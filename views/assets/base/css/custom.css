@@ -1,0 +1,117 @@
+#loader {
+    display: none;
+    background: rgba(255,255,255,0.7) url("../../../assets/plugins/cubeportfolio/img/cbp-loading.gif") no-repeat scroll center center;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10060;
+}
+
+.errorDiv {
+    color: #cd6262;
+}
+
+.badge.c-font-bold {
+    margin-top: -10px;
+    margin-left: -10px;
+    position: absolute;
+}
+
+div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
+    width: 70%;
+}
+
+#floor_maps {
+    margin-top: 120px;
+}
+
+#floor_maps a {
+    color: #000;
+    display: block;
+    margin-top: -23%;
+    position: relative;
+}
+
+.c-content-person-1 {
+    margin-bottom: 15px;
+}
+
+.c-content-person-1 .checkbox-inline {
+    padding-bottom: 3px;
+}
+
+.c-quick-sidebar-toggler.c-btn-border-opacity-04 {
+    border-color: #fff;
+    color: #fff !important;
+}
+
+.c-inverse .c-content-list-1 > li {
+    color: #fff;
+}
+
+.tab-content {
+    overflow: auto;
+}
+
+.bank-cards label {
+    display: inline-block;
+    margin-top: 25px;
+}
+
+.bank-cards img {
+    border: solid 2px #eee;
+}
+
+.bank-cards input[type=radio] {
+   display: none;
+}
+
+.bank-cards input[type="radio"]:checked+label img { 
+    border-color: #cd6262;
+}
+
+/********** BEGIN BOT ********************/
+.botui-app-container {
+    margin-top: 40px;
+}
+
+.botui-container {
+    background-color: #2f353b;
+}
+.botui-message-content {
+    background-color: #acb4bd;
+    color: #000;
+}
+
+.botui-message-content.human {
+    background-color: #e7505a;
+    color: #fff;
+}
+
+.botui-actions-text-input {
+    color: #fff;
+    border-bottom: 1px solid #e7505a;
+}
+
+.botui-actions-buttons-button {
+    line-height: 1 !important;
+    background-color: #e7505a;
+}
+
+.botui-message-content-link {
+    color: #e7505a;
+}
+
+/********** END BOT ********************/
+
+@media (max-width: 480px) {
+    div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
+        width: 100%;
+    }
+    
+    .c-content-media-1 {
+        min-height: auto !important;
+    }
+}

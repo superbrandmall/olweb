@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.php.project</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/php-project/1">
+            <name>OnlineLeasing</name>
+        </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>js</word>
+            <word>zn</word>
+            <word>卫生间</word>
+            <word>在租店铺</word>
+            <word>开户银行</word>
+            <word>服务台</word>
+        </spellchecker-wordlist>
+    </configuration>
+</project>
