@@ -147,10 +147,5 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         $session ->_session();
     }
     
-    $shanghai_sbm = 'OLMALL180424000005';
-    $xh_tm = 'OLMALL180424000004';
-    $bs_tm = 'OLMALL180424000006';
-    $wx_tm = 'OLMALL171212000008';
-    $xa_tm = 'OLMALL171212000020';
-    $zz_tm = 'OLMALL171212000007';
+    include ('MallCode.php');
 }

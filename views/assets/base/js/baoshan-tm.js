@@ -11,16 +11,16 @@ $(document).ready(function(){
         if (y <= $('#f3').offset().top) {
             
         } else if (y <= $('#f2').offset().top && y > $('#f3').offset().top) {
-            getFloorInfo('OLMALL180424000006','二楼','f2');
+            getFloorInfo($.mallCode.baoshanTm,'二楼','f2');
         } else if (y <= $('#f1').offset().top && y > $('#f2').offset().top) {
-            getFloorInfo('OLMALL180424000006','一楼','f1');
+            getFloorInfo($.mallCode.baoshanTm,'一楼','f1');
         } else if (y <= $('#fb1').offset().top && y > $('#f1').offset().top) {
-            getFloorInfo('OLMALL180424000006','负一楼','fb1');
+            getFloorInfo($.mallCode.baoshanTm,'负一楼','fb1');
         }
     });
     
-    getMallInfo('OLMALL180424000006');
-    getFloorInfo('OLMALL180424000006','三楼','f3');
+    getMallInfo($.mallCode.baoshanTm);
+    getFloorInfo($.mallCode.baoshanTm,'三楼','f3');
 });
 
 function getMallInfo(mc) {

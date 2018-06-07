@@ -65,22 +65,22 @@ function GetShopInfo(){
                 
                 var lk;
                 switch (response.data.mallCode) {
-                    case 'OLMALL180424000005':
+                    case $.mallCode.shanghaiSbm:
                         lk = "shanghai-sbm";
                         break;
-                    case 'OLMALL180424000004':
+                    case $.mallCode.baoshanTm:
                         lk = "baoshan-tm";
                         break;
-                    case 'OLMALL171212000007':
+                    case $.mallCode.zhengzhouTm:
                         lk = "zhengzhou-tm";
                         break;
-                    case 'OLMALL180424000006':
+                    case $.mallCode.xuhuiTm:
                         lk = "xuhui-tm";
                         break;
-                    case 'OLMALL171212000010':
+                    case $.mallCode.xianTm:
                         lk = "xian-tm";
                         break;
-                    case 'OLMALL171212000008':
+                    case $.mallCode.wuxiTm:
                         lk = "wuxi-tm";
                         break;
                     default:

@@ -41,7 +41,9 @@
 <script src="views/assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 <!-- END: LAYOUT PLUGINS -->
 <script src="views/assets/base/js/app.js" type="text/javascript"></script>
+<script src="views/assets/base/js/protocol.js" type="text/javascript"></script>
 <script src="views/assets/base/js/scripts.js" type="text/javascript"></script>
+<script src="views/assets/base/js/mall-code.js" type="text/javascript"></script>
 <!-- BEGIN: THEME SCRIPTS -->
 <?php
     echo $scripts; 

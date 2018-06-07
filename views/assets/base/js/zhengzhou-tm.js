@@ -14,27 +14,22 @@ $(document).ready(function(){
         
     $(window).scroll(function() {
         var y = $(this).scrollTop();
-        if(y > ($('video').offset().top + 700)) {
-            $('video').get(0).pause();
-        } else {
-            $('video').get(0).play();
-        }
         
         if (y <= $('#f4').offset().top) {
             
         } else if (y <= $('#f3').offset().top && y > $('#f4').offset().top) {
-            getFloorInfo('OLMALL171212000007','三楼','f3');
+            getFloorInfo($.mallCode.zhengzhouTm,'三楼','f3');
         } else if (y <= $('#f2').offset().top && y > $('#f3').offset().top) {
-            getFloorInfo('OLMALL171212000007','二楼','f2');
+            getFloorInfo($.mallCode.zhengzhouTm,'二楼','f2');
         } else if (y <= $('#f1').offset().top && y > $('#f2').offset().top) {
-            getFloorInfo('OLMALL171212000007','一楼','f1');
+            getFloorInfo($.mallCode.zhengzhouTm,'一楼','f1');
         } else if (y <= $('#fb1').offset().top && y > $('#f1').offset().top) {
-            getFloorInfo('OLMALL171212000007','负一楼','fb1');
+            getFloorInfo($.mallCode.zhengzhouTm,'负一楼','fb1');
         }
     });
     
-    getMallInfo('OLMALL171212000007');
-    getFloorInfo('OLMALL171212000007','四楼','f4');
+    getMallInfo($.mallCode.zhengzhouTm);
+    getFloorInfo($.mallCode.zhengzhouTm,'四楼','f4');
 });
 
 function getMallInfo(mc) {

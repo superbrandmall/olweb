@@ -366,22 +366,22 @@ function GetHistories(p){
                     $.each(v.mallCodes, function(j,w) {
                         codes.push(w);                        
                         switch (w) {
-                            case 'OLMALL180424000005':
+                            case $.mallCode.shanghaiSbm:
                                 mallName = "正大广场上海购物中心";
                                 break;
-                            case 'OLMALL180424000006':
+                            case $.mallCode.baoshanTm:
                                 mallName = "正大乐城宝山购物中心";
                                 break;
-                            case 'OLMALL171212000007':
+                            case $.mallCode.zhengzhouTm:
                                 mallName = "正大乐城郑州购物中心";
                                 break;
-                            case 'OLMALL180424000004':
+                            case $.mallCode.xuhuiTm:
                                 mallName = "正大乐城徐汇购物中心";
                                 break;
-                            case 'OLMALL171212000010':
+                            case $.mallCode.xianTm:
                                 mallName = "正大乐城西安购物中心";
                                 break;
-                            case 'OLMALL171212000008':
+                            case $.mallCode.wuxi.Tm:
                                 mallName = "正大乐城无锡购物中心";
                                 break;
                             default:

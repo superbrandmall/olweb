@@ -45,10 +45,6 @@
 <link href="views/assets/plugins/owl-carousel/owl.transitions.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END: BASE PLUGINS -->
-<!-- BEGIN BOT -->
-<link href="views/assets/plugins/botui/botui.min.css" rel="stylesheet" type="text/css"/>
-<link href="views/assets/plugins/botui/botui-theme-default.css" rel="stylesheet" type="text/css"/>
-<!-- END BOT -->
 <!-- BEGIN THEME STYLES -->
 <link href="views/assets/base/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/base/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
