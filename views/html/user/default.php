@@ -8,7 +8,7 @@
                 <h3 class="c-font-54 c-font-thin c-font-white c-margin-b-40 c-font-uppercase">
                 Online <span class="c-theme-font c-font-bold">Leasing</span></h3>
                 <h5 class="c-font-24 c-font-thin c-font-uppercase c-font-white c-subtitle c-margin-b-40">
-                在线招商平台 </h5>
+                <?= $lang['home_banner_slogan_1'] ?> </h5>
                 <div class="form-inline">
                     <a href="requirement" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-map"></i> <?= $lang['home_shops'] ?></a>
                     <a href="events" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>

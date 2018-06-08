@@ -3274,7 +3274,7 @@ h1 {
     position: relative;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li > .c-link {
-    letter-spacing: 1px;
+    letter-spacing: 0px;
     font-style: normal;
     transition: all 0.2s;
     padding: 41px 15px 39px 15px;
@@ -3482,7 +3482,7 @@ h1 {
     line-height: 0px;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li > .c-link {
-    font-size: 15px;
+    font-size: 14px;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > h3 {
     font-size: 14px;

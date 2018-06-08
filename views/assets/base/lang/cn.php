@@ -1,25 +1,18 @@
 <?php
-/********************** Navigation ********************/
+/********************** header ********************/
 $lang['nav_home'] = "首页";
-$lang['nav_help'] = "帮助";
-$lang['nav_my_info'] = "我的信息";
+$lang['nav_malls'] = "项目";
+$lang['nav_profile'] = "个人";
 $lang['nav_logout'] = "退出";
 $lang['nav_login'] = "登录";
 $lang['nav_register'] = "注册";
-$lang['nav_ai'] = "智能咨询";
-
-/********************** Sub navigation ********************/
-$lang['sub_nav_my_info'] = "我的信息";
-$lang['sub_nav_my_brand'] = "我的品牌";
-$lang['sub_nav_change_info'] = "修改信息";
-$lang['sub_nav_change_password'] = "修改密码";
-$lang['sub_nav_my_reservation'] = "我的预约";
-$lang['sub_nav_my_offer'] = "我的出价";
-$lang['sub_nav_my_favourite'] = "我的关注";
-$lang['sub_nav_my_contract'] = "我的合同";
+$lang['nav_search'] = "搜索";
+$lang['nav_favourites'] = "关注";
+$lang['nav_reservations'] = "预约";
+$lang['nav_title'] = "正大商业房地产";
 
 /********************** Home ********************/
-$lang['home_banner_slogan_1'] = "一站式自助招商平台";
+$lang['home_banner_slogan_1'] = "在线招商平台";
 $lang['home_shops'] = "找店铺";
 $lang['home_events'] = "办活动";
 $lang['home_malls'] = "热门项目";

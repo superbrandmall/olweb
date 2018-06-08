@@ -1,28 +1,21 @@
 <?php
-/********************** Navigation ********************/
-$lang['nav_home'] = "HOME";
-$lang['nav_help'] = "FAQ";
-$lang['nav_my_info'] = "MY INFO";
-$lang['nav_logout'] = "LOGOUT";
-$lang['nav_login'] = "LOGIN";
-$lang['nav_register'] = "REGISTER";
-$lang['nav_ai'] = "Bot";
-
-/********************** Sub navigation ********************/
-$lang['sub_nav_my_info'] = "My info";
-$lang['sub_nav_my_brand'] = "My brands";
-$lang['sub_nav_change_info'] = "Change info";
-$lang['sub_nav_change_password'] = "Change password";
-$lang['sub_nav_my_reservation'] = "My reservations";
-$lang['sub_nav_my_offer'] = "My offers";
-$lang['sub_nav_my_favourite'] = "My favourites";
-$lang['sub_nav_my_contract'] = "My contracts";
+/********************** header ********************/
+$lang['nav_home'] = "home";
+$lang['nav_malls'] = "mall";
+$lang['nav_profile'] = "profile";
+$lang['nav_logout'] = "logout";
+$lang['nav_login'] = "login";
+$lang['nav_register'] = "register";
+$lang['nav_search'] = "search";
+$lang['nav_favourites'] = "favour";
+$lang['nav_reservations'] = "reserve";
+$lang['nav_title'] = "CP Commercial Real Estate";
 
 /********************** Home ********************/
-$lang['home_banner_slogan_1'] = "One-stop self-help investment platform";
+$lang['home_banner_slogan_1'] = "Online investment platform";
 $lang['home_shops'] = "Stores";
 $lang['home_events'] = "Events";
-$lang['home_malls'] = "Malls";
+$lang['home_malls'] = "Mall";
 $lang['home_shanghai_sbm'] = "Shanghai Super Brand Mall";
 $lang['home_shanghai_sbm_addr'] = "168 Lujiazui Xi Road, Pudong, Shanghai";
 $lang['home_luoyang_sbm'] = "Luoyang Super Brand Mall";

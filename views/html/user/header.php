@@ -24,7 +24,7 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Online Leasing | 正大商业房地产管理有限公司</title>
+<title>Online Leasing | <?= $lang['nav_title'] ?></title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -45,6 +45,10 @@
 <link href="views/assets/plugins/owl-carousel/owl.transitions.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END: BASE PLUGINS -->
+<!-- BEGIN BOT -->
+<link href="views/assets/plugins/botui/botui.min.css" rel="stylesheet" type="text/css"/>
+<link href="views/assets/plugins/botui/botui-theme-default.css" rel="stylesheet" type="text/css"/>
+<!-- END BOT -->
 <!-- BEGIN THEME STYLES -->
 <link href="views/assets/base/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/base/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
@@ -82,21 +86,21 @@
                         <a href="/" class="c-link"><i class="fa fa-home"></i> <?= $lang['nav_home'] ?></a>
                     </li>
                     <li class="c-menu-type-classic">
-                        <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> 项目</a>
+                        <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                         <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="requirement" class="c-link"><i class="fa fa-search"></i> 搜索</a>
+                        <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
                     </li>
                     <?php if(isset($_SESSION['user_login'])) { ?>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-info') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-info" class="c-link"><i class="fa fa-user"></i> 个人</a>
+                        <a href="my-info" class="c-link"><i class="fa fa-user"></i> <?= $lang['nav_profile'] ?></a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-favourite') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-favourite" class="c-link"><i class="fa fa-heart"></i> 关注</a>
+                        <a href="my-favourite" class="c-link"><i class="fa fa-heart"></i> <?= $lang['nav_favourites'] ?></a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-reservations') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-reservations" class="c-link"><i class="fa fa-clock-o"></i> 预约</a>
+                        <a href="my-reservations" class="c-link"><i class="fa fa-clock-o"></i> <?= $lang['nav_reservations'] ?></a>
                     </li>
                     <li class="c-menu-type-classic">
                         <a href="javascript: logout();" class="c-link"><i class="fa fa-sign-out"></i> <?= $lang['nav_logout'] ?></a>

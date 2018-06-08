@@ -80,20 +80,22 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         $session ->_session();
     }
 } else {
+    include ('MallCode.php');
+    
     $target = array(
         'home' => array(
             'url' => 'default.php'
         ),
-        'olmall180424000005' => array(
+        strtolower($shanghai_sbm) => array(
             'url' => 'shanghai_sbm.php'
         ),
-        'olmall171212000007' => array(
+        strtolower($zz_tm) => array(
             'url' => 'zhengzhou_tm.php'
         ),
-        'olmall180424000004' => array(
+        strtolower($xh_tm) => array(
             'url' => 'xuhui_tm.php'
         ),
-        'olmall180424000006' => array(
+        strtolower($bs_tm) => array(
             'url' => 'baoshan_tm.php'
         ),
         'shop' => array(
@@ -146,6 +148,4 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         $session = new Session();
         $session ->_session();
     }
-    
-    include ('MallCode.php');
 }
