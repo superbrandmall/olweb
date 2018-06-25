@@ -1,5 +1,5 @@
 <!-- BEGIN: PAGE CONTAINER -->
-<div class="c-layout-page">
+<div class="c-layout-page" style="margin-top: 0;">
 	<!-- BEGIN: PAGE CONTENT -->
 	<!-- BEGIN: LAYOUT/SLIDERS/REVO-SLIDER-7 -->
 	<section class="c-layout-revo-slider c-layout-revo-slider-7">
@@ -62,7 +62,7 @@
 						<?= $lang['home_title'] ?> </h3>
 						<div class="c-line-center">
 						</div>
-						<p class="c-center c-font-uppercase c-font-17">
+						<p class="c-center c-font-17">
 							<?= $lang['home_banner_slogan_2'] ?>
 						</p>
 					</div>
@@ -74,7 +74,7 @@
 						<div class="c-icon">
 							<span class="c-hr c-hr-first"><span class="c-content-line-icon c-icon-27 c-theme"></span></span>
 						</div>
-						<div class="c-title c-font-20 c-font-bold c-font-uppercase">
+						<div class="c-title c-font-20 c-font-bold">
 							1. <?= $lang['home_step_1'] ?>
 						</div>
 						<div class="c-description c-font-17">
@@ -87,7 +87,7 @@
 						<div class="c-icon">
 							<span class="c-hr"><span class="c-content-line-icon c-icon-15 c-theme"></span></span>
 						</div>
-						<div class="c-title c-font-20 c-font-bold c-font-uppercase">
+						<div class="c-title c-font-20 c-font-bold">
 							2. <?= $lang['home_step_2'] ?>
 						</div>
 						<div class="c-description c-font-17">
@@ -100,7 +100,7 @@
 						<div class="c-icon">
 							<span class="c-hr"><span class="c-content-line-icon c-icon-40 c-theme"></span></span>
 						</div>
-						<div class="c-title c-font-20 c-font-bold c-font-uppercase">
+						<div class="c-title c-font-20 c-font-bold">
 							3. <?= $lang['home_step_3'] ?>
 						</div>
 						<div class="c-description c-font-17">
@@ -113,7 +113,7 @@
 						<div class="c-icon">
 							<span class="c-hr c-hr-last"><span class="c-content-line-icon c-icon-28 c-theme"></span></span>
 						</div>
-						<div class="c-title c-font-20 c-font-bold c-font-uppercase">
+						<div class="c-title c-font-20 c-font-bold">
 							4. <?= $lang['home_step_4'] ?>
 						</div>
 						<div class="c-description c-font-17">

@@ -21,6 +21,20 @@ $(document).ready(function(){
     
     getMallInfo($.mallCode.baoshanTm);
     getFloorInfo($.mallCode.baoshanTm,'三楼','f3');
+    
+    document.addEventListener("webkitfullscreenchange", function (event) {
+        if(document.webkitIsFullScreen){
+            $('header, footer').css('display','none');
+            $('video').parent().parent().css('height','100vh');
+        } else {
+            $('header, footer').css('display','block');
+            $('video').parent().parent().css('height','auto');
+        }
+    });
+    
+    if($.cookie('lang') === '2'){
+        translateToEngMall();
+    }
 });
 
 function getMallInfo(mc) {
@@ -148,4 +162,15 @@ function GetBrandModality3(mod) {
     }
     
     return mm;
-}          
+}
+
+function translateToEngMall() {
+    var e = $(".c-layout-page");
+    e.html(e.html()
+            .replace(/\正大乐城宝山购物中心/g, "Baoshan TouchMall")
+            .replace(/\正大乐城郑州购物中心/g, "Zhengzhou TouchMall")
+            .replace(/\正大乐城无锡购物中心/g, "Wuxi TouchMall")
+            .replace(/\正大乐城西安购物中心/g, "Xi’an TouchMall")
+            .replace(/\项目介绍/g, "Enter")
+            .replace(/\尽请期待/g, "Coming Soon"));
+}

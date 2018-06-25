@@ -61,7 +61,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000008" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001030" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -81,7 +81,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000002" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001024" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -101,7 +101,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000019" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001041" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000032" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001054" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -141,7 +141,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000021" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001043" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -161,7 +161,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000034" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001056" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -181,7 +181,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000037" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -201,7 +201,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000038" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001060" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>
@@ -221,7 +221,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180503000040" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001062" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
 								</div>
 							</div>
 						</div>

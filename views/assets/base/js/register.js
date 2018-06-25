@@ -2,11 +2,55 @@ $(document).ready(function(){
     $('#international_verify').val('');
     getBrandModality1();
     
-    /*setInterval(function(){
-        $("header").load(location.href+" header>*","");
-    }, 60000);*/
-    
   ///////////////////// Validate login form /////////////////////////
+  if($.cookie('lang') === '2'){
+        var register_contact_name_1_required = "First and last name can't be empty";
+        var register_contact_name_1_minlength = "Please give correct first and last names";
+        var register_mobile_required = "Mobile can't be empty";
+        var register_mobile_rangelength = "Please give a correct mobile number";
+        var register_mobile_digits = "Please give a correct mobile number";
+        var register_mobile_remoteValidate = "Mobile number already exists";
+        var register_email_required = "Email address can't be empty";
+        var register_email_email = "Please give a correct email address";
+        var register_email_remoteValidate = "Email address already exists";
+        var register_international_required = "Please choose a verification method";
+        var register_international_verify_required = "Verification code can't be empty";
+        var register_international_verify_rangelength = "Verification code must be {0} digits";
+        var register_international_verify_numChar = "Verification code comprises letters and digits";
+        var register_name_required = "Company name can't be empty";
+        var register_name_minlength = "Please give a correct company name";
+        var register_brand_name_required = "Brand name can't be empty";
+        var register_brand_name_minlength = "Please give a correct brand name";
+        var register_modality_1_required = "Please choose a primary category";
+        var register_modality_2_required = "Please choose a secondary category";
+        var register_modality_3_required = "Please choose a teriary category";
+        var register_website_url = "Please give a correct website url";
+        var register_terms = "Please accept and tick the box";
+    } else {
+        var register_contact_name_1_required = "姓名为必填项";
+        var register_contact_name_1_minlength = "请输入完整姓名";
+        var register_mobile_required = "手机为必填项";
+        var register_mobile_rangelength = "请输入正确手机号码";
+        var register_mobile_digits = "请输入正确手机号码";
+        var register_mobile_remoteValidate = "手机号已存在";
+        var register_email_required = "公司邮箱为必填项";
+        var register_email_email = "请输入有效邮箱地址";
+        var register_email_remoteValidate = "公司邮箱已存在";
+        var register_international_required = "请选择验证方式";
+        var register_international_verify_required = "验证码为必填项";
+        var register_international_verify_rangelength = "验证码须为{0}位及{0}位以上字母和数字";
+        var register_international_verify_numChar = "验证码为字母和数字组合";
+        var register_name_required = "公司名称为必填项";
+        var register_name_minlength = "请输入正确公司名称";
+        var register_brand_name_required = "请输入品牌名称";
+        var register_brand_name_minlength = "请输入完整品牌名称";
+        var register_modality_1_required = "请选择一级业态";
+        var register_modality_2_required = "请选择二级业态";
+        var register_modality_3_required = "请选择三级业态";
+        var register_website_url = "请输入有效网址";
+        var register_terms = "请同意并勾选该协议";
+    }
+    
     $("#step1 form").validate({
         onkeyup: false,
         rules: {
@@ -77,49 +121,49 @@ $(document).ready(function(){
         },
         messages: {
             contact_name_1: {
-                required: "姓名为必填项",
-                minlength: "请输入完整姓名"
+                required: register_contact_name_1_required,
+                minlength:register_contact_name_1_minlength
             },
             mobile: {
-                required: "手机为必填项",
-                rangelength: "请输入正确手机号码",
-                digits: "请输入正确手机号码",
-                remoteValidate: "手机号已存在"
+                required: register_mobile_required,
+                rangelength: register_mobile_rangelength,
+                digits: register_mobile_digits,
+                remoteValidate: register_mobile_remoteValidate
             },
             email: {
-                required: "公司邮箱为必填项",
-                email: "请输入有效邮箱地址",
-                remoteValidate: "公司邮箱已存在"
+                required: register_email_required,
+                email: register_email_email,
+                remoteValidate: register_email_remoteValidate
             },
             international: {
-                required: "请选择验证方式"
+                required: register_international_required
             },
             international_verify: {
-                required: "验证码为必填项",
-                rangelength: "验证码须为{0}位及{0}位以上字母和数字",
-                numChar: "验证码为字母和数字组合"
+                required: register_international_verify_required,
+                rangelength: register_international_verify_rangelength,
+                numChar: register_international_verify_numChar
             },
             name: {
-                required: "公司名称为必填项",
-                minlength: "请输入正确公司名称"
+                required: register_name_required,
+                minlength: register_name_minlength
             },
             brand_name: {
-                required: "请输入品牌名称",
-                minlength: "请输入完整品牌名称"
+                required: register_brand_name_required,
+                minlength: register_brand_name_minlength
             },
             modality_1: {
-                required: "请选择一级业态"
+                required: register_modality_1_required
             },
             modality_2: {
-                required: "请选择二级业态"
+                required: register_modality_2_required
             },
             modality_3: {
-                required: "请选择三级业态"
+                required: register_modality_3_required
             },
             website: {
-                url: "请输入有效网址"
+                url: register_website_url
             },
-            terms: "请同意并勾选该协议"
+            terms: register_terms
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));
@@ -382,12 +426,24 @@ function VeryficationCodeInternational() {
 function setTimeInternational(obj) {
     if (countdownInternational == 0) { 
         obj.attr('href','javascript: VeryficationCodeInternational()'); 
-        obj.html("发送验证码");
+        
+        if($.cookie('lang') === '2'){
+            obj.html("Send");
+        } else {
+            obj.html("发送验证码");
+        }
+        
         countdownInternational = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        obj.html("重新发送(" + countdownInternational + ")");
+        
+        if($.cookie('lang') === '2'){
+            obj.html("Re-send(" + countdownInternational + ")s");
+        } else {
+            obj.html("重新发送(" + countdownInternational + ")s");
+        }
+        
         countdownInternational--; 
     } 
 setTimeout(function() { 

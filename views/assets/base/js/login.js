@@ -1,6 +1,20 @@
 $(document).ready(function(){
     $('#login_verify').val('');
     ///////////////////// Validate login form /////////////////////////
+    if($.cookie('lang') === '2'){
+        var login_username_required = "Please give a mobile number or email address";
+        var login_username_xor = "Please give a correct mobile number or email address";
+        var login_verify_required = "Verification code can't be empty";
+        var login_verify_rangelength = "Verification code must be {0} digits";
+        var login_verify_numChar = "Verification code comprises letters and digits";
+    } else {
+        var login_username_required = "请输入手机号码或者邮箱地址";
+        var login_username_xor = "请输入正确的手机号码或者邮箱地址";
+        var login_verify_required = "验证码为必填项";
+        var login_verify_rangelength = "验证码须为{0}位字母和数字";
+        var login_verify_numChar = "验证码为字母和数字组合";
+    }
+    
     $("#login_form").validate({
         rules: {
             login_username: {
@@ -20,13 +34,13 @@ $(document).ready(function(){
         },
         messages: {
             login_username: {
-                required: "请输入手机号码或者邮箱地址",
-                xor: "请输入正确的手机号码或者邮箱地址"
+                required: login_username_required,
+                xor: login_username_xor
             },
             login_verify: {
-                required: "验证码为必填项",
-                rangelength: "验证码须为{0}位及{0}位以上字母和数字",
-                numChar: "验证码为字母和数字组合"
+                required: login_verify_required,
+                rangelength: login_verify_rangelength,
+                numChar: login_verify_numChar
             }
         },
         errorPlacement: function(error, element) {
@@ -173,13 +187,25 @@ function VeryficationCodeLogin() {
 
 function setTimeLogin(obj) {
     if (countdownLogin == 0) { 
-        obj.attr('href','javascript: VeryficationCodeLogin()'); 
-        obj.html("发送验证码");
+        obj.attr('href','javascript: VeryficationCodeLogin()');
+        
+        if($.cookie('lang') === '2'){
+            obj.html("Send");
+        } else {
+            obj.html("发送验证码");
+        }
+        
         countdownLogin = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        obj.html("重新发送(" + countdownLogin + ")");
+        
+        if($.cookie('lang') === '2'){
+            obj.html("Re-send(" + countdownLogin + ")s");
+        } else {
+            obj.html("重新发送(" + countdownLogin + ")s");
+        }
+        
         countdownLogin--; 
     } 
 setTimeout(function() { 

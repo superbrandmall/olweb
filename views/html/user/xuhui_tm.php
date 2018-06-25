@@ -1,6 +1,7 @@
 <?php
 $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/xuhui-tm.js"></script>';
 ?>
+<link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
 
 <!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
@@ -8,11 +9,11 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"><span class="mall-name"></span></h3>
+				<h3 class="c-font-bold"><span class="mall-name"></span></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/"><?= $lang['floor_home'] ?></a>
+					<a href="/"><?= $lang['mall_home'] ?></a>
 				</li>
 				<li>
 					/
@@ -26,22 +27,20 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
     
     <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box animated fadeInRight" style="background-color: #000; margin-bottom: 0; overflow: hidden; z-index: 1;">
-        <div class="col-md-6 hidden-xs hidden-sm">
-            <embed id="video" src='#' allowFullScreen='true' quality='high' width='100%' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
-        </div>
-        <div class="col-md-6 hidden-md hidden-lg">
+        <div class="col-md-6">
             <video loop="loop" src="upload/video/xuhui.mp4" controls="true" width="100%"></video>
         </div>
+        
         <div class="container">
             <div class="col-md-6">
                 <div class="c-content-testimonial-2-slider" data-slider="owl" data-single-item="true" data-auto-play="10000">
                     <div class="owl-carousel owl-theme c-theme owl-single">
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white">上海市徐汇区概况</h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_xuhui_brief'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <blockquote class="c-theme-border c-font-white" style="text-align: left;">
-                                        <p>徐汇区位于上海中心城区的西南部，是较早基本完成旧区改造的中心城区之一。区内有著名的交通大学，以及徐家汇天主教堂等人文深厚的建筑。徐汇区重点发展信息技术、现代生物医药、纳米新材料等高新技术产业，形成区工业电子信息业和生物医药业发展的产业规模。</p>
+                                        <p><?= $lang['mall_xuhui_brief_p'] ?></p>
                                     </blockquote>
                                     <ul class="c-content-list-1 c-theme" style="text-align: left;">
                                         <li class="c-bg-before-red c-font-white">
@@ -59,7 +58,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
                         </div>
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white"><?= $lang['floor_mall_desc'] ?></h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_desc'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <ul id="mall_desc" class="c-content-list-1 c-theme" style="text-align: left;"></ul>
                                 </div>
@@ -79,7 +78,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['floor_shops'] ?></a>
+                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['mall_shops'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -88,7 +87,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>
+                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['mall_events'] ?></a>
 								</div>
 							</div>
 						</div>

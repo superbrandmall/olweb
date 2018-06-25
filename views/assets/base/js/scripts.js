@@ -48,6 +48,10 @@ $(document).ready(function(){
             window.history.pushState("object or string", "Title", "/"+refineUrl() );
         },1000);
     }
+    
+    if($.cookie('lang') === '2'){
+        translateToEngDefault();
+    }
 });
 
 function getMallList() {
@@ -564,3 +568,16 @@ $.validator.addMethod( "remoteValidate", function( value, element, param, method
     }, param ) );
     return "pending";
  }, "" );
+ 
+ function translateToEngDefault() {
+    var e = $(".c-layout-page");
+    e.html(e.html()
+            .replace(/\正大广场陆家嘴购物中心/g, "Shanghai SuperBrandMall")
+            .replace(/\正大乐城徐汇购物中心/g, "Xuhui TouchMall")
+            .replace(/\正大乐城宝山购物中心/g, "Baoshan TouchMall")
+            .replace(/\正大乐城郑州购物中心/g, "Zhengzhou TouchMall")
+            .replace(/\正大乐城无锡购物中心/g, "Wuxi TouchMall")
+            .replace(/\正大乐城西安购物中心/g, "Xi’an TouchMall")
+            .replace(/\项目介绍/g, "Enter")
+            .replace(/\尽请期待/g, "Coming Soon"));
+}

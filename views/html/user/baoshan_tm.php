@@ -8,11 +8,11 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"><span class="mall-name"></span></h3>
+				<h3 class="c-font-bold"><span class="mall-name"></span></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/"><?= $lang['floor_home'] ?></a>
+					<a href="/"><?= $lang['mall_home'] ?></a>
 				</li>
 				<li>
 					/
@@ -26,10 +26,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
     
     <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box animated fadeInRight" style="background-color: #000; margin-bottom: 0; overflow: hidden; z-index: 1;">
-        <div class="col-md-6 hidden-xs hidden-sm">
-            <embed id="video" src='#' allowFullScreen='true' quality='high' width='100%' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
-        </div>
-        <div class="col-md-6 hidden-md hidden-lg">
+        <div class="col-md-6">
             <video loop="loop" src="upload/video/baoshan.mp4" controls="true" width="100%"></video>
         </div>
         <div class="container">
@@ -38,10 +35,10 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
                     <div class="owl-carousel owl-theme c-theme owl-single">
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white">上海市宝山区概况</h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_baoshan_brief'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <blockquote class="c-theme-border c-font-white" style="text-align: left;">
-                                        <p>宝山区位于上海市北部，是上海的“水路门户”。区内有吴淞国际邮轮码头、吴淞炮台湿地森林公园、顾村公园、美兰湖等著名景点。宝山区地处黄浦江和长江的交汇点，是上海重要的钢铁生产与港口集装箱进出口基地。</p>
+                                        <p><?= $lang['mall_baoshan_brief_p'] ?></p>
                                     </blockquote>
                                     <ul class="c-content-list-1 c-theme" style="text-align: left;">
                                         <li class="c-bg-before-red c-font-white">
@@ -59,7 +56,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
                         </div>
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white"><?= $lang['floor_mall_desc'] ?></h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_desc'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <ul id="mall_desc" class="c-content-list-1 c-theme" style="text-align: left;"></ul>
                                 </div>
@@ -79,7 +76,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['floor_shops'] ?></a>
+                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['mall_shops'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -88,7 +85,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>
+                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['mall_events'] ?></a>
 								</div>
 							</div>
 						</div>

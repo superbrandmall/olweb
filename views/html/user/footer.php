@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-6">
 				<p class="c-copyright c-font-oswald c-font-14">
-					 &copy; Copyright <?= date("Y") ?>. <?= $lang['copyright'] ?> 
+					 &copy; copyright <?= date("Y") ?>. <?= $lang['copyright'] ?> 
 				</p>
 			</div>
             <div class="col-md-6 col-sm-6 hidden-sm hidden-xs">
@@ -40,15 +40,15 @@
 <script src="views/assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
 <script src="views/assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 <!-- END: LAYOUT PLUGINS -->
-<script src="views/assets/base/js/app.js" type="text/javascript"></script>
-<script src="views/assets/base/js/protocol.js" type="text/javascript"></script>
-<script src="views/assets/base/js/scripts.js" type="text/javascript"></script>
-<script src="views/assets/base/js/mall-code.js" type="text/javascript"></script>
+<script src="views/assets/base/js/app.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
+<script src="views/assets/base/js/protocol.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
+<script src="views/assets/base/js/scripts.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
+<script src="views/assets/base/js/mall-code.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
 <!-- BEGIN: THEME SCRIPTS -->
 <?php
     echo $scripts; 
 ?>
-<script src="views/assets/base/js/components.js" type="text/javascript"></script>
+<script src="views/assets/base/js/components.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
 <script>
 	$(document).ready(function() {    
 		App.init(); // init core    

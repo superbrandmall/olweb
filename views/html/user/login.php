@@ -9,14 +9,14 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/l
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-				<h3 class="c-font-24 c-font-sbold">欢迎来到Online Leasing</h3>
+				<h3 class="c-font-24 c-font-sbold"><?= $lang['login_welcome'] ?></h3>
                 <div class="c-content-panel" style="margin: 30px 0 20px;">
                     <div class="c-body" style="padding-top: 20px;">
                         <div class="c-content-title-1">
-                            <h4 class="c-font-uppercase c-font-bold"><i class="icon-user"></i> 还没有账号?</h4><br>
+                            <h4 class="c-font-bold"><i class="icon-user"></i> <?= $lang['login_not_registered_user'] ?>?</h4><br>
                             <div class="c-line-left">
                             </div>
-                            <p>赶快注册享受在线租赁吧</p>
+                            <p><?= $lang['login_after_login'] ?></p>
                             <a href="javascript:;" data-toggle="modal" data-target="#step1" data-dismiss="modal" class="btn c-theme-btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup"><?= $lang['login_register_now'] ?></a>
                         </div>
                     </div>
@@ -24,13 +24,13 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/l
                 <div class="c-content-panel">
                     <div class="c-body" style="padding-top: 20px;">
                         <p>
-                            请使用验证码登录
+                            <?= $lang['login_verification_login'] ?>
                         </p>
 
                         <form id="login_form">
                             <div class="form-group">
                                 <label for="login_username" class="hide"><?= $lang['login_account'] ?></label>
-                                <input type="text" class="form-control input-lg c-square" name="login_username" id="login_username" required placeholder="<?= $lang['login_account'] ?>">
+                                <input type="text" class="form-control input-lg c-square" name="login_username" id="login_username" required placeholder="<?= $lang['login_account'] ?>*">
                                 <div id="errorcontainer-login_username" class="errorDiv"></div>
                             </div>
 

@@ -45,15 +45,11 @@
 <link href="views/assets/plugins/owl-carousel/owl.transitions.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/plugins/fancybox/jquery.fancybox.css" rel="stylesheet" type="text/css"/>
 <!-- END: BASE PLUGINS -->
-<!-- BEGIN BOT -->
-<link href="views/assets/plugins/botui/botui.min.css" rel="stylesheet" type="text/css"/>
-<link href="views/assets/plugins/botui/botui-theme-default.css" rel="stylesheet" type="text/css"/>
-<!-- END BOT -->
 <!-- BEGIN THEME STYLES -->
 <link href="views/assets/base/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="views/assets/base/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="views/assets/base/css/components.css?t=<?php echo date("Y-m-d")?>" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="views/assets/base/css/themes/red1.css" rel="stylesheet" id="style_theme" type="text/css"/>
-<link href="views/assets/base/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="views/assets/base/css/custom.css?t=<?php echo date("Y-m-d")?>" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="icon" href="views/assets/base/img/layout/logos/favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="views/assets/base/img/layout/logos/favicon.ico" type="image/x-icon"/>

@@ -74,7 +74,7 @@ function ShowReservations(p,c){
 
                         var alertInfo, startEnd, reserveItems;
                         if(todayTime - v.created < 86400000 ){ //加24小时
-                            alertInfo = '<span class="alert c-theme-bg c-font-white" style="display: block;" role="alert">预约成功，我们的招商人员会在24小时内与您取得联系。</span>';
+                            alertInfo = '<span class="alert c-theme-bg c-font-white" style="display: block;" role="alert">预约成功，我们的招商人员会在2个工作日内与您取得联系。</span>';
                         } else {
                             alertInfo = '';
                         }

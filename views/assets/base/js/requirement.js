@@ -3,34 +3,37 @@ $.vals = [];
 $(document).ready(function(){
     $('#international_verify').val('');
     
-    var d = new Date();
-    var month = d.getMonth()+1;
-    var day = d.getDate();
-    var date = d.getFullYear() + '-' +
-        (month<10 ? '0' : '') + month + '-' +
-        (day<10 ? '0' : '') + day;
-
+    if($.cookie('lang') === '2'){
+        var stCal = "en-US";
+    } else {
+        var stCal = "zh-CN";
+    }
+    
     $('#start').datepicker({
-        'language': "zh-CN",
+        'language': stCal,
         'format': 'yyyy-mm',
         'startDate': '+30d',
         'startView': "months", 
         'minViewMode': "months"
     });
     
-    $('#reserve_date').datepicker({
-        'language': "zh-CN",
-        'format': 'yyyy-mm-dd',
-        'startDate': '+1d'
-    });
-    
-    $('#reserve_date').datepicker('setDate',IncrDate(date));
-    
     if(sessionStorage.getItem("searches") && sessionStorage.getItem("searches") != null && sessionStorage.getItem("searches") != '') {
         ShowResults($.parseJSON(sessionStorage.getItem("searches")),'');
     }
     
     ///////////////////// Validate search form /////////////////////////
+    if($.cookie('lang') === '2'){
+        var requirement_min_area_LessThanEqual = "Minimum leasable area mustn't be greater than maximum leasable area";
+        var requirement_length_required = "Please choose a lease term";
+        var requirement_start_required = "Moving in date can't be empty";
+        var requirement_start_date = "Please give a correct date";
+    } else {
+        var requirement_min_area_LessThanEqual = "最小租赁面积不得大于最大租赁面积";
+        var requirement_length_required = "请选择租约年限";
+        var requirement_start_required = "预计入驻日期为必填项";
+        var requirement_start_date = "请输入有效日期";
+    }
+    
     $("#requirement_form").validate({
         rules: {
             min_area: {
@@ -46,14 +49,14 @@ $(document).ready(function(){
         },
         messages: {
             min_area: {
-                lessThanEqual: "最小租赁面积不得大于最大租赁面积"
+                lessThanEqual: requirement_min_area_LessThanEqual
             },
             length: {
-                required: "请选择租约年限"
+                required: requirement_length_required
             },
             start: {
-                required: "请选择预计入驻日期",
-                date: "请输入有效日期"
+                required: requirement_start_required,
+                date: requirement_start_date
             }
         },
         errorPlacement: function(error, element) {
@@ -84,6 +87,28 @@ $(document).ready(function(){
         GetHistories(1);
     }
     
+    ///////////////////// Validate reserve form /////////////////////////
+    if($.cookie('lang') === '2'){
+        var requirement_rental_length_required = "Please choose a lease term";
+        var requirement_start_date_required = "Moving in date can't be empty";
+        var requirement_start_date_date = "Please give a correct date";
+        var requirement_reserve_date_required = "Reserving date can't be empty";
+        var requirement_reserve_date_date = "Please give a correct date";
+        var requirement_international_required = "Please choose a verification method";
+        var requirement_international_verify_required = "Verification code can't be empty";
+        var requirement_international_verify_rangelength = "Verification code must be {0} digits";
+        var requirement_international_verify_numChar = "Verification code comprises letters and digits";
+    } else {
+        var requirement_rental_length_required = "请选择租约年限";
+        var requirement_start_date_required = "预计入驻日期为必填项";
+        var requirement_start_date_date = "请输入有效日期";
+        var requirement_reserve_date_required = "预约日期为必填项";
+        var requirement_reserve_date_date = "请输入有效日期";
+        var requirement_international_required = "请选择验证方式";
+        var requirement_international_verify_required = "验证码为必填项";
+        var requirement_international_verify_rangelength = "验证码须为{0}位及{0}位以上字母和数字";
+        var requirement_international_verify_numChar = "验证码为字母和数字组合";
+    }
     $("#reserve_form").validate({
         rules: {
             rental_length: {
@@ -107,23 +132,23 @@ $(document).ready(function(){
             }
         },messages: {
             rental_length: {
-                required: "请选择租约年限"
+                required: requirement_rental_length_required
             },
             start_date: {
-                required: "请选择预计入驻日期",
-                date: "请输入有效日期"
+                required: requirement_start_date_required,
+                date: requirement_start_date_date
             },
             reserve_date: {
-                required: "请选择看铺日期",
-                date: "请输入有效日期"
+                required: requirement_reserve_date_required,
+                date: requirement_reserve_date_date
             },
             international: {
-                required: "请选择验证方式"
+                required: requirement_international_required
             },
             international_verify: {
-                required: "验证码为必填项",
-                rangelength: "验证码须为{0}位及{0}位以上字母和数字",
-                numChar: "验证码为字母和数字组合"
+                required: requirement_international_verify_required,
+                rangelength: requirement_international_verify_rangelength,
+                numChar: requirement_international_verify_numChar
             }
         },
         errorPlacement: function(error, element) {
@@ -192,6 +217,10 @@ $(document).ready(function(){
             });
         }
     });
+    
+    if($.cookie('lang') === '2'){
+        translateToEngSearch();
+    }
 });
 
 function ShowSearch(){
@@ -235,8 +264,16 @@ function ShowSearch(){
                 $('html,body').animate({
                 scrollTop: $(".c-content-list").offset().top - 200},
                 'slow');
-                    
-                $('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-white c-font-bold">推荐店铺 ('+response.data.result.length+'家)</h3><div class="c-line-center c-theme-bg"></div>');                            
+                
+                if($.cookie('lang') === '2'){
+                    var tjdp = 'Recommended stores';
+                    var jia = '';
+                } else {
+                    var tjdp = '推荐店铺';
+                    var jia = '家';
+                }
+                
+                $('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-white c-font-bold">'+tjdp+' ('+response.data.result.length+jia+')</h3><div class="c-line-center c-theme-bg"></div>');                            
 
                 sessionStorage.setItem("searches", JSON.stringify(response.data.result) );
                 if(response.data.result.length > 0){
@@ -262,6 +299,8 @@ $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
 });
 
 function ShowResults(result,searchCode) {
+    
+    var dianpujieshao,louceng,mianji,yetai,pipei,yuyue,kanpu,qiatan;
     $.each(result, function(i,v){                  
         var star_length;
         if(v.score === 100){
@@ -293,15 +332,35 @@ function ShowResults(result,searchCode) {
         } else {
             modality = "-";
         }
-
+        
+        if($.cookie('lang') === '2'){
+            dianpujieshao = "Store info";
+            louceng = "Floor";
+            mianji = "Area";
+            yetai = "Category";
+            pipei = "Matching";
+            yuyue = "Reserve";
+            kanpu = " date";
+            qiatan = " date";
+        } else {
+            dianpujieshao = "店铺介绍";
+            louceng = "楼层";
+            mianji = "面积";
+            yetai = "业态";
+            pipei = "匹配";
+            yuyue = "预约";
+            kanpu = "看铺";
+            qiatan = "洽谈";
+        }
+        
         $('.c-content-list').append('<div class="col-md-3" style="display: none;"><div class="c-content-person-1 c-option-2">\n\
 <div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
-<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">店铺介绍</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
+<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
 <div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+v.mallName+'</div>\n\
 </div>\n\
-<div class="c-position">楼层: '+v.floorName+'</div><div class="c-position">面积: '+v.area+'m<sup>2</sup></div><div class="c-position">业态: '+modality+'</div>\n\
-<div class="c-position"><div style="float: left;margin-right: 5px">匹配: </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
-<div class="c-position" style="margin-top: 10px;"><span class="c-content-label c-font-uppercase c-font-bold c-theme-bg"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> 预约 <i class="icon-clock"></i></label></span></div></div></div>\n\
+<div class="c-position">'+louceng+': '+v.floorName+'</div><div class="c-position">'+mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position">'+yetai+': '+modality+'</div>\n\
+<div class="c-position"><div style="float: left;margin-right: 5px">'+pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
+<div class="c-position" style="margin-top: 10px;"><span class="c-content-label c-font-uppercase c-font-bold c-theme-bg"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
 </div></div>');
     });
 
@@ -321,10 +380,30 @@ function ShowResults(result,searchCode) {
         $('#start_date').val($('#start').val());
             
         if($.vals.length > 0){
-            $('#reserve_tag').text('看铺');
+            $('#reserve_tag').text(kanpu);
         } else {
-            $('#reserve_tag').text('洽谈');
+            $('#reserve_tag').text(qiatan);
         }
+        
+        var d = new Date();
+        var month = d.getMonth()+1;
+        var day = d.getDate();
+        var date = d.getFullYear() + '-' +
+            (month<10 ? '0' : '') + month + '-' +
+            (day<10 ? '0' : '') + day;
+        
+        if($.cookie('lang') === '2'){
+            var reCal = "en-US";
+        } else {
+            var reCal = "zh-CN";
+        }
+        $('#reserve_date').datepicker({
+            'language': reCal,
+            'format': 'yyyy-mm-dd',
+            'startDate': '+1d'
+        });
+            
+        $('#reserve_date').datepicker('setDate',IncrDate(date));
     });
 
     var size_li = $(".c-content-list > div").size();
@@ -362,31 +441,60 @@ function GetHistories(p){
                 $.each(response.data.content, function(i,v) {
                     var malls = [];
                     var codes = [];
-                    var mallName;
+                    var mallName,nian;
                     $.each(v.mallCodes, function(j,w) {
-                        codes.push(w);                        
-                        switch (w) {
-                            case $.mallCode.shanghaiSbm:
-                                mallName = "正大广场上海购物中心";
-                                break;
-                            case $.mallCode.baoshanTm:
-                                mallName = "正大乐城宝山购物中心";
-                                break;
-                            case $.mallCode.zhengzhouTm:
-                                mallName = "正大乐城郑州购物中心";
-                                break;
-                            case $.mallCode.xuhuiTm:
-                                mallName = "正大乐城徐汇购物中心";
-                                break;
-                            case $.mallCode.xianTm:
-                                mallName = "正大乐城西安购物中心";
-                                break;
-                            case $.mallCode.wuxi.Tm:
-                                mallName = "正大乐城无锡购物中心";
-                                break;
-                            default:
-                                mallName = "正大广场上海购物中心";
-                                break;
+                        codes.push(w);
+                        
+                        if($.cookie('lang') === '2'){
+                            switch (w) {
+                                case $.mallCode.shanghaiSbm:
+                                    mallName = "Shanghai SuperBrandMall";
+                                    break;
+                                case $.mallCode.baoshanTm:
+                                    mallName = "Baoshan TouchMall";
+                                    break;
+                                case $.mallCode.zhengzhouTm:
+                                    mallName = "Zhengzhou TouchMall";
+                                    break;
+                                case $.mallCode.xuhuiTm:
+                                    mallName = "Xuhui TouchMall";
+                                    break;
+                                case $.mallCode.xianTm:
+                                    mallName = "Xi'an TouchMall";
+                                    break;
+                                case $.mallCode.wuxi.Tm:
+                                    mallName = "Wuxi TouchMall";
+                                    break;
+                                default:
+                                    mallName = "Shanghai SuperBrandMall";
+                                    break;
+                            }
+                            nian = ' year(s)';
+                        } else {
+                            switch (w) {
+                                case $.mallCode.shanghaiSbm:
+                                    mallName = "正大广场上海购物中心";
+                                    break;
+                                case $.mallCode.baoshanTm:
+                                    mallName = "正大乐城宝山购物中心";
+                                    break;
+                                case $.mallCode.zhengzhouTm:
+                                    mallName = "正大乐城郑州购物中心";
+                                    break;
+                                case $.mallCode.xuhuiTm:
+                                    mallName = "正大乐城徐汇购物中心";
+                                    break;
+                                case $.mallCode.xianTm:
+                                    mallName = "正大乐城西安购物中心";
+                                    break;
+                                case $.mallCode.wuxi.Tm:
+                                    mallName = "正大乐城无锡购物中心";
+                                    break;
+                                default:
+                                    mallName = "正大广场上海购物中心";
+                                    break;
+                            }
+                            nian = '年';
                         }
                         malls.push(mallName);
                     });
@@ -403,7 +511,7 @@ function GetHistories(p){
                         startMonth = '0'+startMonth;
                     }
                     
-                    $('#accordion-'+p).append('<div class="panel"><div class="panel-heading" role="tab" id="heading-'+i+'"><h4 class="panel-title"><a class="collapsed c-font-bold c-font-16" data-toggle="collapse" data-parent="#accordion-'+p+'" href="#collapse-'+i+'" aria-expanded="false"><i class="icon-clock"></i> '+created+' </a></h4></div><div id="collapse-'+i+'" class="panel-collapse collapse" role="tabpanel"><div class="panel-body c-font-14"><a href="javascript: void(0);" style="color: #fff;overflow-wrap: break-word;"><span class="min">'+v.minArea+'</span>-<span class="max">'+v.maxArea+'</span> m²/<span class="st">'+startYear+'-'+startMonth+'</span>/<span class="ln">'+v.rentalLength+'</span>年/\n\
+                    $('#accordion-'+p).append('<div class="panel"><div class="panel-heading" role="tab" id="heading-'+i+'"><h4 class="panel-title"><a class="collapsed c-font-bold c-font-16" data-toggle="collapse" data-parent="#accordion-'+p+'" href="#collapse-'+i+'" aria-expanded="false"><i class="icon-clock"></i> '+created+' </a></h4></div><div id="collapse-'+i+'" class="panel-collapse collapse" role="tabpanel"><div class="panel-body c-font-14"><a href="javascript: void(0);" style="color: #fff;overflow-wrap: break-word;"><span class="min">'+v.minArea+'</span>-<span class="max">'+v.maxArea+'</span> m²/<span class="st">'+startYear+'-'+startMonth+'</span>/<span class="ln">'+v.rentalLength+'</span>'+nian+'/\n\
 <span>'+malls+'</span><span class="cd" style="display:none;">'+codes+'</span>\n\
 </a></div></div></div>');
                 });
@@ -622,12 +730,18 @@ function VeryficationCodeReservation() {
 function setTimeReservation(obj) {
     if (countdownReservation == 0) { 
         obj.attr('href','javascript: VeryficationCodeReservation()'); 
-        obj.html("发送验证码");
+        
+        if($.cookie('lang') === '2'){
+            obj.html("Send");
+        } else {
+            obj.html("发送");
+        }
+        
         countdownReservation = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        obj.html("等待(" + countdownReservation + ")s");
+        obj.html("(" + countdownReservation + ")s");
         countdownReservation--; 
     } 
 setTimeout(function() { 
@@ -643,7 +757,18 @@ function PrettyDate(time){
      if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
         return;
 
-    return day_diff == 0 && (
+    if($.cookie('lang') === '2'){
+        return day_diff == 0 && (
+            diff < 60 && "Just now" ||
+            diff < 120 && "1 min ago" ||
+            diff < 3600 && Math.floor( diff / 60 ) + " mins ago" ||
+            diff < 7200 && "1 hour ago" ||
+            diff < 86400 && Math.floor( diff / 3600 ) + " hours ago") ||
+        day_diff == 1 && "Yesterday" ||
+        day_diff < 7 && day_diff + " days ago" ||
+        day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
+    } else {
+        return day_diff == 0 && (
             diff < 60 && "刚才" ||
             diff < 120 && "1分钟前" ||
             diff < 3600 && Math.floor( diff / 60 ) + "分钟前" ||
@@ -652,6 +777,7 @@ function PrettyDate(time){
         day_diff == 1 && "昨天" ||
         day_diff < 7 && day_diff + "天前" ||
         day_diff < 31 && Math.ceil( day_diff / 7 ) + "周前";
+    }
 }
 
 $.validator.addMethod('lessThanEqual', function(value, element, param) {
@@ -687,3 +813,11 @@ $(function() {
     $(".panel-title a").PrettyDate();
     setInterval(function(){ $(".panel-title a").PrettyDate(); }, 5000);
 });
+
+ function translateToEngSearch() {
+    var e = $("#international");
+    e.html(e.html()
+            .replace(/\请选择验证方式/g, "Verification method")
+            .replace(/\邮箱验证/g, "Email")
+            .replace(/\手机验证/g, "Mobile"));
+}

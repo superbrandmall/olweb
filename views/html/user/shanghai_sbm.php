@@ -8,11 +8,11 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"><span class="mall-name"></span></h3>
+				<h3 class="c-font-bold"><span class="mall-name"></span></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/"><?= $lang['floor_home'] ?></a>
+					<a href="/"><?= $lang['mall_home'] ?></a>
 				</li>
 				<li>
 					/
@@ -26,10 +26,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
     
     <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box animated fadeInRight" style="background-color: #000; margin-bottom: 0; overflow: hidden; z-index: 1;">
-        <div class="col-md-6 hidden-xs hidden-sm">
-            <embed id="video" src='#' allowFullScreen='true' quality='high' width='100%' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
-        </div>
-        <div class="col-md-6 hidden-md hidden-lg">
+        <div class="col-md-6">
             <video loop="loop" src="upload/video/shanghai-sbm.mp4" controls="true" width="100%"></video>
         </div>
         <div class="container">
@@ -38,10 +35,10 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
                     <div class="owl-carousel owl-theme c-theme owl-single">
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white">上海概况</h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_shanghai_brief'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <blockquote class="c-theme-border c-font-white" style="text-align: left;">
-                                        <p>上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
+                                        <p><?= $lang['mall_shanghai_brief_p'] ?></p>
                                     </blockquote>
                                     <ul class="c-content-list-1 c-theme" style="text-align: left;">
                                         <li class="c-bg-before-red c-font-white">
@@ -59,7 +56,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
                         </div>
                         <div class="item">
                             <div class="c-content-title-1" style="margin-top: 40px;">
-                                <h3 class="c-font-uppercase c-font-bold c-font-white"><?= $lang['floor_mall_desc'] ?></h3>
+                                <h3 class="c-font-bold c-font-white"><?= $lang['mall_desc'] ?></h3>
                                 <div class="c-content-bar-1 c-opt-1">
                                     <ul id="mall_desc" class="c-content-list-1 c-theme" style="text-align: left;"></ul>
                                 </div>
@@ -79,7 +76,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['floor_shops'] ?></a>
+                                    <a href="requirement" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-map"></i> <?= $lang['mall_shops'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -88,7 +85,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 						<div class="c-content-v-center" style="height: 90px;">
 							<div class="c-wrapper">
                                 <div class="c-body">
-                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>
+                                    <a href="events" class="btn btn-md c-btn-square c-btn-border-2x c-theme-btn c-btn-uppercase c-btn-bold"><i class="icon-calendar"></i> <?= $lang['mall_events'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -443,17 +440,17 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 		</div>
 	</div>
     
-    <a id="f10_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=10" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">10F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/10F.png" class="img-responsive" alt="" /></a>
-    <a id="f9_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=9" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">9F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/9F.png" class="img-responsive" alt="" /></a>
-    <a id="f8_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=8" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">8F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png" class="img-responsive" alt="" /></a>
-    <a id="f7_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=7" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">7F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/7F.png" class="img-responsive" alt="" /></a>
-    <a id="f6_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=6" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">6F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/6F.png" class="img-responsive" alt="" /></a>
-    <a id="f5_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=5" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">5F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/5F.png" class="img-responsive" alt="" /></a>
-    <a id="f4_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=4" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">4F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/4F.png" class="img-responsive" alt="" /></a>
-    <a id="f3_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=3" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">3F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/3F.png" class="img-responsive" alt="" /></a>
-    <a id="f2_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=2" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">2F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/2F.png" class="img-responsive" alt="" /></a>
-    <a id="f1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=1" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/1F.png" class="img-responsive" alt="" /></a>
-    <a id="fb1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?f=0" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/0F.png" class="img-responsive" alt="" /></a>
+    <a id="f10_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=10" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">10F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/10F.png" class="img-responsive" alt="" /></a>
+    <a id="f9_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=9" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">9F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/9F.png" class="img-responsive" alt="" /></a>
+    <a id="f8_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=8" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">8F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png" class="img-responsive" alt="" /></a>
+    <a id="f7_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=7" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">7F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/7F.png" class="img-responsive" alt="" /></a>
+    <a id="f6_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=6" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">6F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/6F.png" class="img-responsive" alt="" /></a>
+    <a id="f5_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=5" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">5F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/5F.png" class="img-responsive" alt="" /></a>
+    <a id="f4_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=4" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">4F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/4F.png" class="img-responsive" alt="" /></a>
+    <a id="f3_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=3" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">3F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/3F.png" class="img-responsive" alt="" /></a>
+    <a id="f2_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=2" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">2F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/2F.png" class="img-responsive" alt="" /></a>
+    <a id="f1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=1" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/1F.png" class="img-responsive" alt="" /></a>
+    <a id="fb1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=0" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/0F.png" class="img-responsive" alt="" /></a>
     
     <div id="floor_map_F" class="modal fade" role="dialog">
         <div class="modal-dialog">

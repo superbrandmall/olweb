@@ -9,7 +9,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
 			<div class="modal-body">
-				<h3 class="c-font-24 c-font-sbold">注册新账号</h3>
+				<h3 class="c-font-24 c-font-sbold"><?= $lang['register_register'] ?></h3>
 				<form>
                     <div class="form-group">
 						<label for="contact_name_1" class="hide"><?= $lang['register_main_contact'] ?>*</label>
@@ -50,14 +50,14 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                         <div id="errorcontainer-modality_3" class="errorDiv"></div>
 					</div>
                     <div class="form-group">
-                        <label for="website" class="hide">官网链接</label>
-                        <input type="url" id="website" name="website" placeholder="官网链接" class="form-control input-lg c-square">
+                        <label for="website" class="hide"><?= $lang['register_website_url'] ?></label>
+                        <input type="url" id="website" name="website" placeholder="<?= $lang['register_website_url'] ?>" class="form-control input-lg c-square">
                         <div id="errorcontainer-website" class="errorDiv"></div>
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
                         <input type="hidden" id="hidden_file">
-                        <span>上传公司品牌介绍PDF</span>
+                        <span><?= $lang['register_upload_company_profile'] ?></span>
                         <input type="file" id="file" name="file" accept=".pdf">
                         <div id="errorcontainer-file" class="errorDiv"></div>
                     </div>
@@ -77,9 +77,9 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 					<div class="form-group">
                         <div class="input-group">
                             <select class="form-control input-lg c-square" id="international" name="international" required>
-                                <option value=""><?= $lang['register_choose'] ?>验证方式*</option>
-                                <option value="verify_mobile">手机验证</option>
-                                <option value="verify_email">邮箱验证</option>
+                                <option value=""><?= $lang['register_verify_method'] ?>*</option>
+                                <option value="verify_mobile"><?= $lang['register_verify_mobile'] ?></option>
+                                <option value="verify_email"><?= $lang['register_verify_email'] ?></option>
                             </select>
                             <span class="input-group-addon" style="background: none;border: none;padding: 2px;"> </span>
                             <div style="position: relative;">
@@ -97,12 +97,12 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 							<span></span>
 							<span class="check"></span>
 							<span class="box"></span>
-                            同意<a href="terms.html" target="_blank">《正大Online Leasing服务条款》</a></label>
+                            <?= $lang['register_accept'] ?><a href="terms.html" target="_blank">《<?= $lang['register_chiatai_ol_reg_agree'] ?>》</a></label>
 						</div>
                         <div id="errorcontainer-terms" class="errorDiv" style="margin-left: 29px"></div>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login">立即注册</button>
+						<button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login"><?= $lang['register_finish_registration'] ?></button>
 						<a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal"><?= $lang['register_back_login'] ?></a>
 					</div>
                     
