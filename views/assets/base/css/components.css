@@ -3490,7 +3490,6 @@ h1 {
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > a {
     font-size: 11px;
-    text-transform: uppercase;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li > .dropdown-menu.c-menu-type-mega .nav.nav-tabs > li > a {
     font-size: 14px;
@@ -8958,7 +8957,6 @@ h1 {
   color: #3f444a;
   font-weight: bold;
   margin: 0 0 30px 0;
-  text-transform: uppercase;
 }
 .c-content-contact-1 > .row .c-body > .c-section > p {
   font-size: 16px;
@@ -9688,7 +9686,7 @@ h1 {
 .c-content-person-1 .c-body .c-head .c-name {
   display: inline-block;
   float: left;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   color: #3f444a;
 }

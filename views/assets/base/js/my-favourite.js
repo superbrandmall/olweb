@@ -6,12 +6,6 @@ $(document).ready(function(){
     }
  });
 
-$(window).bind("load", function() {
-    if($.cookie('lang') === '2'){
-        translateToEng();
-    }
-});
-
 function ShowFavourites(p,c){
     $('.c-content-box .c-margin-t-30').html('');
 
@@ -32,27 +26,27 @@ function ShowFavourites(p,c){
                 if(response.data.content.length > 0) {
                     generatePages(p, response.data.totalPages);
                     
-                    var modal = [];
-                    modal = $.parseJSON(sessionStorage.getItem("modalities"));
-                    
-                    var modalities = [];
-                    $.each(modal, function(i,u) {
-                        $.each(u.children, function(j,w) {
-                            $.each(w.children, function(k,x) {
-                                $.each(x.children, function(l,y) {
-                                    modalities.push(y);
-                                });
-                            });
-                        });
-                    });
-                                        
-                    $.each(response.data.content, function(i,v){ 
-                        var modality;                        
+                    var modality,mallName,floorName;
+                    $.each(response.data.content, function(i,v){
                         if(v.modality !== '' && v.modality !== null){
-                            $.each(modalities, function(k,x) {
-                                if(x.code == v.modality) {
-                                    modality = x.name;
-                                }
+                            $.each($.parseJSON(sessionStorage.getItem("modalities")), function(a,b) {
+                                $.each(b.children, function(j,w) {
+                                    $.each(w.children, function(k,x) {
+                                        $.each(x.children, function(l,y) {
+                                            if($.cookie('lang') === 'en-us'){
+                                                if(y.code == v.modality) {
+                                                    modality = y.remark || '-';
+                                                    return false;
+                                                }
+                                            } else {
+                                                if(y.code == v.modality) {
+                                                    modality = y.name || '-';
+                                                    return false;
+                                                }
+                                            }
+                                        });
+                                    });
+                                });
                             });
                         } else {
                             modality = "-";
@@ -62,15 +56,37 @@ function ShowFavourites(p,c){
                         if(area === null){
                             area = "-";
                         }
+                        
+                        $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
+                            if(w.mallCode == v.mallCode) {
+                                if($.cookie('lang') === 'en-us'){
+                                    mallName = w.mallNameEng;
+                                } else {
+                                    mallName = w.mallName;
+                                }
+                                return false;
+                            }
+                        });
+
+                        $.each($.parseJSON(sessionStorage.getItem("floors")), function(j,w) {
+                            if(w.floorCode == v.floorCode) {
+                                if($.cookie('lang') === 'en-us'){
+                                    floorName = w.descriptionEng;
+                                } else {
+                                    floorName = w.description;
+                                }
+                                return false;
+                            }
+                        });
 
                         $('.c-content-box .c-margin-t-30').append('<div class="col-md-3"><div class="c-content-person-1 c-option-2"><div class="c-caption c-content-overlay">\n\
-<div class="c-overlay-wrapper"><div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'">店铺介绍</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt="">\n\
-</div><div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+v.mallName+'</div></div>\n\
-<div class="c-position">编号: '+v.unit+'</div><div class="c-position">楼层: '+v.floorName+'</div><div class="c-position">面积: '+area+'m<sup>2</sup></div><div class="c-position">业态: '+modality+'</div></div></div></div>');                            
+<div class="c-overlay-wrapper"><div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'">'+$.lang.shopIntro+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt="">\n\
+</div><div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div></div>\n\
+<div class="c-position">'+$.lang.shopUnit+': '+v.unit+'</div><div class="c-position">'+$.lang.floor+': '+floorName+'</div><div class="c-position">'+$.lang.leasableArea+': '+area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div></div></div></div>');                            
 
                     });
                 } else {
-                    $('.c-content-box .c-margin-t-30').html('<div class="col-md-12"><i class="fa fa-info" aria-hidden="true"></i> 您目前没有关注任何店铺</div>');
+                    $('.c-content-box .c-margin-t-30').html('<div class="col-md-12"><i class="fa fa-info" aria-hidden="true"></i> '+$.lang.noFavourites+'</div>');
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -119,14 +135,4 @@ function generatePages(currentPage, LastPage) {
         }
     }
     $(".c-content-pagination").append(pages);
-}
-
-function translateToEng() {
-    var e = $("body");
-    e.html(e.html()
-            .replace(/\编号/g, "Room number")
-            .replace(/\楼层/g, "Floor")
-            .replace(/\面积/g, "Leasing area")
-            .replace(/\业态/g, "Category")
-            .replace(/\您目前没有关注任何店铺/g, "You haven't had any favourite stores yet"));
 }

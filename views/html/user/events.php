@@ -1,5 +1,6 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/events.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>'
+    . '<script type="text/javascript" src="views/assets/base/js/events.js"></script>';
 ?>
 
 <!-- BEGIN: PAGE CONTAINER -->
@@ -8,23 +9,17 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold">办活动</h3>
+				<h3 class="c-font-uppercase c-font-bold"><?= $lang['events_events'] ?></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/">首页</a>
+					<a href="/"><?= $lang['events_home'] ?></a>
 				</li>
 				<li>
 					/
 				</li>
-                <li>
-                    正大广场陆家嘴购物中心
-				</li>
-                <li>
-					/
-				</li>
                 <li class="c-state_active">
-                    场地
+                    <?= $lang['events_events'] ?>
 				</li>
 			</ul>
 		</div>
@@ -35,21 +30,22 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 		<div class="container">
 			<div id="filters-container" class="cbp-l-filters-button">
 				<div data-filter=".sh-sbm" class="cbp-filter-item-active cbp-filter-item">
-					 正大广场陆家嘴购物中心
-					<div class="cbp-filter-counter">
-					</div>
+                    <?= $lang['events_ljz'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
-					 正大乐城宝山购物中心
+                    <?= $lang['events_bs'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
-					 正大乐城徐汇购物中心
+                    <?= $lang['events_xh'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
-					 正大乐城郑州购物中心
+                    <?= $lang['events_wx'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
-					 正大乐城无锡购物中心
+                    <?= $lang['events_xa'] ?>
+				</div>
+                <div data-filter=".sh-sbm" class="cbp-filter-item">
+                    <?= $lang['events_zz'] ?>
 				</div>
 			</div>
 			<div id="grid-container" class="cbp">
@@ -61,16 +57,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001030" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001030" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						明珠厅
+						<?= $lang['events_pearl_atrium'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						一楼东侧入口
+						<?= $lang['events_pearl_atrium_location'] ?>
 					</div>
 				</div>
 				<div class="cbp-item sh-sbm">
@@ -81,16 +77,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001024" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001024" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						滨江厅
+						<?= $lang['events_bund_atrium'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						一楼西侧入口
+						<?= $lang['events_bund_atrium_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">
@@ -101,16 +97,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001041" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001041" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						黑金平台
+						<?= $lang['events_platform'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						二楼东侧
+						<?= $lang['events_platform_location'] ?>
 					</div>
 				</div>
 				<div class="cbp-item sh-sbm">
@@ -121,16 +117,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001054" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001054" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						明珠平台
+						<?= $lang['events_pearl_platform'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						三楼东侧
+						<?= $lang['events_pearl_platform_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">
@@ -141,16 +137,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001043" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001043" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						黄金大道
+						<?= $lang['events_golden_avenue'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						三楼中庭
+						<?= $lang['events_golden_avenue_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">
@@ -161,16 +157,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001056" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001056" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						黄金平台
+						<?= $lang['events_golden_platform'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						四楼东侧
+						<?= $lang['events_golden_platform_location'] ?>
 					</div>
 				</div>
 				<div class="cbp-item sh-sbm">
@@ -181,16 +177,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						翡翠平台
+						<?= $lang['events_jade_platform'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						五楼东侧
+						<?= $lang['events_jade_platform_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">
@@ -201,16 +197,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001060" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001060" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						欢乐天地
+						<?= $lang['events_happiness_platform'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						六楼东侧
+						<?= $lang['events_happiness_platform_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">
@@ -221,16 +217,16 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001062" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase">进入</a>
+									<a href="event?id=OLSHOP180507001062" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cbp-l-grid-projects-title">
-						正大厅
+						<?= $lang['events_ct_hall'] ?>
 					</div>
 					<div class="cbp-l-grid-projects-desc">
-						九楼封闭式多功能大厅
+						<?= $lang['events_ct_hall_location'] ?>
 					</div>
 				</div>
 			</div>

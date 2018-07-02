@@ -11,7 +11,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"><?= $lang['search_search_shops'] ?></h3>
+				<h3 class="c-font-bold"><?= $lang['search_search_shops'] ?></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
@@ -35,7 +35,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 					<div class="col-md-8">
 						<div class="c-contact">
                             <div class="c-content-title-1">
-                                <h3 class="c-font-uppercase c-font-bold"><?= $lang['search_my_intention'] ?></h3>
+                                <h3 class="c-font-bold"><?= $lang['search_my_intention'] ?></h3>
                                 <div class="c-line-left">
                                 </div>
                             </div>
@@ -157,7 +157,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                 <div class="item">
                                     <div class="c-content-testimonial-2 c-bg-grey-1" style="background-image:url(views/assets/base/img/content/misc/feedback_box_3.png); background-position: right bottom; background-repeat: no-repeat; padding: 30px;">
                                         <div class="c-content-title-1 c-inverse">
-                                            <h4 class="c-font-uppercase c-font-bold"><?= $lang['search_my_info'] ?></h4>
+                                            <h4 class="c-font-bold"><?= $lang['search_my_info'] ?></h4>
                                             <div class="c-line-left"></div>
                                         </div>
                                         <ul class="c-content-list-1 c-theme c-separator-dot c-square">
@@ -196,7 +196,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                 <div class="item">
                                     <div class="c-content-testimonial-2 c-bg-grey-1" style="min-height: 360px; background-image:url(views/assets/base/img/content/misc/feedback_box_3.png); background-position: right bottom; background-repeat: no-repeat; padding: 30px;">
                                         <div class="c-content-title-1 c-inverse">
-                                            <h4 class="c-font-uppercase c-font-bold"><?= $lang['search_search_history'] ?></h4>
+                                            <h4 class="c-font-bold"><?= $lang['search_search_history'] ?></h4>
                                             <div class="c-line-left"></div>
                                         </div>
                                         <div class="c-content-accordion-1 c-theme"></div>
@@ -268,7 +268,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                         <li>
                             <?= $lang['search_verify_method'] ?>: 
                             <select id="international" name="international" class="form-control c-square c-theme input-sm valid" required style="display: inline; width: auto;">
-                                <option value=""><?= $lang['search_verify_method'] ?></option>
+                                <option value=""><?= $lang['search_choose'] ?></option>
                             </select>
                             <div id="errorcontainer-international" class="errorDiv"></div>
                         </li>

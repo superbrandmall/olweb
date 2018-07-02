@@ -1,6 +1,5 @@
 (function($, window, document, undefined) {
     'use strict';
-
     // init cubeportfolio
     $('#grid-container').cubeportfolio({
         filters: '#filters-container',

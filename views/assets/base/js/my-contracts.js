@@ -3,7 +3,7 @@ $(document).ready(function(){
 });
 
 $(window).bind("load", function() {
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         translateToEng();
     }
 });

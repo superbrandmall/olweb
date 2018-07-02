@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $('#login_verify').val('');
     ///////////////////// Validate login form /////////////////////////
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         var login_username_required = "Please give a mobile number or email address";
         var login_username_xor = "Please give a correct mobile number or email address";
         var login_verify_required = "Verification code can't be empty";
@@ -188,24 +188,12 @@ function VeryficationCodeLogin() {
 function setTimeLogin(obj) {
     if (countdownLogin == 0) { 
         obj.attr('href','javascript: VeryficationCodeLogin()');
-        
-        if($.cookie('lang') === '2'){
-            obj.html("Send");
-        } else {
-            obj.html("发送验证码");
-        }
-        
+        obj.html($.lang.sendVerificationCode);
         countdownLogin = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        
-        if($.cookie('lang') === '2'){
-            obj.html("Re-send(" + countdownLogin + ")s");
-        } else {
-            obj.html("重新发送(" + countdownLogin + ")s");
-        }
-        
+        obj.html($.lang.resendCode+"(" + countdownLogin + ")s");
         countdownLogin--; 
     } 
 setTimeout(function() { 

@@ -74,7 +74,7 @@ $(document).ready(function(){
                 
                 if(response.data.mobileVerified == 1){
                     $('#contact_phone_1').attr('disabled',true);
-                    $('#contact_phone_1_verified').html('<span class="btn-danger btn-xs c-btn-uppercase">已认证，不可修改</span>');
+                    $('#contact_phone_1_verified').html('<span class="btn-danger btn-xs c-btn-uppercase">'+$.lang.certifiedNonRemodifiable+'</span>');
                 } else {
                     $('#contact_phone_1').attr('disabled',false);
                     $('#contact_phone_1_verified').html('');
@@ -82,7 +82,7 @@ $(document).ready(function(){
                 
                 if(response.data.emailVerified == 1){
                     $('#email').attr('disabled',true);
-                    $('#email_verified').html('<span class="btn-danger btn-xs c-btn-uppercase">已认证，不可修改</span>');
+                    $('#email_verified').html('<span class="btn-danger btn-xs c-btn-uppercase">'+$.lang.certifiedNonRemodifiable+'</span>');
                 } else {
                     $('#email').attr('disabled',false);
                     $('#email_verified').html('');
@@ -99,6 +99,40 @@ $(document).ready(function(){
                 
                 
     ///////////////////// Validate my info form /////////////////////////
+    if($.cookie('lang') === 'en-us'){
+        var profile_contact_name_1_required = "First and last name can't be empty";
+        var profile_contact_name_1_minlength = "Please give correct first and last names";
+        var profile_contact_phone_1_required = "Mobile can't be empty";
+        var profile_contact_phone_1_rangelength = "Please give a correct mobile number";
+        var profile_contact_phone_1_digits = "Please give a correct mobile number";
+        var profile_email_required = "Email address can't be empty";
+        var profile_email_email = "Please give a correct email address";
+        var profile_merchant_name_required = "Company name can't be empty";
+        var profile_merchant_name_minlength = "Please give a correct company name";
+        var profile_brand_name_required = "Brand name can't be empty";
+        var profile_brand_name_minlength = "Please give a correct brand name";
+        var profile_modality_1_required = "Please choose a primary category";
+        var profile_modality_2_required = "Please choose a secondary category";
+        var profile_modality_3_required = "Please choose a teriary category";
+        var profile_website_url = "Please give a correct website url";
+    } else {
+        var profile_contact_name_1_required = "姓名为必填项";
+        var profile_contact_name_1_minlength = "请输入完整姓名";
+        var profile_contact_phone_1_required = "手机为必填项";
+        var profile_contact_phone_1_rangelength = "请输入正确手机号码";
+        var profile_contact_phone_1_digits = "请输入正确手机号码";
+        var profile_email_required = "公司邮箱为必填项";
+        var profile_email_email = "请输入有效邮箱地址";
+        var profile_merchant_name_required = "公司名称为必填项";
+        var profile_merchant_name_minlength = "请输入正确公司名称";
+        var profile_brand_name_required = "请输入品牌名称";
+        var profile_brand_name_minlength = "请输入完整品牌名称";
+        var profile_modality_1_required = "请选择一级业态";
+        var profile_modality_2_required = "请选择二级业态";
+        var profile_modality_3_required = "请选择三级业态";
+        var profile_website_url = "请输入有效网址";
+    }
+    
     $("#my_info_form").validate({
         rules: {
             contact_name_1: {
@@ -137,37 +171,37 @@ $(document).ready(function(){
         },
         messages: {
             contact_name_1: {
-                required: "姓名为必填项",
-                minlength: "请输入完整姓名"
+                required: profile_contact_name_1_required,
+                minlength: profile_contact_name_1_minlength
             },
             contact_phone_1: {
-                required: "手机为必填项",
-                rangelength: "请输入正确手机号码",
-                digits: "请输入正确手机号码"
+                required: profile_contact_phone_1_required,
+                rangelength: profile_contact_phone_1_rangelength,
+                digits: profile_contact_phone_1_digits
             },
             email: {
-                required: "公司邮箱为必填项",
-                email: "请输入有效邮箱地址"
+                required: profile_email_required,
+                email: profile_email_email
             },
             merchant_name: {
-                required: "公司名称为必填项",
-                minlength: "请输入正确公司名称"
+                required: profile_merchant_name_required,
+                minlength: profile_merchant_name_minlength
             },
             brand_name: {
-                required: "请输入品牌名称",
-                minlength: "请输入完整品牌名称"
+                required: profile_brand_name_required,
+                minlength: profile_brand_name_minlength
             },
             modality_1: {
-                required: "请选择一级业态"
+                required: profile_modality_1_required
             },
             modality_2: {
-                required: "请选择二级业态"
+                required: profile_modality_2_required
             },
             modality_3: {
-                required: "请选择三级业态"
+                required: profile_modality_3_required
             },
             website: {
-                url: "请输入有效网址"
+                url: profile_website_url
             }
         },
         errorPlacement: function(error, element) {
@@ -266,7 +300,11 @@ function getBrandModality1() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
         if($.inArray(v.code,['00','01','02']) != -1){
             $.each(v.children, function(j,w) {
-                $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                if($.cookie('lang') === 'en-us'){
+                    $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
+                } else {
+                    $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                }
             });
         }
     });
@@ -281,7 +319,11 @@ function getBrandModality2(mod) {
             $.each(v.children, function(j,w) {
                 if(w.code == m) {
                     $.each(w.children, function(k,x) {
-                        $('#modality_2').append('<option value="'+x.code+'">'+x.name+'</option>');
+                        if($.cookie('lang') === 'en-us'){
+                            $('#modality_2').append('<option value="'+x.code+'">'+x.remark+'</option>');
+                        } else {
+                            $('#modality_2').append('<option value="'+x.code+'">'+x.name+'</option>');
+                        }
                     });
                 }
             });
@@ -299,7 +341,11 @@ function getBrandModality3(mod) {
                 $.each(w.children, function(k,x) {
                     if(x.code == m) {
                         $.each(x.children, function(l,y) {
-                            $('#modality_3').append('<option value="'+y.code+'">'+y.name+'</option>');
+                            if($.cookie('lang') === 'en-us'){
+                                $('#modality_3').append('<option value="'+y.code+'">'+y.remark+'</option>');
+                            } else {
+                                $('#modality_3').append('<option value="'+y.code+'">'+y.name+'</option>');
+                            }
                         });
                     }
                 });

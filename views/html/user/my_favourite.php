@@ -8,17 +8,17 @@
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"><?= $lang['my_favourite_my_favourite'] ?></h3>
+				<h3 class="c-font-bold"><?= $lang['favourite_my_favourites'] ?></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/"><?= $lang['search_home'] ?></a>
+					<a href="/"><?= $lang['favourite_home'] ?></a>
 				</li>
 				<li>
 					/
 				</li>
 				<li class="c-state_active">
-					<?= $lang['my_favourite_my_favourite'] ?>
+					<?= $lang['favourite_my_favourites'] ?>
 				</li>
 			</ul>
 		</div>
@@ -27,13 +27,6 @@
     <!-- BEGIN: 我的关注 -->
     <div class="c-content-box c-size-md c-no-padding" style="margin-top: 20px;">
 		<div class="container">
-            <!-- Begin: Title 1 component -->
-            <div class="c-content-title-1">
-                <h3 class="c-font-uppercase c-font-bold"><?= $lang['my_favourite_my_favourite'] ?></h3>
-                <div class="c-line-left c-theme-bg">
-                </div>
-            </div>
-            <!-- End-->
             <div class="row c-margin-t-30"></div>
             <!-- End-->
             <center>

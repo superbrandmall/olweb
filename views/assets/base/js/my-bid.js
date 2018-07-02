@@ -2,14 +2,14 @@ $(document).ready(function(){
     GetMyBids(1,100);
     setInterval(function(){
         GetMyBids(1,100);
-        if($.cookie('lang') === '2'){
+        if($.cookie('lang') === 'en-us'){
             translateToEng();
         }
     }, 15000);
 });
 
 $(window).bind("load", function() {
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         translateToEng();
     }
 });

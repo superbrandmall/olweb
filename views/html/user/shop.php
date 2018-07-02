@@ -16,7 +16,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"></h3>
+				<h3 class="c-font-bold"></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
@@ -101,7 +101,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
                         <div class="c-label" id="fmap">
                             <span style="background-color: #4EABE6; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['shop_this_shop'] ?>
                             <span style="margin-left: 15px; background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['shop_shop_awaiting_rent'] ?>
-                            <span style="margin-left: 15px; background-color: #f4a018; width: 20px; height: 13px; display: inline-block;"></span> 在租店铺
+                            <span style="margin-left: 15px; background-color: #f4a018; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['shop_shop_in_renting'] ?>
                         </div>
                         <div class="c-body" style="background-color: #F0F0F0;padding: 33px 20px 20px;">
                             <img src="#" class="img-responsive" id="map">
@@ -371,7 +371,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 			<div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-uppercase c-font-bold" id="floor_name"><?= $lang['shop_modality_shop_proportion'] ?></h3>
+                        <h3 class="c-center c-font-bold" id="floor_name"><?= $lang['shop_modality_shop_proportion'] ?></h3>
                         <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div id="proportion"></div>

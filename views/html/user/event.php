@@ -16,11 +16,11 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
-				<h3 class="c-font-uppercase c-font-bold"></h3>
+				<h3 class="c-font-bold"></h3>
 			</div>
 			<ul class="c-page-breadcrumbs c-theme-nav c-pull-right c-fonts-regular">
 				<li>
-					<a href="/"><?= $lang['shop_home'] ?></a>
+					<a href="/"><?= $lang['event_home'] ?></a>
 				</li>
                 <li>
 					/
@@ -30,20 +30,20 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 					/
 				</li>
 				<li class="c-state_active">
-					场地招商详情
+					<?= $lang['event_event_detail'] ?>
 				</li>
 			</ul>
 		</div>
 	</div>
 	<!-- END: 标题 -->
-    <!-- BEGIN: 店铺招商详情 -->
+    <!-- BEGIN: 场地招商详情 -->
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; padding-bottom: 0;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
 					<div class="c-content-media-2-slider" data-slider="owl" data-single-item="true" data-auto-play="4000">
 						<div class="c-content-label c-font-uppercase c-font-bold">
-							场地图片
+							<?= $lang['event_event_picture'] ?>
 						</div>
 						<div class="owl-carousel owl-theme c-theme owl-single"></div>
 					</div>
@@ -51,20 +51,20 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 <div class="col-md-4">
 					<div class="c-content-media-1 c-bordered" style="min-height: 380px;">
 						<div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-							场地招商详情
+							<?= $lang['event_event_detail'] ?>
 						</div>
 						<ul class="c-content-list-1 c-theme c-separator-dot c-square">
                             <li>
-                                场地号: <span id="unit"></span>
+                                <?= $lang['event_room_number'] ?>: <span id="unit"></span>
                             </li>
                             <li>
-                                <?= $lang['shop_floor'] ?>: <span id="floor"></span>
+                                <?= $lang['event_floor'] ?>: <span id="floor"></span>
                             </li>
                             <li>
-                                <?= $lang['shop_leasable_area'] ?>: 
+                                <?= $lang['event_leasable_area'] ?>: 
                                 <strong><span id="area"></span></strong>
                             </li>
-                            <li><?= $lang['shop_moving_date'] ?>:
+                            <li><?= $lang['event_moving_date'] ?>:
                                 <strong><span id="moving_date"></span></strong>
                             </li>
                         </ul>
@@ -78,7 +78,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 			<div class="row">
                 <div id="vr_video" class="col-md-6">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-uppercase c-font-bold c-font-white">VR看场</h3>
+                        <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['event_vr'] ?></h3>
                         <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div class="embed-responsive embed-responsive-16by9">
@@ -87,12 +87,12 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 </div>
                 <div id="shop_location" class="col-md-6">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-uppercase c-font-bold c-font-white">场地落位图</h3>
+                        <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['event_event_location'] ?></h3>
                         <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div id="map" class="c-content-panel">
                         <div class="c-label" id="fmap">
-                            <span style="background-color: #4EABE6; width: 20px; height: 13px; display: inline-block;"></span> 本场地
+                            <span style="background-color: #4EABE6; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['event_this_event'] ?>
                         </div>
                     </div>
                 </div>
@@ -359,7 +359,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 			<div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-uppercase c-font-bold" id="floor_name"><?= $lang['shop_modality_shop_proportion'] ?></h3>
+                        <h3 class="c-center c-font-uppercase c-font-bold" id="floor_name"><?= $lang['event_modality_shop_proportion'] ?></h3>
                         <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div id="proportion"></div>
@@ -367,7 +367,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
             </div>
         </div>
     </div>
-	<!-- END: 店铺招商详情 -->
+	<!-- END: 场地招商详情 -->
 </div>
 
 <?php include ('footer.php'); ?>

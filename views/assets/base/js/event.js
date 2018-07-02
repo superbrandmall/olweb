@@ -58,15 +58,40 @@ function GetShopInfo(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                $('.c-page-title h3').html(response.data.mallName || '-');
                 $('#unit').text(response.data.unit || '-');
-                $('#floor').text(response.data.floorName || '-');
+                
+                var floorName,floorNameEng,mallName;
+                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
+                    if(v.floorCode == response.data.floorCode) {
+                        floorNameEng = v.descriptionEng;
+                        floorName = v.description;
+                        return false;
+                    }
+                });
+                
+                if($.cookie('lang') === 'en-us'){
+                    $('#floor').text(floorNameEng || '-');
+                } else {
+                    $('#floor').text(floorName || '-');
+                }
                 
                 if(response.data.unit != null) {
                     GetMap(response.data.unit);
                 }
                 
-                $('#mall_link').html('<a href="'+response.data.mallCode.toLowerCase()+'">'+response.data.mallName+'</a>');
+                $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+                    if(v.mallCode == response.data.mallCode) {
+                        if($.cookie('lang') === 'en-us'){
+                            mallName = v.mallNameEng;
+                        } else {
+                            mallName = v.mallName;
+                        }
+                        return false;
+                    }
+                });
+                
+                $('.c-page-title h3').html(mallName || '-');
+                $('#mall_link').html('<a href="'+response.data.mallCode.toLowerCase()+'">'+mallName+'</a>');
                 
                 if(response.data.images.length === 0){
                     $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url('+response.data.firstImage+'); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
@@ -76,8 +101,13 @@ function GetShopInfo(){
                     });
                 }
                 
-                $('#floor_name').prepend(response.data.floorName);                   
-                getFloorInfo(response.data.mallCode,response.data.floorName);
+                if($.cookie('lang') === 'en-us'){
+                    $('#floor_name').prepend(floorNameEng);
+                } else {
+                    $('#floor_name').prepend(floorName);
+                }
+                
+                getFloorInfo(response.data.mallCode,floorName);
                 $('#area').text(numberWithCommas(response.data.area)+'m²' || '-');
 
                 if(response.data.shopState === 1) { // 空铺
@@ -110,9 +140,9 @@ function GetShopInfo(){
 
                 if(response.data.shopState !== 0) {
                     if($.cookie('uid') && $.cookie('uid') != '') {
-                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> 预约看场</a>').insertAfter(".c-content-list-1");
+                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     } else {
-                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> 预约看场</a>').insertAfter(".c-content-list-1");
+                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     }
                 }
 
@@ -120,9 +150,9 @@ function GetShopInfo(){
 
                 if($.cookie('uid') && $.cookie('uid') != ''){
                     if(response.data.isMyFavourite === false) {
-                        $('.c-fav').append('<button type="button" class="add-favourite" style="background: transparent;border:none;"><i class="icon-like c-font-thin"></i> <p class="c-font-thin">关注该场地</p></button>');
+                        $('.c-fav').append('<button type="button" class="add-favourite" style="background: transparent;border:none;"><i class="icon-plus c-font-thin"></i> <p class="c-font-thin">'+$.lang.addToFav2+'</p></button>');
                     } else {
-                        $('.c-fav').append('<button type="button" class="remove-favourite" style="background: transparent;border:none; color: #666;"><i class="icon-like c-font-thin"></i> <p class="c-font-thin">取消关注</p></button>');
+                        $('.c-fav').append('<button type="button" class="remove-favourite" style="background: transparent;border:none; color: rgba(255,255,255,0.5);"><i class="icon-close c-font-thin"></i> <p class="c-font-thin">'+$.lang.removeFromFav+'</p></button>');
                     }
                 }
                 
@@ -167,7 +197,7 @@ function AddFavourite(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('.c-fav').remove('button');
-                $('.c-fav').html('<button type="button" class="remove-favourite" style="background: transparent;border:none; color: #666;"><i class="icon-like c-font-thin"></i> <p class="c-font-thin">取消关注</p></button>');
+                $('.c-fav').html('<button type="button" class="remove-favourite" style="background: transparent;border:none; color: rgba(255,255,255,0.5);"><i class="icon-close c-font-thin"></i> <p class="c-font-thin">'+$.lang.removeFromFav+'</p></button>');
 
                 $('.remove-favourite').click(function(){
                     RemoveFavourite();
@@ -205,7 +235,7 @@ function RemoveFavourite(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('.c-fav').remove('button');
-                $('.c-fav').html('<button type="button" class="add-favourite" style="background: transparent;border:none;"><i class="icon-like c-font-thin"></i> <p class="c-font-thin">关注该场地</p></button>');
+                $('.c-fav').html('<button type="button" class="add-favourite" style="background: transparent;border:none;"><i class="icon-plus c-font-thin"></i> <p class="c-font-thin">'+$.lang.addToFav2+'</p></button>');
                 $('.add-favourite').click(function(){
                     AddFavourite();
                 });
@@ -319,7 +349,7 @@ function getFloorInfo(mc,fn) {
                 var modalityName;
                 $.each(details, function(i,v){
                     modalityName = GetFloorModality(v.code);
-                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'家): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
+                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
                 });
                 $('#proportion').html(proportion);
             } else {
@@ -349,27 +379,44 @@ function NetPing(vr) {
 }
 
 function GetFloorModality(mod) {
-    var mm = '-';
+    if($.cookie('lang') === 'en-us'){
+        var mm = 'Other';
+    } else {
+        var mm = '其它';
+    }
     if(mod !== null && mod !== '') {
         var m = mod;
         $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
-            if(v.code == m) {
+            if(v.code == m && $.cookie('lang') === 'zh-cn') {
                 mm = v.name;
+                return false;
+            } else if(v.code == m && $.cookie('lang') === 'en-us') {
+                mm = v.remark;
                 return false;
             }
             $.each(v.children, function(j,w) {
-                if(w.code == m) {
+                if(w.code == m && $.cookie('lang') === 'zh-cn') {
                     mm = w.name;
                     return false;
-                }
+                } else if(w.code == m && $.cookie('lang') === 'en-us') {
+                    mm = w.remark;
+                    return false;
+                } 
                 $.each(w.children, function(k,x) {
-                    if(x.code == m) {
+                    if(x.code == m && $.cookie('lang') === 'zh-cn') {
                         mm = x.name;
+                        return false;
+                    } else if(x.code == m && $.cookie('lang') === 'en-us') {
+                        mm = x.remark;
                         return false;
                     }
                     $.each(x.children, function(l,y) {
-                        if(y.code == m) {
+                        if(y.code == m && $.cookie('lang') === 'zh-cn') {
                             mm = y.name;
+                            return false;
+                        } else if(y.code == m && $.cookie('lang') === 'en-us') {
+                            mm = y.name;
+                            return false;
                         }
                     });
                 });

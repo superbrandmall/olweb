@@ -3,7 +3,7 @@ $.vals = [];
 $(document).ready(function(){
     $('#international_verify').val('');
     
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         var stCal = "en-US";
     } else {
         var stCal = "zh-CN";
@@ -22,7 +22,7 @@ $(document).ready(function(){
     }
     
     ///////////////////// Validate search form /////////////////////////
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         var requirement_min_area_LessThanEqual = "Minimum leasable area mustn't be greater than maximum leasable area";
         var requirement_length_required = "Please choose a lease term";
         var requirement_start_required = "Moving in date can't be empty";
@@ -88,7 +88,7 @@ $(document).ready(function(){
     }
     
     ///////////////////// Validate reserve form /////////////////////////
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         var requirement_rental_length_required = "Please choose a lease term";
         var requirement_start_date_required = "Moving in date can't be empty";
         var requirement_start_date_date = "Please give a correct date";
@@ -217,10 +217,6 @@ $(document).ready(function(){
             });
         }
     });
-    
-    if($.cookie('lang') === '2'){
-        translateToEngSearch();
-    }
 });
 
 function ShowSearch(){
@@ -265,15 +261,7 @@ function ShowSearch(){
                 scrollTop: $(".c-content-list").offset().top - 200},
                 'slow');
                 
-                if($.cookie('lang') === '2'){
-                    var tjdp = 'Recommended stores';
-                    var jia = '';
-                } else {
-                    var tjdp = '推荐店铺';
-                    var jia = '家';
-                }
-                
-                $('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-white c-font-bold">'+tjdp+' ('+response.data.result.length+jia+')</h3><div class="c-line-center c-theme-bg"></div>');                            
+                $('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-white c-font-bold">'+$.lang.recommandStores+' ('+response.data.result.length+$.lang.jia+')</h3><div class="c-line-center c-theme-bg"></div>');                            
 
                 sessionStorage.setItem("searches", JSON.stringify(response.data.result) );
                 if(response.data.result.length > 0){
@@ -287,20 +275,9 @@ function ShowSearch(){
     });
 }
 
-var modalities = [];
-$.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
-    $.each(u.children, function(j,w) {
-        $.each(w.children, function(k,x) {
-            $.each(x.children, function(l,y) {
-                modalities.push(y);
-            });
-        });
-    });
-});
-
 function ShowResults(result,searchCode) {
     
-    var dianpujieshao,louceng,mianji,yetai,pipei,yuyue,kanpu,qiatan;
+    var mallName,floorName;
     $.each(result, function(i,v){                  
         var star_length;
         if(v.score === 100){
@@ -324,43 +301,59 @@ function ShowResults(result,searchCode) {
         var modality;
 
         if(v.modality !== '' && v.modality !== null){
-            $.each(modalities, function(k,x) {
-                if(x.code == v.modality) {
-                    modality = x.name;
-                }
+            $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
+                $.each(u.children, function(j,w) {
+                    $.each(w.children, function(k,x) {
+                        $.each(x.children, function(l,y) {
+                            if($.cookie('lang') === 'en-us'){
+                                if(y.code == v.modality) {
+                                    modality = y.remark || '-';
+                                    return false;
+                                }
+                            } else {
+                                if(y.code == v.modality) {
+                                    modality = y.name || '-';
+                                    return false;
+                                }
+                            }
+                        });
+                    });
+                });
             });
         } else {
             modality = "-";
         }
         
-        if($.cookie('lang') === '2'){
-            dianpujieshao = "Store info";
-            louceng = "Floor";
-            mianji = "Area";
-            yetai = "Category";
-            pipei = "Matching";
-            yuyue = "Reserve";
-            kanpu = " date";
-            qiatan = " date";
-        } else {
-            dianpujieshao = "店铺介绍";
-            louceng = "楼层";
-            mianji = "面积";
-            yetai = "业态";
-            pipei = "匹配";
-            yuyue = "预约";
-            kanpu = "看铺";
-            qiatan = "洽谈";
-        }
+        $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
+            if(w.mallCode == v.mallCode) {
+                if($.cookie('lang') === 'en-us'){
+                    mallName = w.mallNameEng;
+                } else {
+                    mallName = w.mallName;
+                }
+                return false;
+            }
+        });
+        
+        $.each($.parseJSON(sessionStorage.getItem("floors")), function(j,w) {
+            if(w.floorCode == v.floorCode) {
+                if($.cookie('lang') === 'en-us'){
+                    floorName = w.descriptionEng;
+                } else {
+                    floorName = w.description;
+                }
+                return false;
+            }
+        });
         
         $('.c-content-list').append('<div class="col-md-3" style="display: none;"><div class="c-content-person-1 c-option-2">\n\
 <div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
-<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
-<div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+v.mallName+'</div>\n\
+<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
+<div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div>\n\
 </div>\n\
-<div class="c-position">'+louceng+': '+v.floorName+'</div><div class="c-position">'+mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position">'+yetai+': '+modality+'</div>\n\
-<div class="c-position"><div style="float: left;margin-right: 5px">'+pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
-<div class="c-position" style="margin-top: 10px;"><span class="c-content-label c-font-uppercase c-font-bold c-theme-bg"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
+<div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\
+<div class="c-position"><div style="float: left;margin-right: 5px">'+$.lang.pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
+<div class="c-position" style="margin-top: 10px;"><span class="c-content-label c-font-uppercase c-font-bold c-theme-bg"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+$.lang.yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
 </div></div>');
     });
 
@@ -380,9 +373,9 @@ function ShowResults(result,searchCode) {
         $('#start_date').val($('#start').val());
             
         if($.vals.length > 0){
-            $('#reserve_tag').text(kanpu);
+            $('#reserve_tag').text($.lang.kanpu);
         } else {
-            $('#reserve_tag').text(qiatan);
+            $('#reserve_tag').text($.lang.qiatan);
         }
         
         var d = new Date();
@@ -392,7 +385,7 @@ function ShowResults(result,searchCode) {
             (month<10 ? '0' : '') + month + '-' +
             (day<10 ? '0' : '') + day;
         
-        if($.cookie('lang') === '2'){
+        if($.cookie('lang') === 'en-us'){
             var reCal = "en-US";
         } else {
             var reCal = "zh-CN";
@@ -445,57 +438,19 @@ function GetHistories(p){
                     $.each(v.mallCodes, function(j,w) {
                         codes.push(w);
                         
-                        if($.cookie('lang') === '2'){
-                            switch (w) {
-                                case $.mallCode.shanghaiSbm:
-                                    mallName = "Shanghai SuperBrandMall";
-                                    break;
-                                case $.mallCode.baoshanTm:
-                                    mallName = "Baoshan TouchMall";
-                                    break;
-                                case $.mallCode.zhengzhouTm:
-                                    mallName = "Zhengzhou TouchMall";
-                                    break;
-                                case $.mallCode.xuhuiTm:
-                                    mallName = "Xuhui TouchMall";
-                                    break;
-                                case $.mallCode.xianTm:
-                                    mallName = "Xi'an TouchMall";
-                                    break;
-                                case $.mallCode.wuxi.Tm:
-                                    mallName = "Wuxi TouchMall";
-                                    break;
-                                default:
-                                    mallName = "Shanghai SuperBrandMall";
-                                    break;
+                        $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+                            if(v.mallCode == w) {
+                                if($.cookie('lang') === 'en-us'){
+                                    mallName = v.mallNameEng;
+                                    nian = ' year(s)';
+                                } else {
+                                    mallName = v.mallName;
+                                    nian = '年';
+                                }
+                                return false;
                             }
-                            nian = ' year(s)';
-                        } else {
-                            switch (w) {
-                                case $.mallCode.shanghaiSbm:
-                                    mallName = "正大广场上海购物中心";
-                                    break;
-                                case $.mallCode.baoshanTm:
-                                    mallName = "正大乐城宝山购物中心";
-                                    break;
-                                case $.mallCode.zhengzhouTm:
-                                    mallName = "正大乐城郑州购物中心";
-                                    break;
-                                case $.mallCode.xuhuiTm:
-                                    mallName = "正大乐城徐汇购物中心";
-                                    break;
-                                case $.mallCode.xianTm:
-                                    mallName = "正大乐城西安购物中心";
-                                    break;
-                                case $.mallCode.wuxi.Tm:
-                                    mallName = "正大乐城无锡购物中心";
-                                    break;
-                                default:
-                                    mallName = "正大广场上海购物中心";
-                                    break;
-                            }
-                            nian = '年';
-                        }
+                        });
+                        
                         malls.push(mallName);
                     });
                     
@@ -564,7 +519,7 @@ function GetHistories(p){
 }
 
 function showMyInfo(){
-    $('#international').html('<option value="">请选择验证方式</option>');
+    $('#international').html('<option value="">'+$.lang.choose+'</option>');
     
     var userCode = $.cookie('uid');
     $.ajax({
@@ -596,9 +551,9 @@ function showMyInfo(){
                 $('#brand_modality_3_code').val(brandModality);
                 
                 if(response.data.emailVerified == 1) {
-                    $('#international').append('<option value="email" selected="selected">邮箱验证</option>');
+                    $('#international').append('<option value="email" selected="selected">'+$.lang.emailVerify+'</option>');
                 } else if(response.data.mobileVerified == 1) {
-                    $('#international').append('<option value="mobile" selected="selected">手机验证</option>');
+                    $('#international').append('<option value="mobile" selected="selected">'+$.lang.mobileVerify+'</option>');
                 }
         
             } else {
@@ -617,7 +572,9 @@ function GetBrandModality1(mod) {
         var m = mod;
         $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
             $.each(v.children, function(j,w) {
-                if(w.code == m) {
+                if(w.code == m && $.cookie('lang') === 'en-us') {
+                    mm = w.remark;
+                } else if(w.code == m && $.cookie('lang') === 'zh-cn') {
                     mm = w.name;
                 }
             });
@@ -636,7 +593,9 @@ function GetBrandModality2(mod) {
         $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
             $.each(v.children, function(j,w) {
                 $.each(w.children, function(k,x) {
-                    if(x.code == m) {
+                    if(x.code == m && $.cookie('lang') === 'en-us') {
+                        mm = x.remark;
+                    } else if(x.code == m && $.cookie('lang') === 'zh-cn') {
                         mm = x.name;
                     }
                 });
@@ -657,7 +616,9 @@ function GetBrandModality3(mod) {
             $.each(v.children, function(j,w) {
                 $.each(w.children, function(k,x) {
                     $.each(x.children, function(l,y) {
-                        if(y.code == m) {
+                        if(y.code == m && $.cookie('lang') === 'en-us') {
+                            mm = y.remark;
+                        } else if(y.code == m && $.cookie('lang') === 'zh-cn') {
                             mm = y.name;
                         }
                     });
@@ -731,7 +692,7 @@ function setTimeReservation(obj) {
     if (countdownReservation == 0) { 
         obj.attr('href','javascript: VeryficationCodeReservation()'); 
         
-        if($.cookie('lang') === '2'){
+        if($.cookie('lang') === 'en-us'){
             obj.html("Send");
         } else {
             obj.html("发送");
@@ -757,7 +718,7 @@ function PrettyDate(time){
      if ( isNaN(day_diff) || day_diff < 0 || day_diff >= 31 )
         return;
 
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         return day_diff == 0 && (
             diff < 60 && "Just now" ||
             diff < 120 && "1 min ago" ||
@@ -813,11 +774,3 @@ $(function() {
     $(".panel-title a").PrettyDate();
     setInterval(function(){ $(".panel-title a").PrettyDate(); }, 5000);
 });
-
- function translateToEngSearch() {
-    var e = $("#international");
-    e.html(e.html()
-            .replace(/\请选择验证方式/g, "Verification method")
-            .replace(/\邮箱验证/g, "Email")
-            .replace(/\手机验证/g, "Mobile"));
-}

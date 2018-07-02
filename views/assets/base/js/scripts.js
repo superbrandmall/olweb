@@ -5,18 +5,109 @@ $.api = {
     mobileVC: ""
 };
 
+if($.cookie('lang') === 'en-us'){
+    $.lang = {
+        reserveShop: 'Reserve',
+        reserveEvent: 'Reserve',
+        addToFav: 'Add to favorite',
+        addToFav2: 'Add to favorite',
+        removeFromFav: 'Remove from favorite',
+        thisStore: 'This store',
+        forRent: 'For rent',
+        emailVerify: 'Email',
+        mobileVerify: 'Mobile',
+        sendCode: 'Send',
+        sendVerificationCode: 'Send',
+        verifyCode: 'Code',
+        resendCode: 'Re-send',
+        certifiedNonRemodifiable: 'Certified and non remodifiable',
+        noReservations: "You don't have any reservations yet",
+        reserveNegotiation: 'Reserve for negotiation',
+        shopUnit: 'Unit',
+        floor: 'Floor',
+        recommandModality: 'Category',
+        leasableArea: 'Leasable area',
+        reserveDate: 'Date reserved',
+        leasingPeriod: 'Leasing Period',
+        reserveAmount: 'Stores reserved',
+        reserveCallBack: 'Reserve succeeded, our leasing experts will contact you within 2 working days.',
+        noFavourites: "You don't have any favourite stores yet",
+        shopIntro: 'Store detail',
+        modality: 'Category',
+        choose: 'Please choose',
+        contactPhone: 'Contact',
+        recommandStores: 'Recommended stores',
+        jia: '',
+        dianpujieshao : "Store info",
+        louceng : "Floor",
+        mianji : "Area",
+        pipei : "Matching",
+        yuyue : "Reserve",
+        kanpu : " date",
+        qiatan : " date"
+    };
+} else {
+    $.lang = {
+        reserveShop: '预约看铺',
+        reserveEvent: '预约看场',
+        addToFav: '关注该店铺',
+        addToFav2: '关注该场地',
+        removeFromFav: '取消关注',
+        thisStore: '本店铺',
+        forRent: '待租',
+        emailVerify: '邮箱验证',
+        mobileVerify: '手机验证',
+        sendCode: '发送',
+        sendVerificationCode: '发送验证码',
+        verifyCode: '验证码',
+        resendCode: '重新发送',
+        certifiedNonRemodifiable: '已认证，不可修改',
+        noReservations: '您目前没有任何看铺预约',
+        reserveNegotiation: '预约洽谈',
+        shopUnit: '单元号',
+        floor: '所在楼层',
+        recommandModality: '推荐业态',
+        leasableArea: '租赁面积',
+        reserveDate: '预约时间',
+        leasingPeriod: '租约时限',
+        reserveAmount: '预约数量',
+        reserveCallBack: '预约成功，我们的招商人员会在2个工作日内与您取得联系。',
+        noFavourites: '您目前没有关注任何店铺',
+        shopIntro: '店铺介绍',
+        modality: '业态',
+        choose: '请选择',
+        contactPhone: '联系电话',
+        recommandStores: '推荐店铺',
+        jia: '家',
+        dianpujieshao : "店铺介绍",
+        louceng : "楼层",
+        mianji : "面积",
+        pipei : "匹配",
+        yuyue : "预约",
+        kanpu : "看铺",
+        qiatan : "洽谈"
+    };
+}
+
 $(document).ready(function(){
+    if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
+        getMalls();
+    }
     getMallList();
     
     $('#c_link_cn').click(function(){
-        $.cookie('lang',1);
+        $.cookie('lang','zh-cn');
     });
     
     $('#c_link_en').click(function(){
-        $.cookie('lang',2);
+        $.cookie('lang','en-us');
     });
     
     $('#dropdownMenu1').html('');
+    
+    if(!sessionStorage.getItem("floors") || sessionStorage.getItem("floors") == null || sessionStorage.getItem("floors") == '') {
+        getFloors();
+    }
     
     if(!sessionStorage.getItem("modalities") || sessionStorage.getItem("modalities") == null || sessionStorage.getItem("modalities") == '') {
         getModalities();
@@ -49,135 +140,126 @@ $(document).ready(function(){
         },1000);
     }
     
-    if($.cookie('lang') === '2'){
+    if($.cookie('lang') === 'en-us'){
         translateToEngDefault();
     }
 });
 
 function getMallList() {
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/base/info/mall/findAllOrderByPosition",
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                $.each(response.data, function(i,v){
-                    if($('#mall_list').length >0){
-                        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-desc"> '+v.mallName+' </div></div>');
-                    }
+    var mallName,location;
+    $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+        if($.cookie('lang') === 'en-us'){
+            mallName = v.mallNameEng;
+            location = v.locationEng;
+        } else {
+            mallName = v.mallName;
+            location = v.location;
+        }
+    
+        if($('#mall_list').length >0){
+            $('#mall_list').append('<div class="cbp-item web-design logos">\n\
+            <div class="cbp-caption">\n\
+            <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
+            <div class="cbp-caption-activeWrap">\n\
+            <div class="c-masonry-border"></div>\n\
+            <div class="cbp-l-caption-alignCenter">\n\
+            <div class="cbp-l-caption-body">\n\
+            <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
+            </div></div></div></div>\n\
+            <div class="cbp-l-grid-projects-desc"> '+mallName+' </div></div>');
+        }
+        
+        $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
                 
-                    $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+v.mallName+' <span class="fa fa-external-link pull-right" aria-hidden="true"></span></a></li>');
-                
-                    if($('#mall_list_sm').length > 0){
-                        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-title"> '+v.mallName+' </div><div class="cbp-l-grid-projects-desc"> '+v.location+' </div></div>');
-                    }
-                });
-                
-                if($('#mall_list').length >0){
-                    /******** Zhengzhou ***************/
-                    $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-desc">正大乐城郑州购物中心</div></div>');
-
-                    /******** Wuxi ***************/
-                    $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-desc">正大乐城无锡购物中心</div></div>');
-
-                    /******** Xi'an ***************/
-                    $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-desc">正大乐城西安购物中心</div></div>');
-                }
-                
-                if($('#mall_list_sm').length > 0){
-                    /******** Zhengzhou ***************/
-                    $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-title">正大乐城郑州购物中心</div><div class="cbp-l-grid-projects-desc">河南省郑州市郑东新区普惠路77号</div></div>');
-                    
-                    /******** Wuxi ***************/
-                    $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-title">正大乐城无锡购物中心</div><div class="cbp-l-grid-projects-desc">江苏省无锡市惠山区华惠路绿地世纪城600号</div></div>');
-                    
-                    /******** Xi'an ***************/
-                    $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-    <div class="cbp-caption">\n\
-    <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
-    <div class="cbp-caption-activeWrap">\n\
-    <div class="c-masonry-border"></div>\n\
-    <div class="cbp-l-caption-alignCenter">\n\
-    <div class="cbp-l-caption-body">\n\
-    <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-    </div></div></div></div>\n\
-    <div class="cbp-l-grid-projects-title">正大乐城西安购物中心</div><div class="cbp-l-grid-projects-desc">陕西省西安市雁塔区锦业路7号</div></div>');
-                }
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
+        if($('#mall_list_sm').length > 0){
+            $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
+            <div class="cbp-caption">\n\
+            <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
+            <div class="cbp-caption-activeWrap">\n\
+            <div class="c-masonry-border"></div>\n\
+            <div class="cbp-l-caption-alignCenter">\n\
+            <div class="cbp-l-caption-body">\n\
+            <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
+            </div></div></div></div>\n\
+            <div class="cbp-l-grid-projects-title"> '+mallName+' </div><div class="cbp-l-grid-projects-desc"> '+location+' </div></div>');
         }
     });
+    
+    if($('#mall_list').length >0){
+        /******** Zhengzhou ***************/
+        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-desc">正大乐城郑州购物中心</div></div>');
+
+        /******** Wuxi ***************/
+        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-desc">正大乐城无锡购物中心</div></div>');
+
+        /******** Xi'an ***************/
+        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-desc">正大乐城西安购物中心</div></div>');
+    }
+    
+    if($('#mall_list_sm').length > 0){
+        /******** Zhengzhou ***************/
+        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-title">正大乐城郑州购物中心</div><div class="cbp-l-grid-projects-desc">河南省郑州市郑东新区普惠路77号</div></div>');
+
+        /******** Wuxi ***************/
+        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-title">正大乐城无锡购物中心</div><div class="cbp-l-grid-projects-desc">江苏省无锡市惠山区华惠路绿地世纪城600号</div></div>');
+
+        /******** Xi'an ***************/
+        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
+        <div class="cbp-caption">\n\
+        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
+        <div class="cbp-caption-activeWrap">\n\
+        <div class="c-masonry-border"></div>\n\
+        <div class="cbp-l-caption-alignCenter">\n\
+        <div class="cbp-l-caption-body">\n\
+        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
+        </div></div></div></div>\n\
+        <div class="cbp-l-grid-projects-title">正大乐城西安购物中心</div><div class="cbp-l-grid-projects-desc">陕西省西安市雁塔区锦业路7号</div></div>');
+    }
 }
 
 function logout() {
@@ -188,6 +270,50 @@ function logout() {
     }
     
     window.location.href = 'logout';
+}
+
+function getMalls() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/info/mall/findAllOrderByPosition",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                sessionStorage.setItem("malls", JSON.stringify(response.data) );
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getFloors() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/info/floor/findAll",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                sessionStorage.setItem("floors", JSON.stringify(response.data) );
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
 }
 
 function getModalities() {
@@ -572,9 +698,6 @@ $.validator.addMethod( "remoteValidate", function( value, element, param, method
  function translateToEngDefault() {
     var e = $(".c-layout-page");
     e.html(e.html()
-            .replace(/\正大广场陆家嘴购物中心/g, "Shanghai SuperBrandMall")
-            .replace(/\正大乐城徐汇购物中心/g, "Xuhui TouchMall")
-            .replace(/\正大乐城宝山购物中心/g, "Baoshan TouchMall")
             .replace(/\正大乐城郑州购物中心/g, "Zhengzhou TouchMall")
             .replace(/\正大乐城无锡购物中心/g, "Wuxi TouchMall")
             .replace(/\正大乐城西安购物中心/g, "Xi’an TouchMall")

@@ -3,7 +3,7 @@ $(document).ready(function(){
     getBrandModality1();
     
   ///////////////////// Validate login form /////////////////////////
-  if($.cookie('lang') === '2'){
+  if($.cookie('lang') === 'en-us'){
         var register_contact_name_1_required = "First and last name can't be empty";
         var register_contact_name_1_minlength = "Please give correct first and last names";
         var register_mobile_required = "Mobile can't be empty";
@@ -327,7 +327,11 @@ function getBrandModality1() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
         if($.inArray(v.code,['00','01','02']) != -1){
             $.each(v.children, function(j,w) {
-                $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                if($.cookie('lang') === 'en-us'){
+                    $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
+                } else {
+                    $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                }
             });
         }
     });
@@ -342,7 +346,11 @@ function getBrandModality2(mod) {
             $.each(v.children, function(j,w) {
                 if(w.code == m) {
                     $.each(w.children, function(k,x) {
-                        $('#modality_2').append('<option value="'+x.code+'">'+x.name+'</option>');
+                        if($.cookie('lang') === 'en-us'){
+                            $('#modality_2').append('<option value="'+x.code+'">'+x.remark+'</option>');
+                        } else {
+                            $('#modality_2').append('<option value="'+x.code+'">'+x.name+'</option>');
+                        }
                     });
                 }
             });
@@ -360,7 +368,11 @@ function getBrandModality3(mod) {
                 $.each(w.children, function(k,x) {
                     if(x.code == m) {
                         $.each(x.children, function(l,y) {
-                            $('#modality_3').append('<option value="'+y.code+'">'+y.name+'</option>');
+                            if($.cookie('lang') === 'en-us'){
+                                $('#modality_3').append('<option value="'+y.code+'">'+y.remark+'</option>');
+                            } else {
+                                $('#modality_3').append('<option value="'+y.code+'">'+y.name+'</option>');
+                            }
                         });
                     }
                 });
@@ -426,24 +438,12 @@ function VeryficationCodeInternational() {
 function setTimeInternational(obj) {
     if (countdownInternational == 0) { 
         obj.attr('href','javascript: VeryficationCodeInternational()'); 
-        
-        if($.cookie('lang') === '2'){
-            obj.html("Send");
-        } else {
-            obj.html("发送验证码");
-        }
-        
+        obj.html($.lang.sendVerificationCode);
         countdownInternational = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        
-        if($.cookie('lang') === '2'){
-            obj.html("Re-send(" + countdownInternational + ")s");
-        } else {
-            obj.html("重新发送(" + countdownInternational + ")s");
-        }
-        
+        obj.html($.lang.resendCode+"(" + countdownInternational + ")s");
         countdownInternational--; 
     } 
 setTimeout(function() { 

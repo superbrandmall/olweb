@@ -19,16 +19,16 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 
 <div style="margin: 50px 50px 20px; color: #6d6d73;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
-    <span style="margin-left: 15px; background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> 待租店铺
-    <span style="margin-left: 15px; background-color: #f4a018; width: 20px; height: 13px; display: inline-block;"></span> 在租店铺
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 直梯
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 扶梯
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -60px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 停车场
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 总服务台
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 洗手间
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 下楼
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -178px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 上楼
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> 入口
+    <span style="margin-left: 15px; background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_awaiting_rent'] ?>
+    <span style="margin-left: 15px; background-color: #f4a018; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -60px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_info_desk'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_bathroom'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_downstairs'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -178px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_upstairs'] ?>
+    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_entrance'] ?>
 </div>
 <div class="col-md-12">
     <center>
@@ -96,7 +96,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
             if($(el).attr('data-full') != 0){
                 return { 
                     key: $(el).attr('data-key'),
-                    toolTip: '待租',
+                    toolTip: $.lang.forRent,
                     stroke: false,
                     selected: true 
                 };

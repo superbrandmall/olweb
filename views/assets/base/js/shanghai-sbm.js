@@ -117,10 +117,6 @@ $(document).ready(function(){
             $('video').parent().parent().css('height','auto');
         }
     });
-    
-    if($.cookie('lang') === '2'){
-        translateToEngMall();
-    }
 });
 
 function getMallInfo(mc) {
@@ -139,12 +135,22 @@ function getMallInfo(mc) {
                 var proportions = mall.proportion.details;
                 var traffics = mall.traffic;
                 
-                $('#video').attr('src',mall.video);
-                $('#mall_desc').html(mall.description);
+                if($.cookie('lang') === 'en-us'){
+                    var mallName = mall.mallNameEng;
+                    var description = mall.descriptionEng;
+                    var location = mall.locationEng;
+                } else {
+                    var mallName = mall.mallName;
+                    var description = mall.description;
+                    var location = mall.location;
+                }
+                
+                //$('video').attr('src',mall.video);
+                $('#mall_desc').html(description);
                 $('#gross_floor_area').text(numberWithCommas(mall.grossFloorArea));
                 $('#leasing_area').text(numberWithCommas(mall.leasingArea));
-                $('#street').text(mall.location || '-');
-                $('.mall-name').text(mall.mallName);
+                $('#street').text(location || '-');
+                $('.mall-name').text(mallName);
                 
                 var proportion = [];
                 var modalityName = [];
@@ -159,21 +165,14 @@ function getMallInfo(mc) {
                 var trafficType;
                 var trafficText = "";
                 $.each(traffics, function(i,v){
-                    switch(v.type){
-                    case 'bus':
-                        trafficType = "公交";
-                        break;
-                    case 'metro':
-                        trafficType = "地铁";
-                        break;
-                    case 'ferry':
-                        trafficType = "轮渡";
-                        break;
-                    case 'parking':
-                        trafficType = "停车位";
-                        break;    
+                    if($.cookie('lang') === 'en-us'){
+                        trafficType = v.typeEng;
+                        text = v.textEng;
+                    } else {
+                        trafficType = v.type;
+                        text = v.text;
                     }
-                    trafficText += '<li class="c-bg-before-red">'+trafficType + ' <small>'+v.text+'</small></li>';
+                    trafficText += '<li class="c-bg-before-red">'+trafficType + ' <small>'+text+'</small></li>';
                 });
                 $('#traffics').html(trafficText);
             } else {
@@ -205,7 +204,7 @@ function getFloorInfo(mc,fn,fl) {
                     var modalityName;
                     $.each(details, function(i,v){
                         modalityName = GetBrandModality3(v.code);
-                        proportion += '<div class="col-sm-5 modality-name">'+modalityName+' ('+v.count+'家): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
+                        proportion += '<div class="col-sm-5 modality-name">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
                     });
                     $('#proportion_'+fl).html(proportion);
                 } else {
@@ -220,27 +219,44 @@ function getFloorInfo(mc,fn,fl) {
 }
 
 function GetBrandModality3(mod) {
-    var mm = '其它';
+    if($.cookie('lang') === 'en-us'){
+        var mm = 'Other';
+    } else {
+        var mm = '其它';
+    }
     if(mod !== null && mod !== '') {
         var m = mod;
         $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
-            if(v.code == m) {
+            if(v.code == m && $.cookie('lang') === 'zh-cn') {
                 mm = v.name;
+                return false;
+            } else if(v.code == m && $.cookie('lang') === 'en-us') {
+                mm = v.remark;
                 return false;
             }
             $.each(v.children, function(j,w) {
-                if(w.code == m) {
+                if(w.code == m && $.cookie('lang') === 'zh-cn') {
                     mm = w.name;
                     return false;
-                }
+                } else if(w.code == m && $.cookie('lang') === 'en-us') {
+                    mm = w.remark;
+                    return false;
+                } 
                 $.each(w.children, function(k,x) {
-                    if(x.code == m) {
+                    if(x.code == m && $.cookie('lang') === 'zh-cn') {
                         mm = x.name;
+                        return false;
+                    } else if(x.code == m && $.cookie('lang') === 'en-us') {
+                        mm = x.remark;
                         return false;
                     }
                     $.each(x.children, function(l,y) {
-                        if(y.code == m) {
+                        if(y.code == m && $.cookie('lang') === 'zh-cn') {
                             mm = y.name;
+                            return false;
+                        } else if(y.code == m && $.cookie('lang') === 'en-us') {
+                            mm = y.name;
+                            return false;
                         }
                     });
                 });
@@ -251,15 +267,4 @@ function GetBrandModality3(mod) {
     }
     
     return mm;
-}
-
-function translateToEngMall() {
-    var e = $(".c-layout-page");
-    e.html(e.html()
-            .replace(/\正大广场陆家嘴购物中心/g, "Shanghai SuperBrandMall")
-            .replace(/\正大乐城郑州购物中心/g, "Zhengzhou TouchMall")
-            .replace(/\正大乐城无锡购物中心/g, "Wuxi TouchMall")
-            .replace(/\正大乐城西安购物中心/g, "Xi’an TouchMall")
-            .replace(/\项目介绍/g, "Enter")
-            .replace(/\尽请期待/g, "Coming Soon"));
 }

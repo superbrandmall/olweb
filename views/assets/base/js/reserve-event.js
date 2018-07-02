@@ -11,8 +11,14 @@ modal = $.parseJSON(sessionStorage.getItem("modalities"));
 $(document).ready(function(){
     $('#international_verify').val('');
     
+    if($.cookie('lang') === 'en-us'){
+        var stCal = "en-US";
+    } else {
+        var stCal = "zh-CN";
+    }
+    
     $('#start_date, #reserve_date').datepicker({
-        'language': "zh-CN",
+        'language': stCal,
         'format': 'yyyy-mm-dd',
         'startDate': '+1d'
     });
@@ -20,6 +26,28 @@ $(document).ready(function(){
     prepareReservation1();
     
     $('#reserve_date').datepicker('setDate',IncrDate(date));
+    
+    if($.cookie('lang') === 'en-us'){
+        var reserve_length_required = "Please choose a lease term";
+        var reserve_start_date_required = "Moving in date can't be empty";
+        var reserve_start_date = "Please give a correct date";
+        var reserve_reserve_date_required = "Reserving date can't be empty";
+        var reserve_reserve_date_date = "Please give a correct date";
+        var reserve_international_required = "Please choose a verification method";
+        var reserve_international_verify_required = "Verification code can't be empty";
+        var reserve_international_verify_rangelength = "Verification code must be {0} digits";
+        var reserve_international_verify_numChar = "Verification code comprises letters and digits";
+    } else {
+        var reserve_length_required = "请选择租约时限";
+        var reserve_start_date_required = "预计入场日期为必填项";
+        var reserve_start_date = "请输入有效日期";
+        var reserve_reserve_date_required = "看场日期为必填项";
+        var reserve_reserve_date_date = "请输入有效日期";
+        var reserve_international_required = "请选择验证方式";
+        var reserve_international_verify_required = "验证码为必填项";
+        var reserve_international_verify_rangelength = "验证码须为{0}位及{0}位以上字母和数字";
+        var reserve_international_verify_numChar = "验证码为字母和数字组合";
+    }
     
     $("#reserve_form").validate({
         rules: {
@@ -44,23 +72,23 @@ $(document).ready(function(){
             }
         },messages: {
             length: {
-                required: "请选择租约时限"
+                required: reserve_length_required
             },
             start_date: {
-                required: "请选择预计入场日期",
-                date: "请输入有效日期"
+                required: reserve_start_date_required,
+                date: reserve_start_date
             },
             reserve_date: {
-                required: "请选择看场日期",
-                date: "请输入有效日期"
+                required: reserve_reserve_date_required,
+                date: reserve_reserve_date_date
             },
             international: {
-                required: "请选择验证方式"
+                required: reserve_international_required
             },
             international_verify: {
-                required: "验证码为必填项",
-                rangelength: "验证码须为{0}位及{0}位以上字母和数字",
-                numChar: "验证码为字母和数字组合"
+                required: reserve_international_verify_required,
+                rangelength: reserve_international_verify_rangelength,
+                numChar: reserve_international_verify_numChar
             }
         },
         errorPlacement: function(error, element) {
@@ -150,10 +178,30 @@ function prepareReservation1(){
         success: function (response, status, xhr) {
             $('#loader').hide();
             if(response.code === 'C0') {
+                $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+                    if(v.mallCode == response.data.mallCode) {
+                        if($.cookie('lang') === 'en-us'){
+                             $('#mall').text(v.mallNameEng || '-');
+                        } else {
+                             $('#mall').text(v.mallName || '-');
+                        }
+                        return false;
+                    }
+                });
+                
+                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
+                    if(v.floorCode == response.data.floorCode) {
+                        if($.cookie('lang') === 'en-us'){
+                            $('#floor').text(v.descriptionEng || '-');
+                        } else {
+                            $('#floor').text(v.description || '-');
+                        }
+                        return false;
+                    }
+                });
+                
                 $('#shop_image').attr('src',response.data.firstImage || '#');
-                $('#mall').text(response.data.mallName || '-');
                 $('#unit').text(response.data.unit || '-');
-                $('#floor').text(response.data.floorName || '-');
                 $('#area').text(response.data.area || '-');
                                 
                 if(response.data.shopState === 1) { // 空铺
@@ -213,9 +261,9 @@ function prepareReservation2(){
                 $('#brand_modality').val(response.data.brandModality);
                 
                 if(response.data.emailVerified == 1) {
-                    $('#international').append('<option value="email" selected="selected">邮箱验证</option>');
+                    $('#international').append('<option value="email" selected="selected">'+$.lang.emailVerify+'</option>');
                 } else if(response.data.mobileVerified == 1) {
-                    $('#international').append('<option value="mobile" selected="selected">手机验证</option>');
+                    $('#international').append('<option value="mobile" selected="selected">'+$.lang.mobileVerify+'</option>');
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -286,12 +334,12 @@ function VeryficationCodeReservation() {
 function setTimeReservation(obj) {
     if (countdownReservation == 0) { 
         obj.attr('href','javascript: VeryficationCodeReservation()'); 
-        obj.html("发送验证码");
+        obj.html($.lang.sendCode);
         countdownReservation = 60; 
         return;
     } else { 
         obj.attr('href','javascript: void(0)');
-        obj.html("等待(" + countdownReservation + ")s");
+        obj.html("(" + countdownReservation + ")s");
         countdownReservation--; 
     } 
 setTimeout(function() { 

@@ -7,7 +7,7 @@
             <div class="c-singup-form">
                 <h3 class="c-font-54 c-font-thin c-font-white c-margin-b-40 c-font-uppercase">
                 Online <span class="c-theme-font c-font-bold">Leasing</span></h3>
-                <h5 class="c-font-24 c-font-thin c-font-uppercase c-font-white c-subtitle c-margin-b-40">
+                <h5 class="c-font-24 c-font-thin c-font-white c-subtitle c-margin-b-40">
                 <?= $lang['home_banner_slogan_1'] ?> </h5>
                 <div class="form-inline">
                     <a href="requirement" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-map"></i> <?= $lang['home_shops'] ?></a>
@@ -132,7 +132,7 @@
 			<div class="c-content-client-logos-slider-1 c-bordered" data-slider="owl" data-items="6" data-desktop-items="4" data-desktop-small-items="3" data-tablet-items="3" data-mobile-small-items="2" data-auto-play="5000">
 				<!-- Begin: Title 1 component -->
 				<div class="c-content-title-1">
-					<h3 class="c-center c-font-uppercase c-font-bold"><?= $lang['home_partner_brands'] ?></h3>
+					<h3 class="c-center c-font-bold"><?= $lang['home_partner_brands'] ?></h3>
 					<div class="c-line-center c-theme-bg">
 					</div>
 				</div>

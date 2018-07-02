@@ -74,14 +74,14 @@ function ShowReservations(p,c){
 
                         var alertInfo, startEnd, reserveItems;
                         if(todayTime - v.created < 86400000 ){ //加24小时
-                            alertInfo = '<span class="alert c-theme-bg c-font-white" style="display: block;" role="alert">预约成功，我们的招商人员会在2个工作日内与您取得联系。</span>';
+                            alertInfo = '<span class="alert c-theme-bg c-font-white" style="display: block;" role="alert">'+$.lang.reserveCallBack+'</span>';
                         } else {
                             alertInfo = '';
                         }
                         
                         if(v.shops.length > 0) {
-                            startEnd = '&nbsp;&nbsp;&nbsp;<i class="icon-calendar"></i>租约日期: <span>'+startYear+'年'+startMonth+'月'+startDate+'日-'+endYear+'年'+endMonth+'月'+endDate+'日</span>';
-                            reserveItems = '&nbsp;&nbsp;&nbsp;<i class="icon-briefcase"></i>预约数量: <span>'+v.shops.length+'家</span>';
+                            startEnd = '&nbsp;&nbsp;&nbsp;<i class="icon-calendar"></i>'+$.lang.leasingPeriod+': <span>'+startYear+'.'+startMonth+'.'+startDate+'-'+endYear+'.'+endMonth+'.'+endDate+'</span>';
+                            reserveItems = '&nbsp;&nbsp;&nbsp;<i class="icon-briefcase"></i>'+$.lang.reserveAmount+': <span>'+v.shops.length+'</span>';
                         } else {
                             startEnd = '';
                             reserveItems = '';
@@ -90,7 +90,7 @@ function ShowReservations(p,c){
                         $('#reserve_lists').append('<div class="panel">\n\
 <div class="panel-heading" role="tab" id="heading-'+i+'">\n\
 <h4 class="panel-title"><a class="c-font-bold c-font-dark" data-toggle="collapse" data-parent="#reserve_lists" href="#collapse-'+i+'" aria-expanded="true">\n\
-'+alertInfo+'<i class="icon-flag"></i>预约时间: <span class="c-content-label c-font-uppercase c-font-bold c-theme-bg">'+reserveYear+'年'+reserveMonth+'月'+reserveDate+'日</span>\n\
+'+alertInfo+'<i class="icon-flag"></i>'+$.lang.reserveDate+': <span class="c-content-label c-font-uppercase c-font-bold c-theme-bg">'+reserveYear+'.'+reserveMonth+'.'+reserveDate+'</span>\n\
 '+startEnd+reserveItems+'</a></h4></div>\n\
 <div id="collapse-'+i+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-'+i+'"><div class="panel-body c-font-18">\n\
 <ul class="c-content-recent-posts-1" id="res_'+i+'" style="background-color: #fff;"></ul></div></div></div>');
@@ -98,11 +98,14 @@ function ShowReservations(p,c){
                         $('#collapse-0').addClass('in');
                         
                         if(v.shops.length > 0) {
+                            var mallName,floorName,phone;
                             $.each(v.shops, function(j,w) {
                                 var modality;                        
                                 if(w.modality !== '' && w.modality !== null){
                                     $.each(modalities, function(k,x) {
-                                        if(x.code == w.modality) {
+                                        if(x.code == w.modality && $.cookie('lang') === 'en-us') {
+                                            modality = x.remark;
+                                        } else if(x.code == w.modality && $.cookie('lang') === 'zh-cn') {
                                             modality = x.name;
                                         }
                                     });
@@ -118,24 +121,48 @@ function ShowReservations(p,c){
                                     redirect = 'redirectToEvent';
                                 }
                                 
+                                $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+                                    if(v.mallCode == w.mallCode) {
+                                        if($.cookie('lang') === 'en-us'){
+                                             mallName = v.mallNameEng;
+                                        } else {
+                                             mallName = v.mallName;
+                                        }
+                                        phone = v.phone;
+                                        return false;
+                                    }
+                                });
+                                
+                                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
+                                    if(v.floorCode == w.floorCode) {
+                                        if($.cookie('lang') === 'en-us'){
+                                            floorName = v.descriptionEng;
+                                        } else {
+                                            floorName = v.description;
+                                        }
+                                        return false;
+                                    }
+                                });
+                                
                                 $('#res_'+i).append('<li style="cursor:pointer" onclick=\''+redirect+'("'+w.code+'")\'>\n\
 <div class="col-md-3"><img src="'+w.firstImage+'" alt="" class="img-responsive"></div>\n\
 <div class="col-md-4"><ul class="c-content-list-1 c-theme c-separator-dot c-square">\n\
-<li><span>'+w.mallName+'</span></li>\n\
-<li>店铺编号: <span>'+w.unit+'</span></li>\n\
-<li>所在楼层: <span>'+w.floorName+'</span></li>\n\
+<li><span>'+mallName+'</span></li>\n\
+<li>'+$.lang.shopUnit+': <span>'+w.unit+'</span></li>\n\
+<li>'+$.lang.floor+': <span>'+floorName+'</span></li>\n\
 </ul></div>\n\
 <div class="col-md-5"><ul class="c-content-list-1 c-theme c-separator-dot c-square">\n\
-<li>推荐业态: <span>'+modality+'</span></li>\n\
-<li>租赁面积: <span>'+w.area+'m²</span></li></ul></div></li>');
+<li>'+$.lang.recommandModality+': <span>'+modality+'</span></li>\n\
+<li>'+$.lang.leasableArea+': <span>'+w.area+'m²</span></li>\n\
+<li>'+$.lang.contactPhone+': <span>'+phone+'</span></li></ul></div></li>');
                             });
                         } else {
-                            $('#res_'+i).append('<li class="c-font-dark">预约洽谈 <i class="icon-cup"></i></li>');
+                            $('#res_'+i).append('<li class="c-font-dark">'+$.lang.reserveNegotiation+' <i class="icon-cup"></i></li>');
                         }
                         
                     });
                 } else {
-                    $('#reserve_lists').html('<div class="col-md-12"><i class="fa fa-info" aria-hidden="true"></i> 您目前没有任何看铺预约</div>');
+                    $('#reserve_lists').html('<div class="col-md-12"><i class="fa fa-info" aria-hidden="true"></i> '+$.lang.noReservations+'</div>');
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);

@@ -1,6 +1,6 @@
 $.api = {
     base: "http://10.130.12.15:8080/oldataservice/ol/api",
-    baseNew: "http://10.130.12.15:8750",
+    baseNew: $.base,
     emailVC: "",
     mobileVC: ""
 };
