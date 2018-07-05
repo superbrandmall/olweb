@@ -27,7 +27,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
     <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box" style="background-color: #000; margin-bottom: 0; overflow: hidden; z-index: 1;">
         <div class="col-md-6">
-            <video loop="loop" src="upload/video/xuhui.mp4" controls="true" width="100%"></video>
+            <video loop="loop" src="upload/video/<?= $lang['mall_lang_cat'] ?>/xuhui.mp4" controls="true" width="100%"></video>
         </div>
         
         <div class="container">
@@ -325,13 +325,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/x
 			</div>
 		</div>
 	</div>
-    
-    <a id="f4_g" href="views/html/user/component/floor-plan-xuhui-tm.php?m=<?= $xh_tm?>&f=4" data-toggle="modal" data-target="#floor_map_F_xuhui" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">4F</span><img src="views/assets/base/img/content/floor-plan/xuhui-tm/4F.png" class="img-responsive" alt="" /></a>
-    <a id="f3_g" href="views/html/user/component/floor-plan-xuhui-tm.php?m=<?= $xh_tm?>&f=3" data-toggle="modal" data-target="#floor_map_F_xuhui" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">3F</span><img src="views/assets/base/img/content/floor-plan/xuhui-tm/3F.png" class="img-responsive" alt="" /></a>
-    <a id="f2_g" href="views/html/user/component/floor-plan-xuhui-tm.php?m=<?= $xh_tm?>&f=2" data-toggle="modal" data-target="#floor_map_F_xuhui" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">2F</span><img src="views/assets/base/img/content/floor-plan/xuhui-tm/2F.png" class="img-responsive" alt="" /></a>
-    <a id="f1_g" href="views/html/user/component/floor-plan-xuhui-tm.php?m=<?= $xh_tm?>&f=1" data-toggle="modal" data-target="#floor_map_F_xuhui" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">1F</span><img src="views/assets/base/img/content/floor-plan/xuhui-tm/1F.png" class="img-responsive" alt="" /></a>
-    <a id="fb1_g" href="views/html/user/component/floor-plan-xuhui-tm.php?m=<?= $xh_tm?>&f=0" data-toggle="modal" data-target="#floor_map_F_xuhui" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B1F</span><img src="views/assets/base/img/content/floor-plan/xuhui-tm/0F.png" class="img-responsive" alt="" /></a>
-    
+
     <div id="floor_map_F_xuhui" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

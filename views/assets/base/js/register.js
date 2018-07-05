@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $('#international_verify').val('');
-    getBrandModality1();
+    getBrandModality0();
     
   ///////////////////// Validate login form /////////////////////////
   if($.cookie('lang') === 'en-us'){
@@ -21,9 +21,10 @@ $(document).ready(function(){
         var register_name_minlength = "Please give a correct company name";
         var register_brand_name_required = "Brand name can't be empty";
         var register_brand_name_minlength = "Please give a correct brand name";
-        var register_modality_1_required = "Please choose a primary category";
-        var register_modality_2_required = "Please choose a secondary category";
-        var register_modality_3_required = "Please choose a teriary category";
+        var register_modality_0_required = "Please choose category level 1";
+        var register_modality_1_required = "Please choose category level 2";
+        var register_modality_2_required = "Please choose category level 3";
+        var register_modality_3_required = "Please choose category level 4";
         var register_website_url = "Please give a correct website url";
         var register_terms = "Please accept and tick the box";
     } else {
@@ -44,9 +45,10 @@ $(document).ready(function(){
         var register_name_minlength = "请输入正确公司名称";
         var register_brand_name_required = "请输入品牌名称";
         var register_brand_name_minlength = "请输入完整品牌名称";
-        var register_modality_1_required = "请选择一级业态";
-        var register_modality_2_required = "请选择二级业态";
-        var register_modality_3_required = "请选择三级业态";
+        var register_modality_0_required = "请选择一级业态";
+        var register_modality_1_required = "请选择二级业态";
+        var register_modality_2_required = "请选择三级业态";
+        var register_modality_3_required = "请选择四级业态";
         var register_website_url = "请输入有效网址";
         var register_terms = "请同意并勾选该协议";
     }
@@ -105,6 +107,9 @@ $(document).ready(function(){
                 required: true,
                 minlength: 2
             },
+            modality_0: {
+                required: true
+            },
             modality_1: {
                 required: true
             },
@@ -150,6 +155,9 @@ $(document).ready(function(){
             brand_name: {
                 required: register_brand_name_required,
                 minlength: register_brand_name_minlength
+            },
+            modality_0: {
+                required: register_modality_0_required
             },
             modality_1: {
                 required: register_modality_1_required
@@ -322,17 +330,33 @@ $.validator.addMethod('numChar',function(text){
     return regex.test(text);
 }, "The value entered is invalid");
 
-    
-function getBrandModality1() {
+function getBrandModality0() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
         if($.inArray(v.code,['00','01','02']) != -1){
-            $.each(v.children, function(j,w) {
-                if($.cookie('lang') === 'en-us'){
-                    $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
-                } else {
-                    $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
-                }
-            });
+            if($.cookie('lang') === 'en-us'){
+                $('#modality_0').append('<option value="'+v.code+'">'+v.remark+'</option>');
+            } else {
+                $('#modality_0').append('<option value="'+v.code+'">'+v.name+'</option>');
+            }
+        }
+    });
+}
+    
+function getBrandModality1(mod) {
+    var m = mod;
+	$('#modality_1').children().not(':first').remove();
+    
+    $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
+        if(v.code == m) {
+            if($.inArray(v.code,['00','01','02']) != -1){
+                $.each(v.children, function(j,w) {
+                    if($.cookie('lang') === 'en-us'){
+                        $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
+                    } else {
+                        $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                    }
+                });
+            }
         }
     });
 }

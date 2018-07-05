@@ -177,6 +177,9 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                                 <?= $lang['search_brand'] ?>: <span id="brand"></span>
                                             </li>
                                             <li>
+                                                <?= $lang['search_pre_category'] ?>: <span id="brand_modality_0"></span><input type="hidden" id="brand_modality_0_code"></input>
+                                            </li>
+                                            <li>
                                                 <?= $lang['search_primary_category'] ?>: <span id="brand_modality_1"></span><input type="hidden" id="brand_modality_1_code"></input>
                                             </li>
                                             <li>

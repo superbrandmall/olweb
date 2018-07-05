@@ -105,7 +105,7 @@ function ShowReservations(p,c){
                                     $.each(modalities, function(k,x) {
                                         if(x.code == w.modality && $.cookie('lang') === 'en-us') {
                                             modality = x.remark;
-                                        } else if(x.code == w.modality && $.cookie('lang') === 'zh-cn') {
+                                        } else if(x.code == w.modality && $.cookie('lang') !== 'en-us') {
                                             modality = x.name;
                                         }
                                     });

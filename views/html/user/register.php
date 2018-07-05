@@ -29,6 +29,13 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                         <div id="errorcontainer-brand_name" class="errorDiv"></div>
 					</div>
                     <div class="form-group">
+						<label for="modality_0" class="hide"><?= $lang['register_modality_0'] ?>*</label>
+						<select class="form-control input-lg c-square" id="modality_0" name="modality_0" onchange="getBrandModality1(this.value);" required>
+                            <option value=""><?= $lang['register_choose'] ?><?= $lang['register_modality_0'] ?>*</option>
+						</select>
+                        <div id="errorcontainer-modality_0" class="errorDiv"></div>
+					</div>
+                    <div class="form-group">
 						<label for="modality_1" class="hide"><?= $lang['register_modality_1'] ?>*</label>
 						<select class="form-control input-lg c-square" id="modality_1" name="modality_1" onchange="getBrandModality2(this.value);" required>
                             <option value=""><?= $lang['register_choose'] ?><?= $lang['register_modality_1'] ?>*</option>

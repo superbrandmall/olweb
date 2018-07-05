@@ -287,7 +287,7 @@ function GetBrandModality3(mod) {
                         if(y.code == m && $.cookie('lang') === 'en-us') {
                             mm = y.remark;
                             return false;
-                        } else if(y.code == m && $.cookie('lang') === 'zh-cn') {
+                        } else if(y.code == m && $.cookie('lang') !== 'en-us') {
                             mm = y.name;
                             return false;
                         }

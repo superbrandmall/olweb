@@ -543,6 +543,8 @@ function showMyInfo(){
                 $('#mobile').text(response.data.mobile || '-');
                 $('#email').text(response.data.email || '-');
                 $('#brand').text(response.data.brandName || '-');
+                $('#brand_modality_0').text(GetBrandModality0(brandModality.substr(0,2)));
+                $('#brand_modality_0_code').val(brandModality.substr(0,2));
                 $('#brand_modality_1').text(GetBrandModality1(brandModality.substr(0,4)));
                 $('#brand_modality_1_code').val(brandModality.substr(0,4));
                 $('#brand_modality_2').text(GetBrandModality2(brandModality.substr(0,6)));
@@ -566,6 +568,24 @@ function showMyInfo(){
     });
 }
 
+function GetBrandModality0(mod) {
+    var mm;
+    if(mod !== null && mod !== '') {
+        var m = mod;
+        $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
+            if(v.code == m && $.cookie('lang') === 'en-us') {
+                mm = v.remark;
+            } else if(v.code == m && $.cookie('lang') !== 'en-us') {
+                mm = v.name;
+            }
+        });
+    } else {
+        mm = '-';
+    }
+    
+    return mm;
+}
+
 function GetBrandModality1(mod) {
     var mm;
     if(mod !== null && mod !== '') {
@@ -574,7 +594,7 @@ function GetBrandModality1(mod) {
             $.each(v.children, function(j,w) {
                 if(w.code == m && $.cookie('lang') === 'en-us') {
                     mm = w.remark;
-                } else if(w.code == m && $.cookie('lang') === 'zh-cn') {
+                } else if(w.code == m && $.cookie('lang') !== 'en-us') {
                     mm = w.name;
                 }
             });
@@ -595,7 +615,7 @@ function GetBrandModality2(mod) {
                 $.each(w.children, function(k,x) {
                     if(x.code == m && $.cookie('lang') === 'en-us') {
                         mm = x.remark;
-                    } else if(x.code == m && $.cookie('lang') === 'zh-cn') {
+                    } else if(x.code == m && $.cookie('lang') !== 'en-us') {
                         mm = x.name;
                     }
                 });
@@ -618,7 +638,7 @@ function GetBrandModality3(mod) {
                     $.each(x.children, function(l,y) {
                         if(y.code == m && $.cookie('lang') === 'en-us') {
                             mm = y.remark;
-                        } else if(y.code == m && $.cookie('lang') === 'zh-cn') {
+                        } else if(y.code == m && $.cookie('lang') !== 'en-us') {
                             mm = y.name;
                         }
                     });

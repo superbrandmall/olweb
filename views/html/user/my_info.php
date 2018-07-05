@@ -59,7 +59,16 @@
                             <div id="errorcontainer-brand_name" class="errorDiv"></div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="modality_0"><?= $lang['profile_modality_0'] ?>*</label>
+                            <select class="form-control input-lg c-square" id="modality_0" name="modality_0" onchange="getBrandModality1(this.value);" required>
+                                <option value=""><?= $lang['profile_choose'] ?></option>
+                            </select>
+                            <div id="errorcontainer-modality_0" class="errorDiv"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="modality_1"><?= $lang['profile_modality_1'] ?>*</label>
                             <select class="form-control input-lg c-square" id="modality_1" name="modality_1" onchange="getBrandModality2(this.value);" required>
@@ -68,7 +77,7 @@
                             <div id="errorcontainer-modality_1" class="errorDiv"></div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="modality_2"><?= $lang['profile_modality_2'] ?>*</label>
                             <select class="form-control input-lg c-square" id="modality_2" name="modality_2" onchange="getBrandModality3(this.value);" required>
@@ -77,7 +86,7 @@
                             <div id="errorcontainer-modality_2" class="errorDiv"></div>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="modality_3"><?= $lang['profile_modality_3'] ?>*</label>
                             <select class="form-control input-lg c-square" id="modality_3" name="modality_3" required>

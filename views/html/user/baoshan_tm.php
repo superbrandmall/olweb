@@ -27,7 +27,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
     <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box" style="background-color: #000; margin-bottom: 0; overflow: hidden; z-index: 1;">
         <div class="col-md-6">
-            <video loop="loop" src="upload/video/baoshan.mp4" controls="true" width="100%"></video>
+            <video loop="loop" src="upload/video/<?= $lang['mall_lang_cat'] ?>/baoshan.mp4" controls="true" width="100%"></video>
         </div>
         <div class="container">
             <div class="col-md-6">
@@ -292,12 +292,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/b
 			</div>
 		</div>
 	</div>
-    
-    <a id="f3_g" href="views/html/user/component/floor-plan-baoshan-tm.php?m=<?= $bs_tm?>&f=3" data-toggle="modal" data-target="#floor_map_F_baoshan" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">3F</span><img src="views/assets/base/img/content/floor-plan/baoshan-tm/3F.png" class="img-responsive" alt="" /></a>
-    <a id="f2_g" href="views/html/user/component/floor-plan-baoshan-tm.php?m=<?= $bs_tm?>&f=2" data-toggle="modal" data-target="#floor_map_F_baoshan" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">2F</span><img src="views/assets/base/img/content/floor-plan/baoshan-tm/2F.png" class="img-responsive" alt="" /></a>
-    <a id="f1_g" href="views/html/user/component/floor-plan-baoshan-tm.php?m=<?= $bs_tm?>&f=1" data-toggle="modal" data-target="#floor_map_F_baoshan" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">1F</span><img src="views/assets/base/img/content/floor-plan/baoshan-tm/1F.png" class="img-responsive" alt="" /></a>
-    <a id="fb1_g" href="views/html/user/component/floor-plan-baoshan-tm.php?m=<?= $bs_tm?>&f=0" data-toggle="modal" data-target="#floor_map_F_baoshan" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B1F</span><img src="views/assets/base/img/content/floor-plan/baoshan-tm/0F.png" class="img-responsive" alt="" /></a>
-    
+
     <div id="floor_map_F_baoshan" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

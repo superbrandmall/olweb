@@ -12,7 +12,7 @@ $(document).ready(function(){
         },1000);
     }
     
-    getBrandModality1();
+    getBrandModality0();
     
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-customer/api/user/info/simple/"+$.cookie('uid')+"",
@@ -42,6 +42,8 @@ $(document).ready(function(){
                 mod = $.parseJSON(sessionStorage.getItem("modalities"));
                 $.each(mod, function(i,v) {
                     if(v.code == response.data.modality.substr(0,2)) {
+                        $('#modality_0').val(v.code);
+                        getBrandModality1(v.code);
                         $.each(v.children, function(j,w) {
                             if(w.code == response.data.modality.substr(0,4)) {
                                 $('#modality_1').val(w.code);
@@ -111,9 +113,10 @@ $(document).ready(function(){
         var profile_merchant_name_minlength = "Please give a correct company name";
         var profile_brand_name_required = "Brand name can't be empty";
         var profile_brand_name_minlength = "Please give a correct brand name";
-        var profile_modality_1_required = "Please choose a primary category";
-        var profile_modality_2_required = "Please choose a secondary category";
-        var profile_modality_3_required = "Please choose a teriary category";
+        var profile_modality_0_required = "Please choose category level 1";
+        var profile_modality_1_required = "Please choose category level 2";
+        var profile_modality_2_required = "Please choose category level 3";
+        var profile_modality_3_required = "Please choose category level 4";
         var profile_website_url = "Please give a correct website url";
     } else {
         var profile_contact_name_1_required = "姓名为必填项";
@@ -127,9 +130,10 @@ $(document).ready(function(){
         var profile_merchant_name_minlength = "请输入正确公司名称";
         var profile_brand_name_required = "请输入品牌名称";
         var profile_brand_name_minlength = "请输入完整品牌名称";
-        var profile_modality_1_required = "请选择一级业态";
-        var profile_modality_2_required = "请选择二级业态";
-        var profile_modality_3_required = "请选择三级业态";
+        var profile_modality_0_required = "请选择一级业态";
+        var profile_modality_1_required = "请选择二级业态";
+        var profile_modality_2_required = "请选择三级业态";
+        var profile_modality_3_required = "请选择四级业态";
         var profile_website_url = "请输入有效网址";
     }
     
@@ -155,6 +159,9 @@ $(document).ready(function(){
             brand_name: {
                 required: true,
                 minlength: 2
+            },
+            modality_0: {
+                required: true
             },
             modality_1: {
                 required: true
@@ -190,6 +197,9 @@ $(document).ready(function(){
             brand_name: {
                 required: profile_brand_name_required,
                 minlength: profile_brand_name_minlength
+            },
+            modality_0: {
+                required: profile_modality_0_required
             },
             modality_1: {
                 required: profile_modality_1_required
@@ -296,16 +306,33 @@ $(document).ready(function(){
     });
 });
 
-function getBrandModality1() {
+function getBrandModality0() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
         if($.inArray(v.code,['00','01','02']) != -1){
-            $.each(v.children, function(j,w) {
-                if($.cookie('lang') === 'en-us'){
-                    $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
-                } else {
-                    $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
-                }
-            });
+            if($.cookie('lang') === 'en-us'){
+                $('#modality_0').append('<option value="'+v.code+'">'+v.remark+'</option>');
+            } else {
+                $('#modality_0').append('<option value="'+v.code+'">'+v.name+'</option>');
+            }
+        }
+    });
+}
+
+function getBrandModality1(mod) {
+    var m = mod;
+	$('#modality_1').children().not(':first').remove();
+    
+    $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
+        if(v.code == m) {
+            if($.inArray(v.code,['00','01','02']) != -1){
+                $.each(v.children, function(j,w) {
+                    if($.cookie('lang') === 'en-us'){
+                        $('#modality_1').append('<option value="'+w.code+'">'+w.remark+'</option>');
+                    } else {
+                        $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+                    }
+                });
+            }
         }
     });
 }

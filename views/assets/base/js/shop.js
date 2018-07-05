@@ -400,7 +400,7 @@ function GetMap(fn,lk,mc){
     }
     
     $('#map').attr({
-        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+fc+'F.png',
+        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+$.lang.mallLangCat+'/'+fc+'F.png',
         'alt': fc+'F',
         'usemap': '#Map_'+fc+'F_s'
      });
@@ -553,7 +553,7 @@ function GetBrandModality3(mod) {
                         if(y.code == m && $.cookie('lang') === 'en-us') {
                             $('#modality').text(y.remark);
                             return false;
-                        } else if(y.code == m && $.cookie('lang') === 'zh-cn') {
+                        } else if(y.code == m && $.cookie('lang') !== 'en-us') {
                             $('#modality').text(y.name);
                             return false;
                         } 
@@ -575,7 +575,7 @@ function GetFloorModality(mod) {
     if(mod !== null && mod !== '') {
         var m = mod;
         $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
-            if(v.code == m && $.cookie('lang') === 'zh-cn') {
+            if(v.code == m && $.cookie('lang') !== 'en-us') {
                 mm = v.name;
                 return false;
             } else if(v.code == m && $.cookie('lang') === 'en-us') {
@@ -583,7 +583,7 @@ function GetFloorModality(mod) {
                 return false;
             }
             $.each(v.children, function(j,w) {
-                if(w.code == m && $.cookie('lang') === 'zh-cn') {
+                if(w.code == m && $.cookie('lang') !== 'en-us') {
                     mm = w.name;
                     return false;
                 } else if(w.code == m && $.cookie('lang') === 'en-us') {
@@ -591,7 +591,7 @@ function GetFloorModality(mod) {
                     return false;
                 } 
                 $.each(w.children, function(k,x) {
-                    if(x.code == m && $.cookie('lang') === 'zh-cn') {
+                    if(x.code == m && $.cookie('lang') !== 'en-us') {
                         mm = x.name;
                         return false;
                     } else if(x.code == m && $.cookie('lang') === 'en-us') {
@@ -599,7 +599,7 @@ function GetFloorModality(mod) {
                         return false;
                     }
                     $.each(x.children, function(l,y) {
-                        if(y.code == m && $.cookie('lang') === 'zh-cn') {
+                        if(y.code == m && $.cookie('lang') !== 'en-us') {
                             mm = y.name;
                             return false;
                         } else if(y.code == m && $.cookie('lang') === 'en-us') {

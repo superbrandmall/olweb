@@ -44,7 +44,8 @@ if($.cookie('lang') === 'en-us'){
         pipei : "Matching",
         yuyue : "Reserve",
         kanpu : " date",
-        qiatan : " date"
+        qiatan : " date",
+        mallLangCat: "en"
     };
 } else {
     $.lang = {
@@ -85,7 +86,8 @@ if($.cookie('lang') === 'en-us'){
         pipei : "匹配",
         yuyue : "预约",
         kanpu : "看铺",
-        qiatan : "洽谈"
+        qiatan : "洽谈",
+        mallLangCat: "cn"
     };
 }
 
