@@ -36,31 +36,54 @@ function ShowShops(p,c){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages);
                     
-                    var modal = [];
-                    modal = $.parseJSON(sessionStorage.getItem("modalities"));
-                    
-                    /*var modalities = [];
-                    $.each(modal, function(i,u) {
-                        $.each(u.children, function(j,w) {
-                            $.each(w.children, function(k,x) {
-                                $.each(x.children, function(l,y) {
-                                    modalities.push(y);
-                                });
-                            });
-                        });
-                    });*/
-                    
+                    var modality,mallName,floorName,moving;
                     $.each(response.data.content, function(i,v){
-                        /*var modality;                        
                         if(v.modality !== '' && v.modality !== null){
-                            $.each(modalities, function(k,x) {
-                                if(x.code == v.modality) {
-                                    modality = x.name;
-                                }
+                            $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
+                                $.each(u.children, function(j,w) {
+                                    $.each(w.children, function(k,x) {
+                                        $.each(x.children, function(l,y) {
+                                            if(y.code == v.modality) {
+                                                modality = y.name || '-';
+                                                return false;
+                                            }
+                                        });
+                                    });
+                                });
                             });
                         } else {
                             modality = "-";
-                        }*/
+                        }
+                        
+                        $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
+                            if(w.mallCode == v.mallCode) {
+                                mallName = w.mallName;
+                                return false;
+                            }
+                        });
+                        
+                        $.each($.parseJSON(sessionStorage.getItem("floors")), function(j,w) {
+                            if(w.floorCode == v.floorCode) {
+                                floorName = w.description;
+                                return false;
+                            }
+                        });
+                        
+                        if(v.shopState === 1) { // 空铺
+                            moving = IncrMonth(date);
+                        } else { // 非空铺
+                            var contractExpire = new Date();
+                            contractExpire.setTime(v.contractExpireDate);
+                            var contractExpireYear = contractExpire.getFullYear('yyyy');
+                            var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                            var contractExpireDate = contractExpire.getDate('dd');
+
+                            if(IncrMonth(date) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
+                                moving = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate);
+                            } else {
+                                moving = IncrMonth(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate);
+                            }
+                        }
                         
                         var state;
                         switch(v.shopState){
@@ -78,7 +101,7 @@ function ShowShops(p,c){
                                 break;
                         }
                         
-                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.code+'</td><td>'+v.shopName+'</td><td>'+v.buildingName+'</td><td>'+v.floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td>'+v.modality+'</td><td>'+v.contractExpireDate+'</td><td>'+state+'</td><td></td></tr>');
+                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.code+'</td><td>'+v.shopName+'</td><td>'+mallName+'</td><td>'+floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td>'+modality+'</td><td>'+moving+'</td><td>'+state+'</td><td></td></tr>');
                     });
                     
                     if(p == pages){
@@ -87,7 +110,9 @@ function ShowShops(p,c){
                         $("#shows").html('显示第'+Math.ceil((p-1)*c+1)+'到'+Math.ceil((p-1)*c+c)+'条，共'+response.data.totalElements+'条记录');
                     }
                 }
-            } 
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
         }
     });
 }
@@ -95,27 +120,3 @@ function ShowShops(p,c){
 function redirect(id) {
   window.location='shop?id='+id;
 }
-
-/*function IncrDate(date_str){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() + 1);
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-    } else {
-        return '';
-    }
-}*/

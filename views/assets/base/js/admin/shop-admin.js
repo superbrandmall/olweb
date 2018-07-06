@@ -103,15 +103,46 @@ function GetShopInfo(){
                 var images = shop.images;
                 $.images = images;
                 
+                var floorName,mallName;
+                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
+                    if(v.floorCode == shop.floorCode) {
+                        floorName = v.description;
+                        return false;
+                    }
+                });
+                
+                $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
+                    if(v.mallCode == shop.mallCode) {
+                        mallName = v.mallName;
+                        return false;
+                    }
+                });
+                
                 $('#code').val(shop.code || '-');
                 $('#name').val(shop.shopName || '-');
-                $('#building').val(shop.buildingName || '-');
+                $('#sub_type').val(shop.subType || '-');
                 $('#hd_code').val(shop.hdCode || '-');
-                $('#mall').val(shop.mallName || '-');
-                $('#floor').val(shop.floorName || '-');
+                $('#mall').val(mallName || '-');
+                $('#floor').val(floorName || '-');
                 $('#dead_rent').val((shop.deadRent || '-' ) + '元');
                 $('#floating_rental_rate').val((shop.floatingRentalRate || '-' ) + '%');
-                //GetBrandModality3(shop.modality);
+                GetBrandModality3(shop.modality);
+                
+                if(shop.shopState === 1) { // 空铺
+                    $('#moving_date').val(IncrMonth(date));
+                } else { // 非空铺
+                    var contractExpire = new Date();
+                    contractExpire.setTime(shop.contractExpireDate);
+                    var contractExpireYear = contractExpire.getFullYear('yyyy');
+                    var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                    var contractExpireDate = contractExpire.getDate('dd');
+
+                    if(IncrMonth(date) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
+                        $('#moving_date').val(IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                    } else {
+                        $('#moving_date').val(IncrMonth(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                    }
+                }
                 
                 var state;
                 switch(shop.shopState){
@@ -131,7 +162,6 @@ function GetShopInfo(){
                 $('#shop_state').val(state);
                 $('#hd_state').val(shop.hdState || '-');
                 $('#brand_name').val(shop.brandName || '-');
-                //$('#moving_date').val(IncrDate(shop.contractExpireDate) || '-');
                 $('#area').val((shop.area || '-' ) + '平方米');
                 
                 if(coords) {
@@ -291,30 +321,6 @@ function unlockShop(id){
     });    
 }
 
-function IncrDate(date_str){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() + 1);
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-    } else {
-        return '';
-    }
-}
-
 function GetBrandModality3(mod) {
     if(mod !== null && mod !== '') {
         var m = mod;
@@ -323,13 +329,14 @@ function GetBrandModality3(mod) {
                 $.each(w.children, function(k,x) {
                     $.each(x.children, function(l,y) {
                         if(y.code == m) {
-                            $('#modality').text(y.name);
+                            $('#modality').val(y.name);
+                            return false;
                         }
                     });
                 });
             });
         });
     } else {
-        $('#modality').text('-');
+        $('#modality').val('-');
     }
 }

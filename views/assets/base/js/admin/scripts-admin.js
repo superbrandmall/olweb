@@ -5,7 +5,22 @@ $.api = {
     mobileVC: ""
 };
 
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+
 $(document).ready(function(){
+    if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
+        getMalls();
+    }
+    
+    if(!sessionStorage.getItem("floors") || sessionStorage.getItem("floors") == null || sessionStorage.getItem("floors") == '') {
+        getFloors();
+    }
+    
     if(!sessionStorage.getItem("modalities") || sessionStorage.getItem("modalities") == null || sessionStorage.getItem("modalities") == '') {
         getModalities();
     }
@@ -105,6 +120,50 @@ function refineOfferUrl() {
     return value;     
 }
 
+function getMalls() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/info/mall/findAllOrderByPosition",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                sessionStorage.setItem("malls", JSON.stringify(response.data) );
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getFloors() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/info/floor/findAll",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                sessionStorage.setItem("floors", JSON.stringify(response.data) );
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
 function getModalities() {
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-customer/api/base/modality/findAll",
@@ -127,295 +186,131 @@ function getModalities() {
     });
 }
 
-function interpretBusinessCode(bc) {
-    var msg;
-    switch(bc){
-        /**
-        * 参数不能为空
-        */
-        case 'C9000':
-            msg = "参数不能为空";
-            break;
-        case 'C9001':
-            msg = "参数不能为负数";
-            break;
-        /**
-        * 操作过于频繁
-        */
-        case 'C9994':
-            msg = "操作过于频繁。";
-            break;
-        case 'C9995':
-            msg = "数据库操作异常";
-            break;
-        case 'C9996':
-            msg = "查询表单流水号出错";
-            break;
-        case 'C9997':
-            msg = "数据已经过期，请重新刷新。";
-            break;
-        case 'C9998':
-            msg = "请求数据异常";
-            break;
-        case 'C9999':
-            msg = "失败";
-            break;
-        case 'C9995':
-            msg = "数据库操作异常";
-            break; 
-        /**
-        * 用户登录token验证出错
-        */    
-        case 'C0001':
-            msg = "用户token验证出错";
-            break;
-        case 'C0002':
-            msg = "用户token过期";
-            break;
-        case 'C0003':
-            msg = "用户token不能为空";
-            break;
-        case 'C0004':
-            msg = "用户login不能为空";
-            break;
-        case 'C0005':
-            msg = "用户login和token不匹配";
-            break;
-        case 'C0006':
-            msg = "用户类型不匹配";
-            break;
-        /**
-        * 验证码keyword不能为空
-        */
-        case 'C0100':
-            msg = "验证码keyword不能为空";
-            break;
-        case 'C0101':
-            msg = "验证码key不能为空";
-            break;
-        case 'C9999':
-            msg = "验证码不正确";
-            break;
-        case 'C0102':
-            msg = "数据库操作异常";
-            break;
-        /**
-        * 手机号已存在
-        */
-        case 'C0200':
-            msg = "手机号已存在";
-            break;
-        case 'C0201':
-            msg = "邮箱已存在";
-            break;
-        case 'C0202':
-            msg = "用户名或者密码错误";
-            break;
-        case 'C0203':
-            msg = "用户名或者密码错误";
-            break;
-        case 'C0204':
-            msg = "手机号不存在";
-            break;
-        case 'C0205':
-            msg = "邮箱不存在";
-            break;
-        case 'C0206':
-            msg = "用户不存在";
-            break;
-        case 'C0207':
-            msg = "证件已存在";
-            break;
-        case 'C0208':
-            msg = "证件不存在";
-            break;
-        /**
-        * 没有查询到相关信息
-        */
-        case 'C0300':
-            msg = "没有查询到相关信息";
-            break;
-        case 'C0301':
-            msg = "商户不处于开业状态";
-            break;
-        case 'C0302':
-            msg = "统一信用代码和商户名称不匹配";
-            break;
-        /**
-        * 时间转换错误
-        */
-        case 'C1000':
-            msg = "时间转换错误";
-            break;    
-        /**
-        * 获取文件流失败
-        */
-        case 'C1100':
-            msg = "获取文件流失败";
-            break;
-        case 'C1101':
-            msg = "获取指定文件失败，指定文件不存在";
-            break;
-        case 'C1102':
-            msg = "指定key过期或不存在";
-            break;
-        case 'C1103':
-            msg = "文件key不能为空";
-            break;
-        case 'C1104':
-            msg = "文件原始名称编码转换失败";
-            break;
-        /**
-        * freemarker模板生成异常
-        */
-        case 'C1200':
-            msg = "freemarker模板生成异常";
-            break;
-        /**
-        * 初始化容器失败
-        */
-        case 'C2000':
-            msg = "初始化容器失败";
-            break;
-        case 'C2001':
-            msg = "设置权限失败";
-            break;
-        case 'C2002':
-            msg = "容器上传失败";
-            break;
-        case 'C2003':
-            msg = "容器下载失败";
-            break;
-        case 'C2004':
-            msg = "容器删除失败";
-            break;
-        case 'C2005':
-            msg = "删除容器失败";
-            break;
-        /**
-        * 初始化文件访问接口失败
-        */
-        case 'C2100':
-            msg = "freemarker模板生成异常";
-            break;
-        /**
-        * 品牌状态不正确
-        */
-        case 'C5000':
-            msg = "品牌状态不正确";
-            break;
-        case 'C5001':
-            msg = "品牌不处于可以更新的状态";
-            break;
-        case 'C5002':
-            msg = "品牌已经存在";
-            break;
-        case 'C5003':
-            msg = "品牌和商户已经绑定";
-            break;
-        case 'C5004':
-            msg = "品牌信息不存在";
-            break;
-        /**
-        * 用户和商铺已经绑定
-        */
-        case 'C5100':
-            msg = "用户和商铺已经绑定";
-            break;
-        /**
-        * 商户信息不存在
-        */
-        case 'C5200':
-            msg = "商户信息不存在";
-            break;
-        /**
-        * 商铺信息不存在
-        */
-        case 'C5300':
-            msg = "商铺信息不存在";
-            break;
-        /**
-        * 出价信息不存在
-        */
-        case 'C6000':
-            msg = "出价信息不存在";
-            break;
-        case 'C6001':
-            msg = "合同信息不存在";
-            break;
-        case 'C6002':
-            msg = "预览key不能为空";
-            break;
-        case 'C6003':
-            msg = "指定key过期或不存在";
-            break;
-        case 'C6004':
-            msg = "商铺信息不匹配";
-            break;
-        case 'C6005':
-            msg = "用户信息不匹配";
-            break;
-        case 'C6006':
-            msg = "出价明细不能为空";
-            break;
-        /**
-        * 起租日期必须大于等于当日
-        */
-        case 'C6100':
-            msg = "起租日期必须大于等于当日";
-            break;
-        case 'C6101':
-            msg = "起租日期必须大于等于最早可入住日期";
-            break;
-        case 'C6102':
-            msg = "起租日期必须小于等于终止日期";
-            break;
-        case 'C6103':
-            msg = "开始日期必须大于等于起租日期";
-            break;
-        case 'C6104':
-            msg = "结束日期必须小于等于终止日期";
-            break;
-        case 'C6105':
-            msg = "开始日期必须小于等于结束日期";
-            break;
-        /**
-        * 操作码不正确
-        */
-        case 'C11000':
-            msg = "操作码不正确";
-            break;
-        case 'C11100':
-            msg = "操作码不正确";
-            break;
-        /**
-        * 审批通过的出价过期日期不能为空
-        */
-        case 'C11200':
-            msg = "审批通过的出价过期日期不能为空";
-            break;
-        case 'C11201':
-            msg = "审批结果参数不正确";
-            break;
-        case 'C11202':
-            msg = "是否生效参数不正确";
-            break;
-        case 'C11203':
-            msg = "出价不存在";
-            break;
-        /**
-        * 操作结果不正确
-        */
-        case 'C12000':
-            msg = "操作结果不正确";
-            break;
-        default:
-            msg = "";
-            break;
+function IncrDate(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() + 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
     }
-    
+}
+
+function IncrDates(date_str,dates){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() + dates);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrMonth(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10),  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrYear(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + (Number(dt.getFullYear()) + 1);
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+            parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+            
+    } else {
+        return '';
+    }
+}
+
+function IncrYears(date_str, years){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + (Number(dt.getFullYear()) + Number(years));
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+            parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+            
+    } else {
+        return '';
+    }
+}
+
+function interpretBusinessCode(msg) {
     if(msg !== ''){
-        $('#ui_alert').text(msg).slideDown().delay(10000).slideUp(0);
+        $('#ui_alert').text(msg).slideDown().delay(2000).slideUp(0);
         $('html, body').animate({
             scrollTop: $('#ui_alert').offset().top
         }, 0);
@@ -448,11 +343,10 @@ $.validator.addMethod( "remoteValidate", function( value, element, param, method
     this.startRequest( element );
     data = {};
     data[ element.name ] = value;
-    data = JSON.stringify(data);
+    
     $.ajax( $.extend( true, {
         mode: "abort",
         port: "validate" + element.name,
-        dataType: "json",
         data: data,
         context: validator.currentForm,
         success: function( response ) {

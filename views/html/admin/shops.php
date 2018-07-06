@@ -25,7 +25,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     <tr>
                                         <th>店铺编码</th>
                                         <th>店铺名称</th>
-                                        <th>建筑物名称</th>
+                                        <th>项目名称</th>
                                         <th>楼层</th>
                                         <th>店铺面积</th>
                                         <th>经营业态</th>

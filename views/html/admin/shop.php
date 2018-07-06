@@ -46,8 +46,8 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>建筑物名称</label>
-                                    <input class="form-control" id="building" disabled>
+                                    <label>店铺类型</label>
+                                    <input class="form-control" id="sub_type" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -101,7 +101,7 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>海鼎标识</label>
-                                    <input class="form-control" id="hd_code" value="">
+                                    <input class="form-control" id="hd_code" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6">
