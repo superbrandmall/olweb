@@ -34,6 +34,28 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
     position: relative;
 }
 
+.c-topbar {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.c-topbar-inner {
+    padding: 3px;
+}
+
+.c-topbar-title {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.c-topbar-close {
+    display: table-cell;
+    width: 1px;
+    vertical-align: middle;
+}
+
 .c-content-person-1 {
     margin-bottom: 15px;
 }
@@ -73,7 +95,7 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
 }
 
 /********** BEGIN BOT ********************/
-.botui-app-container {
+/*.botui-app-container {
     margin-top: 40px;
 }
 
@@ -102,7 +124,7 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
 
 .botui-message-content-link {
     color: #e7505a;
-}
+}*/
 
 /********** END BOT ********************/
 

@@ -76,9 +76,12 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                     <?= $lang['reserve_lease_term'] ?>: 
                                     <select id="length" name="length" class="form-control c-square c-theme input-sm valid" required="" aria-invalid="false" style="display: inline; width: auto;">
                                         <option value=""><?= $lang['reserve_please_choose'] ?></option>
-                                    <?php for($i=1;$i<=14;$i++) { ?>
-                                        <option value="<?= $i; ?>"><?= $i; ?><?= $lang['reserve_day'] ?></option>
-                                    <?php } ?>
+                                        <option value="3">1-3<?= $lang['reserve_day'] ?></option>
+                                        <option value="5">3-5<?= $lang['reserve_day'] ?></option>
+                                        <option value="7">5-7<?= $lang['reserve_day'] ?></option>
+                                        <option value="10">7-10<?= $lang['reserve_day'] ?></option>
+                                        <option value="14">10-14<?= $lang['reserve_day'] ?></option>
+                                        <option value="15">>14<?= $lang['reserve_day'] ?></option>
                                     </select>
                                     <div id="errorcontainer-length" class="errorDiv"></div>
                                 </li>

@@ -10,6 +10,8 @@ $lang['nav_search'] = "搜索";
 $lang['nav_favourites'] = "关注";
 $lang['nav_reservations'] = "预约";
 $lang['nav_title'] = "正大商业房地产";
+$lang['nav_cookie_policy'] = "我们使用 Cookie 是为了让 Online Leasing 更好地为您服务。 使用我们的网站，即表示您同意我们使用 Cookie。";
+$lang['nav_cookie_know_more'] = "了解更多";
 
 /********************** Home ********************/
 $lang['home_banner_slogan_1'] = "在线招商平台";

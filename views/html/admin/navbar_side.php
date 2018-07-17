@@ -60,6 +60,14 @@
                     </li>
                 </ul>
             </li>
+            <li<?php if($getTarget === "admin/sync-hd") echo " class='active'"?>>
+                <a href="#"><i class="fa fa-life-saver" aria-hidden="true"></i> 同步<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="sync-hd">同步海鼎</a>
+                    </li>
+                </ul>
+            </li>
             <li<?php if($getTarget === "admin/users" || $getTarget === "admin/user") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-user" aria-hidden="true"></i> 用户<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

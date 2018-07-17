@@ -1,15 +1,65 @@
 $(document).ready(function(){
+    ShowMallList();
+    
+    if($.cookie('shopsAdminShopName') && $.cookie('shopsAdminShopName') != null && $.cookie('shopsAdminShopName') != '') {
+        $('#shop_name').val($.cookie('shopsAdminShopName'));
+    }
+    if($.cookie('shopsAdminUnit') && $.cookie('shopsAdminUnit') != null && $.cookie('shopsAdminUnit') != '') {
+        $('#unit').val($.cookie('shopsAdminUnit'));
+    }
+    if($.cookie('shopsAdminState') && $.cookie('shopsAdminState') != null && $.cookie('shopsAdminState') != '') {
+        $('#state option[value="'+$.cookie('shopsAdminState')+'"]').prop("selected", true);
+    }
+    if($.cookie('shopsAdminMallCode') && $.cookie('shopsAdminMallCode') != null && $.cookie('shopsAdminMallCode') != '') {
+        $('#mall_list option[value="'+$.cookie('shopsAdminMallCode')+'"]').prop("selected", true);
+    }
+    if($.cookie('shopsAdminIsSync') && $.cookie('shopsAdminIsSync') != null && $.cookie('shopsAdminIsSync') != '') {
+        $('#is_sync option[value="'+$.cookie('shopsAdminIsSync')+'"]').prop("selected", true);
+    }
+    if($.cookie('shopsAdminShopState') && $.cookie('shopsAdminShopState') != null && $.cookie('shopsAdminShopState') != '') {
+        $('#shop_state option[value="'+$.cookie('shopsAdminShopState')+'"]').prop("selected", true);
+    }
+    
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        ShowShops(getURLParameter('page'),50);
+        ShowShops(getURLParameter('page'),50);  
     } else {
         ShowShops(1,50);
     }
+    
+    $('#search').click(function() {
+        $.cookie('shopsAdminShopName',$('#shop_name').val());
+        $.cookie('shopsAdminUnit',$('#unit').val());
+        $.cookie('shopsAdminState',$('#state').children('option:selected').val());
+        $.cookie('shopsAdminMallCode',$('#mall_list').children('option:selected').val());
+        $.cookie('shopsAdminIsSync',$('#is_sync').children('option:selected').val());
+        $.cookie('shopsAdminShopState',$('#shop_state').children('option:selected').val());
+        
+        ShowShops(1,50);
+    });
+    
 });
+
+function ShowMallList(){
+    $('#mall_list').html('');
+    $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
+        var selected = ''; 
+        if(j == 0){
+            selected = 'selected';
+        }
+        $('#mall_list').append('<option value="'+w.mallCode+'" selected="'+selected+'">'+w.mallName+'</option>');
+    });
+}
 
 function ShowShops(p,c){
     var pg = p-1;
     var map = {
-        mallName: "正大乐城宝山购物中心"
+        unit: $('#unit').val() || null,
+        shopName: $('#shop_name').val() || null,
+        mallCode: $('#mall_list').val(),
+        isSync: $('#is_sync').val() || null,
+        hdState: 'using',
+        state: $('#state').val() || null,
+        shopState: $('#shop_state').val() || null
     };
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-admin/api/shop/findAll?size=50&page="+pg+"&sort=code,asc",
@@ -31,7 +81,9 @@ function ShowShops(p,c){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
+                $('table tbody').html('');
+                $('.pagination').html('');
+
                 if(response.data.content.length > 0) { 
                     var pages =  response.data.totalPages;
                     generatePages(p, pages);
@@ -85,23 +137,26 @@ function ShowShops(p,c){
                             }
                         }
                         
-                        var state;
+                        var state, isLock, isSync;
                         switch(v.shopState){
                             case 1:
-                                state = "<button type='button' class='btn btn-success'>空铺</button>";
+                                state = "<div class='badge badge-danger'>空铺</div>";
                                 break;
                             case 2:
-                                state = "<button type='button' class='btn btn-danger'>待租</button>";
+                                state = "<div class='badge badge-warning'>待租</div>";
                                 break;
                             case 0:
-                                state = "<button type='button' class='btn btn-warning'>在租</button>";
+                                state = "<div class='badge badge-success'>在租</div>";
                                 break;
                             default:
-                                state = "<button type='button' class='btn btn-warning'>在租</button>";
+                                state = "<div class='badge badge-success'>在租</div>";
                                 break;
                         }
                         
-                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.code+'</td><td>'+v.shopName+'</td><td>'+mallName+'</td><td>'+floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td>'+modality+'</td><td>'+moving+'</td><td>'+state+'</td><td></td></tr>');
+                        v.state === 1? isLock = "<div class='badge badge-info'>未锁定</div>" : isLock = "<div class='badge badge-warning'>锁定</div>";
+                        v.isSync === 1? isSync = "<div class='badge badge-info'>同步</div>" : isSync = "<div class='badge badge-warning'>不同步</div>";
+                        
+                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.unit+'</td><td>'+isLock+'</td><td>'+isSync+'</td><td>'+v.shopName+'</td><td>'+mallName+'</td><td>'+floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td>'+modality+'</td><td>'+moving+'</td><td>'+state+'</td></tr>');
                     });
                     
                     if(p == pages){

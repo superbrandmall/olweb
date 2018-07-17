@@ -5,7 +5,7 @@ $(document).ready(function(){
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "update-succeed":
-                $('#ui_succeed').show().delay(10000).hide(0);
+                $('#ui_succeed').show().delay(2000).hide(0);
                 $('html, body').animate({
                     scrollTop: $('#ui_succeed').offset().top
                 }, 0);
@@ -20,23 +20,16 @@ $(document).ready(function(){
     GetMallInfo();
     
      $('#submit').click(function(){
-        SaveMallBidStandard();
+        SaveMallInfo();
+        //SaveMallBidStandard();
     });
 });
 
 function GetMallInfo(){
-    var map = {
-        mall: {
-            code: getURLParameter('id')
-        }
-    };
     $.ajax({
-        url: $.api.base+"/mall/findByCode",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseNew+"/onlineleasing-admin/api/mall/"+getURLParameter('id')+"",
+        type: "GET",
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -51,29 +44,40 @@ function GetMallInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                var mall = response.data.mall;
+                var mall = response.data;
                 $.mall = mall;
-                $('#code').val(mall.code || '-');
+                $('#code').val(mall.mallCode || '-');
                 $('#name').val(mall.mallName || '-');
+                $('#name_eng').val(mall.mallNameEng || '-');
                 $('#gross_area').val((mall.grossFloorArea || '-' ) + '平方米');
                 $('#leasing_area').val((mall.leasingArea || '-' ) + '平方米');
                 $('#location').val(mall.location || '-');
+                $('#location_eng').val(mall.locationEng || '-');
+                $('#phone').val(mall.phone || '-');
+                $('#position').val(mall.position);
                 $('#desc').val(mall.description || '-');
+                $('#desc_eng').val(mall.descriptionEng || '-');
                 $('#hd_code').val(mall.hdCode || '-');
                 
-                if(response.data.traffics != null && response.data.traffics != ''){
-                    var traffics = response.data.traffics;
+                if(mall.traffic != null && mall.traffic != ''){
+                    var traffics = mall.traffic;
                     $.each(traffics, function(i,v){
                         $('#traffics').append('\
 <div class="col-lg-12">\n\
 <div class="panel panel-default">\n\
-<div class="panel-heading">'+v.type+'</div>\n\
-<div class="panel-body"><p>'+v.text+'</p></div>\n\
+<div class="panel-heading"><input class="form-control traffic-type" id="type_'+i+'" value="'+v.type+'"></div>\n\
+<div class="panel-body"><p><input class="form-control" id="text_'+i+'" value="'+v.text+'"></p></div>\n\
+</div></div>');
+                        $('#traffics_eng').append('\
+<div class="col-lg-12">\n\
+<div class="panel panel-default">\n\
+<div class="panel-heading"><input class="form-control" id="type_eng_'+i+'" value="'+v.typeEng+'"></div>\n\
+<div class="panel-body"><p><input class="form-control" id="text_eng_'+i+'" value="'+v.textEng+'"></p></div>\n\
 </div></div>');
                     });
                 }
                 
-                if(response.data.mallBidStandard != null && response.data.mallBidStandard != ''){
+                /*if(response.data.mallBidStandard != null && response.data.mallBidStandard != ''){
                     var mallBidStandard = response.data.mallBidStandard;
                     $.mallBidStandard = mallBidStandard; 
                     $('#rent_free_retail_1').val(mallBidStandard.rentFreeRetail_1 || '');
@@ -94,13 +98,89 @@ function GetMallInfo(){
                     $('#rent_increase_2').val(mallBidStandard.rentIncrease_2 || '');
                     $('#promotion_budget').val(mallBidStandard.promotionBudget || '');
                     $('#maintenance_fee').val(mallBidStandard.maintenanceFee || '');
-                }
-            } 
+                }*/
+            } else {
+                interpretBusinessCode(response.code);
+            }
         }
     });
 }
 
-function SaveMallBidStandard(){
+function SaveMallInfo(){
+    $.mall.mallNameEng = $('#name_eng').val();
+    $.mall.locationEng = $('#location_eng').val();
+    $.mall.phone = $('#phone').val();
+    $.mall.position = $('#position').val();
+    $.mall.description = $('#desc').val();
+    $.mall.descriptionEng = $('#desc_eng').val();
+    var traffic = [];
+    $(".traffic-type").each(function(i,v){
+        traffic.push({
+            'text':$("#text_"+i).val(),
+            'textEng':$("#text_eng_"+i).val(),
+            'type':$("#type_"+i).val(),
+            'typeEng':$("#type_eng_"+i).val()
+        });
+    });
+    $.mall.traffic = traffic;
+    
+    var map = $.mall;
+
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-admin/api/mall/save",
+        type: "PUT",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                caching();
+            } else {
+                interpretBusinessCode(response.code);
+            }
+        }
+    }); 
+}
+
+function caching() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-admin/api/base/info/mall/refresh",
+        type: "POST",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                window.location.href = 'mall?id='+getURLParameter('id')+'&s=update-succeed';
+            } else {
+                interpretBusinessCode(response.code);
+            }
+        }
+    });    
+}
+
+/*function SaveMallBidStandard(){
     $.mallBidStandard.rentFreeRetail_1 = $('#rent_free_retail_1').val();
     $.mallBidStandard.rentFreeRetail_2 = $('#rent_free_retail_2').val();
     $.mallBidStandard.rentFreeRetail_3 = $('#rent_free_retail_3').val();
@@ -150,4 +230,4 @@ function SaveMallBidStandard(){
             }
         }
     });    
-}
+}*/

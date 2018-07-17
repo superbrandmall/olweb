@@ -60,6 +60,17 @@
 <div class="alert alert-danger"  id="ui_alert" role="alert"></div>
 <div class="alert alert-success"  id="ui_congrats" role="alert"></div>
 <header class="c-layout-header c-layout-header-3 c-layout-header-default-mobile">
+    <div class="c-topbar" style="display: none;">
+        <div class="c-topbar-inner c-theme-bg">
+			<div class="container">
+				<h3 class="c-topbar-title c-font-white c-font-14 c-font-thin c-center">
+					<i class="fa fa-exclamation-circle"></i> <?= $lang['nav_cookie_policy'] ?>
+                    <a href="cookie.html" target="_blank" class="c-font-bold c-font-dark c-font-white-hover"><?= $lang['nav_cookie_know_more'] ?></a>
+				</h3>
+				<a href="#" class="c-topbar-close c-font-dark c-font-white-hover"><i class="fa fa-close"></i></a>
+			</div>
+		</div>
+    </div>
     <div class="c-navbar">
         <div class="container">
             <div class="c-navbar-wrapper clearfix">

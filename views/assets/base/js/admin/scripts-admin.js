@@ -24,6 +24,10 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("modalities") || sessionStorage.getItem("modalities") == null || sessionStorage.getItem("modalities") == '') {
         getModalities();
     }
+    
+    if($('.home-page').length > 0){
+        searchShopAndCheck();
+    }
 });
 
 $(function() {
@@ -34,19 +38,98 @@ $(function() {
 //collapses the sidebar on window resize.
 $(function() {
     $(window).bind("load resize", function() {
-        console.log($(this).width())
+        console.log($(this).width());
         if ($(this).width() < 768) {
-            $('div.sidebar-collapse').addClass('collapse')
+            $('div.sidebar-collapse').addClass('collapse');
         } else {
-            $('div.sidebar-collapse').removeClass('collapse')
+            $('div.sidebar-collapse').removeClass('collapse');
         }
     });
 });
 
+function searchShopAndCheck(){
+    var malls = [];                
+    $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
+        malls.push(w.mallCode);
+    });
+        
+    var map = {
+        mallCodes: malls,
+        maxArea: 10000,
+        minArea: 0
+    };
+                
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/findAllBySearchShopAndCheck",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $.each(response.data, function(i,v) {
+                    var mallName;
+                    $.each($.parseJSON(sessionStorage.getItem("malls")), function(a,b) {
+                        if(b.mallCode == i) {
+                            mallName = b.mallName;
+                            return false;
+                        }
+                    });
+                        
+                    $('#page-wrapper').append('\
+    <div class="row"><div class="col-lg-12""><div class="panel panel-default">\n\
+    <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> '+mallName+'问题店铺</div>\n\
+    <div class="panel-body"><div class="list-group" id="list_group_'+i+'"></div></div></div></div></div>');
+                    $.each(v, function(j,w) {
+                        $('#list_group_'+i).append('<a href="shop?id='+w.code+'" class="list-group-item">'+w.unit+'<span class="pull-right text-muted small" id="prob_'+i+'_'+j+'"></span></a>');
+                        $.each(w.checkItems, function(k,x) {
+                            var badgeClass;
+                            switch(k%4){
+                                case 0:
+                                    badgeClass = "danger";
+                                    break;
+                                case 1:
+                                    badgeClass = "success";
+                                    break;
+                                case 2:
+                                    badgeClass = "warning";
+                                    break;
+                                case 3:
+                                    badgeClass = "info";
+                                    break;
+                                default:
+                                    badgeClass = "danger";
+                                    break;
+                            }
+                            $('#prob_'+i+'_'+j).append('<span class="badge badge-'+badgeClass+'">'+x+'</span> ');
+                        });
+                    });
+                });
+            }
+        }
+    });
+}
+
 function logout() {
-    $.cookie('login', null);
-    $.cookie('authorization', null);
-    $.cookie('uid', null);
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 
+    if (keys) { 
+    for (var i = keys.length; i--;) 
+        document.cookie = keys[i]+'=0;expires=' + new Date(0).toUTCString();
+    }
+    
     window.location.href = 'logout';
 }
 

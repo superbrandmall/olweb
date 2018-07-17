@@ -4172,7 +4172,7 @@ h1 {
     border-bottom: 0;
   }
   .c-layout-header.c-layout-header-3 .c-topbar {
-    border-bottom: 1px solid #edf4f6;
+    height: auto;
     background: #ffffff;
   }
   .c-layout-header.c-layout-header-3 .c-topbar .c-top-menu > .c-icons > li > a:not(.btn),

@@ -11,7 +11,7 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
 }
 ?>
 
-<div class="alert alert-success"  id="ui_succeed" role="alert">保存成功!</div>
+<div class="alert alert-success"  id="ui_succeed" role="alert">成功!</div>
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <?php include ('navbar_side.php'); ?>
@@ -125,19 +125,36 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                                     <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
                                     <input type="file" id="add_images" name="add_images" multiple>
                                 </div>
-                            </div>  
-
+                            </div>
+                            
+                            <div class="col-sm-4">
+                                <div class="form-group" id="vr">
+                                    <label>店铺VR</label>&nbsp;&nbsp;
+                                    <label class="radio-inline">
+                                        <input name="vrValidated" value="1" checked="" type="radio">有效
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input name="vrValidated" value="0" checked="" type="radio">无效
+                                    </label>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="#" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                            
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>店铺坐标</label>
+                                    <label>店铺坐标</label>&nbsp;&nbsp;<button onclick="javascript: caching();" class="badge badge-warning"><i class="fa fa-refresh" aria-hidden="true"> </i> 刷新缓存</button> 
                                     <textarea class="form-control" id="coords"></textarea>
                                 </div>
                             </div>
                             <div class="clearfix"> </div>
+                            
                             <div class="col-sm-12" id="buttons">
                                 <center>
-                                    <button class="btn btn-primary" id="submit">提交</button>
-                                    <a href="javascript:history.go(-1)" class="btn btn-default">返回</a>
+                                    <button class="btn btn-primary" id="submit"><i class="fa fa-check" aria-hidden="true"> </i> 提交</button>
+                                    <a href="javascript:history.go(-1)" class="btn btn-default"><i class="fa fa-backward" aria-hidden="true"> </i> 返回</a>
                                 </center>
                             </div>
                         </div>

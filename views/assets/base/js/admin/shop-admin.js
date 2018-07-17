@@ -6,7 +6,7 @@ $(document).ready(function(){
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "update-succeed":
-                $('#ui_succeed').show().delay(10000).hide(0);
+                $('#ui_succeed').show().delay(2000).hide(0);
                 $('html, body').animate({
                     scrollTop: $('#ui_succeed').offset().top
                 }, 0);
@@ -50,8 +50,6 @@ $(document).ready(function(){
             complete: function(){},
             success: function(response, status, xhr) {
                 $('#loader').hide();
-                interpretBusinessCode(response.code);
-                
                 if(response.code === 'C0') {
                     $.each(response.data, function(i,v) {
                         var options = ''; 
@@ -68,6 +66,8 @@ $(document).ready(function(){
                         );
                         $('#img_'+($.images.length + i)).find('.position_'+($.images.length + i)).attr('selected','selected');
                     });
+                } else {
+                    interpretBusinessCode(response.code);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -190,12 +190,22 @@ function GetShopInfo(){
                 
                 var locked = 0;
                 if(shop.state === 1){
-                    $('#buttons center').prepend('<button class="btn btn-danger" id="lock" onClick="lockShop('+shop.id+');">锁定</button>');
+                    $('#buttons center').prepend('<button class="btn btn-danger" id="lock" onClick=\'lockShop("'+shop.code+'");\'><i class="fa fa-lock" aria-hidden="true"> </i> 锁定</button>');
                 } else {
-                    $('#buttons center').prepend('<button class="btn btn-success" id="unlock" onClick="unlockShop('+shop.id+');">解锁</button>');
+                    $('#buttons center').prepend('<button class="btn btn-success" id="unlock" onClick=\'unlockShop("'+shop.code+'");\'><i class="fa fa-unlock" aria-hidden="true"> </i> 解锁</button>');
                 }
                 
-            } 
+                if(shop.vrValidated === 1) { 
+                    $('input:radio[name=vrValidated]')[0].checked = true;
+                    $('#vr iframe').attr('src','/'+shop.vr);
+                } else {
+                    $('input:radio[name=vrValidated]')[1].checked = true;
+                    $('#vr .embed-responsive').hide();
+                }
+                
+            } else {
+                interpretBusinessCode(response.code);
+            }
         }
     });
 }
@@ -220,6 +230,7 @@ function SaveShopInfo(){
     
     $.shop.images = $.images;
     $.shop.coords = $.coords;
+    $.shop.vrValidated = $('input:radio[name=vrValidated]:checked').val();
     
     var map = $.shop;
 
@@ -239,31 +250,23 @@ function SaveShopInfo(){
         },
         success: function (response, status, xhr) {
             $('#loader').hide();
-            interpretBusinessCode(response.code);
-            
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';              
+            } else {
+                interpretBusinessCode(response.code);
             }
         }
     });    
 }
 
-function lockShop(id){
-    var map = {
-        shop: {
-            id : id
-        }
-    };
+function caching() {
     $.ajax({
-        url: $.api.base+"/shop/lock",
+        url: $.api.baseNew+"/onlineleasing-admin/api/base/coords/refresh",
         type: "POST",
-        data: JSON.stringify(map),
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -273,32 +276,51 @@ function lockShop(id){
         },
         success: function (response, status, xhr) {
             $('#loader').hide();
-            interpretBusinessCode(response.code);
-            
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
+            } else {
+                interpretBusinessCode(response.code);
+            }
+        }
+    });    
+}
+
+function lockShop(code){
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/"+code+"/operate/lock",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('#lock').remove();
-                $('#buttons center').prepend('<button class="btn btn-success" id="unlock" onClick="unlockShop('+id+');">解锁</button>');
+                window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
+                $('#buttons center').prepend('<button class="btn btn-success" id="unlock" onClick=\'unlockShop("'+code+'");\'><i class="fa fa-unlock" aria-hidden="true"> </i> 解锁</button>');
+            } else {
+                interpretBusinessCode(response.code);
             }
         }
     });    
 }
 
-function unlockShop(id){
-    var map = {
-        shop: {
-            id : id
-        }
-    };
+function unlockShop(code){
     $.ajax({
-        url: $.api.base+"/shop/unlock",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/"+code+"/operate/unlock",
+        type: "GET",
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -308,14 +330,15 @@ function unlockShop(id){
         },
         success: function (response, status, xhr) {
             $('#loader').hide();
-            interpretBusinessCode(response.code);
-            
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('#unlock').remove();
-                $('#buttons center').prepend('<button class="btn btn-danger" id="lock" onClick="lockShop('+id+');">锁定</button>');
+                window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
+                $('#buttons center').prepend('<button class="btn btn-danger" id="lock" onClick=\'lockShop("'+code+'");\'><i class="fa fa-lock" aria-hidden="true"> </i> 锁定</button>');
+            } else {
+                interpretBusinessCode(response.code);
             }
         }
     });    

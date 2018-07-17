@@ -11,7 +11,7 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
 }
 ?>
 
-<div class="alert alert-success"  id="ui_succeed" role="alert">保存成功!</div>
+<div class="alert alert-success"  id="ui_succeed" role="alert">成功!</div>
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <?php include ('navbar_side.php'); ?>
@@ -26,16 +26,22 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>项目编号</label>
                                     <input class="form-control" id="code" disabled>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label>项目名称</label>
+                                    <label>中文名称</label>
                                     <input class="form-control" id="name" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>英文名称</label>
+                                    <input class="form-control" id="name_eng">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -52,14 +58,38 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>地址</label>
+                                    <label>中文地址</label>
                                     <input class="form-control" id="location" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>描述</label>
-                                    <textarea class="form-control" id="desc" disabled></textarea>
+                                    <label>英文地址</label>
+                                    <input class="form-control" id="location_eng">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>热线电话</label>
+                                    <input class="form-control" id="phone">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>顺序(从0开始)</label>
+                                    <input class="form-control" id="position">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>中文描述</label>
+                                    <textarea class="form-control" id="desc"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>英文描述</label>
+                                    <textarea class="form-control" id="desc_eng"></textarea>
                                 </div>
                             </div>
                             <div class="clearfix"> </div>
@@ -73,11 +103,10 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
             <div class="col-lg-12">
                 <h1 class="page-header">项目周边交通</h1>
             </div>
+            <div class="col-lg-6" id="traffics"></div>
+            <div class="col-lg-6" id="traffics_eng"></div>
         </div>
-        
-        <div class="row" id="traffics"></div>
-        
-        <div class="row">
+        <!--<div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">出价标准配置</h1>
             </div>
@@ -224,10 +253,10 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
         <div class="row">
-            <div class="col-lg-4">
+            <!--<div class="col-lg-4">
                 <div class="panel-body">
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover">
@@ -307,7 +336,7 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
             <div class="col-lg-12">
                 <center>

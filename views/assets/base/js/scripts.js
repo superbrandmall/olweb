@@ -115,6 +115,17 @@ $(document).ready(function(){
         getModalities();
     }
     
+    if($.cookie('cookie') && $.cookie('cookie') == 1){
+        $('.c-topbar').hide();
+        
+    } else {
+        $('.c-topbar').slideDown();
+        $('.c-topbar a').click(function(){
+            $('.c-topbar').slideUp();
+            $.cookie('cookie',1);
+        });
+    }
+    
     $('.floor-maps a[data-toggle="modal"]').on('click', function(){
         var modal_id = $(this).attr('data-target');
         $(modal_id+' .modal-content').load(

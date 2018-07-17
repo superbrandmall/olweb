@@ -55,6 +55,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         'admin/bid' => array(
             'url' => 'bid.php'
         ),
+        'admin/sync-hd' => array(
+            'url' => 'sync_hd.php'
+        ),
         'admin/users' => array(
             'url' => 'users.php'
         ),
@@ -73,7 +76,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
     }
 
     $session_required = array('login.php','default.php','merchant.php','merchants.php','brands.php','brand.php','malls.php','mall.php','buildings.php','building.php',
-        'floors.php','floor.php','shops.php','shop.php','bids.php','bid.php','users.php','user.php');
+        'floors.php','floor.php','shops.php','shop.php','bids.php','bid.php','sync_hd.php','users.php','user.php');
     if (in_array($page, $session_required)) {
         include_once 'models/admin/Session.class.php';
         $session = new Session();
