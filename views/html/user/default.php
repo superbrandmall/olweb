@@ -5,13 +5,13 @@
 	<section class="c-layout-revo-slider c-layout-revo-slider-7">
         <div class="tp-banner-container tp-fullscreen tp-fullscreen-mobile">
             <div class="c-singup-form">
-                <h3 class="c-font-54 c-font-thin c-font-white c-margin-b-40 c-font-uppercase">
+                <h3 class="c-font-54 c-font-bold c-font-white c-margin-b-40 c-font-uppercase">
                 Online <span class="c-theme-font c-font-bold">Leasing</span></h3>
                 <h5 class="c-font-24 c-font-thin c-font-white c-subtitle c-margin-b-40">
                 <?= $lang['home_banner_slogan_1'] ?> </h5>
                 <div class="form-inline">
-                    <a href="requirement" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-map"></i> <?= $lang['home_shops'] ?></a>
-                    <a href="events" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>
+                    <a href="requirement" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-map"></i> <?= $lang['home_shops'] ?></a>
+                    <a href="events" class="btn btn-lg c-btn-blue c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-calendar"></i> <?= $lang['home_events'] ?></a>
                 </div>
             </div>
             <div class="tp-banner">
@@ -25,7 +25,7 @@
             </div>
             
             <!-- BEGIN: 热门项目 -->
-            <div class="c-content-box c-size-md hidden-md hidden-sm hidden-xs" style="position: absolute;bottom: 0;left: 0;right:0;z-index: 20;margin-bottom: 0;padding: 10px 0 5px 0;background: rgba(0,0,0,0.8);">
+            <div class="c-content-box c-size-md hidden-md hidden-sm hidden-xs" style="position: absolute;bottom: 0;left: 0;right:0;z-index: 20;margin-bottom: 0;">
                 <div class="container">
                     <div class="cbp-panel">
                         <div id="mall_list" class="c-content-latest-works cbp cbp-l-grid-masonry-projects"></div>
@@ -126,7 +126,7 @@
 	</div>
 	<!-- END: 平台介绍 -->
 	<!-- BEGIN: CONTENT/SLIDERS/CLIENT-LOGOS-2 -->
-	<div class="c-content-box c-size-md c-bg-grey-1" style="padding-bottom: 120px; margin-bottom: 0;">
+	<div class="c-content-box c-size-md c-bg-grey-1" style="background: url(views/assets/base/img/content/backgrounds/body-3.jpg) center center no-repeat;background-size: cover; padding-bottom: 120px; margin-bottom: 0;">
 		<div class="container">
 			<!-- Begin: Testimonals 1 component -->
 			<div class="c-content-client-logos-slider-1 c-bordered" data-slider="owl" data-items="6" data-desktop-items="4" data-desktop-small-items="3" data-tablet-items="3" data-mobile-small-items="2" data-auto-play="5000">

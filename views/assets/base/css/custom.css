@@ -10,7 +10,7 @@
 }
 
 .errorDiv {
-    color: #cd6262;
+    color: #ff6f33;
 }
 
 .badge.c-font-bold {
@@ -38,10 +38,6 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
     position: absolute;
     width: 100%;
     z-index: 1;
-}
-
-.c-topbar-inner {
-    padding: 3px;
 }
 
 .c-topbar-title {
@@ -91,7 +87,11 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
 }
 
 .bank-cards input[type="radio"]:checked+label img { 
-    border-color: #cd6262;
+    border-color: #ff6f33;
+}
+
+#mall_list .cbp-l-grid-projects-desc {
+    background-color: #fff;
 }
 
 /********** BEGIN BOT ********************/

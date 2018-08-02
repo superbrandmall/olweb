@@ -71,7 +71,7 @@ function GetShopInfo(){
                 
                 if($.cookie('lang') === 'en-us'){
                     $('#floor').text(floorNameEng || '-');
-                    $('#shop_state').text(response.data.shopState === 1 ? 'Previous' : 'Brand');
+                    $('#shop_state').text(response.data.shopState === 1 ? 'Previous' : 'Current');
                 } else {
                     $('#floor').text(floorName || '-');
                     $('#shop_state').text(response.data.shopState === 1 ? '上一品牌' : '在租品牌');
@@ -170,9 +170,9 @@ function GetShopInfo(){
 
                 if(response.data.shopState !== 0) {
                     if($.cookie('uid') && $.cookie('uid') != '') {
-                        $('<a href="reserve?sid='+getURLParameter('id')+'&search='+(getURLParameter('search')||'')+'" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="reserve?sid='+getURLParameter('id')+'&search='+(getURLParameter('search')||'')+'" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
                     } else {
-                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
                     }
                 }
 

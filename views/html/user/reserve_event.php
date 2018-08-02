@@ -1,4 +1,13 @@
 <?php
+    if(explode('?sid=',$_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?sid=',$_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&search=') !== false) {
+        $id = explode('&search=',$id)[0];
+    }
+} else {
+    $id = null;
+}
+
 $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/reserve-event.js"></script>'
     . '<script src="views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'
     . '<script src="views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>';
@@ -21,7 +30,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 					/
 				</li>
 				<li class="c-state_active">
-                    <?= $lang['reserve_event_detail'] ?>
+                    <a href="shop?id=<?= $id ?>"><?= $lang['reserve_event_detail'] ?></a>
 				</li>
                 <li>
 					/

@@ -76,7 +76,7 @@ function GetShopInfo(){
                 }
                 
                 if(response.data.unit != null) {
-                    GetMap(response.data.unit);
+                    GetMap(response.data.unit,response.data.mallCode);
                 }
                 
                 $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
@@ -328,8 +328,8 @@ function GetEngineeringSpecifications(specs){
     });
 }
 
-function GetMap(u){     
-    $('#map').append('<img src="views/assets/base/img/content/events/'+$.lang.mallLangCat+'/'+u+'.jpg" class="img-responsive" style="margin: 0 auto;">');
+function GetMap(u,m){     
+    $('#map').append('<img src="views/assets/base/img/content/events/'+$.lang.mallLangCat+'/'+m+'/'+u+'.jpg" class="img-responsive" style="margin: 0 auto;">');
 }
 
 function getFloorInfo(mc,fn) {

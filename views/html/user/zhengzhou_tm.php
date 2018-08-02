@@ -315,7 +315,7 @@ $scripts = $scripts. '<script src="views/assets/plugins/chart.min.js" type="text
 	</div>
 	<!-- END: 联系方式 -->
     
-    <div class="c-content-box c-size-md c-bg-white animated fadeInDown" style="z-index: 1;">
+    <div class="c-content-box c-size-md c-bg-white animated fadeInDown" style="margin-bottom: 0; z-index: 1;">
 		<div class="container">
 			<div class="c-content-bar-2 c-opt-1">
 				<div class="row">

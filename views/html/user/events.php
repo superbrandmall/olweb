@@ -1,8 +1,3 @@
-<?php
-$scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>'
-    . '<script type="text/javascript" src="views/assets/base/js/events.js"></script>';
-?>
-
 <!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
 	<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-1 -->
@@ -32,10 +27,10 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/c
 				<div data-filter=".sh-sbm" class="cbp-filter-item-active cbp-filter-item">
                     <?= $lang['events_ljz'] ?>
 				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
+                <div data-filter=".bs-tm" class="cbp-filter-item">
                     <?= $lang['events_bs'] ?>
 				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
+                <!--<div data-filter=".sh-sbm" class="cbp-filter-item">
                     <?= $lang['events_xh'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
@@ -46,7 +41,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/c
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
                     <?= $lang['events_zz'] ?>
-				</div>
+				</div>-->
 			</div>
 			<div id="grid-container" class="cbp">
 				<div class="cbp-item sh-sbm">
@@ -227,6 +222,146 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/c
 					</div>
 					<div class="cbp-l-grid-projects-desc">
 						<?= $lang['events_ct_hall_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_a1.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000036" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_a1'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_a1_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_a2.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000006" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_a2'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_a2_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_b.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000031" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_b'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_b_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_c1.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000028" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_c1'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_c1_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_c2.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000008" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_c2'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_c2_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_d1.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180723000046" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_d1'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_d1_location'] ?>
+					</div>
+				</div>
+                <div class="cbp-item bs-tm">
+					<div class="cbp-caption">
+						<div class="cbp-caption-defaultWrap">
+							<img src="views/assets/base/img/content/events/bs_d2.jpg" alt="">
+						</div>
+						<div class="cbp-caption-activeWrap">
+							<div class="cbp-l-caption-alignCenter">
+								<div class="cbp-l-caption-body">
+									<a href="event?id=OLSHOP180522000059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="cbp-l-grid-projects-title">
+						<?= $lang['events_bs_d2'] ?>
+					</div>
+					<div class="cbp-l-grid-projects-desc">
+						<?= $lang['events_bs_d2_location'] ?>
 					</div>
 				</div>
 			</div>

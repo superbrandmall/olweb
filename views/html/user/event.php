@@ -73,7 +73,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 			</div>
 		</div>
 	</div>
-    <div class="c-content-box c-size-md c-bg-grey-2" style="margin-bottom: 0;">
+    <div class="c-content-box c-size-md c-bg-grey-1" style="background: url(views/assets/base/img/content/backgrounds/body-1.jpg) center center no-repeat;background-size: cover; margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
                 <div id="vr_video" class="col-md-6">

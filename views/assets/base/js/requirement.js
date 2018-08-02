@@ -1,3 +1,10 @@
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    
 $.vals = [];
 
 $(document).ready(function(){
@@ -19,6 +26,8 @@ $(document).ready(function(){
     
     if(sessionStorage.getItem("searches") && sessionStorage.getItem("searches") != null && sessionStorage.getItem("searches") != '') {
         ShowResults($.parseJSON(sessionStorage.getItem("searches")),'');
+    } else {
+        ShowSearchInit();
     }
     
     ///////////////////// Validate search form /////////////////////////
@@ -219,6 +228,47 @@ $(document).ready(function(){
     });
 });
 
+function ShowSearchInit(){
+    $('.c-content-team-1-slider .c-content-title-1,.c-content-list').html('');
+    var map = {
+        userCode: '',
+        brandCode: '',
+        brandName: '',
+        brandModality: '',
+        minArea: 0,
+        maxArea: 3000,
+        startDate: IncrMonth(date),
+        endDate: '',
+        mallCodes: [$.mallCode.shanghaiSbm],
+        max: 9,
+        rentalLength: ''
+    };
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/searchshop/details",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(response.data.result.length > 0){
+                    ShowResults(response.data.result,response.data.searchShopDetailCode);
+                }
+                
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            } 
+        }
+    });
+}
+
 function ShowSearch(){
     $('.c-content-team-1-slider .c-content-title-1,.c-content-list').html('');
     var mall = [];
@@ -235,7 +285,7 @@ function ShowSearch(){
         startDate: $("#start").val()+'-01',
         endDate: IncrYears($("#start").val()+'-01',$('#length').val()),
         mallCodes: mall,
-        max: 8,
+        max: 9,
         rentalLength: $('#length').val()
     };
     $.ajax({
@@ -261,7 +311,7 @@ function ShowSearch(){
                 scrollTop: $(".c-content-list").offset().top - 200},
                 'slow');
                 
-                $('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-white c-font-bold">'+$.lang.recommandStores+' ('+response.data.result.length+$.lang.jia+')</h3><div class="c-line-center c-theme-bg"></div>');                            
+                //$('.c-content-team-1-slider .c-content-title-1').append('<h3 class="c-center c-font-bold">'+$.lang.recommandStores+' ('+response.data.result.length+$.lang.jia+')</h3><div class="c-line-center c-theme-bg"></div>');                            
 
                 sessionStorage.setItem("searches", JSON.stringify(response.data.result) );
                 if(response.data.result.length > 0){
@@ -276,7 +326,6 @@ function ShowSearch(){
 }
 
 function ShowResults(result,searchCode) {
-    
     var mallName,floorName;
     $.each(result, function(i,v){                  
         var star_length;
@@ -346,67 +395,71 @@ function ShowResults(result,searchCode) {
             }
         });
         
-        $('.c-content-list').append('<div class="col-md-3" style="display: none;"><div class="c-content-person-1 c-option-2">\n\
+        $('.c-content-list').append('<div class="col-md-4" style="display: none;"><div class="c-content-person-1 c-option-2 c-shadow">\n\
 <div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
 <div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
 <div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div>\n\
 </div>\n\
 <div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\
 <div class="c-position"><div style="float: left;margin-right: 5px">'+$.lang.pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
-<div class="c-position" style="margin-top: 10px;"><span class="c-content-label c-font-uppercase c-font-bold c-theme-bg"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+$.lang.yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
+<div class="c-position" style="margin-top: 10px;"><span class="c-btn btn-no-focus c-btn-header btn btn-xs c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+$.lang.yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
 </div></div>');
     });
 
     $('#reserve_items').fadeIn().click(function(){
-        $.vals = [];
+        if($.cookie('uid') && $.cookie('uid') != '') {
+            $.vals = [];
         
-        $('input:checkbox[name="reservation[]"]').each(function() {
-            if(this.checked) {
-                $.vals.push(this.value);
+            $('input:checkbox[name="reservation[]"]').each(function() {
+                if(this.checked) {
+                    $.vals.push(this.value);
+                }
+            });
+
+            $('#reserve-form').modal('show');
+            $('#brand_name').val($('#brand').text());
+            $('#leasing_area').val($('#min_area').val()+'-'+$('#max_area').val());
+            $('#rental_length').val($('#length').val());
+            $('#start_date').val($('#start').val());
+
+            if($.vals.length > 0){
+                $('#reserve_tag').text($.lang.kanpu);
+            } else {
+                $('#reserve_tag').text($.lang.qiatan);
             }
-        });
-        
-        $('#reserve-form').modal('show');
-        $('#brand_name').val($('#brand').text());
-        $('#leasing_area').val($('#min_area').val()+'-'+$('#max_area').val());
-        $('#rental_length').val($('#length').val());
-        $('#start_date').val($('#start').val());
-            
-        if($.vals.length > 0){
-            $('#reserve_tag').text($.lang.kanpu);
+
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var date = d.getFullYear() + '-' +
+                (month<10 ? '0' : '') + month + '-' +
+                (day<10 ? '0' : '') + day;
+
+            if($.cookie('lang') === 'en-us'){
+                var reCal = "en-US";
+            } else {
+                var reCal = "zh-CN";
+            }
+            $('#reserve_date').datepicker({
+                'language': reCal,
+                'format': 'yyyy-mm-dd',
+                'startDate': '+1d'
+            });
+
+            $('#reserve_date').datepicker('setDate',IncrDate(date));
         } else {
-            $('#reserve_tag').text($.lang.qiatan);
+            $('#login-form').modal('show');
         }
-        
-        var d = new Date();
-        var month = d.getMonth()+1;
-        var day = d.getDate();
-        var date = d.getFullYear() + '-' +
-            (month<10 ? '0' : '') + month + '-' +
-            (day<10 ? '0' : '') + day;
-        
-        if($.cookie('lang') === 'en-us'){
-            var reCal = "en-US";
-        } else {
-            var reCal = "zh-CN";
-        }
-        $('#reserve_date').datepicker({
-            'language': reCal,
-            'format': 'yyyy-mm-dd',
-            'startDate': '+1d'
-        });
-            
-        $('#reserve_date').datepicker('setDate',IncrDate(date));
     });
 
     var size_li = $(".c-content-list > div").size();
-    var x=8;
+    var x=9;
     if(size_li > x){
         $('#loadMore-container').fadeIn();
     }
     $('.c-content-list > div:lt('+x+')').fadeIn();
     $('.cbp-l-loadMore-link').click(function () {
-        x= (x+8 <= size_li) ? x+8 : size_li;
+        x= (x+9 <= size_li) ? x+9 : size_li;
         $('.c-content-list > div:lt('+x+')').fadeIn();
 
         if(x === size_li){
@@ -454,7 +507,7 @@ function GetHistories(p){
                         malls.push(mallName);
                     });
                     
-                    var created = new Date();
+                    /*var created = new Date();
                     created.setTime(v.created);
                     created = created.toLocaleString();
                     
@@ -468,7 +521,7 @@ function GetHistories(p){
                     
                     $('#accordion-'+p).append('<div class="panel"><div class="panel-heading" role="tab" id="heading-'+i+'"><h4 class="panel-title"><a class="collapsed c-font-bold c-font-16" data-toggle="collapse" data-parent="#accordion-'+p+'" href="#collapse-'+i+'" aria-expanded="false"><i class="icon-clock"></i> '+created+' </a></h4></div><div id="collapse-'+i+'" class="panel-collapse collapse" role="tabpanel"><div class="panel-body c-font-14"><a href="javascript: void(0);" style="color: #fff;overflow-wrap: break-word;"><span class="min">'+v.minArea+'</span>-<span class="max">'+v.maxArea+'</span> m²/<span class="st">'+startYear+'-'+startMonth+'</span>/<span class="ln">'+v.rentalLength+'</span>'+nian+'/\n\
 <span>'+malls+'</span><span class="cd" style="display:none;">'+codes+'</span>\n\
-</a></div></div></div>');
+</a></div></div></div>');*/
                 });
                 
                 $('#requirement_form')[0].reset();
@@ -487,7 +540,7 @@ function GetHistories(p){
                     $("input:checkbox[name=mall]:first").prop("checked", true);
                 }
                 
-                $('.panel-heading:first').find('a').attr('aria-expanded',true);
+                /*$('.panel-heading:first').find('a').attr('aria-expanded',true);
                 $('.panel-heading:first').find('a').removeClass('collapsed');
                 $('.panel-collapse:first').addClass('in');
                 
@@ -508,7 +561,7 @@ function GetHistories(p){
                         
                         $("#search_button").trigger("click");
                     });
-                });
+                });*/
                 
                 showMyInfo();
             } else {
@@ -543,13 +596,13 @@ function showMyInfo(){
                 $('#mobile').text(response.data.mobile || '-');
                 $('#email').text(response.data.email || '-');
                 $('#brand').text(response.data.brandName || '-');
-                $('#brand_modality_0').text(GetBrandModality0(brandModality.substr(0,2)));
+                //$('#brand_modality_0').text(GetBrandModality0(brandModality.substr(0,2)));
                 $('#brand_modality_0_code').val(brandModality.substr(0,2));
-                $('#brand_modality_1').text(GetBrandModality1(brandModality.substr(0,4)));
+                //$('#brand_modality_1').text(GetBrandModality1(brandModality.substr(0,4)));
                 $('#brand_modality_1_code').val(brandModality.substr(0,4));
-                $('#brand_modality_2').text(GetBrandModality2(brandModality.substr(0,6)));
+                //$('#brand_modality_2').text(GetBrandModality2(brandModality.substr(0,6)));
                 $('#brand_modality_2_code').val(brandModality.substr(0,6));
-                $('#brand_modality_3').text(GetBrandModality3(brandModality));
+                //$('#brand_modality_3').text(GetBrandModality3(brandModality));
                 $('#brand_modality_3_code').val(brandModality);
                 
                 if(response.data.emailVerified == 1) {
@@ -568,7 +621,7 @@ function showMyInfo(){
     });
 }
 
-function GetBrandModality0(mod) {
+/*function GetBrandModality0(mod) {
     var mm;
     if(mod !== null && mod !== '') {
         var m = mod;
@@ -650,7 +703,7 @@ function GetBrandModality3(mod) {
     }
     
     return mm;
-}
+}*/
 
 $.validator.addMethod('numChar',function(text){
     var regex = /^[0-9a-zA-Z\ ]+$|(^$)/;
@@ -705,7 +758,6 @@ function VeryficationCodeReservation() {
            console.log(textStatus, errorThrown);
         }
     });
-    
 }
 
 function setTimeReservation(obj) {

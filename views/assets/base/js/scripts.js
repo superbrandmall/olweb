@@ -7,6 +7,11 @@ $.api = {
 
 if($.cookie('lang') === 'en-us'){
     $.lang = {
+        zzTm:  'Zhengzhou TouchMall',
+        wxTm: 'Wuxi TouchMall',
+        xaTm: 'Xi\'an TouchMall',
+        enter: 'Enter',
+        comingSoon: 'Coming Soon',
         reserveShop: 'Reserve',
         reserveEvent: 'Reserve',
         addToFav: 'Add to favorite',
@@ -49,6 +54,11 @@ if($.cookie('lang') === 'en-us'){
     };
 } else {
     $.lang = {
+        zzTm:  '正大乐城郑州购物中心',
+        wxTm: '正大乐城无锡购物中心',
+        xaTm: '正大乐城西安购物中心',
+        enter: '项目介绍',
+        comingSoon: '尽请期待',
         reserveShop: '预约看铺',
         reserveEvent: '预约看场',
         addToFav: '关注该店铺',
@@ -151,10 +161,6 @@ $(document).ready(function(){
         setTimeout(function () {
             window.history.pushState("object or string", "Title", "/"+refineUrl() );
         },1000);
-    }
-    
-    if($.cookie('lang') === 'en-us'){
-        translateToEngDefault();
     }
 });
 
@@ -707,13 +713,3 @@ $.validator.addMethod( "remoteValidate", function( value, element, param, method
     }, param ) );
     return "pending";
  }, "" );
- 
- function translateToEngDefault() {
-    var e = $(".c-layout-page");
-    e.html(e.html()
-            .replace(/\正大乐城郑州购物中心/g, "Zhengzhou TouchMall")
-            .replace(/\正大乐城无锡购物中心/g, "Wuxi TouchMall")
-            .replace(/\正大乐城西安购物中心/g, "Xi’an TouchMall")
-            .replace(/\项目介绍/g, "Enter")
-            .replace(/\尽请期待/g, "Coming Soon"));
-}

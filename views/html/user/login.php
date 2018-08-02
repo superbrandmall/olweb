@@ -10,7 +10,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/l
 			</div>
 			<div class="modal-body">
 				<h3 class="c-font-24 c-font-sbold"><?= $lang['login_welcome'] ?></h3>
-                <div class="c-content-panel" style="margin: 30px 0 20px;">
+                <div class="c-content-panel c-no-border c-shadow" style="margin: 30px 0 20px;">
                     <div class="c-body" style="padding-top: 20px;">
                         <div class="c-content-title-1">
                             <h4 class="c-font-bold"><i class="icon-user"></i> <?= $lang['login_not_registered_user'] ?>?</h4><br>
@@ -21,7 +21,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/l
                         </div>
                     </div>
                 </div>
-                <div class="c-content-panel">
+                <div class="c-content-panel c-no-border c-shadow">
                     <div class="c-body" style="padding-top: 20px;">
                         <p>
                             <?= $lang['login_verification_login'] ?>

@@ -5,22 +5,15 @@ floor['f1'] = true;
 floor['fb1'] = true;
 
 $(document).ready(function(){
-    $(window).scroll(function() {
-        var y = $(this).scrollTop();
-        
-        if (y <= $('#f3').offset().top) {
-            
-        } else if (y <= $('#f2').offset().top && y > $('#f3').offset().top) {
-            getFloorInfo($.mallCode.baoshanTm,'二楼','f2');
-        } else if (y <= $('#f1').offset().top && y > $('#f2').offset().top) {
-            getFloorInfo($.mallCode.baoshanTm,'一楼','f1');
-        } else if (y <= $('#fb1').offset().top && y > $('#f1').offset().top) {
-            getFloorInfo($.mallCode.baoshanTm,'负一楼','fb1');
-        }
-    });
-    
     getMallInfo($.mallCode.baoshanTm);
+    getFloorInfo($.mallCode.baoshanTm,'负一楼','fb1');
+    getFloorInfo($.mallCode.baoshanTm,'一楼','f1');
+    getFloorInfo($.mallCode.baoshanTm,'二楼','f2');
     getFloorInfo($.mallCode.baoshanTm,'三楼','f3');
+    
+    setTimeout(function () {
+        $('.owl-mall-carousel').css('visibility','visible');
+    },1000);
     
     document.addEventListener("webkitfullscreenchange", function (event) {
         if(document.webkitIsFullScreen){
@@ -76,7 +69,7 @@ function getMallInfo(mc) {
                     proportion.push(Math.round(v.percentage*100));
                 });
                 
-                var trafficType;
+                var trafficType,text;
                 var trafficText = "";
                 $.each(traffics, function(i,v){
                     if($.cookie('lang') === 'en-us'){
@@ -118,7 +111,7 @@ function getFloorInfo(mc,fn,fl) {
                     var modalityName;
                     $.each(details, function(i,v){
                         modalityName = GetBrandModality3(v.code);
-                        proportion += '<div class="col-sm-5 modality-name">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
+                        proportion += '<div class="col-xs-8" style="text-align: left; padding: 0;">'+modalityName+' ('+v.count+$.lang.jia+')</div><div class="col-xs-4" style="text-align: right;">'+Math.round(v.percentage*100)+'%</div><div class="clearfix"> </div>'; 
                     });
                     $('#proportion_'+fl).html(proportion);
                 } else {

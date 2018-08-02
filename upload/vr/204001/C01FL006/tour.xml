@@ -1,6 +1,6 @@
 ﻿<krpano version="1.19" title="Virtual Tour">
 
-	<include url="skin/vtourskin.xml" />
+	<include url="../skin/vtourskin.xml" />
 
 	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
@@ -65,7 +65,10 @@
 	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
 	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
-
+    <autorotate enabled="true" waittime="2.0" speed="-10.0" horizon="0.0" />
+	
+	<events name="onautorotateevents" keep="true" onautorotateoneround="startup()"/>
+	
 	<!-- startup action - load the first scene -->
 	<action name="startup" autorun="onstart">
 		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
@@ -73,9 +76,11 @@
 		if(startactions !== null, startactions() );
 	</action>
 
-
+	<action name="hide_vtourskin_all" autorun="onstart">
+	        delayedcall(2.0,skin_hideskin());
+	</action>
 	
-	<scene name="scene_3-106_0312" title="3-106_0312" onstart="" thumburl="panos/3-106_0312.tiles/thumb.jpg" lat="" lng="" heading="">
+	<scene name="scene_3-106_0312" title="场景1" onstart="" thumburl="panos/3-106_0312.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
@@ -84,6 +89,20 @@
 		<image>
 			<cube url="panos/3-106_0312.tiles/pano_%s.jpg" />
 		</image>
+		<hotspot name="spot4" style="skin_hotspotstyle" ath="-14.942" atv="27.138" linkedscene="scene_3-203_0131" />
+
+	</scene>
+    
+    <scene name="scene_3-203_0131" title="场景2" onstart="" thumburl="panos/3-203_0131.tiles/thumb.jpg" lat="" lng="" heading="">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/3-203_0131.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/3-203_0131.tiles/pano_%s.jpg" />
+		</image>
+		<hotspot name="spot4" style="skin_hotspotstyle" ath="83.744" atv="34.907" linkedscene="scene_3-106_0312" />
 
 	</scene>
 

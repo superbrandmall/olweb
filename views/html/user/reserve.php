@@ -1,4 +1,13 @@
 <?php
+    if(explode('?sid=',$_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?sid=',$_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&search=') !== false) {
+        $id = explode('&search=',$id)[0];
+    }
+} else {
+    $id = null;
+}
+
 $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/reserve.js"></script>'
     . '<script src="views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'
     . '<script src="views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>';
@@ -21,7 +30,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 					/
 				</li>
 				<li class="c-state_active">
-					<?= $lang['reserve_shop_detail'] ?>
+					<a href="shop?id=<?= $id ?>"><?= $lang['reserve_shop_detail'] ?></a>
 				</li>
                 <li>
 					/
@@ -104,7 +113,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 
                             <hr>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger btn-md c-btn-uppercase c-btn-bold c-btn-square"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
+                                <button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
                             </div>
                         </form>
 					</div>
