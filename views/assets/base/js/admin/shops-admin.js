@@ -62,7 +62,7 @@ function ShowShops(p,c){
         shopState: $('#shop_state').val() || null
     };
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-admin/api/shop/findAll?size=50&page="+pg+"&sort=code,asc",
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/findAll?size="+c+"&page="+pg+"&sort=code,asc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,

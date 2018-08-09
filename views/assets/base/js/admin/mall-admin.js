@@ -100,7 +100,7 @@ function GetMallInfo(){
                     $('#maintenance_fee').val(mallBidStandard.maintenanceFee || '');
                 }*/
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -148,7 +148,7 @@ function SaveMallInfo(){
                 }
                 caching();
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     }); 
@@ -174,7 +174,7 @@ function caching() {
                 }
                 window.location.href = 'mall?id='+getURLParameter('id')+'&s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });    
@@ -220,7 +220,7 @@ function caching() {
         },
         success: function (response, status, xhr) {
             $('#loader').hide();
-            interpretBusinessCode(response.code);
+            interpretBusinessCode(response.customerMessage);
             
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null){

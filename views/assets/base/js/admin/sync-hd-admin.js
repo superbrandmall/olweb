@@ -35,7 +35,7 @@ function syncHDBaseInfo(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -61,7 +61,7 @@ function syncHDModality(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -87,7 +87,7 @@ function syncHDBrand(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -113,7 +113,7 @@ function syncHDMerchant(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -139,7 +139,7 @@ function syncHDShop(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -165,7 +165,7 @@ function cachingMallInfo(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -191,7 +191,7 @@ function cachingFloorInfo(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -217,7 +217,7 @@ function cachingModality(){
                 }
                 window.location.href = 'sync-hd?s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });

@@ -68,11 +68,22 @@
                     </li>
                 </ul>
             </li>
-            <li<?php if($getTarget === "admin/users" || $getTarget === "admin/user") echo " class='active'"?>>
+            <li<?php if($getTarget === "admin/users" || $getTarget === "admin/add-user") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-user" aria-hidden="true"></i> 用户<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="users">用户信息</a>
+                    </li>
+                </ul>
+            </li>
+            <li<?php if($getTarget === "admin/roles" || $getTarget === "admin/add-role" || $getTarget === "admin/apis") echo " class='active'"?>>
+                <a href="#"><i class="fa fa-fighter-jet" aria-hidden="true"></i> 权限<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="roles">角色信息</a>
+                    </li>
+                    <li>
+                        <a href="apis">API信息</a>
                     </li>
                 </ul>
             </li>

@@ -116,7 +116,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 
                             <hr>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger btn-md c-btn-uppercase c-btn-bold c-btn-square"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
+                                <button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
                             </div>
                         </form>
 					</div>

@@ -140,9 +140,9 @@ function GetShopInfo(){
 
                 if(response.data.shopState !== 0) {
                     if($.cookie('uid') && $.cookie('uid') != '') {
-                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     } else {
-                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg btn-danger c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     }
                 }
 

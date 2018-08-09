@@ -67,7 +67,7 @@ $(document).ready(function(){
                         $('#img_'+($.images.length + i)).find('.position_'+($.images.length + i)).attr('selected','selected');
                     });
                 } else {
-                    interpretBusinessCode(response.code);
+                    interpretBusinessCode(response.customerMessage);
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -204,7 +204,7 @@ function GetShopInfo(){
                 }
                 
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });
@@ -256,7 +256,7 @@ function SaveShopInfo(){
                 }
                 window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';              
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });    
@@ -282,7 +282,7 @@ function caching() {
                 }
                 window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });    
@@ -310,7 +310,7 @@ function lockShop(code){
                 window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
                 $('#buttons center').prepend('<button class="btn btn-success" id="unlock" onClick=\'unlockShop("'+code+'");\'><i class="fa fa-unlock" aria-hidden="true"> </i> 解锁</button>');
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });    
@@ -338,7 +338,7 @@ function unlockShop(code){
                 window.location.href = 'shop?id='+getURLParameter('id')+'&s=update-succeed';
                 $('#buttons center').prepend('<button class="btn btn-danger" id="lock" onClick=\'lockShop("'+code+'");\'><i class="fa fa-lock" aria-hidden="true"> </i> 锁定</button>');
             } else {
-                interpretBusinessCode(response.code);
+                interpretBusinessCode(response.customerMessage);
             }
         }
     });    

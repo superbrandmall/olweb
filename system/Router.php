@@ -61,8 +61,17 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         'admin/users' => array(
             'url' => 'users.php'
         ),
-        'admin/user' => array(
-            'url' => 'user.php'
+        'admin/add-admin' => array(
+            'url' => 'add_admin.php'
+        ),
+        'admin/roles' => array(
+            'url' => 'roles.php'
+        ),
+        'admin/add-role' => array(
+            'url' => 'add_role.php'
+        ),
+        'admin/apis' => array(
+            'url' => 'apis.php'
         ),
         'admin/logout' => array(
             'url' => 'logout.php'
@@ -76,7 +85,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
     }
 
     $session_required = array('login.php','default.php','merchant.php','merchants.php','brands.php','brand.php','malls.php','mall.php','buildings.php','building.php',
-        'floors.php','floor.php','shops.php','shop.php','bids.php','bid.php','sync_hd.php','users.php','user.php');
+        'floors.php','floor.php','shops.php','shop.php','bids.php','bid.php','sync_hd.php','users.php','add_admin.php','roles.php','add_role.php','apis.php');
     if (in_array($page, $session_required)) {
         include_once 'models/admin/Session.class.php';
         $session = new Session();
