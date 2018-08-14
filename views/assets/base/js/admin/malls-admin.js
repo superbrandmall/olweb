@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if(getURLParameter('page') && getURLParameter('page') >= 1){
+   if(getURLParameter('page') && getURLParameter('page') >= 1){
         ShowShops(getURLParameter('page'),50);
     } else {
         ShowMalls(1,50);
@@ -7,14 +7,10 @@ $(document).ready(function(){
 });
 
 function ShowMalls(p,c){
-    var map = {
-        mall: {
-            page: p,
-            pageCount: c
-        }
-    };
+    var pg = p-1;
+    var map = {};
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-admin/api/mall/findAll",
+        url: $.api.baseNew+"/onlineleasing-admin/api/mall/findAll?size="+c+"&page="+pg+"&sort=code,asc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -33,13 +29,15 @@ function ShowMalls(p,c){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                $('table tbody').html('');
+                $('.pagination').html('');
                 
                 if(response.data.content.length > 0) {
                     var pages =  response.data.totalPages;
                     generatePages(p, pages);
                     
                     $.each(response.data.content, function(i,v){
-                        $('table tbody').append('<tr onclick=\'redirect("'+v.mallCode+'");\' style="cursor: pointer;"><td><img src="/'+v.img+'" width="100" /></td><td>'+v.position+'</td><td>'+v.mallName+'</td><td>'+v.location+'</td><td>'+v.phone+'</td></tr>');
+                        $('table tbody').append('<tr onclick=\'redirect("'+v.mallCode+'");\' style="cursor: pointer;"><td>'+v.mallCode+'</td><td><img src="/'+v.img+'" width="100" /></td><td>'+v.position+'</td><td>'+v.mallName+'</td><td>'+v.location+'</td><td>'+v.phone+'</td></tr>');
                     });
                     
                     if(p == pages){

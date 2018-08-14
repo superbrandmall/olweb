@@ -140,77 +140,77 @@
 				<!-- Begin: Owlcarousel -->
 				<div class="owl-carousel owl-theme c-theme owl-bordered1">
 					<div class="item">
-						<img src="views/assets/base/img/content/client-logos/chj-jewellery.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/chow-tai-fook.jpg" alt=""/>
+                        <a href="shop?id=OLSHOP180507000059"><img src="views/assets/base/img/content/client-logos/chj-jewellery.jpg" alt="潮宏基"/></a>
+                        <a href="shop?id=OLSHOP180507000061"><img src="views/assets/base/img/content/client-logos/chow-tai-fook.jpg" alt="周大福"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/enzo.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/gelle-freres.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000057"><img src="views/assets/base/img/content/client-logos/enzo.jpg" alt="ENZO"/></a>
+                        <a href="shop?id=OLSHOP180507000513"><img src="views/assets/base/img/content/client-logos/hokkaido.jpg" alt="蟹的冈田屋"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/moco.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/innisfree.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000170"><img src="views/assets/base/img/content/client-logos/moco.jpg" alt="MO&Co."/></a>
+                        <a href="shop?id=OLSHOP180507000031"><img src="views/assets/base/img/content/client-logos/innisfree.jpg" alt="innisfree"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/toysrus.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/heytea.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000387"><img src="views/assets/base/img/content/client-logos/toysrus.jpg" alt="玩具反斗城"/></a>
+                        <a href="shop?id=OLSHOP180507000524"><img src="views/assets/base/img/content/client-logos/heytea.jpg" alt="喜茶"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/new-balance.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000129"><img src="views/assets/base/img/content/client-logos/new-balance.jpg" alt="New Balance"/></a>
+                        <a href="shop?id=OLSHOP180507000577"><img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt="汤姆熊欢乐世界"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/urban-revivo.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/banila.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000170"><img src="views/assets/base/img/content/client-logos/urban-revivo.jpg" alt="URBAN REVIVO"/></a>
+                        <a href="shop?id=OLSHOP180507000086"><img src="views/assets/base/img/content/client-logos/banila.jpg" alt="banilaco"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/xiaohuige.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/stellar-international.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000658"><img src="views/assets/base/img/content/client-logos/xiaohuige.jpg" alt="金牌小辉哥火锅"/></a>
+                        <a href="shop?id=OLSHOP180507000662"><img src="views/assets/base/img/content/client-logos/stellar-international.jpg" alt="星美正大影城"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/zara.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/teenie-weenie.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000066"><img src="views/assets/base/img/content/client-logos/zara.jpg" alt="ZARA"/></a>
+                        <a href="shop?id=OLSHOP180507000179"><img src="views/assets/base/img/content/client-logos/teenie-weenie.jpg" alt="Teenie Weenie"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/winhouse.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000127"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt="Adidas Originals"/></a>
+                        <a href="shop?id=OLSHOP180507000078"><img src="views/assets/base/img/content/client-logos/winhouse.jpg" alt="winhouse"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/hm.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/lacesar.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000064"><img src="views/assets/base/img/content/client-logos/hm.jpg" alt="H&M"/></a>
+                        <a href="shop?id=OLSHOP180507000165"><img src="views/assets/base/img/content/client-logos/lacesar.jpg" alt="乐凯撒比萨"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/element-fresh.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000163"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt="耶里夏丽"/></a>
+                        <a href="shop?id=OLSHOP180507000053"><img src="views/assets/base/img/content/client-logos/element-fresh.jpg" alt="Element Fresh"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/pandora.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/ca.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000079"><img src="views/assets/base/img/content/client-logos/pandora.jpg" alt="Pandora"/></a>
+                        <a href="shop?id=OLSHOP180507000051"><img src="views/assets/base/img/content/client-logos/ca.jpg" alt="C&A"/></a>
 					</div>
                     
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/skechers.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000067"><img src="views/assets/base/img/content/client-logos/skechers.jpg" alt="SKECHERS"/></a>
+                        <a href="shop?id=OLSHOP180507000028"><img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt="Swarovski"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/shiseido.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/folli-follie.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000071"><img src="views/assets/base/img/content/client-logos/shiseido.jpg" alt="Shiseido"/></a>
+                        <a href="shop?id=OLSHOP180507000089"><img src="views/assets/base/img/content/client-logos/folli-follie.jpg" alt="Folli Follie"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/g-star.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/gucci.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000636"><img src="views/assets/base/img/content/client-logos/wills.jpg" alt=""/></a>
+                        <a href="shop?id=OLSHOP180507000087"><img src="views/assets/base/img/content/client-logos/gucci.jpg" alt="Gucci"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/calvin-klein.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/haagen-dazs.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000141"><img src="views/assets/base/img/content/client-logos/calvin-klein.jpg" alt="Calvin Klein Underwear"/></a>
+                        <a href="shop?id=OLSHOP180507000088"><img src="views/assets/base/img/content/client-logos/haagen-dazs.jpg" alt="Hagan Dazs"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/laneige.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/mellowe.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000042"><img src="views/assets/base/img/content/client-logos/laneige.jpg" alt="LANEIGE"/></a>
+                        <a href="shop?id=OLSHOP180507000085"><img src="views/assets/base/img/content/client-logos/mellowe.jpg" alt="麦隆咖啡"/></a>
 					</div>
                     <div class="item">
-						<img src="views/assets/base/img/content/client-logos/wang-steak.jpg" alt=""/>
-                        <img src="views/assets/base/img/content/client-logos/bloves.jpg" alt=""/>
+						<a href="shop?id=OLSHOP180507000659"><img src="views/assets/base/img/content/client-logos/wang-steak.jpg" alt="王品台塑牛排"/></a>
+                        <a href="shop?id=OLSHOP180507000044"><img src="views/assets/base/img/content/client-logos/bloves.jpg" alt="BLOVES"/></a>
 					</div>
 				</div>
 				<!-- End-->

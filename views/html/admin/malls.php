@@ -23,6 +23,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
+                                        <th>项目编号</th>
                                         <th>项目图片</th>
                                         <th>项目顺序</th>
                                         <th>项目名称</th>
