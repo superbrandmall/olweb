@@ -54,10 +54,8 @@ function GetMallInfo(){
                 $('#location').val(mall.location || '-');
                 $('#location_eng').val(mall.locationEng || '-');
                 $('#phone').val(mall.phone || '-');
-                $('#position').val(mall.position);
                 $('#desc').val(mall.description || '-');
                 $('#desc_eng').val(mall.descriptionEng || '-');
-                $('#hd_code').val(mall.hdCode || '-');
                 
                 if(mall.traffic != null && mall.traffic != ''){
                     var traffics = mall.traffic;
@@ -110,7 +108,6 @@ function SaveMallInfo(){
     $.mall.mallNameEng = $('#name_eng').val();
     $.mall.locationEng = $('#location_eng').val();
     $.mall.phone = $('#phone').val();
-    $.mall.position = $('#position').val();
     $.mall.description = $('#desc').val();
     $.mall.descriptionEng = $('#desc_eng').val();
     var traffic = [];

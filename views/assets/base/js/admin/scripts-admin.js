@@ -149,7 +149,7 @@ function generatePages(currentPage, LastPage) {
     if (LastPage <= 6) {
         for(var i=1;i<=LastPage;i++) {
             if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'">'+i+'</a></li>';
+                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
             } else {
                 pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
             }
@@ -163,7 +163,7 @@ function generatePages(currentPage, LastPage) {
         }
         for(var i=1;i<=3;i++) {
             if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'">'+i+'</a></li>';
+                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
             } else {
                 pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
             }
@@ -171,7 +171,7 @@ function generatePages(currentPage, LastPage) {
         pages += '<li class="c-space"><span>...</span></li>';
         for(var i=LastPage-2;i<=LastPage;i++) {
             if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'">'+i+'</a></li>';
+                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
             } else {
                 pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
             }

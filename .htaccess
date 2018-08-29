@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^/(cpm|cpm/.*)$  
+RewriteCond %{REQUEST_URI} !^/(supercard|supercard/.*)$  
 RewriteRule ^([a-z0-9\/-]+)?$ index.php?p=$1
 ErrorDocument 403 /403.htm
 </IfModule>

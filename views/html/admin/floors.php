@@ -24,6 +24,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                 <thead>
                                     <tr>
                                         <th>楼层编码</th>
+                                        <th>建筑编码</th>
                                         <th>楼层名</th>
                                         <th>描述</th>
                                         <th>建筑面积</th>

@@ -1,6 +1,6 @@
 $(document).ready(function(){
    if(getURLParameter('page') && getURLParameter('page') >= 1){
-        ShowShops(getURLParameter('page'),50);
+        ShowMalls(getURLParameter('page'),50);
     } else {
         ShowMalls(1,50);
     }

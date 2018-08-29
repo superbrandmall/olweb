@@ -1,20 +1,31 @@
 $(document).ready(function(){
-    GetFloorInfo();    
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "update-succeed":
+                $('#ui_succeed').show().delay(2000).hide(0);
+                $('html, body').animate({
+                    scrollTop: $('#ui_succeed').offset().top
+                }, 0);
+                break;
+            default:
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/admin/"+refineOfferUrl() );
+        },1000);
+    }
+    
+    GetFloorInfo();  
+    
+    $('#submit').click(function(){
+        SaveFloorInfo();
+    });
 });
 
 function GetFloorInfo(){
-    var map = {
-        floor : {
-            code: getURLParameter('id')
-        }
-    };
     $.ajax({
-        url: $.api.base+"/floor/findByCode",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseNew+"/onlineleasing-admin/api/floor/"+getURLParameter('id')+"",
+        type: "GET",
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -29,7 +40,7 @@ function GetFloorInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                var floor = response.data.floor;
+                var floor = response.data;
                 $('#code').val(floor.code || '-');
                 $('#floor').val(floor.floorName || '-');
                 $('#building').val(floor.buildingCode || '-');

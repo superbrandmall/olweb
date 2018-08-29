@@ -44,16 +44,22 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                                     <input class="form-control" id="name_eng">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>建筑面积</label>
                                     <input class="form-control" id="gross_area" disabled>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label>租赁面积</label>
                                     <input class="form-control" id="leasing_area" disabled>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>联系电话</label>
+                                    <input class="form-control" id="phone">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -66,18 +72,6 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                                 <div class="form-group">
                                     <label>英文地址</label>
                                     <input class="form-control" id="location_eng">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>热线电话</label>
-                                    <input class="form-control" id="phone">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>顺序(从0开始)</label>
-                                    <input class="form-control" id="position">
                                 </div>
                             </div>
                             <div class="col-sm-6">
