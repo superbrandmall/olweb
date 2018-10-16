@@ -14,7 +14,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/l
                     <div class="c-body" style="padding-top: 20px;">
                         <div class="c-content-title-1">
                             <h4 class="c-font-bold"><i class="icon-user"></i> <?= $lang['login_not_registered_user'] ?>?</h4><br>
-                            <div class="c-line-left">
+                            <div class="c-line-left c-theme-bg">
                             </div>
                             <p><?= $lang['login_after_login'] ?></p>
                             <a href="javascript:;" data-toggle="modal" data-target="#step1" data-dismiss="modal" class="btn c-theme-btn c-btn-uppercase c-btn-bold c-btn-slim c-btn-border-2x c-btn-square c-btn-signup"><?= $lang['login_register_now'] ?></a>

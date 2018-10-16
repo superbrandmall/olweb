@@ -76,9 +76,9 @@
             <div class="c-navbar-wrapper clearfix">
                 <div class="c-brand c-pull-left">
                     <a href="/" class="c-logo">
-                        <img src="views/assets/base/img/layout/logos/sbm_logo.png" alt="正大" height="40" class="c-desktop-logo">
-                        <img src="views/assets/base/img/layout/logos/sbm_logo.png" alt="正大" height="40" class="c-desktop-logo-inverse">
-                        <img src="views/assets/base/img/layout/logos/sbm_logo.png" alt="正大" height="25" class="c-mobile-logo">
+                        <img src="views/assets/base/img/layout/logos/logo.png" alt="正大" height="40" class="c-desktop-logo">
+                        <img src="views/assets/base/img/layout/logos/logo.png" alt="正大" height="40" class="c-desktop-logo-inverse">
+                        <img src="views/assets/base/img/layout/logos/logo.png" alt="正大" height="25" class="c-mobile-logo">
                     </a>
                     <button class="c-hor-nav-toggler" type="button" data-target=".c-mega-menu">
                         <span class="c-line"></span>
@@ -92,7 +92,7 @@
                     <li class="<?php if (!isset($_GET['p']) || $_GET['p'] == 'home' || $_GET['p'] == '') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="/" class="c-link"><i class="fa fa-home"></i> <?= $lang['nav_home'] ?></a>
                     </li>
-                    <li class="c-menu-type-classic">
+                    <li class="<?php if (isset($_GET['p']) && substr($_GET['p'],0,6) == 'olmall') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                         <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                     </li>
@@ -140,9 +140,9 @@ if(!isset($_SESSION['user_login']) || $_SESSION['user_login'] == "") {
     include ('register.php');
     include ('login.php');
     // END: 注册页/登录页
+} else {
+    echo '<div class="alert alert-success login-succeed" role="alert">';
+    echo $lang['login_succeed'].$_SESSION['user_login'];
+    echo '</div>';
 }
 ?>
-
-<div class="alert alert-success login-succeed" role="alert">
-    <?= $lang['login_succeed'].$_SESSION['user_login'] ?>
-</div>

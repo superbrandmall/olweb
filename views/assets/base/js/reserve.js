@@ -8,6 +8,8 @@ var date = d.getFullYear() + '-' +
 var modal = [];
 modal = $.parseJSON(sessionStorage.getItem("modalities"));
 
+$.leaseTerm = 1;
+
 $(document).ready(function(){
     $('#international_verify').val('');
     
@@ -23,10 +25,12 @@ $(document).ready(function(){
         'startDate': '+1d'
     });
     
+    $('#length').html('<option value="">'+$.lang.choose+'</option>');
+    
     prepareReservation1();
     
     $('#reserve_date').datepicker('setDate',IncrDate(date));
-    
+
     if($.cookie('lang') === 'en-us'){
         var reserve_length_required = "Please choose a lease term";
         var reserve_start_date_required = "Moving in date can't be empty";
@@ -104,12 +108,19 @@ $(document).ready(function(){
                 key = $.api.mobileVC;
             }
             
+            var endDate;
+            if($.leaseTerm == 1){
+                endDate = IncrYears($('#start_date').val(),$('#length').val());
+            } else {
+                endDate = IncrMonths($('#start_date').val(),$('#length').val());
+            }
+            
             var map = {
                 brandCode: "",
                 brandModality: $('#brand_modality').val(),
                 brandName: $("#brand").val(),
                 email: $('#email').text(),
-                endDate: IncrYears($('#start_date').val(),$('#length').val()),
+                endDate: endDate,
                 merchantCode: "",
                 merchantName: $('#company_name').text(),
                 mobile: $('#mobile').text(),
@@ -199,6 +210,17 @@ function prepareReservation1(){
                         return false;
                     }
                 });
+                
+                if(response.data.subType == '正柜'){
+                    for(var i=1; i<=8; i++){
+                        $('#length').append('<option value="'+i+'">'+i+$.lang.lengthYear+'</option>');
+                    }
+                } else {
+                    $.leaseTerm = 2;
+                    for(var i=1; i<=12; i++){
+                        $('#length').append('<option value="'+i+'">'+i+$.lang.lengthMonth+'</option>');
+                    }
+                }
                 
                 $('#shop_image').attr('src',response.data.firstImage || '#');
                 $('#unit').text(response.data.unit || '-');

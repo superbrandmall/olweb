@@ -57,25 +57,25 @@
 		var slider = $('.c-layout-revo-slider .tp-banner');
 	    var cont = $('.c-layout-revo-slider .tp-banner-container');
 	    var api = slider.show().revolution({
-	        delay: 1000,    
-	        startwidth:1170,
-	        startheight: 620,
+	        delay: 0,    
+	        startwidth: 910,
+	        startheight: 520,
 	        navigationType: "hide",
-	        navigationArrows: "solo",
+	        navigationArrows: "none",
 	        touchenabled: "on",
-	        onHoverStop: "on",
+	        onHoverStop: "off",
 	        keyboardNavigation: "off",
 	        navigationStyle: "circle",
 	        navigationHAlign: "center",
 	        navigationVAlign: "bottom",
 	        spinner: "spinner2",
-	        fullScreen: "on",   
-	        fullScreenAlignForce:"on",
+	        fullScreen: "off",   
+	        fullScreenAlignForce: "on",
 	        fullScreenOffsetContainer: (App.getViewPort().width < App.getBreakpoint('md') ? '.c-layout-header' : ''),
 	        shadow: 0,
 	        fullWidth: "off",
 	        forceFullWidth: "off",
-	        hideTimerBar:"on",
+	        hideTimerBar: "on",
 	        hideThumbsOnMobile: "on",
 	        hideNavDelayOnMobile: 1500,
 	        hideBulletsOnMobile: "on",
@@ -88,6 +88,22 @@
 	            $('.c-singup-form').fadeIn(); 
 	        }, 1500);
 	    });
+
+        if($('.tp-bgimg').length >0){
+            var element = document.getElementsByClassName('tp-bgimg')[0];
+            element.addEventListener('transitionend', handle, false);
+        }
+        
+        function handle(){
+            change();
+        }
+        function change() {
+            if($('.tp-bgimg').hasClass('zoom')) {
+                $('.tp-bgimg').removeClass('zoom');
+            } else {
+                $('.tp-bgimg').addClass('zoom');
+            }            
+        }
 	});
 	</script>
 <!-- END: THEME SCRIPTS -->

@@ -6,6 +6,7 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
     
 $.vals = [];
+$.leaseTerm = 2;
 
 $(document).ready(function(){
     $('#international_verify').val('');
@@ -23,21 +24,29 @@ $(document).ready(function(){
         'startView': "months", 
         'minViewMode': "months"
     });
-    
+        
     if(sessionStorage.getItem("searches") && sessionStorage.getItem("searches") != null && sessionStorage.getItem("searches") != '') {
         ShowResults($.parseJSON(sessionStorage.getItem("searches")),'');
     } else {
         ShowSearchInit();
     }
     
+    listSelectOptions();
+    
+    $('#subtype').change(function(){
+        listSelectOptions();
+    });
+    
     ///////////////////// Validate search form /////////////////////////
     if($.cookie('lang') === 'en-us'){
         var requirement_min_area_LessThanEqual = "Minimum leasable area mustn't be greater than maximum leasable area";
+        var requirement_subtype_required = "Please choose a subtype";
         var requirement_length_required = "Please choose a lease term";
         var requirement_start_required = "Moving in date can't be empty";
         var requirement_start_date = "Please give a correct date";
     } else {
         var requirement_min_area_LessThanEqual = "最小租赁面积不得大于最大租赁面积";
+        var requirement_subtype_required = "请选择店铺类型";
         var requirement_length_required = "请选择租约年限";
         var requirement_start_required = "预计入驻日期为必填项";
         var requirement_start_date = "请输入有效日期";
@@ -47,6 +56,9 @@ $(document).ready(function(){
         rules: {
             min_area: {
                 lessThanEqual: "#max_area"
+            },
+            subtype: {
+                required: true
             },
             length: {
                 required: true
@@ -59,6 +71,9 @@ $(document).ready(function(){
         messages: {
             min_area: {
                 lessThanEqual: requirement_min_area_LessThanEqual
+            },
+            subtype: {
+                required: requirement_subtype_required
             },
             length: {
                 required: requirement_length_required
@@ -74,6 +89,7 @@ $(document).ready(function(){
         submitHandler: function() {
             $.cookie('search-min-area',$("#min_area").val());
             $.cookie('search-max-area',$("#max_area").val());
+            $.cookie('search-sub-type',$("#subtype").val());
             $.cookie('search-rental-length',$("#length").val());
             $.cookie('search-start-date',$("#start").val());
                 
@@ -105,8 +121,8 @@ $(document).ready(function(){
         var requirement_reserve_date_date = "Please give a correct date";
         var requirement_international_required = "Please choose a verification method";
         var requirement_international_verify_required = "Verification code can't be empty";
-        var requirement_international_verify_rangelength = "Verification code must be {0} digits";
-        var requirement_international_verify_numChar = "Verification code comprises letters and digits";
+        var requirement_international_verify_rangelength = "Verification code must be {0} digits or letters";
+        var requirement_international_verify_numChar = "Verification code comprises digits or letters";
     } else {
         var requirement_rental_length_required = "请选择租约年限";
         var requirement_start_date_required = "预计入驻日期为必填项";
@@ -115,8 +131,8 @@ $(document).ready(function(){
         var requirement_reserve_date_date = "请输入有效日期";
         var requirement_international_required = "请选择验证方式";
         var requirement_international_verify_required = "验证码为必填项";
-        var requirement_international_verify_rangelength = "验证码须为{0}位及{0}位以上字母和数字";
-        var requirement_international_verify_numChar = "验证码为字母和数字组合";
+        var requirement_international_verify_rangelength = "验证码须为{0}位及{0}位以上数字或字母";
+        var requirement_international_verify_numChar = "验证码为数字或字母组合";
     }
     $("#reserve_form").validate({
         rules: {
@@ -171,12 +187,23 @@ $(document).ready(function(){
                 key = $.api.mobileVC;
             }
             
+            var endDate;
+            if($.leaseTerm == 1){
+                endDate = IncrYears($('#start_date').val()+'-01',$('#rental_length').val());
+                
+                $('#reserve_items').hide();
+            } else {
+                endDate = IncrMonths($('#start_date').val()+'-01',$('#rental_length').val());
+                
+                $('#reserve_items').show();
+            }
+            
             var map = {
                 brandCode: "",
                 brandModality: $('#brand_modality_3_code').val(),
                 brandName: $("#brand_name").val(),
                 email: $('#email').text(),
-                endDate: IncrYears($('#start_date').val()+'-01',$('#rental_length').val()),
+                endDate: endDate,
                 merchantCode: "",
                 merchantName: $('#company_name').text(),
                 mobile: $('#mobile').text(),
@@ -235,6 +262,7 @@ function ShowSearchInit(){
         brandCode: '',
         brandName: '',
         brandModality: '',
+        subType: 'kiosk',
         minArea: 0,
         maxArea: 3000,
         startDate: IncrMonth(date),
@@ -275,15 +303,28 @@ function ShowSearch(){
     $('#requirement_form input:checkbox:checked').each(function(i,elem){
         mall.push($(this).val());
     });
+    
+    var endDate;
+    if($.leaseTerm == 1){
+        endDate = IncrYears($("#start").val()+'-01',$('#length').val());
+        
+        $('#reserve_items').hide();
+    } else {
+        endDate = IncrMonths($("#start").val()+'-01',$('#length').val());
+        
+        $('#reserve_items').show();
+    }
+            
     var map = {
         userCode: $.cookie('uid'),
         brandCode: '',
         brandName: $("#brand").text(),
         brandModality: $("#brand_modality_3_code").val(),
+        subType: $("#subtype").val(),
         minArea: $("#min_area").val(),
         maxArea: $("#max_area").val(),
         startDate: $("#start").val()+'-01',
-        endDate: IncrYears($("#start").val()+'-01',$('#length').val()),
+        endDate: endDate,
         mallCodes: mall,
         max: 9,
         rentalLength: $('#length').val()
@@ -402,55 +443,64 @@ function ShowResults(result,searchCode) {
 </div>\n\
 <div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\
 <div class="c-position"><div style="float: left;margin-right: 5px">'+$.lang.pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
-<div class="c-position" style="margin-top: 10px;"><span class="c-btn btn-no-focus c-btn-header btn btn-xs c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+$.lang.yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
+<div class="c-position" style="margin-top: 10px;"><span class="c-btn btn-no-focus c-btn-header btn btn-xs c-theme-btn c-btn-circle c-btn-uppercase c-btn-sbold"><label class="checkbox-inline" style="font-size: 14px; font-weight: 400;"><input id="reserve_'+v.code+'" name="reservation[]" value="'+v.code+'" type="checkbox"> '+$.lang.yuyue+' <i class="icon-clock"></i></label></span></div></div></div>\n\
 </div></div>');
     });
+    
+    if($.leaseTerm == 2){
+        $('#reserve_items').fadeIn().click(function(){
+            if($.cookie('uid') && $.cookie('uid') != '') {
+                $.vals = [];
 
-    $('#reserve_items').fadeIn().click(function(){
-        if($.cookie('uid') && $.cookie('uid') != '') {
-            $.vals = [];
-        
-            $('input:checkbox[name="reservation[]"]').each(function() {
-                if(this.checked) {
-                    $.vals.push(this.value);
+                $('input:checkbox[name="reservation[]"]').each(function() {
+                    if(this.checked) {
+                        $.vals.push(this.value);
+                    }
+                });
+
+                $('#reserve-form').modal('show');
+                $('#brand_name').val($('#brand').text());
+                $('#leasing_area').val($('#min_area').val()+'-'+$('#max_area').val());
+                $('#rental_length').val($('#length').val());
+                if($.leaseTerm == 1){
+                    $('#rental_length').next('span').text($.lang.lengthYear);
+                } else {
+                    $('#rental_length').next('span').text($.lang.lengthMonth);
                 }
-            });
 
-            $('#reserve-form').modal('show');
-            $('#brand_name').val($('#brand').text());
-            $('#leasing_area').val($('#min_area').val()+'-'+$('#max_area').val());
-            $('#rental_length').val($('#length').val());
-            $('#start_date').val($('#start').val());
 
-            if($.vals.length > 0){
-                $('#reserve_tag').text($.lang.kanpu);
+                $('#start_date').val($('#start').val());
+
+                if($.vals.length > 0){
+                    $('#reserve_tag').text($.lang.kanpu);
+                } else {
+                    $('#reserve_tag').text($.lang.qiatan);
+                }
+
+                var d = new Date();
+                var month = d.getMonth()+1;
+                var day = d.getDate();
+                var date = d.getFullYear() + '-' +
+                    (month<10 ? '0' : '') + month + '-' +
+                    (day<10 ? '0' : '') + day;
+
+                if($.cookie('lang') === 'en-us'){
+                    var reCal = "en-US";
+                } else {
+                    var reCal = "zh-CN";
+                }
+                $('#reserve_date').datepicker({
+                    'language': reCal,
+                    'format': 'yyyy-mm-dd',
+                    'startDate': '+1d'
+                });
+
+                $('#reserve_date').datepicker('setDate',IncrDate(date));
             } else {
-                $('#reserve_tag').text($.lang.qiatan);
+                $('#login-form').modal('show');
             }
-
-            var d = new Date();
-            var month = d.getMonth()+1;
-            var day = d.getDate();
-            var date = d.getFullYear() + '-' +
-                (month<10 ? '0' : '') + month + '-' +
-                (day<10 ? '0' : '') + day;
-
-            if($.cookie('lang') === 'en-us'){
-                var reCal = "en-US";
-            } else {
-                var reCal = "zh-CN";
-            }
-            $('#reserve_date').datepicker({
-                'language': reCal,
-                'format': 'yyyy-mm-dd',
-                'startDate': '+1d'
-            });
-
-            $('#reserve_date').datepicker('setDate',IncrDate(date));
-        } else {
-            $('#login-form').modal('show');
-        }
-    });
+        });
+    }
 
     var size_li = $(".c-content-list > div").size();
     var x=9;
@@ -527,8 +577,11 @@ function GetHistories(p){
                 $('#requirement_form')[0].reset();
                 $('input:checkbox').attr('checked',false);
                 $("#min_area").val($.cookie('search-min-area') || 0);
+                $("#subtype").val($.cookie('search-sub-type') || 'kiosk');
                 $("#max_area").val($.cookie('search-max-area') || 3000);
                 $("#start").val($.cookie('search-start-date') || '');
+                
+                listSelectOptions();
                 $("#length").val($.cookie('search-rental-length') || '');
 
                 if($.cookie('search-malls') && $.cookie('search-malls') != '' && $.cookie('search-malls') != null) {
@@ -619,6 +672,25 @@ function showMyInfo(){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function listSelectOptions() {
+    $('#length').html('<option value="">'+$.lang.choose+'</option>');
+    if($('#subtype').val() == '正柜'){
+        $.leaseTerm = 1;
+        for(var i=1; i<=8; i++){
+            $('#length').append('<option value="'+i+'">'+i+$.lang.lengthYear+'</option>');
+        }
+        
+        $('#reserve_items').hide();
+    } else {
+        $.leaseTerm = 2;
+        for(var i=1; i<=12; i++){
+            $('#length').append('<option value="'+i+'">'+i+$.lang.lengthMonth+'</option>');
+        }
+        
+        $('#reserve_items').show();
+    }
 }
 
 /*function GetBrandModality0(mod) {

@@ -19,8 +19,8 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 
 <div style="margin: 50px 50px 20px; color: #6d6d73;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
-    <span style="margin-left: 15px; background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_awaiting_rent'] ?>
-    <span style="margin-left: 15px; background-color: #f4a018; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
+    <span style="margin-left: 15px; background-color: #c9ae89; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_awaiting_rent'] ?>
+    <span style="margin-left: 15px; background-color: #E3E3E3; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
     <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
     <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
     <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
@@ -97,7 +97,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                 if(response.code === 'C0') {
                     $.each(response.data, function(i,v){
                         if(v.state === 1 && v.coords != null && v.coords != ''){
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.unit+'" data-full="'+v.shopState+'" name="'+(v.brandName || '')+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.unit+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
                         }
                     });
 
@@ -114,18 +114,30 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
     
     function drawShops(){
         var areas = $.map($('#Map_'+<?= $i ?>+'F area'),function(el) {
-            if($(el).attr('data-full') != 0){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $.lang.forRent,
-                    stroke: false,
-                    selected: true 
-                };
+            if($.cookie('merchantmodality') && $.cookie('merchantmodality') != null && $.cookie('merchantmodality') != '') {
+                var merchantmodality = $.cookie('merchantmodality').substr(0,4);
+                var datamodality;
+                $(el).attr('data-modality') == null ? datamodality = null : datamodality = $(el).attr('data-modality').substr(0,4);
+                
+                if($(el).attr('data-full') != 0 && merchantmodality == datamodality){
+                    return { 
+                        key: $(el).attr('data-key'),
+                        toolTip: $.lang.forRent,
+                        stroke: false,
+                        selected: true 
+                    };
+                } else {
+                    return { 
+                        key: $(el).attr('data-key'),
+                        toolTip: $(el).attr('name'),
+                        fillColor: 'cdcdcd'
+                    };
+                }
             } else {
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    fillColor: 'f4a018'
+                    fillColor: 'cdcdcd'
                 };
             }
         });
@@ -134,7 +146,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
         var yOffset;
 
         $('#floor_map_F').find('img').mapster({
-            fillColor: 'c34343',
+            fillColor: 'c9ae89',
             fillOpacity: 0.8,
             strokeColor: 'ffd62c',
             strokeWidth: 0,

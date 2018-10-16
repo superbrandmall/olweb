@@ -96,7 +96,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                 </li>
                                 <li>
                                     <?= $lang['reserve_planned_moving_in_date'] ?>: 
-                                    <input type="text" id="start_date" name="start_date" class="form-control c-square c-theme input-sm" placeholder="<?= $lang['reserve_planned_moving_in_date'] ?>" data-plugin="datepicker" style="display: inline; width: auto;" readonly>
+                                    <input type="text" id="start_date" name="start_date" class="form-control c-square c-theme input-sm" placeholder="<?= $lang['reserve_planned_moving_in_date'] ?>" data-plugin="datepicker" style="display: inline; width: auto;">
                                     <div id="errorcontainer-start_date" class="errorDiv"></div>
                                 </li>
                                 <li>
@@ -116,7 +116,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 
                             <hr>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
+                                <button type="submit" class="btn btn-md c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
                             </div>
                         </form>
 					</div>

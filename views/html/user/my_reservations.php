@@ -31,7 +31,7 @@
     <!-- BEGIN: 我的预约 -->
 	<div class="c-content-box c-size-md c-no-padding" style="margin-top: 20px;">
 		<div class="container">
-            <div class="alert alert-info" style="display: block;" role="alert"><i class="icon-info"></i> <?= $lang['reservation_following_records'] ?></div>
+            <div class="alert alert-theme" style="display: block;" role="alert"><i class="icon-info"></i> <?= $lang['reservation_following_records'] ?></div>
             <div class="col-md-12">
                 <div class="c-content-accordion-1 c-accordion-grey">
                     <div class="panel-group" id="reserve_lists" role="tablist"></div>

@@ -42,7 +42,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 			<div class="row">
 				<div class="col-md-8">
 					<div class="c-content-media-2-slider" data-slider="owl" data-single-item="true" data-auto-play="4000">
-						<div class="c-content-label c-font-uppercase c-font-bold">
+						<div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
 							<?= $lang['event_event_picture'] ?>
 						</div>
 						<div class="owl-carousel owl-theme c-theme owl-single"></div>
@@ -79,7 +79,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 <div id="vr_video" class="col-md-6">
                     <div class="c-content-title-1">
                         <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['event_vr'] ?></h3>
-                        <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -88,7 +87,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 <div id="shop_location" class="col-md-6">
                     <div class="c-content-title-1">
                         <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['event_event_location'] ?></h3>
-                        <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div id="map" class="c-content-panel">
                         <div class="c-label" id="fmap">
@@ -104,7 +102,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 		<div class="container" id="other_imgs">
 			<div class="c-content-title-1">
 				<h3 class="c-font-uppercase c-center c-font-bold">参考附件</h3>
-				<div class="c-line-center c-theme-bg"></div>
 			</div>
         </div>
     </div>
@@ -113,7 +110,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
 		<div class="container">
             <div class="c-content-title-1">
                 <h3 class="c-font-uppercase c-center c-font-bold">工程条件</h3>
-                <div class="c-line-center"></div>
             </div>
             
             <div class="table-responsive" style="background-color: #fff;">
@@ -360,7 +356,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 <div class="col-md-6 col-md-offset-3">
                     <div class="c-content-title-1">
                         <h3 class="c-center c-font-uppercase c-font-bold" id="floor_name"><?= $lang['event_modality_shop_proportion'] ?></h3>
-                        <div class="c-line-center c-theme-bg"></div>
                     </div>
                     <div id="proportion"></div>
                 </div>

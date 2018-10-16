@@ -1,6 +1,8 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/register.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="views/assets/plugins/typeahead/typeahead.bundle.js"></script>'
+. '<script type="text/javascript" src="views/assets/base/js/register.js"></script>';
 ?>
+<link href="views/assets/plugins/typeahead/typeaheadjs.css" rel="stylesheet">
 
 <div class="modal fade c-content-login-form" id="step1" role="dialog" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">
@@ -12,13 +14,22 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 				<h3 class="c-font-24 c-font-sbold"><?= $lang['register_register'] ?></h3>
 				<form>
                     <div class="form-group">
-						<label for="contact_name_1" class="hide"><?= $lang['register_main_contact'] ?>*</label>
-						<input type="text" id="contact_name_1" name="contact_name_1" placeholder="<?= $lang['register_main_contact'] ?>*" required class="form-control input-lg c-square">
+                        <div class="input-group">
+                            <label for="contact_name_1" class="hide"><?= $lang['register_main_contact'] ?>*</label>
+                            <input type="text" id="contact_name_1" name="contact_name_1" placeholder="<?= $lang['register_main_contact'] ?>*" required class="form-control input-lg c-square">
+                            <span class="input-group-addon" style="background: none;border: none;padding: 2px;"> </span>
+                            <div style="position: relative;">
+                                <label for="uscc" class="hide"><?= $lang['register_uscc'] ?>*</label>
+                                <input type="text" id="uscc" name="uscc" placeholder="<?= $lang['register_uscc'] ?>*" required class="form-control input-lg c-square">
+                            </div>
+                        </div>
                         <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
-					</div><div class="form-group">
+                        <div id="errorcontainer-uscc" class="errorDiv"></div>
+                    </div>
+                    <div class="form-group">
                         <div class="input-group">
                             <label for="name" class="hide"><?= $lang['register_company_name'] ?>*</label>
-						<input type="text" id="name" name="name" placeholder="<?= $lang['register_company_name'] ?>*" required class="form-control input-lg c-square">
+                            <input type="text" id="name" name="name" placeholder="<?= $lang['register_company_name'] ?>*" required class="form-control input-lg c-square">
                             <span class="input-group-addon" style="background: none;border: none;padding: 2px;"> </span>
                             <div style="position: relative;">
                                 <label for="brand_name" class="hide"><?= $lang['register_brand_name'] ?>*</label>
@@ -56,18 +67,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 						</select>
                         <div id="errorcontainer-modality_3" class="errorDiv"></div>
 					</div>
-                    <div class="form-group">
-                        <label for="website" class="hide"><?= $lang['register_website_url'] ?></label>
-                        <input type="url" id="website" name="website" placeholder="<?= $lang['register_website_url'] ?>" class="form-control input-lg c-square">
-                        <div id="errorcontainer-website" class="errorDiv"></div>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
-                        <input type="hidden" id="hidden_file">
-                        <span><?= $lang['register_upload_company_profile'] ?></span>
-                        <input type="file" id="file" name="file" accept=".pdf">
-                        <div id="errorcontainer-file" class="errorDiv"></div>
-                    </div>
                     <div class="form-group">
                         <div class="input-group">
                             <label for="mobile" class="hide"><?= $lang['register_mobile'] ?>*</label>
@@ -112,7 +111,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 						<button type="submit" class="btn c-theme-btn btn-md c-btn-uppercase c-btn-bold c-btn-square c-btn-login"><?= $lang['register_finish_registration'] ?></button>
 						<a href="javascript:;" class="c-btn-forgot" data-toggle="modal" data-target="#login-form" data-dismiss="modal"><?= $lang['register_back_login'] ?></a>
 					</div>
-                    
+                    <input type="hidden" id="hidden_brand_code">
 				</form>
 			</div>
 		</div>

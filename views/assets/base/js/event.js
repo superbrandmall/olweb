@@ -140,9 +140,9 @@ function GetShopInfo(){
 
                 if(response.data.shopState !== 0) {
                     if($.cookie('uid') && $.cookie('uid') != '') {
-                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="reserve-event?sid='+getURLParameter('id')+'" class="btn btn-lg c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     } else {
-                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveEvent+'</a>').insertAfter(".c-content-list-1");
                     }
                 }
 
@@ -349,7 +349,7 @@ function getFloorInfo(mc,fn) {
                 var modalityName;
                 $.each(details, function(i,v){
                     modalityName = GetFloorModality(v.code);
-                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
+                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
                 });
                 $('#proportion').html(proportion);
             } else {

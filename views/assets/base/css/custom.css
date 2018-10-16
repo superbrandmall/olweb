@@ -94,6 +94,22 @@ div[id^="floor_map_"] .modal-dialog, #map .modal-dialog {
     background-color: #fff;
 }
 
+.tp-bgimg {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    transition: all 10s ease-in-out;
+    -moz-transition: all 10s ease-in-out;
+    -webkit-transition: all 10s ease-in-out;
+    -o-transition: all 10s ease-in-out;
+}
+
+.tp-bgimg.zoom {
+    -webkit-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);
+}
+
 /********** BEGIN BOT ********************/
 /*.botui-app-container {
     margin-top: 40px;

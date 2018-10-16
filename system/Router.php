@@ -101,9 +101,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         strtolower($shanghai_sbm) => array(
             'url' => 'shanghai_sbm.php'
         ),
-        strtolower($zz_tm) => array(
-            'url' => 'zhengzhou_tm.php'
-        ),
         strtolower($xh_tm) => array(
             'url' => 'xuhui_tm.php'
         ),

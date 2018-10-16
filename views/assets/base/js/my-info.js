@@ -15,7 +15,7 @@ $(document).ready(function(){
     getBrandModality0();
     
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/info/simple/"+$.cookie('uid')+"",
+        url: $.api.baseNew+"/onlineleasing-customer/api/v2/user/info/"+$.cookie('uid')+"",
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -41,19 +41,19 @@ $(document).ready(function(){
                 var mod = [];
                 mod = $.parseJSON(sessionStorage.getItem("modalities"));
                 $.each(mod, function(i,v) {
-                    if(v.code == response.data.modality.substr(0,2)) {
+                    if(v.code == response.data.brandModality.substr(0,2)) {
                         $('#modality_0').val(v.code);
                         getBrandModality1(v.code);
                         $.each(v.children, function(j,w) {
-                            if(w.code == response.data.modality.substr(0,4)) {
+                            if(w.code == response.data.brandModality.substr(0,4)) {
                                 $('#modality_1').val(w.code);
                                 getBrandModality2(w.code);
                                 $.each(w.children, function(k,x) {
-                                    if(x.code == response.data.modality.substr(0,6)) {
+                                    if(x.code == response.data.brandModality.substr(0,6)) {
                                         $('#modality_2').val(x.code);
                                         getBrandModality3(x.code);
                                         $.each(x.children, function(l,y) {
-                                            if(y.code == response.data.modality) {
+                                            if(y.code == response.data.brandModality) {
                                                 $('#modality_3').val(y.code);
                                             }
                                         });
@@ -63,14 +63,7 @@ $(document).ready(function(){
                         });
                     }
                 });
-                
-                $('#website').val(response.data.website);
-                
-                if(response.data.file != null && response.data.file != ''){
-                    $('#hidden_file').val(response.data.file);
-                    getPDF(response.data.file);     
-                }
-                
+
                 $('#contact_phone_1').val(response.data.mobile);
                 $('#email').val(response.data.email);
                 
@@ -109,15 +102,6 @@ $(document).ready(function(){
         var profile_contact_phone_1_digits = "Please give a correct mobile number";
         var profile_email_required = "Email address can't be empty";
         var profile_email_email = "Please give a correct email address";
-        var profile_merchant_name_required = "Company name can't be empty";
-        var profile_merchant_name_minlength = "Please give a correct company name";
-        var profile_brand_name_required = "Brand name can't be empty";
-        var profile_brand_name_minlength = "Please give a correct brand name";
-        var profile_modality_0_required = "Please choose category level 1";
-        var profile_modality_1_required = "Please choose category level 2";
-        var profile_modality_2_required = "Please choose category level 3";
-        var profile_modality_3_required = "Please choose category level 4";
-        var profile_website_url = "Please give a correct website url";
     } else {
         var profile_contact_name_1_required = "姓名为必填项";
         var profile_contact_name_1_minlength = "请输入完整姓名";
@@ -126,15 +110,6 @@ $(document).ready(function(){
         var profile_contact_phone_1_digits = "请输入正确手机号码";
         var profile_email_required = "公司邮箱为必填项";
         var profile_email_email = "请输入有效邮箱地址";
-        var profile_merchant_name_required = "公司名称为必填项";
-        var profile_merchant_name_minlength = "请输入正确公司名称";
-        var profile_brand_name_required = "请输入品牌名称";
-        var profile_brand_name_minlength = "请输入完整品牌名称";
-        var profile_modality_0_required = "请选择一级业态";
-        var profile_modality_1_required = "请选择二级业态";
-        var profile_modality_2_required = "请选择三级业态";
-        var profile_modality_3_required = "请选择四级业态";
-        var profile_website_url = "请输入有效网址";
     }
     
     $("#my_info_form").validate({
@@ -151,29 +126,6 @@ $(document).ready(function(){
             email: {
                 required: true,
                 email: true
-            },
-            merchant_name: {
-                required: true,
-                minlength: 3
-            },
-            brand_name: {
-                required: true,
-                minlength: 2
-            },
-            modality_0: {
-                required: true
-            },
-            modality_1: {
-                required: true
-            },
-            modality_2: {
-                required: true
-            },
-            modality_3: {
-                required: true
-            },
-            website: {
-                url: true
             }
         },
         messages: {
@@ -189,56 +141,24 @@ $(document).ready(function(){
             email: {
                 required: profile_email_required,
                 email: profile_email_email
-            },
-            merchant_name: {
-                required: profile_merchant_name_required,
-                minlength: profile_merchant_name_minlength
-            },
-            brand_name: {
-                required: profile_brand_name_required,
-                minlength: profile_brand_name_minlength
-            },
-            modality_0: {
-                required: profile_modality_0_required
-            },
-            modality_1: {
-                required: profile_modality_1_required
-            },
-            modality_2: {
-                required: profile_modality_2_required
-            },
-            modality_3: {
-                required: profile_modality_3_required
-            },
-            website: {
-                url: profile_website_url
             }
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            var brand_name = $('#brand_name').val();
             var email = $('#email').val();
-            var file = $('#hidden_file').val();
-            var merchant_name = $('#merchant_name').val();
             var mobile = $('#contact_phone_1').val();
-            var modality = $('#modality_3').val();
-            var website = $('#website').val();
             $.settings.name = $('#contact_name_1').val();
             
             var map = {
-                brandName: brand_name,
                 code: $.cookie('uid'),
                 email: email,
-                file: file,
-                merchantName: merchant_name,
                 mobile: mobile,
-                modality: modality,
-                settings: $.settings,
-                website: website            };
+                settings: $.settings
+            };
             $.ajax({
-                url: $.api.baseNew+"/onlineleasing-customer/api/user/save/simple",
+                url: $.api.baseNew+"/onlineleasing-customer/api/v2/user/save",
                 type: "PUT",
                 data: JSON.stringify(map),
                 async: false,
@@ -271,7 +191,7 @@ $(document).ready(function(){
     });
     
     ///////////////////// File Uploading /////////////////////////////////////
-    $('#file').on("change", function () {
+    /*$('#file').on("change", function () {
         var formData = new FormData();
         formData.append('vo.userCode',  'myinfo');
         formData.append('vo.containerName', 'test');
@@ -303,7 +223,7 @@ $(document).ready(function(){
                console.log(textStatus, errorThrown);
             }
         });
-    });
+    });*/
 });
 
 function getBrandModality0() {
@@ -381,6 +301,7 @@ function getBrandModality3(mod) {
     });
 }
 
+/*
 function getPDF(pdf) {
     var map = {
         uri: pdf    
@@ -410,3 +331,4 @@ function getPDF(pdf) {
         }
     });
 }
+*/

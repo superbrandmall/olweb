@@ -16,10 +16,17 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 						<div class="c-contact">
                             <div class="c-content-title-1">
                                 <h3 class="c-font-bold"><?= $lang['search_search_shops'] ?></h3>
-                                <div class="c-line-left">
-                                </div>
                             </div>
 							<form id="requirement_form">
+                                <div class="form-group">
+									<p><?= $lang['search_sub_type'] ?></p>
+                                    <select id="subtype" name="subtype" class="form-control c-square c-theme input-sm" required>
+                                        <option value=""><?= $lang['search_sub_type'] ?>*</option>
+                                        <option value="kiosk" selected="selected"><?= $lang['search_sub_type_kiosk'] ?></option>
+                                        <option value="正柜"><?= $lang['search_sub_type_store'] ?></option>
+                                    </select>
+                                    <div id="errorcontainer-subtype" class="errorDiv"></div>
+								</div>
 								<div class="form-group">
 									<p><?= $lang['search_leasable_area'] ?></p>
                                     <div class="input-group" style="width: auto;">
@@ -49,12 +56,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 								</div>
                                 <div class="form-group">
 									<p><?= $lang['search_leasing_period'] ?></p>
-                                    <select id="length" name="length" class="form-control c-square c-theme input-sm" required>
-                                        <option value=""><?= $lang['search_leasing_period'] ?>*</option>
-                                    <?php for($i=1;$i<=8;$i++) { ?>
-                                        <option value="<?= $i; ?>"><?= $i; ?><?= $lang['search_year'] ?></option>
-                                    <?php } ?>
-                                    </select>
+                                    <select id="length" name="length" class="form-control c-square c-theme input-sm" required></select>
                                     <div id="errorcontainer-length" class="errorDiv"></div>
 								</div>
                                 <div class="form-group">
@@ -74,9 +76,9 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                             <?= $lang['search_ljz'] ?> </label>
                                         </div>
                                     </div>
-                                    <div style="float: left; margin-right: 20px;">
+                                    <!--<div style="float: left; margin-right: 20px;">
                                         <div class="c-checkbox">
-                                            <input id="<?= $xh_tm ?>" name="mall" value="<?= $xh_tm ?>" class="c-check" type="checkbox">
+                                            <input id="<?= $xh_tm ?>" name="mall" value="<?= $xh_tm ?>" class="c-check" type="checkbox" disabled>
                                             <label for="<?= $xh_tm ?>" class="c-font-thin c-font-16">
                                             <span></span>
                                             <span class="check"></span>
@@ -86,7 +88,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                     </div>
                                     <div style="float: left; margin-right: 20px;">
                                         <div class="c-checkbox">
-                                            <input id="<?= $bs_tm ?>" name="mall" value="<?= $bs_tm ?>" class="c-check" type="checkbox">
+                                            <input id="<?= $bs_tm ?>" name="mall" value="<?= $bs_tm ?>" class="c-check" type="checkbox" disabled>
                                             <label for="<?= $bs_tm ?>" class="c-font-thin c-font-16">
                                             <span></span>
                                             <span class="check"></span>
@@ -106,16 +108,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                     </div>
                                     <div style="float: left; margin-right: 20px;">
                                         <div class="c-checkbox">
-                                            <input id="<?= $xa_tm ?>" name="mall" value="<?= $xa_tm ?>" class="c-check" type="checkbox" disabled>
-                                            <label for="<?= $xa_tm ?>" class="c-font-thin c-font-16">
-                                            <span></span>
-                                            <span class="check"></span>
-                                            <span class="box"></span>
-                                            <?= $lang['search_xa'] ?> </label>
-                                        </div>
-                                    </div>
-                                    <div style="float: left; margin-right: 20px;">
-                                        <div class="c-checkbox">
                                             <input id="<?= $zz_tm ?>" name="mall" value="<?= $zz_tm ?>" class="c-check" type="checkbox" disabled>
                                             <label for="<?= $zz_tm ?>" class="c-font-thin c-font-16">
                                             <span></span>
@@ -123,7 +115,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                             <span class="box"></span>
                                             <?= $lang['search_zz'] ?> </label>
                                         </div>
-                                    </div>
+                                    </div>-->
 								</div>
                                 <div class="clearfix"> </div><br>
 								<button id="search_button" class="btn c-theme-btn c-btn-uppercase btn-lg c-btn-bold c-btn-square"><?= $lang['search_search_shops'] ?></button>
@@ -208,7 +200,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                     <span class="cbp-l-loadMore-defaultText"><?= $lang['search_load_more'] ?>...</span>
                                 </a>
                             </div>
-                            <center><button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold" id="reserve_items" style="display: none;"><i class="icon-check"></i> <?= $lang['search_check_or_negotiation'] ?></button></center>
+                            <center><button type="submit" class="btn btn-md c-theme-btn c-btn-uppercase c-btn-square c-btn-bold" id="reserve_items" style="display: none;"><i class="icon-check"></i> <?= $lang['search_check_or_negotiation'] ?></button></center>
                         </div>
                     </div>                        
 				</div>
@@ -273,7 +265,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 
                     <hr>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['search_make_reservation'] ?></button>
+                        <button type="submit" class="btn btn-md c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['search_make_reservation'] ?></button>
                     </div>
                 </form>
 			</div>

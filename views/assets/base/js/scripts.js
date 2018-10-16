@@ -50,7 +50,9 @@ if($.cookie('lang') === 'en-us'){
         yuyue : "Reserve",
         kanpu : " date",
         qiatan : " date",
-        mallLangCat: "en"
+        mallLangCat: "en",
+        lengthMonth: " month(s)",
+        lengthYear: " year(s)"
     };
 } else {
     $.lang = {
@@ -97,7 +99,9 @@ if($.cookie('lang') === 'en-us'){
         yuyue : "预约",
         kanpu : "看铺",
         qiatan : "洽谈",
-        mallLangCat: "cn"
+        mallLangCat: "cn",
+        lengthMonth: "个月",
+        lengthYear: "年"
     };
 }
 
@@ -162,6 +166,9 @@ $(document).ready(function(){
             window.history.pushState("object or string", "Title", "/"+refineUrl() );
         },1000);
     }
+    
+    
+    
 });
 
 function getMallList() {
@@ -175,7 +182,7 @@ function getMallList() {
             location = v.location;
         }
     
-        if($('#mall_list').length >0){
+        /*if($('#mall_list').length >0){
             $('#mall_list').append('<div class="cbp-item web-design logos">\n\
             <div class="cbp-caption">\n\
             <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
@@ -186,11 +193,12 @@ function getMallList() {
             <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
             </div></div></div></div>\n\
             <div class="cbp-l-grid-projects-desc"> '+mallName+' </div></div>');
-        }
+        }*/
         
-        $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
-                
-        if($('#mall_list_sm').length > 0){
+        if(v.mallCode === $.mallCode.shanghaiSbm){
+            $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
+        }
+        /*if($('#mall_list_sm').length > 0){
             $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
             <div class="cbp-caption">\n\
             <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
@@ -201,11 +209,10 @@ function getMallList() {
             <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
             </div></div></div></div>\n\
             <div class="cbp-l-grid-projects-title"> '+mallName+' </div><div class="cbp-l-grid-projects-desc"> '+location+' </div></div>');
-        }
+        }*/
     });
     
-    if($('#mall_list').length >0){
-        /******** Zhengzhou ***************/
+    /*if($('#mall_list').length >0){
         $('#mall_list').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
@@ -217,7 +224,6 @@ function getMallList() {
         </div></div></div></div>\n\
         <div class="cbp-l-grid-projects-desc">正大乐城郑州购物中心</div></div>');
 
-        /******** Wuxi ***************/
         $('#mall_list').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
@@ -229,7 +235,6 @@ function getMallList() {
         </div></div></div></div>\n\
         <div class="cbp-l-grid-projects-desc">正大乐城无锡购物中心</div></div>');
 
-        /******** Xi'an ***************/
         $('#mall_list').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
@@ -243,7 +248,6 @@ function getMallList() {
     }
     
     if($('#mall_list_sm').length > 0){
-        /******** Zhengzhou ***************/
         $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
@@ -255,7 +259,6 @@ function getMallList() {
         </div></div></div></div>\n\
         <div class="cbp-l-grid-projects-title">正大乐城郑州购物中心</div><div class="cbp-l-grid-projects-desc">河南省郑州市郑东新区普惠路77号</div></div>');
 
-        /******** Wuxi ***************/
         $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
@@ -267,7 +270,6 @@ function getMallList() {
         </div></div></div></div>\n\
         <div class="cbp-l-grid-projects-title">正大乐城无锡购物中心</div><div class="cbp-l-grid-projects-desc">江苏省无锡市惠山区华惠路绿地世纪城600号</div></div>');
 
-        /******** Xi'an ***************/
         $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
         <div class="cbp-caption">\n\
         <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
@@ -278,7 +280,7 @@ function getMallList() {
         <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
         </div></div></div></div>\n\
         <div class="cbp-l-grid-projects-title">正大乐城西安购物中心</div><div class="cbp-l-grid-projects-desc">陕西省西安市雁塔区锦业路7号</div></div>');
-    }
+    }*/
 }
 
 function logout() {
@@ -452,6 +454,30 @@ function IncrMonth(date_str){
         dt.setDate(dt.getDate());
         parts[0] = "" + dt.getFullYear();
         parts[1] = "" + (Number(dt.getMonth()) + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrMonths(date_str, months){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10),  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + Number(months));
         if (parts[1].length < 2) {
           parts[1] = "0" + parts[1];
         }

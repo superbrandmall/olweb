@@ -39,9 +39,14 @@ $(document).ready(function(){
 
 function GetShopInfo(){
     var shopCode = getURLParameter('id') || null;
-    var userCode = $.cookie('uid');
+    
+    var userCodeParameter = '';
+    if($.cookie('uid') && $.cookie('uid') != ''){
+        userCodeParameter = "?userCode="+$.cookie('uid');
+    }
+    
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+shopCode+"?userCode="+userCode+"",
+        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+shopCode+userCodeParameter+"",
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -168,11 +173,11 @@ function GetShopInfo(){
                     $('#engineering_specifications').hide();
                 }
 
-                if(response.data.shopState !== 0) {
+                if((response.data.subType == 'kiosk' || response.data.subType == 'pop-up') && response.data.shopState !== 0) {
                     if($.cookie('uid') && $.cookie('uid') != '') {
-                        $('<a href="reserve?sid='+getURLParameter('id')+'&search='+(getURLParameter('search')||'')+'" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="reserve?sid='+getURLParameter('id')+'&search='+(getURLParameter('search')||'')+'" class="btn btn-lg c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
                     } else {
-                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
+                        $('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn btn-lg c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-clock"></i> '+$.lang.reserveShop+'</a>').insertAfter(".c-content-list-1");
                     }
                 }
 
@@ -424,7 +429,7 @@ function getCoords(mc,fn) {
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
                     if(v.state === 1 && v.coords != null && v.coords != ''){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" name="'+v.brandName+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
                     }
                 });
                 
@@ -445,31 +450,44 @@ function drawShops(){
             return { 
                 key: $(el).attr('data-key'),
                 toolTip: $.lang.thisStore,
-                fillColor: '4EABE6',
+                fillColor: 'c34343',
                 fillOpacity: 1,
                 stroke: false,
                 selected: true 
             };
         } else {
-            if($(el).attr('data-full') != 0){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $.lang.forRent,
-                    stroke: false,
-                    selected: true 
-                };
+            if($.cookie('merchantmodality') && $.cookie('merchantmodality') != null && $.cookie('merchantmodality') != '') {
+                var merchantmodality = $.cookie('merchantmodality').substr(0,4);
+                var datamodality;
+                $(el).attr('data-modality') == null ? datamodality = null : datamodality = $(el).attr('data-modality').substr(0,4);
+                
+                if($(el).attr('data-full') != 0 && merchantmodality == datamodality){
+                    return { 
+                        key: $(el).attr('data-key'),
+                        toolTip: $.lang.forRent,
+                        stroke: false,
+                        selected: true 
+                    };
+                } else {
+                    return { 
+                        key: $(el).attr('data-key'),
+                        toolTip: $(el).attr('name'),
+                        fillColor: 'cdcdcd'
+                    };
+                }
             } else {
                 return { 
                     key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('name')
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd'
                 };
             }
         }
     });
 
     $('#map').mapster({
-        fillColor: 'c34343',
-        fillOpacity: 1.0,
+        fillColor: 'c9ae89',
+        fillOpacity: 0.8,
         strokeColor: 'ffd62c',
         strokeWidth: 0,
         clickNavigate: true,
@@ -514,7 +532,7 @@ function getFloorInfo(mc,fn) {
                 var modalityName;
                 $.each(details, function(i,v){
                     modalityName = GetFloorModality(v.code);
-                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
+                    proportion += '<div class="col-sm-5">'+modalityName+' ('+v.count+'): '+Math.round(v.percentage*100)+'%</div><div class="col-sm-7"><div class="progress"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="'+Math.round(v.percentage*100)+'" aria-valuemin="0" aria-valuemax="100" style="width: '+Math.round(v.percentage*100)+'%;"></div></div></div><div class="clearfix"> </div>'; 
                 });
                 $('#proportion').html(proportion);
             } else {

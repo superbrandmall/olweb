@@ -23,11 +23,17 @@ abstract class BaseObject {
             } else {
                 $this->domain = 'http://10.130.12.15';
             }
-        } else {
+        } else if(gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.41' || gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.45') {
             if(strpos($_SERVER['REQUEST_URI'],'admin') !== false) {
                 $this->domain = 'http://uat-ol.superbrandmall.com/admin';
             } else {
                 $this->domain = 'http://uat-ol.superbrandmall.com';
+            }
+        } else {
+            if(strpos($_SERVER['REQUEST_URI'],'admin') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/admin';
+            } else {
+                $this->domain = 'http://ol.superbrandmall.com';
             }
         }
     

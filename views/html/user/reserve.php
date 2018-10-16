@@ -83,12 +83,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                 </li>
                                 <li>
                                     <?= $lang['reserve_lease_term'] ?>: 
-                                    <select id="length" name="length" class="form-control c-square c-theme input-sm valid" required aria-invalid="false" style="display: inline; width: auto;">
-                                        <option value=""><?= $lang['reserve_please_choose'] ?></option>
-                                    <?php for($i=1;$i<=8;$i++) { ?>
-                                        <option value="<?= $i; ?>"><?= $i; ?><?= $lang['reserve_year'] ?></option>
-                                    <?php } ?>
-                                    </select>
+                                    <select id="length" name="length" class="form-control c-square c-theme input-sm valid" required aria-invalid="false" style="display: inline; width: auto;"></select>
                                     <div id="errorcontainer-length" class="errorDiv"></div>
                                 </li>
                                 <li>
@@ -113,7 +108,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 
                             <hr>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-md c-btn-red-1 c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
+                                <button type="submit" class="btn btn-md c-theme-btn c-btn-uppercase c-btn-square c-btn-bold"><i class="icon-check"></i> <?= $lang['reserve_make_reservation'] ?></button>
                             </div>
                         </form>
 					</div>

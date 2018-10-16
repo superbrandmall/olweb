@@ -63,7 +63,7 @@ $(document).ready(function(){
                 }
             };
             $.ajax({
-                url: $.api.baseNew+"/onlineleasing-customer/api/login/login/simple",
+                url: $.api.baseNew+"/onlineleasing-customer/api/v2/login/login",
                 type: "POST",
                 data: JSON.stringify(map),
                 async: false,
@@ -85,8 +85,10 @@ $(document).ready(function(){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         $.cookie('uid', response.data.code);
-                        $.cookie('international', response.data.international);
+                        $.cookie('international', response.data.settings.international);
                         $.cookie('newlogin',1);
+                        $.cookie('merchantmodality', response.data.brandModality);
+                        
                         $.ajax({
                             type: 'POST',
                             url: 'controllers/api/1.0/ApiLoginSession.php',

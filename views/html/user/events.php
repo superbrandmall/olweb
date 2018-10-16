@@ -21,16 +21,16 @@
 	</div>
 	<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-1 -->
 	<!-- BEGIN: PAGE CONTENT -->
-	<div class="c-content-box c-size-md">
+	<div class="c-content-box c-size-md c-bg-grey-1">
 		<div class="container">
 			<div id="filters-container" class="cbp-l-filters-button">
 				<div data-filter=".sh-sbm" class="cbp-filter-item-active cbp-filter-item">
                     <?= $lang['events_ljz'] ?>
 				</div>
-                <div data-filter=".bs-tm" class="cbp-filter-item">
+                <!--<div data-filter=".bs-tm" class="cbp-filter-item">
                     <?= $lang['events_bs'] ?>
 				</div>
-                <!--<div data-filter=".sh-sbm" class="cbp-filter-item">
+                <div data-filter=".sh-sbm" class="cbp-filter-item">
                     <?= $lang['events_xh'] ?>
 				</div>
                 <div data-filter=".sh-sbm" class="cbp-filter-item">
@@ -224,7 +224,7 @@
 						<?= $lang['events_ct_hall_location'] ?>
 					</div>
 				</div>
-                <div class="cbp-item bs-tm">
+                <!--<div class="cbp-item bs-tm">
 					<div class="cbp-caption">
 						<div class="cbp-caption-defaultWrap">
 							<img src="views/assets/base/img/content/events/bs_a1.jpg" alt="">
@@ -363,7 +363,7 @@
 					<div class="cbp-l-grid-projects-desc">
 						<?= $lang['events_bs_d2_location'] ?>
 					</div>
-				</div>
+				</div>-->
 			</div>
 		</div>
 	</div>
