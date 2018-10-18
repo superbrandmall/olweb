@@ -2,7 +2,6 @@
 $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/shanghai-sbm.js"></script>';
 ?>
 
-<!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
     <div class="c-content-box c-size-md" style="background-image: url(views/assets/base/img/content/backgrounds/body-4.jpg); background-position: center bottom; margin-bottom: 0; z-index: 1;">
 		<div class="container">
@@ -32,7 +31,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 		</div>
 	</div>
     
-    <!-- BEGIN: 项目介绍 -->
     <div class="c-content-box c-size-lg c-bg-white" style="margin-bottom: 0; z-index: 1;">
 		<div class="container">
             <div class="c-content-title-1">
@@ -91,9 +89,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
         </div>
     </div>
-    <!-- END: 项目介绍 -->
     
-    <!-- BEGIN: 10楼 -->
 	<div id="f10" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/10F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -111,9 +107,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 10楼 -->
     
-    <!-- BEGIN: 9楼 -->
 	<div id="f9" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/9F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -131,9 +125,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 9楼 -->
     
-    <!-- BEGIN: 8楼 -->
 	<div id="f8" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/8F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -151,9 +143,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 8楼 -->
     
-    <!-- BEGIN: 7楼 -->
 	<div id="f7" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/7F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -171,9 +161,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 7楼 -->
     
-    <!-- BEGIN: 6楼 -->
 	<div id="f6" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/6F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -191,9 +179,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 6楼 -->
     
-    <!-- BEGIN: 5楼 -->
 	<div id="f5" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/5F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -211,9 +197,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 5楼 -->
     
-    <!-- BEGIN: 4楼 -->
 	<div id="f4" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/4F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -231,9 +215,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 4楼 -->
     
-    <!-- BEGIN: 3楼 -->
 	<div id="f3" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/3F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -251,9 +233,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 3楼 -->
     
-    <!-- BEGIN: 2楼 -->
 	<div id="f2" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/2F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -271,9 +251,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 2楼 -->
     
-    <!-- BEGIN: 1楼 -->
 	<div id="f1" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/1F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -291,9 +269,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: 1楼 -->
     
-    <!-- BEGIN: B1楼 -->
 	<div id="fb1" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/B1F.jpg); margin-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -311,166 +287,6 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
             </div>
 		</div>
 	</div>
-	<!-- END: B1楼 -->
-    
-    <!-- BEGIN: CONTENT/SLIDERS/CLIENT-LOGOS-2 -->
-	<!--<div class="c-content-box c-size-md c-bg-grey-1" style="background: url(views/assets/base/img/content/backgrounds/body-3.jpg) center center no-repeat;background-size: cover; padding-bottom: 120px; margin-bottom: 0;">
-		<div class="container">
-			<div class="c-content-client-logos-slider-1 c-bordered" data-slider="owl" data-items="5" data-desktop-items="4" data-desktop-small-items="3" data-tablet-items="3" data-mobile-small-items="1">
-				<div class="c-content-title-1">
-					<h3 class="c-center c-font-bold"><?= $lang['mall_business_invitation'] ?></h3>
-                    <div class="c-line-center c-theme-bg">
-					</div>
-				</div>
-				<div class="owl-mall-carousel owl-theme c-theme owl-bordered1" style="visibility: hidden;">
-                    <div class="item">
-                        <div style="height: 200px;" class="modality-name-div">
-                            <div id="proportion_fb1" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=0" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 100px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-bank"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>B1F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 190px;" class="modality-name-div">
-                            <div id="proportion_f1" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=1" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 110px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-diamond"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>1F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 180px;" class="modality-name-div">
-                            <div id="proportion_f2" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=2" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 120px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-child"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>2F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 170px;" class="modality-name-div">
-                            <div id="proportion_f3" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=3" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 130px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-female"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>3F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 160px;" class="modality-name-div">
-                            <div id="proportion_f4" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=4" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 140px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-soccer-ball-o"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>4F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 150px;" class="modality-name-div">
-                            <div id="proportion_f5" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=5" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 150px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-male"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>5F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 140px;" class="modality-name-div">
-                            <div id="proportion_f6" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=6" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 160px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-cutlery"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>6F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 130px;" class="modality-name-div">
-                            <div id="proportion_f7" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=7" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 170px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-venus-mars"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>7F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 120px;" class="modality-name-div">
-                            <div id="proportion_f8" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=8" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 180px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-film"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>8F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 110px;" class="modality-name-div">
-                            <div id="proportion_f9" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=9" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 190px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-suitcase"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>9F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-                    <div class="item">
-                        <div style="height: 100px;" class="modality-name-div">
-                            <div id="proportion_f10" class="modality-name"></div>
-                        </div>
-                        <a href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm?>&f=10" data-toggle="modal" data-target="#floor_map_F">
-                            <span style="height: 200px;" class="floor-name">
-                                <span class="btn btn-xs c-btn-square c-btn-border-opacity-04 c-btn-uppercase c-btn-bold">
-                                    <i class="fa fa-suitcase"></i><br>
-                                    <?= $lang['mall_open_floor_map'] ?>10F
-                                </span>
-                            </span>
-                        </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>-->
-	<!-- END: CONTENT/SLIDERS/CLIENT-LOGOS-2 -->
 
     <div class="c-content-box c-size-lg c-bg-white" style="margin-bottom: 0; z-index: 1;">
 		<div class="container">

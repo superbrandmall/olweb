@@ -248,65 +248,6 @@ var ContentOwlcarousel = function() {
 }();
 // END: Home Page Partner Brands Carousel
 
-// BEGIN: Mall Floor Carousel
-var ContentMallOwlcarousel = function() {
-    
-    var _initInstances = function() {
-        $("[data-slider='owl'] .owl-mall-carousel").each(function() { 
-            var parent = $(this).parent();
-
-            var items;
-            var itemsDesktop;
-            var itemsDesktopSmall;
-            var itemsTablet;
-            var itemsTabletSmall;
-            var itemsMobile;
-
-            if (parent.attr("data-single-item") == "true") {
-                items = 1;
-                itemsDesktop = 1;
-                itemsDesktopSmall = 1;
-                itemsTablet = 1;
-                itemsTabletSmall = 1;
-                itemsMobile = 1;
-            } else {
-                items = parent.attr('data-items');
-                itemsDesktop = [1199, parent.attr('data-desktop-items') ? parent.attr('data-desktop-items') : items];
-                itemsDesktopSmall = [979, parent.attr('data-desktop-small-items') ? parent.attr('data-desktop-small-items') : 3];
-                itemsTablet = [768, parent.attr('data-tablet-items') ? parent.attr('data-tablet-items') : 2];
-                itemsMobile = [479, parent.attr('data-mobile-items') ? parent.attr('data-mobile-items') : 1];
-            }
-
-            $(this).owlCarousel({
-
-                items: items,
-                itemsDesktop: itemsDesktop,
-                itemsDesktopSmall: itemsDesktopSmall,
-                itemsTablet: itemsTablet,
-                itemsTabletSmall: itemsTablet,
-                itemsMobile: itemsMobile,
-                pagination: false,
-                navigation : true,
-                navigationText : ["<",">"],
-                slideSpeed : parent.attr('data-slide-speed', 400),
-                paginationSpeed : parent.attr('data-pagination-speed', 800),  
-                singleItem: parent.attr("data-single-item") == "true" ? true : false
-            });
-        });
-    };
-
-    return {
-
-         //main function to initiate the module
-        init: function() {
-            
-            _initInstances();
-        }
-
-    };
-}();
-// END: Mall Floor Carousel
-
 // BEGIN: ContentCubeLatestPortfolio
 var ContentCubeLatestPortfolio = function() {
 
@@ -502,7 +443,6 @@ $(document).ready(function() {
     
     // init plugin wrappers    
     ContentOwlcarousel.init();
-    ContentMallOwlcarousel.init();
     ContentCubeLatestPortfolio.init();
     ContentCounterUp.init();
     ContentFancybox.init();

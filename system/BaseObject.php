@@ -1,14 +1,4 @@
 <?php
-if (file_exists('system/DB.php')) {
-    include_once 'system/DB.php';
-} else if (file_exists('../../system/DB.php')) {
-    include_once '../../system/DB.php';
-} else if (file_exists('../../../system/DB.php')) {
-    include_once '../../../system/DB.php';
-} else {
-    include_once '../../../../system/DB.php';
-}
-
 abstract class BaseObject {
     static $abs_path;
     var $post = array();

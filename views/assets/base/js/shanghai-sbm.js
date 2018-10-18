@@ -11,35 +11,6 @@ floor['f2'] = true;
 floor['f1'] = true;
 floor['fb1'] = true;
 
-/*$(document).ready(function(){
-    getMallInfo($.mallCode.shanghaiSbm);
-    getFloorInfo($.mallCode.shanghaiSbm,'负一楼','fb1');
-    getFloorInfo($.mallCode.shanghaiSbm,'一楼','f1');
-    getFloorInfo($.mallCode.shanghaiSbm,'二楼','f2');
-    getFloorInfo($.mallCode.shanghaiSbm,'三楼','f3');
-    getFloorInfo($.mallCode.shanghaiSbm,'四楼','f4');
-    getFloorInfo($.mallCode.shanghaiSbm,'五楼','f5');
-    getFloorInfo($.mallCode.shanghaiSbm,'六楼','f6');
-    getFloorInfo($.mallCode.shanghaiSbm,'七楼','f7');
-    getFloorInfo($.mallCode.shanghaiSbm,'八楼','f8');
-    getFloorInfo($.mallCode.shanghaiSbm,'九楼','f9');
-    getFloorInfo($.mallCode.shanghaiSbm,'十楼','f10');
-    
-    setTimeout(function () {
-        $('.owl-mall-carousel').css('visibility','visible');
-    },1000);
-    
-    document.addEventListener("webkitfullscreenchange", function (event) {
-        if(document.webkitIsFullScreen){
-            $('header, footer').css('display','none');
-            $('video').parent().parent().css('height','100vh');
-        } else {
-            $('header, footer').css('display','block');
-            $('video').parent().parent().css('height','auto');
-        }
-    });
-});*/
-
 $(document).ready(function(){
     $(window).scroll(function() {
         var y = $(this).scrollTop();
@@ -174,7 +145,6 @@ function getMallInfo(mc) {
                     var location = mall.location;
                 }
                 
-                //$('video').attr('src',mall.video);
                 $('#mall_desc').html(description);
                 $('#gross_floor_area').text(numberWithCommas(mall.grossFloorArea));
                 $('#leasing_area').text(numberWithCommas(mall.leasingArea));

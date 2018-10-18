@@ -54,6 +54,16 @@
 <link rel="icon" href="views/assets/base/img/layout/logos/favicon.ico" type="image/x-icon"/>
 <link rel="shortcut icon" href="views/assets/base/img/layout/logos/favicon.ico" type="image/x-icon"/>
 <script src="views/assets/plugins/jquery.min.js" type="text/javascript"></script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?e00d3e6681b0b3f02f92f9c45bd58997";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 <body class="c-layout-header-fixed<?php if (!isset($_GET['p']) || $_GET['p'] == 'home') { echo ' c-layout-header-fullscreen';} ?>">
 <div id="loader"></div>
@@ -99,27 +109,6 @@
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
                     </li>
-                    <?php if(isset($_SESSION['user_login'])) { ?>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-info') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-info" class="c-link"><i class="fa fa-user"></i> <?= $lang['nav_profile'] ?></a>
-                    </li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-favourite') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-favourite" class="c-link"><i class="fa fa-heart"></i> <?= $lang['nav_favourites'] ?></a>
-                    </li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'my-reservations') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="my-reservations" class="c-link"><i class="fa fa-clock-o"></i> <?= $lang['nav_reservations'] ?></a>
-                    </li>
-                    <li class="c-menu-type-classic">
-                        <a href="javascript: logout();" class="c-link"><i class="fa fa-sign-out"></i> <?= $lang['nav_logout'] ?></a>
-                    </li>
-                    <?php } else { ?>
-                    <li>
-                        <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold"><i class="icon-user"></i> <?= $lang['nav_login'] ?></a>
-                    </li>
-                    <li>
-                        <a href="javascript:;" data-toggle="modal" data-target="#step1" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold"><i class="icon-note"></i> <?= $lang['nav_register'] ?></a>
-                    </li>
-                    <?php } ?>
                     <li class="c-menu-type-classic">
                         <?php if (isset($_SESSION["lang"]) && $_SESSION["lang"] == 'en') { ?>
                         <a href="/?lang=cn" class="c-link" id="c_link_cn"><img src="views/assets/base/img/content/misc/cn.png" alt="正大" width="20" > 中文</a>
@@ -133,16 +122,3 @@
         </div>
     </div>
 </header>
-
-<?php 
-if(!isset($_SESSION['user_login']) || $_SESSION['user_login'] == "") {
-    // BEGIN: 注册页/登录页
-    include ('register.php');
-    include ('login.php');
-    // END: 注册页/登录页
-} else {
-    echo '<div class="alert alert-success login-succeed" role="alert">';
-    echo $lang['login_succeed'].$_SESSION['user_login'];
-    echo '</div>';
-}
-?>

@@ -1,6 +1,4 @@
-<!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
-	<!-- BEGIN: LAYOUT/BREADCRUMBS/BREADCRUMBS-1 -->
 	<div class="c-layout-breadcrumbs-1 c-fonts-uppercase c-fonts-bold">
 		<div class="container">
 			<div class="c-page-title c-pull-left">
@@ -19,29 +17,13 @@
 			</ul>
 		</div>
 	</div>
-	<!-- END: LAYOUT/BREADCRUMBS/BREADCRUMBS-1 -->
-	<!-- BEGIN: PAGE CONTENT -->
+
 	<div class="c-content-box c-size-md c-bg-grey-1">
 		<div class="container">
 			<div id="filters-container" class="cbp-l-filters-button">
 				<div data-filter=".sh-sbm" class="cbp-filter-item-active cbp-filter-item">
                     <?= $lang['events_ljz'] ?>
 				</div>
-                <!--<div data-filter=".bs-tm" class="cbp-filter-item">
-                    <?= $lang['events_bs'] ?>
-				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
-                    <?= $lang['events_xh'] ?>
-				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
-                    <?= $lang['events_wx'] ?>
-				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
-                    <?= $lang['events_xa'] ?>
-				</div>
-                <div data-filter=".sh-sbm" class="cbp-filter-item">
-                    <?= $lang['events_zz'] ?>
-				</div>-->
 			</div>
 			<div id="grid-container" class="cbp">
 				<div class="cbp-item sh-sbm">
@@ -52,7 +34,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001030" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001126" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -72,7 +54,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001024" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001116" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -92,7 +74,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001041" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001148" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -112,7 +94,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001054" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001161" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -132,7 +114,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001043" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001150" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -152,7 +134,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001056" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001163" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -172,7 +154,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001166" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -192,7 +174,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001060" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001167" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -212,7 +194,7 @@
 						<div class="cbp-caption-activeWrap">
 							<div class="cbp-l-caption-alignCenter">
 								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180507001062" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+									<a href="event?id=OLSHOP180917001169" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
 								</div>
 							</div>
 						</div>
@@ -224,151 +206,9 @@
 						<?= $lang['events_ct_hall_location'] ?>
 					</div>
 				</div>
-                <!--<div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_a1.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000036" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_a1'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_a1_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_a2.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000006" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_a2'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_a2_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_b.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000031" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_b'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_b_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_c1.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000028" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_c1'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_c1_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_c2.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000008" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_c2'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_c2_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_d1.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180723000046" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_d1'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_d1_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item bs-tm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/bs_d2.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180522000059" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_bs_d2'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_bs_d2_location'] ?>
-					</div>
-				</div>-->
 			</div>
 		</div>
 	</div>
-	<!-- END: PAGE CONTENT -->
 </div>
-<!-- END: PAGE CONTAINER -->
 
 <?php include ('footer.php'); ?>

@@ -58,8 +58,8 @@
 	    var cont = $('.c-layout-revo-slider .tp-banner-container');
 	    var api = slider.show().revolution({
 	        delay: 0,    
-	        startwidth: 910,
-	        startheight: 520,
+	        startwidth: 960,
+	        startheight: 550,
 	        navigationType: "hide",
 	        navigationArrows: "none",
 	        touchenabled: "on",

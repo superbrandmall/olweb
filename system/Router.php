@@ -101,47 +101,17 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         strtolower($shanghai_sbm) => array(
             'url' => 'shanghai_sbm.php'
         ),
-        strtolower($xh_tm) => array(
-            'url' => 'xuhui_tm.php'
-        ),
-        strtolower($bs_tm) => array(
-            'url' => 'baoshan_tm.php'
-        ),
         'shop' => array(
             'url' => 'shop.php'
         ),
-        'login' => array(
-            'url' => 'default.php'
-        ),
-        'register' => array(
-            'url' => 'default.php'
-        ),
         'requirement' => array(
             'url' => 'requirement.php'
-        ),
-        'my-info' => array(
-            'url' => 'my_info.php'
-        ),
-        'reserve' => array(
-            'url' => 'reserve.php'
-        ),
-        'reserve-event' => array(
-            'url' => 'reserve_event.php'
-        ),
-        'my-reservations' => array(
-            'url' => 'my_reservations.php'
-        ),
-        'my-favourite' => array(
-            'url' => 'my_favourite.php'
         ),
         'events' => array(
             'url' => 'events.php'
         ),
         'event' => array(
             'url' => 'event.php'
-        ),
-        'logout' => array(
-            'url' => 'logout.php'
         )
     );
     

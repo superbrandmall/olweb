@@ -19,7 +19,6 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 
 <div style="margin: 50px 50px 20px; color: #6d6d73;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
-    <span style="margin-left: 15px; background-color: #c9ae89; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_awaiting_rent'] ?>
     <span style="margin-left: 15px; background-color: #E3E3E3; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
     <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
     <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
@@ -114,32 +113,11 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
     
     function drawShops(){
         var areas = $.map($('#Map_'+<?= $i ?>+'F area'),function(el) {
-            if($.cookie('merchantmodality') && $.cookie('merchantmodality') != null && $.cookie('merchantmodality') != '') {
-                var merchantmodality = $.cookie('merchantmodality').substr(0,4);
-                var datamodality;
-                $(el).attr('data-modality') == null ? datamodality = null : datamodality = $(el).attr('data-modality').substr(0,4);
-                
-                if($(el).attr('data-full') != 0 && merchantmodality == datamodality){
-                    return { 
-                        key: $(el).attr('data-key'),
-                        toolTip: $.lang.forRent,
-                        stroke: false,
-                        selected: true 
-                    };
-                } else {
-                    return { 
-                        key: $(el).attr('data-key'),
-                        toolTip: $(el).attr('name'),
-                        fillColor: 'cdcdcd'
-                    };
-                }
-            } else {
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd'
-                };
-            }
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: $(el).attr('name'),
+                fillColor: 'cdcdcd'
+            };
         });
         
         var xOffset;
@@ -163,11 +141,9 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                     "width": "auto"
                 });
                 
-                //here we call that unique ID for mouseenter or mouseover             
                 $("area").on("mouseenter",  function (data) {
                    xOffset = data.pageX;
                    yOffset = data.pageY;
-                   //tooltip class name already is given by imageMapster and we change to new position
                    $(".mapster_tooltip").css("left", xOffset);
                    $(".mapster_tooltip").css("top", yOffset);
                 });

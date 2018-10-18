@@ -1,5 +1,5 @@
 $.api = {
-    base: "http://10.130.12.15:8080/oldataservice/ol/api",
+    base: $.base,
     baseNew: $.base,
     emailVC: "",
     mobileVC: ""
@@ -181,106 +181,11 @@ function getMallList() {
             mallName = v.mallName;
             location = v.location;
         }
-    
-        /*if($('#mall_list').length >0){
-            $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-            <div class="cbp-caption">\n\
-            <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
-            <div class="cbp-caption-activeWrap">\n\
-            <div class="c-masonry-border"></div>\n\
-            <div class="cbp-l-caption-alignCenter">\n\
-            <div class="cbp-l-caption-body">\n\
-            <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
-            </div></div></div></div>\n\
-            <div class="cbp-l-grid-projects-desc"> '+mallName+' </div></div>');
-        }*/
         
         if(v.mallCode === $.mallCode.shanghaiSbm){
             $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
         }
-        /*if($('#mall_list_sm').length > 0){
-            $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-            <div class="cbp-caption">\n\
-            <div class="cbp-caption-defaultWrap"><img src="'+v.img+'" alt=""></div>\n\
-            <div class="cbp-caption-activeWrap">\n\
-            <div class="c-masonry-border"></div>\n\
-            <div class="cbp-l-caption-alignCenter">\n\
-            <div class="cbp-l-caption-body">\n\
-            <a href="'+v.mallCode.toLowerCase()+'" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">项目介绍</a>\n\
-            </div></div></div></div>\n\
-            <div class="cbp-l-grid-projects-title"> '+mallName+' </div><div class="cbp-l-grid-projects-desc"> '+location+' </div></div>');
-        }*/
     });
-    
-    /*if($('#mall_list').length >0){
-        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-desc">正大乐城郑州购物中心</div></div>');
-
-        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-desc">正大乐城无锡购物中心</div></div>');
-
-        $('#mall_list').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-desc">正大乐城西安购物中心</div></div>');
-    }
-    
-    if($('#mall_list_sm').length > 0){
-        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/zhengzhou-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-title">正大乐城郑州购物中心</div><div class="cbp-l-grid-projects-desc">河南省郑州市郑东新区普惠路77号</div></div>');
-
-        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/wuxi-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-title">正大乐城无锡购物中心</div><div class="cbp-l-grid-projects-desc">江苏省无锡市惠山区华惠路绿地世纪城600号</div></div>');
-
-        $('#mall_list_sm').append('<div class="cbp-item web-design logos">\n\
-        <div class="cbp-caption">\n\
-        <div class="cbp-caption-defaultWrap"><img src="views/assets/base/img/content/mall/xian-tm.jpg" alt=""></div>\n\
-        <div class="cbp-caption-activeWrap">\n\
-        <div class="c-masonry-border"></div>\n\
-        <div class="cbp-l-caption-alignCenter">\n\
-        <div class="cbp-l-caption-body">\n\
-        <a href="#!" class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase">尽请期待</a>\n\
-        </div></div></div></div>\n\
-        <div class="cbp-l-grid-projects-title">正大乐城西安购物中心</div><div class="cbp-l-grid-projects-desc">陕西省西安市雁塔区锦业路7号</div></div>');
-    }*/
 }
 
 function logout() {
@@ -371,11 +276,8 @@ function getURLParameter(sParam) {
 }
 
 function refineUrl() {
-    //get full url
     var url = window.location.href;
-    //get url after/  
     var value = url.substring(url.lastIndexOf('/') + 1);
-    //get the part after before ?
     value  = value.split("?")[0];   
     return value;     
 }

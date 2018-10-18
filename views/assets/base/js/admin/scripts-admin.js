@@ -50,7 +50,9 @@ $(function() {
 function searchShopAndCheck(){
     var malls = [];                
     $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
-        malls.push(w.mallCode);
+        if(w.mallCode == 'OLMALL180917000003' ){
+            malls.push(w.mallCode);
+        }
     });
         
     var map = {

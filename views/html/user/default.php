@@ -1,8 +1,5 @@
-<!-- BEGIN: PAGE CONTAINER -->
 <div class="c-layout-page">
-	<!-- BEGIN: PAGE CONTENT -->
-	<!-- BEGIN: LAYOUT/SLIDERS/REVO-SLIDER-7 -->
-	<section class="c-layout-revo-slider c-layout-revo-slider-7" style="max-width: 910px; margin: 0 auto;">
+	<section class="c-layout-revo-slider c-layout-revo-slider-7" style="max-width: 960px; margin: 0 auto;">
         <div class="tp-banner-container">
             <div class="c-singup-form">
                 <h3 class="c-font-26 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
@@ -24,7 +21,6 @@
         </div>
 	</section>
     
-	<!-- BEGIN: 平台介绍 -->
     <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 0; padding-bottom: 0;">
 		<div class="container">
 			<div class="row">
@@ -38,74 +34,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-3 col-sm-6">
-					<div class="c-content-step-1 c-opt-1">
-						<div class="c-icon">
-							<span class="c-hr c-hr-first"><span class="c-content-line-icon c-icon-27 c-theme"></span></span>
-						</div>
-						<div class="c-title c-font-20 c-font-bold">
-							1. <?= $lang['home_step_1'] ?>
-						</div>
-						<div class="c-description c-font-17">
-							 <?= $lang['home_step_1_desc'] ?>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="c-content-step-1 c-opt-1">
-						<div class="c-icon">
-							<span class="c-hr"><span class="c-content-line-icon c-icon-15 c-theme"></span></span>
-						</div>
-						<div class="c-title c-font-20 c-font-bold">
-							2. <?= $lang['home_step_2'] ?>
-						</div>
-						<div class="c-description c-font-17">
-							 <?= $lang['home_step_2_desc'] ?>
-						</div>
-					</div>
-				</div>
-                <div class="col-md-3 col-sm-6">
-					<div class="c-content-step-1 c-opt-1">
-						<div class="c-icon">
-							<span class="c-hr"><span class="c-content-line-icon c-icon-40 c-theme"></span></span>
-						</div>
-						<div class="c-title c-font-20 c-font-bold">
-							3. <?= $lang['home_step_3'] ?>
-						</div>
-						<div class="c-description c-font-17">
-							 <?= $lang['home_step_3_desc'] ?>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-6">
-					<div class="c-content-step-1 c-opt-1">
-						<div class="c-icon">
-							<span class="c-hr c-hr-last"><span class="c-content-line-icon c-icon-28 c-theme"></span></span>
-						</div>
-						<div class="c-title c-font-20 c-font-bold">
-							4. <?= $lang['home_step_4'] ?>
-						</div>
-						<div class="c-description c-font-17">
-							 <?= $lang['home_step_4_desc'] ?>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
-	<!-- END: 平台介绍 -->
-	<!-- BEGIN: CONTENT/SLIDERS/CLIENT-LOGOS-2 -->
+
 	<div class="c-content-box c-size-md c-bg-grey-1" style="background: url(views/assets/base/img/content/backgrounds/body-3.jpg) center center no-repeat;background-size: cover; padding-bottom: 120px; margin-bottom: 0;">
 		<div class="container">
-			<!-- Begin: Testimonals 1 component -->
 			<div class="c-content-client-logos-slider-1 c-bordered" data-slider="owl" data-items="6" data-desktop-items="4" data-desktop-small-items="3" data-tablet-items="3" data-mobile-small-items="2" data-auto-play="5000">
-				<!-- Begin: Title 1 component -->
 				<div class="c-content-title-1">
 					<h3 class="c-center c-font-bold"><?= $lang['home_partner_brands'] ?></h3>
 				</div>
-				<!-- End-->
-				<!-- Begin: Owlcarousel -->
+
 				<div class="owl-carousel owl-theme c-theme owl-bordered1">
 					<div class="item">
                         <a href="shop?id=OLSHOP180917000061"><img src="views/assets/base/img/content/client-logos/chj-jewellery.jpg" alt="潮宏基"/></a>
@@ -181,15 +119,9 @@
                         <a href="shop?id=OLSHOP180917000046"><img src="views/assets/base/img/content/client-logos/bloves.jpg" alt="BLOVES"/></a>
 					</div>
 				</div>
-				<!-- End-->
 			</div>
-			<!-- End-->
 		</div>
 	</div>
-	<!-- END: CONTENT/SLIDERS/CLIENT-LOGOS-2 -->
-
-	<!-- END: PAGE CONTENT -->
 </div>
-<!-- END: PAGE CONTAINER -->
 
 <?php include ('footer.php'); ?>
