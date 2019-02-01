@@ -1,12 +1,12 @@
 <?php
 /********************** header ********************/
 $lang['nav_home'] = "首页";
-$lang['nav_malls'] = "项目";
+$lang['nav_malls'] = "商业项目";
 $lang['nav_profile'] = "个人";
 $lang['nav_logout'] = "退出";
 $lang['nav_login'] = "登录";
 $lang['nav_register'] = "注册";
-$lang['nav_search'] = "搜索";
+$lang['nav_search'] = "搜索店铺";
 $lang['nav_favourites'] = "关注";
 $lang['nav_reservations'] = "预约";
 $lang['nav_title'] = "正大商业房地产";
@@ -34,7 +34,7 @@ $lang['home_wuxi_tm_addr'] = "江苏省无锡市惠山区华惠路绿地世纪�
 $lang['home_baoshan_tm'] = "正大乐城宝山购物中心";
 $lang['home_baoshan_tm_addr'] = "上海市宝山区陆翔路111号";
 $lang['home_title'] = "正大 Online Leasing 平台";
-$lang['home_banner_slogan_2'] = "致力于打造专业商业信息智能共享平台";
+$lang['home_banner_slogan_2'] = "努力打造专业商业信息智能共享平台";
 $lang['home_step_1'] = "寻找店铺";
 $lang['home_step_1_desc'] = "大数据精准测算，开店选址好帮手";
 $lang['home_step_2'] = "VR看铺";
@@ -222,7 +222,7 @@ $lang['mall_howard_johnson_hotel_addr'] = "徐汇区汾阳路1号，近淮海中
 
 /********************** Floor ********************/
 $lang['floor_shop_awaiting_rent'] = "待租店铺";
-$lang['floor_shop_in_renting'] = "在租店铺";
+$lang['floor_shop_in_renting'] = "店铺";
 $lang['floor_lift'] = "直梯";
 $lang['floor_escalator'] = "扶梯";
 $lang['floor_parking'] = "停车场";
@@ -245,7 +245,7 @@ $lang['shop_vr'] = "VR看铺";
 $lang['shop_shop_location'] = "店铺落位图";
 $lang['shop_this_shop'] = "本店铺";
 $lang['shop_shop_awaiting_rent'] = "待租店铺";
-$lang['shop_shop_in_renting'] = "在租店铺";
+$lang['shop_shop_in_renting'] = "店铺";
 $lang['shop_modality_shop_proportion'] = "店铺业态占比";
 
 /********************** Event ********************/

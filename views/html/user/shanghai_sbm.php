@@ -3,7 +3,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 ?>
 
 <div class="c-layout-page">
-    <div class="c-content-box c-size-md" style="background-image: url(views/assets/base/img/content/backgrounds/body-4.jpg); background-position: center bottom; margin-bottom: 0; z-index: 1;">
+    <div class="c-content-box c-size-md" style="background-image: url(views/assets/base/img/content/backgrounds/body-4.jpg); background-position: left center; margin-bottom: 0; z-index: 1;">
 		<div class="container">
 			<div class="c-content-feature-3-grid">
 				<h3 class="c-title c-font-bold mall-name"></h3>

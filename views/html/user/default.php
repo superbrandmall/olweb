@@ -4,13 +4,11 @@
             <div class="c-singup-form">
                 <h3 class="c-font-26 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
                 Online Leasing</h3>
-                <h5 class="c-font-24 c-font-thin c-font-white c-subtitle c-margin-b-30 hidden-xs">
-                <?= $lang['home_banner_slogan_1'] ?> </h5>
                 <div class="form-inline">
                     <a href="<?= strtolower($shanghai_sbm) ?>" class="btn btn-lg c-btn-blue c-btn-uppercase c-btn-square"><?= $lang['home_enter'] ?></a>
                 </div>
+                <img class="hidden-xs" alt="" src="views/assets/base/img/layout/logos/sbm_logo.png" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; z-index: 21;">
             </div>
-            <img class="hidden-xs" alt="" src="views/assets/base/img/layout/logos/sbm_logo.png" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; z-index: 21;">
             <div class="tp-banner">
                 <ul>
                     <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-style="dark">
@@ -21,16 +19,16 @@
         </div>
 	</section>
     
-    <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 0; padding-bottom: 0;">
+    <div class="c-content-box c-size-md c-bg-black c-bg-black-font" style="margin: 60px 0 0;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="c-content-title-1">
-						<h3 class="c-center c-font-bold">
-						<?= $lang['home_title'] ?> </h3>
-						<p class="c-center c-font-17">
+						<h3 class="c-center">
+						<?= $lang['home_banner_slogan_1'] ?> </h3>
+						<h3 class="c-center">
 							<?= $lang['home_banner_slogan_2'] ?>
-						</p>
+						</h3>
 					</div>
 				</div>
 			</div>

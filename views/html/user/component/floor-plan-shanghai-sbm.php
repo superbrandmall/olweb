@@ -19,15 +19,15 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 
 <div style="margin: 50px 50px 20px; color: #6d6d73;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
-    <span style="margin-left: 15px; background-color: #E3E3E3; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_info_desk'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_bathroom'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_downstairs'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -179px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_upstairs'] ?>
-    <span style="margin-left: 15px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_entrance'] ?>
+    <span style="margin-left: 10px; background-color: #E3E3E3; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_info_desk'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_bathroom'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_downstairs'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -179px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_upstairs'] ?>
+    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_entrance'] ?>
 </div>
 <div class="col-md-12">
     <center>
@@ -113,11 +113,13 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
     
     function drawShops(){
         var areas = $.map($('#Map_'+<?= $i ?>+'F area'),function(el) {
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: $(el).attr('name'),
-                fillColor: 'cdcdcd'
-            };
+            if($(el).attr('data-full') != 1){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd'
+                };
+            }
         });
         
         var xOffset;

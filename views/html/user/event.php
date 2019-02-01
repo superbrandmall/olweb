@@ -86,7 +86,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                         <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['event_event_location'] ?></h3>
                     </div>
                     <div id="map" class="c-content-panel">
-                        <div class="c-label" id="fmap">
+                        <div class="c-label" id="fmap" style="background-color: transparent;">
                             <span style="background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['event_this_event'] ?>
                         </div>
                     </div>

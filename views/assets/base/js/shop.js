@@ -260,11 +260,13 @@ function drawShops(){
                 selected: true 
             };
         } else {
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: $(el).attr('name'),
-                fillColor: 'cdcdcd'
-            };
+            if($(el).attr('data-full') != 1){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd'
+                };
+            }
             
         }
     });

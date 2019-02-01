@@ -80,14 +80,14 @@
 	        delayedcall(2.0,skin_hideskin());
 	</action>
 	
-	<scene name="scene_27-29_0404" title="场景1" onstart="" thumburl="panos/27-29_0404.tiles/thumb.jpg" lat="" lng="" heading="">
+	<scene name="scene_5F27-29_1121" title="场景1" onstart="" thumburl="panos/5F27-29_1121.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
-		<preview url="panos/27-29_0404.tiles/preview.jpg" />
+		<preview url="panos/5F27-29_1121.tiles/preview.jpg" />
 
 		<image>
-			<cube url="panos/27-29_0404.tiles/pano_%s.jpg" />
+			<cube url="panos/5F27-29_1121.tiles/pano_%s.jpg" />
 		</image>
 
 	</scene>

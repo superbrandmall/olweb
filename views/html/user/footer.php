@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-md-6 col-sm-6">
 				<p class="c-copyright c-font-oswald c-font-14">
-					 &copy; copyright <?= date("Y") ?>. <?= $lang['copyright'] ?> 
+					 &copy; COPYRIGHT <?= date("Y") ?>. <?= $lang['copyright'] ?> 
 				</p>
 			</div>
             <div class="col-md-6 col-sm-6 hidden-sm hidden-xs">

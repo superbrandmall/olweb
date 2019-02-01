@@ -1,12 +1,12 @@
 <?php
 /********************** header ********************/
-$lang['nav_home'] = "Home";
-$lang['nav_malls'] = "Mall";
+$lang['nav_home'] = "HOME";
+$lang['nav_malls'] = "MALL";
 $lang['nav_profile'] = "Profile";
 $lang['nav_logout'] = "Logout";
 $lang['nav_login'] = "Login";
 $lang['nav_register'] = "Register";
-$lang['nav_search'] = "Search";
+$lang['nav_search'] = "SEARCH";
 $lang['nav_favourites'] = "Favorite";
 $lang['nav_reservations'] = "Reservation";
 $lang['nav_title'] = "CP Commercial Real Estate";
@@ -222,7 +222,7 @@ $lang['mall_howard_johnson_hotel_addr'] = "1 Fenyang Road, Xuhui, Shanghai";
 
 /********************** Floor ********************/
 $lang['floor_shop_awaiting_rent'] = "Stores for rent";
-$lang['floor_shop_in_renting'] = "Stores in renting";
+$lang['floor_shop_in_renting'] = "Stores";
 $lang['floor_lift'] = "Lift";
 $lang['floor_escalator'] = "Escalator";
 $lang['floor_parking'] = "Parking";
@@ -245,7 +245,7 @@ $lang['shop_vr'] = "VR";
 $lang['shop_shop_location'] = "Store location";
 $lang['shop_this_shop'] = "This store";
 $lang['shop_shop_awaiting_rent'] = "Stores for rent";
-$lang['shop_shop_in_renting'] = "Stores in renting";
+$lang['shop_shop_in_renting'] = "Stores";
 $lang['shop_modality_shop_proportion'] = " store categories";
 
 /********************** Event ********************/

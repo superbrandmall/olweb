@@ -79,15 +79,15 @@
 	<action name="hide_vtourskin_all" autorun="onstart">
 	        delayedcall(2.0,skin_hideskin());
 	</action>
-    
-	<scene name="scene_49A_0330" title="场景1" onstart="" thumburl="panos/49A_0330.tiles/thumb.jpg" lat="" lng="" heading="">
+	
+	<scene name="scene_3F49A_1121" title="场景1" onstart="" thumburl="panos/3F49A_1121.tiles/thumb.jpg" lat="" lng="" heading="">
 
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
 
-		<preview url="panos/49A_0330.tiles/preview.jpg" />
+		<preview url="panos/3F49A_1121.tiles/preview.jpg" />
 
 		<image>
-			<cube url="panos/49A_0330.tiles/pano_%s.jpg" />
+			<cube url="panos/3F49A_1121.tiles/pano_%s.jpg" />
 		</image>
 
 	</scene>
