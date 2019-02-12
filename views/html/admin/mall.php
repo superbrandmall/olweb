@@ -94,6 +94,30 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
         </div>
         
         <div class="row">
+            <div class="col-lg-6">
+                <h1 class="page-header">客流量</h1>
+                <div class="widget-content">
+                    <canvas id="area-chart"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h1 class="page-header">车库流量</h1>
+                <div class="widget-content">
+                    <canvas id="area-chart2"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="page-header">销售额</h1>
+                <div class="widget-content">
+                    <canvas id="bar-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">项目周边交通</h1>
             </div>

@@ -111,6 +111,35 @@ function GetShopInfo(){
                     }
                 });
                 
+                var lk;
+                switch (response.data.mallCode) {
+                    case $.mallCode.shanghaiSbm:
+                        lk = "shanghai-sbm";
+                        break;
+                    case $.mallCode.baoshanTm:
+                        lk = "baoshan-tm";
+                        break;
+                    case $.mallCode.zhengzhouTm:
+                        lk = "zhengzhou-tm";
+                        break;
+                    case $.mallCode.xuhuiTm:
+                        lk = "xuhui-tm";
+                        break;
+                    case $.mallCode.xianTm:
+                        lk = "xian-tm";
+                        break;
+                    case $.mallCode.wuxiTm:
+                        lk = "wuxi-tm";
+                        break;
+                    default:
+                        lk = "shanghai-sbm";
+                        break;
+                }
+                
+                if(shop.floorCode != null) {
+                    GetMap(floorName,lk,response.data.mallCode);
+                }
+                
                 $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
                     if(v.mallCode == shop.mallCode) {
                         mallName = v.mallName;
@@ -124,8 +153,8 @@ function GetShopInfo(){
                 $('#hd_code').val(shop.hdCode || '-');
                 $('#mall').val(mallName || '-');
                 $('#floor').val(floorName || '-');
-                $('#dead_rent').val((shop.deadRent || '-' ) + '元');
-                $('#floating_rental_rate').val((shop.floatingRentalRate || '-' ) + '%');
+                $('#dead_rent').val((Math.round((shop.deadRent * shop.area * 365) / 12) || '-' ) + '元');
+                $('#floating_rental_rate').val((shop.floatingRentalRate * 100 || '-' ) + '%');
                 GetBrandModality3(shop.modality);
                 
                 if(shop.shopState === 1) { // 空铺
@@ -362,4 +391,151 @@ function GetBrandModality3(mod) {
     } else {
         $('#modality').val('-');
     }
+}
+
+function GetMap(fn,lk,mc){
+    var fc;
+    switch (fn) {
+        case '十楼':
+            fc = '10';
+            break;
+        case '九楼':
+            fc = '9';
+            break;
+        case '八楼':
+            fc = '8';
+            break;
+        case '七楼':
+            fc = '7';
+            break;    
+        case '六楼':
+            fc = '6';
+            break;
+        case '五楼':
+            fc = '5';
+            break;
+        case '四楼':
+            fc = '4';
+            break;
+        case '三楼':
+            fc = '3';
+            break;
+        case '二楼':
+            fc = '2';
+            break;
+        case '一楼':
+            fc = '1';
+            break;
+        case '负一楼':
+            fc = '0';
+            break;
+        default:
+            fc = '1';
+            break;
+    }
+    
+    $('#map').attr({
+        'src': '/views/assets/base/img/content/floor-plan/'+lk+'/cn/'+fc+'F.png',
+        'alt': fc+'F',
+        'usemap': '#Map_'+fc+'F_s'
+     });
+     
+    $('#map').parent().append('<map name="Map_'+fc+'F_s" id="Map_'+fc+'F_s"></map>');
+    
+    getCoords(mc,fn);
+}
+
+function getCoords(mc,fn) {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/"+mc+"/"+fn+"",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.state === 1 && v.coords != null && v.coords != ''){
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                    }
+                });
+                
+                drawShops();
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function drawShops(){
+    var areas = $.map($('area'),function(el) {
+        if(getURLParameter('id') === $(el).attr('alt')){
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: '本店铺',
+                fillColor: '3c763d',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        } else {
+            if($(el).attr('data-full') == 0){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd',
+                    selected: true
+                };
+            } else if($(el).attr('data-full') == 1){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: '空铺',
+                    fillColor: 'f2dede',
+                    selected: true
+                };
+            } else {
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: '待租',
+                    fillColor: 'fcf8e3',
+                    selected: true
+                };
+            }
+            
+        }
+    });
+
+    $('#map').mapster({
+        fillColor: 'c9ae89',
+        fillOpacity: 0.8,
+        strokeColor: 'ffd62c',
+        strokeWidth: 0,
+        clickNavigate: true,
+        mapKey: 'data-key',
+        showToolTip: true,
+        areas:  areas,
+        onShowToolTip: function () {
+            $(".mapster_tooltip").css({
+                "font-weight": "bold",
+                "color": "#fff",
+                "background": "rgba(0,0,0,0.8)",
+                "font-size": "26px",
+                "width": "auto"
+            });
+
+            $("area").on("mouseenter",  function (data) {
+               xOffset = data.pageX;
+               yOffset = data.pageY;
+               $(".mapster_tooltip").css("left", xOffset);
+               $(".mapster_tooltip").css("top", yOffset);
+            });
+        }
+    });
 }

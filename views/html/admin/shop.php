@@ -127,7 +127,7 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                                 </div>
                             </div>
                             
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group" id="vr">
                                     <label>店铺VR</label>&nbsp;&nbsp;
                                     <label class="radio-inline">
@@ -138,6 +138,23 @@ if(explode('?id=',$_SERVER['REQUEST_URI'])[1] != null) {
                                     </label>
                                     <div class="embed-responsive embed-responsive-16by9">
                                         <iframe class="embed-responsive-item" src="#" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>店铺落位图</label>
+                                    <div class="c-content-panel" style="background-color: transparent;">
+                                        <div class="c-label" id="fmap" style="background-color: transparent;">
+                                            <span style="background-color: #3c763d; width: 20px; height: 13px; display: inline-block;"></span> 本店铺
+                                            <span style="margin-left: 15px; background-color: #fcf8e3; width: 20px; height: 13px; display: inline-block;"></span> 待租
+                                            <span style="margin-left: 15px; background-color: #f2dede; width: 20px; height: 13px; display: inline-block;"></span> 空铺
+                                            <span style="margin-left: 15px; background-color: #cdcdcd; width: 20px; height: 13px; display: inline-block;"></span> 在租
+                                        </div>
+                                        <div class="c-body">
+                                            <img src="#" class="img-responsive" id="map">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

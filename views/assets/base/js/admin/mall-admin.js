@@ -57,6 +57,24 @@ function GetMallInfo(){
                 $('#desc').val(mall.description || '-');
                 $('#desc_eng').val(mall.descriptionEng || '-');
                 
+                var hdCode;
+                switch(mall.mallCode){
+                    case 'OLMALL180917000003':
+                        hdCode = "100001";
+                        break;
+                    case 'OLMALL180917000002':
+                        hdCode = "201001";
+                        break;
+                    case 'OLMALL180917000001':
+                        hdCode = "204001";
+                        break;
+                    default:
+                        hdCode = "100001";
+                        break;
+                }
+                
+                getMallFlow(hdCode);
+                
                 if(mall.traffic != null && mall.traffic != ''){
                     var traffics = mall.traffic;
                     $.each(traffics, function(i,v){
@@ -175,6 +193,120 @@ function caching() {
             }
         }
     });    
+}
+
+function getMallFlow(hd) {
+    $.ajax({
+        url: "http://10.130.12.15:8750/sync-bi/api/bi/findByMallHdCode/"+hd,
+        type: "GET",
+        async: false,
+        complete: function(){},
+        success: function (response, status, xhr) {
+            var yyyymmdd = [];
+            var upTy = [];
+            var vehicleInTy = [];
+            var salesTy = [];
+            
+            $.each(response.data, function(i,v){
+                yyyymmdd.push(v.yyyymmdd);
+                upTy.push(Math.round(v.upTy/1000));
+                vehicleInTy.push((Math.round(v.vehicleInTy/1000)*0.1).toFixed(2));
+                salesTy.push(Math.round(v.salesTy/1000000));
+            });
+            showUpTy(yyyymmdd,upTy);
+            showVehicleTy(yyyymmdd,vehicleInTy);
+            showSalesTy(yyyymmdd,salesTy);
+            $('.flowdata').append(yyyymmdd[0]+'-'+yyyymmdd[yyyymmdd.length-1]);
+        }
+    });
+}
+
+function showUpTy(yyyymmdd,upTy) {
+    /********* 客流量 **********/   
+    var kll = document.getElementById("area-chart").getContext('2d');
+    var kllChart = new Chart(kll, {
+        type: 'bar',
+        data: {
+            labels: yyyymmdd,
+            datasets: [
+                {
+                    label: '客流量(千人)',
+                    data: upTy,
+                    backgroundColor: 'rgba(234,106,114,0.5)',
+                    borderColor: 'rgba(234,106,114,1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function showVehicleTy(yyyymmdd,vehicleInTy) {
+    /********* 车库流量 **********/
+    var ckll = document.getElementById("area-chart2").getContext('2d');
+    var ckllChart = new Chart(ckll, {
+        type: 'line',
+        data: {
+            labels: yyyymmdd,
+            datasets: [
+                {
+                    label: '车库流量(万辆)',
+                    data: vehicleInTy,
+                    backgroundColor: 'rgba(214,182,91,0.5)',
+                    borderColor: 'rgba(214,182,91,1)',
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+}
+
+function showSalesTy(yyyymmdd,salesTy) {
+    /********* 销售额 **********/
+    var xse = document.getElementById("bar-chart").getContext('2d');
+    var xseChart = new Chart(xse, {
+        type: 'line',
+        data: {
+            labels: yyyymmdd,
+            datasets: [
+                {
+                    label: '销售额(百万)',
+                    data: salesTy,
+                    backgroundColor: 'transparent',
+                    borderColor: 'rgba(231,80,90,1)',
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 }
 
 /*function SaveMallBidStandard(){

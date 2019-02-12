@@ -4,7 +4,7 @@
             <li>
                 <a href="home"><i class="fa fa-home fa-fw"></i> 首页</a>
             </li>
-            <li<?php if($getTarget === "admin/merchants" || $getTarget === "admin/merchant" || $getTarget === "admin/merchant-tianyancha") echo " class='active'"?>>
+            <!--<li<?php if($getTarget === "admin/merchants" || $getTarget === "admin/merchant" || $getTarget === "admin/merchant-tianyancha") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-briefcase" aria-hidden="true"></i> 商户<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -19,7 +19,7 @@
                         <a href="brands">品牌信息</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li<?php if($getTarget === "admin/malls" || $getTarget === "admin/mall") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> 项目<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -28,14 +28,14 @@
                     </li>
                 </ul>
             </li>
-            <li<?php if($getTarget === "admin/buildings" || $getTarget === "admin/building") echo " class='active'"?>>
+            <!--<li<?php if($getTarget === "admin/buildings" || $getTarget === "admin/building") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-building" aria-hidden="true"></i> 建筑<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="buildings">建筑信息</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li<?php if($getTarget === "admin/floors" || $getTarget === "admin/floor") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-building-o" aria-hidden="true"></i> 楼层<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -52,14 +52,14 @@
                     </li>
                 </ul>
             </li>
-            <li<?php if($getTarget === "admin/bids" || $getTarget === "admin/bid") echo " class='active'"?>>
+            <!--<li<?php if($getTarget === "admin/bids" || $getTarget === "admin/bid") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-bar-chart-o" aria-hidden="true"></i> 出价<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="bids">出价信息</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li<?php if($getTarget === "admin/sync-hd") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-life-saver" aria-hidden="true"></i> 同步<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -68,7 +68,7 @@
                     </li>
                 </ul>
             </li>
-            <li<?php if($getTarget === "admin/users" || $getTarget === "admin/add-user") echo " class='active'"?>>
+            <!--<li<?php if($getTarget === "admin/users" || $getTarget === "admin/add-user") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-user" aria-hidden="true"></i> 用户<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
@@ -86,7 +86,7 @@
                         <a href="apis">API信息</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
         </ul>
     </div>
 </nav>
