@@ -69,19 +69,19 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 					<div class="col-md-4">
                         <h4 class="c-title c-first c-font-bold"><?= $lang['mall_gdp'] ?></h4>
 						<span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-							30,134</span><?= $lang['mall_yiyuan'] ?>
+							32,680</span><?= $lang['mall_yiyuan'] ?>
 						</span>
 					</div>
 					<div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_resident_population'] ?></h4>
 						<span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-							24,183,300
+							24,152,700
                         </span><?= $lang['mall_ren'] ?>
 					</div>
 					<div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_retail_sales'] ?></h4>
 						<span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-							11,830
+							12,669
                         </span><?= $lang['mall_yiyuan'] ?>
 					</div>
 				</div>
@@ -343,7 +343,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 							<h3 class="c-font-bold"><?= $lang['mall_fivestar_hotel'] ?></h3>
 							<ul class="c-content-list-1 c-theme c-separator-dot c-square">
                                 <li class="c-bg-before-red"><a href="http://www.shangri-la.com/cn/shanghai/pudongshangrila/" target="_blank"><?= $lang['mall_shangri_la'] ?></a> <small><?= $lang['mall_shangri_la_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.shicc.net/shicc/?lang=zh" target="_blank"><?= $lang['mall_oriental_riverside'] ?></a> <small><?= $lang['mall_oriental_riverside_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><a href="http://www.riverside-beijing.com/" target="_blank"><?= $lang['mall_oriental_riverside'] ?></a> <small><?= $lang['mall_oriental_riverside_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="http://www.ritzcarlton.com/zh-cn/hotels/china/shanghai-pudong" target="_blank"><?= $lang['mall_ritz_carlton'] ?></a> <small><?= $lang['mall_ritz_carlton_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="https://shanghai.grand.hyatt.com/zh-Hans/hotel/home.html" target="_blank"><?= $lang['mall_grand_hyatt'] ?></a> <small><?= $lang['mall_grand_hyatt_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="http://www.kempinskishanghaihotel.com/" target="_blank"><?= $lang['mall_grand_kempinski'] ?></a> <small><?= $lang['mall_grand_kempinski_addr'] ?></small></li>
