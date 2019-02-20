@@ -3,18 +3,10 @@ $(document).ready(function(){
 });
 
 function GetBrandInfo(){
-    var map = {
-        brand : {
-            code: getURLParameter('id')
-        }
-    };
     $.ajax({
-        url: $.api.base+"/brand/findByCode",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseNew+"/onlineleasing-admin/api/brand/"+getURLParameter('id')+"",
+        type: "GET",
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -29,21 +21,19 @@ function GetBrandInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                var brand = response.data.brand;
+                var brand = response.data;
                 $('#code').val(brand.code || '-');
                 $('#brand_name').val(brand.name || '-');
-                
-                var mod = [];
-                mod = $.parseJSON(sessionStorage.getItem("modalities"));
-                $.each(mod, function(i,v) {
-                    if(v.code == brand.modality_1.substr(0,2)) {
-                        $.each(v.list, function(j,w) {
+
+                $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
+                    if(u.code == brand.modality_1.substr(0,2)) {
+                        $.each(u.children, function(j,w) {
                             if(w.code == brand.modality_1) {
                                 $('#modality_1').val(w.name);
-                                $.each(w.list, function(k,x) {
+                                $.each(w.children, function(k,x) {
                                     if(x.code == brand.modality_2) {
                                         $('#modality_2').val(x.name);
-                                        $.each(x.list, function(l,y) {
+                                        $.each(x.children, function(l,y) {
                                             if(y.code == brand.modality_3) {
                                                 $('#modality_3').val(y.name);
                                             }

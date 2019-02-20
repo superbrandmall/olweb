@@ -3,18 +3,10 @@ $(document).ready(function(){
 });
 
 function GetBuildingInfo(){
-    var map = {
-        building : {
-            code: getURLParameter('id')
-        }
-    };
     $.ajax({
-        url: $.api.base+"/building/findByCode",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseNew+"/onlineleasing-admin/api/building/"+getURLParameter('id')+"",
+        type: "GET",
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -29,8 +21,8 @@ function GetBuildingInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                var building = response.data.building;
-                $('#code').val(building.code || '-');
+                var building = response.data;
+                $('#code').val(building.buildingCode || '-');
                 $('#mall').val(building.mallCode || '-');
                 $('#building').val(building.buildingName || '-');
                 $('#gross_area').val((building.grossFloorArea || '-' ) + '平方米');

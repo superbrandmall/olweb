@@ -11,7 +11,7 @@
                         <a href="merchants">商户信息</a>
                     </li>
                 </ul>
-            </li>
+            </li>-->
             <li<?php if($getTarget === "admin/brands" || $getTarget === "admin/brand") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-globe" aria-hidden="true"></i> 品牌<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -19,7 +19,7 @@
                         <a href="brands">品牌信息</a>
                     </li>
                 </ul>
-            </li>-->
+            </li>
             <li<?php if($getTarget === "admin/malls" || $getTarget === "admin/mall") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-star" aria-hidden="true"></i> 项目<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
@@ -28,14 +28,14 @@
                     </li>
                 </ul>
             </li>
-            <!--<li<?php if($getTarget === "admin/buildings" || $getTarget === "admin/building") echo " class='active'"?>>
+            <li<?php if($getTarget === "admin/buildings" || $getTarget === "admin/building") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-building" aria-hidden="true"></i> 建筑<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="buildings">建筑信息</a>
                     </li>
                 </ul>
-            </li>-->
+            </li>
             <li<?php if($getTarget === "admin/floors" || $getTarget === "admin/floor") echo " class='active'"?>>
                 <a href="#"><i class="fa fa-building-o" aria-hidden="true"></i> 楼层<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">

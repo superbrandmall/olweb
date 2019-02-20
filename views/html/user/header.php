@@ -28,7 +28,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="keywords" content="正大, 正大广场, 正大乐城, 上海, 徐汇, 宝山, 滨江, 顾村公园, 商铺, 商场, 郑州, 陆家嘴, 郑东新区, 浦东, 租赁, 在线租赁, leasing, online leasing" />
+<meta name="keywords" content="正大商业地产,cp commercial real,正大广场最新楼层指南,正大广场,上海正大广场,正大,上海帝泰发展有限公司,
+      上海正大广场官网,正大广场官网,上海正大广场所有品牌,正大地产,super brand mall,superbrandmall,正大商业地产,super brand mall shanghai,正大廣場,
+      www.superbrandmall.com,正大广场有哪些品牌,浦东正大广场,陆家嘴正大广场,上海 正大广场,superbrand mall,正大广场商家,上海正大广场品牌,
+      上海正大,super brand mall pudong,正大广场 上海,正大商业集团,正大广场品牌,正大商业,正大广场 品牌,正大广场活动,Super brand mall,帝泰,
+      正大官网,正大广场 亲子娱乐,Super brand mall shanghai,superbrand mall pudong,上海陆家嘴正大广场,正大广场网站,上海正大广场品牌男装,
+      上海正大集团有限公司,上海浦东正大广场,正大地产官网,正大商业房地产,上海市正大广场,Super Brand Mall,正大广场 英文,正大广场英文地址,
+      正大广场有哪些牌子,superbrand mall adidas,上海正大广场活动,上海正大广场店,上海帝泰,上海浦东新区正大广场,super brand mall shanghai stores,
+      正大广场上海,正大购物广场,superbrand mall shanghai,正大集团,正大商场,上海正大百货,正大广场入驻品牌,上海正大广场入驻品牌,正大广场商铺,
+      上海正大广场楼层指南,上海正大广场网站,上海 浦东 正大广场,mall,正大广场都有什么品牌" />
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="views/assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css"/>

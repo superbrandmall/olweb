@@ -43,7 +43,7 @@ function ShowMallList(){
     $('#mall_list').html('');
     $.each($.parseJSON(sessionStorage.getItem("malls")), function(j,w) {
         var selected = ''; 
-        if(j == 1){
+        if(j == 0){
             selected = 'selected = "selected"';
         }
         $('#mall_list').append('<option value="'+w.mallCode+'" '+selected+'>'+w.mallName+'</option>');
