@@ -26,7 +26,8 @@ $(document).ready(function(){
         ShowShops(1,50);
     }
     
-    $('#search').click(function() {
+    $('#search').click(function(e) {
+        e.preventDefault();
         $.cookie('shopsAdminShopName',$('#shop_name').val());
         $.cookie('shopsAdminUnit',$('#unit').val());
         $.cookie('shopsAdminState',$('#state').children('option:selected').val());
@@ -156,7 +157,7 @@ function ShowShops(p,c){
                         v.state === 1? isLock = "<div class='badge badge-info'>未锁定</div>" : isLock = "<div class='badge badge-warning'>锁定</div>";
                         v.isSync === 1? isSync = "<div class='badge badge-info'>同步</div>" : isSync = "<div class='badge badge-warning'>不同步</div>";
                         
-                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.unit+'</td><td>'+isLock+'</td><td>'+isSync+'</td><td>'+v.shopName+'</td><td>'+mallName+'</td><td>'+floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td>'+modality+'</td><td>'+moving+'</td><td>'+state+'</td></tr>');
+                        $('table tbody').append('<tr onclick=\'redirect("'+v.code+'");\' style="cursor: pointer;"><td>'+v.unit+'</td><td>'+isLock+'</td><td>'+isSync+'</td><td>'+v.shopName+'</td><td>'+mallName+'</td><td>'+floorName+'</td><td>'+v.area+'m<sup>2</sup></td><td<td>'+modality+'</td><td>'+moving+'</td><td>'+state+'</td></tr>');
                     });
                     
                     if(p == pages){
