@@ -96,7 +96,7 @@ function searchShopAndCheck(){
     <div class="panel-heading"><i class="fa fa-bell fa-fw"></i> '+mallName+'问题店铺</div>\n\
     <div class="panel-body"><div class="list-group" id="list_group_'+i+'"></div></div></div></div></div>');
                     $.each(v, function(j,w) {
-                        if(w.subType != '临时场地' && w.subType != '虚拟点位' && w.subType != 'STORA'){
+                        if(w.subType == '正柜' || w.subType == 'kiosk'){
                             $('#list_group_'+i).append('<a href="shop?id='+w.code+'" class="list-group-item">'+w.unit+'<span class="pull-right text-muted small" id="prob_'+i+'_'+j+'"></span></a>');
                             $.each(w.checkItems, function(k,x) {
                                 var badgeClass;

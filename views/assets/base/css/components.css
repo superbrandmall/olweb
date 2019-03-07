@@ -3926,8 +3926,13 @@ h1 {
     border-bottom: 0;
   }
   .c-layout-header.c-layout-header-default-mobile .c-topbar {
-    border-bottom: 1px solid #edf4f6;
+    position: relative;
     background: #ffffff;
+  }
+  
+  .c-bg-dark {
+    padding: 5px 0;
+
   }
   .c-layout-header.c-layout-header-default-mobile .c-topbar .c-top-menu > .c-icons > li > a:not(.btn),
   .c-layout-header.c-layout-header-default-mobile .c-topbar .c-top-menu > .c-icons > li > span,

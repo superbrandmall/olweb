@@ -37,6 +37,11 @@
       正大广场有哪些牌子,superbrand mall adidas,上海正大广场活动,上海正大广场店,上海帝泰,上海浦东新区正大广场,super brand mall shanghai stores,
       正大广场上海,正大购物广场,superbrand mall shanghai,正大集团,正大商场,上海正大百货,正大广场入驻品牌,上海正大广场入驻品牌,正大广场商铺,
       上海正大广场楼层指南,上海正大广场网站,上海 浦东 正大广场,mall,正大广场都有什么品牌" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Online Leasing在线招商平台">
+<meta property="og:description" content="努力打造专业商业信息智能共享平台">
+<meta property="og:image" content="https://ol.superbrandmall.com/views/assets/base/img/content/backgrounds/wechat-thumbnail.jpg">
+<meta property="og:url" content="https://ol.superbrandmall.com/">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="views/assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css"/>
 <link href="views/assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css"/>
