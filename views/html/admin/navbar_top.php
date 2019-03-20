@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
             <span class="sr-only">Toggle navigation</span>
@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="home">
-            <img src="/views/assets/base/img/layout/logos/sbm_logo.png" alt="正大" height="25" style="display: inline-block;" /> Online Leasing 后台管理系统
+            <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="25" style="display: inline-block;" /> FLOOR PLANS
         </a>
     </div>
 

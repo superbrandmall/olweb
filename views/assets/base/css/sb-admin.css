@@ -3,7 +3,7 @@
 /* ------------------------------- */
 
  body {
-    background-color: #f8f8f8;
+    background-color: #222;
     overflow-x: hidden;
 }
 
@@ -25,6 +25,23 @@ a, a:hover, a:focus {
     background-color: #fff;
 }
 
+#side-menu > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #999;
+}
+
+#side-menu {
+    background-color: #222;
+}
+
+#side-menu > .active > a,
+#side-menu > li > a:hover, 
+#side-menu > li > a:focus {
+    color: #ffffff;
+    background-color: #080808;
+}
+
 .thumbnail {
     position: relative;
 }
@@ -32,15 +49,14 @@ a, a:hover, a:focus {
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 150px;
+        margin: 0 0 0 100px;
         padding: 0 30px 30px;
-        min-height: 1300px;
-        border-left: 1px solid #e7e7e7;
+        min-height: 1000px;
     }
 }
 
 .navbar-static-side ul li {
-    border-bottom: 1px solid #e7e7e7;
+    text-align: center;
 }
 
 /* Navigation */
@@ -138,7 +154,7 @@ a, a:hover, a:focus {
     .navbar-static-side {
         z-index: 1;
         position: absolute;
-        width: 150px;
+        width: 100px;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -146,6 +162,32 @@ a, a:hover, a:focus {
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
+}
+
+table {
+    background-color: #FBFCF4;
+}
+
+.table-striped > tbody > tr:nth-of-type(2n+1),
+.table-striped > tbody > tr:hover {
+    background-color: #EBCEAE;
+}
+
+.table-striped > tbody a {
+    color: #333;
+    text-decoration: none;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    border-top: 0 none;
+}
+
+#fmap .radio-inline {
+    margin-top: -4px;
+}
+
+.list-group-item {
+    font-size: 12px;
 }
 
 /* Buttons */
@@ -341,6 +383,7 @@ label.error {
 
 .badge {
     padding: 5px 15px;
+    font-weight: normal;
 }
 
 .badge-success {
