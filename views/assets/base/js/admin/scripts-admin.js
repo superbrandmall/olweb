@@ -194,7 +194,7 @@ function getShopFloorInfo(fl) {
                                 break;
                         }
 
-                        if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '') {
+                        if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '' && (v.shopState == 0 || v.shopState == 2)) {
                             itm++;
                             if(itm % 2 == 0){
                                 $('#shops_info tbody').append('<tr><td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td></tr>');

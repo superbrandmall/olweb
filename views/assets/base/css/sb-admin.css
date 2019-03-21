@@ -164,21 +164,26 @@ a, a:hover, a:focus {
     }
 }
 
-table {
+#shops_info table {
     background-color: #FBFCF4;
 }
 
-.table-striped > tbody > tr:nth-of-type(2n+1),
-.table-striped > tbody > tr:hover {
+#shops_info .table-striped > tbody > tr:nth-of-type(2n+1),
+#shops_info .table-striped > tbody > tr:hover {
     background-color: #EBCEAE;
 }
 
-.table-striped > tbody a {
+#shops_info .table-striped > tbody a {
     color: #333;
     text-decoration: none;
 }
 
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+#shops_info .table > thead > tr > th, 
+#shops_info .table > tbody > tr > th, 
+#shops_info .table > tfoot > tr > th, 
+#shops_info .table > thead > tr > td, 
+#shops_info .table > tbody > tr > td, 
+#shops_info .table > tfoot > tr > td {
     border-top: 0 none;
 }
 

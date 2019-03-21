@@ -34,6 +34,9 @@
             <li id="nav_f_0">
                 <a href="/admin/?f=0">B1</a>
             </li>
+            <li id="nav_summary">
+                <a href="/admin/summary">Summary</a>
+            </li>
         </ul>
     </div>
 </nav>
