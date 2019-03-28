@@ -79,7 +79,7 @@ function getFloorsRentalInfo(fl) {
                 var stores_3_units = 0; //改造个数
 
                 $.each(response.data, function(i,v){
-                    if(v.subType == '正柜' || v.subType == 'THEAT'){
+                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state == 1 ){
                         stores = stores + v.area;
                         stores_units++;
 

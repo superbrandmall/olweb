@@ -164,7 +164,7 @@ function getShopFloorInfo(fl) {
 
                 var itm = 0;
                 $.each(response.data, function(i,v){
-                    if(v.subType == '正柜' || v.subType == 'kiosk'){
+                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state == 1 ){
                         stores = stores + v.area;
 
                         switch (v.shopState) {
@@ -195,16 +195,16 @@ function getShopFloorInfo(fl) {
                         }
 
                         if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '' && (v.shopState == 0 || v.shopState == 2)) {
-                            itm++;
                             if(itm % 2 == 0){
                                 $('#shops_info tbody').append('<tr><td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td></tr>');
                             } else {
-                                $('#shops_info tbody').find('tr').last().append('<td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td><');
+                                $('#shops_info tbody').find('tr').last().append('<td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td>');
                             }
+                            itm++;
                         }
                     }
 
-                    if(v.shopState != 3 && v.coords != null && v.coords != ''){
+                    if(v.coords != null && v.coords != '' && v.state == 1){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'" shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
@@ -261,6 +261,13 @@ function drawShops(){
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
                     fillColor: 'FEED99',
+                    selected: true
+                };
+            } else if($(el).attr('data-full') == 3){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: '改造中',
+                    fillColor: 'D5C8AA',
                     selected: true
                 };
             }
@@ -365,6 +372,9 @@ function GetShopInfo(){
                 var state, brandTime = "现";
                 var brandName = shop.brandName;
                 switch(shop.shopState){
+                    case 0:
+                        state = "在租";
+                        break;
                     case 1:
                         state = "空铺";
                         $('#shop_state').addClass('badge-danger');
@@ -380,13 +390,23 @@ function GetShopInfo(){
                         state = "待租";
                         $('#shop_state').addClass('badge-warning');
                         break;
-                    case 0:
-                        state = "在租";
+                    case 3:
+                        state = "改造";
+                        $('#shop_state').addClass('badge-renovation');
+                        if(shop.brandToSign != null && shop.brandToSign != ''){
+                            brandTime = "目标";
+                            brandName = shop.brandToSign;
+                            $('#brand_name').addClass('badge-success');
+                        } else {
+                            brandTime = "原";
+                        }
                         break;
                     default:
                         state = "在租";
                         break;
                 }
+                
+                $('#shop_name').text(shop.shopName);
                 $('#shop_state').text(state);
                 $('#brand_time').text(brandTime);
                 $('#brand_name').text(brandName || '-');
@@ -445,6 +465,21 @@ function GetShopInfo(){
 
                     $('#opening_date').text(openingYear+'-'+openingMonth+'-'+openingDate);
                 }
+                
+                if(shop.remark_1 != null){
+                    $('#plan_open_date').text(shop.remark_1);
+                }
+                
+                if(shop.remark_2 != null){
+                    $('#loss').text((numberWithCommas(shop.remark_2) || 0 ) + '元');
+                    if(shop.remark_2 != 0){
+                        $('#loss').addClass('badge-danger');
+                    }
+                }
+                
+                if(shop.responsiblePerson != null){
+                    $('#responsible_person').text(shop.responsiblePerson);
+                }
 
                 if(shop.brandName != null && shop.brandName != '') {
                     if(shop.shopState == 1) {
@@ -478,7 +513,6 @@ function GetShopInfo(){
                     $('#vr .embed-responsive').hide();
                 }
 
-                console.log('门牌号:'+shop.shopName);
                 console.log('单元号:'+shop.unit);
                 
             } else {

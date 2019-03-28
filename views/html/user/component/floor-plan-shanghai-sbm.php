@@ -113,7 +113,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
     
     function drawShops(){
         var areas = $.map($('#Map_'+<?= $i ?>+'F area'),function(el) {
-            if($(el).attr('data-full') != 1){
+            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),

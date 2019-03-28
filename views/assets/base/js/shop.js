@@ -64,10 +64,42 @@ function GetShopInfo(){
                 
                 if($.cookie('lang') === 'en-us'){
                     $('#floor').text(floorNameEng || '-');
-                    $('#shop_state').text(response.data.shopState === 1 ? 'Previous' : 'Current');
+                    switch(response.data.shopState){
+                        case 0:
+                            $('#shop_state').text('Current');
+                            break;
+                        case 1:
+                            $('#shop_state').text('Previous');
+                            break;
+                        case 2:
+                            $('#shop_state').text('Current');
+                            break;
+                        case 3:
+                            $('#shop_state').text('Previous');
+                            break;
+                        default:
+                            $('#shop_state').text('Current');
+                            break;
+                    }
                 } else {
                     $('#floor').text(floorName || '-');
-                    $('#shop_state').text(response.data.shopState === 1 ? '上一品牌' : '在租品牌');
+                    switch(response.data.shopState){
+                        case 0:
+                            $('#shop_state').text('在租品牌');
+                            break;
+                        case 1:
+                            $('#shop_state').text('上一品牌');
+                            break;
+                        case 2:
+                            $('#shop_state').text('在租品牌');
+                            break;
+                        case 3:
+                            $('#shop_state').text('上一品牌');
+                            break;
+                        default:
+                            $('#shop_state').text('在租品牌');
+                            break;
+                    }
                 }
                 
                 var lk;
@@ -260,7 +292,7 @@ function drawShops(){
                 selected: true 
             };
         } else {
-            if($(el).attr('data-full') != 1){
+            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),

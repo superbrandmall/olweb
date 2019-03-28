@@ -414,3 +414,9 @@ label.error {
     border-color: #bce8f1;
     color: #31708f;
 }
+
+.badge-renovation {
+    background-color: #BCAC85;
+    border-color: #BCAC85;
+    color: #fff;
+}

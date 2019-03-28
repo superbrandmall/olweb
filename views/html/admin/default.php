@@ -44,6 +44,10 @@
 				                  <span id="floor" class="badge"></span>
 				                  楼层
 				                </li>
+                                                <li class="list-group-item">
+				                  <span id="shop_name" class="badge"></span>
+				                  门牌号
+				                </li>
 				                <li class="list-group-item">
 				                  <span id="shop_state" class="badge"></span>
 				                  状态
@@ -63,6 +67,10 @@
 				                <li class="list-group-item">
 				                  <span id="float_rent" class="badge"></span>
 				                  扣率
+				                </li>
+                                                <li class="list-group-item">
+				                  <span id="sales" class="badge"></span>
+				                  近<span id="weeks"></span>周销售额
 				                </li>
 			              	</ul>
 		              	</div>
@@ -89,9 +97,17 @@
 				                  <span id="opening_date" class="badge"></span>
 				                  开业时间
 				                </li>
-				                <li class="list-group-item">
-				                  <span id="sales" class="badge"></span>
-				                  近<span id="weeks"></span>周销售额
+                                                <li class="list-group-item">
+				                  <span id="plan_open_date" class="badge"></span>
+				                  预算开业
+				                </li>
+                                                <li class="list-group-item">
+				                  <span id="loss" class="badge"></span>
+				                  损失金额
+				                </li>
+                                                <li class="list-group-item">
+				                  <span id="responsible_person" class="badge"></span>
+				                  负责人
 				                </li>
 			              	</ul>
 		              	</div>

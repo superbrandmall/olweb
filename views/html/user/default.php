@@ -49,7 +49,7 @@
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000059"><img src="views/assets/base/img/content/client-logos/enzo.jpg" alt="ENZO"/></a>
-                            <a href="shop?id=OLSHOP180917000605"><img src="views/assets/base/img/content/client-logos/zhangshengji.jpg" alt="张生记"/></a>
+                            <a href="shop?id=OLSHOP180917000072"><img src="views/assets/base/img/content/client-logos/starbucks.jpg" alt="Starbucks"/></a>
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000385"><img src="views/assets/base/img/content/client-logos/moco.jpg" alt="MO&Co."/></a>
