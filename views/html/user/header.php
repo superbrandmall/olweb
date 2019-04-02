@@ -122,6 +122,11 @@ var _hmt = _hmt || [];
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
                     </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">
+                            <i class="icon-note"></i> <?= $lang['nav_contact'] ?>
+                        </a>
+                    </li>
                     <li class="c-menu-type-classic">
                         <?php if (isset($_SESSION["lang"]) && $_SESSION["lang"] == 'en') { ?>
                         <a href="/?lang=cn" class="c-link" id="c_link_cn"><img src="views/assets/base/img/content/misc/cn.png" alt="正大" width="20" > 中文</a>
@@ -135,3 +140,7 @@ var _hmt = _hmt || [];
         </div>
     </div>
 </header>
+
+<?php
+include ('contact.php');
+?>

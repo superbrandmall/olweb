@@ -5,7 +5,7 @@ $lang['nav_malls'] = "MALL";
 $lang['nav_profile'] = "Profile";
 $lang['nav_logout'] = "Logout";
 $lang['nav_login'] = "Login";
-$lang['nav_register'] = "Register";
+$lang['nav_contact'] = "Get in Touch";
 $lang['nav_search'] = "SEARCH";
 $lang['nav_favourites'] = "Favorite";
 $lang['nav_reservations'] = "Reservation";
@@ -45,28 +45,20 @@ $lang['home_step_4'] = "Checking offline";
 $lang['home_step_4_desc'] = "All-round viewing edges of stores";
 $lang['home_partner_brands'] = "Partner brands";
 
-/********************** Register ********************/
-$lang['register_register'] = "Registration";
-$lang['register_choose'] = "Please choose ";
-$lang['register_main_contact'] = "First and last name";
-$lang['register_company_name'] = "Company name";
-$lang['register_brand_name'] = "Brand name";
-$lang['register_uscc'] = "Uniform social credit code";
-$lang['register_modality_0'] = "category level 1";
-$lang['register_modality_1'] = "category level 2";
-$lang['register_modality_2'] = "category level 3";
-$lang['register_modality_3'] = "category level 4";
-$lang['register_verify_method'] = "Verification method";
-$lang['register_verify_mobile'] = "Mobile";
-$lang['register_verify_email'] = "Email";
-$lang['register_mobile'] = "Mobile";
-$lang['register_veryfication_code'] = "Code";
-$lang['register_send_code'] = "Send";
-$lang['register_company_email'] = "Email";
-$lang['register_accept'] = "Accept ";
-$lang['register_chiatai_ol_reg_agree'] = "Chia Tai Online Leasing user registration agreement";
-$lang['register_finish_registration'] = "Register now";
-$lang['register_back_login'] = "Back to login";
+/********************** Contact ********************/
+$lang['contact_contact'] = "Get in Touch";
+$lang['contact_choose'] = "Please choose ";
+$lang['contact_main_contact'] = "First and last name";
+$lang['contact_company_name'] = "Company name";
+$lang['contact_brand_name'] = "Brand name";
+$lang['contact_modality_0'] = "category level 1";
+$lang['contact_modality_1'] = "category level 2";
+$lang['contact_modality_2'] = "category level 3";
+$lang['contact_modality_3'] = "category level 4";
+$lang['contact_phone'] = "Phone";
+$lang['contact_email'] = "Email";
+$lang['contact_msg'] = "Message";
+$lang['contact_finish_form'] = "Submit";
 
 /********************** Login ********************/
 $lang['login_welcome'] = "Welcome to Online Leasing";

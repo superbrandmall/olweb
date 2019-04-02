@@ -5,7 +5,7 @@ $lang['nav_malls'] = "商业项目";
 $lang['nav_profile'] = "个人";
 $lang['nav_logout'] = "退出";
 $lang['nav_login'] = "登录";
-$lang['nav_register'] = "注册";
+$lang['nav_contact'] = "联系我们";
 $lang['nav_search'] = "搜索店铺";
 $lang['nav_favourites'] = "关注";
 $lang['nav_reservations'] = "预约";
@@ -45,28 +45,20 @@ $lang['home_step_4'] = "到店看铺"; //签订合同
 $lang['home_step_4_desc'] = "线上线下结合，全方位看铺无死角"; //快速高效，线上合同即时生成，方便下载取阅
 $lang['home_partner_brands'] = "合作品牌";
 
-/********************** Register ********************/
-$lang['register_register'] = "注册新账号";
-$lang['register_choose'] = "请选择";
-$lang['register_main_contact'] = "姓名";
-$lang['register_company_name'] = "公司名称";
-$lang['register_brand_name'] = "品牌名称";
-$lang['register_uscc'] = "统一社会信用代码";
-$lang['register_modality_0'] = "一级业态";
-$lang['register_modality_1'] = "二级业态";
-$lang['register_modality_2'] = "三级业态";
-$lang['register_modality_3'] = "四级业态";
-$lang['register_verify_method'] = "验证方式";
-$lang['register_verify_mobile'] = "手机验证";
-$lang['register_verify_email'] = "邮箱验证";
-$lang['register_mobile'] = "手机";
-$lang['register_veryfication_code'] = "验证码";
-$lang['register_send_code'] = "发送验证码";
-$lang['register_company_email'] = "公司邮箱";
-$lang['register_accept'] = "同意";
-$lang['register_chiatai_ol_reg_agree'] = "正大Online Leasing用户注册协议";
-$lang['register_finish_registration'] = "立即注册";
-$lang['register_back_login'] = "返回登录";
+/********************** Contact ********************/
+$lang['contact_contact'] = "联系我们";
+$lang['contact_choose'] = "请选择";
+$lang['contact_main_contact'] = "姓名";
+$lang['contact_company_name'] = "公司名称";
+$lang['contact_brand_name'] = "品牌名称";
+$lang['contact_modality_0'] = "一级业态";
+$lang['contact_modality_1'] = "二级业态";
+$lang['contact_modality_2'] = "三级业态";
+$lang['contact_modality_3'] = "四级业态";
+$lang['contact_phone'] = "电话";
+$lang['contact_email'] = "邮箱";
+$lang['contact_msg'] = "讯息";
+$lang['contact_finish_form'] = "提交";
 
 /********************** Login ********************/
 $lang['login_welcome'] = "欢迎来到Online Leasing";

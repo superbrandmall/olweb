@@ -104,8 +104,12 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         strtolower($shanghai_sbm) => array(
             'url' => 'shanghai_sbm.php'
         ),
+        
         'shop' => array(
             'url' => 'shop.php'
+        ),
+        'contact' => array(
+            'url' => 'default.php'
         ),
         'requirement' => array(
             'url' => 'requirement.php'
@@ -124,7 +128,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         $page = 'default.php';
     }
     
-    $session_required = array('login.php','register.php','reserve.php','reserve_event.php','my_info.php','my_reservations.php','my_favourite.php');
+    $session_required = array('contact.php');
     if (in_array($page, $session_required)) {
         include_once 'models/user/Session.class.php';
         $session = new Session();
