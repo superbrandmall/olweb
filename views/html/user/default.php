@@ -101,14 +101,14 @@
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000695"><img src="views/assets/base/img/content/client-logos/wills.jpg" alt="Will's GYM"/></a>
-                            <a href="shop?id=OLSHOP180917000530"><img src="views/assets/base/img/content/client-logos/hotwind.jpg" alt="热风"/></a>
+                            <a href="shop?id=OLSHOP180917000734"><img src="views/assets/base/img/content/client-logos/taier.jpg" alt="太二老坛子酸菜鱼"/></a>
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000703"><img src="views/assets/base/img/content/client-logos/south-beauty.jpg" alt="俏江南"/></a>
                             <a href="shop?id=OLSHOP180917000096"><img src="views/assets/base/img/content/client-logos/haagen-dazs.jpg" alt="Hagan Dazs"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000656"><img src="views/assets/base/img/content/client-logos/charme.jpg" alt="港丽"/></a>
+                            <a href="shop?id=OLSHOP180917000635"><img src="views/assets/base/img/content/client-logos/fengherili.jpg" alt="丰和日丽"/></a>
                             <a href="shop?id=OLSHOP180917000341"><img src="views/assets/base/img/content/client-logos/koradior.jpg" alt="Koradior"/></a>
                         </div>
                         <div class="item">

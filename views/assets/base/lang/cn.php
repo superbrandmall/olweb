@@ -2,6 +2,7 @@
 /********************** header ********************/
 $lang['nav_home'] = "首页";
 $lang['nav_malls'] = "商业项目";
+$lang['nav_co_work'] = "OZONE";
 $lang['nav_profile'] = "个人";
 $lang['nav_logout'] = "退出";
 $lang['nav_login'] = "登录";
@@ -253,65 +254,6 @@ $lang['event_event_location'] = "场地落位图";
 $lang['event_this_event'] = "本场地";
 $lang['event_modality_shop_proportion'] = "店铺业态占比";
 
-/********************** Reserve ********************/
-$lang['reserve_home'] = "首页";
-$lang['reserve_shop_detail'] = "店铺招商详情";
-$lang['reserve_event_detail'] = "场地招商详情";
-$lang['reserve_reserve_showing'] = "预约看铺";
-$lang['reserve_reserve_event_showing'] = "预约看场";
-$lang['reserve_my_info'] = "我的信息";
-$lang['reserve_name'] = "姓名";
-$lang['reserve_company'] = "公司名称";
-$lang['reserve_mobile'] = "联系电话";
-$lang['reserve_email'] = "邮箱";
-$lang['reserve_reservation'] = "预约信息";
-$lang['reserve_brands'] = "入驻品牌";
-$lang['reserve_date'] = "预约时间";
-$lang['reserve_lease_term'] = "租约时限";
-$lang['reserve_year'] = "年";
-$lang['reserve_day'] = "天";
-$lang['reserve_please_choose'] = "请选择";
-$lang['reserve_planned_moving_in_date'] = "预计入驻日期";
-$lang['reserve_planned_moving_in_event_date'] = "预计入场日期";
-$lang['reserve_verify_method'] = "验证方式";
-$lang['reserve_veryfication_code'] = "验证码";
-$lang['reserve_send_code'] = "发送";
-$lang['reserve_make_reservation'] = "提交预约";
-$lang['reserve_shop_info'] = "店铺信息";
-$lang['reserve_event_info'] = "场地信息";
-$lang['reserve_recommand_modality'] = "推荐业态";
-$lang['reserve_leasable_area'] = "租赁面积";
-$lang['reserve_floor'] = "所在楼层";
-$lang['reserve_room_number'] = "单元号";
-$lang['reserve_project'] = "所属项目";
-
-/********************** Profile ********************/
-$lang['profile_home'] = "首页";
-$lang['profile_profile'] = "个人";
-$lang['profile_my_info'] = "我的信息";
-$lang['profile_name'] = "姓名";
-$lang['profile_company'] = "公司名称";
-$lang['profile_brand'] = "品牌名称";
-$lang['profile_choose'] = "请选择";
-$lang['profile_modality_0'] = "一级业态";
-$lang['profile_modality_1'] = "二级业态";
-$lang['profile_modality_2'] = "三级业态";
-$lang['profile_modality_3'] = "四级业态";
-$lang['profile_mobile'] = "手机";
-$lang['profile_email'] = "公司邮箱";
-$lang['profile_save'] = "保存信息";
-$lang['profile_change_succeed'] = "修改信息成功";
-
-/********************** My reservations ********************/
-$lang['reservation_reserve_succeed'] = "预约成功";
-$lang['reservation_home'] = "首页";
-$lang['reservation_my_reservations'] = "我的预约";
-$lang['reservation_following_records'] = "以下是您的预约记录, 感谢您对正大Online Leasing的支持和关注。";
-
-/********************** My favourite ********************/
-$lang['favourite_home'] = "首页";
-$lang['favourite_my_favourites'] = "我的关注";
-
 /********************** Events ********************/
 $lang['events_home'] = "首页";
 $lang['events_events'] = "办活动";
@@ -322,13 +264,11 @@ $lang['events_wx'] = "正大乐城无锡购物中心";
 $lang['events_xa'] = "正大乐城西安购物中心";
 $lang['events_zz'] = "正大乐城郑州购物中心";
 $lang['events_detail'] = "场地详情";
-$lang['events_pearl_atrium'] = "明珠厅";
+$lang['events_pearl_atrium'] = "1F东厅"; //明珠厅
 $lang['events_pearl_atrium_location'] = "1F东侧入口";
-$lang['events_bund_atrium'] = "滨江厅";
+$lang['events_bund_atrium'] = "1F西厅"; //滨江厅
 $lang['events_bund_atrium_location'] = "1F西侧入口";
-$lang['events_pearl_platform'] = "明珠平台";
-$lang['events_pearl_platform_location'] = "3F东侧";
-$lang['events_jade_platform'] = "翡翠平台";
+$lang['events_jade_platform'] = "5F东平台"; //翡翠平台
 $lang['events_jade_platform_location'] = "5F东侧";
 $lang['events_ct_hall'] = "正大厅";
 $lang['events_ct_hall_location'] = "9F封闭式多功能大厅";
@@ -336,10 +276,6 @@ $lang['events_golden_avenue'] = "黄金大道";
 $lang['events_golden_avenue_location'] = "3F中庭";
 $lang['events_golden_platform'] = "黄金平台";
 $lang['events_golden_platform_location'] = "4F东侧";
-$lang['events_platform'] = "黑金平台";
-$lang['events_platform_location'] = "2F东侧";
-$lang['events_happiness_platform'] = "欢乐天地";
-$lang['events_happiness_platform_location'] = "6F东侧";
 $lang['events_bs_a1'] = "A1";
 $lang['events_bs_a1_location'] = "B1中心广场";
 $lang['events_bs_a2'] = "A2";
@@ -354,6 +290,12 @@ $lang['events_bs_d1'] = "D1";
 $lang['events_bs_d1_location'] = "B1地铁出入口";
 $lang['events_bs_d2'] = "D2";
 $lang['events_bs_d2_location'] = "B1地铁入口主干道";
+
+/********************** Co-work ********************/
+$lang['co_work_cowork'] = "联合办公";
+$lang['co_work_phone'] = "手机号码";
+$lang['co_work_veryfication_code'] = "验证码";
+$lang['co_work_send_code'] = "发送验证码";
 
 /********************** Footer ********************/
 $lang['copyright'] = "上海帝泰发展有限公司版权所有";

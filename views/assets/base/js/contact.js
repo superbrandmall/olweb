@@ -19,6 +19,8 @@ $(document).ready(function(){
         var contact_modality_2_required = "Please choose category level 3";
         var contact_modality_3_required = "Please choose category level 4";
         var contact_msg_required = "Message can't be empty";
+        var contact_msg_sent = "Message sent successfully";
+        var contact_msg_max_length = "Text length is too long";
     } else {
         var contact_contact_name_1_required = "姓名为必填项";
         var contact_contact_name_1_minlength = "请输入完整姓名";
@@ -36,6 +38,8 @@ $(document).ready(function(){
         var contact_modality_2_required = "请选择三级业态";
         var contact_modality_3_required = "请选择四级业态";
         var contact_msg_required = "讯息为必填项";
+        var contact_msg_sent = "讯息发送成功";
+        var contact_msg_max_length = "讯息文字太长";
     }
     
     $("#contact form").validate({
@@ -75,7 +79,8 @@ $(document).ready(function(){
                 required: true
             },
             contact_msg: {
-                required: true
+                required: true,
+                maxlength: 255
             }
         },
         messages: {
@@ -113,7 +118,8 @@ $(document).ready(function(){
                 required: contact_modality_3_required
             },
             contact_msg: {
-                required: contact_msg_required
+                required: contact_msg_required,
+                maxlength: contact_msg_max_length
             }
         },
         errorPlacement: function(error, element) {
@@ -124,33 +130,84 @@ $(document).ready(function(){
             var email = $('#email').val();
             var merchant_name = $('#name').val();
             var phone = $('#phone').val();
-            var modality_3 = $('#modality_3').val();
+            var modality_3;
+            
+            $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,u) {
+                $.each(u.children, function(j,w) {
+                    $.each(w.children, function(k,x) {
+                        $.each(x.children, function(l,y) {
+                            if($.cookie('lang') === 'en-us'){
+                                if(y.code == $('#modality_3').val()) {
+                                    modality_3 = y.remark || '-';
+                                    return false;
+                                }
+                            } else {
+                                if(y.code == $('#modality_3').val()) {
+                                    modality_3 = y.name || '-';
+                                    return false;
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+            
             var user_name = $('#contact_name_1').val();
             var msg = $('#contact_msg').val();
 
+            var map = {
+                brandName: brand_name,
+                brandModality: modality_3,
+                email: email,
+                merchantName: merchant_name,
+                msg: msg,
+                phone: phone,
+                userName: user_name
+            };
+            
             $.ajax({
-                url: "controllers/api/1.0/ApiMail.php",
-                type: "POST",
-                data: {
-                    brand_name: brand_name,
-                    email: email,
-                    merchant_name: merchant_name,
-                    phone: phone,
-                    modality_3: modality_3,
-                    user_name: user_name,
-                    msg: msg
-                },
+                url: $.api.baseNew+"/onlineleasing-admin/api/contacts/save",
+                type: "PUT",
+                data: JSON.stringify(map),
                 async: false,
+                dataType: "json",
+                contentType: "application/json",
                 beforeSend: function(request) {
                     $('#loader').show();
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
                 },
-                complete: function(){},
                 success: function (response, status, xhr) {
-                    $('#loader').hide();
-                    window.location.reload(false);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                   console.log(textStatus, errorThrown);
+                    if(response.code === 'C0') {
+                        $.ajax({
+                            url: "controllers/api/1.0/ApiMail.php",
+                            type: "POST",
+                            data: {
+                                brand_name: brand_name,
+                                email: email,
+                                merchant_name: merchant_name,
+                                phone: phone,
+                                modality_3: modality_3,
+                                user_name: user_name,
+                                msg: msg
+                            },
+                            async: false,
+                            beforeSend: function(request) {},
+                            complete: function(){},
+                            success: function (response, status, xhr) {
+                                $('#loader').hide();
+                                $('#contact .modal-content').append('<div class="alert alert-success" role="alert" style="display: block;margin: 10px; padding: 10px;">'+contact_msg_sent+'</div>');
+                                setTimeout(function () {
+                                    window.location.reload(false);
+                                },3000);
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                               console.log(textStatus, errorThrown);
+                            }
+                        });
+                    } else {
+                        interpretBusinessCode(response.customerMessage);
+                    }
                 }
             });
         }

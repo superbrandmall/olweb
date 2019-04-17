@@ -2,6 +2,7 @@
 /********************** header ********************/
 $lang['nav_home'] = "HOME";
 $lang['nav_malls'] = "MALL";
+$lang['nav_co_work'] = "OZONE";
 $lang['nav_profile'] = "Profile";
 $lang['nav_logout'] = "Logout";
 $lang['nav_login'] = "Login";
@@ -253,65 +254,6 @@ $lang['event_event_location'] = "Event location";
 $lang['event_this_event'] = "This event";
 $lang['event_modality_shop_proportion'] = " store categories";
 
-/********************** Reserve ********************/
-$lang['reserve_home'] = "Home";
-$lang['reserve_shop_detail'] = "Store detail";
-$lang['reserve_event_detail'] = "Event detail";
-$lang['reserve_reserve_showing'] = "Reserve showings";
-$lang['reserve_reserve_event_showing'] = "Reserve showings";
-$lang['reserve_my_info'] = "My info";
-$lang['reserve_name'] = "Name";
-$lang['reserve_company'] = "Company";
-$lang['reserve_mobile'] = "Mobile";
-$lang['reserve_email'] = "Email";
-$lang['reserve_reservation'] = "Reservation";
-$lang['reserve_brands'] = "Brands";
-$lang['reserve_date'] = "Date";
-$lang['reserve_lease_term'] = "Lease term";
-$lang['reserve_please_choose'] = "Please choose ";
-$lang['reserve_year'] = " year(s)";
-$lang['reserve_day'] = " days";
-$lang['reserve_planned_moving_in_date'] = "Moving in date";
-$lang['reserve_planned_moving_in_event_date'] = "Event start date";
-$lang['reserve_verify_method'] = "Verification method";
-$lang['reserve_veryfication_code'] = "Code";
-$lang['reserve_send_code'] = "Send";
-$lang['reserve_make_reservation'] = "Make a reservation";
-$lang['reserve_shop_info'] = "Store info";
-$lang['reserve_event_info'] = "Event info";
-$lang['reserve_recommand_modality'] = "Category";
-$lang['reserve_leasable_area'] = "Leasable area";
-$lang['reserve_floor'] = "Floor";
-$lang['reserve_room_number'] = "Unit";
-$lang['reserve_project'] = "Mall";
-
-/********************** Profile ********************/
-$lang['profile_home'] = "Home";
-$lang['profile_profile'] = "Profile";
-$lang['profile_my_info'] = "My info";
-$lang['profile_name'] = "Name";
-$lang['profile_company'] = "Company";
-$lang['profile_brand'] = "Brand";
-$lang['profile_choose'] = "Please choose";
-$lang['profile_modality_0'] = "Category level 1";
-$lang['profile_modality_1'] = "Category level 2";
-$lang['profile_modality_2'] = "Category level 3";
-$lang['profile_modality_3'] = "Category level 4";
-$lang['profile_mobile'] = "Mobile";
-$lang['profile_email'] = "Email";
-$lang['profile_save'] = "Save";
-$lang['profile_change_succeed'] = "Change info succeeded";
-
-/********************** My reservations ********************/
-$lang['reservation_reserve_succeed'] = "Reserve succeeded";
-$lang['reservation_home'] = "Home";
-$lang['reservation_my_reservations'] = "My reservations";
-$lang['reservation_following_records'] = "Following are your reservation records, thanks for using Chia Tai Online Leasing system.";
-
-/********************** My favourite ********************/
-$lang['favourite_home'] = "Home";
-$lang['favourite_my_favourites'] = "My favourites";
-
 /********************** Events ********************/
 $lang['events_home'] = "Home";
 $lang['events_events'] = "Events";
@@ -322,13 +264,11 @@ $lang['events_wx'] = "Wuxi TouchMall";
 $lang['events_xa'] = "Xi'an TouchMall";
 $lang['events_zz'] = "Zhengzhou TouchMall";
 $lang['events_detail'] = "Detail";
-$lang['events_pearl_atrium'] = "Pearl Atrium";
+$lang['events_pearl_atrium'] = "1F East Atrium"; //Pearl Atrium
 $lang['events_pearl_atrium_location'] = "1F east side entrance";
-$lang['events_bund_atrium'] = "Bund Atrium";
+$lang['events_bund_atrium'] = "1F West Atrium"; //Bund Atrium
 $lang['events_bund_atrium_location'] = "1F west side entrance";
-$lang['events_pearl_platform'] = "Pearl Platform";
-$lang['events_pearl_platform_location'] = "3F east side";
-$lang['events_jade_platform'] = "Jade Platform";
+$lang['events_jade_platform'] = "5F East Platform"; //Jade Platform
 $lang['events_jade_platform_location'] = "5F east side";
 $lang['events_ct_hall'] = "CT Hall";
 $lang['events_ct_hall_location'] = "9F closed type multifunction hall";
@@ -336,10 +276,6 @@ $lang['events_golden_avenue'] = "Golden Avenue";
 $lang['events_golden_avenue_location'] = "3F atrium";
 $lang['events_golden_platform'] = "Golden Platform";
 $lang['events_golden_platform_location'] = "4F east side";
-$lang['events_platform'] = "Platform";
-$lang['events_platform_location'] = "2F east side";
-$lang['events_happiness_platform'] = "Happiness Platform";
-$lang['events_happiness_platform_location'] = "6F east side";
 $lang['events_bs_a1'] = "A1";
 $lang['events_bs_a1_location'] = "B1 central plaza";
 $lang['events_bs_a2'] = "A2";
@@ -354,6 +290,12 @@ $lang['events_bs_d1'] = "D1";
 $lang['events_bs_d1_location'] = "B1 metro entrance";
 $lang['events_bs_d2'] = "D2";
 $lang['events_bs_d2_location'] = "B1 metro entrance main path";
+
+/********************** Co-work ********************/
+$lang['co_work_cowork'] = "Co-Working";
+$lang['co_work_phone'] = "Mobile Number";
+$lang['co_work_veryfication_code'] = "Verification code";
+$lang['co_work_send_code'] = "Send";
 
 /********************** Footer ********************/
 $lang['copyright'] = "Shanghai Kinghill Ltd.";

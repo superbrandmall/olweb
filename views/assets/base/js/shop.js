@@ -7,22 +7,6 @@ var date = d.getFullYear() + '-' +
     
 $(document).ready(function(){   
     GetShopInfo();
-    
-    $('#grid-container').cubeportfolio({
-        filters: '#filters-container',
-        defaultFilter: '.qiangdian',
-        animationType: 'sequentially',
-        gridAdjustment: 'responsive',
-        displayType: 'default',
-        caption: 'expand',
-        mediaQueries: [{
-            width: 1,
-            cols: 1
-        }],
-        gapHorizontal: 0,
-        gapVertical: 0
-    });
-
 });
 
 function GetShopInfo(){
@@ -147,12 +131,13 @@ function GetShopInfo(){
                 if(response.data.images.length === 0){
                     $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url('+response.data.firstImage+'); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');            
                 } else {
-                    $.each(response.data.images, function(i,v){
-                        if(response.data.shopState !== 0){
-                            $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/shanghai-sbm.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
-                        }
-                        $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
-                    });
+                    if(response.data.shopState !== 0 && response.data.shopState !== 2){ //非在租或待租
+                        $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/shanghai-sbm.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
+                    } else {
+                        $.each(response.data.images, function(i,v){
+                            $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
+                        });
+                    }
                 }
                 
                 if($.cookie('lang') === 'en-us'){

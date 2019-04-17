@@ -119,6 +119,9 @@ var _hmt = _hmt || [];
                         <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                         <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                     </li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'co-work') { echo 'c-active '; } ?>c-menu-type-classic">
+                        <a href="co-work" class="c-link"><i class="fa fa-suitcase"></i> <?= $lang['nav_co_work'] ?></a>
+                    </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
                     </li>

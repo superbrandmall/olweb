@@ -104,7 +104,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         strtolower($shanghai_sbm) => array(
             'url' => 'shanghai_sbm.php'
         ),
-        
         'shop' => array(
             'url' => 'shop.php'
         ),
@@ -119,6 +118,18 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         ),
         'event' => array(
             'url' => 'event.php'
+        ),
+        'co-work' => array(
+            'url' => 'co-work.php'
+        ),
+        'shared-space' => array(
+            'url' => 'shared-space.php'
+        ),
+        'work-space' => array(
+            'url' => 'work-space.php'
+        ),
+        'ly-space' => array(
+            'url' => 'ly-space.php'
         )
     );
     

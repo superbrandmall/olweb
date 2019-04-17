@@ -69,46 +69,6 @@
                 <div class="cbp-item sh-sbm">
 					<div class="cbp-caption">
 						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/platform.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180917001148" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_platform'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_platform_location'] ?>
-					</div>
-				</div>
-				<div class="cbp-item sh-sbm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/pearl_platform.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180917001161" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_pearl_platform'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_pearl_platform_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item sh-sbm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
 							<img src="views/assets/base/img/content/events/gd_avenue.jpg" alt="">
 						</div>
 						<div class="cbp-caption-activeWrap">
@@ -164,26 +124,6 @@
 					</div>
 					<div class="cbp-l-grid-projects-desc">
 						<?= $lang['events_jade_platform_location'] ?>
-					</div>
-				</div>
-                <div class="cbp-item sh-sbm">
-					<div class="cbp-caption">
-						<div class="cbp-caption-defaultWrap">
-							<img src="views/assets/base/img/content/events/happiness_platform.jpg" alt="">
-						</div>
-						<div class="cbp-caption-activeWrap">
-							<div class="cbp-l-caption-alignCenter">
-								<div class="cbp-l-caption-body">
-									<a href="event?id=OLSHOP180917001167" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="cbp-l-grid-projects-title">
-						<?= $lang['events_happiness_platform'] ?>
-					</div>
-					<div class="cbp-l-grid-projects-desc">
-						<?= $lang['events_happiness_platform_location'] ?>
 					</div>
 				</div>
                 <div class="cbp-item sh-sbm">

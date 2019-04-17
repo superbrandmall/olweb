@@ -4,32 +4,32 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
 
 <div class="c-layout-page">
     <div class="c-content-box c-size-md" style="background-image: url(views/assets/base/img/content/backgrounds/body-4.jpg); background-position: left center; margin-bottom: 0; z-index: 1;">
-		<div class="container">
-			<div class="c-content-feature-3-grid">
-				<h3 class="c-title c-font-bold mall-name"></h3>
+        <div class="container">
+            <div class="c-content-feature-3-grid">
+                <h3 class="c-title c-font-bold mall-name"></h3>
                 <div class="row">
                     <div class="col-md-2 col-md-offset-4 col-xs-6">
-						<div class="c-content-v-center" style="height: 90px;">
-							<div class="c-wrapper">
+                        <div class="c-content-v-center" style="height: 90px;">
+                            <div class="c-wrapper">
                                 <div class="c-body">
                                     <a href="requirement" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square"><?= $lang['mall_shops'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2 col-xs-6">
-						<div class="c-content-v-center" style="height: 90px;">
-							<div class="c-wrapper">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-6">
+                        <div class="c-content-v-center" style="height: 90px;">
+                            <div class="c-wrapper">
                                 <div class="c-body">
                                     <a href="events" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square"><?= $lang['mall_events'] ?></a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <div class="c-content-box c-size-lg c-bg-white" style="margin-bottom: 0; z-index: 1;">
 		<div class="container">

@@ -7,22 +7,6 @@ var date = d.getFullYear() + '-' +
     
 $(document).ready(function(){   
     GetShopInfo();
-    
-    $('#grid-container').cubeportfolio({
-        filters: '#filters-container',
-        defaultFilter: '.qiangdian',
-        animationType: 'sequentially',
-        gridAdjustment: 'responsive',
-        displayType: 'default',
-        caption: 'expand',
-        mediaQueries: [{
-            width: 1,
-            cols: 1
-        }],
-        gapHorizontal: 0,
-        gapVertical: 0
-    });
-
 });
 
 function GetShopInfo(){
@@ -63,8 +47,33 @@ function GetShopInfo(){
                     $('#floor').text(floorName || '-');
                 }
                 
+                var lk;
+                switch (response.data.mallCode) {
+                    case $.mallCode.shanghaiSbm:
+                        lk = "shanghai-sbm";
+                        break;
+                    case $.mallCode.baoshanTm:
+                        lk = "baoshan-tm";
+                        break;
+                    case $.mallCode.zhengzhouTm:
+                        lk = "zhengzhou-tm";
+                        break;
+                    case $.mallCode.xuhuiTm:
+                        lk = "xuhui-tm";
+                        break;
+                    case $.mallCode.xianTm:
+                        lk = "xian-tm";
+                        break;
+                    case $.mallCode.wuxiTm:
+                        lk = "wuxi-tm";
+                        break;
+                    default:
+                        lk = "shanghai-sbm";
+                        break;
+                }
+                
                 if(response.data.unit != null) {
-                    GetMap(response.data.unit,response.data.mallCode);
+                    GetMap(floorName,lk,response.data.mallCode);
                 }
                 
                 $.each($.parseJSON(sessionStorage.getItem("malls")), function(i,v) {
@@ -132,8 +141,136 @@ function GetShopInfo(){
     });
 }
 
-function GetMap(u,m){     
-    $('#map').append('<img src="views/assets/base/img/content/events/'+$.lang.mallLangCat+'/'+m+'/'+u+'.jpg" class="img-responsive" style="margin: 0 auto;">');
+function GetMap(fn,lk,mc){
+    var fc;
+    switch (fn) {
+        case '十楼':
+            fc = '10';
+            break;
+        case '九楼':
+            fc = '9';
+            break;
+        case '八楼':
+            fc = '8';
+            break;
+        case '七楼':
+            fc = '7';
+            break;    
+        case '六楼':
+            fc = '6';
+            break;
+        case '五楼':
+            fc = '5';
+            break;
+        case '四楼':
+            fc = '4';
+            break;
+        case '三楼':
+            fc = '3';
+            break;
+        case '二楼':
+            fc = '2';
+            break;
+        case '一楼':
+            fc = '1';
+            break;
+        case '负一楼':
+            fc = '0';
+            break;
+        default:
+            fc = '1';
+            break;
+    }
+    
+    $('#map').attr({
+        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+$.lang.mallLangCat+'/'+fc+'F.png',
+        'alt': fc+'F',
+        'usemap': '#Map_'+fc+'F_s'
+     });
+     
+    $('#map').parent().append('<map name="Map_'+fc+'F_s" id="Map_'+fc+'F_s"></map>');
+    
+    getCoords(mc,fn);
+}
+
+function getCoords(mc,fn) {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/"+mc+"/"+fn+"",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.state === 1 && v.coords != null && v.coords != ''){
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="event?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                    }
+                });
+                
+                drawShops();
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function drawShops(){
+    var areas = $.map($('area'),function(el) {
+        if(getURLParameter('id') === $(el).attr('alt')){
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: $.lang.thisEvent,
+                fillColor: 'c34343',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        } else {
+            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd'
+                };
+            }
+            
+        }
+    });
+
+    $('#map').mapster({
+        fillColor: 'c9ae89',
+        fillOpacity: 0.8,
+        strokeColor: 'ffd62c',
+        strokeWidth: 0,
+        clickNavigate: true,
+        mapKey: 'data-key',
+        showToolTip: true,
+        areas:  areas,
+        onShowToolTip: function () {
+            $(".mapster_tooltip").css({
+                "font-weight": "bold",
+                "color": "#fff",
+                "background": "rgba(0,0,0,0.8)",
+                "font-size": "26px",
+                "width": "auto"
+            });
+
+            $("area").on("mouseenter",  function (data) {
+               xOffset = data.pageX;
+               yOffset = data.pageY;
+               $(".mapster_tooltip").css("left", xOffset);
+               $(".mapster_tooltip").css("top", yOffset);
+            });
+        }
+    });
 }
 
 function getFloorInfo(mc,fn) {

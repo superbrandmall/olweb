@@ -39,7 +39,7 @@ General reset
 
 body {
   color: #2B2B2B;
-  font-family: simhei,Montserrat;
+  font-family: Simhei,Montserrat;
   padding: 0px !important;
   margin: 0px !important;
   font-weight: 300;
@@ -1409,6 +1409,10 @@ h1 {
   background-color: #c9ae89 !important;
 }
 
+.c-bg-before-white:before {
+  background-color: #fff !important;
+}
+
 .c-bg-red-1 {
   background-color: #ff6f33 !important;
 }
@@ -2061,7 +2065,7 @@ h1 {
 }
 
 .c-bg-dark-2 {
-  background-color: #31383c !important;
+  background-color: #CEB688 !important;
 }
 .c-bg-dark-2.c-bg-opacity {
   /* RGBa with 0.04 opacity */
@@ -2600,7 +2604,7 @@ h1 {
 }
 
 .c-border-left-dark-2 {
-  border-left-color: #31383c !important;
+  border-left-color: #CEB688 !important;
 }
 
 .c-border-right-dark-2 {
@@ -9561,7 +9565,6 @@ h1 {
   margin: 0;
 }
 .c-content-feature-2.c-option-2 {
-  cursor: pointer;
   padding: 20px 0;
 }
 .c-content-feature-2.c-option-2 .c-icon-wrapper {
