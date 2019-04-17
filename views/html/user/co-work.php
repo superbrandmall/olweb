@@ -117,8 +117,8 @@ var ContentCubeWorldsFoods = function() {
 $(document).ready(function() {
     $('nav .navbar-nav').html('\
 <li class="c-menu-type-classic"><a href="#hot_spaces" class="c-link">办公地点</a></li>\n\
-<li class="c-menu-type-classic"><a href="#we_offer" class="c-link">关于eat n work</a></li>\n\
-<li class="c-menu-type-classic"><a href="#grids" class="c-link">关于OZONE</a></li>\n\
+<li class="c-menu-type-classic"><a href="#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="#grids" class="c-link">关于<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="16" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="#prices" class="c-link">房型与价格</a></li>');
         
     Ozone1Owlcarousel.init();
@@ -128,7 +128,7 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 160px 0; z-index: 11;">
+    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">梦寐以求的办公生活！</h3>
             <div class="col-md-4">
@@ -140,19 +140,19 @@ $(document).ready(function() {
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold" style="font-size: 26px;">How Unique We are</h1><br>
-                <p style="line-height: 35px;">正大集团和Muse集团于2018年<br>携手开创eat n work品牌，<br>
-                    OZONE 是旗下共享办公子品牌，<br>
+                <h1 class="c-font-bold" style="margin-top: 100px; font-size: 32px;">How Unique We are</h1><br>
+                <p style="line-height: 40px;">正大集团和Muse集团于2018年<br>携手开创 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="14" /> 品牌，<br>
+                    <img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="20" /> 是旗下共享办公子品牌，<br>
                     它不是一般意义上的办公地，<br>而是一个办公、社交和服务的生活工作平衡点。</p>
-<p style="line-height: 35px;">eat n work 满足对美食的无限期许，<br>又能找到工作的乐趣！
+<p style="line-height: 35px;"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="14" /> 满足对美食的无限期许，<br>又能找到工作的乐趣！
                 </p>
             </div>
             
             <div class="col-md-6">
-                <div class="modal-dialog" style="position: absolute; top: -270px; right: 0;">
+                <div class="modal-dialog">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到 eat n work</h1>
+                            <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="25" /></h1>
                             <p>正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
                             <hr>
                             <p>请留下联系方式，我们将有专人与您联系。</p>
@@ -245,6 +245,9 @@ $(document).ready(function() {
     
     <div id="grids" class="c-content-box c-size-md" style="margin-bottom: 0; background-color: #fff; z-index: 11; padding: 120px 0;">
         <div class="container">
+            <div class="c-content-title-1">
+                <h3 class="c-center c-font-uppercase c-font-bold">全天候全时段全配套</h3>
+            </div><br>
             <div class="row" style="background-color: rgb(219, 219, 219);">
                 <div class="col-sm-3" style="padding: 0;">
                     <img class="c-photo img-responsive" alt="" src="views/assets/base/img/content/mall/snapshot-1.jpg">
@@ -283,14 +286,13 @@ $(document).ready(function() {
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
                     <h1 class="c-font-uppercase c-font-bold">“餐饮+办公”一站式</h1><br>
                     <div class="c-content">
-                        <p style="line-height: 20px;"><strong><i>6<small>000m<sup>2</sup></small></strong> 总面积</p>
-                        <p style="line-height: 20px;"><strong><i>2<small>000m<sup>2</sup></small></strong> 星级全江景餐厅</p>
-                        <p style="line-height: 20px;"><strong><i>3<small>800m<sup>2</sup></small></strong> 办公区域</p>
-                        <p style="line-height: 20px;"><strong><i>5<small>60个</small></strong> 可实地注册的办公工位</p>
-                        <p style="line-height: 20px;"><strong><i>3<small>65天</small></strong> 全年空调无休</p>
-                        <p style="line-height: 20px;"><strong><i>7<small>50个</small></strong> 停车位（900元/年付）</p>
-                        <p style="line-height: 20px;"><strong><i>三<small>层</small></strong> PM2.5过滤新风系统</p>
-                        <p style="line-height: 20px;"><strong><i>高<small>颜值</small></strong> 化妆间</p>
+                        <p style="line-height: 25px;"><strong><i>6</i><small>000m<sup>2</sup></small></strong> 总面积</p>
+                        <p style="line-height: 25px;"><strong><i>2</i><small>000m<sup>2</sup></small></strong> 星级全江景餐厅</p>
+                        <p style="line-height: 25px;"><strong><i>3</i><small>800m<sup>2</sup></small></strong> 办公区域</p>
+                        <p style="line-height: 25px;"><strong><i>5</i><small>60个</small></strong> 可实地注册的办公工位</p>
+                        <p style="line-height: 25px;"><strong><i>3</i><small>65天</small></strong> 全年空调无休</p>
+                        <p style="line-height: 25px;"><strong><i>7</i><small>50个</small></strong> 停车位（900元/年付）</p>
+                        <p style="line-height: 25px;"><strong><i>三</i><small>层</small></strong> PM2.5过滤新风系统</p>
                     </div>
                 </div>
                 <div class="col-sm-3" style="padding: 0;">
@@ -302,13 +304,13 @@ $(document).ready(function() {
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
                     <h1 class="c-font-uppercase c-font-bold">生活方式组合</h1><br>
                     <div class="c-content">
-                        <p style="line-height: 20px;"><strong><i>4<small>00+</small></strong> 正大广场入驻品牌</p>
-                        <p style="line-height: 20px;"><strong><i>整<small>层</small></strong> “儿童第三个家”亲子活动区</p>
-                        <p style="line-height: 20px;"><strong><i>大<small>型专业连锁</small></strong> SPA、美容、纤体品牌</p>
-                        <p style="line-height: 20px;"><strong><i>健<small>身潮牌</small> & 全<small>国连锁</small></strong> “动“无止尽</p>
-                        <p style="line-height: 20px;"><strong><i>2<small>0+</small></strong> 办公专属餐厅布局</p>
-                        <p style="line-height: 20px;"><strong><i>品<small>类融合</small></strong> 空间开放</p>
-                        <p style="line-height: 20px;"><strong><i>私<small>董宴客厅</small></strong> 专属景观露台</p>
+                        <p style="line-height: 25px;"><strong><i>4</i><small>00+</small></strong> 正大广场入驻品牌</p>
+                        <p style="line-height: 25px;"><strong><i>整</i><small>层</small></strong> “儿童第三个家”亲子活动区</p>
+                        <p style="line-height: 25px;"><strong><i>大</i><small>型专业连锁</small></strong> SPA、美容、纤体品牌</p>
+                        <p style="line-height: 25px;"><strong><i>健</i><small>身潮牌</small> & 全<small>国连锁</small></strong> “动“无止尽</p>
+                        <p style="line-height: 25px;"><strong><i>2</i><small>0+</small></strong> 办公专属餐厅布局</p>
+                        <p style="line-height: 25px;"><strong><i>品</i><small>类融合</small></strong> 空间开放</p>
+                        <p style="line-height: 25px;"><strong><i>私</i><small>董宴客厅</small></strong> 专属景观露台</p>
                     </div>
                 </div>
             </div>

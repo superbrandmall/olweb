@@ -2,8 +2,8 @@
 $(document).ready(function() {
     $('nav .navbar-nav').html('\
 <li class="c-menu-type-classic"><a href="co-work#hot_spaces" class="c-link">办公地点</a></li>\n\
-<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于eat n work</a></li>\n\
-<li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于OZONE</a></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="16" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
     $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
@@ -15,15 +15,15 @@ $(document).ready(function() {
         <div class="container">
             <h3 class="c-font-60 c-font-bold c-font-uppercase c-font-white">洛阳</h3>
             <div class="col-md-4">
-                <p class="c-font-20 c-font-white">LE CINEMA 乐影城 OZONE</p>
+                <p class="c-font-20 c-font-white">LE CINEMA 乐影城 <img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="24" /></p>
             </div>
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 150px;">
+    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold" style="font-size: 26px;">洛阳正大国际广场店</h1><br>
+                <h1 class="c-font-bold" style="margin-top: 100px; font-size: 32px;">洛阳正大国际广场店</h1><br>
                 <p>坐落于洛阳市洛龙区开元大道225号正大广场7楼，<br>
                     是一个繁华的商业区。</p><p>原创与跨界的共生，<br>
                     不仅重新定义了空间概念，<br>更改变了消费观念。</p><p>
@@ -32,10 +32,10 @@ $(document).ready(function() {
             </div>
             
             <div class="col-md-6">
-                <div class="modal-dialog" style="position: absolute; top: -270px; right: 0;">
+                <div class="modal-dialog">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到OZONE</h1>
+                            <h1 class="c-font-44 c-font-sbold">欢迎来到<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="50" /></h1>
                             <p>正大广场洛阳购物中心 | 洛阳市洛龙区开元大道225号正大广场7楼</p>
                             <hr>
                             <p>请留下联系方式，我们将有专人与您联系。</p>
@@ -126,7 +126,7 @@ $(document).ready(function() {
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 120px;">
+    <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 120px; z-index: 11;">
         <div class="container">
             <div class="container">
                 <div class="c-content-pricing-1 c-option-2">

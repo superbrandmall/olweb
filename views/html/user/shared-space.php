@@ -2,8 +2,8 @@
 $(document).ready(function() {
     $('nav .navbar-nav').html('\
 <li class="c-menu-type-classic"><a href="co-work#hot_spaces" class="c-link">办公地点</a></li>\n\
-<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于eat n work</a></li>\n\
-<li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于OZONE</a></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="16" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
     $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
@@ -11,25 +11,25 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 160px 0; z-index: 11;">
+    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">公共区域</h3>
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 160px;">
+    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold c-font-26">陆家嘴正大广场旗舰店</h1><br>
+                <h1 class="c-font-bold" style="margin-top: 100px; font-size: 32px;">陆家嘴正大广场旗舰店</h1><br>
                 <p class="c-font-26">金融城的便捷、繁华</p>
                 <p class="c-font-26">引爆全新生活方式！</p>
             </div>
             
             <div class="col-md-6">
-                <div class="modal-dialog" style="position: absolute; top: -370px; right: 0;">
+                <div class="modal-dialog">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到OZONE</h1>
+                            <h1 class="c-font-44 c-font-sbold">欢迎来到<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="50" /></h1>
                             <p>正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
                             <hr>
                             <p>请留下联系方式，我们将有专人与您联系。</p>
@@ -221,7 +221,7 @@ $(document).ready(function() {
                             <img src="/views/assets/base/img/content/mall/communicate.jpg" alt="" height="70" style="float: left; margin-right: 25px;">
                             <h3 class="c-font-uppercase c-title">行业交流</h3>
                             <p>
-                                与OZONE入驻合伙人，头脑风暴，分享经验！
+                                与<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="20" />入驻合伙人，头脑风暴，分享经验！
                             </p>
                         </div>
                     </div>
