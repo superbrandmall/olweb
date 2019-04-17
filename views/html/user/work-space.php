@@ -6,7 +6,7 @@ $(document).ready(function() {
 <li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于OZONE</a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
-    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/ozone.png" alt="正大" class="c-desktop-logo" height="20" style="margin-left: 10px;"></a>');
+    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
 });
 </script>
 
@@ -17,13 +17,12 @@ $(document).ready(function() {
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 140px;">
+    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 200px;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold" style="font-size: 26px;">欢迎来到OZONE陆家嘴正大广场旗舰店</h1><br>
-                <p>上海浦东陆家嘴西路168号</p>
-                <p>金融城的便捷、繁华</p>
-                <p>引爆全新生活方式！</p>
+                <h1 class="c-font-bold c-font-26">陆家嘴正大广场旗舰店</h1><br>
+                <p class="c-font-26">金融城的便捷、繁华</p>
+                <p class="c-font-26">引爆全新生活方式！</p>
             </div>
             
             <div class="col-md-6">

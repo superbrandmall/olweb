@@ -123,12 +123,12 @@ $(document).ready(function() {
         
     Ozone1Owlcarousel.init();
     ContentCubeWorldsFoods.init();
-    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/ozone.png" alt="正大" class="c-desktop-logo" height="20" style="margin-left: 10px;"></a>');
+    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
 });
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork4.jpg); background-position: center -380px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
+    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 160px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">梦寐以求的办公生活！</h3>
             <div class="col-md-4">
@@ -141,11 +141,10 @@ $(document).ready(function() {
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
                 <h1 class="c-font-bold" style="font-size: 26px;">How Unique We are</h1><br>
-                <p>正大集团和Muse集团于2018年<br>携手开创eat n work品牌，<br>
+                <p style="line-height: 35px;">正大集团和Muse集团于2018年<br>携手开创eat n work品牌，<br>
                     OZONE 是旗下共享办公子品牌，<br>
                     它不是一般意义上的办公地，<br>而是一个办公、社交和服务的生活工作平衡点。</p>
-                <p>它源自于快节奏工作的白领生活，<br>办公不仅是工作，而是一种生活方式！</p>
-<p>eat n work 满足对美食的无限期许，<br>又能找到工作的乐趣！
+<p style="line-height: 35px;">eat n work 满足对美食的无限期许，<br>又能找到工作的乐趣！
                 </p>
             </div>
             
@@ -254,22 +253,22 @@ $(document).ready(function() {
                     <img class="c-photo img-responsive" alt="" src="views/assets/base/img/content/mall/snapshot-2.jpg">
                 </div>
                 <div class="col-sm-6 c-font-14" style="padding: 2%;">
-                    <h3 class="c-font-uppercase c-font-bold">正大广场有联合办公吗?</h3>
-                    <p class="c-font-thin">
+                    <h1 class="c-font-uppercase c-font-bold ">正大广场有联合办公吗?</h1><br>
+                    <p class="c-font-thin" style="line-height: 28px;">
                         <strong>有啊</strong>，一样办公，感受高贵不贵的“商业共享空间”！
                     </p>
                 </div>
             </div>
             <div class="row" style="background-color: #F4F4F5;">
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
-                    <h3 class="c-font-uppercase c-font-bold">商场里有全配套的联合办公吗?</h3>
-                    <p class="c-font-thin">
+                    <h1 class="c-font-uppercase c-font-bold">商场里有全配套的联合办公吗?</h1><br>
+                    <p class="c-font-thin" style="line-height: 28px;">
                         <strong>当然</strong>，“餐饮+办公+生活”400+入驻品牌，一站式办公配套，一步到位！
                     </p>
                 </div>
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
-                    <h3 class="c-font-uppercase c-font-bold">黄金地段有联合办公吗?</h3>
-                    <p class="c-font-thin">
+                    <h1 class="c-font-uppercase c-font-bold">黄金地段有联合办公吗?</h1><br>
+                    <p class="c-font-thin" style="line-height: 28px;">
                         <strong>有</strong>，近千平全江景餐厅，一样吃喝、会晤、谈判，有车族、上班族，交通直达，性价比才是硬道理！
                     </p>
                 </div>
@@ -282,16 +281,16 @@ $(document).ready(function() {
             </div>
             <div class="row" style="background-color: rgb(219, 219, 219);">
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
-                    <h3 class="c-font-uppercase c-font-bold">“餐饮+办公”一站式</h3>
+                    <h1 class="c-font-uppercase c-font-bold">“餐饮+办公”一站式</h1><br>
                     <div class="c-content">
-                        <p><strong><i>6<small>000m<sup>2</sup></small></i></strong> 总面积</p>
-                        <p><strong><i>2<small>000m<sup>2</sup></small></i></strong> 星级全江景餐厅</p>
-                        <p><strong><i>3<small>800m<sup>2</sup></small></i></strong> 办公区域</p>
-                        <p><strong><i>5<small>60个</small></i></strong> 可实地注册的办公工位</p>
-                        <p><strong><i>3<small>65天</small></i></strong> 全年空调无休</p>
-                        <p><strong><i>7<small>50个</small></i></strong> 停车位（900元/年付）</p>
-                        <p><strong><i>三<small>层</small></i></strong> PM2.5过滤新风系统</p>
-                        <p><strong><i>高<small>颜值</small></i></strong> 化妆间</p>
+                        <p style="line-height: 20px;"><strong><i>6<small>000m<sup>2</sup></small></strong> 总面积</p>
+                        <p style="line-height: 20px;"><strong><i>2<small>000m<sup>2</sup></small></strong> 星级全江景餐厅</p>
+                        <p style="line-height: 20px;"><strong><i>3<small>800m<sup>2</sup></small></strong> 办公区域</p>
+                        <p style="line-height: 20px;"><strong><i>5<small>60个</small></strong> 可实地注册的办公工位</p>
+                        <p style="line-height: 20px;"><strong><i>3<small>65天</small></strong> 全年空调无休</p>
+                        <p style="line-height: 20px;"><strong><i>7<small>50个</small></strong> 停车位（900元/年付）</p>
+                        <p style="line-height: 20px;"><strong><i>三<small>层</small></strong> PM2.5过滤新风系统</p>
+                        <p style="line-height: 20px;"><strong><i>高<small>颜值</small></strong> 化妆间</p>
                     </div>
                 </div>
                 <div class="col-sm-3" style="padding: 0;">
@@ -301,15 +300,15 @@ $(document).ready(function() {
                     <img class="c-photo img-responsive" alt="" src="views/assets/base/img/content/mall/snapshot-4.jpg">
                 </div>
                 <div class="col-sm-3 c-font-14" style="padding: 2%;">
-                    <h3 class="c-font-uppercase c-font-bold">生活方式组合</h3>
+                    <h1 class="c-font-uppercase c-font-bold">生活方式组合</h1><br>
                     <div class="c-content">
-                        <p><strong><i>4<small>00+</small></i></strong> 正大广场入驻品牌</p>
-                        <p><strong><i>整<small>层</small></i></strong> “儿童第三个家”亲子活动区</p>
-                        <p><strong><i>大<small>型专业连锁</small></i></strong> SPA、美容、纤体品牌</p>
-                        <p><strong><i>健<small>身潮牌</small> & 全<small>国连锁</small></i></strong> “动“无止尽</p>
-                        <p><strong><i>2<small>0+ 办公专属餐厅布局 品类融合，空间开放</small></i></strong> 焗烤台、刺生台、色拉吧、水吧<br>
-                                                蛤蜊煮、选菜区、卡座区、公共区<br>
-                                                中包厢、私董宴客厅/专属景观露台</p>
+                        <p style="line-height: 20px;"><strong><i>4<small>00+</small></strong> 正大广场入驻品牌</p>
+                        <p style="line-height: 20px;"><strong><i>整<small>层</small></strong> “儿童第三个家”亲子活动区</p>
+                        <p style="line-height: 20px;"><strong><i>大<small>型专业连锁</small></strong> SPA、美容、纤体品牌</p>
+                        <p style="line-height: 20px;"><strong><i>健<small>身潮牌</small> & 全<small>国连锁</small></strong> “动“无止尽</p>
+                        <p style="line-height: 20px;"><strong><i>2<small>0+</small></strong> 办公专属餐厅布局</p>
+                        <p style="line-height: 20px;"><strong><i>品<small>类融合</small></strong> 空间开放</p>
+                        <p style="line-height: 20px;"><strong><i>私<small>董宴客厅</small></strong> 专属景观露台</p>
                     </div>
                 </div>
             </div>
@@ -449,13 +448,13 @@ $(document).ready(function() {
             <div class="c-content-title-1">
                 <h3 class="c-center c-font-uppercase c-font-bold">现代休闲共餐</h3>
                 <div class="c-center c-font-18">
-                    您将拥有环球美食餐厅所提供的超高性价比星际服务，<br>"eat n work"将星厨与创意合二为一，将餐饮与工作完美融合
+                    环球美食<br>超高性价比星级服务<br>餐饮与工作完美融合
                 </div>
             </div>
             <div class="row c-margin-t-60">
                 <div class="col-md-12">
                     <div class="c-content-testimonial-2-slider" data-slider="owl1" data-single-item="true" data-auto-play="6000">
-                        <div class="c-title c-font-uppercase c-font-bold c-theme-bg">
+                        <div class="c-title c-font-uppercase c-font-bold c-theme-bg" style="font-size: 18px;">
                             明星主厨 用美食传递幸福
                         </div>
                         <div class="owl-carousel owl-theme c-theme owl-single">
@@ -621,7 +620,7 @@ $(document).ready(function() {
                         <h3 class="c-center c-font-uppercase c-font-bold">热门办公空间</h3>
                     </div><br>
                     <div class="row">
-                        <div class="col-md-4 col-md-offset-2">
+                        <div class="col-md-6">
                             <div class="c-content-person-1 c-option-2">
                                 <div class="c-caption c-content-overlay">
                                     <div class="c-overlay-wrapper">
@@ -644,7 +643,7 @@ $(document).ready(function() {
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="c-content-person-1 c-option-2">
                                 <div class="c-caption c-content-overlay">
                                     <div class="c-overlay-wrapper">

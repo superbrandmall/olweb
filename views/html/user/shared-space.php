@@ -6,7 +6,7 @@ $(document).ready(function() {
 <li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于OZONE</a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
-    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/ozone.png" alt="正大" class="c-desktop-logo" height="20" style="margin-left: 10px;"></a>');
+    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
 });
 </script>
 
@@ -17,13 +17,12 @@ $(document).ready(function() {
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 120px;">
+    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 160px;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold" style="font-size: 26px;">欢迎来到OZONE陆家嘴正大广场旗舰店</h1><br>
-                <p>上海浦东陆家嘴西路168号</p>
-                <p>金融城的便捷、繁华</p>
-                <p>引爆全新生活方式！</p>
+                <h1 class="c-font-bold c-font-26">陆家嘴正大广场旗舰店</h1><br>
+                <p class="c-font-26">金融城的便捷、繁华</p>
+                <p class="c-font-26">引爆全新生活方式！</p>
             </div>
             
             <div class="col-md-6">
@@ -126,7 +125,7 @@ $(document).ready(function() {
             <div class="c-content-title-1">
                 <h3 class="c-center c-font-uppercase c-font-white c-font-bold">前台接待</h3>
                 <div class="c-center c-font-24 c-font-white">
-                    访客等候: 茶水、咖啡、下午
+                    茶水、咖啡
                 </div>
             </div>
         </div>
@@ -139,7 +138,7 @@ $(document).ready(function() {
                     江景会议室
                 </div>
                 <div class="c-desc">
-                    <p>3人、8人、10人及20人以上洽谈</p>
+                    <p>3-20人以上洽谈</p>
                 </div><br>
                 <img src="/views/assets/base/img/content/mall/shared-space-2.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
             </div>
@@ -204,7 +203,7 @@ $(document).ready(function() {
     <div class="c-content-box c-size-lg c-bg-parallax" style="background-image: url(/views/assets/base/img/content/mall/shared-space-7.jpg); margin-bottom: 0; padding: 160px 0;">
         <div class="container">
             <div class="c-content-title-1">
-                <h3 class="c-center c-font-uppercase c-font-white c-font-bold">360°全江美景、俯瞰外滩</h3>
+                <h3 class="c-center c-font-uppercase c-font-white c-font-bold">360°全江美景<br>俯瞰外滩</h3>
             </div>
         </div>
     </div>
@@ -285,7 +284,7 @@ $(document).ready(function() {
                     <h3 class="c-font-uppercase c-center c-font-bold">交通</h3>
                 </div>
                 <br>
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-12">
                     <img src="/views/assets/base/img/content/mall/map.jpg" class="img-responsive" />
                 </div>
             </div>

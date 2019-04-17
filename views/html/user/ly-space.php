@@ -6,7 +6,7 @@ $(document).ready(function() {
 <li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于OZONE</a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
-    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/ozone.png" alt="正大" class="c-desktop-logo" height="20" style="margin-left: 10px;"></a>');
+    $('.c-brand').append('<a href="co-work" class="c-logo"><img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>');
 });
 </script>
 
@@ -23,7 +23,7 @@ $(document).ready(function() {
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding-bottom: 150px;">
         <div class="container">
             <div class="col-md-6" style="font-size: 20px;">
-                <h1 class="c-font-bold" style="font-size: 26px;">欢迎来到OZONE洛阳正大国际广场店</h1><br>
+                <h1 class="c-font-bold" style="font-size: 26px;">洛阳正大国际广场店</h1><br>
                 <p>坐落于洛阳市洛龙区开元大道225号正大广场7楼，<br>
                     是一个繁华的商业区。</p><p>原创与跨界的共生，<br>
                     不仅重新定义了空间概念，<br>更改变了消费观念。</p><p>
