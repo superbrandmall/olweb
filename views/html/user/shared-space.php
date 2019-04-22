@@ -1,8 +1,10 @@
 <script>
 $(document).ready(function() {
     $('nav .navbar-nav').html('\
-<li class="c-menu-type-classic"><a href="co-work#hot_spaces" class="c-link">办公地点</a></li>\n\
-<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> 办公地点</a>\n\
+<ul class="dropdown-menu c-menu-type-classic c-pull-left" style=""><li><a href="work-space">上海 OZONE</a></li><li><a href="ly-space">洛阳 LE CINEMA 乐影城</a></li></ul></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#abt_eat_n_work" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="co-work#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/kzone.png" alt="KZONE" height="11" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#grids" class="c-link">关于<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="16" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="co-work#prices" class="c-link">房型与价格</a></li>');
 
@@ -11,7 +13,7 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
+    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">公共区域</h3>
         </div>
@@ -26,11 +28,11 @@ $(document).ready(function() {
             </div>
             
             <div class="col-md-6">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width: auto;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
                             <h1 class="c-font-44 c-font-sbold">欢迎来到<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="50" /></h1>
-                            <p>正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
+                            <p class="c-font-14">正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
                             <hr>
                             <p>请留下联系方式，我们将有专人与您联系。</p>
                             <form>
@@ -99,7 +101,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="form-group">
                                     <div class="c-checkbox">
-                                        <input type="checkbox" id="terms" name="terms" class="c-check" required>
+                                        <input type="checkbox" id="terms" name="terms" class="c-check" checked="checked" required>
                                         <label for="terms" class="c-font-thin c-font-17">
                                             <span></span>
                                             <span class="check"></span>

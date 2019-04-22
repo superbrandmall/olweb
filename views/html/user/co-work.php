@@ -116,8 +116,10 @@ var ContentCubeWorldsFoods = function() {
 
 $(document).ready(function() {
     $('nav .navbar-nav').html('\
-<li class="c-menu-type-classic"><a href="#hot_spaces" class="c-link">办公地点</a></li>\n\
-<li class="c-menu-type-classic"><a href="#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> 办公地点</a>\n\
+<ul class="dropdown-menu c-menu-type-classic c-pull-left" style=""><li><a href="work-space">上海 OZONE</a></li><li><a href="ly-space">洛阳 LE CINEMA 乐影城</a></li></ul></li>\n\
+<li class="c-menu-type-classic"><a href="#abt_eat_n_work" class="c-link">关于<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" /></a></li>\n\
+<li class="c-menu-type-classic"><a href="#we_offer" class="c-link">关于<img src="views/assets/base/img/content/mall/kzone.png" alt="KZONE" height="11" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="#grids" class="c-link">关于<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="16" /></a></li>\n\
 <li class="c-menu-type-classic"><a href="#prices" class="c-link">房型与价格</a></li>');
         
@@ -128,7 +130,7 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -370px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
+    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">梦寐以求的办公生活！</h3>
             <div class="col-md-4">
@@ -139,7 +141,7 @@ $(document).ready(function() {
     
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
         <div class="container">
-            <div class="col-md-6" style="font-size: 20px;">
+            <div id="abt_eat_n_work" class="col-md-6" style="font-size: 20px;">
                 <h1 class="c-font-bold" style="margin-top: 100px; font-size: 32px;">How Unique We are</h1><br>
                 <p style="line-height: 40px;">正大集团和Muse集团于2018年<br>携手开创 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="14" /> 品牌，<br>
                     <img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="20" /> 是旗下共享办公子品牌，<br>
@@ -149,11 +151,11 @@ $(document).ready(function() {
             </div>
             
             <div class="col-md-6">
-                <div class="modal-dialog">
+                <div class="modal-dialog" style="width: auto;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
                             <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="25" /></h1>
-                            <p>正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
+                            <p class="c-font-14">正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
                             <hr>
                             <p>请留下联系方式，我们将有专人与您联系。</p>
                             <form>
@@ -222,7 +224,7 @@ $(document).ready(function() {
                                 </div>
                                 <div class="form-group">
                                     <div class="c-checkbox">
-                                        <input type="checkbox" id="terms" name="terms" class="c-check" required>
+                                        <input type="checkbox" id="terms" name="terms" class="c-check" checked="checked" required>
                                         <label for="terms" class="c-font-thin c-font-17">
                                             <span></span>
                                             <span class="check"></span>
@@ -547,7 +549,7 @@ $(document).ready(function() {
     <div class="c-content-box c-size-lg c-bg-parallax" style="background-image: url(/views/assets/base/img/content/mall/Organic-VEG.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="c-content-title-1">
-                <h3 class="c-center c-font-uppercase c-font-white c-font-bold">CP GROUP世界的厨房: “从农场到餐桌” 完美呈现</h3>
+                <h3 class="c-center c-font-uppercase c-font-white c-font-bold">正大食品 • 世界的厨房: 品质安全,幸福生活</h3>
                 <div class="c-center c-font-24 c-font-white">
                     成为陆家嘴白领生活的一抹亮色
                 </div>
@@ -614,7 +616,7 @@ $(document).ready(function() {
         </div>
     </div>
 
-    <div id="hot_spaces" class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 120px;">
+    <div id="hot_spaces" class="c-content-box c-size-md c-bg-grey-1" style="padding: 120px 0;">
         <div class="container">
             <div class="container">
                 <div class="c-content-pricing-1 c-option-2">
