@@ -273,7 +273,7 @@ function ShowResults(result,searchCode) {
         
         $('.c-content-list').append('<div class="col-md-4" style="display: none;"><div class="c-content-person-1 c-option-2 c-shadow">\n\
 <div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
-<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+v.firstImage+'" alt=""></div>\n\
+<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="/views/assets/base/img/content/mall/shanghai-sbm.jpg" alt=""></div>\n\
 <div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div>\n\
 </div>\n\
 <div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\

@@ -7,16 +7,7 @@ $.api = {
 
 if($.cookie('lang') === 'en-us'){
     $.lang = {
-        zzTm:  'Zhengzhou TouchMall',
-        wxTm: 'Wuxi TouchMall',
-        xaTm: 'Xi\'an TouchMall',
         enter: 'Enter',
-        comingSoon: 'Coming Soon',
-        reserveShop: 'Reserve',
-        reserveEvent: 'Reserve',
-        addToFav: 'Add to favorite',
-        addToFav2: 'Add to favorite',
-        removeFromFav: 'Remove from favorite',
         thisStore: 'This store',
         thisEvent: 'This event',
         forRent: 'For rent',
@@ -26,18 +17,10 @@ if($.cookie('lang') === 'en-us'){
         sendVerificationCode: 'Send',
         verifyCode: 'Code',
         resendCode: 'Re-send',
-        certifiedNonRemodifiable: 'Certified and non remodifiable',
-        noReservations: "You don't have any reservations yet",
-        reserveNegotiation: 'Reserve for negotiation',
         shopUnit: 'Unit',
         floor: 'Floor',
         recommandModality: 'Category',
         leasableArea: 'Leasable area',
-        reserveDate: 'Date reserved',
-        leasingPeriod: 'Leasing Period',
-        reserveAmount: 'Stores reserved',
-        reserveCallBack: 'Reserve succeeded, our leasing experts will contact you within 2 working days.',
-        noFavourites: "You don't have any favourite stores yet",
         shopIntro: 'Store detail',
         modality: 'Category',
         choose: 'Please choose',
@@ -48,25 +31,13 @@ if($.cookie('lang') === 'en-us'){
         louceng : "Floor",
         mianji : "Area",
         pipei : "Matching",
-        yuyue : "Reserve",
-        kanpu : " date",
-        qiatan : " date",
         mallLangCat: "en",
         lengthMonth: " month(s)",
         lengthYear: " year(s)"
     };
 } else {
     $.lang = {
-        zzTm:  '正大乐城郑州购物中心',
-        wxTm: '正大乐城无锡购物中心',
-        xaTm: '正大乐城西安购物中心',
         enter: '项目介绍',
-        comingSoon: '尽请期待',
-        reserveShop: '预约看铺',
-        reserveEvent: '预约看场',
-        addToFav: '关注该店铺',
-        addToFav2: '关注该场地',
-        removeFromFav: '取消关注',
         thisStore: '本店铺',
         thisEvent: '本场地',
         forRent: '待租',
@@ -76,18 +47,10 @@ if($.cookie('lang') === 'en-us'){
         sendVerificationCode: '发送验证码',
         verifyCode: '验证码',
         resendCode: '重新发送',
-        certifiedNonRemodifiable: '已认证，不可修改',
-        noReservations: '您目前没有任何看铺预约',
-        reserveNegotiation: '预约洽谈',
         shopUnit: '单元号',
         floor: '所在楼层',
         recommandModality: '推荐业态',
         leasableArea: '租赁面积',
-        reserveDate: '预约时间',
-        leasingPeriod: '租约时限',
-        reserveAmount: '预约数量',
-        reserveCallBack: '预约成功，我们的招商人员会在2个工作日内与您取得联系。',
-        noFavourites: '您目前没有关注任何店铺',
         shopIntro: '店铺介绍',
         modality: '业态',
         choose: '请选择',
@@ -98,9 +61,6 @@ if($.cookie('lang') === 'en-us'){
         louceng : "楼层",
         mianji : "面积",
         pipei : "匹配",
-        yuyue : "预约",
-        kanpu : "看铺",
-        qiatan : "洽谈",
         mallLangCat: "cn",
         lengthMonth: "个月",
         lengthYear: "年"
@@ -438,8 +398,7 @@ function IncrYears(date_str, years){
         if (parts[2].length < 2) {
             parts[2] = "0" + parts[2];
         }
-        return parts.join("-");
-            
+        return parts.join("-"); 
     } else {
         return '';
     }

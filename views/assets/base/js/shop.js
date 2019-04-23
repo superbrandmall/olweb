@@ -94,17 +94,14 @@ function GetShopInfo(){
                     case $.mallCode.baoshanTm:
                         lk = "baoshan-tm";
                         break;
-                    case $.mallCode.zhengzhouTm:
-                        lk = "zhengzhou-tm";
-                        break;
                     case $.mallCode.xuhuiTm:
                         lk = "xuhui-tm";
                         break;
-                    case $.mallCode.xianTm:
-                        lk = "xian-tm";
+                    case $.mallCode.luoyangSbm:
+                        lk = "luoyang-sbm";
                         break;
-                    case $.mallCode.wuxiTm:
-                        lk = "wuxi-tm";
+                    case $.mallCode.hefeiSbm:
+                        lk = "hefei-sbm";
                         break;
                     default:
                         lk = "shanghai-sbm";
