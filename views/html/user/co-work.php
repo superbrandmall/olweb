@@ -130,7 +130,7 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
+    <div class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">梦寐以求的办公生活！</h3>
             <div class="col-md-4">
@@ -139,9 +139,9 @@ $(document).ready(function() {
         </div>
     </div>
     
-    <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
+    <div id="abt_eat_n_work" class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11;">
         <div class="container">
-            <div id="abt_eat_n_work" class="col-md-6" style="font-size: 20px;">
+            <div class="col-md-6" style="font-size: 20px;">
                 <h1 class="c-font-bold" style="margin-top: 100px; font-size: 32px;">How Unique We are</h1><br>
                 <p style="line-height: 40px;">正大集团和Muse集团于2018年<br>携手开创 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="14" /> 品牌，<br>
                     <img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="20" /> 是旗下共享办公子品牌，<br>
@@ -150,8 +150,8 @@ $(document).ready(function() {
                 </p>
             </div>
             
-            <div class="col-md-6">
-                <div class="modal-dialog" style="width: auto;">
+            <div id="contact_us" class="col-md-6" style="padding: 0;">
+                <div class="modal-dialog" style="width: auto; margin: 0;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
                             <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="25" /></h1>
@@ -324,9 +324,23 @@ $(document).ready(function() {
             <div class="c-content-title-1">
                 <h3 class="c-center c-font-uppercase c-font-bold">WHAT DO WE OFFER?</h3>
                 <div class="c-center c-font-24">
-                    <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="" height="20" style="margin: -8px 10px 0 0;"><br>
+                    <img src="views/assets/base/img/content/mall/eat_n_work.png" alt="" height="20" style="margin: -8px 10px 0 0;">
                     舌尖上的办公体验
                 </div>
+                <p class="c-font-uppercase">
+                    一般在办公室内人们只能喝到咖啡、
+                    茶或选择不多的甜品、饼干。而正大
+                    广场在办公室设计过程中，将品质
+                    餐饮融入办公环境。
+                    让办公生活的白领们，体验五星酒
+                    店的餐饮礼遇。
+                    上百种全球美食，从早餐，午餐，到
+                    下午茶与晚餐，满足所有办公族群
+                    的需求。
+                    独立、潮流、创新、果敢的生活方式，
+                    让金融城的白领，拥有自由上瘾的
+                    环境！
+                </p>
             </div><br>
             <div class="cbp-panel">
                 <div id="grid-container" class="c-content-latest-works cbp cbp-l-grid-masonry-projects">
@@ -335,30 +349,12 @@ $(document).ready(function() {
                             <div class="cbp-caption-defaultWrap">
                                 <img src="views/assets/base/img/content/mall/food1.jpg" alt="">
                             </div>
-                            <div class="cbp-caption-activeWrap">
-                                <div class="c-masonry-border">
-                                </div>
-                                <div class="cbp-l-caption-alignCenter">
-                                    <div class="cbp-l-caption-body">
-                                        <p class="c-font-white">BBQ猪肋排</p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="cbp-item">
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">
                                 <img src="views/assets/base/img/content/mall/food2.jpg" alt="">
-                            </div>
-                            <div class="cbp-caption-activeWrap">
-                                <div class="c-masonry-border">
-                                </div>
-                                <div class="cbp-l-caption-alignCenter">
-                                    <div class="cbp-l-caption-body">
-                                        <p class="c-font-white">⻩油柠檬香草烤鸡</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -382,15 +378,6 @@ $(document).ready(function() {
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">
                                 <img src="views/assets/base/img/content/mall/food4.jpg" alt="">
-                            </div>
-                            <div class="cbp-caption-activeWrap">
-                                <div class="c-masonry-border">
-                                </div>
-                                <div class="cbp-l-caption-alignCenter">
-                                    <div class="cbp-l-caption-body">
-                                        <p class="c-font-white">脆⽪烤⾁</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -417,11 +404,6 @@ $(document).ready(function() {
                             </div>
                             <div class="cbp-caption-activeWrap">
                                 <div class="c-masonry-border"> 
-                                </div>
-                                <div class="cbp-l-caption-alignCenter">
-                                    <div class="cbp-l-caption-body">
-                                        <p class="c-font-white">烤⽜排和⽺排</p>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -452,7 +434,10 @@ $(document).ready(function() {
             <div class="c-content-title-1">
                 <h3 class="c-center c-font-uppercase c-font-bold">现代休闲共餐</h3>
                 <div class="c-center c-font-18">
-                    环球美食<br>超高性价比星级服务<br>餐饮与工作完美融合
+                    超500平豪华中央厨房，
+                    星级主厨助阵；<br>
+                    顶级食材汇聚全球盛宴，
+                    从培育、种植、到菜品上桌严格把控品质。
                 </div>
             </div>
             <div class="row c-margin-t-60">
@@ -675,7 +660,7 @@ $(document).ready(function() {
         </div>
     </div>
 
-    <div class="c-content-box c-size-sm c-bg-grey-2" style="padding: 12px 0 0; position: fixed; bottom: -20px; left: 0; right: 0; z-index: 10;">
+    <div class="c-content-box c-size-xs hidden-xs c-bg-grey-2" style="padding: 12px 0 0; position: fixed; bottom: -20px; left: 0; right: 0; z-index: 10;">
         <div class="container">
             <div class="c-content-subscribe-form-1">
                 <div class="row">
@@ -683,7 +668,7 @@ $(document).ready(function() {
                         <h3 class="c-font-20 c-font-uppercase c-font-bold c-font-white">正在寻找一个灵活高端的办公空间？预约参观，我们将尽快与你确认。</h3>
                     </div>
                     <div class="col-sm-4">
-                        <a href="#form" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;">立即预约</a>
+                        <a href="#contact_us" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;">立即预约</a>
                     </div>
                 </div>
             </div>

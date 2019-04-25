@@ -13,7 +13,7 @@ $(document).ready(function() {
 </script>
 
 <div class="c-layout-page">
-    <div id="form" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
+    <div class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/cowork2.jpg); background-position: center -150px; margin-bottom: 0; padding: 120px 0; z-index: 11;">
         <div class="container">
             <h3 class="c-font-70 c-font-bold c-font-uppercase c-font-white">办公区域</h3>
         </div>
@@ -27,8 +27,8 @@ $(document).ready(function() {
                 <p class="c-font-26">引爆全新生活方式！</p>
             </div>
             
-            <div class="col-md-6">
-                <div class="modal-dialog" style="width: auto;">
+            <div id="contact_us" class="col-md-6" style="padding: 0;">
+                <div class="modal-dialog" style="width: auto; margin: 0;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
                             <h1 class="c-font-44 c-font-sbold">欢迎来到<img src="views/assets/base/img/content/mall/ozone.png" alt="OZONE" height="50" /></h1>
@@ -444,7 +444,7 @@ $(document).ready(function() {
         </div>
     </div>
 
-    <div class="c-content-box c-size-sm c-bg-grey-2" style="padding: 12px 0 0; position: fixed; bottom: -20px; left: 0; right: 0; z-index: 10;">
+    <div class="c-content-box c-size-xs hidden-xs c-bg-grey-2" style="padding: 12px 0 0; position: fixed; bottom: -20px; left: 0; right: 0; z-index: 10;">
         <div class="container">
             <div class="c-content-subscribe-form-1">
                 <div class="row">
@@ -452,7 +452,7 @@ $(document).ready(function() {
                         <h3 class="c-font-20 c-font-uppercase c-font-bold c-font-white">正在寻找一个灵活高端的办公空间？预约参观，我们将尽快与你确认。</h3>
                     </div>
                     <div class="col-sm-4">
-                        <a href="#form" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;">立即预约</a>
+                        <a href="#contact_us" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;">立即预约</a>
                     </div>
                 </div>
             </div>

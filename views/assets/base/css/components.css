@@ -3717,13 +3717,12 @@ h1 {
     text-transform: uppercase;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-bold > .nav.navbar-nav > li > .c-link {
-    font-weight: 600;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-bold > .nav.navbar-nav > li .dropdown-menu > li > h3 {
     font-weight: 600;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-bold > .nav.navbar-nav > li .dropdown-menu > li > a {
-    font-weight: 600;
+    font-weight: 300;
   }
 }
 @media (min-width: 992px) {
@@ -3926,7 +3925,6 @@ h1 {
 @media (max-width: 991px) {
   /* 991px */
   .c-layout-header.c-layout-header-default-mobile {
-    background: #464034;
     border-bottom: 0;
   }
   .c-layout-header.c-layout-header-default-mobile .c-topbar {
@@ -5413,12 +5411,10 @@ h1 {
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile {
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li > .c-link {
-    border-bottom: 1px solid #404851;
-    color: #ebedf2;
+    color: #2b2b2b;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li > .c-link:focus, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li > .c-link:hover {
     background: none;
-    color: #ebedf2;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li > .c-quick-sidebar-toggler {
     background: none;
@@ -5430,15 +5426,13 @@ h1 {
     background-color: #ff6b57;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li.c-active > .c-link, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li:hover > .c-link {
-    color: #ff6b57;
     background: none;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li > h3 {
     color: #cbd2d9;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li > a {
-    border-bottom: 1px solid #404851;
-    color: #98a2ac;
+    color: #2b2b2b;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li > a:focus, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li > a:hover {
     color: #98a2ac;

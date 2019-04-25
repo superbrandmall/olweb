@@ -22,7 +22,6 @@ a:active, a:hover, a:focus {
 }
 
 .c-theme-nav li:focus > a:not(.btn), .c-theme-nav li:active > a:not(.btn), .c-theme-nav li:hover > a:not(.btn) {
-  color: #d3b690 !important;
 }
 .c-theme-nav li:focus > .c-quick-sidebar-toggler > .c-line, .c-theme-nav li:active > .c-quick-sidebar-toggler > .c-line, .c-theme-nav li:hover > .c-quick-sidebar-toggler > .c-line {
   background: #d3b690 !important;
