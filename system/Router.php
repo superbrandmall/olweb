@@ -125,14 +125,14 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         'co-work' => array(
             'url' => 'co-work.php'
         ),
-        'shared-space' => array(
-            'url' => 'shared-space.php'
-        ),
-        'work-space' => array(
-            'url' => 'work-space.php'
+        'sh-space' => array(
+            'url' => 'sh-space.php'
         ),
         'ly-space' => array(
             'url' => 'ly-space.php'
+        ),
+        'room-type' => array(
+            'url' => 'room-type.php'
         )
     );
     
