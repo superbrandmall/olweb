@@ -30,7 +30,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
         </div>
     </div>
     
-    <div id="grids" class="c-content-box c-size-md" style="margin-bottom: 0; background-color: #fff; z-index: 11; padding: 60px 0;">
+    <div id="grids" class="c-content-box c-size-md" style="margin-bottom: 0; background-color: #fff; z-index: 11; padding-bottom: 0;">
         <div class="container">
             <div class="c-content-title-1">
                 <h3 class="c-center c-font-uppercase c-font-bold">不一样的我们</h3>
@@ -156,16 +156,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
             </div>
             
             <br>-->
-            <div class="row">
-                <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid1.jpg" alt="" />
-            </div><br>
-            <div class="row">
-                <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid2.jpg" alt="" />
-            </div><br>
-            <div class="row">
-                <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid3.jpg" alt="" />
-            </div>
         </div>
+        <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid1.jpg" alt="" /><br><br>
+        <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid2.jpg" alt="" /><br><br>
+        <img style="width: 100%;" src="/views/assets/base/img/content/mall/ozone/grid3.jpg" alt="" />
     </div>
     
     <div id="we_offer" class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; padding: 60px 0;">

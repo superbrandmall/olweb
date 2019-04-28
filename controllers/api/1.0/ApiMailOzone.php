@@ -49,8 +49,8 @@ if (!empty ($_POST['email']) && !empty ($_POST['phone']) && !empty ($_POST['user
 {
 
     $text = "联系人:" . $_POST['user_name'] . "<br><br>电话:" . $_POST['country_code'] . $_POST['phone'] . "<br><br>邮箱:" . $_POST['email'];
+    $mail->addAddress('rina.tang@ozone-cn.com','customerservice');
     $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
-    $mail->addAddress('jun.ma0902@outlook.com','customerservice');
 }
 
 

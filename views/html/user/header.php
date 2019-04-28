@@ -119,11 +119,11 @@ var _hmt = _hmt || [];
                         <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                         <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                     </li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'co-work') { echo 'c-active '; } ?>c-menu-type-classic">
-                        <a href="co-work" class="c-link"><i class="fa fa-suitcase"></i> <?= $lang['nav_co_work'] ?></a>
-                    </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') { echo 'c-active '; } ?>c-menu-type-classic">
                         <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
+                    </li>
+                    <li class="c-menu-type-classic">
+                        <a href="http://ozone-cn.com" class="c-link"><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" style="margin-top: -4px;" height="12"></a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">

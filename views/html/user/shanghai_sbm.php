@@ -37,7 +37,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/s
                 <h3 class="c-center c-font-bold"><?= $lang['mall_shanghai_brief'] ?> & <?= $lang['mall_desc'] ?></h3>
             </div>
             <div class="col-md-4">
-                <video loop="loop" src="upload/video/<?= $lang['mall_lang_cat'] ?>/shanghai-sbm.mp4" controls="true" width="100%"></video><br><br>
+                <video loop="loop" autoplay="true" src="upload/video/<?= $lang['mall_lang_cat'] ?>/shanghai-sbm.mp4" controls="true" width="100%"></video><br><br>
                 <div class="c-body">
                     <div class="c-section">
                         <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
