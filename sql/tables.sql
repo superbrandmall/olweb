@@ -1,28 +1,3 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4541
-#
-# http://www.sequelpro.com/
-# https://github.com/sequelpro/sequelpro
-#
-# Host: 10.130.12.44 (MySQL 5.5.60-0+deb8u1)
-# Database: online_leasing_db_uat
-# Generation Time: 2018-09-10 08:18:55 +0000
-# ************************************************************
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
-# Dump of table t_bot_synonym
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_bot_synonym`;
 
 CREATE TABLE `t_bot_synonym` (
@@ -36,11 +11,6 @@ CREATE TABLE `t_bot_synonym` (
   `source` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_bot_word
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_bot_word`;
 
@@ -57,11 +27,6 @@ CREATE TABLE `t_bot_word` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_bot_word_synonym
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_bot_word_synonym`;
 
 CREATE TABLE `t_bot_word_synonym` (
@@ -73,11 +38,6 @@ CREATE TABLE `t_bot_word_synonym` (
   `synonym_code` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_c_api_interactive_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_c_api_interactive_detail`;
 
@@ -101,11 +61,6 @@ CREATE TABLE `t_c_api_interactive_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_c_event_interactive_detail
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_c_event_interactive_detail`;
 
 CREATE TABLE `t_c_event_interactive_detail` (
@@ -123,11 +78,6 @@ CREATE TABLE `t_c_event_interactive_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_c_job_interactive_detail
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_c_job_interactive_detail`;
 
 CREATE TABLE `t_c_job_interactive_detail` (
@@ -143,11 +93,6 @@ CREATE TABLE `t_c_job_interactive_detail` (
   `error_message` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_c_mail_send_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_c_mail_send_detail`;
 
@@ -169,11 +114,6 @@ CREATE TABLE `t_c_mail_send_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_c_mail_template
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_c_mail_template`;
 
 CREATE TABLE `t_c_mail_template` (
@@ -188,11 +128,6 @@ CREATE TABLE `t_c_mail_template` (
   `subject` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_c_rest_interactive_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_c_rest_interactive_detail`;
 
@@ -214,11 +149,6 @@ CREATE TABLE `t_c_rest_interactive_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_c_serial_code
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_c_serial_code`;
 
 CREATE TABLE `t_c_serial_code` (
@@ -232,11 +162,6 @@ CREATE TABLE `t_c_serial_code` (
   `remark` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_c_sms_send_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_c_sms_send_detail`;
 
@@ -258,11 +183,6 @@ CREATE TABLE `t_c_sms_send_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_c_sms_template
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_c_sms_template`;
 
 CREATE TABLE `t_c_sms_template` (
@@ -276,11 +196,6 @@ CREATE TABLE `t_c_sms_template` (
   `file_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_bid
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid`;
 
@@ -335,11 +250,6 @@ CREATE TABLE `t_ol_bid` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_bid_acctype
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_bid_acctype`;
 
 CREATE TABLE `t_ol_bid_acctype` (
@@ -352,11 +262,6 @@ CREATE TABLE `t_ol_bid_acctype` (
   `item_value` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_bid_cashier_mode
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid_cashier_mode`;
 
@@ -371,11 +276,6 @@ CREATE TABLE `t_ol_bid_cashier_mode` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_bid_compare_frequency
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_bid_compare_frequency`;
 
 CREATE TABLE `t_ol_bid_compare_frequency` (
@@ -388,11 +288,6 @@ CREATE TABLE `t_ol_bid_compare_frequency` (
   `item_value` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_bid_contract
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid_contract`;
 
@@ -408,11 +303,6 @@ CREATE TABLE `t_ol_bid_contract` (
   `deposit_bill_pdf` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_bid_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid_detail`;
 
@@ -430,11 +320,6 @@ CREATE TABLE `t_ol_bid_detail` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_bid_leasemodule
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_bid_leasemodule`;
 
 CREATE TABLE `t_ol_bid_leasemodule` (
@@ -448,11 +333,6 @@ CREATE TABLE `t_ol_bid_leasemodule` (
   `leasemodulename` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_bid_leasetermname
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid_leasetermname`;
 
@@ -469,11 +349,6 @@ CREATE TABLE `t_ol_bid_leasetermname` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_bid_leasetype
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_bid_leasetype`;
 
 CREATE TABLE `t_ol_bid_leasetype` (
@@ -486,11 +361,6 @@ CREATE TABLE `t_ol_bid_leasetype` (
   `item_value` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_bid_promotion_kind
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_bid_promotion_kind`;
 
@@ -505,11 +375,6 @@ CREATE TABLE `t_ol_bid_promotion_kind` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_bid_rent_method
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_bid_rent_method`;
 
 CREATE TABLE `t_ol_bid_rent_method` (
@@ -523,11 +388,6 @@ CREATE TABLE `t_ol_bid_rent_method` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_brand
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_brand`;
 
 CREATE TABLE `t_ol_brand` (
@@ -537,7 +397,7 @@ CREATE TABLE `t_ol_brand` (
   `updated` datetime NOT NULL,
   `state` tinyint(4) NOT NULL DEFAULT '1',
   `name` varchar(100) NOT NULL,
-  `city` varchar(20) DEFAULT NULL,
+  `city` varchar(200) DEFAULT NULL,
   `attribute` tinyint(4) DEFAULT NULL,
   `class` tinyint(4) DEFAULT NULL,
   `standard_area` tinyint(4) DEFAULT NULL,
@@ -569,11 +429,6 @@ CREATE TABLE `t_ol_brand` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_brand_shop_sample
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_brand_shop_sample`;
 
 CREATE TABLE `t_ol_brand_shop_sample` (
@@ -585,11 +440,6 @@ CREATE TABLE `t_ol_brand_shop_sample` (
   `shop_sample` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_building
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_building`;
 
@@ -610,10 +460,23 @@ CREATE TABLE `t_ol_building` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `t_ol_contacts`;
 
-
-# Dump of table t_ol_file_upload_detail
-# ------------------------------------------------------------
+CREATE TABLE `t_ol_contacts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `created` datetime NOT NULL,
+  `updated` datetime NOT NULL,
+  `state` tinyint(4) NOT NULL DEFAULT '1',
+  `code` varchar(40) DEFAULT NULL,
+  `user_name` varchar(100) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `merchant_name` varchar(100) DEFAULT NULL,
+  `brand_name` varchar(100) DEFAULT NULL,
+  `brand_modality` varchar(40) DEFAULT NULL,
+  `msg` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 DROP TABLE IF EXISTS `t_ol_file_upload_detail`;
 
@@ -632,11 +495,6 @@ CREATE TABLE `t_ol_file_upload_detail` (
   `suffix` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_floor
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_floor`;
 
@@ -658,11 +516,6 @@ CREATE TABLE `t_ol_floor` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_floor_old
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_floor_old`;
 
 CREATE TABLE `t_ol_floor_old` (
@@ -681,11 +534,6 @@ CREATE TABLE `t_ol_floor_old` (
   `hd_state` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_mall
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_mall`;
 
@@ -712,11 +560,6 @@ CREATE TABLE `t_ol_mall` (
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_mall_bid_standard
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_mall_bid_standard`;
 
@@ -745,11 +588,6 @@ CREATE TABLE `t_ol_mall_bid_standard` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_mall_traffic
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_mall_traffic`;
 
 CREATE TABLE `t_ol_mall_traffic` (
@@ -766,11 +604,6 @@ CREATE TABLE `t_ol_mall_traffic` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_mapping
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_mapping`;
 
 CREATE TABLE `t_ol_mapping` (
@@ -784,11 +617,6 @@ CREATE TABLE `t_ol_mapping` (
   `type` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_merchant
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_merchant`;
 
@@ -812,11 +640,6 @@ CREATE TABLE `t_ol_merchant` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_merchant_address
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_merchant_address`;
 
 CREATE TABLE `t_ol_merchant_address` (
@@ -834,11 +657,6 @@ CREATE TABLE `t_ol_merchant_address` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_merchant_bank_account
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_merchant_bank_account`;
 
 CREATE TABLE `t_ol_merchant_bank_account` (
@@ -851,11 +669,6 @@ CREATE TABLE `t_ol_merchant_bank_account` (
   `bank_account_desc` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_merchant_brand
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_merchant_brand`;
 
@@ -871,11 +684,6 @@ CREATE TABLE `t_ol_merchant_brand` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_merchant_business_license
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_merchant_business_license`;
 
 CREATE TABLE `t_ol_merchant_business_license` (
@@ -887,11 +695,6 @@ CREATE TABLE `t_ol_merchant_business_license` (
   `business_license` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_merchant_court_announcement
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_merchant_court_announcement`;
 
@@ -922,11 +725,6 @@ CREATE TABLE `t_ol_merchant_court_announcement` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_merchant_illegal_info
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_merchant_illegal_info`;
 
 CREATE TABLE `t_ol_merchant_illegal_info` (
@@ -942,11 +740,6 @@ CREATE TABLE `t_ol_merchant_illegal_info` (
   `remove_department` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_merchant_lawsuit
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_merchant_lawsuit`;
 
@@ -966,11 +759,6 @@ CREATE TABLE `t_ol_merchant_lawsuit` (
   `uuid` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_merchant_own_tax
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_merchant_own_tax`;
 
@@ -992,11 +780,6 @@ CREATE TABLE `t_ol_merchant_own_tax` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_merchant_punishment_info
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_merchant_punishment_info`;
 
 CREATE TABLE `t_ol_merchant_punishment_info` (
@@ -1017,11 +800,6 @@ CREATE TABLE `t_ol_merchant_punishment_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_modality
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_modality`;
 
 CREATE TABLE `t_ol_modality` (
@@ -1039,11 +817,6 @@ CREATE TABLE `t_ol_modality` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_my_favourite
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_my_favourite`;
 
 CREATE TABLE `t_ol_my_favourite` (
@@ -1055,11 +828,6 @@ CREATE TABLE `t_ol_my_favourite` (
   `state` tinyint(4) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_reservation
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_reservation`;
 
@@ -1085,11 +853,6 @@ CREATE TABLE `t_ol_reservation` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_reservation_shop
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_reservation_shop`;
 
 CREATE TABLE `t_ol_reservation_shop` (
@@ -1101,11 +864,6 @@ CREATE TABLE `t_ol_reservation_shop` (
   `shop_code` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_search_shop_detail
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_search_shop_detail`;
 
@@ -1125,13 +883,9 @@ CREATE TABLE `t_ol_search_shop_detail` (
   `start_date` datetime DEFAULT NULL,
   `end_date` datetime DEFAULT NULL,
   `mall_codes` text,
+  `sub_type` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_shop
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_shop`;
 
@@ -1160,13 +914,21 @@ CREATE TABLE `t_ol_shop` (
   `hd_state` varchar(30) DEFAULT NULL,
   `sub_type` varchar(50) DEFAULT NULL,
   `is_sync` tinyint(4) NOT NULL DEFAULT '1',
+  `sign_up_date` datetime DEFAULT NULL,
+  `hoarding_date` datetime DEFAULT NULL,
+  `entering_date` datetime DEFAULT NULL,
+  `opening_date` datetime DEFAULT NULL,
+  `days_before_contract_expire` smallint(11) DEFAULT NULL,
+  `brand_to_sign` varchar(200) DEFAULT NULL,
+  `responsible_person` varchar(200) DEFAULT NULL,
+  `leasing_status` varchar(200) DEFAULT NULL,
+  `remark_1` varchar(200) DEFAULT NULL,
+  `remark_2` varchar(200) DEFAULT NULL,
+  `remark_3` varchar(200) DEFAULT NULL,
+  `remark_4` varchar(200) DEFAULT NULL,
+  `remark_5` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_shop_coords
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_shop_coords`;
 
@@ -1184,11 +946,6 @@ CREATE TABLE `t_ol_shop_coords` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_shop_engineering_images
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_shop_engineering_images`;
 
 CREATE TABLE `t_ol_shop_engineering_images` (
@@ -1201,11 +958,6 @@ CREATE TABLE `t_ol_shop_engineering_images` (
   `image` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_shop_engineering_specifications
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_shop_engineering_specifications`;
 
@@ -1223,11 +975,6 @@ CREATE TABLE `t_ol_shop_engineering_specifications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_shop_images
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_shop_images`;
 
 CREATE TABLE `t_ol_shop_images` (
@@ -1240,11 +987,6 @@ CREATE TABLE `t_ol_shop_images` (
   `position` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
-
-
-
-# Dump of table t_ol_sys_message
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_sys_message`;
 
@@ -1261,11 +1003,6 @@ CREATE TABLE `t_ol_sys_message` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
-
-
-# Dump of table t_ol_temp_param
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_temp_param`;
 
 CREATE TABLE `t_ol_temp_param` (
@@ -1278,11 +1015,6 @@ CREATE TABLE `t_ol_temp_param` (
   `value` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_user
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_user`;
 
@@ -1308,11 +1040,6 @@ CREATE TABLE `t_ol_user` (
   UNIQUE KEY `mobile` (`mobile`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_user_contacts
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_user_contacts`;
 
 CREATE TABLE `t_ol_user_contacts` (
@@ -1330,11 +1057,6 @@ CREATE TABLE `t_ol_user_contacts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Dump of table t_ol_user_merchant
-# ------------------------------------------------------------
-
 DROP TABLE IF EXISTS `t_ol_user_merchant`;
 
 CREATE TABLE `t_ol_user_merchant` (
@@ -1346,11 +1068,6 @@ CREATE TABLE `t_ol_user_merchant` (
   `merchant_code` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table t_ol_user_simple
-# ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `t_ol_user_simple`;
 
@@ -1367,13 +1084,3 @@ CREATE TABLE `t_ol_user_simple` (
   `file` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -58,13 +58,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </div>
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-4.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
-            </div><br>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="c-center c-desc">
-                        <small>*以上价格均含税/物业/水电/空调/保洁保安/前台接待/网络;空调同步商场空调时间</small>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
