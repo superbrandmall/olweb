@@ -1,6 +1,6 @@
 <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->
 <a name="footer"></a>
-<footer class="c-layout-footer c-layout-footer-1">
+<footer class="c-layout-footer c-layout-footer-1" style="position: relative; z-index: 0; ">
 <div class="c-postfooter">
 	<div class="container">
 		<div class="row">

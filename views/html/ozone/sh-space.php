@@ -36,14 +36,14 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <h3 class="c-font-uppercase c-center c-font-bold">Location</h3>
                 </div>
                 <br>
-                <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2">
                     <img src="/views/assets/base/img/content/mall/ozone/map-sh.jpg" class="img-responsive" style="margin: 0 auto;" />
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="c-content-box c-size-md" style="padding: 12px 0 0; margin-bottom: 120px; background-color: #fff;">
+    <div class="c-content-box c-size-md" style="padding: 12px 0 0; margin-bottom: 0; background-color: #fff;">
         <div class="container">
             <div class="c-content-subscribe-form-1">
                 <div class="row">

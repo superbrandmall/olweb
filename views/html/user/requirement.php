@@ -6,7 +6,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 <link href="views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <div class="c-layout-page">
-    <div class="c-content-box c-size-md c-no-padding" style="margin-top: 20px;">
+    <div class="c-content-box c-size-md c-no-padding" style="margin: 20px 0 0;">
 		<div class="container">
 			<div class="c-content-feedback-1 c-option-2">
 				<div class="row">

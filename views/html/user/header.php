@@ -123,7 +123,7 @@ var _hmt = _hmt || [];
                         <a href="requirement" class="c-link"><i class="fa fa-search"></i> <?= $lang['nav_search'] ?></a>
                     </li>
                     <li class="c-menu-type-classic">
-                        <a href="http://ozone-cn.com" class="c-link"><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" style="margin-top: -4px;" height="12"></a>
+                        <a href="http://ozone-cn.com" class="c-link" target="_blank"><i class="fa fa-external-link-square"></i> eat n work</a>
                     </li>
                     <li>
                         <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">

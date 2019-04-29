@@ -90,7 +90,7 @@ var _hmt = _hmt || [];
         <div class="container">
             <div class="c-navbar-wrapper clearfix">
                 <div class="c-brand c-pull-left">
-                    <a href="/" class="c-logo">
+                    <a href="https://ol.superbrandmall.com/" class="c-logo">
                         <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="40" class="c-desktop-logo">
                         <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="40" class="c-desktop-logo-inverse">
                         <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="25" class="c-mobile-logo">
@@ -100,18 +100,23 @@ var _hmt = _hmt || [];
                         <span class="c-line"></span>
                         <span class="c-line"></span>
                     </button>
-                    <a href="co-work" class="c-logo"><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;"></a>
+                    <a href="co-work" class="c-logo">
+                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" height="18" style="margin-left: 10px;">
+                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo-inverse" height="18" style="margin-left: 10px;">
+                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-mobile-logo" height="10" style="margin-left: 10px;">
+                    </a>
                 </div>
                 
-                <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-uppercase c-fonts-bold">
+                <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-bold">
                     <ul class="nav navbar-nav c-theme-nav">
+                        <li class="c-menu-type-classic"><a href="about-us" class="c-link">关于我们</a></li>
                         <li class="c-menu-type-classic"><a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> 办公地点</a>
                             <ul class="dropdown-menu c-menu-type-classic c-pull-left" style="">
                                 <li><a href="sh-space">上海</a></li>
                                 <li><a href="ly-space">洛阳</a></li>
                             </ul>
                         </li>
-                        <li class="c-menu-type-classic"><a href="co-work" class="c-link">关于<img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="12" /></a></li>
+                        <li class="c-menu-type-classic"><a href="co-work" class="c-link">关于eat n work</a></li>
                         <li class="c-menu-type-classic"><a href="room-type" class="c-link">房型介绍</a></li>
                         <li class="c-menu-type-classic"><a href="co-work#join_us" class="c-link">加入我们</a></li>
                         <li class="c-menu-type-classic"><a href="co-work#contact" class="c-link">联系我们</a></li>

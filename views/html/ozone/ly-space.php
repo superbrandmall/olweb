@@ -45,9 +45,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         <div class="c-name c-font-uppercase c-font-bold" style="line-height: 47px; font-size: 20px;">
                                             移动工位
                                         </div>
-                                        <div class="c-socials c-theme" style="margin-top: 10px;">
-                                            1800元/月起
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -60,9 +57,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     <div class="c-head">
                                         <div class="c-name c-font-uppercase c-font-bold" style="line-height: 47px; font-size: 20px;">
                                             专属工位
-                                        </div>
-                                        <div class="c-socials c-theme" style="margin-top: 10px;">
-                                            3500元/月起
                                         </div>
                                     </div>
                                 </div>
@@ -81,14 +75,14 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <h3 class="c-font-uppercase c-center c-font-bold">Location</h3>
                 </div>
                 <br>
-                <div class="col-md-12">
+                <div class="col-md-8 col-md-offset-2">
                     <img src="/views/assets/base/img/content/mall/ozone/map-ly.jpg" class="img-responsive" style="margin: 0 auto;" />
                 </div>
             </div>
         </div>
     </div>
     
-    <div class="c-content-box c-size-md" style="padding: 12px 0 0; margin-bottom: 120px; background-color: #fff;">
+    <div class="c-content-box c-size-md" style="padding: 12px 0 0; margin-bottom: 0; background-color: #fff;">
         <div class="container">
             <div class="c-content-subscribe-form-1">
                 <div class="row">

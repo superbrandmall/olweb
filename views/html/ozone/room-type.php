@@ -71,72 +71,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0;">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="c-title c-center c-font-bold c-font-uppercase" style="font-size: 30px; margin: 20px 0 30px 0;">
-                        定制面积 （140人）
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <img src="/views/assets/base/img/content/mall/ozone/work-space-5.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
-                </div>
-                <div class="col-md-4">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                                <tr>
-                                    <th scope="row">
-                                        面积
-                                    </th>
-                                    <td>
-                                        560平方米
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        建议办公人数
-                                    </th>
-                                    <td>
-                                        140人
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        租金单价
-                                    </th>
-                                    <td>
-                                        约13元/平/日
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        物业费单价
-                                    </th>
-                                    <td>
-                                        约25元/平/日
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">
-                                        每月租金
-                                    </th>
-                                    <td>
-                                        约235,433元
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 120px;">
-        <div class="container">
             <div class="col-md-12">
                 <div class="c-title c-center c-font-bold c-font-uppercase" style="font-size: 30px; margin: 20px 0 30px 0;">
-                    快闪店（9/15 /18/44人）
+                    快闪店（9/15人）
                 </div>
             </div>
             <div class="col-md-4">
@@ -217,7 +154,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     特色
                                 </th>
                                 <td>
-                                    临近<img src="views/assets/base/img/content/mall/eat_n_work.png" alt="eat n work" height="12" />现代休闲餐饮区<br>和正大厅,适合展示或快闪类客户
+                                    临近 eat n work 现代休闲餐饮区<br>和正大厅,适合展示或快闪类客户
                                 </td>
                                 <td>
                                     与901相邻<br>可组合成前店后办公模式
@@ -227,9 +164,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </table>
                 </div>
             </div>
-        </div><br>
+        </div>
+    </div>
     
+    <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 0;">
         <div class="container">
+            <div class="col-md-12">
+                <div class="c-title c-center c-font-bold c-font-uppercase" style="font-size: 30px; margin: 20px 0 30px 0;">
+                    定制面积 （44/18/140人）
+                </div>
+            </div>
             <div class="col-md-4">
                 <img src="/views/assets/base/img/content/mall/ozone/work-space-7.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
             </div>
@@ -275,10 +219,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     租金单价
                                 </th>
                                 <td>
-                                    16元/平/日
+                                    约16元/平/日
                                 </td>
                                 <td>
-                                    19元/平/日
+                                    约19元/平/日
                                 </td>
                             </tr>
                             <tr>
@@ -286,10 +230,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     物业费单价
                                 </th>
                                 <td>
-                                    30元/平/日
+                                    约30元/平/日
                                 </td>
                                 <td>
-                                    30元/平/月
+                                    约30元/平/月
                                 </td>
                             </tr>
                             <tr>
@@ -297,10 +241,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     每月租金
                                 </th>
                                 <td>
-                                    113,666元
+                                    约113,666元
                                 </td>
                                 <td>
-                                    42,554元
+                                    约42,554元
                                 </td>
                             </tr>
                             <tr>
@@ -316,6 +260,61 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="/views/assets/base/img/content/mall/ozone/work-space-5.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
+                </div>
+                <div class="col-md-4">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        面积
+                                    </th>
+                                    <td>
+                                        560平方米
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        建议办公人数
+                                    </th>
+                                    <td>
+                                        140人
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        租金单价
+                                    </th>
+                                    <td>
+                                        约13元/平/日
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        物业费单价
+                                    </th>
+                                    <td>
+                                        约25元/平/日
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">
+                                        每月租金
+                                    </th>
+                                    <td>
+                                        约235,433元
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

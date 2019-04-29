@@ -1,5 +1,5 @@
 <?php
-if($_SERVER['SERVER_NAME'] == 'ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'www.ozone-cn.com'){
+if($_SERVER['SERVER_NAME'] == 'ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'www.ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com' || $_SERVER['SERVER_NAME'] == 'ol.jun'){
     include ('views/html/ozone/header.php');
     if(strpos($_SERVER['REQUEST_URI'],'co-work')) {
         include ('views/html/ozone/co-work.php');
@@ -9,6 +9,8 @@ if($_SERVER['SERVER_NAME'] == 'ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'www.
         include ('views/html/ozone/ly-space.php');
     } else if(strpos($_SERVER['REQUEST_URI'],'room-type')) {
         include ('views/html/ozone/room-type.php');
+    } else if(strpos($_SERVER['REQUEST_URI'],'about-us')) {
+        include ('views/html/ozone/about-us.php');
     } else {
         include ('views/html/ozone/co-work.php');
     }

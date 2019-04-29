@@ -133,6 +133,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         ),
         'room-type' => array(
             'url' => 'room-type.php'
+        ),
+        'about-us' => array(
+            'url' => 'about-us.php'
+        ),
+        'join-us' => array(
+            'url' => 'join-us.php'
+        ),
+        'contact-us' => array(
+            'url' => 'contact-us.php'
         )
     );
     
