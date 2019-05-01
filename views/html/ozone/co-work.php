@@ -173,31 +173,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
                             <div class="item">
                                 <div class="col-md-4">
                                     <div class="c-content-testimonial-2" style="padding: 50px 30px 50px 30px;">
-                                        <div class="c-testimonial c-font-uppercase c-font-bold">
-                                            Brian Tan 
-                                        </div>
-                                        <div class="c-author">
-                                            <div class="c-portrait" style="background-image: url(/views/assets/base/img/content/mall/ozone/cook1.jpg)">
-                                            </div>
-                                            <div class="c-name c-font-uppercase">
-                                                陈绵泰
-                                            </div>
-                                            <p class="c-position c-theme c-font-uppercase">
-                                                美食家 / 厨师 / 概念创意师 / 活动策划师
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <img class="img-responsive" src="/views/assets/base/img/content/mall/ozone/cook11.jpg" alt="">
-                                </div>
-                                <div class="col-md-4">
-                                    <img class="img-responsive" src="/views/assets/base/img/content/mall/ozone/cook12.jpg" alt="">
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="col-md-4">
-                                    <div class="c-content-testimonial-2" style="padding: 50px 30px 50px 30px;">
                                         <div class="c-testimonial c-font-uppercase c-font-bold" style="margin: 20px 0;">
                                             Jacqueline Qiu
                                         </div>

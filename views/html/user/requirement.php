@@ -13,7 +13,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 					<div class="col-md-3">
 						<div class="c-contact">
                             <div class="c-content-title-1">
-                                <h3 class="c-font-bold"><?= $lang['search_search_shops'] ?></h3>
+                                <h3 class="c-font-bold"><i class="fas fa-store-alt c-font-dark"></i> <?= $lang['search_search_shops'] ?></h3>
                             </div>
 							<form id="requirement_form">
                                 <div class="form-group">

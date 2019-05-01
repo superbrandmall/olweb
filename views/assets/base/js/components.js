@@ -348,6 +348,34 @@ var ContentCubeLatestPortfolio = function() {
             lightboxCounter: '<div class="cbp-popup-lightbox-counter">{{current}} of {{total}}</div>'
         });
         
+        $('#event-grid').cubeportfolio({
+            filters: '#filters-container',
+            loadMore: '#loadMore-container',
+            loadMoreAction: 'click',
+            layoutMode: 'grid',
+            defaultFilter: '*',
+            animationType: 'quicksand',
+            gapHorizontal: 35,
+            gapVertical: 25,
+            gridAdjustment: 'responsive',
+            mediaQueries: [{
+                width: 1100,
+                cols: 3
+            }, {
+                width: 800,
+                cols: 2
+            }, {
+                width: 500,
+                cols: 2
+            }, {
+                width: 320,
+                cols: 1
+            }],
+            caption: 'zoom',
+            displayType: 'lazyLoading',
+            displayTypeSpeed: 100
+        });
+        
         $('#grid-container').cubeportfolio({
             filters: '#filters-container',
             loadMore: '#loadMore-container',

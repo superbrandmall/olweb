@@ -125,7 +125,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     物业费单价
                                 </th>
                                 <td>
-                                    约30元/平/日
+                                    约30元/平/月
                                 </td>
                                 <td>
                                     约30元/平/月
@@ -223,7 +223,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     物业费单价
                                 </th>
                                 <td>
-                                    约30元/平/日
+                                    约30元/平/月
                                 </td>
                                 <td>
                                     约30元/平/月
@@ -294,7 +294,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         物业费单价
                                     </th>
                                     <td>
-                                        约25元/平/日
+                                        约25元/平/月
                                     </td>
                                 </tr>
                                 <tr>

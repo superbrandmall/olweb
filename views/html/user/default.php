@@ -76,7 +76,7 @@
                             <a href="shop?id=OLSHOP180917000430"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt="望湘园"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000154"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt="Adidas Originals"/></a>
+                            <a href="shop?id=OLSHOP180917000383"><img src="views/assets/base/img/content/client-logos/fila.jpg" alt="FILA"/></a>
                             <a href="shop?id=OLSHOP180917000659"><img src="views/assets/base/img/content/client-logos/tai-cook.jpg" alt="明泰谷"/></a>
                         </div>
                         <div class="item">
@@ -85,7 +85,7 @@
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000190"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt="耶里夏丽"/></a>
-                            <a href="shop?id=OLSHOP180917000431"><img src="views/assets/base/img/content/client-logos/fulinxuan.jpg" alt="富临轩"/></a>
+                            <a href="shop?id=OLSHOP180917000211"><img src="views/assets/base/img/content/client-logos/urban-revivo.jpg" alt="URBAN REVIVO"/></a>
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000035"><img src="views/assets/base/img/content/client-logos/longines.jpg" alt="Longines"/></a>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000069"><img src="views/assets/base/img/content/client-logos/skechers.jpg" alt="SKECHERS"/></a>
-                            <a href="shop?id=OLSHOP180917000666"><img src="views/assets/base/img/content/client-logos/banana-leaf.jpg" alt="广州蕉叶"/></a>
+                            <a href="shop?id=OLSHOP180917000737"><img src="views/assets/base/img/content/client-logos/korean-barbecue.jpg" alt="炉边情谈"/></a>
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000745"><img src="views/assets/base/img/content/client-logos/shanghai-min.jpg" alt="小南国"/></a>
