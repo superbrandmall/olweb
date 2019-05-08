@@ -28,10 +28,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta name="keywords" content="OZONE, 正大广场联合办公, eat n work, 乐作生活" />
+<meta name="keywords" content="上海联合办公,出租上海写字楼,共享办公室上海,上海办公室出租,eat n work,上海办公楼出租,联合办公空间,联合办公出租,工位 出租,上海办公楼租赁,上海办公室租赁,上海写字楼出租,联合办公 空间,
+      联合办公租赁,工位出租,共享办公室,funwork联合办公,wework" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="OZONE - 乐作生活">
-<meta property="og:description" content="OZONE 致力于将“工作并快乐生活”的概念深耕至每一个人，让工作不再千篇⼀律、两点⼀线， 重新定义生活哲学，实现新生代更多的“创意+”。">
+<meta property="og:description" content="OZONE 致力于将“工作并快乐生活”的概念深耕至每一个人，让工作不再千篇⼀律、两点⼀线，重新定义生活哲学，实现新生代更多的“创意+”。">
 <meta property="og:image" content="https://ol.superbrandmall.com/views/assets/base/img/content/backgrounds/wechat-thumbnail.jpg">
 <meta property="og:url" content="http://ozone-cn.com/">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -126,7 +127,3 @@ var _hmt = _hmt || [];
         </div>
     </div>
 </header>
-
-<?php
-include ('contact.php');
-?>
