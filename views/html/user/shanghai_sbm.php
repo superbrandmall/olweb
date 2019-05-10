@@ -97,11 +97,8 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
                         <h2 class="c-feature-16-title c-font-bold c-font-white">10F <?= $lang['mall_shanghai_sbm_10'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
-                            <?= $lang['mall_modality_shop_proportion'] ?>
-                        </p>
-                        <div id="proportion_f10"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=10" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="http://eatnwork-china.com/" target="_blank"><?= $lang['home_enter'] ?></a>
                     </div>
                 </div>
             </div>
@@ -115,11 +112,8 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
                         <h2 class="c-feature-16-title c-font-bold">9F <?= $lang['mall_shanghai_sbm_9'] ?></h2>
-                        <p class="c-feature-16-desc">
-                            <?= $lang['mall_modality_shop_proportion'] ?>
-                        </p>
-                        <div id="proportion_f9"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=9" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="http://eatnwork-china.com/" target="_blank"><?= $lang['home_enter'] ?></a>
                     </div>
                 </div>
             </div>
@@ -358,8 +352,8 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
         </div>
     </div>
 
-    <a id="f10_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=10" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">10F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/10F.png" class="img-responsive" alt="" /></a>
-    <a id="f9_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=9" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">9F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/9F.png" class="img-responsive" alt="" /></a>
+    <a id="f10_g" href="http://eatnwork-china.com/" target="_blank" class="hidden-xs hidden-sm hidden-md floor-guide" style="background-color: #fff; padding: 5px;"><span class="badge c-bg-white c-font-red c-font-bold">10F</span><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" style="margin-top: 15px;" class="img-responsive" alt="" /></a>
+    <a id="f9_g" href="http://eatnwork-china.com/" target="_blank" class="hidden-xs hidden-sm hidden-md floor-guide" style="background-color: #fff; padding: 5px;"><span class="badge c-bg-white c-font-red c-font-bold">9F</span><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" style="margin-top: 15px;" class="img-responsive" alt="" /></a>
     <a id="f8_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=8" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">8F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/8F.png" class="img-responsive" alt="" /></a>
     <a id="f7_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=7" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">7F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/7F.png" class="img-responsive" alt="" /></a>
     <a id="f6_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=6" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">6F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/6F.png" class="img-responsive" alt="" /></a>

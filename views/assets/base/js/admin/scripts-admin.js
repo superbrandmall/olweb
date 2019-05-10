@@ -304,6 +304,45 @@ function drawShops(){
             });
         }
     });
+    
+    setTimeout(function () {
+        var pos, brand;
+        $('map area').each(function(i,elem){
+            if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
+                pos = $(this).attr('coords').split(',');
+                var x = 0;
+                var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft;
+                while(x < pos.length){
+                    if(parseInt(pos[x]) < posLeftMin){
+                        posLeftMin = parseInt(pos[x]);
+                    } 
+                    
+                    if(parseInt(pos[x]) > posLeftMax){
+                        posLeftMax = parseInt(pos[x]);
+                    }
+                    x = x + 2;
+                }
+                posLeft = parseInt((posLeftMin + posLeftMax) / 2);
+
+                var y = 1;
+                var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
+                while(y < pos.length){
+                    if(parseInt(pos[y]) < posTopMin){
+                        posTopMin = parseInt(pos[y]);
+                    }
+                    if(parseInt(pos[y]) > posTopMax){
+                        posTopMax = parseInt(pos[y]);
+                    }
+                    y = y + 2;
+                }
+                posTop = parseInt((posTopMin + posTopMax) / 2 + 30);
+                brand = $(this).attr('name');
+                $(this).after(
+                    '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 7px; line-height: 7px; width: 35px; word-break: break-all;">'+brand+'</span>'
+                );
+            }
+        });
+    },1000);
 }
 
 

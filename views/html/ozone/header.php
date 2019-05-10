@@ -24,17 +24,17 @@
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>OZONE - 乐作生活</title>
+<title>eat n work - 美食+共享办公就是eat n work生活和工作两不误</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="keywords" content="上海联合办公,出租上海写字楼,共享办公室上海,上海办公室出租,eat n work,上海办公楼出租,联合办公空间,联合办公出租,工位 出租,上海办公楼租赁,上海办公室租赁,上海写字楼出租,联合办公 空间,
       联合办公租赁,工位出租,共享办公室,funwork联合办公,wework" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="OZONE - 乐作生活">
-<meta property="og:description" content="OZONE 致力于将“工作并快乐生活”的概念深耕至每一个人，让工作不再千篇⼀律、两点⼀线，重新定义生活哲学，实现新生代更多的“创意+”。">
+<meta property="og:title" content="eat n work - 美食+共享办公就是eat n work生活和工作两不误å">
+<meta property="og:description" content="它不是一般意义上的办公地，而是一个办公、社交和服务的生活工作平衡点。满足对美食的无限期许，又能找到工作的乐趣！">
 <meta property="og:image" content="https://ol.superbrandmall.com/views/assets/base/img/content/backgrounds/wechat-thumbnail.jpg">
-<meta property="og:url" content="http://ozone-cn.com/">
+<meta property="og:url" content="http://eatnwork-china.com/">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="/views/assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css"/>
@@ -65,7 +65,7 @@
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?ed58e2185471ba60a2249ef2d806d6c7";
+  hm.src = "https://hm.baidu.com/hm.js?527a91aa1c5dc1858dc47ed2c1c9151e";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();

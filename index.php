@@ -1,5 +1,5 @@
 <?php
-if($_SERVER['SERVER_NAME'] == 'ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'www.ozone-cn.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com' || $_SERVER['SERVER_NAME'] == 'ol.jun'){
+if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com'){
     include ('views/html/ozone/header.php');
     if(strpos($_SERVER['REQUEST_URI'],'co-work')) {
         include ('views/html/ozone/co-work.php');
