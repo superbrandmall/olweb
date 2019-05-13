@@ -14,6 +14,8 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
     } else {
         include ('views/html/ozone/co-work.php');
     }
+} else if ($_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com') { // remove this part once eatnwork-china.com is ICP registered
+    header('Location: http://www.eatnwork-china.com/');
 } else {
     if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         include ('views/html/admin/header.php');
