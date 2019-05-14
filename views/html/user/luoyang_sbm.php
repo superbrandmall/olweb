@@ -18,28 +18,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <h3 class="c-center c-font-bold"><?= $lang['mall_luoyang_brief'] ?> & <?= $lang['mall_desc'] ?></h3>
             </div>
             <div class="col-md-4">
-                <video loop="loop" autoplay="true" src="upload/video/<?= $lang['mall_lang_cat'] ?>/shanghai-sbm.mp4" controls="true" width="100%"></video><br><br>
+                <video loop="loop" autoplay="true" src="upload/video/<?= $lang['mall_lang_cat'] ?>/luoyang-sbm.mp4" controls="true" width="100%"></video><br><br>
                 <div class="c-body">
                     <div class="c-section">
-                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-                            <?= $lang['mall_location'] ?>
-                        </div>
                         <div>
                             <span id="street"></span>
-                        </div>
-                        <br>
-                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-                            <?= $lang['mall_floor_area'] ?>
-                        </div>
-                        <div>
-                            <span id="gross_floor_area"></span>m<sup>2</sup>
-                        </div>
-                        <br>
-                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-                            <?= $lang['mall_leasable_area'] ?>
-                        </div>
-                        <div>
-                            <span id="leasing_area"></span>m<sup>2</sup>
                         </div>
                     </div>
                 </div>

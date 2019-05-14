@@ -1,5 +1,5 @@
 var floor = [];
-floor['f10'] = true;
+//floor['f10'] = true;
 floor['f9'] = true;
 floor['f8'] = true;
 floor['f7'] = true;
@@ -15,52 +15,44 @@ $(document).ready(function(){
     $(window).scroll(function() {
         var y = $(this).scrollTop();
         
-        if (y <= $('#f10').offset().top) {
+        if (y <= $('#f9').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f8_g" ).addClass('floor-guide-active-pre-pre');
             $( "#f7_g" ).addClass('floor-guide-active-pre');
             $( "#f6_g" ).addClass('floor-guide-active');
             $( "#f5_g" ).addClass('floor-guide-active-next');
             $( "#f4_g" ).addClass('floor-guide-active-next-next');
-        } else if (y <= $('#f9').offset().top && y > $('#f10').offset().top) {
+        } else if (y <= $('#f8').offset().top && y > $('#f9').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f7_g" ).addClass('floor-guide-active-pre-pre');
             $( "#f6_g" ).addClass('floor-guide-active-pre');
             $( "#f5_g" ).addClass('floor-guide-active');
             $( "#f4_g" ).addClass('floor-guide-active-next');
             $( "#f3_g" ).addClass('floor-guide-active-next-next');
-            getFloorInfo($.mallCode.shanghaiSbm,'九楼','f9');
-        } else if (y <= $('#f8').offset().top && y > $('#f9').offset().top) {
+            getFloorInfo($.mallCode.shanghaiSbm,'八楼','f8');
+        } else if (y <= $('#f7').offset().top && y > $('#f8').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f6_g" ).addClass('floor-guide-active-pre-pre');
             $( "#f5_g" ).addClass('floor-guide-active-pre');
             $( "#f4_g" ).addClass('floor-guide-active');
             $( "#f3_g" ).addClass('floor-guide-active-next');
             $( "#f2_g" ).addClass('floor-guide-active-next-next');
-            getFloorInfo($.mallCode.shanghaiSbm,'八楼','f8');
-        } else if (y <= $('#f7').offset().top && y > $('#f8').offset().top) {
+            getFloorInfo($.mallCode.shanghaiSbm,'七楼','f7');
+        } else if (y <= $('#f6').offset().top && y > $('#f7').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f5_g" ).addClass('floor-guide-active-pre-pre');
             $( "#f4_g" ).addClass('floor-guide-active-pre');
             $( "#f3_g" ).addClass('floor-guide-active');
             $( "#f2_g" ).addClass('floor-guide-active-next');
             $( "#f1_g" ).addClass('floor-guide-active-next-next');
-            getFloorInfo($.mallCode.shanghaiSbm,'七楼','f7');
-        } else if (y <= $('#f6').offset().top && y > $('#f7').offset().top) {
+            getFloorInfo($.mallCode.shanghaiSbm,'六楼','f6');
+        } else if (y <= $('#f5').offset().top && y > $('#f6').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f4_g" ).addClass('floor-guide-active-pre-pre');
             $( "#f3_g" ).addClass('floor-guide-active-pre');
             $( "#f2_g" ).addClass('floor-guide-active');
             $( "#f1_g" ).addClass('floor-guide-active-next');
             $( "#fb1_g" ).addClass('floor-guide-active-next-next');
-            getFloorInfo($.mallCode.shanghaiSbm,'六楼','f6');
-        } else if (y <= $('#f5').offset().top && y > $('#f6').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
-            $( "#f10_g" ).addClass('floor-guide-active-pre-pre');
-            $( "#f9_g" ).addClass('floor-guide-active-pre');
-            $( "#f8_g" ).addClass('floor-guide-active');
-            $( "#f7_g" ).addClass('floor-guide-active-next');
-            $( "#f6_g" ).addClass('floor-guide-active-next-next');
             getFloorInfo($.mallCode.shanghaiSbm,'五楼','f5');
         } else if (y <= $('#f4').offset().top && y > $('#f5').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
@@ -106,7 +98,7 @@ $(document).ready(function(){
     });
     
     getMallInfo($.mallCode.shanghaiSbm);
-    getFloorInfo($.mallCode.shanghaiSbm,'十楼','f10');
+    getFloorInfo($.mallCode.shanghaiSbm,'九楼','f9');
     
     document.addEventListener("webkitfullscreenchange", function (event) {
         if(document.webkitIsFullScreen){

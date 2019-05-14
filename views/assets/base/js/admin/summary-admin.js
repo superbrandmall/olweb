@@ -13,8 +13,8 @@ var stores_3_units_total = 0;
 $(document).ready(function(){
     $('#nav_summary').addClass('active');
     
-    var floorDesc = ['十楼','九楼','八楼','七楼','六楼','五楼','四楼','三楼','二楼','一楼','负一楼'];
-    var space = [2600,2825];
+    var floorDesc = ['九楼','八楼','七楼','六楼','五楼','四楼','三楼','二楼','一楼','负一楼'];
+    /*var space = [2600,2825];
     for(var i=0;i<2;i++){
         $('#summary_area_percentage tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'%</td><td style="background: #ebcccc;">'+0+'%</td><td style="background: #faf2cc;">'+0+'%</td><td style="background: #D5C8AA;">'+100+'%</td></tr>');
         $('#summary_area tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'m<sup>2</sup></td><td style="background: #ebcccc;">'+0+'m<sup>2</sup></td><td style="background: #faf2cc;">'+0+'m<sup>2</sup></td><td style="background: #D5C8AA;">'+space[i]+'m<sup>2</sup></td><td>'+space[i]+'m<sup>2</sup></td></tr>');
@@ -27,6 +27,10 @@ $(document).ready(function(){
         stores_units_total++;
     }                
     for(var i=2;i<11;i++){
+        getFloorsRentalInfo(floorDesc[i]);
+    }*/
+    
+    for(var i=0;i<10;i++){
         getFloorsRentalInfo(floorDesc[i]);
     }
     
