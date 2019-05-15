@@ -78,9 +78,11 @@ include("views/assets/base/" . $filename);
             })();
         </script>
     </head>
-    <body class="c-layout-header-fixed<?php if (!isset($_GET['p']) || $_GET['p'] == 'home') {
-    echo ' c-layout-header-fullscreen';
-} ?>">
+    <body class="c-layout-header-fixed<?php
+    if (!isset($_GET['p']) || $_GET['p'] == 'home') {
+        echo ' c-layout-header-fullscreen';
+    }
+    ?>">
         <div id="loader"></div>
         <div class="alert alert-danger"  id="ui_alert" role="alert"></div>
         <div class="alert alert-success"  id="ui_congrats" role="alert"></div>
@@ -114,26 +116,41 @@ include("views/assets/base/" . $filename);
 
                         <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-uppercase c-fonts-bold">
                             <ul class="nav navbar-nav c-theme-nav">
-                                <li class="<?php if (!isset($_GET['p']) || $_GET['p'] == 'home' || $_GET['p'] == '') {
-    echo 'c-active ';
-} ?>c-menu-type-classic">
+                                <li class="<?php
+    if (!isset($_GET['p']) || $_GET['p'] == 'home' || $_GET['p'] == '') {
+        echo 'c-active ';
+    }
+    ?>c-menu-type-classic">
                                     <a href="/" class="c-link"><i class="fa fa-home"></i> <?= $lang['nav_home'] ?></a>
                                 </li>
-                                <li class="<?php if (isset($_GET['p']) && substr($_GET['p'], 0, 6) == 'olmall') {
-    echo 'c-active ';
-} ?>c-menu-type-classic">
+                                <li class="<?php
+                                    if (isset($_GET['p']) && substr($_GET['p'], 0, 6) == 'olmall') {
+                                        echo 'c-active ';
+                                    }
+    ?>c-menu-type-classic">
                                     <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                                     <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                                 </li>
-                                <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'requirement') {
-    echo 'c-active ';
-} ?>c-menu-type-classic">
+                                <li class="<?php
+                                    if (isset($_GET['p']) && $_GET['p'] == 'requirement') {
+                                        echo 'c-active ';
+                                    }
+                                    ?>c-menu-type-classic">
                                     <a href="requirement" class="c-link"><i class="fas fa-store-alt"></i> <?= $lang['nav_search'] ?></a>
                                 </li>
-                                <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'events') {
-    echo 'c-active ';
-} ?>c-menu-type-classic">
+                                <li class="<?php
+                                    if (isset($_GET['p']) && $_GET['p'] == 'events') {
+                                        echo 'c-active ';
+                                    }
+                                    ?>c-menu-type-classic">
                                     <a href="events" class="c-link"><i class="far fa-calendar-alt"></i> <?= $lang['nav_event'] ?></a>
+                                </li>
+                                <li class="<?php
+                                    if (isset($_GET['p']) && $_GET['p'] == 'ads') {
+                                        echo 'c-active ';
+                                    }
+                                    ?>c-menu-type-classic">
+                                    <a href="ads" class="c-link"><i class="fas fa-ad"></i> <?= $lang['nav_ad'] ?></a>
                                 </li>
                                 <li class="c-menu-type-classic">
                                     <a href="http://eatnwork-china.com/" class="c-link" target="_blank"><i class="fas fa-external-link-square-alt"></i> eat n work</a>

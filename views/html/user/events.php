@@ -1,4 +1,6 @@
 <div class="c-layout-page">
+    <img style="width: 100%;" src="/views/assets/base/img/content/events/banner.jpg" alt="" />
+    
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0;">
         <div class="container">
             <div class="c-page-title c-pull-left">

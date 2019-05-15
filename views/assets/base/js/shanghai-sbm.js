@@ -29,7 +29,6 @@ $(document).ready(function(){
             $( "#f5_g" ).addClass('floor-guide-active');
             $( "#f4_g" ).addClass('floor-guide-active-next');
             $( "#f3_g" ).addClass('floor-guide-active-next-next');
-            getFloorInfo($.mallCode.shanghaiSbm,'八楼','f8');
         } else if (y <= $('#f7').offset().top && y > $('#f8').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
             $( "#f6_g" ).addClass('floor-guide-active-pre-pre');
@@ -98,7 +97,7 @@ $(document).ready(function(){
     });
     
     getMallInfo($.mallCode.shanghaiSbm);
-    getFloorInfo($.mallCode.shanghaiSbm,'九楼','f9');
+    getFloorInfo($.mallCode.shanghaiSbm,'八楼','f8');
     
     document.addEventListener("webkitfullscreenchange", function (event) {
         if(document.webkitIsFullScreen){

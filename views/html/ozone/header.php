@@ -38,7 +38,7 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="/views/assets/plugins/socicon/socicon.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/bootstrap-social/bootstrap-social.css" rel="stylesheet" type="text/css"/>
-<link href="/views/assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/views/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/animate/animate.min.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

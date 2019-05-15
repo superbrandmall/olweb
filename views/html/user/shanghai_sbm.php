@@ -7,26 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
         <div class="container">
             <div class="c-content-feature-3-grid">
                 <h3 class="c-title c-font-bold mall-name"></h3>
-                <div class="row">
-                    <div class="col-md-2 col-md-offset-4 col-xs-6">
-                        <div class="c-content-v-center" style="height: 90px;">
-                            <div class="c-wrapper">
-                                <div class="c-body">
-                                    <a href="requirement" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square"><?= $lang['mall_shops'] ?></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2 col-xs-6">
-                        <div class="c-content-v-center" style="height: 90px;">
-                            <div class="c-wrapper">
-                                <div class="c-body">
-                                    <a href="events" class="btn btn-lg c-btn-white c-btn-uppercase c-btn-square"><?= $lang['mall_events'] ?></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row" style="height: 90px;"></div>
             </div>
         </div>
     </div>
@@ -113,7 +94,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         <div class="c-feature-16-line c-theme-bg"></div>
                         <h2 class="c-feature-16-title c-font-bold">9、10F <?= $lang['mall_shanghai_sbm_9'] ?></h2>
                         <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="http://eatnwork-china.com/" target="_blank"><?= $lang['home_enter'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="http://eatnwork-china.com/sh-space" target="_blank"><?= $lang['home_enter'] ?></a>
                     </div>
                 </div>
             </div>

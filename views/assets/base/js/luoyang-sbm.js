@@ -17,13 +17,11 @@ $(document).ready(function(){
             $( "#f5_g" ).addClass('floor-guide-active-pre');
             $( "#f4_g" ).addClass('floor-guide-active');
             $( "#f3_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'七楼','f7');
         } else if (y <= $('#f6').offset().top && y > $('#f7').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
             $( "#f4_g" ).addClass('floor-guide-active-pre');
             $( "#f3_g" ).addClass('floor-guide-active');
             $( "#f2_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'六楼','f6');
         } else if (y <= $('#f5').offset().top && y > $('#f6').offset().top) {
             $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
             $( "#f3_g" ).addClass('floor-guide-active-pre');
@@ -64,7 +62,7 @@ $(document).ready(function(){
     });
     
     getMallInfo($.mallCode.luoyangSbm);
-    getFloorInfo($.mallCode.luoyangSbm,'七楼','f7');
+    getFloorInfo($.mallCode.luoyangSbm,'六楼','f6');
     
     document.addEventListener("webkitfullscreenchange", function (event) {
         if(document.webkitIsFullScreen){
