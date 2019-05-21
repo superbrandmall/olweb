@@ -162,9 +162,9 @@ include("views/assets/base/" . $filename);
                                 </li>
                                 <li class="c-menu-type-classic">
 <?php if (isset($_SESSION["lang"]) && $_SESSION["lang"] == 'en') { ?>
-                                        <a href="/?lang=cn" class="c-link" id="c_link_cn"><img src="views/assets/base/img/content/misc/cn.png" alt="正大" width="20" > 中文</a>
+                                        <a href="/?lang=cn" class="c-link" id="c_link_cn">中文</a>
         <?php } else { ?>
-                                        <a href="/?lang=en" class="c-link" id="c_link_en"><img src="views/assets/base/img/content/misc/en.png" alt="正大" width="20" > EN</a>
+                                        <a href="/?lang=en" class="c-link" id="c_link_en">EN</a>
         <?php } ?>
                                 </li>
                             </ul>

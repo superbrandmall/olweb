@@ -151,7 +151,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
-        $page = 'default.php';
+        if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com'){
+            $page = 'co-work.php';
+        } else {
+            $page = 'default.php';
+        }
     }
     
     $session_required = array('contact.php');

@@ -64,14 +64,6 @@ $(document).ready(function(){
                 floorDesc = '八楼';
                 floor = 'L8';
                 break;
-            case '9':
-                floorDesc = '九楼';
-                floor = 'L9';
-                break;
-            case '10':
-                floorDesc = '十楼';
-                floor = 'L10';
-                break;
             default:
                 floorDesc = [];
                 floor = 'L1';
@@ -104,10 +96,6 @@ $(document).ready(function(){
     }
 
     $('#floorNo').text(floor);
-
-    if(getURLParameter('id') && getURLParameter('id') != '') {
-        GetShopInfo();
-    }
 
     if(getURLParameter('expire') && getURLParameter('expire') != '') {
         $('input[name=daysBeforeExpiration][value='+getURLParameter('expire')+']').attr('checked',true);
@@ -158,9 +146,9 @@ function getShopFloorInfo(fl) {
                 var stores_2 = 0;
                 var stores_3 = 0;
 
-                if(!getURLParameter('id') || getURLParameter('id') == '') {
+                /*if(!getURLParameter('id') || getURLParameter('id') == '') {
                     $('#shops_info').html('<div class="col-sm-12"><div class="table-responsive"><table class="table table-hover table-striped"><tbody></tbody></table></div></div>');
-                }
+                }*/
 
                 var itm = 0;
                 $.each(response.data, function(i,v){
@@ -194,18 +182,18 @@ function getShopFloorInfo(fl) {
                                 break;
                         }
 
-                        if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '' && (v.shopState == 0 || v.shopState == 2)) {
+                        /*if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '' && (v.shopState == 0 || v.shopState == 2)) {
                             if(itm % 2 == 0){
                                 $('#shops_info tbody').append('<tr><td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td></tr>');
                             } else {
                                 $('#shops_info tbody').find('tr').last().append('<td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td>');
                             }
                             itm++;
-                        }
+                        }*/
                     }
 
-                    if(v.coords != null && v.coords != '' && v.state == 1){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'" shape="poly" coords="'+v.coords+'" />'); 
+                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state == 1){
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
 
@@ -305,6 +293,8 @@ function drawShops(){
         }
     });
     
+    $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
+    
     setTimeout(function () {
         var pos, brand;
         $('map area').each(function(i,elem){
@@ -338,17 +328,16 @@ function drawShops(){
                 posTop = parseInt((posTopMin + posTopMax) / 2 + 30);
                 brand = $(this).attr('name');
                 $(this).after(
-                    '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 7px; line-height: 7px; width: 35px; word-break: break-all;">'+brand+'</span>'
+                    '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 6px; width: 45px; word-break: break-all;">'+brand+'</span>'
                 );
             }
         });
     },1000);
 }
 
-
-function GetShopInfo(){
+function GetShopInfo(sc){
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-admin/api/shop/"+getURLParameter('id')+"",
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/"+sc+"",
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -372,154 +361,42 @@ function GetShopInfo(){
                 var images = shop.images;
                 $.images = images;
                 
-                var floorName,mallName;
-                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
-                    if(v.floorCode == shop.floorCode) {
-                        floorName = v.description;
-                        return false;
-                    }
-                });
                 
-                var lk;
-                switch (response.data.mallCode) {
-                    case $.mallCode.shanghaiSbm:
-                        lk = "shanghai-sbm";
-                        break;
-                    case $.mallCode.baoshanTm:
-                        lk = "baoshan-tm";
-                        break;
-                    case $.mallCode.zhengzhouTm:
-                        lk = "zhengzhou-tm";
-                        break;
-                    case $.mallCode.xuhuiTm:
-                        lk = "xuhui-tm";
-                        break;
-                    case $.mallCode.xianTm:
-                        lk = "xian-tm";
-                        break;
-                    case $.mallCode.wuxiTm:
-                        lk = "wuxi-tm";
-                        break;
-                    default:
-                        lk = "shanghai-sbm";
-                        break;
-                }
-
-                
-                $('#floor').text(floorName || '-');
-                
-                var state, brandTime = "现";
                 var brandName = shop.brandName;
-                switch(shop.shopState){
-                    case 0:
-                        state = "在租";
-                        break;
-                    case 1:
-                        state = "空铺";
-                        $('#shop_state').addClass('badge-danger');
-                        if(shop.brandToSign != null && shop.brandToSign != ''){
-                            brandTime = "目标";
-                            brandName = shop.brandToSign;
-                            $('#brand_name').addClass('badge-success');
-                        } else {
-                            brandTime = "原";
-                        }
-                        break;
-                    case 2:
-                        state = "待租";
-                        $('#shop_state').addClass('badge-warning');
-                        break;
-                    case 3:
-                        state = "改造";
-                        $('#shop_state').addClass('badge-renovation');
-                        if(shop.brandToSign != null && shop.brandToSign != ''){
-                            brandTime = "目标";
-                            brandName = shop.brandToSign;
-                            $('#brand_name').addClass('badge-success');
-                        } else {
-                            brandTime = "原";
-                        }
-                        break;
-                    default:
-                        state = "在租";
-                        break;
+                if(shop.shopState == 1 || shop.shopState == 3){
+                    if(shop.brandToSign != null && shop.brandToSign != ''){
+                        brandName = shop.brandToSign;
+                        $('#brand_name').css('color','#f00');
+                    } else {
+                        $('#brand_name').css('color','#333');
+                    }
+                } else {
+                    $('#brand_name').css('color','#333');
                 }
-                
-                $('#shop_name').text(shop.shopName);
-                $('#shop_state').text(state);
-                $('#brand_time').text(brandTime);
                 $('#brand_name').text(brandName || '-');
-                $('#area').text((shop.area || '-' ) + 'm²');
-                $('#rent').text((Math.round(shop.deadRent*365/12) || '-' ) + '元/m²/月');
-                $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
-                $('#rent').attr('title',(shop.deadRent || '-' ) + '元/m²/日');
-
+                
                 var contractExpire,contractExpireYear,contractExpireMonth,contractExpireDate;
                 if(shop.contractExpireDate != null){
                     contractExpire = new Date();
                     contractExpire.setTime(shop.contractExpireDate);
                     contractExpireYear = contractExpire.getFullYear('yyyy');
                     contractExpireMonth = contractExpire.getMonth('mm')+1;
+                    if(contractExpireMonth < 10) {
+                        contractExpireMonth = "0"+contractExpireMonth;
+                    }
                     contractExpireDate = contractExpire.getDate('dd');
-
+                    if(contractExpireDate < 10) {
+                        contractExpireDate = "0"+contractExpireDate;
+                    }
+                    
                     $('#contract_expire_date').text(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate);
                 }
-
-                if(shop.signUpDate != null){
-                    var signUp = new Date();
-                    signUp.setTime(shop.signUpDate);
-                    var signUpYear = signUp.getFullYear('yyyy');
-                    var signUpMonth = signUp.getMonth('mm')+1;
-                    var signUpDate = signUp.getDate('dd');
-
-                    $('#sign_up_date').text(signUpYear+'-'+signUpMonth+'-'+signUpDate);
-                }
-
-                if(shop.hoardingDate != null){
-                    var hoarding = new Date();
-                    hoarding.setTime(shop.hoardingDate);
-                    var hoardingYear = hoarding.getFullYear('yyyy');
-                    var hoardingMonth = hoarding.getMonth('mm')+1;
-                    var hoardingDate = hoarding.getDate('dd');
-
-                    $('#hoarding_date').text(hoardingYear+'-'+hoardingMonth+'-'+hoardingDate);
-                }
-
-                if(shop.enteringDate != null){
-                    var entering = new Date();
-                    entering.setTime(shop.enteringDate);
-                    var enteringYear = entering.getFullYear('yyyy');
-                    var enteringMonth = entering.getMonth('mm')+1;
-                    var enteringDate = entering.getDate('dd');
-
-                    $('#entering_date').text(enteringYear+'-'+enteringMonth+'-'+enteringDate);
-                }
-
-                if(shop.openingDate != null){
-                    var opening = new Date();
-                    opening.setTime(shop.openingDate);
-                    var openingYear = opening.getFullYear('yyyy');
-                    var openingMonth = opening.getMonth('mm')+1;
-                    var openingDate = opening.getDate('dd');
-
-                    $('#opening_date').text(openingYear+'-'+openingMonth+'-'+openingDate);
-                }
                 
-                if(shop.remark_1 != null){
-                    $('#plan_open_date').text(shop.remark_1);
-                }
+                $('#rent').text((shop.deadRent || '-' ) + '元/m²/日');
+                $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
                 
-                if(shop.remark_2 != null){
-                    $('#loss').text((numberWithCommas(shop.remark_2) || 0 ) + '元');
-                    if(shop.remark_2 != 0){
-                        $('#loss').addClass('badge-danger');
-                    }
-                }
+                $('#area').text((shop.area || '-' ) + 'm²');
                 
-                if(shop.responsiblePerson != null){
-                    $('#responsible_person').text(shop.responsiblePerson);
-                }
-
                 if(shop.brandName != null && shop.brandName != '') {
                     if(shop.shopState == 1) {
                         showShopSales(shop.brandName,'100001A'+shop.unit,contractExpireYear+((contractExpireMonth<10 ? '0' : '') + contractExpireMonth+((contractExpireDate<10 ? '0' : '') + contractExpireDate)));
@@ -530,17 +407,109 @@ function GetShopInfo(){
                     $('#weeks').text('4');
                 }
                 
-                if(images && images != null) {
-                    $.each(images, function(i,v){
-                        $('#images').append('\
-<div class="col-xs-12 col-sm-6 col-sm-3">\n\
-<div class="thumbnail">\n\
-<img class="img-responsive" src="'+v.image+'" alt="">\n\
-</div></div>'
-                        );                
-                    });
+                if(shop.signUpDate != null){
+                    var signUp = new Date();
+                    signUp.setTime(shop.signUpDate);
+                    var signUpYear = signUp.getFullYear('yyyy');
+                    var signUpMonth = signUp.getMonth('mm')+1;
+                    if(signUpMonth < 10) {
+                        signUpMonth = "0"+signUpMonth;
+                    }
+                    var signUpDate = signUp.getDate('dd');
+                    if(signUpDate < 10) {
+                        signUpDate = "0"+signUpDate;
+                    }
+
+                    $('#sign_up_date').text(signUpYear+'-'+signUpMonth+'-'+signUpDate);
+                } else {
+                    $('#sign_up_date').text('-');
+                }
+                if(shop.hoardingDate != null){
+                    var hoarding = new Date();
+                    hoarding.setTime(shop.hoardingDate);
+                    var hoardingYear = hoarding.getFullYear('yyyy');
+                    var hoardingMonth = hoarding.getMonth('mm')+1;
+                    if(hoardingMonth < 10) {
+                        hoardingMonth = "0"+hoardingMonth;
+                    }
+                    var hoardingDate = hoarding.getDate('dd');
+                    if(hoardingDate < 10) {
+                        hoardingDate = "0"+hoardingDate;
+                    }
+
+                    $('#hoarding_date').text(hoardingYear+'-'+hoardingMonth+'-'+hoardingDate);
+                } else {
+                    $('#hoarding_date').text('-');
+                }
+
+                if(shop.enteringDate != null){
+                    var entering = new Date();
+                    entering.setTime(shop.enteringDate);
+                    var enteringYear = entering.getFullYear('yyyy');
+                    var enteringMonth = entering.getMonth('mm')+1;
+                    if(enteringMonth < 10) {
+                        enteringMonth = "0"+enteringMonth;
+                    }
+                    var enteringDate = entering.getDate('dd');
+                    if(enteringDate < 10) {
+                        enteringDate = "0"+enteringDate;
+                    }
+
+                    $('#entering_date').text(enteringYear+'-'+enteringMonth+'-'+enteringDate);
+                } else {
+                    $('#entering_date').text('-');
+                }
+                if(shop.openingDate != null){
+                    var opening = new Date();
+                    opening.setTime(shop.openingDate);
+                    var openingYear = opening.getFullYear('yyyy');
+                    var openingMonth = opening.getMonth('mm')+1;
+                    if(openingMonth < 10) {
+                        openingMonth = "0"+openingMonth;
+                    }
+                    var openingDate = opening.getDate('dd');
+                    if(openingDate < 10) {
+                        openingDate = "0"+openingDate;
+                    }
+
+                    $('#opening_date').text(openingYear+'-'+openingMonth+'-'+openingDate);
+                } else {
+                    $('#opening_date').text('-');
                 }
                 
+                if(shop.remark_1 != null){
+                    $('#plan_open_date').text(shop.remark_1);
+                } else {
+                    $('#plan_open_date').text('-');
+                }
+                if(shop.responsiblePerson != null){
+                    $('#responsible_person').text(shop.responsiblePerson);
+                } else {
+                    $('#responsible_person').text('-');
+                }
+                
+                if(shop.remark_2 != null){
+                    $('#loss').text((numberWithCommas(shop.remark_2) || 0 ) + '元');
+                    if(shop.remark_2 != 0){
+                        $('#loss').css('color','#f00');
+                    }
+                } else {
+                    $('#loss').text('-').css('color','#333');
+                }
+                
+                if(images != null && images.length > 0) {
+                    $('#shop_detail .modal-footer').show().html('<img src="'+images[0].image+'" style="width: 100%;" />');
+                } else {
+                    $('#shop_detail .modal-footer').hide().html('');
+                }
+                
+                $('#shop_detail').css('opacity', 1);
+                
+                $('#shop_detail').modal('toggle');
+                
+                console.log('单元号:'+shop.unit);
+                
+                /*
                 if(shop.vrValidated === 1) {
                     if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
                         $('#vr .embed-responsive').hide();
@@ -550,9 +519,8 @@ function GetShopInfo(){
                     }
                 } else {
                     $('#vr .embed-responsive').hide();
-                }
+                }*/
 
-                console.log('单元号:'+shop.unit);
                 
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -653,13 +621,6 @@ function DecrDates(date_str,dates){
         return '';
     }
 }
-
-
-
-
-
-
-
 
 function logout() {
     var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 

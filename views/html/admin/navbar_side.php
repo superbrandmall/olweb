@@ -1,12 +1,12 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
-            <li id="nav_f_10">
+            <!--<li id="nav_f_10">
                 <a href="/admin/?f=10">L10</a>
             </li>
             <li id="nav_f_9">
                 <a href="/admin/?f=9">L9</a>
-            </li>
+            </li>-->
             <li id="nav_f_8">
                 <a href="/admin/?f=8">L8</a>
             </li>

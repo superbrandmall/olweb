@@ -45,13 +45,35 @@ $mail->Subject = 'eat n work官网预约';
 
 
 
-if (!empty ($_POST['email']) && !empty ($_POST['phone']) && !empty ($_POST['user_name'])) 
-{
+if (!empty ($_POST['email']) && !empty ($_POST['phone']) && !empty ($_POST['user_name'])) {
 
     $text = "联系人:" . $_POST['user_name'] . "<br><br>电话:(" . $_POST['country_code'] . ")" . $_POST['phone'] . "<br><br>邮箱:" . $_POST['email'];
-    $mail->addAddress('rina.tang@ozone-cn.com','customerservice');
-    $mail->addAddress('sammy.wang@ozone-cn.com','customerservice');
+        
+    $myFile = "mailto.txt";
+    $myFileLink = fopen($myFile, 'r');
+    $mailTo = fread($myFileLink, filesize($myFile));
+    fclose($myFileLink);
+    $mail->addAddress($mailTo,'customerservice');
     $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
+            
+    $mailToList = ['rina.tang@eatnwork-china.com','howard.hou@eatnwork-china.com'];
+    
+    switch ($mailTo) {
+        case $mailToList[0]:
+            $next = $mailToList[1];
+            break;
+        case $mailToList[1]:
+            $next = $mailToList[0];
+            break;
+        default:
+            $next = $mailToList[1];
+            break;
+    }
+    
+    $myFileLink2 = fopen($myFile, 'w+');
+    $newContents = $next;
+    fwrite($myFileLink2, $newContents);
+    fclose($myFileLink2);
 }
 
 

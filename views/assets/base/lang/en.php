@@ -51,7 +51,7 @@ $lang['home_partner_brands'] = "Partner brands";
 /********************** Contact ********************/
 $lang['contact_contact'] = "Get in Touch";
 $lang['contact_choose'] = "Please choose ";
-$lang['contact_main_contact'] = "First and last name";
+$lang['contact_main_contact'] = "Name";
 $lang['contact_company_name'] = "Company name";
 $lang['contact_brand_name'] = "Brand name";
 $lang['contact_modality_0'] = "category level 1";
@@ -311,10 +311,47 @@ $lang['events_bs_d2'] = "D2";
 $lang['events_bs_d2_location'] = "B1 metro entrance main path";
 
 /********************** Co-work ********************/
+$lang['co_work_nav_about_us'] = "About Us";
+$lang['co_work_nav_office_location'] = "Office Location";
+$lang['co_work_nav_about_eatnwork'] = "About eat n work";
+$lang['co_work_nav_shanghai'] = "Shanghai";
+$lang['co_work_nav_luoyang'] = "Luoyang";
+$lang['co_work_nav_office_type'] = "Office Types";
+$lang['co_work_nav_join_us'] = "Join Us";
+$lang['co_work_nav_contact_us'] = "Contact Us";
+$lang['co_work_welcome_to'] = "Welcome to";
+$lang['co_work_sbm_ljz'] = "SuperBrand Mall @ Lujiazui";
+$lang['co_work_sbm_ljz_addr'] = "9&10F, 168 Lujiazui West Road, Pudong, Shanghai";
+$lang['co_work_leave_contact'] = "Please leave your contact, we shall be in touch with you.";
 $lang['co_work_cowork'] = "Co-Working";
 $lang['co_work_phone'] = "Mobile Number";
 $lang['co_work_veryfication_code'] = "Verification code";
 $lang['co_work_send_code'] = "Send";
+$lang['co_work_i_agree'] = "I agree to your Online Leasing ";
+$lang['co_work_service_terms'] = "Services Terms & Conditions, ";
+$lang['co_work_i_read'] = "I have read your Online Leasing ";
+$lang['co_work_privacy_policy'] = "Privacy Protection Policy.";
+$lang['co_work_book_now'] = "Book Now";
+$lang['co_work_we_different'] = "We are different";
+$lang['co_work_we_different_p1'] = "A new experience for work & living, a completely new lifestyle concept.<br>Avoiding work and living transition, giving a new meaning to shared workspace.
+";
+$lang['co_work_we_different_p2'] = "Iconic Superbrandmall, located in Lujiazui, the heart of business district in Shanghai,<br>is entrepreneurs first-choice, as it provides sense of trustworthiness.
+";
+$lang['co_work_we_different_p3'] = "Integrating the core lifestyle and work precincts, saving valuable time on travelling,<br>it will provide entreprenuers a better sense of living.";
+$lang['co_work_tastebuds_experience'] = "Tastebuds Experience @ Work";
+$lang['co_work_tastebuds_experience_p1'] = "Beautiful afternoon tea and finest deserts; perfect ambiance for discussion,<br>helps to make appointment with client for discussion and signing the order; which will increase the chance of business success.";
+$lang['co_work_tastebuds_experience_p2'] = "The starry night of Shanghai and the panaromic view of Huangpu River, can be enjoyed from the balcony.<br>Garden like atmostphere and the beauty of nature will spur our innovative spirit.";
+$lang['co_work_tastebuds_experience_p3'] = "Top tier star chefs, wide variety of cuisines, all-day round coffee – allows you to enjoy great lifestyle at anytime.<br>Let the new and dynamic commercial precinct to serve you.";
+$lang['co_work_causal_dining'] = "Modern Causal Dining";
+$lang['co_work_causal_dining_p1'] = "Star Chefs, gather @ ";
+$lang['co_work_causal_dining_p2'] = "Top class incredients from the globe – from farm to table – with highest quality control.";
+$lang['co_work_star_chef'] = "Star Chef. Gourmet Food as Message of Love.";
+$lang['co_work_sunny_yu'] = "";
+$lang['co_work_sunny_yu_intro'] = "20 years multi-national cuisine experience / emphasise on simple and natural cooking / worked at Shangri-La, 18 Bund, Wanda Intercontinental Hotel";
+$lang['co_work_cp_foods'] = "CP Foods • Global Kitchen • Fresh on your table!";
+$lang['co_work_cp_foods_p'] = "Lujiazui’s Executives Lifestyle Delight";
+$lang['co_work_contact_bar'] = "Are you looking for a flexible, high-end working space? Make an appointment for a visit. We shall confirm an appointment with you soon.";
+$lang['co_work_contact_us'] = "Contact Us";
 
 /********************** Footer ********************/
 $lang['copyright'] = "Shanghai Kinghill Ltd.";

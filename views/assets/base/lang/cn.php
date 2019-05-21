@@ -311,10 +311,45 @@ $lang['events_bs_d2'] = "D2";
 $lang['events_bs_d2_location'] = "B1地铁入口主干道";
 
 /********************** Co-work ********************/
+$lang['co_work_nav_about_us'] = "关于我们";
+$lang['co_work_nav_office_location'] = "办公地点";
+$lang['co_work_nav_shanghai'] = "上海";
+$lang['co_work_nav_luoyang'] = "洛阳";
+$lang['co_work_nav_about_eatnwork'] = "关于eat n work";
+$lang['co_work_nav_office_type'] = "房型介绍";
+$lang['co_work_nav_join_us'] = "加入我们";
+$lang['co_work_nav_contact_us'] = "联系我们";
+$lang['co_work_welcome_to'] = "欢迎来到";
+$lang['co_work_sbm_ljz'] = "正大广场陆家嘴购物中心";
+$lang['co_work_sbm_ljz_addr'] = "上海市浦东陆家嘴西路168号9、10楼";
+$lang['co_work_leave_contact'] = "请留下联系方式，我们将有专人与您联系。";
 $lang['co_work_cowork'] = "联合办公";
 $lang['co_work_phone'] = "手机号码";
 $lang['co_work_veryfication_code'] = "验证码";
 $lang['co_work_send_code'] = "发送验证码";
+$lang['co_work_i_agree'] = "我同意正大Online Leasing的";
+$lang['co_work_service_terms'] = "服务条款，";
+$lang['co_work_i_read'] = "并且我已阅读并理解正大Online Leasing的";
+$lang['co_work_privacy_policy'] = "隐私政策。";
+$lang['co_work_book_now'] = "立即预约";
+$lang['co_work_we_different'] = "不一样的我们";
+$lang['co_work_we_different_p1'] = "办公场景化生活新体验，全新生活理念，<br>避免工作与生活的切换，给共享办公赋予新意义。";
+$lang['co_work_we_different_p2'] = "全上海核心陆家嘴商圈，地标正大广场，<br>创业者一步到位的首选，给新公司提供诚信背书。";
+$lang['co_work_we_different_p3'] = "核心价值生活商圈与工作商圈融合一体，<br>彻底节省在路上的时间，给创业者更好的生活感。";
+$lang['co_work_tastebuds_experience'] = "舌尖上的办公体验";
+$lang['co_work_tastebuds_experience_p1'] = "美好下午茶与精致甜品，完美洽谈氛围，<br>助力客户签单邀约洽谈，多一分成功的希望期许。";
+$lang['co_work_tastebuds_experience_p2'] = "璀璨夜上海黄浦江全貌，落地窗大露台，<br>花园式氛围别致简约风，用舒适自然激发创造力。";
+$lang['co_work_tastebuds_experience_p3'] = "顶级食材星级大厨百款菜品全天候咖啡，<br>随时随地享受美好人生，让全新生态商圈服务你。";
+$lang['co_work_causal_dining'] = "现代休闲共餐";
+$lang['co_work_causal_dining_p1'] = "明星主厨，荟聚 ";
+$lang['co_work_causal_dining_p2'] = "超500平豪华中央厨房，星级主厨助阵；<br>顶级食材汇聚全球盛宴，从培育、种植、到菜品上桌严格把控品质。";
+$lang['co_work_star_chef'] = "明星主厨 用美食传递幸福";
+$lang['co_work_sunny_yu'] = "于冰";
+$lang['co_work_sunny_yu_intro'] = "从业20年 / 拥有丰富多国料理经验 / 秉持简约、自然的烹饪理念，以当季食材还原食物的美味 / 曾任职于香格里拉大酒店、外滩18号、万达洲际酒店";
+$lang['co_work_cp_foods'] = "正大食品 • 世界的厨房 • 新鲜你的餐桌！";
+$lang['co_work_cp_foods_p'] = "成为陆家嘴白领生活的一抹亮色";
+$lang['co_work_contact_bar'] = "正在寻找一个灵活高端的办公空间？预约参观，我们将尽快与你确认。";
+$lang['co_work_contact_us'] = "联系我们";
 
 /********************** Footer ********************/
 $lang['copyright'] = "上海帝泰发展有限公司版权所有";

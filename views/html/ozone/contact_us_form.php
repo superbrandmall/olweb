@@ -69,13 +69,13 @@
                 <span></span>
                 <span class="check"></span>
                 <span class="box"></span>
-                我同意正大Online Leasing的<a href="/terms.html" target="_blank">服务条款</a>，并且我已阅读并理解正大Online Leasing的<a href="/cookie.html" target="_blank">隐私政策</a>，包括隐私政策中所规定的处理和传输我的信息。
+                <?= $lang['co_work_i_agree'] ?><a href="/terms.html" target="_blank"><?= $lang['co_work_service_terms'] ?></a><?= $lang['co_work_i_read'] ?><a href="/cookie.html" target="_blank"><?= $lang['co_work_privacy_policy'] ?></a>
             </label>
         </div>
         <div id="errorcontainer-terms" class="errorDiv" style="margin-left: 29px"></div>
     </div>
     <div id="terms_box" style="position: relative;"></div>
     <div class="form-group">
-        <button type="submit" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;">立即预约</button>
+        <button type="submit" class="btn c-theme-btn btn-lg c-btn-uppercase c-btn-bold c-btn-square c-btn-login" style="width: 100%; font-size: 20px;"><?= $lang['co_work_book_now'] ?></button>
     </div>
 </form>

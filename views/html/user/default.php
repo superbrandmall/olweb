@@ -3,10 +3,8 @@
         <div class="tp-banner-container">
             <div class="c-singup-form">
                 <h3 class="c-font-26 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
-                Online Leasing</h3>
-                <div class="form-inline">
-                    <a href="<?= strtolower($shanghai_sbm) ?>" class="btn btn-lg c-btn-blue c-btn-uppercase c-btn-square"><?= $lang['home_enter'] ?></a>
-                </div>
+                    Online Leasing
+                </h3>
                 <img class="hidden-xs" alt="" src="views/assets/base/img/layout/logos/sbm_logo.png" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; z-index: 21;">
             </div>
             <div class="tp-banner">
