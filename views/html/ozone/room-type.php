@@ -14,10 +14,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="modal-dialog" style="width: auto; margin: 0;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
-                            <p class="c-font-14">正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
+                            <h1 class="c-font-44 c-font-sbold"><?= $lang['co_work_welcome_to'] ?> <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
+                            <p class="c-font-14"><?= $lang['co_work_sbm_ljz'] ?> | <?= $lang['co_work_sbm_ljz_addr'] ?></p>
                             <hr>
-                            <p>请留下联系方式，我们将有专人与您联系。</p>
+                            <p><?= $lang['co_work_leave_contact'] ?></p>
                             <?php include ('contact_us_form.php'); ?>
                         </div>
                     </div>
@@ -29,18 +29,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="c-content-box c-size-md c-bg-white" style="margin-bottom: 0;">
         <div class="container">
             <div class="c-content-title-1">
-                <h3 class="c-center c-font-uppercase c-font-bold">特色房型推荐</h3>
+                <h3 class="c-center c-font-uppercase c-font-bold"><?= $lang['co_work_recommend_top_office'] ?></h3>
             </div><br>
             <div class="row">
                 <div class="col-md-6">
                     <div class="c-center c-desc">
-                        <p>外滩江景豪华套间</p>
+                        <p><?= $lang['co_work_luxurious_office'] ?></p>
                     </div>
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-1.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
                 <div class="col-md-6">
                     <div class="c-center c-desc">
-                        <p>外侧中庭采光间</p>
+                        <p><?= $lang['co_work_atrium_office'] ?></p>
                     </div>
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-2.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
@@ -48,13 +48,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <div class="row">
                 <div class="col-md-6">
                     <div class="c-center c-desc">
-                        <p>10人 半采光 办公室</p>
+                        <p><?= $lang['co_work_10_pax_office'] ?></p>
                     </div>
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-3.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
                 <div class="col-md-6">
                     <div class="c-center c-desc">
-                        <p>5人 半采光 办公室</p>
+                        <p><?= $lang['co_work_5_pax_office'] ?></p>
                     </div>
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-4.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
@@ -66,7 +66,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="container">
             <div class="col-md-12">
                 <div class="c-title c-center c-font-bold c-font-uppercase" style="font-size: 30px; margin: 20px 0 30px 0;">
-                    快闪店（9/15人）
+                    <?= $lang['co_work_popup_store'] ?>（9/15<?= $lang['co_work_person'] ?>）
                 </div>
             </div>
             <div class="col-md-4">
@@ -89,68 +89,68 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    面积
+                                    <?= $lang['co_work_area'] ?>
                                 </th>
                                 <td>
-                                    36平方米
+                                    36㎡
                                 </td>
                                 <td>
-                                    70平方米
+                                    70㎡
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    建议办公人数
+                                    <?= $lang['co_work_recommend_number_of_person'] ?>
                                 </th>
                                 <td>
-                                    9人
+                                    9<?= $lang['co_work_person'] ?>
                                 </td>
                                 <td>
-                                    15人
+                                    15<?= $lang['co_work_person'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    租金单价
+                                    <?= $lang['co_work_unit_rental_fee'] ?>
                                 </th>
                                 <td>
-                                    约30元/平/日
+                                    <?= $lang['co_work_approx'] ?>30<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_day'] ?>
                                 </td>
                                 <td>
-                                    约25元/平/日
+                                    <?= $lang['co_work_approx'] ?>25<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_day'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    物业费单价
+                                    <?= $lang['co_work_unit_property_management_fee'] ?>
                                 </th>
                                 <td>
-                                    约30元/平/月
+                                    <?= $lang['co_work_approx'] ?>30<?= $lang['co_work_rmb'] ?>㎡/<?= $lang['co_work_month'] ?>
                                 </td>
                                 <td>
-                                    约30元/平/月
+                                    <?= $lang['co_work_approx'] ?>30<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_month'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    每月租金
+                                    <?= $lang['co_work_total_monthly_rental'] ?>
                                 </th>
                                 <td>
-                                    约35,025元
+                                    <?= $lang['co_work_approx'] ?>35,025<?= $lang['co_work_rmb'] ?>
                                 </td>
                                 <td>
-                                    约55,329元
+                                    <?= $lang['co_work_approx'] ?>55,329<?= $lang['co_work_rmb'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    特色
+                                    <?= $lang['co_work_special_feature'] ?>
                                 </th>
                                 <td>
-                                    临近 eat n work 现代休闲餐饮区<br>和正大厅,适合展示或快闪类客户
+                                    <?= $lang['co_work_special_feature_popup_901'] ?>
                                 </td>
                                 <td>
-                                    与901相邻<br>可组合成前店后办公模式
+                                    <?= $lang['co_work_special_feature_popup_901902'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -164,7 +164,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="container">
             <div class="col-md-12">
                 <div class="c-title c-center c-font-bold c-font-uppercase" style="font-size: 30px; margin: 20px 0 30px 0;">
-                    定制面积 （44/18/140人）
+                    <?= $lang['co_work_customised_office'] ?> （44/18/140<?= $lang['co_work_person'] ?>）
                 </div>
             </div>
             <div class="col-md-4">
@@ -177,78 +177,78 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <tr>
                                 <th></th>
                                 <th>
-                                    橘色区域
+                                    <?= $lang['co_work_orange_area'] ?>
                                 </th>
                                 <th>
-                                    蓝色区域
+                                    <?= $lang['co_work_blue_area'] ?>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">
-                                    面积
+                                    <?= $lang['co_work_area'] ?>
                                 </th>
                                 <td>
-                                    220平方米
+                                    220㎡
                                 </td>
                                 <td>
-                                    70平方米
+                                    70㎡
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    建议办公人数
+                                    <?= $lang['co_work_recommend_number_of_person'] ?>
                                 </th>
                                 <td>
-                                    44人
+                                    44<?= $lang['co_work_person'] ?>
                                 </td>
                                 <td>
-                                    18人
+                                    18<?= $lang['co_work_person'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    租金单价
+                                    <?= $lang['co_work_unit_rental_fee'] ?>
                                 </th>
                                 <td>
-                                    约16元/平/日
+                                    <?= $lang['co_work_approx'] ?>16<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_day'] ?>
                                 </td>
                                 <td>
-                                    约19元/平/日
+                                    <?= $lang['co_work_approx'] ?>19<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_day'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    物业费单价
+                                    <?= $lang['co_work_unit_property_management_fee'] ?>
                                 </th>
                                 <td>
-                                    约30元/平/月
+                                    <?= $lang['co_work_approx'] ?>30<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_month'] ?>
                                 </td>
                                 <td>
-                                    约30元/平/月
+                                    <?= $lang['co_work_approx'] ?>30<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_month'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    每月租金
+                                    <?= $lang['co_work_total_monthly_rental'] ?>
                                 </th>
                                 <td>
-                                    约113,666元
+                                    <?= $lang['co_work_approx'] ?>113,666<?= $lang['co_work_rmb'] ?>
                                 </td>
                                 <td>
-                                    约42,554元
+                                    <?= $lang['co_work_approx'] ?>42,554<?= $lang['co_work_rmb'] ?>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">
-                                    特色
+                                    <?= $lang['co_work_special_feature'] ?>
                                 </th>
                                 <td>
-                                    适合广告、教育、电商、互联网企业
+                                    <?= $lang['co_work_special_feature_orange'] ?>
                                 </td>
                                 <td>
-                                    套内有独立储藏室，<br>适合电商或零售客户
+                                    <?= $lang['co_work_special_feature_blue'] ?>
                                 </td>
                             </tr>
                         </tbody>
@@ -261,48 +261,48 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="col-md-4">
                     <img src="/views/assets/base/img/content/mall/ozone/work-space-5.jpg"  class="c-content-person-1 c-option-2 c-bordered c-shadow img-responsive" style="background-color: #fff;" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="table-responsive">
                         <table class="table">
                             <tbody>
                                 <tr>
                                     <th scope="row">
-                                        面积
+                                        <?= $lang['co_work_area'] ?>
                                     </th>
                                     <td>
-                                        560平方米
+                                        560㎡
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">
-                                        建议办公人数
+                                        <?= $lang['co_work_recommend_number_of_person'] ?>
                                     </th>
                                     <td>
-                                        140人
+                                        140<?= $lang['co_work_person'] ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">
-                                        租金单价
+                                        <?= $lang['co_work_unit_rental_fee'] ?>
                                     </th>
                                     <td>
-                                        约13元/平/日
+                                        <?= $lang['co_work_approx'] ?>13<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_day'] ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">
-                                        物业费单价
+                                        <?= $lang['co_work_unit_property_management_fee'] ?>
                                     </th>
                                     <td>
-                                        约25元/平/月
+                                        <?= $lang['co_work_approx'] ?>25<?= $lang['co_work_rmb'] ?>/㎡/<?= $lang['co_work_month'] ?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">
-                                        每月租金
+                                        <?= $lang['co_work_total_monthly_rental'] ?>
                                     </th>
                                     <td>
-                                        约235,433元
+                                        <?= $lang['co_work_approx'] ?>235,433<?= $lang['co_work_rmb'] ?>
                                     </td>
                                 </tr>
                             </tbody>

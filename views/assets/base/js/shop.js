@@ -129,7 +129,7 @@ function GetShopInfo(){
                     $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url('+response.data.firstImage+'); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');            
                 } else {
                     if(response.data.shopState !== 0 && response.data.shopState !== 2){ //非在租或待租
-                        $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/shanghai-sbm.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
+                        $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/empty.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
                     } else {
                         $.each(response.data.images, function(i,v){
                             $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
@@ -158,10 +158,14 @@ function GetShopInfo(){
                     var contractExpireMonth = contractExpire.getMonth('mm')+1;
                     var contractExpireDate = contractExpire.getDate('dd');
 
-                    if(IncrMonth(date) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
-                        $('#moving_date').text(IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                    if(IncrMonths(date,6) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
+                        $('#moving_date').text('>6'+$.lang.lengthMonth);
                     } else {
-                        $('#moving_date').text(IncrMonth(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                        if(IncrMonth(date) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
+                            $('#moving_date').text(IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                        } else {
+                            $('#moving_date').text(IncrMonth(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
+                        }
                     }
                 }
 

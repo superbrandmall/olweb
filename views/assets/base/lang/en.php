@@ -322,6 +322,8 @@ $lang['co_work_nav_contact_us'] = "Contact Us";
 $lang['co_work_welcome_to'] = "Welcome to";
 $lang['co_work_sbm_ljz'] = "SuperBrand Mall @ Lujiazui";
 $lang['co_work_sbm_ljz_addr'] = "9&10F, 168 Lujiazui West Road, Pudong, Shanghai";
+$lang['co_work_sbm_ly'] = "SuperBrand Mall @ Luoyang";
+$lang['co_work_sbm_ly_addr'] = "7F, 225 Kai Yuan Avenue, Luolong District, Luoyang";
 $lang['co_work_leave_contact'] = "Please leave your contact, we shall be in touch with you.";
 $lang['co_work_cowork'] = "Co-Working";
 $lang['co_work_phone'] = "Mobile Number";
@@ -335,7 +337,7 @@ $lang['co_work_book_now'] = "Book Now";
 $lang['co_work_we_different'] = "We are different";
 $lang['co_work_we_different_p1'] = "A new experience for work & living, a completely new lifestyle concept.<br>Avoiding work and living transition, giving a new meaning to shared workspace.
 ";
-$lang['co_work_we_different_p2'] = "Iconic Superbrandmall, located in Lujiazui, the heart of business district in Shanghai,<br>is entrepreneurs first-choice, as it provides sense of trustworthiness.
+$lang['co_work_we_different_p2'] = "Iconic SuperBrand Mall, located in Lujiazui, the heart of business district in Shanghai,<br>is entrepreneurs first-choice, as it provides sense of trustworthiness.
 ";
 $lang['co_work_we_different_p3'] = "Integrating the core lifestyle and work precincts, saving valuable time on travelling,<br>it will provide entreprenuers a better sense of living.";
 $lang['co_work_tastebuds_experience'] = "Tastebuds Experience @ Work";
@@ -346,12 +348,39 @@ $lang['co_work_causal_dining'] = "Modern Causal Dining";
 $lang['co_work_causal_dining_p1'] = "Star Chefs, gather @ ";
 $lang['co_work_causal_dining_p2'] = "Top class incredients from the globe – from farm to table – with highest quality control.";
 $lang['co_work_star_chef'] = "Star Chef. Gourmet Food as Message of Love.";
+$lang['co_work_jacqueline_qiu'] = "";
+$lang['co_work_jacqueline_qiu_intro'] = "Vice Chairman, Western Cuisine Committee, China Hospitality Association / Judge, Star Chef Competition / Coach, World’s Youth Chefs Competition";
 $lang['co_work_sunny_yu'] = "";
 $lang['co_work_sunny_yu_intro'] = "20 years multi-national cuisine experience / emphasise on simple and natural cooking / worked at Shangri-La, 18 Bund, Wanda Intercontinental Hotel";
 $lang['co_work_cp_foods'] = "CP Foods • Global Kitchen • Fresh on your table!";
 $lang['co_work_cp_foods_p'] = "Lujiazui’s Executives Lifestyle Delight";
 $lang['co_work_contact_bar'] = "Are you looking for a flexible, high-end working space? Make an appointment for a visit. We shall confirm an appointment with you soon.";
 $lang['co_work_contact_us'] = "Contact Us";
+$lang['co_work_recommend_top_office'] = "Recommendation of our Top Offices";
+$lang['co_work_luxurious_office'] = "Luxurious Office with Riverside Bund View";
+$lang['co_work_atrium_office'] = "Atrium Office with Natural Lighting";
+$lang['co_work_10_pax_office'] = "10 pax Office with Partial Natural Lighting";
+$lang['co_work_5_pax_office'] = "5 pax Office with Partial Natural Lighting";
+$lang['co_work_popup_store'] = "Pop-up Store";
+$lang['co_work_area'] = "Area";
+$lang['co_work_recommend_number_of_person'] = "Recommended <br>number of person";
+$lang['co_work_unit_rental_fee'] = "Unit Rental Fee";
+$lang['co_work_unit_property_management_fee'] = "Unit Property <br>Management Fee";
+$lang['co_work_total_monthly_rental'] = "Total Monthly <br>Rental";
+$lang['co_work_special_feature'] = "Special Feature";
+$lang['co_work_person'] = " person";
+$lang['co_work_approx'] = "Approx. RMB ";
+$lang['co_work_rmb'] = "";
+$lang['co_work_day'] = " day";
+$lang['co_work_month'] = " month";
+$lang['co_work_special_feature_popup_901'] = "Nearby “eat n work’ is the <br>trendy casual restaurant <br>section and CP Hall suitable <br>for exhibition and pop-up stores";
+$lang['co_work_special_feature_popup_901902'] = "Neighbour to Unit 901 <br>Can be configured into a <br>Shop-in-the-front, with an <br>Office-behind";
+$lang['co_work_customised_office'] = "Customised Office Areas";
+$lang['co_work_orange_area'] = "Orange Area";
+$lang['co_work_blue_area'] = "Blue Area";
+$lang['co_work_special_feature_orange'] = "Suitable for Advertising <br>Agency, Education, eCommerce <br>& Internet enterprises";
+$lang['co_work_special_feature_blue'] = "Includes a storage room. <br>Suitable for e-Commerce <br>and Retail clients";
+
 
 /********************** Footer ********************/
 $lang['copyright'] = "Shanghai Kinghill Ltd.";

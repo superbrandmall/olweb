@@ -7,17 +7,17 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="c-content-box c-size-md c-bg-grey-1" style="margin-bottom: 0; z-index: 11; padding: 0;">
         <div class="container">
             <div class="col-md-6" style="padding: 100px 50px 50px;">
-                <img src="/views/assets/base/img/content/mall/ozone/ly-intro.jpg" class="img-responsive" />
+                <img src="/views/assets/base/img/content/mall/ozone/<?= $lang['mall_lang_cat'] ?>/ly-intro.jpg" class="img-responsive" />
             </div>
             
             <div id="contact_us" class="col-md-6" style="padding: 0;">
                 <div class="modal-dialog" style="width: auto; margin: 0;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
-                            <p class="c-font-14">正大广场洛阳购物中心 | 洛阳市洛龙区开元大道225号正大广场7楼</p>
+                            <h1 class="c-font-44 c-font-sbold"><?= $lang['co_work_welcome_to'] ?> <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
+                            <p class="c-font-14"><?= $lang['co_work_sbm_ly'] ?> | <?= $lang['co_work_sbm_ly_addr'] ?></p>
                             <hr>
-                            <p>请留下联系方式，我们将有专人与您联系。</p>
+                            <p><?= $lang['co_work_leave_contact'] ?></p>
                             <?php include ('contact_us_form.php'); ?>
                         </div>
                     </div>
@@ -34,7 +34,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <div class="container">
                 <div class="c-content-pricing-1 c-option-2">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-uppercase c-font-bold">房型与价格</h3>
+                        <h3 class="c-center c-font-uppercase c-font-bold"><?= $lang['co_work_nav_office_type'] ?></h3>
                     </div><br>
                     <div class="row">
                         <div class="col-md-6">

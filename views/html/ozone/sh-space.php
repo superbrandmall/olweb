@@ -14,10 +14,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="modal-dialog" style="width: auto; margin: 0;">
                     <div class="modal-content c-square" style="background-color: #fff; box-shadow: none; border: 1px solid rgb(240, 240, 240); padding: 0;">
                         <div class="modal-body" style="padding: 20px 40px;">
-                            <h1 class="c-font-44 c-font-sbold">欢迎来到 <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
-                            <p class="c-font-14">正大广场陆家嘴购物中心 | 上海市浦东陆家嘴西路168号9、10楼</p>
+                            <h1 class="c-font-44 c-font-sbold"><?= $lang['co_work_welcome_to'] ?> <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" height="25" /></h1>
+                            <p class="c-font-14"><?= $lang['co_work_sbm_ljz'] ?> | <?= $lang['co_work_sbm_ljz_addr'] ?></p>
                             <hr>
-                            <p>请留下联系方式，我们将有专人与您联系。</p>
+                            <p><?= $lang['co_work_leave_contact'] ?></p>
                             <?php include ('contact_us_form.php'); ?>
                         </div>
                     </div>

@@ -171,18 +171,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
                         <div class="owl-carousel owl-theme c-theme owl-single">
                             <div class="item">
                                 <div class="col-md-4">
-                                    <div class="c-content-testimonial-2" style="padding: 50px 30px 50px 30px;">
+                                    <div class="c-content-testimonial-2" style="padding: 50px 30px 40px 30px;">
                                         <div class="c-testimonial c-font-uppercase c-font-bold" style="margin: 20px 0;">
                                             Jacqueline Qiu
                                         </div>
                                         <div class="c-author">
                                             <div class="c-portrait" style="background-image: url(/views/assets/base/img/content/mall/ozone/cook2.jpg)">
                                             </div>
-                                            <div class="c-name">
-                                                邱琼
+                                            <div class="c-name" style="margin-top: -20px;">
+                                                <?= $lang['co_work_jacqueline_qiu'] ?>
                                             </div>
                                             <p class="c-position c-theme" style="margin-left: 75px;">
-                                                中国饭店协会西餐休闲餐专业委员会副主席 / 世界名厨之星大赛评委 / 世界青年厨师大赛中国队导师
+                                                <?= $lang['co_work_jacqueline_qiu_intro'] ?>
                                             </p>
                                         </div>
                                     </div>

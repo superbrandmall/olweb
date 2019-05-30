@@ -391,6 +391,32 @@ function GetShopInfo(sc){
                     
                     $('#contract_expire_date').text(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate);
                 }
+
+                var state;
+                var shopStateClass = 'badge-default';
+                switch(shop.shopState){
+                    case 0:
+                        state = "在租";
+                        break;
+                    case 1:
+                        state = "空铺";
+                        shopStateClass = 'badge-danger';
+                        break;
+                    case 2:
+                        state = "待租";
+                        shopStateClass = 'badge-warning';
+                        break;
+                    case 3:
+                        state = "改造";
+                        shopStateClass = 'badge-renovation';
+                        break;
+                    default:
+                        state = "在租";
+                        shopStateClass = 'badge-default';
+                        break;
+                }
+                
+                $('#brand_name').append(' <span class="badge '+shopStateClass+'">'+state+'</span>');
                 
                 $('#rent').text((shop.deadRent || '-' ) + '元/m²/日');
                 $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
@@ -498,30 +524,27 @@ function GetShopInfo(sc){
                 }
                 
                 if(images != null && images.length > 0) {
-                    $('#shop_detail .modal-footer').show().html('<img src="'+images[0].image+'" style="width: 100%;" />');
+                    $('#store_img').html('<img src="'+images[0].image+'" style="width: 100%;" />');
                 } else {
-                    $('#shop_detail .modal-footer').hide().html('');
+                    $('#store_img').html('');
+                }
+                
+                if(shop.vrValidated === 1) {
+                    if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
+                        $('#store_vr .embed-responsive').hide();
+                    } else {
+                        $('#store_vr .embed-responsive').show();
+                        $('#store_vr iframe').attr('src','/'+shop.vr);
+                    }
+                } else {
+                    $('#store_vr .embed-responsive').hide();
                 }
                 
                 $('#shop_detail').css('opacity', 1);
                 
                 $('#shop_detail').modal('toggle');
                 
-                console.log('单元号:'+shop.unit);
-                
-                /*
-                if(shop.vrValidated === 1) {
-                    if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
-                        $('#vr .embed-responsive').hide();
-                    } else {
-                        $('#vr .embed-responsive').show();
-                        $('#vr iframe').attr('src','/'+shop.vr);
-                    }
-                } else {
-                    $('#vr .embed-responsive').hide();
-                }*/
-
-                
+                console.log('单元号:'+shop.unit+', 门牌号:'+shop.shopName); 
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
