@@ -71,14 +71,14 @@
                         </div>
                         <div class="item">
                             <a href="shop?id=OLSHOP180917000499"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt="NIKE"/></a>
-                            <a href="shop?id=OLSHOP180917000430"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt="望湘园"/></a>
+                            <a href="shop?id=OLSHOP180917000500"><img src="views/assets/base/img/content/client-logos/fila.jpg" alt="FILA"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000383"><img src="views/assets/base/img/content/client-logos/fila.jpg" alt="FILA"/></a>
+                            <a href="shop?id=OLSHOP181024000011"><img src="views/assets/base/img/content/client-logos/belle.jpg" alt="BeLLE"/></a>
                             <a href="shop?id=OLSHOP180917000659"><img src="views/assets/base/img/content/client-logos/tai-cook.jpg" alt="明泰谷"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000330"><img src="views/assets/base/img/content/client-logos/dingtaifeng.jpg" alt="鼎泰丰"/></a>
+                            <a href="shop?id=OLSHOP180917000738"><img src="views/assets/base/img/content/client-logos/coconut-taste.jpg" alt="椰子不语"/></a>
                             <a href="shop?id=OLSHOP180917000746"><img src="views/assets/base/img/content/client-logos/heiseiya.jpg" alt="HEISEIYA"/></a>
                         </div>
                         <div class="item">

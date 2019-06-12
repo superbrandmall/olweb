@@ -56,7 +56,7 @@ if (!empty ($_POST['email']) && !empty ($_POST['phone']) && !empty ($_POST['user
     $mail->addAddress($mailTo,'customerservice');
     $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
             
-    $mailToList = ['rina.tang@eatnwork-china.com','howard.hou@eatnwork-china.com'];
+    $mailToList = ['sammy.wang@eatnwork-china.com','sammy.wang@eatnwork-china.com'];
     
     switch ($mailTo) {
         case $mailToList[0]:

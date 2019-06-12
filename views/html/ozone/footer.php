@@ -45,6 +45,15 @@
     echo $scripts; 
 ?>
 <script>
+    
+    $('#c_link_cn').click(function(){
+        $.cookie('lang','zh-cn');
+    });
+    
+    $('#c_link_en').click(function(){
+        $.cookie('lang','en-us');
+    });
+    
     // BEGIN: Layout Brand
 var LayoutBrand = function() {
 
@@ -136,15 +145,28 @@ var LayoutMegaMenu = function() {
         
         
         
-        ///////////////////// Validate contact form /////////////////////////
-    var contact_contact_name_1_required = "姓名为必填项";
-    var contact_contact_name_1_minlength = "请输入完整姓名";
-    var contact_phone_required = "手机号码为必填项";
-    var contact_phone_rangelength = "请输入正确手机号码";
-    var contact_phone_digits = "请输入正确电话号码";
-    var contact_email_required = "邮箱为必填项";
-    var contact_email_email = "请输入有效邮箱地址";
-    var contact_msg_sent = "预约发送成功";
+    ///////////////////// Validate contact form /////////////////////////
+    if($.cookie('lang') === 'en-us'){
+       var contact_contact_name_1_required = "Name can't be empty";
+        var contact_contact_name_1_minlength = "Please give a correct name";
+        var contact_phone_required = "Mobile number can't be empty";
+        var contact_phone_rangelength = "Please give a correct mobile number";
+        var contact_phone_digits = "Please give a correct mobile number";
+        var contact_email_required = "Email can't be empty";
+        var contact_email_email = "Please give a correct email address";
+        var contact_agree_terms = "Please agree the above mentioned clauses";
+        var contact_msg_sent = "Message sent successfully";
+    } else {
+        var contact_contact_name_1_required = "姓名为必填项";
+        var contact_contact_name_1_minlength = "请输入完整姓名";
+        var contact_phone_required = "手机号码为必填项";
+        var contact_phone_rangelength = "请输入正确手机号码";
+        var contact_phone_digits = "请输入正确手机号码";
+        var contact_email_required = "邮箱为必填项";
+        var contact_email_email = "请输入有效邮箱地址";
+        var contact_agree_terms = "请同意并勾选以上条款";
+        var contact_msg_sent = "预约发送成功";
+    }
 
     $("#form").validate({
         onkeyup: false,
@@ -178,7 +200,7 @@ var LayoutMegaMenu = function() {
                 required: contact_email_required,
                 email: contact_email_email
             },
-            terms: "请同意并勾选以上条款"
+            terms: contact_agree_terms
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));

@@ -153,7 +153,7 @@ include("views/assets/base/" . $filename);
                                     <a href="ads" class="c-link"><i class="fas fa-ad"></i> <?= $lang['nav_ad'] ?></a>
                                 </li>
                                 <li class="c-menu-type-classic">
-                                    <a href="http://eatnwork-china.com/" class="c-link" target="_blank"><i class="fas fa-external-link-square-alt"></i> eat n work</a>
+                                    <a href="http://uat-ol.superbrandmall.com/" class="c-link" target="_blank"><i class="fas fa-external-link-square-alt"></i> eat n work</a>
                                 </li>
                                 <li>
                                     <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">
