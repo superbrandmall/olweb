@@ -61,6 +61,7 @@ include("views/assets/base/" . $filename);
         <link rel="shortcut icon" href="/views/assets/base/img/layout/logos/favicon.ico" type="image/x-icon"/>
         <script src="/views/assets/plugins/jquery.min.js" type="text/javascript"></script>
 
+        <!-- 百度统计-->
         <script>
             var _hmt = _hmt || [];
             (function () {

@@ -145,6 +145,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'admin')) !== false) {
         ),
         'ads' => array(
             'url' => 'ads.php'
+        ),
+        'test' => array(
+            'url' => 'test.php'
         )
     );
     
