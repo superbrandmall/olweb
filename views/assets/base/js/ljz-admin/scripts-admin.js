@@ -184,9 +184,9 @@ function getShopFloorInfo(fl) {
 
                         /*if(v.brandName != null && v.brandName != '' && v.coords != null && v.coords != '' && (v.shopState == 0 || v.shopState == 2)) {
                             if(itm % 2 == 0){
-                                $('#shops_info tbody').append('<tr><td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td></tr>');
+                                $('#shops_info tbody').append('<tr><td><a href="/ljz-admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td></tr>');
                             } else {
-                                $('#shops_info tbody').find('tr').last().append('<td><a href="/admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td>');
+                                $('#shops_info tbody').find('tr').last().append('<td><a href="/ljz-admin/?f='+(getURLParameter('f') || '1')+'&id='+v.code+'">'+v.brandName+'</a></td>');
                             }
                             itm++;
                         }*/

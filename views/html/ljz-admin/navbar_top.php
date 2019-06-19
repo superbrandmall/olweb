@@ -25,8 +25,8 @@
             </ul>
         </li>
         <li>
-            <a href="javascript: logout();">
-                <i class="fa fa-sign-out fa-fw"></i>
+            <a href="javascript: logout();" title="登出">
+                <i class="fas fa-sign-out-alt"></i>
             </a>
         </li>
     </ul>

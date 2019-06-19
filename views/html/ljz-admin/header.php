@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>正大广场陆家嘴购物中心 | 楼层管理系统</title>
 <link href="/views/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<link href="/views/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link href="/views/assets/plugins/font-awesome/css/all.css" rel="stylesheet">
 <link href="/views/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 <link href="/views/assets/plugins/timeline/timeline.css" rel="stylesheet">
 <link href="/views/assets/base/css/sb-admin.css" rel="stylesheet">

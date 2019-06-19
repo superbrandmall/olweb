@@ -10,6 +10,6 @@
 ?>
 <script type="text/javascript" src="/views/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script type="text/javascript" src="/views/assets/base/js/protocol.js"></script>
-<script type="text/javascript" src="/views/assets/base/js/admin/scripts-admin.js"></script>
+<script type="text/javascript" src="/views/assets/base/js/ljz-admin/scripts-admin.js"></script>
 </body>
 </html>

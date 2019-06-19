@@ -10,12 +10,12 @@ if (file_exists('system/BaseObject.php')) {
 class Session extends BaseObject {
     public function _session() {
         if(!isset($_SESSION['admin_login'])) {
-            if(isset($_GET['p']) && $_GET['p'] != 'admin/login') {
+            if(isset($_GET['p']) && $_GET['p'] != 'ljz-admin/login') {
                 header("location: $this->domain/login");
                 die();
             }
         } else {
-            if(isset($_GET['p']) && $_GET['p'] == 'admin/login') {
+            if(isset($_GET['p']) && $_GET['p'] == 'ljz-admin/login') {
                 header("location: $this->domain/home");
                 die();
             }

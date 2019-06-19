@@ -1,5 +1,5 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/admin/summary-admin.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/ljz-admin/summary-admin.js"></script>';
 ?>
 
 <div id="wrapper">
