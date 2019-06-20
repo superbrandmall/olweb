@@ -10,18 +10,24 @@ abstract class BaseObject {
         if(gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.15') {
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://10.130.12.15/ljz-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
+                $this->domain = 'http://10.130.12.15/brands-admin';
             } else {
                 $this->domain = 'http://10.130.12.15';
             }
         } else if(gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.41' || gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.45') {
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://uat-ol.superbrandmall.com/ljz-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
+                $this->domain = 'http://uat-ol.superbrandmall.com/brands-admin';
             } else {
                 $this->domain = 'http://uat-ol.superbrandmall.com';
             }
         } else {
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/ljz-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/brands-admin';
             } else {
                 $this->domain = 'http://ol.superbrandmall.com';
             }

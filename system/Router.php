@@ -30,6 +30,49 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $session = new Session();
         $session ->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
+    $target = array(
+        'brands-admin/home' => array(
+            'url' => 'default.php'
+        ),
+        'brands-admin/login' => array(
+            'url' => 'login.php'
+        ),
+        'brands-admin/logout' => array(
+            'url' => 'logout.php'
+        ),
+        'brands-admin/brands' => array(
+            'url' => 'brands.php'
+        ),
+        'brands-admin/brand' => array(
+            'url' => 'brand.php'
+        ),
+        'brands-admin/create-brand' => array(
+            'url' => 'create-brand.php'
+        ),
+        'brands-admin/users' => array(
+            'url' => 'users.php'
+        ),
+        'brands-admin/user' => array(
+            'url' => 'user.php'
+        ),
+        'brands-admin/reset' => array(
+            'url' => 'reset.php'
+        )
+    );
+    
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php','default.php','brands.php','brand.php','create-brand.php','user.php','users.php');
+    if (in_array($page, $session_required)) {
+        include_once 'models/brands-admin/Session.class.php';
+        $session = new Session();
+        $session ->_session();
+    }
 } else {
     include ('MallCode.php');
     
