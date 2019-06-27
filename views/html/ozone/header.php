@@ -71,6 +71,17 @@ include("views/assets/base/" . $filename);
                 s.parentNode.insertBefore(hm, s);
             })();
         </script>
+        
+        <!-- 百度商桥-->
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?f5353968fa442b3d50b38a956c9d8ae7";
+              var s = document.getElementsByTagName("script")[0];
+              s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
     </head>
     <body class="c-layout-header-fixed<?php if (!isset($_GET['p']) || $_GET['p'] == 'home') {
     echo ' c-layout-header-fullscreen';

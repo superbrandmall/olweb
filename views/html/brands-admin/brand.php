@@ -102,14 +102,13 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">市场销售份额</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group col-md-3" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" name="" value="10" />
+                                <div class="form-group">
+                                    <label for="warranty_months" class="col-md-3 control-label">市场销售份额</label>
+                                    <div class="col-md-7 col-sm-12 required">
+                                        <div class="input-group" style="padding-left: 0px;">
+                                            <input class="form-control" type="text" name="warranty_months" value="10" />
                                             <span class="input-group-addon">%</span>
                                         </div>
-                                        <div class="col-md-9" style="padding-left: 0px;"></div>
                                     </div>
                                 </div>
                                 
@@ -214,15 +213,12 @@
                                     </div>
                                 </div>
                                 
-                                <div class="form-group ">
+                                <div class="form-group">
                                     <label class="col-md-3 control-label">客单价</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group col-md-3" style="padding-left: 0px;">
+                                    <div class="col-md-7 col-sm-12 required">
+                                        <div class="input-group" style="padding-left: 0px;">
                                             <input class="form-control" type="text" name="" value="500" />
                                             <span class="input-group-addon">元</span>
-                                        </div>
-                                        <div class="col-md-9" style="padding-left: 0px;">
-
                                         </div>
                                     </div>
                                 </div>

@@ -24,7 +24,7 @@
 }
 
 label.error {
-    color: #f00;
+    color: orange;
 }
 
 .login-failed {

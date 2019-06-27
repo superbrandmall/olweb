@@ -8,7 +8,6 @@ $(document).ready(function(){
     } else {
         getBrandDashboard();
     }
-    
 })
 
 function findBrandDashboard(pd) {
@@ -112,13 +111,14 @@ function showPie(m, p, id) {
             datasets: [{
                     data: p,
                     backgroundColor: [
-                        '#FF6384',
-                        '#FF9F40',
-                        '#FFCD56',
-                        '#4BC0C0',
-                        '#36A2EB',
-                        '#9966FF',
-                        '#C9CBCF'
+                        '#27D656',
+                        '#120202',
+                        '#F56954',
+                        '#00A65A',
+                        '#F39C12',
+                        '#00C0EF',
+                        '#3C8DBC',
+                        '#D2D6DE'
                     ],
                     label: '业态店铺占比'
                 }]

@@ -59,6 +59,27 @@ function numberWithCommas(x) {
     }
 }
 
+function getURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
+
+function refineUrl() {
+    //get full url
+    var url = window.location.href;
+    //get url after/  
+    var value = url.substring(url.lastIndexOf('/') + 1);
+    //get the part after before ?
+    value  = value.split("?")[0];   
+    return value;     
+}
+
 function logout() {
     var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 
     if (keys) { 
