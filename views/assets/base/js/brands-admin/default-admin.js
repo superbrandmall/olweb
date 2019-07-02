@@ -12,7 +12,7 @@ $(document).ready(function(){
 
 function findBrandDashboard(pd) {
     $.ajax({
-        url: $.api.baseNew + "/onlineleasing-customer/api/brand/findBrandDashboard/?pendDays=" + pd+ "",
+        url: $.api.baseNew + "/onlineleasing-customer/api/brand/findBrandDashboard/?pendDays=" + pd+ "&userCode=" + $.cookie('login'),
         type: "GET",
         async: false,
         beforeSend: function (request) {
@@ -23,6 +23,7 @@ function findBrandDashboard(pd) {
         success: function (response, status, xhr) {
             if (response.code === 'C0') {
                 sessionStorage.setItem("brandSummaryInfos", JSON.stringify(response.data));  
+                sessionStorage.setItem("userModalities", JSON.stringify(response.data.userModalities));  
                 getBrandDashboard();
             }
         },

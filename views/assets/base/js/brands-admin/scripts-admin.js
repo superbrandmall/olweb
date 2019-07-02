@@ -51,6 +51,48 @@ function getModalities() {
     });
 }
 
+function generatePages(currentPage, LastPage, items) {
+    var pages = '';
+    if (LastPage <= 6) {
+        for(var i=1;i<=LastPage;i++) {
+            if(i == currentPage ) {
+                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            } else {
+                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            }
+        }
+    } else {
+        if(currentPage>1){
+            var previousPage = +currentPage-1;
+            pages += '<li><a href="?page='+previousPage+'&items='+items+'">&lt;</a></li>';
+        } else {
+            pages += '<li class="c-space"><span>&lt;</span></li>';
+        }
+        for(var i=1;i<=3;i++) {
+            if(i == currentPage ) {
+                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            } else {
+                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            }
+        }
+        pages += '<li class="c-space"><span>...</span></li>';
+        for(var i=LastPage-2;i<=LastPage;i++) {
+            if(i == currentPage ) {
+                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            } else {
+                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+            }
+        }
+        if(currentPage<LastPage){
+            var nextPage = +currentPage+1;
+            pages += '<li><a href="?page='+nextPage+'&items='+items+'">&gt;</a></li>';
+        } else {
+            pages += '<li class="c-space"><span>&gt;</span></li>';
+        }
+    }
+    $(".pagination .pagination").append(pages);
+}
+
 function numberWithCommas(x) {
     if(x == null){
         return '-';

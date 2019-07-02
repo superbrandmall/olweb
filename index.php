@@ -6,6 +6,9 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
     if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家嘴内部汇报
         include ('views/html/ljz-admin/header.php');
         include 'views/html/ljz-admin/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'ly-admin')) !== false) { // 洛阳内部汇报
+        include ('views/html/ly-admin/header.php');
+        include 'views/html/ly-admin/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
         include ('views/html/brands-admin/header.php');
         include 'views/html/brands-admin/'.$page;

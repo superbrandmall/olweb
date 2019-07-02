@@ -13,7 +13,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li>
-                        <a href="/brands-admin/brands">
+                        <a href="/brands-admin/brands?items=10">
                             <i class="fa fa-asterisk text-green"></i> 所有品牌
                         </a>
                     </li>

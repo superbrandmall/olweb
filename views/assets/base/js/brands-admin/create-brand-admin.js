@@ -38,7 +38,6 @@ $(document).ready(function(){
     })
     
     $("#create-form").validate({
-        onkeyup: false,
         rules: {
             brand_name: {
                 required: true,
@@ -232,7 +231,11 @@ $(document).ready(function(){
 
 function getBrandModality1() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
-        $('#modality_1').append('<option value="'+v.code+'">'+v.name+'</option>');
+        if(v.code == '00' || v.code == '01' || v.code == '02') {
+            $.each(v.children, function(j,w) {
+                $('#modality_1').append('<option value="'+w.code+'">'+w.name+'</option>');
+            });
+        };
     });
 }
 
@@ -242,11 +245,13 @@ function getBrandModality2(mod) {
     $('#modality_3').children().not(':first').remove();
   
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
-        if(v.code == m) {
-            $.each(v.children, function(j,w) {
-                $('#modality_2').append('<option value="'+w.code+'">'+w.name+'</option>');
-            });
-        };
+        $.each(v.children, function(j,w) {
+            if(w.code == m) {
+                $.each(w.children, function(k,x) {
+                    $('#modality_2').append('<option value="'+x.code+'">'+x.name+'</option>');
+                });
+            };
+        });
     });
 }
 
@@ -256,11 +261,13 @@ function getBrandModality3(mod) {
   
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
         $.each(v.children, function(j,w) {
-            if(w.code == m) {
-                $.each(w.children, function(k,x) {
-                    $('#modality_3').append('<option value="'+x.code+'">'+x.name+'</option>');
-                });
-            };
+            $.each(w.children, function(k,x) {
+                if(x.code == m) {
+                    $.each(x.children, function(l,y) {
+                        $('#modality_3').append('<option value="'+y.code+'">'+y.name+'</option>');
+                    });
+                };
+            });
         });
     });
 }
@@ -328,68 +335,74 @@ function addNewBrand() {
     var contact_name_1 = $('#contact_name_1').val();
     var contact_phone_1 = $('#contact_phone_1').val();
 
-    var map = {
-        "brand": {
-            "attribute": attribute,
-            "averageUnitPrice": average_unit_price,
-            "brandClass": brand_class,
-            "city": city,
-            "compare": compare,
-            "contactName": contact_name_1,
-            "contactPhone": contact_phone_1,
-            "hdState": "using",
-            "history": history,
-            "joined": joined,
-            "location": location,
-            "logo": logo,
-            "marketShare": market_share,
-            "modality_1": modality_1,
-            "modality_2": modality_2,
-            "modality_3": modality_3,
-            "name": brand_name,
-            "nameEng": name_eng,
-            "rank": rank,
-            "reputation": reputation,
-            "shopAmount": shop_amount,
-            "standardArea": standard_area,
-            "target": target,
-            "userCode": $.cookie('login')
-          },
-          "brandAuthor": "",
-          "merchantCode": "1"
-    };
+    if(logo != '' && brand_name != '' && attribute != '' && modality_1 != '' && modality_2 != '' && modality_3 != '' && brand_class != '' 
+            && reputation != '' && market_share != '' && name_eng != '' && location != '' && standard_area != '' && target != '' 
+            && city != '' && history != '' && rank != '' && shop_amount != '' && compare != '' && average_unit_price!= '' 
+            && joined != '' && contact_name_1 != '' && contact_phone_1 != ''){
+        var map = {
+            "brand": {
+                "attribute": attribute,
+                "averageUnitPrice": average_unit_price,
+                "brandClass": brand_class,
+                "city": city,
+                "compare": compare,
+                "contactName": contact_name_1,
+                "contactPhone": contact_phone_1,
+                "hdState": "created",
+                "history": history,
+                "joined": joined,
+                "location": location,
+                "logo": logo,
+                "marketShare": market_share,
+                "modality1": modality_1,
+                "modality2": modality_2,
+                "modality3": modality_3,
+                "name": brand_name,
+                "nameEng": name_eng,
+                "rank": rank,
+                "reputation": reputation,
+                "shopAmount": shop_amount,
+                "standardArea": standard_area,
+                "target": target,
+                "userCode": $.cookie('login'),
+                "status": 0
+              },
+              "brandAuthor": "",
+              "merchantCode": "1"
+        };
 
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/brand/addNewBrand",
-        type: "POST",
-        data: JSON.stringify(map),
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+        $.ajax({
+            url: $.api.baseNew+"/onlineleasing-customer/api/brand/addNewBrand",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    window.location.href = 'create-brand?s=succeed';
+                } else {
+                    console.log(response.customerMessage);
+                    window.location.href = 'create-brand?s=fail';
                 }
-
-                window.location.href = 'create-brand?s=succeed';
-            } else {
-                console.log(response.customerMessage);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
                 window.location.href = 'create-brand?s=fail';
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
-            window.location.href = 'create-brand?s=fail';
-        }
-    });
+        });
+    }
 }

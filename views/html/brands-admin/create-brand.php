@@ -43,9 +43,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
 
                         <div class="box-body">
-                            <form id="create-form" class="form-horizontal" method="post" action="#" autocomplete="off" role="form" enctype="multipart/form-data">
-                                <input type="hidden" name="_token" value="">
-
+                            <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="brand_name" class="col-md-3 control-label">品牌名称</label>
                                     <div class="col-md-7 col-sm-12 required">
