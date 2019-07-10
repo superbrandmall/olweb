@@ -54,7 +54,7 @@
                             <a href="shop?id=OLSHOP180917000572"><img src="views/assets/base/img/content/client-logos/gundam.jpg" alt="高达"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000433"><img src="views/assets/base/img/content/client-logos/toysrus.jpg" alt="玩具反斗城"/></a>
+                            <a href="shop?id=OLSHOP180917000638"><img src="views/assets/base/img/content/client-logos/toysrus.jpg" alt="玩具反斗城"/></a>
                             <a href="shop?id=OLSHOP180917000570"><img src="views/assets/base/img/content/client-logos/heytea.jpg" alt="喜茶"/></a>
                         </div>
                         <div class="item">
@@ -62,7 +62,7 @@
                             <a href="shop?id=OLSHOP180917000627"><img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt="汤姆熊欢乐世界"/></a>
                         </div>
                         <div class="item">
-                            <a href="shop?id=OLSHOP180917000067"><img src="views/assets/base/img/content/client-logos/gap.jpg" alt="GAP"/></a>
+                            <a href="shop?id=OLSHOP180917000556"><img src="views/assets/base/img/content/client-logos/pop-mart.jpg" alt="POP MART"/></a>
                             <a href="shop?id=OLSHOP180917000098"><img src="views/assets/base/img/content/client-logos/agatha.jpg" alt="AGATHA"/></a>
                         </div>
                         <div class="item">

@@ -63,9 +63,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="box-footer">
                         <button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                        <a href="/brands-admin/reset" style="color: #CEB688;">忘记密码</a>
-                    </div>
                 </div>
             </div>
         </div>

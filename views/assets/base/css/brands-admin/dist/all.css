@@ -14788,7 +14788,7 @@ a.logo.no-hover a:hover {
 }
 
 .required {
-	border-right: 6px solid orange
+	/*border-right: 6px solid orange*/
 }
 
 body {

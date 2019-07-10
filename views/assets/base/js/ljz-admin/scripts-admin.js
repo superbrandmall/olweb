@@ -293,7 +293,9 @@ function drawShops(){
         }
     });
     
-    $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
+    if(document.body.clientWidth >= 1280){
+        $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
+    }
     
     setTimeout(function () {
         var pos, brand;

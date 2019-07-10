@@ -27,6 +27,7 @@
     </head>
     <?php
     if(isset($_SESSION['brands_admin_login'])) {
+        if(isset($_GET['p']) && $_GET['p'] != 'brands-admin/reset') {
     ?>
     <body class="sidebar-mini skin-blue ">
         <div id="loader"></div>
@@ -73,19 +74,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#">
-                                            <i class="fa fa-check fa-fw"></i>
-                                            查看所辖品牌
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user fa-fw"></i>
-                                            修改资料
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
+                                        <a href="/brands-admin/reset">
                                             <i class="fa fa-asterisk fa-fw"></i>
                                             修改密码
                                         </a>
@@ -108,5 +97,6 @@
                 </a>
             </header>
             <?php
+        }
     }
     ?>

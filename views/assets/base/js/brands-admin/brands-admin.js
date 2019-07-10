@@ -5,6 +5,25 @@ $(document).ready(function(){
         ShowBrands(1,getURLParameter('items'));
     }
     
+    if(getURLParameter('delete')) {
+        switch (getURLParameter('delete')) {
+            case "succeed":
+                $('.callout-info').show().delay(2000).hide(0);
+                $('html, body').animate({
+                    scrollTop: $('#webui').offset().top
+                }, 0);
+                break;
+            case "fail":
+                $('.callout-danger').show().delay(2000).hide(0);
+                $('html, body').animate({
+                    scrollTop: $('#webui').offset().top
+                }, 0);
+                break;
+            default:
+                break;
+        }
+    }
+    
     switch (getURLParameter('items')) {
         case '10':
             $('.page-size').text('10');
@@ -53,9 +72,9 @@ function ShowBrands(p,c){
                     generatePages(p, pages, itm);
                     
                     var modality3 = '';
-                    var attribute, brandClass, reputation, statusL, statusS;
-                    var updateL = '<a href="#" class="btn btn-sm btn-success" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>';
-                    var updateS = '<a href="#" class="btn btn-xs btn-success" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>';
+                    var statusL, statusS;
+                    var updateL;
+                    var updateS;
                     $.each(response.data.content, function(i,v){
                         if(v.logo != null){
                             var logoL = '<a href="'+v.logo+'" data-toggle="lightbox" data-type="image"><img src="'+v.logo+'" width="50"></a>';
@@ -77,63 +96,6 @@ function ShowBrands(p,c){
                             });
                         });
                         
-                        switch (v.attribute) {
-                            case 1:
-                                attribute = '国际知名品牌国内首家';
-                                break;
-                            case 2:
-                                attribute = '国际主流知名品牌';
-                                break;
-                            case 3:
-                                attribute = '国际普通品牌';
-                                break;
-                            case 4:
-                                attribute = '国内主流知名品牌';
-                                break;
-                            case 5:
-                                attribute = '国内普通品牌';
-                                break;
-                            case 6:
-                                attribute = '区域知名品牌';
-                                break;
-                            case 7:
-                                attribute = '区域普通品牌';
-                                break;
-                            default:
-                                attribute = '';
-                                break;
-                        }
-                        
-                        switch (v.brandClass) {
-                            case 1:
-                                brandClass = '奢侈';
-                                break;
-                            case 2:
-                                brandClass = '中等';
-                                break;
-                            case 3:
-                                brandClass = '低端';
-                                break;
-                            default:
-                                brandClass = '';
-                                break;
-                        }
-                        
-                        switch (v.reputation) {
-                            case 1:
-                                reputation = '非常好';
-                                break;
-                            case 2:
-                                reputation = '比较好';
-                                break;
-                            case 3:
-                                reputation = '一般';
-                                break;
-                            default:
-                                reputation = '';
-                                break;
-                        }
-                        
                         switch (v.status) {
                             case 0:
                                 statusL = '<span class="btn btn-sm btn-default">新增加</span>';
@@ -149,9 +111,12 @@ function ShowBrands(p,c){
                                 break;
                         }
                         
+                        updateL = '<a href="/brands-admin/brand?id='+v.code+'" class="btn btn-sm btn-success" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>';
+                        updateS = '<a href="/brands-admin/brand?id='+v.code+'" class="btn btn-xs btn-success" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>';
+                        
                         if(v.userCode == $.cookie('login')){
-                            updateL = '<a href="#" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href="#" class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
-                            updateS = '<a href="#" class="btn btn-xs btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href="#" class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+                            updateL = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-sm btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href=\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+                            updateS = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-xs btn-warning" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href="\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
                         }
 
                         $('#brandsL').append('\
@@ -159,9 +124,10 @@ function ShowBrands(p,c){
 <td><a href="/brands-admin/brand?id='+v.code+'">'+v.name+'</a></td>\n\
 <td>'+logoL+'</td>\n\
 <td>'+modality3+'</td>\n\
-<td>'+attribute+'</td>\n\
-<td>'+brandClass+'</td>\n\
-<td>'+reputation+'</td>\n\
+<td>'+v.companyName+'</td>\n\
+<td>'+v.contactName+'</td>\n\
+<td>'+v.title+'</td>\n\
+<td>'+v.contactPhone+'</td>\n\
 <td>'+statusL+'</td>\n\
 <td>'+updateL+'</td>\n\
 </tr>');
@@ -172,9 +138,10 @@ function ShowBrands(p,c){
 <div class="card-views"><div class="card-view"><span class="title">Logo</span><span class="value">'+logoS+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value"><a href="/brands-admin/brand?id='+v.code+'">'+v.name+'</a></span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value">'+modality3+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">属性</span><span class="value">'+attribute+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">价位</span><span class="value">'+brandClass+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">口碑</span><span class="value">'+reputation+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">公司</span><span class="value">'+v.companyName+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">联系人</span><span class="value">'+v.contactName+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">职位</span><span class="value">'+v.title+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">电话</span><span class="value">'+v.contactPhone+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">状态</span><span class="value" style="display: inline-block; margin-bottom: 2px;">'+statusS+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">操作</span><span class="value">'+updateS+'</span></div></div>\n\
 </td></tr>');
@@ -192,6 +159,37 @@ function ShowBrands(p,c){
     });
 }
 
-function redirect(id) {
-  window.location='brand?id='+id;
+function deleteBrand(id) {
+    $.ajax({
+        url: $.api.baseNew + "/onlineleasing-customer/api/brand/delete/?code=" + id,
+        type: "DELETE",
+        async: false,
+        beforeSend: function (request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                if(getURLParameter('page') && getURLParameter('page') >= 1){
+                window.location.href = 'brands?page'+getURLParameter('page')+'&items='+getURLParameter('items')+'&delete=succeed';
+            } else {
+                window.location.href = 'brands?items='+getURLParameter('items')+'&delete=succeed';
+            }
+            } else {
+                if(getURLParameter('page') && getURLParameter('page') >= 1){
+                    window.location.href = 'brands?page'+getURLParameter('page')+'&items='+getURLParameter('items')+'&delete=fail';
+                } else {
+                    window.location.href = 'brands?items='+getURLParameter('items')+'&delete=fail';
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            if(getURLParameter('page') && getURLParameter('page') >= 1){
+                window.location.href = 'brands?page'+getURLParameter('page')+'&items='+getURLParameter('items')+'&delete=fail';
+            } else {
+                window.location.href = 'brands?items='+getURLParameter('items')+'&delete=fail';
+            }
+        }
+    });
 }

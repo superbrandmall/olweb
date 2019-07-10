@@ -17,21 +17,6 @@
                             <i class="fa fa-asterisk text-green"></i> 所有品牌
                         </a>
                     </li>
-                    <li>
-                        <a href="/brands-admin/brands">
-                            <i class="fa fa-check text-red"></i> 在租品牌
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/brands-admin/brands">
-                            <i class="fa fa-warning text-orange"></i> 待租品牌
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/brands-admin/brands">
-                            <i class="fa fa-circle-o text-blue"></i> 即将签约
-                        </a>
-                    </li>
                 </ul>
             </li>
             <li>

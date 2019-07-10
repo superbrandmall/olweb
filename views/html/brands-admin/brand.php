@@ -1,15 +1,21 @@
+<?php
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/brands-admin/brand-admin.js"></script>';
+?>
+
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
     <section class="content-header" style="padding-bottom: 30px;">
         <h1 class="pull-left">
-            更新品牌
+            查看品牌
         </h1>
         <div class="pull-right">
-            <a href="/brands-admin/brands" class="btn btn-primary pull-right">
-                返回</a>
+            <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
+                返回
+            </a>
         </div>
     </section>
+    
     <section class="content">
         <div id="webui">
             <div class="row">
@@ -24,252 +30,179 @@
                         </div>
 
                         <div class="box-body">
-                            <form id="create-form" class="form-horizontal" method="post" action="#" autocomplete="off" role="form" enctype="multipart/form-data">
+                            <form class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">品牌名称</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="NUOGIC">
+                                    <label for="brand_name" class="col-md-3 control-label">品牌名称</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="brand_name" name="brand_name" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group ">
+                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group ">
+                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group ">
+                                    <label for="company_name" class="col-md-3 control-label">联系人公司</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="company_name" name="company_name" readonly />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group ">
+                                    <label for="title"  class="col-md-3 control-label">联系人职位</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="title" name="title" readonly />
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">品牌属性</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">国际知名品牌国内首家</option>
-                                            <option value="2">国际主流知名品牌</option>
-                                            <option value="3" selected>国际普通品牌</option>
-                                            <option value="4">国内主流知名品牌</option>
-                                            <option value="5">国内普通品牌</option>
-                                            <option value="6">区域知名品牌</option>
-                                            <option value="7">区域普通品牌</option>
-                                        </select>
+                                    <label for="modality_1" class="col-md-3 control-label">一级业态</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="modality_1" name="modality_1" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">一级业态</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="" selected>女装&配件</option>
-                                        </select>
+                                    <label for="modality_2" class="col-md-3 control-label">二级业态</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="modality_2" name="modality_2" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">二级业态</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="" selected>配件</option>
-                                        </select>
+                                    <label for="modality_3" class="col-md-3 control-label">三级业态</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="modality_3" name="modality_3" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">三级业态</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="" selected>女鞋</option>
-                                        </select>
+                                    <label for="attribute" class="col-md-3 control-label">品牌属性</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="attribute" name="attribute" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">品牌价位</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">奢侈</option>
-                                            <option value="2" selected>中等</option>
-                                            <option value="3">低端</option>
-                                        </select>
+                                    <label for="class" class="col-md-3 control-label">品牌价位</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="class" name="class" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">口碑</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">非常好</option>
-                                            <option value="2" selected>比较好</option>
-                                            <option value="3">一般</option>
-                                        </select>
+                                    <label for="reputation" class="col-md-3 control-label">口碑</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="reputation" name="reputation" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="warranty_months" class="col-md-3 control-label">市场销售份额</label>
-                                    <div class="col-md-7 col-sm-12 required">
+                                    <label for="market_share" class="col-md-3 control-label">市场销售份额</label>
+                                    <div class="col-md-7 col-sm-12">
                                         <div class="input-group" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" name="warranty_months" value="10" />
+                                            <input class="form-control" type="text" id="market_share" name="market_share" readonly />
                                             <span class="input-group-addon">%</span>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group ">
-                                    <label class="col-md-3 control-label">英文名称</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="NUOGIC" />
+                                    <label for="name_eng" class="col-md-3 control-label">英文名称</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="name_eng" name="name_eng" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">开店区域</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">商务区</option>
-                                            <option value="2">居民区</option>
-                                            <option value="3" selected>商务区/居民区</option>
-                                        </select>
+                                    <label for="location" class="col-md-3 control-label">开店区域</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="location" name="location" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">标准店面积</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">< 80 m&sup2;</option>
-                                            <option value="2">80 - 150 m&sup2;</option>
-                                            <option value="3" selected>150 - 250 m&sup2;</option>
-                                            <option value="4">250 - 600 m&sup2;</option>
-                                            <option value="5">> 600 m&sup2;</option>
-                                        </select>
+                                    <label for="standard_area" class="col-md-3 control-label">标准店面积</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="standard_area" name="standard_area" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">主要客户群</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">快速增长的中产家庭</option>
-                                            <option value="2">金领/商务精英/高级白领/专业人</option>
-                                            <option value="3">富裕的年长者/心态年轻的中老年人</option>
-                                            <option value="4" selected>有消费力的新世代（80/90后）</option>
-                                            <option value="5">都有</option>
-                                        </select>
+                                    <label for="target" class="col-md-3 control-label">主要客户群</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="target" name="target" readonly>
                                     </div>
                                 </div>
 
                                 <div class="form-group ">
-                                    <label class="col-md-3 control-label">城市</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="上海" />
+                                    <label for="city" class="col-md-3 control-label">城市</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="city" name="city" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">品牌发展历史</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">> 10年</option>
-                                            <option value="2" selected>> 5年</option>
-                                            <option value="3">> 2年</option>
-                                            <option value="4">新品牌</option>
-                                        </select>
+                                    <label for="history" class="col-md-3 control-label">品牌发展历史</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="history" name="history" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group ">
-                                    <label class="col-md-3 control-label">行业排名</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="Top50" />
+                                    <label for="rank" class="col-md-3 control-label">行业排名</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="rank" name="rank" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">当地已开店数</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1" selected>> 10家</option>
-                                            <option value="2">5-10家</option>
-                                            <option value="3">< 5家</option>
-                                            <option value="4">0</option>
-                                        </select>
+                                    <label for="shop_amount" class="col-md-3 control-label">当地已开店数</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="shop_amount" name="shop_amount" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">月均销售额坪效</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">> 当地同等行业水平 20%</option>
-                                            <option value="2" selected>> 当地同等行业水平 10%</option>
-                                            <option value="3">= 当地同等行业水平</option>
-                                            <option value="4">< 当地同等行业水平 10%</option>
-                                            <option value="5">< 当地同等行业水平 20%</option>
-                                        </select>
+                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="compare" name="compare" readonly>
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">客单价</label>
-                                    <div class="col-md-7 col-sm-12 required">
+                                <div class="form-group ">
+                                    <label for="average_unit_price" class="col-md-3 control-label">客单价</label>
+                                    <div class="col-md-7 col-sm-12">
                                         <div class="input-group" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" name="" value="500" />
+                                            <input class="form-control" type="text" id="average_unit_price" name="average_unit_price" readonly>
                                             <span class="input-group-addon">元</span>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM</label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" name="" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1" selected>0</option>
-                                            <option value="2">1</option>
-                                            <option value="3">2</option>
-                                            <option value="4">3</option>
-                                            <option value="5">> 3</option>
-                                        </select>
+                                    <label for="joined" class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="joined" name="joined" readonly>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group ">
-                                    <label class="col-md-3 control-label">联系人姓名</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="黄先生"  />
+                                    <label class="col-md-3 control-label" for="logo">品牌Logo</label>
+                                    <div class="col-md-7">
+                                        <img id="imagePreview" style="max-width: 200px;">
                                     </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label">联系人电话</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" name="" value="13661680652"  />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label" for="image">品牌Logo</label>
-                                    <div class="col-md-7 required">
-                                        <label class="btn btn-default">
-                                            选择文件...
-                                            <input type="file" name="image" id="logo" data-maxsize="9000000" accept="image/gif,image/jpeg,image/png,image/svg" style="display:none">
-                                        </label>
-                                        <span class="help-block" id="logo-status">文件类型可选择jpg、png、gif或svg，文件最大尺寸不超过10M。</span>
-                                        <span class='label label-default' id="logo-info"></span>
-                                    </div>
-                                    <div class="col-md-4 col-md-offset-3">
-                                        <img id="imagePreview" src="/views/assets/base/img/content/brands-admin/nuogic.jpg" style="max-width: 200px;">
-                                    </div>
-                                </div>
-
-
-                                <div class="box-footer text-right">
-                                    <a class="btn btn-link text-left" href="/brands-admin/brands">取消</a>
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> 保存</button>
                                 </div>
                             </form>
                         </div>
@@ -289,6 +222,6 @@
 
     </section>
 
-</div><!-- /.content-wrapper -->
+</div>
 
 <?php include 'footer.php'; ?>

@@ -18,7 +18,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
     <section class="content">
         <div id="webui">
-
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="callout callout-info" style="display: none;">
+                        删除品牌成功!
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -78,15 +84,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>
-                                                                    <div class="th-inner">属性</div>
+                                                                    <div class="th-inner">公司</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>
-                                                                    <div class="th-inner">价位</div>
+                                                                    <div class="th-inner">联系人</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>
-                                                                    <div class="th-inner">口碑</div>
+                                                                    <div class="th-inner">职位</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">电话</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>

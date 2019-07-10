@@ -1,5 +1,6 @@
 <?php
 if(isset($_SESSION['brands_admin_login'])) {
+    if(isset($_GET['p']) && $_GET['p'] != 'brands-admin/reset') {
 ?>
             <footer class="main-footer hidden-print">
                 <div class="pull-right hidden-xs">
@@ -26,6 +27,7 @@ if(isset($_SESSION['brands_admin_login'])) {
             </div>
         </div>
 <?php
+    }
 }
 ?>
 
