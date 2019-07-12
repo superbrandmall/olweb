@@ -33,15 +33,24 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="login-box-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="alert alert-danger login-failed">
+                                <div class="alert alert-danger reset-failed" style="display: none;">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                                     <i class="fa fa-remove faa-pulse animated"></i>
-                                    <strong>登录失败!</strong> 账号输入有误。
+                                    修改密码失败!
+                                </div>
+                                <div class="alert alert-success reset-succeeded" style="display: none;">
+                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <i class="fa fa-remove faa-pulse animated"></i>
+                                    修改密码成功!
                                 </div>
                             </div>
 
                             <div class="col-md-12">
                                 <fieldset>
+                                    <div class="form-group">
+                                        <input class="form-control" id="old_password" placeholder="原密码" name="old_password" type="password" required autocomplete="off">
+                                        <div id="errorcontainer-old_password" class="errorDiv"></div>
+                                    </div>
                                     <div class="form-group">
                                         <input class="form-control" id="login_password" placeholder="新密码" name="login_password" type="password" required autocomplete="off">
                                         <div id="errorcontainer-login_password" class="errorDiv"></div>
@@ -58,7 +67,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <button type="submit" class="btn btn-lg btn-primary btn-block">修改</button>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                        <a href="javascript: window.history.go(-1);" style="color: #CEB688;"><< 返回</a>
+                        <a href="/brands-admin/" style="color: #CEB688;"><< 返回</a>
                     </div>
                 </div>
             </div>
