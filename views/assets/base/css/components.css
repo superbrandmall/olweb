@@ -1205,6 +1205,7 @@ h1 {
 }
 .c-bg-black.c-bg-black-font {
   color: #fcfcfc !important;
+  margin: 60px 0 0;
 }
 
 .c-bg-black-hover:hover {
@@ -3627,18 +3628,18 @@ h1 {
     float: right;
     display: inline-block;
     font-size: 13px;
-    font-family: FontAwesome;
+    content: "\f053";
+    font-family: 'Font Awesome\ 5 Free';
     height: auto;
     margin-top: 2px;
     margin-right: 2px;
-    content: "\f104";
-    font-weight: 300;
+    font-weight: 900;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open.dropdown-submenu > a:after, .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open > a.dropdown-toggle:after,
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .c-open.dropdown-submenu > a:after,
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .c-open > a.dropdown-toggle:after {
     margin-right: 0px;
-    content: "\f107";
+    content: "\f078";
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .dropdown-menu {
     padding-bottom: 0;
@@ -5605,6 +5606,9 @@ h1 {
   .c-layout-revo-slider-7 .c-singup-form .form-inline .form-group {
     margin: 10px 20px;
   }
+  .c-bg-black.c-bg-black-font {
+    margin: 0;
+  }
 }
 .c-layout-revo-slider-8 .c-block {
   padding: 40px 50px 40px 50px;
@@ -7044,7 +7048,7 @@ h1 {
 /*.c-content-ver-nav .c-menu > li:before {
   color: #5c6873;
   content: "\f105";
-  font-family: FontAwesome;
+  font-family: 'Font Awesome 5 Free';
   font-weight: 100;
   width: 12px;
   height: 12px;
@@ -9952,7 +9956,7 @@ h1 {
       position: relative;
   }
   .c-layout-revo-slider-7 .c-singup-form {
-      margin-top: 30px;
+      margin-top: 70px;
   }
 }
 .c-content-client-logos-slider-1 .item img {

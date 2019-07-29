@@ -48,7 +48,7 @@
 
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                            <form class="navbar-form navbar-left form-horizontal" role="search" action="#" method="get">
+                            <!--<form class="navbar-form navbar-left form-horizontal" role="search" action="#" method="get">
                                 <div class="col-xs-12 col-md-12">
                                     <div class="col-xs-12 form-group">
                                         <label class="sr-only" for="tagSearch">搜寻品牌</label>
@@ -59,7 +59,7 @@
                                         <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
                                     </div>
                                 </div>
-                            </form>
+                            </form>-->
 
                             <li>
                                 <a href="/brands-admin/create-brand">
@@ -69,8 +69,16 @@
 
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="/views/assets/base/img/content/brands-admin/mayunfei.gif" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">马云飞 <b class="caret"></b></span>
+                                    <img src="/views/assets/base/img/content/brands-admin/avatar.png" class="user-image" alt="User Image">
+                                    <span class="hidden-xs">
+                                        <?php
+                                        if(isset($_SESSION['brands_admin_name'])) {
+                                            echo $_SESSION['brands_admin_name'];
+                                        } else {
+                                            echo "租赁部";
+                                        }
+                                        ?>
+                                        <b class="caret"></b></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>

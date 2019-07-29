@@ -1,7 +1,11 @@
 <?php
 if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com'){
-    include ('views/html/ozone/header.php');
-    include 'views/html/ozone/'.$page;
+    if(strpos ($_SERVER['REQUEST_URI'] , 'advertising' ) == true){
+        include ('views/html/advertising/index.php');
+    } else {
+        include ('views/html/ozone/header.php');
+        include 'views/html/ozone/'.$page;
+    }
 } else { // 内部汇报
     if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家嘴内部汇报
         include ('views/html/ljz-admin/header.php');

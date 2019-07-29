@@ -71,7 +71,6 @@ function ShowBrands(p,c){
                     var itm = getURLParameter('items');
                     generatePages(p, pages, itm);
                     
-                    var modality3 = '';
                     var statusL, statusS;
                     var updateL;
                     var updateS;
@@ -84,16 +83,11 @@ function ShowBrands(p,c){
                             var logoS = '';
                         }
                         
-                        $.each($.parseJSON(sessionStorage.getItem("modalities")), function(h,u) {
-                            $.each(u.children, function(j,w) {
-                                $.each(w.children, function(k,x) {
-                                    $.each(x.children, function(l,y) {
-                                        if(y.code == v.modality3) {
-                                            modality3 = y.name;
-                                        }
-                                    });
-                                });
-                            });
+                        var category = '';
+                        $.each($.parseJSON(sessionStorage.getItem("category")), function(h,u) {
+                            if(u.code == v.newCategoryCode) {
+                                category = u.name;
+                            }
                         });
                         
                         switch (v.status) {
@@ -123,13 +117,13 @@ function ShowBrands(p,c){
 <tr data-index="'+i+'">\n\
 <td><a href="/brands-admin/brand?id='+v.code+'">'+v.name+'</a></td>\n\
 <td>'+logoL+'</td>\n\
-<td>'+modality3+'</td>\n\
-<td>'+v.companyName+'</td>\n\
-<td>'+v.contactName+'</td>\n\
-<td>'+v.title+'</td>\n\
-<td>'+v.contactPhone+'</td>\n\
+<td>'+category+'</td>\n\
+<td>'+(v.companyName || '')+'</td>\n\
+<td>'+(v.contactName || '')+'</td>\n\
+<td>'+(v.title || '')+'</td>\n\
+<td>'+(v.contactPhone || '')+'</td>\n\
 <td>'+statusL+'</td>\n\
-<td>'+updateL+'</td>\n\
+<td>'+updateL +'</td>\n\
 </tr>');
                         
                         $('#brandsS').append('\
@@ -137,7 +131,7 @@ function ShowBrands(p,c){
 <td colspan="65">\n\
 <div class="card-views"><div class="card-view"><span class="title">Logo</span><span class="value">'+logoS+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value"><a href="/brands-admin/brand?id='+v.code+'">'+v.name+'</a></span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value">'+modality3+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value">'+category+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">公司</span><span class="value">'+v.companyName+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">联系人</span><span class="value">'+v.contactName+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">职位</span><span class="value">'+v.title+'</span></div></div>\n\

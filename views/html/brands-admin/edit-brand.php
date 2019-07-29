@@ -85,20 +85,32 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="modality_1" class="col-md-3 control-label">一级业态</label>
-                                    <div class="col-md-7">
-                                        <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
+                                    <label for="new_category" class="col-md-3 control-label">新业态 *</label>
+                                    <div class="col-md-7 required">
+                                        <select class="select2" id="new_category" name="new_category" style="width: 100%">
                                             <option value="">未选择</option>
                                         </select>
+                                        <div id="errorcontainer-new_category" class="errorDiv"></div>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="modality_2" class="col-md-3 control-label">二级业态</label>
-                                    <div class="col-md-7">
+                                    <label for="modality_1" class="col-md-3 control-label">一级业态 *</label>
+                                    <div class="col-md-7 required">
+                                        <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
+                                            <option value="">未选择</option>
+                                        </select>
+                                        <div id="errorcontainer-modality_1" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="modality_2" class="col-md-3 control-label">二级业态 *</label>
+                                    <div class="col-md-7 required">
                                         <select class="select2" id="modality_2" name="modality_2" style="width: 100%">
                                             <option value="">未选择</option>
                                         </select>
+                                        <div id="errorcontainer-modality_2" class="errorDiv"></div>
                                     </div>
                                 </div>
                                 

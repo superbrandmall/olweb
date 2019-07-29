@@ -30,7 +30,7 @@ function findOneBrandByCode(id) {
                 $('#company_name').val(brand.companyName);
                 $('#title').val(brand.title);
                 
-                var attribute, modality1, modality2, modality3, brandClass, reputation, location, target, standardArea, history, compare, joined;
+                var attribute, category, modality1, modality2, modality3, brandClass, reputation, location, target, standardArea, history, compare, joined;
                 switch (brand.attribute) {
                     case 1:
                         attribute = '国际知名品牌国内首家';
@@ -58,6 +58,12 @@ function findOneBrandByCode(id) {
                         break;
                 }
                 
+                $.each($.parseJSON(sessionStorage.getItem("category")), function(h,u) {
+                    if(u.code == brand.newCategoryCode) {
+                        category = u.name;
+                    }
+                });
+                
                 $.each($.parseJSON(sessionStorage.getItem("modalities")), function(h,u) {
                     $.each(u.children, function(j,w) {
                         if(w.code == brand.modality1) {
@@ -77,6 +83,7 @@ function findOneBrandByCode(id) {
                 });
                         
                 $('#attribute').val(attribute);
+                $('#new_category').val(category);
                 $('#modality_1').val(modality1);
                 $('#modality_2').val(modality2);
                 $('#modality_3').val(modality3);

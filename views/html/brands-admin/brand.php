@@ -67,6 +67,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
+                                    <label for="new_category" class="col-md-3 control-label">新业态</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="new_category" name="new_category" readonly>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
                                     <label for="modality_1" class="col-md-3 control-label">一级业态</label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="modality_1" name="modality_1" readonly>

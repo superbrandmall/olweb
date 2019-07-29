@@ -17,17 +17,17 @@ $(document).ready(function(){
                 break;
         }
         setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/brands-admin/"+refineUrl() );
+            window.history.pushState("object or string", "Title", "/brands-admin/"+refineCreateUrl() );
         },1000);
     }
     
     if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 1) {
-        getBrandModality1();
+        getALLNewCategory();
     } else {
-        $('#modality_1').attr('disabled',true);
-        $('#modality_2').attr('disabled',true);
-        getUserBrandModality3();
+        getNewCategory();
     }
+    
+    getBrandModality1();
     
     /*$('#brand_name').blur(function(){
         if($('#brand_name').val() != ''){
@@ -61,6 +61,15 @@ $(document).ready(function(){
             title: {
                 required: true
             },
+            new_category: {
+                required: true
+            },
+            modality_1: {
+                required: true
+            },
+            modality_2: {
+                required: true
+            },
             modality_3: {
                 required: true
             },
@@ -91,6 +100,15 @@ $(document).ready(function(){
             title: {
                 required: "请输入联系人职位"
             },
+            new_category: {
+                required: "请选择新业态"
+            },
+            modality_1: {
+                required: "请选择一级业态"
+            },
+            modality_2: {
+                required: "请选择二级业态"
+            },
             modality_3: {
                 required: "请选择三级业态"
             },
@@ -109,7 +127,7 @@ $(document).ready(function(){
         },
         submitHandler: function() {
             //findBrandDashboard($('#brand_name').val());
-            addBrand();
+            checkBrand();
         }
     });
     
@@ -151,6 +169,22 @@ $(document).ready(function(){
     });
     
 })
+
+function getALLNewCategory() {
+    $.each($.parseJSON(sessionStorage.getItem("category")), function(i,v) {
+        $('#new_category').append('<option value="'+v.code+'">'+v.name+'</option>');
+    });
+}
+
+function getNewCategory() {
+    $.each($.parseJSON(sessionStorage.getItem("userModalities")), function(a,b) {
+        $.each($.parseJSON(sessionStorage.getItem("category")), function(i,v) {
+            if(v.code == b.newCategoryCode) {
+                $('#new_category').append('<option value="'+v.code+'">'+v.name+'</option>');
+            };
+        });
+    })
+}
 
 function getBrandModality1() {
     $.each($.parseJSON(sessionStorage.getItem("modalities")), function(i,v) {
@@ -250,6 +284,49 @@ function getUserBrandModality3() {
     }); 
 }*/
 
+function checkBrand() {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brand/checkBrandName/?name="+$('#brand_name').val(),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                $('#loader').hide();
+                
+                var brands = response.data;
+                var ab = true;
+                if(brands.length > 0) {
+                    $.each(brands, function(i,v) {
+                        if(v.contactName == $('#contact_name_1').val()){
+                            ab = false;
+                        }
+                    })
+                }
+                
+                if(ab == true) {
+                    addBrand();
+                } else {
+                    $('.callout-warning').show().delay(2000).hide(0);
+                    $('html, body').animate({
+                        scrollTop: $('#webui').offset().top
+                    }, 0);
+                }
+            }
+        }
+    })
+}
+
 function addBrand() {
     var logo = $('#hidden_logo').val() || null;
     var brand_name = $('#brand_name').val();
@@ -257,6 +334,7 @@ function addBrand() {
     var contact_phone_1 = $('#contact_phone_1').val();
     var company_name = $('#company_name').val();
     var title = $('#title').val();
+    var new_category = $('#new_category').val();
     var modality_1 = $('#modality_3').val().substr(0,4);
     var modality_2 = $('#modality_3').val().substr(0,6);
     var modality_3 = $('#modality_3').val();
@@ -276,7 +354,7 @@ function addBrand() {
     var average_unit_price = $('#average_unit_price').val() || null;
     var joined = $('#joined').val() || null;
 
-    if(brand_name != '' && contact_name_1 != '' && contact_phone_1 != '' && company_name != '' && title != '' && modality_3 != ''){
+    if(brand_name != '' && contact_name_1 != '' && contact_phone_1 != '' && company_name != '' && title != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
         var map = {
             "attribute": attribute,
             "averageUnitPrice": average_unit_price,
@@ -297,6 +375,7 @@ function addBrand() {
             "modality3": modality_3,
             "name": brand_name,
             "nameEng": name_eng,
+            "newCategoryCode": new_category,
             "rank": rank,
             "reputation": reputation,
             "shopAmount": shop_amount,
@@ -304,7 +383,7 @@ function addBrand() {
             "target": target,
             "title": title,
             "userCode": $.cookie('login'),
-            "status": 0
+            "status": 1
         };
 
         $.ajax({
@@ -341,4 +420,11 @@ function addBrand() {
             }
         });
     }
+}
+
+function refineCreateUrl() {
+    var url = window.location.href;
+    var value = url.substring(url.lastIndexOf('/') + 1);
+    value  = value.split("&s")[0];   
+    return value;     
 }

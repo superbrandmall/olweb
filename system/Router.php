@@ -69,9 +69,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'brands-admin/logout' => array(
             'url' => 'logout.php'
         ),
-        'brands-admin/brands' => array(
-            'url' => 'brands.php'
-        ),
         'brands-admin/brand' => array(
             'url' => 'brand.php'
         ),
@@ -80,12 +77,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         ),
         'brands-admin/edit-brand' => array(
             'url' => 'edit-brand.php'
-        ),
-        'brands-admin/users' => array(
-            'url' => 'users.php'
-        ),
-        'brands-admin/user' => array(
-            'url' => 'user.php'
         ),
         'brands-admin/reset' => array(
             'url' => 'reset.php'
@@ -98,7 +89,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','brands.php','brand.php','create-brand.php','edit-brand.php','user.php','users.php');
+    $session_required = array('login.php','default.php','brand.php','create-brand.php','edit-brand.php');
     if (in_array($page, $session_required)) {
         include_once 'models/brands-admin/Session.class.php';
         $session = new Session();
@@ -155,9 +146,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         ),
         'ads' => array(
             'url' => 'ads.php'
-        ),
-        'test' => array(
-            'url' => 'test.php'
         )
     );
     

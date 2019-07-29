@@ -546,7 +546,8 @@ function GetShopInfo(sc){
                 
                 $('#shop_detail').modal('toggle');
                 
-                console.log('单元号:'+shop.unit+', 门牌号:'+shop.shopName); 
+                $('#unit').text(shop.unit);
+                $('#shop_name').text(shop.shopName);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

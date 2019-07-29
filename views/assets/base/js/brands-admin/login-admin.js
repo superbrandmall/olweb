@@ -55,6 +55,7 @@ $(document).ready(function(){
                         }
                         
                         var ucode = response.data.code;
+                        var uname = response.data.settings.name;
                         
                         $.ajax({
                             url: $.api.baseNew+"/common-authorization/api/passport/check/exist/userrole?userCode="+ucode+"&role=admin",
@@ -78,7 +79,8 @@ $(document).ready(function(){
                                         type: 'POST',
                                         url: '/controllers/api/1.0/ApiBrandsAdminLoginSession.php',
                                         data: {
-                                            user_code: ucode
+                                            user_code: ucode,
+                                            user_name: uname
                                         },
                                         dataType: "json",
                                         beforeSend: function(request) {

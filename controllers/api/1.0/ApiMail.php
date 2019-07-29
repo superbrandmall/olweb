@@ -49,8 +49,8 @@ if (!empty ($_POST['brand_name']) && !empty ($_POST['email']) && !empty ($_POST[
 {
 
     $text = "讯息:" . $_POST['msg'] . "<br><br>公司名:" . $_POST['merchant_name'] . "<br><br>业态:" . $_POST['modality_3'] . "<br><br>品牌名:" . $_POST['brand_name'] . "<br><br>联系人:" . $_POST['user_name'] . "<br><br>电话:" . $_POST['phone'] . "<br><br>邮箱:" . $_POST['email'];
+    $mail->addAddress('michael@superbrandmall.com','customerservice');
     $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
-
 }
 
 

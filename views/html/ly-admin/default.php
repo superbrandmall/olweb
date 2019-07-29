@@ -127,6 +127,20 @@
                     </div>
                 </form>
             </div>
+            <div class="modal-footer" style="text-align: left;">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="control-label">单元号:</span>
+                        <strong id="unit" class="control-label"></strong>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group">
+                            <span class="control-label">门牌号:</span>
+                            <strong id="shop_name" class="control-label"></strong>
+                        </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

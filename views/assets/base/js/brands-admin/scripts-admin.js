@@ -23,12 +23,47 @@ $(document).ready(function(){
     if (!sessionStorage.getItem("modalities") || sessionStorage.getItem("modalities") == null || sessionStorage.getItem("modalities") == '') {
         getModalities();
     }
+    
+    if (!sessionStorage.getItem("category") || sessionStorage.getItem("category") == null || sessionStorage.getItem("category") == '') {
+        getNewCategories();
+    }
 
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {
         event.preventDefault();
         $(this).ekkoLightbox();
     });
 })
+
+function getNewCategories() {
+    var category = [];
+    category.push(
+        {code: 'OLCATEGORY190719000001',name: 'F&B-Chinese'},
+        {code: 'OLCATEGORY190719000002',name: 'F&B-Asian/Others'},
+        {code: 'OLCATEGORY190719000003',name: 'F&B-Western & Bars & Clubs'},
+        {code: 'OLCATEGORY190719000004',name: 'F&B-Fast Food/Drink Coffee/Desserts'},
+        {code: 'OLCATEGORY190719000005',name: 'Selective Luxury'},
+        {code: 'OLCATEGORY190719000006',name: "Men's Fashion"},
+        {code: 'OLCATEGORY190719000007',name: 'Cosmetics'},
+        {code: 'OLCATEGORY190719000008',name: 'Sports'},
+        {code: 'OLCATEGORY190719000009',name: 'Entertainment'},
+        {code: 'OLCATEGORY190719000010',name: 'Digital Products'},
+        {code: 'OLCATEGORY190719000011',name: 'IP'},
+        {code: 'OLCATEGORY190719000012',name: "Women's Fashion"},
+        {code: 'OLCATEGORY190719000013',name: 'Underwear'},
+        {code: 'OLCATEGORY190719000014',name: 'Shoes/Bags'},
+        {code: 'OLCATEGORY190719000015',name: 'Jewelry/Watches'},
+        {code: 'OLCATEGORY190719000016',name: 'Accessories'},
+        {code: 'OLCATEGORY190719000017',name: 'Home/Lifestyle'},
+        {code: 'OLCATEGORY190719000018',name: 'Tourist items'},
+        {code: 'OLCATEGORY190719000019',name: 'Health & Wellness'},
+        {code: 'OLCATEGORY190719000020',name: 'Kids & Senior Citizens'},
+        {code: 'OLCATEGORY190719000021',name: 'Fast Fashion'},
+        {code: 'OLCATEGORY190719000022',name: 'Kiosks'},
+        {code: 'OLCATEGORY190719000023',name: 'Service'}
+    )
+    
+    sessionStorage.setItem("category", JSON.stringify(category));
+}
 
 function getModalities() {
     $.ajax({

@@ -19,7 +19,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <tr>
                                 <th>楼层</th>
                                 <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #faf2cc; padding: 0;">
                                     <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
                                         <option value="90">待租90天</option>
@@ -27,6 +26,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
+                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #D5C8AA;">改造</th>
                             </tr>
                         </thead>
@@ -44,7 +44,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <tr>
                                 <th>楼层</th>
                                 <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #faf2cc; padding: 0;">
                                     <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
                                         <option value="90">待租90天</option>
@@ -52,6 +51,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
+                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #D5C8AA;">改造</th>
                                 <th>合计</th>
                             </tr>
@@ -77,7 +77,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <tr>
                                 <th>楼层</th>
                                 <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #faf2cc; padding: 0;">
                                     <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
                                         <option value="90">待租90天</option>
@@ -85,6 +84,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
+                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #D5C8AA;">改造</th>
                             </tr>
                         </thead>
@@ -102,7 +102,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <tr>
                                 <th>楼层</th>
                                 <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #faf2cc; padding: 0;">
                                     <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
                                         <option value="90">待租90天</option>
@@ -110,6 +109,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
+                                <th style="background: #ebcccc;">空铺</th>
                                 <th style="background: #D5C8AA;">改造</th>
                                 <th>合计</th>
                             </tr>
