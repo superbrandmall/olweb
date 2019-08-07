@@ -73,7 +73,7 @@ $(document).ready(function(){
         $('#nav_f_'+getURLParameter('f')).addClass('active');
 
         $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/admin/'+getURLParameter('f')+'F.png',
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
             'alt'   : getURLParameter('f')+'F',
             'usemap': '#Map_'+getURLParameter('f')+'F'
         });
@@ -84,7 +84,7 @@ $(document).ready(function(){
         getShopFloorInfo(floorDesc);
     } else {
         $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/admin/1F.png',
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/1F.png',
             'alt'   : '1F',
             'usemap': '#Map_1F'
         });
@@ -92,6 +92,11 @@ $(document).ready(function(){
             'name'  : 'Map_1F',
             'id'    : '"Map_1F'
         });
+        
+        if($('#nav_summary').hasClass('active') == false){
+            $('#nav_f_1').addClass('active');
+        }
+        
         getShopFloorInfo('一楼');
     }
 
@@ -234,29 +239,37 @@ function drawShops(){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd',
-                    selected: true
+                    fillColor: '7d9fe9',
+                    selected: true,
+                    stroke: true,
+                    strokeColor: '6a90e1'
                 };
             } else if($(el).attr('data-full') == 1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: '空铺',
                     fillColor: 'FE9E9E',
-                    selected: true
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'FE9E9E'
                 };
             } else if($(el).attr('data-full') == 2){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
                     fillColor: 'FEED99',
-                    selected: true
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'FEED99'
                 };
             } else if($(el).attr('data-full') == 3){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: '改造中',
                     fillColor: 'D5C8AA',
-                    selected: true
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'D5C8AA'
                 };
             }
             
@@ -278,9 +291,9 @@ function drawShops(){
         onShowToolTip: function () {
             $(".mapster_tooltip").css({
                 "font-weight": "bold",
-                "color": "#fff",
-                "background": "rgba(0,0,0,0.8)",
-                "font-size": "26px",
+                "color": "#a3aec2",
+                "background": "rgba(28,34,56,1)",
+                "font-size": "22px",
                 "width": "auto"
             });
 
@@ -297,44 +310,47 @@ function drawShops(){
         $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
     }
     
-    setTimeout(function () {
-        var pos, brand;
-        $('map area').each(function(i,elem){
-            if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
-                pos = $(this).attr('coords').split(',');
-                var x = 0;
-                var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft;
-                while(x < pos.length){
-                    if(parseInt(pos[x]) < posLeftMin){
-                        posLeftMin = parseInt(pos[x]);
-                    } 
-                    
-                    if(parseInt(pos[x]) > posLeftMax){
-                        posLeftMax = parseInt(pos[x]);
-                    }
-                    x = x + 2;
-                }
-                posLeft = parseInt((posLeftMin + posLeftMax) / 2);
+    
+    if(document.body.clientWidth > 1000){
+        setTimeout(function () {
+            var pos, brand;
+            $('map area').each(function(i,elem){
+                if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
+                    pos = $(this).attr('coords').split(',');
+                    var x = 0;
+                    var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft;
+                    while(x < pos.length){
+                        if(parseInt(pos[x]) < posLeftMin){
+                            posLeftMin = parseInt(pos[x]);
+                        } 
 
-                var y = 1;
-                var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
-                while(y < pos.length){
-                    if(parseInt(pos[y]) < posTopMin){
-                        posTopMin = parseInt(pos[y]);
+                        if(parseInt(pos[x]) > posLeftMax){
+                            posLeftMax = parseInt(pos[x]);
+                        }
+                        x = x + 2;
                     }
-                    if(parseInt(pos[y]) > posTopMax){
-                        posTopMax = parseInt(pos[y]);
+                    posLeft = parseInt((posLeftMin + posLeftMax) / 2);
+
+                    var y = 1;
+                    var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
+                    while(y < pos.length){
+                        if(parseInt(pos[y]) < posTopMin){
+                            posTopMin = parseInt(pos[y]);
+                        }
+                        if(parseInt(pos[y]) > posTopMax){
+                            posTopMax = parseInt(pos[y]);
+                        }
+                        y = y + 2;
                     }
-                    y = y + 2;
+                    posTop = parseInt((posTopMin + posTopMax) / 2 + 30);
+                    brand = $(this).attr('name');
+                    $(this).after(
+                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 6px; width: 45px; word-break: break-all;">'+brand+'</span>'
+                    );
                 }
-                posTop = parseInt((posTopMin + posTopMax) / 2 + 30);
-                brand = $(this).attr('name');
-                $(this).after(
-                    '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 6px; width: 45px; word-break: break-all;">'+brand+'</span>'
-                );
-            }
-        });
-    },1000);
+            });
+        },1000);
+    }
 }
 
 function GetShopInfo(sc){

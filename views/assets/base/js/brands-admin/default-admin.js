@@ -5,11 +5,17 @@ var year = d.getFullYear();
 $(document).ready(function(){
     var pendDays = 90;
     
-    //if (!sessionStorage.getItem("brandSummaryInfos") || sessionStorage.getItem("brandSummaryInfos") == null || sessionStorage.getItem("brandSummaryInfos") == '') {
+    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180604000001') {
+        var items = getURLParameter('items') || $('.bootstrap-table .page-size:first').text();
+                    
+        if(getURLParameter('page') && getURLParameter('page') >= 1){
+            ShowBrandsAdmin(getURLParameter('page'),items);
+        } else {
+            ShowBrandsAdmin(1,items);
+        }
+    } else {
         findBrandDashboard(pendDays);
-    /*} else {
-        getBrandDashboard();
-    }*/
+    }
     
     if(getURLParameter('delete')) {
         switch (getURLParameter('delete')) {
@@ -124,8 +130,7 @@ function ShowBrands(p,c,u){
                 
                 if(response.data.content.length > 0) { 
                     var pages =  response.data.totalPages;
-                    var itm = getURLParameter('items');
-                    generatePages(p, pages, itm);
+                    generatePages(p, pages, c);
                     
                     var updateL;
                     var updateS;
@@ -290,4 +295,125 @@ function refineDeleteUrl() {
     var value = url.substring(url.lastIndexOf('/') + 1);
     value  = value.split("&delete")[0];   
     return value;     
+}
+
+
+function ShowBrandsAdmin(p,c){
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brandCompany/findAll?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) { 
+                    var pages =  response.data.totalPages;
+                    generatePages(p, pages, c);
+                    
+                    var deleteL;
+                    var deleteS;
+                    $.each(response.data.content, function(i,v){
+                        deleteL = '<a href=\'javascript: deleteBrandAdmin("'+v.code+'");\' class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>';
+                        deleteS = '<a href=\'javascript: deleteBrandAdmin("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>';
+                        
+
+                        $('#brandsL').append('\
+<tr data-index="'+i+'">\n\
+<td><a href="/brands-admin/edit-brand?id='+v.code+'" title="Update">'+v.name+'</a></td>\n\
+<td>'+v.bigModality+'</td>\n\
+<td>'+v.littleModality+'</td>\n\
+<td>'+v.enterYear+'</td>\n\
+<td>'+v.city+'</td>\n\
+<td>'+v.firstMall+'</td>\n\
+<td>'+v.firstMemo+'</td>\n\
+<td>'+v.floorCode +'</td>\n\
+<td>'+deleteL +'</td>\n\
+</tr>');
+                        
+                        $('#brandsS').append('\
+<tr data-index="'+i+'">\n\
+<td colspan="65">\n\
+<div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value"><a href="/brands-admin/edit-brand?id='+v.code+'" title="Update">'+v.name+'</a></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value">'+v.bigModality+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">细分业态</span><span class="value">'+v.littleModality+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">进入年份</span><span class="value">'+v.enterYear+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">城市</span><span class="value">'+v.city+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">首店进驻Mall</span><span class="value">'+v.firstMall+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">首店情况</span><span class="value">'+v.firstMemo+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">所在楼层</span><span class="value">'+v.floorCode+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">删除</span><span class="value">'+deleteS+'</span></div></div>\n\
+</td></tr>');
+
+                    });
+                    
+                    if(p == pages){
+                        $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
+                    } else {
+                        $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
+                    }
+                }
+            } 
+        }
+    });
+}
+
+function deleteBrandAdmin(id) {
+    var items = getURLParameter('items') || $('.bootstrap-table .page-size:first').text();
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew + "/onlineleasing-customer/api/brandCompany/deleteBrand?code=" + id,
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function (request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(getURLParameter('page') && getURLParameter('page') >= 1){
+                    window.location.href = '?page'+getURLParameter('page')+'&items='+items+'&delete=succeed';
+                } else {
+                    window.location.href = '?items='+items+'&delete=succeed';
+                }
+            } else {
+                if(getURLParameter('page') && getURLParameter('page') >= 1){
+                    window.location.href = '?page'+getURLParameter('page')+'&items='+items+'&delete=fail';
+                } else {
+                    window.location.href = '?items='+items+'&delete=fail';
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            if(getURLParameter('page') && getURLParameter('page') >= 1){
+                window.location.href = '?page'+getURLParameter('page')+'&items='+items+'&delete=fail';
+            } else {
+                window.location.href = '?items='+items+'&delete=fail';
+            }
+        }
+    });
 }

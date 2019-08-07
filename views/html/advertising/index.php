@@ -21,12 +21,12 @@
     </div>
 </div>
 
-<div id="fh5co-tours" class="fh5co-section-gray">
+<div id="fh5co-tours" class="fh5co-section-gray" style="background-color: #464034;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center heading-section animate-box">
-                <h3>广告位类型</h3>
-                <p>正大广场共计有16种广告媒体形式，分布于客流密集的场内区域及陆家嘴核心户外位置，可为各行业广告主提供灵活多样、高曝光率的精准投放服务。</p>
+                <h3 style="color: #fff;">广告位类型</h3>
+                <p style="color: #fff;">正大广场共计有16种广告媒体形式，分布于客流密集的场内区域及陆家嘴核心户外位置，可为各行业广告主提供灵活多样、高曝光率的精准投放服务。</p>
             </div>
         </div>
         <div class="row">

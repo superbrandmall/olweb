@@ -69,7 +69,13 @@
 
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="/views/assets/base/img/content/brands-admin/avatar.png" class="user-image" alt="User Image">
+                                    <?php
+                                    if(isset($_SESSION['brands_admin_name']) && $_SESSION['brands_admin_name'] != '管理员') {
+                                        echo '<img src="/views/assets/base/img/content/brands-admin/'.$_SESSION['brands_admin_login'].'.jpg" class="user-image" alt="'.$_SESSION['brands_admin_name'].'">';
+                                    } else {
+                                        echo '<img src="/views/assets/base/img/content/brands-admin/avatar.png" class="user-image" alt="User Image">';
+                                    }
+                                    ?>
                                     <span class="hidden-xs">
                                         <?php
                                         if(isset($_SESSION['brands_admin_name'])) {
@@ -81,6 +87,9 @@
                                         <b class="caret"></b></span>
                                 </a>
                                 <ul class="dropdown-menu">
+                                <?php
+                                if(isset($_SESSION['brands_admin_name']) && $_SESSION['brands_admin_name'] != '管理员') {
+                                ?>
                                     <li>
                                         <a href="/brands-admin/reset">
                                             <i class="fa fa-asterisk fa-fw"></i>
@@ -88,6 +97,9 @@
                                         </a>
                                     </li>
                                     <li class="divider"></li>
+                                <?php
+                                }
+                                ?>
                                     <li>
                                         <a href="javascript: logout();" title="登出">
                                             <i class="fa fa-sign-out fa-fw"></i>

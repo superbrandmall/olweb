@@ -12,33 +12,18 @@ var stores_3_units_total = 0;
 
 $(document).ready(function(){
     $('#nav_summary').addClass('active');
-    
+
     var floorDesc = ['九楼','八楼','七楼','六楼','五楼','四楼','三楼','二楼','一楼','负一楼'];
-    /*var space = [2600,2825];
-    for(var i=0;i<2;i++){
-        $('#summary_area_percentage tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'%</td><td style="background: #ebcccc;">'+0+'%</td><td style="background: #faf2cc;">'+0+'%</td><td style="background: #D5C8AA;">'+100+'%</td></tr>');
-        $('#summary_area tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'m<sup>2</sup></td><td style="background: #ebcccc;">'+0+'m<sup>2</sup></td><td style="background: #faf2cc;">'+0+'m<sup>2</sup></td><td style="background: #D5C8AA;">'+space[i]+'m<sup>2</sup></td><td>'+space[i]+'m<sup>2</sup></td></tr>');
-        stores_3_total = Math.round(stores_3_total + space[i]);
-        stores_total = Math.round(stores_total + space[i]);
-        
-        $('#summary_units_percentage tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'%</td><td style="background: #ebcccc;">'+0+'%</td><td style="background: #faf2cc;">'+0+'%</td><td style="background: #D5C8AA;">'+100+'%</td></tr>');
-        $('#summary_units tbody').append('<tr><td>'+floorDesc[i]+'</td><td style="background: #dff0d8;">'+0+'个</td><td style="background: #ebcccc;">'+0+'个</td><td style="background: #faf2cc;">'+0+'个</td><td style="background: #D5C8AA;">1个</td><td>1个</td></tr>');
-        stores_3_units_total++;
-        stores_units_total++;
-    }                
-    for(var i=2;i<11;i++){
-        getFloorsRentalInfo(floorDesc[i]);
-    }*/
     
     for(var i=0;i<10;i++){
         getFloorsRentalInfo(floorDesc[i]);
     }
     
-    $('#summary_area tbody').append('<tr><td>合计</td><td style="background: #dff0d8;">'+stores_0_total+'m<sup>2</sup></td><td style="background: #faf2cc;">'+stores_2_total+'m<sup>2</sup></td><td style="background: #ebcccc;">'+stores_1_total+'m<sup>2</sup></td><td style="background: #D5C8AA;">'+stores_3_total+'m<sup>2</sup></td><td>'+stores_total+'m<sup>2</sup></td></tr>');
-    $('#summary_area_percentage tbody').append('<tr><td>合计</td><td style="background: #dff0d8;">'+Math.round(stores_0_total/stores_total*100)+'%</td><td style="background: #faf2cc;">'+Math.round(stores_2_total/stores_total*100)+'%</td><td style="background: #ebcccc;">'+Math.round(100-Math.round(stores_0_total/stores_total*100)-Math.round(stores_2_total/stores_total*100)-Math.round(stores_3_total/stores_total*100))+'%</td><td style="background: #D5C8AA;">'+Math.round(stores_3_total/stores_total*100)+'%</td></tr>');
+    $('#summary_area tbody').append('<tr><td>合计</td><td>'+stores_0_total+'m<sup>2</sup></td><td>'+stores_2_total+'m<sup>2</sup></td><td>'+stores_1_total+'m<sup>2</sup></td><td>'+stores_3_total+'m<sup>2</sup></td><td>'+stores_total+'m<sup>2</sup></td></tr>');
+    $('#summary_area_percentage tbody').append('<tr><td>合计</td><td>'+Math.round(stores_0_total/stores_total*100)+'%</td><td>'+Math.round(stores_2_total/stores_total*100)+'%</td><td>'+Math.round(100-Math.round(stores_0_total/stores_total*100)-Math.round(stores_2_total/stores_total*100)-Math.round(stores_3_total/stores_total*100))+'%</td><td>'+Math.round(stores_3_total/stores_total*100)+'%</td></tr>');
 
-    $('#summary_units tbody').append('<tr><td>合计</td><td style="background: #dff0d8;">'+stores_0_units_total+'个</td><td style="background: #faf2cc;">'+stores_2_units_total+'个</td><td style="background: #ebcccc;">'+stores_1_units_total+'个</td><td style="background: #D5C8AA;">'+stores_3_units_total+'个</td><td>'+stores_units_total+'个</td></tr>');
-    $('#summary_units_percentage tbody').append('<tr><td>合计</td><td style="background: #dff0d8;">'+Math.round(stores_0_units_total/stores_units_total*100)+'%</td><td style="background: #faf2cc;">'+Math.round(stores_2_units_total/stores_units_total*100)+'%</td><td style="background: #ebcccc;">'+Math.round(100-Math.round(stores_0_units_total/stores_units_total*100)-Math.round(stores_2_units_total/stores_units_total*100)-Math.round(stores_3_units_total/stores_units_total*100))+'%</td><td style="background: #D5C8AA;">'+Math.round(stores_3_units_total/stores_units_total*100)+'%</td></tr>');
+    $('#summary_units tbody').append('<tr><td>合计</td><td>'+stores_0_units_total+'个</td><td>'+stores_2_units_total+'个</td><td>'+stores_1_units_total+'个</td><td>'+stores_3_units_total+'个</td><td>'+stores_units_total+'个</td></tr>');
+    $('#summary_units_percentage tbody').append('<tr><td>合计</td><td>'+Math.round(stores_0_units_total/stores_units_total*100)+'%</td><td>'+Math.round(stores_2_units_total/stores_units_total*100)+'%</td><td>'+Math.round(100-Math.round(stores_0_units_total/stores_units_total*100)-Math.round(stores_2_units_total/stores_units_total*100)-Math.round(stores_3_units_total/stores_units_total*100))+'%</td><td>'+Math.round(stores_3_units_total/stores_units_total*100)+'%</td></tr>');
 
     if(getURLParameter('expire') && getURLParameter('expire') != '') {
         $('select[name=days-before-expiration]').val(getURLParameter('expire'));
@@ -130,11 +115,11 @@ function getFloorsRentalInfo(fl) {
                 var renovation_units = (Math.round(stores_3_units/stores_units*100) || '0');
                 var empty_units = (Math.round(100-leased_units-toBeLeased_units-renovation_units));
                         
-                $('#summary_area_percentage tbody').append('<tr><td>'+fl+'</td><td style="background: #dff0d8;">'+leased+'%</td><td style="background: #faf2cc;">'+toBeLeased+'%</td><td style="background: #ebcccc;">'+empty+'%</td><td style="background: #D5C8AA;">'+renovation+'%</td></tr>');
-                $('#summary_area tbody').append('<tr><td>'+fl+'</td><td style="background: #dff0d8;">'+Math.round(stores_0)+'m<sup>2</sup></td><td style="background: #faf2cc;">'+Math.round(stores_2)+'m<sup>2</sup></td><td style="background: #ebcccc;">'+Math.round(stores_1)+'m<sup>2</sup></td><td style="background: #D5C8AA;">'+Math.round(stores_3)+'m<sup>2</sup></td><td>'+Math.round(stores)+'m<sup>2</sup></td></tr>');
+                $('#summary_area_percentage tbody').append('<tr><td>'+fl+'</td><td>'+leased+'%</td><td>'+toBeLeased+'%</td><td>'+empty+'%</td><td>'+renovation+'%</td></tr>');
+                $('#summary_area tbody').append('<tr><td>'+fl+'</td><td>'+Math.round(stores_0)+'m<sup>2</sup></td><td>'+Math.round(stores_2)+'m<sup>2</sup></td><td>'+Math.round(stores_1)+'m<sup>2</sup></td><td>'+Math.round(stores_3)+'m<sup>2</sup></td><td>'+Math.round(stores)+'m<sup>2</sup></td></tr>');
                 
-                $('#summary_units_percentage tbody').append('<tr><td>'+fl+'</td><td style="background: #dff0d8;">'+leased_units+'%</td><td style="background: #faf2cc;">'+toBeLeased_units+'%</td><td style="background: #ebcccc;">'+empty_units+'%</td><td style="background: #D5C8AA;">'+renovation_units+'%</td></tr>');
-                $('#summary_units tbody').append('<tr><td>'+fl+'</td><td style="background: #dff0d8;">'+Math.round(stores_0_units)+'个</td><td style="background: #faf2cc;">'+Math.round(stores_2_units)+'个</td><td style="background: #ebcccc;">'+Math.round(stores_1_units)+'个</td><td style="background: #D5C8AA;">'+Math.round(stores_3_units)+'个</td><td>'+Math.round(stores_units)+'个</td></tr>');
+                $('#summary_units_percentage tbody').append('<tr><td>'+fl+'</td><td>'+leased_units+'%</td><td>'+toBeLeased_units+'%</td><td>'+empty_units+'%</td><td>'+renovation_units+'%</td></tr>');
+                $('#summary_units tbody').append('<tr><td>'+fl+'</td><td>'+Math.round(stores_0_units)+'个</td><td>'+Math.round(stores_2_units)+'个</td><td>'+Math.round(stores_1_units)+'个</td><td>'+Math.round(stores_3_units)+'个</td><td>'+Math.round(stores_units)+'个</td></tr>');
                 
                 stores_total = Math.round(stores_total + stores);
                 stores_0_total = Math.round(stores_0_total + stores_0);

@@ -5,7 +5,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div style="max-width: 320px; margin: 0 auto;">
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">管理员登录</h3>

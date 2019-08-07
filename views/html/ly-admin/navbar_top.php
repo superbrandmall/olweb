@@ -6,14 +6,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="home">
+        <a class="navbar-brand" href="home" style="color: #38a2a5;">
             <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="25" style="display: inline-block;" /> FLOOR PLANS
         </a>
     </div>
 
     <ul class="nav navbar-top-links navbar-right">
         <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #718197;">
                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
@@ -25,7 +25,7 @@
             </ul>
         </li>
         <li>
-            <a href="javascript: logout();" title="登出">
+            <a href="javascript: logout();" title="登出" style="color: #718197;">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
         </li>

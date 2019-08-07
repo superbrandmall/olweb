@@ -3,7 +3,7 @@
 /* ------------------------------- */
 
  body {
-    background-color: #222;
+    background-color: #1c2238;
     overflow-x: hidden;
 }
 
@@ -22,24 +22,33 @@ a, a:hover, a:focus {
 #page-wrapper {
     padding: 0 15px 30px;
     min-height: 568px;
-    background-color: #fff;
+    background-color: #252c48;
+}
+
+.navbar-inverse {
+    background-color: #111724;
+    border-color: #252c45;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #1c2238;
 }
 
 #side-menu > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
-    color: #999;
+    color: #455372;
 }
 
 #side-menu {
-    background-color: #222;
+    background-color: #1c2238;
 }
 
 #side-menu > .active > a,
 #side-menu > li > a:hover, 
 #side-menu > li > a:focus {
-    color: #ffffff;
-    background-color: #080808;
+    color: #91a3ba;
+    background-color: #3b6eb1;
 }
 
 .thumbnail {

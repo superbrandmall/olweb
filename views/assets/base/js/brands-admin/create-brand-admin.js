@@ -21,13 +21,15 @@ $(document).ready(function(){
         },1000);
     }
     
-    if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 1) {
-        getALLNewCategory();
-    } else {
-        getNewCategory();
-    }
+    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180604000001') {
+        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 1) {
+            getALLNewCategory();
+        } else {
+            getNewCategory();
+        }
     
-    getBrandModality1();
+        getBrandModality1();
+    }
     
     /*$('#brand_name').blur(function(){
         if($('#brand_name').val() != ''){
@@ -43,93 +45,116 @@ $(document).ready(function(){
         getBrandModality3($(this).val());
     })
     
-    $("#create-form").validate({
-        rules: {
-            brand_name: {
-                required: true,
-                minlength: 2
+    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180604000001') {
+        $("#create-form").validate({
+            rules: {
+                brand_name: {
+                    required: true,
+                    minlength: 2
+                }
             },
-            contact_name_1: {
-                required: true
+            messages: {
+                brand_name: {
+                    required: "请输入品牌名称",
+                    minlength: "请输入完整品牌名称"
+                }
             },
-            contact_phone_1: {
-                required: true
+            errorPlacement: function(error, element) {
+                error.appendTo('#errorcontainer-' + element.attr('id'));
             },
-            company_name: {
-                required: true
-            },
-            title: {
-                required: true
-            },
-            new_category: {
-                required: true
-            },
-            modality_1: {
-                required: true
-            },
-            modality_2: {
-                required: true
-            },
-            modality_3: {
-                required: true
-            },
-            name_eng: {
-                minlength: 2
-            },
-            city: {
-                minlength: 2
-            },
-            average_unit_price: {
-                number: true
+            submitHandler: function() {
+                addBrandAdmin();
             }
-        },
-        messages: {
-            brand_name: {
-                required: "请输入品牌名称",
-                minlength: "请输入完整品牌名称"
+        });
+    } else {
+        $("#create-form").validate({
+            rules: {
+                brand_name: {
+                    required: true,
+                    minlength: 2
+                },
+                contact_name_1: {
+                    required: true
+                },
+                contact_phone_1: {
+                    required: true
+                },
+                company_name: {
+                    required: true
+                },
+                title: {
+                    required: true
+                },
+                new_category: {
+                    required: true
+                },
+                modality_1: {
+                    required: true
+                },
+                modality_2: {
+                    required: true
+                },
+                modality_3: {
+                    required: true
+                },
+                name_eng: {
+                    minlength: 2
+                },
+                city: {
+                    minlength: 2
+                },
+                average_unit_price: {
+                    number: true
+                }
             },
-            contact_name_1: {
-                required: "请输入联系人姓名"
+            messages: {
+                brand_name: {
+                    required: "请输入品牌名称",
+                    minlength: "请输入完整品牌名称"
+                },
+                contact_name_1: {
+                    required: "请输入联系人姓名"
+                },
+                contact_phone_1: {
+                    required: "请输入联系人电话"
+                },
+                company_name: {
+                    required: "请输入联系人公司"
+                },
+                title: {
+                    required: "请输入联系人职位"
+                },
+                new_category: {
+                    required: "请选择新业态"
+                },
+                modality_1: {
+                    required: "请选择一级业态"
+                },
+                modality_2: {
+                    required: "请选择二级业态"
+                },
+                modality_3: {
+                    required: "请选择三级业态"
+                },
+                name_eng: {
+                    minlength: "请输入完整品牌英文名称"
+                },
+                city: {
+                    minlength: "请输入完整城市名称"
+                },
+                average_unit_price: {
+                    number: "请正确输入客单价"
+                }
             },
-            contact_phone_1: {
-                required: "请输入联系人电话"
+            errorPlacement: function(error, element) {
+                error.appendTo('#errorcontainer-' + element.attr('id'));
             },
-            company_name: {
-                required: "请输入联系人公司"
-            },
-            title: {
-                required: "请输入联系人职位"
-            },
-            new_category: {
-                required: "请选择新业态"
-            },
-            modality_1: {
-                required: "请选择一级业态"
-            },
-            modality_2: {
-                required: "请选择二级业态"
-            },
-            modality_3: {
-                required: "请选择三级业态"
-            },
-            name_eng: {
-                minlength: "请输入完整品牌英文名称"
-            },
-            city: {
-                minlength: "请输入完整城市名称"
-            },
-            average_unit_price: {
-                number: "请正确输入客单价"
+            submitHandler: function() {
+                //findBrandDashboard($('#brand_name').val());
+                checkBrand();
             }
-        },
-        errorPlacement: function(error, element) {
-            error.appendTo('#errorcontainer-' + element.attr('id'));
-        },
-        submitHandler: function() {
-            //findBrandDashboard($('#brand_name').val());
-            checkBrand();
-        }
-    });
+        });
+    }
     
     $('#logo').on("change", function () {
         var formData = new FormData();
@@ -388,6 +413,66 @@ function addBrand() {
 
         $.ajax({
             url: $.api.baseNew+"/onlineleasing-customer/api/brand/addBrand",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    window.location.href = 'create-brand?s=succeed';
+                } else {
+                    console.log(response.customerMessage);
+                    window.location.href = 'create-brand?s=fail';
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+                window.location.href = 'create-brand?s=fail';
+            }
+        });
+    }
+}
+
+function addBrandAdmin() {
+    var name = $('#brand_name').val();
+    var littleModality = $('#detailed_category').val() || null;
+    var floorCode = $('#floor').val() || null;
+    var firstMemo = $('#if_first').val() || null;
+    var firstMall = $('#mall').val() || null;
+    var enterYear = $('#entered_year').val() || null;
+    var city = $('#city').val() || null;
+    var bigModality = $('#category').val() || null;
+
+    if(name != ''){
+        var map = {
+            "bigModality": bigModality,
+            "city": city,
+            "enterYear": enterYear,
+            "firstMall": firstMall,
+            "firstMemo": firstMemo,
+            "floorCode": floorCode,
+            "littleModality": littleModality,
+            "name": name,
+            "state": 1,
+            "status": 1,
+        };
+
+        $.ajax({
+            url: $.api.baseNew+"/onlineleasing-customer/api/brandCompany/save",
             type: "POST",
             data: JSON.stringify(map),
             async: false,

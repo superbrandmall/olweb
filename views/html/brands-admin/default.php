@@ -10,7 +10,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             所有品牌
         </h1>
         <div class="pull-right">
-            <a href="/brands-admin/create-brand" class="btn btn-primary pull-right"></i> 新增</a>
+            <a href="/brands-admin/create-brand" class="btn btn-primary pull-right">
+                新增
+            </a>
         </div>
     </section>
 
@@ -23,7 +25,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </div>
                 </div>
             </div>
-            
+           
+        <?php
+            if(isset($_SESSION['brands_admin_name']) && $_SESSION['brands_admin_name'] != '管理员') {
+        ?>
             <div class="row">
                 <div class="col-lg-4 col-xs-4">
                     <div class="small-box bg-teal">
@@ -64,6 +69,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </div>
                 </div>
             </div>
+        <?php
+            }
+        ?>
             
             <div class="row">
                 <div class="col-md-12">
@@ -99,6 +107,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                     <table class="table table-striped snipe-table table-responsive table-no-bordered" style="margin-top: 0">
                                                         <thead id="assetsListingTable-sticky-header" class="hidden-xs">
                                                             <tr>
+                                                            <?php
+                                                                if(isset($_SESSION['brands_admin_name']) && $_SESSION['brands_admin_name'] != '管理员') {
+                                                            ?>
                                                                 <th>
                                                                     <div class="th-inner">品牌</div>
                                                                     <div class="fht-cell"></div>
@@ -131,6 +142,48 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                     <div class="th-inner">操作</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
+                                                            <?php
+                                                                } else {
+                                                            ?>
+                                                                <th>
+                                                                    <div class="th-inner">品牌</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">业态</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">细分业态</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">进入年份</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">城市</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">首店进驻Mall</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">首店情况</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">所在楼层</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                                <th>
+                                                                    <div class="th-inner">删除</div>
+                                                                    <div class="fht-cell"></div>
+                                                                </th>
+                                                            <?php
+                                                                }
+                                                            ?>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="brandsL" class="hidden-xs"></tbody>

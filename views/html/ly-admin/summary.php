@@ -5,7 +5,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <?php include ('navbar_side.php'); ?>
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="color: #a1a1b0;">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Venue Rental Summary by Area</h1>
@@ -18,16 +18,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <thead>
                             <tr>
                                 <th>楼层</th>
-                                <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #faf2cc; padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
+                                <th>在租</th>
+                                <th style="padding: 0;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
-                                <th style="background: #ebcccc;">空铺</th>
-                                <th style="background: #D5C8AA;">改造</th>
+                                <th>空铺</th>
+                                <th>改造</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,16 +43,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <thead>
                             <tr>
                                 <th>楼层</th>
-                                <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #faf2cc; padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
+                                <th>在租</th>
+                                <th style="padding: 0;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
-                                <th style="background: #ebcccc;">空铺</th>
-                                <th style="background: #D5C8AA;">改造</th>
+                                <th>空铺</th>
+                                <th>改造</th>
                                 <th>合计</th>
                             </tr>
                         </thead>
@@ -76,16 +76,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <thead>
                             <tr>
                                 <th>楼层</th>
-                                <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #faf2cc; padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
+                                <th>在租</th>
+                                <th style="padding: 0;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
-                                <th style="background: #ebcccc;">空铺</th>
-                                <th style="background: #D5C8AA;">改造</th>
+                                <th>空铺</th>
+                                <th>改造</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,16 +101,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <thead>
                             <tr>
                                 <th>楼层</th>
-                                <th style="background: #dff0d8;">在租</th>
-                                <th style="background: #faf2cc; padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="background: #faf2cc; border: 0 none; box-shadow: none;">
+                                <th>在租</th>
+                                <th style="padding: 0;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
                                     </select>
                                 </th>
-                                <th style="background: #ebcccc;">空铺</th>
-                                <th style="background: #D5C8AA;">改造</th>
+                                <th>空铺</th>
+                                <th>改造</th>
                                 <th>合计</th>
                             </tr>
                         </thead>

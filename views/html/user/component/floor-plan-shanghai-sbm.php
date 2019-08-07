@@ -17,21 +17,20 @@ session_start();
 include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 ?>
 
-<div style="margin: 50px 50px 20px; color: #6d6d73;">
+<div style="margin: 50px 50px 20px; color: #333333;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
-    <span style="margin-left: 10px; background-color: #E3E3E3; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['floor_shop_in_renting'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_info_desk'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_bathroom'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_downstairs'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -179px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_upstairs'] ?>
-    <span style="margin-left: 10px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_entrance'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -89px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_info_desk'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -119px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_bathroom'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -149px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_downstairs'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -178px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_go_upstairs'] ?>
+    <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -208px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_entrance'] ?>
 </div>
 <div class="col-md-12">
     <center>
-        <img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $lang['mall_lang_cat'] ?>/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
+        <img src="views/assets/base/img/content/floor-plan/shanghai-sbm/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
         <map name="Map_<?= $i ?>F" id="Map_<?= $i ?>F"></map>
     </center>
 </div>
@@ -119,7 +118,10 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd'
+                    fillColor: '7d9fe9',
+                    fillOpacity: 1,
+                    strokeColor: '6a90e1',
+                    strokeWidth: 1
                 };
             }
         });
@@ -128,10 +130,10 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
         var yOffset;
 
         $('#floor_map_F').find('img').mapster({
-            fillColor: 'c9ae89',
-            fillOpacity: 0.8,
-            strokeColor: 'ffd62c',
-            strokeWidth: 0,
+            fillColor: '7d9fe9',
+            fillOpacity: 1,
+            strokeColor: '6a90e1',
+            strokeWidth: 1,
             clickNavigate: true,
             mapKey: 'data-key',
             showToolTip: true,
@@ -140,8 +142,8 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                 $(".mapster_tooltip").css({
                     "font-weight": "bold",
                     "color": "#fff",
-                    "background": "rgba(0,0,0,0.8)",
-                    "font-size": "26px",
+                    "background": "rgba(28,34,56,1)",
+                    "font-size": "22px",
                     "width": "auto"
                 });
                 
