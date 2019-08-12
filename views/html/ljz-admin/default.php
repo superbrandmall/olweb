@@ -62,10 +62,10 @@
         <div class="modal-content c-square">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span></button>
+                    <span aria-hidden="true" style="color: #ffffff;">×</span></button>
                 <h4 class="modal-title" id="brand_name"></h4>
             </div>
-            <div class="modal-body" style="overflow: auto;">
+            <div class="modal-body">
                 <form>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -127,7 +127,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer" style="text-align: left;">
+            <div class="modal-footer">
                 <div class="col-md-6">
                     <div class="form-group">
                         <span class="control-label">单元号:</span>

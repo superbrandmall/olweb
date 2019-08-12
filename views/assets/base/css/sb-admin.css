@@ -398,6 +398,9 @@ label.error {
 .badge {
     padding: 5px 15px;
     font-weight: normal;
+    background-color: #508dd4;
+    border-color: #508dd4;
+    color: #ffffff;
 }
 
 .badge-success {
@@ -428,4 +431,26 @@ label.error {
     background-color: #BCAC85;
     border-color: #BCAC85;
     color: #fff;
+}
+
+.modal-content {
+    background-color: #252c47; 
+    color: #8f9aaf;
+}
+
+.modal-content strong {
+    color: #508dd4;
+}
+
+.modal-header {
+    border-bottom-color: #1c2237;
+}
+
+.modal-body {
+    overflow: auto;
+}
+
+.modal-footer {
+    text-align: left; 
+    border-top-color: #1c2237;
 }

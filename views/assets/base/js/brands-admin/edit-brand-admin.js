@@ -21,8 +21,8 @@ $(document).ready(function(){
         },1000);
     }
     
-    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180604000001') {
-        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 1) {
+    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180912000001') {
+        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
             getALLNewCategory();
         } else {
             getNewCategory();
@@ -42,7 +42,7 @@ $(document).ready(function(){
         getBrandModality3($(this).val());
     })
     
-    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180604000001') {
+    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180912000001') {
         $("#edit-form").validate({
             rules: {
                 brand_name: {
@@ -147,7 +147,7 @@ $(document).ready(function(){
                 error.appendTo('#errorcontainer-' + element.attr('id'));
             },
             submitHandler: function() {
-                editBrand();
+                CheckBrandStatus(getURLParameter('id'));
             }
         });
     }
@@ -303,6 +303,40 @@ function findOneBrandByCode(id) {
                 if(brand.logo != null){
                     $('#imagePreview').attr('src',brand.logo);
                 }
+            } else {
+                console.log(response.customerMessage);
+            }                               
+        }
+    }); 
+}
+
+function CheckBrandStatus(id) {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brand/findOneByCode/"+id,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var brand = response.data;
+                
+                if(brand.status != 0){
+                    editBrand();
+                } else {
+                    window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=fail';
+                }
+                
+                
             } else {
                 console.log(response.customerMessage);
             }                               

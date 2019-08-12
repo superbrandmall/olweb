@@ -10,7 +10,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             修改品牌
         </h1>
         <div class="pull-right">
-            <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
+            <a href="brands-admin/" class="btn btn-primary pull-right">
                 返回
             </a>
         </div>

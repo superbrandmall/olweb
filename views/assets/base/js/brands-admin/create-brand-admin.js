@@ -21,8 +21,8 @@ $(document).ready(function(){
         },1000);
     }
     
-    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180604000001') {
-        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 1) {
+    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180912000001') {
+        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
             getALLNewCategory();
         } else {
             getNewCategory();
@@ -45,7 +45,7 @@ $(document).ready(function(){
         getBrandModality3($(this).val());
     })
     
-    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180604000001') {
+    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180912000001') {
         $("#create-form").validate({
             rules: {
                 brand_name: {

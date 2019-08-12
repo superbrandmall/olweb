@@ -5,7 +5,7 @@ var year = d.getFullYear();
 $(document).ready(function(){
     var pendDays = 90;
     
-    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180604000001') {
+    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180912000001') {
         var items = getURLParameter('items') || $('.bootstrap-table .page-size:first').text();
                     
         if(getURLParameter('page') && getURLParameter('page') >= 1){
@@ -154,17 +154,22 @@ function ShowBrands(p,c,u){
                         
                         if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
                             if(v.status == 1){
-                                lockL = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockL_'+v.code+'" class="btn btn-warning btn-sm" title="Lock"><i class="fa fa-lock"></i></a>&nbsp;';
-                                lockS = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockS_'+v.code+'" class="btn btn-warning btn-xs" title="Lock"><i class="fa fa-lock"></i></a>&nbsp;';
+                                lockL = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockL_'+v.code+'" class="btn btn-success btn-sm" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
+                                lockS = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockS_'+v.code+'" class="btn btn-success btn-xs" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
                             } else {
-                                lockL = '<a href=\'javascript: lockBrand("'+v.code+'",1);\' id="lockL_'+v.code+'" class="btn btn-success btn-sm" title="Unlock"><i class="fa fa-unlock"></i></a>&nbsp;';
-                                lockS = '<a href=\'javascript: lockBrand("'+v.code+'",1);\' id="lockS_'+v.code+'" class="btn btn-success btn-xs" title="Unlock"><i class="fa fa-unlock"></i></a>&nbsp;';
+                                lockL = '<a href=\'javascript: lockBrand("'+v.code+'",1);\' id="lockL_'+v.code+'" class="btn btn-warning btn-sm" title="Unlock"><i class="fa fa-lock"></i></a>&nbsp;';
+                                lockS = '<a href=\'javascript: lockBrand("'+v.code+'",1);\' id="lockS_'+v.code+'" class="btn btn-warning btn-xs" title="Unlock"><i class="fa fa-lock"></i></a>&nbsp;';
                             }
                         }
                         
                         if(v.userCode == $.cookie('login')){
-                            updateL = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-sm btn-info" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href=\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lockL;
-                            updateS = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-xs btn-info" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href=\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lockS;
+                            if(v.status == 0){
+                                updateL = '<span class="btn btn-sm btn-warning">已锁定</span>';
+                                updateS = '<span class="btn btn-xs btn-warning">已锁定</span>';
+                            } else {
+                                updateL = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-sm btn-info" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href=\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-sm delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lockL;
+                                updateS = '<a href="/brands-admin/edit-brand?id='+v.code+'" class="btn btn-xs btn-info" data-tooltip="true" title="Update"><i class="fa fa-pencil"></i></a>&nbsp;<a href=\'javascript: deleteBrand("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lockS;
+                            }
                         } else {
                             updateL = '<a href="/brands-admin/brand?id='+v.code+'" class="btn btn-sm btn-default" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>&nbsp;'+lockL;
                             updateS = '<a href="/brands-admin/brand?id='+v.code+'" class="btn btn-xs btn-default" data-tooltip="true" title="Check"><i class="fa fa-eye"></i></a>&nbsp;'+lockS;
@@ -274,17 +279,17 @@ function lockBrand(id,s){
             }
             
             if(s == 0){
-                $('#lockL_'+id+',#lockS_'+id).removeClass('btn-warning').attr({
+                $('#lockL_'+id+',#lockS_'+id).removeClass('btn-success').attr({
                     'title' : 'Unlock',
                     'href'  : 'javascript: lockBrand("'+id+'",1)'
                 });
-                $('#lockL_'+id+',#lockS_'+id).addClass('btn-success').html('<i class="fa fa-unlock"></i>');
+                $('#lockL_'+id+',#lockS_'+id).addClass('btn-warning').html('<i class="fa fa-lock"></i>');
             } else {
-                $('#lockL_'+id+',#lockS_'+id).removeClass('btn-success').attr({
+                $('#lockL_'+id+',#lockS_'+id).removeClass('btn-warning').attr({
                     'title' : 'Lock',
                     'href'  : 'javascript: lockBrand("'+id+'",0)'
                 });
-                $('#lockL_'+id+',#lockS_'+id).addClass('btn-warning').html('<i class="fa fa-lock"></i>');
+                $('#lockL_'+id+',#lockS_'+id).addClass('btn-success').html('<i class="fa fa-unlock"></i>');
             }
         }
     })

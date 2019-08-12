@@ -198,7 +198,7 @@ function getShopFloorInfo(fl) {
                     }
 
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state == 1){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
 
@@ -386,10 +386,10 @@ function GetShopInfo(sc){
                         brandName = shop.brandToSign;
                         $('#brand_name').css('color','#f00');
                     } else {
-                        $('#brand_name').css('color','#333');
+                        $('#brand_name').css('color','#fff');
                     }
                 } else {
-                    $('#brand_name').css('color','#333');
+                    $('#brand_name').css('color','#fff');
                 }
                 $('#brand_name').text(brandName || '-');
                 
