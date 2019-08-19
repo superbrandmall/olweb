@@ -331,10 +331,53 @@ function drawShops(){
                         }
                         y = y + 2;
                     }
-                    posTop = parseInt((posTopMin + posTopMax) / 2 + 30);
+                    if(i % 2 == 0){
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 35);
+                    } else {
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 25);
+                    }
+                    
                     brand = $(this).attr('name');
+                    
+                    var fontSize = 6;
+                    if($(this).attr('data-area') < 25){
+                        fontSize = 4;
+                    } else if($(this).attr('data-area') >= 25 && $(this).attr('data-area') < 100){
+                        fontSize = 5;
+                    } else if($(this).attr('data-area') >= 100 && $(this).attr('data-area') < 200){
+                        fontSize = 6;
+                    } else if($(this).attr('data-area') >= 200 && $(this).attr('data-area') < 300){
+                        fontSize = 7;
+                    } else if($(this).attr('data-area') >= 300 && $(this).attr('data-area') < 400){
+                        fontSize = 8;
+                    } else if($(this).attr('data-area') >= 400 && $(this).attr('data-area') < 500){
+                        fontSize = 9;
+                    } else if($(this).attr('data-area') >= 500 && $(this).attr('data-area') < 600){
+                        fontSize = 10;
+                    } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
+                        fontSize = 11;
+                    } else if($(this).attr('data-area') >= 700 && $(this).attr('data-area') < 800){
+                        fontSize = 12;
+                    } else if($(this).attr('data-area') >= 800 && $(this).attr('data-area') < 900){
+                        fontSize = 13;
+                    } else if($(this).attr('data-area') >= 900 && $(this).attr('data-area') < 1000){
+                        fontSize = 14;
+                    } else if($(this).attr('data-area') >= 1000 && $(this).attr('data-area') < 1100){
+                        fontSize = 15;
+                    } else if($(this).attr('data-area') >= 1100 && $(this).attr('data-area') < 1200){
+                        fontSize = 16;
+                    } else if($(this).attr('data-area') >= 1200 && $(this).attr('data-area') < 1300){
+                        fontSize = 17;
+                    } else if($(this).attr('data-area') >= 1300 && $(this).attr('data-area') < 1400){
+                        fontSize = 18;
+                    } else if($(this).attr('data-area') >= 1400 && $(this).attr('data-area') < 1500){
+                        fontSize = 19;
+                    } else if($(this).attr('data-area') >= 1500){
+                        fontSize = 20;
+                    }
+                    
                     $(this).after(
-                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: 6px; width: 45px; word-break: break-all;">'+brand+'</span>'
+                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: '+fontSize+'px; word-break: break-all;">'+brand+'</span>'
                     );
                 }
             });

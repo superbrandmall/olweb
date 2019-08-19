@@ -272,36 +272,38 @@ function findOneBrandByCode(id) {
                 
                 var brand = response.data;
                 
-                $('#brand_name').val(brand.name);
-                $('#hidden_logo').val(brand.logo);
-                $('#contact_name_1').val(brand.contactName);
-                $('#contact_phone_1').val(brand.contactPhone);
-                $('#company_name').val(brand.companyName);
-                $('#title').val(brand.title);
-                $('#new_category').val(brand.newCategoryCode).trigger('change');
-                $('#modality_1').val(brand.modality1).trigger('change');
-                getBrandModality2(brand.modality1);
-                $('#modality_2').val(brand.modality2).trigger('change');
-                getBrandModality3(brand.modality2);
-                $('#modality_3').val(brand.modality3).trigger('change');
-                $('#attribute').val(brand.attribute).trigger('change');
-                $('#class').val(brand.brandClass).trigger('change');
-                $('#reputation').val(brand.reputation).trigger('change');
-                $('#market_share').val(brand.marketShare);
-                $('#name_eng').val(brand.nameEng);
-                $('#location').val(brand.location).trigger('change');
-                $('#standard_area').val(brand.standardArea).trigger('change');
-                $('#target').val(brand.target).trigger('change');
-                $('#city').val(brand.city);
-                $('#history').val(brand.history).trigger('change');
-                $('#rank').val(brand.rank);
-                $('#shop_amount').val(brand.shopAmount).trigger('change');
-                $('#compare').val(brand.compare).trigger('change');
-                $('#average_unit_price').val(brand.averageUnitPrice);
-                $('#joined').val(brand.joined).trigger('change');
-                
-                if(brand.logo != null){
-                    $('#imagePreview').attr('src',brand.logo);
+                if(brand.state == 1 && brand.hdState == 'created' && brand.userCode == $.cookie('uid')) {
+                    $('#brand_name').val(brand.name);
+                    $('#hidden_logo').val(brand.logo);
+                    $('#contact_name_1').val(brand.contactName);
+                    $('#contact_phone_1').val(brand.contactPhone);
+                    $('#company_name').val(brand.companyName);
+                    $('#title').val(brand.title);
+                    $('#new_category').val(brand.newCategoryCode).trigger('change');
+                    $('#modality_1').val(brand.modality1).trigger('change');
+                    getBrandModality2(brand.modality1);
+                    $('#modality_2').val(brand.modality2).trigger('change');
+                    getBrandModality3(brand.modality2);
+                    $('#modality_3').val(brand.modality3).trigger('change');
+                    $('#attribute').val(brand.attribute).trigger('change');
+                    $('#class').val(brand.brandClass).trigger('change');
+                    $('#reputation').val(brand.reputation).trigger('change');
+                    $('#market_share').val(brand.marketShare);
+                    $('#name_eng').val(brand.nameEng);
+                    $('#location').val(brand.location).trigger('change');
+                    $('#standard_area').val(brand.standardArea).trigger('change');
+                    $('#target').val(brand.target).trigger('change');
+                    $('#city').val(brand.city);
+                    $('#history').val(brand.history).trigger('change');
+                    $('#rank').val(brand.rank);
+                    $('#shop_amount').val(brand.shopAmount).trigger('change');
+                    $('#compare').val(brand.compare).trigger('change');
+                    $('#average_unit_price').val(brand.averageUnitPrice);
+                    $('#joined').val(brand.joined).trigger('change');
+
+                    if(brand.logo != null){
+                        $('#imagePreview').attr('src',brand.logo);
+                    }
                 }
             } else {
                 console.log(response.customerMessage);
@@ -330,7 +332,7 @@ function CheckBrandStatus(id) {
                 
                 var brand = response.data;
                 
-                if(brand.status != 0){
+                if(brand.status != 0 && brand.state != 0 && brand.hdState != 'deleted' && brand.userCode == $.cookie('uid')){
                     editBrand();
                 } else {
                     window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=fail';

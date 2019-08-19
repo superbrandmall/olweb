@@ -17,7 +17,7 @@ session_start();
 include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 ?>
 
-<div style="margin: 50px 50px 20px; color: #333333;">
+<div style="margin: 50px 50px 20px; color: #565d66;">
     <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
     <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
     <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
@@ -121,7 +121,8 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                     fillColor: '7d9fe9',
                     fillOpacity: 1,
                     strokeColor: '6a90e1',
-                    strokeWidth: 1
+                    strokeWidth: 1,
+                    stroke: true
                 };
             }
         });
@@ -131,7 +132,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 
         $('#floor_map_F').find('img').mapster({
             fillColor: '7d9fe9',
-            fillOpacity: 1,
+            fillOpacity: 0.8,
             strokeColor: '6a90e1',
             strokeWidth: 1,
             clickNavigate: true,

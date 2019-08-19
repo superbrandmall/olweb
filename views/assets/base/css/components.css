@@ -3052,7 +3052,7 @@ h1 {
 
 .modal-content {
     overflow: auto;
-    background-color: #D3B690;
+    background: rgba(240,240,240,0.8);
     padding: 10px 0 40px;
 }
 

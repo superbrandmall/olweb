@@ -229,7 +229,7 @@ function GetMap(fn,lk,mc){
     }
     
     $('#map').attr({
-        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+$.lang.mallLangCat+'/'+fc+'F.png',
+        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+fc+'F.png',
         'alt': fc+'F',
         'usemap': '#Map_'+fc+'F_s'
      });
@@ -272,29 +272,28 @@ function drawShops(){
     var areas = $.map($('area'),function(el) {
         if(getURLParameter('id') === $(el).attr('alt')){
             return { 
-                key: $(el).attr('data-key'),
-                toolTip: $.lang.thisStore,
-                fillColor: 'c34343',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
+                    key: $(el).attr('data-key'),
+                    toolTip: $.lang.thisStore,
+                    selected: true,
+                    stroke: true,
+                    strokeColor: '6a90e1'
+                };
         } else {
             if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd'
+                    stroke: true,
+                    strokeColor: '6a90e1'
                 };
             }
-            
         }
     });
 
     $('#map').mapster({
-        fillColor: 'c9ae89',
+        fillColor: '7d9fe9',
         fillOpacity: 0.8,
-        strokeColor: 'ffd62c',
+        strokeColor: '6a90e1',
         strokeWidth: 0,
         clickNavigate: true,
         mapKey: 'data-key',
@@ -302,12 +301,12 @@ function drawShops(){
         areas:  areas,
         onShowToolTip: function () {
             $(".mapster_tooltip").css({
-                "font-weight": "bold",
-                "color": "#fff",
-                "background": "rgba(0,0,0,0.8)",
-                "font-size": "26px",
-                "width": "auto"
-            });
+                    "font-weight": "bold",
+                    "color": "#fff",
+                    "background": "rgba(28,34,56,1)",
+                    "font-size": "22px",
+                    "width": "auto"
+                });
 
             $("area").on("mouseenter",  function (data) {
                xOffset = data.pageX;

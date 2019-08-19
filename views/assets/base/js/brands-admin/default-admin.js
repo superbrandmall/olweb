@@ -77,9 +77,9 @@ function findBrandDashboard(pd) {
                     var items = getURLParameter('items') || $('.page-size').text();
                     var url = '';
                     if(response.data.userModalities[0].isComplete == 2){
-                        url = 'findAllByUserCodes';
+                        url = 'findAllByUserCodes'; // Category head 可以查看自己管理的业态，其中马云飞和宋总可以查看所有业态
                     } else {
-                        url = 'findAllByUserCode2';
+                        url = 'findAllByUserCode2'; // 其他人只能查看自己建立的品牌
                     }
                     
                     if(getURLParameter('page') && getURLParameter('page') >= 1){
