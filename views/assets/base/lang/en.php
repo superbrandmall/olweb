@@ -124,6 +124,7 @@ $lang['search_make_reservation'] = "Make a reservation";
 
 /********************** Mall ********************/
 $lang['mall_home'] = "Home";
+$lang['mall_opening_soon'] = "Opening Soon";
 $lang['mall_shanghai_brief'] = "Brief of Shanghai";
 $lang['mall_xuhui_brief'] = "Brief of Shanghai Xuhui";
 $lang['mall_luoyang_brief'] = "Brief of Luoyang";

@@ -3,6 +3,8 @@ $(document).ready(function(){
 })
 
 function findOneBrandByCode(id) {
+    $('.update-link').attr('href','/brands-admin/edit-brand?id='+id);
+    $('.delete-asset').attr('href','javascript: deleteBrand("'+id+'")');
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-customer/api/brand/findOneByCode/"+id,
         type: "GET",
@@ -20,6 +22,16 @@ function findOneBrandByCode(id) {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                var url;
+                if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2){
+                    url = 'findAllByBrandCode/'+id; // Category head 可以查看自己管理的业态，其中马云飞和宋总可以查看所有业态
+                } else {
+                    url = 'findAllByBrandCodeAndUserCode/'+id+'/'+$.cookie('uid'); // 其他人只能查看自己建立的联系人
+                }
+                
+                findContacts(url);
+                    
                 $('#loader').hide();
                 
                 var brand = response.data;
@@ -32,11 +44,11 @@ function findOneBrandByCode(id) {
                 })
                 
                 if(brand.state == 1 && brand.hdState == 'created' && (brand.userCode == $.cookie('uid') || allow == 1)) {
-                    $('#brand_name').val(brand.name);
-                    $('#contact_name_1').val(brand.contactName);
-                    $('#contact_phone_1').val(brand.contactPhone);
-                    $('#company_name').val(brand.companyName);
-                    $('#title').val(brand.title);
+                    $('#brand_name').text(brand.name);
+                    $('#contact_name_1').text(brand.contactName);
+                    $('#contact_phone_1').text(brand.contactPhone);
+                    $('#company_name').text(brand.companyName);
+                    $('#title').text(brand.title);
 
                     var attribute, category, modality1, modality2, modality3, brandClass, reputation, location, target, standardArea, history, compare, joined;
                     switch (brand.attribute) {
@@ -90,11 +102,11 @@ function findOneBrandByCode(id) {
                         });
                     });
 
-                    $('#attribute').val(attribute);
-                    $('#new_category').val(category);
-                    $('#modality_1').val(modality1);
-                    $('#modality_2').val(modality2);
-                    $('#modality_3').val(modality3);
+                    $('#attribute').text(attribute);
+                    $('#new_category').text(category);
+                    $('#modality_1').text(modality1);
+                    $('#modality_2').text(modality2);
+                    $('#modality_3').text(modality3);
 
                     switch (brand.brandClass) {
                         case 1:
@@ -126,10 +138,10 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#class').val(brandClass);
-                    $('#reputation').val(reputation);
-                    $('#market_share').val(brand.marketShare);
-                    $('#name_eng').val(brand.nameEng);
+                    $('#class').text(brandClass);
+                    $('#reputation').text(reputation);
+                    $('#market_share').text(brand.marketShare);
+                    $('#name_eng').text(brand.nameEng);
 
                     switch (brand.location) {
                         case 1:
@@ -146,7 +158,7 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#location').val(location);
+                    $('#location').text(location);
 
                     switch (brand.standardArea) {
                         case 1:
@@ -169,7 +181,7 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#standard_area').val(standardArea);
+                    $('#standard_area').text(standardArea);
 
                     switch (brand.target) {
                         case 1:
@@ -192,8 +204,8 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#target').val(target);
-                    $('#city').val(brand.city);
+                    $('#target').text(target);
+                    $('#city').text(brand.city);
 
                     switch (brand.history) {
                         case 1:
@@ -213,9 +225,9 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#history').val(history);
-                    $('#rank').val(brand.rank);
-                    $('#shop_amount').val(brand.shopAmount);
+                    $('#history').text(history);
+                    $('#rank').text(brand.rank);
+                    $('#shop_amount').text(brand.shopAmount);
 
                     switch (brand.compare) {
                         case 1:
@@ -238,8 +250,8 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#compare').val(compare);
-                    $('#average_unit_price').val(brand.averageUnitPrice);
+                    $('#compare').text(compare);
+                    $('#average_unit_price').text(brand.averageUnitPrice);
 
                     switch (brand.joined) {
                         case 1:
@@ -262,7 +274,7 @@ function findOneBrandByCode(id) {
                             break;
                     }
 
-                    $('#joined').val(joined);
+                    $('#joined').text(joined);
 
                     if(brand.logo != null){
                         $('#imagePreview').attr('src',brand.logo);
@@ -273,4 +285,64 @@ function findOneBrandByCode(id) {
             }                               
         }
     }); 
+}
+
+function findContacts(url) {
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brandContact/"+url+"?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) { 
+                    
+                }
+            }
+        }
+    })
+}
+
+function deleteBrand(id) {
+    $.ajax({
+        url: $.api.baseNew + "/onlineleasing-customer/api/brand/delete/?code=" + id,
+        type: "DELETE",
+        async: false,
+        beforeSend: function (request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if(xhr.getResponseHeader("Authorization") !== null){
+                $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+            }
+                
+            if (response.code === 'C0') {
+                window.location.href = 'home/?delete=succeed';
+            } else {
+                window.location.href = 'home/?delete=fail';
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            window.location.href = 'home/?delete=fail';
+        }
+    });
 }

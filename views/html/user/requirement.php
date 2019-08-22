@@ -20,8 +20,8 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
 									<p><?= $lang['search_sub_type'] ?></p>
                                     <select id="subtype" name="subtype" class="form-control c-square c-theme input-sm" required>
                                         <option value=""><?= $lang['search_sub_type'] ?>*</option>
-                                        <option value="kiosk" selected="selected"><?= $lang['search_sub_type_kiosk'] ?></option>
-                                        <option value="正柜"><?= $lang['search_sub_type_store'] ?></option>
+                                        <option value="正柜" selected="selected"><?= $lang['search_sub_type_store'] ?></option>
+                                        <option value="kiosk"><?= $lang['search_sub_type_kiosk'] ?></option>
                                     </select>
                                     <div id="errorcontainer-subtype" class="errorDiv"></div>
 								</div>

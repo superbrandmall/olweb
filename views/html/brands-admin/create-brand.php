@@ -44,46 +44,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
                         <div class="box-body">
                             <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-                            <?php
-                                if(isset($_SESSION['brands_admin_name']) && $_SESSION['brands_admin_name'] != '管理员') {
-                            ?>
                                 <div class="form-group">
                                     <label for="brand_name" class="col-md-3 control-label">品牌名称 *</label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="brand_name" name="brand_name">
                                         <div id="errorcontainer-brand_name" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
-                                        <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
-                                        <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="company_name" class="col-md-3 control-label">联系人公司 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="company_name" name="company_name" />
-                                        <div id="errorcontainer-company_name" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="title"  class="col-md-3 control-label">联系人职位 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="title" name="title" />
-                                        <div id="errorcontainer-title" class="errorDiv"></div>
                                     </div>
                                 </div>
                                 
@@ -321,85 +286,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                         <img id="imagePreview" style="max-width: 200px;">
                                     </div>
                                 </div>
-                                
-                            <?php
-                                } else {
-                            ?>
-                                <div class="form-group">
-                                    <label for="brand_name" class="col-md-3 control-label">品牌名称 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="brand_name" name="brand_name">
-                                        <div id="errorcontainer-brand_name" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="category" class="col-md-3 control-label">业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="category" name="category">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="detailed_category" class="col-md-3 control-label">细分业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="detailed_category" name="detailed_category">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="entered_year" class="col-md-3 control-label">进入年份</label>
-                                    <div class="col-md-7">
-                                        <select class="select2" id="entered_year" name="entered_year" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="2009">2009</option>
-                                            <option value="2010">2010</option>
-                                            <option value="2011">2011</option>
-                                            <option value="2012">2012</option>
-                                            <option value="2013">2013</option>
-                                            <option value="2014">2014</option>
-                                            <option value="2015">2015</option>
-                                            <option value="2016">2016</option>
-                                            <option value="2017">2017</option>
-                                            <option value="2018">2018</option>
-                                            <option value="2019">2019</option>
-                                            <option value="2020">2020</option>
-                                            <option value="2021">2021</option>
-                                            <option value="2022">2022</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="city" class="col-md-3 control-label">城市</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="city" name="city">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="mall" class="col-md-3 control-label">首店进驻Mall</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="mall" name="mall">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="if_first" class="col-md-3 control-label">首店情况</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="if_first" name="if_first">
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="floor" class="col-md-3 control-label">所在楼层</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="floor" name="floor">
-                                    </div>
-                                </div>
-                            <?php
-                                }
-                            ?>
 
                                 <div class="box-footer text-right">
                                     <a class="btn btn-link text-left" href="/brands-admin/brands">取消</a>

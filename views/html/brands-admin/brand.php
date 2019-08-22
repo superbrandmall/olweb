@@ -15,220 +15,233 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </a>
         </div>
     </section>
-    
+
     <section class="content">
         <div id="webui">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
+                <div class="col-md-12">
+                    <div class="callout callout-info" style="display: none;">
+                        新增联系人成功!
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#details" data-toggle="tab" aria-expanded="false">
+                                    <span class="hidden-lg hidden-md">
+                                        <i class="fa fa-info-circle"></i>
+                                    </span>
+                                    <span class="hidden-xs hidden-sm">基础信息</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#contacts_tab" data-toggle="tab">
+                                    <span class="hidden-lg hidden-md">
+                                        <i class="fa fa-user"></i></span>
+                                    <span class="hidden-xs hidden-sm">联系人</span>
+                                </a>
+                            </li>
+
+                            <li class="dropdown pull-right">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-gear"></i> 操作
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#!" class="update-link">更新品牌</a></li>
+                                    <li><a href="#!" class="delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a></li>
+                                    <li><a href="#!" class="create-contact-link">新增联系人</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="details">
+                                <div class="row">
+                                    <div class="col-md-2 text-center">
+                                        <img id="imagePreview" class="avatar img-circle">
+                                    </div>
+
+                                    <div class="col-md-8">
+                                        <div class="table table-responsive">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-nowrap">品牌名称</td>
+                                                        <td id="brand_name"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">新业态</td>
+                                                        <td id="new_category"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">一级业态</td>
+                                                        <td id="modality_1"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">二级业态</td>
+                                                        <td id="modality_2"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">三级业态</td>
+                                                        <td id="modality_3"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">品牌属性</td>
+                                                        <td id="attribute"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">品牌价位</td>
+                                                        <td id="class"></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td class="text-nowrap">口碑</td>
+                                                        <td id="reputation"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">市场销售份额</td>
+                                                        <td id="market_share"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">英文名称</td>
+                                                        <td id="name_eng"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">开店区域</td>
+                                                        <td id="location"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">标准店面积</td>
+                                                        <td id="standard_area"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">主要客户群</td>
+                                                        <td id="target"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">城市</td>
+                                                        <td id="city"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">品牌发展历史</td>
+                                                        <td id="history"></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-nowrap">行业排名</td>
+                                                        <td id="rank"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">当地已开店数</td>
+                                                        <td id="shop_amount"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">月均销售额坪效</td>
+                                                        <td id="compare"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">客单价</td>
+                                                        <td><span id="average_unit_price"></span>元</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">是否有旗下品牌已入驻SBM/TM</td>
+                                                        <td><span id="joined"></span>个</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <div class="col-md-12">
+                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-default update-link">更新品牌</a>
+                                        </div>
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a>
+                                        </div>
+                                        <div class="col-md-12" style="padding-top: 5px;">
+                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-info create-contact-link">新增联系人</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="box-body">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="brand_name" class="col-md-3 control-label">品牌名称</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="brand_name" name="brand_name" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="company_name" class="col-md-3 control-label">联系人公司</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="company_name" name="company_name" readonly />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="title"  class="col-md-3 control-label">联系人职位</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="title" name="title" readonly />
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="new_category" class="col-md-3 control-label">新业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="new_category" name="new_category" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_1" class="col-md-3 control-label">一级业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="modality_1" name="modality_1" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_2" class="col-md-3 control-label">二级业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="modality_2" name="modality_2" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_3" class="col-md-3 control-label">三级业态</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="modality_3" name="modality_3" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="attribute" class="col-md-3 control-label">品牌属性</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="attribute" name="attribute" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="class" class="col-md-3 control-label">品牌价位</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="class" name="class" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="reputation" class="col-md-3 control-label">口碑</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="reputation" name="reputation" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="market_share" class="col-md-3 control-label">市场销售份额</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <div class="input-group" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" id="market_share" name="market_share" readonly />
-                                            <span class="input-group-addon">%</span>
+                            <div class="tab-pane" id="contacts_tab">
+                                <div class="table-responsive">
+                                    <div class="bootstrap-table">
+                                        <div class="fixed-table-container table-no-bordered" style="padding-bottom: 0px;">
+                                            <div class="fixed-table-header" style="display: none;">
+                                                <table></table>
+                                            </div>
+                                            <div class="fixed-table-body">
+                                                <div class="fixed-table-loading" style="top: 1px; display: none;">
+                                                    <h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>
+                                                </div>
+                                                <table id="contactsTable" class="table table-striped snipe-table table-responsive table-no-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="hidden-xs" data-field="icon">
+                                                                <div class="th-inner "></div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-3">
+                                                                <div class="th-inner ">姓名</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-3">
+                                                                <div class="th-inner ">电话</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-3">
+                                                                <div class="th-inner ">公司</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-3">
+                                                                <div class="th-inner ">职位</div><div class="fht-cell"></div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr data-index="0">
+                                                            <td class="hidden-xs"><i class="fa fa-user-o icon-med"></i></td>
+                                                            <td class="col-sm-3"></td>
+                                                            <td class="col-sm-3"></td>
+                                                            <td class="col-sm-3"></td>
+                                                            <td class="col-sm-3"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group ">
-                                    <label for="name_eng" class="col-md-3 control-label">英文名称</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="name_eng" name="name_eng" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="location" class="col-md-3 control-label">开店区域</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="location" name="location" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="standard_area" class="col-md-3 control-label">标准店面积</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="standard_area" name="standard_area" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="target" class="col-md-3 control-label">主要客户群</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="target" name="target" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="city" class="col-md-3 control-label">城市</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="city" name="city" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="history" class="col-md-3 control-label">品牌发展历史</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="history" name="history" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="rank" class="col-md-3 control-label">行业排名</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="rank" name="rank" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="shop_amount" class="col-md-3 control-label">当地已开店数</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="shop_amount" name="shop_amount" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="compare" name="compare" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="average_unit_price" class="col-md-3 control-label">客单价</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <div class="input-group" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" id="average_unit_price" name="average_unit_price" readonly>
-                                            <span class="input-group-addon">元</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="joined" class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="joined" name="joined" readonly>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label class="col-md-3 control-label" for="logo">品牌Logo</label>
-                                    <div class="col-md-7">
-                                        <img id="imagePreview" style="max-width: 200px;">
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="slideout-menu">
-                    <a href="#" class="slideout-menu-toggle pull-right">×</a>
-                    <h3>
-                        注意事项
-                    </h3>
-                    <p>新增品牌应谨慎小心，严格按照格式要求填写内容，以免引起差错。 </p>
-                </div>
             </div>
-
         </div>
-
     </section>
-
 </div>
 
 <?php include 'footer.php'; ?>

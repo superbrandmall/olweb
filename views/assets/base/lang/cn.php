@@ -124,6 +124,7 @@ $lang['search_make_reservation'] = "提交预约";
 
 /********************** Mall ********************/
 $lang['mall_home'] = "首页";
+$lang['mall_opening_soon'] = "即将开业，敬请期待";
 $lang['mall_shanghai_brief'] = "上海概况";
 $lang['mall_luoyang_brief'] = "洛阳概况";
 $lang['mall_xuhui_brief'] = "上海市徐汇区概况";

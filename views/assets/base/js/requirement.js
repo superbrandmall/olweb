@@ -101,18 +101,32 @@ $(document).ready(function(){
 });
 
 function ShowSearchInit(){
+    var mallCodes = [$.mallCode.shanghaiSbm];
+    if(getURLParameter('mall')) {
+        switch (getURLParameter('mall')) {
+            case "olmall180917000003":
+                mallCodes = [$.mallCode.shanghaiSbm];
+                break;
+            case "olmall190117000001":
+                mallCodes = [$.mallCode.luoyangSbm];
+                break;
+            default:
+                break;
+        }
+    }
+    
     $('.c-content-team-1-slider .c-content-title-1,.c-content-list').html('');
     var map = {
         userCode: '',
         brandCode: '',
         brandName: '',
         brandModality: '',
-        subType: 'kiosk',
+        subType: '正柜',
         minArea: 0,
         maxArea: 3000,
         startDate: IncrMonth(date),
         endDate: '',
-        mallCodes: [$.mallCode.shanghaiSbm],
+        mallCodes: mallCodes,
         max: 9,
         rentalLength: ''
     };

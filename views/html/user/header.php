@@ -131,13 +131,24 @@ include("views/assets/base/" . $filename);
                                     <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
                                     <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                                 </li>
+                            <?php
+                            $requirment = 'requirement';
+                            if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000003') { // LJZ
+                                $requirment =  $requirment.'?mall=olmall180917000003';
+                            } else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // LY
+                                $requirment =  $requirment.'?mall=olmall190117000001';
+                            }
+                            ?>
                                 <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'requirement') {
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="requirement" class="c-link"><i class="fas fa-store-alt"></i> <?= $lang['nav_search'] ?></a>
+                                    <a href="<?php echo $requirment; ?>" class="c-link"><i class="fas fa-store-alt"></i> <?= $lang['nav_search'] ?></a>
                                 </li>
+                            <?php
+                            if (strpos($_SERVER['REQUEST_URI'],'olmall190117000001') == FALSE) { // 如果是LY则不显示以下内容
+                            ?>
                                 <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'events') {
                                         echo 'c-active ';
@@ -155,6 +166,9 @@ include("views/assets/base/" . $filename);
                                 <li class="c-menu-type-classic">
                                     <a href="http://uat-ol.superbrandmall.com/" class="c-link" target="_blank"><i class="fas fa-external-link-square-alt"></i> eat n work</a>
                                 </li>
+                            <?php
+                            }
+                            ?>
                                 <li>
                                     <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">
                                         <i class="icon-note"></i> <?= $lang['nav_contact'] ?>

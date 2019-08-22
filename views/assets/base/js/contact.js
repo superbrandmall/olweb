@@ -126,6 +126,7 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
+            $('#loader').show();
             var brand_name = $('#brand_name').val();
             var email = $('#email').val();
             var merchant_name = $('#name').val();
@@ -165,7 +166,7 @@ $(document).ready(function(){
                 userName: user_name
             };
             
-            $.ajax({
+            /*$.ajax({
                 url: $.api.baseNew+"/onlineleasing-admin/api/contacts/save",
                 type: "PUT",
                 data: JSON.stringify(map),
@@ -173,7 +174,6 @@ $(document).ready(function(){
                 dataType: "json",
                 contentType: "application/json",
                 beforeSend: function(request) {
-                    $('#loader').show();
                     request.setRequestHeader("Lang", $.cookie('lang'));
                     request.setRequestHeader("Source", "onlineleasing");
                 },
@@ -195,7 +195,6 @@ $(document).ready(function(){
                             beforeSend: function(request) {},
                             complete: function(){},
                             success: function (response, status, xhr) {
-                                $('#loader').hide();
                                 $('#contact .modal-content').append('<div class="alert alert-success" role="alert" style="display: block;margin: 10px; padding: 10px;">'+contact_msg_sent+'</div>');
                                 setTimeout(function () {
                                     window.location.reload(false);
@@ -208,6 +207,32 @@ $(document).ready(function(){
                     } else {
                         interpretBusinessCode(response.customerMessage);
                     }
+                }
+            });*/
+            
+            $.ajax({
+                url: "controllers/api/1.0/ApiMail.php",
+                type: "POST",
+                data: {
+                    brand_name: brand_name,
+                    email: email,
+                    merchant_name: merchant_name,
+                    phone: phone,
+                    modality_3: modality_3,
+                    user_name: user_name,
+                    msg: msg
+                },
+                async: false,
+                beforeSend: function(request) {},
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    $('#contact .modal-content').append('<div class="alert alert-success" role="alert" style="display: block;margin: 10px; padding: 10px;">'+contact_msg_sent+'</div>');
+                    setTimeout(function () {
+                        window.location.reload(false);
+                    },3000);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus, errorThrown);
                 }
             });
         }

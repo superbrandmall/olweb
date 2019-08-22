@@ -59,7 +59,7 @@
                     </div>
                     <div class="item">
                         <a href="shop?id=OLSHOP180917000632"><img src="views/assets/base/img/content/client-logos/nothing-big-but-eat.jpg" alt="吃饭皇帝大"/></a>
-                        <a href="shop?id=OLSHOP180917000627"><img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt="汤姆熊欢乐世界"/></a>
+                        <a href="shop?id=OLSHOP190322000001"><img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt="汤姆熊欢乐世界"/></a>
                     </div>
                     <div class="item">
                         <a href="shop?id=OLSHOP180917000556"><img src="views/assets/base/img/content/client-logos/pop-mart.jpg" alt="POP MART"/></a>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="item">
                         <a href="shop?id=OLSHOP180917000745"><img src="views/assets/base/img/content/client-logos/shanghai-min.jpg" alt="小南国"/></a>
-                        <a href="shop?id=OLSHOP180917000696"><img src="views/assets/base/img/content/client-logos/wall-street-english.jpg" alt="华尔街英语"/></a>
+                        <a href="shop?id=OLSHOP180917000742"><img src="views/assets/base/img/content/client-logos/haoledi.jpg" alt="好乐迪"/></a>
                     </div>
                     <div class="item">
                         <a href="shop?id=OLSHOP180917000695"><img src="views/assets/base/img/content/client-logos/wills.jpg" alt="Will's GYM"/></a>

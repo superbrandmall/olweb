@@ -14,7 +14,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="row">
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_area_percentage" class="table table-striped table-bordered table-hover">
+                    <table id="summary_area_percentage" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>楼层</th>
@@ -39,7 +39,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_area" class="table table-striped table-bordered table-hover">
+                    <table id="summary_area" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>楼层</th>
@@ -72,7 +72,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="row">
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_units_percentage" class="table table-striped table-bordered table-hover">
+                    <table id="summary_units_percentage" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>楼层</th>
@@ -97,7 +97,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_units" class="table table-striped table-bordered table-hover">
+                    <table id="summary_units" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>楼层</th>

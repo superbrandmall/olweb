@@ -61,8 +61,9 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
                         <h2 class="c-feature-16-title c-font-bold">7F <?= $lang['mall_luoyang_sbm_7'] ?></h2>
-                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="http://eatnwork-china.com/ly-space" target="_blank"><?= $lang['home_enter'] ?></a>
+                        <p class="c-feature-16-desc">
+                            <?= $lang['mall_opening_soon'] ?>                        
+                        </p>
                     </div>
                 </div>
             </div>

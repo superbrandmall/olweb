@@ -4,7 +4,7 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/c
 
 <div class="modal fade c-content-login-form" id="contact" role="dialog" data-backdrop="static" data-keyboard="false">
 	<div class="modal-dialog">
-		<div class="modal-content c-square">
+            <div class="modal-content c-square" style="background: rgba(240,240,240,1);">
 			<div class="modal-header c-no-border">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			</div>
