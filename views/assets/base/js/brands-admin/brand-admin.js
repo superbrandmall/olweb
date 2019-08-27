@@ -1,10 +1,30 @@
 $(document).ready(function(){
+    if(getURLParameter('delete')) {
+        switch (getURLParameter('delete')) {
+            case "succeed":
+                $('.callout-info').show().delay(2000).hide(0);
+                $('html, body').animate({
+                    scrollTop: $('#webui').offset().top
+                }, 0);
+                break;
+            case "fail":
+                $('.callout-danger').show().delay(2000).hide(0);
+                $('html, body').animate({
+                    scrollTop: $('#webui').offset().top
+                }, 0);
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/brands-admin/"+refineDeleteUrl() );
+        },1000);
+    }
+    
     findOneBrandByCode(getURLParameter('id'));
 })
 
 function findOneBrandByCode(id) {
-    $('.update-link').attr('href','/brands-admin/edit-brand?id='+id);
-    $('.delete-asset').attr('href','javascript: deleteBrand("'+id+'")');
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-customer/api/brand/findOneByCode/"+id,
         type: "GET",
@@ -31,10 +51,37 @@ function findOneBrandByCode(id) {
                 }
                 
                 findContacts(url);
-                    
-                $('#loader').hide();
                 
                 var brand = response.data;
+                
+                if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
+                    if(brand.status == 1){
+                        $('.lock-link').attr('href','javascript: lockBrand("'+brand.code+'",0)').text('锁定品牌');
+                        $('#lock2').removeClass('btn-warning').addClass('btn-success');
+                        $('.lock-link').parent().show();
+                    } else {
+                        $('.lock-link').attr('href','javascript: lockBrand("'+brand.code+'",1)').text('解锁品牌');
+                        $('#lock2').removeClass('btn-success').addClass('btn-warning');
+                        $('.lock-link').parent().show();
+                    }
+                }
+
+                if(brand.userCode == $.cookie('login')){ // 如果登录者为该品牌所有者
+                    if(brand.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015'){ // 如果该品牌已锁定并且登录者没有最大权限
+                        $('.lock-link').attr('href','#!').removeClass('btn-success').addClass('btn-warning').text('已锁定');
+                        $('.lock-link').parent().show();
+                    } else {
+                        $('.update-link').attr('href','/brands-admin/edit-brand?id='+id);
+                        $('.update-link').parent().show();
+                        
+                        $('#details .delete-asset, .dropdown .delete-asset').attr('href','javascript: deleteBrand("'+id+'")');
+                        $('#details .delete-asset, .dropdown .delete-asset').parent().show();
+                    }
+                }
+                
+                $('.create-contact-link').attr('href','/brands-admin/create-brand-contact?id='+id+'&category='+brand.newCategoryCode);
+                    
+                $('#loader').hide();
                 
                 var allow = 0;
                 $.each($.parseJSON(sessionStorage.getItem("userModalities")), function(a,b) {
@@ -306,12 +353,53 @@ function findContacts(url) {
         success: function (response, status, xhr) {
             $('#loader').hide();
             if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                $('#loader').hide();
                 
-                if(response.data.content.length > 0) { 
-                    
+                if(response.data.content.length > 0) {
+                    var update;
+                    var lock = '';
+                    $.each(response.data.content, function(i,v){
+                        var user = '管理员';
+                        $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
+                            if(u.code == v.userCode) {
+                                user = u.name;
+                            }
+                        });
+                        
+                        if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
+                            if(v.status == 1){
+                                lock = '<a href=\'javascript: lockContact("'+v.code+'",0);\' id="lock_'+v.code+'" class="btn btn-success btn-xs" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
+                            } else {
+                                lock = '<a href=\'javascript: lockContact("'+v.code+'",1);\' id="lock_'+v.code+'" class="btn btn-warning btn-xs" title="Unlock"><i class="fa fa-lock"></i></a>&nbsp;';
+                            }
+                        }
+                        
+                        if(v.userCode == $.cookie('login')){ // 如果登录者为该联系人所有者
+                            if(v.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015'){ // 如果该联系人已锁定并且登录者没有最大权限
+                                update = '<span class="btn btn-xs btn-warning">已锁定</span>';
+                            } else {
+                                update = '<a href=\'javascript: deleteContact("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该联系人 ?" data-title="删除联系人" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lock;
+                            }
+                        } else {
+                            update = lock;
+                        }
+                        
+                        $('#contactsTable').append('\
+<tr data-index="'+i+'">\n\
+<td class="col-sm-2">'+v.contactName+'</td>\n\
+<td class="col-sm-2">'+v.contactPhone+'</td>\n\
+<td class="col-sm-2">'+v.companyName+'</td>\n\
+<td class="col-sm-2">'+v.title +'</td>\n\
+<td class="col-sm-2">'+user+'</td>\n\
+<td class="col-sm-2">'+update+'</td>\n\
+</tr>');
+                    })
                 }
             }
         }
@@ -320,7 +408,7 @@ function findContacts(url) {
 
 function deleteBrand(id) {
     $.ajax({
-        url: $.api.baseNew + "/onlineleasing-customer/api/brand/delete/?code=" + id,
+        url: $.api.baseNew + "/onlineleasing-customer/api/brand/delete/?code=" + id + "&loginUserCode=" + $.cookie('login'),
         type: "DELETE",
         async: false,
         beforeSend: function (request) {
@@ -345,4 +433,117 @@ function deleteBrand(id) {
             window.location.href = 'home/?delete=fail';
         }
     });
+}
+
+function deleteContact(id) {
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew + "/onlineleasing-customer/api/brandContact/deleteBrandContact/?code=" + id,
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        beforeSend: function (request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if(xhr.getResponseHeader("Authorization") !== null){
+                $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+            }
+                
+            if (response.code === 'C0') {
+                window.location.href = 'brand?id='+getURLParameter('id')+'&delete=succeed#contacts_tab';
+            } else {
+                window.location.href = 'brand?id='+getURLParameter('id')+'&delete=fail#contacts_tab';
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            window.location.href = 'brand?id='+getURLParameter('id')+'&delete=fail#contacts_tab';
+        }
+    });
+}
+
+function lockBrand(id,s){
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brand/updateStatus?code="+id+"&status="+s+"&loginUserCode="+$.cookie('login'),
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+            }
+            
+            if(s == 0){
+                $('.lock-link').attr('href','javascript: lockBrand("'+id+'",1)').text('解锁品牌');
+                $('#lock2').removeClass('btn-success').addClass('btn-warning');
+                $('.lock-link').parent().show();
+                
+            } else {
+                $('.lock-link').attr('href','javascript: lockBrand("'+id+'",0)').text('锁定品牌');
+                $('#lock2').removeClass('btn-warning').addClass('btn-success');
+                $('.lock-link').parent().show();
+            }
+        }
+    })
+}
+
+function lockContact(id,s){
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brandContact/updateStatus?code="+id+"&status="+s,
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+            }
+            
+            if(s == 0){
+                $('#lock_'+id).removeClass('btn-success').attr({
+                    'title' : 'Unlock',
+                    'href'  : 'javascript: lockContact("'+id+'",1)'
+                });
+                $('#lock_'+id).addClass('btn-warning').html('<i class="fa fa-lock"></i>');
+            } else {
+                $('#lock_'+id).removeClass('btn-warning').attr({
+                    'title' : 'Lock',
+                    'href'  : 'javascript: lockContact("'+id+'",0)'
+                });
+                $('#lock_'+id).addClass('btn-success').html('<i class="fa fa-unlock"></i>');
+            }
+        }
+    })
+}
+
+function refineDeleteUrl() {
+    var url = window.location.href;
+    var value = url.substring(url.lastIndexOf('/') + 1);
+    value  = value.split("&delete")[0];   
+    return value;     
 }

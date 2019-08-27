@@ -75,6 +75,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'brands-admin/create-brand' => array(
             'url' => 'create-brand.php'
         ),
+        'brands-admin/create-brand-contact' => array(
+            'url' => 'create-brand-contact.php'
+        ),
         'brands-admin/edit-brand' => array(
             'url' => 'edit-brand.php'
         ),
@@ -89,7 +92,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','brand.php','create-brand.php','edit-brand.php');
+    $session_required = array('login.php','default.php','brand.php','create-brand.php','create-brand-contact.php','edit-brand.php');
     if (in_array($page, $session_required)) {
         include_once 'models/brands-admin/Session.class.php';
         $session = new Session();

@@ -21,10 +21,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        新增联系人成功!
+                        删除联系人成功!
+                    </div>
+                    <div class="callout callout-danger" style="display: none;">
+                        删除联系人失败!
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">
@@ -52,8 +56,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#!" class="update-link">更新品牌</a></li>
-                                    <li><a href="#!" class="delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a></li>
+                                    <li style="display: none;"><a href="#!" class="update-link">更新品牌</a></li>
+                                    <li style="display: none;"><a href="#!" class="delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a></li>
+                                    <li style="display: none;"><a href="#!" class="lock-link" id="lock1">锁定品牌</a></li>
                                     <li><a href="#!" class="create-contact-link">新增联系人</a></li>
                                 </ul>
                             </li>
@@ -176,11 +181,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     </div>
 
                                     <div class="col-md-2">
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" style="display: none;">
                                             <a href="#!" style="width: 100%;" class="btn btn-sm btn-default update-link">更新品牌</a>
                                         </div>
-                                        <div class="col-md-12" style="padding-top: 5px;">
+                                        <div class="col-md-12" style="display: none; padding-top: 5px;">
                                             <a href="#!" style="width: 100%;" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a>
+                                        </div>
+                                        <div class="col-md-12" style="display: none; padding-top: 5px;">
+                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-success lock-link" id="lock2">锁定品牌</a>
                                         </div>
                                         <div class="col-md-12" style="padding-top: 5px;">
                                             <a href="#!" style="width: 100%;" class="btn btn-sm btn-info create-contact-link">新增联系人</a>
@@ -200,36 +208,30 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <div class="fixed-table-loading" style="top: 1px; display: none;">
                                                     <h4><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>
                                                 </div>
-                                                <table id="contactsTable" class="table table-striped snipe-table table-responsive table-no-bordered">
+                                                <table class="table table-striped snipe-table table-responsive table-no-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th class="hidden-xs" data-field="icon">
-                                                                <div class="th-inner "></div>
-                                                                <div class="fht-cell"></div>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">姓名</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-3">
-                                                                <div class="th-inner ">姓名</div><div class="fht-cell"></div>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">电话</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-3">
-                                                                <div class="th-inner ">电话</div><div class="fht-cell"></div>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">公司</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-3">
-                                                                <div class="th-inner ">公司</div><div class="fht-cell"></div>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">职位</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-3">
-                                                                <div class="th-inner ">职位</div><div class="fht-cell"></div>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">所有人</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner"></div><div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                        <tr data-index="0">
-                                                            <td class="hidden-xs"><i class="fa fa-user-o icon-med"></i></td>
-                                                            <td class="col-sm-3"></td>
-                                                            <td class="col-sm-3"></td>
-                                                            <td class="col-sm-3"></td>
-                                                            <td class="col-sm-3"></td>
-                                                        </tr>
-                                                    </tbody>
+                                                    <tbody id="contactsTable"></tbody>
                                                 </table>
                                             </div>
                                         </div>

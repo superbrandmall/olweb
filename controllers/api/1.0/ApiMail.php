@@ -29,13 +29,13 @@ $mail->Hostname = 'superbrandmall.com';
 //character set
 $mail->CharSet = 'UTF-8';
 //sender alias
-$mail->FromName = 'eccp@superbrandmall.com';
+$mail->FromName = 'Online Leasing';
 //smtp account
-$mail->Username ='eccp@superbrandmall.com';
+$mail->Username ='onlineleasing@superbrandmall.com';
 //smtp password
-$mail->Password = 'Sbm123456';
+$mail->Password = 'Qaz12345';
 //sender address
-$mail->From = 'eccp@superbrandmall.com';
+$mail->From = 'onlineleasing@superbrandmall.com';
 //format html or not
 $mail->isHTML(true);
 //rcpt address

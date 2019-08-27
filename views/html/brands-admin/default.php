@@ -23,6 +23,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="callout callout-info" style="display: none;">
                         删除品牌成功!
                     </div>
+                    <div class="callout callout-success" style="display: none;">
+                        修改品牌所有人成功!
+                    </div>
+                    <div class="callout callout-danger" style="display: none;">
+                        修改品牌所有人失败!
+                    </div>
                 </div>
             </div>
            
@@ -114,19 +120,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>
-                                                                    <div class="th-inner">公司</div>
-                                                                    <div class="fht-cell"></div>
-                                                                </th>
-                                                                <th>
-                                                                    <div class="th-inner">联系人</div>
-                                                                    <div class="fht-cell"></div>
-                                                                </th>
-                                                                <th>
-                                                                    <div class="th-inner">职位</div>
-                                                                    <div class="fht-cell"></div>
-                                                                </th>
-                                                                <th>
-                                                                    <div class="th-inner">电话</div>
+                                                                    <div class="th-inner">创建人</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>

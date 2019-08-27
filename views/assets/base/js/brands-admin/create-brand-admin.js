@@ -311,7 +311,6 @@ function addBrand() {
             "shopAmount": shop_amount,
             "standardArea": standard_area,
             "target": target,
-            "title": title,
             "userCode": $.cookie('login'),
             "status": 1
         };

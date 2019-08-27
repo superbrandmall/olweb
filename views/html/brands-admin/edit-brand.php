@@ -55,38 +55,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     </div>
                                 </div>
                                 
-                                <div class="form-group ">
-                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
-                                        <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
-                                        <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="company_name" class="col-md-3 control-label">联系人公司 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="company_name" name="company_name" />
-                                        <div id="errorcontainer-company_name" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label for="title"  class="col-md-3 control-label">联系人职位 *</label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="title" name="title" />
-                                        <div id="errorcontainer-title" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
                                 <div class="form-group">
                                     <label for="new_category" class="col-md-3 control-label">新业态 *</label>
                                     <div class="col-md-7 required">

@@ -7361,7 +7361,7 @@ body {
 	transition: margin .3s ease-in-out,-webkit-transform .3s ease-in-out;
 	transition: transform .3s ease-in-out,margin .3s ease-in-out;
 	transition: transform .3s ease-in-out,margin .3s ease-in-out,-webkit-transform .3s ease-in-out;
-	margin-left: 230px;
+	margin-left: 150px;
 	z-index: 820
 }
 
@@ -7474,7 +7474,7 @@ a:active,a:focus,a:hover {
 	-webkit-transition: margin-left .3s ease-in-out;
 	transition: margin-left .3s ease-in-out;
 	margin-bottom: 0;
-	margin-left: 230px;
+	margin-left: 150px;
 	border: none;
 	min-height: 50px;
 	border-radius: 0
@@ -7739,7 +7739,7 @@ a:active,a:focus,a:hover {
 	left: 0;
 	padding-top: 50px;
 	min-height: 100%;
-	width: 230px;
+	width: 150px;
 	z-index: 810;
 	-webkit-transition: -webkit-transform .3s ease-in-out,width .3s ease-in-out;
 	-webkit-transition: width .3s ease-in-out,-webkit-transform .3s ease-in-out;

@@ -66,16 +66,24 @@ function checkBrand() {
     } else {
         url = 'findAllByUserCode/'+$.cookie('uid'); // 其他人只能查看自己建立的联系人
     }
+    
+    var map = {};
                 
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/brand/checkBrandName/?name="+$('#brand_name').val(),
-        type: "GET",
+        url: $.api.baseNew+"/onlineleasing-customer/api/brandContact/"+url+"?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
+        dataType: "json",
+        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
+        complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Login") !== null){
@@ -86,11 +94,11 @@ function checkBrand() {
                 }
                 $('#loader').hide();
                 
-                var brands = response.data;
+                var brands = response.data.content;
                 var ab = true;
                 if(brands.length > 0) {
                     $.each(brands, function(i,v) {
-                        if(v.contactName == $('#contact_name_1').val()){
+                        if(v.brandCode == getURLParameter('id') && v.contactName == $('#contact_name_1').val() && v.userCode == $.cookie('login')){
                             ab = false;
                         }
                     })
@@ -122,10 +130,11 @@ function addContact() {
             "companyName": company_name,
             "contactName": contact_name_1,
             "contactPhone": contact_phone_1,
-            "code": brand_code,
+            "brandCode": brand_code,
             "title": title,
             "userCode": $.cookie('login'),
             "status": 1,
+            "state": 1,
             "newCategoryCode": new_category_code
         };
 
@@ -151,15 +160,15 @@ function addContact() {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
 
-                    window.location.href = 'create-brand?s=succeed';
+                    window.location.href = 'brand?id='+brand_code+'#contacts_tab';
                 } else {
                     console.log(response.customerMessage);
-                    window.location.href = 'create-brand?s=fail';
+                    window.location.href = 'create-brand-contact?id='+brand_code+'&category='+new_category_code+'&s=fail';
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
-                window.location.href = 'create-brand?s=fail';
+                window.location.href = 'create-brand-contact?id='+brand_code+'&category='+new_category_code+'&s=fail';
             }
         });
     }

@@ -21,18 +21,14 @@ $(document).ready(function(){
         },1000);
     }
     
-    if ($.cookie('uid') != '' && $.cookie('uid') != 'CUSER180912000001') {
-        if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
-            getALLNewCategory();
-        } else {
-            getNewCategory();
-        }
-    
-        getBrandModality1();
-        findOneBrandByCode(getURLParameter('id'));
+    if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
+        getALLNewCategory();
     } else {
-        findOneBrandByCodeAdmin(getURLParameter('id'));
+        getNewCategory();
     }
+
+    getBrandModality1();
+    findOneBrandByCode(getURLParameter('id'));
     
     $('#modality_1').change(function(){
         getBrandModality2($(this).val());
@@ -42,115 +38,69 @@ $(document).ready(function(){
         getBrandModality3($(this).val());
     })
     
-    if ($.cookie('uid') != '' && $.cookie('uid') == 'CUSER180912000001') {
-        $("#edit-form").validate({
-            rules: {
-                brand_name: {
-                    required: true,
-                    minlength: 2
-                }
+    $("#edit-form").validate({
+        rules: {
+            brand_name: {
+                required: true,
+                minlength: 2
             },
-            messages: {
-                brand_name: {
-                    required: "请输入品牌名称",
-                    minlength: "请输入完整品牌名称"
-                }
+            new_category: {
+                required: true
             },
-            errorPlacement: function(error, element) {
-                error.appendTo('#errorcontainer-' + element.attr('id'));
+            modality_1: {
+                required: true
             },
-            submitHandler: function() {
-                editBrandAdmin();
+            modality_2: {
+                required: true
+            },
+            modality_3: {
+                required: true
+            },
+            name_eng: {
+                minlength: 2
+            },
+            city: {
+                minlength: 2
+            },
+            average_unit_price: {
+                number: true
             }
-        });
-    } else {
-        $("#edit-form").validate({
-            rules: {
-                brand_name: {
-                    required: true,
-                    minlength: 2
-                },
-                contact_name_1: {
-                    required: true
-                },
-                contact_phone_1: {
-                    required: true
-                },
-                company_name: {
-                    required: true
-                },
-                title: {
-                    required: true
-                },
-                new_category: {
-                    required: true
-                },
-                modality_1: {
-                    required: true
-                },
-                modality_2: {
-                    required: true
-                },
-                modality_3: {
-                    required: true
-                },
-                name_eng: {
-                    minlength: 2
-                },
-                city: {
-                    minlength: 2
-                },
-                average_unit_price: {
-                    number: true
-                }
+        },
+        messages: {
+            brand_name: {
+                required: "请输入品牌名称",
+                minlength: "请输入完整品牌名称"
             },
-            messages: {
-                brand_name: {
-                    required: "请输入品牌名称",
-                    minlength: "请输入完整品牌名称"
-                },
-                contact_name_1: {
-                    required: "请输入联系人姓名"
-                },
-                contact_phone_1: {
-                    required: "请输入联系人电话"
-                },
-                company_name: {
-                    required: "请输入联系人公司"
-                },
-                title: {
-                    required: "请输入联系人职位"
-                },
-                new_category: {
-                    required: "请选择新业态"
-                },
-                modality_1: {
-                    required: "请选择一级业态"
-                },
-                modality_2: {
-                    required: "请选择二级业态"
-                },
-                modality_3: {
-                    required: "请选择三级业态"
-                },
-                name_eng: {
-                    minlength: "请输入完整品牌英文名称"
-                },
-                city: {
-                    minlength: "请输入完整城市名称"
-                },
-                average_unit_price: {
-                    number: "请正确输入客单价"
-                }
+            new_category: {
+                required: "请选择新业态"
             },
-            errorPlacement: function(error, element) {
-                error.appendTo('#errorcontainer-' + element.attr('id'));
+            modality_1: {
+                required: "请选择一级业态"
             },
-            submitHandler: function() {
-                CheckBrandStatus(getURLParameter('id'));
+            modality_2: {
+                required: "请选择二级业态"
+            },
+            modality_3: {
+                required: "请选择三级业态"
+            },
+            name_eng: {
+                minlength: "请输入完整品牌英文名称"
+            },
+            city: {
+                minlength: "请输入完整城市名称"
+            },
+            average_unit_price: {
+                number: "请正确输入客单价"
             }
-        });
-    }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            CheckBrandStatus(getURLParameter('id'));
+        }
+    });
+    
     
     $('#logo').on("change", function () {
         var formData = new FormData();
@@ -333,7 +283,7 @@ function CheckBrandStatus(id) {
                 var brand = response.data;
                 
                 if(brand.status != 0 && brand.state != 0 && brand.hdState != 'deleted' && brand.userCode == $.cookie('uid')){
-                    editBrand();
+                    editBrand(brand.userCode);
                 } else {
                     window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=fail';
                 }
@@ -346,13 +296,9 @@ function CheckBrandStatus(id) {
     }); 
 }
 
-function editBrand() {
+function editBrand(uc) {
     var logo = $('#hidden_logo').val() || null;
     var brand_name = $('#brand_name').val();
-    var contact_name_1 = $('#contact_name_1').val();
-    var contact_phone_1 = $('#contact_phone_1').val();
-    var company_name = $('#company_name').val();
-    var title = $('#title').val();
     var new_category = $('#new_category').val();
     var modality_1 = $('#modality_3').val().substr(0,4);
     var modality_2 = $('#modality_3').val().substr(0,6);
@@ -373,7 +319,7 @@ function editBrand() {
     var average_unit_price = $('#average_unit_price').val() || null;
     var joined = $('#joined').val() || null;
 
-    if(brand_name != '' && contact_name_1 != '' && contact_phone_1 != '' && company_name != '' && title != ''  && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
+    if(brand_name != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
         var map = {
             "code": getURLParameter('id'),
             "attribute": attribute,
@@ -381,9 +327,6 @@ function editBrand() {
             "brandClass": brand_class,
             "city": city,
             "compare": compare,
-            "companyName": company_name,
-            "contactName": contact_name_1,
-            "contactPhone": contact_phone_1,
             "hdState": "created",
             "history": history,
             "joined": joined,
@@ -401,8 +344,8 @@ function editBrand() {
             "shopAmount": shop_amount,
             "standardArea": standard_area,
             "target": target,
-            "title": title,
-            "userCode": $.cookie('login'),
+            "loginUserCode": $.cookie('login'),
+            "userCode": uc,
             "status": 1,
             "state": 1
         };
@@ -448,103 +391,4 @@ function refineEditUrl() {
     var value = url.substring(url.lastIndexOf('/') + 1);
     value  = value.split("&s")[0];   
     return value;     
-}
-
-function findOneBrandByCodeAdmin(id) {
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/brandCompany/findOneByCode/"+id,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                $('#loader').hide();
-                
-                var brand = response.data;
-                
-                $('#brand_name').val(brand.name);
-                $('#category').val(brand.bigModality);
-                $('#detailed_category').val(brand.littleModality);
-                $('#entered_year').val(brand.enterYear).trigger('change');
-                $('#city').val(brand.city);
-                $('#mall').val(brand.firstMall);
-                $('#if_first').val(brand.firstMemo);
-                $('#floor').val(brand.floorCode);
-                
-            } else {
-                console.log(response.customerMessage);
-            }                               
-        }
-    }); 
-}
-
-function editBrandAdmin() {
-    var name = $('#brand_name').val();
-    var littleModality = $('#detailed_category').val() || null;
-    var floorCode = $('#floor').val() || null;
-    var firstMemo = $('#if_first').val() || null;
-    var firstMall = $('#mall').val() || null;
-    var enterYear = $('#entered_year').val() || null;
-    var city = $('#city').val() || null;
-    var bigModality = $('#category').val() || null;
-
-    if(name != ''){
-        var map = {
-            "bigModality": bigModality,
-            "city": city,
-            "code": getURLParameter('id'),
-            "enterYear": enterYear,
-            "firstMall": firstMall,
-            "firstMemo": firstMemo,
-            "floorCode": floorCode,
-            "littleModality": littleModality,
-            "name": name,
-            "state": 1,
-            "status": 1,
-        };
-
-        $.ajax({
-            url: $.api.baseNew+"/onlineleasing-customer/api/brandCompany/update",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                $('#loader').show();
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                $('#loader').hide();
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-
-                    window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=succeed';
-                } else {
-                    console.log(response.customerMessage);
-                    window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=fail';
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-                window.location.href = 'edit-brand?id='+getURLParameter('id')+'&s=fail';
-            }
-        });
-    }
 }
