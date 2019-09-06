@@ -23,7 +23,8 @@ $(document).ready(function(){
     
     if ($.cookie('uid') != '') {
         if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
-            getALLNewCategory();
+            //getALLNewCategory();
+            getNewCategory();
         } else {
             getNewCategory();
         }
@@ -105,7 +106,7 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            addBrand();
+            checkBrandName($('#brand_name').val());
         }
     });
     
@@ -224,13 +225,14 @@ function getUserBrandModality3() {
     })
 }
 
-/*function findBrandDashboard(name) {
+function checkBrandName(name) {
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/brand/findAllByNameContaining?name="+name,
+        url: $.api.baseNew+"/onlineleasing-customer/api/brand/checkBrandName?name="+name,
         type: "GET",
         async: false,
         beforeSend: function(request) {
-            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
@@ -242,18 +244,27 @@ function getUserBrandModality3() {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                $('#loader').hide();
                 
                 if(response.data.length > 0){
-                    $('.callout-warning').show().delay(2000).hide(0);
-                    $('html, body').animate({
-                        scrollTop: $('#webui').offset().top
-                    }, 0);
+                    var duplicate = false;
+                    $.each(response.data, function(i,x) {
+                        if(x.newCategoryCode == $('#new_category').val()){
+                            duplicate = true;
+                        }
+                    })
+                    
+                    if(duplicate == true) {
+                        $('.callout-warning').show().delay(2000).hide(0);
+                        $('html, body').animate({
+                            scrollTop: $('#webui').offset().top
+                        }, 0);
+                    } else {
+                        addBrand();
+                    }
                 } else {
                     addBrand();
                 }
             } else {
-                $('#loader').hide();
                 $('.callout-warning').show().delay(2000).hide(0);
                 $('html, body').animate({
                     scrollTop: $('#webui').offset().top
@@ -261,7 +272,7 @@ function getUserBrandModality3() {
             }                               
         }
     }); 
-}*/
+}
 
 function addBrand() {
     var logo = $('#hidden_logo').val() || null;
@@ -333,9 +344,12 @@ function addBrand() {
             success: function (response, status, xhr) {
                 $('#loader').hide();
                 if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
+                    if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
 
                     window.location.href = 'create-brand-contact?id='+response.data.code+'&category='+response.data.newCategoryCode+'&s=succeed';
                 } else {

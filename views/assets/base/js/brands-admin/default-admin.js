@@ -163,7 +163,7 @@ function ShowBrands(p,c,u){
                             }
                         });
                         
-                        var user = '<td>管理员</td>';
+                        var user = '管理员';
                         
                         if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
                             if(v.status == 1){
@@ -187,7 +187,7 @@ function ShowBrands(p,c,u){
                         } else {
                             $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
                                 if(u.code == v.userCode) {
-                                    user = '<td>'+u.name+'</td>';
+                                    user = u.name;
                                 }
                             });
                         }

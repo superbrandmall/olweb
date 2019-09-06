@@ -45,12 +45,21 @@ $mail->Subject = 'Online Leasing Contact Form';
 
 
 
-if (!empty ($_POST['brand_name']) && !empty ($_POST['email']) && !empty ($_POST['merchant_name']) && !empty ($_POST['phone']) && !empty ($_POST['modality_3']) && !empty ($_POST['user_name']) && !empty ($_POST['msg'])) 
+if (!empty ($_POST['brand_name']) && !empty ($_POST['email']) && !empty ($_POST['merchant_name']) && !empty ($_POST['phone']) && !empty ($_POST['modality_3']) && !empty ($_POST['user_name']) && !empty ($_POST['target_mall']) && !empty ($_POST['msg'])) 
 {
-
-    $text = "讯息:" . $_POST['msg'] . "<br><br>公司名:" . $_POST['merchant_name'] . "<br><br>业态:" . $_POST['modality_3'] . "<br><br>品牌名:" . $_POST['brand_name'] . "<br><br>联系人:" . $_POST['user_name'] . "<br><br>电话:" . $_POST['phone'] . "<br><br>邮箱:" . $_POST['email'];
-    $mail->addAddress('michael@superbrandmall.com','customerservice');
-    $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
+    if($_POST['target_mall'] == 'OLMALL190117000001'){
+        $mail->addAddress('Neoh.KC@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.liu@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
+        $target = '洛阳正大国际广场';
+    } else {
+        $mail->addAddress('michael@superbrandmall.com','customerservice');
+        $mail->addAddress('yan.song@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
+        $target = '正大广场陆家嘴购物中心';
+    }
+    
+    $text = "讯息:" . $_POST['msg'] . "<br><br>购物商场:" . $target . "<br><br>公司名:" . $_POST['merchant_name'] . "<br><br>业态:" . $_POST['modality_3'] . "<br><br>品牌名:" . $_POST['brand_name'] . "<br><br>联系人:" . $_POST['user_name'] . "<br><br>电话:" . $_POST['phone'] . "<br><br>邮箱:" . $_POST['email'];
 }
 
 

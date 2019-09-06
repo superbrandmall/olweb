@@ -10,7 +10,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             查看品牌
         </h1>
         <div class="pull-right">
-            <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
+            <?php $_SESSION['record_url'] == ''?  $back = 'brands-admin/' : $back = $_SESSION['record_url']; ?>
+            <a href="<?= $back ?>" class="btn btn-primary pull-right">
                 返回
             </a>
         </div>

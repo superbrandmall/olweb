@@ -5,6 +5,7 @@ $(document).ready(function(){
   if($.cookie('lang') === 'en-us'){
         var contact_contact_name_1_required = "First and last name can't be empty";
         var contact_contact_name_1_minlength = "Please give correct first and last names";
+        var contact_target_mall_required = "Please choose a shopping mall";
         var contact_phone_required = "Phone can't be empty";
         var contact_phone_rangelength = "Please give a correct phone number";
         var contact_phone_digits = "Please give a correct phone number";
@@ -24,6 +25,7 @@ $(document).ready(function(){
     } else {
         var contact_contact_name_1_required = "姓名为必填项";
         var contact_contact_name_1_minlength = "请输入完整姓名";
+        var contact_target_mall_required = "请选择购物广场";
         var contact_phone_required = "电话为必填项";
         var contact_phone_rangelength = "请输入正确电话号码";
         var contact_phone_digits = "请输入正确电话号码";
@@ -48,6 +50,9 @@ $(document).ready(function(){
             contact_name_1: {
                 required: true,
                 minlength: 1
+            },
+            target_mall: {
+                required: true
             },
             phone: {
                 required: true,
@@ -87,6 +92,9 @@ $(document).ready(function(){
             contact_name_1: {
                 required: contact_contact_name_1_required,
                 minlength: contact_contact_name_1_minlength
+            },
+            target_mall: {
+                required: contact_target_mall_required
             },
             phone: {
                 required: contact_phone_required,
@@ -154,6 +162,7 @@ $(document).ready(function(){
             });
             
             var user_name = $('#contact_name_1').val();
+            var target_mall = $('#target_mall').val();
             var msg = $('#contact_msg').val();
 
             var map = {
@@ -163,7 +172,8 @@ $(document).ready(function(){
                 merchantName: merchant_name,
                 msg: msg,
                 phone: phone,
-                userName: user_name
+                userName: user_name,
+                targetMall: target_mall
             };
             
             /*$.ajax({
@@ -220,6 +230,7 @@ $(document).ready(function(){
                     phone: phone,
                     modality_3: modality_3,
                     user_name: user_name,
+                    target_mall: target_mall,
                     msg: msg
                 },
                 async: false,

@@ -37,7 +37,7 @@ a, a:hover, a:focus {
 #side-menu > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
-    color: #455372;
+    color: #91a3ba;
 }
 
 #side-menu {
@@ -47,7 +47,7 @@ a, a:hover, a:focus {
 #side-menu > .active > a,
 #side-menu > li > a:hover, 
 #side-menu > li > a:focus {
-    color: #91a3ba;
+    color: #fff;
     background-color: #3b6eb1;
 }
 
@@ -434,7 +434,7 @@ label.error {
 }
 
 .modal-content {
-    background-color: #252c47; 
+    background: rgba(37,44,71,0.9);
     color: #8f9aaf;
 }
 

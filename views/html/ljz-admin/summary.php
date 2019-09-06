@@ -5,7 +5,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <?php include ('navbar_side.php'); ?>
-    <div id="page-wrapper" style="color: #a1a1b0;">
+    <div id="page-wrapper" style="color: #bdbdbd;">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Venue Rental Summary by Area</h1>
@@ -20,7 +20,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -45,7 +45,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -78,7 +78,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -103,7 +103,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #a1a1b0; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>

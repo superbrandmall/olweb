@@ -1,7 +1,7 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/brands-admin/default-admin.js"></script>';
 ?>
-
+<?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
@@ -120,7 +120,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>
-                                                                    <div class="th-inner">创建人</div>
+                                                                    <div class="th-inner">所有人</div>
                                                                     <div class="fht-cell"></div>
                                                                 </th>
                                                                 <th>

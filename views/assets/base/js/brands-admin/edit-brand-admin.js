@@ -22,7 +22,8 @@ $(document).ready(function(){
     }
     
     if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2) {
-        getALLNewCategory();
+        //getALLNewCategory();
+        getNewCategory();
     } else {
         getNewCategory();
     }
