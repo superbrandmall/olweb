@@ -85,7 +85,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
             success: function (response, status, xhr) {
                 if(response.code === 'C0') {
                     $.each(response.data, function(i,v){
-                        if(v.state === 1 && v.coords != null && v.coords != '' && v.subType != '固定场地' && v.subType != '临时场地'){
+                        if(v.state !== 0 && v.coords != null && v.coords != '' && v.subType != '固定场地' && v.subType != '临时场地'){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.unit+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+(v.brandName || '')+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
                         }
                     });

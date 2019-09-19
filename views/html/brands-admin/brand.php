@@ -216,15 +216,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="th-inner">姓名</div><div class="fht-cell"></div>
                                                             </th>
                                                             <th class="col-sm-2">
-                                                                <div class="th-inner">电话</div><div class="fht-cell"></div>
-                                                            </th>
-                                                            <th class="col-sm-2">
                                                                 <div class="th-inner">公司</div><div class="fht-cell"></div>
                                                             </th>
                                                             <th class="col-sm-2">
                                                                 <div class="th-inner">职位</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-2">
+                                                            <th class="col-sm-1">
+                                                                <div class="th-inner">电话</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-1">
+                                                                <div class="th-inner">微信</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-1">
+                                                                <div class="th-inner">邮箱</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-1">
                                                                 <div class="th-inner">所有人</div><div class="fht-cell"></div>
                                                             </th>
                                                             <th class="col-sm-2">

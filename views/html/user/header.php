@@ -163,12 +163,35 @@ include("views/assets/base/" . $filename);
                                     ?>c-menu-type-classic">
                                     <a href="ads" class="c-link"><i class="fas fa-ad"></i> <?= $lang['nav_ad'] ?></a>
                                 </li>
-                                <li class="c-menu-type-classic">
-                                    <a href="http://uat-ol.superbrandmall.com/" class="c-link" target="_blank"><i class="fas fa-external-link-square-alt"></i> eat n work</a>
-                                </li>
                             <?php
                             }
                             ?>
+                                
+                            <?php if(isset($_SESSION['user_login'])) { ?>
+                                <li class="<?php
+                                    if (isset($_GET['p']) && $_GET['p'] == 'my-cart') {
+                                        echo 'c-active ';
+                                    }
+                                    ?>c-menu-type-classic c-cart-toggler-wrapper">
+                                    <a href="#!" class="c-link dropdown-toggle">
+                                        <i class="fa fa-caret-down"></i> 
+                                        <i class="icon-handbag c-cart-icon" style="font-size: 16px;"></i> 
+                                        <span class="badge c-bg-blue" style="margin-top: -7px;">3</span>
+                                    </a>
+                                    <ul class="dropdown-menu c-menu-type-classic c-pull-left">
+                                        <li><a href="my-cart"><?= $lang['nav_cart'] ?></a></li>
+                                        <hr>
+                                        <li><a href="javascript: logout();"><?= $lang['nav_logout'] ?></a></li>
+                                    </ul>
+                                </li>
+                            <?php } else { ?>
+                                <li class="c-cart-toggler-wrapper">
+                                    <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-icon">
+                                        <i class="icon-handbag c-cart-icon" style="font-size: 20px;"></i> 
+                                    </a>
+                                </li>
+                            <?php } ?>
+                                
                                 <li>
                                     <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">
                                         <i class="icon-note"></i> <?= $lang['nav_contact'] ?>
@@ -190,4 +213,17 @@ include("views/assets/base/" . $filename);
 
 <?php
 include ('contact.php');
+?>
+
+<?php 
+if(!isset($_SESSION['user_login']) || $_SESSION['user_login'] == "") {
+    // BEGIN: 注册页/登录页
+    include ('register.php');
+    include ('login.php');
+    // END: 注册页/登录页
+} else {
+    echo '<div class="alert alert-success login-succeed" role="alert">';
+    echo $lang['login_succeed'].$_SESSION['user_login'];
+    echo '</div>';
+}
 ?>

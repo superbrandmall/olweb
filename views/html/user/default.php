@@ -37,81 +37,37 @@
         <div class="container">
             <div class="c-content-client-logos-slider-1 c-bordered" data-slider="owl" data-items="6" data-desktop-items="4" data-desktop-small-items="3" data-tablet-items="3" data-mobile-small-items="2" data-auto-play="5000">
                 <div class="c-content-title-1">
-                    <h3 class="c-center c-font-bold"><?= $lang['home_partner_brands'] ?></h3>
+                    <h3 class="c-center c-font-bold" style="margin: 0 0 20px;"><?= $lang['mall_opening_soon'] ?></h3>
                 </div>
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000061"><img src="views/assets/base/img/content/client-logos/chj-jewellery.jpg" alt="潮宏基"/></a>
-                        <a href="shop?id=OLSHOP180917000063"><img src="views/assets/base/img/content/client-logos/chow-tai-fook.jpg" alt="周大福"/></a>
+                        <a href="shop?id=OLSHOP180917000682"><img src="views/assets/base/img/content/client-logos/dongying.jpg" alt="DONGYING BOUTIQUE(东瀛）"/></a>
+                        <a href="shop?id=OLSHOP180917000421"><img src="views/assets/base/img/content/client-logos/cat.jpg" alt="CAT"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000059"><img src="views/assets/base/img/content/client-logos/enzo.jpg" alt="ENZO"/></a>
-                        <a href="shop?id=OLSHOP180917000072"><img src="views/assets/base/img/content/client-logos/starbucks.jpg" alt="Starbucks"/></a>
+                        <a href="shop?id=OLSHOP180917000317"><img src="views/assets/base/img/content/client-logos/la.jpg" alt="LA"/></a>
+                        <a href="shop?id=OLSHOP190717000003"><img src="views/assets/base/img/content/client-logos/petit-mieux.jpg" alt="PETIT MIEUX 贝的屋"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000385"><img src="views/assets/base/img/content/client-logos/moco.jpg" alt="MO&Co."/></a>
-                        <a href="shop?id=OLSHOP180917000572"><img src="views/assets/base/img/content/client-logos/gundam.jpg" alt="高达"/></a>
+                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/southside-story.jpg" alt="城南往事"/></a>
+                        <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt="逸荟"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000638"><img src="views/assets/base/img/content/client-logos/toysrus.jpg" alt="玩具反斗城"/></a>
-                        <a href="shop?id=OLSHOP180917000570"><img src="views/assets/base/img/content/client-logos/heytea.jpg" alt="喜茶"/></a>
+                        <a href="shop?id=OLSHOP180917000509"><img src="views/assets/base/img/content/client-logos/vero-moda.jpg" alt="VEROMODA"/></a>
+                        <a href="shop?id=OLSHOP190430000002"><img src="views/assets/base/img/content/client-logos/yum-cha.jpg" alt="饮茶"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000632"><img src="views/assets/base/img/content/client-logos/nothing-big-but-eat.jpg" alt="吃饭皇帝大"/></a>
-                        <a href="shop?id=OLSHOP190322000001"><img src="views/assets/base/img/content/client-logos/tomsworld.jpg" alt="汤姆熊欢乐世界"/></a>
+                        <a href="shop?id=OLSHOP190501000002"><img src="views/assets/base/img/content/client-logos/pujiangxiaoyue.jpg" alt="浦江晓月"/></a>
+                        <a href="shop?id=OLSHOP180917000637"><img src="views/assets/base/img/content/client-logos/wangshunge.jpg" alt="旺顺阁鱼头泡饼"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000556"><img src="views/assets/base/img/content/client-logos/pop-mart.jpg" alt="POP MART"/></a>
-                        <a href="shop?id=OLSHOP180917000098"><img src="views/assets/base/img/content/client-logos/agatha.jpg" alt="AGATHA"/></a>
+                        <a href="shop?id=OLSHOP180917000634"><img src="views/assets/base/img/content/client-logos/guimanlong.jpg" alt="桂满陇"/></a>
+                        <a href="shop?id=OLSHOP180917000732"><img src="views/assets/base/img/content/client-logos/skateboard-chicken.jpg" alt="滑板鸡"/></a>
                     </div>
                     <div class="item">
-                        <a href="shop?id=OLSHOP180917000603"><img src="views/assets/base/img/content/client-logos/tsui-wah.jpg" alt="翠华"/></a>
-                        <a href="shop?id=OLSHOP180917000722"><img src="views/assets/base/img/content/client-logos/stellar-international.jpg" alt="星美正大影城"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000499"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt="NIKE"/></a>
-                        <a href="shop?id=OLSHOP180917000500"><img src="views/assets/base/img/content/client-logos/fila.jpg" alt="FILA"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP181024000011"><img src="views/assets/base/img/content/client-logos/belle.jpg" alt="BeLLE"/></a>
-                        <a href="shop?id=OLSHOP180917000659"><img src="views/assets/base/img/content/client-logos/tai-cook.jpg" alt="明泰谷"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000738"><img src="views/assets/base/img/content/client-logos/coconut-taste.jpg" alt="椰子不语"/></a>
-                        <a href="shop?id=OLSHOP180917000746"><img src="views/assets/base/img/content/client-logos/heiseiya.jpg" alt="HEISEIYA"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000190"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt="耶里夏丽"/></a>
-                        <a href="shop?id=OLSHOP180917000211"><img src="views/assets/base/img/content/client-logos/urban-revivo.jpg" alt="URBAN REVIVO"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000035"><img src="views/assets/base/img/content/client-logos/longines.jpg" alt="Longines"/></a>
-                        <a href="shop?id=OLSHOP180917000414"><img src="views/assets/base/img/content/client-logos/muji.jpg" alt="MUJI"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000069"><img src="views/assets/base/img/content/client-logos/skechers.jpg" alt="SKECHERS"/></a>
-                        <a href="shop?id=OLSHOP180917000737"><img src="views/assets/base/img/content/client-logos/korean-barbecue.jpg" alt="炉边情谈"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000745"><img src="views/assets/base/img/content/client-logos/shanghai-min.jpg" alt="小南国"/></a>
-                        <a href="shop?id=OLSHOP180917000742"><img src="views/assets/base/img/content/client-logos/haoledi.jpg" alt="好乐迪"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000695"><img src="views/assets/base/img/content/client-logos/wills.jpg" alt="Will's GYM"/></a>
-                        <a href="shop?id=OLSHOP180917000734"><img src="views/assets/base/img/content/client-logos/taier.jpg" alt="太二老坛子酸菜鱼"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000703"><img src="views/assets/base/img/content/client-logos/south-beauty.jpg" alt="俏江南"/></a>
-                        <a href="shop?id=OLSHOP180917000096"><img src="views/assets/base/img/content/client-logos/haagen-dazs.jpg" alt="Hagan Dazs"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000635"><img src="views/assets/base/img/content/client-logos/fengherili.jpg" alt="丰和日丽"/></a>
-                        <a href="shop?id=OLSHOP180917000341"><img src="views/assets/base/img/content/client-logos/koradior.jpg" alt="Koradior"/></a>
-                    </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000719"><img src="views/assets/base/img/content/client-logos/wang-steak.jpg" alt="王品台塑牛排"/></a>
-                        <a href="shop?id=OLSHOP180917000561"><img src="views/assets/base/img/content/client-logos/vans.jpg" alt="VANS"/></a>
+                        <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt="耶里夏丽"/></a>
+                        <a href="shop?id=OLSHOP190420000003"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt="望湘园小雅"/></a>
                     </div>
                 </div>
             </div>

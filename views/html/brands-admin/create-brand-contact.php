@@ -45,7 +45,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="box-body">
                             <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名 *</label>
+                                    <label for="contact_name_1" class="col-md-3 control-label">联系人姓名 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
                                         <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
@@ -53,7 +53,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话 *</label>
+                                    <label for="contact_phone_1"  class="col-md-3 control-label">联系人电话 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
                                         <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
@@ -61,7 +61,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="company_name" class="col-md-3 control-label">联系人公司 *</label>
+                                    <label for="company_name" class="col-md-3 control-label">联系人公司 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="company_name" name="company_name" />
                                         <div id="errorcontainer-company_name" class="errorDiv"></div>
@@ -69,10 +69,25 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="title"  class="col-md-3 control-label">联系人职位 *</label>
+                                    <label for="title"  class="col-md-3 control-label">联系人职位 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="title" name="title" />
                                         <div id="errorcontainer-title" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="wechat"  class="col-md-3 control-label">联系人微信号</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="wechat" name="wechat" />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email"  class="col-md-3 control-label">联系人邮箱</label>
+                                    <div class="col-md-7 col-sm-12">
+                                        <input class="form-control" type="text" id="email" name="email" />
+                                        <div id="errorcontainer-email" class="errorDiv"></div>
                                     </div>
                                 </div>
 
@@ -90,7 +105,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <h3>
                         注意事项
                     </h3>
-                    <p>新增品牌联系人应谨慎小心，严格按照格式要求填写内容，以免引起差错。 </p>
+                    <p><span class="btn-box-tool-lg">*</span> 号代表该栏目为必填。</p>
                 </div>
             </div>
 

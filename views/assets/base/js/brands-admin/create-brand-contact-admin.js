@@ -34,6 +34,9 @@ $(document).ready(function(){
             },
             title: {
                 required: true
+            },
+            email: {
+                email: true
             }
         },
         messages: {
@@ -48,6 +51,9 @@ $(document).ready(function(){
             },
             title: {
                 required: "请输入联系人职位"
+            },
+            email: {
+                email: "请输入有效邮箱地址"
             }
         },
         errorPlacement: function(error, element) {
@@ -124,6 +130,8 @@ function addContact() {
     var contact_phone_1 = $('#contact_phone_1').val();
     var company_name = $('#company_name').val();
     var title = $('#title').val();
+    var wechat = $('#wechat').val();
+    var email = $('#email').val();
 
     if(brand_code != '' && contact_name_1 != '' && contact_phone_1 != '' && company_name != '' && title != '' && new_category_code != ''){
         var map = {
@@ -133,9 +141,11 @@ function addContact() {
             "brandCode": brand_code,
             "title": title,
             "userCode": $.cookie('login'),
-            "status": 1,
+            "status": 0, //默认锁定
             "state": 1,
-            "newCategoryCode": new_category_code
+            "newCategoryCode": new_category_code,
+            "remarkFirst": wechat,
+            "remarkSecond": email,
         };
 
         $.ajax({

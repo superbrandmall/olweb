@@ -149,6 +149,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         ),
         'ads' => array(
             'url' => 'ads.php'
+        ),
+        'login' => array(
+            'url' => 'default.php'
+        ),
+        'logout' => array(
+            'url' => 'logout.php'
+        ),
+        'my-cart' => array(
+            'url' => 'my-cart.php'
         )
     );
     
@@ -162,7 +171,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         }
     }
     
-    $session_required = array('contact.php');
+    $session_required = array('login.php', 'my-cart.php', 'contact.php');
     if (in_array($page, $session_required)) {
         include_once 'models/user/Session.class.php';
         $session = new Session();

@@ -65,14 +65,18 @@ $(document).ready(function(){
             modality_3: {
                 required: true
             },
+            average_unit_price: {
+                required: true,
+                number: true
+            },
+            logo: {
+                required: true
+            },
             name_eng: {
                 minlength: 2
             },
             city: {
                 minlength: 2
-            },
-            average_unit_price: {
-                number: true
             }
         },
         messages: {
@@ -92,14 +96,18 @@ $(document).ready(function(){
             modality_3: {
                 required: "请选择三级业态"
             },
+            average_unit_price: {
+                required: "请输入客单价",
+                number: "请正确输入客单价"
+            },
+            logo: {
+                required: "请上传品牌Logo"
+            },
             name_eng: {
                 minlength: "请输入完整品牌英文名称"
             },
             city: {
                 minlength: "请输入完整城市名称"
-            },
-            average_unit_price: {
-                number: "请正确输入客单价"
             }
         },
         errorPlacement: function(error, element) {
@@ -323,7 +331,7 @@ function addBrand() {
             "standardArea": standard_area,
             "target": target,
             "userCode": $.cookie('login'),
-            "status": 1
+            "status": 0
         };
 
         $.ajax({

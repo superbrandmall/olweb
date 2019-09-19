@@ -149,7 +149,7 @@ function getShopFloorInfo(fl) {
 
                 var itm = 0;
                 $.each(response.data, function(i,v){
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state == 1 ){
+                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
                         stores = stores + v.area;
 
                         switch (v.shopState) {
@@ -189,7 +189,7 @@ function getShopFloorInfo(fl) {
                         }*/
                     }
 
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state == 1){
+                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
@@ -318,7 +318,7 @@ function drawShops(){
                         }
                         x = x + 2;
                     }
-                    posLeft = parseInt((posLeftMin + posLeftMax) / 2);
+                    posLeft = parseInt((posLeftMin + posLeftMax) / 2 - 10);
 
                     var y = 1;
                     var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
@@ -332,9 +332,9 @@ function drawShops(){
                         y = y + 2;
                     }
                     if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 35);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 45);
                     } else {
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 25);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 15);
                     }
                     
                     brand = $(this).attr('name');

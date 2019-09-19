@@ -7,6 +7,12 @@ var date = d.getFullYear() + '-' +
     
 $(document).ready(function(){   
     GetShopInfo();
+    
+    $('.add-cart').click(function(){
+        if($.cookie('uid') && $.cookie('uid') != ''){
+            AddCart();
+        }
+    });
 });
 
 function GetShopInfo(){
@@ -171,12 +177,53 @@ function GetShopInfo(){
 
                 $('.item .c-content-media-2').append('<div class="c-panel"><div class="c-fav"></div></div>');
                 
+                if($.cookie('uid') && $.cookie('uid') != ''){
+                    $('.c-content-list-1').after('<a href="javascript:;" class="add-cart btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                } else {
+                    $('.c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                }
+                
                 if(response.data.vr !== null) {
                     NetPing(response.data.vr);
                 } else {
                     $('#vr_video').hide();
                     $('#shop_location').addClass('col-md-offset-3');
                 }
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function AddCart(){
+    var userCode = $.cookie('uid');
+    var shopCode = getURLParameter('id');
+    
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/myfavourite/save?userCode="+userCode+"&shopCode="+shopCode+"",
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                window.location.href = "my-cart";
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

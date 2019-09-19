@@ -393,10 +393,12 @@ function findContacts(url) {
                         $('#contactsTable').append('\
 <tr data-index="'+i+'">\n\
 <td class="col-sm-2">'+v.contactName+'</td>\n\
-<td class="col-sm-2">'+v.contactPhone+'</td>\n\
 <td class="col-sm-2">'+v.companyName+'</td>\n\
 <td class="col-sm-2">'+v.title +'</td>\n\
-<td class="col-sm-2">'+user+'</td>\n\
+<td class="col-sm-1">'+v.contactPhone+'</td>\n\
+<td class="col-sm-1">'+(v.remarkFirst || "")+'</td>\n\
+<td class="col-sm-1">'+(v.remarkSecond || "")+'</td>\n\
+<td class="col-sm-1">'+user+'</td>\n\
 <td class="col-sm-2">'+update+'</td>\n\
 </tr>');
                     })

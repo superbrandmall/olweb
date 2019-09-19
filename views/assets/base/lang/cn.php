@@ -5,6 +5,7 @@ $lang['nav_malls'] = "商业项目";
 $lang['nav_co_work'] = "OZONE";
 $lang['nav_profile'] = "个人";
 $lang['nav_logout'] = "退出";
+$lang['nav_cart'] = "购物车";
 $lang['nav_login'] = "登录";
 $lang['nav_contact'] = "联系我们";
 $lang['nav_search'] = "店铺";
@@ -63,10 +64,33 @@ $lang['contact_email'] = "邮箱";
 $lang['contact_msg'] = "讯息";
 $lang['contact_finish_form'] = "提交";
 
+/********************** Register ********************/
+$lang['register_register'] = "注册新账号";
+$lang['register_choose'] = "请选择";
+$lang['register_main_contact'] = "姓名";
+$lang['register_company_name'] = "公司名称";
+$lang['register_brand_name'] = "品牌名称";
+$lang['register_uscc'] = "统一社会信用代码";
+$lang['register_modality_0'] = "一级业态";
+$lang['register_modality_1'] = "二级业态";
+$lang['register_modality_2'] = "三级业态";
+$lang['register_modality_3'] = "四级业态";
+$lang['register_verify_method'] = "验证方式";
+$lang['register_verify_mobile'] = "手机验证";
+$lang['register_verify_email'] = "邮箱验证";
+$lang['register_mobile'] = "手机";
+$lang['register_veryfication_code'] = "验证码";
+$lang['register_send_code'] = "发送验证码";
+$lang['register_company_email'] = "公司邮箱";
+$lang['register_accept'] = "同意";
+$lang['register_chiatai_ol_reg_agree'] = "正大Online Leasing用户注册协议";
+$lang['register_finish_registration'] = "立即注册";
+$lang['register_back_login'] = "返回登录";
+
 /********************** Login ********************/
 $lang['login_welcome'] = "欢迎来到Online Leasing";
-$lang['login_after_login'] = "赶快注册享受在线租赁吧";
-$lang['login_account'] = "手机号/邮箱";
+$lang['login_after_login'] = "赶快注册吧";
+$lang['login_account'] = "手机";
 $lang['login_password'] = "密码";
 $lang['login_login'] = "登录";
 $lang['login_verification_login'] = "请使用验证码登录";
@@ -124,7 +148,7 @@ $lang['search_make_reservation'] = "提交预约";
 
 /********************** Mall ********************/
 $lang['mall_home'] = "首页";
-$lang['mall_opening_soon'] = "即将开业，敬请期待";
+$lang['mall_opening_soon'] = "即将开业";
 $lang['mall_shanghai_brief'] = "上海概况";
 $lang['mall_luoyang_brief'] = "洛阳概况";
 $lang['mall_xuhui_brief'] = "上海市徐汇区概况";

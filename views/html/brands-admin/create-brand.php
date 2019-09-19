@@ -45,7 +45,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="box-body">
                             <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="brand_name" class="col-md-3 control-label">品牌名称 *</label>
+                                    <label for="brand_name" class="col-md-3 control-label">品牌名称 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="brand_name" name="brand_name">
                                         <div id="errorcontainer-brand_name" class="errorDiv"></div>
@@ -53,7 +53,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="new_category" class="col-md-3 control-label">新业态 *</label>
+                                    <label for="new_category" class="col-md-3 control-label">新业态 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="new_category" name="new_category" style="width: 100%">
                                             <option value="">未选择</option>
@@ -63,7 +63,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="modality_1" class="col-md-3 control-label">一级业态 *</label>
+                                    <label for="modality_1" class="col-md-3 control-label">一级业态 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
                                             <option value="">未选择</option>
@@ -73,7 +73,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="modality_2" class="col-md-3 control-label">二级业态 *</label>
+                                    <label for="modality_2" class="col-md-3 control-label">二级业态 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="modality_2" name="modality_2" style="width: 100%">
                                             <option value="">未选择</option>
@@ -83,12 +83,41 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="modality_3" class="col-md-3 control-label">三级业态 *</label>
+                                    <label for="modality_3" class="col-md-3 control-label">三级业态 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="modality_3" name="modality_3" style="width: 100%">
                                             <option value="">未选择</option>
                                         </select>
                                         <div id="errorcontainer-modality_3" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="average_unit_price" class="col-md-3 control-label">客单价 <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7 col-sm-12" required>
+                                        <div class="input-group" style="padding-left: 0px;">
+                                            <input class="form-control" type="text" id="average_unit_price" name="average_unit_price" />
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                        <div id="errorcontainer-average_unit_price" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" for="logo">品牌Logo <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7">
+                                        <label class="btn btn-default">
+                                            选择文件...
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
+                                            <input type="hidden" id="hidden_logo" name="hidden_logo">
+                                            <input type="file" name="logo" id="logo" data-maxsize="9000000" accept="image/gif,image/jpeg,image/png,image/svg" style="width: 0;height: 0;" required>
+                                        </label>
+                                        <span class="help-block" id="logo-status">文件类型可选择jpg、png、gif或svg，文件最大尺寸不超过10M。</span>
+                                        <span class='label label-default' id="logo-info"></span>
+                                        <div id="errorcontainer-logo" class="errorDiv"></div>
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-3">
+                                        <img id="imagePreview" style="max-width: 200px;">
                                     </div>
                                 </div>
                                 
@@ -246,17 +275,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="average_unit_price" class="col-md-3 control-label">客单价</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <div class="input-group" style="padding-left: 0px;">
-                                            <input class="form-control" type="text" id="average_unit_price" name="average_unit_price" />
-                                            <span class="input-group-addon">元</span>
-                                        </div>
-                                        <div id="errorcontainer-average_unit_price" class="errorDiv"></div>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label for="joined" class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM</label>
                                     <div class="col-md-7">
                                         <select class="select2" id="joined" name="joined" style="width: 100%">
@@ -267,23 +285,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                             <option value="4">3</option>
                                             <option value="5">> 3</option>
                                         </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label" for="logo">品牌Logo</label>
-                                    <div class="col-md-7">
-                                        <label class="btn btn-default">
-                                            选择文件...
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
-                                            <input type="hidden" id="hidden_logo" name="hidden_logo">
-                                            <input type="file" name="logo" id="logo" data-maxsize="9000000" accept="image/gif,image/jpeg,image/png,image/svg" style="width: 0;height: 0;">
-                                        </label>
-                                        <span class="help-block" id="logo-status">文件类型可选择jpg、png、gif或svg，文件最大尺寸不超过10M。</span>
-                                        <span class='label label-default' id="logo-info"></span>
-                                    </div>
-                                    <div class="col-md-4 col-md-offset-3">
-                                        <img id="imagePreview" style="max-width: 200px;">
                                     </div>
                                 </div>
 
@@ -301,7 +302,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <h3>
                         注意事项
                     </h3>
-                    <p>新增品牌应谨慎小心，严格按照格式要求填写内容，以免引起差错。 </p>
+                    <p><span class="btn-box-tool-lg">*</span> 号代表该栏目为必填。</p>
                 </div>
             </div>
 
