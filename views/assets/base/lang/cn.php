@@ -99,7 +99,7 @@ $lang['login_register_now'] = "立即注册";
 $lang['login_succeed'] = "<strong>登录成功!</strong> 欢迎回来, ";
 
 /********************** Search ********************/
-$lang['search_search_shops'] = "找店铺";
+$lang['search_search_shops'] = "推荐店铺";
 $lang['search_home'] = "首页";
 $lang['search_leasable_area'] = "租赁面积";
 $lang['search_from'] = "从";
@@ -271,7 +271,7 @@ $lang['floor_entrance'] = "入口";
 
 /********************** Store ********************/
 $lang['shop_home'] = "首页";
-$lang['shop_shop_detail'] = "店铺招商详情";
+$lang['shop_shop_detail'] = "招商详情";
 $lang['shop_shop_picture'] = "店铺门图";
 $lang['shop_room_number'] = "单元号";
 $lang['shop_floor'] = "所在楼层";
@@ -284,6 +284,7 @@ $lang['shop_this_shop'] = "本店铺";
 $lang['shop_shop_awaiting_rent'] = "待租店铺";
 $lang['shop_shop_in_renting'] = "店铺";
 $lang['shop_modality_shop_proportion'] = "店铺业态占比";
+$lang['shop_continue_shopping'] = "继续逛逛";
 
 /********************** Event ********************/
 $lang['event_home'] = "首页";

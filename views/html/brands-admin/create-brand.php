@@ -117,7 +117,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                         <div id="errorcontainer-logo" class="errorDiv"></div>
                                     </div>
                                     <div class="col-md-4 col-md-offset-3">
-                                        <img id="imagePreview" style="max-width: 200px;">
+                                        <img id="imagePreview" style="max-width: 200px; max-height: 100px;">
                                     </div>
                                 </div>
                                 

@@ -7383,8 +7383,8 @@ body {
 
 @media (max-width:767px) {
 	.sidebar-open .content-wrapper,.sidebar-open .main-footer,.sidebar-open .right-side {
-		-webkit-transform: translate(230px);
-		transform: translate(230px)
+		-webkit-transform: translate(150px);
+		transform: translate(150px)
 	}
 }
 

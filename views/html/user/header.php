@@ -175,8 +175,8 @@ include("views/assets/base/" . $filename);
                                     ?>c-menu-type-classic c-cart-toggler-wrapper">
                                     <a href="#!" class="c-link dropdown-toggle">
                                         <i class="fa fa-caret-down"></i> 
-                                        <i class="icon-handbag c-cart-icon" style="font-size: 16px;"></i> 
-                                        <span class="badge c-bg-blue" style="margin-top: -7px;">3</span>
+                                        <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i> 
+                                        <span class="badge c-bg-blue" style="margin-top: -7px;"><?= $lang['nav_cart'] ?></span>
                                     </a>
                                     <ul class="dropdown-menu c-menu-type-classic c-pull-left">
                                         <li><a href="my-cart"><?= $lang['nav_cart'] ?></a></li>
@@ -187,7 +187,8 @@ include("views/assets/base/" . $filename);
                             <?php } else { ?>
                                 <li class="c-cart-toggler-wrapper">
                                     <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-icon">
-                                        <i class="icon-handbag c-cart-icon" style="font-size: 20px;"></i> 
+                                        <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i> 
+                                        <span class="badge c-bg-red" style="margin-top: -7px;"><?= $lang['nav_login'] ?></span>
                                     </a>
                                 </li>
                             <?php } ?>

@@ -69,7 +69,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             <div class="tab-pane active" id="details">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
-                                        <img id="imagePreview" class="avatar img-circle">
+                                        <img id="imagePreview" class="avatar img-circle" style="max-width: 200px; max-height: 100px;">
                                     </div>
 
                                     <div class="col-md-8">

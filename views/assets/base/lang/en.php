@@ -99,7 +99,7 @@ $lang['login_register_now'] = "Register now";
 $lang['login_succeed'] = "<strong>Login succeeded!</strong> Welcome back, ";
 
 /********************** Search ********************/
-$lang['search_search_shops'] = "Search stores";
+$lang['search_search_shops'] = "Recommand stores";
 $lang['search_home'] = "Home";
 $lang['search_leasable_area'] = "Leasable area";
 $lang['search_from'] = "From";
@@ -284,6 +284,7 @@ $lang['shop_this_shop'] = "This store";
 $lang['shop_shop_awaiting_rent'] = "Stores for rent";
 $lang['shop_shop_in_renting'] = "Stores";
 $lang['shop_modality_shop_proportion'] = " store categories";
+$lang['shop_continue_shopping'] = "Continue shopping";
 
 /********************** Event ********************/
 $lang['event_home'] = "Home";

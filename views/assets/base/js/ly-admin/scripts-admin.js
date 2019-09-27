@@ -307,7 +307,7 @@ function drawShops(){
                 if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
                     pos = $(this).attr('coords').split(',');
                     var x = 0;
-                    var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft;
+                    var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft, width;
                     while(x < pos.length){
                         if(parseInt(pos[x]) < posLeftMin){
                             posLeftMin = parseInt(pos[x]);
@@ -318,7 +318,8 @@ function drawShops(){
                         }
                         x = x + 2;
                     }
-                    posLeft = parseInt((posLeftMin + posLeftMax) / 2 - 10);
+                    posLeft = parseInt((posLeftMin + posLeftMax) / 2);
+                    width = parseInt(posLeftMax - posLeftMin);
 
                     var y = 1;
                     var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
@@ -332,9 +333,9 @@ function drawShops(){
                         y = y + 2;
                     }
                     if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 45);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 35);
                     } else {
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 15);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 25);
                     }
                     
                     brand = $(this).attr('name');
@@ -377,7 +378,7 @@ function drawShops(){
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; font-size: '+fontSize+'px; word-break: break-all;">'+brand+'</span>'
+                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; width: '+width+'px; font-size: '+fontSize+'px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">'+brand+'</span>'
                     );
                 }
             });
@@ -579,15 +580,22 @@ function GetShopInfo(sc){
                     $('#store_img').html('');
                 }
                 
+                $('#store_vr').find('img').remove();
                 if(shop.vrValidated === 1) {
                     if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
                         $('#store_vr .embed-responsive').hide();
+                        if(images != null && images.length > 1) {
+                            $('#store_vr').append('<img src="'+images[1].image+'" style="width: 100%; margin-top: 10px;" />');
+                        }
                     } else {
                         $('#store_vr .embed-responsive').show();
                         $('#store_vr iframe').attr('src','/'+shop.vr);
                     }
                 } else {
                     $('#store_vr .embed-responsive').hide();
+                    if(images != null && images.length > 1) {
+                        $('#store_vr').append('<img src="'+images[1].image+'" style="width: 100%; margin-top: 10px;" />');
+                    }
                 }
                 
                 $('#shop_detail').css('opacity', 1);

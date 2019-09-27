@@ -41,33 +41,47 @@
                 </div>
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000682"><img src="views/assets/base/img/content/client-logos/dongying.jpg" alt="DONGYING BOUTIQUE(东瀛）"/></a>
-                        <a href="shop?id=OLSHOP180917000421"><img src="views/assets/base/img/content/client-logos/cat.jpg" alt="CAT"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000682"><img src="views/assets/base/img/content/client-logos/dongying.jpg" alt=""/></a>
+                        东瀛
+                        <a href="shop?id=OLSHOP180917000082"><img src="views/assets/base/img/content/client-logos/green-safe.jpg" alt=""/></a>
+                        Green&Safe
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000317"><img src="views/assets/base/img/content/client-logos/la.jpg" alt="LA"/></a>
-                        <a href="shop?id=OLSHOP190717000003"><img src="views/assets/base/img/content/client-logos/petit-mieux.jpg" alt="PETIT MIEUX 贝的屋"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000317"><img src="views/assets/base/img/content/client-logos/la.jpg" alt=""/></a>
+                        LA
+                        <a href="shop?id=OLSHOP190717000003"><img src="views/assets/base/img/content/client-logos/petit-mieux.jpg" alt=""/></a>
+                        贝的屋
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/southside-story.jpg" alt="城南往事"/></a>
-                        <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt="逸荟"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/southside-story.jpg" alt=""/></a>
+                        城南往事
+                        <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt=""/></a>
+                        逸麟居
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000509"><img src="views/assets/base/img/content/client-logos/vero-moda.jpg" alt="VEROMODA"/></a>
-                        <a href="shop?id=OLSHOP190430000002"><img src="views/assets/base/img/content/client-logos/yum-cha.jpg" alt="饮茶"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000509"><img src="views/assets/base/img/content/client-logos/vero-moda.jpg" alt=""/></a>
+                        VEROMODA
+                        <a href="shop?id=OLSHOP190821000001"><img src="views/assets/base/img/content/client-logos/diaji.jpg" alt=""/></a>
+                        嗲记
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP190501000002"><img src="views/assets/base/img/content/client-logos/pujiangxiaoyue.jpg" alt="浦江晓月"/></a>
-                        <a href="shop?id=OLSHOP180917000637"><img src="views/assets/base/img/content/client-logos/wangshunge.jpg" alt="旺顺阁鱼头泡饼"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190501000002"><img src="views/assets/base/img/content/client-logos/pujiangxiaoyue.jpg" alt=""/></a>
+                        浦江晓月
+                        <a href="shop?id=OLSHOP180917000637"><img src="views/assets/base/img/content/client-logos/wangshunge.jpg" alt=""/></a>
+                        旺顺阁鱼头泡饼
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP180917000634"><img src="views/assets/base/img/content/client-logos/guimanlong.jpg" alt="桂满陇"/></a>
-                        <a href="shop?id=OLSHOP180917000732"><img src="views/assets/base/img/content/client-logos/skateboard-chicken.jpg" alt="滑板鸡"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000634"><img src="views/assets/base/img/content/client-logos/guimanlong.jpg" alt=""/></a>
+                        桂满陇
+                        <a href="shop?id=OLSHOP180917000732"><img src="views/assets/base/img/content/client-logos/skateboard-chicken.jpg" alt=""/></a>
+                        滑板鸡
                     </div>
-                    <div class="item">
-                        <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt="耶里夏丽"/></a>
-                        <a href="shop?id=OLSHOP190420000003"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt="望湘园小雅"/></a>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/></a>
+                        耶里夏丽
+                        <a href="shop?id=OLSHOP190420000003"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt=""/></a>
+                        望湘园小雅
                     </div>
                 </div>
             </div>

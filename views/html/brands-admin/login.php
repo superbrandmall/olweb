@@ -28,7 +28,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="col-md-4 col-md-offset-4">
                 <div class="box login-box">
                     <div class="box-header">
-                        <h3 class="box-title"> 管理员登录</h3>
+                        <h3 class="box-title"> 用户登录</h3>
                     </div>
                     <div class="login-box-body">
                         <div class="row">
