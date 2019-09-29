@@ -14,6 +14,17 @@
                     </li>
                 </ul>
             </li>
+            <?php
+            if($_SESSION['brands_admin_login'] == 'CUSER190709000022' || $_SESSION['brands_admin_login'] == 'CUSER190709000015'){
+            ?>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'brands-admin/log') { echo 'active '; }?>">
+                <a href="/brands-admin/log?items=10"><i class="fa fa-bar-chart"></i> 
+                    <span>操作日志</span>
+                </a>
+            </li>
+            <?php
+            }
+            ?>
         </ul>
     </section>
 </aside>

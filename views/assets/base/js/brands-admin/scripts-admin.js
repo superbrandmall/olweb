@@ -94,7 +94,9 @@ function getUsers() {
         {code: 'CUSER190709000022',name: '马云飞'},
         {code: 'CUSER190709000023',name: '师晓慧'},
         {code: 'CUSER190709000024',name: '叶蔚'},
-        {code: 'CUSER190709000025',name: '罗真龙'}
+        {code: 'CUSER190709000025',name: '罗真龙'},
+        {code: 'CUSER190924000001',name: '杭梦琪'},
+        {code: 'CUSER190927000001',name: '陈竞毅'}
     )
     
     sessionStorage.setItem("users", JSON.stringify(users));

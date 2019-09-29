@@ -50,8 +50,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000317"><img src="views/assets/base/img/content/client-logos/la.jpg" alt=""/></a>
                         LA
-                        <a href="shop?id=OLSHOP190717000003"><img src="views/assets/base/img/content/client-logos/petit-mieux.jpg" alt=""/></a>
-                        贝的屋
+                        <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
+                        adidas
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/southside-story.jpg" alt=""/></a>
@@ -60,16 +60,16 @@
                         逸麟居
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000509"><img src="views/assets/base/img/content/client-logos/vero-moda.jpg" alt=""/></a>
-                        VEROMODA
+                        <a href="shop?id=OLSHOP190627000001"><img src="views/assets/base/img/content/client-logos/gu.jpg" alt=""/></a>
+                        GU
                         <a href="shop?id=OLSHOP190821000001"><img src="views/assets/base/img/content/client-logos/diaji.jpg" alt=""/></a>
                         嗲记
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190501000002"><img src="views/assets/base/img/content/client-logos/pujiangxiaoyue.jpg" alt=""/></a>
-                        浦江晓月
-                        <a href="shop?id=OLSHOP180917000637"><img src="views/assets/base/img/content/client-logos/wangshunge.jpg" alt=""/></a>
-                        旺顺阁鱼头泡饼
+                        <a href="shop?id=OLSHOP180917000743"><img src="views/assets/base/img/content/client-logos/jianghudongbaiding.jpg" alt=""/></a>
+                        姜虎东白丁
+                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/chengnanwangshi.jpg" alt=""/></a>
+                        城南往事
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000634"><img src="views/assets/base/img/content/client-logos/guimanlong.jpg" alt=""/></a>
@@ -80,8 +80,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/></a>
                         耶里夏丽
-                        <a href="shop?id=OLSHOP190420000003"><img src="views/assets/base/img/content/client-logos/wangxiangyuan.jpg" alt=""/></a>
-                        望湘园小雅
+                        <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
+                         NIKE
                     </div>
                 </div>
             </div>
