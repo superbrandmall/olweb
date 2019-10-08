@@ -53,6 +53,9 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         </div>
                         <ul class="c-content-list-1 c-theme c-separator-dot c-square">
                             <li>
+                                <?= $lang['shop_room_name'] ?>: <span id="room_name"></span>
+                            </li>
+                            <li>
                                 <?= $lang['shop_room_number'] ?>: <span id="unit"></span>
                             </li>
                             <li>

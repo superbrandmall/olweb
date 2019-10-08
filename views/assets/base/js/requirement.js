@@ -287,10 +287,10 @@ function ShowResults(result,searchCode) {
         
         var img;
         if(v.shopState !== 0 && v.shopState !== 2){ //非在租或待租
-            img = '/views/assets/base/img/content/mall/empty.jpg';
+            img = '/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg';
         } else {
             if(result.firstImage === null){
-                img = '/views/assets/base/img/content/mall/empty.jpg';
+                img = '/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg';
             } else {
                 img = v.firstImage;
             }

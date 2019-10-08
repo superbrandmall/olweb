@@ -245,10 +245,10 @@ function ShowOtherShops(){
                         
                         var img;
                         if(v.shopState !== 0 && v.shopState !== 2){ //非在租或待租
-                            img = '/views/assets/base/img/content/mall/empty.jpg';
+                            img = '/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg';
                         } else {
                             if(v.firstImage === null){
-                                img = '/views/assets/base/img/content/mall/empty.jpg';
+                                img = '/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg';
                             } else {
                                 img = v.firstImage;
                             }
@@ -260,7 +260,7 @@ function ShowOtherShops(){
 <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">'+modality+'</div>\n\
 <div class="c-overlay-wrapper">\n\
 <div class="c-overlay-content"><a href="shop?id='+v.code+'" class="btn btn-md c-btn-grey-1 c-btn-uppercase c-btn-bold c-btn-border-1x c-btn-square">'+my_cart_more_details+'</a></div></div>\n\
-<div class="c-bg-img-center-contain c-overlay-object" data-height="height" style="height: 270px; background-size: 405px; background-image: url('+img+');"></div></div>\n\
+<div class="c-bg-img-center-contain c-overlay-object" data-height="height" style="height: 270px; background-size: 405px; background-image: url('+img+'); background-position: center center;"></div></div>\n\
 <div class="c-info"><p class="c-title c-font-18 c-font-slim">'+v.unit+'</p>\n\
 <p class="c-price c-font-16 c-font-slim">'+floorName+' &nbsp;\n\
 <span class="c-font-16 c-font-line-through c-font-red">'+v.area+'m<sup>2</sup></span></p></div>\n\

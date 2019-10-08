@@ -41,6 +41,7 @@ function GetShopInfo(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                $('#room_name').text(response.data.shopName || '-');
                 $('#unit').text(response.data.unit || '-');
                 
                 var floorName,floorNameEng,mallName;
@@ -135,7 +136,7 @@ function GetShopInfo(){
                     $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url('+response.data.firstImage+'); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');            
                 } else {
                     if(response.data.shopState !== 0 && response.data.shopState !== 2){ //非在租或待租
-                        $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/empty.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
+                        $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
                     } else {
                         $.each(response.data.images, function(i,v){
                             $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
@@ -299,7 +300,7 @@ function getCoords(mc,fn) {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
-                    if(v.state === 1 && v.coords != null && v.coords != ''){
+                    if(v.state !== 0 && v.coords != null && v.coords != ''){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="shop?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
                     }
                 });

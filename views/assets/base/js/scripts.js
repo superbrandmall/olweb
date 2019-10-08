@@ -416,6 +416,10 @@ function interpretBusinessCode1(msg) {
     }
 }
 
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 $.validator.addMethod( "remoteValidate", function( value, element, param, method ) {
     if ( this.optional( element ) ) {
         return "dependency-mismatch";

@@ -72,10 +72,10 @@
                         城南往事
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000634"><img src="views/assets/base/img/content/client-logos/guimanlong.jpg" alt=""/></a>
-                        桂满陇
-                        <a href="shop?id=OLSHOP180917000732"><img src="views/assets/base/img/content/client-logos/skateboard-chicken.jpg" alt=""/></a>
-                        滑板鸡
+                        <a href="shop?id=OLSHOP190731000004"><img src="views/assets/base/img/content/client-logos/qixi.jpg" alt=""/></a>
+                        栖蠵
+                        <a href="shop?id=OLSHOP190426000001"><img src="views/assets/base/img/content/client-logos/ur.jpg" alt=""/></a>
+                        URBAN REVIVO
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/></a>
