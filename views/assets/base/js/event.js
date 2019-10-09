@@ -30,6 +30,7 @@ function GetShopInfo(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                $('#room_name').text(response.data.shopName || '-');
                 $('#unit').text(response.data.unit || '-');
                 
                 var floorName,floorNameEng,mallName;
@@ -183,7 +184,7 @@ function GetMap(fn,lk,mc){
     }
     
     $('#map').attr({
-        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+$.lang.mallLangCat+'/'+fc+'F.png',
+        'src': 'views/assets/base/img/content/floor-plan/'+lk+'/'+fc+'F.png',
         'alt': fc+'F',
         'usemap': '#Map_'+fc+'F_s'
      });

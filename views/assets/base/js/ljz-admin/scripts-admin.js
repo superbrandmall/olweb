@@ -611,6 +611,7 @@ function GetShopInfo(sc){
                 
                 $('#unit').text(shop.unit);
                 $('#shop_name').text(shop.shopName);
+                console.log(shop.code);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

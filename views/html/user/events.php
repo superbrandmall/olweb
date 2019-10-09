@@ -80,7 +80,7 @@
                         <div class="cbp-caption-activeWrap">
                             <div class="cbp-l-caption-alignCenter">
                                 <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001163" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
+                                    <a href="event?id=OLSHOP190809000001" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
                                 </div>
                             </div>
                         </div>
