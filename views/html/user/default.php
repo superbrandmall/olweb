@@ -81,7 +81,13 @@
                         <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/></a>
                         耶里夏丽
                         <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
-                         NIKE
+                        NIKE
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190903000002"><img src="views/assets/base/img/content/client-logos/diandude.jpg" alt=""/></a>
+                        点都德
+                        <a href="shop?id=OLSHOP190627000004"><img src="views/assets/base/img/content/client-logos/ua.jpg" alt=""/></a>
+                        Under Armour
                     </div>
                 </div>
             </div>
