@@ -45,6 +45,24 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="box-body">
                             <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                                 <div class="form-group">
+                                    <label class="col-md-3 control-label" for="namecard">联系人名片 <span style="margin-right:10px;"></span></label>
+                                    <div class="col-md-7">
+                                        <label class="btn btn-default">
+                                            选择文件...
+                                            <input type="hidden" name="MAX_FILE_SIZE" value="9000000">
+                                            <input type="hidden" id="hidden_namecard" name="hidden_namecard">
+                                            <input type="file" name="namecard" id="namecard" data-maxsize="9000000" accept="image/jpeg,image/png" style="width: 0;height: 0;">
+                                        </label>
+                                        <span class="help-block" id="namecard-status">文件类型可选择jpg、png，文件最大尺寸不超过10M。<br><i class="fa fa-exclamation-circle"></i> 图片请尽量保持清晰完整。</span>
+                                        <span class='label label-default' id="namecard-info"></span>
+                                        <div id="errorcontainer-namecard" class="errorDiv"></div>
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-3">
+                                        <img id="imagePreview" style="max-width: 200px; max-height: 100px;">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
                                     <label for="contact_name_1" class="col-md-3 control-label">联系人姓名 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
@@ -77,14 +95,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="wechat"  class="col-md-3 control-label">联系人微信号</label>
+                                    <label for="wechat"  class="col-md-3 control-label">联系人微信号 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="wechat" name="wechat" />
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="email"  class="col-md-3 control-label">联系人邮箱</label>
+                                    <label for="email"  class="col-md-3 control-label">联系人邮箱 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="email" name="email" />
                                         <div id="errorcontainer-email" class="errorDiv"></div>

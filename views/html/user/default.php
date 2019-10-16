@@ -78,8 +78,8 @@
                         URBAN REVIVO
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190420000001"><img src="views/assets/base/img/content/client-logos/yershari.jpg" alt=""/></a>
-                        耶里夏丽
+                        <a href="shop?id=OLSHOP190709000001"><img src="views/assets/base/img/content/client-logos/lokal.jpg" alt=""/></a>
+                        WAGAS
                         <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
                         NIKE
                     </div>

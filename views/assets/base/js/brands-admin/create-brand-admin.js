@@ -122,7 +122,7 @@ $(document).ready(function(){
     $('#logo').on("change", function () {
         var formData = new FormData();
         formData.append('vo.userCode',  $.cookie('login'));
-        formData.append('vo.containerName', 'brands');
+        formData.append('vo.containerName', 'logo');
         formData.append('vo.prefix', $.cookie('login')+'/photo/logo');
         formData.append('files', $('#logo')[0].files[0]);
         $.ajax({

@@ -212,8 +212,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <table class="table table-striped snipe-table table-responsive table-no-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th class="col-sm-2">
+                                                            <th class="col-sm-1">
                                                                 <div class="th-inner">姓名</div><div class="fht-cell"></div>
+                                                            </th>
+                                                            <th class="col-sm-2">
+                                                                <div class="th-inner">名片</div><div class="fht-cell"></div>
                                                             </th>
                                                             <th class="col-sm-2">
                                                                 <div class="th-inner">公司</div><div class="fht-cell"></div>
@@ -233,7 +236,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                             <th class="col-sm-1">
                                                                 <div class="th-inner">所有人</div><div class="fht-cell"></div>
                                                             </th>
-                                                            <th class="col-sm-2">
+                                                            <th class="col-sm-1">
                                                                 <div class="th-inner"></div><div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

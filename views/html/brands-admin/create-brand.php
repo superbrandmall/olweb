@@ -122,7 +122,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="attribute" class="col-md-3 control-label">品牌属性</label>
+                                    <label for="attribute" class="col-md-3 control-label">品牌属性 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="attribute" name="attribute" style="width: 100%">
                                             <option value="">未选择</option>
@@ -138,7 +138,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="class" class="col-md-3 control-label">品牌价位</label>
+                                    <label for="class" class="col-md-3 control-label">品牌价位 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="class" name="class" style="width: 100%">
                                             <option value="">未选择</option>
@@ -150,7 +150,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="reputation" class="col-md-3 control-label">口碑</label>
+                                    <label for="reputation" class="col-md-3 control-label">口碑 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="reputation" name="reputation" style="width: 100%">
                                             <option value="">未选择</option>
@@ -162,7 +162,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="market_share" class="col-md-3 control-label">市场销售份额</label>
+                                    <label for="market_share" class="col-md-3 control-label">市场销售份额 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <div class="input-group" style="padding-left: 0px;">
                                             <input class="form-control" type="text" id="market_share" name="market_share" />
@@ -172,7 +172,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="name_eng" class="col-md-3 control-label">英文名称</label>
+                                    <label for="name_eng" class="col-md-3 control-label">英文名称 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="name_eng" name="name_eng" />
                                         <div id="errorcontainer-name_eng" class="errorDiv"></div>
@@ -180,7 +180,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="location" class="col-md-3 control-label">开店区域</label>
+                                    <label for="location" class="col-md-3 control-label">开店区域 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="location" name="location" style="width: 100%">
                                             <option value="">未选择</option>
@@ -192,7 +192,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="standard_area" class="col-md-3 control-label">标准店面积</label>
+                                    <label for="standard_area" class="col-md-3 control-label">标准店面积 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="standard_area" name="standard_area" style="width: 100%">
                                             <option value="">未选择</option>
@@ -206,7 +206,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="target" class="col-md-3 control-label">主要客户群</label>
+                                    <label for="target" class="col-md-3 control-label">主要客户群 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="target" name="target" style="width: 100%">
                                             <option value="">未选择</option>
@@ -220,7 +220,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="city" class="col-md-3 control-label">城市</label>
+                                    <label for="city" class="col-md-3 control-label">城市 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="city" name="city" value="" />
                                         <div id="errorcontainer-city" class="errorDiv"></div>
@@ -228,7 +228,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="history" class="col-md-3 control-label">品牌发展历史</label>
+                                    <label for="history" class="col-md-3 control-label">品牌发展历史 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="history" name="history" style="width: 100%">
                                             <option value="">未选择</option>
@@ -241,14 +241,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="rank" class="col-md-3 control-label">行业排名</label>
+                                    <label for="rank" class="col-md-3 control-label">行业排名 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7 col-sm-12">
                                         <input class="form-control" type="text" id="rank" name="rank" />
                                     </div>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="shop_amount" class="col-md-3 control-label">当地已开店数</label>
+                                    <label for="shop_amount" class="col-md-3 control-label">当地已开店数 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="shop_amount" name="shop_amount" style="width: 100%">
                                             <option value="">未选择</option>
@@ -261,7 +261,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效</label>
+                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="compare" name="compare" style="width: 100%">
                                             <option value="">未选择</option>
@@ -275,7 +275,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="joined" class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM</label>
+                                    <label for="joined" class="col-md-3 control-label">是否有旗下品牌已入驻SBM/TM <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="joined" name="joined" style="width: 100%">
                                             <option value="">未选择</option>

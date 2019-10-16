@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var items = getURLParameter('items') || $('.page-size').text();
+    var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
         findAllLogs(getURLParameter('page'),items);
     } else {

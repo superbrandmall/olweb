@@ -390,16 +390,23 @@ function findContacts(url) {
                             update = lock;
                         }
                         
+                        if(v.remarkThird != null && v.remarkThird != ''){
+                            var nameCard = '><a href="'+v.remarkThird+'" data-toggle="lightbox" data-type="image"><img src="'+v.remarkThird+'" width="50"></a>';
+                        } else {
+                            var nameCard = '';
+                        }
+                        
                         $('#contactsTable').append('\
 <tr data-index="'+i+'">\n\
-<td class="col-sm-2">'+v.contactName+'</td>\n\
+<td class="col-sm-1">'+v.contactName+'</td>\n\
+<td class="col-sm-2">'+nameCard+'</td>\n\
 <td class="col-sm-2">'+v.companyName+'</td>\n\
 <td class="col-sm-2">'+v.title +'</td>\n\
 <td class="col-sm-1">'+v.contactPhone+'</td>\n\
 <td class="col-sm-1">'+(v.remarkFirst || "")+'</td>\n\
 <td class="col-sm-1">'+(v.remarkSecond || "")+'</td>\n\
 <td class="col-sm-1">'+user+'</td>\n\
-<td class="col-sm-2">'+update+'</td>\n\
+<td class="col-sm-1">'+update+'</td>\n\
 </tr>');
                     })
                 }

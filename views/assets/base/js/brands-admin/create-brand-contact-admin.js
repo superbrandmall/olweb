@@ -63,6 +63,71 @@ $(document).ready(function(){
             checkBrand();
         }
     });
+                
+    $('#namecard').on("change", function () {
+        var formData = new FormData();
+        formData.append('vo.userCode',  $.cookie('login'));
+        formData.append('vo.containerName', 'namecard');
+        formData.append('vo.prefix', $.cookie('login')+'/photo/namecard');
+        formData.append('files', $('#namecard')[0].files[0]);
+        $.ajax({
+            type: "POST",
+            url: $.api.baseNew+"/zuul/onlineleasing-file/api/upload/multi",
+            data: formData,
+            async: false,
+            cache: false,
+            processData: false,
+            contentType: false,
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function(response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    $('#hidden_namecard').val(response.data[0].uri);
+                    $('#imagePreview').attr('src',response.data[0].uri);
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: '/controllers/api/1.0/ApiNameCard.php',
+                        data: {
+                            namecard: response.data[0].uri
+                        },
+                        dataType: "json",
+                        success: function(response, status, xhr) {
+                            var rs = response.words_result;
+                            if($('#contact_name_1').val() == '' && rs.NAME.length > 0){
+                                $('#contact_name_1').val(rs.NAME[rs.NAME.length - 1]);
+                            }
+                            if($('#contact_phone_1').val() == '' && rs.MOBILE.length > 0){
+                                $('#contact_phone_1').val(rs.MOBILE[rs.MOBILE.length - 1]);
+                            }
+                            if($('#company_name').val() == '' && rs.COMPANY.length > 0){
+                                $('#company_name').val(rs.COMPANY[rs.COMPANY.length - 1]);
+                            }
+                            if($('#title').val() == '' && rs.TITLE.length > 0){
+                                $('#title').val(rs.TITLE[rs.TITLE.length - 1]);
+                            }
+                            if($('#email').val() == '' && rs.EMAIL.length > 0){
+                                $('#email').val(rs.EMAIL[rs.EMAIL.length - 1]);
+                            }
+                        },
+                        error : function(){ }
+                    });
+                } else {
+                    console.log(response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    });            
 })
 
 function checkBrand() {
@@ -126,6 +191,7 @@ function checkBrand() {
 function addContact() {
     var brand_code = getURLParameter('id') || '';
     var new_category_code = getURLParameter('category') || '';
+    var namecard = $('#hidden_namecard').val();
     var contact_name_1 = $('#contact_name_1').val();
     var contact_phone_1 = $('#contact_phone_1').val();
     var company_name = $('#company_name').val();
@@ -146,6 +212,7 @@ function addContact() {
             "newCategoryCode": new_category_code,
             "remarkFirst": wechat,
             "remarkSecond": email,
+            "remarkThird": namecard,
         };
 
         $.ajax({

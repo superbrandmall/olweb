@@ -85,7 +85,7 @@ function findBrandDashboard(pd) {
                 sessionStorage.setItem("userModalities", JSON.stringify(response.data.userModalities));
                 
                 if(response.data.userModalities.length > 0){
-                    var items = getURLParameter('items') || $('.page-size').text();
+                    var items = getURLParameter('items') || $('.page-size').first().text();
                     var url = '';
                     if(response.data.userModalities[0].isComplete == 2){
                         url = 'findAllByUserCodes'; // Category head 可以查看自己管理的业态，其中马云飞和宋总可以查看所有业态
