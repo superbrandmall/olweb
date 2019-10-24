@@ -42,14 +42,14 @@
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000682"><img src="views/assets/base/img/content/client-logos/dongying.jpg" alt=""/></a>
-                        东瀛
+                        <a href="shop?id=OLSHOP180917000425"><img src="views/assets/base/img/content/client-logos/fairwhale.jpg" alt=""/></a>
+                        FAIRWHALE
                         <a href="shop?id=OLSHOP180917000082"><img src="views/assets/base/img/content/client-logos/green-safe.jpg" alt=""/></a>
                         Green&Safe
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000317"><img src="views/assets/base/img/content/client-logos/la.jpg" alt=""/></a>
-                        LA
+                        <a href="shop?id=OLSHOP180917000830"><img src="views/assets/base/img/content/client-logos/3am.jpg" alt=""/></a>
+                        3AM HAIR SALON
                         <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
                         adidas
                     </div>

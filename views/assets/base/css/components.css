@@ -3414,7 +3414,7 @@ h1 {
     letter-spacing: 0px;
     font-style: normal;
     transition: all 0.2s;
-    padding: 41px 15px 39px 15px;
+    padding: 41px 20px 39px 20px;
     min-height: 100px;
     font-size: 14px;
   }
@@ -3620,13 +3620,14 @@ h1 {
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li > .c-link {
     font-size: 14px;
+    font-weight: 500;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > h3 {
     font-size: 14px;
     text-transform: uppercase;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > a {
-    font-size: 11px;
+    font-size: 13px;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li > a {
     font-size: 14px;
@@ -3706,28 +3707,17 @@ h1 {
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open > .dropdown-menu {
     display: block;
+    text-align: center;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open > .dropdown-menu .dropdown-submenu.c-open > .dropdown-menu {
     display: block;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .dropdown-submenu > a:after,
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li a.dropdown-toggle:after {
-    position: relative;
-    float: right;
-    display: inline-block;
-    font-size: 13px;
-    content: "\f053";
-    font-family: 'Font Awesome\ 5 Free';
-    height: auto;
-    margin-top: 2px;
-    margin-right: 2px;
-    font-weight: 900;
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open.dropdown-submenu > a:after, .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li.c-open > a.dropdown-toggle:after,
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .c-open.dropdown-submenu > a:after,
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .c-open > a.dropdown-toggle:after {
-    margin-right: 0px;
-    content: "\f078";
   }
   .c-layout-header .c-navbar .c-mega-menu > .nav.navbar-nav > li .dropdown-menu {
     padding-bottom: 0;
@@ -3793,13 +3783,15 @@ h1 {
     display: none !important;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li > .c-link {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > h3 {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 500;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-uppercase > .nav.navbar-nav > li .dropdown-menu > li > a {
-    font-size: 13px;
+    font-size: 12px;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-bold > .nav.navbar-nav > li > .c-link {
   }
@@ -3807,7 +3799,7 @@ h1 {
     font-weight: 600;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-fonts-bold > .nav.navbar-nav > li .dropdown-menu > li > a {
-    font-weight: 300;
+    font-weight: 500;
   }
 }
 @media (min-width: 992px) {
@@ -4101,17 +4093,17 @@ h1 {
   .c-layout-header.c-layout-header-default-mobile .c-brand > .c-hor-nav-toggler {
     margin-top: -1px;
     display: inline-block;
-    background-color: #c9ae89;
+    background-color: transparent;
     padding: 3px 7px 4px 7px;
   }
   .c-layout-header.c-layout-header-default-mobile .c-brand > .c-hor-nav-toggler > .c-line {
-    background: #fff;
+    background: #2b2b2b;
   }
   .c-layout-header.c-layout-header-default-mobile .c-brand > .c-hor-nav-toggler:hover {
-    background-color: #2B2B2B;
+    background-color: transparent;
   }
   .c-layout-header.c-layout-header-default-mobile .c-brand > .c-hor-nav-toggler:hover > .c-line {
-    background: white;
+    background: #2b2b2b;
   }
   .c-layout-header.c-layout-header-default-mobile .c-brand > .c-search-toggler {
     display: inline-block;
@@ -5389,8 +5381,8 @@ h1 {
 @media (min-width: 992px) {
   /* 992px */
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li > .dropdown-menu {
-    background: #2c3137;
-    box-shadow: none;
+    background: #fff;
+    box-shadow: 0 4px 4px rgba(0,0,0,.1);
     border: 0;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu {
@@ -5402,7 +5394,7 @@ h1 {
     color: #cbd2d9;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu > li > a {
-    color: #fff;
+    color: #2b2b2b;
     overflow-wrap: break-word;
     word-wrap: break-word;
     -ms-word-break: break-all;
@@ -5412,15 +5404,13 @@ h1 {
     word-break: break-word;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu > li > a:hover, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu > li > a:focus {
-    background: none;
-    color: #7d8691;
+      background-color: #fff;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu > li.c-active > a, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li .dropdown-menu > li:hover > a {
-    background: #292e33;
-    color: #ff6b57;
+      background-color: #fff;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li > .dropdown-menu.c-menu-type-classic .dropdown-menu {
-    background: #2c3137;
+      background-color: #fff;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark > .nav.navbar-nav > li > .dropdown-menu.c-menu-type-mega > .row > div {
     border-right: 1px solid #32373d;
@@ -5496,6 +5486,7 @@ h1 {
 @media (max-width: 991px) {
   /* 991px */
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile {
+      text-align: center;
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li > .c-link {
     color: #2b2b2b;
@@ -5526,7 +5517,7 @@ h1 {
   }
   .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li.c-active > a, .c-layout-header .c-navbar .c-mega-menu.c-mega-menu-dark-mobile > .nav.navbar-nav > li .dropdown-menu > li:hover > a {
     background: none;
-    color: #ff6b57;
+    color: #2b2b2b;
   }
 }
 .c-layout-revo-slider:before, .c-layout-revo-slider:after {

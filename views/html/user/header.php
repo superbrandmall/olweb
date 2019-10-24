@@ -121,14 +121,14 @@ include("views/assets/base/" . $filename);
         echo 'c-active ';
     }
     ?>c-menu-type-classic">
-                                    <a href="/" class="c-link"><i class="fa fa-home"></i> <?= $lang['nav_home'] ?></a>
+                                    <a href="/" class="c-link"><?= $lang['nav_home'] ?></a>
                                 </li>
                                 <li class="<?php
                                     if (isset($_GET['p']) && substr($_GET['p'], 0, 6) == 'olmall') {
                                         echo 'c-active ';
                                     }
     ?>c-menu-type-classic">
-                                    <a href="#!" class="c-link dropdown-toggle"><i class="fa fa-caret-down"></i> <?= $lang['nav_malls'] ?></a>
+                                    <a href="#!" class="c-link dropdown-toggle"><?= $lang['nav_malls'] ?></a>
                                     <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                                 </li>
                             <?php
@@ -144,7 +144,7 @@ include("views/assets/base/" . $filename);
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="<?php echo $requirment; ?>" class="c-link"><i class="fas fa-store-alt"></i> <?= $lang['nav_search'] ?></a>
+                                    <a href="<?php echo $requirment; ?>" class="c-link"><?= $lang['nav_search'] ?></a>
                                 </li>
                             <?php
                             if (strpos($_SERVER['REQUEST_URI'],'olmall190117000001') == FALSE) { // 如果是LY则不显示以下内容
@@ -154,14 +154,14 @@ include("views/assets/base/" . $filename);
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="events" class="c-link"><i class="far fa-calendar-alt"></i> <?= $lang['nav_event'] ?></a>
+                                    <a href="events" class="c-link"><?= $lang['nav_event'] ?></a>
                                 </li>
                                 <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'ads') {
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="ads" class="c-link"><i class="fas fa-ad"></i> <?= $lang['nav_ad'] ?></a>
+                                    <a href="ads" class="c-link"><?= $lang['nav_ad'] ?></a>
                                 </li>
                             <?php
                             }
