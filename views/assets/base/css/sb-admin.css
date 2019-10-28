@@ -3,7 +3,7 @@
 /* ------------------------------- */
 
  body {
-    background-color: #1c2238;
+    background-color: #252C48;
     overflow-x: hidden;
 }
 
@@ -22,11 +22,11 @@ a, a:hover, a:focus {
 #page-wrapper {
     padding: 0 15px 30px;
     min-height: 568px;
-    background-color: #252c48;
+    background-color: #0C132F;
 }
 
 .navbar-inverse {
-    background-color: #111724;
+    background-color: #252C48;
     border-color: #252c45;
 }
 
@@ -37,18 +37,18 @@ a, a:hover, a:focus {
 #side-menu > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
-    color: #91a3ba;
+    color: rgb(69, 53, 15);
 }
 
 #side-menu {
-    background-color: #1c2238;
+    background-color: rgb(106, 88, 47);
 }
 
 #side-menu > .active > a,
 #side-menu > li > a:hover, 
 #side-menu > li > a:focus {
-    color: #fff;
-    background-color: #3b6eb1;
+    color: rgb(106, 88, 47);
+    background-color: rgb(69, 53, 15);
 }
 
 .thumbnail {
@@ -66,6 +66,11 @@ a, a:hover, a:focus {
 
 .navbar-static-side ul li {
     text-align: center;
+    border-bottom: solid 1px rgb(180, 164, 126); 
+}
+
+.navbar-static-side ul li:first-child {
+    border-top: solid 1px rgb(180, 164, 126); 
 }
 
 /* Navigation */
@@ -85,10 +90,15 @@ a, a:hover, a:focus {
 .navbar-top-links li a {
     padding: 15px;
     min-height: 50px;
+    color: rgb(37, 44, 72);
 }
 
 .navbar-top-links .dropdown-menu li {
     display: block;
+}
+
+.dropdown-menu .divider {
+    background-color: rgb(37, 44, 72);
 }
 
 .navbar-top-links .dropdown-menu li:last-child {
@@ -98,6 +108,10 @@ a, a:hover, a:focus {
 .navbar-top-links .dropdown-menu li a {
     padding: 3px 20px;
     min-height: 0;
+}
+
+.navbar-top-links .dropdown-menu li a:hover {
+    background-color: transparent;
 }
 
 .navbar-top-links .dropdown-menu li a div {
@@ -126,8 +140,16 @@ a, a:hover, a:focus {
 .navbar-top-links .dropdown-user {
     right: 0;
     left: auto;
+    background-color: rgb(120, 128, 163);
 }
 
+
+.nav .open > a, 
+.nav .open > a:hover, 
+.nav .open > a:focus {
+    background-color: rgb(120, 128, 163);
+    color: rgb(37, 44, 72) !important;
+}
 /* Sidebar Menu Styles */
 
  .sidebar-search {
@@ -328,6 +350,15 @@ table.dataTable thead .sorting:after {
     float: right;
     font-family: fontawesome;
     color: rgba(50,50,50,.5);
+}
+
+.table-bordered > thead > tr > th, 
+.table-bordered > tbody > tr > th, 
+.table-bordered > tfoot > tr > th, 
+.table-bordered > thead > tr > td, 
+.table-bordered > tbody > tr > td, 
+.table-bordered > tfoot > tr > td {
+    border-color: rgb(37, 44, 72);
 }
 
 /* Circle Buttons */

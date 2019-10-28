@@ -4,14 +4,14 @@
     <div id="page-wrapper" class="home-page">
         <div class="row">
             <div class="col-lg-12">
-                <h1 id="floorNo" style="display: inline-block; margin-right: 5px; color: #a1a1b0;"></h1><label style="color: #a1a1b0;">楼层指引</label>
+                <h1 id="floorNo" style="display: inline-block; margin-right: 5px; color: rgb(120, 128, 163);"></h1><label style="color: rgb(120, 128, 163);">楼层指引</label>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="form-group">
                     <div class="c-content-panel" style="background-color: transparent;">
-                        <div class="c-label" id="fmap" style="background-color: transparent; margin: 10px 0; color: #a1a1b0;">
+                        <div class="c-label" id="fmap" style="background-color: transparent; margin: 10px 0; color: #fff;">
                             <span style="margin-left: 15px; background-color: #7d9fe9; width: 20px; height: 13px; display: inline-block;"></span> 在租 <span id="leased"></span>%
                             <span style="margin-left: 15px; background-color: #FE9E9E; width: 20px; height: 13px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
                             <span style="margin-left: 15px; background-color: #FEED99; width: 20px; height: 13px; display: inline-block;"></span> 待租 <span id="to_be_lease"></span>%

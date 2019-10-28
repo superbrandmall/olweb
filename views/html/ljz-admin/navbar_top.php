@@ -6,7 +6,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="home" style="color: #38a2a5;">
+        <a class="navbar-brand" href="home" style="color: #fff; font-weight: bold;">
             <img src="/views/assets/base/img/layout/logos/logo.png" alt="正大" height="25" style="display: inline-block;" /> FLOOR PLANS
         </a>
     </div>

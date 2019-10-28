@@ -5,22 +5,22 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <?php include ('navbar_side.php'); ?>
-    <div id="page-wrapper" style="color: #bdbdbd;">
+    <div id="page-wrapper" style="color: rgb(37, 44, 72);">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Venue Rental Summary by Area</h1>
+                <h1 class="page-header" style="color: rgb(120, 128, 163); border-bottom-color: rgb(120, 128, 163);">Venue Rental Summary by Area</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_area_percentage" class="table table-bordered">
+                    <table id="summary_area_percentage" class="table table-bordered" style="background-color: #7880A3; margin-bottom: 0; border: none;">
                         <thead>
                             <tr>
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: rgb(37, 44, 72); background-color: #7880A3;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -39,13 +39,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_area" class="table table-bordered">
+                    <table id="summary_area" class="table table-bordered" style="background-color: #7880A3; margin-bottom: 0; border: none;">
                         <thead>
                             <tr>
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: rgb(37, 44, 72); background-color: #7880A3;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -66,19 +66,19 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Venue Rental Summary by Units</h1>
+                <h1 class="page-header" style="color: rgb(120, 128, 163); border-bottom-color: rgb(120, 128, 163);">Venue Rental Summary by Units</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_units_percentage" class="table table-bordered">
+                    <table id="summary_units_percentage" class="table table-bordered" style="background-color: #7880A3; margin-bottom: 0; border: none;">
                         <thead>
                             <tr>
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: rgb(37, 44, 72); background-color: #7880A3;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
@@ -97,13 +97,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             
             <div class="col-lg-6">
                 <div class="table-responsive">
-                    <table id="summary_units" class="table table-bordered">
+                    <table id="summary_units" class="table table-bordered" style="background-color: #7880A3; margin-bottom: 0; border: none;">
                         <thead>
                             <tr>
                                 <th>楼层</th>
                                 <th>在租</th>
                                 <th style="padding: 0;">
-                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: #bdbdbd; background-color: #252c48;">
+                                    <select class="form-control" name="days-before-expiration" style="border: 0 none; box-shadow: none; color: rgb(37, 44, 72); background-color: #7880A3;">
                                         <option value="90">待租90天</option>
                                         <option value="60">待租60天</option>
                                         <option value="30">待租30天</option>
