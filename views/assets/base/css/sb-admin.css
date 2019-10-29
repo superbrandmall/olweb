@@ -4,7 +4,6 @@
 
  body {
     background-color: #252C48;
-    overflow-x: hidden;
 }
 
 a, a:hover, a:focus {
@@ -61,6 +60,7 @@ a, a:hover, a:focus {
         margin: 0 0 0 100px;
         padding: 0 30px 30px;
         min-height: 1000px;
+        overflow: auto;
     }
 }
 
@@ -79,12 +79,12 @@ a, a:hover, a:focus {
 
 /* Top Right Navigation Dropdown Styles */
 
- .navbar-top-links li {
-    display: inline-block;
+ .navbar-top-links {
+    margin-right: 0;
 }
 
-.navbar-top-links li:last-child {
-    margin-right: 15px;
+ .navbar-top-links li {
+    display: inline-block;
 }
 
 .navbar-top-links li a {

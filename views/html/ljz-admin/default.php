@@ -26,7 +26,15 @@
                             </label>)
                             <span style="margin-left: 15px; background-color: #D5C8AA; width: 20px; height: 13px; display: inline-block;"></span> 改造 <span id="renovation"></span>%
                         </div>
-                        <div class="c-body">
+                        <div class="c-body" style="position: relative;">
+                            <div style="position: absolute;top: 0;left: 0; z-index: 1;">
+                                <button id="zoom_in" class="btn btn-sm btn-default" style="display: block;">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button id="zoom_out" class="btn btn-sm btn-default" style="display: block;">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
                             <img src="#" class="img-responsive" usemap="" id="map" />
                             <map name="" id=""></map>
                         </div>

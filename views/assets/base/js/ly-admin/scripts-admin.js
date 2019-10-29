@@ -103,7 +103,34 @@ $(document).ready(function(){
     $('input[name=daysBeforeExpiration]').change(function() {
         var exp = $('input[name=daysBeforeExpiration]:checked').val();
         insertParam('expire',exp);
-    }); 
+    });
+    
+    var size = 0.85;
+    $('#zoom_in').click(function (){
+        size = size + 0.15;
+        $('#map').mapster('resize', size*($(window).width()), 0, 0);
+        addTextLayer();
+        
+        $('#zoom_out').attr('disabled', false);
+        if(size >= 2.35){
+            $(this).attr('disabled', true);
+        } else {
+            $(this).attr('disabled', false);
+        }
+    });
+    
+    $('#zoom_out').click(function (){
+        size = size - 0.15;
+        $('#map').mapster('resize', size*($(window).width()), 0, 0);
+        addTextLayer();
+        
+        $('#zoom_in').attr('disabled', false);
+        if(size <= 0.15){
+            $(this).attr('disabled', true);
+        } else {
+            $(this).attr('disabled', false);
+        }
+    });
 });
 
 $(function() {
@@ -120,6 +147,11 @@ $(function() {
         } else {
             $('div.sidebar-collapse').removeClass('collapse');
         }
+    });
+    
+    window.addEventListener("resize",function(){
+        $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
+        addTextLayer();
     });
 });
 
@@ -300,6 +332,11 @@ function drawShops(){
     
     $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
     
+    addTextLayer();
+}
+
+function addTextLayer(){
+    $('map span').remove();
     if(document.body.clientWidth > 1000){
         setTimeout(function () {
             var pos, brand;
@@ -333,47 +370,43 @@ function drawShops(){
                         y = y + 2;
                     }
                     if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 35);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 + 10);
                     } else {
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 25);
+                        posTop = parseInt((posTopMin + posTopMax) / 2);
                     }
                     
                     brand = $(this).attr('name');
                     
-                    var fontSize = 6;
+                    var fontSize = 8;
                     if($(this).attr('data-area') < 25){
-                        fontSize = 4;
-                    } else if($(this).attr('data-area') >= 25 && $(this).attr('data-area') < 100){
-                        fontSize = 5;
-                    } else if($(this).attr('data-area') >= 100 && $(this).attr('data-area') < 200){
                         fontSize = 6;
-                    } else if($(this).attr('data-area') >= 200 && $(this).attr('data-area') < 300){
+                    } else if($(this).attr('data-area') >= 25 && $(this).attr('data-area') < 100){
                         fontSize = 7;
-                    } else if($(this).attr('data-area') >= 300 && $(this).attr('data-area') < 400){
+                    } else if($(this).attr('data-area') >= 100 && $(this).attr('data-area') < 200){
                         fontSize = 8;
-                    } else if($(this).attr('data-area') >= 400 && $(this).attr('data-area') < 500){
+                    } else if($(this).attr('data-area') >= 200 && $(this).attr('data-area') < 300){
                         fontSize = 9;
-                    } else if($(this).attr('data-area') >= 500 && $(this).attr('data-area') < 600){
+                    } else if($(this).attr('data-area') >= 300 && $(this).attr('data-area') < 400){
                         fontSize = 10;
-                    } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
+                    } else if($(this).attr('data-area') >= 400 && $(this).attr('data-area') < 500){
                         fontSize = 11;
-                    } else if($(this).attr('data-area') >= 700 && $(this).attr('data-area') < 800){
+                    } else if($(this).attr('data-area') >= 500 && $(this).attr('data-area') < 600){
                         fontSize = 12;
-                    } else if($(this).attr('data-area') >= 800 && $(this).attr('data-area') < 900){
+                    } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
                         fontSize = 13;
-                    } else if($(this).attr('data-area') >= 900 && $(this).attr('data-area') < 1000){
+                    } else if($(this).attr('data-area') >= 700 && $(this).attr('data-area') < 800){
                         fontSize = 14;
-                    } else if($(this).attr('data-area') >= 1000 && $(this).attr('data-area') < 1100){
+                    } else if($(this).attr('data-area') >= 800 && $(this).attr('data-area') < 900){
                         fontSize = 15;
-                    } else if($(this).attr('data-area') >= 1100 && $(this).attr('data-area') < 1200){
+                    } else if($(this).attr('data-area') >= 900 && $(this).attr('data-area') < 1000){
                         fontSize = 16;
-                    } else if($(this).attr('data-area') >= 1200 && $(this).attr('data-area') < 1300){
+                    } else if($(this).attr('data-area') >= 1000 && $(this).attr('data-area') < 1100){
                         fontSize = 17;
-                    } else if($(this).attr('data-area') >= 1300 && $(this).attr('data-area') < 1400){
+                    } else if($(this).attr('data-area') >= 1100 && $(this).attr('data-area') < 1200){
                         fontSize = 18;
-                    } else if($(this).attr('data-area') >= 1400 && $(this).attr('data-area') < 1500){
+                    } else if($(this).attr('data-area') >= 1200 && $(this).attr('data-area') < 1300){
                         fontSize = 19;
-                    } else if($(this).attr('data-area') >= 1500){
+                    } else if($(this).attr('data-area') >= 1300){
                         fontSize = 20;
                     }
                     
@@ -726,65 +759,6 @@ function getURLParameter(sParam) {
     }
 }
 
-function generatePages(currentPage, LastPage) {
-    var pages = '';
-    if (LastPage <= 6) {
-        for(var i=1;i<=LastPage;i++) {
-            if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
-            } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
-            }
-        }
-    } else {
-        if(currentPage>1){
-            var previousPage = +currentPage-1;
-            pages += '<li><a href="?page='+previousPage+'">&lt;</a></li>';
-        } else {
-            pages += '<li class="c-space"><span>&lt;</span></li>';
-        }
-        for(var i=1;i<=3;i++) {
-            if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
-            } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
-            }
-        }
-        pages += '<li class="c-space"><span>...</span></li>';
-        for(var i=LastPage-2;i<=LastPage;i++) {
-            if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="javascript: void(0);">'+i+'</a></li>';
-            } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'">'+i+'</a></li>';
-            }
-        }
-        if(currentPage<LastPage){
-            var nextPage = +currentPage+1;
-            pages += '<li><a href="?page='+nextPage+'">&gt;</a></li>';
-        } else {
-            pages += '<li class="c-space"><span>&gt;</span></li>';
-        }
-    }
-    $(".pagination").append(pages);
-}
-
-function refineUrl() {
-    //get full url
-    var url = window.location.href;
-    //get url after/  
-    var value = url.substring(url.lastIndexOf('/') + 1);
-    //get the part after before ?
-    value  = value.split("?")[0];   
-    return value;     
-}
-
-function refineOfferUrl() {
-    var url = window.location.href;
-    var value = url.substring(url.lastIndexOf('/') + 1);
-    value  = value.split("&")[0];   
-    return value;     
-}
-
 function getMalls() {
     $.ajax({
         url: $.api.baseNew+"/onlineleasing-customer/api/base/info/mall/findAllOrderByPosition",
@@ -851,128 +825,6 @@ function getModalities() {
     });
 }
 
-function IncrDate(date_str){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() + 1);
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-    } else {
-        return '';
-    }
-}
-
-function IncrDates(date_str,dates){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() + dates);
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-    } else {
-        return '';
-    }
-}
-
-function IncrMonth(date_str){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10),  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate());
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (Number(dt.getMonth()) + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-    } else {
-        return '';
-    }
-}
-
-function IncrYear(date_str){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate());
-        parts[0] = "" + (Number(dt.getFullYear()) + 1);
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-            parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-            
-    } else {
-        return '';
-    }
-}
-
-function IncrYears(date_str, years){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() - 1);
-        parts[0] = "" + (Number(dt.getFullYear()) + Number(years));
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
-        }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-            parts[2] = "0" + parts[2];
-        }
-        return parts.join("-");
-            
-    } else {
-        return '';
-    }
-}
-
 function interpretBusinessCode(msg) {
     if(msg !== ''){
         $('#ui_alert').text(msg).slideDown().delay(2000).slideUp(0);
@@ -981,62 +833,3 @@ function interpretBusinessCode(msg) {
         }, 0);
     }
 }
-
-$.validator.addMethod( "remoteValidate", function( value, element, param, method ) {
-    if ( this.optional( element ) ) {
-        return "dependency-mismatch";
-    }
-    method = typeof method === "string" && method || "remoteValidate";
-
-    var previous = this.previousValue( element, method ),
-    validator, data, optionDataString;
-
-    if ( !this.settings.messages[ element.name ] ) {
-        this.settings.messages[ element.name ] = {};
-    }
-    previous.originalMessage = previous.originalMessage || this.settings.messages[ element.name ][ method ];
-    this.settings.messages[ element.name ][ method ] = previous.message;
-
-    param = typeof param === "string" && { url: param } || param;
-    optionDataString = $.param( $.extend( { data: value }, param.data ) );
-    if ( previous.old === optionDataString ) {
-        return previous.valid;
-    }
-
-    previous.old = optionDataString;
-    validator = this;
-    this.startRequest( element );
-    data = {};
-    data[ element.name ] = value;
-    
-    $.ajax( $.extend( true, {
-        mode: "abort",
-        port: "validate" + element.name,
-        data: data,
-        context: validator.currentForm,
-        success: function( response ) {
-            var valid = response === true || response === "true",
-            errors, message, submitted;
-
-            validator.settings.messages[ element.name ][ method ] = previous.originalMessage;
-            if ( valid ) {
-                submitted = validator.formSubmitted;
-                validator.resetInternals();
-                validator.toHide = validator.errorsFor( element );
-                validator.formSubmitted = submitted;
-                validator.successList.push( element );
-                validator.invalid[ element.name ] = false;
-                validator.showErrors();
-            } else {
-                errors = {};
-                message = response || validator.defaultMessage( element, { method: method, parameters: value } );
-                errors[ element.name ] = previous.message = message;
-                validator.invalid[ element.name ] = true;
-                validator.showErrors( errors );
-            }
-            previous.valid = valid;
-            validator.stopRequest( element, valid );
-        }
-    }, param ) );
-    return "pending";
- }, "" );
