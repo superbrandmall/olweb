@@ -41,6 +41,7 @@ if(isset($_SESSION['brands_admin_login'])) {
         <script type="text/javascript" src="/views/assets/base/js/brands-admin/plugins/chart-master/Chart.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/mall-code.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/brands-admin/protocol-admin.js"></script>
         <?php

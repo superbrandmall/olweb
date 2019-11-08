@@ -4470,7 +4470,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 }
 
 .navbar-nav {
-	margin: 7.5px -15px
+	display: inline-block;
 }
 
 .navbar-nav>li>a {
@@ -7717,7 +7717,6 @@ a:active,a:focus,a:hover {
 
 @media (max-width:991px) {
 	.content-header {
-		padding-top: 70px;
 	}
 }
 
