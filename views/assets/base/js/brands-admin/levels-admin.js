@@ -11,6 +11,8 @@ var day = d.getDate();
 var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
+    
+var levelShopsAdmin = '';
 
 $(document).ready(function(){
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
@@ -98,12 +100,12 @@ $(document).ready(function(){
     
     var size = 1;
     $('#zoom_in').click(function (){
-        size = size + 0.15;
+        size = size + 0.5;
         $('#map').mapster('resize', size*($('#map_canvas').width()), 0, 0);
         addTextLayer();
         
         $('#zoom_out').attr('disabled', false);
-        if(size >= 2.35){
+        if(size >= 3){
             $(this).attr('disabled', true);
         } else {
             $(this).attr('disabled', false);
@@ -111,18 +113,19 @@ $(document).ready(function(){
     });
     
     $('#zoom_out').click(function (){
-        size = size - 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
+        size = size - 0.5;
+        $('#map').mapster('resize', size*($('#map_canvas').width()), 0, 0);
         addTextLayer();
         
         $('#zoom_in').attr('disabled', false);
-        if(size <= 0.15){
+        if(size <= 1){
             $(this).attr('disabled', true);
         } else {
             $(this).attr('disabled', false);
         }
     });
     
+    renderLevelShops();
 });
 
 $(function() {
@@ -146,6 +149,8 @@ function getShopFloorInfo(fl) {
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                levelShopsAdmin = response;
+                
                 var stores = 0;
                 var stores_0 = 0;
                 var stores_1 = 0;
@@ -289,10 +294,6 @@ function drawShops(){
         }
     });
     
-    if(document.body.clientWidth >= 1280){
-        $('#map').mapster('resize', 1*($('#map_canvas').width()), 0, 0);
-    }
-    
     addTextLayer();
 }
 
@@ -331,7 +332,7 @@ function addTextLayer(){
                         y = y + 2;
                     }
                     if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 10);
+                        posTop = parseInt((posTopMin + posTopMax) / 2 - 10);
                     } else {
                         posTop = parseInt((posTopMin + posTopMax) / 2);
                     }
@@ -355,20 +356,8 @@ function addTextLayer(){
                         fontSize = 11;
                     } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
                         fontSize = 12;
-                    } else if($(this).attr('data-area') >= 700 && $(this).attr('data-area') < 800){
+                    } else if($(this).attr('data-area') >= 700){
                         fontSize = 13;
-                    } else if($(this).attr('data-area') >= 800 && $(this).attr('data-area') < 900){
-                        fontSize = 14;
-                    } else if($(this).attr('data-area') >= 900 && $(this).attr('data-area') < 1000){
-                        fontSize = 15;
-                    } else if($(this).attr('data-area') >= 1000 && $(this).attr('data-area') < 1100){
-                        fontSize = 16;
-                    } else if($(this).attr('data-area') >= 1100 && $(this).attr('data-area') < 1200){
-                        fontSize = 17;
-                    } else if($(this).attr('data-area') >= 1200 && $(this).attr('data-area') < 1300){
-                        fontSize = 18;
-                    } else if($(this).attr('data-area') >= 1300){
-                        fontSize = 19;
                     }
                     
                     $(this).after(
@@ -472,4 +461,38 @@ function getFloors() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function renderLevelShops() {
+    if(levelShopsAdmin != '') {
+        var index = 0;
+        $.each(levelShopsAdmin.data, function(i,v){
+            if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0){
+                $('#levelShopList').append('\
+<tr data-index="'+index+'">\n\
+<td>'+v.unit+'</td>\n\
+<td>'+v.area+'m<sup>2</sup></td>\n\
+<td>'+v.brandName+'</td>\n\
+<td></td>\n\
+<td>'+v.modality+'</td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+<td></td>\n\
+</tr>'); 
+                index++;
+            }
+        });
+    }
 }

@@ -86,8 +86,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190903000002"><img src="views/assets/base/img/content/client-logos/diandude.jpg" alt=""/></a>
                         点都德
-                        <a href="shop?id=OLSHOP180917000425"><img src="views/assets/base/img/content/client-logos/fairwhale.jpg" alt=""/></a>
-                        FAIRWHALE
+                        <a href="shop?id=OLSHOP190918000002"><img src="views/assets/base/img/content/client-logos/zawushe.jpg" alt=""/></a>
+                        杂物社
                     </div>
                 </div>
             </div>
