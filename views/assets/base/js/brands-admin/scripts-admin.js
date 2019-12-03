@@ -31,6 +31,10 @@ $(document).ready(function(){
     if (!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
         getUsers();
     }
+    
+    if (!sessionStorage.getItem("admins") || sessionStorage.getItem("admins") == null || sessionStorage.getItem("admins") == '') {
+        getAdmins();
+    }
 
     $(document).on('click', '[data-toggle="lightbox"]', function (event) {
         event.preventDefault();
@@ -101,6 +105,20 @@ function getUsers() {
     sessionStorage.setItem("users", JSON.stringify(users));
 }
 
+function getAdmins() {
+    var admins = [];
+    admins.push(
+        'CUSER190709000015',
+        'CUSER190709000022',
+        'CUSER190709000023',
+        'CUSER190709000024',
+        'CUSER190924000001',
+        'CUSER190927000001'
+    )
+    
+    sessionStorage.setItem("admins", JSON.stringify(admins));
+}
+
 function getModalities() {
     $.ajax({
         url: $.api.baseNew + "/onlineleasing-customer/api/base/modality/findAll",
@@ -166,9 +184,17 @@ function generatePages(currentPage, LastPage, items) {
 
 function numberWithCommas(x) {
     if(x == null){
-        return '-';
+        return '';
     } else {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+}
+
+function numberWithoutCommas(x) {
+    if(x == null){
+        return '';
+    } else {
+        return x.toString().replace(/[,]/g,"");
     }
 }
 

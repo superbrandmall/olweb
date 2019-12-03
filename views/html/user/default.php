@@ -48,28 +48,28 @@
                         Green&Safe
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000830"><img src="views/assets/base/img/content/client-logos/3am.jpg" alt=""/></a>
-                        3AM HAIR SALON
+                        <a href="shop?id=OLSHOP180917000097"><img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt=""/></a>
+                        Swarovski
                         <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
                         adidas
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/southside-story.jpg" alt=""/></a>
-                        城南往事
+                        <a href="shop?id=OLSHOP190717000002"><img src="views/assets/base/img/content/client-logos/xixifo.jpg" alt=""/></a>
+                        西西弗书店&矢量咖啡
                         <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt=""/></a>
                         逸麟居
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190627000001"><img src="views/assets/base/img/content/client-logos/gu.jpg" alt=""/></a>
                         GU
-                        <a href="shop?id=OLSHOP190821000001"><img src="views/assets/base/img/content/client-logos/diaji.jpg" alt=""/></a>
-                        嗲记
+                        <a href="shop?id=OLSHOP190828000002"><img src="views/assets/base/img/content/client-logos/lego.jpg" alt=""/></a>
+                        LEGO乐高
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000743"><img src="views/assets/base/img/content/client-logos/jianghudongbaiding.jpg" alt=""/></a>
                         姜虎东白丁
-                        <a href="shop?id=OLSHOP190616000001"><img src="views/assets/base/img/content/client-logos/chengnanwangshi.jpg" alt=""/></a>
-                        城南往事
+                        <a href="shop?id=OLSHOP191022000064"><img src="views/assets/base/img/content/client-logos/muweiliu.jpg" alt=""/></a>
+                        木卫六
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190731000004"><img src="views/assets/base/img/content/client-logos/qixi.jpg" alt=""/></a>
@@ -86,8 +86,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190903000002"><img src="views/assets/base/img/content/client-logos/diandude.jpg" alt=""/></a>
                         点都德
-                        <a href="shop?id=OLSHOP190918000002"><img src="views/assets/base/img/content/client-logos/zawushe.jpg" alt=""/></a>
-                        杂物社
+                        <a href="shop?id=OLSHOP190420000002"><img src="views/assets/base/img/content/client-logos/charme.jpg" alt=""/></a>
+                        港丽餐厅
                     </div>
                 </div>
             </div>

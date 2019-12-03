@@ -7,12 +7,15 @@ $.api = {
 
 var d = new Date();
 var month = d.getMonth()+1;
+var year = d.getFullYear();
 var day = d.getDate();
 var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
     
 var levelShopsAdmin = '';
+var brandsSelector = '<option value="">请选择</option>';
+var floorDesc;
 
 $(document).ready(function(){
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
@@ -27,7 +30,7 @@ $(document).ready(function(){
         getModalities();
     }
 
-    var floorDesc, floor = '1F';
+    var floor = '1F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
             case '0':
@@ -125,7 +128,56 @@ $(document).ready(function(){
         }
     });
     
-    renderLevelShops();
+    var pendDays = 90;
+    getBrands(pendDays);
+    renderLevelShops(floorDesc);
+    
+    
+    $('#view_all').click(function (){
+        $('#levelShopList2').fadeIn();
+        
+        $('.fixed-table-body').stop(true).animate({
+            scrollTop: $('#levelShopList2').offset().top
+        }, 0);
+    });
+    
+    $(".brands-selector").change(function () {
+        if($(this).val() != ''){
+            applyNewCategory($(this).parents('tr').attr('id'));
+        }
+    });
+    
+    /********************* Start of calculation *************************/
+    
+    $('.predict-sales').blur(function(){
+        $(this).val(numberWithCommas(numberWithoutCommas($(this).val())));
+        calBackPushRent();
+        calBackPushUnitRent();
+        calHigherRent();
+        calHigherDailyRent();
+    });
+    
+    $('.predict-floatin-rates').blur(function(){
+        calBackPushRent();
+        calBackPushUnitRent();
+        calHigherRent();
+        calHigherDailyRent();
+    });
+    
+    $('.guarantee-unit-rent').blur(function(){
+        calGuaranteeRent();
+        calHigherRent();
+        calHigherDailyRent();
+    });
+    
+    $('.guarantee-rent').blur(function(){
+        $(this).val(numberWithCommas(numberWithoutCommas($(this).val())));
+        calGuaranteeUnitRent();
+        calHigherRent();
+        calHigherDailyRent();
+    });
+    
+    /********************* End of calculation *************************/
 });
 
 $(function() {
@@ -191,7 +243,11 @@ function getShopFloorInfo(fl) {
                     }
 
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'#!;\' shape="poly" coords="'+v.coords+'" />'); 
+                        if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                        } else {
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" shape="poly" coords="'+v.coords+'" />'); 
+                        }
                     }
                 });
 
@@ -213,54 +269,78 @@ function getShopFloorInfo(fl) {
     
 function drawShops(){
     var areas = $.map($('area'),function(el) {
-        if(getURLParameter('id') === $(el).attr('alt')){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: '本店铺',
-                fillColor: '3c763d',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        } else {
-            if($(el).attr('data-full') == 0){
+        if($(el).attr('data-full') == 0){
+            if($(el).attr('data-responsible-person') == $.cookie('uid') || $(el).attr('data-category-head') == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
                     fillColor: '7d9fe9',
                     selected: true,
-                    stroke: true,
-                    strokeColor: '6a90e1'
+                    stroke: false
                 };
-            } else if($(el).attr('data-full') == 1){
+            } else {
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'becff4',
+                    selected: true,
+                    stroke: false,
+                    clickNavigate: false
+                };
+            }
+        } else if($(el).attr('data-full') == 1){
+            if($(el).attr('data-responsible-person') == $.cookie('uid') || $(el).attr('data-category-head') == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: '空铺',
                     fillColor: 'FE9E9E',
                     selected: true,
-                    stroke: true,
-                    strokeColor: 'FE9E9E'
+                    stroke: false
                 };
-            } else if($(el).attr('data-full') == 2){
+            } else {
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: '空铺',
+                    fillColor: 'fecece',
+                    selected: true,
+                    stroke: false,
+                    clickNavigate: false
+                };
+            }
+        } else if($(el).attr('data-full') == 2){
+            if($(el).attr('data-responsible-person') == $.cookie('uid') || $(el).attr('data-category-head') == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
                     fillColor: 'FEED99',
                     selected: true,
-                    stroke: true,
-                    strokeColor: 'FEED99'
+                    stroke: false
                 };
-            } else if($(el).attr('data-full') == 3){
+            } return { 
+                key: $(el).attr('data-key'),
+                toolTip: $(el).attr('name'),
+                fillColor: 'fef6cc',
+                selected: true,
+                stroke: false,
+                clickNavigate: false
+            };
+        } else if($(el).attr('data-full') == 3){
+            if($(el).attr('data-responsible-person') == $.cookie('uid') || $(el).attr('data-category-head') == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: '改造中',
                     fillColor: 'D5C8AA',
                     selected: true,
-                    stroke: true,
-                    strokeColor: 'D5C8AA'
+                    stroke: false
                 };
-            }
-            
+            } return { 
+                key: $(el).attr('data-key'),
+                toolTip: '改造中',
+                fillColor: 'eae3d4',
+                selected: true,
+                stroke: false,
+                clickNavigate: false
+            };
         }
     });
     
@@ -268,9 +348,9 @@ function drawShops(){
     var yOffset;
 
     $('#map').mapster({
-        fillColor: 'c9ae89',
+        fillColor: 'becff4',
         fillOpacity: 0.8,
-        strokeColor: 'ffd62c',
+        strokeColor: 'becff4',
         strokeWidth: 0,
         clickNavigate: true,
         mapKey: 'data-key',
@@ -369,54 +449,76 @@ function addTextLayer(){
     }
 }
 
-function insertParam(key, value) {
-    key = escape(key); value = escape(value);
+function JumpToShopList(sc){
+    $('td').removeClass('dark-layer');
+    /*var sTop = $('#row_'+sc).offset().top - 550;
+    var nowScrollTop = $('.fixed-table-body').scrollTop();
 
-    var kvp = document.location.search.substr(1).split('&');
-    if (kvp == '') {
-        document.location.search = '?' + key + '=' + value;
-    }
-    else {
+    $('html, body').animate({
+        scrollTop: $('.fixed-table-body').offset().top
+    }, 0);
 
-        var i = kvp.length; var x; while (i--) {
-            x = kvp[i].split('=');
-
-            if (x[0] == key) {
-                x[1] = value;
-                kvp[i] = x.join('=');
-                break;
-            }
-        }
-
-        if (i < 0) { kvp[kvp.length] = [key, value].join('='); }
-
-        //this will reload the page, it's likely better to store this until finished
-        document.location.search = kvp.join('&');
-    }
+    $('.fixed-table-body').stop(true).animate({
+        scrollTop: sTop + nowScrollTop
+    }, 0);*/
+    
+    $('.rows-'+sc+' td').addClass('dark-layer');
+    
+    GetShopInfo(sc);
 }
 
-function DecrDates(date_str,dates){
-    if(date_str){
-        var parts = date_str.split("-");
-        var dt = new Date(
-          parseInt(parts[0], 10),      // year
-          parseInt(parts[1], 10) - 1,  // month (starts with 0)
-          parseInt(parts[2], 10)       // date
-        );
-        dt.setDate(dt.getDate() - dates);
-        parts[0] = "" + dt.getFullYear();
-        parts[1] = "" + (dt.getMonth() + 1);
-        if (parts[1].length < 2) {
-          parts[1] = "0" + parts[1];
+function GetShopInfo(sc){
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-admin/api/shop/"+sc+"",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var shop = response.data;
+                var images = shop.images;
+                
+                if(images != null && images.length > 0) {
+                    $('#store_img').html('<img src="'+images[0].image+'" style="width: auto; height: 100%;" />');
+                } else {
+                    $('#store_img').html('');
+                }
+                
+                $('#store_img_2').find('img').remove();
+                if(shop.vrValidated === 1) {
+                    if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
+                        $('#store_vr').hide();
+                        if(images != null && images.length > 1) {
+                            $('#store_img_2').show().append('<img src="'+images[1].image+'" style="width: auto; height: 100%;" />');
+                        }
+                    } else {
+                        $('#store_img_2').hide();
+                        $('#store_vr').show();
+                        $('#store_vr iframe').attr('src','/'+shop.vr);
+                    }
+                } else {
+                    $('#store_vr').hide();
+                    if(images != null && images.length > 1) {
+                         $('#store_img_2').show().append('<img src="'+images[1].image+'" style="width: auto; height: 100%;" />');
+                    }
+                }
+                
+            } else {
+                console.log(response.customerMessage);
+            }
         }
-        parts[2] = "" + dt.getDate();
-        if (parts[2].length < 2) {
-          parts[2] = "0" + parts[2];
-        }
-        return parts.join("");
-    } else {
-        return '';
-    }
+    });
 }
 
 function getMalls() {
@@ -463,36 +565,450 @@ function getFloors() {
     });
 }
 
-function renderLevelShops() {
+function renderLevelShops(fD) {
     if(levelShopsAdmin != '') {
-        var index = 0;
+        var bg = '#AFBEDE';
         $.each(levelShopsAdmin.data, function(i,v){
-            if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0){
-                $('#levelShopList').append('\
-<tr data-index="'+index+'">\n\
-<td>'+v.unit+'</td>\n\
-<td>'+v.area+'m<sup>2</sup></td>\n\
-<td>'+v.brandName+'</td>\n\
-<td></td>\n\
-<td>'+v.modality+'</td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-<td></td>\n\
-</tr>'); 
-                index++;
+            if(v.shopState == 0){
+                if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                    bg = '#7d9fe9';
+                } else {
+                    bg = '#becff4';
+                }
+            } else if(v.shopState == 1){
+                if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                    bg = '#FE9E9E';
+                } else {
+                    bg = '#fecece';
+                }
+            } else if(v.shopState == 2){
+                if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                    bg = '#FEED99';
+                } else { 
+                    bg = '#fef6cc';
+                };
+            } else if(v.shopState == 3){
+                if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                    bg = '#D5C8AA';
+                } else { 
+                    bg = '#eae3d4';
+                };
             }
+            
+            if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0){
+                if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+                    $('#levelShopList').append('\
+    <tr style="border-left: 20px solid '+bg+'" id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
+    <td rowspan="1" style="vertical-align: middle;">'+v.shopName+'</td>\n\
+    <td rowspan="1" style="vertical-align: middle;"><span class="area">'+v.area+'</span>m<sup>2</sup></td>\n\
+    <td rowspan="1" style="vertical-align: middle;">'+(v.brandName || '')+'</td>\n\
+    <td><i class="fa fa-plus"></i><select class="brands-selector" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
+    <td class="new-category-code"></td>\n\
+    <td><input class="form-control target-confirm-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
+    <td><input class="form-control target-contract-signed-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
+    <td><input class="form-control target-hoarding-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
+    <td><input class="form-control target-entering-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
+    <td><input class="form-control target-opening-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
+    <td><input class="form-control user-remark" type="text" style="width: auto;" /></td>\n\
+    <td class="responsible-person"></td>\n\
+    <td><div class="input-group"><input class="form-control predict-sales" type="text" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control predict-floatin-rates" type="text" /><span class="input-group-addon">%</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control back-push-rent non-input" type="text" style="width: auto;" readonly /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control back-push-unit-rent non-input" type="text" readonly /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control guarantee-unit-rent" type="text" /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control guarantee-rent" type="text" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control higher-rent non-input" type="text" style="width: auto;" readonly /><span class="input-group-addon">元</span></div></td>\n\
+    <td><div class="input-group"><input class="form-control higher-daily-rent non-input" type="text" readonly /><span class="input-group-addon">元</span></div></td>\n\
+    <td><a href=\'javascript: saveShopBrand("'+v.code+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
+    </tr>'); 
+                } else {
+                    $('#levelShopList2').append('\
+    <tr style="border-left: 20px solid '+bg+'" id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
+    <td style="vertical-align: middle;">'+v.shopName+'</td>\n\
+    <td style="vertical-align: middle;">'+v.area+'m<sup>2</sup></td>\n\
+    <td style="vertical-align: middle;">'+(v.brandName || '')+'</td>\n\
+    <td colspan="18"></td>\n\
+    </tr>'); 
+                }
+                
+                $('.date-picker').datepicker({
+                    'language': 'zh-CN',
+                    'format': 'yyyy-mm-dd'
+                });
+            } 
         });
+        
+        renderLevelShopNewBrands(fD);
     }
+}
+
+function renderLevelShopNewBrands(fD) {
+    var map = {};
+    
+    var url = '';
+    if($.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
+        url = 'findAllByFloorCodeAndState/'+fD+"/1";
+    } else {
+        url = 'findAllByFloorCodeAndStateAndUserCode/'+fD+"/1/"+$.cookie('uid');
+    }
+    
+    
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/shopBrand/"+url,
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    var bg = "#fff";
+                    var rows = 1;
+                    $.each(response.data, function(i,v){
+                        rows = $('#row_'+v.shopCode+' td:eq(0)').attr('rowSpan');
+                        rows++;
+                        for(var j=0;j<3;j++){
+                            $('#row_'+v.shopCode+' td:eq('+j+')').attr('rowSpan',rows);
+                        }
+                        
+                        bg = $('#row_'+v.shopCode).css('borderLeftColor');
+                        
+                        var user = '';
+                        $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
+                            if(u.code == v.userCode) {
+                                user = u.name;
+                            }
+                        });
+                        
+                        $('<tr id="row_'+v.shopCode+'_'+i+'" class="rows-'+v.shopCode+'" style="border-left: 20px solid '+bg+'">\n\
+                            <td><select class="brands-selector" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
+                            <td class="new-category-code">'+v.newCategoryCode+'</td>\n\
+                            <td><input class="form-control target-confirm-date date-picker" type="text" value="'+(v.targetConfirmDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
+                            <td><input class="form-control target-contract-signed-date date-picker" type="text" value="'+(v.targetContractSignedDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
+                            <td><input class="form-control target-hoarding-date date-picker" type="text" value="'+(v.targetHoardingDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
+                            <td><input class="form-control target-entering-date date-picker" type="text" value="'+(v.targetEnteringDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
+                            <td><input class="form-control target-opening-date date-picker" type="text" value="'+(v.targetOpeningDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
+                            <td><input class="form-control user-remark" type="text" value="'+v.userRemark+'" style="width: auto;" /></td>\n\
+                            <td class="responsible-person">'+user+'</td>\n\
+                            <td><div class="input-group"><input class="form-control predict-sales" type="text" value="'+(numberWithCommas(v.predictSales) || '')+'" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control predict-floatin-rates" type="text" value="'+(v.predictFloatingRates || '')+'" /><span class="input-group-addon">%</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control back-push-rent non-input" type="text" style="width: auto;" value="'+(numberWithCommas(v.backPushRent) || '')+'" readonly /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control back-push-unit-rent non-input" type="text" value="'+(numberWithCommas(v.backPushUnitRent) || '')+'" readonly /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control guarantee-unit-rent" type="text" value="'+(numberWithCommas(v.guaranteeUnitRent) || '')+'" /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control guarantee-rent" type="text" value="'+(numberWithCommas(v.guaranteeRent) || '')+'" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control higher-rent non-input" type="text" value="'+(numberWithCommas(v.higherRent) || '')+'" style="width: auto;" readonly /><span class="input-group-addon">元</span></div></td>\n\
+                            <td><div class="input-group"><input class="form-control higher-daily-rent non-input" type="text" value="'+(numberWithCommas(v.higherDailyRent) || '')+'" readonly /><span class="input-group-addon">元</span></div></td>\n\
+\                           <td><a id="save_'+v.code+'" href=\'javascript: updateShopBrand("'+v.shopCode+'_'+i+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
+                            </tr>').insertAfter('#row_'+v.shopCode);
+                        
+                        $('#row_'+v.shopCode).next('tr').find('td').find('.brands-selector').val(v.brandCode);
+                    });
+                    
+                    $('.date-picker').datepicker({
+                        'language': 'zh-CN',
+                        'format': 'yyyy-mm-dd'
+                    });
+                }
+            } 
+        }
+    });
+}
+
+function getBrands(pd) {
+    $.ajax({
+        url: $.api.baseNew + "/onlineleasing-customer/api/brand/findBrandDashboardByUserCode/?pendDays=" + pd+ "&yyyyMm="+year+(month<10 ? '0'+month : month)+"&userCode=" + $.cookie('login'),
+        type: "GET",
+        async: false,
+        beforeSend: function (request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                if(response.data.userModalities.length > 0){
+                    var url = '';
+                    if(response.data.userModalities[0].isComplete == 2){
+                        url = 'findAllByUserCodes'; // Category head 可以查看自己管理的业态，其中马云飞和宋总可以查看所有业态
+                    } else {
+                        url = 'findAllByUserCode2'; // 其他人只能查看自己建立的品牌
+                    }
+                    
+                    showBrands(1,100,url);
+                }
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function showBrands(p,c,u){
+    var map = {};
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/brand/"+u+"/"+$.cookie('login')+"?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $.each(response.data.content, function(i,v){
+                        brandsSelector += '<option value="'+v.code+'" category="'+v.newCategoryCode+'" user="'+v.userCode+'">'+v.name+'</option>';
+                    });  
+                }
+            } 
+        }
+    });
+}
+
+function applyNewCategory(rid) {
+    var ct = $('#'+rid+' select option:selected').attr('category');
+    var category = '';
+    $.each($.parseJSON(sessionStorage.getItem("category")), function(h,u) {
+        if(u.code == ct) {
+            category = u.name;
+        }
+    });
+    
+    $('#'+rid+' .new-category-code').text(category);
+    
+    var uc = $('#'+rid+' select option:selected').attr('user');
+    var user = '';
+    $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
+        if(u.code == uc) {
+            user = u.name;
+        }
+    });
+    
+    $('#'+rid+' .responsible-person').text(user);
+}
+
+function updateShopBrand(i){
+    var map = {
+        code: $('#row_'+i+' .save').attr('id').split('_')[1],
+        userCode: $.cookie('login'),
+        shopCode: i.split('_')[0],
+        brandCode: $('#row_'+i+' .brands-selector').val(),
+        newCategoryCode: $('#row_'+i+' .new-category-code').text() || null,
+        backPushRent: numberWithoutCommas($('#row_'+i+' .back-push-rent').val()) || null,
+        backPushUnitRent: numberWithoutCommas($('#row_'+i+' .back-push-unit-rent').val()) || null,
+        guaranteeRent: numberWithoutCommas($('#row_'+i+' .guarantee-rent').val()) || null,
+        guaranteeUnitRent: numberWithoutCommas($('#row_'+i+' .guarantee-unit-rent').val()) || null,
+        higherDailyRent: numberWithoutCommas($('#row_'+i+' .higher-daily-rent').val()) || null,
+        higherRent: numberWithoutCommas($('#row_'+i+' .higher-rent').val()) || null,
+        predictFloatingRates: $('#row_'+i+' .predict-floatin-rates').val() || null,
+        predictSales: numberWithoutCommas($('#row_'+i+' .predict-sales').val()) || null,
+        targetConfirmDate: $('#row_'+i+' .target-confirm-date').val() || null,
+        targetContractSignedDate: $('#row_'+i+' .target-contract-signed-date').val() || null,
+        targetEnteringDate: $('#row_'+i+' .target-entering-date').val() || null,
+        targetHoardingDate: $('#row_'+i+' .target-hoarding-date').val() || null,
+        targetOpeningDate: $('#row_'+i+' .target-opening-date').val() || null,
+        userRemark: $('#row_'+i+' .user-remark').val(),
+        status: 1,
+        floorCode: floorDesc
+    };
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/shopBrand/update",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $('#row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                setTimeout(function () {
+                    $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                },1000);
+            } else {
+                $('#row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                setTimeout(function () {
+                    $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                },1000);
+            }
+        }
+    })
+}
+
+function saveShopBrand(i){
+    if($('#row_'+i+' .brands-selector').val() != ''){
+        var map = {
+            userCode: $('#row_'+i+' .brands-selector option:selected').attr('user'),
+            shopCode: i,
+            brandCode: $('#row_'+i+' .brands-selector').val(),
+            newCategoryCode: $('#row_'+i+' .new-category-code').text() || null,
+            backPushRent: numberWithoutCommas($('#row_'+i+' .back-push-rent').val()) || null,
+            backPushUnitRent: numberWithoutCommas($('#row_'+i+' .back-push-unit-rent').val()) || null,
+            guaranteeRent: numberWithoutCommas($('#row_'+i+' .guarantee-rent').val()) || null,
+            guaranteeUnitRent: numberWithoutCommas($('#row_'+i+' .guarantee-unit-rent').val()) || null,
+            higherDailyRent: numberWithoutCommas($('#row_'+i+' .higher-daily-rent').val()) || null,
+            higherRent: numberWithoutCommas($('#row_'+i+' .higher-rent').val()) || null,
+            predictFloatingRates: $('#row_'+i+' .predict-floatin-rates').val() || null,
+            predictSales: numberWithoutCommas($('#row_'+i+' .predict-sales').val()) || null,
+            targetConfirmDate: $('#row_'+i+' .target-confirm-date').val() || null,
+            targetContractSignedDate: $('#row_'+i+' .target-contract-signed-date').val() || null,
+            targetEnteringDate: $('#row_'+i+' .target-entering-date').val() || null,
+            targetHoardingDate: $('#row_'+i+' .target-hoarding-date').val() || null,
+            targetOpeningDate: $('#row_'+i+' .target-opening-date').val() || null,
+            userRemark: $('#row_'+i+' .user-remark').val(),
+            status: 1,
+            state: 1,
+            floorCode: floorDesc
+        };
+        $.ajax({
+            url: $.api.baseNew+"/onlineleasing-customer/api/shopBrand/save",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    $('#row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    setTimeout(function () {
+                        $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    },1000);
+                } else {
+                    $('#row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                    setTimeout(function () {
+                        $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    },1000);
+                }
+            }
+        })
+    } else {
+        $('#row_'+i+' .save').html('<i class="fa fa-exclamation-circle"></i> 品牌');
+        setTimeout(function () {
+            $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+        },1000);
+    }
+}
+
+function calBackPushRent() {
+    var backPushRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.predict-sales').val()) > 0 && $(this).find('.predict-floatin-rates').val() > 0){
+            backPushRent = Math.round(numberWithoutCommas($(this).find('.predict-sales').val()) * $(this).find('.predict-floatin-rates').val() / 100);
+            if(numberWithoutCommas($(this).find('.back-push-rent').val()) != backPushRent){
+                $(this).find('.back-push-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.back-push-rent').val(numberWithCommas(backPushRent));
+        }
+    });
+}
+
+function calBackPushUnitRent() {
+    var backPushUnitRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.back-push-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
+            backPushUnitRent = Number(numberWithoutCommas($(this).find('.back-push-rent').val()) * 12 / 365 / $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text()).toFixed(2);
+            if(numberWithoutCommas($(this).find('.back-push-unit-rent').val()) != backPushUnitRent){
+                $(this).find('.back-push-unit-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.back-push-unit-rent').val(numberWithCommas(backPushUnitRent));
+        }
+    });
+}
+
+function calGuaranteeRent() {
+    var guaranteeRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
+            guaranteeRent = Number(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) * $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() * 365 / 12).toFixed(2);
+            if(numberWithoutCommas($(this).find('.guarantee-rent').val()) != guaranteeRent){
+                $(this).find('.guarantee-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.guarantee-rent').val(numberWithCommas(guaranteeRent));
+        }
+    });
+}
+
+function calGuaranteeUnitRent() {
+    var guaranteeUnitRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.guarantee-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
+            guaranteeUnitRent = Number(numberWithoutCommas($(this).find('.guarantee-rent').val()) * 12 / 365 / $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text()).toFixed(2);
+            if(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) != guaranteeUnitRent){
+                $(this).find('.guarantee-unit-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.guarantee-unit-rent').val(numberWithCommas(guaranteeUnitRent));
+        }
+    });
+}
+
+function calHigherRent() {
+    var higherRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.back-push-rent').val()) > 0 && numberWithoutCommas($(this).find('.guarantee-rent').val()) > 0){
+            higherRent = Math.max(numberWithoutCommas($(this).find('.back-push-rent').val()),numberWithoutCommas($(this).find('.guarantee-rent').val()));
+            if(numberWithoutCommas($(this).find('.higher-rent').val()) != higherRent){
+                $(this).find('.higher-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.higher-rent').val(numberWithCommas(higherRent));
+        }
+    });
+}
+
+function calHigherDailyRent() {
+    var higherDailyRent;
+    $('tbody tr').each(function(i){
+        if(numberWithoutCommas($(this).find('.back-push-unit-rent').val()) > 0 && numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) > 0){
+            higherDailyRent = Math.max(numberWithoutCommas($(this).find('.back-push-unit-rent').val()),numberWithoutCommas($(this).find('.guarantee-unit-rent').val()));
+            if(numberWithoutCommas($(this).find('.higher-daily-rent').val()) != higherDailyRent){
+                $(this).find('.higher-daily-rent').fadeOut().fadeIn();
+            }
+            $(this).find('.higher-daily-rent').val(numberWithCommas(higherDailyRent));
+        }
+    });
 }

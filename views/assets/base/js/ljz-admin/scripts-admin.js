@@ -24,6 +24,10 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("modalities") || sessionStorage.getItem("modalities") == null || sessionStorage.getItem("modalities") == '') {
         getModalities();
     }
+    
+    if (!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
+        getUsers();
+    }
 
     var floorDesc, floor = '1F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
@@ -491,32 +495,32 @@ function GetShopInfo(sc){
                 var shopStateClass = 'badge-default';
                 switch(shop.shopState){
                     case 0:
-                        state = "在租";
+                        state = "Leased";
                         break;
                     case 1:
-                        state = "空铺";
+                        state = "Vacancy";
                         shopStateClass = 'badge-danger';
                         break;
                     case 2:
-                        state = "待租";
+                        state = "Expiring";
                         shopStateClass = 'badge-warning';
                         break;
                     case 3:
-                        state = "改造";
+                        state = "Renovation";
                         shopStateClass = 'badge-renovation';
                         break;
                     default:
-                        state = "在租";
+                        state = "Leased";
                         shopStateClass = 'badge-default';
                         break;
                 }
                 
                 $('#brand_name').append(' <span class="badge '+shopStateClass+'">'+state+'</span>');
                 
-                $('#rent').text((shop.deadRent || '-' ) + '元/m²/日');
+                $('#rent').text((shop.deadRent || '-' ) + ' yuan/m²/day');
                 $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
                 
-                $('#area').text((shop.area || '-' ) + 'm²');
+                $('#area').text((shop.area || '-' ) + ' m²');
                 
                 if(shop.brandName != null && shop.brandName != '') {
                     if(shop.shopState == 1) {
@@ -598,25 +602,36 @@ function GetShopInfo(sc){
                     $('#opening_date').text('-');
                 }
                 
-                if(shop.remark_1 != null){
+                /*if(shop.remark_1 != null){
                     $('#plan_open_date').text(shop.remark_1);
                 } else {
                     $('#plan_open_date').text('-');
-                }
+                }*/
+                
                 if(shop.responsiblePerson != null){
-                    $('#responsible_person').text(shop.responsiblePerson);
+                    var user = '-';
+                    $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
+                        if(u.code == shop.responsiblePerson) {
+                            user = u.name;
+                        }
+                    });
+                
+                    $('#responsible_person').text(user);
                 } else {
                     $('#responsible_person').text('-');
                 }
                 
-                if(shop.remark_2 != null){
+                
+                
+                
+                /*if(shop.remark_2 != null){
                     $('#loss').text((numberWithCommas(shop.remark_2) || 0 ) + '元');
                     if(shop.remark_2 != 0){
                         $('#loss').css('color','#f00');
                     }
                 } else {
                     $('#loss').text('-').css('color','#333');
-                }
+                }*/
                 
                 if(images != null && images.length > 0) {
                     $('#store_img').html('<img src="'+images[0].image+'" style="width: 100%;" />');
@@ -708,10 +723,10 @@ function showShopSales(brand,bu,date) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('#weeks').text(response.data.weeks > 0 ? response.data.weeks : 4); 
-                $('#sales').text((numberWithCommas(response.data.total) || 0 ) + '元'); 
+                $('#sales').text((numberWithCommas(response.data.total) || 0 ) + ' yuan'); 
             } else {
                 $('#weeks').text('4');
-                $('#sales').text('0元'); 
+                $('#sales').text('0 yuan'); 
             }
         }
     });
@@ -812,6 +827,38 @@ function getFloors() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function getUsers() {
+    var users = [];
+    users.push(
+        {code: 'CUSER190709000001',name: '蒋晟'},
+        {code: 'CUSER190709000002',name: '陈春梅'},
+        {code: 'CUSER190709000003',name: '徐晔琤'},
+        {code: 'CUSER190709000004',name: '李晓洁'},
+        {code: 'CUSER190709000005',name: '徐伟杰'},
+        {code: 'CUSER190709000006',name: "Austin Rao"},
+        {code: 'CUSER190709000008',name: '周晓芳'},
+        {code: 'CUSER190709000009',name: 'Megan Jing'},
+        {code: 'CUSER190709000010',name: '姜皓文'},
+        {code: 'CUSER190709000011',name: '冰淼'},
+        {code: 'CUSER190709000012',name: "方佳俊"},
+        {code: 'CUSER190709000013',name: '魏肖霞'},
+        {code: 'CUSER190709000015',name: '宋岩'},
+        {code: 'CUSER190709000016',name: '崔迪'},
+        {code: 'CUSER190709000017',name: '周轶君'},
+        {code: 'CUSER190709000018',name: '乔治'},
+        {code: 'CUSER190709000019',name: '李秉彝'},
+        {code: 'CUSER190709000020',name: '黄赛男'},
+        {code: 'CUSER190709000021',name: '周蓉靓'},
+        {code: 'CUSER190709000022',name: '马云飞'},
+        {code: 'CUSER190709000023',name: '师晓慧'},
+        {code: 'CUSER190709000024',name: '叶蔚'},
+        {code: 'CUSER190924000001',name: '杭梦琪'},
+        {code: 'CUSER190927000001',name: '陈竞毅'}
+    )
+    
+    sessionStorage.setItem("users", JSON.stringify(users));
 }
 
 function getModalities() {

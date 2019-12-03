@@ -2696,7 +2696,6 @@ caption,th {
 }
 
 .table>tbody+tbody {
-	border-top: 2px solid #ddd
 }
 
 .table .table {
@@ -2778,6 +2777,62 @@ table td[class*=col-],table th[class*=col-] {
 .table-responsive {
 	overflow-x: auto;
 	min-height: .01%
+}
+
+table .form-control, 
+table .input-group .input-group-addon,
+table .form-control[readonly] {
+    background: transparent;
+    border: 0 none;
+    padding: 0;
+    font-size: 12px;
+    color: #333;
+    box-shadow: 1px 1px 0px #ccc;
+}
+
+table .input-group .input-group-addon,
+table .form-control.non-input {
+    box-shadow: none;
+    padding-left: 5px;
+}
+
+table .form-control {
+    font-weight: bold;
+    text-align: center;
+}
+
+table .form-control.date-picker {
+    font-size: 8px;
+    background: transparent;
+}
+
+#levelShopList td, 
+#levelShopList2 td {
+    vertical-align: middle;
+    text-align: center;
+    font-size: 12px;
+}
+
+.primary-rows td:nth-child(-n+3), 
+.primary-rows td:nth-child(-n+3) {
+    background-color: #f9f9f9;
+}
+
+.primary-rows td:nth-child(3), 
+.primary-rows td:nth-child(3) {
+    border-right: solid 1px #ddd !important;
+}
+
+.brands-selector {
+    border: 0 none;
+}
+
+.fixed-table-body thead th .th-inner {
+    text-align: center;
+}
+
+.dark-layer {
+    background: #CCF0F5 !important;
 }
 
 @media screen and (max-width:767px) {
@@ -5930,7 +5985,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:focus,a.list-gro
 }
 
 .embed-responsive.embed-responsive-4by3 {
-	padding-bottom: 75%
+	
 }
 
 .well {
@@ -9937,7 +9992,11 @@ a:active,a:focus,a:hover {
 }
 
 .table-bordered,.table-bordered>tbody>tr>td,.table-bordered>tbody>tr>th,.table-bordered>tfoot>tr>td,.table-bordered>tfoot>tr>th,.table-bordered>thead>tr>td,.table-bordered>thead>tr>th {
-	border: 1px solid #f4f4f4
+	border: 1px solid #333;
+}
+
+.bootstrap-table .table.table-bordered > thead > tr > th {
+    border-bottom: 2px solid #333;
 }
 
 .table-bordered>thead>tr>td,.table-bordered>thead>tr>th {
