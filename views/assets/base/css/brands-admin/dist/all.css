@@ -2787,7 +2787,7 @@ table .form-control[readonly] {
     padding: 0;
     font-size: 12px;
     color: #333;
-    box-shadow: 1px 1px 0px #ccc;
+    box-shadow: inset 6px 6px 2px -6px #000;
 }
 
 table .input-group .input-group-addon,
@@ -2806,7 +2806,7 @@ table .form-control.date-picker {
     background: transparent;
 }
 
-#levelShopList td, 
+#levelShopListL td, 
 #levelShopList2 td {
     vertical-align: middle;
     text-align: center;
@@ -2985,6 +2985,14 @@ textarea.form-control {
 
 input[type=search] {
 	-webkit-appearance: none
+}
+
+input[disabled], input[readonly] {
+	cursor: not-allowed;
+	background-color: #F9F9F9;
+	opacity: 1;
+        border: 0 none;
+        margin-right: 6px;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -9193,6 +9201,9 @@ a:active,a:focus,a:hover {
 	left: auto
 }
 
+#store_img:after{display: block;height:100%;_height:100%;clear:both;content:'\020';}
+#store_img{zoom:1;}
+
 .btn-box-tool {
 	padding: 5px;
 	font-size: 12px;
@@ -9980,7 +9991,7 @@ a:active,a:focus,a:hover {
 }
 
 .table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th {
-	border-top: 1px solid #f4f4f4
+	border-top: 0 none;
 }
 
 .table>thead>tr>th {

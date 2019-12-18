@@ -68,6 +68,10 @@ $(document).ready(function(){
                 floorDesc = '八楼';
                 floor = 'L8';
                 break;
+            case '9':
+                floorDesc = '九楼';
+                floor = 'L9';
+                break;
             default:
                 floorDesc = [];
                 floor = 'L1';
@@ -832,30 +836,30 @@ function getFloors() {
 function getUsers() {
     var users = [];
     users.push(
-        {code: 'CUSER190709000001',name: '蒋晟'},
-        {code: 'CUSER190709000002',name: '陈春梅'},
-        {code: 'CUSER190709000003',name: '徐晔琤'},
-        {code: 'CUSER190709000004',name: '李晓洁'},
-        {code: 'CUSER190709000005',name: '徐伟杰'},
+        {code: 'CUSER190709000001',name: 'Victor Jiang'},
+        {code: 'CUSER190709000002',name: 'Chris Chen'},
+        {code: 'CUSER190709000003',name: 'Grace Xu'},
+        {code: 'CUSER190709000004',name: 'Maggie Li'},
+        {code: 'CUSER190709000005',name: 'Jeff Xu'},
         {code: 'CUSER190709000006',name: "Austin Rao"},
-        {code: 'CUSER190709000008',name: '周晓芳'},
+        {code: 'CUSER190709000008',name: 'Doris Zhou'},
         {code: 'CUSER190709000009',name: 'Megan Jing'},
-        {code: 'CUSER190709000010',name: '姜皓文'},
-        {code: 'CUSER190709000011',name: '冰淼'},
-        {code: 'CUSER190709000012',name: "方佳俊"},
-        {code: 'CUSER190709000013',name: '魏肖霞'},
-        {code: 'CUSER190709000015',name: '宋岩'},
-        {code: 'CUSER190709000016',name: '崔迪'},
-        {code: 'CUSER190709000017',name: '周轶君'},
-        {code: 'CUSER190709000018',name: '乔治'},
-        {code: 'CUSER190709000019',name: '李秉彝'},
-        {code: 'CUSER190709000020',name: '黄赛男'},
-        {code: 'CUSER190709000021',name: '周蓉靓'},
-        {code: 'CUSER190709000022',name: '马云飞'},
-        {code: 'CUSER190709000023',name: '师晓慧'},
-        {code: 'CUSER190709000024',name: '叶蔚'},
-        {code: 'CUSER190924000001',name: '杭梦琪'},
-        {code: 'CUSER190927000001',name: '陈竞毅'}
+        {code: 'CUSER190709000010',name: 'Kevin Jiang'},
+        {code: 'CUSER190709000011',name: 'Melissa Bing'},
+        {code: 'CUSER190709000012',name: "Pierre Fang"},
+        {code: 'CUSER190709000013',name: 'Sylvia Wei'},
+        {code: 'CUSER190709000015',name: 'Selena Song'},
+        {code: 'CUSER190709000016',name: 'Di Cui'},
+        {code: 'CUSER190709000017',name: 'Echo Zhou'},
+        {code: 'CUSER190709000018',name: 'George Qiao'},
+        {code: 'CUSER190709000019',name: 'Dolby Li'},
+        {code: 'CUSER190709000020',name: 'Ariel Huang'},
+        {code: 'CUSER190709000021',name: 'Joy Zhou'},
+        {code: 'CUSER190709000022',name: 'Claude Ma'},
+        {code: 'CUSER190709000023',name: 'Abby Shi'},
+        {code: 'CUSER190709000024',name: 'Wei Ye'},
+        {code: 'CUSER190924000001',name: 'Mia Hang'},
+        {code: 'CUSER190927000001',name: 'Barnny Chen'}
     )
     
     sessionStorage.setItem("users", JSON.stringify(users));

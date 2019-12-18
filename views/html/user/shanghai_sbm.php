@@ -45,7 +45,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 </div>
             </div>
             <div class="col-md-8">
-                <p><?= $lang['mall_shanghai_brief_p'] ?></p>
+                <p style="margin: 10px 0;"><?= $lang['mall_shanghai_brief_p'] ?></p>
                 <div class="row">
                     <div class="col-md-4">
                         <h4 class="c-title c-first c-font-bold"><?= $lang['mall_gdp'] ?></h4>

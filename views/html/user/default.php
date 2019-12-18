@@ -44,8 +44,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000571"><img src="views/assets/base/img/content/client-logos/peets-coffee.jpg" alt=""/></a>
                         Peet's Coffee
-                        <a href="shop?id=OLSHOP180917000082"><img src="views/assets/base/img/content/client-logos/green-safe.jpg" alt=""/></a>
-                        Green&Safe
+                        <a href="shop?id=OLSHOP190613000006"><img src="views/assets/base/img/content/client-logos/hunkemoller.jpg" alt=""/></a>
+                        Hunkemoller
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000097"><img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt=""/></a>
@@ -68,8 +68,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000743"><img src="views/assets/base/img/content/client-logos/jianghudongbaiding.jpg" alt=""/></a>
                         姜虎东白丁
-                        <a href="shop?id=OLSHOP191022000064"><img src="views/assets/base/img/content/client-logos/muweiliu.jpg" alt=""/></a>
-                        木卫六
+                        <a href="shop?id=OLSHOP190924000001"><img src="views/assets/base/img/content/client-logos/wala.jpg" alt=""/></a>
+                        WALA 蛙辣火锅
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190731000004"><img src="views/assets/base/img/content/client-logos/qixi.jpg" alt=""/></a>

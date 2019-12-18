@@ -21,14 +21,31 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <video loop="loop" autoplay="true" src="upload/video/<?= $lang['mall_lang_cat'] ?>/luoyang-sbm.mp4" controls="true" width="100%"></video><br><br>
                 <div class="c-body">
                     <div class="c-section">
+                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
+                            <?= $lang['mall_location'] ?>
+                        </div>
                         <div>
                             <span id="street"></span>
+                        </div>
+                        <br>
+                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
+                            <?= $lang['mall_floor_area'] ?>
+                        </div>
+                        <div>
+                            <span id="gross_floor_area"></span>m<sup>2</sup>
+                        </div>
+                        <br>
+                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
+                            <?= $lang['mall_leasable_area'] ?>
+                        </div>
+                        <div>
+                            <span id="leasing_area"></span>m<sup>2</sup>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
-                <p><?= $lang['mall_luoyang_brief_p'] ?></p>
+                <p style="margin: 10px 0;"><?= $lang['mall_luoyang_brief_p'] ?></p>
                 <div class="row">
                     <div class="col-md-4">
                         <h4 class="c-title c-first c-font-bold"><?= $lang['mall_gdp'] ?></h4>
@@ -62,8 +79,10 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         <div class="c-feature-16-line c-theme-bg"></div>
                         <h2 class="c-feature-16-title c-font-bold">7F <?= $lang['mall_luoyang_sbm_7'] ?></h2>
                         <p class="c-feature-16-desc">
-                            <?= $lang['mall_opening_soon'] ?>                        
+                            <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
+                        <div id="proportion_f7"></div>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-luoyang-sbm.php?m=<?= $luoyang_sbm ?>&f=7" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>

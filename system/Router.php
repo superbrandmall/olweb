@@ -107,6 +107,21 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $session = new Session();
         $session ->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'],'portal')) !== false) { // 内部网站导航
+    $target = array(
+        'portal/1' => array(
+            'url' => 'default.php'
+        ),
+        'portal/2' => array(
+            'url' => 'default2.php'
+        )
+    );
+    
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
 } else {
     include ('MallCode.php');
     

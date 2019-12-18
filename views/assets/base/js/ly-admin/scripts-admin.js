@@ -56,6 +56,10 @@ $(document).ready(function(){
                 floorDesc = '六楼';
                 floor = 'L6';
                 break;
+            case '7':
+                floorDesc = '七楼';
+                floor = 'L7';
+                break;
             default:
                 floorDesc = [];
                 floor = 'L1';

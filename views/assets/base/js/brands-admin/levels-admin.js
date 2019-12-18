@@ -141,9 +141,15 @@ $(document).ready(function(){
         }, 0);
     });
     
-    $(".brands-selector").change(function () {
+    $(".brands-selector-L").change(function () {
         if($(this).val() != ''){
-            applyNewCategory($(this).parents('tr').attr('id'));
+            applyNewCategoryL($(this).parents('tr').attr('id'));
+        }
+    });
+    
+    $(".brands-selector-S").change(function () {
+        if($(this).val() != ''){
+            applyNewCategoryS($(this).parents('tr').attr('id'));
         }
     });
     
@@ -151,30 +157,30 @@ $(document).ready(function(){
     
     $('.predict-sales').blur(function(){
         $(this).val(numberWithCommas(numberWithoutCommas($(this).val())));
-        calBackPushRent();
-        calBackPushUnitRent();
-        calHigherRent();
-        calHigherDailyRent();
+        calBackPushRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calBackPushUnitRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherDailyRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
     });
     
     $('.predict-floatin-rates').blur(function(){
-        calBackPushRent();
-        calBackPushUnitRent();
-        calHigherRent();
-        calHigherDailyRent();
+        calBackPushRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calBackPushUnitRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherDailyRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
     });
     
     $('.guarantee-unit-rent').blur(function(){
-        calGuaranteeRent();
-        calHigherRent();
-        calHigherDailyRent();
+        calGuaranteeRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherDailyRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
     });
     
     $('.guarantee-rent').blur(function(){
         $(this).val(numberWithCommas(numberWithoutCommas($(this).val())));
-        calGuaranteeUnitRent();
-        calHigherRent();
-        calHigherDailyRent();
+        calGuaranteeUnitRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
+        calHigherDailyRent($(this).parents('tr').attr('id'),$(this).parents('tbody').attr('id'));
     });
     
     /********************* End of calculation *************************/
@@ -185,7 +191,17 @@ $(function() {
         $('#map').mapster('resize', 1*($('#map_canvas').width()), 0, 0);
         addTextLayer();
     });
+    
+    window.οnlοad =
+        $("#store_vr").css({
+            'height': $("#store_img").height()+'px'
+        });
+        
+    window.οnlοad = addTextLayer();
+        
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
+
 
 function getShopFloorInfo(fl) {
     $.ajax({
@@ -373,8 +389,6 @@ function drawShops(){
             });
         }
     });
-    
-    addTextLayer();
 }
 
 function addTextLayer(){
@@ -450,19 +464,11 @@ function addTextLayer(){
 }
 
 function JumpToShopList(sc){
-    $('td').removeClass('dark-layer');
-    /*var sTop = $('#row_'+sc).offset().top - 550;
-    var nowScrollTop = $('.fixed-table-body').scrollTop();
+    $('#levelShopListL td').removeClass('dark-layer');
+    $('#levelShopListS tr').hide();
 
-    $('html, body').animate({
-        scrollTop: $('.fixed-table-body').offset().top
-    }, 0);
-
-    $('.fixed-table-body').stop(true).animate({
-        scrollTop: sTop + nowScrollTop
-    }, 0);*/
-    
-    $('.rows-'+sc+' td').addClass('dark-layer');
+    $('#levelShopListL .rows-'+sc+' td').addClass('dark-layer');
+    $('#levelShopListS .rows-'+sc).show();
     
     GetShopInfo(sc);
 }
@@ -490,7 +496,7 @@ function GetShopInfo(sc){
                 var images = shop.images;
                 
                 if(images != null && images.length > 0) {
-                    $('#store_img').html('<img src="'+images[0].image+'" style="width: auto; height: 100%;" />');
+                    $('#store_img').html('<img src="'+images[0].image+'" class="img-responsive" alt="" />');
                 } else {
                     $('#store_img').html('');
                 }
@@ -500,7 +506,7 @@ function GetShopInfo(sc){
                     if(shop.shopState === 1 && shop.brandToSign != null && shop.brandToSign != ''){
                         $('#store_vr').hide();
                         if(images != null && images.length > 1) {
-                            $('#store_img_2').show().append('<img src="'+images[1].image+'" style="width: auto; height: 100%;" />');
+                            $('#store_img_2').show().append('<img src="'+images[1].image+'" class="img-responsive" alt="" />');
                         }
                     } else {
                         $('#store_img_2').hide();
@@ -510,7 +516,7 @@ function GetShopInfo(sc){
                 } else {
                     $('#store_vr').hide();
                     if(images != null && images.length > 1) {
-                         $('#store_img_2').show().append('<img src="'+images[1].image+'" style="width: auto; height: 100%;" />');
+                         $('#store_img_2').show().append('<img src="'+images[1].image+'" class="img-responsive" alt="" />');
                     }
                 }
                 
@@ -597,12 +603,12 @@ function renderLevelShops(fD) {
             
             if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0){
                 if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
-                    $('#levelShopList').append('\
-    <tr style="border-left: 20px solid '+bg+'" id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
-    <td rowspan="1" style="vertical-align: middle;">'+v.shopName+'</td>\n\
-    <td rowspan="1" style="vertical-align: middle;"><span class="area">'+v.area+'</span>m<sup>2</sup></td>\n\
-    <td rowspan="1" style="vertical-align: middle;">'+(v.brandName || '')+'</td>\n\
-    <td><i class="fa fa-plus"></i><select class="brands-selector" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
+                    $('#levelShopListL').append('\
+    <tr id="row_'+v.code+'" class="rows-'+v.code+' primary-rows" onclick=\'javascript: JumpToShopList("'+v.code+'");\'>\n\
+    <td rowspan="1" style="vertical-align: middle; z-index: 4; background-color: '+bg+';">'+v.shopName+'</td>\n\
+    <td rowspan="1" style="vertical-align: middle; z-index: 4;"><span class="area">'+v.area+'</span>m<sup>2</sup></td>\n\
+    <td rowspan="1" style="vertical-align: middle; z-index: 4;">'+(v.brandName || '')+'</td>\n\
+    <td><i class="fa fa-plus"></i><select class="brands-selector-L" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
     <td class="new-category-code"></td>\n\
     <td><input class="form-control target-confirm-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
     <td><input class="form-control target-contract-signed-date date-picker" type="text" data-plugin="datepicker" readonly /></td>\n\
@@ -619,12 +625,39 @@ function renderLevelShops(fD) {
     <td><div class="input-group"><input class="form-control guarantee-rent" type="text" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
     <td><div class="input-group"><input class="form-control higher-rent non-input" type="text" style="width: auto;" readonly /><span class="input-group-addon">元</span></div></td>\n\
     <td><div class="input-group"><input class="form-control higher-daily-rent non-input" type="text" readonly /><span class="input-group-addon">元</span></div></td>\n\
-    <td><a href=\'javascript: saveShopBrand("'+v.code+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
+    <td><a href=\'javascript: saveShopBrandL("'+v.code+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
     </tr>'); 
+                    
+                    $('#levelShopListS').append('\
+<tr style="border-left: 10px solid '+bg+'" id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
+<td colspan="65">\n\
+<div class="card-views"><div class="card-view"><span class="title">铺位号</span><span class="value"><a href="/brands-admin/brand?id='+v.code+'">'+v.shopName+'</a></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">面积</span><span class="value">'+v.area+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">原品牌</span><span class="value">'+(v.brandName || '')+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">新品牌</span><span class="value"><select class="brands-selector-S">'+brandsSelector+'</select></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value new-category-code"></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">确认时间</span><span class="value"><input class="target-confirm-date date-picker" type="text" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">签约时间</span><span class="value"><input class="target-contract-signed-date date-picker" type="text" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">围挡时间</span><span class="value"><input class="target-hoarding-date date-picker" type="text" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">进场时间</span><span class="value"><input class="target-entering-date date-picker" type="text" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">开业时间</span><span class="value"><input class="target-opening-date date-picker" type="text" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">备注</span><span class="value"><input class="user-remark" type="text" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">责任人</span><span class="value responsible-person"></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业绩预估</span><span class="value"><input class="predict-sales" type="text" /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">预估扣点</span><span class="value"><input class="predict-floatin-rates" type="text" /><span>%</span></span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">倒推月租金</span><span class="value"><input class="back-push-rent" type="text" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">倒推租金单价</span><span class="value"><input class="back-push-unit-rent" type="text" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保底租金单价</span><span class="value"><input class="guarantee-unit-rent" type="text" /><span>元</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保底月租金</span><span class="value"><input class="guarantee-rent" type="text" /><span>元</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">取高月租金</span><span class="value"><input class="higher-rent" type="text" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">取高日租金</span><span class="value"><input class="higher-daily-rent" type="text" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保存</span><span class="value"><a href=\'javascript: saveShopBrandS("'+v.code+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></span></div></div>\n\
+</td></tr>');
+                   
                 } else {
                     $('#levelShopList2').append('\
-    <tr style="border-left: 20px solid '+bg+'" id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
-    <td style="vertical-align: middle;">'+v.shopName+'</td>\n\
+    <tr id="row_'+v.code+'" class="rows-'+v.code+' primary-rows">\n\
+    <td style="vertical-align: middle; background-color: '+bg+';">'+v.shopName+'</td>\n\
     <td style="vertical-align: middle;">'+v.area+'m<sup>2</sup></td>\n\
     <td style="vertical-align: middle;">'+(v.brandName || '')+'</td>\n\
     <td colspan="18"></td>\n\
@@ -678,13 +711,13 @@ function renderLevelShopNewBrands(fD) {
                     var bg = "#fff";
                     var rows = 1;
                     $.each(response.data, function(i,v){
-                        rows = $('#row_'+v.shopCode+' td:eq(0)').attr('rowSpan');
+                        rows = $('#levelShopListL #row_'+v.shopCode+' td:eq(0)').attr('rowSpan');
                         rows++;
                         for(var j=0;j<3;j++){
-                            $('#row_'+v.shopCode+' td:eq('+j+')').attr('rowSpan',rows);
+                            $('#levelShopListL #row_'+v.shopCode+' td:eq('+j+')').attr('rowSpan',rows);
                         }
                         
-                        bg = $('#row_'+v.shopCode).css('borderLeftColor');
+                        bg = $('#levelShopListL #row_'+v.shopCode).css('backgroundColor');
                         
                         var user = '';
                         $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
@@ -693,8 +726,8 @@ function renderLevelShopNewBrands(fD) {
                             }
                         });
                         
-                        $('<tr id="row_'+v.shopCode+'_'+i+'" class="rows-'+v.shopCode+'" style="border-left: 20px solid '+bg+'">\n\
-                            <td><select class="brands-selector" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
+                        $('<tr id="row_'+v.shopCode+'_'+i+'" class="rows-'+v.shopCode+'" onclick=\'javascript: JumpToShopList("'+v.shopCode+'");\'>\n\
+                            <td><select class="brands-selector-L" style="font-weight: bold; background: transparent; text-align: center;">'+brandsSelector+'</select></td>\n\
                             <td class="new-category-code">'+v.newCategoryCode+'</td>\n\
                             <td><input class="form-control target-confirm-date date-picker" type="text" value="'+(v.targetConfirmDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
                             <td><input class="form-control target-contract-signed-date date-picker" type="text" value="'+(v.targetContractSignedDate || '')+'" data-plugin="datepicker" readonly /></td>\n\
@@ -711,10 +744,34 @@ function renderLevelShopNewBrands(fD) {
                             <td><div class="input-group"><input class="form-control guarantee-rent" type="text" value="'+(numberWithCommas(v.guaranteeRent) || '')+'" style="width: auto;" /><span class="input-group-addon">元</span></div></td>\n\
                             <td><div class="input-group"><input class="form-control higher-rent non-input" type="text" value="'+(numberWithCommas(v.higherRent) || '')+'" style="width: auto;" readonly /><span class="input-group-addon">元</span></div></td>\n\
                             <td><div class="input-group"><input class="form-control higher-daily-rent non-input" type="text" value="'+(numberWithCommas(v.higherDailyRent) || '')+'" readonly /><span class="input-group-addon">元</span></div></td>\n\
-\                           <td><a id="save_'+v.code+'" href=\'javascript: updateShopBrand("'+v.shopCode+'_'+i+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
-                            </tr>').insertAfter('#row_'+v.shopCode);
+\                           <td><a id="save_'+v.code+'" href=\'javascript: updateShopBrandL("'+v.shopCode+'_'+i+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></td>\n\
+                            </tr>').insertAfter('#levelShopListL #row_'+v.shopCode);
                         
-                        $('#row_'+v.shopCode).next('tr').find('td').find('.brands-selector').val(v.brandCode);
+                        $('#levelShopListL #row_'+v.shopCode).next('tr').find('td').find('.brands-selector-L').val(v.brandCode);
+                        
+                        $('<tr id="row_'+v.shopCode+'_'+i+'" class="rows-'+v.shopCode+'" style="border-left: 10px solid '+bg+'" >\n\
+<td colspan="65">\n\
+<div class="card-views"><div class="card-view"><span class="title">新品牌</span><span class="value"><select class="brands-selector-S">'+brandsSelector+'</select></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业态</span><span class="value new-category-code">'+v.newCategoryCode+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">确认时间</span><span class="value"><input class="target-confirm-date date-picker" type="text" value="'+(v.targetConfirmDate || '')+'" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">签约时间</span><span class="value"><input class="target-contract-signed-date date-picker" type="text" value="'+(v.targetContractSignedDate || '')+'" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">围挡时间</span><span class="value"><input class="target-hoarding-date date-picker" type="text" value="'+(v.targetHoardingDate || '')+'" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">进场时间</span><span class="value"><input class="target-entering-date date-picker" type="text" value="'+(v.targetEnteringDate || '')+'" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">开业时间</span><span class="value"><input class="target-opening-date date-picker" type="text" value="'+(v.targetOpeningDate || '')+'" data-plugin="datepicker" readonly style="background: #FFF; border: solid 1px #dedede;" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">备注</span><span class="value"><input class="user-remark" type="text" value="'+v.userRemark+'" /></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">责任人</span><span class="value responsible-person">'+user+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">业绩预估</span><span class="value"><input class="predict-sales" type="text" value="'+(numberWithCommas(v.predictSales) || '')+'" /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">预估扣点</span><span class="value"><input class="predict-floatin-rates" type="text" value="'+(v.predictFloatingRates || '')+'" /><span>%</span></span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">倒推月租金</span><span class="value"><input class="back-push-rent" type="text" value="'+(numberWithCommas(v.backPushRent) || '')+'" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">倒推租金单价</span><span class="value"><input class="back-push-unit-rent" type="text" value="'+(numberWithCommas(v.backPushUnitRent) || '')+'" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保底租金单价</span><span class="value"><input class="guarantee-unit-rent" type="text" value="'+(numberWithCommas(v.guaranteeUnitRent) || '')+'" /><span>元</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保底月租金</span><span class="value"><input class="guarantee-rent" type="text" value="'+(numberWithCommas(v.guaranteeRent) || '')+'" /><span>元</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">取高月租金</span><span class="value"><input class="higher-rent" type="text" value="'+(numberWithCommas(v.higherRent) || '')+'" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">取高日租金</span><span class="value"><input class="higher-daily-rent" type="text" value="'+(numberWithCommas(v.higherDailyRent) || '')+'" readonly /><span>元</span></span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">保存</span><span class="value"><a id="save_'+v.code+'" href=\'javascript: updateShopBrandS("'+v.shopCode+'_'+i+'");\' class="save btn btn-danger btn-xs"><i class="fa fa-save"></i></a></span></div></div>\n\
+</td></tr>').insertAfter('#levelShopListS #row_'+v.shopCode);
+                        
+                        $('#levelShopListS #row_'+v.shopCode).next('tr').find('td').find('.brands-selector-S').val(v.brandCode);
                     });
                     
                     $('.date-picker').datepicker({
@@ -790,8 +847,8 @@ function showBrands(p,c,u){
     });
 }
 
-function applyNewCategory(rid) {
-    var ct = $('#'+rid+' select option:selected').attr('category');
+function applyNewCategoryL(rid) {
+    var ct = $('#levelShopListL #'+rid+' select option:selected').attr('category');
     var category = '';
     $.each($.parseJSON(sessionStorage.getItem("category")), function(h,u) {
         if(u.code == ct) {
@@ -799,9 +856,9 @@ function applyNewCategory(rid) {
         }
     });
     
-    $('#'+rid+' .new-category-code').text(category);
+    $('#levelShopListL #'+rid+' .new-category-code').text(category);
     
-    var uc = $('#'+rid+' select option:selected').attr('user');
+    var uc = $('#levelShopListL #'+rid+' select option:selected').attr('user');
     var user = '';
     $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
         if(u.code == uc) {
@@ -809,30 +866,52 @@ function applyNewCategory(rid) {
         }
     });
     
-    $('#'+rid+' .responsible-person').text(user);
+    $('#levelShopListL #'+rid+' .responsible-person').text(user);
 }
 
-function updateShopBrand(i){
+function applyNewCategoryS(rid) {
+    var ct = $('#levelShopListS #'+rid+' select option:selected').attr('category');
+    var category = '';
+    $.each($.parseJSON(sessionStorage.getItem("category")), function(h,u) {
+        if(u.code == ct) {
+            category = u.name;
+        }
+    });
+    
+    $('#levelShopListS #'+rid+' .new-category-code').text(category);
+    
+    var uc = $('#levelShopListS #'+rid+' select option:selected').attr('user');
+    var user = '';
+    $.each($.parseJSON(sessionStorage.getItem("users")), function(h,u) {
+        if(u.code == uc) {
+            user = u.name;
+        }
+    });
+    
+    $('#levelShopListS #'+rid+' .responsible-person').text(user);
+}
+
+function updateShopBrandL(i){
     var map = {
-        code: $('#row_'+i+' .save').attr('id').split('_')[1],
+        code: $('#levelShopListL #row_'+i+' .save').attr('id').split('_')[1],
         userCode: $.cookie('login'),
         shopCode: i.split('_')[0],
-        brandCode: $('#row_'+i+' .brands-selector').val(),
-        newCategoryCode: $('#row_'+i+' .new-category-code').text() || null,
-        backPushRent: numberWithoutCommas($('#row_'+i+' .back-push-rent').val()) || null,
-        backPushUnitRent: numberWithoutCommas($('#row_'+i+' .back-push-unit-rent').val()) || null,
-        guaranteeRent: numberWithoutCommas($('#row_'+i+' .guarantee-rent').val()) || null,
-        guaranteeUnitRent: numberWithoutCommas($('#row_'+i+' .guarantee-unit-rent').val()) || null,
-        higherDailyRent: numberWithoutCommas($('#row_'+i+' .higher-daily-rent').val()) || null,
-        higherRent: numberWithoutCommas($('#row_'+i+' .higher-rent').val()) || null,
-        predictFloatingRates: $('#row_'+i+' .predict-floatin-rates').val() || null,
-        predictSales: numberWithoutCommas($('#row_'+i+' .predict-sales').val()) || null,
-        targetConfirmDate: $('#row_'+i+' .target-confirm-date').val() || null,
-        targetContractSignedDate: $('#row_'+i+' .target-contract-signed-date').val() || null,
-        targetEnteringDate: $('#row_'+i+' .target-entering-date').val() || null,
-        targetHoardingDate: $('#row_'+i+' .target-hoarding-date').val() || null,
-        targetOpeningDate: $('#row_'+i+' .target-opening-date').val() || null,
-        userRemark: $('#row_'+i+' .user-remark').val(),
+        brandCode: $('#levelShopListL #row_'+i+' .brands-selector-L').val(),
+        newCategoryCode: $('#levelShopListL #row_'+i+' .new-category-code').text() || null,
+        backPushRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .back-push-rent').val()) || null,
+        backPushUnitRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .back-push-unit-rent').val()) || null,
+        guaranteeRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .guarantee-rent').val()) || null,
+        guaranteeUnitRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .guarantee-unit-rent').val()) || null,
+        higherDailyRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .higher-daily-rent').val()) || null,
+        higherRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .higher-rent').val()) || null,
+        predictFloatingRates: $('#levelShopListL #row_'+i+' .predict-floatin-rates').val() || null,
+        predictSales: numberWithoutCommas($('#levelShopListL #row_'+i+' .predict-sales').val()) || null,
+        targetConfirmDate: $('#levelShopListL #row_'+i+' .target-confirm-date').val() || null,
+        targetContractSignedDate: $('#levelShopListL #row_'+i+' .target-contract-signed-date').val() || null,
+        targetEnteringDate: $('#levelShopListL #row_'+i+' .target-entering-date').val() || null,
+        targetHoardingDate: $('#levelShopListL #row_'+i+' .target-hoarding-date').val() || null,
+        targetOpeningDate: $('#levelShopListL #row_'+i+' .target-opening-date').val() || null,
+        userRemark: $('#levelShopListL #row_'+i+' .user-remark').val(),
         status: 1,
         floorCode: floorDesc
     };
@@ -844,7 +923,7 @@ function updateShopBrand(i){
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
-            $('#row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+            $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -852,45 +931,103 @@ function updateShopBrand(i){
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
-                $('#row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-check"></i>');
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
                 setTimeout(function () {
-                    $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
                 },1000);
             } else {
-                $('#row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
                 setTimeout(function () {
-                    $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                },1000);
+            }
+        }
+    });
+}
+
+function updateShopBrandS(i){
+    var map = {
+        code: $('#levelShopListS #row_'+i+' .save').attr('id').split('_')[1],
+        userCode: $.cookie('login'),
+        shopCode: i.split('_')[0],
+        brandCode: $('#levelShopListS #row_'+i+' .brands-selector-S').val(),
+        newCategoryCode: $('#levelShopListS #row_'+i+' .new-category-code').text() || null,
+        backPushRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .back-push-rent').val()) || null,
+        backPushUnitRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .back-push-unit-rent').val()) || null,
+        guaranteeRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .guarantee-rent').val()) || null,
+        guaranteeUnitRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .guarantee-unit-rent').val()) || null,
+        higherDailyRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .higher-daily-rent').val()) || null,
+        higherRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .higher-rent').val()) || null,
+        predictFloatingRates: $('#levelShopListS #row_'+i+' .predict-floatin-rates').val() || null,
+        predictSales: numberWithoutCommas($('#levelShopListS #row_'+i+' .predict-sales').val()) || null,
+        targetConfirmDate: $('#levelShopListS #row_'+i+' .target-confirm-date').val() || null,
+        targetContractSignedDate: $('#levelShopListS #row_'+i+' .target-contract-signed-date').val() || null,
+        targetEnteringDate: $('#levelShopListS #row_'+i+' .target-entering-date').val() || null,
+        targetHoardingDate: $('#levelShopListS #row_'+i+' .target-hoarding-date').val() || null,
+        targetOpeningDate: $('#levelShopListS #row_'+i+' .target-opening-date').val() || null,
+        userRemark: $('#levelShopListS #row_'+i+' .user-remark').val(),
+        status: 1,
+        floorCode: floorDesc
+    };
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/shopBrand/update",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                setTimeout(function () {
+                    $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                },1000);
+            } else {
+                $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                setTimeout(function () {
+                    $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
                 },1000);
             }
         }
     })
 }
 
-function saveShopBrand(i){
-    if($('#row_'+i+' .brands-selector').val() != ''){
+function saveShopBrandL(i){
+    if($('#levelShopListL #row_'+i+' .brands-selector-L').val() != ''){
         var map = {
-            userCode: $('#row_'+i+' .brands-selector option:selected').attr('user'),
+            userCode: $('#levelShopListL #row_'+i+' .brands-selector-L option:selected').attr('user'),
             shopCode: i,
-            brandCode: $('#row_'+i+' .brands-selector').val(),
-            newCategoryCode: $('#row_'+i+' .new-category-code').text() || null,
-            backPushRent: numberWithoutCommas($('#row_'+i+' .back-push-rent').val()) || null,
-            backPushUnitRent: numberWithoutCommas($('#row_'+i+' .back-push-unit-rent').val()) || null,
-            guaranteeRent: numberWithoutCommas($('#row_'+i+' .guarantee-rent').val()) || null,
-            guaranteeUnitRent: numberWithoutCommas($('#row_'+i+' .guarantee-unit-rent').val()) || null,
-            higherDailyRent: numberWithoutCommas($('#row_'+i+' .higher-daily-rent').val()) || null,
-            higherRent: numberWithoutCommas($('#row_'+i+' .higher-rent').val()) || null,
-            predictFloatingRates: $('#row_'+i+' .predict-floatin-rates').val() || null,
-            predictSales: numberWithoutCommas($('#row_'+i+' .predict-sales').val()) || null,
-            targetConfirmDate: $('#row_'+i+' .target-confirm-date').val() || null,
-            targetContractSignedDate: $('#row_'+i+' .target-contract-signed-date').val() || null,
-            targetEnteringDate: $('#row_'+i+' .target-entering-date').val() || null,
-            targetHoardingDate: $('#row_'+i+' .target-hoarding-date').val() || null,
-            targetOpeningDate: $('#row_'+i+' .target-opening-date').val() || null,
-            userRemark: $('#row_'+i+' .user-remark').val(),
+            brandCode: $('#levelShopListL #row_'+i+' .brands-selector-L').val(),
+            newCategoryCode: $('#levelShopListL #row_'+i+' .new-category-code').text() || null,
+            backPushRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .back-push-rent').val()) || null,
+            backPushUnitRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .back-push-unit-rent').val()) || null,
+            guaranteeRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .guarantee-rent').val()) || null,
+            guaranteeUnitRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .guarantee-unit-rent').val()) || null,
+            higherDailyRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .higher-daily-rent').val()) || null,
+            higherRent: numberWithoutCommas($('#levelShopListL #row_'+i+' .higher-rent').val()) || null,
+            predictFloatingRates: $('#levelShopListL #row_'+i+' .predict-floatin-rates').val() || null,
+            predictSales: numberWithoutCommas($('#levelShopListL #row_'+i+' .predict-sales').val()) || null,
+            targetConfirmDate: $('#levelShopListL #row_'+i+' .target-confirm-date').val() || null,
+            targetContractSignedDate: $('#levelShopListL #row_'+i+' .target-contract-signed-date').val() || null,
+            targetEnteringDate: $('#levelShopListL #row_'+i+' .target-entering-date').val() || null,
+            targetHoardingDate: $('#levelShopListL #row_'+i+' .target-hoarding-date').val() || null,
+            targetOpeningDate: $('#levelShopListL #row_'+i+' .target-opening-date').val() || null,
+            userRemark: $('#levelShopListL #row_'+i+' .user-remark').val(),
             status: 1,
             state: 1,
             floorCode: floorDesc
@@ -903,7 +1040,7 @@ function saveShopBrand(i){
             dataType: "json",
             contentType: "application/json",
             beforeSend: function(request) {
-                $('#row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+                $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
                 request.setRequestHeader("Login", $.cookie('login'));
                 request.setRequestHeader("Authorization", $.cookie('authorization'));
                 request.setRequestHeader("Lang", $.cookie('lang'));
@@ -911,104 +1048,207 @@ function saveShopBrand(i){
             },
             success: function (response, status, xhr) {
                 if(response.code === 'C0') {
-                    $('#row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                    $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-check"></i>');
                     if(xhr.getResponseHeader("Authorization") !== null){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
 
                     setTimeout(function () {
-                        $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                        $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
                     },1000);
                 } else {
-                    $('#row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                    $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
                     setTimeout(function () {
-                        $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                        $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
                     },1000);
                 }
             }
         })
     } else {
-        $('#row_'+i+' .save').html('<i class="fa fa-exclamation-circle"></i> 品牌');
+        $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-exclamation-circle"></i> 品牌');
         setTimeout(function () {
-            $('#row_'+i+' .save').html('<i class="fa fa-save"></i>');
+            $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
         },1000);
     }
 }
 
-function calBackPushRent() {
+function saveShopBrandS(i){
+    if($('#levelShopListS #row_'+i+' .brands-selector-S').val() != ''){
+        var map = {
+            userCode: $('#levelShopListS #row_'+i+' .brands-selector-S option:selected').attr('user'),
+            shopCode: i,
+            brandCode: $('#levelShopListS #row_'+i+' .brands-selector-S').val(),
+            newCategoryCode: $('#levelShopListS #row_'+i+' .new-category-code').text() || null,
+            backPushRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .back-push-rent').val()) || null,
+            backPushUnitRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .back-push-unit-rent').val()) || null,
+            guaranteeRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .guarantee-rent').val()) || null,
+            guaranteeUnitRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .guarantee-unit-rent').val()) || null,
+            higherDailyRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .higher-daily-rent').val()) || null,
+            higherRent: numberWithoutCommas($('#levelShopListS #row_'+i+' .higher-rent').val()) || null,
+            predictFloatingRates: $('#levelShopListS #row_'+i+' .predict-floatin-rates').val() || null,
+            predictSales: numberWithoutCommas($('#levelShopListS #row_'+i+' .predict-sales').val()) || null,
+            targetConfirmDate: $('#levelShopListS #row_'+i+' .target-confirm-date').val() || null,
+            targetContractSignedDate: $('#levelShopListS #row_'+i+' .target-contract-signed-date').val() || null,
+            targetEnteringDate: $('#levelShopListS #row_'+i+' .target-entering-date').val() || null,
+            targetHoardingDate: $('#levelShopListS #row_'+i+' .target-hoarding-date').val() || null,
+            targetOpeningDate: $('#levelShopListS #row_'+i+' .target-opening-date').val() || null,
+            userRemark: $('#levelShopListS #row_'+i+' .user-remark').val(),
+            status: 1,
+            state: 1,
+            floorCode: floorDesc
+        };
+        $.ajax({
+            url: $.api.baseNew+"/onlineleasing-customer/api/shopBrand/save",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-spinner fa-spin"></i>');
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-check"></i>');
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    setTimeout(function () {
+                        $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    },1000);
+                } else {
+                    $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
+                    setTimeout(function () {
+                        $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                    },1000);
+                }
+            }
+        })
+    } else {
+        $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-exclamation-circle"></i> 品牌');
+        setTimeout(function () {
+            $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+        },1000);
+    }
+}
+
+function calBackPushRent(id,id2) {
     var backPushRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.predict-sales').val()) > 0 && $(this).find('.predict-floatin-rates').val() > 0){
-            backPushRent = Math.round(numberWithoutCommas($(this).find('.predict-sales').val()) * $(this).find('.predict-floatin-rates').val() / 100);
-            if(numberWithoutCommas($(this).find('.back-push-rent').val()) != backPushRent){
-                $(this).find('.back-push-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.back-push-rent').val(numberWithCommas(backPushRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.predict-sales').val()) > 0 && $('#'+id2+' #'+id).find('.predict-floatin-rates').val() > 0){
+        backPushRent = Math.round(numberWithoutCommas($('#'+id2+' #'+id).find('.predict-sales').val()) * $('#'+id2+' #'+id).find('.predict-floatin-rates').val() / 100);
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-rent').val()) != backPushRent){
+            $('#'+id2+' #'+id).find('.back-push-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.back-push-rent').val(numberWithCommas(backPushRent));
+    }
 }
 
-function calBackPushUnitRent() {
+function calBackPushUnitRent(id,id2) {
     var backPushUnitRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.back-push-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
-            backPushUnitRent = Number(numberWithoutCommas($(this).find('.back-push-rent').val()) * 12 / 365 / $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text()).toFixed(2);
-            if(numberWithoutCommas($(this).find('.back-push-unit-rent').val()) != backPushUnitRent){
-                $(this).find('.back-push-unit-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.back-push-unit-rent').val(numberWithCommas(backPushUnitRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-rent').val()) > 0 && $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text() > 0){
+        backPushUnitRent = Number(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-rent').val()) * 12 / 365 / $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text()).toFixed(2);
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-unit-rent').val()) != backPushUnitRent){
+            $('#'+id2+' #'+id).find('.back-push-unit-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.back-push-unit-rent').val(numberWithCommas(backPushUnitRent));
+    }
 }
 
-function calGuaranteeRent() {
+function calGuaranteeRent(id,id2) {
     var guaranteeRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
-            guaranteeRent = Number(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) * $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() * 365 / 12).toFixed(2);
-            if(numberWithoutCommas($(this).find('.guarantee-rent').val()) != guaranteeRent){
-                $(this).find('.guarantee-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.guarantee-rent').val(numberWithCommas(guaranteeRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-unit-rent').val()) > 0 && $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text() > 0){
+        guaranteeRent = Number(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-unit-rent').val()) * $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text() * 365 / 12).toFixed(2);
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-rent').val()) != guaranteeRent){
+            $('#'+id2+' #'+id).find('.guarantee-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.guarantee-rent').val(numberWithCommas(guaranteeRent));
+    }
 }
 
-function calGuaranteeUnitRent() {
+function calGuaranteeUnitRent(id,id2) {
     var guaranteeUnitRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.guarantee-rent').val()) > 0 && $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text() > 0){
-            guaranteeUnitRent = Number(numberWithoutCommas($(this).find('.guarantee-rent').val()) * 12 / 365 / $('.primary-rows.'+$(this).attr('class').split(' ')[0]).find('.area').text()).toFixed(2);
-            if(numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) != guaranteeUnitRent){
-                $(this).find('.guarantee-unit-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.guarantee-unit-rent').val(numberWithCommas(guaranteeUnitRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-rent').val()) > 0 && $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text() > 0){
+        guaranteeUnitRent = Number(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-rent').val()) * 12 / 365 / $('.primary-rows.rows-'+id.split('_')[1]).find('.area').text()).toFixed(2);
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-unit-rent').val()) != guaranteeUnitRent){
+            $('#'+id2+' #'+id).find('.guarantee-unit-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.guarantee-unit-rent').val(numberWithCommas(guaranteeUnitRent));
+    }
 }
 
-function calHigherRent() {
+function calHigherRent(id,id2) {
     var higherRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.back-push-rent').val()) > 0 && numberWithoutCommas($(this).find('.guarantee-rent').val()) > 0){
-            higherRent = Math.max(numberWithoutCommas($(this).find('.back-push-rent').val()),numberWithoutCommas($(this).find('.guarantee-rent').val()));
-            if(numberWithoutCommas($(this).find('.higher-rent').val()) != higherRent){
-                $(this).find('.higher-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.higher-rent').val(numberWithCommas(higherRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-rent').val()) > 0 && numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-rent').val()) > 0){
+        higherRent = Math.max(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-rent').val()),numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-rent').val()));
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.higher-rent').val()) != higherRent){
+            $('#'+id2+' #'+id).find('.higher-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.higher-rent').val(numberWithCommas(higherRent));
+    }
 }
 
-function calHigherDailyRent() {
+function calHigherDailyRent(id,id2) {
     var higherDailyRent;
-    $('tbody tr').each(function(i){
-        if(numberWithoutCommas($(this).find('.back-push-unit-rent').val()) > 0 && numberWithoutCommas($(this).find('.guarantee-unit-rent').val()) > 0){
-            higherDailyRent = Math.max(numberWithoutCommas($(this).find('.back-push-unit-rent').val()),numberWithoutCommas($(this).find('.guarantee-unit-rent').val()));
-            if(numberWithoutCommas($(this).find('.higher-daily-rent').val()) != higherDailyRent){
-                $(this).find('.higher-daily-rent').fadeOut().fadeIn();
-            }
-            $(this).find('.higher-daily-rent').val(numberWithCommas(higherDailyRent));
+    if(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-unit-rent').val()) > 0 && numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-unit-rent').val()) > 0){
+        higherDailyRent = Math.max(numberWithoutCommas($('#'+id2+' #'+id).find('.back-push-unit-rent').val()),numberWithoutCommas($('#'+id2+' #'+id).find('.guarantee-unit-rent').val()));
+        if(numberWithoutCommas($('#'+id2+' #'+id).find('.higher-daily-rent').val()) != higherDailyRent){
+            $('#'+id2+' #'+id).find('.higher-daily-rent').fadeOut().fadeIn();
         }
-    });
+        $('#'+id2+' #'+id).find('.higher-daily-rent').val(numberWithCommas(higherDailyRent));
+    }
+}
+
+function scrollHandle() {
+    var scrollTop = $('.fixed-table-body').scrollTop();
+    // 当滚动距离大于0时设置top及相应的样式
+    if (scrollTop > 0) {
+        $('.fixed-table-body tr th').css({
+            "top": scrollTop + 'px',
+            "marginTop": "-1px",
+            "padding": 0
+        });
+    } else {
+    // 当滚动距离小于0时设置top及相应的样式
+         $('.fixed-table-body tr th').css({
+            "top": scrollTop + 'px',
+            "marginTop": 0
+        });
+    }
+    
+    var scrollLeft = $('.fixed-table-body').scrollLeft();
+    // 当滚动距离大于0时设置left及相应的样式
+    if (scrollLeft > 275) {
+        $('.fixed-table-body tr th:eq(0), .fixed-table-body tr th:eq(1), .fixed-table-body tr th:eq(2)').css({
+            "left": scrollLeft + 'px',
+            "marginLeft": "-1px",
+            "padding": 0
+        });
+        
+        $('.primary-rows').each(function() {
+            $(this).find("td:eq(0),td:eq(1),td:eq(2)").css({
+                "position": "relative",
+                "left": scrollLeft + 'px',
+                "marginLeft": "-1px",
+                "padding": 0
+            });
+        })
+    } else {
+    // 当滚动距离小于0时设置left及相应的样式
+         $('.fixed-table-body tr th:eq(0), .fixed-table-body tr th:eq(1), .fixed-table-body tr th:eq(2)').css({
+            "left": scrollLeft + 'px',
+            "marginLeft": 0
+        });
+        
+        $('.primary-rows').each(function() {
+            $(this).find("td:eq(0),td:eq(1),td:eq(2)").css({
+                "left": scrollLeft + 'px',
+                "marginLeft": 0
+            });
+        })
+    }
 }

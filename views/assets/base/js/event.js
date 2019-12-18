@@ -207,8 +207,12 @@ function getCoords(mc,fn) {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
-                    if(v.state === 1 && v.coords != null && v.coords != ''){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="event?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                    if(v.state != 0 && v.coords != null && v.coords != ''){
+                        if(v.subType == '固定场地' || v.subType == '临时场地'){
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="event?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                        } else {
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="#!" shape="poly" coords="'+v.coords+'" />');                           
+                        }
                     }
                 });
                 

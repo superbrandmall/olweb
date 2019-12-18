@@ -1,9 +1,9 @@
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav" id="side-menu">
-            <!--<li id="nav_f_7">
+            <li id="nav_f_7">
                 <a href="/ly-admin/?f=7">L7</a>
-            </li>-->
+            </li>
             <li id="nav_f_6">
                 <a href="/ly-admin/?f=6">L6</a>
             </li>

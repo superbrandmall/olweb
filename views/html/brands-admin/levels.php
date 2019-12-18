@@ -53,8 +53,8 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                 </div>        
             </div>
         </div>
-        <div class="col-lg-6">
-            <div class="box box-default" style="display: inline-block; width: 49%;">
+        <div class="col-lg-3 hidden-xs">
+            <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">VR全景</h3>
                     <div class="box-tools pull-right">
@@ -63,8 +63,8 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                     </div>
                 </div>
                 <div class="box-body">
-                    <div id="store_img_2" class="embed-responsive embed-responsive-4by3" style="height: 287px;">
-                        <img src="/views/assets/base/img/content/mall/shanghai-sbm.jpg" style="width: auto; height: 100%;" alt="">
+                    <div id="store_img_2" class="embed-responsive embed-responsive-4by3" style="height: 100%;">
+                        <img src="/views/assets/base/img/content/mall/shanghai-sbm.jpg" class="img-responsive" alt="">
                     </div>
 
                     <div id="store_vr" class="embed-responsive embed-responsive-4by3" style="display: none; height: 287px;">
@@ -72,7 +72,9 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                     </div>
                 </div>
             </div>
-            <div class="box box-default" style="float: left; width: 49%; margin-right: 2%;">
+        </div>
+        <div class="col-lg-3 hidden-xs">
+            <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">店铺图片</h3>
                     <div class="box-tools pull-right">
@@ -81,8 +83,8 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                     </div>
                 </div>
                 <div class="box-body">
-                    <div id="store_img" class="embed-responsive embed-responsive-4by3" style="height: 287px;">
-                        <img src="/views/assets/base/img/content/mall/shanghai-sbm.jpg" style="width: auto; height: 100%;" alt="">
+                    <div id="store_img" class="embed-responsive embed-responsive-4by3" style="height: 100%;">
+                        <img src="/views/assets/base/img/content/mall/shanghai-sbm.jpg" class="img-responsive" alt="">
                     </div>
                 </div>
             </div>
@@ -101,101 +103,98 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                         <div class="col-md-12">
                             <div class="bootstrap-table">
                                 <div class="fixed-table-container table-no-bordered">
-                                    <div class="fixed-table-body" style="max-height: 75vh;">
-                                        <table class="table table-striped snipe-table table-responsive table-no-bordered">
-                                            <?php 
-                                            $thead = '<thead>
+                                    <div class="fixed-table-body" style="max-height: 715px;">
+                                        <table class="table table-striped snipe-table table-responsive table-no-bordered" data-show-columns="true">
+                                            <thead class="hidden-xs">
                                                 <tr>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 5;">
                                                         <div class="th-inner">铺位号</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 5;">
                                                         <div class="th-inner">面积</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative;  background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 5;">
                                                         <div class="th-inner">原品牌</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">新品牌</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">业态</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">确认时间</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">签约时间</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">围挡时间</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">进场时间</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">开业时间</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">备注</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#AEAEB2, #6C6C70); color: #fff; z-index: 3;">
                                                         <div class="th-inner">责任人</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#30DB5B, #248A3D); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#30DB5B, #248A3D); color: #fff; z-index: 3;">
                                                         <div class="th-inner">业绩预估</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#30DB5B, #248A3D); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#30DB5B, #248A3D); color: #fff; z-index: 3;">
                                                         <div class="th-inner">预估扣点</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#30DB5B, #248A3D); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#30DB5B, #248A3D); color: #fff; z-index: 3;">
                                                         <div class="th-inner">倒推月租金</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#30DB5B, #248A3D); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#30DB5B, #248A3D); color: #fff; z-index: 3;">
                                                         <div class="th-inner">倒推租金单价</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#409CFF, #0040DD); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#409CFF, #0040DD); color: #fff; z-index: 3;">
                                                         <div class="th-inner">保底租金单价</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#409CFF, #0040DD); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#409CFF, #0040DD); color: #fff; z-index: 3;">
                                                         <div class="th-inner">保底月租金</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#409CFF, #0040DD); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#409CFF, #0040DD); color: #fff; z-index: 3;">
                                                         <div class="th-inner">取高月租金</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#409CFF, #0040DD); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#409CFF, #0040DD); color: #fff; z-index: 3;">
                                                         <div class="th-inner">取高日租金</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
-                                                    <th style="background-image: linear-gradient(#409CFF, #0040DD); color: #fff;">
+                                                    <th style="position: relative; background-image: linear-gradient(#409CFF, #0040DD); color: #fff; z-index: 3;">
                                                         <div class="th-inner">保存</div>
                                                         <div class="fht-cell"></div>
                                                     </th>
                                                 </tr>
-                                            </thead>'
-                                            ?>
-                                            <?= $thead; ?>
-                                            <tbody id="levelShopList"></tbody>
-                                            <?= $thead; ?>
+                                            </thead>
+                                            <tbody id="levelShopListL" class="hidden-xs"></tbody>
+                                            <tbody id="levelShopListS" class="hidden-sm hidden-md hidden-lg"></tbody>
                                             <tbody id="levelShopList2" style="display: none;"></tbody>
                                         </table>
                                     </div>
@@ -203,7 +202,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="col-md-12 text-center" style="padding-top: 10px;">
+                        <div class="col-md-12 text-center hidden-xs" style="padding-top: 10px;">
                             <a id="view_all" href="javascript: void(0);" class="btn btn-primary btn-sm" style="width: 100%">查看全部</a>
                         </div>
                     </div>

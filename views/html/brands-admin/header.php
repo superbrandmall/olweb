@@ -111,7 +111,7 @@
                         </ul>
                     </div>
                 </nav>
-                <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+                <a href="#" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
                     <span class="sr-only">导航切换</span>
                     <i class="fa fa-bars"></i>
                 </a>
