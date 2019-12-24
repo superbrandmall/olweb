@@ -135,6 +135,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         strtolower($luoyang_sbm) => array(
             'url' => 'luoyang_sbm.php'
         ),
+        strtolower($bs_tm) => array(
+            'url' => 'baoshan_tm.php'
+        ),
         'shop' => array(
             'url' => 'shop.php'
         ),

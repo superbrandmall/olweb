@@ -239,7 +239,7 @@ function getShopFloorInfo(fl) {
                     }
 
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
 
@@ -358,85 +358,82 @@ function addTextLayer(){
     $('map span').remove();
     if(document.body.clientWidth > 1000){
         setTimeout(function () {
-            var pos, brand;
+            var pos, shopName, area, brand;
             $('map area').each(function(i,elem){
+                pos = $(this).attr('coords').split(',');
+                var x = 0;
+                var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), width, height;
+                while(x < pos.length){
+                    if(parseInt(pos[x]) < posLeftMin){
+                        posLeftMin = parseInt(pos[x]);
+                    } 
+
+                    if(parseInt(pos[x]) > posLeftMax){
+                        posLeftMax = parseInt(pos[x]);
+                    }
+                    x = x + 2;
+                }
+                width = parseInt(posLeftMax - posLeftMin - 10);             
+
+                var y = 1;
+                var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
+                while(y < pos.length){
+                    if(parseInt(pos[y]) < posTopMin){
+                        posTopMin = parseInt(pos[y]);
+                    }
+                    if(parseInt(pos[y]) > posTopMax){
+                        posTopMax = parseInt(pos[y]);
+                    }
+                    y = y + 2;
+                }
+
+                height = parseInt(posTopMax - posTopMin - 10);
+                
                 if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
-                    pos = $(this).attr('coords').split(',');
-                    var x = 0;
-                    var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft, width;
-                    while(x < pos.length){
-                        if(parseInt(pos[x]) < posLeftMin){
-                            posLeftMin = parseInt(pos[x]);
-                        } 
-
-                        if(parseInt(pos[x]) > posLeftMax){
-                            posLeftMax = parseInt(pos[x]);
-                        }
-                        x = x + 2;
-                    }
-                    posLeft = parseInt((posLeftMin + posLeftMax) / 2);
-                    width = parseInt(posLeftMax - posLeftMin);
-
-                    var y = 1;
-                    var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
-                    while(y < pos.length){
-                        if(parseInt(pos[y]) < posTopMin){
-                            posTopMin = parseInt(pos[y]);
-                        }
-                        if(parseInt(pos[y]) > posTopMax){
-                            posTopMax = parseInt(pos[y]);
-                        }
-                        y = y + 2;
-                    }
-                    if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 + 10);
-                    } else {
-                        posTop = parseInt((posTopMin + posTopMax) / 2);
-                    }
-                    
+                    shopName = $(this).attr('data-shop-name');
+                    area = $(this).attr('data-area');
                     brand = $(this).attr('name');
-                    
-                    var fontSize = 8;
-                    if($(this).attr('data-area') < 25){
-                        fontSize = 6;
-                    } else if($(this).attr('data-area') >= 25 && $(this).attr('data-area') < 100){
-                        fontSize = 7;
-                    } else if($(this).attr('data-area') >= 100 && $(this).attr('data-area') < 200){
-                        fontSize = 8;
-                    } else if($(this).attr('data-area') >= 200 && $(this).attr('data-area') < 300){
-                        fontSize = 9;
-                    } else if($(this).attr('data-area') >= 300 && $(this).attr('data-area') < 400){
-                        fontSize = 10;
-                    } else if($(this).attr('data-area') >= 400 && $(this).attr('data-area') < 500){
-                        fontSize = 11;
-                    } else if($(this).attr('data-area') >= 500 && $(this).attr('data-area') < 600){
-                        fontSize = 12;
-                    } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
-                        fontSize = 13;
-                    } else if($(this).attr('data-area') >= 700 && $(this).attr('data-area') < 800){
-                        fontSize = 14;
-                    } else if($(this).attr('data-area') >= 800 && $(this).attr('data-area') < 900){
-                        fontSize = 15;
-                    } else if($(this).attr('data-area') >= 900 && $(this).attr('data-area') < 1000){
-                        fontSize = 16;
-                    } else if($(this).attr('data-area') >= 1000 && $(this).attr('data-area') < 1100){
-                        fontSize = 17;
-                    } else if($(this).attr('data-area') >= 1100 && $(this).attr('data-area') < 1200){
-                        fontSize = 18;
-                    } else if($(this).attr('data-area') >= 1200 && $(this).attr('data-area') < 1300){
-                        fontSize = 19;
-                    } else if($(this).attr('data-area') >= 1300){
-                        fontSize = 20;
+                    if(brand.length > 10){
+                        brand = brand.substring(0,10) + "...";
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; width: '+width+'px; font-size: '+fontSize+'px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                    );
+                } else {
+                    shopName = $(this).attr('data-shop-name');
+                    area = $(this).attr('data-area');
+                    
+                    $(this).after(
+                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')</span>'
                     );
                 }
+                
+                resetFontSize($(this).next(),width,height,5,14,posLeftMin,posTopMin);
             });
         },1000);
     }
 }
+
+function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
+    divWord.css('font-size', minSize + "px");
+    for (var i = minSize; i < maxSize; i++) {
+        if ($(divWord).width() > maxWidth) {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 6) + 'px'    
+            }); 
+                break;
+        } else {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2) + 'px'
+            });
+        }
+    }
+};
 
 function GetShopInfo(sc){
     $.ajax({

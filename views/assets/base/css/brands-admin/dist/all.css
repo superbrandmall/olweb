@@ -2802,8 +2802,7 @@ table .form-control {
 }
 
 table .form-control.date-picker {
-    font-size: 8px;
-    background: transparent;
+    width: auto;
 }
 
 #levelShopListL td, 

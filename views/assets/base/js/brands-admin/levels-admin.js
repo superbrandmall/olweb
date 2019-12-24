@@ -101,31 +101,22 @@ $(document).ready(function(){
 
     $('#floorNo').text(floor);
     
-    var size = 1;
     $('#zoom_in').click(function (){
-        size = size + 0.5;
-        $('#map').mapster('resize', size*($('#map_canvas').width()), 0, 0);
+        $('#map_canvas').removeClass('col-lg-6').addClass('col-lg-12');
+        $('#map').mapster('resize', 0.95*($('#map_canvas').width()), 0, 0);
         addTextLayer();
-        
-        $('#zoom_out').attr('disabled', false);
-        if(size >= 3){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
+        $('#vr, #image').hide();
+        $(this).hide();
+        $('#zoom_out').show();
     });
     
     $('#zoom_out').click(function (){
-        size = size - 0.5;
-        $('#map').mapster('resize', size*($('#map_canvas').width()), 0, 0);
+        $('#map_canvas').removeClass('col-lg-12').addClass('col-lg-6');
+        $('#map').mapster('resize', 0.95*($('#map_canvas').width()), 0, 0);
         addTextLayer();
-        
-        $('#zoom_in').attr('disabled', false);
-        if(size <= 1){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
+        $('#vr, #image').show();
+        $(this).hide();
+        $('#zoom_in').show();
     });
     
     var pendDays = 90;
@@ -260,9 +251,9 @@ function getShopFloorInfo(fl) {
 
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                         if(v.responsiblePerson == $.cookie('uid') || v.categoryHead == $.cookie('uid') || $.inArray($.cookie('uid'),$.parseJSON(sessionStorage.getItem("admins"))) != -1){
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                         } else {
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" name="'+(v.brandName || '')+'" shape="poly" coords="'+v.coords+'" />'); 
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-responsible-person="'+v.responsiblePerson+'" data-category-head="'+v.categoryHead+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" shape="poly" coords="'+v.coords+'" />'); 
                         }
                     }
                 });
@@ -395,73 +386,82 @@ function addTextLayer(){
     $('map span').remove();
     if(document.body.clientWidth > 1000){
         setTimeout(function () {
-            var pos, brand;
+            var pos, shopName, area, brand;
             $('map area').each(function(i,elem){
+                pos = $(this).attr('coords').split(',');
+                var x = 0;
+                var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), width, height;
+                while(x < pos.length){
+                    if(parseInt(pos[x]) < posLeftMin){
+                        posLeftMin = parseInt(pos[x]);
+                    } 
+
+                    if(parseInt(pos[x]) > posLeftMax){
+                        posLeftMax = parseInt(pos[x]);
+                    }
+                    x = x + 2;
+                }
+                width = parseInt(posLeftMax - posLeftMin - 10); 
+
+                var y = 1;
+                var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
+                while(y < pos.length){
+                    if(parseInt(pos[y]) < posTopMin){
+                        posTopMin = parseInt(pos[y]);
+                    }
+                    if(parseInt(pos[y]) > posTopMax){
+                        posTopMax = parseInt(pos[y]);
+                    }
+                    y = y + 2;
+                }
+
+                height = parseInt(posTopMax - posTopMin - 10);
+                    
                 if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
-                    pos = $(this).attr('coords').split(',');
-                    var x = 0;
-                    var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), posLeft, width;
-                    while(x < pos.length){
-                        if(parseInt(pos[x]) < posLeftMin){
-                            posLeftMin = parseInt(pos[x]);
-                        } 
-
-                        if(parseInt(pos[x]) > posLeftMax){
-                            posLeftMax = parseInt(pos[x]);
-                        }
-                        x = x + 2;
-                    }
-                    posLeft = parseInt((posLeftMin + posLeftMax) / 2);
-                    width = parseInt(posLeftMax - posLeftMin);
-
-                    var y = 1;
-                    var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]), posTop;
-                    while(y < pos.length){
-                        if(parseInt(pos[y]) < posTopMin){
-                            posTopMin = parseInt(pos[y]);
-                        }
-                        if(parseInt(pos[y]) > posTopMax){
-                            posTopMax = parseInt(pos[y]);
-                        }
-                        y = y + 2;
-                    }
-                    if(i % 2 == 0){
-                        posTop = parseInt((posTopMin + posTopMax) / 2 - 10);
-                    } else {
-                        posTop = parseInt((posTopMin + posTopMax) / 2);
-                    }
-                    
+                    shopName = $(this).attr('data-shop-name');
+                    area = $(this).attr('data-area');
                     brand = $(this).attr('name');
-                    
-                    var fontSize = 7;
-                    if($(this).attr('data-area') < 25){
-                        fontSize = 5;
-                    } else if($(this).attr('data-area') >= 25 && $(this).attr('data-area') < 100){
-                        fontSize = 6;
-                    } else if($(this).attr('data-area') >= 100 && $(this).attr('data-area') < 200){
-                        fontSize = 7;
-                    } else if($(this).attr('data-area') >= 200 && $(this).attr('data-area') < 300){
-                        fontSize = 8;
-                    } else if($(this).attr('data-area') >= 300 && $(this).attr('data-area') < 400){
-                        fontSize = 9;
-                    } else if($(this).attr('data-area') >= 400 && $(this).attr('data-area') < 500){
-                        fontSize = 10;
-                    } else if($(this).attr('data-area') >= 500 && $(this).attr('data-area') < 600){
-                        fontSize = 11;
-                    } else if($(this).attr('data-area') >= 600 && $(this).attr('data-area') < 700){
-                        fontSize = 12;
-                    } else if($(this).attr('data-area') >= 700){
-                        fontSize = 13;
+                    if(brand.length > 10){
+                        brand = brand.substring(0,10) + "...";
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute; left:'+posLeft+'px; top:'+posTop+'px; width: '+width+'px; font-size: '+fontSize+'px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                    );
+                } else {
+                    shopName = $(this).attr('data-shop-name');
+                    area = $(this).attr('data-area');
+                    
+                    $(this).after(
+                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')</span>'
                     );
                 }
+                
+                resetFontSize($(this).next(),width,height,4,12,posLeftMin,posTopMin);
             });
         },1000);
     }
 }
+
+function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
+    divWord.css('font-size', minSize + "px");
+    for (var i = minSize; i < maxSize; i++) {
+        if ($(divWord).width() > maxWidth) {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 5) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 5) + 'px'    
+            }); 
+                break;
+        } else {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2) + 'px'
+            });
+        }
+    }
+};
 
 function JumpToShopList(sc){
     $('#levelShopListL td').removeClass('dark-layer');

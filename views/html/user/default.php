@@ -44,8 +44,8 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000571"><img src="views/assets/base/img/content/client-logos/peets-coffee.jpg" alt=""/></a>
                         Peet's Coffee
-                        <a href="shop?id=OLSHOP190613000006"><img src="views/assets/base/img/content/client-logos/hunkemoller.jpg" alt=""/></a>
-                        Hunkemoller
+                        <a href="shop?id=OLSHOP190828000002"><img src="views/assets/base/img/content/client-logos/lego.jpg" alt=""/></a>
+                        LEGO乐高
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000097"><img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt=""/></a>
@@ -58,12 +58,6 @@
                         西西弗书店&矢量咖啡
                         <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt=""/></a>
                         逸麟居
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190627000001"><img src="views/assets/base/img/content/client-logos/gu.jpg" alt=""/></a>
-                        GU
-                        <a href="shop?id=OLSHOP190828000002"><img src="views/assets/base/img/content/client-logos/lego.jpg" alt=""/></a>
-                        LEGO乐高
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000743"><img src="views/assets/base/img/content/client-logos/jianghudongbaiding.jpg" alt=""/></a>

@@ -26,7 +26,9 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                             <span style="margin-left: 5px; background-image: linear-gradient(#eae3d4, #D5C8AA); width: 13px; height: 13px; display: inline-block;"></span> 改造 <span id="renovation"></span>%
                         </div>
                         <div class="box-tools pull-right">
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            <button type="button" class="btn btn-box-tool" id="zoom_in"><i class="fa fa-plus-square-o"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" id="zoom_out" style="display: none;"><i class="fa fa-minus-square-o"></i>
                             </button>
                         </div>
                     </div>
@@ -35,14 +37,6 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                             <div class="form-group">
                                 <div class="c-content-panel" style="background-color: transparent;">
                                     <div class="c-body" style="position: relative;">
-                                        <div style="position: absolute;top: 0;left: 15px; z-index: 1;">
-                                            <button id="zoom_in" class="btn btn-sm btn-default" style="display: block;">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            <button id="zoom_out" class="btn btn-sm btn-default" style="display: block;">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
                                         <img src="#" class="img-responsive" usemap="" id="map" />
                                         <map name="" id=""></map>
                                     </div>
@@ -53,14 +47,10 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                 </div>        
             </div>
         </div>
-        <div class="col-lg-3 hidden-xs">
+        <div class="col-lg-3 hidden-xs" id="vr">
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">VR全景</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="box-body">
                     <div id="store_img_2" class="embed-responsive embed-responsive-4by3" style="height: 100%;">
@@ -73,14 +63,10 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 hidden-xs">
+        <div class="col-lg-3 hidden-xs" id="image">
             <div class="box box-default">
                 <div class="box-header with-border">
                     <h3 class="box-title">店铺图片</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="box-body">
                     <div id="store_img" class="embed-responsive embed-responsive-4by3" style="height: 100%;">
@@ -103,7 +89,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
                         <div class="col-md-12">
                             <div class="bootstrap-table">
                                 <div class="fixed-table-container table-no-bordered">
-                                    <div class="fixed-table-body" style="max-height: 715px;">
+                                    <div class="fixed-table-body" style="max-height: 90vh;">
                                         <table class="table table-striped snipe-table table-responsive table-no-bordered" data-show-columns="true">
                                             <thead class="hidden-xs">
                                                 <tr>
