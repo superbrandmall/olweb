@@ -58,6 +58,34 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $session = new Session();
         $session ->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'],'bs-admin')) !== false) { // 宝山内部汇报
+    $target = array(
+        'bs-admin/home' => array(
+            'url' => 'default.php'
+        ),
+        'bs-admin/login' => array(
+            'url' => 'login.php'
+        ),
+        'bs-admin/summary' => array(
+            'url' => 'summary.php'
+        ),
+        'bs-admin/logout' => array(
+            'url' => 'logout.php'
+        )
+    );
+    
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php','default.php','summary.php');
+    if (in_array($page, $session_required)) {
+        include_once 'models/bs-admin/Session.class.php';
+        $session = new Session();
+        $session ->_session();
+    }
 } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
     $target = array(
         'brands-admin/home' => array(
@@ -90,6 +118,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'brands-admin/log' => array(
             'url' => 'log.php'
         ),
+        'brands-admin/hd-brands' => array(
+            'url' => 'hd-brands.php'
+        ),
         'brands-admin/ai-test' => array(
             'url' => 'ai-test.php'
         )
@@ -101,7 +132,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','brand.php','create-brand.php','create-brand-contact.php','edit-brand.php','levels.php','log.php');
+    $session_required = array('login.php','default.php','brand.php','create-brand.php','create-brand-contact.php','edit-brand.php','levels.php','hd-brands.php','log.php');
     if (in_array($page, $session_required)) {
         include_once 'models/brands-admin/Session.class.php';
         $session = new Session();

@@ -42,44 +42,42 @@
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000571"><img src="views/assets/base/img/content/client-logos/peets-coffee.jpg" alt=""/></a>
-                        Peet's Coffee
-                        <a href="shop?id=OLSHOP190828000002"><img src="views/assets/base/img/content/client-logos/lego.jpg" alt=""/></a>
-                        LEGO乐高
+                        <a href="shop?id=OLSHOP180917000100"><img src="views/assets/base/img/content/client-logos/pandora.jpg" alt=""/></a>
+                        Pandora
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000097"><img src="views/assets/base/img/content/client-logos/swarovski.jpg" alt=""/></a>
-                        Swarovski
-                        <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
-                        adidas
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190717000002"><img src="views/assets/base/img/content/client-logos/xixifo.jpg" alt=""/></a>
-                        西西弗书店&矢量咖啡
-                        <a href="shop?id=OLSHOP190430000001"><img src="views/assets/base/img/content/client-logos/yilinju.jpg" alt=""/></a>
-                        逸麟居
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000743"><img src="views/assets/base/img/content/client-logos/jianghudongbaiding.jpg" alt=""/></a>
-                        姜虎东白丁
-                        <a href="shop?id=OLSHOP190924000001"><img src="views/assets/base/img/content/client-logos/wala.jpg" alt=""/></a>
-                        WALA 蛙辣火锅
+                        <a href="shop?id=OLSHOP191023000002"><img src="views/assets/base/img/content/client-logos/best-travel.jpg" alt=""/></a>
+                        悠客智行
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190731000004"><img src="views/assets/base/img/content/client-logos/qixi.jpg" alt=""/></a>
                         栖蠵
-                        <a href="shop?id=OLSHOP190426000001"><img src="views/assets/base/img/content/client-logos/ur.jpg" alt=""/></a>
-                        URBAN REVIVO
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190709000001"><img src="views/assets/base/img/content/client-logos/lokal.jpg" alt=""/></a>
                         WAGAS
-                        <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
-                        NIKE
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190903000002"><img src="views/assets/base/img/content/client-logos/diandude.jpg" alt=""/></a>
                         点都德
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190924000001"><img src="views/assets/base/img/content/client-logos/wala.jpg" alt=""/></a>
+                        WALA 蛙辣火锅
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
+                        adidas
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190426000001"><img src="views/assets/base/img/content/client-logos/ur.jpg" alt=""/></a>
+                        URBAN REVIVO
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
+                        NIKE
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190420000002"><img src="views/assets/base/img/content/client-logos/charme.jpg" alt=""/></a>
                         港丽餐厅
                     </div>

@@ -30,7 +30,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 </div>
 <div class="col-md-12">
     <center>
-        <img src="views/assets/base/img/content/floor-plan/luoyang-sbm/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
+        <img src="views/assets/base/img/content/floor-plan/baoshan-tm/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
         <map name="Map_<?= $i ?>F" id="Map_<?= $i ?>F"></map>
     </center>
 </div>
@@ -50,18 +50,6 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                 break;
             case 3:
                 floorDesc = '三楼';
-                break;
-            case 4:
-                floorDesc = '四楼';
-                break;
-            case 5:
-                floorDesc = '五楼';
-                break;
-            case 6:
-                floorDesc = '六楼';
-                break;
-            case 7:
-                floorDesc = '七楼';
                 break;
             default:
                 floorDesc = [];

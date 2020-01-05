@@ -2826,10 +2826,6 @@ table .form-control.date-picker {
     border: 0 none;
 }
 
-.fixed-table-body thead th .th-inner {
-    text-align: center;
-}
-
 .dark-layer {
     background: #CCF0F5 !important;
 }
@@ -9882,7 +9878,8 @@ a:active,a:focus,a:hover {
 	margin: 0;
 	border-bottom-color: #f4f4f4;
 	border-top-right-radius: 3px;
-	border-top-left-radius: 3px
+	border-top-left-radius: 3px;
+        margin-bottom: 20px;
 }
 
 .nav-tabs-custom>.nav-tabs>li {

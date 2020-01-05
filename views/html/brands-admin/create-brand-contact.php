@@ -7,7 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div class="content-wrapper">
     <section class="content-header" style="padding-bottom: 30px;">
         <h1 class="pull-left">
-            新增品牌联系人
+            创建品牌联系人
         </h1>
         <div class="pull-right">
             <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
@@ -21,10 +21,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        新增品牌成功!
+                        创建品牌成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        新增联系人失败!
+                        创建联系人失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
                         该联系人已存在!

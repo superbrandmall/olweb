@@ -384,7 +384,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <h3>
                         注意事项
                     </h3>
-                    <p>新增品牌应谨慎小心，严格按照格式要求填写内容，以免引起差错。 </p>
+                    <p>创建品牌应谨慎小心，严格按照格式要求填写内容，以免引起差错。 </p>
                 </div>
             </div>
 

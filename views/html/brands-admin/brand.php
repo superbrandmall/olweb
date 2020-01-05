@@ -60,7 +60,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     <li style="display: none;"><a href="#!" class="update-link">更新品牌</a></li>
                                     <li style="display: none;"><a href="#!" class="delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该品牌 ?" data-title="删除品牌" onclick="return false;">删除品牌</a></li>
                                     <li style="display: none;"><a href="#!" class="lock-link" id="lock1">锁定品牌</a></li>
-                                    <li><a href="#!" class="create-contact-link">新增联系人</a></li>
+                                    <li><a href="#!" class="create-contact-link">创建联系人</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -69,7 +69,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             <div class="tab-pane active" id="details">
                                 <div class="row">
                                     <div class="col-md-2 text-center">
-                                        <img id="imagePreview" class="avatar img-circle" style="max-width: 200px; max-height: 100px;">
+                                        <img id="imagePreview" class="avatar img-circle" style="max-width: 200px; max-height: 100px; margin-bottom: 20px;">
                                     </div>
 
                                     <div class="col-md-8">
@@ -192,7 +192,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                             <a href="#!" style="width: 100%;" class="btn btn-sm btn-success lock-link" id="lock2">锁定品牌</a>
                                         </div>
                                         <div class="col-md-12" style="padding-top: 5px;">
-                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-info create-contact-link">新增联系人</a>
+                                            <a href="#!" style="width: 100%;" class="btn btn-sm btn-info create-contact-link">创建联系人</a>
                                         </div>
                                     </div>
                                 </div>

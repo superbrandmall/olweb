@@ -398,18 +398,18 @@ function addTextLayer(){
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')<br>'+brand+'</span>'
                     );
                 } else {
                     shopName = $(this).attr('data-shop-name');
                     area = $(this).attr('data-area');
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')</span>'
                     );
                 }
                 
-                resetFontSize($(this).next(),width,height,5,14,posLeftMin,posTopMin);
+                resetFontSize($(this).next(),width,height,4,12,posLeftMin,posTopMin);
             });
         },1000);
     }

@@ -144,7 +144,7 @@ function getMallList() {
             location = v.location;
         }
         
-        if(v.mallCode === $.mallCode.shanghaiSbm || v.mallCode === $.mallCode.luoyangSbm){
+        if(v.mallCode === $.mallCode.shanghaiSbm || v.mallCode === $.mallCode.luoyangSbm || v.mallCode === $.mallCode.baoshanTm){
             $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
         }
     });

@@ -47,7 +47,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="c-content-media-1 c-bordered" style="min-height: 380px;">
+                    <div class="c-content-media-1 c-bordered" style="min-height: 380px; overflow: hidden;">
                         <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
                             <?= $lang['shop_shop_detail'] ?>
                         </div>

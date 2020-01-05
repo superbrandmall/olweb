@@ -9,17 +9,22 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
-            <li  class="<?php if (isset($_GET['p']) && $_GET['p'] == 'brands-admin/' || $_GET['p'] == 'brands-admin/home') { echo 'active'; }?>">
+            <li  class="<?php if (isset($_GET['p']) && ($_GET['p'] == 'brands-admin/' || $_GET['p'] == 'brands-admin/home' || $_GET['p'] == 'brands-admin/hd-brands')) { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-copyright"></i>
                     <span>品牌列表</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'brands-admin/') { echo 'active '; }?>">
+                    <li class="<?php if (isset($_GET['p']) && ($_GET['p'] == 'brands-admin/' || $_GET['p'] == 'brands-admin/home')) { echo 'active '; }?>">
                         <a href="/brands-admin/?items=10">
-                            <i class="fa fa-asterisk text-blue"></i> 所有品牌
+                            <i class="fa fa-asterisk text-blue"></i> 新建品牌
                         </a>
                     </li>
+                    <!--<li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'brands-admin/hd-brands') { echo 'active '; }?>">
+                        <a href="/brands-admin/hd-brands?items=10">
+                            <i class="fa fa-asterisk text-red"></i> 海鼎品牌
+                        </a>
+                    </li>-->
                 </ul>
             </li>
             <li  class="<?php if (isset($_GET['p']) && $_GET['p'] == 'brands-admin/levels') { echo 'active'; }?>">

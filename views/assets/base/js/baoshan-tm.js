@@ -1,69 +1,30 @@
 var floor = [];
-floor['f7'] = true;
-floor['f6'] = true;
-floor['f5'] = true;
-floor['f4'] = true;
 floor['f3'] = true;
 floor['f2'] = true;
 floor['f1'] = true;
 floor['fb1'] = true;
 
 $(document).ready(function(){
+    $( "#f3_g" ).addClass('floor-guide-active-pre-pre');
+    $( "#f2_g" ).addClass('floor-guide-active-pre');
+    $( "#f1_g" ).addClass('floor-guide-active');
+    $( "#fb1_g" ).addClass('floor-guide-active-next');
+    
     $(window).scroll(function() {
         var y = $(this).scrollTop();
-
-        if (y <= $('#f7').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f5_g" ).addClass('floor-guide-active-pre');
-            $( "#f4_g" ).addClass('floor-guide-active');
-            $( "#f3_g" ).addClass('floor-guide-active-next');
-        } else if (y <= $('#f6').offset().top && y > $('#f7').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f4_g" ).addClass('floor-guide-active-pre');
-            $( "#f3_g" ).addClass('floor-guide-active');
-            $( "#f2_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'六楼','f6');
-        } else if (y <= $('#f5').offset().top && y > $('#f6').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f3_g" ).addClass('floor-guide-active-pre');
-            $( "#f2_g" ).addClass('floor-guide-active');
-            $( "#f1_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'五楼','f5');
-        } else if (y <= $('#f4').offset().top && y > $('#f5').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f2_g" ).addClass('floor-guide-active-pre');
-            $( "#f1_g" ).addClass('floor-guide-active');
-            $( "#fb1_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'四楼','f4');
-        } else if (y <= $('#f3').offset().top && y > $('#f4').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f7_g" ).addClass('floor-guide-active-pre');
-            $( "#f6_g" ).addClass('floor-guide-active');
-            $( "#f5_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'三楼','f3');
+        if (y <= $('#f3').offset().top) {
+            
         } else if (y <= $('#f2').offset().top && y > $('#f3').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f6_g" ).addClass('floor-guide-active-pre');
-            $( "#f5_g" ).addClass('floor-guide-active');
-            $( "#f4_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'二楼','f2');
+            getFloorInfo($.mallCode.baoshanTm,'二楼','f2');
         } else if (y <= $('#f1').offset().top && y > $('#f2').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f5_g" ).addClass('floor-guide-active-pre');
-            $( "#f4_g" ).addClass('floor-guide-active');
-            $( "#f3_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'一楼','f1');
+            getFloorInfo($.mallCode.baoshanTm,'一楼','f1');
         } else if (y <= $('#fb1').offset().top && y > $('#f1').offset().top) {
-            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next');
-            $( "#f4_g" ).addClass('floor-guide-active-pre');
-            $( "#f3_g" ).addClass('floor-guide-active');
-            $( "#f2_g" ).addClass('floor-guide-active-next');
-            getFloorInfo($.mallCode.luoyangSbm,'负一楼','fb1');
+            getFloorInfo($.mallCode.baoshanTm,'负一楼','fb1');
         }
     });
     
-    getMallInfo($.mallCode.luoyangSbm);
-    getFloorInfo($.mallCode.luoyangSbm,'七楼','f7');
+    getMallInfo($.mallCode.baoshanTm);
+    getFloorInfo($.mallCode.baoshanTm,'三楼','f3');
     
     document.addEventListener("webkitfullscreenchange", function (event) {
         if(document.webkitIsFullScreen){

@@ -63,7 +63,7 @@
 
                             <li>
                                 <a href="/brands-admin/create-brand">
-                                    <i class="fa fa-plus"></i> 新增品牌
+                                    <i class="fa fa-plus"></i> 创建品牌
                                 </a>
                             </li>
 

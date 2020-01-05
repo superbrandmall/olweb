@@ -74,6 +74,29 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/r
                                             <?= $lang['search_ljz'] ?> </label>
                                         </div>
                                     </div>
+                                                                        
+                                    <div style="float: left; margin-right: 20px;">
+                                        <div class="c-checkbox">
+                                            <input id="<?= $bs_tm ?>" name="mall" value="<?= $bs_tm ?>" class="c-check" type="checkbox">
+                                            <label for="<?= $bs_tm ?>" class="c-font-thin c-font-16">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            <?= $lang['search_bs'] ?> </label>
+                                        </div>
+                                    </div>                                    
+                                                                        
+                                    <div style="float: left; margin-right: 20px;">
+                                        <div class="c-checkbox">
+                                            <input id="<?= $luoyang_sbm ?>" name="mall" value="<?= $luoyang_sbm ?>" class="c-check" type="checkbox">
+                                            <label for="<?= $luoyang_sbm ?>" class="c-font-thin c-font-16">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            <?= $lang['search_ly'] ?> </label>
+                                        </div>
+                                    </div>
+                                                                        
 								</div>
                                 <div class="clearfix"> </div><br>
 								<button id="search_button" class="btn c-theme-btn c-btn-uppercase btn-lg c-btn-bold c-btn-square"><?= $lang['search_search_shops'] ?></button>

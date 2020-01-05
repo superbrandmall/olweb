@@ -137,6 +137,8 @@ include("views/assets/base/" . $filename);
                                 $requirment =  $requirment.'?mall=olmall180917000003';
                             } else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // LY
                                 $requirment =  $requirment.'?mall=olmall190117000001';
+                            } else if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000002') { // BS
+                                $requirment =  $requirment.'?mall=olmall180917000002';
                             }
                             ?>
                                 <li class="<?php
@@ -147,7 +149,7 @@ include("views/assets/base/" . $filename);
                                     <a href="<?php echo $requirment; ?>" class="c-link"><?= $lang['nav_search'] ?></a>
                                 </li>
                             <?php
-                            if (strpos($_SERVER['REQUEST_URI'],'olmall190117000001') == FALSE) { // 如果是LY则不显示以下内容
+                            if (strpos($_SERVER['REQUEST_URI'],'olmall190117000001') == FALSE && strpos($_SERVER['REQUEST_URI'],'olmall180917000002') == FALSE) { // 如果是LY或BS则不显示以下内容
                             ?>
                                 <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'events') {

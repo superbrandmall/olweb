@@ -426,14 +426,14 @@ function addTextLayer(){
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')<br>'+brand+'</span>'
                     );
                 } else {
                     shopName = $(this).attr('data-shop-name');
                     area = $(this).attr('data-area');
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;">'+shopName+'<br>('+area+')</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')</span>'
                     );
                 }
                 
@@ -1054,7 +1054,7 @@ function saveShopBrandL(i){
                     }
 
                     setTimeout(function () {
-                        $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                        window.location.reload();
                     },1000);
                 } else {
                     $('#levelShopListL #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');
@@ -1119,7 +1119,7 @@ function saveShopBrandS(i){
                     }
 
                     setTimeout(function () {
-                        $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-save"></i>');
+                        window.location.reload();
                     },1000);
                 } else {
                     $('#levelShopListS #row_'+i+' .save').html('<i class="fa fa-remove"></i> 错误');

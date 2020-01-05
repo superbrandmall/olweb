@@ -1,5 +1,5 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/brands-admin/default-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/brands-admin/hd-brands-admin.js"></script>';
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
@@ -7,72 +7,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div class="content-wrapper">
     <section class="content-header" style="padding-bottom: 30px;">
         <h1 class="pull-left">
-            新建品牌
+            海鼎品牌
         </h1>
-        <div class="pull-right">
-            <a href="/brands-admin/create-brand" class="btn btn-primary pull-right">
-                创建品牌
-            </a>
-        </div>
     </section>
 
     <section class="content">
-        <div id="webui">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="callout callout-info" style="display: none;">
-                        删除品牌成功!
-                    </div>
-                    <div class="callout callout-success" style="display: none;">
-                        修改品牌所有人成功!
-                    </div>
-                    <div class="callout callout-danger" style="display: none;">
-                        修改品牌所有人失败!
-                    </div>
-                </div>
-            </div>
-           
-            <div class="row">
-                <div class="col-lg-4 col-xs-4">
-                    <div class="small-box bg-teal">
-                        <div class="inner">
-                            <h3 id="totalBrands"></h3>
-                            <p>新建品牌</p>
-                        </div>
-                        <div class="icon">
-                            总共
-                        </div>
-                        <a href="javascript: void(0);" class="small-box-footer">总共 <i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-xs-4">
-                    <div class="small-box bg-maroon">
-                        <div class="inner">
-                            <h3 id="currentWeekNum"></h3>
-                            <p>新建品牌</p>
-                        </div>
-                        <div class="icon">
-                            本周
-                        </div>
-                        <a href="javascript: void(0);" class="small-box-footer">本周 <i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-xs-4">
-                    <div class="small-box bg-orange">
-                        <div class="inner">
-                            <h3 id="currentMonthNum"></h3>
-                            <p>新建品牌</p>
-                        </div>
-                        <div class="icon">
-                            本月
-                        </div>
-                        <a href="javascript: void(0);" class="small-box-footer">本月 <i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-            </div>
-            
+        <div id="webui">          
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -90,10 +30,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/brands-admin/?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/brands-admin/?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/brands-admin/?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/brands-admin/?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/brands-admin/hd-brands?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/brands-admin/hd-brands?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/brands-admin/hd-brands?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/brands-admin/hd-brands?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页</span>
                                             </div>
@@ -111,19 +51,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">Logo</div>
+                                                                <div class="th-inner">一级业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">业态</div>
+                                                                <div class="th-inner">二级业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">所有人</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">操作</div>
+                                                                <div class="th-inner">三级业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
@@ -143,10 +79,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/brands-admin/?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/brands-admin/?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/brands-admin/?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/brands-admin/?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/brands-admin/hd-brands?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/brands-admin/hd-brands?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/brands-admin/hd-brands?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/brands-admin/hd-brands?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>
