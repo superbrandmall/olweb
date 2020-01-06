@@ -44,6 +44,19 @@
           </div>
         </div>
       </div>
+        
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <a href="https://ol.superbrandmall.com/bs-admin" target="_blank"><img class="card-img-top" src="/views/assets/base/img/content/portal/ol-bs.jpg" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">宝山正大乐城</h4>
+            <p class="card-text" style="font-size: 10px;"><a href="https://ol.superbrandmall.com/bs-admin" target="_blank">https://ol.superbrandmall.com/bs-admin</a><br>用户名: onlineleasing@superbrandmall.com<br>密码: 12345678</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://ol.superbrandmall.com/bs-admin" target="_blank" class="btn btn-primary">查看</a>
+          </div>
+        </div>
+      </div>
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">

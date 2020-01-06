@@ -85,13 +85,13 @@
         
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
-          <a href="#!"><img class="card-img-top" src="/views/assets/base/img/content/portal/bs.jpg" alt=""></a>
+          <a href="https://ol.superbrandmall.com/olmall180917000002"><img class="card-img-top" src="/views/assets/base/img/content/portal/bs.jpg" alt=""></a>
           <div class="card-body">
             <h4 class="card-title">宝山正大乐城</h4>
-            <p class="card-text">Coming soon...</p>
+            <p class="card-text"><a href="https://ol.superbrandmall.com/olmall180917000002" target="_blank">https://ol.superbrandmall.com/olmall180917000002</a><br>宝山区位于上海市北部，是上海的“水路门户”...</p>
           </div>
           <div class="card-footer">
-            <a href="#!" class="btn btn-primary">查看</a>
+            <a href="https://ol.superbrandmall.com/olmall180917000002" class="btn btn-primary">查看</a>
           </div>
         </div>
       </div>

@@ -42,6 +42,10 @@
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190613000009"><img src="views/assets/base/img/content/client-logos/miniso.jpg" alt=""/></a>
+                        名创优品
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000100"><img src="views/assets/base/img/content/client-logos/pandora.jpg" alt=""/></a>
                         Pandora
                     </div>
@@ -56,10 +60,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190709000001"><img src="views/assets/base/img/content/client-logos/lokal.jpg" alt=""/></a>
                         WAGAS
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190903000002"><img src="views/assets/base/img/content/client-logos/diandude.jpg" alt=""/></a>
-                        点都德
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190924000001"><img src="views/assets/base/img/content/client-logos/wala.jpg" alt=""/></a>

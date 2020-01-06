@@ -12,6 +12,8 @@ abstract class BaseObject {
                 $this->domain = 'http://10.130.12.15/ljz-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
                 $this->domain = 'http://10.130.12.15/ly-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'bs-admin') !== false) {
+                $this->domain = 'http://10.130.12.15/bs-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
                 $this->domain = 'http://10.130.12.15/brands-admin';
             } else {
@@ -22,6 +24,8 @@ abstract class BaseObject {
                 $this->domain = 'http://uat-ol.superbrandmall.com/ljz-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
                 $this->domain = 'http://uat-ol.superbrandmall.com/ly-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'bs-admin') !== false) {
+                $this->domain = 'http://uat-ol.superbrandmall.com/bs-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
                 $this->domain = 'http://uat-ol.superbrandmall.com/brands-admin';
             } else {
@@ -32,7 +36,9 @@ abstract class BaseObject {
                 $this->domain = 'http://ol.superbrandmall.com/ljz-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/ly-admin';
-            } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
+            } else if(strpos($_SERVER['REQUEST_URI'],'bs-admin') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/bs-admin';
+            }else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/brands-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'portal') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/portal';
