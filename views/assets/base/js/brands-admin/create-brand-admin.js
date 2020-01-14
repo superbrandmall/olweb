@@ -69,6 +69,18 @@ $(document).ready(function(){
                 required: true,
                 number: true
             },
+            compare: {
+                required: true
+            },
+            standard_area: {
+                required: true
+            },
+            entered_mall: {
+                required: true
+            },
+            competitor: {
+                required: true
+            },
             logo: {
                 required: true
             },
@@ -99,6 +111,18 @@ $(document).ready(function(){
             average_unit_price: {
                 required: "请输入客单价",
                 number: "请正确输入客单价"
+            },
+            compare: {
+                required: "请选择月均销售额坪效"
+            },
+            standard_area: {
+                required: "请选择标准店面积"
+            },
+            entered_mall: {
+                required: "请输入已入驻购物中心"
+            },
+            competitor: {
+                required: "请输入对标品牌"
             },
             logo: {
                 required: "请上传品牌Logo"
@@ -283,29 +307,31 @@ function checkBrandName(name) {
 }
 
 function addBrand() {
-    var logo = $('#hidden_logo').val() || null;
     var brand_name = $('#brand_name').val();
     var new_category = $('#new_category').val();
     var modality_1 = $('#modality_3').val().substr(0,4);
     var modality_2 = $('#modality_3').val().substr(0,6);
     var modality_3 = $('#modality_3').val();
+    var average_unit_price = $('#average_unit_price').val() || null;
+    var compare = $('#compare').val() || null;
+    var standard_area = $('#standard_area').val() || null;
+    var entered_mall = $('#entered_mall').val() || null;
+    var competitor = $('#competitor').val() || null;
+    var logo = $('#hidden_logo').val() || null;
     var attribute = $('#attribute').val() || null;
     var brand_class = $('#class').val() || null;
     var reputation = $('#reputation').val() || null;
     var market_share = $('#market_share').val() || null;
     var name_eng = $('#name_eng').val() || null;
     var location = $('#location').val() || null;
-    var standard_area = $('#standard_area').val() || null;
     var target = $('#target').val() || null;
     var city = $('#city').val() || null;
     var history = $('#history').val() || null;
     var rank = $('#rank').val() || null;
     var shop_amount = $('#shop_amount').val() || null;
-    var compare = $('#compare').val() || null;
-    var average_unit_price = $('#average_unit_price').val() || null;
     var joined = $('#joined').val() || null;
 
-    if(brand_name != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
+    if(brand_name != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != '' && average_unit_price != '' && compare != '' && standard_area != '' && entered_mall != '' && competitor != ''){
         var map = {
             "attribute": attribute,
             "averageUnitPrice": average_unit_price,
@@ -331,7 +357,9 @@ function addBrand() {
             "standardArea": standard_area,
             "target": target,
             "userCode": $.cookie('login'),
-            "status": 0
+            "status": 0,
+            "mallName": entered_mall,
+            "competitorBrand": competitor
         };
 
         $.ajax({
@@ -353,11 +381,11 @@ function addBrand() {
                 $('#loader').hide();
                 if(response.code === 'C0') {
                     if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
 
                     window.location.href = 'create-brand-contact?id='+response.data.code+'&category='+response.data.newCategoryCode+'&s=succeed';
                 } else {

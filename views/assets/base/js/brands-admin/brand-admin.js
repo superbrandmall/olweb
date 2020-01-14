@@ -45,9 +45,9 @@ function findOneBrandByCode(id) {
                 
                 var url;
                 if($.parseJSON(sessionStorage.getItem("userModalities"))[0].isComplete == 2){
-                    url = 'findAllByBrandCode/'+id; // Category head 可以查看自己管理的业态，其中马云飞和宋总可以查看所有业态
+                    url = 'findAllByBrandCode/'+id; // Category head 可以查看自己的业category，其中宋总和马云飞可查看所有业态
                 } else {
-                    url = 'findAllByBrandCodeAndUserCode/'+id+'/'+$.cookie('uid'); // 其他人只能查看自己建立的联系人
+                    url = 'findAllByBrandCodeAndUserCode/'+id+'/'+$.cookie('uid'); // 其他人只能查看自己建立的品牌
                 }
                 
                 findContacts(url);
@@ -91,11 +91,11 @@ function findOneBrandByCode(id) {
                 })
                 
                 if(brand.state == 1 && brand.hdState == 'created' && (brand.userCode == $.cookie('uid') || allow == 1)) {
+                    if(brand.logo != null){
+                        $('#imagePreview').attr('src',brand.logo);
+                    }
+                    
                     $('#brand_name').text(brand.name);
-                    $('#contact_name_1').text(brand.contactName);
-                    $('#contact_phone_1').text(brand.contactPhone);
-                    $('#company_name').text(brand.companyName);
-                    $('#title').text(brand.title);
 
                     var attribute, category, modality1, modality2, modality3, brandClass, reputation, location, target, standardArea, history, compare, joined;
                     switch (brand.attribute) {
@@ -148,12 +148,59 @@ function findOneBrandByCode(id) {
                             });
                         });
                     });
-
-                    $('#attribute').text(attribute);
+                    
+                    switch (brand.compare) {
+                        case 1:
+                            compare = '> 当地同等行业水平 20%';
+                            break;
+                        case 2:
+                            compare = '> 当地同等行业水平 10%';
+                            break;
+                        case 3:
+                            compare = '= 当地同等行业水平';
+                            break;
+                        case 4:
+                            compare = '< 当地同等行业水平 10%';
+                            break;
+                        case 5:
+                            compare = '< 当地同等行业水平 20%';
+                            break;
+                        default:
+                            compare = '';
+                            break;
+                    }
+                    
+                    switch (brand.standardArea) {
+                        case 1:
+                            standardArea = '< 80 ㎡';
+                            break;
+                        case 2:
+                            standardArea = '80 - 150 ㎡';
+                            break;
+                        case 3:
+                            standardArea = '150 - 250 ㎡';
+                            break;
+                        case 4:
+                            standardArea = '250 - 600 ㎡';
+                            break;
+                        case 5:
+                            standardArea = '> 600 ㎡';
+                            break;
+                        default:
+                            standardArea = '';
+                            break;
+                    }
+                    
                     $('#new_category').text(category);
                     $('#modality_1').text(modality1);
                     $('#modality_2').text(modality2);
                     $('#modality_3').text(modality3);
+                    $('#average_unit_price').text(brand.averageUnitPrice);
+                    $('#compare').text(compare);
+                    $('#standard_area').text(standardArea);
+                    $('#entered_mall').text(brand.mallName);
+                    $('#competitor').text(brand.competitorBrand);
+                    $('#attribute').text(attribute);
 
                     switch (brand.brandClass) {
                         case 1:
@@ -207,29 +254,6 @@ function findOneBrandByCode(id) {
 
                     $('#location').text(location);
 
-                    switch (brand.standardArea) {
-                        case 1:
-                            standardArea = '< 80 ㎡';
-                            break;
-                        case 2:
-                            standardArea = '80 - 150 ㎡';
-                            break;
-                        case 3:
-                            standardArea = '150 - 250 ㎡';
-                            break;
-                        case 4:
-                            standardArea = '250 - 600 ㎡';
-                            break;
-                        case 5:
-                            standardArea = '> 600 ㎡';
-                            break;
-                        default:
-                            standardArea = '';
-                            break;
-                    }
-
-                    $('#standard_area').text(standardArea);
-
                     switch (brand.target) {
                         case 1:
                             target = '快速增长的中产家庭';
@@ -276,30 +300,6 @@ function findOneBrandByCode(id) {
                     $('#rank').text(brand.rank);
                     $('#shop_amount').text(brand.shopAmount);
 
-                    switch (brand.compare) {
-                        case 1:
-                            compare = '> 当地同等行业水平 20%';
-                            break;
-                        case 2:
-                            compare = '> 当地同等行业水平 10%';
-                            break;
-                        case 3:
-                            compare = '= 当地同等行业水平';
-                            break;
-                        case 4:
-                            compare = '< 当地同等行业水平 10%';
-                            break;
-                        case 5:
-                            compare = '< 当地同等行业水平 20%';
-                            break;
-                        default:
-                            compare = '';
-                            break;
-                    }
-
-                    $('#compare').text(compare);
-                    $('#average_unit_price').text(brand.averageUnitPrice);
-
                     switch (brand.joined) {
                         case 1:
                             joined = '0';
@@ -322,10 +322,6 @@ function findOneBrandByCode(id) {
                     }
 
                     $('#joined').text(joined);
-
-                    if(brand.logo != null){
-                        $('#imagePreview').attr('src',brand.logo);
-                    }
                 }
             } else {
                 console.log(response.customerMessage);

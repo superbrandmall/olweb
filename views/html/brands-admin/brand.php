@@ -100,6 +100,31 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                         <td class="text-nowrap">三级业态</td>
                                                         <td id="modality_3"></td>
                                                     </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">客单价</td>
+                                                        <td><span id="average_unit_price"></span>元</td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">月均销售额坪效</td>
+                                                        <td id="compare"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">标准店面积</td>
+                                                        <td id="standard_area"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">已入驻购物中心</td>
+                                                        <td id="entered_mall"></td>
+                                                    </tr>
+                                                    
+                                                    <tr>
+                                                        <td class="text-nowrap">对标品牌</td>
+                                                        <td id="competitor"></td>
+                                                    </tr>
 
                                                     <tr>
                                                         <td class="text-nowrap">品牌属性</td>
@@ -110,7 +135,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                         <td class="text-nowrap">品牌价位</td>
                                                         <td id="class"></td>
                                                     </tr>
-
 
                                                     <tr>
                                                         <td class="text-nowrap">口碑</td>
@@ -130,11 +154,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                     <tr>
                                                         <td class="text-nowrap">开店区域</td>
                                                         <td id="location"></td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td class="text-nowrap">标准店面积</td>
-                                                        <td id="standard_area"></td>
                                                     </tr>
                                                     
                                                     <tr>
@@ -160,16 +179,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                     <tr>
                                                         <td class="text-nowrap">当地已开店数</td>
                                                         <td id="shop_amount"></td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td class="text-nowrap">月均销售额坪效</td>
-                                                        <td id="compare"></td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <td class="text-nowrap">客单价</td>
-                                                        <td><span id="average_unit_price"></span>元</td>
                                                     </tr>
                                                     
                                                     <tr>

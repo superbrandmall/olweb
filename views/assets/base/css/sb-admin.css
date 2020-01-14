@@ -471,6 +471,7 @@ label.error {
 
 .modal-content strong {
     color: #508dd4;
+    font-size: 13px;
 }
 
 .modal-header {

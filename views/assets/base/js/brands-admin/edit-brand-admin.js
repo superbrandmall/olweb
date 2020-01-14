@@ -57,14 +57,27 @@ $(document).ready(function(){
             modality_3: {
                 required: true
             },
+            average_unit_price: {
+                required: true,
+                number: true
+            },
+            compare: {
+                required: true
+            },
+            standard_area: {
+                required: true
+            },
+            entered_mall: {
+                required: true
+            },
+            competitor: {
+                required: true
+            },
             name_eng: {
                 minlength: 2
             },
             city: {
                 minlength: 2
-            },
-            average_unit_price: {
-                number: true
             }
         },
         messages: {
@@ -84,14 +97,27 @@ $(document).ready(function(){
             modality_3: {
                 required: "请选择三级业态"
             },
+            average_unit_price: {
+                required: "请输入客单价",
+                number: "请正确输入客单价"
+            },
+            compare: {
+                required: "请选择月均销售额坪效"
+            },
+            standard_area: {
+                required: "请选择标准店面积"
+            },
+            entered_mall: {
+                required: "请输入已入驻购物中心"
+            },
+            competitor: {
+                required: "请输入对标品牌"
+            },
             name_eng: {
                 minlength: "请输入完整品牌英文名称"
             },
             city: {
                 minlength: "请输入完整城市名称"
-            },
-            average_unit_price: {
-                number: "请正确输入客单价"
             }
         },
         errorPlacement: function(error, element) {
@@ -226,30 +252,28 @@ function findOneBrandByCode(id) {
                 if(brand.state == 1 && brand.hdState == 'created' && brand.userCode == $.cookie('uid')) {
                     $('#brand_name').val(brand.name);
                     $('#hidden_logo').val(brand.logo);
-                    $('#contact_name_1').val(brand.contactName);
-                    $('#contact_phone_1').val(brand.contactPhone);
-                    $('#company_name').val(brand.companyName);
-                    $('#title').val(brand.title);
                     $('#new_category').val(brand.newCategoryCode).trigger('change');
                     $('#modality_1').val(brand.modality1).trigger('change');
                     getBrandModality2(brand.modality1);
                     $('#modality_2').val(brand.modality2).trigger('change');
                     getBrandModality3(brand.modality2);
                     $('#modality_3').val(brand.modality3).trigger('change');
+                    $('#average_unit_price').val(brand.averageUnitPrice);
+                    $('#compare').val(brand.compare).trigger('change');
+                    $('#standard_area').val(brand.standardArea).trigger('change');
+                    $('#entered_mall').val(brand.mallName);
+                    $('#competitor').val(brand.competitorBrand);
                     $('#attribute').val(brand.attribute).trigger('change');
                     $('#class').val(brand.brandClass).trigger('change');
                     $('#reputation').val(brand.reputation).trigger('change');
                     $('#market_share').val(brand.marketShare);
                     $('#name_eng').val(brand.nameEng);
                     $('#location').val(brand.location).trigger('change');
-                    $('#standard_area').val(brand.standardArea).trigger('change');
                     $('#target').val(brand.target).trigger('change');
                     $('#city').val(brand.city);
                     $('#history').val(brand.history).trigger('change');
                     $('#rank').val(brand.rank);
                     $('#shop_amount').val(brand.shopAmount).trigger('change');
-                    $('#compare').val(brand.compare).trigger('change');
-                    $('#average_unit_price').val(brand.averageUnitPrice);
                     $('#joined').val(brand.joined).trigger('change');
 
                     if(brand.logo != null){
@@ -298,29 +322,31 @@ function CheckBrandStatus(id) {
 }
 
 function editBrand(uc) {
-    var logo = $('#hidden_logo').val() || null;
     var brand_name = $('#brand_name').val();
     var new_category = $('#new_category').val();
     var modality_1 = $('#modality_3').val().substr(0,4);
     var modality_2 = $('#modality_3').val().substr(0,6);
     var modality_3 = $('#modality_3').val();
+    var average_unit_price = $('#average_unit_price').val() || null;
+    var compare = $('#compare').val() || null;
+    var standard_area = $('#standard_area').val() || null;
+    var entered_mall = $('#entered_mall').val() || null;
+    var competitor = $('#competitor').val() || null;
+    var logo = $('#hidden_logo').val() || null;
     var attribute = $('#attribute').val() || null;
     var brand_class = $('#class').val() || null;
     var reputation = $('#reputation').val() || null;
     var market_share = $('#market_share').val() || null;
     var name_eng = $('#name_eng').val() || null;
     var location = $('#location').val() || null;
-    var standard_area = $('#standard_area').val() || null;
     var target = $('#target').val() || null;
     var city = $('#city').val() || null;
     var history = $('#history').val() || null;
     var rank = $('#rank').val() || null;
     var shop_amount = $('#shop_amount').val() || null;
-    var compare = $('#compare').val() || null;
-    var average_unit_price = $('#average_unit_price').val() || null;
     var joined = $('#joined').val() || null;
 
-    if(brand_name != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
+    if(brand_name != '' && new_category != '' && modality_1!= '' && modality_2 != '' && modality_3 != '' && average_unit_price != '' && compare != '' && standard_area != '' && entered_mall != '' && competitor != ''){
         var map = {
             "code": getURLParameter('id'),
             "attribute": attribute,
@@ -348,7 +374,9 @@ function editBrand(uc) {
             "loginUserCode": $.cookie('login'),
             "userCode": uc,
             "status": 1,
-            "state": 1
+            "state": 1,
+            "mallName": entered_mall,
+            "competitorBrand": competitor
         };
 
         $.ajax({

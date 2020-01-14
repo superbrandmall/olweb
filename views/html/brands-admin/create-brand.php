@@ -104,6 +104,52 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
+                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效 <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7 required">
+                                        <select class="select2" id="compare" name="compare" style="width: 100%">
+                                            <option value="">未选择</option>
+                                            <option value="1">> 当地同等行业水平 20%</option>
+                                            <option value="2">> 当地同等行业水平 10%</option>
+                                            <option value="3">= 当地同等行业水平</option>
+                                            <option value="4">< 当地同等行业水平 10%</option>
+                                            <option value="5">< 当地同等行业水平 20%</option>
+                                        </select>
+                                        <div id="errorcontainer-compare" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="standard_area" class="col-md-3 control-label">标准店面积 <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7 required">
+                                        <select class="select2" id="standard_area" name="standard_area" style="width: 100%">
+                                            <option value="">未选择</option>
+                                            <option value="1">< 80 m&sup2;</option>
+                                            <option value="2">80 - 150 m&sup2;</option>
+                                            <option value="3">150 - 250 m&sup2;</option>
+                                            <option value="4">250 - 600 m&sup2;</option>
+                                            <option value="5">> 600 m&sup2;</option>
+                                        </select>
+                                        <div id="errorcontainer-standard_area" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="entered_mall" class="col-md-3 control-label">已入驻购物中心 <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7 col-sm-12 required">
+                                        <input class="form-control" type="text" id="entered_mall" name="entered_mall" value="" />
+                                        <div id="errorcontainer-entered_mall" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="competitor" class="col-md-3 control-label">对标品牌 <span class="btn-box-tool-lg">*</span></label>
+                                    <div class="col-md-7 col-sm-12 required">
+                                        <input class="form-control" type="text" id="competitor" name="competitor" value="" />
+                                        <div id="errorcontainer-competitor" class="errorDiv"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
                                     <label class="col-md-3 control-label" for="logo">品牌Logo <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7">
                                         <label class="btn btn-default">
@@ -192,20 +238,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="standard_area" class="col-md-3 control-label">标准店面积 <span style="margin-right:10px;"></span></label>
-                                    <div class="col-md-7">
-                                        <select class="select2" id="standard_area" name="standard_area" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">< 80 m&sup2;</option>
-                                            <option value="2">80 - 150 m&sup2;</option>
-                                            <option value="3">150 - 250 m&sup2;</option>
-                                            <option value="4">250 - 600 m&sup2;</option>
-                                            <option value="5">> 600 m&sup2;</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
                                     <label for="target" class="col-md-3 control-label">主要客户群 <span style="margin-right:10px;"></span></label>
                                     <div class="col-md-7">
                                         <select class="select2" id="target" name="target" style="width: 100%">
@@ -256,20 +288,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                             <option value="2">5-10家</option>
                                             <option value="3">< 5家</option>
                                             <option value="4">0</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="compare" class="col-md-3 control-label">月均销售额坪效 <span style="margin-right:10px;"></span></label>
-                                    <div class="col-md-7">
-                                        <select class="select2" id="compare" name="compare" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="1">> 当地同等行业水平 20%</option>
-                                            <option value="2">> 当地同等行业水平 10%</option>
-                                            <option value="3">= 当地同等行业水平</option>
-                                            <option value="4">< 当地同等行业水平 10%</option>
-                                            <option value="5">< 当地同等行业水平 20%</option>
                                         </select>
                                     </div>
                                 </div>

@@ -103,7 +103,7 @@ $(document).ready(function(){
     
     $('#zoom_in').click(function (){
         $('#map_canvas').removeClass('col-lg-6').addClass('col-lg-12');
-        $('#map').mapster('resize', 0.95*($('#map_canvas').width()), 0, 0);
+        $('#map').mapster('resize', 1*($('#map_canvas').width()), 0, 0);
         addTextLayer();
         $('#vr, #image').hide();
         $(this).hide();
@@ -112,7 +112,7 @@ $(document).ready(function(){
     
     $('#zoom_out').click(function (){
         $('#map_canvas').removeClass('col-lg-12').addClass('col-lg-6');
-        $('#map').mapster('resize', 0.95*($('#map_canvas').width()), 0, 0);
+        $('#map').mapster('resize', 1*($('#map_canvas').width()), 0, 0);
         addTextLayer();
         $('#vr, #image').show();
         $(this).hide();

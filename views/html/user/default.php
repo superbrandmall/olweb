@@ -42,16 +42,24 @@
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191130000001"><img src="views/assets/base/img/content/client-logos/skechers-kids.jpg" alt=""/></a>
+                        SKECHERS Kids
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000733"><img src="views/assets/base/img/content/client-logos/xibuniuda.jpg" alt=""/></a>
+                        西步牛大
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190613000009"><img src="views/assets/base/img/content/client-logos/miniso.jpg" alt=""/></a>
                         名创优品
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000100"><img src="views/assets/base/img/content/client-logos/pandora.jpg" alt=""/></a>
-                        Pandora
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP191023000002"><img src="views/assets/base/img/content/client-logos/best-travel.jpg" alt=""/></a>
                         悠客智行
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000100"><img src="views/assets/base/img/content/client-logos/pandora.jpg" alt=""/></a>
+                        Pandora
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190731000004"><img src="views/assets/base/img/content/client-logos/qixi.jpg" alt=""/></a>
@@ -66,20 +74,12 @@
                         WALA 蛙辣火锅
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190627000003"><img src="views/assets/base/img/content/client-logos/adidas.jpg" alt=""/></a>
-                        adidas
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190426000001"><img src="views/assets/base/img/content/client-logos/ur.jpg" alt=""/></a>
                         URBAN REVIVO
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
                         NIKE
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190420000002"><img src="views/assets/base/img/content/client-logos/charme.jpg" alt=""/></a>
-                        港丽餐厅
                     </div>
                 </div>
             </div>
