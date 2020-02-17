@@ -446,7 +446,7 @@ function addTextLayer(){
 function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
     divWord.css('font-size', minSize + "px");
     for (var i = minSize; i < maxSize; i++) {
-        if ($(divWord).width() > maxWidth) {
+        if ($(divWord).width() > maxWidth  || $(divWord).height() > maxHeight) {
             $(divWord).css({
                 'font-size': i + 'px',
                 'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 5) + 'px',
@@ -464,12 +464,12 @@ function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMi
 };
 
 function JumpToShopList(sc){
-    $('#levelShopListL td').removeClass('dark-layer');
+    /*$('#levelShopListL td').removeClass('dark-layer');
     $('#levelShopListS tr').hide();
 
     $('#levelShopListL .rows-'+sc+' td').addClass('dark-layer');
     $('#levelShopListS .rows-'+sc).show();
-    
+    */
     GetShopInfo(sc);
 }
 
@@ -495,6 +495,41 @@ function GetShopInfo(sc){
                 var shop = response.data;
                 var images = shop.images;
                 
+                /*$('#shop_name').text(shop.shopName);
+                
+                var state;
+                var shopStateClass = 'badge-default';
+                switch(shop.shopState){
+                    case 0:
+                        state = shop.brandName;
+                        break;
+                    case 1:
+                        state = "空铺";
+                        shopStateClass = 'badge-danger';
+                        break;
+                    case 2:
+                        state = "6个月内到期";
+                        shopStateClass = 'badge-warning';
+                        break;
+                    case 3:
+                        state = "改造中";
+                        shopStateClass = 'badge-renovation';
+                        break;
+                    default:
+                        state = "在租";
+                        shopStateClass = 'badge-default';
+                        break;
+                }
+                
+                $('#shop_name').append(' <span class="badge '+shopStateClass+'">'+state+'</span>');
+                $('#area').text((shop.area || '-' ) + ' m²');
+                $('#new_brand').text(shop.brandCode || '-' );
+                $('#category').text();
+                $('#confirm_time').text();
+                
+                $('#shop_detail').css('opacity', 1);
+                $('#shop_detail').modal('toggle');*/
+
                 if(images != null && images.length > 0) {
                     $('#store_img').html('<img src="'+images[0].image+'" class="img-responsive" alt="" />');
                 } else {

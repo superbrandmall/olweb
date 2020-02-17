@@ -198,4 +198,77 @@ $scripts = $scripts . '<script src="/views/assets/base/js/brands-admin/levels-ad
     </section>
 </div>
 
+<div class="modal fade" id="shop_detail" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content c-square">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="shop_name"></h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="control-label">面积:</span>
+                        <strong id="area" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">业态:</span>
+                        <strong id="category" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">Size:</span>
+                        <strong id="asssss" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">Target contract signed date:</span>
+                        <strong id="sign_up_date" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">Target decoration date:</span>
+                        <strong id="entering_date" class="control-label"></strong>
+                    </div>
+                    <!--<div class="form-group">
+                        <span class="control-label">预算开业:</span>
+                        <strong id="plan_open_date" class="control-label"></strong>
+                    </div>-->
+                    <div class="form-group" id="store_img" style="margin-top: 25px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span class="control-label">新品牌:</span>
+                        <strong id="new_brand" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">确认时间:</span>
+                        <strong id="confirm_time" class="control-label"></strong>
+                    </div>
+                    <!--<div class="form-group">
+                        <span class="control-label">损失金额:</span>
+                        <strong id="loss" class="control-label"></strong>
+                    </div>-->
+                    <div class="form-group">
+                        <span class="control-label">Responsible person:</span>
+                        <strong id="responsible_person" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">Target hoarding date:</span>
+                        <strong id="hoarding_date" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label">Target opening date:</span>
+                        <strong id="opening_date" class="control-label"></strong>
+                    </div>
+
+                    <div class="form-group" id="store_vr">
+                        <div class="embed-responsive embed-responsive-4by3" style="display: none;">
+                            <iframe class="embed-responsive-item" src="#" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php include ('footer.php'); ?>

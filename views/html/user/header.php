@@ -117,95 +117,97 @@ include("views/assets/base/" . $filename);
                         <nav class="c-mega-menu c-pull-right c-mega-menu-dark c-mega-menu-dark-mobile c-theme c-fonts-uppercase c-fonts-bold">
                             <ul class="nav navbar-nav c-theme-nav">
                                 <li class="<?php
-    if (!isset($_GET['p']) || $_GET['p'] == 'home' || $_GET['p'] == '') {
-        echo 'c-active ';
-    }
-    ?>c-menu-type-classic">
+                                if (!isset($_GET['p']) || $_GET['p'] == 'home' || $_GET['p'] == '') {
+                                    echo 'c-active ';
+                                }
+                                ?>c-menu-type-classic">
                                     <a href="/" class="c-link"><?= $lang['nav_home'] ?></a>
                                 </li>
                                 <li class="<?php
-                                    if (isset($_GET['p']) && substr($_GET['p'], 0, 6) == 'olmall') {
-                                        echo 'c-active ';
-                                    }
-    ?>c-menu-type-classic">
+                                if (isset($_GET['p']) && substr($_GET['p'], 0, 6) == 'olmall') {
+                                    echo 'c-active ';
+                                }
+                                ?>c-menu-type-classic">
                                     <a href="#!" class="c-link dropdown-toggle"><?= $lang['nav_malls'] ?></a>
                                     <ul id="mall_list_top" class="dropdown-menu c-menu-type-classic c-pull-left"></ul>
                                 </li>
-                            <?php
-                            $requirment = 'requirement';
-                            if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000003') { // LJZ
-                                $requirment =  $requirment.'?mall=olmall180917000003';
-                            } else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // LY
-                                $requirment =  $requirment.'?mall=olmall190117000001';
-                            } else if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000002') { // BS
-                                $requirment =  $requirment.'?mall=olmall180917000002';
-                            }
-                            ?>
+                                <?php
+                                $requirment = 'requirement';
+                                if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000003') { // LJZ
+                                    $requirment = $requirment . '?mall=olmall180917000003';
+                                } else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // LY
+                                    $requirment = $requirment . '?mall=olmall190117000001';
+                                } else if (isset($_GET['p']) && $_GET['p'] == 'olmall190409000001') { // HF
+                                    $requirment = $requirment . '?mall=olmall190409000001';
+                                } else if (isset($_GET['p']) && $_GET['p'] == 'olmall180917000002') { // BS
+                                    $requirment = $requirment . '?mall=olmall180917000002';
+                                }
+                                ?>
                                 <li class="<?php
-                                    if (isset($_GET['p']) && $_GET['p'] == 'requirement') {
-                                        echo 'c-active ';
-                                    }
-                                    ?>c-menu-type-classic">
+                                if (isset($_GET['p']) && $_GET['p'] == 'requirement') {
+                                    echo 'c-active ';
+                                }
+                                ?>c-menu-type-classic">
                                     <a href="<?php echo $requirment; ?>" class="c-link"><?= $lang['nav_search'] ?></a>
                                 </li>
-                            <?php
-                            if (strpos($_SERVER['REQUEST_URI'],'olmall190117000001') == FALSE && strpos($_SERVER['REQUEST_URI'],'olmall180917000002') == FALSE) { // 如果是LY或BS则不显示以下内容
-                            ?>
-                                <li class="<?php
+                                <?php
+                                if (strpos($_SERVER['REQUEST_URI'], 'olmall190117000001') == FALSE && strpos($_SERVER['REQUEST_URI'], 'olmall190409000001') == FALSE && strpos($_SERVER['REQUEST_URI'], 'olmall180917000002') == FALSE) { // 如果是LY,HF,BS则不显示以下内容
+                                    ?>
+                                    <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'events') {
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="events" class="c-link"><?= $lang['nav_event'] ?></a>
-                                </li>
-                                <li class="<?php
+                                        <a href="events" class="c-link"><?= $lang['nav_event'] ?></a>
+                                    </li>
+                                    <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'ads') {
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic">
-                                    <a href="ads" class="c-link"><?= $lang['nav_ad'] ?></a>
-                                </li>
-                            <?php
-                            }
-                            ?>
-                                
-                            <?php if(isset($_SESSION['user_login'])) { ?>
-                                <li class="<?php
+                                        <a href="ads" class="c-link"><?= $lang['nav_ad'] ?></a>
+                                    </li>
+                                    <?php
+                                }
+                                ?>
+
+                                <?php if (isset($_SESSION['user_login'])) { ?>
+                                    <li class="<?php
                                     if (isset($_GET['p']) && $_GET['p'] == 'my-cart') {
                                         echo 'c-active ';
                                     }
                                     ?>c-menu-type-classic c-cart-toggler-wrapper">
-                                    <a href="#!" class="c-link dropdown-toggle">
-                                        <i class="fa fa-caret-down"></i> 
-                                        <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i> 
-                                        <span class="badge c-bg-blue" style="margin-top: -7px;"><?= $lang['nav_cart'] ?></span>
-                                    </a>
-                                    <ul class="dropdown-menu c-menu-type-classic c-pull-left">
-                                        <li><a href="my-cart"><?= $lang['nav_cart'] ?></a></li>
-                                        <hr>
-                                        <li><a href="javascript: logout();"><?= $lang['nav_logout'] ?></a></li>
-                                    </ul>
-                                </li>
-                            <?php } else { ?>
-                                <li class="c-cart-toggler-wrapper">
-                                    <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-icon">
-                                        <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i> 
-                                        <span class="badge c-bg-red" style="margin-top: -7px;"><?= $lang['nav_login'] ?></span>
-                                    </a>
-                                </li>
-                            <?php } ?>
-                                
+                                        <a href="#!" class="c-link dropdown-toggle">
+                                            <i class="fa fa-caret-down"></i>
+                                            <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i>
+                                            <span class="badge c-bg-blue" style="margin-top: -7px;"><?= $lang['nav_cart'] ?></span>
+                                        </a>
+                                        <ul class="dropdown-menu c-menu-type-classic c-pull-left">
+                                            <li><a href="my-cart"><?= $lang['nav_cart'] ?></a></li>
+                                            <hr>
+                                            <li><a href="javascript: logout();"><?= $lang['nav_logout'] ?></a></li>
+                                        </ul>
+                                    </li>
+                                <?php } else { ?>
+                                    <li class="c-cart-toggler-wrapper">
+                                        <a href="javascript:;" data-toggle="modal" data-target="#login-form" class="c-btn-icon">
+                                            <i class="icon-handbag c-cart-icon" style="font-size: 19px;"></i>
+                                            <span class="badge c-bg-red" style="margin-top: -7px;"><?= $lang['nav_login'] ?></span>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+
                                 <li>
                                     <a href="javascript:;" data-toggle="modal" data-target="#contact" class="c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-red-1 c-btn-circle c-btn-uppercase c-btn-sbold">
                                         <i class="icon-note"></i> <?= $lang['nav_contact'] ?>
                                     </a>
                                 </li>
                                 <li class="c-menu-type-classic">
-<?php if (isset($_SESSION["lang"]) && $_SESSION["lang"] == 'en') { ?>
+                                    <?php if (isset($_SESSION["lang"]) && $_SESSION["lang"] == 'en') { ?>
                                         <a href="/?lang=cn" class="c-link" id="c_link_cn">中文</a>
-        <?php } else { ?>
+                                    <?php } else { ?>
                                         <a href="/?lang=en" class="c-link" id="c_link_en">EN</a>
-        <?php } ?>
+                                    <?php } ?>
                                 </li>
                             </ul>
                         </nav>
@@ -214,19 +216,19 @@ include("views/assets/base/" . $filename);
             </div>
         </header>
 
-<?php
-include ('contact.php');
-?>
+        <?php
+        include ('contact.php');
+        ?>
 
-<?php 
-if(!isset($_SESSION['user_login']) || $_SESSION['user_login'] == "") {
-    // BEGIN: 注册页/登录页
-    include ('register.php');
-    include ('login.php');
-    // END: 注册页/登录页
-} else {
-    echo '<div class="alert alert-success login-succeed" role="alert">';
-    echo $lang['login_succeed'].$_SESSION['user_login'];
-    echo '</div>';
-}
-?>
+        <?php
+        if (!isset($_SESSION['user_login']) || $_SESSION['user_login'] == "") {
+            // BEGIN: 注册页/登录页
+            include ('register.php');
+            include ('login.php');
+            // END: 注册页/登录页
+        } else {
+            echo '<div class="alert alert-success login-succeed" role="alert">';
+            echo $lang['login_succeed'] . $_SESSION['user_login'];
+            echo '</div>';
+        }
+        ?>

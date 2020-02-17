@@ -7,7 +7,7 @@ abstract class BaseObject {
     var $domain;
     
     public function __construct() {
-        if(gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.15') {
+        /*if(gethostbyname($_SERVER['SERVER_NAME']) == '10.130.12.15') {
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://10.130.12.15/ljz-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
@@ -31,7 +31,7 @@ abstract class BaseObject {
             } else {
                 $this->domain = 'http://uat-ol.superbrandmall.com';
             }
-        } else {
+        } else {*/
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/ljz-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
@@ -45,7 +45,7 @@ abstract class BaseObject {
             } else {
                 $this->domain = 'http://ol.superbrandmall.com';
             }
-        }
+        //}
     
         if(session_id() == '' || !isset($_SESSION)) {
             session_start();

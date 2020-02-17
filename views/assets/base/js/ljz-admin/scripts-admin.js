@@ -418,7 +418,7 @@ function addTextLayer(){
 function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
     divWord.css('font-size', minSize + "px");
     for (var i = minSize; i < maxSize; i++) {
-        if ($(divWord).width() > maxWidth) {
+        if ($(divWord).width() > maxWidth || $(divWord).height() > maxHeight) {
             $(divWord).css({
                 'font-size': i + 'px',
                 'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
@@ -839,7 +839,9 @@ function getUsers() {
         {code: 'CUSER190709000004',name: 'Maggie Li'},
         {code: 'CUSER190709000005',name: 'Jeff Xu'},
         {code: 'CUSER190709000006',name: "Austin Rao"},
+        {code: 'CUSER191225000001',name: "Mikayla Deng"},
         {code: 'CUSER190709000008',name: 'Doris Zhou'},
+        {code: 'CUSER191225000002',name: 'Joy Gu'},
         {code: 'CUSER190709000009',name: 'Megan Jing'},
         {code: 'CUSER190709000010',name: 'Kevin Jiang'},
         {code: 'CUSER190709000011',name: 'Melissa Bing'},

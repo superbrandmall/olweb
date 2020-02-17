@@ -403,7 +403,7 @@ function addTextLayer(){
 function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
     divWord.css('font-size', minSize + "px");
     for (var i = minSize; i < maxSize; i++) {
-        if ($(divWord).width() > maxWidth) {
+        if ($(divWord).width() > maxWidth || $(divWord).height() > maxHeight) {
             $(divWord).css({
                 'font-size': i + 'px',
                 'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
