@@ -74,7 +74,7 @@
         <div class="card h-100">
           <a href="https://ol.superbrandmall.com/olmall190117000001" target="_blank"><img class="card-img-top" src="/views/assets/base/img/content/portal/ly.jpg" alt=""></a>
           <div class="card-body">
-            <h4 class="card-title">洛阳正大广场</h4>
+            <h4 class="card-title">洛阳正大国际广场</h4>
             <p class="card-text"><a href="https://ol.superbrandmall.com/olmall190117000001" target="_blank">https://ol.superbrandmall.com/olmall190117000001</a><br>洛阳市位于河南省西部，总面积15230平方公里...</p>
           </div>
           <div class="card-footer">
@@ -92,6 +92,19 @@
           </div>
           <div class="card-footer">
             <a href="https://ol.superbrandmall.com/olmall180917000002" class="btn btn-primary">查看</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <a href="https://ol.superbrandmall.com/olmall190409000001" target="_blank"><img class="card-img-top" src="/views/assets/base/img/content/portal/hf.jpg" alt=""></a>
+          <div class="card-body">
+            <h4 class="card-title">合肥正大广场</h4>
+            <p class="card-text"><a href="https://ol.superbrandmall.com/olmall190409000001" target="_blank">https://ol.superbrandmall.com/olmall190409000001</a><br>合肥市位于安徽省正中央，总面积11445平方公里...</p>
+          </div>
+          <div class="card-footer">
+            <a href="https://ol.superbrandmall.com/olmall190409000001" target="_blank" class="btn btn-primary">查看</a>
           </div>
         </div>
       </div>

@@ -85,8 +85,16 @@ $(document).ready(function(){
             var key = $.api.mobileVC;
             var vt = 'mobile';
             
+            var d = new Date();
+            var month = d.getMonth()+1;
+            var day = d.getDate();
+            var time = d.getTime();
+            var email = d.getFullYear() +
+                (month<10 ? '0' : '') + month +
+                (day<10 ? '0' : '') + day + time;
+            
             var map = {
-                email: 'default@domain.com',
+                email: email+'@domain.com',
                 international: 0,
                 lang: 0,
                 mobile: mobile,

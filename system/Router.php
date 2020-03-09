@@ -86,6 +86,34 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $session = new Session();
         $session ->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'],'hf-admin')) !== false) { // 合肥内部汇报
+    $target = array(
+        'hf-admin/home' => array(
+            'url' => 'default.php'
+        ),
+        'hf-admin/login' => array(
+            'url' => 'login.php'
+        ),
+        'hf-admin/summary' => array(
+            'url' => 'summary.php'
+        ),
+        'hf-admin/logout' => array(
+            'url' => 'logout.php'
+        )
+    );
+    
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php','default.php','summary.php');
+    if (in_array($page, $session_required)) {
+        include_once 'models/hf-admin/Session.class.php';
+        $session = new Session();
+        $session ->_session();
+    }
 } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
     $target = array(
         'brands-admin/home' => array(

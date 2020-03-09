@@ -5,6 +5,9 @@
                 <h3 class="c-font-26 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
                     Online Leasing
                 </h3>
+                <h4 class="c-font-39 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
+                    线上招商平台
+                </h4>
                 <img class="hidden-xs" alt="" src="views/assets/base/img/layout/logos/sbm_logo.png" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; z-index: 21;">
             </div>
             <div class="tp-banner">
@@ -41,6 +44,14 @@
                 </div>
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000552"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
+                        薛蟠烤串
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200101000001"><img src="views/assets/base/img/content/client-logos/ipromise.jpg" alt=""/></a>
+                        IPromise
+                    </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP191227000004"><img src="views/assets/base/img/content/client-logos/dig-potency.jpg" alt=""/></a>
                         Dig Potency

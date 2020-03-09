@@ -30,7 +30,7 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 </div>
 <div class="col-md-12">
     <center>
-        <img src="views/assets/base/img/content/floor-plan/luoyang-sbm/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
+        <img src="views/assets/base/img/content/floor-plan/hefei-sbm/<?= $i ?>F.png" class="img-responsive" alt="<?= $i>0 ? $i : 'B1' ?>F" usemap="#Map_<?= $i ?>F" />
         <map name="Map_<?= $i ?>F" id="Map_<?= $i ?>F"></map>
     </center>
 </div>

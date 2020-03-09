@@ -15,6 +15,12 @@ if (strpos($_SERVER['REQUEST_URI'], 'lang=en') == true) {
 
 $filename = "lang/" . $_SESSION["lang"] . ".php";
 include("views/assets/base/" . $filename);
+
+if (isset($_GET['p']) && $_GET['p'] == 'events' || isset($_GET['p']) && $_GET['p'] == 'event') { // 场地页
+    $hm = 'c969aa05170b06a39efcbccc40cc620d';
+} else {
+    $hm = '3938fbddbfea6dc8c77359c58664c361';
+}
 ?>
 <!DOCTYPE html>
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -72,7 +78,7 @@ include("views/assets/base/" . $filename);
             var _hmt = _hmt || [];
             (function () {
                 var hm = document.createElement("script");
-                hm.src = "https://hm.baidu.com/hm.js?e00d3e6681b0b3f02f92f9c45bd58997";
+                hm.src = "https://hm.baidu.com/hm.js?<?php echo $hm;?>";
                 var s = document.getElementsByTagName("script")[0];
                 s.parentNode.insertBefore(hm, s);
             })();
