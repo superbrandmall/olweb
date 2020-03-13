@@ -163,7 +163,13 @@ function GetShopInfo(){
                     contractExpire.setTime(response.data.contractExpireDate);
                     var contractExpireYear = contractExpire.getFullYear('yyyy');
                     var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                    if(contractExpireMonth < 10){
+                        contractExpireMonth = "0"+contractExpireMonth;
+                    }
                     var contractExpireDate = contractExpire.getDate('dd');
+                    if(contractExpireDate < 10) {
+                        contractExpireDate = "0"+contractExpireDate;
+                    }
 
                     if(IncrMonths(date,6) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
                         $('#moving_date').text('>6'+$.lang.lengthMonth);

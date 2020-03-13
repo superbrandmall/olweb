@@ -475,6 +475,8 @@ function GetShopInfo(sc){
                     }
                     
                     $('#contract_expire_date').text(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate);
+                } else {
+                    $('#contract_expire_date').text('-');
                 }
 
                 var state;

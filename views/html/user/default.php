@@ -1,19 +1,12 @@
 <div class="c-layout-page">
     <section class="c-layout-revo-slider c-layout-revo-slider-7" style="max-width: 960px; margin: 0 auto;">
         <div class="tp-banner-container">
-            <div class="c-singup-form">
-                <h3 class="c-font-26 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
-                    Online Leasing
-                </h3>
-                <h4 class="c-font-39 c-font-bold c-font-white c-margin-b-30 c-font-uppercase">
-                    线上招商平台
-                </h4>
-                <img class="hidden-xs" alt="" src="views/assets/base/img/layout/logos/sbm_logo.png" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; margin: auto; z-index: 21;">
-            </div>
             <div class="tp-banner">
                 <ul>
-                    <li data-transition="fade" data-slotamount="1" data-masterspeed="1500" data-style="dark">
-                        <img alt="" src="views/assets/base/img/content/backgrounds/banner.jpg" class="tp-caption lightgrey_divider skewfromrightshort fadeout" data-x="85" data-y="224" data-speed="500" data-start="1200" data-easing="Power4.easeOut">
+                    <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="6000" data-thumb="">
+                        <img src="views/assets/base/img/layout/sliders/revo-slider/base/blank.png" alt="">
+                        <div class="caption fulllscreenvideo tp-videolayer" data-x="0" data-y="0" data-speed="600" data-start="1000" data-easing="Power4.easeOut" data-endspeed="500" data-endeasing="Power4.easeOut" data-autoplay="true" data-autoplayonlyfirsttime="false" data-nextslideatend="true" data-videowidth="100%" data-videoheight="100%" data-videopreload="meta" data-videomp4="upload/video/video-1.mp4" data-videowebm="" data-videocontrols="controls" data-forcecover="1" data-forcerewind="on" data-aspectratio="16:9" data-volume="mute" data-videoloop="loop" data-videoposter="views/assets/base/img/layout/sliders/revo-slider/base/blank.png">
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -26,9 +19,9 @@
                 <div class="col-md-12">
                     <div class="c-content-title-1">
                         <h3 class="c-center">
-                            <?= $lang['home_banner_slogan_1'] ?> </h3>
+                            Online Leasing </h3>
                         <h3 class="c-center">
-                            <?= $lang['home_banner_slogan_2'] ?>
+                            <?= $lang['home_banner_slogan_1'] ?>
                         </h3>
                     </div>
                 </div>

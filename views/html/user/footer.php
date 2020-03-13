@@ -85,7 +85,11 @@
 	    api.bind("revolution.slide.onchange",function (e,data) {
 	        $('.c-layout-header').removeClass('hide');   
 	        setTimeout(function(){
-	            $('.c-singup-form').fadeIn(); 
+	            //$('.c-singup-form').fadeIn(); 
+                    $('video').attr({
+                        'controls':'controls',
+                        'muted':false
+                    });
 	        }, 1500);
 	    });
 

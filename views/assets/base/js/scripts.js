@@ -71,7 +71,9 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
     }
-    getMallList();
+    
+    $('video').attr('controls','controls');
+    //getMallList();
     
     $('#c_link_cn').click(function(){
         $.cookie('lang','zh-cn');
