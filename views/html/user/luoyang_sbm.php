@@ -56,7 +56,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_resident_population'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            6,823,000
+                            6,888,500
                         </span><?= $lang['mall_ren'] ?>
                     </div>
                     <div class="col-md-4">
@@ -185,7 +185,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="col-md-offset-7 col-md-5 col-xs-12">
                     <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">1F <?= $lang['mall_luoyang_sbm_1'] ?></h2>
+                        <h2 class="c-feature-16-title c-font-bold">GF <?= $lang['mall_luoyang_sbm_1'] ?></h2>
                         <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
@@ -203,7 +203,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="col-md-5 col-xs-12">
                     <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">B1F <?= $lang['mall_luoyang_sbm_0'] ?></h2>
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">B1 <?= $lang['mall_luoyang_sbm_0'] ?></h2>
                         <p class="c-feature-16-desc c-font-grey">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>

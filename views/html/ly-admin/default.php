@@ -40,26 +40,6 @@
                         </div>
                     </div>
                 </div>
-
-
-                <!--<div id="shops_info" class="col-sm-4">
-
-                            <div class="col-sm-12" style="padding: 0;">
-                     <div class="form-group" id="vr">
-                        <div class="embed-responsive embed-responsive-16by9" style="display: none;">
-                             <iframe class="embed-responsive-item" src="#" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-                <div class="clearfix"> </div>
-
-                <div class="col-sm-12">
-                    <div class="form-group" id="images">
-                        <div class="clearfix"> </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>
@@ -81,43 +61,8 @@
                             <strong id="contract_expire_date" class="control-label"></strong>
                         </div>
                         <div class="form-group">
-                            <span class="control-label">租金:</span>
-                            <strong id="rent" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
                             <span class="control-label">面积:</span>
                             <strong id="area" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">签约时间:</span>
-                            <strong id="sign_up_date" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">进场时间:</span>
-                            <strong id="entering_date" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">预算开业:</span>
-                            <strong id="plan_open_date" class="control-label"></strong>
-                        </div>
-                        <div class="form-group" id="store_img" style="margin-top: 25px;"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <span class="control-label">近<span id="weeks"></span>周销售额:</span>
-                            <strong id="sales" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">扣率:</span>
-                            <strong id="float_rent" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">损失金额:</span>
-                            <strong id="loss" class="control-label"></strong>
-                        </div>
-                        <div class="form-group">
-                            <span class="control-label">围挡时间:</span>
-                            <strong id="hoarding_date" class="control-label"></strong>
                         </div>
                         <div class="form-group">
                             <span class="control-label">开业时间:</span>
@@ -126,6 +71,33 @@
                         <div class="form-group">
                             <span class="control-label">负责人:</span>
                             <strong id="responsible_person" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">&nbsp;</span>
+                            <strong class="control-label">&nbsp;</strong>
+                        </div>
+                        <div class="form-group" id="store_img" style="margin-top: 25px;"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <span class="control-label">电量:</span>
+                            <strong id="electricity" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">上水:</span>
+                            <strong id="tap_water" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">下水:</span>
+                            <strong id="drainege" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">燃气:</span>
+                            <strong id="gas" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">排油烟:</span>
+                            <strong id="oil_smoke_emission" class="control-label"></strong>
                         </div>
                         <div class="form-group" id="store_vr">
                             <div class="embed-responsive embed-responsive-4by3" style="display: none;">

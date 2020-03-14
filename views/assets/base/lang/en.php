@@ -305,7 +305,13 @@ $lang['shop_shop_location'] = "Store location";
 $lang['shop_this_shop'] = "This store";
 $lang['shop_shop_awaiting_rent'] = "Stores for rent";
 $lang['shop_shop_in_renting'] = "Stores";
-$lang['shop_modality_shop_proportion'] = " store categories";
+$lang['shop_modality_shop_proportion'] = " Store categories";
+$lang['shop_engineering_specification'] = "Engineering specification";
+$lang['shop_electricity'] = "Electricity";
+$lang['shop_tap_water'] = "Tap water";
+$lang['shop_drainege'] = "Drainege";
+$lang['shop_gas'] = "Gas";
+$lang['shop_oil_smoke_emission'] = "Oil smoke emission";
 $lang['shop_continue_shopping'] = "Continue shopping";
 
 /********************** Event ********************/

@@ -185,9 +185,9 @@ function GetShopInfo(){
                 $('.item .c-content-media-2').append('<div class="c-panel"><div class="c-fav"></div></div>');
                 
                 if($.cookie('uid') && $.cookie('uid') != ''){
-                    $('.c-content-list-1').after('<a href="javascript:;" class="add-cart btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" class="add-cart btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
                 } else {
-                    $('.c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
                 }
                 
                 if(response.data.vr !== null) {
@@ -196,6 +196,39 @@ function GetShopInfo(){
                     $('#vr_video').hide();
                     $('#shop_location').addClass('col-md-offset-3');
                 }
+                
+                if(response.data.mallCode === $.mallCode.luoyangSbm) {
+                    if(response.data.remark_1 != null && response.data.remark_1 != '' && response.data.remark_1 != '无'){
+                        $('#electricity').text(response.data.remark_1+'KW');
+                    } else {
+                        $('#electricity').text('-');
+                    }
+
+                    if(response.data.remark_2 != null && response.data.remark_2 != ''){
+                        $('#tap_water').text(response.data.remark_2);
+                    } else {
+                        $('#tap_water').text('-');
+                    }
+
+                    if(response.data.remark_3 != null && response.data.remark_3 != ''){
+                        $('#drainege').text(response.data.remark_3);
+                    } else {
+                        $('#drainege').text('-');
+                    }
+
+                    if(response.data.remark_4 != null && response.data.remark_4 != ''){
+                        $('#gas').text(response.data.remark_4);
+                    } else {
+                        $('#gas').text('-');
+                    }
+
+                    if(response.data.remark_5 != null && response.data.remark_5 != ''){
+                        $('#oil_smoke_emission').text(response.data.remark_5);
+                    } else {
+                        $('#oil_smoke_emission').text('-');
+                    }
+                }
+                
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

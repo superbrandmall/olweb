@@ -103,8 +103,8 @@ function getMallInfo(mc) {
                 }
                 
                 $('#mall_desc').html(description);
-                $('#gross_floor_area').text(numberWithCommas(mall.grossFloorArea));
-                $('#leasing_area').text(numberWithCommas(mall.leasingArea));
+                $('#gross_floor_area').text(numberWithCommas(177881));
+                $('#leasing_area').text(numberWithCommas(69378.58));
                 $('#street').text(location || '-');
                 $('.mall-name').text(mallName);
                 

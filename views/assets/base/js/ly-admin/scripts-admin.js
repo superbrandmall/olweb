@@ -185,7 +185,7 @@ function getShopFloorInfo(fl) {
 
                 var itm = 0;
                 $.each(response.data, function(i,v){
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
+                    if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.state != 0 ){
                         stores = stores + v.area;
 
                         switch (v.shopState) {
@@ -225,7 +225,7 @@ function getShopFloorInfo(fl) {
                         }*/
                     }
 
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                    if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
@@ -504,74 +504,8 @@ function GetShopInfo(sc){
                 }
                 
                 $('#brand_name').append(' <span class="badge '+shopStateClass+'">'+state+'</span>');
-                
-                $('#rent').text((shop.deadRent || '-' ) + '元/m²/日');
-                $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
-                
                 $('#area').text((shop.area || '-' ) + 'm²');
-                
-                if(shop.brandName != null && shop.brandName != '') {
-                    if(shop.shopState == 1) {
-                        showShopSales(shop.brandName,'301001A'+shop.unit,contractExpireYear+((contractExpireMonth<10 ? '0' : '') + contractExpireMonth+((contractExpireDate<10 ? '0' : '') + contractExpireDate)));
-                    } else {
-                        showShopSales(shop.brandName,'301001A'+shop.unit,DecrDates(date,2));
-                    }
-                } else {
-                    $('#weeks').text('4');
-                }
-                
-                if(shop.signUpDate != null){
-                    var signUp = new Date();
-                    signUp.setTime(shop.signUpDate);
-                    var signUpYear = signUp.getFullYear('yyyy');
-                    var signUpMonth = signUp.getMonth('mm')+1;
-                    if(signUpMonth < 10) {
-                        signUpMonth = "0"+signUpMonth;
-                    }
-                    var signUpDate = signUp.getDate('dd');
-                    if(signUpDate < 10) {
-                        signUpDate = "0"+signUpDate;
-                    }
 
-                    $('#sign_up_date').text(signUpYear+'-'+signUpMonth+'-'+signUpDate);
-                } else {
-                    $('#sign_up_date').text('-');
-                }
-                if(shop.hoardingDate != null){
-                    var hoarding = new Date();
-                    hoarding.setTime(shop.hoardingDate);
-                    var hoardingYear = hoarding.getFullYear('yyyy');
-                    var hoardingMonth = hoarding.getMonth('mm')+1;
-                    if(hoardingMonth < 10) {
-                        hoardingMonth = "0"+hoardingMonth;
-                    }
-                    var hoardingDate = hoarding.getDate('dd');
-                    if(hoardingDate < 10) {
-                        hoardingDate = "0"+hoardingDate;
-                    }
-
-                    $('#hoarding_date').text(hoardingYear+'-'+hoardingMonth+'-'+hoardingDate);
-                } else {
-                    $('#hoarding_date').text('-');
-                }
-
-                if(shop.enteringDate != null){
-                    var entering = new Date();
-                    entering.setTime(shop.enteringDate);
-                    var enteringYear = entering.getFullYear('yyyy');
-                    var enteringMonth = entering.getMonth('mm')+1;
-                    if(enteringMonth < 10) {
-                        enteringMonth = "0"+enteringMonth;
-                    }
-                    var enteringDate = entering.getDate('dd');
-                    if(enteringDate < 10) {
-                        enteringDate = "0"+enteringDate;
-                    }
-
-                    $('#entering_date').text(enteringYear+'-'+enteringMonth+'-'+enteringDate);
-                } else {
-                    $('#entering_date').text('-');
-                }
                 if(shop.openingDate != null){
                     var opening = new Date();
                     opening.setTime(shop.openingDate);
@@ -590,24 +524,40 @@ function GetShopInfo(sc){
                     $('#opening_date').text('-');
                 }
                 
-                if(shop.remark_1 != null){
-                    $('#plan_open_date').text(shop.remark_1);
+                if(shop.remark_1 != null && shop.remark_1 != '' && shop.remark_1 != '无'){
+                    $('#electricity').text(shop.remark_1+'KW');
                 } else {
-                    $('#plan_open_date').text('-');
+                    $('#electricity').text('-');
                 }
+                
+                if(shop.remark_2 != null && shop.remark_2 != ''){
+                    $('#tap_water').text(shop.remark_2);
+                } else {
+                    $('#tap_water').text('-');
+                }
+                
+                if(shop.remark_3 != null && shop.remark_3 != ''){
+                    $('#drainege').text(shop.remark_3);
+                } else {
+                    $('#drainege').text('-');
+                }
+                
+                if(shop.remark_4 != null && shop.remark_4 != ''){
+                    $('#gas').text(shop.remark_4);
+                } else {
+                    $('#gas').text('-');
+                }
+                
+                if(shop.remark_5 != null && shop.remark_5 != ''){
+                    $('#oil_smoke_emission').text(shop.remark_5);
+                } else {
+                    $('#oil_smoke_emission').text('-');
+                }
+                
                 if(shop.responsiblePerson != null){
                     $('#responsible_person').text(shop.responsiblePerson);
                 } else {
                     $('#responsible_person').text('-');
-                }
-                
-                if(shop.remark_2 != null){
-                    $('#loss').text((numberWithCommas(shop.remark_2) || 0 ) + '元');
-                    if(shop.remark_2 != 0){
-                        $('#loss').css('color','#f00');
-                    }
-                } else {
-                    $('#loss').text('-').css('color','#333');
                 }
                 
                 if(images != null && images.length > 0) {
@@ -672,41 +622,6 @@ function insertParam(key, value) {
         //this will reload the page, it's likely better to store this until finished
         document.location.search = kvp.join('&');
     }
-}
-
-function showShopSales(brand,bu,date) {
-    var map = {
-        brandName: brand,
-        buildunit: bu,
-        yyyymmdd: date
-    };
-
-    $.ajax({
-        url: $.api.baseNew+"/sync-bi/api/sales/calSales",
-        type: "POST",
-        data: JSON.stringify(map),
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                $('#weeks').text(response.data.weeks > 0 ? response.data.weeks : 4); 
-                $('#sales').text((numberWithCommas(response.data.total) || 0 ) + '元'); 
-            } else {
-                $('#weeks').text('4');
-                $('#sales').text('0元'); 
-            }
-        }
-    });
 }
 
 function numberWithCommas(x) {

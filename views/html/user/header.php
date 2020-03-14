@@ -18,6 +18,8 @@ include("views/assets/base/" . $filename);
 
 if (isset($_GET['p']) && $_GET['p'] == 'events' || isset($_GET['p']) && $_GET['p'] == 'event') { // 场地页
     $hm = 'c969aa05170b06a39efcbccc40cc620d';
+} else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // 洛阳页
+    $hm = 'cfcaa07557189638526beda641ad5724';
 } else {
     $hm = '3938fbddbfea6dc8c77359c58664c361';
 }

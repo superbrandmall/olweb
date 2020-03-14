@@ -306,6 +306,12 @@ $lang['shop_this_shop'] = "本店铺";
 $lang['shop_shop_awaiting_rent'] = "待租店铺";
 $lang['shop_shop_in_renting'] = "店铺";
 $lang['shop_modality_shop_proportion'] = "店铺业态占比";
+$lang['shop_engineering_specification'] = "工程条件";
+$lang['shop_electricity'] = "电量";
+$lang['shop_tap_water'] = "上水";
+$lang['shop_drainege'] = "下水";
+$lang['shop_gas'] = "燃气";
+$lang['shop_oil_smoke_emission'] = "排油烟";
 $lang['shop_continue_shopping'] = "继续逛逛";
 
 /********************** Event ********************/

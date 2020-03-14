@@ -112,9 +112,33 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div class="c-content-box c-size-lg c-bg-white" style="margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3">
+                <div class="col-md-3 col-md-offset-1">
                     <div class="c-content-title-1">
-                        <h3 class="c-center c-font-bold" id="floor_name"><?= $lang['shop_modality_shop_proportion'] ?></h3>
+                        <h3 class="c-font-bold"><?= $lang['shop_engineering_specification'] ?></h3>
+                    </div>
+                    <div class="col-md-12">
+                        <ul class="c-content-list-1 c-theme c-separator-dot c-square" style="margin-top: 0;">
+                            <li style="font-weight: 300; font-size: 17px;">
+                                <?= $lang['shop_electricity'] ?>: <strong id="electricity"></strong>
+                            </li>
+                            <li style="font-weight: 300; font-size: 17px;">
+                                <?= $lang['shop_tap_water'] ?>: <strong id="tap_water"></strong>
+                            </li>
+                            <li style="font-weight: 300; font-size: 17px;">
+                                <?= $lang['shop_drainege'] ?>: <strong id="drainege"></strong>
+                            </li>
+                            <li style="font-weight: 300; font-size: 17px;">
+                                <?= $lang['shop_gas'] ?>: <strong id="gas"></strong>
+                            </li>
+                            <li style="font-weight: 300; font-size: 17px;">
+                                <?= $lang['shop_oil_smoke_emission'] ?>: <strong id="oil_smoke_emission"></strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="c-content-title-1">
+                        <h3 class="c-font-bold" id="floor_name"><?= $lang['shop_modality_shop_proportion'] ?></h3>
                     </div>
                     <div id="proportion"></div>
                 </div>
