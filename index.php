@@ -19,6 +19,9 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'hf-admin')) !== false) { // 合肥内部汇报
         include ('views/html/hf-admin/header.php');
         include 'views/html/hf-admin/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'v2')) !== false) { // 2.0
+        include ('views/html/v2/header.php');
+        include 'views/html/v2/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
         include ('views/html/brands-admin/header.php');
         include 'views/html/brands-admin/'.$page;

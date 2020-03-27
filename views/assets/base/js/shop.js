@@ -4,7 +4,19 @@ var day = d.getDate();
 var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
-    
+
+if($.cookie('lang') === 'en-us'){
+    $.lang = {
+        addToFavorites: "Add to Favorites",
+        lengthMonth: " month(s)"
+    };
+} else {
+    $.lang = {
+        addToFavorites: "加入收藏夹",
+        lengthMonth: "个月"
+    };
+}
+
 $(document).ready(function(){   
     GetShopInfo();
     
@@ -185,9 +197,9 @@ function GetShopInfo(){
                 $('.item .c-content-media-2').append('<div class="c-panel"><div class="c-fav"></div></div>');
                 
                 if($.cookie('uid') && $.cookie('uid') != ''){
-                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" class="add-cart btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" class="add-cart btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">'+$.lang.addToFavorites+'</a>');
                 } else {
-                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">加入购物车</a>');
+                    $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">'+$.lang.addToFavorites+'</a>');
                 }
                 
                 if(response.data.vr !== null) {

@@ -47,20 +47,26 @@ $mail->Subject = 'Online Leasing Contact Form';
 
 if (!empty ($_POST['brand_name']) && !empty ($_POST['email']) && !empty ($_POST['merchant_name']) && !empty ($_POST['phone']) && !empty ($_POST['modality_3']) && !empty ($_POST['user_name']) && !empty ($_POST['target_mall']) && !empty ($_POST['msg'])) 
 {
-    $mail->addAddress('michael@superbrandmall.com','customerservice');
-    $mail->addAddress('yan.song@superbrandmall.com','customerservice');
-    $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
-        
-    if($_POST['target_mall'] == 'OLMALL190117000001'){
+    if($_POST['target_mall'] == 'OLMALL180917000003'){
+        $mail->addAddress('michael@superbrandmall.com','customerservice');
+        $mail->addAddress('yan.song@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
+        $target = '正大广场陆家嘴购物中心';
+    } else if($_POST['target_mall'] == 'OLMALL190117000001'){
         $mail->addAddress('Neoh.KC@superbrandmall.com','customerservice');
+        $mail->addAddress('qiang.tuo@superbrandmall.com','customerservice');
         $mail->addAddress('jun.liu@superbrandmall.com','customerservice');
         $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
         $target = '洛阳正大国际广场';
-    } else if($_POST['target_mall'] == 'OLMALL180917000003'){
-        $target = '正大广场陆家嘴购物中心';
     } else if($_POST['target_mall'] == 'OLMALL180917000002'){
+        $mail->addAddress('michael@superbrandmall.com','customerservice');
+        $mail->addAddress('yan.song@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
         $target = '正大乐城宝山购物中心';
     } else if($_POST['target_mall'] == 'OLMALL190409000001'){
+        $mail->addAddress('michael@superbrandmall.com','customerservice');
+        $mail->addAddress('yan.song@superbrandmall.com','customerservice');
+        $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
         $target = '合肥正大广场';
     }
     

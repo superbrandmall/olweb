@@ -114,6 +114,82 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         $session = new Session();
         $session ->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'],'v2')) !== false) { // Ol 2.0
+    $target = array(
+        'v2/login' => array(
+            'url' => 'login.php'
+        ),
+        'v2/home' => array(
+            'url' => 'default.php'
+        ),
+        'v2/mall' => array(
+            'url' => 'mall.php'
+        ),
+        'v2/register' => array(
+            'url' => 'register.php'
+        ),
+        'v2/register-events' => array(
+            'url' => 'register_events.php'
+        ),
+        'v2/event' => array(
+            'url' => 'event.php'
+        ),
+        'v2/choose-event' => array(
+            'url' => 'choose_event.php'
+        ),
+        'v2/confirm-event' => array(
+            'url' => 'confirm_event.php'
+        ),
+        'v2/pay-done' => array(
+            'url' => 'pay_done.php'
+        ),
+        'v2/authentication' => array(
+            'url' => 'authentication.php'
+        ),
+        'v2/floor-plan' => array(
+            'url' => 'floor_plan.php'
+        ),
+        'v2/advertising' => array(
+            'url' => 'advertising.php'
+        ),
+        'v2/advertising-shopping-cart' => array(
+            'url' => 'advertising_shopping_cart.php'
+        ),
+        'v2/confirm-ads' => array(
+            'url' => 'confirm_ads.php'
+        ),
+        'v2/price' => array(
+            'url' => 'price.php'
+        ),
+        'v2/confirm-leasing' => array(
+            'url' => 'confirm_leasing.php'
+        ),
+        'v2/negotiation' => array(
+            'url' => 'negotiation.php'
+        ),
+        'v2/engineering' => array(
+            'url' => 'engineering.php'
+        ),
+        'v2/contract' => array(
+            'url' => 'contract.php'
+        ),
+        'v2/logout' => array(
+            'url' => 'logout.php'
+        )
+    );
+    
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array();
+    if (in_array($page, $session_required)) {
+        include_once 'models/v2/Session.class.php';
+        $session = new Session();
+        $session ->_session();
+    }
 } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
     $target = array(
         'brands-admin/home' => array(

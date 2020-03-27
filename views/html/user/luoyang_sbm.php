@@ -22,6 +22,13 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="c-body">
                     <div class="c-section">
                         <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
+                            <?= $lang['mall_hotline'] ?>
+                        </div>
+                        <div>
+                            <a href="tel:037969901513">0379-69901513</a>
+                        </div>
+                        <br>
+                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
                             <?= $lang['mall_location'] ?>
                         </div>
                         <div>

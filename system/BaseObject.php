@@ -48,6 +48,8 @@ abstract class BaseObject {
                 $this->domain = 'http://ol.superbrandmall.com/brands-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'portal') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/portal';
+            } else if(strpos($_SERVER['REQUEST_URI'],'v2') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/v2';
             } else {
                 $this->domain = 'http://ol.superbrandmall.com';
             }

@@ -31,7 +31,12 @@ function GetShopInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('#room_name').text(response.data.shopName || '-');
-                $('#unit').text(response.data.unit || '-');
+                $('#area_spesifc').text(response.data.remark_1 || '-');
+                $('#height').text(response.data.remark_2 || '-');
+                $('#electricity').text(response.data.remark_3 || '-');
+                $('#wire_towing').text(response.data.remark_4 || '-');
+                $('#elevator_size').text(response.data.remark_5 || '-');
+                $('#network_type').text(response.data.remark_6 || '-');
                 
                 var floorName,floorNameEng,mallName;
                 $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
@@ -62,8 +67,11 @@ function GetShopInfo(){
                     case $.mallCode.xuhuiTm:
                         lk = "xuhui-tm";
                         break;
-                    case $.mallCode.xianTm:
-                        lk = "xian-tm";
+                    case $.mallCode.luoyangSbm:
+                        lk = "luoyang-sbm";
+                        break;
+                    case $.mallCode.hefeisBm:
+                        lk = "hefei-sbm";
                         break;
                     case $.mallCode.wuxiTm:
                         lk = "wuxi-tm";
@@ -107,28 +115,6 @@ function GetShopInfo(){
                 
                 getFloorInfo(response.data.mallCode,floorName);
                 $('#area').text(numberWithCommas(response.data.area)+'m²' || '-');
-
-                if(response.data.shopState === 1) { // 空铺
-                    $('#moving_date').text(IncrDates(date,5));
-                } else { // 非空铺
-                    var contractExpire = new Date();
-                    contractExpire.setTime(response.data.contractExpireDate);
-                    var contractExpireYear = contractExpire.getFullYear('yyyy');
-                    var contractExpireMonth = contractExpire.getMonth('mm')+1;
-                    if(contractExpireMonth < 10){
-                        contractExpireMonth = "0"+contractExpireMonth;
-                    }
-                    var contractExpireDate = contractExpire.getDate('dd');
-                    if(contractExpireDate < 10) {
-                        contractExpireDate = "0"+contractExpireDate;
-                    }
-
-                    if(IncrDates(date,5) <= (contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate)) {
-                        $('#moving_date').text(IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate));
-                    } else {
-                        $('#moving_date').text(IncrDates(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate,5));
-                    }
-                }
 
                 $('.item .c-content-media-2').append('<div class="c-panel"><div class="c-fav"></div></div>');
                 

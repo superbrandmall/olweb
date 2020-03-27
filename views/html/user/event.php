@@ -40,34 +40,46 @@ $scripts = $scripts. '<script type="text/javascript" src="views/assets/base/js/e
                 <div class="col-md-8">
                     <div class="c-content-media-2-slider" data-slider="owl" data-single-item="true" data-auto-play="4000">
                         <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-                            <?= $lang['event_event_picture'] ?>
+                            <?= $lang['event_event_detail'] ?>
                         </div>
                         <div class="owl-carousel owl-theme c-theme owl-single"></div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="c-content-media-1 c-bordered" style="min-height: 380px;">
-                        <div class="c-content-label c-font-uppercase c-font-bold c-theme-bg">
-                            <?= $lang['event_event_detail'] ?>
-                        </div>
-                        <ul class="c-content-list-1 c-theme c-separator-dot c-square">
+                        <ul class="c-content-list-1 c-theme c-separator-dot c-square" style="margin: 0;">
                             <li>
                                 <?= $lang['shop_room_name'] ?>: <span id="room_name"></span>
-                            </li>
-                            <li>
-                                <?= $lang['event_room_number'] ?>: <span id="unit"></span>
                             </li>
                             <li>
                                 <?= $lang['event_floor'] ?>: <span id="floor"></span>
                             </li>
                             <li>
                                 <?= $lang['event_leasable_area'] ?>: 
-                                <strong><span id="area"></span></strong>
+                                <span id="area"></span> <small>(<span id="area_spesifc"></span>)</small>
                             </li>
-                            <li><?= $lang['event_moving_date'] ?>:
-                                <strong><span id="moving_date"></span></strong>
+                            <li>
+                                <?= $lang['event_maximum_height'] ?>: 
+                                <span id="height"></span>
+                            </li>
+                            <li>
+                                <?= $lang['event_electricity'] ?>: 
+                                <span id="electricity"></span>
+                            </li>
+                            <li>
+                                <?= $lang['event_wire_towing'] ?>: 
+                                <span id="wire_towing"></span>
+                            </li>
+                            <li>
+                                <?= $lang['event_elevator_size'] ?>: 
+                                <span id="elevator_size"></span>
+                            </li>
+                            <li>
+                                <?= $lang['event_network_type'] ?>: 
+                                <span id="network_type"></span>
                             </li>
                         </ul>
+                        <div><small>注:活动场地使用区域按斜线所示范围为限，活动场地内之装置或背板不得超过限高。</small></div>
                     </div><br>
                 </div>
             </div>

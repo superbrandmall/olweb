@@ -38,7 +38,23 @@
 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000552"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
+                        <a href="shop?id=OLSHOP190613000007"><img src="views/assets/base/img/content/client-logos/ms_sue.jpg" alt=""/></a>
+                        MS SUE
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000838"><img src="views/assets/base/img/content/client-logos/purethai.jpg" alt=""/></a>
+                        纯太
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000557"><img src="views/assets/base/img/content/client-logos/SKECHERS.jpg" alt=""/></a>
+                        SKECHERS
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191022000066"><img src="views/assets/base/img/content/client-logos/vans.jpg" alt=""/></a>
+                        VANS
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200117000001"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
                         薛蟠烤串
                     </div>
                     <div class="item" style="text-align: center;">
@@ -48,6 +64,10 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP191227000004"><img src="views/assets/base/img/content/client-logos/dig-potency.jpg" alt=""/></a>
                         Dig Potency
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191019000002"><img src="views/assets/base/img/content/client-logos/la-zephire.jpg" alt=""/></a>
+                        LA ZEPHIRE
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP191130000001"><img src="views/assets/base/img/content/client-logos/skechers-kids.jpg" alt=""/></a>
