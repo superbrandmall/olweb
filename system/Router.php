@@ -122,6 +122,12 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'v2/home' => array(
             'url' => 'default.php'
         ),
+        'v2/info' => array(
+            'url' => 'info.php'
+        ),
+        'v2/my-msg' => array(
+            'url' => 'my_msg.php'
+        ),
         'v2/mall' => array(
             'url' => 'mall.php'
         ),
@@ -166,6 +172,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         ),
         'v2/negotiation' => array(
             'url' => 'negotiation.php'
+        ),
+        'v2/all-orders' => array(
+            'url' => 'all_orders.php'
         ),
         'v2/engineering' => array(
             'url' => 'engineering.php'

@@ -1,7 +1,8 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/floor-plan-admin.js"></script>'
         . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'
-        . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>';
+        . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>'
+        . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 <link href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -118,8 +119,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
-
+<div class="modal fade" id="engineering_pdf" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content c-square">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-xs-12">
+                    <iframe id="pdfContainer" src="/views/assets/plugins/pdfjs/web/viewer.html?file=/views/html/v2/GF01A.pdf" width="100%" height="450px" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

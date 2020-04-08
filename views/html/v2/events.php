@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12">
-        <h4 class="page-header">会议和场地活动</h4>
+        <h4 class="page-header"><i class="fa fa-calendar" aria-hidden="true"></i> 会议和场地活动</h4>
     </div>
 
     <div class="col-sm-3 col-xs-6">

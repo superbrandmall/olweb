@@ -380,7 +380,7 @@ function renderShopList(shop){
 <div class="header">入驻日期: <a href="#" class="pull-right badge">VR</a>\n\
 </div>\n\
 <div class="header">面积: '+v.area+'m<sup>2</sup><a href=\'javascript: drawShopsFromList("'+v.code+'");\' class="pull-right badge">查看位置</a></div>\n\
-<div class="header">店铺特色: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">工程条件: 有/无，排烟量:</div><div class="header">展面宽度:</div></div></li>');
+<div class="header">店铺特色: <a href="#" onclick="$(\'#engineering_pdf\').modal(\'toggle\');" class="pull-right badge">工程条件</a></div><div class="header">排烟量: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">展面宽度:</div></div></li>');
                     }
                 } else {
                     if(category == mod && Math.round(area) > minSize && Math.round(area) < maxSize && v.shopState == 1){
@@ -400,7 +400,7 @@ function renderShopList(shop){
 <div class="header">入驻日期: <a href="#" class="pull-right badge">VR</a>\n\
 </div>\n\
 <div class="header">面积: '+v.area+'m<sup>2</sup><a href=\'javascript: drawShopsFromList("'+v.code+'");\' class="pull-right badge">查看位置</a></div>\n\
-<div class="header">店铺特色: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">工程条件: 有/无，排烟量:</div><div class="header">展面宽度:</div></div></li>');
+<div class="header">店铺特色: <a href="#" onclick="$(\'#engineering_pdf\').modal(\'toggle\');" class="pull-right badge">工程条件</a></div><div class="header">排烟量: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">展面宽度:</div></div></li>');
                     }
                 }
             
@@ -429,7 +429,7 @@ function renderShopListFromDraw(sc){
 <div class="header">入驻日期: <a href="#" class="pull-right badge">VR</a>\n\
 </div>\n\
 <div class="header">面积: '+v.area+'m<sup>2</sup><a href=\'javascript: drawShopsFromList("'+v.code+'");\' class="pull-right badge">查看位置</a></div>\n\
-<div class="header">店铺特色: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">工程条件: 有/无，排烟量:</div><div class="header">展面宽度:</div></div></li>');
+<div class="header">店铺特色: <a href="#" onclick="$(\'#engineering_pdf\').modal(\'toggle\');" class="pull-right badge">工程条件</a></div><div class="header">排烟量: <a href="/v2/authentication?id='+v.code+'" class="pull-right badge">申请报价</a></div><div class="header">展面宽度:</div></div></li>');
         }
         
     });

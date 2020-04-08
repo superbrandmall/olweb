@@ -51,55 +51,55 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <span class="sr-only">Next</span>
         </a>
     </div>
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="padding: 0 0 30px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 class="page-header">商业项目</h4>
+                    <h4 class="page-header"><i class="fa fa-building-o" aria-hidden="true"></i> 商业项目</h4>
                 </div>
                 <div class="col-xs-3">
                     <a href="/v2/mall"><img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/1s.jpg"></a>
-                    <center><h3 style="margin-top: 0;"><a href="/v2/mall"><small>陆家嘴</small></a></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><a href="/v2/mall" style="color: #333;"><small>上海正大广场</small></a></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/2s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>洛阳</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>洛阳正大广场</small></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/3s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>合肥</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>合肥正大广场</small></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/4s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>徐汇</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>徐汇正大乐城</small></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/5s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>宝山</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>宝山正大广场</small></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/6s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>郑州</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>郑州正大广场</small></div></center>
                 </div>
                 <div class="col-xs-3">
                     <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/7s.jpg">
-                    <center><h3 style="margin-top: 0;"><small>无锡</small></h3></center>
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>无锡正大广场</small></div></center>
                 </div>
                 <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="http://placehold.it/200x200">
-                    <center><h3 style="margin-top: 0;"><small>北京</small></h3></center>
+                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/8s.jpg">
+                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>北京正大中心</small></div></center>
                 </div>
             </div>
             <hr>
             <div class="row">
                 <div class="col-xs-4">
-                    <a href="#" class="btn btn-default">增值服务</a>
+                    <a href="#" class="btn btn-default"><i class="fa fa-cny" aria-hidden="true"></i> 增值服务</a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="#" class="btn btn-default">增值服务</a>
+                    <a href="#" class="btn btn-default"><i class="fa fa-cny" aria-hidden="true"></i> 增值服务</a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="/v2/choose-event" class="btn btn-default">增值服务</a>
+                    <a href="/v2/choose-event" class="btn btn-default"><i class="fa fa-cny" aria-hidden="true"></i> 增值服务</a>
                 </div>
             </div>
             <hr>

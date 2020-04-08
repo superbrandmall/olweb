@@ -26,10 +26,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">查看合同</h4>
+                <h4 class="page-header"><i class="fa fa-paperclip" aria-hidden="true"></i> 查看合同</h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        你可以在线阅读并下载合同
+                        <i class="fa fa-download" aria-hidden="true"></i> 你可以在线阅读并下载合同
                         <div class="pull-right">
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -37,7 +37,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="<?php echo $file; ?>" download="<?php echo $download; ?>">点击下载合同</a>
+                                    <li><a href="<?php echo $file; ?>" download="<?php echo $download; ?>"><i class="fa fa-paper-plane" aria-hidden="true"></i>点击下载合同</a>
                                     </li>
                                     <li><a href="#" onclick="javascript: $('#stamp_video').modal('toggle');">同意并盖章</a>
                                     </li>
@@ -54,9 +54,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="col-xs-12" style="margin-bottom: 40px;">
                 <center>
-                    <a href="<?php echo $file; ?>" download="<?php echo $download; ?>" class="btn btn-success">点击下载</a>
-                    <a href="#" onclick="javascript: $('#stamp_video').modal('toggle');" class="btn btn-success">同意并盖章</a>
-                    <a href="<?php echo $pay; ?>" class="btn btn-success">同意并付款</a>
+                    <a href="<?php echo $file; ?>" download="<?php echo $download; ?>" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i> 点击下载</a>
+                    <a href="#" onclick="javascript: $('#stamp_video').modal('toggle');" class="btn btn-success"><i class="fa fa-address-book-o" aria-hidden="true"></i> 同意并盖章</a>
+                    <a href="<?php echo $pay; ?>" class="btn btn-success"><i class="fa fa-credit-card" aria-hidden="true"></i> 同意并付款</a>
                 </center>
             </div>
         </div>

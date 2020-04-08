@@ -24,7 +24,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">场地说明</h4>
+                <h4 class="page-header"><i class="fa fa-info-circle" aria-hidden="true"></i> 场地说明</h4>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -75,7 +75,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h4 class="page-header">VR看场</h4>
+                        <h4 class="page-header"><i class="fa fa-street-view" aria-hidden="true"></i> VR看场</h4>
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe class="embed-responsive-item" src="#"></iframe>
                         </div>
@@ -84,7 +84,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <h4 class="page-header">场地落位图</h4>
+                        <h4 class="page-header"><i class="fa fa-map-marker" aria-hidden="true"></i> 场地落位图</h4>
                         <div>
                             <img src="#" class="img-responsive" id="map">
                         </div>

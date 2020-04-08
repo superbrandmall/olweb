@@ -10,7 +10,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div id="page-wrapper" class="home-page">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">购物车</h4>
+                <h4 class="page-header"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 购物车</h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="radio">
@@ -185,7 +185,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         <div class="col-xs-3">
-            <a href="/v2/contract?type=ads" class="btn btn-sm btn-success" style="margin-top: 5px;">结算 <small>(1)</small></a>
+            <a href="/v2/contract?type=ads" class="btn btn-sm btn-success" style="margin-top: 5px;"><i class="fa fa-check" aria-hidden="true"></i> 结算 <small>(1)</small></a>
         </div>
     </div>
 </div>

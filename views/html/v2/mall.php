@@ -1,3 +1,8 @@
+<?php
+$scripts = $scripts. '<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>'
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/mall-admin.js"></script>';
+?>
+
 <div id="wrapper">
     <?php include ('navbar_top.php'); ?>
     <div class="col-xs-12" style="padding-left: 0; padding-right: 0; background-image: url(/views/assets/base/img/content/backgrounds/mall-intro.jpg); background-size: cover; height: 670px;">
@@ -12,44 +17,8 @@
         <img src="/views/assets/base/img/content/backgrounds/WechatIMG4.jpg" class="img-responsive" />
     </div>
 
-    <!--<div class="container">
-
-
-        <div class="row">
-            <div class="col-xs-12">
-
-                <p><strong>2018年GDP</strong><br>32,680亿元</p>
-                <p><strong>2018年常住人口</strong><br>24,152,700人</p>
-                <p><strong>2018年社会消费品零售总额</strong><br>12,669亿元</p>
-                <address>
-                    <strong>项目地址</strong><br>
-                    上海市浦东陆家嘴西路168号
-                </address>
-                <address>
-                    <strong>总建筑面积</strong><br>
-                    249,038.81m<sup>2</sup>
-                </address>
-                <address>
-                    <strong>可租赁面积</strong><br>
-                    140,599.05m<sup>2</sup>
-                </address>
-            </div>
-            <div class="col-xs-12">
-                <div class="badge badge-info">位置: 上海浦东黄浦江畔，陆家嘴地段 </div>
-                <div class="badge badge-danger">定位: 大型国际化都会购物中心 </div>
-                <div class="badge badge-info">投资方: 泰国正大集团旗下的上海帝泰发展有限公司 </div>
-                <div class="badge badge-important">建筑面积: 249,038.81m<sup>2</sup> </div>
-                <div class="badge badge-primary">楼层: 地上10层、地下3层 </div>
-                <div class="badge badge-success">年营业额: 30亿元 </div>
-                <div class="badge badge-warning">年客流量: 3000万 </div>
-                <div class="badge badge-renovation">入驻品牌: 400+ </div>
-                <div class="badge badge-light">停车位: 750个 </div>
-            </div>
-        </div>
-    </div>-->
-
     <div class="col-xs-12" style="padding-left: 0; padding-right: 0;">
-        <video loop="loop" autoplay="true" src="/upload/video/video-1.mp4" controls="true" width="100%"></video>
+        <video id="vido_one" loop="loop" autoplay="true" src="/upload/video/video-1.mp4" controls="true" width="100%" webkit-playsinline="true" playsinline="true"></video>
     </div>
     <div class="col-xs-12" style="padding-left: 0; padding-right: 0;">
         <img src="/views/assets/base/img/content/backgrounds/WechatIMG5.jpg" class="img-responsive" />
@@ -60,7 +29,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <br>
-                    <h4>楼层特色</h4>
+                    <h4><i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 楼层特色</h4>
                     <ul class="timeline">
                         <li>
                             <div class="timeline-badge">9F
@@ -313,7 +282,7 @@
                             <img src="/views/assets/base/img/content/mall/shanghai-sbm/B1F.jpg" style="float: left; width: 46%; margin-top: 10px;">
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h4 class="timeline-title"></h4>
+                                    <h4 class="timeline-title">配套服务及快时尚</h4>
                                 </div>
                                 <div class="timeline-body">
                                     <div class="btn-group">

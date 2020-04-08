@@ -10,7 +10,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div id="page-wrapper" class="home-page">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">商品清单</h4>
+                <h4 class="page-header"><i class="fa fa-list-alt" aria-hidden="true"></i> 商品清单</h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         L5 广告位
@@ -140,7 +140,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         <div class="col-xs-3">
-            <a href="#!" onclick="javascript: $('#pay_bill').modal('toggle');" class="btn btn-sm btn-warning" style="margin-top: 5px;">支付订单</a>
+            <a href="#!" onclick="javascript: $('#pay_bill').modal('toggle');" class="btn btn-sm btn-warning" style="margin: 5px 0;"><i class="fa fa-check" aria-hidden="true"></i> 支付订单</a>
         </div>
     </div>
 </div>

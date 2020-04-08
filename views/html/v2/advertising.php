@@ -80,7 +80,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div class="panel panel-default" style="max-height: 300px; overflow: auto;">
                     <div class="panel-heading">
                         <span id="floorNo"></span>
-                        <a href="advertising-shopping-cart" class="pull-right badge">查看购物车</a>
+                        <a href="advertising-shopping-cart" class="pull-right badge"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 查看购物车</a>
                     </div>
                     <div class="panel-body">
                         <ul class="chat">

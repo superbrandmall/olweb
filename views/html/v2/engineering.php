@@ -7,10 +7,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">工程条件确认</h4>
+                <h4 class="page-header"><i class="fa fa-wrench" aria-hidden="true"></i> 工程条件确认</h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        请仔细阅读并提交确认
+                        <i class="fa fa-eye" aria-hidden="true"></i> 请仔细阅读并提交确认
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">

@@ -7,13 +7,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">智能报价 <span id="round"></span></h4>
+                <h4 class="page-header"><i class="fa fa-rocket" aria-hidden="true"></i> 智能报价 <span id="round"></span></h4>
                 <div class="alert alert-warning">
                     您回价的固定租金过低，请重新回价，请在x月x日前进行回价。
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        基础信息
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> 基础信息
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -47,7 +47,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        合同信息
+                        <i class="fa fa-paperclip" aria-hidden="true"></i> 合同信息
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-tabs" role="tablist">
@@ -134,8 +134,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="col-xs-12">
                 <center>
-                    <button class="btn btn-primary" id="confirm_price"><i class="fa fa-check" aria-hidden="true"> </i> 确认合同</button>
-                    <button class="btn btn-warning" id="negotiate"><i class="fa fa-exclamation" aria-hidden="true"> </i> 商讨合同</button>
+                    <button class="btn btn-primary" id="confirm_price"><i class="fa fa-check" aria-hidden="true"> </i> 接受报价</button>
+                    <button class="btn btn-warning" id="negotiate"><i class="fa fa-exclamation" aria-hidden="true"> </i> 商讨价格</button>
                 </center><br><br>
             </div>
         </div>

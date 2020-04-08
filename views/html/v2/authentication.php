@@ -7,10 +7,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">授权认证</h4>
+                <h4 class="page-header"><i class="fa fa-check-square-o" aria-hidden="true"></i> 授权认证</h4>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        请选择您的业态
+                        <i class="fa fa-caret-square-o-down" aria-hidden="true"></i> 请选择您的业态
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
@@ -42,26 +42,26 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        请及时上传以下相关资料
+                        <i class="fa fa-upload" aria-hidden="true"></i> 请及时上传以下相关资料
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <label>名片 (.jpg/.png格式)</label>
+                            <label><i class="fa fa-id-card-o" aria-hidden="true"></i> 名片 (.jpg/.png格式)</label>
                             <input type="file">
                         </div>
                         <div class="form-group">
-                            <label>品牌Logo (.jpg/.png格式)</label>
+                            <label><i class="fa fa-registered" aria-hidden="true"></i> 品牌Logo (.jpg/.png格式)</label>
                             <input type="file">
                         </div>
                         <div class="form-group">
-                            <label>品牌介绍 (.pdf格式)</label>
+                            <label><i class="fa fa-file-text-o" aria-hidden="true"></i> 品牌介绍 (.pdf格式)</label>
                             <input type="file">
                         </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        请填写现有门店所在商场、楼层、面积、营业额
+                        <i class="fa fa-table" aria-hidden="true"></i> 请填写现有门店所在商场、楼层、面积、营业额
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -105,7 +105,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="col-xs-12" style="margin-bottom: 40px;">
                 <center>
-                    <button class="btn btn-success" id="to_authenticate">提交认证</button>
+                    <button class="btn btn-success" id="to_authenticate"><i class="fa fa-paper-plane" aria-hidden="true"></i> 提交认证</button>
                 </center>
             </div>
         </div>

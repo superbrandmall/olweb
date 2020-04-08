@@ -10,14 +10,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">场地选择报价</h4>
+                <h4 class="page-header"><i class="fa fa-calculator" aria-hidden="true"></i> 场地选择报价</h4>
                 <div class="form-group">
-                    <label>档期选择</label>
+                    <label><i class="fa fa-calendar" aria-hidden="true"></i> 档期选择</label>
                     <input type="text" id="daterange" name="daterange" class="form-control input-sm" style="background: #fff;" readonly>
                     <p>*我司对档期有最终解释权</p>
                 </div>
                 <div class="form-group">
-                    <label>增值有偿服务</label>
+                    <label><i class="fa fa-gift" aria-hidden="true"></i> 增值有偿服务</label>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" value="">垃圾清运费服务: 活动所产生的干垃圾收费标准为 40 元/桶、生活湿垃圾为 60 元/桶，标准环卫桶 240L/桶; 建筑垃圾为 1200 元/车
@@ -35,7 +35,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </div>
                     <p>*有偿服务需另行签署补充协议</p>
                 </div>
-                <label>您的报价</label>
+                <label><i class="fa fa-money" aria-hidden="true"></i> 您的报价</label>
                 <div class="form-group input-group">
                     <input type="text" class="form-control input-sm">
                     <span class="input-group-addon input-sm">元</span>
@@ -48,7 +48,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="row">
             <div class="col-xs-12">
                 <center>
-                    <button class="btn btn-success" id="quotation">提交报价</button>
+                    <button class="btn btn-success" id="quotation"><i class="fa fa-paper-plane" aria-hidden="true"></i> 提交报价</button>
                 </center>
             </div>
         </div>

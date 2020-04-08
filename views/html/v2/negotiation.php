@@ -7,13 +7,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div id="page-wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <h4 class="page-header">智能报价 - 回价中</h4>
+                <h4 class="page-header"><i class="fa fa-rocket" aria-hidden="true"></i> 智能报价 - 商讨合同</h4>
                 <div class="alert alert-danger">
                     现阶段没有合适的合作机会，期待将来的合作。
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        基础信息
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> 基础信息
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -47,7 +47,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 
                 <div id="contract_info" class="panel panel-default" style="border-color: #E7505A;">
                     <div class="panel-heading">
-                        合同信息
+                        <i class="fa fa-paperclip" aria-hidden="true"></i> 合同信息
                     </div>
                     <div class="panel-body">
                         <ul class="nav nav-tabs" role="tablist">
@@ -134,7 +134,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="col-xs-12">
                 <center>
-                    <button class="btn btn-primary" id="apply_price" onclick="javascript: $('#negotiate-apply').modal('toggle');"><i class="fa fa-check" aria-hidden="true"> </i> 提交修改合同申请</button>
+                    <button class="btn btn-primary" id="apply_price" onclick="javascript: $('#negotiate-apply').modal('toggle');"><i class="fa fa-paper-plane" aria-hidden="true"> </i> 提交修改合同申请</button>
                 </center><br><br>
             </div>
         </div>
@@ -145,7 +145,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="modal-dialog modal-md">
         <div class="modal-content c-square">
             <div class="modal-body">
-                报价发送成功！
+                <i class="fa fa-check" aria-hidden="true"></i> 报价发送成功！
             </div>
         </div>
     </div>

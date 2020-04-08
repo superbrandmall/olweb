@@ -53,81 +53,7 @@ a, a:hover, a:focus {
 
 /* Navigation */
 
-/* ------------------------------- */
 
-/* Top Right Navigation Dropdown Styles */
-
- .navbar-top-links {
-    margin-right: 0;
-}
-
- .navbar-top-links li {
-    display: inline-block;
-}
-
-.navbar-top-links li a {
-    padding: 15px;
-    min-height: 50px;
-    color: rgb(37, 44, 72);
-}
-
-.navbar-top-links .dropdown-menu li {
-    display: block;
-}
-
-.dropdown-menu .divider {
-    background-color: rgb(37, 44, 72);
-}
-
-.navbar-top-links .dropdown-menu li:last-child {
-    margin-right: 0;
-}
-
-.navbar-top-links .dropdown-menu li a {
-    padding: 3px 20px;
-    min-height: 0;
-}
-
-.navbar-top-links .dropdown-menu li a:hover {
-    background-color: transparent;
-}
-
-.navbar-top-links .dropdown-menu li a div {
-    white-space: normal;
-}
-
-.navbar-top-links .dropdown-messages,
-.navbar-top-links .dropdown-tasks,
-.navbar-top-links .dropdown-alerts {
-    width: 310px;
-    min-width: 0;
-}
-
-.navbar-top-links .dropdown-messages {
-    margin-left: 5px;
-}
-
-.navbar-top-links .dropdown-tasks {
-    margin-left: -59px;
-}
-
-.navbar-top-links .dropdown-alerts {
-    margin-left: -123px;
-}
-
-.navbar-top-links .dropdown-user {
-    right: 0;
-    left: auto;
-    background-color: rgb(120, 128, 163);
-}
-
-
-.nav .open > a, 
-.nav .open > a:hover, 
-.nav .open > a:focus {
-    background-color: rgb(120, 128, 163);
-    color: rgb(37, 44, 72) !important;
-}
 /* Sidebar Menu Styles */
 
  .sidebar-search {
@@ -257,6 +183,7 @@ a, a:hover, a:focus {
 .chat li {
     margin-bottom: 10px;
     padding-bottom: 5px;
+    padding-top: 5px;
     border-bottom: 1px dotted #B3A9A9;
 }
 
@@ -452,10 +379,8 @@ label.error {
 }
 
 .modal-header {
+    height: 34px;
     border-bottom: 0 none;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 300px;
 }
 
 .modal-title {
@@ -498,4 +423,14 @@ address {
     display: block;
     width: 70px;
     overflow: hidden;
+}
+
+.navbar-default.navbar-fixed-bottom {
+    background-color: #2b2b2b;
+    border: 0 none;
+    padding-top: 3px;
+}
+
+.navbar-default.navbar-fixed-bottom a {
+    color: #CEB688;
 }
