@@ -19,18 +19,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/pearl_atrium.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001126" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP180917001126"><img src="views/assets/base/img/content/events/pearl_atrium.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_pearl_atrium'] ?>
+                        <a href="event?id=OLSHOP180917001126"><?= $lang['events_pearl_atrium'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_pearl_atrium_location'] ?>
@@ -39,18 +32,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/bund_atrium.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001116" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP180917001116"><img src="views/assets/base/img/content/events/bund_atrium.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_bund_atrium'] ?>
+                        <a href="event?id=OLSHOP180917001116"><?= $lang['events_bund_atrium'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_bund_atrium_location'] ?>
@@ -59,18 +45,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/gd_avenue.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001150" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP180917001150"><img src="views/assets/base/img/content/events/gd_avenue.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_golden_avenue'] ?>
+                        <a href="event?id=OLSHOP180917001150"><?= $lang['events_golden_avenue'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_golden_avenue_location'] ?>
@@ -79,18 +58,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/gd_platform.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP190809000001" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP190809000001"><img src="views/assets/base/img/content/events/gd_platform.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_golden_platform'] ?>
+                        <a href="event?id=OLSHOP190809000001"><?= $lang['events_golden_platform'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_golden_platform_location'] ?>
@@ -99,18 +71,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/jade_platform.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001166" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP180917001166"><img src="views/assets/base/img/content/events/jade_platform.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_jade_platform'] ?>
+                        <a href="event?id=OLSHOP180917001166"><?= $lang['events_jade_platform'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_jade_platform_location'] ?>
@@ -119,18 +84,11 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                 <div class="cbp-item sh-sbm">
                     <div class="cbp-caption">
                         <div class="cbp-caption-defaultWrap">
-                            <img src="views/assets/base/img/content/events/ct_hall.jpg" alt="">
-                        </div>
-                        <div class="cbp-caption-activeWrap">
-                            <div class="cbp-l-caption-alignCenter">
-                                <div class="cbp-l-caption-body">
-                                    <a href="event?id=OLSHOP180917001169" class="cbp-l-caption-buttonLeft btn btn-sm c-btn-square c-btn-border-1x c-btn-white c-btn-uppercase"><?= $lang['events_detail'] ?></a>
-                                </div>
-                            </div>
+                            <a href="event?id=OLSHOP180917001169"><img src="views/assets/base/img/content/events/ct_hall.jpg" alt=""></a>
                         </div>
                     </div>
                     <div class="cbp-l-grid-projects-title">
-                        <?= $lang['events_ct_hall'] ?>
+                        <a href="event?id=OLSHOP180917001169"><?= $lang['events_ct_hall'] ?></a>
                     </div>
                     <div class="cbp-l-grid-projects-desc">
                         <?= $lang['events_ct_hall_location'] ?>

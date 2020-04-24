@@ -5,11 +5,27 @@ var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
     
-$(document).ready(function(){   
+$(document).ready(function(){
+    ContentOwlcarousel.init();
+    
     GetShopInfo();
     
-    $('#choose_event').click(function(){
-        window.location.href = '/v2/register-events?id='+getURLParameter('id');
+    $('.choose_event').click(function(){
+        window.location.href = '/v2/choose-event?id='+getURLParameter('id');
+    });
+    
+    $('#slide1').swipeSlide({
+        autoSwipe:true,//自动切换默认是
+        speed:3000,//速度默认4000
+        continuousScroll:true,//默认否
+        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad:true,//懒加载默认否
+        firstCallback : function(i,sum,me){
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback : function(i,sum,me){
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
     });
 });
 
@@ -58,20 +74,12 @@ function GetShopInfo(){
                 }
                 
                 $.each(response.data.images, function(i,v){
-                    if(v.position == 0) {
-                        $('.carousel-inner').append('<div class="item active"><img src="'+v.image+'" alt="..."></div>');
-                        $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+v.position+'" class="active"></li>');
-                    } else {
-                        $('.carousel-inner').append('<div class="item"><img src="'+v.image+'" alt="..."></div>');
-                        $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>');
-                    }
-                    
-                    
-                    
+                    $('#slide1 ul').append('<li><a href="javascript:;"><img src='+v.image+' alt=""></a></li>');
+                    $('#slide1 .dot').append('<span></span>');
                 });
                 
                 if(response.data.vr !== null) {
-                    $('.embed-responsive iframe').attr('src','/'+response.data.vr);
+                    $('#vr').attr('src','/'+response.data.vr);
                 } 
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -218,3 +226,35 @@ function drawShops(){
         }
     });
 }
+
+var ContentOwlcarousel = function() {
+    
+    var _initInstances = function() {
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 15,
+            dots: false,
+            responsive:{
+                0:{
+                    items:1.5
+                },
+                600:{
+                    items:3.5
+                },
+                1000:{
+                    items:5.5
+                }
+            }
+        })
+    };
+
+    return {
+
+         //main function to initiate the module
+        init: function() {
+            
+            _initInstances();
+        }
+
+    };
+}();

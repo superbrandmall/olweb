@@ -1,8 +1,9 @@
 <?php
+
 $controller = null;
 $getTarget = isset($_GET['p']) ? $_GET['p'] : null;
-    
-if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家嘴内部汇报
+
+if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆家嘴内部汇报
     $target = array(
         'ljz-admin/home' => array(
             'url' => 'default.php'
@@ -17,20 +18,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'logout.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','summary.php');
+    $session_required = array('login.php', 'default.php', 'summary.php');
     if (in_array($page, $session_required)) {
         include_once 'models/ljz-admin/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'ly-admin')) !== false) { // 洛阳内部汇报
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'ly-admin')) !== false) { // 洛阳内部汇报
     $target = array(
         'ly-admin/home' => array(
             'url' => 'default.php'
@@ -45,20 +46,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'logout.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','summary.php');
+    $session_required = array('login.php', 'default.php', 'summary.php');
     if (in_array($page, $session_required)) {
         include_once 'models/ly-admin/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'bs-admin')) !== false) { // 宝山内部汇报
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'bs-admin')) !== false) { // 宝山内部汇报
     $target = array(
         'bs-admin/home' => array(
             'url' => 'default.php'
@@ -73,20 +74,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'logout.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','summary.php');
+    $session_required = array('login.php', 'default.php', 'summary.php');
     if (in_array($page, $session_required)) {
         include_once 'models/bs-admin/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'hf-admin')) !== false) { // 合肥内部汇报
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'hf-admin')) !== false) { // 合肥内部汇报
     $target = array(
         'hf-admin/home' => array(
             'url' => 'default.php'
@@ -101,20 +102,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'logout.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','summary.php');
+    $session_required = array('login.php', 'default.php', 'summary.php');
     if (in_array($page, $session_required)) {
         include_once 'models/hf-admin/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'v2')) !== false) { // Ol 2.0
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'v2')) !== false) { // Ol 2.0
     $target = array(
         'v2/login' => array(
             'url' => 'login.php'
@@ -137,14 +138,14 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'v2/register-events' => array(
             'url' => 'register_events.php'
         ),
+        'v2/events' => array(
+            'url' => 'events.php'
+        ),
         'v2/event' => array(
             'url' => 'event.php'
         ),
         'v2/choose-event' => array(
             'url' => 'choose_event.php'
-        ),
-        'v2/confirm-event' => array(
-            'url' => 'confirm_event.php'
         ),
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
@@ -155,20 +156,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'v2/floor-plan' => array(
             'url' => 'floor_plan.php'
         ),
+        'v2/ads' => array(
+            'url' => 'ads.php'
+        ),
+        'v2/ad' => array(
+            'url' => 'ad.php'
+        ),
         'v2/advertising' => array(
             'url' => 'advertising.php'
         ),
         'v2/advertising-shopping-cart' => array(
             'url' => 'advertising_shopping_cart.php'
         ),
-        'v2/confirm-ads' => array(
-            'url' => 'confirm_ads.php'
-        ),
         'v2/price' => array(
             'url' => 'price.php'
-        ),
-        'v2/confirm-leasing' => array(
-            'url' => 'confirm_leasing.php'
         ),
         'v2/negotiation' => array(
             'url' => 'negotiation.php'
@@ -176,30 +177,47 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
         'v2/all-orders' => array(
             'url' => 'all_orders.php'
         ),
+        'v2/order-to-be-stamped' => array(
+            'url' => 'order_to_be_stamped.php'
+        ),
+        'v2/stamping' => array(
+            'url' => 'stamping.php'
+        ),
+        'v2/to-pay' => array(
+            'url' => 'to_pay.php'
+        ),
+        'v2/bill' => array(
+            'url' => 'bill.php'
+        ),
         'v2/engineering' => array(
             'url' => 'engineering.php'
+        ),
+        'v2/improve-info' => array(
+            'url' => 'improve_info.php'
         ),
         'v2/contract' => array(
             'url' => 'contract.php'
         ),
-        'v2/logout' => array(
-            'url' => 'logout.php'
+        'v2/contract-view' => array(
+            'url' => 'contract_view.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array();
+    $session_required = array('login.php', 'info.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php', 'authentication.php',
+        'floor_plan.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
+        'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'contract.php','contract_view.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'brands-admin')) !== false) { // 品牌库
     $target = array(
         'brands-admin/home' => array(
             'url' => 'default.php'
@@ -238,20 +256,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'ai-test.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
         $page = 'default.php';
     }
 
-    $session_required = array('login.php','default.php','brand.php','create-brand.php','create-brand-contact.php','edit-brand.php','levels.php','hd-brands.php','log.php');
+    $session_required = array('login.php', 'default.php', 'brand.php', 'create-brand.php', 'create-brand-contact.php', 'edit-brand.php', 'levels.php', 'hd-brands.php', 'log.php');
     if (in_array($page, $session_required)) {
         include_once 'models/brands-admin/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
-} else if (isset($_GET['p']) && (strpos($_GET['p'],'portal')) !== false) { // 内部网站导航
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'portal')) !== false) { // 内部网站导航
     $target = array(
         'portal/1' => array(
             'url' => 'default.php'
@@ -260,7 +278,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'default2.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
@@ -268,7 +286,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
     }
 } else {
     include ('MallCode.php');
-    
+
     $target = array(
         'home' => array(
             'url' => 'default.php'
@@ -334,21 +352,21 @@ if (isset($_GET['p']) && (strpos($_GET['p'],'ljz-admin')) !== false) { // 陆家
             'url' => 'my-cart.php'
         )
     );
-    
+
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
-        if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com'){
+        if ($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com') {
             $page = 'co-work.php';
         } else {
             $page = 'default.php';
         }
     }
-    
+
     $session_required = array('login.php', 'my-cart.php', 'contact.php');
     if (in_array($page, $session_required)) {
         include_once 'models/user/Session.class.php';
         $session = new Session();
-        $session ->_session();
+        $session->_session();
     }
 }

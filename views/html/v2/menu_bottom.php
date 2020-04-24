@@ -1,14 +1,24 @@
-<div class="main_nav_bottom">
-    <nav class="navbar navbar-default navbar-fixed-bottom">
-        <div class="container" align="center">
-            <ul class="nav nav-tabs nav-tabs-justified">
-                <div class="row" align="center">
-                    <div class="col-xs-3" align="center"><li><a href="/v2/default"><i class="fa fa-home" aria-hidden="true"></i><br>首页</a></li></div>
-                    <div class="col-xs-3" align="center"><li><a href="https://www.fengting.io/play.html?projectId=5e673e62ceb1e90b9a5343a6&from=groupmessage&isappinstalled=0"><i class="fa fa-street-view" aria-hidden="true"></i><br>VR看场</a></li></div>
-                    <div class="col-xs-3" align="center"><li><a href="/v2/my-msg"><i class="fa fa-commenting-o" aria-hidden="true"></i><br>消息</a></li></div>
-                    <div class="col-xs-3" align="center"><li><a href="/v2/info"><i class="fa fa-user-o" aria-hidden="true"></i><br>我的</a></li></div>
-                </div>
-            </ul>
+<div class="weui-tabbar" style="position: fixed;left: 0;right: 0;bottom: 0;">
+    <a href="/v2/default" class="weui-tabbar__item">
+        <i class="weui-tabbar__icon fa fa-home" aria-hidden="true"></i>
+        <p class="weui-tabbar__label">业务选择</p>
+    </a>
+    <a href="https://720yun.com/t/d0vksldepqe?scene_id=43986975" class="weui-tabbar__item">
+        <i class="weui-tabbar__icon fa fa-street-view" aria-hidden="true"></i>
+        <p class="weui-tabbar__label">VR看场</p>
+    </a>
+    <a href="/v2/my-msg" class="weui-tabbar__item">
+        <div style="display: inline-block; position: relative;">
+            <i class="weui-tabbar__icon fa fa-commenting" aria-hidden="true"></i>
+            <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">1</span>
         </div>
-    </nav>
+        <p class="weui-tabbar__label">通知消息</p>
+    </a>
+    <a href="/v2/info" class="weui-tabbar__item">
+        <div style="display: inline-block; position: relative;">
+            <i class="weui-tabbar__icon fa fa-user" aria-hidden="true"></i>
+            <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;"></span>
+        </div>
+        <p class="weui-tabbar__label">个人主页</p>
+    </a>
 </div>

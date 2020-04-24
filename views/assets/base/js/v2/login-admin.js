@@ -1,105 +1,85 @@
 $(document).ready(function(){
-    ///////////////////// Validate login form /////////////////////////
+    $('#login_verify').val('');
+    
     $("#login_form").validate({
         rules: {
             login_username: {
                 required: true,
-                xor: [{
-                    digits: true,
-                    rangelength: [11,11]
-                },{
-                    email: true
-                }]
+                digits: true,
+                rangelength: [11,11]
             },
-            login_password: {
+            login_verify: {
                 required: true,
-                minlength: 8
+                rangelength: [4,4],
+                digits: true
             }
         },
         messages: {
             login_username: {
-                required: "请输入手机号码或者邮箱地址",
-                xor: "请输入正确的手机号码或者邮箱地址"
+                required: "请输入手机号码",
+                digits: "请输入正确的手机号码",
+                rangelength: "请输入正确的手机号码"
             },
-            login_password: {
-                required: "请输入密码",
-                minlength: "密码须为{0}位及{0}位以上字母和数字"
+            login_verify: {
+                required: "验证码",
+                rangelength: "验证码须为{0}位数字",
+                digits: "验证码须为{0}位数字"
             }
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
-        submitHandler: function() {            
-            var map = {
-                username: $('#login_username').val(),
-                password: $('#login_password').val()
-            };
+        submitHandler: function() {
+            var key = $.api.mobileVC;           
+            var userName = $('#login_username').val();
+
             $.ajax({
-                url: $.api.baseNew+"/onlineleasing-customer/api/login/login",
-                type: "POST",
-                data: map,
+                url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+$.api.mobileVC,
+                type: "GET",
                 async: false,
                 beforeSend: function(request) {
-                    $('#loader').show();
-                    request.setRequestHeader("Lang", 1);
+                    $('#login').attr('disabled','disabled');
+                    request.setRequestHeader("Lang", $.cookie('lang'));
                     request.setRequestHeader("Source", "onlineleasing");
                 },
-                complete: function(){},
+                complete: function(){
+                },
                 success: function (response, status, xhr) {
-                    if(response.code === 'C0') {
+                   if(response.code === 'C0') {
                         if(xhr.getResponseHeader("Login") !== null){
                             $.cookie('login', xhr.getResponseHeader("Login"));
                         }
                         if(xhr.getResponseHeader("Authorization") !== null){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
-                        
-                        var ucode = response.data.code;
+                        $.cookie('uid', userName);
                         
                         $.ajax({
-                            url: $.api.baseNew+"/common-authorization/api/passport/check/exist/userrole?userCode="+ucode+"&role=admin",
-                            type: "GET",
-                            async: false,
-                            beforeSend: function(request) {
-                                request.setRequestHeader("Lang", $.cookie('lang'));
-                                request.setRequestHeader("Source", "onlineleasing");
+                            type: 'POST',
+                            url: '/controllers/api/2.0/ApiLoginSession.php',
+                            data: {
+                                uid: userName
                             },
-                            success: function (response, status, xhr) {
-                                if(response.code === 'C0') {
-                                    if(xhr.getResponseHeader("Login") !== null){
-                                        $.cookie('login', xhr.getResponseHeader("Login"));
+                            dataType: "json",
+                            beforeSend: function(request) {
+                            },
+                            complete: function(){
+                                $('#login').attr('disabled','disabled');
+                                if(getURLParameter('type')){
+                                    if(getURLParameter('type') == 'leasing'){
+                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
+                                    } else if(getURLParameter('type') == 'ads'){
+                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
                                     }
-                                    if(xhr.getResponseHeader("Authorization") !== null){
-                                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                                    }
-                                    $('#loader').hide();
-                                    $.cookie('uid', ucode);
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: '/controllers/api/1.0/ApiAdminLoginSession.php',
-                                        data: {
-                                            user_code: ucode
-                                        },
-                                        dataType: "json",
-                                        beforeSend: function(request) {
-                                            $('#loader').show();
-                                            request.setRequestHeader("Lang", $.cookie('lang'));
-                                            request.setRequestHeader("Source", "onlineleasing");
-                                        },
-                                        complete: function(){
-                                            $('#loader').hide();
-                                            window.location.href = "home";
-                                        }
-                                    });
+                                } else if(getURLParameter('id') != ''){
+                                    window.location.href = '/v2/register-events?id='+getURLParameter('id');
                                 } else {
-                                    $('#loader').hide();
-                                    $('.login-failed').show().delay(10000).hide(0);
-                                }                               
+                                    window.location.href = '/v2/register';
+                                }
                             }
-                        }); 
+                        });
                     } else {
-                        $('#loader').hide();
-                        $('.login-failed').show().delay(10000).hide(0);
+                        interpretBusinessCode(response.customerMessage);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -109,34 +89,50 @@ $(document).ready(function(){
             
         }
     });
+    
+    
 });
 
-$.validator.addMethod('xor', function(val, el, param) {
-    var valid = false;
+var countdownLogin=60;
+
+function VeryficationCodeLogin() {
+    var obj = $("#login_verify_link");
+    var userName = $('#login_username').val();
     
-    //loop through sets of nested rules
-    for(var i=0;i<param.length;i++){
-        var setResult = true;
-        
-        //loop through nested rules in the set
-        for(var x in param[i]){
-            var result = $.validator.methods[x].call(this, val, el, param[i][x]);
-            
-            // If the input breaks one rule in a set we stop and move
-            // to the next set...
-            if(!result){
-                setResult = false;
-                break;
+    if(userName != '') {
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/sms/sendIdentifyCode?mobileNo="+userName,
+            type: "GET",
+            async: false,
+            beforeSend: function(request) {
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $.api.mobileVC = response.data.identifyCode;
+
+                setTimeLogin(obj);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
             }
-        }
-    
-        // If the value passes for one set we stop with a true result
-        if(setResult == true) {
-            valid = true;
-            break;
-        }
+        });
     }
-    
-    // Return the validation result
-    return this.optional(el) || valid;
-}, "The value entered is invalid");
+}
+
+function setTimeLogin(obj) {
+    if (countdownLogin == 0) { 
+        obj.attr('href','javascript: VeryficationCodeLogin()');
+        obj.html("获取验证码");
+        countdownLogin = 60; 
+        return;
+    } else { 
+        obj.attr('href','javascript: void(0)');
+        obj.html("重新获取(" + countdownLogin + ")s");
+        countdownLogin--; 
+    } 
+setTimeout(function() { 
+    setTimeLogin(obj); }
+    ,1000); 
+}

@@ -1,65 +1,103 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/register-admin.js"></script>';
+    $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/register-admin.js"></script>';
 ?>
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-xs-12">
-                <h4 class="page-header"><i class="fa fa-user-plus" aria-hidden="true"></i> 注册
-                </h4>
-                <form role="form">
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="姓名">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                        <input type="text" class="form-control" placeholder="手机">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" class="form-control" placeholder="邮箱">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="密码">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                        <input type="text" class="form-control" placeholder="公司">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-briefcase"></i></span>
-                        <input type="text" class="form-control" placeholder="职位">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon"><i class="fa fa-registered"></i></span>
-                        <input type="text" class="form-control" placeholder="品牌">
-                    </div>
-                    <p class="text-right"><a href="#"><i class="fa fa-plus"></i> 增加更多品牌</a></p>
-                    <div class="form-group">
-                        <label><i class="fa fa-hand-o-right" aria-hidden="true"></i> 运营模式</label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked="">直营
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">代理
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">加盟
-                        </label>
-                    </div>
-                </form>
+<?php include ('navbar_top.php'); ?>
+
+<form id="register_form">
+    <div class="page__bd" style="background-color: #EDEDED;">
+        <div class="weui-form">
+            <div class="weui-form__text-area">
+                <h2 class="weui-form__title">完善信息</h2>
             </div>
-            <div class="col-xs-12">
-                <center>
-                    <button class="btn btn-success" id="register"><i class="fa fa-paper-plane" aria-hidden="true"></i> 提交注册信息</button>
-                </center>
+            <div class="weui-form__control-area">
+                <div id="brands" class="weui-cells__group weui-cells__group_form" style="margin-top: 24px;">
+                    <div class="weui-cells__title">
+                        品牌信息
+                        <a class="add weui-link" href="#" style="float: right;">增加更多品牌</a>
+                    </div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">品牌名*</label></div>
+                            <div class="weui-cell__bd">
+                                <input name="brand_1" id="brand_1" required class="brand weui-input" placeholder="填写品牌名"/>
+                                <div id="errorcontainer-brand_1" class="errorDiv"></div>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">业态*</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select category" id="category_1" name="category_1" required>
+                                    <option value="">请选择</option>
+                                </select>
+                                <div id="errorcontainer-category_1" class="errorDiv"></div>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+                            <div class="weui-cell__hd">
+                                <label for="" class="weui-label">运营模式*</label>
+                            </div>
+                            <div class="weui-cell__bd">
+                                <select class="weui-select operation" id="operation_1" name="operation_1" required>
+                                    <option value="">请选择</option>
+                                    <option value="0">直营</option>
+                                    <option value="1">代理</option>
+                                    <option value="2">加盟</option>
+                                </select>
+                                <div id="errorcontainer-operation_1" class="errorDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="weui-form">
+            <div class="weui-form__control-area">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells__title">个人信息</div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">姓名*</label></div>
+                            <div class="weui-cell__bd">
+                                <input name="contact_name_1" id="contact_name_1" required class="weui-input" placeholder="填写姓名"/>
+                                <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">公司名</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="company_name" class="weui-input" placeholder="填写公司名"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">邮箱</label></div>
+                            <div class="weui-cell__bd">
+                                <input type="email" id="email" class="weui-input" placeholder="填写邮箱"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">职位</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="job_title" class="weui-input" placeholder="填写职位"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="weui-btn-area">
+        <button type="submit" class="weui-btn weui-btn_primary" id="register">提交信息</button>
+    </div>
+</form>
+<br>
+<br>
+<br>
+<br>
+
+<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

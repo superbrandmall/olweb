@@ -4,17 +4,29 @@ $(document).ready(function(){
         e = e || window.event;  
         if (e.wheelDelta) {               
             if (e.wheelDelta > 0) {  
-                eventForm.css('opacity',0);  
+                eventForm.css({
+                    'height':0,
+                    'padding': 0 
+                });  
             }  
             if (e.wheelDelta < 0) {  
-                eventForm.css('opacity',1);
+                eventForm.css({
+                    'height':'auto',
+                    'padding': '30px 0 18px'
+                });
             }  
         } else if (e.detail) {  
             if (e.detail> 0) {  
-                eventForm.css('opacity',0);
+                eventForm.css({
+                    'height':0,
+                    'padding': 0 
+                });
             }  
             if (e.detail< 0) {
-                eventForm.css('opacity',1); 
+                eventForm.css({
+                    'height':'auto',
+                    'padding': '30px 0 18px'
+                });
             }  
         }  
     };

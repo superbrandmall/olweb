@@ -1,36 +1,44 @@
 <?php
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/login-admin.js"></script>';
 ?>
+<?php include ('navbar_top.php'); ?>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div style="max-width: 320px; margin: 0 auto;">
-                <div class="login-panel panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">欢迎来到 Online Leasing 2.0</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form id="login_form">
-                            <fieldset>
-                                <div class="alert alert-warning login-failed" role="alert">
-                                    <strong>登录失败!</strong> 账号输入有误。
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="手机或邮箱地址" name="login_username" id="login_username" type="text" autofocus required>
-                                    <div id="errorcontainer-login_username" class="errorDiv"></div>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="密码" id="login_password" name="login_password" type="password" required>
-                                    <div id="errorcontainer-login_password" class="errorDiv"></div>
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-success btn-block">登录</button>
-                            </fieldset>
-                        </form>
+<form id="login_form">
+    <div class="page__bd" style="background-color: #EDEDED;">
+        <div class="weui-form">
+            <div class="weui-form__text-area">
+                <h2 class="weui-form__title">登录</h2>
+            </div>
+            <div class="weui-form__control-area">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">手机号</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="number" pattern="[0-9]*" name="login_username" id="login_username" required placeholder="请输入手机号" value=""/>
+                                <div id="errorcontainer-login_username" class="errorDiv"></div>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active weui-cell_vcode">
+                            <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+                            <div class="weui-cell__bd">
+                                <input autofocus class="weui-input" type="text" pattern="[0-9]*" id="login_verify" name="login_verify" required placeholder="输入验证码" maxlength="6"/>
+                                <div id="errorcontainer-login_verify" class="errorDiv"></div>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <button id="login_verify_link" onClick="javascript: VeryficationCodeLogin();" class="weui-btn weui-btn_default weui-vcode-btn">获取验证码</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="weui-btn-area">
+        <button type="submit" class="weui-btn weui-btn_primary" id="login">登录</button>
+    </div>
+</form>
+
+<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

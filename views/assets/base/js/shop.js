@@ -168,7 +168,7 @@ function GetShopInfo(){
                 $('#b_name').text(response.data.brandName || '-');
                 $('#area').text(numberWithCommas(response.data.area)+'m²' || '-');
 
-                if(response.data.shopState === 1) { // 空铺
+                if(response.data.shopState === 1 || response.data.shopState === 3) { // 空铺
                     $('#moving_date').text(IncrMonth(date));
                 } else { // 非空铺
                     var contractExpire = new Date();
