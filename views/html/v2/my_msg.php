@@ -1,4 +1,9 @@
+<?php
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/my-msg-admin.js"></script>';
+?>
+
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 叮咚！请查收您的消息。为了让您不错过任何重要信息，我们也已经通过手机短信把消息推送给您啦！</div>
 
 <div class="page__bd">
     <div class="weui-tab">

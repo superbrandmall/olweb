@@ -82,6 +82,7 @@ function GetShopPriceInfo(){
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -90,6 +91,7 @@ function GetShopPriceInfo(){
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
@@ -199,12 +201,14 @@ function getShopsMoreInfo() {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code == '200') {
+                hideLoading();
                 sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data.shop_info) );
             }
         }
@@ -346,6 +350,7 @@ function SaveOrder(){
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -354,6 +359,7 @@ function SaveOrder(){
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }

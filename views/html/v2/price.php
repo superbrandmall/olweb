@@ -4,6 +4,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-heartbeat" aria-hidden="true"></i> 尊敬的阁下，人工智能已为您量身定做了一份报价，请查收！对了，您可以"滑动"选择"合同年限"来告诉我们您对租赁时长需求哦！</div>
+
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-form">
         <div class="weui-form__text-area">

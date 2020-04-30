@@ -4,6 +4,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 谢谢您的青睐！在给您报价前，我们还需要核实一下您公司的信息，所以不好意思还要耽误您一会儿时间。</div>
+
 <form id="authentication_form">
     <div class="page__bd" style="background-color: #EDEDED;">
         <div class="weui-form">
@@ -15,17 +17,15 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells__title" style="margin-top: 24px;">公司认证必填</div>
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">公司名*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-company_name"><label class="weui-label">公司名*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="company_name"  id="company_name" required class="weui-input" placeholder="填写公司名"/>
-                                <div id="errorcontainer-company_name" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">统一社会信用代码*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-uscc"><label class="weui-label">统一社会信用代码*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="uscc" id="uscc" required class="weui-input" placeholder="填写统一社会信用代码"/>
-                                <div id="errorcontainer-uscc" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell  weui-cell_uploader">

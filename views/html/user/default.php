@@ -36,10 +36,22 @@
                     <h3 class="c-center c-font-bold" style="margin: 0 0 20px;"><?= $lang['mall_opening_soon'] ?></h3>
                 </div>
 
-                <div class="owl-carousel owl-theme c-theme owl-bordered1">
+                <!--<div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190613000007"><img src="views/assets/base/img/content/client-logos/ms_sue.jpg" alt=""/></a>
-                        MS SUE
+                        <a href="shop?id=OLSHOP191026000001"><img src="views/assets/base/img/content/client-logos/icicle.jpg" alt=""/></a>
+                        之禾 ICICLE
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200108000002"><img src="views/assets/base/img/content/client-logos/leicun.jpg" alt=""/></a>
+                        罍村
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000540"><img src="views/assets/base/img/content/client-logos/osim.jpg" alt=""/></a>
+                        OSIM
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000307"><img src="views/assets/base/img/content/client-logos/koradior.jpg" alt=""/></a>
+                        Koradior
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000838"><img src="views/assets/base/img/content/client-logos/purethai.jpg" alt=""/></a>
@@ -82,14 +94,61 @@
                         WAGAS
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190924000001"><img src="views/assets/base/img/content/client-logos/wala.jpg" alt=""/></a>
-                        WALA 蛙辣火锅
+                        <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
+                        NIKE
+                    </div>
+                </div>-->
+                
+                <div class="owl-carousel owl-theme c-theme owl-bordered1">
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191026000001"><img src="views/assets/base/img/content/client-logos/icicle.jpg" alt=""/></a>
+                        之禾 ICICLE
+                        <a href="shop?id=OLSHOP200108000002"><img src="views/assets/base/img/content/client-logos/leicun.jpg" alt=""/></a>
+                        罍村
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000540"><img src="views/assets/base/img/content/client-logos/osim.jpg" alt=""/></a>
+                        OSIM
+                        <a href="shop?id=OLSHOP180917000307"><img src="views/assets/base/img/content/client-logos/koradior.jpg" alt=""/></a>
+                        Koradior
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000838"><img src="views/assets/base/img/content/client-logos/purethai.jpg" alt=""/></a>
+                        纯太
+                        <a href="shop?id=OLSHOP180917000557"><img src="views/assets/base/img/content/client-logos/SKECHERS.jpg" alt=""/></a>
+                        SKECHERS
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191022000066"><img src="views/assets/base/img/content/client-logos/vans.jpg" alt=""/></a>
+                        VANS
+                        <a href="shop?id=OLSHOP200117000001"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
+                        薛蟠烤串
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200101000001"><img src="views/assets/base/img/content/client-logos/ipromise.jpg" alt=""/></a>
+                        IPromise
+                        <a href="shop?id=OLSHOP191227000004"><img src="views/assets/base/img/content/client-logos/dig-potency.jpg" alt=""/></a>
+                        Dig Potency
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191019000002"><img src="views/assets/base/img/content/client-logos/la-zephire.jpg" alt=""/></a>
+                        LA ZEPHIRE
+                        <a href="shop?id=OLSHOP191130000001"><img src="views/assets/base/img/content/client-logos/skechers-kids.jpg" alt=""/></a>
+                        SKECHERS Kids
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000733"><img src="views/assets/base/img/content/client-logos/xibuniuda.jpg" alt=""/></a>
+                        西步牛大
+                        <a href="shop?id=OLSHOP190709000001"><img src="views/assets/base/img/content/client-logos/lokal.jpg" alt=""/></a>
+                        WAGAS
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
                         NIKE
                     </div>
                 </div>
+                
+                
             </div>
         </div>
     </div>

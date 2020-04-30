@@ -14,8 +14,10 @@ $(document).ready(function(){
             },
             dataType: "json",
             beforeSend: function(request) {
+                showLoading();
             },
             complete: function(){
+                hideLoading();
                 $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/pdf/leasing_contract.pdf');
             }
         });

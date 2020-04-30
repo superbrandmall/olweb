@@ -1,10 +1,22 @@
 $(document).ready(function(){
-    ContentOwlcarousel.init();
+    const dp = new DPlayer({
+        container: document.getElementById('dplayer'),
+        screenshot: true,
+        autoplay:true,
+        video: {
+            url: '/upload/video/video-1.mp4',
+            pic: '/views/assets/base/img/content/backgrounds/video-1.jpg',
+            thumbnails: '/views/assets/base/img/content/backgrounds/video-1.jpg'
+        }
+    });
     
-    document.addEventListener("WeixinJSBridgeReady",function() {
-	document.getElementById('vido_one').play(); 
-    }, false);
+    ContentOwlcarousel.init();
 });
+
+function showFloorVR(id){
+    $("#floor_vr iframe").attr('src',"/upload/vr/100001/floors/"+id+"/tour.html");
+    $("#floor_vr").show();
+}
 
 var ContentOwlcarousel = function() {
     

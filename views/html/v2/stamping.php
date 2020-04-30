@@ -4,6 +4,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 太棒了！尊敬的阁下，还差最后一步，请点击"用印完成"来进入支付环节吧！</div>
 
 <div class="page__bd">
     <div class="weui-tab">
@@ -44,7 +45,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 
                 <ul class="weui-media-box__info" style="float: right;">
                     <li class="weui-media-box__info__meta"><a href="javascript:;" id="stamping_completed" style="color: #fa5151;">用印完成</a></li>
-                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href="/v2/contract-view">查看合同</a></li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view">查看合同</a></li>
                 </ul>
             </div>
         </div>

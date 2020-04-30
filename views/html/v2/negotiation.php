@@ -4,6 +4,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-sad" aria-hidden="true"></i> 抱歉让您失望了！但是希望您能告诉我们，这份报价有哪些地方可以改进呢？您的宝贵意见会帮助我们成长哦！</div>
+
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-form">
         <div class="weui-form__text-area">

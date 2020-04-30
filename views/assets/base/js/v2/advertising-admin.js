@@ -138,12 +138,14 @@ function getAdFloorInfo(fl) {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("ads", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
                     if(v.subType == 'ad' && v.floor == fl && v.coords != null && v.coords != '' && v.state != 0){

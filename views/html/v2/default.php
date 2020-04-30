@@ -4,6 +4,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 您好！欢迎来到正大商业地产智能招商平台，接下去我会陪您一起挑选您心仪的铺位、场地和广告位哦！</div>
 
 <div class="slide" id="slide1">
     <ul>
@@ -40,17 +41,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div class="weui-navbar">
-    <div class="weui-navbar__item weui-bar__item_on" onclick="window.location='/v2/floor-plan?f=8&type=leasing'">
-        <i class="fa fa-paper-plane" aria-hidden="true"></i><br>
+<div class="weui-navbar" id="home_shortcuts">
+    <div class="weui-navbar__item" onclick="window.location='/v2/floor-plan?f=8&type=leasing'" style="color: #333;">
+        <i class="fa fa-paper-plane" aria-hidden="true" style="color: #10aeff;"></i><br>
         租铺位
     </div>
-    <div class="weui-navbar__item weui-bar__item_on" onclick="window.location='/v2/events'">
-        <i class="fa fa-calendar" aria-hidden="true"></i><br>
+    <div class="weui-navbar__item" onclick="window.location='/v2/events'" style="color: #333;">
+        <i class="fa fa-calendar" aria-hidden="true" style="color: #10aeff;"></i><br>
         办活动
     </div>
-    <div class="weui-navbar__item weui-bar__item_on" onclick="window.location='/v2/advertising?f=8&type=ads'">
-        <i class="fa fa-bolt" aria-hidden="true"></i><br>
+    <div class="weui-navbar__item" onclick="window.location='/v2/advertising?f=8&type=ads'" style="color: #333;">
+        <i class="fa fa-bolt" aria-hidden="true" style="color: #10aeff;"></i><br>
         做广告
     </div>
 </div>
@@ -73,6 +74,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <img src="/views/assets/base/img/content/mall/3s.jpg" alt="">
         </div>
         <p class="weui-grid__label">合肥正大广场</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/9s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">乐清正大广场</p>
     </a>
     <a href="javascript:" class="weui-grid">
         <div class="weui-grid__icon">

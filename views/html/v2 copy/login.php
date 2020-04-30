@@ -1,52 +1,42 @@
 <?php
-if (explode('?', $_SERVER['REQUEST_URI'])[1] != null) {
-    $param = '?'.explode('?', $_SERVER['REQUEST_URI'])[1];
-} else {
-    $param = '';
-}
-
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/login-admin.js"></script>';
 ?>
+<?php include ('navbar_top.php'); ?>
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-xs-6" style="text-align: center;padding: 20px 0; border-bottom: solid 2px #eee; background-color: #fff;">
-                <a href="/v2/register<?= $param ?>" style="color: #333;">注册</a>
+<form id="login_form">
+    <div class="page__bd" style="background-color: #EDEDED;">
+        <div class="weui-form">
+            <div class="weui-form__text-area">
+                <h2 class="weui-form__title">登录</h2>
             </div>
-            <div class="col-xs-6" style="text-align: center;padding: 20px 0; border-bottom: solid 2px #CEB688; background-color: #fff;">
-                <span>登录</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <form role="form" style="margin-top: 20px;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            登录信息
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group input-group">
-                                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                <input type="tel" class="form-control" placeholder="请输入您的手机号">
-                                <span class="input-group-addon" id="send_code">发送验证码</span>
+            <div class="weui-form__control-area">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-login_username"><label class="weui-label">手机号</label></div>
+                            <div class="weui-cell__bd">
+                                <input class="weui-input" type="number" pattern="[0-9]*" name="login_username" id="login_username" required placeholder="请输入手机号" value=""/>
                             </div>
-                            <div class="form-group input-group" style="margin-bottom: 0;">
-                                <span class="input-group-addon" style="padding: 6px 11px;"><i class="fa fa-key"></i></span>
-                                <input type="password" class="form-control" placeholder="请输入您的验证码">
+                        </div>
+                        <div class="weui-cell weui-cell_active weui-cell_vcode">
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-login_verify"><label class="weui-label">验证码</label></div>
+                            <div class="weui-cell__bd">
+                                <input autofocus class="weui-input" type="text" pattern="[0-9]*" id="login_verify" name="login_verify" required placeholder="输入验证码" maxlength="6"/>
+                            </div>
+                            <div class="weui-cell__ft">
+                                <button id="login_verify_link" onClick="javascript: VeryficationCodeLogin();" class="weui-btn weui-btn_default weui-vcode-btn">获取验证码</button>
                             </div>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-xs-12">
-                <center>
-                    <button class="btn btn-success" id="login"><i class="fa fa-paper-plane" aria-hidden="true"></i> 登录</button>
-                </center>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <div class="weui-btn-area">
+        <button type="submit" class="weui-btn weui-btn_primary" id="login">登录</button>
+    </div>
+</form>
+
+<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

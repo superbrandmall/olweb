@@ -3,8 +3,11 @@
         <i class="weui-tabbar__icon fa fa-home" aria-hidden="true"></i>
         <p class="weui-tabbar__label">业务选择</p>
     </a>
-    <a href="https://720yun.com/t/d0vksldepqe?scene_id=43986975" class="weui-tabbar__item">
-        <i class="weui-tabbar__icon fa fa-street-view" aria-hidden="true"></i>
+    <a href="/v2/vr" class="weui-tabbar__item">
+        <div style="display: inline-block; position: relative;">
+            <i class="weui-tabbar__icon fa fa-street-view" aria-hidden="true"></i>
+            <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">新</span>
+        </div>
         <p class="weui-tabbar__label">VR看场</p>
     </a>
     <a href="/v2/my-msg" class="weui-tabbar__item">

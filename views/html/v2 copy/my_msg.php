@@ -1,50 +1,63 @@
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-6" style="text-align: center;padding: 20px 0; border-bottom: solid 2px #CEB688; background-color: #fff;">
-                <span>我的消息</span>
+<?php
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/my-msg-admin.js"></script>';
+?>
+
+<?php include ('navbar_top.php'); ?>
+
+<div class="page__bd">
+    <div class="weui-tab">
+        <div class="weui-navbar">
+            <div class="weui-navbar__item weui-bar__item_on" style="background-color:  #CEB688; color: #fff;">
+                我的消息
             </div>
-            <div class="col-xs-6" style="text-align: center;padding: 20px 0; border-bottom: solid 2px #eee; background-color: #fff;">
-                <span>系统消息</span>
+            <div class="weui-navbar__item">
+                系统消息
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="chat">
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <div class="pull-left">
-                            您已下单【陆家嘴正大广场】商铺单元【06FL035】,请您于2020-04-06 09:10:02完成合同盖章及付款。
-                        </div>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <div class="text-muted small" style="clear: both;">2020-03-30 09:10:03</div>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <div class="pull-left">
-                            您收藏的【陆家嘴正大广场】商铺单元【07FL110】已经被人下单了。
-                        </div>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <div class="text-muted small" style="clear: both;">2020-03-29 12:00:49</div>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <div class="pull-left">
-                            您收藏的【陆家嘴正大广场】商铺单元【05FL047】已经被人下单了。
-                        </div>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <div class="text-muted small" style="clear: both;">2020-03-28 18:15:24</div>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <div class="pull-left">
-                            您的资料已经审核通过，快来为心仪的铺位下单吧！
-                        </div>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                        <div class="text-muted small" style="clear: both;">2020-03-26 12:00:49</div>
-                    </li>
-                </ul>
+        <div class="weui-tab__panel">
+            <div class="weui-panel">
+                <div class="weui-panel__bd">
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">下单成功</h4>
+                        <p class="weui-media-box__desc">您已下单【陆家嘴正大广场】商铺单元【06FL035】,请您于2020-04-06 09:10:02完成合同盖章及付款。</p>
+                        <ul class="weui-media-box__info">
+                            <li class="weui-media-box__info__meta">2020-03-30</li>
+                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">09:10:03</li>
+                        </ul>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">关注商铺已租出</h4>
+                        <p class="weui-media-box__desc">您收藏的【陆家嘴正大广场】商铺单元【07FL110】已经被人下单了。</p>
+                        <ul class="weui-media-box__info">
+                            <li class="weui-media-box__info__meta">2020-03-29</li>
+                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">12:00:49</li>
+                        </ul>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">关注商铺已租出</h4>
+                        <p class="weui-media-box__desc">您收藏的【陆家嘴正大广场】商铺单元【05FL047】已经被人下单了。</p>
+                        <ul class="weui-media-box__info">
+                            <li class="weui-media-box__info__meta">2020-03-28</li>
+                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">18:15:24</li>
+                        </ul>
+                    </div>
+                    <div class="weui-media-box weui-media-box_text">
+                        <h4 class="weui-media-box__title">审核通过</h4>
+                        <p class="weui-media-box__desc">您的资料已经审核通过，快来为心仪的铺位下单吧！</p>
+                        <ul class="weui-media-box__info">
+                            <li class="weui-media-box__info__meta">2020-03-26</li>
+                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">12:00:49</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<br>
+<br>
+<br>
+<br>
 
 <?php include ('menu_bottom.php'); ?>
 

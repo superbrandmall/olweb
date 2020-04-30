@@ -2,6 +2,10 @@
     padding-right: 16px;
 }
 
+.weui-media-box__desc {
+    color: #333;
+}
+
 .weui-media-box__info__meta_extra {
     padding-left: 0.7em;
 }
@@ -17,6 +21,22 @@
 .weui-grid__icon {
     width: auto;
     height: auto;
+}
+
+.weui-grids:after {
+    border-bottom: 0 none;
+}
+
+.weui-grids:before {
+    border-top: 0 none;
+}
+
+.weui-grid:before {
+    border-right: 0 none;
+}
+
+.weui-grid:after {
+    border-bottom: 0 none;
 }
 
 .weui-form {
@@ -51,5 +71,20 @@
 }
 
 .error {
-    color: #f00;
+    color: #fa9d3b;
+}
+
+#home_shortcuts:after {
+    border-bottom: 0 none;
+}
+
+.topTips {
+    padding: 2px 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    background: #FB3C5B;
+    opacity: 1;
+    font-weight: bold;
 }

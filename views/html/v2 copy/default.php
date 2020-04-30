@@ -2,108 +2,120 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>';
 ?>
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-        </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="/views/assets/base/img/content/backgrounds/v2-banner-1.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img src="/views/assets/base/img/content/backgrounds/v2-banner-2.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img src="/views/assets/base/img/content/backgrounds/v2-banner-3.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-            <div class="item">
-                <img src="/views/assets/base/img/content/backgrounds/v2-banner-4.jpg" alt="...">
-                <div class="carousel-caption">
-                    ...
-                </div>
-            </div>
-        </div>
+<?php include ('navbar_top.php'); ?>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-        </a>
+<div class="slide" id="slide1">
+    <ul>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
+            </a>
+            <div class="slide-desc">隔岸相望浦东陆家嘴</div>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
+            </a>
+            <div class="slide-desc">陆家嘴明珠环</div>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
+            </a>
+            <div class="slide-desc">SUPER BRAND MALL 正大广场正门</div>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/v2-banner-4.jpg' alt="">
+            </a>
+            <div class="slide-desc">3F黄金大道</div>
+        </li>
+    </ul>
+    <div class="dot">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-    <div id="page-wrapper" style="padding: 30px 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-3">
-                    <a href="/v2/mall"><img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/1s.jpg"></a>
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><a href="/v2/mall" style="color: #333;"><small>上海正大广场</small></a></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/2s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>洛阳正大广场</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/3s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>合肥正大广场</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/4s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>徐汇正大乐城</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/5s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>宝山正大乐城</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/6s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>郑州正大乐城</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/7s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>无锡正大乐城</small></div></center>
-                </div>
-                <div class="col-xs-3">
-                    <img class="img-circle img-responsive" src="/views/assets/base/img/content/mall/8s.jpg">
-                    <center><div style="font-size: 12px; margin-bottom: 10px;"><small>北京正大中心</small></div></center>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-xs-4">
-                    <a href="/v2/floor-plan" class="btn btn-default" style="padding: 15px 20px;"><i class="fa fa-paper-plane" style="color: #CEB688;" aria-hidden="true"></i><br>租铺位</a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="/v2/events" class="btn btn-default" style="padding: 15px 20px;"><i class="fa fa-calendar" style="color: #CEB688;" aria-hidden="true"></i><br>办活动</a>
-                </div>
-                <div class="col-xs-4">
-                    <a href="/v2/ads" class="btn btn-default" style="padding: 15px 20px;"><i class="fa fa-bolt" style="color: #CEB688;" aria-hidden="true"></i><br>做广告</a>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </div>
-    
-    <?php include ('menu_bottom.php'); ?>
 </div>
+
+<div class="weui-navbar" id="home_shortcuts">
+    <div class="weui-navbar__item" onclick="window.location='/v2/floor-plan?f=8&type=leasing'" style="color: #333;">
+        <i class="fa fa-paper-plane" aria-hidden="true" style="color: #10aeff;"></i><br>
+        租铺位
+    </div>
+    <div class="weui-navbar__item" onclick="window.location='/v2/events'" style="color: #333;">
+        <i class="fa fa-calendar" aria-hidden="true" style="color: #10aeff;"></i><br>
+        办活动
+    </div>
+    <div class="weui-navbar__item" onclick="window.location='/v2/advertising?f=8&type=ads'" style="color: #333;">
+        <i class="fa fa-bolt" aria-hidden="true" style="color: #10aeff;"></i><br>
+        做广告
+    </div>
+</div>
+
+<div class="weui-grids">
+    <a href="/v2/mall" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/1s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">上海正大广场</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/2s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">洛阳正大广场</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/3s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">合肥正大广场</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/9s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">乐清正大广场</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/4s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">徐汇正大乐城</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/5s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">宝山正大乐城</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/6s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">郑州正大乐城</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/7s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">无锡正大乐城</p>
+    </a>
+    <a href="javascript:" class="weui-grid">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/mall/8s.jpg" alt="">
+        </div>
+        <p class="weui-grid__label">北京正大中心</p>
+    </a>
+</div>
+<br>
+<br>
+<br>
+<br>
+    
+<?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

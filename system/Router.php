@@ -123,6 +123,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/home' => array(
             'url' => 'default.php'
         ),
+        'v2/vr' => array(
+            'url' => 'vr.php'
+        ),
         'v2/info' => array(
             'url' => 'info.php'
         ),

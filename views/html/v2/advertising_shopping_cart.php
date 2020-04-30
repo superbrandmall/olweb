@@ -3,6 +3,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 欢迎来到购物车，您可以根据需要调整数量。在页面底部有"合计"总价，如果没问题可以点击"结算"进入支付环节哦！</div>
 
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-form">

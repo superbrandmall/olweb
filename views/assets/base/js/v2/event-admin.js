@@ -37,7 +37,7 @@ function GetShopInfo(){
         type: "GET",
         async: false,
         beforeSend: function(request) {
-            $('#loader').show();
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -45,8 +45,8 @@ function GetShopInfo(){
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            $('#loader').hide();
             if(response.code === 'C0') {
+                hideLoading();
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
@@ -149,12 +149,14 @@ function getCoords(mc,fn) {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 $.each(response.data, function(i,v){
                     if(v.state != 0 && v.coords != null && v.coords != ''){
                         if(v.subType == '固定场地' || v.subType == '临时场地'){

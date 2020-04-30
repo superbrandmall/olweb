@@ -1,6 +1,6 @@
 <div class="page__bd" style="font-size: 15px;">
     <h4 class="page-header" style="margin: 16px;">广告宣传
-        <a href="/v2/ads" class="pull-right"><small>查看全部 <i class="fa fa-angle-right" aria-hidden="true"></i></small></a>
+        <a href="/v2/ads" class="weui-link pull-right">查看全部 <i class="fa fa-angle-right" aria-hidden="true"></i></a>
     </h4>
     
     <div class="owl-carousel owl-theme c-theme owl-bordered1">

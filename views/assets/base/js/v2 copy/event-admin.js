@@ -10,8 +10,22 @@ $(document).ready(function(){
     
     GetShopInfo();
     
-    $('#choose_event').click(function(){
-        window.location.href = '/v2/register-events?id='+getURLParameter('id');
+    $('.choose_event').click(function(){
+        window.location.href = '/v2/choose-event?id='+getURLParameter('id');
+    });
+    
+    $('#slide1').swipeSlide({
+        autoSwipe:true,//自动切换默认是
+        speed:3000,//速度默认4000
+        continuousScroll:true,//默认否
+        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad:true,//懒加载默认否
+        firstCallback : function(i,sum,me){
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback : function(i,sum,me){
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
     });
 });
 
@@ -23,7 +37,7 @@ function GetShopInfo(){
         type: "GET",
         async: false,
         beforeSend: function(request) {
-            $('#loader').show();
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -31,8 +45,8 @@ function GetShopInfo(){
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            $('#loader').hide();
             if(response.code === 'C0') {
+                hideLoading();
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
@@ -60,20 +74,12 @@ function GetShopInfo(){
                 }
                 
                 $.each(response.data.images, function(i,v){
-                    if(v.position == 0) {
-                        $('.carousel-inner').append('<div class="item active"><img src="'+v.image+'" alt="..."></div>');
-                        $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+v.position+'" class="active"></li>');
-                    } else {
-                        $('.carousel-inner').append('<div class="item"><img src="'+v.image+'" alt="..."></div>');
-                        $('.carousel-indicators').append('<li data-target="#carousel-example-generic" data-slide-to="'+i+'"></li>');
-                    }
-                    
-                    
-                    
+                    $('#slide1 ul').append('<li><a href="javascript:;"><img src='+v.image+' alt=""></a></li>');
+                    $('#slide1 .dot').append('<span></span>');
                 });
                 
                 if(response.data.vr !== null) {
-                    $('.embed-responsive iframe').attr('src','/'+response.data.vr);
+                    $('#vr').attr('src','/'+response.data.vr);
                 } 
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -143,12 +149,14 @@ function getCoords(mc,fn) {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 $.each(response.data, function(i,v){
                     if(v.state != 0 && v.coords != null && v.coords != ''){
                         if(v.subType == '固定场地' || v.subType == '临时场地'){

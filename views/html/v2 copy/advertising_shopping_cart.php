@@ -1,195 +1,182 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-shopping-cart-admin.js"></script>'
-        . '<script src="/views/assets/plugins/daterangepicker/moment.min.js" type="text/javascript"></script>'
-        . '<script src="/views/assets/plugins/daterangepicker/daterangepicker.js" type="text/javascript"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-shopping-cart-admin.js"></script>';
 ?>
-<link href="/views/assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" media="all" />
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper" class="home-page">
-        <div class="row">
-            <div class="col-xs-12">
-                <h4 class="page-header"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 购物车</h4>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="option3" id="" value="option1" checked> L5 广告位
-                            </label>
-                        </div>
+<?php include ('navbar_top.php'); ?>
+
+<div class="page__bd" style="background-color: #EDEDED;">
+    <div class="weui-form">
+        <div class="weui-form__text-area">
+            <h2 class="weui-form__title">购物车</h2>
+        </div>
+    </div>
+    
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            L5 广告位 <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg weui-cells weui-cells_checkbox" style="padding-top: 0;">
+                <label class="weui-cell weui-cell_active weui-check__label" for="s51" style="padding: 0;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox5" id="s51" checked="checked">
+                        <i class="weui-icon-checked"></i>
                     </div>
-                    <div class="panel-body">
-                        <ul class="chat">
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option3-1" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
+                    <div class="weui-media-box__hd" style="width: 100px; height: 80px;">
+                        <img class="weui-media-box__thumb" src="https://via.placeholder.com/100x80" alt="">
+                    </div>
+                </label>
+                <div class="weui-media-box__bd">
+                    <div class="weui-form-preview__bd" style="font-size: 15px;">
+                        <div class="weui-form-preview__item">
+                            <span class="weui-form-preview__value" style="text-align: left;">黄金大道悬挂分屏LED</span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-start" id="txt_dateStart_1" placeholder="填写档期起始日">
                                 </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">黄金大道悬挂分屏LED</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 50,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">1</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
+                            </span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-end" id="txt_dateEnd_1" placeholder="填写档期终止日">
                                 </div>
-                            </li>
-                        </ul>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="option1" id="" value="option1" checked> L4 广告位
-                            </label>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="chat">
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option1-1" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">黄金大道吊幅</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 20,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">6</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option1-2" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">电梯门贴</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 5,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">3</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option1-3" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">圆柱灯箱</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 10,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">4</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>¥35,000</p>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="option2" id="" value="option1" checked> L3 广告位
-                            </label>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="chat">
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option2-1" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">手扶梯贴+地贴+楼梯贴</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 10,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">4</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option2-2" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">灯箱</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 10,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">8</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <div class="pull-left">
-                                    <div class="radio">
-                                        <label>
-                                            <input type="radio" name="option2-3" id="" value="option1" checked> <img src="https://via.placeholder.com/100x80" alt="">
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="chat-body clearfix" style="margin-left: 100px; margin-top: 6px;">
-                                    <div class="header">电梯门贴</div>
-                                    <div class="header">
-                                        <input type="text" id="daterange" name="daterange" class="form-control input-sm"  style="width: 70%;background: #fff;" readonly>
-                                    </div>
-                                    <div class="header">¥ 5,000<div class="pull-right"><button type="button" class="btn btn-outline btn-default btn-xs">-</button><span class="btn btn-outline btn-default btn-xs">4</span><button type="button" class="btn btn-outline btn-default btn-xs">+</button></div></div>
-                                </div>
-                            </li>
-                        </ul>
+                <div class="weui-cell__ft">
+                    <div class="weui-count">
+                        <a class="weui-count__btn weui-count__decrease"></a>
+                        <input class="weui-count__number" type="number" value="1" />
+                        <a class="weui-count__btn weui-count__increase"></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <br><br><br><br>
+    
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            L3 广告位 <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg weui-cells weui-cells_checkbox" style="padding-top: 0;">
+                <label class="weui-cell weui-cell_active weui-check__label" for="s31" style="padding: 0;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox3" id="s31" checked="checked">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-media-box__hd" style="width: 100px; height: 80px;">
+                        <img class="weui-media-box__thumb" src="https://via.placeholder.com/100x80" alt="">
+                    </div>
+                </label>
+                <div class="weui-media-box__bd">
+                    <div class="weui-form-preview__bd" style="font-size: 15px;">
+                        <div class="weui-form-preview__item">
+                            <span class="weui-form-preview__value" style="text-align: left;">三楼入口LED环绕屏</span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-start" id="txt_dateStart_2" placeholder="填写档期起始日">
+                                </div>
+                            </span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-end" id="txt_dateEnd_2" placeholder="填写档期终止日">
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>¥20,000</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <div class="weui-count">
+                        <a class="weui-count__btn weui-count__decrease"></a>
+                        <input class="weui-count__number" type="number" value="1" />
+                        <a class="weui-count__btn weui-count__increase"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="weui-panel">
+        <div class="weui-panel__hd">
+            L1 广告位 <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg weui-cells weui-cells_checkbox" style="padding-top: 0;">
+                <label class="weui-cell weui-cell_active weui-check__label" for="s11" style="padding: 0;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-media-box__hd" style="width: 100px; height: 80px;">
+                        <img class="weui-media-box__thumb" src="https://via.placeholder.com/100x80" alt="">
+                    </div>
+                </label>
+                <div class="weui-media-box__bd">
+                    <div class="weui-form-preview__bd" style="font-size: 15px;">
+                        <div class="weui-form-preview__item">
+                            <span class="weui-form-preview__value" style="text-align: left;">东南口转角墙面广告</span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-start" id="txt_dateStart_3" placeholder="填写档期起始日">
+                                </div>
+                            </span>
+                            <span class="weui-form-preview__value">
+                                <div class="weui-cell__bd">
+                                    <input class="weui-input date-end" id="txt_dateEnd_3" placeholder="填写档期终止日">
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>¥920,000</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <div class="weui-count">
+                        <a class="weui-count__btn weui-count__decrease"></a>
+                        <input class="weui-count__number" type="number" value="1" />
+                        <a class="weui-count__btn weui-count__increase"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div style="position: fixed; bottom: 50px; left: 0; right: 0;text-align: center; background: #fff; border-top: solid 1px #ccc;">
-    <div class="row">
-        <div class="col-xs-3">
-            <div class="radio">
-                <label>
-                    <input type="radio" name="" id="" value="option0" checked> 全选
+<div style="position: fixed; bottom: 63px; left: 0; right: 0;text-align: center; background: #fff; z-index: 2;">
+    <div class="weui-cells" style="margin-top: 0;">
+        <div class="weui-cell">
+            <div class="weui-cells_checkbox">
+                <label class="weui-cell weui-cell_active weui-check__label" for="s99" style="padding: 0;">
+                    <div class="weui-cell__hd">
+                        <input type="checkbox" class="weui-check" name="checkbox99" id="s99" checked="checked">
+                        <i class="weui-icon-checked"></i>
+                    </div>
                 </label>
             </div>
-        </div>
-        <div class="col-xs-2">
-        </div>
-        <div class="col-xs-4">
-            <div style="margin-top: 10px;">
-                合计: ¥ 365,000
+            <div class="weui-cell__bd">
+                <p>合计: ¥365,000</p>
             </div>
-        </div>
-        <div class="col-xs-3">
-            <a href="/v2/contract?type=ads" class="btn btn-sm btn-success" style="margin-top: 5px;"><i class="fa fa-check" aria-hidden="true"></i> 结算 <small>(1)</small></a>
+            <div class="weui-cell__ft">
+                <a href="/v2/contract?type=ads" class="weui-link"><i class="fa fa-check" aria-hidden="true"></i> 结算 <small>(1)</small></a>
+            </div>
         </div>
     </div>
 </div>
-
+<br><br><br><br><br>
 <?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

@@ -3,6 +3,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 这里是您的个人主页，您能随时"完善信息"，也可以在"订单管理"追踪订单进度哦！</div>
 
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-panel weui-cell_access">
@@ -15,7 +16,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <h4 id="uid" class="weui-media-box__title"></h4>
                     <p class="weui-media-box__desc"></p>
                 </div>
-                <a class="weui-cell__ft" href="/v2/improve-info" style="font-size: 15px;">完善信息</a>
+                <a class="weui-cell__ft" href="/v2/improve-info" style="font-size: 15px; color: #576b95;">完善信息</a>
             </div>
         </div>
     </div>
@@ -32,7 +33,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells">
                     <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/all-orders">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-clipboard" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-clipboard" aria-hidden="true" style="margin-right: 10px; color: #fa9d3b;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>订单管理</p>
@@ -41,7 +42,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </a>
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>我的询价</p>
@@ -50,7 +51,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </a>
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-heart" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-heart" aria-hidden="true" style="margin-right: 10px; color: #fa5151;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>我的关注</p>
@@ -68,7 +69,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells">
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>联系人管理</p>
@@ -77,7 +78,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </a>
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>我的票据</p>
@@ -86,7 +87,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </a>
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-file-text" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-file-text" aria-hidden="true" style="margin-right: 10px; color: #07c160"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>发票抬头</p>
@@ -104,7 +105,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells">
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px; color: #10aeff;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>联系客服</p>
@@ -113,7 +114,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </a>
                     <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-life-saver" aria-hidden="true" style="margin-right: 10px;"></i>
+                            <i class="fa fa-life-saver" aria-hidden="true" style="margin-right: 10px; color: #91d300;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>帮助中心</p>

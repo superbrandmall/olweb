@@ -47,7 +47,7 @@ $mail->Subject = 'Online Leasing 场地活动需求';
 
 if (!empty ($_POST['user_name']) && !empty ($_POST['phone']) && !empty ($_POST['event_time']) && !empty ($_POST['event_theme']) && !empty ($_POST['target'])) 
 {
-    $mail->addAddress('miao.bing@superbrandmall.com','customerservice');
+    //$mail->addAddress('miao.bing@superbrandmall.com','customerservice');
     $mail->addAddress('jun.ma@superbrandmall.com','customerservice');
     $text = "姓名:" . $_POST['user_name'] . "<br><br>电话:" . $_POST['phone'] . "<br><br>计划活动时间:" . $_POST['event_time'] . "<br><br>活动主题:" . $_POST['event_theme'] . "<br><br>意向场地:" . $_POST['target'] . "<br><br>其他需求:" . $_POST['other_requirements'];
 }

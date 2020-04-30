@@ -11,7 +11,8 @@ $(document).ready(function(){
                 required: true
             },
             email: {
-                required: true
+                required: true,
+                email: true
             },
             sign_body: {
                 required: true
@@ -29,19 +30,20 @@ $(document).ready(function(){
         },
         messages: {
             contact_name_1: {
-                required: "姓名为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             email: {
-                required: "邮箱为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             sign_body: {
-                required: "签约主体为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             contact_address: {
-                required: "联系地址为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             event_name: {
-                required: "活动名称为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
             
         },

@@ -9,6 +9,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 这是上海陆家嘴正大广场，我们不仅为您全方位介绍商场，还有全景VR可以看。哦对了，点击"在线选铺"更有旺铺供您选择哦，快试试吧！</div>
 
 <div class="page__bd">
     <div style="padding-left: 0; padding-right: 0; background-image: url(/views/assets/base/img/content/backgrounds/mall-intro.jpg); background-size: cover; height: 670px;">

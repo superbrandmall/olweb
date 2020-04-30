@@ -1,4 +1,5 @@
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，以下场地位任君挑选，我们期待与您的合作！</div>
 
 <div class="weui-panel">
     <div class="weui-panel__hd">会议和场地活动</div>

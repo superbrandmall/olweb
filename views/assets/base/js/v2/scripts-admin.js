@@ -13,6 +13,22 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        bgAudioPlay();
+    });
+
+    //if($('.weui-toptips.topTips').length > 0){
+        //if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
+           // $('.weui-toptips.topTips').hide();  
+        //} else {
+            $('.weui-toptips.topTips').slideDown();
+            setTimeout(function () {
+                $('.weui-toptips.topTips').slideUp();  
+            }, 10000);
+            //$.cookie(location.pathname.split("/")[2],1);
+        //}
+    //}
+            
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
     }
@@ -43,11 +59,13 @@ function getMalls() {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("malls", JSON.stringify(response.data) );
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -65,11 +83,13 @@ function getFloors() {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("floors", JSON.stringify(response.data) );
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -132,3 +152,32 @@ function interpretBusinessCode(msg) {
         }, 0);
     }
 }
+
+function showLoading() {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') != 'none') return;
+    $loadingToast.fadeIn();
+}
+
+function hideLoading() {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') == 'none') return;
+    $loadingToast.fadeOut();
+}
+
+function bgAudioPlay() {
+    const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        autoplay: true,
+        preload: true,
+        volume: 0.1,
+        audio: [{
+            url: '/upload/audio/v2_bg_music.mp3'
+        }]
+    });
+}
+
+$.validator.addMethod('numChar',function(text){
+    var regex = /^[0-9a-zA-Z\ ]+$|(^$)/;
+    return regex.test(text);
+}, "The value entered is invalid");

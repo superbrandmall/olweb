@@ -38,8 +38,8 @@
                 </div>
                 
                 <ul class="weui-media-box__info" style="float: right;">
-                    <li class="weui-media-box__info__meta"><a href="/v2/bill">当前账单</a></li>
-                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href="/v2/contract-view">当前合同</a></li>
+                    <li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/bill">当前账单</a></li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view">当前合同</a></li>
                 </ul>
             </div>
         </div>

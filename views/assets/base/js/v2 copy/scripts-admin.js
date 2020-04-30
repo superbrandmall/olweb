@@ -26,16 +26,6 @@ $(document).ready(function(){
     }
 });
 
-function logout() {
-    var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 
-    if (keys) { 
-    for (var i = keys.length; i--;) 
-        document.cookie = keys[i]+'=0;expires=' + new Date(0).toUTCString();
-    }
-    
-    window.location.href = 'logout';
-}
-
 function getURLParameter(sParam) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');
@@ -53,11 +43,13 @@ function getMalls() {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("malls", JSON.stringify(response.data) );
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -75,34 +67,14 @@ function getFloors() {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("floors", JSON.stringify(response.data) );
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}
-
-function getModalities() {
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/base/modality/findAll",
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                sessionStorage.setItem("modalities", JSON.stringify(response.data) );
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -143,6 +115,13 @@ function getNewCategories() {
     sessionStorage.setItem("category", JSON.stringify(category));
 }
 
+function showGallery(src){
+    if($('.weui-gallery__img').length > 0){
+        $(this).remove();
+    }
+    $("#gallery").show().append('<span class="weui-gallery__img" style="background-image: url('+src+');"></span>');
+}
+
 function scrollTo(e){
     $('html, body').animate({
         scrollTop: e.offset().top
@@ -157,3 +136,20 @@ function interpretBusinessCode(msg) {
         }, 0);
     }
 }
+
+function showLoading() {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') != 'none') return;
+    $loadingToast.fadeIn();
+}
+
+function hideLoading() {
+    var $loadingToast = $('#loadingToast');
+    if ($loadingToast.css('display') == 'none') return;
+    $loadingToast.fadeOut();
+}
+
+$.validator.addMethod('numChar',function(text){
+    var regex = /^[0-9a-zA-Z\ ]+$|(^$)/;
+    return regex.test(text);
+}, "The value entered is invalid");

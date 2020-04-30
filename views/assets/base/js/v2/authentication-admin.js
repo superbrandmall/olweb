@@ -44,15 +44,19 @@ $(document).ready(function(){
                 required: true
             },
             uscc: {
-                required: true
+                required: true,
+                rangelength: [18,18],
+                numChar: true
             }
         },
         messages: {
             company_name: {
-                required: "公司名为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             uscc: {
-                required: "统一社会信用代码为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                numChar: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {

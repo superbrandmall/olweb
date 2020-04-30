@@ -1,6 +1,5 @@
 $(document).ready(function(){
     $(function(){
-        var $tooltips = $('.js_tooltips');
         var $toast = $('#js_toast');
 
         $('#showTooltips').on('click', function(){

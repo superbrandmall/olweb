@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $('.weui-tabbar a').removeClass('weui-bar__item_on');
+    $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');
+    
     $('#slide1').swipeSlide({
         autoSwipe:true,//自动切换默认是
         speed:3000,//速度默认4000

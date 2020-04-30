@@ -1,6 +1,7 @@
 $.selectedShops = new Array();
 
 $(document).ready(function(){
+    showLoading();
     $('#showCategoryPicker').on('click', function () {
         weui.picker([{
             label: '不限业态',
@@ -139,23 +140,6 @@ $(document).ready(function(){
         });
     });
     
-    $('.nav-item>a').on('click', function () {
-        $(".weui-navs ul ul li").removeClass('active');
-        $('.nav-item').children('ul').hide();
-        if ($(this).next().css('display') == "none") {
-            //展开
-            $('.nav-item').children('ul').hide();
-            $(this).next('ul').show();
-            $(this).parent('li').addClass('nav-show').siblings('li').removeClass('nav-show');
-        } else {
-            //收缩
-            $(this).next('ul').hide();
-            $('.nav-item.nav-show').removeClass('nav-show');
-        }
-    });
-
-    var sidebarjs = new SidebarJS('navbar');
-    
     var floorDesc, floor = '8F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
@@ -269,12 +253,14 @@ function getShopFloorInfo(fl) {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
+                hideLoading();
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
@@ -318,12 +304,14 @@ function getShopsMoreInfo() {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code == '200') {
+                hideLoading();
                 sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data.shop_info) );
             }
         }
@@ -502,10 +490,10 @@ function renderShopList(shop){
 <p class="weui-media-box__desc">'+ATV+'</p>\n\
 <p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
 <ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
+<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
 </ul>\n\
 </div>\n\
 </div>');
@@ -589,10 +577,10 @@ function renderShopListFromDraw(sc){
 <p class="weui-media-box__desc">'+ATV+'</p>\n\
 <p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
 <ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
+<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
 </ul>\n\
 </div>\n\
 </div>');
@@ -642,7 +630,7 @@ function addTextLayer(){
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;">'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;color:#fff;text-shadow:#000 1px 1px 1px;">'+brand+'</span>'
                     );
                 }
                 
@@ -657,14 +645,16 @@ function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMi
     for (var i = minSize; i < maxSize; i++) {
         if ($(divWord).width() > maxWidth || $(divWord).height() > maxHeight) {
             $(divWord).css({
-                'font-size': i + 'px',
+                //'font-size': i + 'px',
+                'font-size': '6px',
                 'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
                 'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 6) + 'px'    
             }); 
                 break;
         } else {
             $(divWord).css({
-                'font-size': i + 'px',
+                //'font-size': i + 'px',
+                'font-size': '6px',
                 'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px',
                 'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2) + 'px'
             });

@@ -3,6 +3,7 @@
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 啊呀，我都不知道怎样称呼您！？悄悄告诉我一些您的信息，我们交个朋友吧！</div>
 
 <form id="register_form">
     <div class="page__bd" style="background-color: #EDEDED;">
@@ -18,26 +19,24 @@
                     </div>
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">品牌名*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-brand_1"><label class="weui-label">品牌名*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="brand_1" id="brand_1" required class="brand weui-input" placeholder="填写品牌名"/>
-                                <div id="errorcontainer-brand_1" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
-                            <div class="weui-cell__hd">
-                                <label for="" class="weui-label">业态*</label>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-category_1">
+                                <label for="category_1" class="weui-label">业态*</label>
                             </div>
                             <div class="weui-cell__bd">
                                 <select class="weui-select category" id="category_1" name="category_1" required>
                                     <option value="">请选择</option>
                                 </select>
-                                <div id="errorcontainer-category_1" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
-                            <div class="weui-cell__hd">
-                                <label for="" class="weui-label">运营模式*</label>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-operation_1">
+                                <label for="operation_1" class="weui-label">运营模式*</label>
                             </div>
                             <div class="weui-cell__bd">
                                 <select class="weui-select operation" id="operation_1" name="operation_1" required>
@@ -46,7 +45,6 @@
                                     <option value="1">代理</option>
                                     <option value="2">加盟</option>
                                 </select>
-                                <div id="errorcontainer-operation_1" class="errorDiv"></div>
                             </div>
                         </div>
                     </div>
@@ -60,10 +58,9 @@
                     <div class="weui-cells__title">个人信息</div>
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">姓名*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-contact_name_1"><label class="weui-label">姓名*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="contact_name_1" id="contact_name_1" required class="weui-input" placeholder="填写姓名"/>
-                                <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">

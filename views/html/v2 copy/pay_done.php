@@ -2,17 +2,13 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/pay-done-admin.js"></script>';
 ?>
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper" style="padding: 0; background: #fff; height: 90vh;">
-        <div class="row">
-            <div class="col-xs-12">
-                <img id="done" src="/views/assets/base/img/content/backgrounds/5000-3.jpg" class="img-responsive" />
-            </div>  
-        </div>
+<?php include ('navbar_top.php'); ?>
 
-        <?php include ('menu_bottom.php'); ?>
-    </div>
+<div class="page__bd">
+    
+    <img id="done" onclick="window.location = '/v2/all-orders'" src="/views/assets/base/img/content/backgrounds/890000-3.jpg" style="width: 100%;" />
 </div>
+
+<?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

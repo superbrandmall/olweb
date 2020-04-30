@@ -1,41 +1,86 @@
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h4 class="page-header"><i class="fa fa-calendar" aria-hidden="true"></i> 会议和场地活动</h4>
-            </div>
+<?php include ('navbar_top.php'); ?>
 
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP180917001126"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/pearl_atrium.jpg"></a>
-                <center style="margin-bottom: 25px;">1F东厅</center>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP180917001116"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/bund_atrium.jpg"></a>
-                <center style="margin-bottom: 25px;">1F西厅</center>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP180917001150"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/gd_avenue.jpg"></a>
-                <center style="margin-bottom: 25px;">3F黄金大道</center>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP190809000001"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/gd_platform.jpg"></a>
-                <center style="margin-bottom: 25px;">4F东厅</center>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP180917001166"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/jade_platform.jpg"></a>
-                <center style="margin-bottom: 25px;">5F东平台</center>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="/v2/event?id=OLSHOP180917001169"><img class="img-responsive portfolio-item" src="/views/assets/base/img/content/events/ct_hall.jpg"></a>
-                <center style="margin-bottom: 25px;">9F封闭式多功能大厅</center>
+<div class="weui-panel">
+    <div class="weui-panel__hd">会议和场地活动</div>
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_small-appmsg">
+            <div class="weui-cells">
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/pearl_atrium.jpg");'>
+                            <img src="/views/assets/base/img/content/events/pearl_atrium.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001126'" class="weui-cell__bd weui-cell_primary">
+                        <p>1F东厅</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001126'" class="weui-cell__ft"></span>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/bund_atrium.jpg");'>
+                            <img src="/views/assets/base/img/content/events/bund_atrium.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001116'" class="weui-cell__bd weui-cell_primary">
+                        <p>1F西厅</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001116'" class="weui-cell__ft"></span>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/gd_avenue.jpg");'>
+                            <img src="/views/assets/base/img/content/events/gd_avenue.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>    
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001150'" class="weui-cell__bd weui-cell_primary">
+                        <p>3F黄金大道</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001150'" class="weui-cell__ft"></span>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/gd_platform.jpg");'>
+                            <img src="/views/assets/base/img/content/events/gd_platform.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP190809000001'" class="weui-cell__bd weui-cell_primary">
+                        <p>4F东厅</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP190809000001'" class="weui-cell__ft"></span>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/jade_platform.jpg");'>
+                            <img src="/views/assets/base/img/content/events/jade_platform.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001166'" class="weui-cell__bd weui-cell_primary">
+                        <p>5F东平台</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001166'" class="weui-cell__ft"></span>
+                </div>
+                <div class="weui-cell weui-cell_active weui-cell_access">
+                    <div class="weui-cell__hd">
+                        <a href='javascript: showGallery("/views/assets/base/img/content/events/ct_hall.jpg");'>
+                            <img src="/views/assets/base/img/content/events/ct_hall.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
+                        </a>
+                    </div>
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001169'" class="weui-cell__bd weui-cell_primary">
+                        <p>9F封闭式多功能大厅</p>
+                    </div>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001169'" class="weui-cell__ft"></span>
+                </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="gallery" class="weui-gallery" style="display: none;">
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#gallery").hide();'></i>
+        </a>
     </div>
 </div>
 

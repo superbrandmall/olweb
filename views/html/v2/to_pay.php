@@ -4,6 +4,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，谢谢您的支持！现在您可以点击"查看账单"进行付款哦！</div>
 
 <div class="page__bd">
     <div class="weui-tab">
@@ -44,7 +45,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 
                 <ul class="weui-media-box__info" style="float: right;">
                     <li class="weui-media-box__info__meta"><a href="javascript:;" id="check_bill" style="color: #fa5151;">查看账单</a></li>
-                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href="/v2/contract-view">查看合同</a></li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view">查看合同</a></li>
                 </ul>
             </div>
         </div>

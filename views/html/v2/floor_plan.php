@@ -4,7 +4,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 
+<style>
+    [sidebarjs-container] {
+        width: auto;
+    }
+</style>
+
 <?php include ('navbar_top.php'); ?>
+
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们为您推荐以下铺位，您可以逛逛不同楼层，看看全景VR, 比比工程条件。如果满意就请点击"申请报价"吧！</div>
 
 <div class="page__hd" style="display: inline-block;">
     <div class="weui-cell weui-cell_select" style="float: left; width: 33%;">

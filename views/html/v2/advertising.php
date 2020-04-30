@@ -17,6 +17,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们挑选了以下广告位推荐给您，您可以看看全景VR，或者"广告位详情"，如果没问题就直接"加入购物车"吧！</div>
+
 <div class="page__hd" style="display: inline-block;">
     <div class="weui-cells__title" style="display: inline-block;" navbar-toggle><i class="fa fa-retweet" aria-hidden="true"></i> 切换楼层</div>
     <div class="weui-cells__title" style="display: inline-block;"><span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block;"></span> 推荐位置</div>

@@ -4,6 +4,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 太好了！人工智能已经开始准备合同了！您还需要再确认一遍以下信息，麻烦您看一下这些信息是否完善了？</div>
+
 <form id="improve_form">
     <div class="page__bd" style="background-color: #EDEDED;">
         <div class="weui-form">
@@ -15,59 +17,51 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells__title">承租方信息</div>
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">公司名*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-company_name"><label class="weui-label">公司名*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="company_name" id="company_name" class="weui-input" required placeholder="填写公司名"/>
-                                <div id="errorcontainer-company_name" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">统一社会信用代码*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-uscc"><label class="weui-label">统一社会信用代码*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="uscc" id="uscc" class="weui-input" required placeholder="填写统一社会信用代码"/>
-                                <div id="errorcontainer-uscc" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">注册地址/住址*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-register_address"><label class="weui-label">注册地址/住址*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="register_address" id="register_address" class="weui-input" required placeholder="填写注册地址/住址"/>
-                                <div id="errorcontainer-register_address" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">负责人身份证号码*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-identity_card_no"><label class="weui-label">负责人身份证号码*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="identity_card_no" id="identity_card_no" class="weui-input" required placeholder="填写负责人身份证号码"/>
-                                <div id="errorcontainer-identity_card_no" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">邮寄地址*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-contact_address"><label class="weui-label">邮寄地址*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="contact_address" id="contact_address" class="weui-input" required placeholder="填写邮寄地址"/>
-                                <div id="errorcontainer-contact_address" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">联系电话*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-contact_phone_1"><label class="weui-label">联系电话*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="contact_phone_1" id="contact_phone_1" class="weui-input" required placeholder="填写联系电话"/>
-                                <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">开户银行*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-bank_name"><label class="weui-label">开户银行*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="bank_name" id="bank_name" class="weui-input" required placeholder="填写开户银行"/>
-                                <div id="errorcontainer-bank_name" class="errorDiv"></div>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">银行账号*</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-bank_card_no"><label class="weui-label">银行账号*</label></div>
                             <div class="weui-cell__bd">
                                 <input name="bank_card_no" id="bank_card_no" class="weui-input" required placeholder="填写银行账号"/>
-                                <div id="errorcontainer-bank_card_no" class="errorDiv"></div>
                             </div>
                         </div>
                     </div>

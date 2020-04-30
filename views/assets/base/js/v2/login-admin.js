@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    $('#login_username').val($.cookie('uid_temp'));
     $('#login_verify').val('');
     
     $("#login_form").validate({
@@ -16,28 +17,29 @@ $(document).ready(function(){
         },
         messages: {
             login_username: {
-                required: "请输入手机号码",
-                digits: "请输入正确的手机号码",
-                rangelength: "请输入正确的手机号码"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                digits: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             login_verify: {
-                required: "验证码",
-                rangelength: "验证码须为{0}位数字",
-                digits: "验证码须为{0}位数字"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                digits: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            var key = $.api.mobileVC;           
             var userName = $('#login_username').val();
+            var key = $('#login_verify').val();
 
             $.ajax({
-                url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+$.api.mobileVC,
+                url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+key,
                 type: "GET",
                 async: false,
                 beforeSend: function(request) {
+                    showLoading();
                     $('#login').attr('disabled','disabled');
                     request.setRequestHeader("Lang", $.cookie('lang'));
                     request.setRequestHeader("Source", "onlineleasing");
@@ -45,39 +47,60 @@ $(document).ready(function(){
                 complete: function(){
                 },
                 success: function (response, status, xhr) {
-                   if(response.code === 'C0') {
+                    hideLoading();
+                    if(response.code === 'C0') {
                         if(xhr.getResponseHeader("Login") !== null){
                             $.cookie('login', xhr.getResponseHeader("Login"));
                         }
                         if(xhr.getResponseHeader("Authorization") !== null){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
-                        $.cookie('uid', userName);
                         
-                        $.ajax({
-                            type: 'POST',
-                            url: '/controllers/api/2.0/ApiLoginSession.php',
-                            data: {
-                                uid: userName
-                            },
-                            dataType: "json",
-                            beforeSend: function(request) {
-                            },
-                            complete: function(){
-                                $('#login').attr('disabled','disabled');
-                                if(getURLParameter('type')){
-                                    if(getURLParameter('type') == 'leasing'){
-                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
-                                    } else if(getURLParameter('type') == 'ads'){
-                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
+                        if(response.data.resultCode === '00') {
+                            $.cookie('uid', userName);
+
+                            $.ajax({
+                                type: 'POST',
+                                url: '/controllers/api/2.0/ApiLoginSession.php',
+                                data: {
+                                    uid: userName
+                                },
+                                dataType: "json",
+                                beforeSend: function(request) {
+                                    showLoading();
+                                },
+                                complete: function(){
+                                    hideLoading();
+                                    if(getURLParameter('type')){
+                                        if(getURLParameter('type') == 'leasing'){
+                                            window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
+                                        } else if(getURLParameter('type') == 'ads'){
+                                            window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
+                                        }
+                                    } else if(getURLParameter('id')){
+                                        window.location.href = '/v2/register-events?id='+getURLParameter('id');
+                                    } else {
+                                        window.location.href = '/v2/register';
                                     }
-                                } else if(getURLParameter('id') != ''){
-                                    window.location.href = '/v2/register-events?id='+getURLParameter('id');
-                                } else {
-                                    window.location.href = '/v2/register';
                                 }
-                            }
-                        });
+                            });
+                        } else {
+                            $.cookie('uid_temp', userName);
+                            $(function(){
+                                $('body').append('<div id="js_toast" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">验证码错误</p></div></div>');
+                                var $toast = $('#js_toast');
+
+                                $('.page.cell').removeClass('slideIn');
+
+                                $toast.fadeIn(100);
+                                setTimeout(function () {
+                                    $toast.fadeOut(100);
+                                    window.location.reload();
+                                }, 2000);
+  
+                            });
+                        }
+                        
                     } else {
                         interpretBusinessCode(response.customerMessage);
                     }
@@ -105,13 +128,13 @@ function VeryficationCodeLogin() {
             type: "GET",
             async: false,
             beforeSend: function(request) {
+                showLoading();
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
             complete: function(){},
             success: function (response, status, xhr) {
-                $.api.mobileVC = response.data.identifyCode;
-
+                hideLoading();
                 setTimeLogin(obj);
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -123,12 +146,18 @@ function VeryficationCodeLogin() {
 
 function setTimeLogin(obj) {
     if (countdownLogin == 0) { 
-        obj.attr('href','javascript: VeryficationCodeLogin()');
+        obj.attr({
+            'href':'javascript: VeryficationCodeLogin()',
+            'disabled': false
+        });
         obj.html("获取验证码");
         countdownLogin = 60; 
         return;
-    } else { 
-        obj.attr('href','javascript: void(0)');
+    } else {
+        obj.attr({
+            'href':'javascript: void(0)',
+            'disabled': true
+        });
         obj.html("重新获取(" + countdownLogin + ")s");
         countdownLogin--; 
     } 

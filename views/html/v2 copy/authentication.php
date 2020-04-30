@@ -2,89 +2,155 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/authentication-admin.js"></script>';
 ?>
 
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div id="page-wrapper">
-        <div class="row">
-            <div class="col-xs-12">
-                <h4 class="page-header"><i class="fa fa-check-square-o" aria-hidden="true"></i> 授权认证</h4>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-certificate" aria-hidden="true"></i> 公司认证必填
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-building"></i></span>
-                            <input type="text" class="form-control" placeholder="公司">
+<?php include ('navbar_top.php'); ?>
+
+<form id="authentication_form">
+    <div class="page__bd" style="background-color: #EDEDED;">
+        <div class="weui-form">
+            <div class="weui-form__text-area">
+                <h2 class="weui-form__title">授权认证</h2>
+            </div>
+            <div class="weui-form__control-area">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells__title" style="margin-top: 24px;">公司认证必填</div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-company_name"><label class="weui-label">公司名*</label></div>
+                            <div class="weui-cell__bd">
+                                <input name="company_name"  id="company_name" required class="weui-input" placeholder="填写公司名"/>
+                            </div>
                         </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
-                            <input type="text" class="form-control" placeholder="统一社会信用代码">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-uscc"><label class="weui-label">统一社会信用代码*</label></div>
+                            <div class="weui-cell__bd">
+                                <input name="uscc" id="uscc" required class="weui-input" placeholder="填写统一社会信用代码"/>
+                            </div>
                         </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label><i class="fa fa-file-text" aria-hidden="true"></i> 营业执照上传 (.jpg/.png/.pdf格式)</label>
-                            <input type="file">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-upload" aria-hidden="true"></i> 其它选填资料
-                    </div>
-                    <div class="panel-body">
-                        <label>名片 (.jpg/.png/.pdf格式)</label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
-                            <input type="file" class="form-control">
-                        </div>
-                        
-                        <label>品牌Logo (.jpg/.png/.pdf格式)</label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-registered" aria-hidden="true"></i></span>
-                            <input type="file" class="form-control">
-                        </div>
-                        
-                        <label>品牌介绍 (.jpg/.png/.pdf格式)</label>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-                            <input type="file" class="form-control">
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        选填现有门店经营状况
-                        <a href="#" class="add pull-right"><small><i class="fa fa-plus"></i> 增加更多品牌</small></a>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-group input-group">
-                            <span class="input-group-addon" style="padding: 6px 13px;"><i class="fa fa-map-signs"></i></span>
-                            <input type="text" class="form-control" placeholder="所在商场">
-                        </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-map-o"></i></span>
-                            <input type="text" class="form-control" placeholder="楼层">
-                        </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-area-chart"></i></span>
-                            <input type="text" class="form-control" placeholder="面积(m²)">
-                        </div>
-                        <div class="form-group input-group">
-                            <span class="input-group-addon"><i class="fa fa-money"></i></span>
-                            <input type="text" class="form-control" placeholder="营业额(万)">
+                        <div class="weui-cell  weui-cell_uploader">
+                            <div class="weui-cell__bd">
+                                <div class="weui-uploader">
+                                    <div class="weui-uploader__hd">
+                                        <p class="weui-uploader__title">营业执照图片上传*</p>
+                                        <div class="weui-uploader__info">.jpg/.png格式</div>
+                                    </div>
+                                    <div class="weui-uploader__bd">
+                                        <ul class="weui-uploader__files" id="uploaderFiles1"></ul>
+                                        <div class="weui-uploader__input-box">
+                                            <input id="uploaderInput1" class="weui-uploader__input" type="file" accept="image/*" multiple/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-12" style="margin-bottom: 40px;">
-                <center>
-                    <button class="btn btn-success" id="to_authenticate"><i class="fa fa-paper-plane" aria-hidden="true"></i> 提交认证</button>
-                </center>
+        </div>
+        <br>
+        <div class="weui-form">
+            <div class="weui-form__control-area">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells__title">其它选填资料</div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell  weui-cell_uploader">
+                            <div class="weui-cell__bd">
+                                <div class="weui-uploader">
+                                    <div class="weui-uploader__hd">
+                                        <p class="weui-uploader__title">名片图片上传</p>
+                                        <div class="weui-uploader__info">.jpg/.png格式</div>
+                                    </div>
+                                    <div class="weui-uploader__bd">
+                                        <ul class="weui-uploader__files" id="uploaderFiles2"></ul>
+                                        <div class="weui-uploader__input-box">
+                                            <input id="uploaderInput2" class="weui-uploader__input" type="file" accept="image/*" multiple/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-cell  weui-cell_uploader">
+                            <div class="weui-cell__bd">
+                                <div class="weui-uploader">
+                                    <div class="weui-uploader__hd">
+                                        <p class="weui-uploader__title">品牌Logo图片上传</p>
+                                        <div class="weui-uploader__info">.jpg/.png格式</div>
+                                    </div>
+                                    <div class="weui-uploader__bd">
+                                        <ul class="weui-uploader__files" id="uploaderFiles3"></ul>
+                                        <div class="weui-uploader__input-box">
+                                            <input id="uploaderInput3" class="weui-uploader__input" type="file" accept="image/*" multiple/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="weui-cell  weui-cell_uploader">
+                            <div class="weui-cell__bd">
+                                <div class="weui-uploader">
+                                    <div class="weui-uploader__hd">
+                                        <p class="weui-uploader__title">品牌介绍图片上传</p>
+                                        <div class="weui-uploader__info">.jpg/.png格式</div>
+                                    </div>
+                                    <div class="weui-uploader__bd">
+                                        <ul class="weui-uploader__files" id="uploaderFiles4"></ul>
+                                        <div class="weui-uploader__input-box">
+                                            <input id="uploaderInput4" class="weui-uploader__input" type="file" accept="image/*" multiple/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="weui-form">
+            <div class="weui-form__control-area">
+                <div id="malls" class="weui-cells__group weui-cells__group_form" style="background-color: #EDEDED;">
+                    <div class="weui-cells__title" style="background-color: #fff; margin-bottom: 0; padding-bottom: 8px;">
+                        选填现有门店经营状况
+                        <a class="add weui-link" href="#" style="float: right;">增加更多门店</a>
+                    </div>
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">所在商场</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="mall_1" class="mall weui-input" placeholder="填写商场名"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">楼层</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="floor_1" class="floor weui-input" placeholder="填写楼层"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">面积(m²)</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="area_1" class="area weui-input" placeholder="填写面积"/>
+                            </div>
+                        </div>
+                        <div class="weui-cell weui-cell_active">
+                            <div class="weui-cell__hd"><label class="weui-label">营业额(万)</label></div>
+                            <div class="weui-cell__bd">
+                                <input id="sales_1" class="sales weui-input" placeholder="填写营业额"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="weui-btn-area">
+        <button type="submit" class="weui-btn weui-btn_primary" id="to_authenticate">提交认证</button>
+    </div>
+</form>
+<br>
+<br>
+<br>
+<br>
 
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

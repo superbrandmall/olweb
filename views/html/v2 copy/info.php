@@ -1,104 +1,131 @@
-<div id="wrapper">
-    <?php include ('navbar_top.php'); ?>
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="chat" style="margin-top: 10px;">
-                    <li class="left clearfix" style="border-bottom: 0 none;">
-                        <span class="pull-left">
-                            <img class="img-circle img-responsive" src="/views/assets/base/img/content/brands-admin/avatar.png" alt="" style="border: solid 1px #ccc;">
-                        </span>
-                        <div class="chat-body clearfix">
-                            <div class="header">13818816898</div>
-                            <div class="header">&nbsp;<a href="#!" class="pull-right badge">完善信息 <i class="fa fa-angle-right" aria-hidden="true"></i></a></div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row" style="background-color: #AFBEDE; padding: 5px 0;">
-            <div class="col-xs-10">
-                <i class="fa fa-info-circle" aria-hidden="true"></i> 完善资料有助于订单审核通过
-            </div>
-            <div class="col-xs-2">
-                <button class="btn btn-default btn-xs">完善</button>
+<?php
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/info-admin.js"></script>';
+?>
+
+<?php include ('navbar_top.php'); ?>
+
+<div class="page__bd" style="background-color: #EDEDED;">
+    <div class="weui-panel weui-cell_access">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_appmsg">
+                <div class="weui-media-box__hd">
+                    <img class="weui-media-box__thumb" src="/views/assets/base/img/content/brands-admin/avatar.png" alt="">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 id="uid" class="weui-media-box__title"></h4>
+                    <p class="weui-media-box__desc"></p>
+                </div>
+                <a class="weui-cell__ft" href="/v2/improve-info" style="font-size: 15px; color: #576b95;">完善信息</a>
             </div>
         </div>
     </div>
-    <img class="img-responsive" style="width: 100%;" src="https://via.placeholder.com/400x120" alt="">
-    <div class="container" style="background-color: #eee;">
-        <div class="row" style="background-color: #fff;">
-            <div class="col-xs-12">
-                <ul class="chat">
-                    <li class="left clearfix" style="padding: 20px 0;" onclick="javascript: (window.location.href = '/v2/all-orders');">
-                        <span class="pull-left">
-                            <i class="fa fa-clipboard" aria-hidden="true"></i> 订单管理
-                        </span>
-                        <a href="/v2/all-orders" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-comment-o" aria-hidden="true"></i> 我的询价
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-heart" aria-hidden="true"></i> 我的关注
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
+
+    <div class="weui-header bg-blue" style="height: 40px;"> 
+        <div class="weui-header-left" style="font-size: 14px; top: 10px;"><i class="fa fa-info-circle" aria-hidden="true"></i> 完善资料有助于订单审核通过</div>
+    </div>
+
+    <img style="width: 100%;" src="/views/assets/base/img/content/backgrounds/640.gif" alt="">
+
+    <div class="weui-panel" style="margin-top: -5px;">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/all-orders">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-clipboard" aria-hidden="true" style="margin-right: 10px; color: #fa9d3b;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>订单管理</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>我的询价</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-heart" aria-hidden="true" style="margin-right: 10px; color: #fa5151;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>我的关注</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                </div>
             </div>
         </div>
-        <br>
-        <div class="row" style="background-color: #fff;">
-            <div class="col-xs-12">
-                <ul class="chat">
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-user-circle-o" aria-hidden="true"></i> 联系人管理
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-print" aria-hidden="true"></i> 我的票据
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-file-text" aria-hidden="true"></i> 发票抬头
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
+    </div>
+    
+    <div class="weui-panel">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>联系人管理</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>我的票据</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-file-text" aria-hidden="true" style="margin-right: 10px; color: #07c160"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>发票抬头</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                </div>
             </div>
         </div>
-        <br>
-        <div class="row" style="background-color: #fff;">
-            <div class="col-xs-12">
-                <ul class="chat">
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-phone-square" aria-hidden="true"></i> 联系客服
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                    <li class="left clearfix" style="padding: 20px 0;">
-                        <span class="pull-left">
-                            <i class="fa fa-question-circle" aria-hidden="true"></i> 帮助中心
-                        </span>
-                        <a href="#!" class="pull-right"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
+    </div>
+    
+    <div class="weui-panel">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px; color: #10aeff;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>联系客服</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-life-saver" aria-hidden="true" style="margin-right: 10px; color: #91d300;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>帮助中心</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
+                </div>
             </div>
         </div>
-        <br>
-        <br>
     </div>
 </div>
+<br><br><br><br>
 
 <?php include ('menu_bottom.php'); ?>
 

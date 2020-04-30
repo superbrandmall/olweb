@@ -37,16 +37,16 @@ $(document).ready(function(){
         },
         messages: {
             brand_1: {
-                required: "品牌名为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             category_1: {
-                required: "业态为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             operation_1: {
-                required: "运营模式为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             contact_name_1: {
-                required: "姓名为必填项"
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
@@ -69,6 +69,8 @@ $(document).ready(function(){
                 } else {
                     window.location.href = '/v2/info';
                 }
+            } else {
+                window.location.href = '/v2/info';
             }
         }
     })
