@@ -16,18 +16,18 @@ $(document).ready(function(){
     document.addEventListener('WeixinJSBridgeReady', function() {
         bgAudioPlay();
     });
-
-    //if($('.weui-toptips.topTips').length > 0){
-        //if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
-           // $('.weui-toptips.topTips').hide();  
-        //} else {
+    
+    if($('.weui-toptips.topTips').length > 0){
+        if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
+            $('.weui-toptips.topTips').hide();  
+        } else {
             $('.weui-toptips.topTips').slideDown();
             setTimeout(function () {
                 $('.weui-toptips.topTips').slideUp();  
             }, 10000);
-            //$.cookie(location.pathname.split("/")[2],1);
-        //}
-    //}
+            $.cookie(location.pathname.split("/")[2],1);
+        }
+    }
             
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
@@ -165,11 +165,12 @@ function hideLoading() {
     $loadingToast.fadeOut();
 }
 
-function bgAudioPlay() {
+function bgAudioPlay(url) {
     const ap = new APlayer({
         container: document.getElementById('aplayer'),
         autoplay: true,
-        preload: true,
+        preload: 'auto',
+        loop: 'all',
         volume: 0.1,
         audio: [{
             url: '/upload/audio/v2_bg_music.mp3'

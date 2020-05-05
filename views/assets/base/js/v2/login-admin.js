@@ -56,6 +56,7 @@ $(document).ready(function(){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         
+                        $.cookie('uid_temp', userName);
                         if(response.data.resultCode === '00') {
                             $.cookie('uid', userName);
 
@@ -85,7 +86,6 @@ $(document).ready(function(){
                                 }
                             });
                         } else {
-                            $.cookie('uid_temp', userName);
                             $(function(){
                                 $('body').append('<div id="js_toast" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">验证码错误</p></div></div>');
                                 var $toast = $('#js_toast');

@@ -2,6 +2,80 @@ $.selectedShops = new Array();
 
 $(document).ready(function(){
     showLoading();
+    
+    var floorDesc, floor = '8F';
+    if(getURLParameter('f') && getURLParameter('f') != '') {
+        switch (getURLParameter('f')) {
+            case '0':
+                floorDesc = '负一楼';
+                floor = 'B1';
+                break;
+            case '1':
+                floorDesc = '一楼';
+                floor = 'L1';
+                break;
+            case '2':
+                floorDesc = '二楼';
+                floor = 'L2';
+                break;
+            case '3':
+                floorDesc = '三楼';
+                floor = 'L3';
+                break;
+            case '4':
+                floorDesc = '四楼';
+                floor = 'L4';
+                break;
+            case '5':
+                floorDesc = '五楼';
+                floor = 'L5';
+                break;
+            case '6':
+                floorDesc = '六楼';
+                floor = 'L6';
+                break;
+            case '7':
+                floorDesc = '七楼';
+                floor = 'L7';
+                break;
+            case '8':
+                floorDesc = '八楼';
+                floor = 'L8';
+                break;
+            case '9':
+                floorDesc = '九楼';
+                floor = 'L9';
+                break;
+            default:
+                floorDesc = [];
+                floor = 'L1';
+                break;
+        }
+        
+        $('#map').attr({
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
+            'alt'   : getURLParameter('f')+'F',
+            'usemap': '#Map_'+getURLParameter('f')+'F'
+        });
+        $('map').attr({
+            'name'  : 'Map_'+getURLParameter('f')+'F',
+            'id'    : '"Map_'+getURLParameter('f')+'F'
+        });
+        getShopFloorInfo(floorDesc);
+    } else {
+        $('#map').attr({
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png',
+            'alt'   : '8F',
+            'usemap': '#Map_8F'
+        });
+        $('map').attr({
+            'name'  : 'Map_8F',
+            'id'    : '"Map_8F'
+        });
+
+        getShopFloorInfo('八楼');
+    }
+        
     $('#showCategoryPicker').on('click', function () {
         weui.picker([{
             label: '不限业态',
@@ -81,11 +155,14 @@ $(document).ready(function(){
             onConfirm: function (result) {
                 $('#showCategoryPicker').text(result[0].label);
                 $.cookie('category',result[0].value);
+                $.cookie('categoryDesc',result[0].label);
+
+                getShopFloorInfo(floorDesc);
             },
             title: '请选择业态'
         });
     });
-    
+
     $('#showSizePicker').on('click', function () {
         weui.picker([{
             label: '不限面积',
@@ -120,128 +197,66 @@ $(document).ready(function(){
             onConfirm: function (result) {
                 $('#showSizePicker').text(result[0].label);
                 $.cookie('size',result[0].value);
+                $.cookie('sizeDesc',result[0].label);
+
+                getShopFloorInfo(floorDesc);
             },
             title: '请选择面积范围'
         });
     });
-    
-    $('#showDatePicker').on('click', function (){
-        weui.datePicker({
-            start: 2020,
-            end: new Date().getFullYear(),
+
+    $('#showFloorPicker').on('click', function (){
+        weui.picker([{
+            label: '八楼',
+            value: '8'
+        }, {
+            label: '七楼',
+            value: '7'
+        }, {
+            label: '六楼',
+            value: '6'
+        },{
+            label: '五楼',
+            value: '5'
+        }, {
+            label: '四楼',
+            value: '4'
+        },{
+            label: '三楼',
+            value: '3'
+        },{
+            label: '二楼',
+            value: '2'
+        },{
+            label: '一楼',
+            value: '1'
+        },{
+            label: '负一楼',
+            value: '0'
+        }], {
             onChange: function (result) {
-                console.log(result);
             },
             onConfirm: function (result) {
-                $.cookie('startDate',result[0].label+result[1].label+result[2].label);
-                $('#showDatePicker').text( $.cookie('startDate'));
+                $.cookie('floor',result[0].value);
+                window.location.href = '/v2/floor-plan?f='+result[0].value+'&type=leasing';
             },
-            title: '请选择起始日期'
+            title: '请选择铺位所在楼层'
         });
     });
     
-    var floorDesc, floor = '8F';
-    if(getURLParameter('f') && getURLParameter('f') != '') {
-        switch (getURLParameter('f')) {
-            case '0':
-                floorDesc = '负一楼';
-                floor = 'B1';
-                break;
-            case '1':
-                floorDesc = '一楼';
-                floor = 'L1';
-                break;
-            case '2':
-                floorDesc = '二楼';
-                floor = 'L2';
-                break;
-            case '3':
-                floorDesc = '三楼';
-                floor = 'L3';
-                break;
-            case '4':
-                floorDesc = '四楼';
-                floor = 'L4';
-                break;
-            case '5':
-                floorDesc = '五楼';
-                floor = 'L5';
-                break;
-            case '6':
-                floorDesc = '六楼';
-                floor = 'L6';
-                break;
-            case '7':
-                floorDesc = '七楼';
-                floor = 'L7';
-                break;
-            case '8':
-                floorDesc = '八楼';
-                floor = 'L8';
-                break;
-            case '9':
-                floorDesc = '九楼';
-                floor = 'L9';
-                break;
-            default:
-                floorDesc = [];
-                floor = 'L1';
-                break;
-        }
-
-        $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
-            'alt'   : getURLParameter('f')+'F',
-            'usemap': '#Map_'+getURLParameter('f')+'F'
-        });
-        $('map').attr({
-            'name'  : 'Map_'+getURLParameter('f')+'F',
-            'id'    : '"Map_'+getURLParameter('f')+'F'
-        });
-        getShopFloorInfo(floorDesc);
-    } else {
-        $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png',
-            'alt'   : '8F',
-            'usemap': '#Map_8F'
-        });
-        $('map').attr({
-            'name'  : 'Map_8F',
-            'id'    : '"Map_8F'
-        });
-        
-        getShopFloorInfo('八楼');
+    $('#showFloorPicker').text(floorDesc);
+    var categoryDesc = '不限业态';
+    if($.cookie('categoryDesc') != ''){
+        categoryDesc = $.cookie('categoryDesc');
     }
-
-    $('#floorNo').text(floor);
+    $('#showCategoryPicker').text(categoryDesc);
+    var sizeDesc = '不限面积';
+    if($.cookie('size') != ''){
+        sizeDesc = $.cookie('sizeDesc');
+    }
+    $('#showSizePicker').text(sizeDesc);
     
-    var size = 0.85;
-    $('#zoom_in').click(function (){
-        size = size + 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        addTextLayer();
-        
-        $('#zoom_out').attr('disabled', false);
-        if(size >= 2.35){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
-    $('#zoom_out').click(function (){
-        size = size - 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        addTextLayer();
-        
-        $('#zoom_in').attr('disabled', false);
-        if(size <= 0.15){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
+    $('#floorNo').text(floor); 
 });
 
 function getShopFloorInfo(fl) {
@@ -263,16 +278,12 @@ function getShopFloorInfo(fl) {
                 hideLoading();
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
-
-                    }
-                    
                     if(v.shopState == 0 || v.shopState == 2){
-                        if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href="#" shape="poly" coords="'+v.coords+'" />'); 
                         }
                     } else {
-                        if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'"  data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                         }
                     }
@@ -484,7 +495,7 @@ function renderShopList(shop){
 <p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
 </div>\n\
 <div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc">进场日期: '+settle_date+'</p>\n\
+<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
 <p class="weui-media-box__desc">免租期: '+free_of_ground_rent+'天</p>\n\
 <p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
 <p class="weui-media-box__desc">'+ATV+'</p>\n\
@@ -514,22 +525,7 @@ function showVR(id){
 }
 
 function askPrice(sc){
-    if($.cookie('startDate') == '' || $.cookie('startDate') == null){
-        weui.datePicker({
-            start: 2020,
-            end: new Date().getFullYear(),
-            onChange: function (result) {
-                console.log(result);
-            },
-            onConfirm: function (result) {
-                $.cookie('startDate',result[0].label+result[1].label+result[2].label);
-                $('#showDatePicker').text( $.cookie('startDate'));
-            },
-            title: '请选择起始日期'
-        });
-    } else {
-        window.location.href = '/v2/authentication?id='+sc+'';
-    }
+    window.location.href = '/v2/authentication?id='+sc+'';
 }
 
 function renderShopListFromDraw(sc){
@@ -571,7 +567,7 @@ function renderShopListFromDraw(sc){
 <p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
 </div>\n\
 <div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc">进场日期: '+settle_date+'</p>\n\
+<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
 <p class="weui-media-box__desc">免租期: '+free_of_ground_rent+'</p>\n\
 <p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
 <p class="weui-media-box__desc">'+ATV+'</p>\n\

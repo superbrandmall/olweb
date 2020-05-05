@@ -5,40 +5,40 @@ if (explode('?f=', $_SERVER['REQUEST_URI'])[1] != null) {
     $floor = '';
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/weui/js/sidebar.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-admin.js"></script>';
 ?>
-
-<style>
-    [sidebarjs-container] {
-        width: auto;
-    }
-</style>
 
 <?php include ('navbar_top.php'); ?>
 
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们挑选了以下广告位推荐给您，您可以看看全景VR，或者"广告位详情"，如果没问题就直接"加入购物车"吧！</div>
 
-<div class="page__hd" style="display: inline-block;">
-    <div class="weui-cells__title" style="display: inline-block;" navbar-toggle><i class="fa fa-retweet" aria-hidden="true"></i> 切换楼层</div>
-    <div class="weui-cells__title" style="display: inline-block;"><span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block;"></span> 推荐位置</div>
+<div class="weui-cells">
+    <a class="weui-cell  weui-cell_access" href="javascript:">
+        <div class="weui-cell__bd" id="showFloorPicker">
+            <p>请选择楼层</p>
+        </div>
+        <div class="weui-cell__ft">
+        </div>
+    </a>
 </div>
+
 <div class="page__bd" style="margin: 0 16px 16px;">
     <div class="weui-article" style="position: relative; padding: 0;">
         <img src="#" usemap="" id="map" />
         <map name="" id=""></map>
     </div>
 </div>
+
 <div class="page__bd"> 
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">
-            <span id="floorNo"></span>
+            <span><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 10px;"></span> 推荐位置</span>
             <div class="weui-cell__ft" style="float: right;"><a href="advertising-shopping-cart" class="weui-link"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 查看购物车</a></div>
         </div>
         <div class="weui-panel__bd" style="max-height: 300px; overflow: auto;"></div>
     </div>
 </div>
-<div class="weui-navs" navbar>
+<!--<div class="weui-navs" navbar>
     <ul>
         <li class="nav-item">
             <a id="f8_g" href="/v2/advertising?f=8">8F</a>
@@ -81,7 +81,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
             </div>
         </li>
     </ul>
-</div>
+</div>-->
 
 <div id="gallery" class="weui-gallery" style="display: none;">
     <div class="weui-gallery__opr">

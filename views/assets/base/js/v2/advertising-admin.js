@@ -1,78 +1,53 @@
 $.selectedAds = new Array();
 
-$.selectedAdTypes = new Array();
-$(".ad-types").each(function(){
-    $.selectedAdTypes.push($(this).parent().parent().find('p').text());
-});
-
 $(document).ready(function(){
-    $('.ad-types').change(function(){
-        if($(this).prop('checked')) {
-            if($.inArray($(this).val(),$.selectedAdTypes) == -1){
-                $.selectedAdTypes.push($(this).parent().parent().find('p').text());
-            }
-        } else {
-            if($.inArray($(this).val(),$.selectedAdTypes) != -1){
-                $.selectedAdTypes.splice($.inArray($(this).push($(this).parent().parent().find('p').text()),$.selectedAdTypes),1);
-            }
-        }
-                
-        drawAds();
-        renderAdList(sessionStorage.getItem("ads"));
-    });
+    showLoading();
     
-    
-    $('.nav-item>a').on('click', function () {
-        $(".weui-navs ul ul li").removeClass('active');
-        $('.nav-item').children('ul').hide();
-        if ($(this).next().css('display') == "none") {
-            //展开
-            $('.nav-item').children('ul').hide();
-            $(this).next('ul').show();
-            $(this).parent('li').addClass('nav-show').siblings('li').removeClass('nav-show');
-        } else {
-            //收缩
-            $(this).next('ul').hide();
-            $('.nav-item.nav-show').removeClass('nav-show');
-        }
-    });
-
-    var sidebarjs = new SidebarJS('navbar');
-    
-    var floor;
+    var floorDesc, floor;
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
             case '0':
+                floorDesc = '负一楼';
                 floor = 'B1';
                 break;
             case '1':
+                floorDesc = '一楼';
                 floor = 'L1';
                 break;
             case '2':
+                floorDesc = '二楼';
                 floor = 'L2';
                 break;
             case '3':
+                floorDesc = '三楼';
                 floor = 'L3';
                 break;
             case '4':
+                floorDesc = '四楼';
                 floor = 'L4';
                 break;
             case '5':
+                floorDesc = '五楼';
                 floor = 'L5';
                 break;
             case '6':
+                floorDesc = '六楼';
                 floor = 'L6';
                 break;
             case '7':
+                floorDesc = '七楼';
                 floor = 'L7';
                 break;
             case '8':
+                floorDesc = '八楼';
                 floor = 'L8';
                 break;
             case '9':
+                floorDesc = '九楼';
                 floor = 'L9';
                 break;
             default:
+                floorDesc = [];
                 floor = 'L1';
                 break;
         }
@@ -100,34 +75,33 @@ $(document).ready(function(){
         
         getAdFloorInfo(1);
     }
-
+    
+    $('#showFloorPicker').on('click', function (){
+        weui.picker([{
+            label: '八楼东区悬挂式LED',
+            value: '8'
+        }, {
+            label: '五楼黄金大道悬挂分屏LED',
+            value: '5'
+        }, {
+            label: '三楼入口全包LED环绕屏',
+            value: '3'
+        }, {
+            label: '一楼户外墙面广告',
+            value: '1'
+        }], {
+            onChange: function (result) {
+            },
+            onConfirm: function (result) {
+                $.cookie('floor',result[0].value);
+                window.location.href = '/v2/advertising?f='+result[0].value+'&type=ads';
+            },
+            title: '请选择广告位所在楼层'
+        });
+    });
+    
+    $('#showFloorPicker p').text(floorDesc);
     $('#floorNo').text(floor);
-    
-    var size = 0.85;
-    $('#zoom_in').click(function (){
-        size = size + 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        
-        $('#zoom_out').attr('disabled', false);
-        if(size >= 2.35){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
-    $('#zoom_out').click(function (){
-        size = size - 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        
-        $('#zoom_in').attr('disabled', false);
-        if(size <= 0.15){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
 });
 
 function getAdFloorInfo(fl) {
@@ -159,7 +133,7 @@ function getAdFloorInfo(fl) {
                     drawAdsFromList(getURLParameter('id'));
                 } else {
                     drawAds();
-                    renderAdList($.selectedAdTypes);
+                    renderAdList();
                 }
                 
             } else {
@@ -174,15 +148,13 @@ function getAdFloorInfo(fl) {
     
 function drawAds(){
     var areas = $.map($('area'),function(el) {
-        if($.inArray($(el).attr('data-shop-name'),$.selectedAdTypes) != -1){
-            return { 
-                key: $(el).attr('data-key'),
-                fillColor: 'ffff00',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        }
+        return { 
+            key: $(el).attr('data-key'),
+            fillColor: 'ffff00',
+            fillOpacity: 1,
+            stroke: false,
+            selected: true 
+        }; 
     });
     
     var xOffset;
@@ -268,14 +240,14 @@ function drawAdsFromList(sc){
     });
 }
 
-function renderAdList(ad){
+function renderAdList(){
     $('.weui-panel__bd').html('');
     
     $.selectedAds = [];
     
     $.each($.parseJSON(sessionStorage.getItem("ads")), function(i,v){
         if(v.shopState == 1) {
-            if(v.subType == 'ad' && v.floor == getURLParameter('f') && v.coords != null && v.coords != '' && v.state != 0 && $.inArray(v.shopName,$.selectedAdTypes) != -1){
+            if(v.subType == 'ad' && v.floor == getURLParameter('f') && v.coords != null && v.coords != '' && v.state != 0){
                 if(v.shopState == 1){
                     $.selectedAds.push(v.code);
                     var src = '/views/assets/base/img/content/mall/1s.jpg';

@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<div id="aplayer" style="display: none;"></div>
+<div id="aplayer" class="aplayer" style="display: none;"></div>
 
 <script type="text/javascript" src="/views/assets/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/weui/js/jweixin-1.0.0.js"></script>
