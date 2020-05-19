@@ -1,7 +1,89 @@
 $.selectedShops = new Array();
 
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var time = d.getTime();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+
 $(document).ready(function(){
     showLoading();
+    
+    var floorDesc, floor = '8F';
+    if(getURLParameter('f') && getURLParameter('f') != '') {
+        switch (getURLParameter('f')) {
+            case '0':
+                floorDesc = '负一楼';
+                floor = 'B1';
+                break;
+            case '1':
+                floorDesc = '一楼';
+                floor = 'L1';
+                break;
+            case '2':
+                floorDesc = '二楼';
+                floor = 'L2';
+                break;
+            case '3':
+                floorDesc = '三楼';
+                floor = 'L3';
+                break;
+            case '4':
+                floorDesc = '四楼';
+                floor = 'L4';
+                break;
+            case '5':
+                floorDesc = '五楼';
+                floor = 'L5';
+                break;
+            case '6':
+                floorDesc = '六楼';
+                floor = 'L6';
+                break;
+            case '7':
+                floorDesc = '七楼';
+                floor = 'L7';
+                break;
+            case '8':
+                floorDesc = '八楼';
+                floor = 'L8';
+                break;
+            case '9':
+                floorDesc = '九楼';
+                floor = 'L9';
+                break;
+            default:
+                floorDesc = [];
+                floor = 'L1';
+                break;
+        }
+        
+        $('#map').attr({
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
+            'alt'   : getURLParameter('f')+'F',
+            'usemap': '#Map_'+getURLParameter('f')+'F'
+        });
+        $('map').attr({
+            'name'  : 'Map_'+getURLParameter('f')+'F',
+            'id'    : '"Map_'+getURLParameter('f')+'F'
+        });
+        getShopFloorInfo(floorDesc);
+    } else {
+        $('#map').attr({
+            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png',
+            'alt'   : '8F',
+            'usemap': '#Map_8F'
+        });
+        $('map').attr({
+            'name'  : 'Map_8F',
+            'id'    : '"Map_8F'
+        });
+
+        getShopFloorInfo('八楼');
+    }
+        
     $('#showCategoryPicker').on('click', function () {
         weui.picker([{
             label: '不限业态',
@@ -81,11 +163,14 @@ $(document).ready(function(){
             onConfirm: function (result) {
                 $('#showCategoryPicker').text(result[0].label);
                 $.cookie('category',result[0].value);
+                $.cookie('categoryDesc',result[0].label);
+
+                getShopFloorInfo(floorDesc);
             },
             title: '请选择业态'
         });
     });
-    
+
     $('#showSizePicker').on('click', function () {
         weui.picker([{
             label: '不限面积',
@@ -120,146 +205,66 @@ $(document).ready(function(){
             onConfirm: function (result) {
                 $('#showSizePicker').text(result[0].label);
                 $.cookie('size',result[0].value);
+                $.cookie('sizeDesc',result[0].label);
+
+                getShopFloorInfo(floorDesc);
             },
             title: '请选择面积范围'
         });
     });
-    
-    $('#showDatePicker').on('click', function (){
-        weui.datePicker({
-            start: 2020,
-            end: new Date().getFullYear(),
+
+    $('#showFloorPicker').on('click', function (){
+        weui.picker([{
+            label: '8F 聚会时光',
+            value: '8'
+        }, {
+            label: '7F 健康生活',
+            value: '7'
+        }, {
+            label: '6F 国风文化',
+            value: '6'
+        },{
+            label: '5F 运动潮玩',
+            value: '5'
+        }, {
+            label: '4F 型男周边',
+            value: '4'
+        },{
+            label: '3F 精致女孩/千禧女孩',
+            value: '3'
+        },{
+            label: '2F 家庭生活',
+            value: '2'
+        },{
+            label: '1F 国际风尚/滨江夜食',
+            value: '1'
+        },{
+            label: 'B1 配套服务',
+            value: '0'
+        }], {
             onChange: function (result) {
-                console.log(result);
             },
             onConfirm: function (result) {
-                $.cookie('startDate',result[0].label+result[1].label+result[2].label);
-                $('#showDatePicker').text( $.cookie('startDate'));
+                $.cookie('floor',result[0].value);
+                window.location.href = '/v2/floor-plan?f='+result[0].value+'&type=leasing';
             },
-            title: '请选择起始日期'
+            title: '请选择铺位所在楼层'
         });
     });
     
-    $('.nav-item>a').on('click', function () {
-        $(".weui-navs ul ul li").removeClass('active');
-        $('.nav-item').children('ul').hide();
-        if ($(this).next().css('display') == "none") {
-            hideLoading();
-            //展开
-            $('.nav-item').children('ul').hide();
-            $(this).next('ul').show();
-            $(this).parent('li').addClass('nav-show').siblings('li').removeClass('nav-show');
-        } else {
-            //收缩
-            $(this).next('ul').hide();
-            $('.nav-item.nav-show').removeClass('nav-show');
-        }
-    });
-
-    var sidebarjs = new SidebarJS('navbar');
-    
-    var floorDesc, floor = '8F';
-    if(getURLParameter('f') && getURLParameter('f') != '') {
-        switch (getURLParameter('f')) {
-            case '0':
-                floorDesc = '负一楼';
-                floor = 'B1';
-                break;
-            case '1':
-                floorDesc = '一楼';
-                floor = 'L1';
-                break;
-            case '2':
-                floorDesc = '二楼';
-                floor = 'L2';
-                break;
-            case '3':
-                floorDesc = '三楼';
-                floor = 'L3';
-                break;
-            case '4':
-                floorDesc = '四楼';
-                floor = 'L4';
-                break;
-            case '5':
-                floorDesc = '五楼';
-                floor = 'L5';
-                break;
-            case '6':
-                floorDesc = '六楼';
-                floor = 'L6';
-                break;
-            case '7':
-                floorDesc = '七楼';
-                floor = 'L7';
-                break;
-            case '8':
-                floorDesc = '八楼';
-                floor = 'L8';
-                break;
-            case '9':
-                floorDesc = '九楼';
-                floor = 'L9';
-                break;
-            default:
-                floorDesc = [];
-                floor = 'L1';
-                break;
-        }
-
-        $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
-            'alt'   : getURLParameter('f')+'F',
-            'usemap': '#Map_'+getURLParameter('f')+'F'
-        });
-        $('map').attr({
-            'name'  : 'Map_'+getURLParameter('f')+'F',
-            'id'    : '"Map_'+getURLParameter('f')+'F'
-        });
-        getShopFloorInfo(floorDesc);
-    } else {
-        $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png',
-            'alt'   : '8F',
-            'usemap': '#Map_8F'
-        });
-        $('map').attr({
-            'name'  : 'Map_8F',
-            'id'    : '"Map_8F'
-        });
-        
-        getShopFloorInfo('八楼');
+    $('#showFloorPicker').text('已选择'+floorDesc);
+    var categoryDesc = '不限业态';
+    if($.cookie('categoryDesc') != ''){
+        categoryDesc = $.cookie('categoryDesc');
     }
-
-    $('#floorNo').text(floor);
+    $('#showCategoryPicker').text(categoryDesc);
+    var sizeDesc = '不限面积';
+    if($.cookie('size') != ''){
+        sizeDesc = $.cookie('sizeDesc');
+    }
+    $('#showSizePicker').text(sizeDesc);
     
-    var size = 0.85;
-    $('#zoom_in').click(function (){
-        size = size + 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        addTextLayer();
-        
-        $('#zoom_out').attr('disabled', false);
-        if(size >= 2.35){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
-    $('#zoom_out').click(function (){
-        size = size - 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 0);
-        addTextLayer();
-        
-        $('#zoom_in').attr('disabled', false);
-        if(size <= 0.15){
-            $(this).attr('disabled', true);
-        } else {
-            $(this).attr('disabled', false);
-        }
-    });
-    
+    $('#floorNo').text(floor); 
 });
 
 function getShopFloorInfo(fl) {
@@ -281,16 +286,12 @@ function getShopFloorInfo(fl) {
                 hideLoading();
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
-
-                    }
-                    
                     if(v.shopState == 0 || v.shopState == 2){
-                        if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href="#" shape="poly" coords="'+v.coords+'" />'); 
                         }
                     } else {
-                        if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'"  data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                         }
                     }
@@ -463,28 +464,22 @@ function renderShopList(shop){
     
     $.each($.parseJSON(sessionStorage.getItem("shops")), function(i,v){
         if(v.shopState == 1) {
-            if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-                
-                
-                
-                
+            if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+  
                 var settle_date = '-';
                 var ATV = '';
                 var business_format_CHS = '-';
                 var free_of_ground_rent = '-';
                 var c_per = '';
+                var opening_date = '-';
                 $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-                    
                     if(v.unit == w.unit_no){
-                        settle_date = w.settle_date.split(' ')[0] || '';
                         ATV = w.ATV || '';
                         business_format_CHS = w.business_format_CHS || '-';
                         free_of_ground_rent = w.free_of_ground_rent || '-';
                         c_per = w.c_per+'/m<sup>2</sup>/月' || '';
                     }
                 })
-                    
-                
                 
                 area = v.area;
 
@@ -494,24 +489,47 @@ function renderShopList(shop){
                     if(v.images != null && v.images.length > 0){
                         src = v.images[0].image;
                     }
+                    
+                    if(v.shopState === 1 || v.shopState === 3) { // 空铺
+                        settle_date = IncrDates(date,15);
+                    } else { // 非空铺
+                        var contractExpire = new Date();
+                        contractExpire.setTime(v.contractExpireDate);
+                        var contractExpireYear = contractExpire.getFullYear('yyyy');
+                        var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                        if(contractExpireMonth < 10){
+                            contractExpireMonth = "0"+contractExpireMonth;
+                        }
+                        var contractExpireDate = contractExpire.getDate('dd');
+                        if(contractExpireDate < 10) {
+                            contractExpireDate = "0"+contractExpireDate;
+                        }
+                        
+                        settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
+                        
+                    }
+                    
+                    if(free_of_ground_rent != '-'){
+                        opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+                    }
 
-                    $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg">\n\
+                    $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
 <div class="weui-media-box__hd" style="position: relative; overflow: hidden; height: 110px;">\n\
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
 <span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
 <p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
 </div>\n\
-<div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc">进场日期: '+settle_date+'</p>\n\
-<p class="weui-media-box__desc">免租期: '+free_of_ground_rent+'天</p>\n\
+<div class="weui-media-box__bd" onclick=\'javascript: drawShopsFromList("'+v.code+'");\'>\n\
+<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
+<p class="weui-media-box__desc">开业日期: <strong>'+opening_date+'</strong></p>\n\
 <p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
 <p class="weui-media-box__desc">'+ATV+'</p>\n\
 <p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
 <ul class="weui-media-box__info">\n\
 <li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript:;\'>加入关注</a></li>\n\
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="color: #fa5151;">申请报价</a></li>\n\
 </ul>\n\
 </div>\n\
 </div>');
@@ -531,42 +549,22 @@ function showVR(id){
     $("#vr_viewer").show();
 }
 
-function askPrice(sc){
-    if($.cookie('startDate') == '' || $.cookie('startDate') == null){
-        weui.datePicker({
-            start: 2020,
-            end: new Date().getFullYear(),
-            onChange: function (result) {
-                console.log(result);
-            },
-            onConfirm: function (result) {
-                $.cookie('startDate',result[0].label+result[1].label+result[2].label);
-                $('#showDatePicker').text( $.cookie('startDate'));
-            },
-            title: '请选择起始日期'
-        });
-    } else {
-        window.location.href = '/v2/authentication?id='+sc+'';
-    }
-}
-
 function renderShopListFromDraw(sc){
     $('.weui-panel__bd').html('');
     $.each($.parseJSON(sessionStorage.getItem("shops")), function(i,v){
         if(v.code == sc){
             $.selectedShops.push(v.code);
-            
-            
-            
+
             var settle_date = '-';
             var ATV = '';
             var business_format_CHS = '-';
             var free_of_ground_rent = '-';
             var c_per = '';
+            var opening_date = '-';
+            
             $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
 
                 if(v.unit == w.unit_no){
-                    settle_date = w.settle_date.split(' ')[0] || '-';
                     ATV = w.ATV || '';
                     business_format_CHS = w.business_format_CHS || '-';
                     free_of_ground_rent = w.free_of_ground_rent || '-';
@@ -574,31 +572,50 @@ function renderShopListFromDraw(sc){
                 }
             })
             
-            
-            
-            
             var src = '/views/assets/base/img/content/mall/1s.jpg';
             if(v.images != null && v.images.length > 0){
                 src = v.images[0].image;
             }
+            
+            if(v.shopState === 1 || v.shopState === 3) { // 空铺
+                settle_date = IncrDates(date,15);
+            } else { // 非空铺
+                var contractExpire = new Date();
+                contractExpire.setTime(v.contractExpireDate);
+                var contractExpireYear = contractExpire.getFullYear('yyyy');
+                var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                if(contractExpireMonth < 10){
+                    contractExpireMonth = "0"+contractExpireMonth;
+                }
+                var contractExpireDate = contractExpire.getDate('dd');
+                if(contractExpireDate < 10) {
+                    contractExpireDate = "0"+contractExpireDate;
+                }
 
-            $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg">\n\
+                settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
+            }
+
+            if(free_of_ground_rent != '-'){
+                opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+            }
+            
+            $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
 <div class="weui-media-box__hd" style="position: relative; overflow: hidden; height: 110px;">\n\
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
 <span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
 <p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
 </div>\n\
-<div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc">进场日期: '+settle_date+'</p>\n\
-<p class="weui-media-box__desc">免租期: '+free_of_ground_rent+'</p>\n\
+<div class="weui-media-box__bd" onclick=\'javascript: drawShopsFromList("'+v.code+'");\'>\n\
+<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
+<p class="weui-media-box__desc">开业日期: <strong>'+opening_date+'</strong></p>\n\
 <p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
 <p class="weui-media-box__desc">'+ATV+'</p>\n\
 <p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
 <ul class="weui-media-box__info">\n\
 <li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: drawShopsFromList("'+v.code+'");\'>查看位置</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript:;\'>加入关注</a></li>\n\
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.code+'");\' style="color: #fa5151;">申请报价</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="color: #fa5151;">申请报价</a></li>\n\
 </ul>\n\
 </div>\n\
 </div>');
@@ -683,6 +700,186 @@ function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMi
 function GetShopInfo(sc){
     drawShopsFromList(sc);
     renderShopListFromDraw(sc);
+}
+
+function askPrice(ut,sc,ed,od,ud,a){
+    showLoading();
+    var unit = ut;
+    var enterDate = ed;
+    var openDate = od;
+    var unitDesc = ud;
+    var area = a;
+    var outTradeNo = '100001' + d.getFullYear() +
+                (month<10 ? '0' : '') + month +
+                (day<10 ? '0' : '') + day + time
+                + '0000' + parseInt(Math.random()*10);
+    
+    /* 
+     * @订单状态  
+     *  待确认订单
+     *  待用印订单
+     *  用印中订单
+     *  待付款订单
+     *  已完成订单
+     *  已关闭订单
+     *  已隐藏订单
+     */
+    
+    var map = {
+        "amount": 100000,
+        "appid": "test",
+        "brandId": "",
+        "brandName": $.cookie('brand_1'),
+        "code": unit,
+        "contractInfos": [
+          {
+            "amount": "",
+            "bizScope": "testss",
+            "breachAmount": "",
+            "code": unit,
+            "depositAmount": "",
+            "electricBillFlag": "1",
+            "endDate": "",
+            "enterDate": enterDate,
+            "isCleaning": "1",
+            "isSecurity": "1",
+            "isService": "1",
+            "mobileNo": $.cookie('uid'),
+            "name": "test name",
+            "num": 1,
+            "openDate": openDate,
+            "orgCode": "100001",
+            "otherFlag": "",
+            "outTradeNo": outTradeNo,
+            "remarkFifth": "",
+            "remarkFirst": "",
+            "remarkFourth": "",
+            "remarkSecond": "",
+            "remarkThird": "",
+            "salesFlag": "1",
+            "serviceDepositAmount": 2000,
+            "size": "", //广告尺寸规格
+            "spec": "",
+            "startDate": openDate,
+            "unitCode": unit,
+            "unitDesc": unitDesc,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "userId": "10000101",
+            "vipFlag": "1",
+            "wxCardFlag": "1",
+            "area": area //广告默认传1
+          }
+        ],
+        "contractNo": "",
+        "contractTermInfos": [
+          {
+            "amount": "",
+            "code": "11",
+            "endDate": "",
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": outTradeNo,
+            "rentAmount": "",
+            "startDate": openDate,
+            "taxAmount": "",
+            "termType": "B011",
+            "termTypeName": "固定租金",
+            "unitCode": unit,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": area 
+          },
+          {
+            "amount": "",
+            "code": "11",
+            "endDate": "",
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": outTradeNo,
+            "rentAmount": "",
+            "startDate": openDate,
+            "taxAmount": "",
+            "termType": "B021",
+            "termTypeName": "物业管理费",
+            "unitCode": unit,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": area
+          },
+          {
+            "amount": 0.15,
+            "code": "11",
+            "endDate": "",
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": outTradeNo,
+            "startDate": openDate,
+            "taxAmount": 0.015,
+            "termType": "G021",
+            "termTypeName": "推广费",
+            "unitCode": unit,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": area
+          },
+          {
+            "amount": "",
+            "code": "11",
+            "endDate": "",
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": outTradeNo, //订单号需动态调用
+            "rentAmount": "",
+            "startDate": openDate,
+            "taxAmount": "",
+            "termType": "D011",
+            "termTypeName": "提成扣率",
+            "unitCode": unit,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": area
+          }
+        ],
+        "contractType": "R1",//R1租赁 R4广告 R5场地
+        "mobileNo": $.cookie('uid'),
+        "name": "wechatol",
+        "orderStates": "待确认订单", //订单状态
+        "orgCode": "100001",
+        "outTradeNo": outTradeNo,
+        "payStates": "未支付", //支付状态
+        "tenantId": "海鼎公司uuid",
+        "tenantName": "公司名",
+        "tenantNo": "海鼎公司编号",
+        "tenantOrg": "G12321312312223131", //uscc
+        "userId": "sfsdfsfasfsfasdfasdf",
+        "remarkFirst": sc
+    };
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                window.location.href = '/v2/authentication?id='+sc+'';
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
 }
 
 function NetPing(images,vr) {

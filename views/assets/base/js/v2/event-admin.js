@@ -11,7 +11,7 @@ $(document).ready(function(){
     GetShopInfo();
     
     $('.choose_event').click(function(){
-        window.location.href = '/v2/choose-event?id='+getURLParameter('id');
+        window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
     });
     
     $('#slide1').swipeSlide({
@@ -234,17 +234,17 @@ var ContentOwlcarousel = function() {
     var _initInstances = function() {
         $('.owl-carousel').owlCarousel({
             loop: true,
-            margin: 15,
-            dots: false,
+            margin: 0,
+            dots: true,
             responsive:{
                 0:{
-                    items:1.5
+                    items:1
                 },
                 600:{
-                    items:3.5
+                    items:2
                 },
                 1000:{
-                    items:5.5
+                    items:3
                 }
             }
         })

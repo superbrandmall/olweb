@@ -12,7 +12,7 @@ $(document).ready(function(){
                     var passed = '<div class="js_dialog" id="passed" style="display: none;">\n\
             <div class="weui-mask">\n\
             </div><div class="weui-dialog">\n\
-            <div class="weui-dialog__bd">我们初步接受您的报价方案，请继续后续步骤</div>\n\
+            <div class="weui-dialog__bd">恭喜您阁下！我们初步接受了您的报价方案，接下来请点击"知道了"继续吧。</div>\n\
             <div class="weui-dialog__ft">\n\
             <a href="javascript: redirect(\'/v2/contract?type=event\');" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
             </div>\n\
@@ -45,7 +45,7 @@ $(document).ready(function(){
                     var failed = '<div class="js_dialog" id="failed" style="display: none;">\n\
             <div class="weui-mask">\n\
             </div><div class="weui-dialog">\n\
-            <div class="weui-dialog__bd">您的报价过低，请重新出价</div>\n\
+            <div class="weui-dialog__bd">尊敬的阁下，您的报价有点低哦，我们再谈一次吧？请您点击"知道了"重新出价吧。</div>\n\
             <div class="weui-dialog__ft">\n\
             <a href="javascript: redirect(\'remove\');" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
             </div>\n\
@@ -63,7 +63,7 @@ $(document).ready(function(){
                     var passed = '<div class="js_dialog" id="passed" style="display: none;">\n\
             <div class="weui-mask">\n\
             </div><div class="weui-dialog">\n\
-            <div class="weui-dialog__bd">我们初步接受您的报价方案，请继续后续步骤</div>\n\
+            <div class="weui-dialog__bd">恭喜您阁下！我们初步接受了您的报价方案，接下来请点击"知道了"继续吧。</div>\n\
             <div class="weui-dialog__ft">\n\
             <a href="javascript: redirect(\'/v2/contract?type=event\');" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
             </div>\n\
@@ -80,7 +80,7 @@ $(document).ready(function(){
                     var failed = '<div class="js_dialog" id="failed" style="display: none;">\n\
             <div class="weui-mask">\n\
             </div><div class="weui-dialog">\n\
-            <div class="weui-dialog__bd">您的报价过低，现阶段没有合适的合作机会，我们会有专人与您取得联系</div>\n\
+            <div class="weui-dialog__bd">尊敬的阁下，很遗憾您的报价还是低于我们的预期，看来现阶段我们没有合适的机会跟您合作，不过没关系，稍后我们会有专人与您取得联系哦。</div>\n\
             <div class="weui-dialog__ft">\n\
             <a href="javascript: redirect(\'/v2/default\');" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
             </div>\n\

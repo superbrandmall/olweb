@@ -66,8 +66,8 @@ $(document).ready(function(){
                     window.location.href = '/v2/floor-plan?f='+getURLParameter('f')+'&type=leasing';
                 } else if(getURLParameter('type') == 'ads'){
                     window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
-                } else {
-                    window.location.href = '/v2/info';
+                } else if(getURLParameter('type') == 'events'){
+                    window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
                 }
             } else {
                 window.location.href = '/v2/info';

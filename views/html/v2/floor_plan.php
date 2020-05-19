@@ -34,7 +34,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 <div class="page__bd">    
     <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd"><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 10px;"></span> 推荐位置</div>
+        <div class="weui-panel__hd"><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 5px;"></span> 推荐位置 <small>(可点击上图黄色位置查看铺位详细信息)</small></div>
         <div class="weui-panel__bd" style="max-height: 300px; overflow: auto;"></div>
     </div>
 </div>

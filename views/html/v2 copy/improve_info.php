@@ -4,6 +4,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 太好了！人工智能已经开始准备合同了！您还需要再确认一遍以下信息，麻烦您看一下这些信息是否完善了？</div>
+
 <form id="improve_form">
     <div class="page__bd" style="background-color: #EDEDED;">
         <div class="weui-form">

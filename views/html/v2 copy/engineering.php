@@ -5,6 +5,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 谢谢您能接受我们的报价，麻烦您再看一下本铺位的工程条件是否还有什么问题？</div>
+
 <div class="page__bd" style="font-size: 15px;">
     <div class="weui-article">
         <h2 class="title">工程条件确认</h2>

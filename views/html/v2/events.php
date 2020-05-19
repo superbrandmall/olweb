@@ -12,10 +12,10 @@
                             <img src="/views/assets/base/img/content/events/pearl_atrium.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001126'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001126&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>1F东厅</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001126'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001126&type=events'" class="weui-cell__ft"></span>
                 </div>
                 <div class="weui-cell weui-cell_active weui-cell_access">
                     <div class="weui-cell__hd">
@@ -23,10 +23,10 @@
                             <img src="/views/assets/base/img/content/events/bund_atrium.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001116'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001116&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>1F西厅</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001116'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001116&type=events'" class="weui-cell__ft"></span>
                 </div>
                 <div class="weui-cell weui-cell_active weui-cell_access">
                     <div class="weui-cell__hd">
@@ -34,10 +34,10 @@
                             <img src="/views/assets/base/img/content/events/gd_avenue.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>    
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001150'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001150&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>3F黄金大道</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001150'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001150&type=events'" class="weui-cell__ft"></span>
                 </div>
                 <div class="weui-cell weui-cell_active weui-cell_access">
                     <div class="weui-cell__hd">
@@ -45,10 +45,10 @@
                             <img src="/views/assets/base/img/content/events/gd_platform.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP190809000001'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP190809000001&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>4F东厅</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP190809000001'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP190809000001&type=events'" class="weui-cell__ft"></span>
                 </div>
                 <div class="weui-cell weui-cell_active weui-cell_access">
                     <div class="weui-cell__hd">
@@ -56,10 +56,10 @@
                             <img src="/views/assets/base/img/content/events/jade_platform.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001166'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001166&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>5F东平台</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001166'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001166&type=events'" class="weui-cell__ft"></span>
                 </div>
                 <div class="weui-cell weui-cell_active weui-cell_access">
                     <div class="weui-cell__hd">
@@ -67,10 +67,10 @@
                             <img src="/views/assets/base/img/content/events/ct_hall.jpg" alt="" style="width: 30px; height: 20px; margin-right: 16px; display: block;">
                         </a>
                     </div>
-                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001169'" class="weui-cell__bd weui-cell_primary">
+                    <div onclick="window.location = '/v2/event?id=OLSHOP180917001169&type=events'" class="weui-cell__bd weui-cell_primary">
                         <p>9F封闭式多功能大厅</p>
                     </div>
-                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001169'" class="weui-cell__ft"></span>
+                    <span onclick="window.location = '/v2/event?id=OLSHOP180917001169&type=events'" class="weui-cell__ft"></span>
                 </div>
             </div>
         </div>

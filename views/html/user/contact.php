@@ -21,7 +21,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                                 <select class="form-control input-lg c-square" id="target_mall" name="target_mall" required>
                                     <option value=""><?= $lang['nav_malls'] ?>*</option>
                                     <option value="<?= $shanghai_sbm ?>"><?= $lang['search_ljz'] ?></option>
-                                    <option value="<?= $baoshan_tm ?>"><?= $lang['search_bs'] ?></option>
+                                    <option value="<?= $bs_tm ?>"><?= $lang['search_bs'] ?></option>
                                     <option value="<?= $luoyang_sbm ?>"><?= $lang['search_ly'] ?></option>
                                     <option value="<?= $hefei_sbm ?>"><?= $lang['search_hf'] ?></option>
                                 </select>

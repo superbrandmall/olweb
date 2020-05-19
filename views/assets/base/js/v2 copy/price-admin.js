@@ -217,6 +217,17 @@ function getShopsMoreInfo() {
 
 function SaveOrder(){
     var shopCode = getURLParameter('id') || null;
+    
+    /* 
+     * @订单状态  
+     *  待确认订单
+     *  待用印订单
+     *  用印中订单
+     *  待付款订单
+     *  已完成订单
+     *  已关闭订单
+     */
+    
     var map = {
         "amount": 100000,
         "appid": "test",

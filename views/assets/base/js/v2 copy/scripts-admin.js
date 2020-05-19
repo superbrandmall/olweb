@@ -13,6 +13,22 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        bgAudioPlay();
+    });
+    
+    if($('.weui-toptips.topTips').length > 0){
+        if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
+            $('.weui-toptips.topTips').hide();  
+        } else {
+            $('.weui-toptips.topTips').slideDown();
+            setTimeout(function () {
+                $('.weui-toptips.topTips').slideUp();  
+            }, 10000);
+            $.cookie(location.pathname.split("/")[2],1);
+        }
+    }
+            
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
     }
@@ -147,6 +163,67 @@ function hideLoading() {
     var $loadingToast = $('#loadingToast');
     if ($loadingToast.css('display') == 'none') return;
     $loadingToast.fadeOut();
+}
+
+function bgAudioPlay() {
+    const ap = new APlayer({
+        container: document.getElementById('aplayer'),
+        autoplay: true,
+        preload: 'auto',
+        loop: 'all',
+        volume: 0.1,
+        audio: [{
+            url: '/upload/audio/v2_bg_music.mp3'
+        }]
+    });
+}
+
+function IncrDate(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() + 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrDates(date_str,dates){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() + dates);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
 }
 
 $.validator.addMethod('numChar',function(text){

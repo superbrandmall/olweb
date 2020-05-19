@@ -32,56 +32,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div class="page__bd"> 
     <div class="weui-panel weui-panel_access">
         <div class="weui-panel__hd">
-            <span><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 10px;"></span> 推荐位置</span>
-            <div class="weui-cell__ft" style="float: right;"><a href="advertising-shopping-cart" class="weui-link"><i class="fa fa-shopping-cart" aria-hidden="true"></i> 查看购物车</a></div>
+            <span><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 5px;"></span> 推荐位置</span>
+            <div class="weui-cell__ft" style="float: right;"><a href="advertising-shopping-cart" class="weui-link"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <small>查看购物车</small></a></div>
         </div>
         <div class="weui-panel__bd" style="max-height: 300px; overflow: auto;"></div>
     </div>
 </div>
-<!--<div class="weui-navs" navbar>
-    <ul>
-        <li class="nav-item">
-            <a id="f8_g" href="/v2/advertising?f=8">8F</a>
-            <div class="weui-form__control-area">
-              <div class="weui-cells__group weui-cells__group_form">
-                  <div class="weui-cells weui-cells_checkbox">
-                      <?php include ('ads-types/8.html'); ?>
-                  </div>
-              </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a id="f5_g" href="/v2/advertising?f=5">5F</a>
-            <div class="weui-form__control-area">
-              <div class="weui-cells__group weui-cells__group_form">
-                  <div class="weui-cells weui-cells_checkbox">
-                      <?php include ('ads-types/5.html'); ?>
-                  </div>
-              </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a id="f3_g" href="/v2/advertising?f=3">3F</a>
-            <div class="weui-form__control-area">
-              <div class="weui-cells__group weui-cells__group_form">
-                  <div class="weui-cells weui-cells_checkbox">
-                      <?php include ('ads-types/3.html'); ?>
-                  </div>
-              </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a id="f1_g" href="/v2/advertising?f=1">1F</a>
-            <div class="weui-form__control-area">
-              <div class="weui-cells__group weui-cells__group_form">
-                  <div class="weui-cells weui-cells_checkbox">
-                      <?php include ('ads-types/1.html'); ?>
-                  </div>
-              </div>
-            </div>
-        </li>
-    </ul>
-</div>-->
 
 <div id="gallery" class="weui-gallery" style="display: none;">
     <div class="weui-gallery__opr">

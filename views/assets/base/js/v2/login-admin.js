@@ -77,9 +77,9 @@ $(document).ready(function(){
                                             window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
                                         } else if(getURLParameter('type') == 'ads'){
                                             window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
-                                        }
-                                    } else if(getURLParameter('id')){
-                                        window.location.href = '/v2/register-events?id='+getURLParameter('id');
+                                        } else if(getURLParameter('type') == 'events'){
+                                            window.location.href = '/v2/register?id='+getURLParameter('id')+'&type=events';
+                                        } 
                                     } else {
                                         window.location.href = '/v2/register';
                                     }
@@ -158,7 +158,7 @@ function setTimeLogin(obj) {
             'href':'javascript: void(0)',
             'disabled': true
         });
-        obj.html("重新获取(" + countdownLogin + ")s");
+        obj.html("重新获取(" + countdownLogin + ")");
         countdownLogin--; 
     } 
 setTimeout(function() { 

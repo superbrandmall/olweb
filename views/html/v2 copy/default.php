@@ -4,6 +4,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 您好！欢迎来到正大商业地产智能招商平台，接下去我会陪您一起挑选您心仪的铺位、场地和广告位哦！</div>
 
 <div class="slide" id="slide1">
     <ul>

@@ -2,6 +2,14 @@ var first_year_bond = '-';
 var second_year_bond = '-';
 var third_year_bond = '-';
 
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var time = d.getTime();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    
 $(document).ready(function(){
     GetShopPriceInfo();
     //SaveOrder();
@@ -12,59 +20,6 @@ $(document).ready(function(){
     
     $('#negotiate').click(function(){
         window.location.href = '/v2/negotiation?id='+getURLParameter('id')+'#contract_info';
-    });
-    
-    $(function(){
-        var $sliderTrack = $('#sliderTrack'),
-            $sliderHandler = $('#sliderHandler'),
-            $sliderValue = $('#sliderValue');
-
-        var totalLen = $('#sliderInner').width(),
-            startLeft = 0,
-            startX = 0;
-
-        $sliderHandler
-            .on('touchstart', function (e) {
-                startLeft = parseInt($sliderHandler.css('left')) * totalLen / 100;
-                startX = e.originalEvent.changedTouches[0].clientX;
-            })
-            .on('touchmove', function(e){
-                var dist = startLeft + e.originalEvent.changedTouches[0].clientX - startX,
-                    percent;
-                dist = dist < 0 ? 0 : dist > totalLen ? totalLen : dist;
-                percent =  parseInt(dist / totalLen * 100);
-                var years;
-                if(percent >= 0 && percent < 31) {
-                    years = 1;
-                    $('#year_2').fadeOut();
-                    $('#year_3').fadeOut();
-                    
-                    $('#bond').text(first_year_bond);
-                    $.cookie('bond',first_year_bond);
-                } else if(percent >= 31 && percent < 71) {
-                    years = 2;
-                    $('#year_2').fadeIn();
-                    $('#year_3').fadeOut();
-                    
-                    $('#bond').text(second_year_bond);
-                    $.cookie('bond',second_year_bond);
-                } else if(percent >= 71) {
-                    years = 3;
-                    $('#year_2').fadeIn();
-                    $('#year_3').fadeIn();
-                    
-                    $('#bond').text(third_year_bond);
-                    $.cookie('bond',third_year_bond);
-                }
-                $.cookie('years',years);
-                
-                $sliderTrack.css('width', percent + '%');
-                $sliderHandler.css('left', percent + '%');
-                $sliderValue.text(years+'年');
-
-                e.preventDefault();
-            })
-        ;
     });
 });
 
@@ -118,8 +73,6 @@ function GetShopPriceInfo(){
                 $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
                     
                     if(response.data.unit == w.unit_no){
-                        settle_date = w.settle_date.split(' ')[0] || '';
-                        open_date = w.settle_date.split(' ')[0] || '';
                         free_of_ground_rent = w.free_of_ground_rent + '天' || '-';
                         
                         first_year_unit_price = '¥'+w.first_year.first_year_unit_price + '/m²' || '-';
@@ -142,6 +95,28 @@ function GetShopPriceInfo(){
                     }
                 })
                 
+                if(response.data.shopState === 1 || response.data.shopState === 3) { // 空铺
+                    settle_date = IncrDates(date,15);
+                } else { // 非空铺
+                    var contractExpire = new Date();
+                    contractExpire.setTime(response.data.contractExpireDate);
+                    var contractExpireYear = contractExpire.getFullYear('yyyy');
+                    var contractExpireMonth = contractExpire.getMonth('mm')+1;
+                    if(contractExpireMonth < 10){
+                        contractExpireMonth = "0"+contractExpireMonth;
+                    }
+                    var contractExpireDate = contractExpire.getDate('dd');
+                    if(contractExpireDate < 10) {
+                        contractExpireDate = "0"+contractExpireDate;
+                    }
+
+                    settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
+
+                }
+
+                if(free_of_ground_rent != '-'){
+                    open_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+                }
                 
                 $('#room_name').text(response.data.shopName || '-');
                 $.cookie('room_name',$('#room_name').text());
@@ -217,6 +192,17 @@ function getShopsMoreInfo() {
 
 function SaveOrder(){
     var shopCode = getURLParameter('id') || null;
+    
+    /* 
+     * @订单状态  
+     *  待确认订单
+     *  待用印订单
+     *  用印中订单
+     *  待付款订单
+     *  已完成订单
+     *  已关闭订单
+     */
+    
     var map = {
         "amount": 100000,
         "appid": "test",

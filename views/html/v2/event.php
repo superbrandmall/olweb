@@ -95,7 +95,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <br>
 <br>
 <br>
-<br>
 
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

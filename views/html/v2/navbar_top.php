@@ -6,5 +6,7 @@
     </div>
     <div class="weui-cell__ft">
         <a href="#!" style="color: #333;"><small>EN</small></a>
+         | 
+        <a href="/v2/contact" style="color: #333;"><small>客服</small></a>
     </div>
 </div>

@@ -5,16 +5,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <?php include ('navbar_top.php'); ?>
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，请从下列菜单中选择VR看场的商业项目。</div>
 
-<div class="page__bd">
+<div class="page__bd" style="margin-top: 50px;">
     <a href="javascript: showVR();" class="weui-btn weui-btn_primary">上海正大广场</a>
     <a href="javascript:;" class="weui-btn weui-btn_default">洛阳正大广场</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">合肥正大广场</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">乐清正大广场</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">徐汇正大乐城</a>
     <a href="javascript:;" class="weui-btn weui-btn_default">宝山正大乐城</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">郑州正大乐城</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">无锡正大乐城</a>
-    <a href="javascript:;" class="weui-btn weui-btn_default">北京正大中心</a>
 </div>
 
 <div id="vr_viewer" class="weui-gallery">

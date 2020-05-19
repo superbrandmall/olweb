@@ -19,7 +19,7 @@
     </a>
     <a href="/v2/info" class="weui-tabbar__item">
         <div style="display: inline-block; position: relative;">
-            <i class="weui-tabbar__icon fa fa-user" aria-hidden="true"></i>
+            <i class="weui-tabbar__icon fa fa-user-o" aria-hidden="true"></i>
             <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;"></span>
         </div>
         <p class="weui-tabbar__label">个人主页</p>

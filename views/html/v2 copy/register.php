@@ -3,6 +3,7 @@
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 啊呀，我都不知道怎样称呼您！？悄悄告诉我一些您的信息，我们交个朋友吧！</div>
 
 <form id="register_form">
     <div class="page__bd" style="background-color: #EDEDED;">

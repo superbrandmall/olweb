@@ -4,6 +4,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 太激动了，我们快要成交了！在这里您可以看到"应缴金额"并选择支付方式，付款成交后会有服务人员与您联系哦。</div>
 
 <div class="page__bd" style="font-size: 15px;">
     <div class="page__bd">

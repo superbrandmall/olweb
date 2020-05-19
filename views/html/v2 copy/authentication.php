@@ -4,6 +4,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 谢谢您的青睐！在给您报价前，我们还需要核实一下您公司的信息，所以不好意思还要耽误您一会儿时间。</div>
+
 <form id="authentication_form">
     <div class="page__bd" style="background-color: #EDEDED;">
         <div class="weui-form">

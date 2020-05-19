@@ -100,7 +100,7 @@ $(document).ready(function(){
         });
     });
     
-    $('#showFloorPicker p').text(floorDesc);
+    $('#showFloorPicker p').text('已选择'+floorDesc);
     $('#floorNo').text(floor);
 });
 
@@ -261,7 +261,7 @@ function renderAdList(){
 <span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
 </div>\n\
 <div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc" style="-webkit-line-clamp: 4;">'+v.remark_1+'</p>\n\
+<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; font-size: 12px;">'+v.remark_1+'</p>\n\
 <p class="weui-media-box__desc">价格: '+v.remark_2+'/月</p>\n\
 <ul class="weui-media-box__info">\n\
 <li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.remark_6+'");\'>VR</a></li>\n\
@@ -299,7 +299,7 @@ function renderAdListFromDraw(sc){
 <span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
 </div>\n\
 <div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc" style="-webkit-line-clamp: 4;">'+v.remark_1+'</p>\n\
+<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; font-size: 12px;">'+v.remark_1+'</p>\n\
 <p class="weui-media-box__desc">价格: '+v.remark_2+'/月</p>\n\
 <ul class="weui-media-box__info">\n\
 <li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.remark_6+'");\'>VR</a></li>\n\

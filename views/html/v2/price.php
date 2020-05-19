@@ -50,119 +50,55 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         </div>
     </div>
     <br>
-    <div class="weui-form">
-        <div class="weui-form__control-area">
-            <div class="weui-cells__group weui-cells__group_form">
-                <div class="weui-cells_form">
-                    <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">合同年限</label></div>
-                        <div class="weui-cell__bd">
-                            <div class="weui-slider-box">
-                                <div class="weui-slider">
-                                    <div id="sliderInner" class="weui-slider__inner">
-                                        <div id="sliderTrack" style="width: 30%;" class="weui-slider__track"></div>
-                                        <div id="sliderHandler" style="left: 30%;" class="weui-slider__handler"></div>
-                                    </div>
-                                </div>
-                                <div id="sliderValue" class="weui-slider-box__value">1年</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div style="background-color: #fff; font-size: 15px; padding: 0 16px;">
-        <div id="year_3" style="display: none;">
-            <div class="weui-form-preview__hd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">合同信息</label>
-                    <em class="weui-form-preview__value">第3年</em>
-                </div>
-            </div>
-            <div class="weui-form-preview__bd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">日固定租金</label>
-                    <span id="third_year_unit_price" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">月固定租金</label>
-                    <span id="third_year_rent" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">扣率</label>
-                    <span id="third_year_deduction_rate" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">物业管理费</label>
-                    <span id="third_year_property_maintenance" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>
-                    <span class="weui-form-preview__value">1.50%</span>
-                </div>
+        <div class="weui-form-preview__hd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">合同信息</label>
+                <em class="weui-form-preview__value">3年</em>
             </div>
         </div>
-        <div id="year_2" style="display: none;">
-            <div class="weui-form-preview__hd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">合同信息</label>
-                    <em class="weui-form-preview__value">第2年</em>
-                </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>年限</th>
+                    <th>日固定租金</th>
+                    <th>月固定租金</th>
+                    <th>扣率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>第1年</td>
+                    <td id="first_year_unit_price"></td>
+                    <td id="first_year_rent"></td>
+                    <td id="first_year_deduction_rate"></td>
+                </tr>
+                <tr>
+                    <td>第2年</td>
+                    <td id="second_year_unit_price"></td>
+                    <td id="second_year_rent"></td>
+                    <td id="second_year_deduction_rate"></td>
+                </tr>
+                <tr>
+                    <td>第3年</td>
+                    <td id="third_year_unit_price"></td>
+                    <td id="third_year_rent"></td>
+                    <td id="third_year_deduction_rate"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">物业管理费</label>
+                <span id="third_year_property_maintenance" class="weui-form-preview__value"></span>
             </div>
-            <div class="weui-form-preview__bd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">日固定租金</label>
-                    <span id="second_year_unit_price" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">月固定租金</label>
-                    <span id="second_year_rent" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">扣率</label>
-                    <span id="second_year_deduction_rate" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">物业管理费</label>
-                    <span id="second_year_property_maintenance" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>
-                    <span class="weui-form-preview__value">1.50%</span>
-                </div>
-            </div>
-        </div>
-        <div id="year_1">
-            <div class="weui-form-preview__hd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">合同信息</label>
-                    <em class="weui-form-preview__value">第1年</em>
-                </div>
-            </div>
-            <div class="weui-form-preview__bd">
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">日固定租金</label>
-                    <span id="first_year_unit_price" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">月固定租金</label>
-                    <span id="first_year_rent" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">扣率</label>
-                    <span id="first_year_deduction_rate" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">物业管理费</label>
-                    <span id="first_year_property_maintenance" class="weui-form-preview__value"></span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>
-                    <span class="weui-form-preview__value">1.50%</span>
-                </div>
+            <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>
+                <span class="weui-form-preview__value">1.50%</span>
             </div>
         </div>
+        
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__item" style="text-align: left;">
                 <span class="weui-form-preview__value">*以上固定租金和物业管理费，推广费都为不含税价格，固定租金税率5%，物业管理费和推广费税率6%</span>

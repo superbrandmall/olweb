@@ -14,7 +14,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 </div>
                 <div class="weui-media-box__bd">
                     <h4 id="uid" class="weui-media-box__title"></h4>
-                    <p class="weui-media-box__desc"></p>
+                    <p id="contact_name_1" class="weui-media-box__desc"></p>
                 </div>
                 <a class="weui-cell__ft" href="/v2/improve-info" style="font-size: 15px; color: #576b95;">完善信息</a>
             </div>
@@ -85,15 +85,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-file-text" aria-hidden="true" style="margin-right: 10px; color: #07c160"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>发票抬头</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -103,7 +94,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="weui-panel__bd">
             <div class="weui-media-box weui-media-box_small-appmsg">
                 <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/contact">
                         <div class="weui-cell__hd">
                             <i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px; color: #10aeff;"></i>
                         </div>
@@ -112,7 +103,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/qa">
                         <div class="weui-cell__hd">
                             <i class="fa fa-life-saver" aria-hidden="true" style="margin-right: 10px; color: #91d300;"></i>
                         </div>

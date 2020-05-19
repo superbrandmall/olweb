@@ -79,7 +79,7 @@ $(document).ready(function(){
             $.cookie('bank_card_no', $('#bank_card_no').val());
             
             if(getURLParameter('id') && getURLParameter('id') != ''){
-                window.location.href = '/v2/order-to-be-stamped';
+                window.location.href = '/v2/stamping';
             } else {
                 window.location.href = '/v2/info';
             }

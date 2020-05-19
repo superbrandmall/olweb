@@ -3,6 +3,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 ?>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，请您告诉我们活动的档期、选择的有偿服务，以及您对本场地的报价，我们谈谈吧！</div>
 
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-form">

@@ -7,6 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
 
 <?php include ('navbar_top.php'); ?>
+<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 在这里您可以查看广告位说明，不仅有图文介绍，还有全景VR可以看哦。对了，如果都满意的话就点击"加入购物车"吧！</div>
 
 <div class="slide" id="slide1">
     <ul></ul>
