@@ -717,12 +717,12 @@ function askPrice(ut,sc,ed,od,ud,a){
     /* 
      * @订单状态  
      *  待确认订单
-     *  待用印订单
-     *  用印中订单
+     *  预览合同已生成
+     *  合同待用印
+     *  合同用印中
      *  待付款订单
      *  已完成订单
      *  已关闭订单
-     *  已隐藏订单
      */
     
     var map = {
@@ -871,7 +871,7 @@ function askPrice(ut,sc,ed,od,ud,a){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                window.location.href = '/v2/authentication?id='+sc+'';
+                window.location.href = '/v2/authentication?id='+sc+'&trade='+outTradeNo;
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

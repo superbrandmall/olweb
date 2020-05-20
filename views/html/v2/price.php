@@ -70,28 +70,28 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <tbody>
                 <tr>
                     <td>第1年</td>
-                    <td id="first_year_unit_price"></td>
-                    <td id="first_year_rent"></td>
-                    <td id="first_year_deduction_rate"></td>
+                    <td>¥<span id="first_year_unit_price"></span>/m²</td>
+                    <td>¥<span id="first_year_rent"></span></td>
+                    <td><span id="first_year_deduction_rate"></span>%</td>
                 </tr>
                 <tr>
                     <td>第2年</td>
-                    <td id="second_year_unit_price"></td>
-                    <td id="second_year_rent"></td>
-                    <td id="second_year_deduction_rate"></td>
+                    <td>¥<span id="second_year_unit_price"></span>/m²</td>
+                    <td>¥<span id="second_year_rent"></span></td>
+                    <td><span id="second_year_deduction_rate"></span>%</td>
                 </tr>
                 <tr>
                     <td>第3年</td>
-                    <td id="third_year_unit_price"></td>
-                    <td id="third_year_rent"></td>
-                    <td id="third_year_deduction_rate"></td>
+                    <td>¥<span id="third_year_unit_price"></span>/m²</td>
+                    <td>¥<span id="third_year_rent"></span></td>
+                    <td><span id="third_year_deduction_rate"></span>%</td>
                 </tr>
             </tbody>
         </table>
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">物业管理费</label>
-                <span id="third_year_property_maintenance" class="weui-form-preview__value"></span>
+                <span class="weui-form-preview__value">¥<span id="third_year_property_maintenance"></span>/月</span>
             </div>
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>

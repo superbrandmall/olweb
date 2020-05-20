@@ -1,25 +1,6 @@
 $(document).ready(function(){
     getBrandCategory();
     
-    $('.add').click(function(e){
-        e.preventDefault();
-        var newBrand = $('#brands').find('.weui-cells_form:first').clone();
-        $('#brands').append(newBrand);
-        var lastBrand = $('#brands').find('.weui-cells_form:last');
-        
-        lastBrand.find('.brand').attr('id','brand_'+$('#brands').find('.weui-cells_form').length).val('');  
-        lastBrand.find('.category').attr({
-            'id':'category_'+$('#brands').find('.weui-cells_form').length,
-            'name':'category_'+$('#brands').find('.weui-cells_form').length
-        }).val('');
-        lastBrand.find('.operation').attr({
-            'id':'operation_'+$('#brands').find('.weui-cells_form').length,
-            'name':'operation_'+$('#brands').find('.weui-cells_form').length
-        }).val('');
-
-        scrollTo(lastBrand);
-    });
-    
     $("#register_form").validate({
         rules: {
             brand_1: {
@@ -32,6 +13,12 @@ $(document).ready(function(){
                 required: true
             },
             contact_name_1: {
+                required: true
+            },
+            company_name: {
+                required: true
+            },
+            email: {
                 required: true
             }
         },
@@ -47,6 +34,12 @@ $(document).ready(function(){
             },
             contact_name_1: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            company_name: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            email: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
@@ -59,7 +52,6 @@ $(document).ready(function(){
             $.cookie('contact_name_1', $('#contact_name_1').val());
             $.cookie('company_name', $('#company_name').val());
             $.cookie('email', $('#email').val());
-            $.cookie('job_title', $('#job_title').val());
             
             if(getURLParameter('type')){
                 if(getURLParameter('type') == 'leasing'){
@@ -91,5 +83,4 @@ function getBrandCategory() {
     $('#contact_name_1').val($.cookie('contact_name_1'));
     $('#company_name').val($.cookie('company_name'));
     $('#email').val($.cookie('email'));
-    $('#job_title').val($.cookie('job_title'));
 } 

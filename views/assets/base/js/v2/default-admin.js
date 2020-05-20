@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('body').css('backgroundColor','#4e13d1');
+    $('body').css('backgroundColor','#292929');
     $('.weui-tabbar a').removeClass('weui-bar__item_on');
     $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');
     

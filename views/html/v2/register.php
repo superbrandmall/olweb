@@ -15,7 +15,6 @@
                 <div id="brands" class="weui-cells__group weui-cells__group_form" style="margin-top: 24px;">
                     <div class="weui-cells__title">
                         品牌信息
-                        <a class="add weui-link" href="#" style="float: right;">增加更多品牌</a>
                     </div>
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active">
@@ -64,21 +63,15 @@
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">公司名</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-company_name"><label class="weui-label">公司名*</label></div>
                             <div class="weui-cell__bd">
-                                <input id="company_name" class="weui-input" placeholder="填写公司名"/>
+                                <input name="company_name" id="company_name" required class="weui-input" placeholder="填写公司名"/>
                             </div>
                         </div>
                         <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">邮箱</label></div>
+                            <div class="weui-cell__hd errorDiv" id="errorcontainer-email"><label class="weui-label">邮箱*</label></div>
                             <div class="weui-cell__bd">
-                                <input type="email" id="email" class="weui-input" placeholder="填写邮箱"/>
-                            </div>
-                        </div>
-                        <div class="weui-cell weui-cell_active">
-                            <div class="weui-cell__hd"><label class="weui-label">职位</label></div>
-                            <div class="weui-cell__bd">
-                                <input id="job_title" class="weui-input" placeholder="填写职位"/>
+                                <input type="email" name="email" id="email" required class="weui-input" placeholder="填写邮箱"/>
                             </div>
                         </div>
                     </div>

@@ -201,7 +201,7 @@ transform:scale(1);
 
 /******* ART  ********/
 .weui-tabbar {
-    background-color: #2e55d4;
+    background-color: #c9b18d;
 }
 
 .weui-tabbar__icon>i, i.weui-tabbar__icon, .weui-tabbar__label {
@@ -256,7 +256,7 @@ transform:scale(1);
 }
 
 .mall-floors {
-    background-color: #444;
+    background-color: #292929;
     padding: 10px 30px;
 }
 
@@ -281,7 +281,7 @@ transform:scale(1);
     height: 8px;
     top: 0;
     margin-top: 0;
-    background-color: #ff5174;
+    background-color: #c5ad8a;
 }
 
 .mall-floors .weui-grid {
@@ -298,11 +298,11 @@ transform:scale(1);
     background: #515151;
     border-radius: 12px;
     display: inline-block;
-    color: #eee;
-    box-shadow: 0 0 8px #333;
+    color: #fff;
+    box-shadow: 0 0 5px #111;
 }
 
 .mall-floors .weui-grid a.active {
-    background: #fe516f;
-    box-shadow: 0 0 8px #cc183f;
+    background: #c5ac8a;
+    box-shadow: 0 0 8px #040404;
 }

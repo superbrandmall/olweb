@@ -176,6 +176,25 @@ function bgAudioPlay() {
             url: '/upload/audio/v2_bg_music.mp3'
         }]
     });
+        
+    //音轨补偿
+    setTimeout(function(){
+        //如果发现有本地存储，则进行音轨补偿
+        if(localStorage.getItem('bgm_time') != null) {
+            ap.seek(localStorage.getItem('bgm_time'));
+            ap.play();
+        }
+        //不断循环记录播放进度
+        window.setInterval(function(){
+            //检测是否支持本地存储
+            if(typeof(Storage) !== 'undefined'){
+                //写入BGM播放进度
+                localStorage.setItem('bgm_time',ap.audio.currentTime);
+            }
+        },100);
+        //初始化启动BGM
+        ap.play();
+    },1000);
 }
 
 function IncrDate(date_str){
@@ -221,6 +240,55 @@ function IncrDates(date_str,dates){
           parts[2] = "0" + parts[2];
         }
         return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrYear(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + (Number(dt.getFullYear()) + 1);
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+            parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+            
+    } else {
+        return '';
+    }
+}
+
+function IncrYears(date_str, years){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + (Number(dt.getFullYear()) + Number(years));
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+            parts[2] = "0" + parts[2];
+        }
+        return parts.join("-"); 
     } else {
         return '';
     }

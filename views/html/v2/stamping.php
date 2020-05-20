@@ -1,6 +1,5 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/stamping-admin.js"></script>'
-        . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/stamping-admin.js"></script>';
 ?>
 
 <?php include ('navbar_top.php'); ?>
@@ -28,7 +27,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="weui-panel">
             <div class="weui-panel__hd">
                 B1FL07 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <div style="color: rgba(0,0,0,.5); float: right;">待用印</div>
+                <div style="color: rgba(0,0,0,.5); float: right;">合同待用印</div>
             </div>
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_appmsg">
@@ -54,7 +53,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="weui-panel">
             <div class="weui-panel__hd">
                 B1FL07 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <div style="color: rgba(0,0,0,.5); float: right;">用印中</div>
+                <div style="color: rgba(0,0,0,.5); float: right;">合同用印中</div>
             </div>
             <div class="weui-panel__bd">
                 <div class="weui-media-box weui-media-box_appmsg">

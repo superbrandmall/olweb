@@ -49,7 +49,7 @@ function getAllOrders() {
         <span class="weui-form-preview__value">共1件商品 合计: ¥</small>******</span>\n\
         <span class="weui-form-preview__value"><small>(不包含税费 ¥*****)</small></span></div></div>\n\
         <ul class="weui-media-box__info" style="float: right;">\n\
-        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'">申请报价</a></li>\n\
+        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'&trade='+v.outTradeNo+'">申请报价</a></li>\n\
         <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">'+alink+'</li>\n\
         </ul></div></div></div>'); 
                         }
@@ -215,7 +215,7 @@ function hideDeletedOrder(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                alert('Succeed!');
+                location.reload();
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

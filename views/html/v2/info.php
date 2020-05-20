@@ -81,7 +81,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
-                            <p>我的票据</p>
+                            <p>我的文件</p>
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>

@@ -66,7 +66,11 @@ $(document).ready(function(){
             $.cookie('company_name', $('#company_name').val());
             $.cookie('uscc', $('#uscc').val());
             
-            window.location.href = '/v2/price?id='+getURLParameter('id');
+            if(getURLParameter('trade') && getURLParameter('trade') != ''){
+                window.location.href = '/v2/price?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
+            } else {
+                window.location.href = '/v2/price?id='+getURLParameter('id');
+            }
         }
     })
 });
