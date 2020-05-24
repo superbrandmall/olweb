@@ -23,22 +23,57 @@ function getAllOrders() {
             if(response.code === 'C0') {
                 hideLoading();
                 var img = '';
-                var f = '';
                 var empty = 1;
                 if(response.data.length > 0){
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state === 1 && v.orderStates !== '已隐藏订单'){
                             empty = 0;
                             img = getShopInfo(v.remarkFirst);
-                            f = v.contractInfos[0].unitCode.split('F')[0];
-                            f = f.charAt(f.length - 1);
-                            var alink = '<a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a>';
-                            if(v.orderStates == '已关闭订单'){
-                                alink = '<a class="weui-link" href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a>';
+                            var alink = '';
+                            if(v.state == 1 && v.orderStates == '已关闭订单'){
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'&trade='+v.outTradeNo+'">申请报价</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a></li>';
+                            } else if(v.orderStates == '已关闭订单'){
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a></li>';
+                            } else if(v.orderStates == '预览合同已生成'){
+                                alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToBeStamped("'+v.id+'");\' class="contract_got" style="color: #fa5151;">获得正式合同</a></li>\n\
+\n\<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看预览合同</a></li>';
+                            } else if(v.orderStates == '合同待用印'){
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract?id='+v.id+'" style="color: #fa5151;">查看合同并用印</a></a></li>';
+                            } else if(v.orderStates == '合同用印中'){
+                                alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToPay("'+v.id+'");\' style="color: #fa5151;">用印完成</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看合同</a></li>';
+                            } else if(v.orderStates === '待付款订单'){
+                                alink = '<li class="weui-media-box__info__meta"><a href="/v2/bill?id='+v.id+'" style="color: #fa5151;">查看账单</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看合同</a></li>';
+                            } else if(v.orderStates === '已完成订单'){
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/my-files">我的文件</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看合同</a></li>';
+                            }
+                            
+                            tax = '*****';
+                            amount = '*****';
+                            if(v.state == 1 && (v.orderStates == '预览合同已生成' || v.orderStates == '合同待用印' || v.orderStates == '合同用印中' || v.orderStates == '待付款订单' || v.orderStates == '已完成订单')){
+                                var taxAmount = 0;
+                                var amount = 0;
+                                var tax = 0;
+                                $.each(v.contractInfos, function(j,w){
+                                    taxAmount = Math.round(taxAmount + w.depositAmount);
+                                    amount = taxAmount;
+                                })
+
+                                $.each(v.contractTermInfos, function(j,w){
+                                    if((w.termTypeName == '固定租金' || w.termTypeName == '物业管理费') && w.code == 1){
+                                        taxAmount = Math.round(taxAmount + w.taxAmount);
+                                        amount = Math.round(amount + w.amount);
+                                    }
+                                })
+
+                                tax = Math.round(amount - taxAmount);
                             }
                             
                             
-                            $('#orders').append('<div class="weui-panel" onclick=\'window.location="/v2/floor-plan?f='+f+'&type=leasing&id='+v.remarkFirst+'"\'>\n\
+                            $('#orders').append('<div class="weui-panel">\n\
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
@@ -46,11 +81,10 @@ function getAllOrders() {
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">共1件商品 合计: ¥</small>******</span>\n\
-        <span class="weui-form-preview__value"><small>(不包含税费 ¥*****)</small></span></div></div>\n\
+        <span class="weui-form-preview__value">共1件商品 合计: ¥'+numberWithCommas(amount)+'</span>\n\
+        <span class="weui-form-preview__value"><small>(含税费 ¥'+numberWithCommas(tax)+')</small></span></div></div>\n\
         <ul class="weui-media-box__info" style="float: right;">\n\
-        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'&trade='+v.outTradeNo+'">申请报价</a></li>\n\
-        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">'+alink+'</li>\n\
+        '+alink+'\n\
         </ul></div></div></div>'); 
                         }
                     });
@@ -164,44 +198,12 @@ function hideOrder(id){
     });
 }
 
-function getOrder(outNO) {
+function updateOrderToBeStamped(id){
+    showLoading();
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/findAllByMobileNoAndOutTradeNo?mobileNo="+$.cookie('uid')+"&outTradeNo="+outNO,
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            showLoading();
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                $.order.copy = JSON.stringify(response.data[0]);
-                hideDeletedOrder();
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-} 
-
-
-function hideDeletedOrder(){
-    var map = $.order.copy; 
-    
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
+        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+id+"&orderStates=合同待用印",
         type: "POST",
-        data: map,
         async: false,
-        dataType: "json",
-        contentType: "application/json",
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -215,7 +217,67 @@ function hideDeletedOrder(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                location.reload();
+                
+                var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
+<div class="weui-mask">\n\
+</div><div class="weui-dialog">\n\
+<div class="weui-dialog__bd">您好，请将正式合同及时送电子用印，谢谢。</div>\n\
+<div class="weui-dialog__ft">\n\
+<a href="javascript: location.reload();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
+</div>\n\
+</div> \n\
+</div>';
+
+                if($('#iosDialog2').length > 0){
+                    $('#iosDialog2').remove();
+                }
+                $('body').append($iosDialog2);
+                $('#iosDialog2').fadeIn(200);
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function updateOrderToPay(id){
+    showLoading();
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+id+"&orderStates=待付款订单",
+        type: "POST",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
+<div class="weui-mask">\n\
+</div><div class="weui-dialog">\n\
+<div class="weui-dialog__bd">您好，已确认甲乙双方用印完成，请查收账单并付款！</div>\n\
+<div class="weui-dialog__ft">\n\
+<a href="javascript: location.reload();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
+</div>\n\
+</div> \n\
+</div>';
+
+                if($('#iosDialog2').length > 0){
+                    $('#iosDialog2').remove();
+                }
+                $('body').append($iosDialog2);
+                $('#iosDialog2').fadeIn(200);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

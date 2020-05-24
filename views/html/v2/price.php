@@ -28,9 +28,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active weui-cell_readonly">
-                        <div class="weui-cell__hd"><label class="weui-label">免租期</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">装修免租期</label></div>
                         <div class="weui-cell__bd">
-                            <div class="weui-input" id="free_of_ground_rent"></div>
+                            <div class="weui-input"><span id="free_of_ground_rent"></span></div>
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active weui-cell_readonly">
@@ -105,7 +105,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="weui-form-preview__item" style="padding: 16px 0;">
                 <label class="weui-form-preview__label">保证金</label>
-                <span id="bond" class="weui-form-preview__value"></span>
+                <span class="weui-form-preview__value">¥<span id="bond"></span></span>
             </div>
             <div class="weui-form-preview__item" style="text-align: left;">
                 <span class="weui-form-preview__value">*保证金构成=3个月最高固定租金含税价+3个月最高物业管理费含税价</span>

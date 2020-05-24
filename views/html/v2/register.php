@@ -9,7 +9,7 @@
     <div class="page__bd" style="background-color: #EDEDED;">
         <div class="weui-form">
             <div class="weui-form__text-area">
-                <h2 class="weui-form__title">完善信息</h2>
+                <h2 class="weui-form__title">注册品牌信息</h2>
             </div>
             <div class="weui-form__control-area">
                 <div id="brands" class="weui-cells__group weui-cells__group_form" style="margin-top: 24px;">
@@ -40,9 +40,9 @@
                             <div class="weui-cell__bd">
                                 <select class="weui-select operation" id="operation_1" name="operation_1" required>
                                     <option value="">请选择</option>
-                                    <option value="0">直营</option>
-                                    <option value="1">代理</option>
-                                    <option value="2">加盟</option>
+                                    <option value="直营">直营</option>
+                                    <option value="代理">代理</option>
+                                    <option value="加盟">加盟</option>
                                 </select>
                             </div>
                         </div>

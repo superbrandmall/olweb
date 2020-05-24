@@ -1,9 +1,9 @@
 <div class="page__bd" style="font-size: 15px;">
     <div class="business-block" style="height: 299px;">
         <div style="position: relative; float: left; width: 28%; height: 100%; background: -webkit-linear-gradient(top,#d0b893,#a68d73); text-align: center;">
-            <img src="/views/assets/base/img/content/backgrounds/events/event-block-bg.jpg" style="width: 70%; margin-top: 50px;">
+            <img src="/views/assets/base/img/content/backgrounds/events/event-block-bg.png" style="height: 55%; margin-top: 40px;">
             <a href="/v2/events" style="position: absolute; bottom: 20px; left: 0; right: 0; margin: 0 auto; text-align: center; z-index: 5;">
-                <img src="/views/assets/base/img/content/backgrounds/events/more.jpg" style="width: 70%;">
+                <img src="/views/assets/base/img/content/backgrounds/events/more.png" style="width: 70%;">
             </a>
         </div>
         <div class="owl-carousel owl-carousel1 owl-theme">

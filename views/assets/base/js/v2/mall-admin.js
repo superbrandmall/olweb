@@ -31,11 +31,76 @@ $(document).ready(function(){
     
     audioplay('voiceplayer');
     
+    $('#slide1').swipeSlide({
+        autoSwipe:true,//自动切换默认是
+        speed:3000,//速度默认4000
+        continuousScroll:true,//默认否
+        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
+        lazyLoad:true,//懒加载默认否
+        firstCallback : function(i,sum,me){
+            me.find('.dot').children().first().addClass('cur');
+        },
+        callback : function(i,sum,me){
+            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+        }
+    });
+    
     weui.slider('#slider', {
         step: 10,
         defaultValue: 40,
         onChange: function(percent){
             if(percent >= 0 && percent <= 10) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(9)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(9)').show();
+            } else if(percent > 10 && percent <= 20) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(8)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(8)').show();
+            } else if(percent > 20 && percent <= 30) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(7)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(7)').show();
+            } else if(percent > 30 && percent <= 40) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(6)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(6)').show();
+            } else if(percent > 40 && percent <= 50) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(5)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(5)').show();
+            } else if(percent > 50 && percent <= 60) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(4)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(4)').show();
+            } else if(percent > 60 && percent <= 70) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(3)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(3)').show();
+            } else if(percent > 70 && percent <= 80) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(2)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(2)').show();
+            } else if(percent > 80 && percent <= 90) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(1)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(1)').show();
+            } else if(percent > 90 && percent <= 100) {
+                $('.mall-floors a.active').removeClass('active');
+                $('.mall-floors .weui-grid:eq(0)').find('a').addClass('active');
+                $('.floor-guide .weui-media-box__bd').hide();
+                $('.floor-guide .weui-media-box__bd:eq(0)').show();
+            }
+            /*if(percent >= 0 && percent <= 10) {
                 $('.mall-floors a.active').removeClass('active');
                 $('.mall-floors .weui-grid:eq(9)').find('a').addClass('active');
                 $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
@@ -85,7 +150,7 @@ $(document).ready(function(){
                 $('.mall-floors .weui-grid:eq(0)').find('a').addClass('active');
                 $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
                 $('.floor-guide .weui-media-box__bd:eq(0)').addClass('visible');
-            }
+            }*/
         }
     });
 
@@ -130,7 +195,7 @@ $(document).ready(function(){
             $('.mall-floors a.active').removeClass('active');
             $('.mall-floors .weui-grid:eq('+i+')').find('a').addClass('active');
             $('.floor-guide .weui-media-box__bd').hide();
-            $('.floor-guide .weui-media-box__bd:eq('+i+')').fadeIn();
+            $('.floor-guide .weui-media-box__bd:eq('+i+')').show();
             $('.weui-slider__track').css('width', per + '%');
             $('.weui-slider__handler').css('left', per + '%');
         })
@@ -209,6 +274,7 @@ function ContentOwlcarousel2() {
         loop: true,
         margin: 0,
         dots: false,
+        autoplay: true,
         responsive:{
             0:{
                 items:2

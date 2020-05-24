@@ -3,7 +3,7 @@ $(document).ready(function(){
         $('#facial img').attr('src','/views/assets/base/img/content/backgrounds/890000-2.jpg');
         $('#pay_1').css('background','#BABABA');
         setTimeout(function () {
-            window.location.href = '/v2/pay-done?type=leasing';
+            window.location.href = '/v2/pay-done?type=leasing&id='+getURLParameter('id');
         },500);
     });
 });

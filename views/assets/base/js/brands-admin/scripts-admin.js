@@ -78,7 +78,6 @@ function getUsers() {
     users.push(
         {code: 'CUSER190709000001',name: 'Victor Jiang'},
         {code: 'CUSER190709000002',name: 'Chris Chen'},
-        {code: 'CUSER190709000003',name: 'Grace Xu'},
         {code: 'CUSER190709000004',name: 'Maggie Li'},
         {code: 'CUSER190709000005',name: 'Jeff Xu'},
         {code: 'CUSER190709000006',name: "Austin Rao"},
@@ -87,12 +86,9 @@ function getUsers() {
         {code: 'CUSER191225000002',name: 'Joy Gu'},
         {code: 'CUSER190709000009',name: 'Megan Jing'},
         {code: 'CUSER190709000010',name: 'Kevin Jiang'},
-        {code: 'CUSER190709000011',name: 'Melissa Bing'},
         {code: 'CUSER190709000012',name: "Pierre Fang"},
-        {code: 'CUSER190709000013',name: 'Sylvia Wei'},
         {code: 'CUSER190709000015',name: 'Selena Song'},
         {code: 'CUSER190709000016',name: 'Di Cui'},
-        {code: 'CUSER190709000017',name: 'Echo Zhou'},
         {code: 'CUSER190709000018',name: 'George Qiao'},
         {code: 'CUSER190709000019',name: 'Dolby Li'},
         {code: 'CUSER190709000020',name: 'Ariel Huang'},
@@ -101,7 +97,10 @@ function getUsers() {
         {code: 'CUSER190709000023',name: 'Abby Shi'},
         {code: 'CUSER190709000024',name: 'Wei Ye'},
         {code: 'CUSER190924000001',name: 'Mia Hang'},
-        {code: 'CUSER190927000001',name: 'Barnny Chen'}
+        {code: 'CUSER190927000001',name: 'Barnny Chen'},
+        {code: 'CUSER200524000001',name: 'Nicole Zhang'},
+        {code: 'CUSER200524000002',name: 'Amanda Tian'},
+        {code: 'CUSER200524000003',name: 'Willa Sun'}
     )
     
     sessionStorage.setItem("users", JSON.stringify(users));

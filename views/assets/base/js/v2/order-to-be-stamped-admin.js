@@ -19,22 +19,19 @@ function getAllOrdersToBeConfirmed() {
             if(response.code === 'C0') {
                 hideLoading();
                 var img = '';
-                var f = '';
                 var empty = 1;
                 if(response.data.length > 0){
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state === 1 && v.orderStates !== '已隐藏订单'){
                             empty = 0;
                             img = getShopInfo(v.remarkFirst);
-                            f = v.contractInfos[0].unitCode.split('F')[0];
-                            f = f.charAt(f.length - 1);
                             var alink = '<a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a>';
                             if(v.orderStates == '已关闭订单'){
                                 alink = '<a class="weui-link" href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a>';
                             }
                             
                             
-                            $('#orders').append('<div class="weui-panel" onclick=\'window.location="/v2/floor-plan?f='+f+'&type=leasing&id='+v.remarkFirst+'"\'>\n\
+                            $('#orders').append('<div class="weui-panel">\n\
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\

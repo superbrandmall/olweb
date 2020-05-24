@@ -11,52 +11,58 @@ var date = d.getFullYear() + '-' +
 $(document).ready(function(){
     showLoading();
     
-    var floorDesc, floor = '8F';
+    var floorDesc, floorLable, floor = '8F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
             case '0':
                 floorDesc = '负一楼';
                 floor = 'B1';
+                floorLable = 'B1F 配套服务';
                 break;
             case '1':
                 floorDesc = '一楼';
                 floor = 'L1';
+                floorLable = '1F 国际风尚/滨江夜食';
                 break;
             case '2':
                 floorDesc = '二楼';
                 floor = 'L2';
+                floorLable = '2F 家庭生活';
                 break;
             case '3':
                 floorDesc = '三楼';
                 floor = 'L3';
+                floorLable = '3F 精致女孩/千禧女孩';
                 break;
             case '4':
                 floorDesc = '四楼';
                 floor = 'L4';
+                floorLable = '4F 型男周边';
                 break;
             case '5':
                 floorDesc = '五楼';
                 floor = 'L5';
+                floorLable = '5F 运动潮玩';
                 break;
             case '6':
                 floorDesc = '六楼';
                 floor = 'L6';
+                floorLable = '6F 国风文化';
                 break;
             case '7':
                 floorDesc = '七楼';
                 floor = 'L7';
+                floorLable = '7F 健康生活';
                 break;
             case '8':
                 floorDesc = '八楼';
                 floor = 'L8';
-                break;
-            case '9':
-                floorDesc = '九楼';
-                floor = 'L9';
+                floorLable = '8F 聚会时光';
                 break;
             default:
                 floorDesc = [];
                 floor = 'L1';
+                floorLable = '1F 聚会时光';
                 break;
         }
         
@@ -83,122 +89,23 @@ $(document).ready(function(){
 
         getShopFloorInfo('八楼');
     }
-        
-    $('#showCategoryPicker').on('click', function () {
-        weui.picker([{
-            label: '不限业态',
-            value: '0-1000'
-        }, {
-            label: '中餐',
-            value: 'OLCATEGORY190719000001'
-        }, {
-            label: '亚洲菜',
-            value: 'OLCATEGORY190719000002'
-        },{
-            label: '西餐&酒吧',
-            value: 'OLCATEGORY190719000003'
-        }, {
-            label: '快餐&咖啡奶茶&甜品',
-            value: 'OLCATEGORY190719000004'
-        },{
-            label: '轻奢',
-            value: 'OLCATEGORY190719000005'
-        },{
-            label: '男性时尚',
-            value: 'OLCATEGORY190719000006'
-        },{
-            label: '化妆品',
-            value: 'OLCATEGORY190719000007'
-        },{
-            label: '运动潮流',
-            value: 'OLCATEGORY190719000008'
-        },{
-            label: '娱乐',
-            value: 'OLCATEGORY190719000009'
-        },{
-            label: '电子产品',
-            value: 'OLCATEGORY190719000010'
-        },{
-            label: 'IP',
-            value: 'OLCATEGORY190719000011'
-        },{
-            label: '女性时尚',
-            value: 'OLCATEGORY190719000012'
-        },{
-            label: '内衣',
-            value: 'OLCATEGORY190719000013'
-        },{
-            label: '鞋包',
-            value: 'OLCATEGORY190719000014'
-        },{
-            label: '黄金珠宝/表',
-            value: 'OLCATEGORY190719000015'
-        },{
-            label: '首饰配饰',
-            value: 'OLCATEGORY190719000016'
-        },{
-            label: '家居/生活方式',
-            value: 'OLCATEGORY190719000017'
-        },{
-            label: '旅游',
-            value: 'OLCATEGORY190719000018'
-        },{
-            label: '健身&健康体验',
-            value: 'OLCATEGORY190719000019'
-        },{
-            label: '儿童类',
-            value: 'OLCATEGORY190719000020'
-        },{
-            label: '快时尚',
-            value: 'OLCATEGORY190719000021'
-        },{
-            label: '临时柜',
-            value: 'OLCATEGORY190719000022'
-        },{
-            label: '服务',
-            value: 'OLCATEGORY190719000023'
-        }], {
-            onChange: function (result) {
-            },
-            onConfirm: function (result) {
-                $('#showCategoryPicker').text(result[0].label);
-                $.cookie('category',result[0].value);
-                $.cookie('categoryDesc',result[0].label);
-
-                getShopFloorInfo(floorDesc);
-            },
-            title: '请选择业态'
-        });
-    });
 
     $('#showSizePicker').on('click', function () {
         weui.picker([{
             label: '不限面积',
             value: '0-1000'
         }, {
-            label: '50m²以下',
-            value: '0-50'
+            label: '100m²以下',
+            value: '0-100'
         }, {
-            label: '50-100m²',
-            value: '50-100'
-        },{
             label: '100-200m²',
             value: '100-200'
-        }, {
-            label: '200-300m²',
-            value: '200-300'
         },{
-            label: '300-500m²',
-            value: '300-500'
+            label: '200-500m²',
+            value: '200-500'
         },{
-            label: '500-800m²',
-            value: '500-800'
-        },{
-            label: '800-1000m²',
-            value: '800-1000'
-        },{
-            label: '1000m²以上',
-            value: '1000-10000'
+            label: '500m²以上',
+            value: '500-10000'
         }], {
             onChange: function (result) {
             },
@@ -248,16 +155,12 @@ $(document).ready(function(){
                 $.cookie('floor',result[0].value);
                 window.location.href = '/v2/floor-plan?f='+result[0].value+'&type=leasing';
             },
-            title: '请选择铺位所在楼层'
+            title: '请选择铺位所在区域'
         });
     });
     
-    $('#showFloorPicker').text('已选择'+floorDesc);
-    var categoryDesc = '不限业态';
-    if($.cookie('categoryDesc') != ''){
-        categoryDesc = $.cookie('categoryDesc');
-    }
-    $('#showCategoryPicker').text(categoryDesc);
+    $('#showFloorPicker').text('已选'+floorLable);
+    
     var sizeDesc = '不限面积';
     if($.cookie('size') != ''){
         sizeDesc = $.cookie('sizeDesc');
@@ -286,13 +189,13 @@ function getShopFloorInfo(fl) {
                 hideLoading();
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
-                    if(v.shopState == 0 || v.shopState == 2){
-                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href="#" shape="poly" coords="'+v.coords+'" />'); 
-                        }
+                    if((v.unit == "02FL035") || (v.unit == "03FL084") || (v.unit == "03FL001") || (v.unit == "03FL004") || (v.unit == "04FL005") || (v.unit == "04FL008") || (v.unit == "05FL123") || (v.unit == "05FL117") || (v.unit == "07FL069") || (v.unit == "08FL012") || (v.unit == "08FL015")){
+                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-push="1" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     } else {
-                        if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'"  data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                        if(v.shopState == 0 || v.shopState == 2){
+                            if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                                $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-push="0" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href="#" shape="poly" coords="'+v.coords+'" />'); 
+                            }
                         }
                     }
                 });
@@ -340,14 +243,13 @@ function getShopsMoreInfo() {
     
 function drawShops(mod,size){
     var areas = $.map($('area'),function(el) {
-        //var category = $(el).attr('data-modality').substring(0, 2);
         var area = $(el).attr('data-area');
         
         var minSize = size.split('-')[0];
         var maxSize = size.split('-')[1];
         
         if(mod == '') {
-            if(Math.round(area) > minSize && Math.round(area) < maxSize && $(el).attr('data-full') == 1){
+            if(Math.round(area) > minSize && Math.round(area) < maxSize && $(el).attr('data-push') == 1){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: '铺位号: '+$(el).attr('data-shop-name')+'<br>面积: '+$(el).attr('data-area')+'m<sup>2</sup>',
@@ -452,7 +354,7 @@ function drawShopsFromList(sc){
 
 function renderShopList(shop){
     $('.weui-panel__bd').html('');
-    var category, area;
+    var area;
     var minSize = 0;
     var maxSize = 10000;
     if($.cookie('size') != '' && $.cookie('size') != null){
@@ -463,57 +365,43 @@ function renderShopList(shop){
     $.selectedShops = [];
     
     $.each($.parseJSON(sessionStorage.getItem("shops")), function(i,v){
-        if(v.shopState == 1) {
-            if((v.subType == '正柜' || v.subType == 'kiosk' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
-  
-                var settle_date = '-';
-                var ATV = '';
-                var business_format_CHS = '-';
-                var free_of_ground_rent = '-';
-                var c_per = '';
-                var opening_date = '-';
-                $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-                    if(v.unit == w.unit_no){
-                        ATV = w.ATV || '';
-                        business_format_CHS = w.business_format_CHS || '-';
-                        free_of_ground_rent = w.free_of_ground_rent || '-';
-                        c_per = w.c_per+'/m<sup>2</sup>/月' || '';
-                    }
-                })
-                
-                area = v.area;
+        if((v.unit == "02FL035") || (v.unit == "03FL084") || (v.unit == "03FL001") || (v.unit == "03FL004") || (v.unit == "04FL005") || (v.unit == "04FL008") || (v.unit == "05FL123") || (v.unit == "05FL117") || (v.unit == "07FL069") || (v.unit == "08FL012") || (v.unit == "08FL015")){
 
-                if(Math.round(area) > minSize && Math.round(area) < maxSize && v.shopState == 1){
-                    $.selectedShops.push(v.code);
-                    var src = '/views/assets/base/img/content/mall/1s.jpg';
-                    if(v.images != null && v.images.length > 0){
-                        src = v.images[0].image;
-                    }
-                    
-                    if(v.shopState === 1 || v.shopState === 3) { // 空铺
-                        settle_date = IncrDates(date,15);
-                    } else { // 非空铺
-                        var contractExpire = new Date();
-                        contractExpire.setTime(v.contractExpireDate);
-                        var contractExpireYear = contractExpire.getFullYear('yyyy');
-                        var contractExpireMonth = contractExpire.getMonth('mm')+1;
-                        if(contractExpireMonth < 10){
-                            contractExpireMonth = "0"+contractExpireMonth;
-                        }
-                        var contractExpireDate = contractExpire.getDate('dd');
-                        if(contractExpireDate < 10) {
-                            contractExpireDate = "0"+contractExpireDate;
-                        }
-                        
-                        settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
-                        
-                    }
-                    
-                    if(free_of_ground_rent != '-'){
-                        opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
-                    }
+            var settle_date = '-';
+            var ATV = '';
+            var business_format_CHS = '-';
+            var free_of_ground_rent = '-';
+            var c_per = '';
+            var opening_date = '-';
+            $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
+                if(v.unit == w.unit_no){
+                    ATV = w.ATV || '';
+                    business_format_CHS = w.business_format_CHS || '-';
+                    free_of_ground_rent = w.free_of_ground_rent || '-';
+                    c_per = w.c_per+'/m<sup>2</sup>/月' || '';
+                }
+            })
 
-                    $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
+            area = v.area;
+
+            if(Math.round(area) > minSize && Math.round(area) < maxSize){
+                $.selectedShops.push(v.code);
+                var src = '/views/assets/base/img/content/mall/1s.jpg';
+                if(v.images != null && v.images.length > 0){
+                    src = v.images[0].image;
+                }
+
+                if(v.shopState === 1 || v.shopState === 3) { // 空铺
+                    settle_date = IncrDates(date,15);
+                } else { // 非空铺
+                    settle_date = IncrDates(date,(v.daysBeforeContractExpire+1));
+                }
+
+                if(free_of_ground_rent != '-'){
+                    opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+                }
+
+                $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
 <div class="weui-media-box__hd" style="position: relative; overflow: hidden; height: 110px;">\n\
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
 <span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
@@ -533,12 +421,16 @@ function renderShopList(shop){
 </ul>\n\
 </div>\n\
 </div>');
-                }
-                
-                
             }
         }
     });
+    
+    if(!$.selectedShops.length) {
+        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg">\n\
+<div class="weui-media-box__hd">\n\
+<i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>\n\
+<div class="weui-media-box__bd">对不起，本区域暂无合适推荐位置，请重新选择区域</div></div>');
+    }
 }
 
 function showEngineering(id){
@@ -580,19 +472,7 @@ function renderShopListFromDraw(sc){
             if(v.shopState === 1 || v.shopState === 3) { // 空铺
                 settle_date = IncrDates(date,15);
             } else { // 非空铺
-                var contractExpire = new Date();
-                contractExpire.setTime(v.contractExpireDate);
-                var contractExpireYear = contractExpire.getFullYear('yyyy');
-                var contractExpireMonth = contractExpire.getMonth('mm')+1;
-                if(contractExpireMonth < 10){
-                    contractExpireMonth = "0"+contractExpireMonth;
-                }
-                var contractExpireDate = contractExpire.getDate('dd');
-                if(contractExpireDate < 10) {
-                    contractExpireDate = "0"+contractExpireDate;
-                }
-
-                settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
+                settle_date = IncrDates(date,(v.daysBeforeContractExpire+1));
             }
 
             if(free_of_ground_rent != '-'){
@@ -620,8 +500,14 @@ function renderShopListFromDraw(sc){
 </div>\n\
 </div>');
         }
-        
     });
+    
+    if(!$.selectedShops.length) {
+        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg">\n\
+<div class="weui-media-box__hd">\n\
+<i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>\n\
+<div class="weui-media-box__bd">对不起，本区域暂无合适推荐位置，请重新选择区域</div></div>');
+    }
 }
 
 function addTextLayer(){
@@ -757,7 +643,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "remarkSecond": "",
             "remarkThird": "",
             "salesFlag": "1",
-            "serviceDepositAmount": 2000,
+            "serviceDepositAmount": 3000,
             "size": "", //广告尺寸规格
             "spec": "",
             "startDate": openDate,
@@ -774,7 +660,7 @@ function askPrice(ut,sc,ed,od,ud,a){
         "contractTermInfos": [
           {
             "amount": "",
-            "code": "11",
+            "code": "1",
             "endDate": "",
             "name": "",
             "orgCode": "100001",
@@ -790,7 +676,7 @@ function askPrice(ut,sc,ed,od,ud,a){
           },
           {
             "amount": "",
-            "code": "11",
+            "code": "1",
             "endDate": "",
             "name": "",
             "orgCode": "100001",
@@ -805,8 +691,8 @@ function askPrice(ut,sc,ed,od,ud,a){
             "area": area
           },
           {
-            "amount": 0.15,
-            "code": "11",
+            "amount": 0.0159,
+            "code": "1",
             "endDate": "",
             "name": "",
             "orgCode": "100001",
@@ -821,7 +707,7 @@ function askPrice(ut,sc,ed,od,ud,a){
           },
           {
             "amount": "",
-            "code": "11",
+            "code": "1",
             "endDate": "",
             "name": "",
             "orgCode": "100001",

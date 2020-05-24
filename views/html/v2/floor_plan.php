@@ -8,21 +8,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们为您推荐以下铺位，您可以逛逛不同楼层，看看全景VR, 比比工程条件。如果满意就请点击"申请报价"吧！</div>
 
 <div class="page__hd" style="display: inline-block; width: 100%;">
-    <div class="weui-cell weui-cell_select" style="float: left; width: 33%;">
+    <div class="weui-cell weui-cell_select" style="float: left; width: 60%;">
         <div class="weui-cell__bd">
-            <a href="javascript:" class="weui-select" id="showFloorPicker" style="font-size: 12px; width: 60%; display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择楼层</a>
-        </div>
-    </div>
-    
-    <div class="weui-cell weui-cell_select" style="float: left; width: 33%;">
-        <div class="weui-cell__bd">
-            <a href="javascript:" class="weui-select" id="showCategoryPicker" style="font-size: 12px; width: 60%; display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择业态</a>
+            <a href="javascript:" class="weui-select" id="showFloorPicker" style="font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择区域</a>
         </div>
     </div>
 
-    <div class="weui-cell weui-cell_select" style="float: left; width: 33%;">
+    <div class="weui-cell weui-cell_select" style="float: left; width: 40%;">
         <div class="weui-cell__bd">
-            <a href="javascript:" class="weui-select" id="showSizePicker" style="font-size: 12px; width: 60%; display: inline-block; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择面积</a>
+            <a href="javascript:" class="weui-select" id="showSizePicker" style="font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择面积</a>
         </div>
     </div>
 </div>

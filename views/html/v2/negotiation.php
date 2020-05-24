@@ -30,7 +30,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <i class="weui-icon-checked"></i>
                             </div>
                             <div class="weui-cell__bd" style="display: inline-block; vertical-align: bottom;">
-                                <p>免租期</p>
+                                <p>装修免租期</p>
                             </div>
                         </label>
                         <label class="weui-cell weui-cell_active weui-check__label" style="display: block;" for="s13">

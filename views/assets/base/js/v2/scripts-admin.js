@@ -197,6 +197,14 @@ function bgAudioPlay() {
     },1000);
 }
 
+function numberWithCommas(x) {
+    if(x == null){
+        return '-';
+    } else {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+}
+
 function IncrDate(date_str){
     if(date_str){
         var parts = date_str.split("-");

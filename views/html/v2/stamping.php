@@ -23,60 +23,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         </div>
     </div>
 
-    <div id="orders">
-        <div class="weui-panel">
-            <div class="weui-panel__hd">
-                B1FL07 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <div style="color: rgba(0,0,0,.5); float: right;">合同待用印</div>
-            </div>
-            <div class="weui-panel__bd">
-                <div class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__hd" style="width: 100px; height: 80px;">
-                        <img class="weui-media-box__thumb" src="http://cre.superbrandmall.com:8280/HDMediaService-Web/fileget?fileID=7e6846e422dbd9887ecf15f30d1c020ad7f5cd50eb73128ea5b8426f8c58b726b38624078f777ed3&amp;fileName=78c42b46876cd5f9&amp;size=0,0" alt="">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <div class="weui-form-preview__bd" style="font-size: 15px;">
-                            <div class="weui-form-preview__item">
-                                <span class="weui-form-preview__value">共1件商品 合计: ¥</small>325,241.<small>36</small></span>
-                                <span class="weui-form-preview__value"><small>(不包含税费 ¥15,000)</small></span>
-                            </div>
-                        </div>
-
-                        <ul class="weui-media-box__info" style="float: right;">
-                            <li class="weui-media-box__info__meta"><a href="/v2/contract" style="color: #fa5151;">查看合同并用印</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-panel">
-            <div class="weui-panel__hd">
-                B1FL07 <i class="fa fa-angle-right" aria-hidden="true"></i>
-                <div style="color: rgba(0,0,0,.5); float: right;">合同用印中</div>
-            </div>
-            <div class="weui-panel__bd">
-                <div class="weui-media-box weui-media-box_appmsg">
-                    <div class="weui-media-box__hd" style="width: 100px; height: 80px;">
-                        <img class="weui-media-box__thumb" src="http://cre.superbrandmall.com:8280/HDMediaService-Web/fileget?fileID=7e6846e422dbd9887ecf15f30d1c020ad7f5cd50eb73128ea5b8426f8c58b726b38624078f777ed3&amp;fileName=78c42b46876cd5f9&amp;size=0,0" alt="">
-                    </div>
-                    <div class="weui-media-box__bd">
-                        <div class="weui-form-preview__bd" style="font-size: 15px;">
-                            <div class="weui-form-preview__item">
-                                <span class="weui-form-preview__value">共1件商品 合计: ¥</small>325,241.<small>36</small></span>
-                                <span class="weui-form-preview__value"><small>(不包含税费 ¥15,000)</small></span>
-                            </div>
-                        </div>
-
-                        <ul class="weui-media-box__info" style="float: right;">
-                            <li class="weui-media-box__info__meta"><a href="javascript:;" id="stamping_completed" style="color: #fa5151;">用印完成</a></li>
-                            <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view">查看合同</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div id="orders"></div>
 </div>
 
 <br>

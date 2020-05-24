@@ -39,9 +39,9 @@
             </div>
         </div>
         <div style="position: relative; height: 100%; background: -webkit-linear-gradient(top,#d0b893,#a68d73); text-align: center; float: left; width: 28%;">
-            <img src="/views/assets/base/img/content/backgrounds/ads/ad-block-bg.jpg" style="height: 65%; margin-top: 20px;">
+            <img src="/views/assets/base/img/content/backgrounds/ads/ad-block-bg.png" style="height: 55%; margin-top: 40px;">
             <a href="/v2/ads" style="position: absolute; bottom: 20px; left: 0; right: 0; margin: 0 auto; text-align: center; z-index: 5;">
-                <img src="/views/assets/base/img/content/backgrounds/ads/more.jpg" style="width: 70%;">
+                <img src="/views/assets/base/img/content/backgrounds/events/more.png" style="width: 70%;">
             </a>
         </div>
     </div>

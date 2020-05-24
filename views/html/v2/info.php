@@ -40,7 +40,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                    <!--<a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
                             <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
                         </div>
@@ -57,7 +57,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <p>我的关注</p>
                         </div>
                         <span class="weui-cell__ft"></span>
-                    </a>
+                    </a>-->
                 </div>
             </div>
         </div>
@@ -67,16 +67,16 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div class="weui-panel__bd">
             <div class="weui-media-box weui-media-box_small-appmsg">
                 <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/company-info">
                         <div class="weui-cell__hd">
                             <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
-                            <p>联系人管理</p>
+                            <p>商户管理</p>
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/my-files">
                         <div class="weui-cell__hd">
                             <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
                         </div>

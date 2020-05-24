@@ -6,7 +6,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 嘿嘿！您不需要记住复杂的密码，用您的手机号及收到的验证码就可以马上登录啦，赶紧试试嘛！</div>
 
 <form id="login_form">
-    <div class="page__bd" style="background-color: #EDEDED;">
+    <div class="page__bd">
         <div class="weui-form">
             <div class="weui-form__text-area">
                 <h2 class="weui-form__title">登录</h2>

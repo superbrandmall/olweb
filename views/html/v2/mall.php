@@ -25,95 +25,128 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 
 <audio id="voiceplayer" src="/upload/audio/sbm-voice.mp3" preload="meta" style="display: none;"></audio>
 
+<div class="slide" id="slide1" style="height: 100vh;">
+    <img src="/views/assets/base/img/content/backgrounds/sbm/logo.png" alt="正大" height="40" style="position: absolute; left: 0; right: 0; top: 10px; margin: 0 auto; z-index: 3;" />     
+    <ul>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/01.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/02.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/03.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/04.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/05.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/sbm/banner/06.jpg' alt="">
+            </a>
+        </li>
+    </ul>
+    <div class="dot">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<div class="page__hd" style="background: #292929; padding: 16px 32px 8px;"><img src='/views/assets/base/img/content/backgrounds/sbm/title.png' style="width: 100%;" alt=""></div>
 <div class="page__bd">
-    <img src="/views/assets/base/img/content/backgrounds/sbm/top.jpg" style="width: 100%;" />
     <img src="/views/assets/base/img/content/backgrounds/sbm/data.jpg" style="width: 100%; margin-top: -10px;" />
-    <div style="margin-top: -10px; background-color: #8f2ef2; color: #fff;">
-        <div class="weui-media-box weui-media-box_appmsg floor-guide">
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">9-10F 高档餐饮/联合办公</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/9F.png" alt="" style="width: 200px;">
+    <div style="margin-top: -10px; background-color: #3f3f3f; color: #fff;">
+        <div class="weui-media-box weui-media-box_appmsg floor-guide" style="padding: 0;">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/9F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">9-10F 高档餐饮/联合办公</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("9F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001169">会议活动-正大厅</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001169">会议活动-正大厅</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">8F 聚会时光</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/6F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/8F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">8F 聚会时光</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("8F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=8&type=leasing">在线选铺</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=8&type=ads">广告宣传</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/advertising?f=8&type=ads">广告宣传</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">7F 健康乐活</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/6F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/7F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">7F 健康乐活</h4>-->
                 <ul class="weui-media-box__info">
                         <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("7F");'>VR</a></li>
                         <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=7&type=leasing">在线选铺</a></li>
                     </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">6F 国风文化</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/6F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/6F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">6F 国风文化</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("6F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=6&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">5F 运动潮玩</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/4F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/5F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">5F 运动潮玩</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("5F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=5&type=leasing">在线选铺</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001166">场地活动</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=5&type=ads">广告宣传</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001166">场地活动</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=5&type=ads">广告宣传</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">4F 型男周边</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/4F.png" alt="">     
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/4F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">4F 型男周边</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("4F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=4&type=leasing">在线选铺</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP190809000001">场地活动</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP190809000001">场地活动</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">3F 精致女孩/千禧女孩</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/3F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/3F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">3F 精致女孩/千禧女孩</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("3F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=3&type=leasing">在线选铺</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001150">场地活动</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=3&type=ads">广告宣传</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001150">场地活动</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=3&type=ads">广告宣传</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">2F 家庭生活</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/2F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/2F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">2F 家庭生活</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("2F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=2&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">1F 国际风尚/滨江夜食</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/1F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/1F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">1F 国际风尚/滨江夜食</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("1F");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=1&type=leasing">在线选铺</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001126">东门场地</a></li>
+                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001126">东门场地</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001116">西门场地</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=1&type=ads">广告宣传</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=1&type=ads">广告宣传</a></li>-->
                 </ul>
             </div>
-            <div class="weui-media-box__bd">
-                <h4 class="weui-media-box__title" style="color: #fff;">B1 配套服务</h4>
-                <img src="/views/assets/base/img/content/backgrounds/sbm/logos/1F.png" alt="">
+            <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/0F.jpg); background-size: cover;">
+                <!--<h4 class="weui-media-box__title" style="color: #fff;">B1 配套服务</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("B1");'>VR</a></li>
                     <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=06&type=leasing">在线选铺</a></li>
@@ -174,7 +207,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     <img src="/views/assets/base/img/content/backgrounds/sbm/sbm-info.jpg" style="width: 100%; margin-top: -10px;" />
     <img src="/views/assets/base/img/content/backgrounds/sbm/mall-view.jpg" style="width: 100%; margin-top: -10px;" />
 
-    <div class="owl-carousel owl-carousel2 owl-theme" style="margin-top: -7px;">
+    <div class="owl-carousel owl-carousel2 owl-theme" style="margin-top: -10px;">
         <div class="item">
             <img src="/views/assets/base/img/content/backgrounds/sbm/PALL/p01.jpg" alt="" />
         </div>

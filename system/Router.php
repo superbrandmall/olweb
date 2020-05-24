@@ -135,6 +135,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/contact' => array(
             'url' => 'contact.php'
         ),
+        'v2/my-files' => array(
+            'url' => 'my_files.php'
+        ),
         'v2/qa' => array(
             'url' => 'qa.php'
         ),
@@ -207,6 +210,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/improve-info' => array(
             'url' => 'improve_info.php'
         ),
+        'v2/company-info' => array(
+            'url' => 'company_info.php'
+        ),
         'v2/contract' => array(
             'url' => 'contract.php'
         ),
@@ -221,9 +227,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'info.php', 'contact.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php', 'authentication.php',
+    $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php', 'authentication.php',
         'floor_plan.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
-        'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'contract.php','contract_view.php');
+        'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
         $session = new Session();
