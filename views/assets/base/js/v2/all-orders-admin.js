@@ -31,10 +31,13 @@ function getAllOrders() {
                             img = getShopInfo(v.remarkFirst);
                             var alink = '';
                             if(v.state == 1 && v.orderStates == '已关闭订单'){
-                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'&trade='+v.outTradeNo+'">申请报价</a></li>\n\
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href=\'javascript: findUserCompanyByMobileNo("'+v.remarkFirst+'","'+v.outTradeNo+'");\'>申请报价</a></li>\n\
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a></li>';
                             } else if(v.orderStates == '已关闭订单'){
                                 alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a></li>';
+                            } else if(v.orderStates == '待确认订单'){
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href=\'javascript: findUserCompanyByMobileNo("'+v.remarkFirst+'","'+v.outTradeNo+'");\'>申请报价</a></li>\n\
+<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a></li>'
                             } else if(v.orderStates == '预览合同已生成'){
                                 alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToBeStamped("'+v.id+'");\' class="contract_got" style="color: #fa5151;">获得正式合同</a></li>\n\
 \n\<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看预览合同</a></li>';
@@ -286,4 +289,38 @@ function updateOrderToPay(id){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function findUserCompanyByMobileNo(sc,outTradeNo){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    if(response.data[0].name != '' && response.data[0].uscc != ''){
+                        window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
+                    } else {
+                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                    }
+                } else {
+                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                }
+            }
+        }
+    })
 }

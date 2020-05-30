@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    $('body').css('backgroundColor','#292929');
     $('.weui-tabbar a').removeClass('weui-bar__item_on');
     $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');
     
@@ -69,4 +68,19 @@ function audioplay(id){
     document.addEventListener("WeixinJSBridgeReady", function () {
         !audio.paused?audio.pause():audio.play();
     }, false);
+}
+
+function redirectToLeasing(){
+    $('#mall_list').find('a:eq(0)').attr('href','/v2/floor-plan?f=8&type=leasing');
+    $('#mall_list').toggle();
+}
+
+function redirectToEvents(){
+    $('#mall_list').find('a:eq(0)').attr('href','/v2/events?type=events');
+    $('#mall_list').toggle();
+}
+
+function redirectToAds(){
+    $('#mall_list').find('a:eq(0)').attr('href','/v2/advertising?f=8&type=ads');
+    $('#mall_list').toggle();
 }

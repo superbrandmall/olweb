@@ -58,51 +58,108 @@ $(document).ready(function(){
                         
                         $.cookie('uid_temp', userName);
                         if(response.data.resultCode === '00') {
-                            $.cookie('uid', userName);
-
+                            var map = {
+                                "mobileNo": userName
+                            }
+                            
                             $.ajax({
-                                type: 'POST',
-                                url: '/controllers/api/2.0/ApiLoginSession.php',
-                                data: {
-                                    uid: userName
-                                },
+                                url: $.api.baseNew+"/comm-wechatol/api/user/login/wx/saveOrUpdate",
+                                type: "POST",
+                                data: JSON.stringify(map),
+                                async: false,
                                 dataType: "json",
+                                contentType: "application/json",
                                 beforeSend: function(request) {
                                     showLoading();
+                                    request.setRequestHeader("Login", $.cookie('login'));
+                                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                                    request.setRequestHeader("Lang", $.cookie('lang'));
+                                    request.setRequestHeader("Source", "onlineleasing");
                                 },
-                                complete: function(){
-                                    hideLoading();
-                                    if(getURLParameter('type')){
-                                        if(getURLParameter('type') == 'leasing'){
-                                            window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
-                                        } else if(getURLParameter('type') == 'ads'){
-                                            window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
-                                        } else if(getURLParameter('type') == 'events'){
-                                            window.location.href = '/v2/register?id='+getURLParameter('id')+'&type=events';
-                                        } 
+                                complete: function(){},
+                                success: function (response, status, xhr) {
+                                    if(response.code === 'C0') {
+                                        if(xhr.getResponseHeader("Authorization") !== null){
+                                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                                        }
+                                        
+                                        $.ajax({
+                                            url: $.api.baseNew+"/comm-wechatol/api/user/info/wx/findAllByMobileNo?mobileNo="+userName,
+                                            type: "POST",
+                                            async: false,
+                                            dataType: "json",
+                                            contentType: "application/json",
+                                            beforeSend: function(request) {
+                                                request.setRequestHeader("Login", $.cookie('login'));
+                                                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                                                request.setRequestHeader("Lang", $.cookie('lang'));
+                                                request.setRequestHeader("Source", "onlineleasing");
+                                            },
+                                            complete: function(){},
+                                            success: function (response, status, xhr) {
+                                                if(response.code === 'C0') {
+                                                    hideLoading();
+                                                    if(xhr.getResponseHeader("Authorization") !== null){
+                                                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                                                    }
+                                                    
+                                                    $.cookie('uid', userName);
+                                                    $.cookie('uname', userName);
+                                                    $.cookie('uemail', userName);
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: '/controllers/api/2.0/ApiLoginSession.php',
+                                                        data: {
+                                                            uid: userName
+                                                        },
+                                                        dataType: "json",
+                                                        beforeSend: function(request) {
+                                                        },
+                                                        complete: function(){
+                                                            if(response.data.name != null && response.data.email != null){
+                                                                if(getURLParameter('type')){
+                                                                    if(getURLParameter('type') == 'leasing'){
+                                                                        window.location.href = '/v2/floor-plan?f='+getURLParameter('f')+'&type=leasing';
+                                                                    } else if(getURLParameter('type') == 'ads'){
+                                                                        window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
+                                                                    } else if(getURLParameter('type') == 'events'){
+                                                                        window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
+                                                                    }
+                                                                } else {
+                                                                    window.location.href = '/v2/info';
+                                                                }
+                                                            } else {
+                                                                if(getURLParameter('type')){
+                                                                    if(getURLParameter('type') == 'leasing'){
+                                                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
+                                                                    } else if(getURLParameter('type') == 'ads'){
+                                                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
+                                                                    } else if(getURLParameter('type') == 'events'){
+                                                                        window.location.href = '/v2/register?id='+getURLParameter('id')+'&type=events';
+                                                                    } 
+                                                                } else {
+                                                                    window.location.href = '/v2/register';
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        })
                                     } else {
-                                        window.location.href = '/v2/register';
+                                        loginError('系统错误');
                                     }
+                                },
+                                error: function(jqXHR, textStatus, errorThrown) {
+                                   console.log(textStatus, errorThrown);
                                 }
                             });
                         } else {
-                            $(function(){
-                                $('body').append('<div id="js_toast" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">验证码错误</p></div></div>');
-                                var $toast = $('#js_toast');
-
-                                $('.page.cell').removeClass('slideIn');
-
-                                $toast.fadeIn(100);
-                                setTimeout(function () {
-                                    $toast.fadeOut(100);
-                                    window.location.reload();
-                                }, 2000);
-  
-                            });
+                            loginError('验证码错误');
                         }
                         
                     } else {
-                        interpretBusinessCode(response.customerMessage);
+                        loginError('系统错误');
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -164,4 +221,17 @@ function setTimeLogin(obj) {
 setTimeout(function() { 
     setTimeLogin(obj); }
     ,1000); 
+}
+
+function loginError() {
+    $('body').append('<div id="js_toast" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">验证码错误</p></div></div>');
+    var $toast = $('#js_toast');
+
+    $('.page.cell').removeClass('slideIn');
+
+    $toast.fadeIn(100);
+    setTimeout(function () {
+        $toast.fadeOut(100);
+        window.location.reload();
+    }, 2000);
 }

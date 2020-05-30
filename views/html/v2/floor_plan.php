@@ -7,16 +7,16 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们为您推荐以下铺位，您可以逛逛不同楼层，看看全景VR, 比比工程条件。如果满意就请点击"申请报价"吧！</div>
 
-<div class="page__hd" style="display: inline-block; width: 100%;">
+<div class="page__hd" style="display: inline-block; width: 100%; background-color: #bba585; margin-top: -7px;">
     <div class="weui-cell weui-cell_select" style="float: left; width: 60%;">
         <div class="weui-cell__bd">
-            <a href="javascript:" class="weui-select" id="showFloorPicker" style="font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择区域</a>
+            <a href="javascript:" class="weui-select" id="showFloorPicker" style="color: #514026; font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择区域</a>
         </div>
     </div>
 
     <div class="weui-cell weui-cell_select" style="float: left; width: 40%;">
         <div class="weui-cell__bd">
-            <a href="javascript:" class="weui-select" id="showSizePicker" style="font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择面积</a>
+            <a href="javascript:" class="weui-select" id="showSizePicker" style="color: #514026; font-size: 12px; overflow: hidden; vertical-align: bottom; white-space: nowrap; text-overflow: ellipsis;">请选择面积</a>
         </div>
     </div>
 </div>
@@ -27,8 +27,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 <div class="page__bd">    
-    <div class="weui-panel weui-panel_access">
-        <div class="weui-panel__hd"><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 5px;"></span> 推荐位置 <small>(可点击上图黄色位置查看铺位详细信息)</small></div>
+    <div class="weui-panel weui-panel_access" style="background-color: #292929;">
+        <div class="weui-panel__hd" style="color: #c9b18d;"><span id="floorNo"></span> <span style="border: solid 1px #ccc; background-color: #ffff00; width: 13px; height: 8px; display: inline-block; margin-left: 5px;"></span> 推荐位置 <small>(可点击上图黄色位置查看铺位详细信息)</small></div>
         <div class="weui-panel__bd" style="max-height: 300px; overflow: auto;"></div>
     </div>
 </div>
@@ -59,7 +59,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<br>
 <br>
 <br>
 <br>

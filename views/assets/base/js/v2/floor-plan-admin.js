@@ -401,24 +401,26 @@ function renderShopList(shop){
                     opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
                 }
 
-                $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
-<div class="weui-media-box__hd" style="position: relative; overflow: hidden; height: 110px;">\n\
-<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
-<span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
-<p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
-</div>\n\
+                $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0 0 10px;">\n\
 <div class="weui-media-box__bd" onclick=\'javascript: drawShopsFromList("'+v.code+'");\'>\n\
-<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
-<p class="weui-media-box__desc">开业日期: <strong>'+opening_date+'</strong></p>\n\
-<p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
-<p class="weui-media-box__desc">'+ATV+'</p>\n\
-<p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
-<ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript:;\'>加入关注</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="color: #fa5151;">申请报价</a></li>\n\
-</ul>\n\
+<div style="position: relative; float: left; width: 142px;">\n\
+<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
+<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
+<div style="padding: 5px 0;">\n\
+<a href=\'javascript: showVR("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
+<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>\n\
+<a href=\'javascript: showEngineering("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">工程条件</a>\n\
+<a href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>\n\
+</div>\n\
+</div>\n\
+<div style="margin-left: 142px;">\n\
+<p class="weui-media-box__desc" style="color: #bba585;">面积: '+v.area+'m<sup>2</sup></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">进场日期: <strong>'+settle_date+'</strong></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">开业日期: <strong>'+opening_date+'</strong></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+business_format_CHS+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">'+ATV+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">同品类业绩坪效: '+c_per+'</p>\n\
+</div>\n\
 </div>\n\
 </div>');
             }
@@ -426,7 +428,7 @@ function renderShopList(shop){
     });
     
     if(!$.selectedShops.length) {
-        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg">\n\
+        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg" style="color: #c9b18d;">\n\
 <div class="weui-media-box__hd">\n\
 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>\n\
 <div class="weui-media-box__bd">对不起，本区域暂无合适推荐位置，请重新选择区域</div></div>');
@@ -479,31 +481,33 @@ function renderShopListFromDraw(sc){
                 opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
             }
             
-            $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg">\n\
-<div class="weui-media-box__hd" style="position: relative; overflow: hidden; height: 110px;">\n\
-<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
-<span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
-<p class="weui-media-box__desc">'+v.area+'m<sup>2</sup></p>\n\
-</div>\n\
+            $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" tyle="background-color: #3f3f3f; padding: 0 0 10px;">\n\
 <div class="weui-media-box__bd" onclick=\'javascript: drawShopsFromList("'+v.code+'");\'>\n\
-<p class="weui-media-box__desc">进场日期: <strong>'+settle_date+'</strong></p>\n\
-<p class="weui-media-box__desc">开业日期: <strong>'+opening_date+'</strong></p>\n\
-<p class="weui-media-box__desc">推荐业态: '+business_format_CHS+'</p>\n\
-<p class="weui-media-box__desc">'+ATV+'</p>\n\
-<p class="weui-media-box__desc">同品类业绩坪效: '+c_per+'</p>\n\
-<ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a class="weui-link" href=\'javascript: showVR("'+v.shopName+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript:;\'>加入关注</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: showEngineering("'+v.shopName+'");\'>工程条件</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="color: #fa5151;">申请报价</a></li>\n\
-</ul>\n\
+<div style="position: relative; float: left; width: 142px;">\n\
+<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
+<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
+<div style="padding: 5px 0;">\n\
+<a href=\'javascript: showVR("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
+<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>\n\
+<a href=\'javascript: showEngineering("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">工程条件</a>\n\
+<a href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>\n\
+</div>\n\
+</div>\n\
+<div style="margin-left: 142px;">\n\
+<p class="weui-media-box__desc" style="color: #bba585;">面积: '+v.area+'m<sup>2</sup></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">进场日期: <strong>'+settle_date+'</strong></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">开业日期: <strong>'+opening_date+'</strong></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+business_format_CHS+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">'+ATV+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">同品类业绩坪效: '+c_per+'</p>\n\
+</div>\n\
 </div>\n\
 </div>');
         }
     });
     
     if(!$.selectedShops.length) {
-        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg">\n\
+        $('.weui-panel__bd').html('<div class="weui-media-box weui-media-box_appmsg" style="color: #c9b18d;">\n\
 <div class="weui-media-box__hd">\n\
 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>\n\
 <div class="weui-media-box__bd">对不起，本区域暂无合适推荐位置，请重新选择区域</div></div>');
@@ -757,7 +761,7 @@ function askPrice(ut,sc,ed,od,ud,a){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                window.location.href = '/v2/authentication?id='+sc+'&trade='+outTradeNo;
+                findUserCompanyByMobileNo(sc,outTradeNo);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -766,6 +770,40 @@ function askPrice(ut,sc,ed,od,ud,a){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function findUserCompanyByMobileNo(sc,outTradeNo){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    if(response.data[0].name != '' && response.data[0].uscc != ''){
+                        window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
+                    } else {
+                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                    }
+                } else {
+                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                }
+            }
+        }
+    })
 }
 
 function NetPing(images,vr) {

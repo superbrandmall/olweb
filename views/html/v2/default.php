@@ -40,9 +40,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div class="weui-navbar" id="home_shortcuts">
-    <div class="weui-navbar__item" onclick="window.location='/v2/mall-list?f=8&type=leasing'" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/leasing-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
-    <div class="weui-navbar__item" onclick="window.location='/v2/mall-list?type=events'" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/event-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
-    <div class="weui-navbar__item" onclick="window.location='/v2/mall-list?f=8&type=ads'" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/advertising-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
+    <div class="weui-navbar__item" onclick="redirectToLeasing();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/leasing-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
+    <div class="weui-navbar__item" onclick="redirectToEvents();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/event-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
+    <div class="weui-navbar__item" onclick="redirectToAds();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/advertising-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
+</div>
+
+<div id="mall_list" style="background-color: #292929; text-align: center; margin: 10px 0 0; display: none;">
+    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">上海正大广场</a>
+    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">洛阳正大广场</a>
+    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">宝山正大乐城</a>
 </div>
 
 <div class="weui-panel weui-panel_access" style="background-color: #292929; margin-top: 0;">
@@ -53,7 +59,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall01.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">上海正大广场</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">上海正大广场</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                     项目关键词: 上海陆家嘴/东方明珠/每年客流量超3000万/明珠环年流量1亿人次
                 </p>
@@ -65,7 +71,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall02.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">洛阳正大广场</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">洛阳正大广场</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -76,7 +82,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall03.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">合肥正大广场</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">合肥正大广场</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -87,7 +93,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall04.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">乐清正大广场</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">乐清正大广场</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -98,7 +104,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall05.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">徐汇正大乐城</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">徐汇正大乐城</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -109,7 +115,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall06.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">宝山正大乐城</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">宝山正大乐城</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -120,7 +126,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall07.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">郑州正大乐城</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">郑州正大乐城</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -131,7 +137,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall08.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">无锡正大乐城</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">无锡正大乐城</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>
@@ -142,7 +148,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall09.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; color: #bba585;">北京正大中心</h4>
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">北京正大中心</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>

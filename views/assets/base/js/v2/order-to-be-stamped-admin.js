@@ -42,7 +42,7 @@ function getAllOrdersToBeConfirmed() {
         <span class="weui-form-preview__value">共1件商品 合计: ¥</small>******</span>\n\
         <span class="weui-form-preview__value"><small>(不包含税费 ¥*****)</small></span></div></div>\n\
         <ul class="weui-media-box__info" style="float: right;">\n\
-        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href="/v2/authentication?id='+v.remarkFirst+'&trade='+v.outTradeNo+'">申请报价</a></li>\n\
+        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href=\'javascript: findUserCompanyByMobileNo("'+v.remarkFirst+'","'+v.outTradeNo+'");\'>申请报价</a></li>\n\
         <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">'+alink+'</li>\n\
         </ul></div></div></div>'); 
                         }
@@ -155,4 +155,38 @@ function hideOrder(id){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function findUserCompanyByMobileNo(sc,outTradeNo){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    if(response.data[0].name != '' && response.data[0].uscc != ''){
+                        window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
+                    } else {
+                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                    }
+                } else {
+                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                }
+            }
+        }
+    })
 }

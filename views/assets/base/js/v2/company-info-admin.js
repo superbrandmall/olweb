@@ -1,10 +1,9 @@
+$.info = {
+    company: ""
+};
+
 $(document).ready(function(){
-    $('#company_name').val($.cookie('company_name'));
-    $('#uscc').val($.cookie('uscc'));
-    $('#business_scope').val($.cookie('business_scope'));
-    $('#contact_name_1').val($.cookie('contact_name_1'));
-    $('#contact_phone_1').val($.cookie('contact_phone_1'));
-    $('#contact_email').val($.cookie('contact_email'));
+    findUserCompanyByMobileNo();
     
     $("#company_form").validate({
         rules: {
@@ -57,22 +56,101 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            $.cookie('company_name', $('#company_name').val());
-            $.cookie('uscc', $('#uscc').val());
-            $.cookie('business_scope', $('#business_scope').val());
-            $.cookie('contact_name_1', $('#contact_name_1').val());
-            $.cookie('contact_phone_1', $('#contact_phone_1').val());
-            $.cookie('contact_email', $('#contact_email').val());
-            
-            $(function(){
-                var $toast = $('#js_toast');
-                $toast.fadeIn(100);
-                setTimeout(function () {
-                    $toast.fadeOut(100);
-                    location.reload();
-                }, 2000);
-            });
+            saveUserCompany();
         }
     })
     
 });
+
+function findUserCompanyByMobileNo() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.info.company = response.data[0].id;
+                    $('#company_name').val(response.data[0].name);
+                    $('#uscc').val(response.data[0].uscc);
+                    $('#business_scope').val(response.data[0].businessScope);
+                    $('#contact_name_1').val(response.data[0].contactName);
+                    $('#contact_phone_1').val(response.data[0].contactPhone);
+                    $('#contact_email').val(response.data[0].contactEmail);
+                }
+            }
+        }
+    })
+}
+
+function saveUserCompany() {
+    var map = {
+        "mobileNo": $.cookie('uid'),
+        "name": $('#company_name').val(),
+        "uscc": $('#uscc').val(),
+        "businessScope": $('#business_scope').val(),
+        "contactName": $('#contact_name_1').val(),
+        "contactPhone": $('#contact_phone_1').val(),
+        "contactEmail": $('#contact_email').val(),
+    }
+    
+    if($.info.company != "") {
+        map.id = $.info.company;
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null) {
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $(function(){
+                    var $toast = $('#js_toast');
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                        if(getURLParameter('id') && getURLParameter('id') != '') {
+                            if(getURLParameter('trade') && getURLParameter('trade') != ''){
+                                window.location.href = '/v2/price?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
+                            } else {
+                                window.location.href = '/v2/price?id='+getURLParameter('id');
+                            }
+                        } else {
+                            location.reload();
+                        }
+                    }, 2000);
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    })
+}

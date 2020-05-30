@@ -165,9 +165,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
         ),
-        'v2/authentication' => array(
-            'url' => 'authentication.php'
-        ),
         'v2/floor-plan' => array(
             'url' => 'floor_plan.php'
         ),
@@ -227,7 +224,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php', 'authentication.php',
+    $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php',
         'floor_plan.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
         'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php');
     if (in_array($page, $session_required)) {

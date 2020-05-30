@@ -100,57 +100,6 @@ $(document).ready(function(){
                 $('.floor-guide .weui-media-box__bd').hide();
                 $('.floor-guide .weui-media-box__bd:eq(0)').show();
             }
-            /*if(percent >= 0 && percent <= 10) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(9)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(9)').addClass('visible');
-            } else if(percent > 10 && percent <= 20) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(8)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(8)').addClass('visible');
-            } else if(percent > 20 && percent <= 30) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(7)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(7)').addClass('visible');
-            } else if(percent > 30 && percent <= 40) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(6)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(6)').addClass('visible');
-            } else if(percent > 40 && percent <= 50) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(5)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(5)').addClass('visible');
-            } else if(percent > 50 && percent <= 60) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(4)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(4)').addClass('visible');
-            } else if(percent > 60 && percent <= 70) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(3)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(3)').addClass('visible');
-            } else if(percent > 70 && percent <= 80) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(2)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(2)').addClass('visible');
-            } else if(percent > 80 && percent <= 90) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(1)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(1)').addClass('visible');
-            } else if(percent > 90 && percent <= 100) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(0)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd.visible').removeClass('visible');
-                $('.floor-guide .weui-media-box__bd:eq(0)').addClass('visible');
-            }*/
         }
     });
 

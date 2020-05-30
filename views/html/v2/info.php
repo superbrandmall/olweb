@@ -16,13 +16,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <h4 id="uid" class="weui-media-box__title"></h4>
                     <p id="contact_name_1" class="weui-media-box__desc"></p>
                 </div>
-                <a class="weui-cell__ft" href="/v2/improve-info" style="font-size: 15px; color: #576b95;">完善信息</a>
+                <a class="weui-cell__ft" href="/v2/register" style="font-size: 15px; color: #576b95;">完善个人资料</a>
             </div>
         </div>
     </div>
 
     <div class="weui-header bg-blue" style="height: 40px;"> 
-        <div class="weui-header-left" style="font-size: 14px; top: 10px;"><i class="fa fa-info-circle" aria-hidden="true"></i> 完善资料有助于订单审核通过</div>
+        <div class="weui-header-left" style="font-size: 14px; top: 10px;"><i class="fa fa-info-circle" aria-hidden="true"></i> 完善资料有助于提升线上商户资质</div>
     </div>
 
     <img style="width: 100%;" src="/views/assets/base/img/content/backgrounds/640.gif" alt="">
@@ -40,9 +40,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/my-files">
+                        <div class="weui-cell__hd">
+                            <i class="fa fa-upload" aria-hidden="true" style="margin-right: 10px; color: #fa5151;"></i>
+                        </div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>文件管理</p>
+                        </div>
+                        <span class="weui-cell__ft"></span>
+                    </a>
                     <!--<a class="weui-cell weui-cell_active weui-cell_access" href="#!">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
+                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
                             <p>我的询价</p>
@@ -69,19 +78,19 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells">
                     <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/company-info">
                         <div class="weui-cell__hd">
-                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
+                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
-                            <p>商户管理</p>
+                            <p>公司信息</p>
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/my-files">
+                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/improve-info">
                         <div class="weui-cell__hd">
                             <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
                         </div>
                         <div class="weui-cell__bd weui-cell_primary">
-                            <p>我的文件</p>
+                            <p>签约信息</p>
                         </div>
                         <span class="weui-cell__ft"></span>
                     </a>

@@ -255,22 +255,26 @@ function renderAdList(){
                         src = v.images[0].image;
                     }
 
-                    $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg">\n\
-<div class="weui-media-box__hd" style="position: relative; overflow: hidden;">\n\
-<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
-<span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
+                    $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0;">\n\
+<div class="weui-media-box__bd" onclick=\'javascript: drawAdsFromList("'+v.code+'");\'>\n\
+<div style="position: relative; float: left; width: 142px;">\n\
+<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
+<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
 </div>\n\
-<div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; font-size: 12px;">'+v.remark_1+'</p>\n\
-<p class="weui-media-box__desc">价格: '+v.remark_2+'/月</p>\n\
-<ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.remark_6+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: drawAdsFromList("'+v.code+'");\'>查看位置</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href="/v2/ad?id='+v.code+'">广告位详情</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: AddtoCart("'+v.code+'");\' style="color: #fa5151;">加入购物车</a></li>\n\
-</ul>\n\
+<div style="margin-left: 142px; padding: 0 5px 5px;">\n\
+<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; color: #bba585;">'+v.remark_1+'m<sup>2</sup></p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">价格: '+v.remark_2+'/月</p>\n\
+</div>\n\
+<div style="clear: both; background-color: #292929; text-align: center; padding: 10px 0;">\n\
+<a href=\'javascript: showVR("'+v.remark_6+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">VR</a>\n\
+<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入关注</a>\n\
+<a href="/v2/ad?id='+v.code+'" style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">广告位详情</a>\n\
+<a href=\'javascript: AddtoCart("'+v.code+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入购物车</a>\n\</div>\n\
 </div>\n\
 </div>');
+                    
+                    
+                    
                 }
             }
         }

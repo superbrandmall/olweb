@@ -1,91 +1,85 @@
+$.info = {
+    company: "",
+    name: ""
+};
+
 $(document).ready(function(){
-    $('#fapiao_company_name').val($.cookie('fapiao_company_name'));
-    $('#tax_no').val($.cookie('tax_no'));
-    $('#contact_address').val($.cookie('contact_address'));
-    $('#fapiao_address').val($.cookie('fapiao_address'));
-    $('#fapiao_phone').val($.cookie('fapiao_phone'));
-    $('#register_address').val($.cookie('register_address'));
-    $('#invoice_address').val($.cookie('invoice_address'));
-    $('#identity_card_no').val($.cookie('identity_card_no'));
-    $('#taxpayer_type').val($.cookie('taxpayer_type'));
-    $('#fapiao_type').val($.cookie('fapiao_type'));
-    $('#bank_name').val($.cookie('bank_name'));
-    $('#bank_card_no').val($.cookie('bank_card_no'));
+    findUserCompanyByMobileNo();
     
     $("#improve_form").validate({
         rules: {
-            fapiao_company_name: {
+            invoice_company_name: {
                 required: true
             },
-            tax_no: {
+            invoice_tax_no: {
                 required: true
             },
-            contact_address: {
-                required: true
-            },
-            fapiao_address: {
-                required: true
-            },
-            fapiao_phone: {
-                required: true
-            },
-            register_address: {
+            mailing_address: {
                 required: true
             },
             invoice_address: {
                 required: true
             },
-            identity_card_no: {
+            invoice_phone: {
                 required: true
             },
-            taxpayer_type: {
+            street_address: {
                 required: true
             },
-            fapiao_type: {
+            billing_address: {
+                required: true
+            },
+            id_card: {
+                required: true
+            },
+            tax_payer_type: {
+                required: true
+            },
+            invoice_type: {
                 required: true
             },
             bank_name: {
                 required: true
             },
-            bank_card_no: {
+            bank_account: {
                 required: true
             }
         },
         messages: {
-            fapiao_company_name: {
+            invoice_company_name: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            tax_no: {
+            invoice_tax_no: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            contact_address: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
-            },
-            fapiao_address: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
-            },
-            fapiao_phone: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
-            },
-            register_address: {
+            mailing_address: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             invoice_address: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            identity_card_no: {
+            invoice_phone: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            taxpayer_type: {
+            street_address: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            fapiao_type: {
+            billing_address: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            id_card: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            tax_payer_type: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            invoice_type: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             bank_name: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
-            bank_card_no: {
+            bank_account: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
@@ -93,25 +87,110 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            $.cookie('fapiao_company_name', $('#comfapiao_company_nameany_name').val());
-            $.cookie('tax_no', $('#tax_no').val());
-            $.cookie('contact_address', $('#contact_address').val());
-            $.cookie('fapiao_address', $('#fapiao_address').val());
-            $.cookie('fapiao_phone', $('#fapiao_phone').val());
-            $.cookie('register_address', $('#register_address').val());
-            $.cookie('invoice_address', $('#invoice_address').val());
-            $.cookie('identity_card_no', $('#identity_card_no').val());
-            $.cookie('taxpayer_type', $('#taxpayer_type').val());
-            $.cookie('fapiao_type', $('#fapiao_type').val());
-            $.cookie('bank_name', $('#bank_name').val());
-            $.cookie('bank_card_no', $('#bank_card_no').val());
-            
-            if(getURLParameter('id') && getURLParameter('id') != ''){
-                window.location.href = '/v2/stamping';
-            } else {
-                window.location.href = '/v2/info';
+            saveUserCompany();
+        }
+    });
+});
+
+function findUserCompanyByMobileNo() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.info.company = response.data[0].id;
+                    $.info.name = response.data[0].name;
+                    $('#invoice_company_name').val(response.data[0].invoiceCompanyName);
+                    $('#invoice_tax_no').val(response.data[0].invoiceTaxNo);
+                    $('#mailing_address').val(response.data[0].mailingAddress);
+                    $('#invoice_address').val(response.data[0].invoiceAddress);
+                    $('#invoice_phone').val(response.data[0].invoicePhone);
+                    $('#street_address').val(response.data[0].streetAddress);
+                    $('#billing_address').val(response.data[0].billingAddress);
+                    $('#id_card').val(response.data[0].idCard);
+                    $('#tax_payer_type').val(response.data[0].taxPayerType);
+                    $('#invoice_type').val(response.data[0].invoiceType);
+                    $('#bank_name').val(response.data[0].bankName);
+                    $('#bank_account').val(response.data[0].bankAccount);
+                }
             }
         }
     })
+}
+
+function saveUserCompany() {
+    var map = {
+        "mobileNo": $.cookie('uid'),
+        "invoiceCompanyName": $('#invoice_company_name').val(),
+        "invoiceTaxNo": $('#invoice_tax_no').val(),
+        "mailingAddress": $('#mailing_address').val(),
+        "invoiceAddress": $('#invoice_address').val(),
+        "invoicePhone": $('#invoice_phone').val(),
+        "streetAddress": $('#street_address').val(),
+        "billingAddress": $('#billing_address').val(),
+        "idCard": $('#id_card').val(),
+        "taxPayerType": $('#tax_payer_type').val(),
+        "invoiceType": $('#invoice_type').val(),
+        "bankName": $('#bank_name').val(),
+        "bankAccount": $('#bank_account').val()
+    }
     
-});
+    if($.info.company != "") {
+        map.id = $.info.company;
+        map.name = $.info.name;
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null) {
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $(function(){
+                    var $toast = $('#js_toast');
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                        if(getURLParameter('id') && getURLParameter('id') != ''){
+                            window.location.href = '/v2/stamping';
+                        } else {
+                            window.location.href = '/v2/info';
+                        }
+                    }, 2000);
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    })
+}

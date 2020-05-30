@@ -5,12 +5,16 @@
   }
 }
 
+.weui-cell:before {
+    border-top: solid 1px #292929;
+}
+
 .weui-cell_select .weui-select {
     padding-right: 16px;
 }
 
-.weui-media-box__desc {
-    color: var(--weui-FG-0);
+.weui-cell.weui-cell_active:active {
+    background: transparent;
 }
 
 .weui-media-box__info__meta_extra {
@@ -19,6 +23,10 @@
 
 .weui-media-box__info__meta {
     padding-right: 0.7em;
+}
+
+.weui-media-box:before {
+    border-top: solid 1px #5b5b5b;
 }
 
 .weui-grid {
@@ -77,8 +85,12 @@
     color: #576b95;
 }
 
+.weui-count .weui-count__btn:after, .weui-count .weui-count__btn:before {
+    background-color: #bba585;
+}
+
 .error {
-    color: #fa9d3b;
+    color: #cc0000;
 }
 
 #home_shortcuts:after {

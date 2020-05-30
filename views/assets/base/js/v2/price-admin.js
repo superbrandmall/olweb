@@ -2,9 +2,8 @@ $.order = {
     copy: ""
 };
 
-var first_year_bond = '-';
-var second_year_bond = '-';
-var third_year_bond = '-';
+var first_year_bond = '';
+var second_year_bond = '';
 
 var d = new Date();
 var month = d.getMonth()+1;
@@ -64,11 +63,6 @@ function GetShopPriceInfo(){
                 var second_year_deduction_rate = '';
                 var second_year_property_maintenance = '';
                 
-                var third_year_unit_price = '';
-                var third_year_rent = '';
-                var third_year_deduction_rate = '';
-                var third_year_property_maintenance = '';
-                
                 $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
                     if(response.data.unit == w.unit_no){
                         free_of_ground_rent = w.free_of_ground_rent;
@@ -84,12 +78,6 @@ function GetShopPriceInfo(){
                         second_year_deduction_rate = w.second_year.second_year_deduction_rate;
                         second_year_property_maintenance = w.second_year.second_year_property_maintenance;
                         second_year_bond = w.second_year.second_year_bond;
-                        
-                        third_year_unit_price = w.third_year.third_year_unit_price;
-                        third_year_rent = w.third_year.third_year_rent;
-                        third_year_deduction_rate = w.third_year.third_year_deduction_rate;
-                        third_year_property_maintenance = w.third_year.third_year_property_maintenance;
-                        third_year_bond = w.third_year.third_year_bond;
                     }
                 })
                 
@@ -144,15 +132,6 @@ function GetShopPriceInfo(){
                 $.cookie('second_year_deduction_rate',second_year_deduction_rate);
                 $('#second_year_property_maintenance').text(second_year_property_maintenance);
                 $.cookie('second_year_property_maintenance',second_year_property_maintenance);
-                
-                $('#third_year_unit_price').text(third_year_unit_price);
-                $.cookie('third_year_unit_price',third_year_unit_price);
-                $('#third_year_rent').text(third_year_rent);
-                $.cookie('third_year_rent',third_year_rent);
-                $('#third_year_deduction_rate').text(third_year_deduction_rate);
-                $.cookie('third_year_deduction_rate',third_year_deduction_rate);
-                $('#third_year_property_maintenance').text(third_year_property_maintenance);
-                $.cookie('third_year_property_maintenance',third_year_property_maintenance);
                 
                 $('#bond').text(first_year_bond);
                 $.cookie('bond',first_year_bond);
@@ -297,26 +276,9 @@ function SaveOrder(){
         "area": $.cookie('area'),
         "id": 0
     }
-    
-    var thirdYearPrice = {
-        "amount": Math.round($.cookie('third_year_rent')*1.05),
-        "code": "3",
-        "endDate": IncrYears($.cookie('open_date'),3),
-        "name": "",
-        "orgCode": "100001",
-        "outTradeNo": order.outTradeNo,
-        "rentAmount": $.cookie('third_year_unit_price'),
-        "startDate": IncrYears($.cookie('open_date'),2),
-        "taxAmount": $.cookie('third_year_rent'),
-        "termType": "B011",
-        "termTypeName": "固定租金",
-        "unitCode": order.contractTermInfos[0].unitCode,
-        "unitId": "sfsdfsfasfsfasdfasdf",
-        "area": $.cookie('area'),
-        "id": 0
-    }
+
         
-    var thirdYearRate = {
+    /*var thirdYearRate = {
         "amount": Math.round($.cookie('third_year_deduction_rate')*1.05),
         "code": "3",
         "endDate": IncrYears($.cookie('open_date'),3),
@@ -332,10 +294,10 @@ function SaveOrder(){
         "unitId": "sfsdfsfasfsfasdfasdf",
         "area": $.cookie('area'),
         "id": 0
-    }    
+    }*/    
     
     if(order.contractTermInfos.length == 4 && order.orderStates == '待确认订单'){
-        order.contractTermInfos.push(secondYearPrice,secondYearRate,thirdYearPrice,thirdYearRate);
+        order.contractTermInfos.push(secondYearPrice,secondYearRate);
     }
     
     /* 

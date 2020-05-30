@@ -25,7 +25,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 
 <audio id="voiceplayer" src="/upload/audio/sbm-voice.mp3" preload="meta" style="display: none;"></audio>
 
-<div class="slide" id="slide1" style="height: 100vh;">
+<div class="slide" id="slide1" style="height: calc(100vh - 60px); max-height: 100%;">
     <img src="/views/assets/base/img/content/backgrounds/sbm/logo.png" alt="正大" height="40" style="position: absolute; left: 0; right: 0; top: 10px; margin: 0 auto; z-index: 3;" />     
     <ul>
         <li>
