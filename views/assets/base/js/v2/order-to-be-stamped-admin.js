@@ -20,11 +20,18 @@ function getAllOrdersToBeConfirmed() {
                 hideLoading();
                 var img = '';
                 var empty = 1;
+                var qty = 1;
                 if(response.data.length > 0){
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state === 1 && v.orderStates !== '已隐藏订单'){
                             empty = 0;
-                            img = getShopInfo(v.remarkFirst);
+                            if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
+                                img = getShopInfo(v.remarkFirst);
+                                qty = 1;
+                            } else if(v.remarkSecond == 'advertising'){
+                                img = v.contractInfos[0].remarkFirst;
+                                qty = v.contractInfos.length;
+                            }
                             var alink = '<a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a>';
                             if(v.orderStates == '已关闭订单'){
                                 alink = '<a class="weui-link" href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a>';
@@ -39,10 +46,10 @@ function getAllOrdersToBeConfirmed() {
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">共1件商品 合计: ¥</small>******</span>\n\
-        <span class="weui-form-preview__value"><small>(不包含税费 ¥*****)</small></span></div></div>\n\
+        <span class="weui-form-preview__value">共'+qty+'件商品 合计: ¥</small>******</span>\n\
+        <span class="weui-form-preview__value"><small>(含税费 ¥*****)</small></span></div></div>\n\
         <ul class="weui-media-box__info" style="float: right;">\n\
-        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href=\'javascript: findUserCompanyByMobileNo("'+v.remarkFirst+'","'+v.outTradeNo+'");\'>申请报价</a></li>\n\
+        <li class="weui-media-box__info__meta"><a class="weui-link" style="color: #fa5151;" href=\'javascript: findUserCompanyByMobileNo("'+v.remarkFirst+'","'+v.outTradeNo+'","'+v.remarkSecond+'");\'>申请报价</a></li>\n\
         <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">'+alink+'</li>\n\
         </ul></div></div></div>'); 
                         }
@@ -157,7 +164,7 @@ function hideOrder(id){
     });
 }
 
-function findUserCompanyByMobileNo(sc,outTradeNo){
+function findUserCompanyByMobileNo(sc,outTradeNo,type){
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
         type: "POST",
@@ -179,7 +186,13 @@ function findUserCompanyByMobileNo(sc,outTradeNo){
                 
                 if(response.data.length > 0){
                     if(response.data[0].name != '' && response.data[0].uscc != ''){
-                        window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
+                        if(type == 'leasing') {
+                            window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
+                        } else if(type == 'advertising') {
+                            window.location.href = '/v2/advertising-shopping-cart?id='+sc+'&trade='+outTradeNo;
+                        } else if(type == 'events') {
+                            window.location.href = '/v2/choose-event?id='+sc+'&trade='+outTradeNo;
+                        } 
                     } else {
                         window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
                     }

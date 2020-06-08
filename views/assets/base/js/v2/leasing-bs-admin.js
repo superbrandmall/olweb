@@ -1,4 +1,6 @@
 $.selectedShops = new Array();
+$.favorites = new Array();
+$.favoritesId = new Array();
 
 var d = new Date();
 var month = d.getMonth()+1;
@@ -10,6 +12,7 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     showLoading();
+    GetMyFavorites();
     
     var floorDesc, floorLable, floor = '8F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
@@ -17,57 +20,32 @@ $(document).ready(function(){
             case '0':
                 floorDesc = '负一楼';
                 floor = 'B1';
-                floorLable = 'B1F 配套服务';
+                floorLable = 'B1F 运动&美食';
                 break;
             case '1':
                 floorDesc = '一楼';
                 floor = 'L1';
-                floorLable = '1F 国际风尚/滨江夜食';
+                floorLable = '1F 潮流生活';
                 break;
             case '2':
                 floorDesc = '二楼';
                 floor = 'L2';
-                floorLable = '2F 家庭生活';
+                floorLable = '2F 聚餐&培训';
                 break;
             case '3':
                 floorDesc = '三楼';
                 floor = 'L3';
-                floorLable = '3F 精致女孩/千禧女孩';
-                break;
-            case '4':
-                floorDesc = '四楼';
-                floor = 'L4';
-                floorLable = '4F 型男周边';
-                break;
-            case '5':
-                floorDesc = '五楼';
-                floor = 'L5';
-                floorLable = '5F 运动潮玩';
-                break;
-            case '6':
-                floorDesc = '六楼';
-                floor = 'L6';
-                floorLable = '6F 国风文化';
-                break;
-            case '7':
-                floorDesc = '七楼';
-                floor = 'L7';
-                floorLable = '7F 健康生活';
-                break;
-            case '8':
-                floorDesc = '八楼';
-                floor = 'L8';
-                floorLable = '8F 聚会时光';
+                floorLable = '3F 教育天地';
                 break;
             default:
                 floorDesc = [];
                 floor = 'L1';
-                floorLable = '1F 聚会时光';
+                floorLable = '1F 潮流生活';
                 break;
         }
         
         $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+getURLParameter('f')+'F.png',
+            'src'   : '/views/assets/base/img/content/floor-plan/baoshan-tm/'+getURLParameter('f')+'F.png',
             'alt'   : getURLParameter('f')+'F',
             'usemap': '#Map_'+getURLParameter('f')+'F'
         });
@@ -78,16 +56,16 @@ $(document).ready(function(){
         getShopFloorInfo(floorDesc);
     } else {
         $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png',
-            'alt'   : '8F',
-            'usemap': '#Map_8F'
+            'src'   : '/views/assets/base/img/content/floor-plan/baoshan-tm/1F.png',
+            'alt'   : '1F',
+            'usemap': '#Map_1F'
         });
         $('map').attr({
-            'name'  : 'Map_8F',
-            'id'    : '"Map_8F'
+            'name'  : 'Map_1F',
+            'id'    : '"Map_1F'
         });
 
-        getShopFloorInfo('八楼');
+        getShopFloorInfo('一楼');
     }
 
     $('#showSizePicker').on('click', function () {
@@ -122,38 +100,22 @@ $(document).ready(function(){
 
     $('#showFloorPicker').on('click', function (){
         weui.picker([{
-            label: '8F 聚会时光',
-            value: '8'
-        }, {
-            label: '7F 健康生活',
-            value: '7'
-        }, {
-            label: '6F 国风文化',
-            value: '6'
-        },{
-            label: '5F 运动潮玩',
-            value: '5'
-        }, {
-            label: '4F 型男周边',
-            value: '4'
-        },{
-            label: '3F 精致女孩/千禧女孩',
+            label: '3F 教育天地',
             value: '3'
         },{
-            label: '2F 家庭生活',
+            label: '2F 聚餐&培训',
             value: '2'
         },{
-            label: '1F 国际风尚/滨江夜食',
+            label: '1F 潮流生活',
             value: '1'
         },{
-            label: 'B1 配套服务',
+            label: 'B1 运动&美食',
             value: '0'
         }], {
             onChange: function (result) {
             },
             onConfirm: function (result) {
-                $.cookie('floor',result[0].value);
-                window.location.href = '/v2/floor-plan?f='+result[0].value+'&type=leasing';
+                window.location.href = '/v2/leasing-bs?f='+result[0].value+'&type=leasing';
             },
             title: '请选择铺位所在区域'
         });
@@ -173,7 +135,7 @@ $(document).ready(function(){
 function getShopFloorInfo(fl) {
     getShopsMoreInfo();
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/OLMALL180917000003/"+fl+"",
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/OLMALL180917000002/"+fl+"",
         type: "GET",
         async: false,
         dataType: "json",
@@ -189,7 +151,7 @@ function getShopFloorInfo(fl) {
                 hideLoading();
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
-                    if((v.unit == "02FL035") || (v.unit == "03FL084") || (v.unit == "03FL001") || (v.unit == "03FL004") || (v.unit == "04FL005") || (v.unit == "04FL008") || (v.unit == "05FL123") || (v.unit == "05FL117") || (v.unit == "07FL069") || (v.unit == "08FL012") || (v.unit == "08FL015")){
+                    if((v.unit == "B1FL022") || (v.unit == "B1FL015") || (v.unit == "01FL035") || (v.unit == "01FL009") || (v.unit == "01FL015")){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-push="1" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     } else {
                         if(v.shopState == 0 || v.shopState == 2){
@@ -220,7 +182,7 @@ function getShopFloorInfo(fl) {
 
 function getShopsMoreInfo() {
     $.ajax({
-        url: "/views/assets/base/js/v2/json/shopAll.json",
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000002",
         type: "GET",
         async: false,
         dataType: "json",
@@ -232,12 +194,17 @@ function getShopsMoreInfo() {
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            if(response.code == '200') {
+            if(response.code === 'C0') {
                 hideLoading();
-                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data.shop_info) );
+                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data)); 
+            } else {
+                interpretBusinessCode(response.customerMessage);
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
         }
-    })
+    });
 }
 
     
@@ -365,20 +332,27 @@ function renderShopList(shop){
     $.selectedShops = [];
     
     $.each($.parseJSON(sessionStorage.getItem("shops")), function(i,v){
-        if((v.unit == "02FL035") || (v.unit == "03FL084") || (v.unit == "03FL001") || (v.unit == "03FL004") || (v.unit == "04FL005") || (v.unit == "04FL008") || (v.unit == "05FL123") || (v.unit == "05FL117") || (v.unit == "07FL069") || (v.unit == "08FL012") || (v.unit == "08FL015")){
+        if((v.unit == "B1FL022") || (v.unit == "B1FL015") || (v.unit == "01FL035") || (v.unit == "01FL009") || (v.unit == "01FL015")){
 
             var settle_date = '-';
-            var ATV = '';
-            var business_format_CHS = '-';
-            var free_of_ground_rent = '-';
-            var c_per = '';
+            var desc = '';
+            var businessFormatChs = '-';
+            var freeOfGroundRent = '-';
             var opening_date = '-';
+            
+            var buildingCode;
+            var storeCode;
+            var vr;
+            
             $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-                if(v.unit == w.unit_no){
-                    ATV = w.ATV || '';
-                    business_format_CHS = w.business_format_CHS || '-';
-                    free_of_ground_rent = w.free_of_ground_rent || '-';
-                    c_per = w.c_per+'/m<sup>2</sup>/月' || '';
+                if(v.unit == w.unitCode){
+                    desc = w.desc || '';
+                    businessFormatChs = w.businessFormatChs || '-';
+                    freeOfGroundRent = w.freeOfGroundRent || '-';
+                    
+                    buildingCode = w.buildingCode;
+                    storeCode = w.storeCode;
+                    vr = w.remarkFirst;
                 }
             })
 
@@ -386,7 +360,7 @@ function renderShopList(shop){
 
             if(Math.round(area) > minSize && Math.round(area) < maxSize){
                 $.selectedShops.push(v.code);
-                var src = '/views/assets/base/img/content/mall/1s.jpg';
+                var src = '/views/assets/base/img/content/mall/5s.jpg';
                 if(v.images != null && v.images.length > 0){
                     src = v.images[0].image;
                 }
@@ -397,8 +371,13 @@ function renderShopList(shop){
                     settle_date = IncrDates(date,(v.daysBeforeContractExpire+1));
                 }
 
-                if(free_of_ground_rent != '-'){
-                    opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+                if(freeOfGroundRent != '-'){
+                    opening_date = IncrDates(settle_date,parseInt(freeOfGroundRent)) || '-';
+                }
+
+                var fav = '<a href=\'javascript: AddToFavorite("'+buildingCode+'","'+v.code+'","'+storeCode+'","'+v.unit+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>';
+                if($.inArray(v.code, $.favorites) != -1){
+                    fav = '<a href=\'javascript: RemoveFavorite("'+$.favoritesId[$.inArray(v.code, $.favorites)]+'","'+buildingCode+'","'+v.code+'","'+storeCode+'","'+v.unit+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">取消关注</a>';
                 }
 
                 $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0 0 10px;">\n\
@@ -407,8 +386,8 @@ function renderShopList(shop){
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
 <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
 <div style="padding: 5px 0;">\n\
-<a href=\'javascript: showVR("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
-<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>\n\
+<a href=\'javascript: showVR("'+vr+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
+'+fav+'\n\
 <a href=\'javascript: showEngineering("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">工程条件</a>\n\
 <a href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>\n\
 </div>\n\
@@ -417,9 +396,8 @@ function renderShopList(shop){
 <p class="weui-media-box__desc" style="color: #bba585;">面积: '+v.area+'m<sup>2</sup></p>\n\
 <p class="weui-media-box__desc" style="color: #bba585;">进场日期: <strong>'+settle_date+'</strong></p>\n\
 <p class="weui-media-box__desc" style="color: #bba585;">开业日期: <strong>'+opening_date+'</strong></p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+business_format_CHS+'</p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">'+ATV+'</p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">同品类业绩坪效: '+c_per+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+businessFormatChs+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">'+desc+'</p>\n\
 </div>\n\
 </div>\n\
 </div>');
@@ -439,7 +417,8 @@ function showEngineering(id){
     $("#engineering_pdf").show();
 }
 
-function showVR(id){
+function showVR(url){
+    $("#vr_viewer iframe").attr('src',url);
     $("#vr_viewer").show();
 }
 
@@ -450,19 +429,25 @@ function renderShopListFromDraw(sc){
             $.selectedShops.push(v.code);
 
             var settle_date = '-';
-            var ATV = '';
-            var business_format_CHS = '-';
-            var free_of_ground_rent = '-';
-            var c_per = '';
+            var desc = '';
+            var businessFormatChs = '-';
+            var freeOfGroundRent = '-';
             var opening_date = '-';
+            
+            var buildingCode;
+            var storeCode;
+            var vr;
             
             $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
 
-                if(v.unit == w.unit_no){
-                    ATV = w.ATV || '';
-                    business_format_CHS = w.business_format_CHS || '-';
-                    free_of_ground_rent = w.free_of_ground_rent || '-';
-                    c_per = w.c_per+'/m<sup>2</sup>/月' || '';
+                if(v.unit == w.unitCode){
+                    desc = w.desc || '';
+                    businessFormatChs = w.businessFormatChs || '-';
+                    freeOfGroundRent = w.freeOfGroundRent || '-';
+                    
+                    buildingCode = w.buildingCode;
+                    storeCode = w.storeCode;
+                    vr = w.remarkFirst;
                 }
             })
             
@@ -477,8 +462,13 @@ function renderShopListFromDraw(sc){
                 settle_date = IncrDates(date,(v.daysBeforeContractExpire+1));
             }
 
-            if(free_of_ground_rent != '-'){
-                opening_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '-';
+            if(freeOfGroundRent != '-'){
+                opening_date = IncrDates(settle_date,parseInt(freeOfGroundRent)) || '-';
+            }
+            
+            var fav = '<a href=\'javascript: AddToFavorite("'+buildingCode+'","'+v.code+'","'+storeCode+'","'+v.unit+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>';
+            if($.inArray(v.code, $.favorites) != -1){
+                fav = '<a href=\'javascript: RemoveFavorite("'+$.favoritesId[$.inArray(v.code, $.favorites)]+'","'+buildingCode+'","'+v.code+'","'+storeCode+'","'+v.unit+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">取消关注</a>';
             }
             
             $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" tyle="background-color: #3f3f3f; padding: 0 0 10px;">\n\
@@ -487,8 +477,8 @@ function renderShopListFromDraw(sc){
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
 <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
 <div style="padding: 5px 0;">\n\
-<a href=\'javascript: showVR("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
-<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">加入关注</a>\n\
+<a href=\'javascript: showVR("'+vr+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">VR</a>\n\
+'+fav+'\n\
 <a href=\'javascript: showEngineering("'+v.shopName+'");\' style="display: inline-block; margin: 2px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">工程条件</a>\n\
 <a href=\'javascript: askPrice("'+v.unit+'","'+v.code+'","'+settle_date+'","'+opening_date+'","'+v.shopName+'","'+v.area+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>\n\
 </div>\n\
@@ -497,9 +487,8 @@ function renderShopListFromDraw(sc){
 <p class="weui-media-box__desc" style="color: #bba585;">面积: '+v.area+'m<sup>2</sup></p>\n\
 <p class="weui-media-box__desc" style="color: #bba585;">进场日期: <strong>'+settle_date+'</strong></p>\n\
 <p class="weui-media-box__desc" style="color: #bba585;">开业日期: <strong>'+opening_date+'</strong></p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+business_format_CHS+'</p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">'+ATV+'</p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">同品类业绩坪效: '+c_per+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">推荐业态: '+businessFormatChs+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">'+desc+'</p>\n\
 </div>\n\
 </div>\n\
 </div>');
@@ -592,6 +581,151 @@ function GetShopInfo(sc){
     renderShopListFromDraw(sc);
 }
 
+function GetMyFavorites(){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.remarkSecond == 1){
+                        $.favorites.push(v.remarkFirst);
+                        $.favoritesId.push(v.id);
+                    }
+                });
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function AddToFavorite(bc,c,sc,uc){
+    showLoading();
+    var map = {
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 1,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing",
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_1');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function RemoveFavorite(id,bc,c,sc,uc){
+    showLoading();
+    var map = {
+        "id": id,
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 0,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing"
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_2');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
 function askPrice(ut,sc,ed,od,ud,a){
     showLoading();
     var unit = ut;
@@ -599,7 +733,7 @@ function askPrice(ut,sc,ed,od,ud,a){
     var openDate = od;
     var unitDesc = ud;
     var area = a;
-    var outTradeNo = '100001' + d.getFullYear() +
+    var outTradeNo = '201001' + d.getFullYear() +
                 (month<10 ? '0' : '') + month +
                 (day<10 ? '0' : '') + day + time
                 + '0000' + parseInt(Math.random()*10);
@@ -638,7 +772,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "name": "test name",
             "num": 1,
             "openDate": openDate,
-            "orgCode": "100001",
+            "orgCode": "201001",
             "otherFlag": "",
             "outTradeNo": outTradeNo,
             "remarkFifth": "",
@@ -654,7 +788,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "unitCode": unit,
             "unitDesc": unitDesc,
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "userId": "10000101",
+            "userId": "20100101",
             "vipFlag": "1",
             "wxCardFlag": "1",
             "area": area //广告默认传1
@@ -667,7 +801,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "code": "1",
             "endDate": "",
             "name": "",
-            "orgCode": "100001",
+            "orgCode": "201001",
             "outTradeNo": outTradeNo,
             "rentAmount": "",
             "startDate": openDate,
@@ -683,7 +817,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "code": "1",
             "endDate": "",
             "name": "",
-            "orgCode": "100001",
+            "orgCode": "201001",
             "outTradeNo": outTradeNo,
             "rentAmount": "",
             "startDate": openDate,
@@ -699,7 +833,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "code": "1",
             "endDate": "",
             "name": "",
-            "orgCode": "100001",
+            "orgCode": "201001",
             "outTradeNo": outTradeNo,
             "startDate": openDate,
             "taxAmount": 0.015,
@@ -714,7 +848,7 @@ function askPrice(ut,sc,ed,od,ud,a){
             "code": "1",
             "endDate": "",
             "name": "",
-            "orgCode": "100001",
+            "orgCode": "201001",
             "outTradeNo": outTradeNo, //订单号需动态调用
             "rentAmount": "",
             "startDate": openDate,
@@ -738,7 +872,8 @@ function askPrice(ut,sc,ed,od,ud,a){
         "tenantNo": "海鼎公司编号",
         "tenantOrg": "G12321312312223131", //uscc
         "userId": "sfsdfsfasfsfasdfasdf",
-        "remarkFirst": sc
+        "remarkFirst": sc,
+        "remarkSecond": 'leasing'
     };
     
     $.ajax({
@@ -796,34 +931,12 @@ function findUserCompanyByMobileNo(sc,outTradeNo){
                     if(response.data[0].name != '' && response.data[0].uscc != ''){
                         window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
                     } else {
-                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=leasing';
                     }
                 } else {
-                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo;
+                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=leasing';
                 }
             }
         }
     })
-}
-
-function NetPing(images,vr) {
-    $.ajax({
-        type: "GET",
-        cache: false,
-        url: 'https://ol.superbrandmall.com/'+vr,
-        data: "",
-        success: function() {
-            $('#store_vr .embed-responsive').show();
-            $('#store_vr iframe').attr('src','/'+vr);
-            $('#store_img').html('');
-        },
-        error: function() {
-            $('#store_vr .embed-responsive').hide();
-            if(images != null && images.length > 1) {
-                $('#store_img').html('<img src="'+images[1].image+'" style="width: 100%;" />');
-            } else {
-                $('#store_img').html('');
-            }
-        }
-    });
 }

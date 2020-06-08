@@ -71,7 +71,8 @@ function audioplay(id){
 }
 
 function redirectToLeasing(){
-    $('#mall_list').find('a:eq(0)').attr('href','/v2/floor-plan?f=8&type=leasing');
+    $('#mall_list').find('a:eq(0)').attr('href','/v2/leasing?f=8&type=leasing');
+    $('#mall_list').find('a:eq(1)').attr('href','/v2/leasing-bs?f=1&type=leasing');
     $('#mall_list').toggle();
 }
 
@@ -81,6 +82,6 @@ function redirectToEvents(){
 }
 
 function redirectToAds(){
-    $('#mall_list').find('a:eq(0)').attr('href','/v2/advertising?f=8&type=ads');
+    $('#mall_list').find('a:eq(0)').attr('href','/v2/advertising?f=3&type=ads');
     $('#mall_list').toggle();
 }

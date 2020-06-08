@@ -1,8 +1,21 @@
 $.selectedAds = new Array();
+$.favorites = new Array();
+$.favoritesId = new Array();
+$.order = {
+    copy: ""
+};
 
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var time = d.getTime();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    
 $(document).ready(function(){
     showLoading();
-    
+    GetMyFavorites();
     var floorDesc, floor;
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
@@ -78,16 +91,13 @@ $(document).ready(function(){
     
     $('#showFloorPicker').on('click', function (){
         weui.picker([{
-            label: '八楼东区悬挂式LED',
-            value: '8'
+            label: '黄金大道悬挂分屏LED',
+            value: '4'
         }, {
-            label: '五楼黄金大道悬挂分屏LED',
-            value: '5'
-        }, {
-            label: '三楼入口全包LED环绕屏',
+            label: '3F入口全包LED环绕屏',
             value: '3'
         }, {
-            label: '一楼户外墙面广告',
+            label: '户外墙面广告',
             value: '1'
         }], {
             onChange: function (result) {
@@ -106,7 +116,7 @@ $(document).ready(function(){
 
 function getAdFloorInfo(fl) {
     $.ajax({
-        url: "/views/assets/base/js/v2/json/ad.json",
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCode?storeCode=OLMALL180917000003",
         type: "GET",
         async: false,
         dataType: "json",
@@ -122,10 +132,9 @@ function getAdFloorInfo(fl) {
                 hideLoading();
                 sessionStorage.setItem("ads", JSON.stringify(response.data) );
                 $.each(response.data, function(i,v){
-                    if(v.subType == 'ad' && v.floor == fl && v.coords != null && v.coords != '' && v.state != 0){
-                        $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-shop-name="'+v.shopName+'" href=\'javascript: GetAdInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                    if(v.remarkSecond == fl && v.coords != null && v.coords != '' && v.state != 0){
+                        $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" href=\'javascript: GetAdInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
-                    
                 });
                 
                 if(getURLParameter('f') && getURLParameter('id')){
@@ -246,37 +255,35 @@ function renderAdList(){
     $.selectedAds = [];
     
     $.each($.parseJSON(sessionStorage.getItem("ads")), function(i,v){
-        if(v.shopState == 1) {
-            if(v.subType == 'ad' && v.floor == getURLParameter('f') && v.coords != null && v.coords != '' && v.state != 0){
-                if(v.shopState == 1){
-                    $.selectedAds.push(v.code);
-                    var src = '/views/assets/base/img/content/mall/1s.jpg';
-                    if(v.images != null && v.images.length > 0){
-                        src = v.images[0].image;
-                    }
+        if(v.remarkSecond == getURLParameter('f') && v.coords != null && v.coords != '' && v.state != 0 && $.inArray(v.code, $.selectedAds) == -1){
+            $.selectedAds.push(v.code);
+            var src = '/views/assets/base/img/content/mall/1s.jpg';
+            if(v.advertisingImagesWxList != null && v.advertisingImagesWxList.length > 0){
+                src = v.advertisingImagesWxList[0].imagePath;
+            }
+            
+            var fav = '<a href=\'javascript: AddToFavorite("'+v.buildingCode+'","'+v.code+'","'+v.storeCode+'","'+v.unitCode+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入关注</a>';
+            if($.inArray(v.code, $.favorites) != -1){
+                fav = '<a href=\'javascript: RemoveFavorite("'+$.favoritesId[$.inArray(v.code, $.favorites)]+'","'+v.buildingCode+'","'+v.code+'","'+v.storeCode+'","'+v.unitCode+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">取消关注</a>';
+            }
 
-                    $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0;">\n\
+            $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0;">\n\
 <div class="weui-media-box__bd" onclick=\'javascript: drawAdsFromList("'+v.code+'");\'>\n\
 <div style="position: relative; float: left; width: 142px;">\n\
 <a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
-<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.shopName+'</span>\n\
+<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.unitDescChs+'</span>\n\
 </div>\n\
 <div style="margin-left: 142px; padding: 0 5px 5px;">\n\
-<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; color: #bba585;">'+v.remark_1+'m<sup>2</sup></p>\n\
-<p class="weui-media-box__desc" style="color: #bba585;">价格: '+v.remark_2+'/月</p>\n\
+<p class="weui-media-box__desc" style="-webkit-line-clamp: 5; color: #bba585;">'+v.descChs+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">价格: ¥'+numberWithCommas(v.dailyPrice)+'<small>/'+v.remarkFirst+'</small></p>\n\
 </div>\n\
 <div style="clear: both; background-color: #292929; text-align: center; padding: 10px 0;">\n\
-<a href=\'javascript: showVR("'+v.remark_6+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">VR</a>\n\
-<a href=\'javascript:;\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入关注</a>\n\
+<a href=\'javascript: showVR("'+v.vr+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">VR</a>\n\
+'+fav+'\n\
 <a href="/v2/ad?id='+v.code+'" style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">广告位详情</a>\n\
-<a href=\'javascript: AddtoCart("'+v.code+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入购物车</a>\n\</div>\n\
+<a href=\'javascript: getOrderByOrderStates("'+v.unitCode+'","'+v.code+'","'+v.size+'","'+v.material+'","'+v.unitDescChs+'","'+v.dailyPrice+'","'+src+'","'+v.remarkFirst+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入购物车</a>\n\</div>\n\
 </div>\n\
 </div>');
-                    
-                    
-                    
-                }
-            }
         }
     });
 }
@@ -288,29 +295,38 @@ function showVR(url){
 
 function renderAdListFromDraw(sc){
     $('.weui-panel__bd').html('');
+    
+    $.selectedAds = [];
+    
     $.each($.parseJSON(sessionStorage.getItem("ads")), function(i,v){
-        if(v.code == sc){
+        if(v.code == sc && $.inArray(v.code, $.selectedAds) == -1){
             $.selectedAds.push(v.code);
             
             var src = '/views/assets/base/img/content/mall/1s.jpg';
-            if(v.images != null && v.images.length > 0){
-                src = v.images[0].image;
+            if(v.advertisingImagesWxList != null && v.advertisingImagesWxList.length > 0){
+                src = v.advertisingImagesWxList[0].imagePath;
+            }
+            
+            var fav = '<a href=\'javascript: AddToFavorite("'+v.buildingCode+'","'+v.code+'","'+v.storeCode+'","'+v.unitCode+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入关注</a>';
+            if($.inArray(v.code, $.favorites) != -1){
+                fav = '<a href=\'javascript: RemoveFavorite("'+$.favoritesId[$.inArray(v.code, $.favorites)]+'","'+v.buildingCode+'","'+v.code+'","'+v.storeCode+'","'+v.unitCode+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">取消关注</a>';
             }
 
-            $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg">\n\
-<div class="weui-media-box__hd" style="position: relative; overflow: hidden;">\n\
-<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 60px; width: 90px;"></a>\n\
-<span class="weui-mark-lb" style="top:0; font-size: 0.65em; white-space: nowrap;">'+v.shopName+'</span>\n\
+            $('.weui-panel__bd').append('<div onclick="window.location=#" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0;">\n\
+<div class="weui-media-box__bd" onclick=\'javascript: drawAdsFromList("'+v.code+'");\'>\n\
+<div style="position: relative; float: left; width: 142px;">\n\
+<a href=\'javascript: showGallery("'+src+'");\'><img class="weui-media-box__thumb" src="'+src+'" alt="" style="height: 84px; width: 126px;"></a>\n\
+<span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">'+v.unitDescChs+'</span>\n\
 </div>\n\
-<div class="weui-media-box__bd">\n\
-<p class="weui-media-box__desc" style="-webkit-line-clamp: 4; font-size: 12px;">'+v.remark_1+'</p>\n\
-<p class="weui-media-box__desc">价格: '+v.remark_2+'/月</p>\n\
-<ul class="weui-media-box__info">\n\
-<li class="weui-media-box__info__meta"><a href=\'javascript: showVR("'+v.remark_6+'");\'>VR</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: drawAdsFromList("'+v.code+'");\'>查看位置</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href="/v2/ad?id='+v.code+'">广告位详情</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a href=\'javascript: AddtoCart("'+v.code+'");\' style="color: #fa5151;">加入购物车</a></li>\n\
-</ul>\n\
+<div style="margin-left: 142px; padding: 0 5px 5px;">\n\
+<p class="weui-media-box__desc" style="-webkit-line-clamp: 5; color: #bba585;">'+v.descChs+'</p>\n\
+<p class="weui-media-box__desc" style="color: #bba585;">价格: ¥'+numberWithCommas(v.dailyPrice)+'<small>/'+v.remarkFirst+'</small></p>\n\
+</div>\n\
+<div style="clear: both; background-color: #292929; text-align: center; padding: 10px 0;">\n\
+<a href=\'javascript: showVR("'+v.vr+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">VR</a>\n\
+'+fav+'\n\
+<a href="/v2/ad?id='+v.code+'" style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">广告位详情</a>\n\
+<a href=\'javascript: getOrderByOrderStates("'+v.unitCode+'","'+v.code+'","'+v.size+'","'+v.material+'","'+v.unitDescChs+'","'+v.dailyPrice+'","'+src+'","'+v.remarkFirst+'");\' style="display: inline-block; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 4px; text-align: center; width: 60px;">加入购物车</a>\n\</div>\n\
 </div>\n\
 </div>');
         }
@@ -323,15 +339,389 @@ function GetAdInfo(sc){
     renderAdListFromDraw(sc);
 }
 
-function AddtoCart(vc) {
-    var $tooltips = $('.js_tooltips');
-    var $toast = $('#js_toast');
+function GetMyFavorites(){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.remarkSecond == 1){
+                        $.favorites.push(v.remarkFirst);
+                        $.favoritesId.push(v.id);
+                    }
+                });
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function AddToFavorite(bc,c,sc,uc){
+    showLoading();
+    var map = {
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 1,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "advertising",
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_1');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function RemoveFavorite(id,bc,c,sc,uc){
+    showLoading();
+    var map = {
+        "id": id,
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 0,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "advertising"
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_2');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getOrderByOrderStates(ut,sc,sz,sp,ud,pr,img,un) {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/order/findAllByMobileNoAndOrderStates?mobileNo="+$.cookie('uid')+"&orderStates=待确认订单",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(response.data != '') {
+                    $.each(response.data, function(i,v){
+                        if(v.remarkSecond == 'advertising'){
+                            $.order.copy = JSON.stringify(response.data[i]);
+                            return false;
+                        }
+                    });
+                }
+                
+                AddtoCart(ut,sc,sz,sp,ud,pr,img,un);
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function AddtoCart(ut,sc,sz,sp,ud,pr,img,un){
+    var unit = ut;
+    var shopCode = sc;
+    var size = sz;
+    var spec = sp;
+    var unitDesc = ud;
+    var dailyPrice = pr;
+    var firstImage = img;
+    var unitName = un;
+    var outTradeNo = '100001' + d.getFullYear() +
+                (month<10 ? '0' : '') + month +
+                (day<10 ? '0' : '') + day + time
+                + '0000' + parseInt(Math.random()*10);
+
+    var exist = 0;
         
-    $('.page.cell').removeClass('slideIn');
+    if($.order.copy == '') {
+        /* 
+         * @订单状态  
+         *  待确认订单
+         *  预览合同已生成
+         *  合同待用印
+         *  合同用印中
+         *  待付款订单
+         *  已完成订单
+         *  已关闭订单
+         */
 
-    $toast.fadeIn(100);
-    setTimeout(function () {
-        $toast.fadeOut(100);
-    }, 2000);
+        var map = {
+            "amount": 100000,
+            "appid": "test",
+            "brandId": "",
+            "brandName": $.cookie('brand_1'),
+            "code": unit,
+            "contractInfos": [
+              {
+                "amount": "",
+                "bizScope": "testss",
+                "breachAmount": "",
+                "code": unit,
+                "depositAmount": "",
+                "electricBillFlag": "1",
+                "endDate": "",
+                "enterDate": "",
+                "isCleaning": "1",
+                "isSecurity": "1",
+                "isService": "1",
+                "mobileNo": $.cookie('uid'),
+                "name": "test name",
+                "num": 1,
+                "openDate": "",
+                "orgCode": "100001",
+                "otherFlag": "",
+                "outTradeNo": outTradeNo,
+                "remarkFifth": "",
+                "remarkFirst": firstImage,
+                "remarkFourth": "",
+                "remarkSecond": unitName,
+                "remarkThird": "",
+                "salesFlag": "1",
+                "serviceDepositAmount": 3000,
+                "size": size, //广告尺寸规格
+                "spec": spec,
+                "startDate": "",
+                "unitCode": unit,
+                "unitDesc": unitDesc,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "userId": "10000101",
+                "vipFlag": "1",
+                "wxCardFlag": "1",
+                "area": 1 //广告默认传1
+              }
+            ],
+            "contractNo": "",
+            "contractTermInfos": [
+              {
+                "amount": (dailyPrice*1.06).toFixed(2),
+                "code": "1",
+                "endDate": "",
+                "name": unitDesc,
+                "orgCode": "100001",
+                "outTradeNo": outTradeNo,
+                "rentAmount": dailyPrice,
+                "startDate": "",
+                "taxAmount": dailyPrice,
+                "termType": "B011",
+                "termTypeName": "固定租金",
+                "unitCode": unit,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "area": 1,
+                "remarkFirst": shopCode
+              }
+            ],
+            "contractType": "R4",//R1租赁 R4广告 R5场地
+            "mobileNo": $.cookie('uid'),
+            "name": "wechatol",
+            "orderStates": "待确认订单", //订单状态
+            "orgCode": "100001",
+            "outTradeNo": outTradeNo,
+            "payStates": "未支付", //支付状态
+            "tenantId": "海鼎公司uuid",
+            "tenantName": "公司名",
+            "tenantNo": "海鼎公司编号",
+            "tenantOrg": "G12321312312223131", //uscc
+            "userId": "sfsdfsfasfsfasdfasdf",
+            "remarkFirst": shopCode,
+            "remarkSecond": 'advertising'
+        };
+    } else {
+        var map = $.parseJSON($.order.copy);
+        $.each(map.contractTermInfos, function(i,v){
+            if(v.remarkFirst == shopCode){
+                exist = 1;
+                findUserCompanyByMobileNo(shopCode,outTradeNo);
+            }
+        });
+        
+        if(exist == 0){
+            var newInfo = $.extend({}, map.contractInfos[0]);
+            newInfo.id = '';
+            newInfo.code = unit;
+            newInfo.size = size;
+            newInfo.spec = spec;
+            newInfo.unitCode = unit;
+            newInfo.unitDesc = unitDesc;
+            newInfo.remarkFirst = firstImage;
+            newInfo.remarkSecond = unitName;
+            map.contractInfos.push(newInfo);
+            
+            var newTerm = $.extend({}, map.contractTermInfos[0]);
+            newTerm.id = '';
+            newTerm.unitCode = unit;
+            newTerm.remarkFirst = shopCode;
+            newTerm.name = unitDesc;
+            newTerm.taxAmount = dailyPrice;
+            newTerm.amount = (dailyPrice*1.06).toFixed(2);
+            map.contractTermInfos.push(newTerm);
+        }
+    }
+    
+    if(exist != 1){
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    hideLoading();
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    findUserCompanyByMobileNo(shopCode,outTradeNo);
+                } else {
+                    interpretBusinessCode(response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+}
 
+function findUserCompanyByMobileNo(sc,outTradeNo){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    if(response.data[0].name != '' && response.data[0].uscc != ''){
+                        window.location.href = '/v2/advertising-shopping-cart?id='+sc+'&trade='+outTradeNo;
+                    } else {
+                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=ads';
+                    }
+                } else {
+                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=ads';
+                }
+            }
+        }
+    })
 }

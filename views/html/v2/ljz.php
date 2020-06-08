@@ -1,6 +1,6 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/mall-admin.js"></script>';
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js"></script>';
 ?>
 
 <link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
@@ -74,82 +74,62 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     <div style="margin-top: -10px; background-color: #3f3f3f; color: #fff;">
         <div class="weui-media-box weui-media-box_appmsg floor-guide" style="padding: 0;">
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/9F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">9-10F 高档餐饮/联合办公</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("9F");'>VR</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001169">会议活动-正大厅</a></li>-->
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/8F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">8F 聚会时光</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("8F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=8&type=leasing">在线选铺</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/advertising?f=8&type=ads">广告宣传</a></li>-->
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=8&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/7F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">7F 健康乐活</h4>-->
                 <ul class="weui-media-box__info">
-                        <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("7F");'>VR</a></li>
-                        <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=7&type=leasing">在线选铺</a></li>
-                    </ul>
+                    <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("7F");'>VR</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=7&type=leasing">在线选铺</a></li>
+                </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/6F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">6F 国风文化</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("6F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=6&type=leasing">在线选铺</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=6&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/5F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">5F 运动潮玩</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("5F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=5&type=leasing">在线选铺</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001166">场地活动</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=5&type=ads">广告宣传</a></li>-->
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=5&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/4F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">4F 型男周边</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("4F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=4&type=leasing">在线选铺</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP190809000001">场地活动</a></li>-->
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=4&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/3F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">3F 精致女孩/千禧女孩</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("3F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=3&type=leasing">在线选铺</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001150">场地活动</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=3&type=ads">广告宣传</a></li>-->
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=3&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/2F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">2F 家庭生活</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("2F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=2&type=leasing">在线选铺</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=2&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/1F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">1F 国际风尚/滨江夜食</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("1F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=1&type=leasing">在线选铺</a></li>
-                    <!--<li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001126">东门场地</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/event?id=OLSHOP180917001116">西门场地</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/advertising?f=1&type=ads">广告宣传</a></li>-->
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=1&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
             <div class="weui-media-box__bd" style="height: 210px; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/0F.jpg); background-size: cover;">
-                <!--<h4 class="weui-media-box__title" style="color: #fff;">B1 配套服务</h4>-->
                 <ul class="weui-media-box__info">
                     <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("B1");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/floor-plan?f=06&type=leasing">在线选铺</a></li>
+                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=06&type=leasing">在线选铺</a></li>
                 </ul>
             </div>
         </div>
@@ -165,34 +145,34 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         </div>
 
         <div class="weui-grid">
-            <a href="javascript:">9F</a>
-        </div>
-        <div class="weui-grid">
-            <a href="javascript:">8F</a>
+            <a href="javascript:">6F</a>
         </div>
         <div class="weui-grid">
             <a href="javascript:">7F</a>
         </div>
         <div class="weui-grid">
-            <a href="javascript:">6F</a>
+            <a href="javascript:">8F</a>
         </div>
         <div class="weui-grid">
-            <a href="javascript:">5F</a>
+            <a href="javascript:">9F</a>
         </div>
         <div class="weui-grid">
-            <a href="javascript:">4F</a>
+            <a href="javascript:">2F</a>
         </div>
         <div class="weui-grid">
             <a href="javascript:">3F</a>
         </div>
         <div class="weui-grid">
-            <a href="javascript:">2F</a>
-        </div>
-        <div class="weui-grid" style="margin-left: 25%;">
-            <a href="javascript:">1F</a>
+            <a href="javascript:">4F</a>
         </div>
         <div class="weui-grid">
+            <a href="javascript:">5F</a>
+        </div>
+        <div class="weui-grid" style="margin-left: 25%;">
             <a href="javascript:">B1</a>
+        </div>
+        <div class="weui-grid">
+            <a href="javascript:">1F</a>
         </div>
     </div>
     

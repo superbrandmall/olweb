@@ -144,8 +144,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/my-msg' => array(
             'url' => 'my_msg.php'
         ),
-        'v2/mall' => array(
-            'url' => 'mall.php'
+        'v2/ljz' => array(
+            'url' => 'ljz.php'
+        ),
+        'v2/bs' => array(
+            'url' => 'bs.php'
         ),
         'v2/register' => array(
             'url' => 'register.php'
@@ -165,8 +168,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
         ),
-        'v2/floor-plan' => array(
-            'url' => 'floor_plan.php'
+        'v2/leasing' => array(
+            'url' => 'leasing.php'
+        ),
+        'v2/leasing-bs' => array(
+            'url' => 'leasing_bs.php'
         ),
         'v2/ads' => array(
             'url' => 'ads.php'
@@ -225,7 +231,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
     }
 
     $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php',
-        'floor_plan.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
+        'leasing.php','leasing_bs.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
         'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';

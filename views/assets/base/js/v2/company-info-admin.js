@@ -137,10 +137,24 @@ function saveUserCompany() {
                     setTimeout(function () {
                         $toast.fadeOut(100);
                         if(getURLParameter('id') && getURLParameter('id') != '') {
-                            if(getURLParameter('trade') && getURLParameter('trade') != ''){
-                                window.location.href = '/v2/price?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
-                            } else {
-                                window.location.href = '/v2/price?id='+getURLParameter('id');
+                            if(getURLParameter('type') && getURLParameter('type') == 'leasing'){
+                                if(getURLParameter('trade') && getURLParameter('trade') != ''){
+                                    window.location.href = '/v2/price?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
+                                } else {
+                                    window.location.href = '/v2/price?id='+getURLParameter('id');
+                                }
+                            } else if(getURLParameter('type') && getURLParameter('type') == 'ads'){
+                                if(getURLParameter('trade') && getURLParameter('trade') != ''){
+                                    window.location.href = '/v2/advertising-shopping-cart?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
+                                } else {
+                                    window.location.href = '/v2/advertising-shopping-cart?id='+getURLParameter('id');
+                                }
+                            } else if(getURLParameter('type') && getURLParameter('type') == 'events'){
+                                if(getURLParameter('trade') && getURLParameter('trade') != ''){
+                                    window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&trade='+getURLParameter('trade');
+                                } else {
+                                    window.location.href = '/v2/choose-event?id='+getURLParameter('id');
+                                }
                             }
                         } else {
                             location.reload();

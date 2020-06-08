@@ -32,7 +32,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cell weui-cell_active weui-cell_readonly" style="color: #bba585;">
                         <div class="weui-cell__hd"><label class="weui-label">装修免租期</label></div>
                         <div class="weui-cell__bd">
-                            <div class="weui-input"><span id="free_of_ground_rent"></span></div>
+                            <div class="weui-input"><span id="free_of_ground_rent"></span>天</div>
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active weui-cell_readonly" style="color: #bba585;">
@@ -60,7 +60,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cell weui-cell_active weui-cell_readonly" style="color: #bba585; border-bottom: solid 1px #292929; margin: 0 32px; padding: 16px 0 8px;">
                         <div class="weui-cell__hd"><label class="weui-label">合同年限</label></div>
                         <div class="weui-cell__bd">
-                            <div class="weui-input" id="">2年</div>
+                            <div class="weui-input"><span id="contractLength"></span>年</div>
                         </div>
                     </div>
                     <div style="margin: 0 32px">
@@ -73,30 +73,17 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     <th style="border: 0 none;">扣率</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr style="border-bottom: solid 1px #595959;">
-                                    <td style="border: 0 none;">第1年</td>
-                                    <td style="border: 0 none;">¥<span id="first_year_unit_price"></span>/m²</td>
-                                    <td style="border: 0 none;">¥<span id="first_year_rent"></span></td>
-                                    <td style="border: 0 none;"><span id="first_year_deduction_rate"></span>%</td>
-                                </tr>
-                                <tr style="border-bottom: solid 1px #595959;">
-                                    <td style="border: 0 none;">第2年</td>
-                                    <td style="border: 0 none;">¥<span id="second_year_unit_price"></span>/m²</td>
-                                    <td style="border: 0 none;">¥<span id="second_year_rent"></span></td>
-                                    <td style="border: 0 none;"><span id="second_year_deduction_rate"></span>%</td>
-                                </tr>
-                            </tbody>
+                            <tbody id="shopRent"></tbody>
                         </table>
                     </div>
                     <div class="weui-form-preview__bd" style="margin: 0 16px; padding: 0px 16px;">
                         <div class="weui-form-preview__item" style="border-bottom: solid 1px #292929; padding: 5px 0;">
                             <label class="weui-form-preview__label" style="color: #bba585;">物业管理费</label>
-                            <span class="weui-form-preview__value" style="color: #bba585;">¥<span id="first_year_property_maintenance"></span>/月</span>
+                            <span class="weui-form-preview__value" style="color: #bba585;">¥<span id="propertyMaintenance"></span>/月</span>
                         </div>
                         <div class="weui-form-preview__item" style="border-bottom: solid 1px #292929; padding: 5px 0;">
                             <label class="weui-form-preview__label" style="color: #bba585;">比率推广费(按含税营业额)</label>
-                            <span class="weui-form-preview__value" style="color: #bba585;">1.50%</span>
+                            <span class="weui-form-preview__value" style="color: #bba585;"><span id="promotionRate"></span>%</span>
                         </div>
                     </div>
                     <div class="weui-form-preview__bd" style="margin: 0 16px;padding: 0px 16px;">
@@ -105,7 +92,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </div>
                         <div class="weui-form-preview__item" style="border-bottom: solid 1px #292929; padding: 5px 0;">
                             <label class="weui-form-preview__label" style="color: #bba585;">保证金</label>
-                            <span class="weui-form-preview__value" style="color: #bba585;">¥<span id="bond"></span></span>
+                            <span class="weui-form-preview__value" style="color: #bba585;">¥<span id="deposit"></span></span>
                         </div>
                         <div class="weui-form-preview__item" style="text-align: left; padding: 5px 0;">
                             <span class="weui-form-preview__value" style="color: #bba585;"><span style="color: #fff">*</span>保证金构成=3个月最高固定租金含税价+3个月最高物业管理费含税价</span>

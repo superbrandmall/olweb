@@ -1,5 +1,5 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/floor-plan-admin.js"></script>'
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/leasing-bs-admin.js"></script>'
         . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 
@@ -51,11 +51,31 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="/upload/vr/100001/floors/8-mid-0421/tour.html" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <iframe src="#" width="100%" frameborder="0" style="height: 90vh;"></iframe>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer").hide();'></i>
         </a>
+    </div>
+</div>
+
+<div id="js_toast_1" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            加入关注成功～
+        </p>
+    </div>
+</div>
+
+<div id="js_toast_2" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            取消关注成功～
+        </p>
     </div>
 </div>
 

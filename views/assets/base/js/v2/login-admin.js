@@ -106,6 +106,9 @@ $(document).ready(function(){
                                                     $.cookie('uid', userName);
                                                     $.cookie('uname', userName);
                                                     $.cookie('uemail', userName);
+                                                    
+                                                    findUserBrandByMobileNo();
+                                                    
                                                     $.ajax({
                                                         type: 'POST',
                                                         url: '/controllers/api/2.0/ApiLoginSession.php',
@@ -119,7 +122,7 @@ $(document).ready(function(){
                                                             if(response.data.name != null && response.data.email != null){
                                                                 if(getURLParameter('type')){
                                                                     if(getURLParameter('type') == 'leasing'){
-                                                                        window.location.href = '/v2/floor-plan?f='+getURLParameter('f')+'&type=leasing';
+                                                                        window.location.href = '/v2/leasing?f='+getURLParameter('f')+'&type=leasing';
                                                                     } else if(getURLParameter('type') == 'ads'){
                                                                         window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
                                                                     } else if(getURLParameter('type') == 'events'){
@@ -172,6 +175,34 @@ $(document).ready(function(){
     
     
 });
+
+function findUserBrandByMobileNo() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/brand/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.cookie('brand_1',response.data[0].brandName);
+                }
+            }
+        }
+    })
+}
 
 var countdownLogin=60;
 

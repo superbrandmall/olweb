@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <div class="page-hd">
     <h1 class="page-hd-title">
-        Q&A
+        F&Q
     </h1>
     <p class="page-hd-desc">我们准备了相关问答，可能对您有帮助哦。</p>
 </div>
@@ -24,7 +24,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells page-category-content">
                         <p class="content">请至各项目首页查看项目具体介绍</p>
                         <ul class="content">
-                            <li><a href="/v2/mall">上海正大广场</a></li>
+                            <li><a href="/v2/ljz">上海正大广场</a></li>
                             <li><a href="javascript:;">洛阳正大广场</a></li>
                             <li><a href="javascript:;">宝山正大乐城</a></li>
                         </ul>
@@ -77,7 +77,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells page-category-content">
                         <p class="content">请至各项目首页查看各项目人流数据</p>
                         <ul class="content">
-                            <li><a href="/v2/mall">上海正大广场</a></li>
+                            <li><a href="/v2/ljz">上海正大广场</a></li>
                             <li><a href="javascript:;">洛阳正大广场</a></li>
                             <li><a href="javascript:;">宝山正大乐城</a></li>
                         </ul>

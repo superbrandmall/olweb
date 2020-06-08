@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if(!getURLParameter('type') || getURLParameter('type') == ''){
+    //if(!getURLParameter('type') || getURLParameter('type') == ''){
         $.ajax({
             type: 'POST',
             url: '/controllers/api/2.0/ApiTCPDF.php',
@@ -23,7 +23,7 @@ $(document).ready(function(){
                 $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/pdf/leasing_contract.pdf');
             }
         });
-    }
+    //}
     
     
     $(function(){
@@ -61,13 +61,14 @@ function updateOrderToStamping(){
         },
         complete: function(){},
         success: function (response, status, xhr) {
+            window.location.href = '/v2/stamping';
             if(response.code === 'C0') {
                 hideLoading();
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                window.location.href = '/v2/stamping';
+                //window.location.href = '/v2/stamping';
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

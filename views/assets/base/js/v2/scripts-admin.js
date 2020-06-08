@@ -229,6 +229,30 @@ function IncrDate(date_str){
     }
 }
 
+function DecrDate(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
 function IncrDates(date_str,dates){
     if(date_str){
         var parts = date_str.split("-");
@@ -240,6 +264,54 @@ function IncrDates(date_str,dates){
         dt.setDate(dt.getDate() + dates);
         parts[0] = "" + dt.getFullYear();
         parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrMonth(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10),  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrMonths(date_str, months){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10),  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + Number(months));
         if (parts[1].length < 2) {
           parts[1] = "0" + parts[1];
         }
@@ -306,3 +378,80 @@ $.validator.addMethod('numChar',function(text){
     var regex = /^[0-9a-zA-Z\ ]+$|(^$)/;
     return regex.test(text);
 }, "The value entered is invalid");
+
+var date_n = new Date();
+
+function formatTime(date_n) {
+    var year = date_n.getFullYear()
+    var month = date_n.getMonth() + 1
+    var day = date_n.getDate()
+    var hour = date_n.getHours()
+    var minute = date_n.getMinutes()
+    var second = date_n.getSeconds() 
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+}
+  
+function formatNumber (n){
+    n = n.toString();
+    return n[1] ? n : '0' + n;
+}
+
+function saveMsgLog () {
+    var map = {
+        "brandCode": "string",
+        "code": "string",
+        "mobileNo": "string",
+        "name": "string",
+        "num": 0,
+        "operatorContent": "string",
+        "orderCode": "string",
+        "remarkFifth": "string",
+        "remarkFirst": "string",
+        "remarkFourth": "string",
+        "remarkSecond": "string",
+        "remarkThird": "string",
+        "state": 0,
+        "type": "string",
+        "unitCode": "string",
+        "userCode": "string"
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/wechatlog/save",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null) {
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $(function(){
+                    var $toast = $('#js_toast');
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                        if(getURLParameter('id') && getURLParameter('id') != ''){
+                            window.location.href = '/v2/stamping';
+                        } else {
+                            window.location.href = '/v2/info';
+                        }
+                    }, 2000);
+                });
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    })
+}

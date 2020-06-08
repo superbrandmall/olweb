@@ -24,25 +24,29 @@ function getAllOrdersToBeConfirmed() {
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state === 1 && v.orderStates == '已完成订单'){
                             empty = 0;
-                            img = getShopInfo(v.remarkFirst);
+                            if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
+                                img = getShopInfo(v.remarkFirst);
+                            } else if(v.remarkSecond == 'advertising'){
+                                img = v.contractInfos[0].remarkFirst;
+                            }
                             
                             //应缴金额=保证金+首月固定租金与物业管理费(含税)
                             var taxAmount = 0; //不含税总额
                             var amount = 0; //含税总额
                             var tax = 0; //税费
                             $.each(v.contractInfos, function(j,w){
-                                taxAmount = Math.round(taxAmount + w.depositAmount);
+                                taxAmount = parseFloat(taxAmount + w.depositAmount);
                                 amount = taxAmount;
                             })
-                            
+
                             $.each(v.contractTermInfos, function(j,w){
                                 if((w.termTypeName == '固定租金' || w.termTypeName == '物业管理费') && w.code == 1){
-                                    taxAmount = Math.round(taxAmount + w.taxAmount);
-                                    amount = Math.round(amount + w.amount);
+                                    taxAmount = parseFloat(taxAmount + w.taxAmount);
+                                    amount = parseFloat(amount + w.amount);
                                 }
                             })
-                            
-                            tax = Math.round(amount - taxAmount);
+
+                            tax = parseFloat((amount - taxAmount).toFixed(2));
                             
                             $('#orders').append('<div class="weui-panel">\n\
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\

@@ -1,4 +1,13 @@
 <?php
+if (explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&trade=') !== false) {
+        $id = explode('&trade=', $id)[0];
+    }
+} else {
+    $id = null;
+}
+
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/choose-event-admin.js"></script>';
 ?>
 
@@ -17,13 +26,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
                         <div class="weui-cell__bd">
-                            <input class="weui-input" id="txt_dateStart" placeholder="填写档期起始日">
+                            <input class="weui-input date-start" id="dateStart_<?= $id; ?>" placeholder="填写档期起始日" readonly>
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd"><label class="weui-label">档期终止</label></div>
                         <div class="weui-cell__bd">
-                            <input class="weui-input" id="txt_dateEnd" placeholder="填写档期终止日">
+                            <input class="weui-input date-end" id="dateEnd_<?= $id; ?>" placeholder="填写档期终止日" readonly>
                         </div>
                     </div>
                     <div class="weui-cells__title">*我司对档期有最终解释权</div>

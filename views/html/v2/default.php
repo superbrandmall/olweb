@@ -47,21 +47,33 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div id="mall_list" style="background-color: #292929; text-align: center; margin: 10px 0 0; display: none;">
     <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">上海正大广场</a>
-    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">洛阳正大广场</a>
     <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">宝山正大乐城</a>
+    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">洛阳正大广场</a>
 </div>
 
 <div class="weui-panel weui-panel_access" style="background-color: #292929; margin-top: 0;">
     <div class="weui-panel__hd" style="font-weight: 300; font-size: 18px; color: #bba585; padding: 20px 16px 9px;">正大商业项目</div>
     <div class="weui-panel__bd">
-        <a href="/v2/mall" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
+        <a href="/v2/ljz" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
             <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
                 <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall01.jpg" alt="">
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
                 <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">上海正大广场</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                    项目关键词: 上海陆家嘴/东方明珠/每年客流量超3000万/明珠环年流量1亿人次
+                    上海陆家嘴/东方明珠/每年客流量超3000万/明珠环年流量1亿人次
+                </p>
+            </div>
+            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"><img src="/views/assets/base/img/content/backgrounds/mall-arrow.png" style="width: 28px; height: 22px; margin: auto; top: 0; bottom: 0; position: absolute; left: 0; right: 0;" alt=""></div>
+        </a>
+        <a href="/v2/bs" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
+            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
+                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall06.jpg" alt="">
+            </div>
+            <div class="weui-media-box__bd" style="margin: 10px;">
+                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">宝山正大乐城</h4>
+                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
+                    上海宝山顾村核心/7、15号线双轨交/樱花节期间客流15万~20万每天/年客流超1300万
                 </p>
             </div>
             <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"><img src="/views/assets/base/img/content/backgrounds/mall-arrow.png" style="width: 28px; height: 22px; margin: auto; top: 0; bottom: 0; position: absolute; left: 0; right: 0;" alt=""></div>
@@ -105,17 +117,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
             <div class="weui-media-box__bd" style="margin: 10px;">
                 <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">徐汇正大乐城</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall06.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">宝山正大乐城</h4>
                 <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
                 </p>
             </div>

@@ -275,6 +275,10 @@ transform:scale(1);
     display: block;
 }
 
+.weui-media-box__desc {
+    -webkit-line-clamp: 4;
+}
+
 .mall-floors {
     background-color: #292929;
     padding: 10px 30px;

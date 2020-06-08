@@ -1,3 +1,7 @@
+<?php
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/events-admin.js"></script>';
+?>
+
 <?php include ('navbar_top.php'); ?>
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，以下场地位任君挑选，我们期待与您的合作！</div>
 
@@ -18,7 +22,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">1F东厅</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP180917001126&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP180917001126&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('01FB011','OLSHOP180917001126','1F东厅','49');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">
@@ -41,7 +45,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">1F西厅</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP180917001116&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP180917001116&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('01FB002','OLSHOP180917001116','1F西厅','180');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">
@@ -64,7 +68,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">3F黄金大道</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP180917001150&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP180917001150&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('03FB001','OLSHOP180917001150','3F黄金大道','580');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">
@@ -87,7 +91,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">4F东平台</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP190809000001&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP190809000001&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('04FB010','OLSHOP190809000001','4F东平台','64');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">
@@ -110,7 +114,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">5F东平台</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP180917001126&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP180917001126&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('05FB001','OLSHOP180917001126','5F东平台','40');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">
@@ -133,7 +137,7 @@
                         <span style="position: absolute; right: 16px; font-weight: bold; color: #ddd; background: rgba(0,0,0,0.5); width: 100%; text-align: right; padding-right: 6px; font-size: 12px;">9F封闭式多功能大厅</span>
                         <div style="width: 126px; padding: 5px 0;">
                             <a class="weui-link" href="/v2/event?id=OLSHOP180917001169&type=events" style="display: block; margin: 0 auto 5px; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">查看详情</a>
-                            <a class="weui-link" href="/v2/choose-event?id=OLSHOP180917001169&type=events" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
+                            <a class="weui-link" href="javascript:;" onclick="javascript: AddtoCart('09FB001','OLSHOP180917001169','9F封闭式多功能大厅','3000');" style="display: block; margin: 0 auto; font-size: 11px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 60px;">申请报价</a>
                         </div>
                     </div>
                     <div style="margin-left: 142px;">

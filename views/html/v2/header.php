@@ -22,3 +22,4 @@
 <link href="/views/assets/base/img/layout/logos/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
 </head>
 <body style="background-color: #292929;" ontouchstart>
+    <div class="weui-toptips bg-warning" id="ui_alert" style="opacity: 1;"></div>

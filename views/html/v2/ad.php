@@ -26,9 +26,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         </div>
         <div class="weui-cell">
             <div class="weui-cell__bd">
+                <p>楼层</p>
+            </div>
+            <div class="weui-cell__ft" id="ad_floor" style="color: #bba585;"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
                 <p>类型</p>
             </div>
             <div class="weui-cell__ft" id="ad_type" style="color: #bba585;"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>价格</p>
+            </div>
+            <div class="weui-cell__ft" style="color: #bba585;"><span id="ad_price"></span><small id="ad_frequency"></small></div>
         </div>
         <div class="weui-cell">
             <div class="weui-cell__bd">
@@ -41,6 +53,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                 <p>材质</p>
             </div>
             <div class="weui-cell__ft" id="ad_material" style="color: #bba585;"></div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p id="ad_desc"></p>
+            </div>
         </div>
     </div>
     
@@ -64,7 +81,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         <a href="/v2/ad?id=OLSHOP200323000038" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">8F东区悬挂式LED</a>
     </div>
     
-    <a href="/v2/advertising-shopping-cart" class="add_ad weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; background-color: #c9b18d; color: #514026; border-radius: 50%; padding: 14px; height: 80px; width: 80px; font-weight: 300; font-size: 16px; z-index: 5;">
+    <a id="add_ad" href="javascript:;" class="weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; background-color: #c9b18d; color: #514026; border-radius: 50%; padding: 14px; height: 80px; width: 80px; font-weight: 300; font-size: 16px; z-index: 5;">
         加入<br>购物车
     </a>
 </div>

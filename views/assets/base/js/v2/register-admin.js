@@ -274,10 +274,11 @@ function saveUserBrand() {
                 if(xhr.getResponseHeader("Authorization") !== null) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                $.cookie('brand_1',$('#brand_1').val());
                 
                 if(getURLParameter('type')){
                     if(getURLParameter('type') == 'leasing'){
-                        window.location.href = '/v2/floor-plan?f='+getURLParameter('f')+'&type=leasing';
+                        window.location.href = '/v2/leasing?f='+getURLParameter('f')+'&type=leasing';
                     } else if(getURLParameter('type') == 'ads'){
                         window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
                     } else if(getURLParameter('type') == 'events'){

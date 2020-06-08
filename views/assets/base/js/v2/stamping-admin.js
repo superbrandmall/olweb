@@ -24,7 +24,6 @@ function getAllOrdersToStamping() {
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state == 1 && (v.orderStates == '预览合同已生成' || v.orderStates == '合同待用印' || v.orderStates == '合同用印中' || v.orderStates == '待付款订单')){
                             empty = 0;
-                            img = getShopInfo(v.remarkFirst);
                             var alink = '';
                             if(v.orderStates == '预览合同已生成'){
                                 alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToBeStamped("'+v.id+'");\' style="color: #fa5151;">获得正式合同</a></li>\n\
@@ -39,23 +38,36 @@ function getAllOrdersToStamping() {
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?id='+v.id+'">查看合同</a></li>';
                             }
                             
-                            //应缴金额=保证金+首月固定租金与物业管理费(含税)
-                            var taxAmount = 0; //不含税总额
-                            var amount = 0; //含税总额
-                            var tax = 0; //税费
-                            $.each(v.contractInfos, function(j,w){
-                                taxAmount = Math.round(taxAmount + w.depositAmount);
-                                amount = taxAmount;
-                            })
+                            if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
+                                img = getShopInfo(v.remarkFirst);
+                                
+                                //应缴金额=保证金+首月固定租金与物业管理费(含税)
                             
-                            $.each(v.contractTermInfos, function(j,w){
-                                if((w.termTypeName == '固定租金' || w.termTypeName == '物业管理费') && w.code == 1){
-                                    taxAmount = Math.round(taxAmount + w.taxAmount);
-                                    amount = Math.round(amount + w.amount);
-                                }
-                            })
+                                var taxAmount = 0; //不含税总额
+                                var amount = 0; //含税总额
+                                var tax = 0; //税费
+                                $.each(v.contractInfos, function(j,w){
+                                    taxAmount = parseFloat(taxAmount + w.depositAmount);
+                                    amount = taxAmount;
+                                })
+
+                                $.each(v.contractTermInfos, function(j,w){
+                                    if((w.termTypeName == '固定租金' || w.termTypeName == '物业管理费') && w.code == 1){
+                                        taxAmount = parseFloat(taxAmount + w.taxAmount);
+                                        amount = parseFloat(amount + w.amount);
+                                    }
+                                })
+
+                                tax = parseFloat((amount - taxAmount).toFixed(2));
+                                var qty = 1;
+                            } else if(v.remarkSecond == 'advertising'){
+                                img = v.contractInfos[0].remarkFirst;
+                                var amount = v.amount;
+                                var tax = (v.amount*0.06).toFixed(2);
+                                var qty = v.remarkThird;
+                            }
                             
-                            tax = Math.round(amount - taxAmount);
+                            
                             
                             
                             $('#orders').append('<div class="weui-panel">\n\
@@ -66,7 +78,7 @@ function getAllOrdersToStamping() {
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">共1件商品 合计: ¥'+numberWithCommas(amount)+'</span>\n\
+        <span class="weui-form-preview__value">共'+qty+'件商品 合计: ¥'+numberWithCommas(amount)+'</span>\n\
         <span class="weui-form-preview__value"><small>(含税费 ¥'+numberWithCommas(tax)+')</small></span></div></div>\n\
         <ul class="weui-media-box__info" style="float: right;">\n\
 '+alink+'\n\

@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('.weui-tabbar a:eq(1)').addClass('weui-bar__item_on');
 });
 
-function showVR(){
+function showVR(vr){
+    $("#vr_viewer iframe").attr('src',vr);
     $("#vr_viewer").show();
 }

@@ -2,9 +2,6 @@ $.order = {
     copy: ""
 };
 
-var first_year_bond = '';
-var second_year_bond = '';
-
 var d = new Date();
 var month = d.getMonth()+1;
 var day = d.getDate();
@@ -15,10 +12,6 @@ var date = d.getFullYear() + '-' +
     
 $(document).ready(function(){
     GetShopPriceInfo();
-    
-    $('#negotiate').click(function(){
-        window.location.href = '/v2/negotiation?id='+getURLParameter('id')+'#contract_info';
-    });
 });
 
 function GetShopPriceInfo(){
@@ -49,40 +42,64 @@ function GetShopPriceInfo(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
 
-                var settle_date = '';
-                var open_date = '';
-                var free_of_ground_rent = '';
-                
-                var first_year_unit_price = '';
-                var first_year_rent = '';
-                var first_year_deduction_rate = '';
-                var first_year_property_maintenance = '';
-                
-                var second_year_unit_price = '';
-                var second_year_rent = '';
-                var second_year_deduction_rate = '';
-                var second_year_property_maintenance = '';
+                var settleDate = '';
+                var openDate = '';
+                var freeOfGroundRent = '';
+                var deposit = '';
+                var rentAmount = '';
+                var taxAmount = '';
+                var deductionTaxAmount = '';
+                var propertyMaintenance = '';
+                var promotionRate = '';
+                var contractLength = '';
                 
                 $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-                    if(response.data.unit == w.unit_no){
-                        free_of_ground_rent = w.free_of_ground_rent;
+                    if(response.data.unit == w.unitCode){
+                        freeOfGroundRent = w.freeOfGroundRent;
+                        deposit = w.deposit;
+                        contractLength = w.contractLength;
+                        $.cookie('contractLength',w.contractLength);
+                        $.cookie('shopNo', w.shopNo);
                         
-                        first_year_unit_price = w.first_year.first_year_unit_price;
-                        first_year_rent = w.first_year.first_year_rent;
-                        first_year_deduction_rate = w.first_year.first_year_deduction_rate;
-                        first_year_property_maintenance = w.first_year.first_year_property_maintenance;
-                        first_year_bond = w.first_year.first_year_bond;
-                        
-                        second_year_unit_price = w.second_year.second_year_unit_price;
-                        second_year_rent = w.second_year.second_year_rent;
-                        second_year_deduction_rate = w.second_year.second_year_deduction_rate;
-                        second_year_property_maintenance = w.second_year.second_year_property_maintenance;
-                        second_year_bond = w.second_year.second_year_bond;
+                        for(var x = 1; x <= w.contractLength; x++){
+                            $.each(w.shopRentWxs, function(k,y){
+                                if(y.code == x && y.termTypeName == "固定租金"){
+                                    rentAmount = y.rentAmount;
+                                    $.cookie('rentAmount_'+x, y.rentAmount);
+                                    taxAmount = y.taxAmount;
+                                    $.cookie('taxAmount_'+x, y.taxAmount);
+                                    $.cookie('amount_'+x, y.amount);
+                                    $.cookie('termStartDate_'+x, y.startDate);
+                                    $.cookie('termEndDate_'+x, y.endDate);
+                                }
+                                if(y.code == x && y.termTypeName == "提成扣率"){
+                                    deductionTaxAmount = y.taxAmount;
+                                    $.cookie('taxDeductionTaxAmount_'+x, y.taxAmount);
+                                    $.cookie('deductionTaxAmount_'+x, y.amount);
+                                }
+                                if(y.code == x && y.termTypeName == "物业管理费"){
+                                    propertyMaintenance = y.taxAmount;
+                                    $.cookie('taxPropertyMaintenance_'+x, y.taxAmount);
+                                    $.cookie('propertyMaintenance_'+x, y.amount);
+                                }
+                                if(y.code == x && y.termTypeName == "推广费"){
+                                    promotionRate = y.taxAmount;
+                                    $.cookie('taxPromotionRate_'+x, y.taxAmount);
+                                    $.cookie('promotionRate_'+x, y.amount);
+                                }
+                            })
+                            
+                            $('#shopRent').append('<tr style="border-bottom: solid 1px #595959;">\n\
+<td style="border: 0 none;">第'+x+'年</td>\n\
+<td style="border: 0 none;">¥'+rentAmount+'/m²</td>\n\
+<td style="border: 0 none;">¥'+taxAmount+'</td>\n\
+<td style="border: 0 none;">'+deductionTaxAmount+'%</td></tr>');
+                        }
                     }
                 })
                 
                 if(response.data.shopState === 1 || response.data.shopState === 3) { // 空铺
-                    settle_date = IncrDates(date,15);
+                    settleDate = IncrDates(date,15);
                 } else { // 非空铺
                     var contractExpire = new Date();
                     contractExpire.setTime(response.data.contractExpireDate);
@@ -96,48 +113,39 @@ function GetShopPriceInfo(){
                         contractExpireDate = "0"+contractExpireDate;
                     }
 
-                    settle_date = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
+                    settleDate = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
 
                 }
 
-                if(free_of_ground_rent != ''){
-                    open_date = IncrDates(settle_date,parseInt(free_of_ground_rent)) || '';
+                if(freeOfGroundRent != ''){
+                    openDate = IncrDates(settleDate,parseInt(freeOfGroundRent)) || '';
                 }
+                
+                $.cookie('settleDate',settleDate);
+                $.cookie('openDate',openDate);
                 
                 $('#room_name').text(response.data.shopName || '');
-                $.cookie('room_name',$('#room_name').text());
+                
                 $('#area').text(response.data.area || '');
-                $.cookie('area',$('#area').text());
-                $('#free_of_ground_rent').text(free_of_ground_rent);
-                $.cookie('free_of_ground_rent',free_of_ground_rent);
-                $('#settle_date').text(settle_date);
-                $.cookie('settle_date',settle_date);
-                $('#open_date').text(open_date);
-                $.cookie('open_date',open_date);
+                $.cookie('area',response.data.area);
                 
-                $('#first_year_unit_price').text(first_year_unit_price);
-                $.cookie('first_year_unit_price',first_year_unit_price);
-                $('#first_year_rent').text(first_year_rent);
-                $.cookie('first_year_rent',first_year_rent);
-                $('#first_year_deduction_rate').text(first_year_deduction_rate);
-                $.cookie('first_year_deduction_rate',first_year_deduction_rate);
-                $('#first_year_property_maintenance').text(first_year_property_maintenance);
-                $.cookie('first_year_property_maintenance',first_year_property_maintenance);
+                $('#free_of_ground_rent').text(freeOfGroundRent);
+                $('#settle_date').text(settleDate);
+                $('#open_date').text(openDate);
+                $('#propertyMaintenance').text(propertyMaintenance);
+                $('#promotionRate').text(promotionRate);
                 
-                $('#second_year_unit_price').text(second_year_unit_price);
-                $.cookie('second_year_unit_price',second_year_unit_price);
-                $('#second_year_rent').text(second_year_rent);
-                $.cookie('second_year_rent',second_year_rent);
-                $('#second_year_deduction_rate').text(second_year_deduction_rate);
-                $.cookie('second_year_deduction_rate',second_year_deduction_rate);
-                $('#second_year_property_maintenance').text(second_year_property_maintenance);
-                $.cookie('second_year_property_maintenance',second_year_property_maintenance);
+                $('#deposit').text(deposit);
+                $.cookie('deposit',deposit);
                 
-                $('#bond').text(first_year_bond);
-                $.cookie('bond',first_year_bond);
+                $('#contractLength').text(contractLength);
                 
                 $('#confirm_price').click(function(){
                     getOrderByTradeNO();
+                });
+                
+                $('#negotiate').click(function(){
+                    window.location.href = '/v2/negotiation?id='+getURLParameter('id')+'&unit='+response.data.unit+'&building='+response.data.buildingCode+'&mall='+response.data.mallCode;
                 });
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -151,7 +159,7 @@ function GetShopPriceInfo(){
 
 function getShopsMoreInfo() {
     $.ajax({
-        url: "/views/assets/base/js/v2/json/shopAll.json",
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
         type: "GET",
         async: false,
         dataType: "json",
@@ -163,12 +171,17 @@ function getShopsMoreInfo() {
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            if(response.code == '200') {
+            if(response.code === 'C0') {
                 hideLoading();
-                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data.shop_info) );
+                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data)); 
+            } else {
+                interpretBusinessCode(response.customerMessage);
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
         }
-    })
+    });
 }
 
 function getOrderByTradeNO() {
@@ -200,105 +213,204 @@ function getOrderByTradeNO() {
 
 function SaveOrder(){
     var order = $.parseJSON($.order.copy);
-    order.mobileNo = $.cookie('settle_date');
+    order.mobileNo = $.cookie('uid');
     order.brandName = $.cookie('brand_1');
     order.remarkFirst = getURLParameter('id');
-    order.orderStates = '预览合同已生成';
-    
+
     $.each(order.contractInfos, function(i,v){
-        v.depositAmount = $.cookie('bond');
-        v.enterDate = $.cookie('settle_date');
-        v.openDate = $.cookie('open_date');
-        v.startDate = $.cookie('open_date');
-        v.unitDesc = $.cookie('shop_name');
+        v.depositAmount = $.cookie('deposit');
+        v.enterDate = $.cookie('settleDate');
+        v.openDate = $.cookie('openDate');
+        v.startDate = $.cookie('openDate');
+        v.unitDesc = $.cookie('shopNo');
     });
 
     $.each(order.contractTermInfos, function(i,v){
         if(v.termTypeName == '固定租金' && v.code == 1){
-            v.endDate = IncrYear($.cookie('open_date'));
-            v.amount = Math.round($.cookie('first_year_rent')*1.05),
-            v.rentAmount = $.cookie('first_year_unit_price');
-            v.taxAmount = $.cookie('first_year_rent');
-            v.startDate = $.cookie('open_date');
+            v.endDate = $.cookie('termEndDate_1');
+            v.amount = $.cookie('amount_1'),
+            v.rentAmount = $.cookie('rentAmount_1');
+            v.taxAmount = $.cookie('taxAmount_1');
+            v.startDate = $.cookie('termStartDate_1');
             v.area = $.cookie('area');
         } else if(v.termTypeName == '物业管理费' && v.code == 1){
-            v.endDate = IncrYear($.cookie('open_date'));
-            v.amount = Math.round($.cookie('first_year_property_maintenance')*1.06),
-            v.taxAmount = $.cookie('first_year_property_maintenance');
-            v.startDate = $.cookie('open_date');
+            v.endDate = $.cookie('termEndDate_1');
+            v.amount = $.cookie('propertyMaintenance_1');
+            v.taxAmount = $.cookie('taxPropertyMaintenance_1');
+            v.startDate = $.cookie('termStartDate_1');
             v.area = $.cookie('area');
         } else if(v.termTypeName == '推广费' && v.code == 1){
-            v.endDate = IncrYear($.cookie('open_date'));
-            v.startDate = $.cookie('open_date');
+            v.endDate = $.cookie('termEndDate_1');
+            v.amount = $.cookie('promotionRate_1');
+            v.taxAmount = $.cookie('taxPromotionRate_1');
+            v.startDate = $.cookie('termStartDate_1');
             v.area = $.cookie('area');
         } else if(v.termTypeName == '提成扣率' && v.code == 1){
-            v.endDate = IncrYear($.cookie('open_date'));
-            v.amount = Math.round($.cookie('first_year_deduction_rate')*1.05);
-            v.taxAmount = $.cookie('first_year_deduction_rate');
-            v.startDate = $.cookie('open_date');
+            v.endDate = $.cookie('termEndDate_1');
+            v.amount = $.cookie('deductionTaxAmount_1');
+            v.taxAmount = $.cookie('taxDeductionTaxAmount_1');
+            v.startDate = $.cookie('termStartDate_1');
             v.area = $.cookie('area');
         }
-        
+
     });
     
-    var secondYearPrice = {
-        "amount": Math.round($.cookie('second_year_rent')*1.05),
-        "code": "2",
-        "endDate": IncrYears($.cookie('open_date'),2),
-        "name": "",
-        "orgCode": "100001",
-        "outTradeNo": order.outTradeNo,
-        "rentAmount": $.cookie('second_year_unit_price'),
-        "startDate": IncrYear($.cookie('open_date')),
-        "taxAmount": $.cookie('second_year_rent'),
-        "termType": "B011",
-        "termTypeName": "固定租金",
-        "unitCode": order.contractTermInfos[0].unitCode,
-        "unitId": "sfsdfsfasfsfasdfasdf",
-        "area": $.cookie('area'),
-        "id": 0
-    }
-    
-    var secondYearRate = {
-        "amount": Math.round($.cookie('second_year_deduction_rate')*1.05),
-        "code": "2",
-        "endDate": IncrYears($.cookie('open_date'),2),
-        "name": "",
-        "orgCode": "100001",
-        "outTradeNo": order.outTradeNo,
-        "rentAmount": "",
-        "startDate": IncrYear($.cookie('open_date')),
-        "taxAmount": $.cookie('second_year_deduction_rate'),
-        "termType": "D011",
-        "termTypeName": "提成扣率",
-        "unitCode": order.contractTermInfos[0].unitCode,
-        "unitId": "sfsdfsfasfsfasdfasdf",
-        "area": $.cookie('area'),
-        "id": 0
-    }
+    if($.cookie('contractLength') > 1) {
+        var secondYearPrice = {
+            "amount": $.cookie('amount_2'),
+            "code": "2",
+            "endDate": $.cookie('termEndDate_2'),
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": order.outTradeNo,
+            "rentAmount": $.cookie('rentAmount_2'),
+            "startDate": $.cookie('termStartDate_2'),
+            "taxAmount": $.cookie('taxAmount_2'),
+            "termType": "B011",
+            "termTypeName": "固定租金",
+            "unitCode": order.contractTermInfos[0].unitCode,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": $.cookie('area'),
+            "id": 0
+        }
 
+        var secondYearMaintenance = {
+            "amount": $.cookie('propertyMaintenance_2'),
+            "code": "2",
+            "endDate": $.cookie('termEndDate_2'),
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": order.outTradeNo,
+            "rentAmount": "",
+            "startDate": $.cookie('termStartDate_2'),
+            "taxAmount": $.cookie('taxPropertyMaintenance_2'),
+            "termType": "B021",
+            "termTypeName": "物业管理费",
+            "unitCode": order.contractTermInfos[0].unitCode,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": $.cookie('area'),
+            "id": 0
+        }
+
+        var secondYearPromotion = {
+            "amount": $.cookie('promotionRate_2'),
+            "code": "2",
+            "endDate": $.cookie('termEndDate_2'),
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": order.outTradeNo,
+            "rentAmount": "",
+            "startDate": $.cookie('termStartDate_2'),
+            "taxAmount": $.cookie('taxPromotionRate_2'),
+            "termType": "G021",
+            "termTypeName": "推广费",
+            "unitCode": order.contractTermInfos[0].unitCode,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": $.cookie('area'),
+            "id": 0
+        }
+
+        var secondYearRate = {
+            "amount": $.cookie('deductionTaxAmount_2'),
+            "code": "2",
+            "endDate": $.cookie('termEndDate_2'),
+            "name": "",
+            "orgCode": "100001",
+            "outTradeNo": order.outTradeNo,
+            "rentAmount": "",
+            "startDate": $.cookie('termStartDate_2'),
+            "taxAmount": $.cookie('taxDeductionTaxAmount_2'),
+            "termType": "D011",
+            "termTypeName": "提成扣率",
+            "unitCode": order.contractTermInfos[0].unitCode,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area": $.cookie('area'),
+            "id": 0
+        }
         
-    /*var thirdYearRate = {
-        "amount": Math.round($.cookie('third_year_deduction_rate')*1.05),
-        "code": "3",
-        "endDate": IncrYears($.cookie('open_date'),3),
-        "name": "",
-        "orgCode": "100001",
-        "outTradeNo": order.outTradeNo,
-        "rentAmount": "",
-        "startDate": IncrYears($.cookie('open_date'),2),
-        "taxAmount": $.cookie('third_year_deduction_rate'),
-        "termType": "D011",
-        "termTypeName": "提成扣率",
-        "unitCode": order.contractTermInfos[0].unitCode,
-        "unitId": "sfsdfsfasfsfasdfasdf",
-        "area": $.cookie('area'),
-        "id": 0
-    }*/    
-    
-    if(order.contractTermInfos.length == 4 && order.orderStates == '待确认订单'){
-        order.contractTermInfos.push(secondYearPrice,secondYearRate);
+        if(order.contractTermInfos.length == 4 && order.orderStates == '待确认订单'){
+            order.contractTermInfos.push(secondYearPrice,secondYearMaintenance,secondYearPromotion,secondYearRate);
+        }
+        
+        if($.cookie('contractLength') > 2) {
+            var thirdYearPrice = {
+                "amount": $.cookie('amount_3'),
+                "code": "3",
+                "endDate": $.cookie('termEndDate_3'),
+                "name": "",
+                "orgCode": "100001",
+                "outTradeNo": order.outTradeNo,
+                "rentAmount": $.cookie('rentAmount_3'),
+                "startDate": $.cookie('termStartDate_3'),
+                "taxAmount": $.cookie('taxAmount_3'),
+                "termType": "B011",
+                "termTypeName": "固定租金",
+                "unitCode": order.contractTermInfos[0].unitCode,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "area": $.cookie('area'),
+                "id": 0
+            }
+
+            var thirdYearMaintenance = {
+                "amount": $.cookie('propertyMaintenance_3'),
+                "code": "3",
+                "endDate": $.cookie('termEndDate_32'),
+                "name": "",
+                "orgCode": "100001",
+                "outTradeNo": order.outTradeNo,
+                "rentAmount": "",
+                "startDate": $.cookie('termStartDate_3'),
+                "taxAmount": $.cookie('taxPropertyMaintenance_3'),
+                "termType": "B021",
+                "termTypeName": "物业管理费",
+                "unitCode": order.contractTermInfos[0].unitCode,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "area": $.cookie('area'),
+                "id": 0
+            }
+
+            var thirdYearPromotion = {
+                "amount": $.cookie('promotionRate_3'),
+                "code": "3",
+                "endDate": $.cookie('termEndDate_3'),
+                "name": "",
+                "orgCode": "100001",
+                "outTradeNo": order.outTradeNo,
+                "rentAmount": "",
+                "startDate": $.cookie('termStartDate_3'),
+                "taxAmount": $.cookie('taxPromotionRate_3'),
+                "termType": "G021",
+                "termTypeName": "推广费",
+                "unitCode": order.contractTermInfos[0].unitCode,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "area": $.cookie('area'),
+                "id": 0
+            }
+
+            var thirdYearRate = {
+                "amount": $.cookie('deductionTaxAmount_3'),
+                "code": "3",
+                "endDate": $.cookie('termEndDate_3'),
+                "name": "",
+                "orgCode": "100001",
+                "outTradeNo": order.outTradeNo,
+                "rentAmount": "",
+                "startDate": $.cookie('termStartDate_3'),
+                "taxAmount": $.cookie('taxDeductionTaxAmount_3'),
+                "termType": "D011",
+                "termTypeName": "提成扣率",
+                "unitCode": order.contractTermInfos[0].unitCode,
+                "unitId": "sfsdfsfasfsfasdfasdf",
+                "area": $.cookie('area'),
+                "id": 0
+            }
+
+            if(order.contractTermInfos.length == 8 && order.orderStates == '待确认订单'){
+                order.contractTermInfos.push(thirdYearPrice,thirdYearMaintenance,thirdYearPromotion,thirdYearRate);
+            }
+        }
     }
+    order.orderStates = '预览合同已生成';
     
     /* 
      * @订单状态  

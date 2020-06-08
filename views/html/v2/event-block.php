@@ -9,7 +9,7 @@
         <div class="owl-carousel owl-carousel1 owl-theme">
             <div class="item">
                 <a href="/v2/event?id=OLSHOP180917001126&type=events">
-                    <img src="/views/assets/base/img/content/backgrounds/events//01_07.jpg" alt="1F东厅" height="299" />
+                    <img src="/views/assets/base/img/content/backgrounds/events/01_07.jpg" alt="1F东厅" height="299" />
                     <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">1F东厅</span>
                 </a>
             </div>

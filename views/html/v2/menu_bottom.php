@@ -6,14 +6,14 @@
     <a href="/v2/vr" class="weui-tabbar__item">
         <div style="display: inline-block; position: relative;">
             <i class="weui-tabbar__icon fa fa-street-view" aria-hidden="true"></i>
-            <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">新</span>
+            <span class="weui-badge" style="background-color: #514026; position: absolute; top: -2px; right: -18px; font-size: 11px; color: #c9b18d;">360°</span>
         </div>
         <p class="weui-tabbar__label">VR看场</p>
     </a>
     <a href="/v2/my-msg" class="weui-tabbar__item">
         <div style="display: inline-block; position: relative;">
             <i class="weui-tabbar__icon fa fa-commenting" aria-hidden="true"></i>
-            <span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">1</span>
+            <!--<span class="weui-badge" style="position: absolute; top: -2px; right: -13px;">1</span>-->
         </div>
         <p class="weui-tabbar__label">通知消息</p>
     </a>

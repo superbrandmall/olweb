@@ -93,7 +93,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         <a href="/v2/event?id=OLSHOP180917001169&type=events" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 11px;">9F封闭式多功能大厅</a>
     </div>
     
-    <a href="javascript:;" class="choose_event weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; background-color: #c9b18d; color: #514026; border-radius: 50%; padding: 10px; height: 80px; width: 80px; line-height: 27px; font-weight: 300; font-size: 21px; z-index: 5;">申请报价</a>
+    <a id="choose_event" href="javascript:;" class="weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; background-color: #c9b18d; color: #514026; border-radius: 50%; padding: 10px; height: 80px; width: 80px; line-height: 27px; font-weight: 300; font-size: 21px; z-index: 5;">申请报价</a>
 </div>
 <br>
 <br>

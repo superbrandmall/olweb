@@ -15,16 +15,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <?php include ('navbar_top.php'); ?>
 
+<div class="weui-panel weui-panel_access" style="background-color: #c9b18d; margin-top: -7px;">
+    <div class="weui-panel__hd" style="font-weight: 500; font-size: 18px; color: #514026; padding: 10px;"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> 查看合同</div>
+    <div class="weui-panel__bd"></div>
+</div>
+
 <div class="page__bd" style="font-size: 15px;">
-    <div class="weui-article">
-        <h2 class="title">查看合同</h2>
-    </div>
     <div class="weui-article" style="position: relative; padding: 0;">
         <iframe id="pdfContainer" src="/views/assets/plugins/pdfjs/web/viewer.html?file=<?php echo $file; ?>" width="100%" frameborder="0" style="height: 60vh;"></iframe>
     </div>
     <br>
     <center>
-        <a href="javascript: window.history.back(-1);" class="weui-btn weui-btn_primary">关闭</a>
+        <button type="button" class="weui-btn" onclick="javascript: window.history.back(-1);" style="background-color: #c9b18d; color: #514026; border-radius: 15px; font-weight: 500; width: initial;">关闭</button>
     </center>
 </div>
 <br>

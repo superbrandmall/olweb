@@ -2,7 +2,7 @@
     if(strpos($_SERVER["REQUEST_URI"],'events') != false) { 
         $url = str_replace('mall-list','events',$_SERVER["REQUEST_URI"]);
     } else if(strpos($_SERVER["REQUEST_URI"],'leasing') != false){
-        $url = str_replace('mall-list','floor-plan',$_SERVER["REQUEST_URI"]);
+        $url = str_replace('mall-list','leasing',$_SERVER["REQUEST_URI"]);
     } else if(strpos($_SERVER["REQUEST_URI"],'ads') != false){
         $url = str_replace('mall-list','advertising',$_SERVER["REQUEST_URI"]);
     } 
