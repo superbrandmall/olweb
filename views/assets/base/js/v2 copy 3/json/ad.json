@@ -1,0 +1,241 @@
+{
+    "clazz": "com.sbm.module.common.exception.BusinessCode",
+    "code": "C0",
+    "message": "成功",
+    "customerMessage": "成功",
+    "data": [{
+            "code": "OLSHOP200323000017",
+            "state": 1,
+            "shopState": 1,
+            "unit": "01AD001",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "835,479,801,479,800,492,835,491",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 1,
+            "daysBeforeContractExpire": 0,
+            "shopName": "墙面广告 户外 东南口转角",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "位于世纪大道、陆家嘴环路、陆家嘴西路交叉口，每年人流量约1亿人次，对于品牌形象树立展示，提供最佳视觉效果，提升品牌美誉度及推广力。",
+            "remark_2": "920000",
+            "remark_3": "墙面广告",
+            "remark_4": "(h)324000mm * (w)(17800+23000)mm",
+            "remark_5": "刀刮布(防火B-3,ROLAND打印)",
+            "remark_6": "/upload/vr/100001/ads/01AD001/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast-corner.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast-corner2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast-corner3.jpg",
+                    "position": 2
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast-corner4.jpg",
+                    "position": 2
+                }]
+        },{
+            "code": "OLSHOP200323000018",
+            "state": 1,
+            "shopState": 1,
+            "unit": "01AD002",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "936,238,921,269,932,275,947,243",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 1,
+            "daysBeforeContractExpire": 0,
+            "shopName": "墙面广告 户外 东南口",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "位于世纪大道、陆家嘴环路、陆家嘴西路交叉口，每年人流量约1亿人次，对于品牌形象树立展示，提供最佳视觉效果，提升品牌美誉度及推广力。",
+            "remark_2": "630000",
+            "remark_3": "墙面广告",
+            "remark_4": "(h)24650mm * (w)14600mm",
+            "remark_5": "刀刮布(防火B-3,ROLAND打印)",
+            "remark_6": "/upload/vr/100001/ads/01AD002/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-southeast3.jpg",
+                    "position": 2
+                }]
+        },{
+            "code": "OLSHOP200323000019",
+            "state": 1,
+            "shopState": 1,
+            "unit": "01AD003",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "835,53,801,53,800,66,835,65",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 1,
+            "daysBeforeContractExpire": 0,
+            "shopName": "墙面广告 户外 东北口",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "位于世纪大道、陆家嘴环路、陆家嘴西路交叉口，每年人流量约1亿人次，对于品牌形象树立展示，提供最佳视觉效果，提升品牌美誉度及推广力。",
+            "remark_2": "460000",
+            "remark_3": "墙面广告",
+            "remark_4": "(h)25400mm * (w)19600mm",
+            "remark_5": "刀刮布(防火B-3,ROLAND打印)",
+            "remark_6": "/upload/vr/100001/ads/01AD003/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/outdoor-northeast.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-northeast2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-northeast3.jpg",
+                    "position": 2
+                },{
+                    "image": "/views/assets/base/img/content/ads/outdoor-northeast4.jpg",
+                    "position": 3
+                }]
+        },{
+            "code": "OLSHOP200323000002",
+            "state": 1,
+            "shopState": 1,
+            "unit": "03AD002",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "885,169,897,169,897,177,885,177",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 3,
+            "daysBeforeContractExpire": 0,
+            "shopName": "3F入口全包LED环绕屏",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "东方明珠天桥处唯一通往场内的主入口，国内外游客首选主干道；为3F东平台入口处场地活动聚揽人气，直接引流。",
+            "remark_2": "20000",
+            "remark_3": "LED/LCD/数字化",
+            "remark_4": "1920*1080像素, 16:9",
+            "remark_5": "精度: 1920*1080",
+            "remark_6": "/upload/vr/100001/ads/03AD002/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/3f-east-entrance-led.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/3f-east-entrance-led3.jpg",
+                    "position": 2
+                },{
+                    "image": "/views/assets/base/img/content/ads/3f-east-entrance-led4.jpg",
+                    "position": 3
+                }]
+        },{
+            "code": "OLSHOP200420000001",
+            "state": 1,
+            "shopState": 1,
+            "unit": "05AD001",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "243,239,255,239,255,247,243,247",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 5,
+            "daysBeforeContractExpire": 0,
+            "shopName": "黄金大道悬挂分屏LED",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "贯穿正大广场东西两侧客流，两侧围绕着零售、餐饮的主力品牌，广告眼球效应极佳。",
+            "remark_2": "35000",
+            "remark_3": "LED/LCD/数字化",
+            "remark_4": "1920*350像素, 16:2.9",
+            "remark_5": "精度: 1920*350*3",
+            "remark_6": "/upload/vr/100001/ads/05AD001/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/golden-avenue-led.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/golden-avenue-led2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/golden-avenue-led3.jpg",
+                    "position": 2
+                },{
+                    "image": "/views/assets/base/img/content/ads/golden-avenue-led4.jpg",
+                    "position": 3
+                }]
+        },{
+            "code": "OLSHOP200323000038",
+            "state": 1,
+            "shopState": 1,
+            "unit": "08AD001",
+            "brandName": null,
+            "brandNameEng": null,
+            "coords": "660,268,685,220,698,227,674,275",
+            "modality": null,
+            "area": 0,
+            "subType": "ad",
+            "floor": 8,
+            "daysBeforeContractExpire": 0,
+            "shopName": "8F东区悬挂式LED",
+            "responsiblePerson": null,
+            "categoryHead": null,
+            "logo": null,
+            "remark_1": "位于正大广场东区通高大厅之中，囊括东区5F以上所有顾客视线，引流上层客流到5F场地活动，最大提升品牌宣广形象。",
+            "remark_2": "30000",
+            "remark_3": "LED/LCD/数字化",
+            "remark_4": "150㎡",
+            "remark_5": "",
+            "remark_6": "/upload/vr/100001/ads/08AD001/tour.html",
+            "remark_7": null,
+            "remark_8": null,
+            "remark_9": null,
+            "remark_10": null,
+            "images": [{
+                    "image": "/views/assets/base/img/content/ads/8f-eastside-led.jpg",
+                    "position": 0
+                },{
+                    "image": "/views/assets/base/img/content/ads/8f-eastside-led2.jpg",
+                    "position": 1
+                },{
+                    "image": "/views/assets/base/img/content/ads/8f-eastside-led3.jpg",
+                    "position": 2
+                }]
+        }]
+}

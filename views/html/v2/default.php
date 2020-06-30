@@ -1,168 +1,113 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>'
+        . '<script type="text/javascript" src="/views/assets/plugins/folding/modernizr.custom.js"></script>';
 ?>
 
-<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
-    <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">您好！欢迎来到正大商业地产智能招商平台！</div>
+<link href="/views/assets/plugins/folding/style.css" rel="stylesheet" type="text/css"/>
+<style>
+.square {
+    display: inline-block;
+    width:100px;
+    height:100px;
+    border:7px solid #D8BD8F;
+    overflow: hidden;
+    animation: rotate 2s linear infinite;
+}
+
+.circle {
+    display: inline-block;
+    width:93px;
+    height:93px;
+    border-radius: 50%;
+    border:7px solid #D8BD8F;
+}
+
+@keyframes rotate{from{transform: rotate(0deg)}
+    to{transform: rotate(360deg)}
+}
+</style>
+
+<div id="welcome" style="position: relative; height: 100vh; text-align: center;">
+    <div style="position: absolute; top: 150px; left: 0; right: 0;">
+        <div class="square"><div class="circle"></div></div>
     </div>
-    <div id="hint2" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">接下去我会陪您一起挑选您心仪的铺位、场地和广告位哦！</div>
-    </div>
-    <div class="animated-circles">
-        <div class="circle c-1"></div>
-        <div class="circle c-2"></div>
-        <div class="circle c-3"></div>
+    
+    <div class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="position: absolute; top: 400px; left: 0; right: 0;">
+        <h3>正大商业地产</h3>
+        <h3>在线招商平台</h3>
     </div>
 </div>
 
-<audio id="voiceplayer" src="/upload/audio/home-voice.mp3" preload="meta" style="display: none;"></audio>
-
-<div class="slide" id="slide1">
-    <div class="weui-cell" style="z-index: 2;">
-        <div class="weui-cell__bd">
-            <a href="/v2/home">
-                <img src="/views/assets/base/img/layout/logos/cp-cre-logo.png" alt="正大" height="20" />
-            </a>
-        </div>
-        <div class="weui-cell__ft">
-            <a href="#!" style="color: #fff; margin-right: 10px;"><small>EN</small></a>
-            <a href="/v2/contact" style="color: #fff;"><small>客服</small></a>
-        </div>
-    </div>
+<div class="slide" id="slide2">
     <ul>
         <li>
             <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/top.jpg' alt="">
+                <img src='/views/assets/base/img/content/backgrounds/story-01.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-02.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-03.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-04.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-05.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-06.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-07.jpg' alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src='/views/assets/base/img/content/backgrounds/story-08.jpg' alt="">
             </a>
         </li>
     </ul>
-</div>
-
-<div class="weui-navbar" id="home_shortcuts">
-    <div class="weui-navbar__item" onclick="redirectToLeasing();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/leasing-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
-    <div class="weui-navbar__item" onclick="redirectToEvents();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/event-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
-    <div class="weui-navbar__item" onclick="redirectToAds();" style="padding: 0;"><img src='/views/assets/base/img/content/backgrounds/advertising-banner.jpg' style="width: 100%; margin-bottom: -7px;"></div>
-</div>
-
-<div id="mall_list" style="background-color: #292929; text-align: center; margin: 10px 0 0; display: none;">
-    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">上海正大广场</a>
-    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">宝山正大乐城</a>
-    <a href="javascript:;" style="display: inline-block; margin: 2px; background-color: #c9b18d; color: #514026; border-radius: 10px; padding: 5px 0; text-align: center; width: 110px; font-size: 14px;">洛阳正大广场</a>
-</div>
-
-<div class="weui-panel weui-panel_access" style="background-color: #292929; margin-top: 0;">
-    <div class="weui-panel__hd" style="font-weight: 300; font-size: 18px; color: #bba585; padding: 20px 16px 9px;">正大商业项目</div>
-    <div class="weui-panel__bd">
-        <a href="/v2/ljz" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall01.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">上海正大广场</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                    上海陆家嘴/东方明珠/每年客流量超3000万/明珠环年流量1亿人次
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"><img src="/views/assets/base/img/content/backgrounds/mall-arrow.png" style="width: 28px; height: 22px; margin: auto; top: 0; bottom: 0; position: absolute; left: 0; right: 0;" alt=""></div>
-        </a>
-        <a href="/v2/bs" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall06.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">宝山正大乐城</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                    上海宝山顾村核心/7、15号线双轨交/樱花节期间客流15万~20万每天/年客流超1300万
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"><img src="/views/assets/base/img/content/backgrounds/mall-arrow.png" style="width: 28px; height: 22px; margin: auto; top: 0; bottom: 0; position: absolute; left: 0; right: 0;" alt=""></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall02.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">洛阳正大广场</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall03.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">合肥正大广场</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall04.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">乐清正大广场</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall05.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">徐汇正大乐城</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall07.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">郑州正大乐城</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall08.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">无锡正大乐城</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
-        <a href="javascript:" class="weui-media-box weui-media-box_appmsg" style="background-color: #3f3f3f; padding: 0; border-bottom: solid 1px #b29872;">
-            <div class="weui-media-box__hd" style="width: 48%; height: auto; margin-right: 0;">
-                <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/mall09.jpg" alt="">
-            </div>
-            <div class="weui-media-box__bd" style="margin: 10px;">
-                <h4 class="weui-media-box__title" style="font-size: 14px; font-weight: bold; color: #bba585;">北京正大中心</h4>
-                <p class="weui-media-box__desc" style="font-size: 12px; display: block; color: #fff;">
-                </p>
-            </div>
-            <div class="media-box-access" style="width: 15%; background-color: #c9b18d; position: relative;"></div>
-        </a>
+    <div class="dot">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 </div>
 
-<br>
-<br>
-<br>
-<br>
+<div class="slide" id="slide1">
+    <ul class="main">
+        <li class="view" onclick="window.location='/v2/ljz'">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
+        </li>
+        <li class="view">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
+        </li>
+        <li class="view">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
+        </li>
+    </ul>
+</div>
     
+<br><br>
 <?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

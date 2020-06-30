@@ -171,6 +171,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/leasing' => array(
             'url' => 'leasing.php'
         ),
+        'v2/shop' => array(
+            'url' => 'shop.php'
+        ),
         'v2/leasing-bs' => array(
             'url' => 'leasing_bs.php'
         ),
@@ -221,6 +224,12 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'v2/contract-view' => array(
             'url' => 'contract_view.php'
+        ),
+        'v2/unionpay' => array(
+            'url' => 'unionpay.php'
+        ),
+        'v2/transfer' => array(
+            'url' => 'transfer.php'
         )
     );
 
@@ -231,8 +240,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
     }
 
     $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php',
-        'leasing.php','leasing_bs.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 'order_to_be_stamped.php',
-        'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php');
+        'leasing.php','shop.php','leasing_bs.php','ads.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 
+        'order_to_be_stamped.php','stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php','unionpay.php','transfer.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
         $session = new Session();

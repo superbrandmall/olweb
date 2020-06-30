@@ -28,6 +28,8 @@ $(document).ready(function(){
             $.cookie(location.pathname.split("/")[2],1);
         }
     }
+    
+    new WOW().init();
             
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
@@ -138,6 +140,24 @@ function showGallery(src){
     $("#gallery").show().append('<span class="weui-gallery__img" style="background-image: url('+src+');"></span>');
 }
 
+function showVR(url){
+    showLoading();
+    setTimeout(function () {
+        hideLoading();
+        $("#vr_viewer iframe").attr('src',url);
+        $("#vr_viewer").show();
+    },100);  
+}
+
+function showVideo(url){
+    showLoading();
+    setTimeout(function () {
+        hideLoading();
+        $("#video_viewer iframe").attr('src',url);
+        $("#video_viewer").show();
+    },100);  
+}
+
 function scrollTo(e){
     $('html, body').animate({
         scrollTop: e.offset().top
@@ -163,6 +183,15 @@ function hideLoading() {
     var $loadingToast = $('#loadingToast');
     if ($loadingToast.css('display') == 'none') return;
     $loadingToast.fadeOut();
+}
+
+function audioplay(id){
+    var audio = document.getElementById(id);
+    !audio.paused?audio.pause():audio.play();
+
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        !audio.paused?audio.pause():audio.play();
+    }, false);
 }
 
 function bgAudioPlay() {
@@ -396,24 +425,17 @@ function formatNumber (n){
     return n[1] ? n : '0' + n;
 }
 
-function saveMsgLog () {
+function saveMsgLog (name,content,trade,type,unit,url){
+    sendSMS (name,content);
     var map = {
-        "brandCode": "string",
-        "code": "string",
-        "mobileNo": "string",
-        "name": "string",
-        "num": 0,
-        "operatorContent": "string",
-        "orderCode": "string",
-        "remarkFifth": "string",
-        "remarkFirst": "string",
-        "remarkFourth": "string",
-        "remarkSecond": "string",
-        "remarkThird": "string",
-        "state": 0,
-        "type": "string",
-        "unitCode": "string",
-        "userCode": "string"
+        "mobileNo": $.cookie('uid'),
+        "name": name,
+        "operatorContent": content,
+        "orderCode": trade,
+        "state": 1,
+        "type": type,
+        "unitCode": unit,
+        "userCode": $.cookie('uid')
     }
     
     $.ajax({
@@ -424,6 +446,7 @@ function saveMsgLog () {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -431,24 +454,39 @@ function saveMsgLog () {
         },
         complete: function(){},
         success: function (response, status, xhr) {
+            hideLoading();
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                $(function(){
-                    var $toast = $('#js_toast');
-                    $toast.fadeIn(100);
-                    setTimeout(function () {
-                        $toast.fadeOut(100);
-                        if(getURLParameter('id') && getURLParameter('id') != ''){
-                            window.location.href = '/v2/stamping';
-                        } else {
-                            window.location.href = '/v2/info';
-                        }
-                    }, 2000);
-                });
+                if(url != '') {
+                    window.location.href = url;
+                }
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    })
+}
+
+function sendSMS (name,content){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/sms/sendCommMessage?mobileNo="+$.cookie('uid')+"&reason="+name+"&message="+content,
+        type: "POST",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);

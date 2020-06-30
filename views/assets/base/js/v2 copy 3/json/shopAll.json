@@ -1,0 +1,319 @@
+{
+    "code": 200,
+    "msg": "success",
+    "data": {
+        "shop_info": [
+            {
+                "shop_id": 1048995,
+                "unit_no": "02FL035",
+                "current_category": "Kids & Senior Citizens",
+                "c_mode": "零售",
+                "business_format_CHS": "儿童零售",
+                "business_format_En": "Kids & Senior Citizens",
+                "ATV": "推荐做儿童零售，客单价300-800",
+                "c_per": "2500",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-1000:00:00",
+                "first_year": {
+                    "first_year_unit_price": "10.50",
+                    "first_year_rent": "32090.80",
+                    "first_year_property_maintenance": "10961.36",
+                    "first_year_deduction_rate": "15",
+                    "first_year_bond": "146051.76"
+                },
+                "second_year": {
+                    "second_year_unit_price": "11.55",
+                    "second_year_rent": "35299.88",
+                    "second_year_property_maintenance": "10961.36",
+                    "second_year_deduction_rate": "15",
+                    "second_year_bond": "146051.76"
+                }
+            },
+            {
+                "shop_id": 1049058,
+                "unit_no": "03FL084",
+                "current_category": "Shoes/Bags",
+                "c_mode": "零售",
+                "business_format_CHS": "鞋包",
+                "business_format_En": "Shoes/Bag",
+                "ATV": "推荐做女包/女鞋，客单价1000-3000",
+                "c_per": "5000-6000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-10 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "33.36",
+                    "first_year_rent": "92956.81",
+                    "first_year_property_maintenance": "13764.98",
+                    "first_year_deduction_rate": "18",
+                    "first_year_bond": "487413.37"
+                },
+                "second_year": {
+                    "second_year_unit_price": "36.70",
+                    "second_year_rent": "138277.63",
+                    "second_year_property_maintenance": "140838.33",
+                    "second_year_deduction_rate": "18",
+                    "second_year_bond": "487413.37"
+                }
+            },
+            {
+                "shop_id": 1049022,
+                "unit_no": "03FL001",
+                "current_category": "Women's Fashion",
+                "c_mode": "零售",
+                "business_format_CHS": "女性服饰",
+                "business_format_En": "Women's Fashion",
+                "ATV": "推荐做大淑/设计师品牌，客单价1000-3000",
+                "c_per": "5000-6000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-10 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "27.00",
+                    "first_year_rent": "68139.45",
+                    "first_year_property_maintenance": "12466.81",
+                    "first_year_deduction_rate": "20",
+                    "first_year_bond": "364843.18"
+                },
+                "second_year": {
+                    "second_year_unit_price": "29.70",
+                    "second_year_rent": "103237.70",
+                    "second_year_property_maintenance": "12466.81",
+                    "second_year_deduction_rate": "20",
+                    "second_year_bond": "364843.18"
+                }
+            },
+            {
+                "shop_id": 1049025,
+                "unit_no": "03FL004",
+                "current_category": "Women's Fashion",
+                "c_mode": "零售",
+                "business_format_CHS": "女性服饰",
+                "business_format_En": "Women's Fashion",
+                "ATV": "推荐做大淑/设计师品牌，客单价1000-2000",
+                "c_per": "5000-6000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-10 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "27.00",
+                    "first_year_rent": "71991.23",
+                    "first_year_property_maintenance": "13171.53",
+                    "first_year_deduction_rate": "20",
+                    "first_year_bond": "385466.97"
+                },
+                "second_year": {
+                    "second_year_unit_price": "29.70",
+                    "second_year_rent": "109073.50",
+                    "second_year_property_maintenance": "13171.53",
+                    "second_year_deduction_rate": "20",
+                    "second_year_bond": "385466.97"
+                }
+            },
+            {
+                "shop_id": 1049068,
+                "unit_no": "04FL005",
+                "current_category": "Sports",
+                "c_mode": "零售",
+                "business_format_CHS": "男性服饰",
+                "business_format_En": "Men's Fashion",
+                "ATV": "推荐做休闲男装，客单价500-2000",
+                "c_per": "5000-8000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-10 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "30.00",
+                    "first_year_rent": "57995.25",
+                    "first_year_property_maintenance": "9549.74",
+                    "first_year_deduction_rate": "22",
+                    "first_year_bond": "307153.23"
+                },
+                "second_year": {
+                    "second_year_unit_price": "33.00",
+                    "second_year_rent": "87868.28",
+                    "second_year_property_maintenance": "9549.74",
+                    "second_year_deduction_rate": "22",
+                    "second_year_bond": "307153.23"
+                }
+            },
+            {
+                "shop_id": 1049072,
+                "unit_no": "04FL008",
+                "current_category": "Sports",
+                "c_mode": "零售",
+                "business_format_CHS": "男性服饰",
+                "business_format_En": "Men's Fashion",
+                "ATV": "推荐做休闲男装，客单价500-2000",
+                "c_per": "5000-8000",
+                "settle_date": "2020-09-16 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-10-12 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "30.00",
+                    "first_year_rent": "49018.38",
+                    "first_year_property_maintenance": "8071.57",
+                    "first_year_deduction_rate": "20",
+                    "first_year_bond": "259610.10"
+                },
+                "second_year": {
+                    "second_year_unit_price": "33.00",
+                    "second_year_rent": "74267.46",
+                    "second_year_property_maintenance": "8071.57",
+                    "second_year_deduction_rate": "20",
+                    "second_year_bond": "259610.10"
+                }
+            },
+            {
+                "shop_id": 1049111,
+                "unit_no": "05FL123",
+                "current_category": "Sports",
+                "c_mode": "零售",
+                "business_format_CHS": "潮流运动",
+                "business_format_En": "Sports",
+                "ATV": "推荐做运动休闲品牌，客单价500-2000",
+                "c_per": "5000-6000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "45",
+                "open_date": "2020-09-25 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "24.00",
+                    "first_year_rent": "137354.80",
+                    "first_year_property_maintenance": "28271.76",
+                    "first_year_deduction_rate": "30",
+                    "first_year_bond": "745436.47"
+                },
+                "second_year": {
+                    "second_year_unit_price": "26.40",
+                    "second_year_rent": "208105.48",
+                    "second_year_property_maintenance": "28271.76",
+                    "second_year_deduction_rate": "30",
+                    "second_year_bond": "745436.47"
+                }
+            },
+            {
+                "shop_id": 1049134,
+                "unit_no": "05FL117",
+                "current_category": "Men's Fashion",
+                "c_mode": "零售",
+                "business_format_CHS": "生活方式",
+                "business_format_En": "Lifestyle",
+                "ATV": "推荐做生活方式业态，客单价100-300",
+                "c_per": "2000-3000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "30",
+                "open_date": "2020-09-10 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "8.00",
+                    "first_year_rent": "30485.60",
+                    "first_year_property_maintenance": "18824.57",
+                    "first_year_deduction_rate": "5",
+                    "first_year_bond": "205356.10"
+                },
+                "second_year": {
+                    "second_year_unit_price": "8.80",
+                    "second_year_rent": "46188.56",
+                    "second_year_property_maintenance": "18824.57",
+                    "second_year_deduction_rate": "5",
+                    "second_year_bond": "205356.10"
+                }
+            },
+            {
+                "shop_id": 1049269,
+                "unit_no": "07FL069",
+                "current_category": "Sports",
+                "c_mode": "零售",
+                "business_format_CHS": "生活服务",
+                "business_format_En": "Services",
+                "ATV": "双电梯口处，难得大铺；推荐做健身娱乐",
+                "c_per": "1000-3000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "75",
+                "open_date": "2020-10-30 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "5.00",
+                    "first_year_rent": "91323.42",
+                    "first_year_property_maintenance": "90904.36",
+                    "first_year_deduction_rate": "10",
+                    "first_year_bond": "289075.87"
+                },
+                "second_year": {
+                    "second_year_unit_price": "5.50",
+                    "second_year_rent": "138363.59",
+                    "second_year_property_maintenance": "90904.36",
+                    "second_year_deduction_rate": "10",
+                    "second_year_bond": "289075.87"
+                },
+                "third_year": {
+                    "third_year_unit_price": "6.05",
+                    "third_year_rent": "152199.95",
+                    "third_year_property_maintenance": "90904.36",
+                    "third_year_deduction_rate": "10",
+                    "third_year_bond": "289075.87"
+                }
+            },
+            {
+                "shop_id": 1049208,
+                "unit_no": "08FL012",
+                "current_category": "F&B-Chinese",
+                "c_mode": "餐饮",
+                "business_format_CHS": "中餐",
+                "business_format_En": "F&B-Chinese",
+                "ATV": "推荐做中餐，客单价50左右",
+                "c_per": "5000-9000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "45",
+                "open_date": "2020-09-30 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "12.00",
+                    "first_year_rent": "21894.30",
+                    "first_year_property_maintenance": "9013.02",
+                    "first_year_deduction_rate": "18",
+                    "first_year_bond": "133152.97"
+                },
+                "second_year": {
+                    "second_year_unit_price": "13.20",
+                    "second_year_rent": "33171.93",
+                    "second_year_property_maintenance": "9013.02",
+                    "second_year_deduction_rate": "18",
+                    "second_year_bond": "133152.97"
+                }
+            },
+            {
+                "shop_id": 1049210,
+                "unit_no": "08FL015",
+                "current_category": "F&B-Chinese",
+                "c_mode": "餐饮",
+                "business_format_CHS": "中餐",
+                "business_format_En": "F&B-Chinese",
+                "ATV": "推荐做中餐，客单价100左右",
+                "c_per": "5000-9000",
+                "settle_date": "2020-08-15 00:00:00",
+                "free_of_ground_rent": "60",
+                "open_date": "2020-10-15 00:00:00",
+                "first_year": {
+                    "first_year_unit_price": "12.00",
+                    "first_year_rent": "72019.05",
+                    "first_year_property_maintenance": "29870.24",
+                    "first_year_deduction_rate": "17",
+                    "first_year_bond": "472364.44"
+                },
+                "second_year": {
+                    "second_year_unit_price": "13.20",
+                    "second_year_rent": "109115.66",
+                    "second_year_property_maintenance": "29870.24",
+                    "second_year_deduction_rate": "17",
+                    "second_year_bond": "472364.44"
+                },
+                "third_year": {
+                    "third_year_unit_price": "14.52",
+                    "third_year_rent": "120027.22",
+                    "third_year_property_maintenance": "29870.24",
+                    "third_year_deduction_rate": "17",
+                    "third_year_bond": "472364.44"
+                }
+            }
+        ]
+    }
+}

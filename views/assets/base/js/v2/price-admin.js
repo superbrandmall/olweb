@@ -1,6 +1,13 @@
+$.favorites = new Array();
+$.favoritesId = new Array();
 $.order = {
-    copy: ""
+    copy: "",
+    building: "",
+    mall: "",
+    unit: ""
 };
+
+var unitCodes = ["02FL035","03FL084","03FL001","04FL005","04FL008","05FL123","05FL117","07FL069","08FL012","08FL015"];
 
 var d = new Date();
 var month = d.getMonth()+1;
@@ -9,22 +16,66 @@ var time = d.getTime();
 var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
-    
+
 $(document).ready(function(){
-    GetShopPriceInfo();
+    getMyFavorites();
+    getShopInfo();
+    getOrderByTradeNO();
+    
+    $(function(){
+        $('.collapse .js-category-1').click(function(){
+            $parent = $(this).parent('li');
+            if($parent.hasClass('js-show')){
+                $parent.removeClass('js-show');
+            }else{
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+            }
+            $('.shop-collapse li').animate({
+                marginTop: '-25px'
+            }, 200);
+        });
+        
+        $('.collapse .js-category-2').click(function(){
+            $parent = $(this).parent('li');
+            if($parent.hasClass('js-show')){
+                $parent.removeClass('js-show');
+                $parent.animate({
+                    marginTop: '-25px'
+                }, 200);
+            }else{
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $parent.animate({
+                    marginTop: '-110px'
+                }, 200);
+            }
+        });
+        
+        $('.collapse .js-category-3').click(function(){
+            $parent = $(this).parent('li');
+            if($parent.hasClass('js-show')){
+                $parent.removeClass('js-show');
+                $parent.animate({
+                    marginTop: '-25px'
+                }, 200);
+            }else{
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $parent.animate({
+                    marginTop: '-110px'
+                }, 200);
+            }
+        });
+
+    });
 });
 
-function GetShopPriceInfo(){
-    getShopsMoreInfo();
+function getShopInfo(){
     var shopCode = getURLParameter('id') || null;
-    
-    var userCodeParameter = '';
-    if($.cookie('uid') && $.cookie('uid') != ''){
-        userCodeParameter = "?userCode="+$.cookie('uid');
-    }
-    
+    var userCode = $.cookie('uid');
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+shopCode+userCodeParameter+"",
+        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+shopCode+"?userCode="+userCode+"",
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -41,7 +92,45 @@ function GetShopPriceInfo(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                if(response.data.code == shopCode){
+                    getShopsMoreInfo(response.data.unit,response.data.shopName,response.data.area,response.data.shopState,response.data.daysBeforeContractExpire);
+                        
+                    $('#shopName').text(response.data.shopName);
+                    $('#area').text(response.data.area);
+                    $.cookie('area',response.data.area);
+                    
+                    $.order.building = response.data.buildingCode;
+                    $.order.mall = response.data.mallCode;
+                    $.order.unit = response.data.unit;
+                }
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
 
+function getShopsMoreInfo(u,sn,a,ss,dbce) {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                
                 var settleDate = '';
                 var openDate = '';
                 var freeOfGroundRent = '';
@@ -51,18 +140,22 @@ function GetShopPriceInfo(){
                 var deductionTaxAmount = '';
                 var propertyMaintenance = '';
                 var promotionRate = '';
-                var contractLength = '';
-                
-                $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-                    if(response.data.unit == w.unitCode){
-                        freeOfGroundRent = w.freeOfGroundRent;
-                        deposit = w.deposit;
-                        contractLength = w.contractLength;
-                        $.cookie('contractLength',w.contractLength);
-                        $.cookie('shopNo', w.shopNo);
+
+                $.each(response.data, function(i,v){
+                    if(u == v.unitCode){
+                        $('#businessFormatChs').text(v.businessFormatChs);
+                        $('#desc').text(v.desc);
+                        $('#settleDate').text(v.settleDate);
+                        $.cookie('settleDate',v.settleDate);
+                        $('#openDate').text(v.openDate);
+                        $.cookie('openDate',v.openDate);
+                        $('#freeOfGroundRent').text(v.freeOfGroundRent);
+                        $('#deposit').text(v.deposit);
+                        $.cookie('deposit',v.deposit);
                         
-                        for(var x = 1; x <= w.contractLength; x++){
-                            $.each(w.shopRentWxs, function(k,y){
+                        for(var x = 1; x <= v.contractLength; x++){
+                            $.each(v.shopRentWxs, function(k,y){
+                                
                                 if(y.code == x && y.termTypeName == "固定租金"){
                                     rentAmount = y.rentAmount;
                                     $.cookie('rentAmount_'+x, y.rentAmount);
@@ -89,63 +182,84 @@ function GetShopPriceInfo(){
                                 }
                             })
                             
-                            $('#shopRent').append('<tr style="border-bottom: solid 1px #595959;">\n\
-<td style="border: 0 none;">第'+x+'年</td>\n\
-<td style="border: 0 none;">¥'+rentAmount+'/m²</td>\n\
-<td style="border: 0 none;">¥'+taxAmount+'</td>\n\
-<td style="border: 0 none;">'+deductionTaxAmount+'%</td></tr>');
+                            $('#shopRent').append('<tr>\n\
+<td>第'+x+'年</td>\n\
+<td>¥'+rentAmount+'/m²</td>\n\
+<td>¥'+taxAmount+'</td>\n\
+<td>'+deductionTaxAmount+'%</td></tr>');
                         }
+                        
+                        $('#rentAmount').text($.cookie('rentAmount_1'));
+                        $('#propertyMaintenance').text(propertyMaintenance);
+                        $('#promotionRate').text(promotionRate);
+                        
+                        if(ss === 1 || ss === 3) { // 空铺
+                            settleDate = IncrDates(date,15);
+                        } else { // 非空铺
+                            settleDate = IncrDates(date,(dbce+1));
+                        }
+
+                        if(v.freeOfGroundRent != ''){
+                            openDate = IncrDates(settleDate,parseInt(v.freeOfGroundRent)) || '';
+                        }
+                        
+                        $('#vr').click(function(){
+                            //showVR(v.remarkFirst);
+                            showVR("https://720yun.com/t/41vksmd9r7b#scene_id=49271840");
+                        })
+                        
+                        $('#engineering_video').click(function(){
+                            showVideo("https://www.xinpianchang.com/a10824429");
+                        })
+                        
+                        var index = $.inArray(getURLParameter('id'), $.favorites);
+                        if(index >= 0){
+                            $('#favourite').html('<i class="fa fa-heart" aria-hidden="true"></i><br>取消收藏');
+                        }
+                        
+                        $('#favourite').click(function(){
+                            if(index >= 0){
+                                removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],v.buildingCode,getURLParameter('id'),v.storeCode,u);
+                            } else {
+                                addToFavorite(v.buildingCode,getURLParameter('id'),v.storeCode,u);
+                            }
+                        })
+                        
+                        
+                        $('#price').click(function(){
+                            askPrice(u,getURLParameter('id'),settleDate,openDate,sn,a);
+                        })
                     }
                 })
-                
-                if(response.data.shopState === 1 || response.data.shopState === 3) { // 空铺
-                    settleDate = IncrDates(date,15);
-                } else { // 非空铺
-                    var contractExpire = new Date();
-                    contractExpire.setTime(response.data.contractExpireDate);
-                    var contractExpireYear = contractExpire.getFullYear('yyyy');
-                    var contractExpireMonth = contractExpire.getMonth('mm')+1;
-                    if(contractExpireMonth < 10){
-                        contractExpireMonth = "0"+contractExpireMonth;
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getMyFavorites(){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.remarkSecond == 1){
+                        $.favorites.push(v.remarkFirst);
+                        $.favoritesId.push(v.id);                        
                     }
-                    var contractExpireDate = contractExpire.getDate('dd');
-                    if(contractExpireDate < 10) {
-                        contractExpireDate = "0"+contractExpireDate;
-                    }
-
-                    settleDate = IncrDate(contractExpireYear+'-'+contractExpireMonth+'-'+contractExpireDate) || '-';
-
-                }
-
-                if(freeOfGroundRent != ''){
-                    openDate = IncrDates(settleDate,parseInt(freeOfGroundRent)) || '';
-                }
-                
-                $.cookie('settleDate',settleDate);
-                $.cookie('openDate',openDate);
-                
-                $('#room_name').text(response.data.shopName || '');
-                
-                $('#area').text(response.data.area || '');
-                $.cookie('area',response.data.area);
-                
-                $('#free_of_ground_rent').text(freeOfGroundRent);
-                $('#settle_date').text(settleDate);
-                $('#open_date').text(openDate);
-                $('#propertyMaintenance').text(propertyMaintenance);
-                $('#promotionRate').text(promotionRate);
-                
-                $('#deposit').text(deposit);
-                $.cookie('deposit',deposit);
-                
-                $('#contractLength').text(contractLength);
-                
-                $('#confirm_price').click(function(){
-                    getOrderByTradeNO();
-                });
-                
-                $('#negotiate').click(function(){
-                    window.location.href = '/v2/negotiation?id='+getURLParameter('id')+'&unit='+response.data.unit+'&building='+response.data.buildingCode+'&mall='+response.data.mallCode;
                 });
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -157,15 +271,34 @@ function GetShopPriceInfo(){
     });
 }
 
-function getShopsMoreInfo() {
+function addToFavorite(bc,c,sc,uc){
+    var map = {
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 1,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing",
+    }
+    
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
-        type: "GET",
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
             showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
@@ -173,7 +306,76 @@ function getShopsMoreInfo() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 hideLoading();
-                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data)); 
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_1');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function removeFavorite(id,bc,c,sc,uc){
+    var map = {
+        "id": id,
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 0,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing"
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var $toast = $('#js_toast_2');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+    
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -200,7 +402,14 @@ function getOrderByTradeNO() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 $.order.copy = JSON.stringify(response.data[0]);
-                SaveOrder();
+                
+                $('#confirm_price').click(function(){
+                    saveOrder();
+                });
+                
+                $('#negotiate').click(function(){
+                    window.location.href = '/v2/negotiation?code='+getURLParameter('id')+'&unit='+$.order.unit+'&building='+$.order.building+'&mall='+$.order.mall+'&id='+response.data[0].id;
+                });
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -209,9 +418,9 @@ function getOrderByTradeNO() {
            console.log(textStatus, errorThrown);
         }
     });
-} 
+}
 
-function SaveOrder(){
+function saveOrder(){
     var order = $.parseJSON($.order.copy);
     order.mobileNo = $.cookie('uid');
     order.brandName = $.cookie('brand_1');
@@ -410,19 +619,18 @@ function SaveOrder(){
             }
         }
     }
-    order.orderStates = '预览合同已生成';
+    order.orderStates = '合同已生成';
     
     /* 
      * @订单状态  
      *  待确认订单
-     *  预览合同已生成
-     *  合同待用印
+     *  合同已生成
      *  合同用印中
      *  待付款订单
      *  已完成订单
      *  已关闭订单
      */
-    
+
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
         type: "POST",
@@ -443,7 +651,7 @@ function SaveOrder(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                window.location.href = '/v2/engineering?id='+getURLParameter('id');
+                saveMsgLog('订单合同已生成','您的订单【陆家嘴正大广场】商铺单元【'+$.cookie('shopNo')+'】合同已生成，请前往我的订单管理页面查看。',order.outTradeNo, '我的消息',$.order.unit,'/v2/improve-info?id='+getURLParameter('id'));
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

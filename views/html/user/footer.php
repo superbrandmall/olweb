@@ -1,26 +1,27 @@
 <!-- BEGIN: LAYOUT/FOOTERS/FOOTER-2 -->
 <a name="footer"></a>
 <footer class="c-layout-footer c-layout-footer-1">
-<div class="c-postfooter">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-sm-6">
-				<p class="c-copyright c-font-oswald c-font-14">
-					 &copy; COPYRIGHT <?= date("Y") ?>. <?= $lang['copyright'] ?> 
-				</p>
-			</div>
-            <div class="col-md-6 col-sm-6 hidden-sm hidden-xs">
-                <ul class="c-socials">
-                    <li>
-                        <p class="c-copyright c-font-oswald c-font-14">
-                            沪ICP备14029636号-1
-                        </p>
-                    </li>
-                </ul>
-			</div>
-		</div>
-	</div>
-</div>
+    <div class="c-postfooter" style="padding: 10px 0 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
+                    &copy; COPYRIGHT <?= date("Y") ?>
+                </div>
+                <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
+                    <?= $lang['copyright'] ?>
+                </div>
+                <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
+                    沪ICP备14029636号-1
+                </div>
+                <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
+                    <a class="c-copyright c-font-oswald c-font-14" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111">
+                        <img src="views/assets/base/img/content/misc/gongan.png" />
+                        沪公网安备 31011502015111号
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 <!-- END: LAYOUT/FOOTERS/FOOTER-2 -->
 <!-- BEGIN: LAYOUT/BASE/BOTTOM -->
@@ -40,76 +41,76 @@
 <script src="views/assets/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
 <script src="views/assets/plugins/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
 <!-- END: LAYOUT PLUGINS -->
-<script src="views/assets/base/js/app.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
-<script src="views/assets/base/js/protocol.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
-<script src="views/assets/base/js/scripts.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
-<script src="views/assets/base/js/mall-code.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
+<script src="views/assets/base/js/app.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
+<script src="views/assets/base/js/protocol.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
+<script src="views/assets/base/js/scripts.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
+<script src="views/assets/base/js/mall-code.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
 <!-- BEGIN: THEME SCRIPTS -->
 <?php
-    echo $scripts; 
+echo $scripts;
 ?>
-<script src="views/assets/base/js/components.js?t=<?php echo date("Y-m-d")?>" type="text/javascript"></script>
+<script src="views/assets/base/js/components.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
 <script>
-	$(document).ready(function() {    
-		App.init(); // init core    
+    $(document).ready(function () {
+        App.init(); // init core
 
-		// init main slider
-		var slider = $('.c-layout-revo-slider .tp-banner');
-	    var cont = $('.c-layout-revo-slider .tp-banner-container');
-	    var api = slider.show().revolution({
-	        delay: 0,    
-	        startwidth: 960,
-	        startheight: 550,
-	        navigationType: "hide",
-	        navigationArrows: "none",
-	        touchenabled: "on",
-	        onHoverStop: "off",
-	        keyboardNavigation: "off",
-	        navigationStyle: "circle",
-	        navigationHAlign: "center",
-	        navigationVAlign: "bottom",
-	        spinner: "spinner2",
-	        fullScreen: "off",   
-	        fullScreenAlignForce: "on",
-	        fullScreenOffsetContainer: (App.getViewPort().width < App.getBreakpoint('md') ? '.c-layout-header' : ''),
-	        shadow: 0,
-	        fullWidth: "off",
-	        forceFullWidth: "off",
-	        hideTimerBar: "on",
-	        hideThumbsOnMobile: "on",
-	        hideNavDelayOnMobile: 1500,
-	        hideBulletsOnMobile: "on",
-	        hideArrowsOnMobile: "on",
-	        hideThumbsUnderResolution: 0
-	    });
-	    api.bind("revolution.slide.onchange",function (e,data) {
-	        $('.c-layout-header').removeClass('hide');   
-	        setTimeout(function(){
-	            //$('.c-singup-form').fadeIn(); 
-                    $('video').attr({
-                        'controls':'controls',
-                        'muted':false
-                    });
-	        }, 1500);
-	    });
+        // init main slider
+        var slider = $('.c-layout-revo-slider .tp-banner');
+        var cont = $('.c-layout-revo-slider .tp-banner-container');
+        var api = slider.show().revolution({
+            delay: 0,
+            startwidth: 960,
+            startheight: 550,
+            navigationType: "hide",
+            navigationArrows: "none",
+            touchenabled: "on",
+            onHoverStop: "off",
+            keyboardNavigation: "off",
+            navigationStyle: "circle",
+            navigationHAlign: "center",
+            navigationVAlign: "bottom",
+            spinner: "spinner2",
+            fullScreen: "off",
+            fullScreenAlignForce: "on",
+            fullScreenOffsetContainer: (App.getViewPort().width < App.getBreakpoint('md') ? '.c-layout-header' : ''),
+            shadow: 0,
+            fullWidth: "off",
+            forceFullWidth: "off",
+            hideTimerBar: "on",
+            hideThumbsOnMobile: "on",
+            hideNavDelayOnMobile: 1500,
+            hideBulletsOnMobile: "on",
+            hideArrowsOnMobile: "on",
+            hideThumbsUnderResolution: 0
+        });
+        api.bind("revolution.slide.onchange", function (e, data) {
+            $('.c-layout-header').removeClass('hide');
+            setTimeout(function () {
+                //$('.c-singup-form').fadeIn();
+                $('video').attr({
+                    'controls': 'controls',
+                    'muted': false
+                });
+            }, 1500);
+        });
 
-        if($('.tp-bgimg').length >0){
+        if ($('.tp-bgimg').length > 0) {
             var element = document.getElementsByClassName('tp-bgimg')[0];
             element.addEventListener('transitionend', handle, false);
         }
-        
-        function handle(){
+
+        function handle() {
             change();
         }
         function change() {
-            if($('.tp-bgimg').hasClass('zoom')) {
+            if ($('.tp-bgimg').hasClass('zoom')) {
                 $('.tp-bgimg').removeClass('zoom');
             } else {
                 $('.tp-bgimg').addClass('zoom');
-            }            
+            }
         }
-	});
-	</script>
+    });
+</script>
 <!-- END: THEME SCRIPTS -->
 <!-- END: LAYOUT/BASE/BOTTOM -->
 </body>
