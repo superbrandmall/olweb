@@ -96,10 +96,12 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="c-content-title-1">
                         <h3 class="c-center c-font-uppercase c-font-bold c-font-white"><?= $lang['shop_shop_location'] ?></h3>
                     </div>
-                    <div class="c-content-panel" style="background-color: transparent;">
+                    <div class="c-content-panel" style="background-color: transparent; position: relative;">
                         <div class="c-label" id="fmap" style="background-color: transparent;">
-                            <span style="background-color: #87A5E7; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['shop_this_shop'] ?>
+                            <span id="shopName" style="font-size: 20px; margin-right: 5px; margin-left: 3px;"></span>
+                            <span style="background-color: #c34343; width: 20px; height: 13px; display: inline-block;"></span> <?= $lang['shop_this_shop'] ?>
                         </div>
+                        <img style="position: absolute; bottom: 5px; left: 5px" src="views/assets/base/img/content/floor-plan/compass.png" width="30" />
                         <div class="c-body" style="background-color: rgba(240,240,240,0.8);padding: 33px 20px 20px;">
                             <img src="#" class="img-responsive" id="map">
                         </div>

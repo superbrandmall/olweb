@@ -5,31 +5,29 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <link href="/views/assets/plugins/folding/style.css" rel="stylesheet" type="text/css"/>
 <style>
-.square {
-    display: inline-block;
-    width:100px;
-    height:100px;
-    border:7px solid #D8BD8F;
-    overflow: hidden;
-    animation: rotate 2s linear infinite;
+.ta_c{text-align: center;
+margin-top: 100px;}
+
+@-webkit-keyframes rotation{
+from {-webkit-transform: rotate(0deg);}
+to {-webkit-transform: rotate(360deg);}
 }
 
-.circle {
-    display: inline-block;
-    width:93px;
-    height:93px;
-    border-radius: 50%;
-    border:7px solid #D8BD8F;
+.Rotation{
+-webkit-transform: rotate(360deg);
+animation: rotation 3s linear infinite;
+-moz-animation: rotation 3s linear infinite;
+-webkit-animation: rotation 3s linear infinite;
+-o-animation: rotation 3s linear infinite;
 }
 
-@keyframes rotate{from{transform: rotate(0deg)}
-    to{transform: rotate(360deg)}
-}
 </style>
 
 <div id="welcome" style="position: relative; height: 100vh; text-align: center;">
     <div style="position: absolute; top: 150px; left: 0; right: 0;">
-        <div class="square"><div class="circle"></div></div>
+        <div class="ta_c">
+            <img class="Rotation img" src="/views/assets/base/img/content/backgrounds/spin-logo.png" width="100" height="100"/>
+        </div>
     </div>
     
     <div class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="position: absolute; top: 400px; left: 0; right: 0;">
@@ -38,7 +36,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div class="slide" id="slide2">
+<!--<div class="slide" id="slide2">
     <ul>
         <li>
             <a href="javascript:;">
@@ -91,7 +89,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <span></span>
         <span></span>
     </div>
-</div>
+</div>-->
 
 <div class="slide" id="slide1">
     <ul class="main">
@@ -106,8 +104,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </li>
     </ul>
 </div>
-    
-<br><br>
-<?php include ('menu_bottom.php'); ?>
+
+<?php //include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

@@ -476,52 +476,16 @@ transform:scale(1);
     color: #111;
 }
 
-#register_form {
-    position: relative;
-    height: 50%; 
-    background-color: #2c0046;
-}
-
-#register_form .page__title {
-    font-size: 36px; 
-    color: #fff;
-    text-shadow: 2px 2px 5px rgba(119,89,141,1);
-}
-
-#register_form .weui-form {
-    padding: 0; 
-    background-color: #2c0046;
-}
-
-#register_form .weui-cells__group_form .weui-cell:before, 
-#register_form .weui-cells:after {
-    border-top: 2px solid #c7becc;
-}
-
-#register_form .weui-cells_form {
-    background-color: #2c0046;
-}
-
-#register_form .weui-cell_active {
-    color: #fff;
-}
-
-#register_form .weui-vcode-btn {
-    background: rgba(229,229,229,0.6);
-    color: #fff;
-    border-radius: 20px;
-    font-size: 12px;
-}
-
 #login_form {
-    position: relative;
-    z-index: 2;
+    position: absolute;
+    top: 235px;
 }
 
 #login_form .page__title {
-    font-size: 36px; 
-    color: #2c0046;
-    text-shadow: 1px 1px 1px rgba(119,89,141,1);
+    font-size: 28px; 
+    color: #504631;
+    text-shadow: 1px 1px 1px rgba(150,145,145,0.7);
+    font-weight: 400;
 }
 
 #login_form .weui-form {
@@ -531,20 +495,23 @@ transform:scale(1);
 
 #login_form .weui-cells__group_form .weui-cell:before, 
 #login_form .weui-cells:after {
-    border-top: 2px solid #2c0046;
+    border-top: 2px solid #504631;
+    left: 15px;
 }
 
 #login_form .weui-cells_form {
     background-color: transparent;
+    width: 260px;
 }
 
 #login_form .weui-cell_active {
-    color: #2c0046;
+    color: #504631;
+    padding-left: 15px;
 }
 
 #login_form .weui-vcode-btn {
     background: rgba(229,229,229,0.8);
-    color: #2c0046;
+    color: #504631;
     border-radius: 20px;
     font-size: 12px;
 }

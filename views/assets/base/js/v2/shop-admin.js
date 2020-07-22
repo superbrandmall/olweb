@@ -147,7 +147,7 @@ function getShopsMoreInfo(u,sn,a,ss,dbce) {
                         
                         var index = $.inArray(getURLParameter('id'), $.favorites);
                         if(index >= 0){
-                            $('#favourite').html('<i class="fa fa-heart" aria-hidden="true"></i><br>取消收藏');
+                            $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
                         }
                         
                         $('#favourite').click(function(){

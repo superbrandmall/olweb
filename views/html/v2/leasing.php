@@ -12,7 +12,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 ?>
 
 <div style="position: relative;">
-    <img src="/views/assets/base/img/content/backgrounds/leasing/<?= $floor ?>F-banner.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
+    <img src="/views/assets/base/img/content/backgrounds/leasing/<?= $floor ?>F-banner.jpg" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
+    <img src="/views/assets/base/img/content/backgrounds/leasing/banner-bg.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="position: absolute; top: 0; left: 0; width: 100%; text-align: center;" />
 </div>
 
 <div class="page__bd" style="margin-top: -60px;">

@@ -1,13 +1,66 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js"></script>';
 ?>
+<style>
+.floors {
+    background-size: cover;
+    background-position: 0 center;
+    background-repeat: no-repeat;
+    animation: animatedBackground 20s linear infinite;
+    -moz-animation: animatedBackground 20s linear infinite;
+    -o-animation: animatedBackground 20s linear infinite;
+}
+ 
+@-webkit-keyframes animatedBackground {
+    0% { background-position: 0 100%; }
+    25% { background-position: 40% 75%; }
+    50% { background-position: 80% 50%; }
+    75% { background-position: 40% 75%; }
+    100% {background-position: 0 100%; }
+}
+@-moz-keyframes animatedBackground {
+    0% { background-position: 0 100%; }
+    25% { background-position: 40% 75%; }
+    50% { background-position: 80% 50%; }
+    75% { background-position: 40% 75%; }
+    100% {background-position: 0 100%; }
+}
+@-o-keyframes animatedBackground {
+    0% { background-position: 0 100%; }
+    25% { background-position: 40% 75%; }
+    50% { background-position: 80% 50%; }
+    75% { background-position: 40% 75%; }
+    100% {background-position: 0 100%; }
+}
+@keyframes animatedBackground {
+    0% { background-position: 0 100%; }
+    25% { background-position: 40% 75%; }
+    50% { background-position: 80% 50%; }
+    75% { background-position: 40% 75%; }
+    100% {background-position: 0 100%; }
+}
+
+.floors.floors2 {
+    animation: animatedBackground2 20s linear infinite;
+    -moz-animation: animatedBackground2 20s linear infinite;
+    -o-animation: animatedBackground2 20s linear infinite;
+}
+
+@keyframes animatedBackground2 {
+    0% { background-position: 0 75%; }
+    40% { background-position: 41% 50%; }
+    50% { background-position: 41% 50%; }
+    90% {background-position: 81% 75%; }
+    100% {background-position: 81% 75%; }
+}
+</style>
 
 <div style="position: relative;">
     <img src="/views/assets/base/img/content/backgrounds/grey-blue-leasing.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
     <img src="/views/assets/base/img/content/backgrounds/leasing-title.png" class="wow slideInRight" data-wow-delay="0.4s" data-wow-offset="300" style="position: absolute; left: 16px; right: 16px; width: 90%; bottom: 0; margin: 0 auto;" />
-    <a href="javascript:;" class="wow fadeInUp" data-wow-delay="0.6s" data-wow-offset="300" style="position: absolute; color: #fff; top: 46%; left: 7%; font-size: 14px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,.6);">Leasing</a>
-    <a href="/v2/events?type=events" class="wow fadeInUp" data-wow-delay="0.8s" data-wow-offset="300" style="position: absolute; color: #838383; top: 37%; left: 45%; font-size: 14px; font-weight: 700;">Event</a>
-    <a href="/v2/ads?type=ads" class="wow fadeInUp" data-wow-delay="1.0s" data-wow-offset="300" style="position: absolute; color: #838383; top: 24%; left: 70%; font-size: 14px; font-weight: 700;">Advertising</a>
+    <a href="javascript:;" class="wow fadeInUp" data-wow-delay="0.6s" data-wow-offset="300" style="position: absolute; color: #fff; top: 46%; left: 7%; font-size: 14px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,.6);">开新铺</a>
+    <a href="/v2/events?type=events" class="wow fadeInUp" data-wow-delay="0.8s" data-wow-offset="300" style="position: absolute; color: #838383; top: 37%; left: 45%; font-size: 14px; font-weight: 700;">办活动</a>
+    <a href="/v2/ads?type=ads" class="wow fadeInUp" data-wow-delay="1.0s" data-wow-offset="300" style="position: absolute; color: #838383; top: 24%; left: 70%; font-size: 14px; font-weight: 700;">做广告</a>
 </div>
 
 <div class="page__bd">
@@ -105,16 +158,73 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="page__bd_spacing">
         <div class="weui-flex">
             <div class="weui-flex__item wow slideInLeft" data-wow-offset="300">
-                <div id="9F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/9F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="8F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/8F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="7F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/7F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="6F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/6F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="5F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/5F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="4F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/4F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="3F" class="floors" onclick="window.location='/v2/leasing?f=3&type=leasing'" style="background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/3F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="2F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/2F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="1F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/1F.jpg) no-repeat; background-size: cover;"></div>
-                <div id="B1F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/B1F.jpg) no-repeat; background-size: cover;"></div>
+                <div id="9F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/9F.jpg);"></div>
+                <div id="8F" class="floors floors2" onclick="window.location='/v2/leasing?f=8&type=leasing'" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/8F.jpg);">
+                    <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/08F.png" alt="08F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
+                </div>
+                <div id="7F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/7F.jpg);"></div>
+                <div id="6F" class="floors" style="display: none; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/6F.jpg);"></div>
+                <div id="5F" class="floors floors2" onclick="window.location='/v2/leasing?f=5&type=leasing'" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/5F.jpg);">
+                    <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/05F.png" alt="05F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
+                </div>
+                <div id="4F" class="floors floors2" onclick="window.location='/v2/leasing?f=4&type=leasing'" style="position: relative; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/4F.jpg);">
+                    <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/04F.png" alt="04F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
+                </div>
+                <div id="3F" class="floors" onclick="window.location='/v2/leasing?f=3&type=leasing'" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/sbm/Floor/3F.jpg);">
+                    <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/03F.png" alt="03F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                </div>
+                <div class="slide" onclick="window.location='/v2/leasing?f=2&type=leasing'" style="max-height: 100%; margin-right: 20px;">
+                    <ul id="2F" style="display: none;"> 
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/2F-1.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/2F-2.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/2F-3.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/2F-4.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="slide" onclick="window.location='/v2/leasing?f=1&type=leasing'" style="max-height: 100%; margin-right: 20px;">
+                    <ul id="1F" style="display: none;"> 
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/1F-1.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/1F-2.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="slide" onclick="window.location='/v2/leasing?f=0&type=leasing'" style="max-height: 100%; margin-right: 20px;">
+                    <ul id="B1F" style="display: none;"> 
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/B1F-1.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">
+                                <img src="/views/assets/base/img/content/backgrounds/sbm/Floor/B1F-2.jpg" alt="" style="border-radius: 25px;">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 
                 <div id="9F_desc" class="floors_desc" style="display: none; width: 50%;font-size: 12px;margin-top: 5px;">一线江景餐厅、联合办公复合业态，正大集团携手MUSE GROUP 精心打造！</div>
                 <div id="8F_desc" class="floors_desc" style="display: none; width: 50%;font-size: 12px;margin-top: 5px;">聚餐、K歌、观影，聚会娱乐不二之选！</div>
@@ -144,19 +254,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <a href="javascript: showFloorImg('5F')">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/5F.png" alt="5F">
                     </a>
-                    <a href="javascript: showFloorImg('4F')">
+                    <a href="javascript: showFloorImg('4F')" class="active">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/4F.png" alt="4F">
                     </a>
-                    <a href="javascript: showFloorImg('3F')" class="active">
+                    <a href="javascript: showFloorImg('3F')">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/3F.png" alt="3F">
                     </a>
-                    <a href="javascript: showFloorImg('2F')">
+                    <a href="javascript: showFloorSlide('2F')">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/2F.png" alt="2F">
                     </a>
-                    <a href="javascript: showFloorImg('1F')">
+                    <a href="javascript: showFloorSlide('1F')">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/1F.png" alt="1F">
                     </a>
-                    <a href="javascript: showFloorImg('B1F')">
+                    <a href="javascript: showFloorSlide('B1F')">
                         <img src="/views/assets/base/img/content/backgrounds/sbm/macaroon/B1.png" alt="B1">
                     </a>
                 </div>

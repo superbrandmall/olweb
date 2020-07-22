@@ -38,6 +38,34 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000695"><img src="views/assets/base/img/content/client-logos/ringside.jpg" alt=""/></a>
+                        Ringside Boxing
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200612000002"><img src="views/assets/base/img/content/client-logos/miniature_world.jpg" alt=""/></a>
+                        微缩世界
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000319"><img src="views/assets/base/img/content/client-logos/vogo.jpg" alt=""/></a>
+                        VOGO
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200111000001"><img src="views/assets/base/img/content/client-logos/bites_brews.jpg" alt=""/></a>
+                        Bites&Brews
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP181107000001"><img src="views/assets/base/img/content/client-logos/pig.jpg" alt=""/></a>
+                        白日梦撸猪
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000728"><img src="views/assets/base/img/content/client-logos/chuan.jpg" alt=""/></a>
+                        川市集
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200101000002"><img src="views/assets/base/img/content/client-logos/ahava.jpg" alt=""/></a>
+                        AHAVA
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP191026000001"><img src="views/assets/base/img/content/client-logos/icicle.jpg" alt=""/></a>
                         之禾 ICICLE
                     </div>
@@ -46,32 +74,8 @@
                         罍村
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000540"><img src="views/assets/base/img/content/client-logos/osim.jpg" alt=""/></a>
-                        OSIM
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000307"><img src="views/assets/base/img/content/client-logos/koradior.jpg" alt=""/></a>
-                        Koradior
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000838"><img src="views/assets/base/img/content/client-logos/purethai.jpg" alt=""/></a>
-                        纯太
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP181115000006"><img src="views/assets/base/img/content/client-logos/sekinana.jpg" alt=""/></a>
-                        炙柒
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200117000001"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
                         薛蟠烤串
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190709000001"><img src="views/assets/base/img/content/client-logos/lokal.jpg" alt=""/></a>
-                        WAGAS
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190627000002"><img src="views/assets/base/img/content/client-logos/nike.jpg" alt=""/></a>
-                        NIKE
                     </div>
                 </div>
                 

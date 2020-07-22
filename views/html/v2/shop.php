@@ -61,7 +61,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </ul>
 </div>
 
-<div class="page__bd">
+<div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
     <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
         <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
@@ -112,7 +112,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
-
-<?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

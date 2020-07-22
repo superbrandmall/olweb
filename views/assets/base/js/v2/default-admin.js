@@ -25,7 +25,7 @@ $(document).ready(function(){
         lazyLoad:false
     });
     
-    $('#slide2').swipeSlide({
+    /*$('#slide2').swipeSlide({
         autoSwipe:true,
         continuousScroll:true,
         transitionType:'ease-in',
@@ -36,5 +36,5 @@ $(document).ready(function(){
         callback : function(i,sum,me){
             me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
         }
-    });
+    });*/
 })

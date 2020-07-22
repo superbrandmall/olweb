@@ -127,6 +127,8 @@ function GetShopInfo(){
                         break;
                 }
                 
+                $('#shopName').text(response.data.shopName);
+                
                 if(response.data.floorCode != null) {
                     GetMap(floorName,lk,response.data.mallCode);
                 }
@@ -373,26 +375,26 @@ function drawShops(){
             return { 
                     key: $(el).attr('data-key'),
                     toolTip: $.lang.thisStore,
-                    selected: true,
-                    stroke: true,
-                    strokeColor: '6a90e1'
+                    fillColor: 'c34343',
+                    fillOpacity: 1,
+                    stroke: false,
+                    selected: true
                 };
         } else {
             if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    stroke: true,
-                    strokeColor: '6a90e1'
+                    fillColor: 'cdcdcd'
                 };
             }
         }
     });
 
     $('#map').mapster({
-        fillColor: '7d9fe9',
+        fillColor: 'c9ae89',
         fillOpacity: 0.8,
-        strokeColor: '6a90e1',
+        strokeColor: 'ffd62c',
         strokeWidth: 0,
         clickNavigate: true,
         mapKey: 'data-key',
