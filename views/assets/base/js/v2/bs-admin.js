@@ -1,161 +1,341 @@
+var index=0;
+var unitCodes = ["B1FL022","B1FL015","01FL035","01FL009","01FL015"];
+var vr;
+
 $(document).ready(function(){
-    audioplay('voiceplayer');
+    $(function(){
+        $('.collapse .js-category').click(function(){
+            $parent = $(this).parent('li');
+            if($parent.hasClass('js-show')){
+                $parent.removeClass('js-show');
+                $(this).children('i').removeClass('icon-35').addClass('icon-74');
+            }else{
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $(this).children('i').removeClass('icon-74').addClass('icon-35');
+                $parent.siblings().find('i').removeClass('icon-35').addClass('icon-74');
+            }
+        });
+
+    });
+        
+    $('.macaroon a').click(function(){
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+        }else{
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+        }
+    });
     
-    $('#slide1').swipeSlide({
-        autoSwipe:true,//自动切换默认是
-        speed:3000,//速度默认4000
-        continuousScroll:true,//默认否
-        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-        lazyLoad:true,//懒加载默认否
+    window.onload = function(){ 
+        $('.slide').hide();
+        $('.floors').css('height',$('.macaroon').innerHeight());
+    }
+    
+    $('.slide').swipeSlide({
+        autoSwipe:true,
+        continuousScroll:true,
+        transitionType:'ease-in',
+        lazyLoad:true,
         firstCallback : function(i,sum,me){
-            me.find('.dot').children().first().addClass('cur');
         },
         callback : function(i,sum,me){
-            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
         }
     });
     
-    weui.slider('#slider', {
-        step: 25,
-        defaultValue: 50,
-        onChange: function(percent){
-            if(percent >= 0 && percent <= 25) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(0)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd').hide();
-                $('.floor-guide .weui-media-box__bd:eq(3)').show();
-            } else if(percent > 25 && percent <= 50) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(1)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd').hide();
-                $('.floor-guide .weui-media-box__bd:eq(2)').show();
-            } else if(percent > 50 && percent <= 75) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(2)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd').hide();
-                $('.floor-guide .weui-media-box__bd:eq(1)').show();
-            } else if(percent > 75 && percent <= 100) {
-                $('.mall-floors a.active').removeClass('active');
-                $('.mall-floors .weui-grid:eq(3)').find('a').addClass('active');
-                $('.floor-guide .weui-media-box__bd').hide();
-                $('.floor-guide .weui-media-box__bd:eq(0)').show();
-            }
-        }
-    });
-
-    $('.mall-floors .weui-grid').each(function(i){
-        var per, index;
-        $(this).find('a').click(function(){
-            switch(i) {
-                case 0:
-                   per = 0;
-                   break;
-                case 1:
-                   per = 33;
-                   break;
-                case 2:
-                   per = 66;
-                   break;
-                case 3:
-                   per = 100;
-                   break;
-                default:
-                   per = 33;
-            }
-            
-            $('.mall-floors a.active').removeClass('active');
-            $('.mall-floors .weui-grid:eq('+i+')').find('a').addClass('active');
-            $('.floor-guide .weui-media-box__bd').hide();
-            $('.floor-guide .weui-media-box__bd:eq('+i+')').show();
-            $('.weui-slider__track').css('width', per + '%');
-            $('.weui-slider__handler').css('left', per + '%');
-        })
-    })
-    
-    $(function(){
-        var sliderTrack = $('#sliderTrack'),
-            sliderHandler = $('#sliderHandler');
- 
-        var totalLen = $('#sliderInner').width(),
-            startLeft = 0,
-            startX = 0;
- 
-        $('.weui-slider__handler')
-        .on('touchstart', function (e) {
-            startLeft = parseInt(sliderHandler.css('left')) * totalLen / 100;
-            startX = e.originalEvent.changedTouches[0].clientX; //移动端
-           //pc端：e.originalEvent.clientX;
-        })
-        .on('touchmove', function(e){
-            var dist = startLeft + e.originalEvent.changedTouches[0].clientX - startX,
-            //pc端：e.originalEvent.clientX;               
-            percent;
-            dist = dist < 0 ? 0 : dist > totalLen ? totalLen : dist;
-            percent =  parseInt(dist / totalLen * 100);
-
-            sliderTrack.css('width', percent + '%');
-            sliderHandler.css('left', percent + '%');
-            
-            e.preventDefault();
-        })
-       .on('touchend',function(e){
-           //代码
-        });
+    $('.weui-dialog__btn').on('click', function(){
+        $(this).parents('.js_dialog').fadeOut(200);
     });
     
-    ContentOwlcarousel();
-    ContentOwlcarousel2();
+    $('.floor_plan').on('click', function(){
+        $('map').html('');
+        GetMap($(this).attr('id'),'baoshan-tm','OLMALL180917000002');
+    });
+    
+    getShopsInfo();
 });
 
-function showFloorVR(id){
-    $("#floor_vr iframe").attr('src',"/upload/vr/100001/floors/"+id+"/tour.html");
+function showFloorImg(floor){
+    $('.slide, .floors_desc').hide();
+    $('.floors, .floors_desc').hide();
+    $('#'+floor+', #'+floor+'_desc').fadeIn();
+}
+
+function showFloorSlide(floor){
+    $('.floors, .floors_desc').hide();
+    $('.slide, .floors_desc').hide();
+    
+    $('.slide').css('height',$('.macaroon').innerHeight());
+    
+    $('#'+floor+', #'+floor+'_desc').fadeIn();
+    $('#'+floor).parent('.slide').fadeIn();
+}
+
+function getShopsInfo() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000002",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                renderShopList(JSON.stringify(response.data));
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function renderShopList(s){
+    var desc = '';
+    var buildingCode;
+    var storeCode;
+    var shopNo;
+    var shop = $.parseJSON(s);
+    
+    $.each(shop, function(j,w){
+        if(w.state == 1){
+            desc = w.desc || '';
+            shopNo = w.shopNo || '';
+            buildingCode = w.buildingCode;
+            storeCode = w.storeCode;
+            
+            $('#empty_stores').append('<a id="shop_'+w.unitCode+'" href="/v2/shop?id='+w.remarkSecond+'&type=leasing&storeCode=OLMALL180917000002" class="weui-grid">\n\
+                <div class="weui-grid__icon" style="position: relative;">\n\
+                    <img src="/views/assets/base/img/content/backgrounds/leasing/'+w.unitCode+'.jpg" alt="">\n\
+                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/0'+w.floor+'.png" alt="0'+w.floor+'" height="35" style="position: absolute;bottom: 29px;right: 11px;width: 73px;height: auto;">\n\
+                    <span style="position: absolute;bottom: 8px;right: 15px;color: #efefef;font-size: 12px;">'+w.shopNo+'</span>\n\
+                </div>\n\
+                <p class="weui-grid__label">\n\
+                <strong>'+shopNo+'</strong>\
+                <br>'+desc+'</p>\n\
+                </a>'
+            );
+        }
+    })
+}
+
+function showVR(){
+    $("#vr_viewer").fadeIn();
+}
+
+function closeVR($s){
+    $("#vr_viewer").hide();
+    $s.parents('js-show').find('.js-category').find('i').removeClass('icon-35').addClass('icon-74');
+    $s.parents('js-show').removeClass('js-show');
+};
+
+function GetMap(fn,lk,mc){
+    var fc,FN;
+    switch (fn) {
+        case '3F':
+            fc = '3';
+            FN = '三楼';
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182613';
+            break;
+        case '2F':
+            fc = '2';
+            FN = '二楼';
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182612';
+            break;
+        case '1F':
+            fc = '1';
+            FN = '一楼';
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
+            break;
+        case 'B1F':
+            fc = '0';
+            FN = '负一楼';
+            break;
+        default:
+            fc = '1';
+            FN = '一楼';
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
+            break;
+    }
+    
+    $('#map').attr({
+        'src': '/views/assets/base/img/content/floor-plan/'+lk+'/'+fc+'F.png',
+        'alt': fc+'F',
+        'usemap': '#Map_'+fc+'F_s'
+     });
+     
+    $('#map').parent().append('<map name="Map_'+fc+'F_s" id="Map_'+fc+'F_s"></map>');
+    
+    $('#floorNo').text(fn);
+    $('#floorVRLink').attr('href','javascript: showFloorVR(vr)');
+    getCoords(mc,FN);
+}
+
+function getCoords(mc,FN) {
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/"+mc+"/"+FN+"",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.each(response.data, function(i,v){
+                    if(v.state !== 0 && v.coords != null && v.coords != ''){
+                        var index = $.inArray(v.unit, unitCodes);
+                        if(index >= 0){
+                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-logo="'+v.logo+'"  href="/v2/shop?id='+v.code+'&type=leasing&storeCode=OLMALL180917000002" shape="poly" coords="'+v.coords+'" />');
+                        } else {
+                            $('map').append('<area data-logo="'+v.logo+'" name="'+v.brandName+'" shape="poly" coords="'+v.coords+'" />');
+                        }
+                    }
+                });
+                drawShops();
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function drawShops(){
+    var areas = $.map($('area'),function(el) {
+        if($(el).attr('href')){
+            return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: "推荐位置",
+                    fillColor: 'F26A85',
+                    fillOpacity: 1,
+                    stroke: true,
+                    strokeColor: 'DC143C',
+                    strokeWidth: 1,
+                    selected: true
+                };
+        } else {
+            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('name'),
+                    fillColor: 'cdcdcd'
+                };
+            }
+        }
+    });
+    
+    var xOffset;
+    var yOffset;
+
+    $('#map').mapster({
+        fillColor: 'c9ae89',
+        fillOpacity: 0,
+        strokeColor: 'ffd62c',
+        strokeWidth: 0,
+        mapKey: 'data-key',
+        showToolTip: true,
+        areas:  areas,
+        clickNavigate: true,
+        onShowToolTip: function () {
+            $(".mapster_tooltip").css({
+                    "font-weight": "bold",
+                    "color": "#fff",
+                    "background": "rgba(28,34,56,1)",
+                    "font-size": "22px",
+                    "width": "auto"
+                });
+
+            $("area").on("mouseenter",  function (data) {
+               xOffset = data.pageX;
+               yOffset = data.pageY;
+               $(".mapster_tooltip").css("left", xOffset);
+               $(".mapster_tooltip").css("top", yOffset);
+            });
+        }
+    });
+
+    addLogoLayer();
+    $('#floor_plan_viewer').fadeIn(200);
+}
+
+function showFloorVR(vr){
+    $("#floor_vr iframe").attr('src',vr);
     $("#floor_vr").show();
 }
 
-function audioplay(id){
-    var audio = document.getElementById(id);
-    !audio.paused?audio.pause():audio.play();
+function addLogoLayer(){
+    $('map area').each(function(i,elem){
+        if($(this).attr('data-area') > 100 && $(this).attr('data-logo') != null && $(this).attr('data-logo') != 'null' && $(this).attr('data-logo') != ''){
+            var pos;
+            pos = $(this).attr('coords').split(',');
+            var x = 0;
+            var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), width, height;
+            while(x < pos.length){
+                if(parseInt(pos[x]) < posLeftMin){
+                    posLeftMin = parseInt(pos[x]);
+                } 
 
-    document.addEventListener("WeixinJSBridgeReady", function () {
-        !audio.paused?audio.pause():audio.play();
-    }, false);
+                if(parseInt(pos[x]) > posLeftMax){
+                    posLeftMax = parseInt(pos[x]);
+                }
+                x = x + 2;
+            }
+            width = parseInt(posLeftMax - posLeftMin - 10);             
+
+            var y = 1;
+            var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
+            while(y < pos.length){
+                if(parseInt(pos[y]) < posTopMin){
+                    posTopMin = parseInt(pos[y]);
+                }
+                if(parseInt(pos[y]) > posTopMax){
+                    posTopMax = parseInt(pos[y]);
+                }
+                y = y + 2;
+            }
+
+            height = parseInt(posTopMax - posTopMin - 10);
+
+            var spanid = 'span_'+$(this).attr('data-key');
+            $('#mapster_wrap_0').append(
+                '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
+            );
+            resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+        }
+    })
 }
 
-function ContentOwlcarousel() {
-    $('.owl-carousel1').owlCarousel({
-        loop: true,
-        margin: 0,
-        dots: true,
-        responsive:{
-            0:{
-                items:1
-            },
-            600:{
-                items:2
-            },
-            1000:{
-                items:3
-            }
+function resetLogoSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
+    var divLogo = $('#'+spanid);
+    for (var i = minSize; i < maxSize; i++) {
+        if ($(divLogo).width() > maxWidth || $(divLogo).height() > maxHeight) {
+            $(divLogo).css({
+                'max-width': i + 'px',
+                'max-height': maxHeight,
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'  
+            }); 
+                break;
+        } else {
+            $(divLogo).css({
+                'max-height': i + 'px',
+                'max-width': maxWidth,
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'
+            });
         }
-    })
-};
-
-function ContentOwlcarousel2() {
-    $('.owl-carousel2').owlCarousel({
-        loop: true,
-        margin: 0,
-        dots: false,
-        autoplay: true,
-        responsive:{
-            0:{
-                items:2
-            },
-            600:{
-                items:3
-            },
-            1000:{
-                items:4
-            }
-        }
-    })
+    }
 };

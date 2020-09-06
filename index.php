@@ -28,6 +28,9 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'portal')) !== false) { // 内部portal
         include ('views/html/portal/header.php');
         include 'views/html/portal/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'gateway')) !== false) { // Payment
+        include ('views/html/gateway/header.php');
+        include 'views/html/gateway/'.$page;
     } else {
         //if (isset($_SERVER['PHP_AUTH_USER']) and ($_SERVER['PHP_AUTH_USER'] == 'demo')){
             include ('views/html/user/header.php');

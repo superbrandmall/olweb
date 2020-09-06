@@ -1,91 +1,122 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
+if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&type=') !== false) {
+        $id = explode('&type=', $id)[0];
+    }
+}
+
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
 ?>
 
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
-
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 在这里您可以查看广告位说明，不仅有图文介绍，还有全景VR可以看哦。对了，如果都满意的话就点击"加入购物车"吧！</div>
-
-<div class="slide" id="slide1">
-    <ul></ul>
-    <div class="dot"></div>
+<div style="position: relative;" class="wow lightSpeedIn" data-wow-delay="0.2s" data-wow-offset="300">
+    <div class="slide">
+        <ul></ul>
+    </div>
 </div>
 
-<div class="page__bd">
-    <div class="weui-cells" style="margin-top: 0;">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>名称</p>
+<div class="page__bd" style="position: relative; margin-top: -16px;">
+    <ul class="collapse shop-collapse">
+        <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400" style="background: url(/views/assets/base/img/content/backgrounds/shop/granite-bg.jpg);">
+            <div class="weui-flex js-category-1">
+                <h3 class="weui-flex__item"><span id="ad_name"></span><a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">VR看广告位</a></h3>
+                <hr color=#baad9b size=1 style="margin: 5px 0;">
+                <div class="weui-flex__item">楼层: <strong id="ad_floor"></strong></div>
+                <div class="weui-flex__item">类型: <strong id="ad_type"></strong></div>
+                <div class="weui-flex__item">尺寸<sup>3</sup>(mm): <strong id="ad_size"></strong></div>
+                <div class="weui-flex__item">材质: <strong id="ad_material"></strong></div>
+                <div class="weui-flex__item" id="ad_desc"></div>
             </div>
-            <div class="weui-cell__ft" id="ad_name"></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>楼层</p>
+        </li>
+        <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="300" style="background: url(/views/assets/base/img/content/backgrounds/shop/marble-bg.jpg); margin: -20px 0 0;">
+            <div class="weui-flex js-category-2">
+                <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
+                <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
+                    <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input date-start" id="dateStart_<?= $id; ?>" placeholder="填写档期起始日" readonly>
+                    </div>
+                </div>
+                <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
+                    <div class="weui-cell__hd"><label class="weui-label">档期终止</label></div>
+                    <div class="weui-cell__bd">
+                        <input class="weui-input date-end" id="dateEnd_<?= $id; ?>" placeholder="填写档期终止日" readonly>
+                    </div>
+                </div>
+                <div class="weui-flex__item"><small>*我司对档期有最终解释权</small></div><br>
+                <div class="weui-flex__item" id="ad_price_frequency">
+                    单价: <span id="ad_price"></span><small id="ad_frequency"></small>
+                </div>
+                <div class="weui-flex__item">总价: <strong><span style="color: #b43018">¥</span> <span id="subTotal" style="color: #b43018">选择档期查看总价</span></strong></div>
             </div>
-            <div class="weui-cell__ft" id="ad_floor"></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>类型</p>
-            </div>
-            <div class="weui-cell__ft" id="ad_type"></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>价格</p>
-            </div>
-            <div class="weui-cell__ft"><span id="ad_price"></span><small id="ad_frequency"></small></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>尺寸<sup>3</sup>(mm)</p>
-            </div>
-            <div class="weui-cell__ft" id="ad_size"></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>材质</p>
-            </div>
-            <div class="weui-cell__ft" id="ad_material"></div>
-        </div>
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p id="ad_desc"></p>
-            </div>
-        </div>
-    </div>
-    
-    <h4 class="page-header" style="margin: 9px 16px 8px; font-weight: 500;">VR看广告位</h4>
-    <div class="weui-article" style="position: relative; padding: 0;">
-        <iframe id="vr" src="#" style="height: 40vh; width: 100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-    </div>
-    
-    <h4 class="page-header" style="margin: 9px 16px 8px; font-weight: 500;">广告位落位图</h4>
-    <div class="weui-article" style="position: relative; padding: 0;">
-        <img src="#" id="map">
-    </div>
-    
-    <h4 class="page-header" style="margin: 16px 16px 8px; font-weight: 500;">其他广告位推荐</h4>
-    <div style="text-align: center; margin: 10px 0 0;">
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000017" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东南口转角</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000018" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东南口</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000019" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东北口</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200420000001" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">黄金大道悬挂分屏LED</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000002" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">3F入口全包LED环绕屏</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000038" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">8F东区悬挂式LED</a>
-    </div>
-    
-    <a id="add_ad" href="javascript:;" class="weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; border-radius: 50%; padding: 14px; height: 80px; width: 80px; font-weight: 300; font-size: 16px; z-index: 5;">
-        加入<br>购物车
-    </a>
+        </li>
+    </ul>
 </div>
+
+<div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+            <i class="fa fa-heart-o" aria-hidden="true"></i><br>
+            收藏
+        </a>
+        <a id="ad_shopping_cart" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
+            购物车
+        </a>
+        <a id="confirm_price" href="javascript:;" style="float: right; background: #50691a; border: solid 2px #668161; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 15px; text-align: center; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">接受报价</a>
+        <a id="add_ad" href="javascript:;" style="float: right; background: #e69c2e; border: solid 2px #eeb96b; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 15px; margin-right: 5px; text-align: center; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">加入购物车</a>
+    </div>
+</div>
+
+<div id="vr_viewer" class="weui-gallery" style="display: none;">
+    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
+        </a>
+    </div>
+</div>
+
+<div class="js_dialog" id="floor_plan_viewer" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd" style="padding: 0; margin: 0;">
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" style="top: 0px; right: 10px; position: absolute;">x</a>
+            <div style="margin: 10px; color: #565d66;">
+                <strong id="floorNo"></strong>
+                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 本位置    
+            </div>
+    
+            <img src="javascript:;" width="320px" height="160px" id="map">
+        </div>
+        <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
+            
+        </div>
+    </div>
+</div>
+
+<div id="js_toast_1" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            加入关注成功～
+        </p>
+    </div>
+</div>
+
+<div id="js_toast_2" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            取消关注成功～
+        </p>
+    </div>
+</div>
+
 <br>
 <br>
 <br>
 
-<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

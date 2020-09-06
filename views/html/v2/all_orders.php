@@ -2,8 +2,6 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/all-orders-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-tab">
         <div class="weui-navbar">
@@ -23,6 +21,23 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 
     <div id="orders"></div>
+</div>
+
+<div>
+    <div class="weui-mask" id="iosMask" style="display: none;"></div>
+    <div class="weui-actionsheet" id="iosActionsheet">
+        <div class="weui-actionsheet__title">
+            <p class="weui-actionsheet__title-text">进场指导手册下载</p>
+        </div>
+        <div class="weui-actionsheet__menu">
+            <div class="weui-actionsheet__cell">租户装修管理手册</div>
+            <div class="weui-actionsheet__cell">围挡设计规范</div>
+            <div class="weui-actionsheet__cell">工程图纸设计规范</div>
+        </div>
+        <div class="weui-actionsheet__action">
+            <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
+        </div>
+    </div>
 </div>
 
 <br>

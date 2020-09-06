@@ -55,12 +55,37 @@ h3 {
     visibility: visible;
 }
 
+input.placeholder::-webkit-input-placeholder {
+    color: #000;
+}
+
+:-moz-placeholder {
+    color: #000;
+}
+
+::-moz-placeholder {
+   color: #000;
+}
+
+input:-ms-input-placeholder {
+   color: #000;
+}
+
+input::-ms-input-placeholder {
+   color: #000;
+}
+
+#mapster_wrap_0 {
+    margin: 0 auto;
+}
+
 .weui-dialog {
     opacity: 1;
     visibility: visible;
     margin: 0 auto;
     -webkit-transform: translate(0,-50%);
     transform: translate(0,-50%);
+    background: rgba(240,240,240,0.8);
 }
 
 .weui-toast {
@@ -330,6 +355,10 @@ transform:scale(1);
     width: 80%;
     margin: 4px auto 0;
     font-size: 11px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    overflow: hidden;
 }
 
 .page__bd_spacing {
@@ -348,6 +377,7 @@ transform:scale(1);
 }
 
 .macaroon a {
+    position: relative;
     display: block;
 }
 
@@ -412,18 +442,22 @@ transform:scale(1);
 }
 
 #slide1 {
-    height: 100vh;
-    width: auto;
-    max-height: 100%;
-    min-height: 800px;
+    min-width: 375px;
+    min-height: 375px;
 }
 
 #slide2 {
     max-height: 100%;
+    margin: 0 20px 40px;
+    top: 20px;
 }
 
 #slide2 li img {
-    height: auto;
+    border-radius: 15px;
+    width: 100%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
 }
 
 #slide2 .dot {

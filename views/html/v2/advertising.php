@@ -8,11 +8,7 @@ if (explode('?f=', $_SERVER['REQUEST_URI'])[1] != null) {
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 我们挑选了以下广告位推荐给您，您可以看看全景VR，或者"广告位详情"，如果没问题就直接"加入购物车"吧！</div>
-
-<div class="page__hd" style="width: 100%;">
+<div class="page__hd" style="width: 100%; margin-top: 20px;">
     <div class="weui-cell weui-cell_select">
         <div class="weui-cell__bd">
             <a href="javascript:;" class="weui-select" id="showFloorPicker" style="font-size: 12px;">请选择楼层</a>
@@ -42,10 +38,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="#" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer").hide();'></i>
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;");  $("#vr_viewer").hide();'></i>
         </a>
     </div>
 </div>

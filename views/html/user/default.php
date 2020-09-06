@@ -46,8 +46,8 @@
                         微缩世界
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000319"><img src="views/assets/base/img/content/client-logos/vogo.jpg" alt=""/></a>
-                        VOGO
+                        <a href="shop?id=OLSHOP200429000001"><img src="views/assets/base/img/content/client-logos/polestar.jpg" alt=""/></a>
+                        POLESTAR
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200111000001"><img src="views/assets/base/img/content/client-logos/bites_brews.jpg" alt=""/></a>
@@ -72,10 +72,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200108000002"><img src="views/assets/base/img/content/client-logos/leicun.jpg" alt=""/></a>
                         罍村
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200117000001"><img src="views/assets/base/img/content/client-logos/diaoye.jpg" alt=""/></a>
-                        薛蟠烤串
                     </div>
                 </div>
                 

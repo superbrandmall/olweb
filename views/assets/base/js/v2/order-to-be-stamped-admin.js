@@ -42,7 +42,7 @@ function getAllOrdersToBeConfirmed() {
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
-        <div class="weui-media-box__hd" style="width: 100px; height: 80px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
+        <div class="weui-media-box__hd" style="width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
@@ -93,8 +93,13 @@ function getShopInfo(sc){
                 }
                 
                 img = '/' + response.data.firstImage;
-                if(response.data.images.length !== 0){
+                
+                if(response.data.firstImage == null || response.data.firstImage == ''){
                     img = response.data.images[0].image;
+                }
+                
+                if(response.data.unit != null && response.data.subType == '正柜'){
+                    img = "/views/assets/base/img/content/backgrounds/leasing/"+response.data.unit+".jpg";
                 }
             }
         }

@@ -1,7 +1,8 @@
 .main {
     width: 100%;
-    height: 100vh;
+    height: 360px !important;
     overflow: visible;
+    position: relative !important;
 }
 
 .view {
@@ -11,7 +12,7 @@
     float: left;
     position: relative;
     box-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-    background: #333;
+    background: #838da9;
     -webkit-perspective: 1000px;
     -moz-perspective: 1000px;
     -o-perspective: 1000px;
@@ -45,7 +46,8 @@
 }
 
 .view .slice {
-    background-size: cover;
+    background-size: auto 88vw;
+    background-repeat: no-repeat;
 }
 
 .view .s2, 

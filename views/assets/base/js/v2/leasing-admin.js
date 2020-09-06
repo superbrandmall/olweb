@@ -1,7 +1,9 @@
-var unitCodes = ["02FL035","03FL084","03FL001","04FL005","04FL008","05FL123","05FL117","07FL069","08FL012","08FL015"];
+var unitCodes = ["01FL064","03FL039","03FL121","2F-44B","4F-37","4F-38","6F-24","B1FL022","B1FL015","01FL035","01FL009","01FL015"];
+var amount = 0;
 
 $(document).ready(function(){
     showLoading();   
+    $('#storeAmount').text(amount);
     
     var floorDesc;
     if(getURLParameter('f') && getURLParameter('f') != '') {
@@ -64,16 +66,12 @@ function getShopFloorInfo(fl) {
                 sessionStorage.setItem("shops", JSON.stringify(response.data) );
                 
                 var index;
-                var amount = 0;
                 $.each(response.data, function(i,v){
                     index = $.inArray(v.unit, unitCodes);
                     if(index >= 0){
                         renderShopList(JSON.stringify(v));
-                        amount++;
                     }
                 });
-                
-                $('#storeAmount').text(amount);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -125,10 +123,8 @@ function renderShopList(s){
             shopNo = w.shopNo || '';
             buildingCode = w.buildingCode;
             storeCode = w.storeCode;
-        }
-    })
-
-    $('.weui-grids').append('<a id="shop_'+shop.unit+'" href="/v2/shop?id='+shop.code+'&type=leasing" class="weui-grid shop-list" data-wow-offset="200">\n\
+            
+            $('.weui-grids').append('<a id="shop_'+shop.unit+'" href="/v2/shop?id='+shop.code+'&type=leasing" class="weui-grid shop-list" data-wow-offset="200">\n\
         <div class="weui-grid__icon">\n\
             <img src="/views/assets/base/img/content/backgrounds/leasing/'+shop.unit+'.jpg" alt="">\n\
         </div>\n\
@@ -137,5 +133,10 @@ function renderShopList(s){
         <br>'+desc+'</p>\n\
         </a>');
             
+            amount++;
+        }
+    })
+    
+    $('#storeAmount').text(amount);
     $('#shop_'+shop.unit).addClass('wow').addClass('slideInRight');
 }

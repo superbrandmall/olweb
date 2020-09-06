@@ -21,40 +21,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="slide">
                         <ul>
                             <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48477866");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP180917001150&type=events">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001150&type=events'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">3F黄金大道</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">超大开阔空间/曝光视野极佳，高层透视/客流集中地</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">黄金大道</span>
-                    <span class="weui-mark-rb">580m²</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
                                 <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001126_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001126_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                             <li>
@@ -123,10 +89,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="slide">
                         <ul>
                             <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                             <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001150_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                         </ul>
                         <div class="dot" style="right: 50%;">
@@ -135,18 +101,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48582385");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP180917001169&type=events">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48477866");'>VR</a></li>
+                        <li><a href="/v2/event?id=OLSHOP180917001150&type=events">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001169&type=events'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">9F封闭式多功能大厅</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">核心CBD区稀有多功能厅/14米挑高/无柱无暇视距</small>
+                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001150&type=events'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">3-4F黄金大道</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">超大开阔空间/曝光视野极佳，高层透视/客流集中地</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">多功能大厅</span>
-                    <span class="weui-mark-rb">封闭式</span>
-                    <span class="weui-mark-rb">3000m²</span>
+                    <span class="weui-mark-rb">黄金大道</span>
+                    <span class="weui-mark-rb">580m²</span>
                 </div>
             </div>
         </div>
@@ -175,11 +140,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP190809000001&type=events'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">4F东平台</p>
+                    <p style="font-size: 14px;">4F平台</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">主动线客流汇集点/人气零售店前/视界开阔无遮挡</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">4F东平台</span>
+                    <span class="weui-mark-rb">东平台</span>
                     <span class="weui-mark-rb">36m²</span>
                 </div>
             </div>
@@ -209,12 +174,47 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001166&type=events'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">5F东平台</p>
+                    <p style="font-size: 14px;">5F平台</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">超高挑高/热点区域/潮牌荟萃</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">5F东平台</span>
+                    <span class="weui-mark-rb">东平台</span>
                     <span class="weui-mark-rb">39.5m²</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="weui-panel__bd">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <div class="slide">
+                        <ul>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                        </ul>
+                        <div class="dot" style="right: 50%;">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48582385");'>VR</a></li>
+                        <li><a href="/v2/event?id=OLSHOP180917001169&type=events">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001169&type=events'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">9F正大厅</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">核心CBD区稀有多功能厅/14米挑高/无柱无暇视距</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">多功能大厅</span>
+                    <span class="weui-mark-rb">封闭式</span>
+                    <span class="weui-mark-rb">3000m²</span>
                 </div>
             </div>
         </div>
@@ -230,10 +230,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="#" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer").hide();'></i>
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
         </a>
     </div>
 </div>

@@ -64,34 +64,6 @@ function saveUserRefusal() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                deleteOrder(getURLParameter('id'));
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    })
-}
-
-function deleteOrder(id){
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+id+"&orderStates=已关闭订单",
-        type: "POST",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                hideLoading();
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
                 $(function(){
                     var $toast = $('#js_toast');
                     $toast.fadeIn(100);
@@ -100,13 +72,10 @@ function deleteOrder(id){
                         window.location.href = '/v2/default';
                     }, 2000);
                 });
-                
-            } else {
-                interpretBusinessCode(response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);
         }
-    });
+    })
 }

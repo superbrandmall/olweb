@@ -2,10 +2,7 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/qa-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 这里是您的个人主页，您能随时"完善信息"，也可以在"订单管理"追踪订单进度哦！</div>
-
-<div class="page-hd">
+<div class="page-hd" style="margin-top: 20px;">
     <h1 class="page-hd-title">
         F&Q
     </h1>

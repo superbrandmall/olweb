@@ -281,6 +281,8 @@ function saveUserBrand() {
                         window.location.href = '/v2/leasing?f='+getURLParameter('f')+'&type=leasing';
                     } else if(getURLParameter('type') == 'ads'){
                         window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
+                    } else if(getURLParameter('type') == 'ad'){
+                        window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type=ad&storeCode='+getURLParameter('storeCode');
                     } else if(getURLParameter('type') == 'events'){
                         window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
                     }

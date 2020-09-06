@@ -88,18 +88,22 @@
                             <span class="control-label">Size:</span>
                             <strong id="area" class="control-label"></strong>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <span class="control-label">Target contract signed date:</span>
                             <strong id="sign_up_date" class="control-label"></strong>
                         </div>
                         <div class="form-group">
                             <span class="control-label">Target decoration date:</span>
                             <strong id="entering_date" class="control-label"></strong>
-                        </div>
-                        <!--<div class="form-group">
-                            <span class="control-label">预算开业:</span>
-                            <strong id="plan_open_date" class="control-label"></strong>
                         </div>-->
+                        <div class="form-group">
+                            <span class="control-label">Contract schedule:</span>
+                            <strong id="contract_schedule" class="control-label"></strong>
+                        </div>
+                        <div class="form-group">
+                            <span class="control-label">Contract extension:</span>
+                            <strong id="contract_extension" class="control-label"></strong>
+                        </div>
                         <div class="form-group" id="store_img" style="margin-top: 25px;"></div>
                     </div>
                     <div class="col-md-6">
@@ -111,23 +115,26 @@
                             <span class="control-label">Floating rental rate:</span>
                             <strong id="float_rent" class="control-label"></strong>
                         </div>
-                        <!--<div class="form-group">
-                            <span class="control-label">损失金额:</span>
-                            <strong id="loss" class="control-label"></strong>
-                        </div>-->
                         <div class="form-group">
                             <span class="control-label">Responsible person:</span>
                             <strong id="responsible_person" class="control-label"></strong>
                         </div>
-                        <div class="form-group">
+                        <!--<div class="form-group">
                             <span class="control-label">Target hoarding date:</span>
                             <strong id="hoarding_date" class="control-label"></strong>
                         </div>
                         <div class="form-group">
                             <span class="control-label">Target opening date:</span>
                             <strong id="opening_date" class="control-label"></strong>
+                        </div>-->
+                        <div class="form-group">
+                            <span class="control-label">Detailed description:</span>
+                            <strong id="detailed_description" class="control-label"></strong>
                         </div>
-                        
+                        <div class="form-group">
+                            <span class="control-label">Deal Review:</span>
+                            <strong id="deal_review" class="control-label"></strong>
+                        </div>
                         <div class="form-group" id="store_vr">
                             <div class="embed-responsive embed-responsive-4by3" style="display: none;">
                                 <iframe class="embed-responsive-item" src="#" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>

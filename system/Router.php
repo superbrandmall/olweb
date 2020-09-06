@@ -147,23 +147,26 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/ljz' => array(
             'url' => 'ljz.php'
         ),
+        'v2/ly' => array(
+            'url' => 'ly.php'
+        ),
         'v2/bs' => array(
             'url' => 'bs.php'
         ),
         'v2/register' => array(
             'url' => 'register.php'
         ),
-        'v2/register-events' => array(
-            'url' => 'register_events.php'
-        ),
         'v2/events' => array(
             'url' => 'events.php'
         ),
+        'v2/events-ly' => array(
+            'url' => 'events_ly.php'
+        ),
+        'v2/events-bs' => array(
+            'url' => 'events_bs.php'
+        ),
         'v2/event' => array(
             'url' => 'event.php'
-        ),
-        'v2/choose-event' => array(
-            'url' => 'choose_event.php'
         ),
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
@@ -174,23 +177,20 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/shop' => array(
             'url' => 'shop.php'
         ),
-        'v2/leasing-bs' => array(
-            'url' => 'leasing_bs.php'
-        ),
         'v2/ads' => array(
             'url' => 'ads.php'
+        ),
+        'v2/ads-ly' => array(
+            'url' => 'ads_ly.php'
+        ),
+        'v2/ads-bs' => array(
+            'url' => 'ads_bs.php'
         ),
         'v2/ad' => array(
             'url' => 'ad.php'
         ),
-        'v2/advertising' => array(
-            'url' => 'advertising.php'
-        ),
         'v2/advertising-shopping-cart' => array(
             'url' => 'advertising_shopping_cart.php'
-        ),
-        'v2/price' => array(
-            'url' => 'price.php'
         ),
         'v2/negotiation' => array(
             'url' => 'negotiation.php'
@@ -228,8 +228,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/unionpay' => array(
             'url' => 'unionpay.php'
         ),
-        'v2/transfer' => array(
-            'url' => 'transfer.php'
+        'v2/favourites' => array(
+            'url' => 'my_favourites.php'
+        ),
+        'v2/category' => array(
+            'url' => 'category.php'
         )
     );
 
@@ -239,9 +242,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'register_events.php', 'choose_event.php', 'pay_done.php',
-        'leasing.php','shop.php','leasing_bs.php', 'ad.php', 'advertising.php', 'advertising_shopping_cart.php', 'price.php', 'negotiation.php', 'all_orders.php', 
-        'order_to_be_stamped.php','stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php','unionpay.php','transfer.php');
+    $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'pay_done.php',
+        'advertising_shopping_cart.php', 'negotiation.php', 'all_orders.php', 'my_favourites.php', 'order_to_be_stamped.php', 
+        'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php','unionpay.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
         $session = new Session();
@@ -306,6 +309,18 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'portal/2' => array(
             'url' => 'default2.php'
+        )
+    );
+
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'gateway')) !== false) { // Payment
+    $target = array(
+        'gateway/bank' => array(
+            'url' => 'default.php'
         )
     );
 
@@ -380,6 +395,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'my-cart' => array(
             'url' => 'my-cart.php'
+        ),
+        'gateway' => array(
+            'url' => 'gateway/index.php'
         )
     );
 

@@ -24,7 +24,7 @@ function getMyMsg() {
                         $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_text" style="background: #fff; margin-bottom: 10px;"><h4 class="weui-media-box__title">'+v.name+'</h4>\n\
                             <p class="weui-media-box__desc">'+v.operatorContent+'</p>\n\
                             <ul class="weui-media-box__info">\n\
-                                <li class="weui-media-box__info__meta">订单号: '+v.orderCode+'</li>\n\
+                                <li class="weui-media-box__info__meta">商户交易号: '+v.orderCode+'</li>\n\
                             </ul>\n\
                         </div>')
                     });

@@ -34,6 +34,7 @@ function getAllOrdersToStamping() {
                             
                                 var taxAmount = 0; //不含税总额
                                 var amount = 0; //含税总额
+                                
                                 var tax = 0; //税费
                                 $.each(v.contractInfos, function(j,w){
                                     taxAmount = parseFloat((taxAmount + w.depositAmount).toFixed(2));
@@ -46,25 +47,38 @@ function getAllOrdersToStamping() {
                                         amount = parseFloat((amount + w.amount).toFixed(2));
                                     }
                                 })
-
+                                
+                                if(v.remarkSecond == 'leasing'){
+                                     amount = parseFloat((amount + 3000).toFixed(2));
+                                     taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                }
                                 tax = parseFloat((amount - taxAmount).toFixed(2));
                                 var qty = 1;
                             } else if(v.remarkSecond == 'advertising'){
                                 img = v.contractInfos[0].remarkFirst;
+                                var amount = 0; //含税总额
+                                var taxAmount = 0; //不含税总额
+                                var qty = 1;
+                                
                                 $.each(v.contractInfos, function(j,w){
                                     shopName = shopName + '【' + w.unitDesc + '】 ';
+                                    amount = amount + w.amount;
+                                    qty = w.remarkThird;
                                 })
                                 
-                                var amount = v.amount;
-                                var tax = (v.amount*0.06).toFixed(2);
-                                var qty = v.remarkThird;
+                                amount = parseFloat(amount.toFixed(2));
+                                taxAmount = parseFloat((amount/1.06).toFixed(2));
+                                var tax = (amount-taxAmount).toFixed(2);
+                            }
+                            
+                            if($.cookie('flowid') != null && $.cookie('flowid') != '' && $.cookie('oid') != null && $.cookie('oid') != '' && v.id == $.cookie('oid') && v.orderStates === '合同用印中') {
+                                findFlowByEsignFlowId(v.id,v.remarkSecond,v.outTradeNo,v.contractInfos[0].unitCode,shopName);
                             }
                             
                             if(v.orderStates === '合同已生成'){
                                 alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'" style="color: #fa5151;">查看合同并用印</a></a></li>';
                             } else if(v.orderStates === '合同用印中'){
-                                alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToPay("'+v.id+'","'+v.remarkSecond+'","'+v.outTradeNo+'","'+v.contractInfos[0].unitCode+'","'+shopName+'");\' style="color: #fa5151;">用印完成</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.orderStates === '待付款订单'){
                                 alink = '<li class="weui-media-box__info__meta"><a href="/v2/bill?trade='+v.outTradeNo+'" style="color: #fa5151;">查看账单</a></li>\n\
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
@@ -74,7 +88,7 @@ function getAllOrdersToStamping() {
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
-        <div class="weui-media-box__hd" style="width: 100px; height: 80px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
+        <div class="weui-media-box__hd" style="width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
@@ -124,8 +138,13 @@ function getShopInfo(sc){
                 }
                 
                 img = '/' + response.data.firstImage;
-                if(response.data.images.length !== 0){
+                
+                if(response.data.firstImage == null || response.data.firstImage == ''){
                     img = response.data.images[0].image;
+                }
+                
+                if(response.data.unit != null && response.data.subType == '正柜'){
+                    img = "/views/assets/base/img/content/backgrounds/leasing/"+response.data.unit+".jpg";
                 }
             }
         }
@@ -157,7 +176,7 @@ function updateOrderToPay(id,type,trade,unit,shopName){
                 var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
 <div class="weui-mask">\n\
 </div><div class="weui-dialog">\n\
-<div class="weui-dialog__bd">您好，已确认甲乙双方用印完成，请查收账单并付款！</div>\n\
+<div class="weui-dialog__bd">您好，现甲乙双方用印完成，请查收账单并付款！</div>\n\
 <div class="weui-dialog__ft">\n\
 <a href="javascript: location.reload();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
 </div>\n\
@@ -188,4 +207,27 @@ function updateOrderToPay(id,type,trade,unit,shopName){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function findFlowByEsignFlowId(id,remarkSecond,outTradeNo,unitCode,shopName){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/esign/findEsignFlow/?signFlowId="+$.cookie('flowid')+"&mobileNo="+$.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(response.data.esignSignFlow.status == 2) {
+                    updateOrderToPay(id,remarkSecond,outTradeNo,unitCode,shopName);
+                }
+            }
+        }
+    })
 }

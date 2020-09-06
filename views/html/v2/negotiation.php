@@ -2,10 +2,6 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/negotiation-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
-<div class="weui-toptips bg-success topTips"><i class="fa fa-sad" aria-hidden="true"></i> 抱歉让您失望了！但是希望您能告诉我们，这份报价有哪些地方可以改进呢？您的宝贵意见会帮助我们成长哦！</div>
-
 <div class="weui-article" style="padding: 24px 32px 0;">
     <h1>很遗憾未能与您达成合作···</h1>
 </div>

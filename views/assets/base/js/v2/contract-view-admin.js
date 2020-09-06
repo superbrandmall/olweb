@@ -1,7 +1,7 @@
 $(document).ready(function(){
     if(getURLParameter('type') && getURLParameter('type') != ''){
         getOrderByTradeNO();
-        $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/views/html/v2/'+getURLParameter('type')+'.pdf');
+        getPDF();
     }
 });
 
@@ -37,7 +37,7 @@ function getOrderByTradeNO() {
                 <div class="weui-cell__ft"></div>\n\
             </a>');
                     
-                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/'+response.data[0].remarkFirst+'.pdf');
+                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/qa/'+response.data.remarkFirst+'.pdf');
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -47,4 +47,9 @@ function getOrderByTradeNO() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function getPDF() {
+    var file = $.api.baseNew+"/comm-wechatol/api/download/showPdf?fileName%3D"+getURLParameter('trade')+".pdf%26fileType%3D10%26mobileNo%3D"+$.cookie('uid');
+    $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file='+file);
 }

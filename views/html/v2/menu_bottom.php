@@ -19,7 +19,6 @@
     <a href="/v2/info" class="weui-tabbar__item">
         <div style="display: inline-block; position: relative;">
             <span class="weui-tabbar__icon icon icon-99"></span>
-            <span class="weui-badge weui-badge_dot" style="position: absolute; top: 0; right: -6px;"></span>
         </div>
         <p class="weui-tabbar__label" style="margin-top: -5px;">我的</p>
     </a>

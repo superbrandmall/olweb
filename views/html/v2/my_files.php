@@ -2,11 +2,7 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/my-files-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
-<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 您可以在这里上传所需文件哦。</div>
-
-<form id="authentication_form">
+<form id="authentication_form" style="margin-top: 20px;">
     <div class="page__bd">
         <div class="weui-form__text-area">
             <h2 class="weui-form__title">我的文件</h2>
@@ -107,6 +103,14 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
+
+<div id="js_toast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">上传成功</p>
+    </div>
+</div>
 
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

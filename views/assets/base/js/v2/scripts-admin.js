@@ -149,15 +149,6 @@ function showVR(url){
     },100);  
 }
 
-function showVideo(url){
-    showLoading();
-    setTimeout(function () {
-        hideLoading();
-        $("#video_viewer iframe").attr('src',url);
-        $("#video_viewer").show();
-    },100);  
-}
-
 function scrollTo(e){
     $('html, body').animate({
         scrollTop: e.offset().top
@@ -412,7 +403,7 @@ var date_n = new Date();
 
 function formatTime(date_n) {
     var year = date_n.getFullYear()
-    var month = date_n.getMonth() + 1
+    var month = date_n.getMonth() + 2
     var day = date_n.getDate()
     var hour = date_n.getHours()
     var minute = date_n.getMinutes()

@@ -733,7 +733,7 @@ function askPrice(ut,sc,ed,od,ud,a){
     var openDate = od;
     var unitDesc = ud;
     var area = a;
-    var outTradeNo = '201001' + d.getFullYear() +
+    var outTradeNo = '10JT201001' + d.getFullYear() +
                 (month<10 ? '0' : '') + month +
                 (day<10 ? '0' : '') + day + time
                 + '0000' + parseInt(Math.random()*10);

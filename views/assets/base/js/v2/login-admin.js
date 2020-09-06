@@ -119,30 +119,18 @@ $(document).ready(function(){
                                                         beforeSend: function(request) {
                                                         },
                                                         complete: function(){
-                                                            if(response.data.name != null && response.data.email != null){
-                                                                if(getURLParameter('type')){
-                                                                    if(getURLParameter('f') && getURLParameter('type') == 'leasing'){
-                                                                        window.location.href = '/v2/leasing?f='+getURLParameter('f')+'&type=leasing';
-                                                                    } else if(getURLParameter('f') && getURLParameter('type') == 'ads'){
-                                                                        window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
-                                                                    } else if(getURLParameter('id') && getURLParameter('type') == 'events'){
-                                                                        window.location.href = '/v2/event?id='+getURLParameter('id')+'&type=events';
+                                                            if(getURLParameter('id') && getURLParameter('id') != ''){
+                                                                if(getURLParameter('type') && getURLParameter('type') != ''){
+                                                                    if(getURLParameter('type') == 'leasing') {
+                                                                        window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                    } else if(getURLParameter('type') == 'event') {
+                                                                        window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                    } else if(getURLParameter('type') == 'ads') {
+                                                                        window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
                                                                     }
-                                                                } else {
-                                                                    window.location.href = '/v2/info';
                                                                 }
                                                             } else {
-                                                                if(getURLParameter('type')){
-                                                                    if(getURLParameter('type') == 'leasing'){
-                                                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=leasing';
-                                                                    } else if(getURLParameter('type') == 'ads'){
-                                                                        window.location.href = '/v2/register?f='+getURLParameter('f')+'&type=ads';
-                                                                    } else if(getURLParameter('type') == 'events'){
-                                                                        window.location.href = '/v2/register?id='+getURLParameter('id')+'&type=events';
-                                                                    } 
-                                                                } else {
-                                                                    window.location.href = '/v2/register';
-                                                                }
+                                                                window.location.href = '/v2/info';
                                                             }
                                                         }
                                                     });
