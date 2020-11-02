@@ -1,4 +1,4 @@
-<div class="weui-cells__title">签约须知</div>
+<center><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i></div>
@@ -9,7 +9,7 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
-            <p>发布方应及时付清广告服务费及保证金,否则商场方有权拒绝发布广告；</p>
+            <p>发布方应在签约之日起七日内或广告发布起始日前（取其早）向商场方一次性足额支付全部保证金和含税服务费。</p>
         </div>
     </div>
     <p style="margin: 16px 16px 0;">解约类型及违约金预览</p>
@@ -23,13 +23,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td title="解约类型">欠费</td><td title="违约金">100%保证金+100%服务费</td><td title="注意事项">欠费超过7日商场方有权解约</td></tr>
-                    <tr><td title="解约类型">未按时发布广告</td><td title="违约金" rowspan="4">100%保证金+未使用服务费</td><td title="解约类型">未按时发布广告</td></tr>
-                    <tr><td title="解约类型">广告内容违法或侵权</td><td title="解约类型">广告内容违法或侵权</td></tr>
-                    <tr><td title="解约类型">擅自转让广告位</td><td title="解约类型">擅自转让广告位</td></tr>
-                    <tr><td title="解约类型">擅自提前解约</td><td title="解约类型">擅自提前解约</td></tr>
-                
-                <tr><td title="解约类型">到期</td><td title="违约金">0</td><td title="注意事项">不得超期占用</td></tr>
+                <tr><td title="解约类型">到期</td><td title="违约金">0</td><td title="注意事项">不可超期占用</td></tr>
+                <tr><td title="解约类型">发布方严重违约导致合同解除</td><td title="违约金">保证金和未使用的服务费不退还</td><td title="解约类型">详见合同第6.4条</td></tr>
+                <tr><td title="解约类型">发布方擅自停止发布广告</td><td title="违约金">保证金和未使用的服务费不退还</td><td title="解约类型">详见合同第6.5条</td></tr>
             </tbody>
         </table>
     </div>

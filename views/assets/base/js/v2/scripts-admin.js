@@ -42,6 +42,40 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("category") || sessionStorage.getItem("category") == null || sessionStorage.getItem("category") == '') {
         getNewCategories();
     }
+    
+    var collapsed = 0;
+    $(".timeline_btn").click(function(){
+        if(collapsed == 0){
+            $(this).animate({
+                left: '160px'
+            }, 200);
+            $("#timeline").animate({
+                left: '0'
+            }, 200);
+            collapsed = 1;
+            
+            setTimeout(function() {
+                $("#timeline").animate({
+                    left: '-160px'
+                }, 200);
+
+                $(".timeline_btn").animate({
+                    left: '0'
+                }, 200);
+                collapsed = 0;
+            }, 10000)
+        } else {
+            $(this).animate({
+                left: '0'
+            }, 200);
+
+            $("#timeline").animate({
+                    left: '-160px'
+            }, 200);
+            collapsed = 0;
+        }
+    })
+    
 });
 
 function getURLParameter(sParam) {
@@ -329,7 +363,7 @@ function IncrMonths(date_str, months){
           parseInt(parts[1], 10),  // month (starts with 0)
           parseInt(parts[2], 10)       // date
         );
-        dt.setDate(dt.getDate() - 1);
+        dt.setDate(dt.getDate());
         parts[0] = "" + dt.getFullYear();
         parts[1] = "" + (Number(dt.getMonth()) + Number(months));
         if (parts[1].length < 2) {
@@ -378,7 +412,7 @@ function IncrYears(date_str, years){
           parseInt(parts[1], 10) - 1,  // month (starts with 0)
           parseInt(parts[2], 10)       // date
         );
-        dt.setDate(dt.getDate() - 1);
+        dt.setDate(dt.getDate());
         parts[0] = "" + (Number(dt.getFullYear()) + Number(years));
         parts[1] = "" + (dt.getMonth() + 1);
         if (parts[1].length < 2) {
@@ -462,7 +496,9 @@ function saveMsgLog (name,content,trade,type,unit,url){
     })
 }
 
-function sendSMS (name,content){
+function sendSMS (name,cont){
+    var reg = new RegExp('/',"g");
+    var content = cont.replace(reg,'／');
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/sms/sendCommMessage?mobileNo="+$.cookie('uid')+"&reason="+name+"&message="+content,
         type: "POST",

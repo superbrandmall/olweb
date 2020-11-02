@@ -29,7 +29,7 @@ function getAllOrdersToBeConfirmed() {
                                 img = getShopInfo(v.remarkFirst);
                                 qty = 1;
                             } else if(v.remarkSecond == 'advertising'){
-                                img = v.contractInfos[0].remarkFirst;
+                                img = v.s[0].remarkFirst;
                                 qty = v.contractInfos.length;
                             }
                             var alink = '<a class="weui-link" href=\'javascript: deleteOrder("'+v.id+'");\'>关闭订单</a>';

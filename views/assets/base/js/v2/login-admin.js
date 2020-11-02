@@ -31,6 +31,7 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
+            showLoading();
             var userName = $('#login_username').val();
             var key = $('#login_verify').val();
 
@@ -47,7 +48,6 @@ $(document).ready(function(){
                 complete: function(){
                 },
                 success: function (response, status, xhr) {
-                    hideLoading();
                     if(response.code === 'C0') {
                         if(xhr.getResponseHeader("Login") !== null){
                             $.cookie('login', xhr.getResponseHeader("Login"));
@@ -98,7 +98,6 @@ $(document).ready(function(){
                                             complete: function(){},
                                             success: function (response, status, xhr) {
                                                 if(response.code === 'C0') {
-                                                    hideLoading();
                                                     if(xhr.getResponseHeader("Authorization") !== null){
                                                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                                     }
@@ -119,18 +118,29 @@ $(document).ready(function(){
                                                         beforeSend: function(request) {
                                                         },
                                                         complete: function(){
+                                                            hideLoading();
                                                             if(getURLParameter('id') && getURLParameter('id') != ''){
                                                                 if(getURLParameter('type') && getURLParameter('type') != ''){
                                                                     if(getURLParameter('type') == 'leasing') {
                                                                         window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                    } else if(getURLParameter('type') == 'event') {
+                                                                    } else if(getURLParameter('type') == 'events') {
                                                                         window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                    } else if(getURLParameter('type') == 'ads') {
+                                                                    } else if(getURLParameter('type') == 'ad') {
                                                                         window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                    } else {
+                                                                        window.location.href = '/v2/info';
                                                                     }
+                                                                } else {
+                                                                    window.location.href = '/v2/info';
                                                                 }
                                                             } else {
-                                                                window.location.href = '/v2/info';
+                                                                if(getURLParameter('type') == 'ads') {
+                                                                    window.location.href = '/v2/advertising-shopping-cart?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                } if(getURLParameter('type') == 'ad-package') {
+                                                                    window.location.href = '/v2/advertising-package?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                } else {
+                                                                    window.location.href = '/v2/info';
+                                                                }
                                                             }
                                                         }
                                                     });
@@ -199,21 +209,23 @@ function VeryficationCodeLogin() {
     var userName = $('#login_username').val();
     
     if(userName != '') {
+        showLoading();
         $.ajax({
             url: $.api.baseNew+"/comm-wechatol/api/sms/sendIdentifyCode?mobileNo="+userName,
             type: "GET",
             async: false,
             beforeSend: function(request) {
-                showLoading();
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
-            complete: function(){},
+            complete: function(){
+            },
             success: function (response, status, xhr) {
                 hideLoading();
                 setTimeLogin(obj);
             },
             error: function(jqXHR, textStatus, errorThrown) {
+               hideLoading();
                console.log(textStatus, errorThrown);
             }
         });
@@ -236,10 +248,11 @@ function setTimeLogin(obj) {
         });
         obj.html("重新获取(" + countdownLogin + ")");
         countdownLogin--; 
-    } 
-setTimeout(function() { 
-    setTimeLogin(obj); }
-    ,1000); 
+    }
+    
+    setTimeout(function() { 
+        setTimeLogin(obj); 
+    },1000); 
 }
 
 function loginError() {

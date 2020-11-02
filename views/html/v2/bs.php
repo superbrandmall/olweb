@@ -7,55 +7,39 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     background-size: cover;
     background-position: 0 center;
     background-repeat: no-repeat;
+    overflow: hidden;
     animation: animatedBackground 20s linear infinite;
     -moz-animation: animatedBackground 20s linear infinite;
     -o-animation: animatedBackground 20s linear infinite;
 }
- 
-@-webkit-keyframes animatedBackground {
-    0% { background-position: 0 100%; }
-    25% { background-position: 40% 75%; }
-    50% { background-position: 80% 50%; }
-    75% { background-position: 40% 75%; }
-    100% {background-position: 0 100%; }
+
+@keyframes animatedBackground {
+    0% { background-position: 0 75%; }
+    40% { background-position: 40% 50%; }
+    50% { background-position: 40% 50%; }
+    90% {background-position: 91% 75%; }
+    100% {background-position: 91% 75%; }
 }
 @-moz-keyframes animatedBackground {
-    0% { background-position: 0 100%; }
-    25% { background-position: 40% 75%; }
-    50% { background-position: 80% 50%; }
-    75% { background-position: 40% 75%; }
-    100% {background-position: 0 100%; }
+    0% { background-position: 0 75%; }
+    40% { background-position: 40% 50%; }
+    50% { background-position: 40% 50%; }
+    90% {background-position: 91% 75%; }
+    100% {background-position: 91% 75%; }
 }
 @-o-keyframes animatedBackground {
-    0% { background-position: 0 100%; }
-    25% { background-position: 40% 75%; }
-    50% { background-position: 80% 50%; }
-    75% { background-position: 40% 75%; }
-    100% {background-position: 0 100%; }
+    0% { background-position: 0 75%; }
+    40% { background-position: 40% 50%; }
+    50% { background-position: 40% 50%; }
+    90% {background-position: 91% 75%; }
+    100% {background-position: 91% 75%; }
 }
 @keyframes animatedBackground {
-    0% { background-position: 0 100%; }
-    25% { background-position: 40% 75%; }
-    50% { background-position: 80% 50%; }
-    75% { background-position: 40% 75%; }
-    100% {background-position: 0 100%; }
-}
-
-@-webkit-keyframes searchLights {
-    0% { left: -500px; top: 50%; }
-    to { left: 60%; top: 50%; }
-}
-@-o-keyframes searchLights {
-    0% { left: -500px; top: 50%; }
-    to { left: 60%; top: 50%; }
-}
-@-moz-keyframes searchLights {
-    0% { left: -500px; top: 50%; }
-    to { left: 60%; top: 50%; }
-}
-@keyframes searchLights {
-    0% { left: -500px; top: 50%; }
-    to { left: 60%; top: 50%; }
+    0% { background-position: 0 75%; }
+    40% { background-position: 40% 50%; }
+    50% { background-position: 40% 50%; }
+    90% {background-position: 91% 75%; }
+    100% {background-position: 91% 75%; }
 }
 </style>
 
@@ -138,18 +122,31 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                 <div class="weui-cells page-category-content">
                     <div class="content">
                         <div class="weui-flex">
-                            <div class="weui-flex__item">
+                            <div class="weui-flex__item" style="position: relative;">
+                                <img src="/views/assets/base/img/content/backgrounds/transparent_by.png" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 1;"/>
                                 <div id="3F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/bs/Floor/3F.jpg);">
                                     <img src="/views/assets/base/img/content/backgrounds/bs/Floor/03F.png" alt="03F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
                                 </div>
                                 <div id="2F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/bs/Floor/2F.jpg);">
                                     <img src="/views/assets/base/img/content/backgrounds/bs/Floor/02F.png" alt="02F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
                                 </div>
                                 <div id="1F" class="floors floor_plan" style="position: relative; background: url(/views/assets/base/img/content/backgrounds/bs/Floor/1F.jpg);">
                                     <img src="/views/assets/base/img/content/backgrounds/bs/Floor/01F.png" alt="01F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
                                 </div>
                                 <div id="B1F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/bs/Floor/B1F.jpg);">
-                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/B1F.png" alt="B1F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/0B1F.png" alt="B1F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
                                 </div>
                               
                                 <div id="3F_desc" class="floors_desc" style="display: none; margin-top: 10px;">学前教育、兴趣培养，让宝贝全面发展</div>
@@ -159,17 +156,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                             </div>
                             <div style="margin-top: -30px;">
                                 <div class="macaroon">
-                                    <a href="javascript: showFloorImg('3F')">
+                                    <a href="javascript: showFloorImg('3F')" style="margin-top: 45px; margin-bottom: 60px;">
                                         <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/3F.png" alt="3F">
                                     </a>
-                                    <a href="javascript: showFloorSlide('2F')">
+                                    <a href="javascript: showFloorSlide('2F')" style="margin-bottom: 60px;">
                                         <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/2F.png" alt="2F">
                                     </a>
-                                    <a href="javascript: showFloorSlide('1F')" class="active">
+                                    <a href="javascript: showFloorSlide('1F')" class="active" style="margin-bottom: 60px;">
                                         <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/1F.png" alt="1F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">3</span>
                                     </a>
-                                    <a href="javascript: showFloorSlide('B1F')">
+                                    <a href="javascript: showFloorSlide('B1F')" style="margin-bottom: 45px;">
                                         <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/B1.png" alt="B1">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">2</span>
                                     </a>
@@ -182,16 +179,35 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         </li>
         <li>
             <div class="weui-flex js-category">
-                <div class="weui-flex__item"><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐</div>
+                <div class="weui-flex__item"><i class="fa fa-map" aria-hidden="true"></i> 楼层图 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 8px; width: 12px; display: inline-block;"></span> <small>推荐位置可点击</small></div>
                 <i class="icon icon-74"></i>
             </div>
             <div class="page-category js-categoryInner">
                 <div class="weui-cells page-category-content">
                     <div class="content">
-                        <div id="empty_stores" class="weui-grids"></div>
+                        <div class="weui-grids">
+                        <?php 
+                            for($i=3;$i>=0;$i--) {
+                        ?>
+                            <div id="L<?= $i ?>" class="weui-grid__icon" style="width: 100%;">
+                                <img src="/views/assets/base/img/content/floor-plan/baoshan-tm/<?= $i ?>F.png" usemap="#Map_L<?= $i ?>">
+                                <map name="Map_L<?= $i ?>" id="Map_L<?= $i ?>"></map>
+                            </div>
+                            <p class="weui-grid__label" style="font-size: 16px; text-align: center;"><?php $i > 0 ? $level = $i.'F' : $level = 'B1'; echo $level; ?></p>
+                        <?php 
+                            }
+                        ?>
+                        </div>
                     </div>
                 </div>
             </div>
+        </li>
+        <li>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item"><i class="fa fa-star-o" aria-hidden="true"></i> 业态选择 <small>(推荐位置)</small></div>
+                <i class="icon icon-74"></i>
+            </div>
+            <?php include ('categories.php'); ?>
         </li>
         <li>
             <div class="weui-flex js-category" onclick="javascript: showVR();">
@@ -223,15 +239,36 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
             <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" style="top: 0px; right: 10px; position: absolute;">x</a>
             <div style="margin: 10px; color: #565d66;">
                 <strong id="floorNo"></strong>
-                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 推荐位置    
+                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 推荐位置可点击    
                 <a id="floorVRLink" href='javascript:;' style="margin-left: 9px; display: inline-block; color: #F26A85;"><i class="fa fa-street-view" aria-hidden="true"></i> 360°全景</a> 
             </div>
     
-            <img src="#" width="320px" height="160px" id="map">
+            <img src="javascript:;" width="320" height="160" id="map">
+            <map></map>
         </div>
         <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
             
         </div>
+    </div>
+</div>
+
+<div id="recommend_empty_stores" class="weui-gallery" style="display: none; z-index: 2000; background: rgba(0,0,0,0.8); color: #fff;">
+    <h3 style="text-align: center; margin: 20px;"><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> <small>推荐位置可点击</small></h3>
+    <div id="empty_stores" class="weui-grids" style="height: 80vh; overflow: scroll;"></div>
+    <?php 
+        for($i=0;$i<100;$i++) {
+    ?>
+        <div id="J<?= $i ?>" class="weui-grid__icon" style="width: 100%; display: none;">
+            <img src="javascript:;" usemap="#Map_J<?= $i ?>" width="320" height="160">
+            <map name="Map_J<?= $i ?>" id="Map_J<?= $i ?>"></map>
+        </div>
+    <?php 
+        }
+    ?>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#empty_stores").html("");  $("#recommend_empty_stores").hide();'></i>
+        </a>
     </div>
 </div>
 
@@ -245,6 +282,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 </div>
 
 <br><br><br>
+
+<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

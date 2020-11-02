@@ -15,6 +15,12 @@ $(document).ready(function(){
             index: 0
         });
     });
+    
+    $("#job_title").change(function() {
+        if($(this).val() == 'others'){
+            $('#other_jobs').slideDown();
+        }; 
+    }); 
 
     $("#basic").validate({
         rules: {
@@ -35,12 +41,18 @@ $(document).ready(function(){
             contact_name_1: {
                 required: true
             },
+            id_card: {
+                required: true
+            },
             contact_phone_1: {
                 required: true
             },
             contact_email: {
                 required: true,
                 email: true
+            },
+            job_title: {
+                required: true
             }
         },
         messages: {
@@ -61,12 +73,18 @@ $(document).ready(function(){
             contact_name_1: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
+            id_card: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
             contact_phone_1: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             contact_email: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
                 email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            job_title: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
@@ -112,9 +130,6 @@ $(document).ready(function(){
             billing_address: {
                 required: true
             },
-            id_card: {
-                required: true
-            },
             tax_payer_type: {
                 required: true
             },
@@ -136,9 +151,6 @@ $(document).ready(function(){
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             billing_address: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
-            },
-            id_card: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             tax_payer_type: {
@@ -193,9 +205,17 @@ $(document).ready(function(){
         if($('#authName').val() == '' && $('#authName').attr('placeholder') != ''){
             $('#authName').val($('#authName').attr('placeholder'));
         }
+        
+        if($('#authPhone').val() == '' && $('#authPhone').attr('placeholder') != ''){
+            $('#authPhone').val($('#authPhone').attr('placeholder'));
+        }
 
         if($('#authIdentity').val() == '' && $('#authIdentity').attr('placeholder') != ''){
             $('#authIdentity').val($('#authIdentity').attr('placeholder'));
+        }
+        
+        if($('#authEmail').val() == '' && $('#authEmail').attr('placeholder') != ''){
+            $('#authEmail').val($('#authEmail').attr('placeholder'));
         }
     })
     
@@ -210,6 +230,10 @@ $(document).ready(function(){
             },
             authIdentity: {
                 required: true
+            },
+            authEmail: {
+                required: true,
+                email: true
             }
         },
         messages: {
@@ -222,6 +246,10 @@ $(document).ready(function(){
             },
             authIdentity: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            authEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
@@ -266,15 +294,22 @@ function findUserCompanyByMobileNo() {
                     $('#uscc').val(response.data[0].uscc);
                     $('#business_scope').val(response.data[0].businessScope);
                     $('#contact_name_1').val(response.data[0].contactName);
+                    $('#id_card').val(response.data[0].idCard);
                     $('#contact_phone_1').val(response.data[0].contactPhone);
                     $('#contact_email').val(response.data[0].contactEmail);
+                    if(response.data[0].title != '业务拓展负责人' && response.data[0].title != '公司负责人/总经理' && response.data[0].title != '中介') {
+                        $('#job_title').val('others');
+                        $('#other_job').val(response.data[0].title);
+                        $('#other_jobs').css('display','flex');
+                    } else {
+                        $('#job_title').val(response.data[0].title);
+                    }
                     
                     $('#mailing_address').val(response.data[0].mailingAddress);
                     $('#invoice_address').val(response.data[0].invoiceAddress);
                     $('#invoice_phone').val(response.data[0].invoicePhone);
                     $('#street_address').val(response.data[0].streetAddress);
                     $('#billing_address').val(response.data[0].billingAddress);
-                    $('#id_card').val(response.data[0].idCard);
                     if(response.data[0].taxPayerType != '' && response.data[0].taxPayerType != null){
                         $('#tax_payer_type').val(response.data[0].taxPayerType);
                     }
@@ -288,6 +323,7 @@ function findUserCompanyByMobileNo() {
                     $('#authName').val(response.data[0].authName);
                     $('#authPhone').val(response.data[0].authPhone);
                     $('#authIdentity').val(response.data[0].authIdentity);
+                    $('#authEmail').val(response.data[0].authEmail);
                 }
             }
         }
@@ -435,14 +471,24 @@ function CreditError() {
 
 function saveUserCompany() {
     showLoading();
+    var title = '';
+    if($('#job_title').val() == 'others') {
+        title = $('#other_job').val();
+    } else {
+        title = $('#job_title').val();
+    }
+    
+    
     var map = {
         "mobileNo": $.cookie('uid'),
         "name": $('#company_name').val(),
         "uscc": $('#uscc').val(),
         "businessScope": $('#business_scope').val(),
         "contactName": $('#contact_name_1').val(),
+        "idCard": $('#id_card').val(),
         "contactPhone": $('#contact_phone_1').val(),
         "contactEmail": $('#contact_email').val(),
+        "title": title
     }
     
     if($.info.company != "") {
@@ -542,7 +588,6 @@ function saveUserInvoice() {
         "invoicePhone": $('#invoice_phone').val(),
         "streetAddress": $('#street_address').val(),
         "billingAddress": $('#billing_address').val(),
-        "idCard": $('#id_card').val(),
         "taxPayerType": $('#tax_payer_type').val(),
         "invoiceType": $('#invoice_type').val()
     }
@@ -649,7 +694,8 @@ function saveAuthorizationPerson() {
         "mobileNo": $.cookie('uid'),
         "authName": $('#authName').val(),
         "authPhone": $('#authPhone').val(),
-        "authIdentity": $('#authIdentity').val()
+        "authIdentity": $('#authIdentity').val(),
+        "authEmail": $('#authEmail').val()
     }
     
     if($.info.company != "") {
@@ -684,15 +730,19 @@ function saveAuthorizationPerson() {
                         if(getURLParameter('type') && getURLParameter('type') != ''){
                             if(getURLParameter('type') == 'leasing') {
                                 window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
-                            } else if(getURLParameter('type') == 'event') {
+                            } else if(getURLParameter('type') == 'events') {
                                 window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
                             } else if(getURLParameter('type') == 'ads') {
                                 window.location.href = '/v2/advertising-shopping-cart?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
                             } else if(getURLParameter('type') == 'ad') {
                                 window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
+                            } else if(getURLParameter('type') == 'ad-package') {
+                                window.location.href = '/v2/advertising-package?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
                             } else {
                                 window.location.href = '/v2/info';
                             }
+                        } else {
+                            window.location.href = '/v2/info';
                         }
                     }, 2000);
                 });

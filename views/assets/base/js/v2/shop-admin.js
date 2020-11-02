@@ -8,10 +8,14 @@ $.order = {
     unit: "",
     id: "",
     uscc: "",
-    company: ""
+    company: "",
+    businessScope: ""
 };
 
-var unitCodes = ["01FL064","03FL039","03FL121","2F-44B","4F-37","4F-38","6F-24","B1FL022","B1FL015","01FL035","01FL009","01FL015"];
+var unitCodes = ["01FL053","01FL064","02FL011","02FL023","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
+    "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
+    "B1FC011","B1FL022","B1FL010","01FL009","01FL015",
+    "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
 var vr;
 
 var d = new Date();
@@ -23,6 +27,19 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
+    if(!$.cookie('categorySelected') || $.cookie('categorySelected') == '' || $.cookie('categorySelected') == null) {
+        window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+    } else {
+        var storeCode = 'OLMALL180917000003';
+        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+            storeCode = getURLParameter('storeCode');
+        }
+        
+        if(storeCode != $.cookie('categorySelected').split('::')[2]){
+            window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+        }
+    }
+    
     if(getURLParameter('info') && getURLParameter('info') == 'done'){
         showLoading();
     } 
@@ -77,7 +94,11 @@ $(document).ready(function(){
 
     });
     
-    $('.weui-dialog__btn').on('click', function(){
+    $('#cad').click(function(){
+        showDialog();
+    })
+    
+    $('a.weui-dialog__btn').on('click', function(){
         $(this).parents('.js_dialog').fadeOut(200);
     });
     
@@ -85,11 +106,19 @@ $(document).ready(function(){
         $('#floor_plan_viewer').fadeIn(200);
     });
     
+    $('#call').click(function(){
+        if($.cookie('uid') == '' || $.cookie('uid') == null){
+            window.location.href = '/v2/login?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+        } else {
+            showAppointmentDialog();
+        }
+    })
+    
     var datetime = '';
-    $("#call").datetimePicker({
+    $("#appointmentTime").datetimePicker({
         title: '请选择看铺时间',
         years: [2020],
-        monthes: ['09', '10'],
+        monthes: ['10', '11'],
         times: function () {
             return [
                 {
@@ -125,6 +154,9 @@ function getShopInfo(){
             case 'OLMALL180917000003':
                 mall = 'shanghai-sbm';
                 break;
+            case 'OLMALL180917000001':
+                mall = 'xuhui-tm';
+                break;
             default:
                 mall = 'shanghai-sbm';
                 break;
@@ -151,31 +183,36 @@ function getShopInfo(){
                 }
                 
                 if(response.data.code == shopCode){
-                    getShopsMoreInfo(response.data.unit,response.data.area,response.data.shopState,response.data.daysBeforeContractExpire);
-                        
-                    $('#shopName').text(response.data.shopName);
-                    $.cookie('shopName',response.data.shopName);
-                    $('#area').text(response.data.area);
-                    $.cookie('area',response.data.area);
-                    $.cookie('shopNo',response.data.unit);
+                    var index = $.inArray(response.data.unit, unitCodes);
+                    if(index >= 0){
+                        getShopsMoreInfo(response.data.unit);
 
-                    $('#negotiate').click(function(){
-                        window.location.href = '/v2/negotiation?code='+getURLParameter('id')+'&unit='+response.data.unit+'&building='+response.data.buildingCode+'&mall='+response.data.mallCode;
-                    });
-                    
-                    var floorName;
-                    $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
-                        if(v.floorCode == response.data.floorCode) {
-                            floorName = v.description;
-                            return false;
-                        }
-                    });
-                    
-                    $('#floor_plan').on('click', function(){
-                        if(response.data.floorCode != null) {
-                            GetMap(floorName,mall,response.data.mallCode);
-                        }
-                    });
+                        $('#shopName').text(response.data.shopName);
+                        $.cookie('shopName',response.data.shopName);
+                        $('#area').text(response.data.area);
+                        $.cookie('area',response.data.area);
+                        $.cookie('shopNo',response.data.unit);
+
+                        $('#negotiate').click(function(){
+                            window.location.href = '/v2/negotiation?code='+getURLParameter('id')+'&unit='+response.data.unit+'&building='+response.data.buildingCode+'&mall='+response.data.mallCode+'&name=0';
+                        });
+
+                        var floorName;
+                        $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
+                            if(v.floorCode == response.data.floorCode) {
+                                floorName = v.description;
+                                return false;
+                            }
+                        });
+
+                        $('#floor_plan').on('click', function(){
+                            if(response.data.floorCode != null) {
+                                GetMap(floorName,mall,response.data.mallCode);
+                            }
+                        });
+                    } else {
+                        $('body').remove();
+                    }
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -187,14 +224,14 @@ function getShopInfo(){
     });
 }
 
-function getShopsMoreInfo(u,ss,dbce) {
+function getShopsMoreInfo(u) {
     var storeCode = 'OLMALL180917000003';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         storeCode = getURLParameter('storeCode');
     }
     
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode="+storeCode,
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndUnitCodeAndCategoryCode?storeCode="+storeCode+"&unitCode="+u+"&categoryCode="+$.cookie('categorySelected').split('::')[0],
         type: "GET",
         async: false,
         dataType: "json",
@@ -213,111 +250,135 @@ function getShopsMoreInfo(u,ss,dbce) {
                 var openDate = '';
                 var rentAmount = '';
                 var taxAmount = '';
+                var amount = '';
                 var deductionTaxAmount = '';
+                var propertyMaintenanceRentAmount = '';
+                var taxPropertyMaintenance = '';
                 var propertyMaintenance = '';
                 var promotionRate = '';
 
-                $.each(response.data, function(i,v){
-                    if(u == v.unitCode){
-                        $('#businessFormatChs').text(v.businessFormatChs);
-                        $('#desc').text(v.desc);
-                        $('#freeOfGroundRent').text(v.freeOfGroundRent);
-                        $('#deposit').text(v.deposit);
-                        $.cookie('deposit',v.deposit);
-                        $.cookie('contractLength',v.contractLength);
-                        
-                        var totalAmount = 0;
-                        for(var x = 1; x <= v.contractLength; x++){
-                            $.each(v.shopRentWxs, function(k,y){
-                                
-                                if(y.code == x && y.termTypeName == "固定租金"){
-                                    rentAmount = y.rentAmount;
-                                    $.cookie('rentAmount_'+x, y.rentAmount);
-                                    taxAmount = y.taxAmount;
-                                    $.cookie('taxAmount_'+x, y.taxAmount);
-                                    $.cookie('amount_'+x, y.amount);
-                                    $.cookie('termStartDate_'+x, y.startDate);
-                                    $.cookie('termEndDate_'+x, y.endDate);
-                                }
-                                if(y.code == x && y.termTypeName == "提成扣率"){
-                                    deductionTaxAmount = y.taxAmount;
-                                    $.cookie('taxDeductionTaxAmount_'+x, y.taxAmount);
-                                    $.cookie('deductionTaxAmount_'+x, y.amount);
-                                }
-                                if(y.code == x && y.termTypeName == "物业管理费"){
-                                    propertyMaintenance = y.taxAmount;
-                                    $.cookie('taxPropertyMaintenance_'+x, y.taxAmount);
-                                    $.cookie('propertyMaintenance_'+x, y.amount);
-                                }
-                                if(y.code == x && y.termTypeName == "推广费"){
-                                    promotionRate = y.taxAmount;
-                                    $.cookie('taxPromotionRate_'+x, y.taxAmount);
-                                    $.cookie('promotionRate_'+x, y.amount);
-                                }
-                            })
-                            
-                            totalAmount = v.deposit;
-                            
-                            $('#shopRent').append('<tr>\n\
-                            <td>第'+x+'年</td>\n\
-                            <td>¥'+rentAmount+'/m²</td>\n\
-                            <td>¥'+taxAmount+'</td>\n\
-                            <td>'+deductionTaxAmount+'%</td></tr>');
-                        }
-                        
-                        totalAmount = (totalAmount + parseFloat(($.cookie('amount_1'))) + parseFloat($.cookie('propertyMaintenance_1')) + 3000).toFixed(2);
+                if(u == response.data.unitCode){
+                    $('#desc').text(response.data.descript);
+                    $('#businessFormatChs').text($.cookie('categorySelected').split('::')[1]);
+                    $('#freeOfGroundRent').text(response.data.freeOfGroundRent);
+                    $.cookie('contractLength',response.data.contractLength);
 
-                        $.cookie('totalAmount', totalAmount);
-                        
-                        $('#rentAmount').text($.cookie('rentAmount_1'));
-                        $('#propertyMaintenance').text(propertyMaintenance);
-                        $('#promotionRate').text(promotionRate);
-                        
-                        if(ss === 1 || ss === 3) { // 空铺
-                            settleDate = IncrDates(date,15);
-                        } else { // 非空铺
-                            settleDate = IncrDates(date,(dbce+1));
-                        }
-
-                        if(v.freeOfGroundRent != ''){
-                            openDate = IncrDates(settleDate,parseInt(v.freeOfGroundRent)) || '';
-                        }
-                        
-                        $('#settleDate').text(settleDate);
-                        $.cookie('settleDate',settleDate);
-                        $('#openDate').text(openDate);
-                        $.cookie('openDate',openDate);
-                        
-                        if(v.remarkFirst != null){
-                            $('#vr').attr('src',v.remarkFirst);
-                        }
-                        
-                        $('#engineering_qa').click(function(){
-                            //showVideo("https://www.xinpianchang.com/a10824429");
-                        })
-                        
-                        var index = $.inArray(getURLParameter('id'), $.favorites);
-                        if(index >= 0){
-                            $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
-                        }
-                        
-                        $('#favourite').click(function(){
-                            if(index >= 0){
-                                removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],v.buildingCode,getURLParameter('id'),v.storeCode,u);
-                            } else {
-                                addToFavorite(v.buildingCode,getURLParameter('id'),v.storeCode,u);
+                    var totalAmount = 0;
+                    for(var x = 1; x <= response.data.contractLength; x++){
+                        $.each(response.data.shopRentWxs, function(k,y){
+                            if(y.code == x && y.termTypeName == "固定租金"){
+                                rentAmount = y.rentAmount;
+                                $.cookie('rentAmount_'+x, y.rentAmount);
+                                taxAmount = y.taxAmount;
+                                $.cookie('taxAmount_'+x, y.taxAmount);
+                                amount = y.amount;
+                                $.cookie('amount_'+x, y.amount);
+                            }
+                            if(y.code == x && y.termTypeName == "提成扣率"){
+                                deductionTaxAmount = y.taxAmount;
+                                $.cookie('taxDeductionTaxAmount_'+x, y.taxAmount);
+                                $.cookie('deductionTaxAmount_'+x, y.amount);
+                            }
+                            if(y.code == x && y.termTypeName == "物业管理费"){
+                                propertyMaintenanceRentAmount = y.rentAmount;
+                                $.cookie('propertyMaintenanceRentAmount_'+x, y.rentAmount);
+                                taxPropertyMaintenance = y.taxAmount;
+                                $.cookie('taxPropertyMaintenance_'+x, y.taxAmount);
+                                propertyMaintenance = y.amount;
+                                $.cookie('propertyMaintenance_'+x, y.amount);
+                            }
+                            if(y.code == x && y.termTypeName == "推广费"){
+                                promotionRate = y.taxAmount;
+                                $.cookie('taxPromotionRate_'+x, y.taxAmount);
+                                $.cookie('promotionRate_'+x, y.amount);
+                            }
+                            if(y.termTypeName == "租赁保证金"){
+                                $('#deposit').text(numberWithCommas(y.amount));
+                                $.cookie('deposit',y.amount);
+                                totalAmount = y.amount;
                             }
                         })
-                        
-                        if(getURLParameter('info') && getURLParameter('info') == 'done'){
-                            findUserCompanyByMobileNo(u);
-                        }
-                        
-                        $('#confirm_price').click(function(){
-                            window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
-                        });
+
+                        $('#shopRent').append('<tr>\n\
+                        <td style="text-align: center;">第'+x+'年</td>\n\
+                        <td style="text-align: center;">¥'+rentAmount+'</td>\n\
+                        <td style="text-align: center;">'+deductionTaxAmount+'%</td>\n\
+                        <td style="text-align: center;">¥'+numberWithCommas(taxAmount)+'</td>\n\
+                        <td style="text-align: center;">¥'+numberWithCommas(amount)+'</td></tr>');
                     }
-                })
+
+                    totalAmount = (totalAmount + parseFloat(($.cookie('amount_1'))) + parseFloat($.cookie('propertyMaintenance_1')) + 3000).toFixed(2);
+                    $('#totalAmount').text(numberWithCommas(totalAmount));
+                    $.cookie('totalAmount', totalAmount);
+                    
+                    $('#rentAmount').text($.cookie('rentAmount_1'));
+                    $('#propertyMaintenance').html('<tr>\n\
+                        <td style="text-align: center;">¥'+propertyMaintenanceRentAmount+'</td>\n\
+                        <td style="text-align: center;">¥'+numberWithCommas(taxPropertyMaintenance)+'</td>\n\
+                        <td style="text-align: center;">¥'+numberWithCommas(propertyMaintenance)+'</td></tr>');
+                    $('#promotionRate').text(promotionRate);
+                    if(!$.cookie('settleDate') || $.cookie('settleDate') == '' || $.cookie('settleDate') == null) {
+                        $('#settleDate').text(IncrDates(date,7));
+                        $.cookie('settleDate',IncrDates(date,7));
+                    } else {
+                        $('#settleDate').text($.cookie('settleDate'));
+                    }
+
+                    $('#settleDate').on('click', function () {
+                        weui.datePicker({
+                            start: IncrDates(date,7),
+                            end: IncrDates(date,30),
+                            onConfirm: function (result) {
+                                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
+                                var dates = result[2].value < 10 ? '0'+result[2].value : result[2].value;
+                                settleDate = result[0].value+'-'+month+'-'+dates;
+                                $('#settleDate').text(settleDate);
+                                $.cookie('settleDate',settleDate);
+                                openDate = IncrDates(settleDate,parseInt(response.data.freeOfGroundRent));
+                                $('#openDate').text(openDate);
+                                $.cookie('openDate',openDate);
+                            },
+                            title: '选择进场日期'
+                        });
+                    });
+
+                    if(response.data.freeOfGroundRent != ''){
+                        openDate = IncrDates($.cookie('settleDate'),parseInt(response.data.freeOfGroundRent)) || '';
+                    }
+
+                    $('#openDate').text(openDate);
+                    $.cookie('openDate',openDate);
+
+                    if(response.data.remarkFirst != null){
+                        $('#vr').attr('src',response.data.remarkFirst);
+                    }
+
+                    $('#engineering_qa').click(function(){
+                        //showVideo("https://www.xinpianchang.com/a10824429");
+                    })
+
+                    var index = $.inArray(getURLParameter('id'), $.favorites);
+                    if(index >= 0){
+                        $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
+                    }
+
+                    $('#favourite').click(function(){
+                        if(index >= 0){
+                            removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
+                        } else {
+                            addToFavorite(response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
+                        }
+                    })
+
+                    if(getURLParameter('info') && getURLParameter('info') == 'done'){
+                        findUserCompanyByMobileNo(u);
+                    }
+
+                    $('#confirm_price').click(function(){
+                        window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+                    });
+                }
+                
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -353,6 +414,7 @@ function findUserCompanyByMobileNo(u){
                     if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
                         $.order.uscc = response.data[0].uscc;
                         $.order.company = response.data[0].name;
+                        $.order.businessScope = response.data[0].businessScope;
                         saveOrder(u);
                     }
                 } else {
@@ -377,6 +439,9 @@ function saveOrder(ut){
                 break;
             case 'OLMALL180917000003':
                 orgCode = '100001';
+                break;
+            case 'OLMALL180917000001':
+                orgCode = '204001';
                 break;
             default:
                 orgCode = '100001';
@@ -407,19 +472,21 @@ function saveOrder(ut){
 
     var map = {
         "amount": 100000,
-        "appid": "test",
+        "appid": "",
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": unit,
         "contractInfos": [
           {
             "amount": $.cookie('totalAmount'),
-            "bizScope": "testss",
+            "bizScope": $.order.businessScope,
             "breachAmount": "",
+            "categoryCode": $.cookie('categorySelected').split('::')[0],
+            "categoryName": $.cookie('categorySelected').split('::')[1],
             "code": unit,
             "depositAmount": $.cookie('deposit'),
             "electricBillFlag": "1",
-            "endDate": endDate,
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),$.cookie('contractLength'))),
             "enterDate": $.cookie('settleDate'),
             "isCleaning": "0",
             "isSecurity": "0",
@@ -440,14 +507,15 @@ function saveOrder(ut){
             "serviceDepositAmount": 0, // 公共事业费押金
             "size": "", //广告尺寸规格
             "spec": "",
-            "startDate": $.cookie('openDate'),
+            "startDate": $.cookie('settleDate'),
             "unitCode": unit,
             "unitDesc": $.cookie('shopName'),
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "userId": "10000101",
+            "userId": $.cookie('uid'),
             "vipFlag": "1",
             "wxCardFlag": "1",
-            "area": $.cookie('area') //广告默认传1
+            "area": $.cookie('area'), //广告默认传1
+            "shopCode": getURLParameter('id')
           }
         ],
         "contractNo": "",
@@ -455,65 +523,86 @@ function saveOrder(ut){
           {
             "amount": $.cookie('amount_1'),
             "code": "1",
-            "endDate": $.cookie('termEndDate_1'),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": $.cookie('rentAmount_1'),
-            "startDate": $.cookie('termStartDate_1'),
+            "startDate": $.cookie('openDate'),
             "taxAmount": $.cookie('taxAmount_1'),
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": $.cookie('area') 
+            "area": $.cookie('area'),
+            "shopCode": getURLParameter('id')
           },
           {
             "amount": $.cookie('propertyMaintenance_1'),
             "code": "1",
-            "endDate":  $.cookie('termEndDate_1'),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": "",
-            "startDate": $.cookie('termStartDate_1'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1'),
+            "startDate": $.cookie('openDate'),
             "taxAmount":  $.cookie('taxPropertyMaintenance_1'),
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "area":  $.cookie('area')
+            "area":  $.cookie('area'),
+            "shopCode": getURLParameter('id')
+          },
+          {
+            "amount": $.cookie('propertyMaintenance_1'),
+            "code": "1",
+            "endDate": DecrDate($.cookie('openDate')),
+            "name": "",
+            "orgCode": orgCode,
+            "outTradeNo": outTradeNo,
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1'),
+            "startDate": $.cookie('settleDate'),
+            "taxAmount":  $.cookie('taxPropertyMaintenance_1'),
+            "termType": "B031",
+            "termTypeName": "装修期物业管理费",
+            "unitCode": unit,
+            "unitId": "sfsdfsfasfsfasdfasdf",
+            "area":  $.cookie('area'),
+            "shopCode": getURLParameter('id')
           },
           {
             "amount": $.cookie('promotionRate_1'),
             "code": "1",
-            "endDate": $.cookie('termEndDate_1'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),$.cookie('contractLength'))),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "startDate": $.cookie('termStartDate_1'),
+            "startDate": $.cookie('openDate'),
             "taxAmount": $.cookie('taxPromotionRate_1'),
             "termType": "G021",
             "termTypeName": "推广费",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": $.cookie('area')
+            "area": $.cookie('area'),
+            "shopCode": getURLParameter('id')
           },
           {
             "amount": $.cookie('deductionTaxAmount_1'),
             "code": "1",
-            "endDate": $.cookie('termEndDate_1'),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo, //订单号需动态调用
             "rentAmount": "",
-            "startDate": $.cookie('termStartDate_1'),
+            "startDate": $.cookie('openDate'),
             "taxAmount":  $.cookie('taxDeductionTaxAmount_1'),
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": $.cookie('area')
+            "area": $.cookie('area'),
+            "shopCode": getURLParameter('id')
           }
         ],
         "contractType": "R1",//R1租赁 R4广告 R5场地
@@ -523,11 +612,11 @@ function saveOrder(ut){
         "orgCode": orgCode,
         "outTradeNo": outTradeNo,
         "payStates": "未支付", //支付状态
-        "tenantId": "海鼎公司uuid",
+        "tenantId": "",
         "tenantName": $.order.company,
-        "tenantNo": "海鼎公司编号",
+        "tenantNo": "",
         "tenantOrg": $.order.uscc, //uscc
-        "userId": "sfsdfsfasfsfasdfasdf",
+        "userId": $.cookie('uid'),
         "remarkFirst": getURLParameter('id'),
         "remarkSecond": 'leasing'
     };
@@ -536,152 +625,122 @@ function saveOrder(ut){
         var secondYearPrice = {
             "amount": $.cookie('amount_2'),
             "code": "2",
-            "endDate": $.cookie('termEndDate_2'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": $.cookie('rentAmount_2'),
-            "startDate": $.cookie('termStartDate_2'),
+            "startDate": IncrYear($.cookie('settleDate')),
             "taxAmount": $.cookie('taxAmount_2'),
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
 
         var secondYearMaintenance = {
             "amount": $.cookie('propertyMaintenance_2'),
             "code": "2",
-            "endDate": $.cookie('termEndDate_2'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": "",
-            "startDate": $.cookie('termStartDate_2'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_2'),
+            "startDate": IncrYear($.cookie('settleDate')),
             "taxAmount": $.cookie('taxPropertyMaintenance_2'),
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
-        }
-
-        var secondYearPromotion = {
-            "amount": $.cookie('promotionRate_2'),
-            "code": "2",
-            "endDate": $.cookie('termEndDate_2'),
-            "name": "",
-            "orgCode": orgCode,
-            "outTradeNo": outTradeNo,
-            "rentAmount": "",
-            "startDate": $.cookie('termStartDate_2'),
-            "taxAmount": $.cookie('taxPromotionRate_2'),
-            "termType": "G021",
-            "termTypeName": "推广费",
-            "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
 
         var secondYearRate = {
             "amount": $.cookie('deductionTaxAmount_2'),
             "code": "2",
-            "endDate": $.cookie('termEndDate_2'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": "",
-            "startDate": $.cookie('termStartDate_2'),
+            "startDate": IncrYear($.cookie('settleDate')),
             "taxAmount": $.cookie('taxDeductionTaxAmount_2'),
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
         
-        map.contractTermInfos.push(secondYearPrice,secondYearMaintenance,secondYearPromotion,secondYearRate);
+        map.contractTermInfos.push(secondYearPrice,secondYearMaintenance,secondYearRate);
     }
     
     if($.cookie('contractLength') > 2) {
         var thirdYearPrice = {
             "amount": $.cookie('amount_3'),
             "code": "3",
-            "endDate": $.cookie('termEndDate_3'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": $.cookie('rentAmount_3'),
-            "startDate": $.cookie('termStartDate_3'),
+            "startDate": IncrYears($.cookie('settleDate'),2),
             "taxAmount": $.cookie('taxAmount_3'),
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
 
         var thirdYearMaintenance = {
             "amount": $.cookie('propertyMaintenance_3'),
             "code": "3",
-            "endDate": $.cookie('termEndDate_32'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": "",
-            "startDate": $.cookie('termStartDate_3'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_3'),
+            "startDate": IncrYears($.cookie('settleDate'),2),
             "taxAmount": $.cookie('taxPropertyMaintenance_3'),
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
-        }
-
-        var thirdYearPromotion = {
-            "amount": $.cookie('promotionRate_3'),
-            "code": "3",
-            "endDate": $.cookie('termEndDate_3'),
-            "name": "",
-            "orgCode": orgCode,
-            "outTradeNo": outTradeNo,
-            "rentAmount": "",
-            "startDate": $.cookie('termStartDate_3'),
-            "taxAmount": $.cookie('taxPromotionRate_3'),
-            "termType": "G021",
-            "termTypeName": "推广费",
-            "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
 
         var thirdYearRate = {
             "amount": $.cookie('deductionTaxAmount_3'),
             "code": "3",
-            "endDate": $.cookie('termEndDate_3'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": "",
-            "startDate": $.cookie('termStartDate_3'),
+            "startDate": IncrYears($.cookie('settleDate'),2),
             "taxAmount": $.cookie('taxDeductionTaxAmount_3'),
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "sfsdfsfasfsfasdfasdf",
             "area": $.cookie('area'),
-            "id": 0
+            "id": 0,
+            "shopCode": getURLParameter('id')
         }
 
-        map.contractTermInfos.push(thirdYearPrice,thirdYearMaintenance,thirdYearPromotion,thirdYearRate);
+        map.contractTermInfos.push(thirdYearPrice,thirdYearMaintenance,thirdYearRate);
     }
 
     $.ajax({
@@ -717,20 +776,23 @@ function saveOrder(ut){
 }
 
 function getOrderByTradeNO(outTradeNo,unit) {
-    var mallName = '陆家嘴正大广场';
+    var mallName = '上海陆家嘴正大广场';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         switch (getURLParameter('storeCode')) {
             case 'OLMALL190117000001':
-                mallName = '洛阳国际广场';
+                mallName = '河南洛阳正大广场';
                 break;
             case 'OLMALL180917000002':
-                mallName = '宝山正大乐城';
+                mallName = '上海宝山正大乐城';
                 break;
             case 'OLMALL180917000003':
-                mallName = '陆家嘴正大广场';
+                mallName = '上海陆家嘴正大广场';
+                break;
+            case 'OLMALL180917000001':
+                mallName = '上海徐汇正大乐城';
                 break;
             default:
-                mallName = '陆家嘴正大广场';
+                mallName = '上海陆家嘴正大广场';
                 break;
         }
     }
@@ -749,7 +811,7 @@ function getOrderByTradeNO(outTradeNo,unit) {
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
-                generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺单元【'+$.cookie('shopNo')+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -803,7 +865,7 @@ function getMyFavorites(){
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
                     if(v.remarkSecond == 1){
-                        $.favorites.push(v.remarkFirst);
+                        $.favorites.push(v.shopCode);
                         $.favoritesId.push(v.id);                        
                     }
                 });
@@ -825,7 +887,7 @@ function addToFavorite(bc,c,sc,uc){
         "mobileNo": $.cookie('uid'),
         "name": "",
         "remarkFifth": "",
-        "remarkFirst": c,
+        "shopCode": c,
         "remarkFourth": "",
         "remarkSecond": 1,
         "remarkThird": "",
@@ -883,7 +945,7 @@ function removeFavorite(id,bc,c,sc,uc){
         "mobileNo": $.cookie('uid'),
         "name": "",
         "remarkFifth": "",
-        "remarkFirst": c,
+        "shopCode": c,
         "remarkFourth": "",
         "remarkSecond": 0,
         "remarkThird": "",
@@ -1002,12 +1064,13 @@ function getCoords(mc,fn) {
                         if(index >= 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-logo="'+v.logo+'"  href="shop?id='+v.code+'&type=leasing" shape="poly" coords="'+v.coords+'" />');
                         } else {
-                            $('map').append('<area data-logo="'+v.logo+'" name="'+v.brandName+'" shape="poly" coords="'+v.coords+'" />');
+                            $('map').append('<area data-key="'+v.unit+'" data-logo="'+v.logo+'" data-area="'+v.area+'" name="'+v.brandName+'" shape="poly" coords="'+v.coords+'" />');
                         }
                     }
                 });
                 
                 drawShops();
+                $('#floor_plan_viewer').fadeIn(200);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -1022,23 +1085,15 @@ function drawShops(){
     var areas = $.map($('area'),function(el) {
         if(getURLParameter('id') === $(el).attr('alt')){
             return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: "本位置",
-                    fillColor: 'F26A85',
-                    fillOpacity: 1,
-                    stroke: true,
-                    strokeColor: 'DC143C',
-                    strokeWidth: 1,
-                    selected: true
-                };
-        } else {
-            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd'
-                };
-            }
+                key: $(el).attr('data-key'),
+                toolTip: "本位置",
+                fillColor: 'F26A85',
+                fillOpacity: 1,
+                stroke: true,
+                strokeColor: 'DC143C',
+                strokeWidth: 1,
+                selected: true
+            };
         }
     });
     
@@ -1071,9 +1126,10 @@ function drawShops(){
             });
         }
     });
-
-    addLogoLayer();
-    $('#floor_plan_viewer').fadeIn(200);
+    
+    setTimeout(function () {
+        addLogoLayer();
+    },1000);
 }
 
 function showFloorVR(vr){
@@ -1119,6 +1175,48 @@ function addLogoLayer(){
                 '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
             );
             resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+        } else if($(this).attr('data-area') > 200 && $(this).attr('name') != null && $(this).attr('name') != 'null' && $(this).attr('name') != ''){
+            var pos;
+            pos = $(this).attr('coords').split(',');
+            var x = 0;
+            var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), width, height;
+            while(x < pos.length){
+                if(parseInt(pos[x]) < posLeftMin){
+                    posLeftMin = parseInt(pos[x]);
+                } 
+
+                if(parseInt(pos[x]) > posLeftMax){
+                    posLeftMax = parseInt(pos[x]);
+                }
+                x = x + 2;
+            }
+            width = parseInt(posLeftMax - posLeftMin - 10); 
+
+            var y = 1;
+            var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
+            while(y < pos.length){
+                if(parseInt(pos[y]) < posTopMin){
+                    posTopMin = parseInt(pos[y]);
+                }
+                if(parseInt(pos[y]) > posTopMax){
+                    posTopMax = parseInt(pos[y]);
+                }
+                y = y + 2;
+            }
+
+            height = parseInt(posTopMax - posTopMin - 10);
+
+            var brand = $(this).attr('name');
+            if(brand.length > 10){
+                brand = brand.substring(0,10) + "...";
+            }
+
+            var spanid = 'span_'+$(this).attr('data-key');
+            $('#mapster_wrap_0').append(
+                '<span id="'+spanid+'" style="position:absolute;line-height:1;text-align:center;">'+brand+'</span>'
+            );
+
+            resetFontSize(spanid,width,height,4,12,posLeftMin,posTopMin);
         }
     })
 }
@@ -1128,114 +1226,251 @@ function resetLogoSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin
     for (var i = minSize; i < maxSize; i++) {
         if ($(divLogo).width() > maxWidth || $(divLogo).height() > maxHeight) {
             $(divLogo).css({
+                'width': 'auto',
+                'height': 'auto',
                 'max-width': i + 'px',
                 'max-height': maxHeight,
-                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
-                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'  
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 18 + 25) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 15 + 20) + 'px' 
             }); 
                 break;
         } else {
             $(divLogo).css({
+                'width': 'auto',
+                'height': 'auto',
                 'max-height': i + 'px',
                 'max-width': maxWidth,
-                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
-                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 18 + 25) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 15 + 20) + 'px' 
             });
         }
     }
-}
+};
 
-function saveAppointment(datetime) {
-    if($.cookie('uid') == '' || $.cookie('uid') == null){
-        window.location.href = '/v2/login?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-    } else {
-        var date = datetime.substring(0,8);
-        var hour = datetime.substring(8,10);
+function resetFontSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
+    var divWord = $('#'+spanid);
+    divWord.css('font-size', minSize + "px");
+    for (var i = minSize; i < maxSize; i++) {
+        if ($(divWord).width() > maxWidth  || $(divWord).height() > maxHeight) {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 5) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 5) + 'px'    
+            }); 
+                break;
+        } else {
+            $(divWord).css({
+                'font-size': i + 'px',
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2) + 'px'
+            });
+        }
+    }
+};
 
-        var orgCode = '100001';
-        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-            switch (getURLParameter('storeCode')) {
-                case 'OLMALL190117000001':
-                    orgCode = '301001';
+function saveAppointment() {
+    var dt = $('#appointmentTime2').val();
+    var year = dt.substring(0,4);
+    var month = dt.substring(4,6);
+    var date = dt.substring(6,8);
+    var hour = dt.substring(8,10);
+
+    var orgCode = '100001';
+    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            case 'OLMALL180917000001':
+                orgCode = '204001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
+    }
+
+    var map = {
+        "appointmentDate": year+'-'+month+'-'+date,
+        "appointmentHour": hour+'时',
+        "mobileNo": $.cookie('uid'),
+        "mail": $('#appointmentEmail').val(),
+        "orgCode": orgCode,
+        "state": 1,
+        "status": "已预约",
+        "unitCode": $.cookie('shopNo'),
+        "unitDesc": $.cookie('shopName'),
+        "name": $('#appointmentName').val(),
+        "tenantName": $('#appointmentCompany').val()
+    }
+
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/appointment/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){ 
+        },
+        success: function (response, status, xhr) {
+            var mallName;
+            switch (response.data.orgCode) {
+                case '301001':
+                    mallName = '河南洛阳国际广场';
                     break;
-                case 'OLMALL180917000002':
-                    orgCode = '201001';
+                case '201001':
+                    mallName = '上海宝山正大乐城';
                     break;
-                case 'OLMALL180917000003':
-                    orgCode = '100001';
+                case '100001':
+                    mallName = '上海陆家嘴正大广场';
+                    break;
+                case '204001':
+                    mallName = '上海徐汇正大乐城';
                     break;
                 default:
-                    orgCode = '100001';
+                    mallName = '上海陆家嘴正大广场';
                     break;
             }
-        }
-    
-        var map = {
-            "appointmentDate": date,
-            "appointmentHour": hour,
-            "mobileNo": $.cookie('uid'),
-            "name": "",
-            "orgCode": orgCode,
-            "state": 1,
-            "status": "已预约",
-            "unitCode": $.cookie('shopNo'),
-            "unitDesc": $.cookie('shopName')
-        }
 
-        $.ajax({
-            url: $.api.baseNew+"/comm-wechatol/api/appointment/saveOrUpdate",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                if(response.code === 'C0') {
-                    hideLoading();
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    
-                    var mallName
-                    switch (response.data.orgCode) {
-                        case '301001':
-                            mallName = '洛阳国际广场';
-                            break;
-                        case '201001':
-                            mallName = '宝山正大乐城';
-                            break;
-                        case '100001':
-                            mallName = '陆家嘴正大广场';
-                            break;
-                        default:
-                            mallName = '陆家嘴正大广场';
-                            break;
-                    }
-                    
-                    sendSMS('预约看铺','您已成功预约【'+mallName+'】【'+response.data.unitDesc+'】线下看铺，时间: '+response.data.appointmentDate);
-                    hideLoading();
-                    $(function(){
-                        var $toast = $('#js_toast_3');
-                        $toast.fadeIn(100);
-                        setTimeout(function () {
-                            $toast.fadeOut(100);
-                        }, 2000);
-                    });
-                } else {
-                    interpretBusinessCode(response.customerMessage);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-               console.log(textStatus, errorThrown);
+            hideLoading();
+            $(function(){
+                var $toast = $('#js_toast_3');
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    $toast.fadeOut(100);
+                }, 2000);
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function showDialog(){
+    var authDialog = $('#cadDialog');
+    authDialog.fadeIn(200);
+    
+    $("#cadDialogForm").validate({
+        onkeyup: false,
+        rules: {
+            cadEmail: {
+                required: true,
+                email: true
             }
-        });
-    }
+        },
+        messages: {
+            cadEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写收件人邮箱',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>邮箱格式不对，请正确填写'
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            hideDialog();
+            showLoading();
+            sendMail($('#cadEmail').val(),$('#cad').attr('data-file'));
+        }
+    })
+}
+
+function showAppointmentDialog(){
+    var appointmentDialog = $('#appointmentDialog');
+    appointmentDialog.fadeIn(200);
+    
+    $("#appointmentDialogForm").validate({
+        onkeyup: false,
+        rules: {
+            appointmentCompany: {
+                required: true
+            },
+            appointmentName: {
+                required: true
+            },
+            appointmentEmail: {
+                required: true,
+                email: true
+            },
+            appointmentTime: {
+                required: true
+            }
+        },
+        messages: {
+            appointmentCompany: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写联系人公司名称'
+            },
+            appointmentName: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写看铺联系人称呼'
+            },
+            appointmentEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写看铺联系人邮箱',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>邮箱格式不对，请正确填写'
+            },
+            appointmentTime: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请选择看铺时间'
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            hideAppointmentDialog();
+            showLoading();
+            saveAppointment();
+        }
+    })
+}
+
+function hideDialog(){
+    var authDialog = $('#cadDialog');
+    authDialog.hide();
+}
+
+function hideAppointmentDialog(){
+    var appointmentDialog = $('#appointmentDialog');
+    appointmentDialog.hide();
+}
+
+function sendMail(email,file) {
+    $.ajax({
+        url: "/controllers/api/2.0/ApiSendCAD.php",
+        type: "POST",
+        data: {
+            "email": email,
+            "file": file
+        },
+        async: false,
+        beforeSend: function(request) {},
+        complete: function(){},
+        success: function (response, status, xhr) {
+            hideLoading();
+            $(function(){
+                var $toast = $('#js_toast_4');
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    $toast.fadeOut(100);
+                }, 2000);
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    }); 
+    
 }
 

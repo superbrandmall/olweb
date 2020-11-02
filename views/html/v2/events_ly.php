@@ -12,7 +12,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd">
     <div class="weui-panel__hd">
-        6个场地区
+        3个场地区
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
@@ -43,41 +43,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
                 <div style="margin: 5px 15px 10px;">
                     <span class="weui-mark-rb">1F东厅</span>
-                    <span class="weui-mark-rb">430m²</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000001_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000001_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000001_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000001_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/29vksq790ie?scene_id=53759356");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP200824000001&type=events&storeCode=OLMALL190117000001">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP200824000001&type=events&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">1F东门</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">车展、房展、品宣类</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">东门公区</span>
-                    <span class="weui-mark-rb">20m²</span>
+                    <span class="weui-mark-rb">306.77m²</span>
                 </div>
             </div>
         </div>
@@ -123,40 +89,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="slide">
                         <ul>
                             <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000002_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000002_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000002_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000002_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/29vksq790ie?scene_id=53759357");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP200824000002&type=events&storeCode=OLMALL190117000001">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP200824000002&type=events&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">1F西门公区</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">车展、房展、品宣类</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">1F西门公区</span>
-                    <span class="weui-mark-rb">30m²</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
                                 <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP190625000003_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP190625000003_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                             <li>
@@ -184,40 +116,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
     </div>
-    <div class="weui-panel__bd">
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000003_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000003_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP200824000003_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP200824000003_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48582386");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP200824000003&type=events&storeCode=OLMALL190117000001">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP200824000003&type=events&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">外广场</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">大型车展，房展、品牌路演</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">西面位置</span>
-                    <span class="weui-mark-rb">300m²</span>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div id="gallery" class="weui-gallery" style="display: none;">
@@ -240,6 +138,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

@@ -1923,13 +1923,23 @@ Device/OS Detection
 
         return p;
     };
-
-    $(document).on("click", ".close-picker", function() {
+    
+    $(document).on("click", ".picker-button", function() {
         var pickerToClose = $('.weui-picker-modal.weui-picker-modal-visible');
         if (pickerToClose.length > 0) {
             $.closePicker(pickerToClose);
         }
-        saveAppointment($('.picker-selected').text());
+        
+        var dt = $('.picker-selected').text();
+        $('#appointmentTime2').val(dt);
+        
+        var year = dt.substring(0,4);
+        var month = dt.substring(4,6);
+        var date = dt.substring(6,8);
+        var hour = dt.substring(8,10);
+        
+        
+        $('#appointmentTime').val(year+'-'+month+'-'+date+' '+hour+'时');
     });
 
     //修复picker会滚动页面的bug

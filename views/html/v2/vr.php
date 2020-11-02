@@ -10,32 +10,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">上海陆家嘴正大广场</p>
     </a>
     
-    <a href="javascript: showVR('https://720yun.com/t/1fvks7dypdh?scene_id=48946189');">
-        <div class="weui-grid__icon">
-            <img src="/views/assets/base/img/content/backgrounds/mall-list/bs.jpg" alt="" style="border-radius: 10px;">
-        </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">上海宝山正大乐城</p>
-    </a>
-    
-    <a href="javascript:;">
+    <a href="javascript: showVR('https://720yun.com/t/29vksq790ie#scene_id=53502941');">
         <div class="weui-grid__icon">
             <img src="/views/assets/base/img/content/backgrounds/mall-list/ly.jpg" alt="" style="border-radius: 10px;">
         </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">洛阳正大广场</p>
-    </a>
-    
-    <a href="javascript:;">
-        <div class="weui-grid__icon">
-            <img src="/views/assets/base/img/content/backgrounds/mall-list/hf.jpg" alt="" style="border-radius: 10px;">
-        </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">合肥正大广场</p>
-    </a>
-    
-    <a href="javascript:;">
-        <div class="weui-grid__icon">
-            <img src="/views/assets/base/img/content/backgrounds/mall-list/yq.jpg" alt="" style="border-radius: 10px;">
-        </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">乐清正大广场</p>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">河南洛阳正大广场</p>
     </a>
     
     <a href="javascript:;">
@@ -45,25 +24,39 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">上海徐汇正大乐城</p>
     </a>
     
+    <a href="javascript: showVR('https://720yun.com/t/1fvks7dypdh?scene_id=48946189');">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/backgrounds/mall-list/bs.jpg" alt="" style="border-radius: 10px;">
+        </div>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">上海宝山正大乐城</p>
+    </a>
+    
+    <a href="javascript:;">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/backgrounds/mall-list/hf.jpg" alt="" style="border-radius: 10px;">
+        </div>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">安徽合肥正大广场</p>
+    </a>
+    
+    <a href="javascript:;">
+        <div class="weui-grid__icon">
+            <img src="/views/assets/base/img/content/backgrounds/mall-list/yq.jpg" alt="" style="border-radius: 10px;">
+        </div>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">浙江乐清正大广场</p>
+    </a>
+    
     <a href="javascript:;">
         <div class="weui-grid__icon">
             <img src="/views/assets/base/img/content/backgrounds/mall-list/zz.jpg" alt="" style="border-radius: 10px;">
         </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">郑州正大乐城</p>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">河南郑州正大乐城</p>
     </a>
     
     <a href="javascript:;">
         <div class="weui-grid__icon">
             <img src="/views/assets/base/img/content/backgrounds/mall-list/wx.jpg" alt="" style="border-radius: 10px;">
         </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">无锡正大乐城</p>
-    </a>
-    
-    <a href="javascript:;">
-        <div class="weui-grid__icon">
-            <img src="/views/assets/base/img/content/backgrounds/mall-list/bj.jpg" alt="" style="border-radius: 10px;">
-        </div>
-        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">北京正大中心</p>
+        <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">江苏无锡正大乐城</p>
     </a>
 </div>
 

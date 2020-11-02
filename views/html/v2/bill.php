@@ -7,8 +7,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="page__bd">
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
+                <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。贵我双方已经签定<span id="mall"></span>的<span id="type"></span>合同双方已完成签章, 已到付款环节。</p>
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">付款金额</label>
+                    <h2 class="weui-form-preview__label">应付金额</h2>
                     <em class="weui-form-preview__value">¥ <span id="amount"></span></em>
                 </div>
                 <div class="weui-form-preview__item">
@@ -18,28 +19,46 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">上海陆家嘴正大广场</label>
+                    <label class="weui-form-preview__label">租户交易号</label>
+                    <span class="weui-form-preview__value"><span id="outTradeNo"></span></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">位置</label>
                     <span class="weui-form-preview__value"><span id="unitDesc"></span></span>
                 </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">装修期满后首月固定租金</label>
-                    <span class="weui-form-preview__value">¥ 24,022.11</span>
+                <div id="leasing_price" style="display: none;">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">装修期满后首月固定租金(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="rent"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">租赁期内首月物业管理费(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="maintenance"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">租赁保证金(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="deposit"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">数据采集设备押金</label>
+                        <span class="weui-form-preview__value">¥ 3,000.00</span>
+                    </div>
+                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额=保证金+数据采集设备押金+首月固定租金与物业管理费(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 保证金=3x(最高月固定租金+物业管理费)(含税)</small></p>
                 </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">租赁期内首月物业管理费</label>
-                    <span class="weui-form-preview__value">¥ 5,436.06</span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">租赁保证金</label>
-                    <span class="weui-form-preview__value">¥ 119,903.54</span>
-                </div>
-                <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label">数据采集设备押金</label>
-                    <span class="weui-form-preview__value">¥ 3,000.00</span>
+                <div id="adevent_price" style="display: none;">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">租金(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="adevent_rent"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">保证金</label>
+                        <span class="weui-form-preview__value">¥ <span id="adevent_deposit"></span></span>
+                    </div>
+                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额=保证金+租金(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 保证金=20%租金(含税)</small></p>
                 </div>
             </div>
-            <p style="padding: 0 16px;"><small>* 应缴金额=保证金+首月固定租金与物业管理费(含税)</small></p>
-            <p style="padding: 0 16px 16px;"><small>* 保证金构成=3x(最高月固定租金+物业管理费)(含税)</small></p>
         </div>
         
         <div class="weui-form__control-area">
@@ -48,33 +67,30 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <label class="weui-cell weui-cell_active weui-check__label">
                         <h3>支付方式选择</h3>
                     </label>
-                    <label class="weui-cell weui-cell_active weui-check__label" for="unionPay">
+                    <label id="unionPayLabel" class="weui-cell weui-cell_active weui-check__label" for="unionPay">
                         <div class="weui-cell__bd">
                             <p><img src="/views/assets/base/img/content/banks/unionpay.jpg" style="width: 70px; vertical-align: bottom;"> 网银支付(推荐使用)</p>
                             <small>请指定邮箱接收付款链接和账单</small>
                         </div>
-                        <div class="weui-cell__ft">
+                        <div class="weui-cell__ft" style="border: solid 1px rgba(0,0,0,.3); padding-left: 0;">
                             <input type="radio" name="payment" class="weui-check placeholder" id="unionPay" checked="checked" />
                             <span class="weui-icon-checked"></span>
                         </div>
                     </label>
-                    <div id="unionPayDetail" class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <i class="fa fa-envelope" aria-hidden="true"></i> <input name="unionPayEmail" id="unionPayEmail" type="email" class="weui-input" required placeholder="请填写付款人邮箱" style="width: auto; margin-left: 5px;"/>
-                    </div>
                     <label class="weui-cell weui-cell_active weui-check__label" for="transfer">
                         <div class="weui-cell__bd">
                             <p>公司转账</p>
                             <small>请务必使用此账号进行转账，且转账金额与订单金额务必保持一致</small>
                         </div>
-                        <div class="weui-cell__ft">
+                        <div class="weui-cell__ft" style="border: solid 1px rgba(0,0,0,.3); padding-left: 0;">
                             <input type="radio" name="payment" class="weui-check placeholder" id="transfer" />
                             <span class="weui-icon-checked"></span>
                         </div>
                     </label>
                     <div id="transferDetail" class="weui-cell__bd" style="padding: 16px 32px; color: #000; display: none;">
-                        <div><small>收款人户名: 上海帝泰发展有限公司</small></div>
-                        <div><small>收款人账号: 310066030018170043300</small></div>
-                        <div><small>开户行名称: 交通银行上海虹口支行</small></div>
+                        <div><small>收款人户名: <span class="org"></span></small></div>
+                        <div><small>收款人账号: <span id="payeeAccount"></span></small></div>
+                        <div><small>开户行名称: <span id="payeeBank"></span></small></div>
                     </div>
                 </div>
             </div>
@@ -114,9 +130,35 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     </div>
 </div>
 
-<br>
-<br>
-<br>
+<div class="js_dialog" id="emailDialog" style="display: none;">
+    <form id="emailDialogForm">
+        <div class="weui-mask"></div>
+        <div class="weui-dialog" style="background: #fff;">
+            <div class="weui-dialog__hd"><strong class="weui-dialog__title">请填写贵司财务付款人邮箱</strong></div>
+            <div class="weui-dialog__bd" style="padding: 0;">
+                <div class="weui-cells__group weui-cells__group_form">
+                    <div class="weui-cells weui-cells_form">
+                        <div class="weui-cell weui-cell_active" style="padding: 16px 0;">
+                            <div class="weui-cell__hd" style="padding-right: 0;"><label class="weui-label">Email</label></div>
+                            <div class="weui-cell__bd">
+                                <input name="unionPayEmail" id="unionPayEmail" type="email" class="weui-input placeholder" required placeholder="如:first.last@company.com" />
+                            </div>
+                        </div>
+                        <div class="errorDiv" id="errorcontainer-unionPayEmail"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="weui-dialog__ft">
+                <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
+                <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
 
+<br>
+<br>
+<br>
+<?php include ('timeline/step_five.php'); ?>
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

@@ -43,7 +43,7 @@ function getAllOrdersToBeConfirmed() {
                         if(v.state === 1 && v.orderStates == '已完成订单'){
                             empty = 0;
                             if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
-                                img = getShopInfo(v.remarkFirst);
+                                img = "/views/assets/base/img/content/backgrounds/events/"+v.remarkFirst+"_1.jpg";
                                 //应缴金额=保证金+首月固定租金与物业管理费(含税)
                                 var taxAmount = 0; //不含税总额
                                 var amount = 0; //含税总额
@@ -60,9 +60,13 @@ function getAllOrdersToBeConfirmed() {
                                     }
                                 })
                                 
+                                var bu = '举办活动';
+                                
                                 if(v.remarkSecond == 'leasing'){
-                                     amount = parseFloat((amount + 3000).toFixed(2));
-                                     taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                    img = getShopInfo(v.remarkFirst);
+                                    amount = parseFloat((amount + 3000).toFixed(2));
+                                    taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                    bu = '租赁商铺';
                                 }
                                 tax = parseFloat((amount - taxAmount).toFixed(2));
                                 var qty = 1;
@@ -80,23 +84,63 @@ function getAllOrdersToBeConfirmed() {
                                 amount = parseFloat(amount.toFixed(2));
                                 taxAmount = parseFloat((amount/1.06).toFixed(2));
                                 tax = (amount-taxAmount).toFixed(2);
+                                amount = parseFloat((amount*1.2).toFixed(2));
+                                
+                                var bu = '广告投放';
+                            }
+                            
+                            var mallName, mallCode, buildingCode;
+                            var refundLink = '';
+                            switch (v.orgCode) {
+                                case '301001':
+                                    mallName = '河南洛阳正大广场';
+                                    mallCode = 'OLMALL190117000001';
+                                    buildingCode = 'OLBUILDING190117000001';
+                                    break;
+                                case '201001':
+                                    mallName = '上海宝山正大乐城';
+                                    mallCode = 'OLMALL180917000002';
+                                    buildingCode = 'OLBUILDING180917000005';
+                                    break;
+                                case '100001':
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
+                                case '204001':
+                                    mallName = '上海徐汇正大乐城';
+                                    mallCode = 'OLMALL180917000001';
+                                    buildingCode = 'OLBUILDING180917000006';
+                                    break;
+                                default:
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
+                            }
+                            
+                            if(v.payStates != '退款中' && v.payStates != '已退款'){
+                                refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';
+                            } else {
+                                refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 4px 8px; color: #999;">'+v.payStates+'</span></li>';
                             }
                             
                             $('#orders').append('<div class="weui-panel">\n\
-        <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
+        <div class="weui-panel__hd">'+mallName+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
         <div class="weui-media-box__hd" style="width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
         <div class="weui-media-box__bd">\n\
-        <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
+        <div class="weui-form-preview__bd" style="font-size: 15px; padding: 0;">\n\
         <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">共'+qty+'件商品 合计: ¥'+numberWithCommas(amount)+'</span>\n\
+        <span class="weui-form-preview__value">'+v.contractInfos[0].unitDesc+'</span>\n\
+        <span class="weui-form-preview__value">共'+qty+'件商品 合计: <small>¥</small>'+numberWithCommas(amount)+'</span>\n\
         <span class="weui-form-preview__value"><small>(含税费 ¥'+numberWithCommas(tax)+')</small></span></div></div>\n\
-        <ul class="weui-media-box__info" style="float: right;">\n\
-        <li class="weui-media-box__info__meta"><a class="weui-link tenant-guide" href="javascript:;">进场指导</a></li>\n\
-        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
-        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="javascript:;">申请退款</a></li>\n\
-        </ul></div></div></div>'); 
+        </div></div><ul class="weui-media-box__button">\n\
+        <li><a class="current tenant-guide" href="javascript:;">进场指导</a></li>\n\
+        <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
+        '+refundLink+'\n\
+        </ul></div>'); 
                         }
                     });
                 }
@@ -212,4 +256,8 @@ function hideOrder(id){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function requireRefund(code,unit,buildingCode,mallCode,trade,id) {
+    window.location.href = '/v2/negotiation?code='+code+'&unit='+unit+'&building='+buildingCode+'&mall='+mallCode+'&name=2&trade='+trade+'&order='+id;
 }

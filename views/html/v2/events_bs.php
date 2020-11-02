@@ -105,6 +105,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 
+<?php include ('timeline/step_one.php'); ?>
+
 <?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

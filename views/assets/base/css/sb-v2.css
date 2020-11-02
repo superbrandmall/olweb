@@ -1,7 +1,7 @@
 body, html {
     font-family: "微软雅黑","Microsoft YaHei";
     background: #fff;
-    color: #646464;
+    color: #000;
     font-weight: 300;
     font-size: 16px;
 }
@@ -36,6 +36,14 @@ h3 {
 
 .weui-media-box:before {
     border-top: 0 none;
+}
+
+.weui-cells__group_form .weui-cell:not(.weui-cell_link), 
+.weui-media-box__desc,
+.weui-form-preview__label, 
+.weui-uploader__info,
+.weui-cells__title {
+    color: #000;
 }
 
 .weui-cells__group_form .weui-cells:before {
@@ -75,7 +83,7 @@ input::-ms-input-placeholder {
    color: #000;
 }
 
-#mapster_wrap_0 {
+[id*="mapster_wrap_"] {
     margin: 0 auto;
 }
 
@@ -86,6 +94,7 @@ input::-ms-input-placeholder {
     -webkit-transform: translate(0,-50%);
     transform: translate(0,-50%);
     background: rgba(240,240,240,0.8);
+    z-index: 20000;
 }
 
 .weui-toast {
@@ -175,6 +184,38 @@ input::-ms-input-placeholder {
     color: #888;
 }
 
+.red-border {
+    border: solid 1px #f00;
+}
+
+.weui-media-box__button {
+    float: right;
+    margin-bottom: 5px;
+    padding-bottom: 4px;
+    font-size: 13px;
+    color: #333;
+    list-style: none;
+    line-height: 3;
+    overflow: hidden;
+    margin-top: -10px;
+}
+
+.weui-media-box__button li {
+    float: left;
+    padding-right: 0.7em;
+}
+
+.weui-media-box__button a {
+    border: solid 1px #666;
+    border-radius: 50px;
+    padding: 4px 8px;
+    color: #666;
+}
+
+.weui-media-box__button a.current {
+    border: solid 1px #fa5151;
+    color: #fa5151;
+}
 /******* CHAT  ********/
 @keyframes scaleToggleOne { 0 {
 transform:scale(1);
@@ -261,12 +302,9 @@ transform:scale(1);
 
 /******* CORE TEAM  ********/
 .slide .slide-desc {
-    width: initial;
-    top: 10px;
-    left: 20px;
-    bottom: inherit;
-    padding: 0 5px;
-    border-radius: 5px;
+    background: rgba(255,255,255,0.6);
+    color: #000;
+    bottom: 10px;
 }
 
 .weui-link,
@@ -281,7 +319,6 @@ transform:scale(1);
     padding: 3px 8px;
     font-size: 12px;
     background: rgb(198, 198, 198);
-    display: inline-block;
 }
 
 .owl-carousel .owl-item img {
@@ -304,6 +341,29 @@ transform:scale(1);
     border-top: 0 none;
 }
 
+.timeline_btn,
+.collapsed_timeline {
+    position: fixed;
+    top: 0;
+    left: 0;   /*160px*/
+    background: rgba(255,255,255,0.9);
+    padding: 1px;
+    border-right: solid 1px #eee;
+    border-bottom: solid 1px #eee;
+    z-index: 1;
+}
+
+#timeline {
+    background: rgba(255,255,255,0.9);
+    position: fixed;
+    top: 0;
+    left: -160px; /*0*/
+    width: 150px;
+    padding: 10px 0 0 10px;
+    border-right: solid 1px #eee;
+    border-bottom: solid 1px #eee;
+    z-index: 1;
+}
 
 /******* Willa  ********/
 .weui-grid {
@@ -413,8 +473,8 @@ transform:scale(1);
 .shop-collapse li {
     position: relative;
     border-radius: 15px;
-    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.5);
     margin: -25px 0 0 0;
     background-repeat: repeat;
     padding-bottom: 30px;
@@ -477,6 +537,9 @@ transform:scale(1);
     right: 0;
     top: 122px;
     width: 105px;
+    height: 105px;
+    background-image: url("/views/assets/base/img/content/brands-admin/avatar.png");
+    background-size: 100%;
     border: solid 4px #fff;
     border-radius: 50%;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.7);

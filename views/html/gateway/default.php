@@ -1,14 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header"><small>本订单应付金额</small> ¥ <span id="amount"></span> <small>(含税费 ¥ <span id="tax"></span>)</small></h1>
+            <h1 class="page-header">
+                <p style="font-size: 16px; margin-bottom: 20px;">感谢贵司对"<span id="org"></span>"的信赖。贵我双方已经签定<span id="mall"></span>的<span id="type"></span>合同双方已完成签章, 已到付款环节。</p>
+                <small>本订单应付金额</small> ¥ <span id="amount"></span> <small>(含税费 ¥ <span id="tax"></span>)</small>
+            </h1>
             <ul style="padding-left: 15px;">
                 <li>商户交易号: <strong id="outTradeNo"></strong></li>
-          	<li>上海陆家嘴正大广场: <strong id="unitDesc"></strong></li>
-          	<li>装修期满后首月固定租金: ¥ <strong id="Gamount"></strong></li>
-          	<li>租赁期内首月物业管理费: ¥ <strong id="Wamount"></strong></li>
-          	<li>租赁保证金: ¥ <strong id="depositAmount"></strong></li>
-          	<li>数据采集设备押金: ¥ <strong>0</strong></li>
+          	<li>位置: <strong id="unitDesc"></strong></li>
+                <li class="leasing_price" style="display: none;">装修期满后首月固定租金(含税): ¥ <strong id="Gamount"></strong></li>
+          	<li class="leasing_price" style="display: none;">租赁期内首月物业管理费(含税): ¥ <strong id="Wamount"></strong></li>
+          	<li class="leasing_price" style="display: none;">租赁保证金(含税): ¥ <strong id="depositAmount"></strong></li>
+          	<li class="leasing_price" style="display: none;">数据采集设备押金: ¥ <strong>3,000</strong></li>
+                <li class="adevent_price" style="display: none;">租金(含税): ¥ <strong id="adevent_rent"></strong></li>
+                <li class="adevent_price" style="display: none;">保证金: ¥ <strong id="adevent_deposit"></strong></li>
             </ul>
             <div><small>* 应缴金额 = 保证金 + 首月固定租金与物业管理费 (含税)</small></div>
             <div><small>* 保证金构成 = 3 x (最高月固定租金 + 物业管理费) (含税)</small></div>

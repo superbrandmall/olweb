@@ -153,6 +153,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/bs' => array(
             'url' => 'bs.php'
         ),
+        'v2/xh' => array(
+            'url' => 'xh.php'
+        ),
         'v2/register' => array(
             'url' => 'register.php'
         ),
@@ -165,14 +168,14 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/events-bs' => array(
             'url' => 'events_bs.php'
         ),
+        'v2/events-xh' => array(
+            'url' => 'events_xh.php'
+        ),
         'v2/event' => array(
             'url' => 'event.php'
         ),
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
-        ),
-        'v2/leasing' => array(
-            'url' => 'leasing.php'
         ),
         'v2/shop' => array(
             'url' => 'shop.php'
@@ -186,11 +189,17 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/ads-bs' => array(
             'url' => 'ads_bs.php'
         ),
+        'v2/ads-xh' => array(
+            'url' => 'ads_xh.php'
+        ),
         'v2/ad' => array(
             'url' => 'ad.php'
         ),
         'v2/advertising-shopping-cart' => array(
             'url' => 'advertising_shopping_cart.php'
+        ),
+        'v2/advertising-package' => array(
+            'url' => 'advertising_package.php'
         ),
         'v2/negotiation' => array(
             'url' => 'negotiation.php'
@@ -243,7 +252,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
     }
 
     $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'pay_done.php',
-        'advertising_shopping_cart.php', 'negotiation.php', 'all_orders.php', 'my_favourites.php', 'order_to_be_stamped.php', 
+        'advertising_shopping_cart.php', 'advertising_package.php', 'negotiation.php', 'all_orders.php', 'my_favourites.php', 'order_to_be_stamped.php', 
         'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php','unionpay.php');
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';

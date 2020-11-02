@@ -33,7 +33,7 @@ include ('system/Router.php');
         <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <img class="navbar-brand" src="/views/assets/base/img/layout/logos/logo.png" alt="正大">
+                    <img class="navbar-brand" src="/views/assets/base/img/layout/logos/cp-cre-logo.png" alt="正大">
                 </div>
             </div><!-- /.container -->
         </nav>

@@ -17,7 +17,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd" style="position: relative; margin-top: -16px;">
     <ul class="collapse shop-collapse">
-        <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400" style="background: url(/views/assets/base/img/content/backgrounds/shop/granite-bg.jpg);">
+        <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400">
             <div class="weui-flex js-category-1">
                 <h3 class="weui-flex__item"><span id="ad_name"></span><a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">VR看广告位</a></h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
@@ -28,7 +28,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div class="weui-flex__item" id="ad_desc"></div>
             </div>
         </li>
-        <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="300" style="background: url(/views/assets/base/img/content/backgrounds/shop/marble-bg.jpg); margin: -20px 0 0;">
+        <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="300" style="margin: -20px 0 0;">
             <div class="weui-flex js-category-2">
                 <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
                 <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
@@ -43,11 +43,55 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <input class="weui-input date-end" id="dateEnd_<?= $id; ?>" placeholder="填写档期终止日" readonly>
                     </div>
                 </div>
-                <div class="weui-flex__item"><small>*我司对档期有最终解释权</small></div><br>
-                <div class="weui-flex__item" id="ad_price_frequency">
-                    单价: <span id="ad_price"></span><small id="ad_frequency"></small>
+                <div class="weui-flex__item"><small>*我司对档期有最终解释权</small></div>
+                <div class="weui-flex__item">
+                    <table class="content" style="font-size: 11px;">
+                        <thead style="background: #F2F2F2; color: #333;">
+                            <tr>
+                                <th style="text-align: center;">不含税单价</th>
+                                <th style="text-align: center;">含税单价(税率6%)</th>
+                                <th style="text-align: center;">售卖单位</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adRent">
+                            <tr>
+                                <td id="ad_price_tax" style="text-align: center;"></td>
+                                <td id="ad_price"style="text-align: center;"></td>
+                                <td id="ad_frequency" style="text-align: center;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="content">
+                        <tbody>
+                            <tr>
+                                <td style="background: #F2F2F2; color: #333;">播放频次</td>
+                                <td id="ad_price_frequency"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="content">
+                        <tbody>
+                            <tr>
+                                <td style="background: #F2F2F2; color: #333; font-size: 12px;">天数</td>
+                                <td>
+                                    <span id="days">请选择档期查看天数</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background: #F2F2F2; color: #333; font-size: 12px;">押金</td>
+                                <td>
+                                    <span id="deposit">请选择档期查看押金</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="background: #F2F2F2; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
+                                <td>
+                                    <span id="subTotal" style="color: #b43018">请选择档期查看总价</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="weui-flex__item">总价: <strong><span style="color: #b43018">¥</span> <span id="subTotal" style="color: #b43018">选择档期查看总价</span></strong></div>
             </div>
         </li>
     </ul>
@@ -118,5 +162,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

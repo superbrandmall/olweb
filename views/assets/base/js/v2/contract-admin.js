@@ -18,7 +18,7 @@ $.file = {
     key: "",
     name: ""
 };
-
+    
 $(document).ready(function(){
     if(getURLParameter('type') && getURLParameter('type') != ''){
         getOrderByTradeNO();
@@ -26,26 +26,14 @@ $(document).ready(function(){
         getPDF();
     }
     
-    $(function(){
-        var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
-<div class="weui-mask">\n\
-</div><div class="weui-dialog">\n\
-<div class="weui-dialog__bd">您好，用印链接稍后将通过E签宝平台发送短信到签章授权人的手机，请注意查收并及时盖章，谢谢！</div>\n\
-<div class="weui-dialog__ft">\n\
-<a href="javascript: showDialog();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
-</div>\n\
-</div> \n\
-</div>';
-
-        $('#confirm_contract').on('click', function(){
-            if($('#iosDialog2').length > 0){
-                $('#iosDialog2').remove();
-            }
-            $('body').append($iosDialog2);
-            $('#iosDialog2').fadeIn(200);
-        });
-    });
+    $('#download_file').click(function(){
+        showDialog2();
+    })
     
+    $('#confirm_contract').on('click', function(){
+        filesCheck();
+    });
+         
     $("#authDialogForm").validate({
         rules: {
             authName: {
@@ -57,6 +45,10 @@ $(document).ready(function(){
             },
             authIdentity: {
                 required: true
+            },
+            authEmail: {
+                required: true,
+                email: true
             }
         },
         messages: {
@@ -69,6 +61,10 @@ $(document).ready(function(){
             },
             authIdentity: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+            },
+            authEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             }
         },
         errorPlacement: function(error, element) {
@@ -130,6 +126,7 @@ function findUserCompanyByMobileNo() {
                     $('#authName').val(response.data[0].authName);
                     $('#authPhone').val(response.data[0].authPhone);
                     $('#authIdentity').val(response.data[0].authIdentity);
+                    $('#authEmail').val(response.data[0].authEmail);
                 }
             }
         }
@@ -141,6 +138,7 @@ function saveUserCompany() {
     map.authName = $('#authName').val();
     map.authPhone = $('#authPhone').val();
     map.authIdentity = $('#authIdentity').val();
+    map.authEmail = $('#authEmail').val();
     
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/saveOrUpdate",
@@ -150,6 +148,7 @@ function saveUserCompany() {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -189,7 +188,7 @@ function updateOrderToStamping(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                eSignFlow();
+                sendFiles();
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -198,6 +197,32 @@ function updateOrderToStamping(){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function sendFiles() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/mail/sendFile?mobileNo="+$.cookie('uid')+"&outTradeNo="+getURLParameter('trade'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            hideLoading();
+            if(response.code === 'C0') {
+                eSignFlow();
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    }); 
 }
 
 function eSignFlow(){
@@ -225,7 +250,7 @@ function eSignFlow(){
           "id": $.order.id,
           "mobileNo": $.cookie('uid'),
           "orgCode": $.order.orgCode,
-          "outTradeNo": "",
+          "outTradeNo": getURLParameter('trade'),
           "tenantName": $.info.name,
           "tenantOrg": $.info.uscc
         },
@@ -246,7 +271,7 @@ function eSignFlow(){
         url: $.api.baseNew+"/comm-wechatol/api/esign/flow",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -263,8 +288,30 @@ function eSignFlow(){
                 }
                 $.cookie('oid',$.order.id);
                 $.cookie('flowid',response.data.data.signFlowId);
+                
+                var mallName;
+                switch ($.order.orgCode) {
+                    case '301001':
+                        mallName = '河南洛阳正大广场';
+                        break;
+                    case '201001':
+                        mallName = '上海宝山正大乐城';
+                        break;
+                    case '100001':
+                        mallName = '上海陆家嘴正大广场';
+                        break;
+                    case '204001':
+                        mallName = '上海徐汇正大乐城';
+                        break;
+                    default:
+                        mallName = '上海陆家嘴正大广场';
+                        break;
+                }
+                
+                
                 hideLoading();
-                saveMsgLog('订单合同用印中','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
+                saveMsgLog('签章链接发送提醒','签章链接已经通过短信发送到您的手机，您可以用手机直接操作；如需要用电脑，请将链接复制到电脑中操作。',$.order.trade, '我的消息',$.order.unit,'');
+                saveMsgLog('订单合同用印中','您的订单【'+mallName+'】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -297,15 +344,15 @@ function getOrderByTradeNO() {
                 $.order.contractNo = response.data.contractNo;
                 $.order.orgCode = response.data.orgCode;
                 if(response.data.remarkSecond == 'leasing') {
-                    $.order.type = '商铺单元';
+                    $.order.type = '商铺位置';
                     $.order.shopName = '【'+response.data.contractInfos[0].unitDesc+'】';
                 } else if(response.data.remarkSecond == 'advertising') {
-                    $.order.type = '广告位';
+                    $.order.type = '广告位置';
                     $.each(response.data.contractInfos, function(i,v){
                         $.order.shopName = $.order.shopName + '【' + v.unitDesc + '】 ';
                     });
                 } else if(response.data.remarkSecond == 'events') {
-                    $.order.type = '场地单元';
+                    $.order.type = '场地位置';
                     $.order.shopName = '【'+response.data.contractInfos[0].unitDesc+'】';
                 }
                  
@@ -317,8 +364,36 @@ function getOrderByTradeNO() {
                 <div class="weui-cell__ft"></div>\n\
             </a>');
                     
-                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/qa/'+response.data.remarkFirst+'.pdf');
+                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/standards/'+response.data.remarkFirst+'.pdf');
                 }
+                
+                var mallCode, buildingCode;
+                switch ($.order.orgCode) {
+                    case '301001':
+                        mallCode = 'OLMALL190117000001';
+                        buildingCode = 'OLBUILDING190117000001';
+                        break;
+                    case '201001':
+                        mallCode = 'OLMALL180917000002';
+                        buildingCode = 'OLBUILDING180917000005';
+                        break;
+                    case '100001':
+                        mallCode = 'OLMALL180917000003';
+                        buildingCode = 'OLBUILDING180917000001';
+                        break;
+                    case '204001':
+                        mallCode = 'OLMALL180917000001';
+                        buildingCode = 'OLBUILDING180917000006';
+                        break;
+                    default:
+                        mallCode = 'OLMALL180917000003';
+                        buildingCode = 'OLBUILDING180917000001';
+                        break;
+                }
+                
+                $('#negotiate').click(function(){
+                    window.location.href = '/v2/negotiation?code='+response.data.remarkFirst+'&unit='+response.data.contractInfos[0].unitCode+'&building='+buildingCode+'&mall='+mallCode+'&name=1&outTradeNo='+getURLParameter('trade');
+                });
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -358,4 +433,159 @@ function getUserContract() {
 function getPDF() {
     var file = $.api.baseNew+"/comm-wechatol/api/download/showPdf?fileName%3D"+getURLParameter('trade')+".pdf%26fileType%3D10%26mobileNo%3D"+$.cookie('uid');
     $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file='+file);
+}
+
+function showDialog2(){
+    var contractDialog = $('#contractDialog');
+    contractDialog.fadeIn(200);
+    
+    $("#contractDialogForm").validate({
+        onkeyup: false,
+        rules: {
+            contractEmail: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            contractEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写收件人邮箱',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>邮箱格式不对，请正确填写'
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            hideDialog2();
+            showLoading();
+            sendMail($('#contractEmail').val());
+        }
+    })
+}
+
+function hideDialog2(){
+    var contractDialog = $('#contractDialog');
+    contractDialog.hide();
+}
+
+function sendMail(email) {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/mail/sendContractMail?mobileNo="+$.cookie('uid')+"&outTradeNo="+getURLParameter('trade')+"&email="+email,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            hideLoading();
+            if(response.code === 'C0') {
+                 hideLoading();
+                $(function(){
+                    var $toast = $('#js_toast_1');
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
+                });
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    }); 
+}
+
+function filesCheck() {
+    var flag = 1;
+    
+    if($('#uploaderFiles__business_license li').length <= 0) { //营业执照
+        flag = 0;
+        $('#uploaderFiles__business_license').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__business_license').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__business_license').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__business_license').parent().find('.weui-uploader__input-box').css('background','#ededed');    
+    }
+    
+    if($('#uploaderFiles__id_card li').length <= 0) { //法人代表身份证件
+        flag = 0;
+        $('#uploaderFiles__id_card').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__id_card').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__id_card').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__id_card').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    if($('#uploaderFiles__trademark li').length <= 0) { //商标注册证
+        flag = 0;
+        $('#uploaderFiles__trademark').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__trademark').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__trademark').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__trademark').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    if($('#uploaderFiles__brand_authorization li').length <= 0) { //品牌授权书
+        flag = 0;
+        $('#uploaderFiles__brand_authorization').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__brand_authorization').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__brand_authorization').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__brand_authorization').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    if($('#uploaderFiles__esign_authorization li').length <= 0) { //电子签章人授权书
+        flag = 0;
+        $('#uploaderFiles__esign_authorization').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__esign_authorization').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__esign_authorization').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__esign_authorization').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    if($.order.type == '场地位置' && $('#uploaderFiles__event_program li').length <= 0) { //活动方案
+        flag = 0;
+        $('#uploaderFiles__event_program').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__event_program').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__event_program').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__event_program').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    if($.order.type == '广告位置' && $('#uploaderFiles__ad_design_sketch li').length <= 0) { //广告效果图
+        flag = 0;
+        $('#uploaderFiles__ad_design_sketch').parent().parent().find('.weui-uploader__title').css('color','#f00');
+        $('#uploaderFiles__ad_design_sketch').parent().find('.weui-uploader__input-box').css('background','#fcc');
+    } else {
+        $('#uploaderFiles__ad_design_sketch').parent().parent().find('.weui-uploader__title').css('color','#000');
+        $('#uploaderFiles__ad_design_sketch').parent().find('.weui-uploader__input-box').css('background','#ededed');
+    }
+    
+    $(function(){
+        var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
+<div class="weui-mask">\n\
+</div><div class="weui-dialog">\n\
+<div class="weui-dialog__bd">您好，E签宝平台稍后会以短信形式将签章链接发送到签章授权人的手机，请注意查收并及时盖章，谢谢！</div>\n\
+<div class="weui-dialog__ft">\n\
+<a href="javascript: showDialog();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
+</div>\n\
+</div> \n\
+</div>';
+
+        if(flag == 1){
+            if($('#iosDialog2').length > 0){
+                $('#iosDialog2').remove();
+            }
+            $('body').append($iosDialog2);
+            $('#iosDialog2').fadeIn(200);
+        }
+    });
 }

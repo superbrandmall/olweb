@@ -33,7 +33,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=44042266");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57904443");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001126&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -67,7 +67,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48477867");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895034");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001116&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -101,7 +101,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48477866");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895073");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001150&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -135,7 +135,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48463593");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895047");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP190809000001&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -169,8 +169,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48582386");'>VR</a></li>
-                        <li><a href="/v2/event?id=OLSHOP180917001126&type=events">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895075");'>VR</a></li>
+                        <li><a href="/v2/event?id=OLSHOP180917001166&type=events">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/event?id=OLSHOP180917001166&type=events'" style="position: relative; margin: 10px 0 0 15px;">
@@ -203,7 +203,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/d0vksldepqe?scene_id=48582385");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895074");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001169&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -241,6 +241,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

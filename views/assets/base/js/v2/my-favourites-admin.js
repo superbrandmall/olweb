@@ -1,4 +1,7 @@
-var unitCodes = ["01FL064","03FL039","03FL121","2F-44B","4F-37","4F-38","6F-24","B1FL022","B1FL015","01FL035","01FL009","01FL015"];
+var unitCodes = ["01FL053","01FL064","02FL011","02FL023","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
+    "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
+    "B1FC011","B1FL022","B1FL010","01FL009","01FL015",
+    "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
 
 $(document).ready(function(){
     getFavourites();
@@ -74,7 +77,7 @@ function renderShopList(s){
     $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
         
         if(w.state ==1 && shop.remarkFirst == w.remarkSecond){
-            desc = w.desc || '';
+            desc = w.descript || '';
             shopNo = w.shopNo || '';
             buildingCode = w.buildingCode;
             storeCode = w.storeCode;

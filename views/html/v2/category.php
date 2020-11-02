@@ -32,10 +32,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
     
     .categories ul li {
-        float: left;
-        line-height: 2em;
+        line-height: 2.5em;
         padding: 0 5px;
-        margin: 0 5px 10px;
+        margin: 10px 2px;
     }
     
     .categories li.label.active {
@@ -47,67 +46,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd">
     <div class="weui-form__text-area" style="margin: 20px 0;">
-        <h2 class="weui-form__title">请选择业态</h2>
+        <h2 class="weui-form__title">请选择您的业态</h2>
     </div>
-    <div class="categories">
-        <div>
-            <p>
-                <span>女鞋</span>
-            </p>
-            <ul>
-                <li class="label f-green b-green">设计师</li>
-                <li class="label f-green b-green">商务/通勤</li>
-                <li class="label f-green b-green">潮流休闲</li>
-                <li class="label f-green b-green">买手/集合店/其他</li>
-            </ul>
-        </div>
-        <div>
-            <p>
-                <span>女包</span>
-            </p>
-            <ul>
-                <li class="label f-blue b-blue">设计师</li>
-                <li class="label f-blue b-blue">商务/通勤</li>
-                <li class="label f-blue b-blue">潮流休闲</li>
-                <li class="label f-blue b-blue">买手/集合店/其他</li>
-            </ul>
-        </div>
-        <div>
-            <p>
-                <span>女性发饰/耳饰/首饰</span>
-            </p>
-            <ul>
-                <li class="label f-green b-green">水晶/锆石</li>
-                <li class="label f-green b-green">银饰</li>
-                <li class="label f-green b-green">K金首饰/其他</li>
-            </ul>
-        </div>
-        <div>
-            <p>
-                <span>女性眼镜</span>
-            </p>
-            <ul>
-                <li class="label f-blue b-blue">自主设计</li>
-                <li class="label f-blue b-blue">买手/集合店/其他</li>
-            </ul>
-        </div>
-        <div>
-            <p>
-                <span>女性帽子/手套/围巾/丝巾/袜子</span>
-            </p>
-            <ul>
-                <li class="label f-green b-green">帽子/手套/围巾/丝巾/袜子/其他</li>
-            </ul>
-        </div>
-        <div>
-            <p>
-                <span>美妆个护</span>
-            </p>
-            <ul>
-                <li class="label f-blue b-blue">护肤/身体护理</li>
-                <li class="label f-blue b-blue">彩妆</li>
-                <li class="label f-blue b-blue">香氛香薰/其他</li>
-            </ul>
+    <div class="weui-cells__group weui-cells__group_form">
+        <div class="weui-cells weui-cells_checkbox categories">
+            <p class="weui-cell weui-cell_active"></p>
         </div>
     </div>
 </div>

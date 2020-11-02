@@ -1,4 +1,4 @@
-<div class="weui-cells__title">签约须知</div>
+<center><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
 <div class="weui-cells">
     <div class="weui-cell">
         <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i></div>
@@ -9,7 +9,13 @@
     <div class="weui-cell">
         <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
-            <p>不得擅自转租，否则转租人需承担违约责任甚至会导致合同解除；</p>
+            <p>不可擅自转租，否则转租人需承担违约责任甚至会导致合同解除；</p>
+        </div>
+    </div>
+    <div class="weui-cell">
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
+        <div class="weui-cell__bd">
+            <p>承租方应在签约之日起五个工作日内或租用时间开始前（取其早）向出租方一次性足额支付全部保证金和含税租金。</p>
         </div>
     </div>
     <p style="margin: 16px 16px 0;">解约类型及违约金预览</p>
@@ -23,14 +29,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td title="解约类型">欠租</td><td title="违约金">200%保证金</td><td title="注意事项">欠租超过3日合同可解除</td></tr>
-                <tr><td title="解约类型">擅自转租</td><td title="违约金">200%保证金</td><td title="注意事项">未经出租方书面同意不可转租</td></tr>
-                <td title="解约类型" rowspan="5">单方取消活动或解除协议</td>
-                <tr><td title="违约金">100%保证金+100%租金</td><td title="注意事项">于活动发生日前7天内（含第7天）</td></tr>
-                <tr><td title="违约金">100%保证金+50%租金</td><td title="注意事项">于活动发生日前8天-30天内（含第30天）</td></tr>
-                <tr><td title="违约金">100%保证金+30%租金</td><td title="注意事项">于活动发生日前31天-90天内（含第90天）</td></tr>
-                <tr><td title="违约金">100%保证金+10%租金</td><td title="注意事项">于活动发生日前91天及以上</td></tr>
-                <tr><td title="解约类型">到期</td><td title="违约金">0</td><td title="注意事项">不得超期占用</td></tr>
+                <tr><td title="解约类型">合同自然到期</td><td title="违约金">0</td><td title="注意事项">不可超期占用</td></tr>
+                <tr><td title="解约类型">承租方擅自取消活动</td><td title="违约金">保证金不退还，并承担不低于合同租金10%的违约金</td><td title="注意事项">详见合同附加条款第8.2条</td></tr>
+                <tr><td title="解约类型">承租方严重违约导致合同解除</td><td title="违约金">保证金和剩余租金（若有）不退还，并承担与保证金金额相同的违约金</td><td title="注意事项">详见合同附加条款第8.1条</td></tr>
             </tbody>
         </table>
     </div>

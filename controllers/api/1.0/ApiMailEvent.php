@@ -17,25 +17,25 @@ $mail->isSMTP();
 //smtp auth true
 $mail->SMTPAuth=true;
 //smtp server
-$mail->Host = 'exchange.superbrandmall.com';
+$mail->Host = 'smtp.partner.outlook.cn';
 //smtp ssl
-//$mail->SMTPSecure = 'ssl';
+$mail->SMTPSecure = 'STARTTLS';
 //smtp port
-$mail->Port = 25;
+$mail->Port = 587;
 //smtp help message head
 //$mail->Helo = 'Hello superbrandmall.com Server';
 //domain name
-$mail->Hostname = 'superbrandmall.com';
+$mail->Hostname = 'outlook.cn';
 //character set
 $mail->CharSet = 'UTF-8';
 //sender alias
 $mail->FromName = 'Online Leasing';
 //smtp account
-$mail->Username ='onlineleasing@superbrandmall.com';
+$mail->Username ='onlineleasing_send@superbrandmall.com';
 //smtp password
-$mail->Password = 'Qaz12345';
+$mail->Password = 'Qaz!2345';
 //sender address
-$mail->From = 'onlineleasing@superbrandmall.com';
+$mail->From = 'onlineleasing_send@superbrandmall.com';
 //format html or not
 $mail->isHTML(true);
 //rcpt address

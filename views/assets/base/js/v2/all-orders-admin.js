@@ -49,7 +49,7 @@ function getAllOrders() {
                             var shopName = '';
                             
                             if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
-                                img = getShopInfo(v.remarkFirst);
+                                img = "/views/assets/base/img/content/backgrounds/events/"+v.remarkFirst+"_1.jpg";
                                 shopName = '【'+v.contractInfos[0].unitDesc+'】';
                                 //应缴金额=保证金+首月固定租金与物业管理费(含税)
                                 
@@ -69,9 +69,13 @@ function getAllOrders() {
                                     }
                                 })
                                 
+                                var bu = '举办活动';
+                                
                                 if(v.remarkSecond == 'leasing'){
+                                    img = getShopInfo(v.remarkFirst);
                                     amount = parseFloat((amount + 3000).toFixed(2));
-                                    taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                    taxAmount = parseFloat((taxAmount + 3000).toFixed(2)); 
+                                    bu = '租赁商铺';
                                 }
                                 
                                 tax = parseFloat((amount - taxAmount).toFixed(2));
@@ -91,38 +95,74 @@ function getAllOrders() {
                                 amount = parseFloat(amount.toFixed(2));
                                 taxAmount = parseFloat((amount/1.06).toFixed(2));
                                 var tax = (amount-taxAmount).toFixed(2);
+                                amount = parseFloat((amount*1.2).toFixed(2));
+                                
+                                var bu = '广告投放';
                             }
                             
-                            if($.cookie('flowid') != null && $.cookie('flowid') != '' && $.cookie('oid') != null && $.cookie('oid') != '' && v.id == $.cookie('oid') && v.orderStates === '合同用印中') {
-                                findFlowByEsignFlowId(v.id,v.remarkSecond,v.outTradeNo,v.contractInfos[0].unitCode,shopName);
+                            var mallName, mallCode, buildingCode;
+                            var refundLink = '';
+                            switch (v.orgCode) {
+                                case '301001':
+                                    mallName = '河南洛阳正大广场';
+                                    mallCode = 'OLMALL190117000001';
+                                    buildingCode = 'OLBUILDING190117000001';
+                                    break;
+                                case '201001':
+                                    mallName = '上海宝山正大乐城';
+                                    mallCode = 'OLMALL180917000002';
+                                    buildingCode = 'OLBUILDING180917000005';
+                                    break;
+                                case '100001':
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
+                                case '204001':
+                                    mallName = '上海徐汇正大乐城';
+                                    mallCode = 'OLMALL180917000001';
+                                    buildingCode = 'OLBUILDING180917000006';
+                                    break;
+                                default:
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
+                            }
+                            
+                            if(v.payStates != '退款中' && v.payStates != '已退款'){
+                                refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';
+                            } else {
+                                refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 4px 8px; color: #999;">'+v.payStates+'</span></li>';
                             }
                                 
                             if(v.state == 1 && v.orderStates == '合同已生成'){
-                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'" style="color: #fa5151;">查看合同并用印</a></a></li>';
+                                alink = '<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同并用印</a></a></li>';
                             } else if(v.state == 1 && v.orderStates == '合同用印中'){
-                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                alink = '<li><a class="current" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.state == 1 && v.orderStates === '待付款订单'){
-                                alink = '<li class="weui-media-box__info__meta"><a href="/v2/bill?trade='+v.outTradeNo+'" style="color: #fa5151;">查看账单</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                alink = '<li><a class="current" href="/v2/bill?trade='+v.outTradeNo+'" style="color: #fa5151;">查看账单</a></li>\n\
+<li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.state == 1 && v.orderStates === '已完成订单'){
-                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link tenant-guide" href="javascript:;">进场指导</a></li>\n\
-        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
-        <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="javascript:;">申请退款</a></li>';
+                                alink = '<li><a class="current tenant-guide" href="javascript:;">进场指导</a></li>\n\
+        <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
+        '+refundLink+'';
                             }
                             
                             $('#orders').append('<div class="weui-panel">\n\
-        <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
+        <div class="weui-panel__hd">'+mallName+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
         <div class="weui-media-box__hd" style="width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
         <div class="weui-media-box__bd">\n\
-        <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
+        <div class="weui-form-preview__bd" style="font-size: 15px; padding: 0;">\n\
         <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">共'+qty+'件商品 合计: ¥'+numberWithCommas(amount)+'</span>\n\
+        <span class="weui-form-preview__value">'+v.contractInfos[0].unitDesc+'</span>\n\
+        <span class="weui-form-preview__value">共'+qty+'件商品 合计: <small>¥</small>'+numberWithCommas(amount)+'</span>\n\
         <span class="weui-form-preview__value"><small>(含税费 ¥'+numberWithCommas(tax)+')</small></span></div></div>\n\
-        <ul class="weui-media-box__info" style="float: right;">\n\
+        </div></div><ul class="weui-media-box__button">\n\
         '+alink+'\n\
-        </ul></div></div></div>');
+        </ul></div>');
                         }     
                     });
                 }
@@ -240,85 +280,6 @@ function hideOrder(id){
     });
 }
 
-function updateOrderToPay(id,type,trade,unit,shopName){
-    showLoading();
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+id+"&orderStates=待付款订单",
-        type: "POST",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                hideLoading();
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
-<div class="weui-mask">\n\
-</div><div class="weui-dialog">\n\
-<div class="weui-dialog__bd">您好，现甲乙双方用印完成，请查收账单并付款！</div>\n\
-<div class="weui-dialog__ft">\n\
-<a href="javascript: location.reload();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
-</div>\n\
-</div> \n\
-</div>';
-                var types;
-                if(type == 'leasing') {
-                    types = '商铺单元';
-                } else if(type == 'advertising') {
-                    types = '广告位';
-                } else if(type == 'events') {
-                    types = '场地单元';
-                }
-                
-                
-                saveMsgLog('订单待付款','您的订单【陆家嘴正大广场】'+types+shopName+'待付款，请前往我的订单管理页面查看。',trade, '我的消息',unit,'');
-                
-                if($('#iosDialog2').length > 0){
-                    $('#iosDialog2').remove();
-                }
-                $('body').append($iosDialog2);
-                $('#iosDialog2').fadeIn(200);
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}
-
-function findFlowByEsignFlowId(id,remarkSecond,outTradeNo,unitCode,shopName){
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/esign/findEsignFlow/?signFlowId="+$.cookie('flowid')+"&mobileNo="+$.cookie('uid'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            showLoading();
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(response.data.esignSignFlow.status == 2) {
-                    updateOrderToPay(id,remarkSecond,outTradeNo,unitCode,shopName);
-                }
-            }
-        }
-    })
-}
-
 function findUserCompanyByMobileNo(sc,outTradeNo,type){
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
@@ -357,4 +318,8 @@ function findUserCompanyByMobileNo(sc,outTradeNo,type){
             }
         }
     })
+}
+
+function requireRefund(code,unit,buildingCode,mallCode,trade,id) {
+    window.location.href = '/v2/negotiation?code='+code+'&unit='+unit+'&building='+buildingCode+'&mall='+mallCode+'&name=2&trade='+trade+'&order='+id;
 }

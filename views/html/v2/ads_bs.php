@@ -8,7 +8,7 @@
 
 <div class="page__bd">
     <div class="weui-panel__hd">
-        3个广告区
+        5个广告区
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
@@ -27,8 +27,8 @@
                     </small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">2F-3F</span>
-                    <span class="weui-mark-rb">户外灯箱</span>
+                    <span class="weui-mark-rb">户外</span>
+                    <span class="weui-mark-rb">外墙灯箱</span>
                 </div>
             </div>
         </div>
@@ -49,8 +49,8 @@
                     </small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">3F</span>
-                    <span class="weui-mark-rb">户外灯箱</span>
+                    <span class="weui-mark-rb">户外</span>
+                    <span class="weui-mark-rb">外墙灯箱</span>
                 </div>
             </div>
         </div>
@@ -58,21 +58,21 @@
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai-3.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai-3.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=47736700");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200825000003&type=ad&storeCode=OLMALL180917000002">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200825000003&type=ad&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">陆翔路招牌（右）</p>
+                    <p style="font-size: 14px;">陆翔路招牌 小 右</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
                         位于陆翔路沿街，车流量大。紧邻七号线及公交车站。环聚高档社区、顾村公园、华山医院等，具有较大消费人群。人流密集画面醒目可创造极佳的品牌宣传效应。
                     </small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">2F-3F</span>
-                    <span class="weui-mark-rb">户外灯箱</span>
+                    <span class="weui-mark-rb">户外</span>
+                    <span class="weui-mark-rb">外墙灯箱</span>
                 </div>
             </div>
         </div>
@@ -80,19 +80,21 @@
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai-2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai-2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=47736700");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200825000004&storeCode=OLMALL180917000002">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200825000004&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">陆翔路招牌（右）-2</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;"></small>
+                    <p style="font-size: 14px;">陆翔路招牌 小 中</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        位于陆翔路沿街，车流量大。紧邻七号线及公交车站。环聚高档社区、顾村公园、华山医院等，具有较大消费人群。人流密集画面醒目可创造极佳的品牌宣传效应。
+                    </small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">2F-3F</span>
-                    <span class="weui-mark-rb">户外灯箱</span>
+                    <span class="weui-mark-rb">户外</span>
+                    <span class="weui-mark-rb">外墙灯箱</span>
                 </div>
             </div>
         </div>
@@ -100,19 +102,21 @@
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luxiangrd-zhaopai-1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luxiangrd-zhaopai-1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=47736700");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200825000005&storeCode=OLMALL180917000002">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200825000005&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">陆翔路招牌（右）-3</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;"></small>
+                    <p style="font-size: 14px;">陆翔路招牌 小 左</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        位于陆翔路沿街，车流量大。紧邻七号线及公交车站。环聚高档社区、顾村公园、华山医院等，具有较大消费人群。人流密集画面醒目可创造极佳的品牌宣传效应。
+                    </small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">2F-3F</span>
-                    <span class="weui-mark-rb">户外灯箱</span>
+                    <span class="weui-mark-rb">户外</span>
+                    <span class="weui-mark-rb">外墙灯箱</span>
                 </div>
             </div>
         </div>
@@ -139,6 +143,8 @@
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

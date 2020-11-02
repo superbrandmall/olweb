@@ -3,10 +3,14 @@ $.shoppingcart = new Array();
 $.favorites = new Array();
 $.favoritesId = new Array();
 
+$.range = new Array();
+$.availableAdsUnit = new Array();
+
 $.order = {
     copy: "",
     uscc: "",
-    company: ""
+    company: "",
+    businessScope: ""
 };
 
 var d = new Date();
@@ -18,8 +22,32 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
     
 $(document).ready(function(){
-    getMyFavorites();
+    getAdScheduleInfo();
     GetAdInfo();
+    
+    if($.cookie('uid') != '' && $.cookie('uid') != null){
+        getMyFavorites();
+    }
+    
+    if($.cookie('startDate_ad') != '' && $.cookie('startDate_ad') != null){
+        $('.date-start').val($.cookie('startDate_ad'));
+    }
+    
+    if($.cookie('endDate_ad') != '' && $.cookie('endDate_ad') != null){
+        $('.date-end').val($.cookie('endDate_ad'));
+    }
+    
+    if($.cookie('result_ad') != '' && $.cookie('result_ad') != null){
+        $('#days').text($.cookie('result_ad')+'天');
+    }
+    
+    if($.cookie('deposit_ad') != '' && $.cookie('deposit_ad') != null){
+        $('#deposit').text('¥'+numberWithCommas($.cookie('deposit_ad')));
+    }
+    
+    if($.cookie('subTotal_ad') != '' && $.cookie('subTotal_ad') != null){
+        $('#subTotal').text('¥'+numberWithCommas($.cookie('subTotal_ad')));
+    }
     
     $('.slide').swipeSlide({
         autoSwipe: true,//自动切换默认是
@@ -143,46 +171,53 @@ function showExpectDatePicker(month,id,dates,type) {
             }
 
             $('#'+id).val(result[0].label.replace("年","-") + month + ("-") + date);
+            
             if(type == 0){
                 var sEnd = IncrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('startDate',result[0].label.replace("年","-") + month + ("-") + date);
+                $.cookie('startDate_ad',result[0].label.replace("年","-") + month + ("-") + date);
                 var vdate = [];
                 $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo){
-                        vdate.push(v.date);
-                    }
-                })
-   
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sEnd, vdate) == -1){
-                        if($('.date-end').val() != '' && $('.date-end').val() > DecrDate(sEnd)){
-                            $d('.date-end').val(DecrDate(sEnd));
-                        } else if($('.date-end').val() == '') {
-                            $('.date-end').val(DecrDate(sEnd));
-                        }
-                        getSubTotal(id);
-                        return false;
-                    } else {
-                        sEnd = IncrDate(sEnd);
-                    }
-                }
-            } else if(type == 1) {
-                var sStart = DecrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('endDate',result[0].label.replace("年","-") + month + ("-") + date);
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo){
+                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) < 0){
                         vdate.push(v.date);
                     }
                 })
                 
                 for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sStart, vdate) == -1){
+                    if($.inArray(sEnd, vdate) < 0){
+                        if($('.date-end').val() != '' && $('.date-end').val() > DecrDate(sEnd)){
+                            $('.date-end').val(DecrDate(sEnd));
+                            $.cookie('endDate_ad',DecrDate(sEnd));
+                        } else if($('.date-end').val() == '') {
+                            $('.date-end').val(DecrDate(sEnd));
+                            $.cookie('endDate_ad',DecrDate(sEnd));
+                        }
+                        
+                        getSubTotal(id);
+                        return false;
+                    } else {
+                        sEnd = IncrDate(sEnd);
+                    }
+                }            
+            } else if(type == 1) {
+                var sStart = DecrDate(result[0].label.replace("年","-") + month + ("-") + date);
+                $.cookie('endDate_ad',result[0].label.replace("年","-") + month + ("-") + date);
+                var vdate = [];
+                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
+                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) < 0){
+                        vdate.push(v.date);
+                    }
+                })
+                
+                for(var x=0;x<vdate.length;x++){
+                    if($.inArray(sStart, vdate) < 0){
                         if($('.date-start').val() != '' && $('.date-start').val() < IncrDate(sStart)){
                             $('.date-start').val(IncrDate(sStart));
+                            $.cookie('startDate_ad',IncrDate(sStart));
                         } else if($('.date-start').val() == '') {
                             $('.date-start').val(IncrDate(sStart));
+                            $.cookie('startDate_ad',IncrDate(sStart));
                         }
+                        
                         getSubTotal(id);
                         return false;
                     } else {
@@ -210,6 +245,9 @@ function GetAdInfo(){
                 break;
             case 'OLMALL180917000003':
                 mall = 'shanghai-sbm';
+                break;
+            case 'OLMALL180917000001':
+                mall = 'xuhui-tm';
                 break;
             default:
                 mall = 'shanghai-sbm';
@@ -266,7 +304,7 @@ function GetAdInfo(){
                                 src = v.advertisingImagesWxList[0].imagePath;
                             }
                 
-                            findUserCompanyByMobileNo(v.unitCode,v.code,v.size,v.material,v.unitDescChs,v.dailyPrice,src,v.remarkFirst);
+                            findUserCompanyByMobileNo(v.unitCode,v.code,v.size,v.material);
                         }
                         
                         var index = $.inArray(getURLParameter('id'), $.favorites);
@@ -287,8 +325,9 @@ function GetAdInfo(){
                         $('#ad_size').text(v.size || '');
                         $('#ad_material').text(v.material || '');
                         $('#ad_floor').text(v.floor || '');
+                        $('#ad_price_tax').text('¥ '+v.dailyPrice || '');
                         $('#ad_price').text('¥ '+numberWithCommas(parseFloat((v.dailyPrice*1.06).toFixed(2))) || '');
-                        $('#ad_frequency').text('/'+v.remarkFirst || '');
+                        $('#ad_frequency').text(v.remarkFirst || '');
                         $('#ad_desc').text(v.descChs || '');
                         
                         var floor = v.remarkSecond;
@@ -319,6 +358,11 @@ function GetAdInfo(){
                         $('#vr').click(function () {
                             showVR(v.vr);
                         })
+                        
+                        if(v.typeChs != 'LED/LCD/数字化'){
+                            $('#ad_price_frequency').parent().parent().parent().hide();
+                        }
+                        
                         return false; 
                     }
                     
@@ -335,8 +379,8 @@ function GetAdInfo(){
                 if(quantity == 1){
                     style = " display: none;";
                 }
-    
-                $('#ad_price_frequency').append('<div class="weui-cell__ft" style="float: right;">\n\
+                
+                $('#ad_price_frequency').html('<div class="weui-cell__ft" style="text-align: center;">\n\
                     <div class="weui-count">\n\
                         <a class="weui-count__btn weui-count__decrease"></a>\n\
                         <input id="qty_'+getURLParameter('id')+'" class="weui-count__number" type="number" value="1" min="0" max="'+quantity+'" readonly />\n\
@@ -376,7 +420,7 @@ function getAdScheduleInfo() {
                 hideLoading();
                 var adsSchedule = [];
                 $.each(response.data, function(i,v){
-                    if(v.unitType == 'ADS'){
+                    if(v.unitType == 'ADS' && v.shopNo == getURLParameter('id')){
                         adsSchedule.push(v);
                     }
                 });
@@ -396,9 +440,10 @@ function getSubTotal() {
     var subTotal = 0;
     var subItems = 0;
     var rentAmount = 0;
+    var deposit = 0;
     $.each($.parseJSON(sessionStorage.getItem("ads")), function(i,v){
         if(getURLParameter('id') == v.code){
-            rentAmount = parseFloat((v.dailyPrice*1.06).toFixed(2));
+            rentAmount = v.dailyPrice;
         }
     })
             
@@ -414,17 +459,42 @@ function getSubTotal() {
     var eArr = eDate.split("-");
     var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
     var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-    result = (eRDate-sRDate)/(24*60*60*1000) || 1;
-    amount = rentAmount * qty * result;
-    subTotal = amount;
+    result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+    $('#days').text(result+'天');
+    $.cookie('result_ad',result);
+    amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
+    deposit = parseFloat((amount*0.2).toFixed(2));
+    $.cookie('deposit_ad',deposit);
+    subTotal = parseFloat((amount+deposit).toFixed(2));
     subItems = qty;
-    
-    $('#subTotal').text(numberWithCommas(subTotal.toFixed(2)));
-    $.cookie('subtotal',subTotal.toFixed(2));
+    $('#deposit').text('¥'+numberWithCommas(deposit));
+    $('#subTotal').text('¥'+numberWithCommas(subTotal));
+    $.cookie('subTotal_ad',subTotal);
     $.cookie('subqty',subItems);
+    
+    $.range = [];
+    for(var d=0;d<result;d++){
+        $.range.push(sDate);
+        sDate = IncrDate(sDate);
+    }
+    
+    $.each($.range, function(index,value){
+        $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
+            if(v.unitType == 'ADS' && v.date == value && v.shopNo == getURLParameter('id')){
+                var inArray = $.inArray(v.unitCode, $.availableAdsUnit);
+                if(v.enable == 1 && inArray == -1){
+                    $.availableAdsUnit.push(v.unitCode);
+                }
+            }
+        })
+    })
+    
+    sessionStorage.setItem("availableAdsUnit_ad", JSON.stringify($.availableAdsUnit) );    
+    var quantity = $.availableAdsUnit.length;
+    $('#qty_'+getURLParameter('id')).attr('max',quantity);
 }
 
-function findUserCompanyByMobileNo(ut,sc,sz,sp,ud,pr,img,un){
+function findUserCompanyByMobileNo(ut,sc,sz,sp){
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
         type: "POST",
@@ -449,7 +519,8 @@ function findUserCompanyByMobileNo(ut,sc,sz,sp,ud,pr,img,un){
                     if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
                         $.order.uscc = response.data[0].uscc;
                         $.order.company = response.data[0].name;
-                        saveOrder(ut,sc,sz,sp,ud,pr,img,un);
+                        $.order.businessScope = response.data[0].businessScope;
+                        saveOrder(ut,sc,sz,sp);
                     }
                 } else {
                     window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=ad&storeCode='+getURLParameter('storeCode');
@@ -459,7 +530,7 @@ function findUserCompanyByMobileNo(ut,sc,sz,sp,ud,pr,img,un){
     })
 }
 
-function saveOrder(ut,sc,sz,sp,ud,pr,img,un){
+function saveOrder(ut,sc,sz,sp){
     var orgCode = '100001';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         switch (getURLParameter('storeCode')) {
@@ -482,10 +553,6 @@ function saveOrder(ut,sc,sz,sp,ud,pr,img,un){
     var shopCode = sc;
     var size = sz;
     var spec = sp;
-    var unitDesc = ud;
-    var dailyPrice = pr;
-    var firstImage = img;
-    var unitName = un;
         
     /* 
      * @订单状态  
@@ -503,69 +570,11 @@ function saveOrder(ut,sc,sz,sp,ud,pr,img,un){
 
     var map = {
         "amount": 100000,
-        "appid": "test",
+        "appid": "",
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": unit,
-        "contractInfos": [
-          {
-            "amount": $.cookie('subtotal'),
-            "bizScope": "testss",
-            "breachAmount": "",
-            "code": unit,
-            "depositAmount": parseFloat(($.cookie('subtotal')*0.2).toFixed(2)),
-            "electricBillFlag": "1",
-            "endDate": $.cookie('endDate'),
-            "enterDate": $.cookie('startDate'),
-            "isCleaning": "1",
-            "isSecurity": "1",
-            "isService": "1",
-            "mobileNo": $.cookie('uid'),
-            "name": "test name",
-            "num": 1,
-            "openDate": $.cookie('startDate'),
-            "orgCode": orgCode,
-            "otherFlag": "",
-            "outTradeNo": outTradeNo,
-            "remarkFifth": "",
-            "remarkFirst": firstImage,
-            "remarkFourth": "",
-            "remarkSecond": unitName,
-            "remarkThird": $.cookie('subqty'),
-            "salesFlag": "1",
-            "serviceDepositAmount": 3000,
-            "size": size, //广告尺寸规格
-            "spec": spec,
-            "startDate": $.cookie('startDate'),
-            "unitCode": unit,
-            "unitDesc": unitDesc,
-            "unitId": "sfsdfsfasfsfasdfasdf",
-            "userId": "10000101",
-            "vipFlag": "1",
-            "wxCardFlag": "1",
-            "area": 1 //广告默认传1
-          }
-        ],
         "contractNo": "",
-        "contractTermInfos": [
-          {
-            "amount": $.cookie('subtotal'),
-            "code": "1",
-            "endDate": $.cookie('endDate'),
-            "name": unitDesc,
-            "orgCode": orgCode,
-            "outTradeNo": outTradeNo,
-            "rentAmount": parseFloat((dailyPrice*1.06).toFixed(2)),
-            "startDate": $.cookie('startDate'),
-            "taxAmount": dailyPrice,
-            "termType": "B103",
-            "termTypeName": "固定租金",
-            "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
-            "area": 1,
-            "remarkFirst": shopCode
-          }
-        ],
         "contractType": "R4",//R1租赁 R4广告 R5场地
         "mobileNo": $.cookie('uid'),
         "name": "wechatol",
@@ -573,14 +582,102 @@ function saveOrder(ut,sc,sz,sp,ud,pr,img,un){
         "orgCode": orgCode,
         "outTradeNo": outTradeNo,
         "payStates": "未支付", //支付状态
-        "tenantId": "海鼎公司uuid",
+        "tenantId": "",
         "tenantName": $.order.company,
-        "tenantNo": "海鼎公司编号",
+        "tenantNo": "",
         "tenantOrg": $.order.uscc, //uscc
-        "userId": "sfsdfsfasfsfasdfasdf",
+        "userId": $.cookie('uid'),
         "remarkFirst": shopCode,
         "remarkSecond": 'advertising'
     };
+    
+    var contractInfos = [];
+    var contractTermInfos = [];  
+    var indexs = 0;
+    
+    var code, unitDesc, size, spec, frequency, amount, taxAmount, rentAmount, deposit, src;
+    $.each($.parseJSON(sessionStorage.getItem("availableAdsUnit_ad")), function(index,value){
+        if(indexs < $.cookie('subqty')){
+            $.each($.parseJSON(sessionStorage.getItem("ads")), function(k,y){
+                if(value == y.unitCode){
+                    code = y.code;
+                    unitDesc = y.unitDescChs;
+                    size = y.size;
+                    spec = y.material;
+                    frequency = y.remarkFirst;
+                    amount = parseFloat((y.dailyPrice * $.cookie('result_ad') * 1.06).toFixed(2));
+                    taxAmount = parseFloat((y.dailyPrice * $.cookie('result_ad')).toFixed(2));
+                    rentAmount = y.dailyPrice;
+                    deposit = parseFloat((amount * 0.2).toFixed(2));
+                    src = '/views/assets/base/img/content/mall/1s.jpg';
+                    if(y.advertisingImagesWxList != null && y.advertisingImagesWxList.length > 0){
+                        src = y.advertisingImagesWxList[0].imagePath;
+                    }
+                }
+            })
+
+            contractInfos.push({
+                "amount": amount,
+                "bizScope": $.order.businessScope,
+                "breachAmount": "",
+                "code": value,
+                "depositAmount": deposit,
+                "electricBillFlag": "1",
+                "endDate": $.cookie('endDate_ad'),
+                "enterDate": $.cookie('startDate_ad'),
+                "isCleaning": "1",
+                "isSecurity": "1",
+                "isService": "1",
+                "mobileNo": $.cookie('uid'),
+                "name": "test name",
+                "num": 1,
+                "openDate": $.cookie('startDate_ad'),
+                "orgCode": orgCode,
+                "otherFlag": "",
+                "outTradeNo": outTradeNo,
+                "remarkFifth": "",
+                "remarkFirst": src,
+                "remarkFourth": "",
+                "remarkSecond": frequency,
+                "remarkThird": "1",
+                "salesFlag": "1",
+                "serviceDepositAmount": 0,
+                "size": size, //广告尺寸规格
+                "spec": spec,
+                "startDate": $.cookie('startDate_ad'),
+                "unitCode": value,
+                "unitDesc": unitDesc,
+                "unitId": "", //uuid
+                "userId": $.cookie('uid'),
+                "vipFlag": "1",
+                "wxCardFlag": "1",
+                "area": 1, //广告默认传1
+                "shopCode": code
+            })
+
+            contractTermInfos.push({
+                "amount": amount,
+                "code": "1",
+                "endDate": $.cookie('endDate_ad'),
+                "name": unitDesc,
+                "orgCode": orgCode,
+                "outTradeNo": outTradeNo,
+                "rentAmount": rentAmount,
+                "startDate": $.cookie('startDate_ad'),
+                "taxAmount": taxAmount,
+                "termType": "B033",
+                "termTypeName": "固定租金",
+                "unitCode": value,
+                "unitId": "",
+                "area": 1,
+                "shopCode": code
+            })
+            indexs++;
+        }
+    })
+    
+    map.contractInfos = contractInfos;
+    map.contractTermInfos = contractTermInfos;
 
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
@@ -614,20 +711,23 @@ function saveOrder(ut,sc,sz,sp,ud,pr,img,un){
 }
 
 function getOrderByTradeNO(outTradeNo,unit) {
-    var mallName = '陆家嘴正大广场';
+    var mallName = '上海陆家嘴正大广场';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         switch (getURLParameter('storeCode')) {
             case 'OLMALL190117000001':
-                mallName = '洛阳国际广场';
+                mallName = '河南洛阳正大广场';
                 break;
             case 'OLMALL180917000002':
-                mallName = '宝山正大乐城';
+                mallName = '上海宝山正大乐城';
                 break;
             case 'OLMALL180917000003':
-                mallName = '陆家嘴正大广场';
+                mallName = '上海陆家嘴正大广场';
+                break;
+            case 'OLMALL180917000001':
+                mallName = '上海徐汇正大乐城';
                 break;
             default:
-                mallName = '陆家嘴正大广场';
+                mallName = '上海陆家嘴正大广场';
                 break;
         }
     }
@@ -646,7 +746,7 @@ function getOrderByTradeNO(outTradeNo,unit) {
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
-                generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】广告单元【'+unit+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】广告位置【'+unit+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -819,7 +919,7 @@ function getMyShoppingCart(bc,c,sc,uc){
                 if(response.data.length > 0) {
                     $.each(response.data, function(i,v){
                         if(v.remarkSecond == 1 && v.unitType == 'shopping-cart'){
-                            $.shoppingcart.push(v.remarkFirst);
+                            $.shoppingcart.push(v.shopCode);
                         }
                     });
                    
@@ -850,13 +950,13 @@ function addToShoppingCart(bc,c,sc,uc){
         "mobileNo": $.cookie('uid'),
         "name": "",
         "remarkFifth": "",
-        "remarkFirst": c,
+        "shopCode": c,
         "remarkFourth": "",
         "remarkSecond": 1,
         "remarkThird": "",
         "storeCode": sc,
         "unitCode": uc,
-        "unitType": "shopping-cart",
+        "unitType": "shopping-cart"
     }
     
     $.ajax({
@@ -881,7 +981,7 @@ function addToShoppingCart(bc,c,sc,uc){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                showToast();
+                //showToast();
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -925,8 +1025,8 @@ function getMyFavorites() {
         success: function (response, status, xhr) {
             if (response.code === 'C0') {
                 $.each(response.data, function (i, v) {
-                    if (v.remarkSecond == 1 && v.unitType == 'ads') {
-                        $.favorites.push(v.remarkFirst);
+                    if (v.remarkSecond == 1 && v.unitType == 'ADS') {
+                        $.favorites.push(v.shopCode);
                         $.favoritesId.push(v.id);
                     }
                 });
@@ -948,7 +1048,7 @@ function addToFavorite(bc, c, sc, uc) {
         "mobileNo": $.cookie('uid'),
         "name": "",
         "remarkFifth": "",
-        "remarkFirst": c,
+        "shopCode": c,
         "remarkFourth": "",
         "remarkSecond": 1,
         "remarkThird": "",
@@ -1006,13 +1106,13 @@ function removeFavorite(id, bc, c, sc, uc) {
         "mobileNo": $.cookie('uid'),
         "name": "",
         "remarkFifth": "",
-        "remarkFirst": c,
+        "shopCode": c,
         "remarkFourth": "",
         "remarkSecond": 0,
         "remarkThird": "",
         "storeCode": sc,
         "unitCode": uc,
-        "unitType": "event"
+        "unitType": "ads"
     }
 
     $.ajax({

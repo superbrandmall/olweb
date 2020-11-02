@@ -9,7 +9,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div class="page__bd">
     <div class="weui-form__control-area">
         <div class="weui-cells__group weui-cells__group_form">
-            <div class="weui-cells__title">请告诉我们您期望的合同条件：</div>
+            <div class="weui-cells__title">请告诉我们您的期望：</div>
             <div class="weui-cells weui-cells_checkbox">
                 <label class="weui-cell weui-cell_active weui-check__label" style="display: block;" for="years_flag">
                     <div class="weui-cell__hd" style="display: inline-block;">
@@ -25,6 +25,20 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="weui-textarea-counter"><span>0</span>/50</div>
                 </div>
                 <input type="hidden" id="years_result">
+                <label class="weui-cell weui-cell_active weui-check__label" style="display: block;" for="term_flag">
+                    <div class="weui-cell__hd" style="display: inline-block;">
+                        <input type="checkbox" class="weui-check" name="term_flag" id="term_flag" />
+                        <i class="weui-icon-checked"></i>
+                    </div>
+                    <div class="weui-cell__bd" style="display: inline-block; vertical-align: bottom;">
+                        <p>合同条款</p>
+                    </div>
+                </label>
+                <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
+                    <textarea class="weui-textarea" placeholder="请填写您对合同条款的意见" rows="1" id="term_reason"></textarea>
+                    <div class="weui-textarea-counter"><span>0</span>/50</div>
+                </div>
+                <input type="hidden" id="term_result">
                 <label class="weui-cell weui-cell_active weui-check__label" style="display: block;" for="free_flag">
                     <div class="weui-cell__hd" style="display: inline-block;">
                         <input type="checkbox" name="free_flag" class="weui-check" id="free_flag"/>
@@ -69,11 +83,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <input type="hidden" id="deduct_result">
             </div>
             <br>
-            <div class="weui-cells__title">反馈与说明</div>
+            <div class="weui-cells__title">其他反馈</div>
             <div class="weui-cells weui-cells_form">
                 <div class="weui-cell">
                     <div class="weui-cell__bd">
-                        <textarea id="reason" class="weui-textarea" placeholder="请填写您的反馈与说明" rows="3"></textarea>
+                        <textarea id="reason" class="weui-textarea" placeholder="请填写其他反馈" rows="3"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/200</div>
                     </div>
                 </div>
@@ -94,5 +108,4 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

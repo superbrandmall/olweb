@@ -1,5 +1,6 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-shopping-cart-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/zepto.weui.js"></script>'
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-shopping-cart-admin.js"></script>';
 ?>
 
 <div class="weui-article" style="margin-top: 20px; padding: 0 16px;">
@@ -7,7 +8,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div class="page__bd">
-    <div class="weui-panel">
+    <div id="shoppingCartEmpty" class="weui-panel">
         <div class="weui-panel__hd">
             <div class="icon-box">
                 <i class="weui-icon-info weui-icon_msg"></i>
@@ -20,7 +21,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div style="position: fixed; bottom: 63px; left: 0; right: 0;text-align: center; z-index: 2;">
+<div id="checkPay" style="position: fixed; bottom: 63px; left: 0; right: 0;text-align: center; z-index: 2;">
     <div class="weui-cells" style="margin-top: 0;">
         <div class="weui-cell" style="margin-bottom: 6px;">
             <div class="weui-cells_checkbox">
@@ -33,15 +34,18 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </label>
             </div>
             <div class="weui-cell__bd">
-                <p style="font-size: 14px;">合计: <span style="color: #b43018;">¥</span> <span id="subTotal" style="color: #b43018;"></span><small> (含税)</small></p>
+                <p style="font-size: 14px;">合计: <span style="color: #b43018;">¥</span> <span id="subTotal" style="color: #b43018;">选择档期查看总价</span><small> (含税及押金)</small></p>
             </div>
             <div class="weui-cell__ft">
-                <a class="weui-btn weui-btn_primary" id="confirm_price" href="javascript:;" style="width: initial; font-size: 14px;">结算 <small>(<span id="subQTY"></span><small>)</small></a>
+                <a class="weui-btn weui-btn_primary" id="confirm_price" href="javascript:;" style="width: initial; font-size: 14px; padding: 5px 8px 6px;">结算 <small>(<span id="subQTY"></span><small>)</small></a>
             </div>
         </div>
     </div>
 </div>
 <br><br><br><br><br>
+
+<?php include ('timeline/step_two.php'); ?>
+
 <?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>
