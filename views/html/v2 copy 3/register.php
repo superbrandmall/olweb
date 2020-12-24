@@ -2,13 +2,10 @@
     $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/register-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 啊呀，我都不知道怎样称呼您！？悄悄告诉我一些您的信息，我们交个朋友吧！</div>
-
-<form id="register_form">
+<form id="register_form" style="margin-top: 20px;">
     <div class="page__bd">
-        <div class="weui-form__text-area">
-            <h2 class="weui-form__title">个人资料</h2>
+        <div class="weui-form__text-area" style="margin-top: 20px;">
+            <h2 class="weui-form__title">品牌资料</h2>
         </div>
         <div class="weui-form__control-area">
             <div id="brands" class="weui-cells__group weui-cells__group_form" style="margin-top: 24px;">
@@ -51,7 +48,7 @@
         <br>
         <div class="weui-form__control-area">
             <div class="weui-cells__group weui-cells__group_form">
-                <div class="weui-cells__title">个人信息</div>
+                <div class="weui-cells__title">联系人信息</div>
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell weui-cell_active">
                         <div class="weui-cell__hd errorDiv" id="errorcontainer-contact_name_1"><label class="weui-label">姓名*</label></div>

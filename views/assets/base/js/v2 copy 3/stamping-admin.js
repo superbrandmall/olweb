@@ -60,11 +60,14 @@ function getAllOrdersToStamping() {
                                 var qty = v.remarkThird;
                             }
                             
+                            if(getURLParameter('flowid') && getURLParameter('flowid') != '' && getURLParameter('oid') && getURLParameter('oid') != '' && v.id == getURLParameter('oid') && v.orderStates === '合同用印中') {
+                                findFlowByEsignFlowId(v.id,v.remarkSecond,v.outTradeNo,v.contractInfos[0].unitCode,shopName);
+                            }
+                            
                             if(v.orderStates === '合同已生成'){
                                 alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'" style="color: #fa5151;">查看合同并用印</a></a></li>';
                             } else if(v.orderStates === '合同用印中'){
-                                alink = '<li class="weui-media-box__info__meta"><a href=\'javascript: updateOrderToPay("'+v.id+'","'+v.remarkSecond+'","'+v.outTradeNo+'","'+v.contractInfos[0].unitCode+'","'+shopName+'");\' style="color: #fa5151;">用印完成</a></li>\n\
-<li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                alink = '<li class="weui-media-box__info__meta"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.orderStates === '待付款订单'){
                                 alink = '<li class="weui-media-box__info__meta"><a href="/v2/bill?trade='+v.outTradeNo+'" style="color: #fa5151;">查看账单</a></li>\n\
 <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><a class="weui-link" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
@@ -74,7 +77,7 @@ function getAllOrdersToStamping() {
         <div class="weui-panel__hd">'+v.contractInfos[0].unitDesc+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
         <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
         <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
-        <div class="weui-media-box__hd" style="width: 100px; height: 80px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
+        <div class="weui-media-box__hd" style="width: 100px; height: 130px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
         <div class="weui-media-box__bd">\n\
         <div class="weui-form-preview__bd" style="font-size: 15px;">\n\
         <div class="weui-form-preview__item">\n\
@@ -124,8 +127,8 @@ function getShopInfo(sc){
                 }
                 
                 img = '/' + response.data.firstImage;
-                if(response.data.images.length !== 0){
-                    img = response.data.images[0].image;
+                if(response.data.unit != null){
+                    img = "/views/assets/base/img/content/backgrounds/leasing/"+response.data.unit+".jpg";
                 }
             }
         }
@@ -188,4 +191,27 @@ function updateOrderToPay(id,type,trade,unit,shopName){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function findFlowByEsignFlowId(id,remarkSecond,outTradeNo,unitCode,shopName){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/esign/findEsignFlow/?signFlowId="+getURLParameter('flowid')+"&mobileNo="+$.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(response.data.esignSignFlow.status == 2) {
+                    updateOrderToPay(id,remarkSecond,outTradeNo,unitCode,shopName);
+                }
+            }
+        }
+    })
 }

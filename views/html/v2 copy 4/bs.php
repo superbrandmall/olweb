@@ -1,185 +1,234 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>'
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
         . '<script type="text/javascript" src="/views/assets/base/js/v2/bs-admin.js"></script>';
 ?>
 
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
+<img src='/views/assets/base/img/content/backgrounds/judyhao.png' width="50px;" alt="" style="z-index: 1; position: absolute; top: 15px; left: 15px;">
 
-<audio id="voiceplayer" src="/upload/audio/sbm-voice.mp3" preload="meta" style="display: none;"></audio>
+<div style="position: relative; margin-bottom: 20px;">
+    <img src="/views/assets/base/img/content/backgrounds/grey-blue-leasing.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
+    <img src="/views/assets/base/img/content/backgrounds/leasing-title.png" class="wow slideInRight" data-wow-delay="0.4s" data-wow-offset="300" style="position: absolute; left: 16px; right: 16px; width: 90%; bottom: 0; margin: 0 auto;" />
+    <a href="javascript:;" class="wow fadeInUp" data-wow-delay="0.6s" data-wow-offset="300" style="position: absolute; color: #fff; top: 46%; left: 7%; font-size: 14px; font-weight: bold;">开新铺</a>
+    <a href="/v2/events-bs?type=events" class="wow fadeInUp" data-wow-delay="0.8s" data-wow-offset="300" style="position: absolute; color: #fff; top: 37%; left: 45%; font-size: 14px;">办活动</a>
+    <a href="/v2/ads-bs?type=ads" class="wow fadeInUp" data-wow-delay="1.0s" data-wow-offset="300" style="position: absolute; color: #fff; top: 24%; left: 70%; font-size: 14px;">做广告</a>
+</div>
 
-<div class="slide" id="slide1" style="height: calc(100vh - 60px); max-height: 100%;">
-    <img src="/views/assets/base/img/content/backgrounds/sbm/logo.png" alt="正大" height="40" style="position: absolute; left: 0; right: 0; top: 10px; margin: 0 auto; z-index: 3;" />     
-    <ul>
+<div class="page__bd" style="background: #0C31FA;">
+    <?php include ('timeline/step_one.php'); ?>
+    <ul class="collapse">
+        <li class="js-show">
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item"><i class="fa fa-bullhorn" aria-hidden="true"></i> 项目介绍</div>
+                <i class="icon icon-74"></i>
+            </div>
+            <div class="page-category js-categoryInner">
+                <div class="weui-cells page-category-content" style="background: #0C31FA; color: #fff;">
+                    <div class="content">
+                        <div class="weui-media-box weui-media-box_appmsg" style="padding: 0;">
+                            <div class="weui-media-box__bd">
+                                <div style="position: relative;">
+                                    <img class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/bs/mall-view.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                </div>
+                                <div style="position: relative; margin: 10px 0 0 15px;">
+                                    <b style="font-size: 20px;">上海宝山正大乐城</b><small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                                        位于北上海核心区域——顾村，是该区域首座一站式购物中心。轨交7号线顾村公园站上盖，南靠上海最大的城市郊野森林公园顾村公园、东邻华山医院北院，周边18个优质社区环伺、覆盖超12万常住居民。与商场无缝连接的地铁站全年客流超720万，樱花节周末单日更是超20万人次，商场每年客流超1300万人次
+                                    </small>
+                                </div>
+                                <div style="margin: 5px 15px 10px;">
+                                    <span class="weui-mark-rb">建筑面积 4.85万方</span>
+                                    <span class="weui-mark-rb">租赁面积 3.09万方</span>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 style="margin: 18px; color: #ccb57a;">国际顶级设计团队倾力打造</h3>
+                        <img src="/views/assets/base/img/content/backgrounds/bs/architector.jpg" style="width: 100%; margin-bottom: 10px;" />
+                        <div class="weui-grids" style="background-color: #fff; margin-top: -5px;">
+                            <a href="javascript:" class="weui-grid wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="300" style="width: 33.3%">
+                                <div class="weui-grid__icon">
+                                    <img src="/views/assets/base/img/content/backgrounds/sbm/Area/image-icon1.png" alt="品牌" style="width: 35px; margin: 0 auto;">
+                                </div>
+                                <p class="weui-grid__label" style="font-size: 11px; margin-bottom: 5px; text-align: center;">
+                                    交通
+                                </p>
+                                <p class="weui-grid__label" style="font-size: 7px; text-align: center;">轨交年进出站超720万人次<br>顾村公园单日最高超30万人次<br>项目每年客流超1300万人次</p>
+                            </a>
+                            <a href="javascript:" class="weui-grid wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="300" style="width: 33.3%">
+                                <div class="weui-grid__icon">
+                                    <img src="/views/assets/base/img/content/backgrounds/sbm/Area/image-icon2.png" alt="技术" style="width: 35px; margin: 0 auto;">
+                                </div>
+                                <p class="weui-grid__label" style="font-size: 11px; margin-bottom: 5px; text-align: center;">
+                                    技术
+                                </p>
+                                <p class="weui-grid__label" style="font-size: 7px; text-align: center;">价格公开透明<br>选铺精准便捷<br>流程简易安全</p>
+                            </a>
+                            <a href="javascript:" class="weui-grid wow fadeInUp" data-wow-delay="0.9s" data-wow-offset="300" style="width: 33.3%">
+                                <div class="weui-grid__icon">
+                                    <img src="/views/assets/base/img/content/backgrounds/sbm/Area/image-icon3.png" alt="优势" style="width: 35px; margin: 0 auto;">
+                                </div>
+                                <p class="weui-grid__label" style="font-size: 11px; margin-bottom: 5px; text-align: center;">
+                                    优势
+                                </p>
+                                <p class="weui-grid__label" style="font-size: 7px; text-align: center;">宝山顾村核心<br>毗邻华山医院北院<br>3公里内居住40万人口</p>
+                            </a>
+                        </div>
+                        <!--<img src="/views/assets/base/img/content/backgrounds/bs/map.jpg" style="width: 100%; margin-top: -10px;" />-->
+                    </div>
+                </div>
+            </div>
+        </li>
         <li>
-            <a href="javascript:;">
-                <img src='https://via.placeholder.com/750x1151' alt="">
-            </a>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item"><i class="fa fa-diamond" aria-hidden="true"></i> 各楼层主题区</div>
+                <i class="icon icon-74"></i>
+            </div>
+            <div class="page-category js-categoryInner">
+                <div class="weui-cells page-category-content">
+                    <div class="content">
+                        <div class="weui-flex">
+                            <div class="weui-flex__item" style="position: relative;">
+                                <div id="3F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
+                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/03F.png" alt="03F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
+                                </div>
+                                <div id="2F" class="floors floor_plan" style="display: none; position: relative;;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
+                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/02F.png" alt="02F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
+                                </div>
+                                <div id="1F" class="floors floor_plan" style="position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
+                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/01F.png" alt="01F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
+                                </div>
+                                <div id="B1F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
+                                    <img src="/views/assets/base/img/content/backgrounds/bs/Floor/0B1F.png" alt="B1F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
+                                    <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
+                                        <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
+                                    </span>
+                                </div>
+                              
+                                <div id="3F_desc" class="floors_desc" style="display: none; margin-top: 10px;">学前教育、兴趣培养，让宝贝全面发展</div>
+                                <div id="2F_desc" class="floors_desc" style="display: none; margin-top: 10px;">遛娃学习、家庭聚餐两不误</div>
+                                <div id="1F_desc" class="floors_desc" style="margin-top: 10px;">珠宝首饰、数码、快时尚、网红餐饮一个都不能少</div>
+                                <div id="B1F_desc" class="floors_desc" style="display: none; margin-top: 10px;">品牌美食、运动装备，体验一站式轻松购物</div>
+                            </div>
+                            <div style="margin-top: -50px;">
+                                <div class="macaroon">
+                                    <a href="javascript: showFloorVR('3F')" style="margin-top: 45px; margin-bottom: 60px;">
+                                        <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/3F.png" alt="3F">
+                                    </a>
+                                    <a href="javascript: showFloorVR('2F')" style="margin-bottom: 60px;">
+                                        <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/2F.png" alt="2F">
+                                    </a>
+                                    <a href="javascript: showFloorVR('1F')" class="active" style="margin-bottom: 60px;">
+                                        <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/1F.png" alt="1F">
+                                        <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">3</span>
+                                    </a>
+                                    <a href="javascript: showFloorVR('B1F')" style="margin-bottom: 45px;">
+                                        <img src="/views/assets/base/img/content/backgrounds/bs/macaroon/B1.png" alt="B1">
+                                        <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">2</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item"><i class="fa fa-map" aria-hidden="true"></i> 楼层图 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 8px; width: 12px; display: inline-block;"></span> <small>推荐位置可点击</small></div>
+                <i class="icon icon-74"></i>
+            </div>
+            <div class="page-category js-categoryInner">
+                <div class="weui-cells page-category-content" style="background: #fff; color: #000;">
+                    <div class="content">
+                        <div class="weui-grids">
+                        <?php 
+                            for($i=3;$i>=0;$i--) {
+                        ?>
+                            <div style="position: relative;">
+                                <div id="L<?= $i ?>" class="weui-grid__icon" style="width: 100%;">
+                                    <img src="/views/assets/base/img/content/floor-plan/baoshan-tm/<?= $i ?>F.png" usemap="#Map_L<?= $i ?>">
+                                    <map name="Map_L<?= $i ?>" id="Map_L<?= $i ?>"></map>
+                                </div>
+                                <p class="weui-grid__label" style="font-size: 16px; position: absolute; top: 0; left: 0; width: auto; padding: 2px 4px; background: #0C31FA; color: #fff;"><?php $i > 0 ? $level = $i.'F' : $level = 'B1'; echo $level; ?></p>
+                            </div>
+                        <?php 
+                            }
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="weui-flex js-category">
+                <div class="weui-flex__item"><i class="fa fa-star-o" aria-hidden="true"></i> 业态选择 <small>(推荐位置)</small></div>
+                <i class="icon icon-74"></i>
+            </div>
+            <?php include ('categories.php'); ?>
         </li>
     </ul>
-    <div class="dot">
-        <span></span>
-    </div>
-</div>
-<div class="page__hd" style="background: #292929; padding: 16px 32px 8px;"><img src='https://via.placeholder.com/605x64' style="width: 100%;" alt=""></div>
-<div class="page__bd">
-    <img src="https://via.placeholder.com/750x707" style="width: 100%; margin-top: -10px;" />
-    <div style="margin-top: -10px; background-color: #3f3f3f; color: #fff;">
-        <div class="weui-media-box weui-media-box_appmsg floor-guide" style="padding: 0;">
-            <div class="weui-media-box__bd" style="height: 210px; background: url(https://via.placeholder.com/750x387); background-size: cover;">
-                <ul class="weui-media-box__info">
-                    <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("3F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=3&type=leasing">在线选铺</a></li>
-                </ul>
-            </div>
-            <div class="weui-media-box__bd" style="height: 210px; background: url(https://via.placeholder.com/750x387); background-size: cover;">
-                <ul class="weui-media-box__info">
-                    <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("2F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=2&type=leasing">在线选铺</a></li>
-                </ul>
-            </div>
-            <div class="weui-media-box__bd" style="height: 210px; background: url(https://via.placeholder.com/750x387); background-size: cover;">
-                <ul class="weui-media-box__info">
-                    <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("1F");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=1&type=leasing">在线选铺</a></li>
-                </ul>
-            </div>
-            <div class="weui-media-box__bd" style="height: 210px; background: url(https://via.placeholder.com/750x387); background-size: cover;">
-                <ul class="weui-media-box__info">
-                    <li class="weui-media-box__info__meta"><a href='javascript: showFloorVR("B1");'>VR</a></li>
-                    <li class="weui-media-box__info__meta"><a href="/v2/leasing?f=06&type=leasing">在线选铺</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="weui-grids mall-floors">
-        <div class="weui-slider-box">
-            <div id="slider" class="weui-slider">
-                <div class="weui-slider__inner">
-                    <div class="weui-slider__track"></div>
-                    <div class="weui-slider__handler"></div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-grid">
-            <a href="javascript:">B1</a>
-        </div>
-        <div class="weui-grid">
-            <a href="javascript:">1F</a>
-        </div>
-        <div class="weui-grid">
-            <a href="javascript:">2F</a>
-        </div>
-        <div class="weui-grid">
-            <a href="javascript:">3F</a>
-        </div>
-    </div>
-    
-    <div class="page__bd" style="font-size: 15px;">
-        <div class="business-block" style="height: 299px;">
-            <div style="position: relative; float: left; width: 28%; height: 100%; background: -webkit-linear-gradient(top,#d0b893,#a68d73); text-align: center;">
-                <img src="/views/assets/base/img/content/backgrounds/events/event-block-bg.png" style="height: 55%; margin-top: 40px;">
-                <a href="/v2/events" style="position: absolute; bottom: 20px; left: 0; right: 0; margin: 0 auto; text-align: center; z-index: 5;">
-                    <img src="/views/assets/base/img/content/backgrounds/events/more.png" style="width: 70%;">
-                </a>
-            </div>
-            <div class="owl-carousel owl-carousel1 owl-theme">
-                <div class="item">
-                    <a href="javascript:;">
-                        <img src="https://via.placeholder.com/538x429" alt="B1中心广场(户外)" height="299" />
-                        <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">B1中心广场(户外)</span>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="javascript:;">
-                        <img src="https://via.placeholder.com/538x429" alt="正门主通道天桥(户外)" height="299" />
-                        <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">正门主通道天桥(户外)</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="page__bd" style="font-size: 15px;">
-        <div class="business-block" style="height: 299px;">
-            <div class="owl-carousel owl-carousel1 owl-theme" style="float: left; width: 72%;">
-                <div class="item">
-                    <a href="javascript:;">
-                        <img src="https://via.placeholder.com/538x429" alt="陆翔路招牌(中)大" height="299" />
-                        <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">陆翔路招牌(中)大</span>
-                    </a> 
-                </div>
-                <div class="item">
-                    <a href="javascript:;">
-                        <img src="https://via.placeholder.com/538x429" alt="陆翔路招牌(中)小" height="299" />
-                        <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">陆翔路招牌(中)小</span>
-                    </a>
-                </div>
-                <div class="item">
-                    <a href="javascript:;">
-                        <img src="https://via.placeholder.com/538x429" alt="陆翔路招牌(右)" height="299" />
-                        <span style="position: absolute;top: 10px;left: 10px;color: #fff;font-weight: bold;">陆翔路招牌(右)</span>
-                    </a>
-                </div>
-            </div>
-            <div style="position: relative; height: 100%; background: -webkit-linear-gradient(top,#d0b893,#a68d73); text-align: center; float: left; width: 28%;">
-                <img src="/views/assets/base/img/content/backgrounds/ads/ad-block-bg.png" style="height: 55%; margin-top: 40px;">
-                <a href="/v2/ads" style="position: absolute; bottom: 20px; left: 0; right: 0; margin: 0 auto; text-align: center; z-index: 5;">
-                    <img src="/views/assets/base/img/content/backgrounds/events/more.png" style="width: 70%;">
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    <img src="https://via.placeholder.com/750x543" style="width: 100%; margin-top: -7px;" />
-    <img src="https://via.placeholder.com/746x637" style="width: 100%; margin-top: -10px;" />
-    <img src="https://via.placeholder.com/746x316" style="width: 100%; margin-top: -10px;" />
-    <img src="https://via.placeholder.com/746x766" style="width: 100%; margin-top: -10px;" />
-    <img src="https://via.placeholder.com/750x277" style="width: 100%; margin-top: -10px;" />
-    <img src="https://via.placeholder.com/572x381" style="width: 100%; margin-top: -10px;" />
-
-    <div class="owl-carousel owl-carousel2 owl-theme" style="margin-top: -10px;">
-        <div class="item">
-            <img src="https://via.placeholder.com/375x698" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/375x698" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/375x698" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/375x698" alt="" />
-        </div>
-        <div class="item">
-            <img src="https://via.placeholder.com/375x698" alt="" />
-        </div>
-    </div>
-    
-    
-    
-    
 </div>
 
-<br><br>
+<div class="js_dialog" id="floor_plan_viewer" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd" style="padding: 0; margin: 0;">
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" style="top: 0px; right: 10px; position: absolute;">x</a>
+            <div style="margin: 10px; color: #565d66;">
+                <strong id="floorNo"></strong>
+                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 推荐位置可点击    
+            </div>
+    
+            <img src="javascript:;" width="320" height="160" id="map">
+            <map></map>
+        </div>
+        <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
+            
+        </div>
+    </div>
+</div>
 
-<div id="gallery" class="weui-gallery" style="display: none;">
+<div id="recommend_empty_stores" class="weui-gallery" style="display: none; background: rgba(0,0,0,0.8); color: #fff;">
+    <h3 style="text-align: center; margin: 20px;"><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> <small>推荐位置可点击</small></h3>
+    <div id="empty_stores" class="weui-grids" style="height: 80vh; overflow: scroll;"></div>
+    <?php 
+        for($i=0;$i<100;$i++) {
+    ?>
+        <div id="J<?= $i ?>" class="weui-grid__icon" style="width: 100%; display: none;">
+            <img src="javascript:;" usemap="#Map_J<?= $i ?>" width="320" height="160">
+            <map name="Map_J<?= $i ?>" id="Map_J<?= $i ?>"></map>
+        </div>
+    <?php 
+        }
+    ?>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#gallery").hide();'></i>
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#empty_stores").html("");  $("#recommend_empty_stores").hide();'></i>
         </a>
     </div>
 </div>
 
-<div id="floor_vr" class="weui-gallery" style="display: none;">
-    <iframe src="#!" style="height: 90vh; width: 100%;" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div id="logo_gallery" class="weui-gallery" style="display: none">
+    <span class="weui-gallery__img"></span>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#floor_vr").hide();'></i>
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#logo_gallery").hide();'></i>
         </a>
     </div>
 </div>
+
+<br><br><br>
 
 <?php include ('menu_bottom.php'); ?>
 

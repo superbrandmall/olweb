@@ -17,7 +17,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <p style="margin: 10px auto; color: #162345; font-size: 14px; text-align: center;">河南洛阳正大广场</p>
     </a>
     
-    <a href="javascript:;">
+    <a href="javascript: showVR('https://720yun.com/t/03vkO7ph5pw?scene_id=55036505');">
         <div class="weui-grid__icon">
             <img src="/views/assets/base/img/content/backgrounds/mall-list/xh.jpg" alt="" style="border-radius: 10px;">
         </div>

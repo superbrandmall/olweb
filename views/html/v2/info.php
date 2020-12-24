@@ -14,7 +14,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <div class="wow slideInLeft" data-wow-delay="0.4s" data-wow-offset="300" style="position: relative; margin-top: -140px; height: 50vh; margin-bottom: 200px;">
     <a href="/v2/all-orders" class="profile-links info-link" style="left: -27px; top: 0; width: 210px;">订单管理</a> 
-    <a href="/v2/improve-info" class="profile-links info-link" style="left: -27px; top: 70px; width: 220px;">完善信息</a>
+    <a href="/v2/improve-info" class="profile-links info-link" style="left: -27px; top: 78px; width: 220px;">完善信息</a>
     
     <a href="/v2/favourites" class="profile-links manage-link" style="left: -30px; top: 160px; width: 250px;">我的收藏</a> 
     <a href="/v2/my-reservation" class="profile-links manage-link" style="left: -30px; top: 230px; width: 240px;">我的预约</a>

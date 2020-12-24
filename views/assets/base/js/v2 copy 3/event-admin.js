@@ -1,99 +1,342 @@
+$.favorites = new Array();
+$.favoritesId = new Array();
+
 var d = new Date();
-var month = d.getMonth()+1;
+var month = d.getMonth() + 1;
 var day = d.getDate();
 var time = d.getTime();
 var date = d.getFullYear() + '-' +
-    (month<10 ? '0' : '') + month + '-' +
-    (day<10 ? '0' : '') + day;
+        (month < 10 ? '0' : '') + month + '-' +
+        (day < 10 ? '0' : '') + day;
+
+$(document).ready(function () {
+    getMyFavorites();
+    getShopInfo();
+
+    $('.slide').swipeSlide({
+        autoSwipe: true,
+        continuousScroll: true,
+        transitionType: 'ease-in',
+        lazyLoad: true
+    });
     
-$(document).ready(function(){
-    ContentOwlcarousel.init();
-    
-    GetShopInfo();
-    
-    $('#slide1').swipeSlide({
-        autoSwipe:true,//自动切换默认是
-        speed:3000,//速度默认4000
-        continuousScroll:true,//默认否
-        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-        lazyLoad:true,//懒加载默认否
-        firstCallback : function(i,sum,me){
-            me.find('.dot').children().first().addClass('cur');
-        },
-        callback : function(i,sum,me){
-            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
-        }
+    $(function () {
+        $('.collapse .js-category-1').click(function () {
+            $parent = $(this).parent('li');
+            if ($parent.hasClass('js-show')) {
+                $parent.removeClass('js-show');
+            } else {
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+            }
+            $('.shop-collapse li').animate({
+                marginTop: '0'
+            }, 200);
+        });
+
+        $('.collapse .js-category-2').click(function () {
+            $parent = $(this).parent('li');
+            if ($parent.hasClass('js-show')) {
+                $parent.removeClass('js-show');
+                $parent.animate({
+                    marginTop: '0'
+                }, 200);
+            } else {
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $parent.animate({
+                    marginTop: '-90px'
+                }, 200);
+            }
+        });
+
+        $('.collapse .js-category-3').click(function () {
+            $parent = $(this).parent('li');
+            if ($parent.hasClass('js-show')) {
+                $parent.removeClass('js-show');
+                $parent.animate({
+                    marginTop: '0'
+                }, 200);
+            } else {
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $parent.animate({
+                    marginTop: '-300px'
+                }, 200);
+            }
+        });
+        
+        $('.collapse .js-category-4').click(function () {
+            $parent = $(this).parent('li');
+            if ($parent.hasClass('js-show')) {
+                $parent.removeClass('js-show');
+                $parent.animate({
+                    marginTop: '0'
+                }, 200);
+            } else {
+                $parent.siblings().removeClass('js-show');
+                $parent.addClass('js-show');
+                $parent.animate({
+                    marginTop: '-90px'
+                }, 200);
+            }
+        });
+
     });
 });
 
-function GetShopInfo(){
+function getShopInfo() {
     var shopCode = getURLParameter('id') || null;
     var userCode = $.cookie('uid');
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+shopCode+"?userCode="+userCode+"",
+        url: $.api.baseNew + "/onlineleasing-customer/api/shop/" + shopCode + "?userCode=" + userCode + "",
         type: "GET",
         async: false,
-        beforeSend: function(request) {
+        beforeSend: function (request) {
             showLoading();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
-        complete: function(){},
+        complete: function () {},
         success: function (response, status, xhr) {
-            if(response.code === 'C0') {
+            if (response.code === 'C0') {
                 hideLoading();
-                if(xhr.getResponseHeader("Authorization") !== null){
+                if (xhr.getResponseHeader("Authorization") !== null) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
-                $('#choose_event').click(function(){
-                    AddtoCart(response.data.hdCode,response.data.code,response.data.shopName,response.data.area);
-                });
-                        
-                $('#room_name').text(response.data.shopName || '-');
-                $('#area').text(response.data.area+'m²' || '-');
-                $('#area_spesifc').text(response.data.remark_1 || '-');
-                $('#height').text(response.data.remark_2 || '-');
-                $('#electricity').text(response.data.remark_3 || '-');
-                $('#wire_towing').text(response.data.remark_4 || '-');
-                $('#elevator_size').text(response.data.remark_5 || '-');
-                $('#network_type').text(response.data.remark_6 || '-');
-                
-                var floorName;
-                $.each($.parseJSON(sessionStorage.getItem("floors")), function(i,v) {
-                    if(v.floorCode == response.data.floorCode) {
-                        floorName = v.description;
-                        return false;
-                    }
-                });
-                
-                $('#floor').text(floorName || '-');              
 
-                if(response.data.unit != null) {
-                    GetMap(floorName,response.data.mallCode);
+                if (response.data.code == shopCode) {
+                    getShopsMoreInfo(response.data.unit, response.data.shopName, response.data.area, response.data.shopState, response.data.daysBeforeContractExpire);
+                    
+                    $('#vr').click(function () {
+                        showVR('/'+response.data.vr);
+                    })
+                        
+                    $('#shopName').text(response.data.shopName);
+                    $('#area').text(response.data.area);
+                    $('#area_spesifc').text(response.data.remark_1 != null ? '(' + response.data.remark_1 + ')' : '');
+                    $('#height').text(response.data.remark_2 != null ? response.data.remark_2 : '');
+                    $('#desc').text(response.data.remark_7 != null ? response.data.remark_7 : '');
+                    
+                    $('#electricity').text(response.data.remark_3 != null ? response.data.remark_3 : '');
+                    $('#wire_towing').text(response.data.remark_4 != null ? response.data.remark_4 : '');
+                    $('#elevator_size').text(response.data.remark_5 != null ? response.data.remark_5 : '');
+                    $('#network_type').text(response.data.remark_6 != null ? response.data.remark_6 : '');
+                    
+                    $('#security').text(response.data.remark_8 != null ? response.data.remark_8 : '');
+                    $('#garbage').text(response.data.remark_9 != null ? response.data.remark_9 : '');
+                    $('#management').text(response.data.remark_10 != null ? response.data.remark_10 : '');
+                    $('#infra').text(response.data.responsiblePerson != null ? response.data.responsiblePerson : '');
+                
+                    var index = $.inArray(getURLParameter('id'), $.favorites);
+                    if (index >= 0) {
+                        $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
+                    }
+
+                    $('#favourite').click(function () {
+                        if (index >= 0) {
+                            removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], response.data.buildingCode, getURLParameter('id'), response.data.mallCode, response.data.unit);
+                        } else {
+                            addToFavorite(response.data.buildingCode, getURLParameter('id'), response.data.mallCode, response.data.unit);
+                        }
+                    })
+                
+                    $('#choose_event').click(function(){
+                        SaveOrder(response.data.hdCode,response.data.code,response.data.shopName,response.data.area);
+                    });
                 }
-                
-                $.each(response.data.images, function(i,v){
-                    $('#slide1 ul').append('<li><a href="javascript:;"><img src='+v.image+' alt=""></a></li>');
-                    $('#slide1 .dot').append('<span></span>');
-                });
-                
-                if(response.data.vr !== null) {
-                    $('#vr').attr('src','/'+response.data.vr);
-                } 
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
         },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
         }
     });
 }
 
-function AddtoCart(uc,sc,un,ar){
+function getShopsMoreInfo(u, sn, a, ss, dbce) {
+    findUserCompanyByMobileNo();
+
+    $.ajax({
+        url: $.api.baseNew + "/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function (request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                hideLoading();
+
+                //$.each(response.data, function (i, v) {
+                    //if (u == v.unitCode) {
+                        
+                    //}
+                //})
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getMyFavorites() {
+    $.ajax({
+        url: $.api.baseNew + "/comm-wechatol/api/user/favorites/wx/findAllByMobileNo?mobileNo=" + $.cookie('uid'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function (request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                $.each(response.data, function (i, v) {
+                    if (v.remarkSecond == 1) {
+                        $.favorites.push(v.remarkFirst);
+                        $.favoritesId.push(v.id);
+                    }
+                });
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function addToFavorite(bc, c, sc, uc) {
+    var map = {
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 1,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing",
+    }
+
+    $.ajax({
+        url: $.api.baseNew + "/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function (request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                hideLoading();
+                if (xhr.getResponseHeader("Authorization") !== null) {
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                var $toast = $('#js_toast_1');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function removeFavorite(id, bc, c, sc, uc) {
+    var map = {
+        "id": id,
+        "buildingCode": bc,
+        "code": "",
+        "favoritesDate": "",
+        "mobileNo": $.cookie('uid'),
+        "name": "",
+        "remarkFifth": "",
+        "remarkFirst": c,
+        "remarkFourth": "",
+        "remarkSecond": 0,
+        "remarkThird": "",
+        "storeCode": sc,
+        "unitCode": uc,
+        "unitType": "leasing"
+    }
+
+    $.ajax({
+        url: $.api.baseNew + "/comm-wechatol/api/user/favorites/wx/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function (request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function () {},
+        success: function (response, status, xhr) {
+            if (response.code === 'C0') {
+                hideLoading();
+                if (xhr.getResponseHeader("Authorization") !== null) {
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                var $toast = $('#js_toast_2');
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    location.reload();
+                }, 2000);
+
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function SaveOrder(uc,sc,un,ar){
     var unit = uc;
     var shopCode = sc;
     var unitName = un;
@@ -113,7 +356,7 @@ function AddtoCart(uc,sc,un,ar){
      *  已关闭订单
      */
 
-    var map = {
+    var order = {
         "amount": 100000,
         "appid": "test",
         "brandId": "",
@@ -161,15 +404,15 @@ function AddtoCart(uc,sc,un,ar){
         "contractNo": "",
         "contractTermInfos": [
           {
-            "amount": "",
+            "amount": "", //$('#user_offer').val()
             "code": "1",
-            "endDate": "",
+            "endDate": $('#endDate').text(),
             "name": "",
             "orgCode": "100001",
             "outTradeNo": outTradeNo,
             "rentAmount": "",
-            "startDate": "",
-            "taxAmount": "",
+            "startDate": $('#startDate').text(),
+            "taxAmount": "", //($('#user_offer').val() - $('#user_offer').val()*0.05).toFixed(2)
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
@@ -180,7 +423,7 @@ function AddtoCart(uc,sc,un,ar){
         "contractType": "R5",//R1租赁 R4广告 R5场地
         "mobileNo": $.cookie('uid'),
         "name": "wechatol",
-        "orderStates": "待确认订单", //订单状态
+        "orderStates": "合同已生成", //订单状态
         "orgCode": "100001",
         "outTradeNo": outTradeNo,
         "payStates": "未支付", //支付状态
@@ -197,7 +440,7 @@ function AddtoCart(uc,sc,un,ar){
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/order/saveOrUpdate",
         type: "POST",
-        data: JSON.stringify(map),
+        data: JSON.stringify(order),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -214,7 +457,8 @@ function AddtoCart(uc,sc,un,ar){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                findUserCompanyByMobileNo(shopCode,outTradeNo);
+                
+                saveMsgLog('订单合同已生成','您的订单【陆家嘴正大广场】场地单元【'+order.contractInfos[0].remarkSecond+'】合同已生成，请前往我的订单管理页面查看。',getURLParameter('trade'), '我的消息',order.contractInfos[0].unitCode,'/v2/contract?type=events&id='+getURLParameter('id'));
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -225,7 +469,7 @@ function AddtoCart(uc,sc,un,ar){
     });
 }
 
-function findUserCompanyByMobileNo(sc,outTradeNo){
+function findUserCompanyByMobileNo(){
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/company/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
         type: "POST",
@@ -247,185 +491,148 @@ function findUserCompanyByMobileNo(sc,outTradeNo){
                 
                 if(response.data.length > 0){
                     if(response.data[0].name != '' && response.data[0].uscc != ''){
-                        window.location.href = '/v2/choose-event?id='+sc+'&trade='+outTradeNo;
+                            showCalendar();
                     } else {
-                        window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=events';
+                        window.location.href = '/v2/company-info?id='+getURLParameter('id')+'&type=events';
                     }
                 } else {
-                    window.location.href = '/v2/company-info?id='+sc+'&trade='+outTradeNo+'&type=events';
+                    window.location.href = '/v2/company-info?id='+getURLParameter('id')+'&type=events';
                 }
             }
         }
     })
 }
 
+function showCalendar() {
+    var data = [{
+        'name': "145",
+        'startDate': "2020-3-09 15:31:29",
+        'type': "手机号"
+    }, {
+        'name': "178956874",
+        'startDate': "2020-3-23 15:31:29",
+        'type': "手机号"
+    }, {
+        'name': "信息编辑",
+        'startDate': "2020-3-20 15:31:29",
+        'type': "手机号"
+    }];
 
-function GetMap(fn,mc){
-    var fc;
-    switch (fn) {
-        case '十楼':
-            fc = '10';
-            break;
-        case '九楼':
-            fc = '9';
-            break;
-        case '八楼':
-            fc = '8';
-            break;
-        case '七楼':
-            fc = '7';
-            break;    
-        case '六楼':
-            fc = '6';
-            break;
-        case '五楼':
-            fc = '5';
-            break;
-        case '四楼':
-            fc = '4';
-            break;
-        case '三楼':
-            fc = '3';
-            break;
-        case '二楼':
-            fc = '2';
-            break;
-        case '一楼':
-            fc = '1';
-            break;
-        case '负一楼':
-            fc = '0';
-            break;
-        default:
-            fc = '1';
-            break;
-    }
+    var workdata=[
+        "2020-4-26",
+        "2020-5-9",
+        "2020-6-28",
+        "2020-9-27",
+        "2020-10-10"
+    ]
     
-    $('#map').attr({
-        'src': '/views/assets/base/img/content/floor-plan/shanghai-sbm/'+fc+'F.png',
-        'alt': fc+'F',
-        'usemap': '#Map_'+fc+'F_s'
-     });
-     
-    $('#map').parent().append('<map name="Map_'+fc+'F_s" id="Map_'+fc+'F_s"></map>');
+    var holidaydata = [{
+        "holiday_name":"春节",
+        "holiday_time":[
+            "2020-1-24",
+            "2020-1-25",
+            "2020-1-26",
+            "2020-1-27",
+            "2020-1-28",
+            "2020-1-29",
+            "2020-1-30",
+            "2020-1-31",
+            "2020-2-1",
+            "2020-2-2"
+        ]},{
+        "holiday_name":"清明节",
+        "holiday_time":[
+            "2020-4-4",
+            "2020-4-5",
+            "2020-4-6"
+        ]},{
+        "holiday_name":"劳动节",
+        "holiday_time":[
+            "2020-5-1",
+            "2020-5-2",
+            "2020-5-3",
+            "2020-5-4",
+            "2020-5-5"
+        ]},{
+        "holiday_name":"端午节",
+        "holiday_time":[
+            "2020-6-25",
+            "2020-6-26",
+            "2020-6-27"
+        ]},{
+        "holiday_name":"国庆节、中秋节",
+        "holiday_time":[
+            "2020-10-1",
+            "2020-10-2",
+            "2020-10-3",
+            "2020-10-4",
+            "2020-10-5",
+            "2020-10-6",
+            "2020-10-7",
+            "2020-10-8"
+        ]}];
     
-    getCoords(mc,fn);
-}
+    $("#calendar").calendar({
+        data: data, //获取记录数据
+        holiday: holidaydata, //规划假日时间
+        work: workdata,//规划上班时间
+        mode: "month",//显示模式，month为月份详细显示， year为年显示
+        width: $('.js-category-2').width(),
+        showModeBtn: false,//是否显示月/年却换模式
+        showEvent: true,//设置年份显示记录信息，为true显示每月记录信息，为false不显示记录信息
+        /*cellClick: function(data, me, lay) {
 
-function getCoords(mc,fn) {
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/base/coords/"+mc+"/"+fn+"",
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            showLoading();
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                hideLoading();
-                $.each(response.data, function(i,v){
-                    if(v.state != 0 && v.coords != null && v.coords != ''){
-                        if(v.subType == '固定场地' || v.subType == '临时场地'){
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="event?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
-                        } else {
-                            $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" name="'+v.brandName+'" href="#!" shape="poly" coords="'+v.coords+'" />');                           
-                        }
-                    }
-                });
-                
-                drawShops();
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}
-
-function drawShops(){
-    var areas = $.map($('area'),function(el) {
-        if(getURLParameter('id') === $(el).attr('alt')){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: "本场地",
-                fillColor: 'c34343',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        } else {
-            if($(el).attr('data-full') != 1 && $(el).attr('data-full') != 3){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('name'),
-                    fillColor: 'cdcdcd'
-                };
-            }
+        },*/
+        monthClick: function(Event, nextMonth, opts, me) {
+            // Event 当前事件  nextMonth月份，opts参数 ，me集合
+            //点击月份的处理方法
+            //开始月份第一天
+            var start = me._cloneDate(opts.newDate);
+            start.setDate(1);
+            // 获取当前月的最后一天
+            var date = new Date();
+            var nextMonthFirstDay = new Date(date.getFullYear(), nextMonth, 1);
+            var oneDay = 1000 * 60 * 60 * 24;
+            var end = new Date(nextMonthFirstDay - oneDay);
+            var startDate = me.transferDate(start); // 日期变换
+            var endDate = me.transferDate(end); // 日期变换
+            var cycleData = [{
+                'name': "145",
+                'startDate': "2020-2-09 15:31:29",
+                'type': "手机号"
+            }, {
+                'name': "178956874",
+                'startDate': "2020-2-23 15:31:29",
+                'type': "手机号"
+            }]//数据结构，以往记录数据，可通过ajax获取
+            me._refreshCalendar(opts.newDate, cycleData);//加载方法
             
+            calendarCellClick();
         }
-    });
-
-    $('#map').mapster({
-        fillColor: 'c9ae89',
-        fillOpacity: 0.8,
-        strokeColor: 'ffd62c',
-        strokeWidth: 0,
-        clickNavigate: false,
-        mapKey: 'data-key',
-        showToolTip: true,
-        areas:  areas,
-        onShowToolTip: function () {
-            $(".mapster_tooltip").css({
-                "font-weight": "bold",
-                "color": "#fff",
-                "background": "rgba(0,0,0,0.8)",
-                "font-size": "26px",
-                "width": "auto"
-            });
-
-            $("area").on("mouseenter",  function (data) {
-               xOffset = data.pageX;
-               yOffset = data.pageY;
-               $(".mapster_tooltip").css("left", xOffset);
-               $(".mapster_tooltip").css("top", yOffset);
-            });
-        }
-    });
-}
-
-var ContentOwlcarousel = function() {
+    })
     
-    var _initInstances = function() {
-        $('.owl-carousel').owlCarousel({
-            loop: true,
-            margin: 0,
-            dots: true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:2
-                },
-                1000:{
-                    items:3
-                }
-            }
-        })
-    };
-
-    return {
-
-         //main function to initiate the module
-        init: function() {
-            
-            _initInstances();
+    calendarCellClick();
+}
+var firstIndex = 41;
+function calendarCellClick() {
+    var indexCell;
+    $('.calendar-cell').not('.calendar-last-month-cell').click(function(){ 
+        indexCell = $(".calendar-cell").index(this);
+        if(indexCell < firstIndex){
+            firstIndex = indexCell;
         }
-
-    };
-}();
+        
+        $('#startDate').text($(".calendar-cell:eq("+firstIndex+")").attr('title'));
+        ($(this).attr("title"));
+        
+        var indexCells = parseInt(indexCell+7);
+        var i = firstIndex;
+        while(i < indexCells){
+            $(".calendar-cell:eq("+i+")").addClass('active');
+            i++;
+        }
+        
+        $('#endDate').text($(".calendar-cell:eq("+(indexCells-1)+")").attr('title'));
+        
+    })
+}

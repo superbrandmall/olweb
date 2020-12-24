@@ -2,8 +2,6 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/company-info-admin.js"></script>';
 ?>
 
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 亲！您可以在这里查看或编辑公司联系信息</div>
-
 <form id="company_form" style="margin-top: 20px;">
     <div class="page__bd">
         <div class="weui-form__text-area">

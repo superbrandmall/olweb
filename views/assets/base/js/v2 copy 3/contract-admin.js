@@ -8,16 +8,19 @@ $.order = {
 
 $.info = {
     copy: ""
-};;
+};
 
-var fileKey;
+$.file = {
+    key: "",
+    name: ""
+};
 
 $(document).ready(function(){
     if(getURLParameter('type') && getURLParameter('type') != ''){
         getOrderByTradeNO();
-        $('#pdfContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/views/html/v2/'+getURLParameter('type')+'.pdf');
+        getUserContract();
+        getPDF();
     }
-    
     
     $(function(){
         var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
@@ -179,11 +182,7 @@ function updateOrderToStamping(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                //eSignUpload();
-                
-                saveMsgLog('订单合同用印中','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
-                sendSMS('E签宝合同用印通知','尊敬的签章人，E签宝平台现收到待用印合同一份，请前往平台https://open.esign.cn?token=ajbliexgdhhagehlpqx签章，谢谢。');
-                sendSMS('合同用印完毕通知','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'现双方已用印完毕，请前往我的订单管理页面继续操作。');
+                eSignFlow();
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -194,46 +193,10 @@ function updateOrderToStamping(){
     });
 }
 
-/*function eSignUpload() {
-    var formData = new FormData();
-    formData.append('vo.userCode',  $.cookie('uid'));
-    formData.append('vo.containerName', 'eSign');
-    formData.append('vo.prefix', $.cookie('uid')+'/eSign/contract');
-    formData.append('files', '/upload/docs/20200616_contract_test.pdf');
-    $.ajax({
-        type: "POST",
-        url: $.api.baseNew+"/api/esign/upload?mobileNo="+$.cookie('uid'),
-        data: formData,
-        async: false,
-        cache: false,
-        processData: false,
-        contentType: false,
-        beforeSend: function(request) {
-            showLoading();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function(response, status, xhr) {
-            hideLoading();
-            if(response.code === 'C0') {
-                fileKey = response.data.fileKey;
-            } else {
-                console.log(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}*/
-
 function eSignFlow(){
     showLoading();
     var map = {
-        "fileName":"E签宝测试.pdf",
+        "fileName": $.file.name,
         "account": {
           "licenseNumber": "310115198309020974",
           "licenseType": "IDCard",
@@ -246,30 +209,32 @@ function eSignFlow(){
           "name": "马俊"
         },
         "fileResult":{
-         "fileKey":"$0570e0be-d6a5-4a8b-9ab9-34cb27c4f019$372265696",
-         "docId":"",
-         "docFilekey":"$0570e0be-d6a5-4a8b-9ab9-34cb27c4f019$372265696"
+         "fileKey": $.file.key,
+         "docFilekey": $.file.key,
+         "docId":""
         },
         "order": {
-          "contractNo": "500001",
+          "contractNo": "500008",
           "contractType": "R1",
-          "id": 45,
+          "id": $.order.id,
           "mobileNo": "13818768168",
           "orgCode": "100001",
-          "outTradeNo": "10000120200615159220138237600002",
-          "tenantName": "上海帝泰发展有限公司",
-          "tenantOrg": "91310000607304334G"
+          "outTradeNo": "",
+          "tenantName": "esigntest上海天诚智汇创业投资有限公司",
+          "tenantOrg": "91310117MA1J16URXD"
         },
         "org": {
+          "agentAccountId": "",
           "contactsMobile": "13818768168",
-          "licenseNumber": "91310000607304334G",
+          "licenseNumber": "91310117MA1J16URXD",
           "licenseType": "SOCNO",
           "legalLicenseType":"IDCard",
           "legalLicenseNumber":"310115198309020974",
-          "organizeName": "上海帝泰发展有限公司",
-          "organizeNo": "91310000607304334G"
+          "organizeName": "esigntest上海天诚智汇创业投资有限公司",
+          "organizeNo": "91310117MA1J16URXD"
         }
       }
+      
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/esign/flow",
         type: "POST",
@@ -291,9 +256,7 @@ function eSignFlow(){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                saveMsgLog('订单合同用印中','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
-                sendSMS('E签宝合同用印通知','尊敬的签章人，E签宝平台现收到待用印合同一份，请前往平台https://open.esign.cn?token=ajbliexgdhhagehlpqx签章，谢谢。');
-                sendSMS('合同用印完毕通知','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'现双方已用印完毕，请前往我的订单管理页面继续操作。');
+                saveMsgLog('订单合同用印中','您的订单【陆家嘴正大广场】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping?oid='+$.order.id+'&flowid='+response.data.data.signFlowId);
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -344,7 +307,7 @@ function getOrderByTradeNO() {
                 <div class="weui-cell__ft"></div>\n\
             </a>');
                     
-                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/'+response.data[0].remarkFirst+'.pdf');
+                    $('#engineeringContainer').attr('src','/views/assets/plugins/pdfjs/web/viewer.html?file=/upload/docs/qa/'+response.data[0].remarkFirst+'.pdf');
                 }
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -354,4 +317,56 @@ function getOrderByTradeNO() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function getUserContract() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNoAndFileTypeAndFileName?mobileNo="+$.cookie('uid')+"&fileType=10&fileName="+getURLParameter('trade')+".pdf",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $.file.key = response.data[0].docFilekey;
+                $.file.name = response.data[0].filename;
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getPDF() {
+    /*$.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/download/file?mobileNo="+$.cookie('uid')+"&fileType=10&fileName="+getURLParameter('trade')+".pdf",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+               
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });*/
+    $('#pdfContainer').attr('src',"/views/assets/plugins/pdfjs/web/viewer.html?file="+$.api.baseNew+"/comm-wechatol/api/download/file?mobileNo="+$.cookie('uid')+"&fileType=10&fileName="+getURLParameter('trade')+".pdf");
 }

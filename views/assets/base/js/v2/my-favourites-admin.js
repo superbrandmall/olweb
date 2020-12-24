@@ -1,14 +1,8 @@
-var unitCodes = ["01FL053","01FL064","02FL011","02FL023","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
-    "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
-    "B1FC011","B1FL022","B1FL010","01FL009","01FL015",
-    "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
-
 $(document).ready(function(){
     getFavourites();
 });
 
 function getFavourites() {
-    getShopsMoreInfo();
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/favorites/wx/findAllByMobileNo?mobileNo="+$.cookie('uid'),
         type: "GET",
@@ -27,7 +21,13 @@ function getFavourites() {
                 
                 if(response.data.length > 0){
                     $.each(response.data, function(i,v){
-                        renderShopList(JSON.stringify(v));
+                        if(v.unitType == 'leasing'){
+                            getShopMoreInfo(v.storeCode, v.unitCode);
+                        } else if(v.unitType == 'ads'){
+                            getAdMoreInfo(v.storeCode, v.unitCode);
+                        } else if(v.unitType == 'event'){
+                            getEventMoreInfo(v.storeCode, v.unitCode);
+                        }
                     });
                 }
             } else {
@@ -40,25 +40,52 @@ function getFavourites() {
     });
 }
 
-function getShopsMoreInfo() {
+function getAdMoreInfo(mall,unit){
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCodeAndUnitCode?storeCode="+mall+"&unitCode="+unit,
         type: "GET",
         async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
-            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
-                hideLoading();
-                sessionStorage.setItem("shopsMoreInfo", JSON.stringify(response.data)); 
-            } else {
-                interpretBusinessCode(response.customerMessage);
+                $('.weui-grids').append('<a id="fav_'+response.data[0].code+'" href="/v2/ad?id='+response.data[0].code+'&type=ad&storeCode='+response.data[0].storeCode+'" class="weui-grid shop-list" data-wow-offset="200">\n\
+                <div class="weui-grid__icon" style="height: 100px; background: url('+response.data[0].advertisingImagesWxList[0].imagePath+'); background-size: cover; background-position: center center;"></div>\n\
+                <p class="weui-grid__label"><strong>'+response.data[0].unitDescChs+'</strong>\n\
+                <br>'+response.data[0].descChs+'</p></a>');
+                
+                $('#fav_'+response.data[0].code).addClass('wow').addClass('slideInRight');
+            }
+        }
+    });
+}
+
+function getEventMoreInfo(mall,unit){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/event/info/findAllByStoreCodeAndUnitCode?storeCode="+mall+"&unitCode="+unit,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $('.weui-grids').append('<a id="fav_'+response.data[0].shopCode+'" href="/v2/event?id='+response.data[0].shopCode+'&type=events&storeCode='+response.data[0].storeCode+'" class="weui-grid shop-list" data-wow-offset="200">\n\
+                <div class="weui-grid__icon" style="height: 100px; background: url(/views/assets/base/img/content/backgrounds/events/'+response.data[0].shopCode+'_1.jpg); background-size: cover; background-position: center center;"></div>\n\
+                <p class="weui-grid__label"><strong>'+response.data[0].shopNo+'</strong>\n\
+                <br>'+response.data[0].descript+'</p></a>');
+                
+                $('#fav_'+response.data[0].shopCode).addClass('wow').addClass('slideInRight');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -67,32 +94,31 @@ function getShopsMoreInfo() {
     });
 }
 
-function renderShopList(s){
-    var desc = '';
-    var buildingCode;
-    var storeCode;
-    var shopNo;
-    var shop = $.parseJSON(s);
-    
-    $.each($.parseJSON(sessionStorage.getItem("shopsMoreInfo")), function(j,w){
-        
-        if(w.state ==1 && shop.remarkFirst == w.remarkSecond){
-            desc = w.descript || '';
-            shopNo = w.shopNo || '';
-            buildingCode = w.buildingCode;
-            storeCode = w.storeCode;
-            
-            $('.weui-grids').append('<a id="shop_'+w.unitCode+'" href="/v2/shop?id='+w.remarkSecond+'&type=leasing" class="weui-grid shop-list" data-wow-offset="200">\n\
-        <div class="weui-grid__icon">\n\
-            <img src="/views/assets/base/img/content/backgrounds/leasing/'+w.unitCode+'.jpg" alt="">\n\
-        </div>\n\
-        <p class="weui-grid__label">\n\
-        <strong>'+shopNo+'</strong>\
-        <br>'+desc+'</p>\n\
-        </a>');
-            
+function getShopMoreInfo(mall,unit){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndUnitCode?storeCode="+mall+"&unitCode="+unit,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                $('.weui-grids').append('<a id="fav_'+response.data[0].remarkSecond+'" href="/v2/category?id='+response.data[0].remarkSecond+'&type=leasing&storeCode='+response.data[0].storeCode+'" class="weui-grid shop-list" data-wow-offset="200">\n\
+                <div class="weui-grid__icon" style="height: 100px; background: url(/views/assets/base/img/content/backgrounds/leasing/'+response.data[0].unitCode+'.jpg); background-size: cover; background-position: center center;"></div>\n\
+                <p class="weui-grid__label"><strong>'+response.data[0].shopNo+'</strong>\n\
+                <br>'+response.data[0].descript+'</p></a>');
+                
+                $('#fav_'+response.data[0].remarkSecond).addClass('wow').addClass('slideInRight');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
         }
-    })
-    
-    $('#shop_'+shop.unit).addClass('wow').addClass('slideInRight');
+    });
 }

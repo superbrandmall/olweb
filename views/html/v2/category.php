@@ -45,6 +45,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </style>
 
 <div class="page__bd">
+    <?php include ('timeline/step_two.php'); ?>
     <div class="weui-form__text-area" style="margin: 20px 0;">
         <h2 class="weui-form__title">请选择您的业态</h2>
     </div>

@@ -38,40 +38,40 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000695"><img src="views/assets/base/img/content/client-logos/ringside.jpg" alt=""/></a>
+                        <a href="shop?id=OLSHOP180917000695"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/07/IMG_4658-240x180.jpg" width="187" alt=""/></a>
                         Ringside Boxing
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200612000002"><img src="views/assets/base/img/content/client-logos/miniature_world.jpg" alt=""/></a>
-                        微缩世界
+                        <a href="shop?id=OLSHOP200624000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/CRL_9517-240x180.jpg" width="187" alt=""/></a>
+                        奥飞欢乐世界
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200429000001"><img src="views/assets/base/img/content/client-logos/polestar.jpg" alt=""/></a>
-                        POLESTAR
+                        <a href="shop?id=OLSHOP200115000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/IMG_9341-240x180.jpg" width="187" alt=""/></a>
+                        始祖鸟
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200111000001"><img src="views/assets/base/img/content/client-logos/bites_brews.jpg" alt=""/></a>
-                        Bites&Brews
+                        <a href="shop?id=OLSHOP201017000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_1699-240x180.jpg" width="187" alt=""/></a>
+                        临家
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP181107000001"><img src="views/assets/base/img/content/client-logos/pig.jpg" alt=""/></a>
-                        白日梦撸猪
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000728"><img src="views/assets/base/img/content/client-logos/chuan.jpg" alt=""/></a>
-                        川市集
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200101000002"><img src="views/assets/base/img/content/client-logos/ahava.jpg" alt=""/></a>
-                        AHAVA
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP191026000001"><img src="views/assets/base/img/content/client-logos/icicle.jpg" alt=""/></a>
+                        <a href="shop?id=OLSHOP191026000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/04/IMG_9604-240x180.jpg" width="187" alt=""/></a>
                         之禾 ICICLE
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200108000002"><img src="views/assets/base/img/content/client-logos/leicun.jpg" alt=""/></a>
-                        罍村
+                        <a href="shop?id=OLSHOP180917000472"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/IMG_9207-240x180.jpg" width="187" alt=""/></a>
+                        Joy&Apply
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190622000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_9791-240x180.jpg" width="187" alt=""/></a>
+                        锦之楼
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000375"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_9821-240x180.jpg" width="187" alt=""/></a>
+                        LELECHA
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000343"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/IMG_9383-240x180.jpg" width="187" alt=""/></a>
+                        Riotlily
                     </div>
                 </div>
                 

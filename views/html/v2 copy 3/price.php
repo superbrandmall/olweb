@@ -1,69 +1,48 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/price-admin.js"></script>';
+if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&trade=') !== false) {
+        $id = explode('&trade=', $id)[0];
+    }
+}
+
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/price-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
+<style type="text/css">
+    #mapster_wrap_0 {
+        margin: 0 auto;
+    }  
+</style>
 
-<div class="weui-toptips bg-success topTips"><i class="fa fa-heartbeat" aria-hidden="true"></i> 尊敬的阁下，人工智能已为您量身定做了一份报价，请查收！对了，您可以"滑动"选择"合同年限"来告诉我们您对租赁时长需求哦！</div>
-
-<div class="slide" id="slide1">
-    <ul></ul>
-    <div class="dot"></div>
+<div style="position: relative;">
+    <iframe id="vr" src="#" width="100%" height="300px" frameborder="0"></iframe>
 </div>
 
-<div class="page__bd">
-    <div class="weui-form__control-area">
-        <div class="weui-cells__group weui-cells__group_form">
-            <div class="weui-cells weui-cells_form">
-                <div class="weui-cell weui-cell_active weui-cell_readonly">
-                    <div class="weui-cell__hd"><label class="weui-label">位置</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input" id="room_name"></div>
-                    </div>
-                </div>
-                <div class="weui-cell weui-cell_active weui-cell_readonly">
-                    <div class="weui-cell__hd"><label class="weui-label">租赁面积</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input"><span id="area"></span>m<sup>2</sup></div>
-                    </div>
-                </div>
-                <div class="weui-cell weui-cell_active weui-cell_readonly">
-                    <div class="weui-cell__hd"><label class="weui-label">进场日期</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input" id="settle_date"></div>
-                    </div>
-                </div>
-                <div class="weui-cell weui-cell_active weui-cell_readonly">
-                    <div class="weui-cell__hd"><label class="weui-label">开业日期</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input" id="open_date"></div>
-                    </div>
-                </div>
-                <div class="weui-cell weui-cell_active weui-cell_readonly">
-                    <div class="weui-cell__hd"><label class="weui-label">装修免租期</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input"><span id="free_of_ground_rent"></span>天</div>
-                    </div>
-                </div>
+<div class="page__bd" style="position: relative; margin-top: -50px;">
+    <ul class="collapse shop-collapse">
+        <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="300" style="background: url(/views/assets/base/img/content/backgrounds/shop/granite-bg.jpg);">
+            <div class="weui-flex js-category-1">
+                <h3 class="weui-flex__item"><span id="shopName"></span></h3>
+                <div class="weui-flex__item"><strong>¥<span id="rentAmount"></span> /m<sup>2</sup>/天</strong></div>
+                <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(使用面积)</div>
+                <div class="weui-flex__item">推荐业态 <span id="businessFormatChs"></span></div>
             </div>
-        </div>
-    </div>
-    
-    <div class="weui-panel__hd" style="margin: 0 32px; padding: 16px 0 8px;">
-        合同条件
-    </div>
-    
-    <div class="weui-form__control-area">
-        <div class="weui-cells__group weui-cells__group_form">
-            <div class="weui-cells weui-cells_form">
-                <div class="weui-cell weui-cell_active weui-cell_readonly" style="margin: 0 32px; padding: 16px 0 8px;">
-                    <div class="weui-cell__hd"><label class="weui-label">签约年限</label></div>
-                    <div class="weui-cell__bd">
-                        <div class="weui-input"><span id="contractLength"></span>年</div>
-                    </div>
-                </div>
-                <div style="margin: 0 32px">
-                    <table style="margin: 0 auto; font-size: 16px;">
+        </li>
+        <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="200" style="background: url(/views/assets/base/img/content/backgrounds/shop/marble-bg.jpg);">
+            <div class="weui-flex js-category-2">
+                <h3 class="weui-flex__item">租约信息<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
+                <hr color=#baad9b size=1 style="margin: 5px 0;">
+                <div class="weui-flex__item" style="float: left; width: 33%;"><small>进场日期</small><br><h4 id="settleDate"></h4></div>
+                <div class="weui-flex__item" style="float: left; width: 33%;"><small>开业日期</small><br><h4 id="openDate"></h4></div>
+                <div class="weui-flex__item" style="float: left; width: 33%;"><small>装修免租期</small><br><h4><span id="freeOfGroundRent"></span>天</h4></div>
+            </div>
+            <div class="page-category js-categoryInner" style="clear: both; padding: 15px 20px;">
+                <div class="weui-cells page-category-content">
+                    <h3 class="weui-flex__item">商务条件</h3>
+                    <hr color=#baad9b size=1 style="margin: 5px 0;">
+                    <table class="content" style="background: transparent;">
                         <thead>
                             <tr>
                                 <th>年限</th>
@@ -74,36 +53,80 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         </thead>
                         <tbody id="shopRent"></tbody>
                     </table>
-                </div>
-                <div class="weui-form-preview__bd" style="margin: 0 16px; padding: 0px 16px;">
-                    <div class="weui-form-preview__item" style="padding: 5px 0;">
-                        <label class="weui-form-preview__label">物业管理费</label>
-                        <span class="weui-form-preview__value">¥<span id="propertyMaintenance"></span>/月</span>
-                    </div>
-                    <div class="weui-form-preview__item" style=" padding: 5px 0;">
-                        <label class="weui-form-preview__label">比率推广费(按含税营业额)</label>
-                        <span class="weui-form-preview__value"><span id="promotionRate"></span>%</span>
-                    </div>
-                </div>
-                <div class="weui-form-preview__bd" style="margin: 0 16px;padding: 0px 16px;">
-                    <div class="weui-form-preview__item" style="text-align: left; padding: 5px 0;">
-                        <span class="weui-form-preview__value">*以上固定租金和物业管理费，推广费都为不含税价格，固定租金税率5%，物业管理费和推广费税率6%</span>
-                    </div>
-                    <div class="weui-form-preview__item" style="padding: 5px 0;">
-                        <label class="weui-form-preview__label">保证金</label>
-                        <span class="weui-form-preview__value">¥<span id="deposit"></span></span>
-                    </div>
-                    <div class="weui-form-preview__item" style="text-align: left; padding: 5px 0;">
-                        <span class="weui-form-preview__value">*保证金构成=3个月最高固定租金含税价+3个月最高物业管理费含税价</span>
-                    </div>
+                    <p class="content">每月固定物业管理费 ¥<span id="propertyMaintenance"></span></p>
+                    <p class="content">每月推广费为含税营业额的<span id="promotionRate"></span>%</p>
+                    <p class="content">履约保证金 ¥<span id="deposit"></span></p>
+                    <p class="content">*以上费用均不含税，固定租金与提成租金税率为5%，物业管理费与推广费税率为6%</p>
+                    <h3 class="weui-flex__item">铺位简介</h3>
+                    <hr color=#baad9b size=1 style="margin: 5px 0;">
+                    <p class="content" id="desc"></p>
                 </div>
             </div>
+        </li>
+        <li class="wow fadeInUp" data-wow-delay="0.9s" data-wow-offset="100" style="background: url(/views/assets/base/img/content/backgrounds/shop/granite-bg.jpg);">
+            <div class="weui-flex js-category-3" style="padding-bottom: 0;">
+                <h3 class="weui-flex__item">工程图纸 
+                    <a id="cad" href="/upload/docs/cad/<?= $id?>.dwg" download="/upload/docs/cad/<?= $id?>.dwg" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载CAD</a>
+                    <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载PDF</a>
+                    <a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载工程条件</a>
+                </h3>
+                <hr color=#d2d2d0 size=1 style="margin: 5px 0;">
+                <div class="weui-flex__item">
+                    <img src="/upload/docs/converted-jpg/<?= $id?>.jpg" style="width: 100%;" />
+                </div>
+            </div>
+            <div class="page-category js-categoryInner">
+                <div class="weui-cells page-category-content">
+                    <p class="content" style="margin-top: 0;">
+                        <img src="/upload/docs/converted-jpg/<?= $id?>-1.jpg" style="width: 100%;" />
+                    </p>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+            <i class="fa fa-heart-o" aria-hidden="true"></i><br>
+            收藏
+        </a>
+        <a id="confirm_price" href="javascript:;" style="float: right; background: #50691a; border: solid 2px #668161; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 20px; text-align: center; width: 60px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">接受报价</a>
+        <a id="negotiate" href="javascript:;" style="float: right; background: #961912; border: solid 2px #bb6965; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 20px; margin-right: 10px; text-align: center; width: 60px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">谢绝报价</a>
+    </div>
+</div>
+
+<div class="js_dialog" id="floor_plan_viewer" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd" style="padding: 0; margin: 0;">
+            <div style="background-color: #c34343; width: 80px; height: 25px; color: #eee; margin: 10px auto;">本店铺</div>
+            <img src="#" width="300" height="150" id="map">
+        </div>
+        <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">x</a>
         </div>
     </div>
-    
-    <div class="weui-form__opr-area" style="margin-left: 32px; margin-right: 32px;">
-        <a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_primary" id="negotiate" style="display: inline-block; width: 49%;">谢绝</a>
-        <a href="javascript:;" class="weui-btn weui-btn_primary" id="confirm_price" style="display: inline-block; width: 49%;">接受报价</a>
+</div>
+
+<div id="js_toast_1" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            加入关注成功～
+        </p>
+    </div>
+</div>
+
+<div id="js_toast_2" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
+        <p class="weui-toast__content">
+            取消关注成功～
+        </p>
     </div>
 </div>
 
@@ -111,5 +134,4 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 
-<?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

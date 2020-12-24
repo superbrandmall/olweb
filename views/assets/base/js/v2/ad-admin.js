@@ -2,9 +2,18 @@ $.shoppingcart = new Array();
 
 $.favorites = new Array();
 $.favoritesId = new Array();
+$.updateFavorites = new Array();
+$.updateFavoritesId = new Array();
 
-$.range = new Array();
 $.availableAdsUnit = new Array();
+
+$.schedule = {
+    startDate: [],
+    endDate: [],
+    unit: [],
+    available: 1,
+    multiple: 0
+}
 
 $.order = {
     copy: "",
@@ -22,40 +31,46 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
     
 $(document).ready(function(){
-    getAdScheduleInfo();
-    GetAdInfo();
-    
     if($.cookie('uid') != '' && $.cookie('uid') != null){
         getMyFavorites();
     }
     
-    if($.cookie('startDate_ad') != '' && $.cookie('startDate_ad') != null){
-        $('.date-start').val($.cookie('startDate_ad'));
+    GetAdInfo();
+    getAdScheduleInfo();
+    
+    if($.cookie('dateStart_'+getURLParameter('id')) != '' && $.cookie('dateStart_'+getURLParameter('id')) != null){
+        $('.date-start').val($.cookie('dateStart_'+getURLParameter('id')));
     }
     
-    if($.cookie('endDate_ad') != '' && $.cookie('endDate_ad') != null){
-        $('.date-end').val($.cookie('endDate_ad'));
+    if($.cookie('dateEnd_'+getURLParameter('id')) != '' && $.cookie('dateEnd_'+getURLParameter('id')) != null){
+        $('.date-end').val($.cookie('dateEnd_'+getURLParameter('id')));
     }
     
-    if($.cookie('result_ad') != '' && $.cookie('result_ad') != null){
-        $('#days').text($.cookie('result_ad')+'天');
+    if($.cookie('result_'+getURLParameter('id')) != '' && $.cookie('result_'+getURLParameter('id')) != null){
+        $('#days').text($.cookie('result_'+getURLParameter('id'))+'天');
     }
     
-    if($.cookie('deposit_ad') != '' && $.cookie('deposit_ad') != null){
-        $('#deposit').text('¥'+numberWithCommas($.cookie('deposit_ad')));
+    if($.cookie('deposit_'+getURLParameter('id')) != '' && $.cookie('deposit_'+getURLParameter('id')) != null){
+        $('#deposit').text('¥'+numberWithCommas($.cookie('deposit_'+getURLParameter('id'))));
     }
     
-    if($.cookie('subTotal_ad') != '' && $.cookie('subTotal_ad') != null){
-        $('#subTotal').text('¥'+numberWithCommas($.cookie('subTotal_ad')));
+    if($.cookie('subTotal_'+getURLParameter('id')) != '' && $.cookie('subTotal_'+getURLParameter('id')) != null){
+        $('#subTotal').text('¥'+numberWithCommas($.cookie('subTotal_'+getURLParameter('id'))));
     }
-    
-    $('.slide').swipeSlide({
-        autoSwipe: true,//自动切换默认是
-        speed: 3000,//速度默认4000
-        continuousScroll: true,//默认否
-        transitionType: 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-        lazyLoad: true//懒加载默认否
-    });
+
+    if($.cookie('subqty_'+getURLParameter('id')) != '' && $.cookie('subqty_'+getURLParameter('id')) != null){
+        $('#qty_'+getURLParameter('id')).val($.cookie('subqty_'+getURLParameter('id')));
+        if($.cookie('subqty_'+getURLParameter('id')) == 0){
+            $('.weui-count__decrease').hide();
+        }
+        
+        if($.cookie('maxqty_'+getURLParameter('id')) != '' && $.cookie('maxqty_'+getURLParameter('id')) != null){
+            $('#qty_'+getURLParameter('id')).attr('max',$.cookie('maxqty_'+getURLParameter('id')));
+            if($.cookie('subqty_'+getURLParameter('id')) == $.cookie('maxqty_'+getURLParameter('id'))){
+                $('.weui-count__increase').hide();
+            }
+        }
+    }
     
     $('.weui-dialog__btn').on('click', function(){
         $(this).parents('.js_dialog').fadeOut(200);
@@ -64,66 +79,37 @@ $(document).ready(function(){
     $('#floor_plan').on('click', function(){
         $('#floor_plan_viewer').fadeIn(200);
     });
+
+    if($.schedule.multiple == 0) {
+        $('.date-start, .date-end').MultiCalendar({
+            scheduleStart : $.schedule.startDate,
+            scheduleEnd: $.schedule.endDate,
+            title: '档期选择',
+            totalMohth: 6,
+            dayText: ['开始', '结束'],
+            valueTypes: ''
+        });
+    } else {
+        $('.date-start, .date-end').MultiCalendar({
+            scheduleStart : ['2020-01-01'],
+            scheduleEnd: ['2020-01-01'],
+            title: '档期选择',
+            totalMohth: 6,
+            dayText: ['开始', '结束'],
+            valueTypes: ''
+        });
+    }
     
-    //开始日期
-    $('.date-start').on('focus', function () {
-        var dt = new Date();
-        var id=dt.getFullYear()+""+dt.getMonth() +""+dt.getDate()+""+dt.getHours()+""+ dt.getMinutes()+""+dt.getSeconds();
-        var startD = $(this).attr('id');
-        weui.datePicker({
-            id: "start"+id,
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            cron: '* * *',
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(startD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
-                    }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,startD,dates,0);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
-    });
+    $('.picker-button').click(function(){
+        if($.schedule.available == 1){
+            $('.date-start').val($('#checkin-date').text() || '');
+            $.cookie('dateStart_'+getURLParameter('id'),$('.date-start').val());
+            $('.date-end').val($('#checkout-date').text() || '');
+            $.cookie('dateEnd_'+getURLParameter('id'),$('.date-end').val());
 
-    //结束日期
-    $('.date-end').on('focus', function () {
-        var dt = new Date();
-        var id = dt.getFullYear() + "" + dt.getMonth() + "" + dt.getDate() + "" + dt.getHours() + "" + dt.getMinutes() + "" + dt.getSeconds();
-
-        var endD = $(this).attr('id');
-        weui.datePicker({
-            id: "end" + id,
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(endD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
-                    }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,endD,dates,1);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
-    });
+            getSubTotal();
+        }
+    })
     
     $('.weui-count__decrease').click(function (e) {
         var $input = $(e.currentTarget).parent().find('.weui-count__number');
@@ -138,6 +124,7 @@ $(document).ready(function(){
         }
         getSubTotal();
     })
+    
     $('.weui-count__increase').click(function (e) {
         var $input = $(e.currentTarget).parent().find('.weui-count__number');
         var number = parseInt($input.val() || "0") + 1;
@@ -152,83 +139,6 @@ $(document).ready(function(){
         getSubTotal();
     });
 });
-
-function showExpectDatePicker(month,id,dates,type) {
-    weui.datePicker({
-        cron: dates+' '+month[1].value+' *',
-        start: '2020-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
-        end: '2020-12-31',
-        depth: 3,
-        onConfirm: function (result) {
-            var month = result[1].label.replace("月","");
-            if(month < 10) {
-                month = "0"+month;
-            }
-
-            var date = result[2].label.replace("日","");
-            if(date < 10) {
-                date = "0"+date;
-            }
-
-            $('#'+id).val(result[0].label.replace("年","-") + month + ("-") + date);
-            
-            if(type == 0){
-                var sEnd = IncrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('startDate_ad',result[0].label.replace("年","-") + month + ("-") + date);
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) < 0){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sEnd, vdate) < 0){
-                        if($('.date-end').val() != '' && $('.date-end').val() > DecrDate(sEnd)){
-                            $('.date-end').val(DecrDate(sEnd));
-                            $.cookie('endDate_ad',DecrDate(sEnd));
-                        } else if($('.date-end').val() == '') {
-                            $('.date-end').val(DecrDate(sEnd));
-                            $.cookie('endDate_ad',DecrDate(sEnd));
-                        }
-                        
-                        getSubTotal(id);
-                        return false;
-                    } else {
-                        sEnd = IncrDate(sEnd);
-                    }
-                }            
-            } else if(type == 1) {
-                var sStart = DecrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('endDate_ad',result[0].label.replace("年","-") + month + ("-") + date);
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) < 0){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sStart, vdate) < 0){
-                        if($('.date-start').val() != '' && $('.date-start').val() < IncrDate(sStart)){
-                            $('.date-start').val(IncrDate(sStart));
-                            $.cookie('startDate_ad',IncrDate(sStart));
-                        } else if($('.date-start').val() == '') {
-                            $('.date-start').val(IncrDate(sStart));
-                            $.cookie('startDate_ad',IncrDate(sStart));
-                        }
-                        
-                        getSubTotal(id);
-                        return false;
-                    } else {
-                        sStart = DecrDate(sStart);
-                    }
-                    
-                }
-            }
-        }
-    })
-}
 
 function GetAdInfo(){
     var storeCode = 'OLMALL180917000003';
@@ -274,6 +184,16 @@ function GetAdInfo(){
 
                 $.each(response.data, function(i,v){
                     if(v.code == getURLParameter('id') && v.state != 0){
+                        $.availableAdsUnit.push(v.unitCode);
+                    }
+                })
+                
+                if($.availableAdsUnit.length > 1){
+                    $.schedule.multiple = 1;
+                }
+                
+                $.each(response.data, function(i,v){
+                    if(v.code == getURLParameter('id') && v.state != 0){
                         var src = '/views/assets/base/img/content/mall/1s.jpg';
                         if(v.advertisingImagesWxList != null && v.advertisingImagesWxList.length > 0){
                             src = v.advertisingImagesWxList[0].imagePath;
@@ -316,7 +236,7 @@ function GetAdInfo(){
                             if (index >= 0) {
                                 removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
                             } else {
-                                addToFavorite(v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
                             }
                         })
     
@@ -345,19 +265,15 @@ function GetAdInfo(){
 
                                 $('#map').parent().append('<map name="Map_'+floor+'F_s" id="Map_'+floor+'F_s"></map>');
 
-                                $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" href="ad?id='+v.code+'" shape="poly" coords="'+v.coords+'" />');
+                                $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" href="ad?id='+v.code+'&type=ad&storeCode='+storeCode+'" shape="poly" coords="'+v.coords+'" />');
 
                                 drawShops();
                             });
                         }
-
-                        $.each(v.advertisingImagesWxList, function(j,w){
-                            $('.slide ul').append('<li><a href="javascript:;"><img src='+w.imagePath+' alt=""></a></li>');
-                        });
-
-                        $('#vr').click(function () {
-                            showVR(v.vr);
-                        })
+                        
+                        if(v.vr != null){
+                            $('#vr').attr('src',v.vr);
+                        }
                         
                         if(v.typeChs != 'LED/LCD/数字化'){
                             $('#ad_price_frequency').parent().parent().parent().hide();
@@ -368,12 +284,8 @@ function GetAdInfo(){
                     
                 });
                 
-                var quantity = 0;
-                $.each(response.data, function(i,v){
-                    if(v.code == getURLParameter('id') && v.state != 0){
-                        quantity = quantity + 1;
-                    }
-                })
+                sessionStorage.setItem("availableAdsUnit_ad", JSON.stringify($.availableAdsUnit) );    
+                var quantity = $.availableAdsUnit.length;                
                 
                 var style = '';
                 if(quantity == 1){
@@ -398,13 +310,26 @@ function GetAdInfo(){
 }
 
 function getAdScheduleInfo() {
-    var storeCode = 'OLMALL180917000003';
+    var orgCode = '100001';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        storeCode = getURLParameter('storeCode');
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
     }
     
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/schedule/findAllByStoreCodeAndEnable?storeCode="+storeCode+"&enable=1",
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByOrgCodeAndShopCode?orgCode="+orgCode+"&shopCode="+getURLParameter('id'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -418,14 +343,176 @@ function getAdScheduleInfo() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 hideLoading();
-                var adsSchedule = [];
-                $.each(response.data, function(i,v){
-                    if(v.unitType == 'ADS' && v.shopNo == getURLParameter('id')){
-                        adsSchedule.push(v);
+                if(response.data.length > 0){
+                    sessionStorage.setItem("ads_schedule", JSON.stringify(response.data));
+                    
+                    $.each(response.data, function(i,v){
+                        if(v.state == 1) {
+                            $.schedule.startDate[i] = v.startDate;
+                            $.schedule.endDate[i] = v.endDate;  
+                            $.schedule.unit[i] = v.unitCode;  
+                        }
+                    })
+                    
+                }
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function checkAdSchedule() {
+    if($.schedule.multiple == 1) {
+        $.schedule.available = 1;
+    } else {
+        var orgCode = '100001';
+        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+            switch (getURLParameter('storeCode')) {
+                case 'OLMALL190117000001':
+                    orgCode = '301001';
+                    break;
+                case 'OLMALL180917000002':
+                    orgCode = '201001';
+                    break;
+                case 'OLMALL180917000003':
+                    orgCode = '100001';
+                    break;
+                default:
+                    orgCode = '100001';
+                    break;
+            }
+        }
+
+        var map = {
+            "advertisingScheduleList": [
+              {
+                "endDate": $('#checkout-date').text(),
+                "shopCode": getURLParameter('id'),
+                "startDate": $('#checkin-date').text(),
+                "unitCode": $.schedule.unit[0],
+                "orgCode": orgCode
+              }
+            ],
+            "mobileNo": $.cookie('uid'),
+            "orgCode": "",
+            "outTradeNo": "",
+        }
+
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                showLoading();
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    hideLoading();
+                    $('.calendar-month .error').removeClass('error');
+                    if(response.data.returnCode == 'OK'){
+                        $.schedule.available = 1;
+                    } else {
+                        $.schedule.available = 0;
+                        $('.calendar-month .cal_select span').addClass('error');
+                        $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                        var $toast = $('#js_toast_3');
+
+                        $('.page.cell').removeClass('slideIn');
+
+                        $toast.fadeIn(100);
+                        setTimeout(function () {
+                            $toast.remove();
+                        }, 2000);
                     }
-                });
-                
-                sessionStorage.setItem("ads_schedule", JSON.stringify(adsSchedule));
+                } else {
+                    interpretBusinessCode(response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
+}
+
+function checkAdSubtotalSchedule() {
+    var orgCode = '100001';
+    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
+    }
+
+    var advertisingScheduleList = [];
+    for(var i=0; i<$.availableAdsUnit.length; i++){
+        advertisingScheduleList.push({
+            "endDate": $('.date-end').val(),
+            "shopCode": getURLParameter('id'),
+            "startDate": $('.date-start').val(),
+            "unitCode": $.availableAdsUnit[i],
+            "orgCode": orgCode
+          })
+    }
+
+    var map = {
+        "advertisingScheduleList": advertisingScheduleList,
+        "mobileNo": ($.cookie('uid') || ''),
+        "orgCode": "",
+        "outTradeNo": "",
+    }
+
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(response.data.returnCode == 'ERROR'){
+                    $.schedule.available = 0;
+                    $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                    var $toast = $('#js_toast_3');
+                    $('.date-start').val('');
+                    $('.date-end').val('');
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.remove();
+                    }, 2000);
+                } else {
+                    $.schedule.available = 1;
+                }
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -461,36 +548,41 @@ function getSubTotal() {
     var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
     result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
     $('#days').text(result+'天');
-    $.cookie('result_ad',result);
+    $.cookie('result_'+getURLParameter('id'),result);
     amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
     deposit = parseFloat((amount*0.2).toFixed(2));
-    $.cookie('deposit_ad',deposit);
+    $.cookie('deposit_'+getURLParameter('id'),deposit);
     subTotal = parseFloat((amount+deposit).toFixed(2));
     subItems = qty;
     $('#deposit').text('¥'+numberWithCommas(deposit));
     $('#subTotal').text('¥'+numberWithCommas(subTotal));
-    $.cookie('subTotal_ad',subTotal);
-    $.cookie('subqty',subItems);
+    $.cookie('subTotal_'+getURLParameter('id'),subTotal);
+    $.cookie('subqty_'+getURLParameter('id'),subItems);
     
-    $.range = [];
-    for(var d=0;d<result;d++){
-        $.range.push(sDate);
-        sDate = IncrDate(sDate);
-    }
-    
-    $.each($.range, function(index,value){
-        $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-            if(v.unitType == 'ADS' && v.date == value && v.shopNo == getURLParameter('id')){
-                var inArray = $.inArray(v.unitCode, $.availableAdsUnit);
-                if(v.enable == 1 && inArray == -1){
-                    $.availableAdsUnit.push(v.unitCode);
-                }
-            }
-        })
+    var aau = [];
+    $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
+        if((dateCompare(v.startDate,sDate) == true || dateCompare(v.endDate,eDate) == true) && v.shopCode == getURLParameter('id')){
+            aau.push(v.unitCode);
+        }
     })
+    
+    for (var i = $.availableAdsUnit.length - 1; i >= 0; i--) {
+        var a = $.availableAdsUnit[i];
+        for (var j = aau.length - 1; j >= 0; j--) {
+            var b = aau[j];
+            if (a == b) {
+                $.availableAdsUnit.splice(i, 1);
+                aau.splice(j, 1);
+                break;
+            }
+        }
+    }
+        
+    checkAdSubtotalSchedule();
     
     sessionStorage.setItem("availableAdsUnit_ad", JSON.stringify($.availableAdsUnit) );    
     var quantity = $.availableAdsUnit.length;
+    $.cookie('maxqty_'+getURLParameter('id'),quantity);
     $('#qty_'+getURLParameter('id')).attr('max',quantity);
 }
 
@@ -597,7 +689,7 @@ function saveOrder(ut,sc,sz,sp){
     
     var code, unitDesc, size, spec, frequency, amount, taxAmount, rentAmount, deposit, src;
     $.each($.parseJSON(sessionStorage.getItem("availableAdsUnit_ad")), function(index,value){
-        if(indexs < $.cookie('subqty')){
+        if(indexs < $.cookie('subqty_'+getURLParameter('id'))){
             $.each($.parseJSON(sessionStorage.getItem("ads")), function(k,y){
                 if(value == y.unitCode){
                     code = y.code;
@@ -605,8 +697,8 @@ function saveOrder(ut,sc,sz,sp){
                     size = y.size;
                     spec = y.material;
                     frequency = y.remarkFirst;
-                    amount = parseFloat((y.dailyPrice * $.cookie('result_ad') * 1.06).toFixed(2));
-                    taxAmount = parseFloat((y.dailyPrice * $.cookie('result_ad')).toFixed(2));
+                    amount = parseFloat((y.dailyPrice * $.cookie('result_'+getURLParameter('id')) * 1.06).toFixed(2));
+                    taxAmount = parseFloat((y.dailyPrice * $.cookie('result_'+getURLParameter('id'))).toFixed(2));
                     rentAmount = y.dailyPrice;
                     deposit = parseFloat((amount * 0.2).toFixed(2));
                     src = '/views/assets/base/img/content/mall/1s.jpg';
@@ -623,15 +715,15 @@ function saveOrder(ut,sc,sz,sp){
                 "code": value,
                 "depositAmount": deposit,
                 "electricBillFlag": "1",
-                "endDate": $.cookie('endDate_ad'),
-                "enterDate": $.cookie('startDate_ad'),
+                "endDate": $.cookie('dateEnd_'+getURLParameter('id')),
+                "enterDate": $.cookie('dateStart_'+getURLParameter('id')),
                 "isCleaning": "1",
                 "isSecurity": "1",
                 "isService": "1",
                 "mobileNo": $.cookie('uid'),
                 "name": "test name",
                 "num": 1,
-                "openDate": $.cookie('startDate_ad'),
+                "openDate": $.cookie('dateStart_'+getURLParameter('id')),
                 "orgCode": orgCode,
                 "otherFlag": "",
                 "outTradeNo": outTradeNo,
@@ -644,7 +736,7 @@ function saveOrder(ut,sc,sz,sp){
                 "serviceDepositAmount": 0,
                 "size": size, //广告尺寸规格
                 "spec": spec,
-                "startDate": $.cookie('startDate_ad'),
+                "startDate": $.cookie('dateStart_'+getURLParameter('id')),
                 "unitCode": value,
                 "unitDesc": unitDesc,
                 "unitId": "", //uuid
@@ -658,12 +750,12 @@ function saveOrder(ut,sc,sz,sp){
             contractTermInfos.push({
                 "amount": amount,
                 "code": "1",
-                "endDate": $.cookie('endDate_ad'),
+                "endDate": $.cookie('dateEnd_'+getURLParameter('id')),
                 "name": unitDesc,
                 "orgCode": orgCode,
                 "outTradeNo": outTradeNo,
                 "rentAmount": rentAmount,
-                "startDate": $.cookie('startDate_ad'),
+                "startDate": $.cookie('dateStart_'+getURLParameter('id')),
                 "taxAmount": taxAmount,
                 "termType": "B033",
                 "termTypeName": "固定租金",
@@ -1025,9 +1117,14 @@ function getMyFavorites() {
         success: function (response, status, xhr) {
             if (response.code === 'C0') {
                 $.each(response.data, function (i, v) {
-                    if (v.remarkSecond == 1 && v.unitType == 'ADS') {
-                        $.favorites.push(v.shopCode);
-                        $.favoritesId.push(v.id);
+                    if(v.unitType == 'ads'){
+                        if(v.remarkSecond == 1){
+                            $.favorites.push(v.shopCode);
+                            $.favoritesId.push(v.id);
+                        } else if(v.remarkSecond == 0){
+                            $.updateFavorites.push(v.shopCode);
+                            $.updateFavoritesId.push(v.id);
+                        }
                     }
                 });
             } else {
@@ -1040,8 +1137,9 @@ function getMyFavorites() {
     });
 }
 
-function addToFavorite(bc, c, sc, uc) {
+function addToFavorite(id, bc, c, sc, uc) {
     var map = {
+        "id": id,
         "buildingCode": bc,
         "code": "",
         "favoritesDate": "",
@@ -1054,7 +1152,7 @@ function addToFavorite(bc, c, sc, uc) {
         "remarkThird": "",
         "storeCode": sc,
         "unitCode": uc,
-        "unitType": "ads",
+        "unitType": "ads"
     }
 
     $.ajax({

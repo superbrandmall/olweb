@@ -2,10 +2,7 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/qa-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 这里是您的个人主页，您能随时"完善信息"，也可以在"订单管理"追踪订单进度哦！</div>
-
-<div class="page-hd">
+<div class="page-hd" style="margin-top: 20px;">
     <h1 class="page-hd-title">
         F&Q
     </h1>
@@ -24,9 +21,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells page-category-content">
                         <p class="content">请至各项目首页查看项目具体介绍</p>
                         <ul class="content">
-                            <li><a href="/v2/ljz">上海正大广场</a></li>
-                            <li><a href="javascript:;">洛阳正大广场</a></li>
-                            <li><a href="javascript:;">宝山正大乐城</a></li>
+                            <li><a href="/v2/ljz">上海陆家嘴正大广场</a></li>
+                            <li><a href="/v2/ly">河南洛阳正大广场</a></li>
+                            <li><a href="/v2/xh">上海徐汇正大乐城</a></li>
+                            <li><a href="/v2/bs">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +50,12 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="page-category js-categoryInner">
                     <div class="weui-cells page-category-content">
                         <p class="content">我们提供线上预订场地的服务，请至场地活动页面选择您有意向的场地</p>
-                        <p class="content"><a href="/v2/mall-list?type=events">前往场地活动页面</a></p>
+                        <ul class="content">
+                            <li><a href="/v2/events?type=events">上海陆家嘴正大广场</a></li>
+                            <li><a href="/v2/events-ly?type=events">河南洛阳正大广场</a></li>
+                            <li><a href="/v2/events-xh?type=events">上海徐汇正大乐城</a></li>
+                            <li><a href="/v2/events-bs?type=events">上海宝山正大乐城</a></li>
+                        </ul>
                     </div>
                 </div>
             </li>
@@ -64,7 +67,12 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="page-category js-categoryInner">
                     <div class="weui-cells page-category-content">
                         <p class="content">我们提供线上预订场地的服务，请至广告投放页面选择您有意向的广告点位</p>
-                        <p class="content"><a href="/v2/mall-list?f=3&type=ads">前往广告投放页面</a></p>
+                        <ul class="content">
+                            <li><a href="/v2/ads?type=ads">上海陆家嘴正大广场</a></li>
+                            <li><a href="/v2/ads-ly?type=ads">河南洛阳正大广场</a></li>
+                            <li><a href="/v2/ads-xh?type=ads">上海徐汇正大乐城</a></li>
+                            <li><a href="/v2/ads-bs?type=ads">上海宝山正大乐城</a></li>
+                        </ul>
                     </div>
                 </div>
             </li>
@@ -77,9 +85,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-cells page-category-content">
                         <p class="content">请至各项目首页查看各项目人流数据</p>
                         <ul class="content">
-                            <li><a href="/v2/ljz">上海正大广场</a></li>
-                            <li><a href="javascript:;">洛阳正大广场</a></li>
-                            <li><a href="javascript:;">宝山正大乐城</a></li>
+                            <li><a href="/v2/ljz">上海陆家嘴正大广场</a></li>
+                            <li><a href="/v2/ly">河南洛阳正大广场</a></li>
+                            <li><a href="/v2/xh">上海徐汇正大乐城</a></li>
+                            <li><a href="/v2/bs">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>

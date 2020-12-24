@@ -7,14 +7,35 @@
 </div>
 
 <div class="page__bd">
+    <?php include ('timeline/step_one.php'); ?>    
     <div class="weui-panel__hd">
         11个广告区
     </div>
     <div class="weui-panel__bd">
+        <!--<div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/special_package.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/special_package.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href="/v2/advertising-package?type=ad-package">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200323000002&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">广告位特价套餐</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">3F入口全包LED环绕屏、8F东区悬挂式、黄金大道悬挂分屏LED、3F通道灯箱、西面吊幅、东区3F-4F手扶电梯贴、陆家嘴西路12根迎风旗、东面1号电梯挂画、西面1号电梯挂画等9个热门位置</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">组合套餐</span>
+                    <span class="weui-mark-rb">限时8折</span>
+                </div>
+            </div>
+        </div>-->
+        <a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>
+        
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895045");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200323000002&type=ad">查看详情</a></li>
@@ -34,7 +55,7 @@
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895070");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200420000001&type=ad">查看详情</a></li>
@@ -231,7 +252,6 @@
             </div>
         </div>
     </div>
-    <a href="/v2/advertising-package?type=ad-package"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="150px" style="position: fixed; right: 0; top: 40%;" /></a>
 </div>
 
 <div id="gallery" class="weui-gallery" style="display: none;">
@@ -254,8 +274,6 @@
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

@@ -7,6 +7,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
 <div class="weui-form__text-area" style="margin: 20px 0;">
     <h2 class="weui-form__title">请填写合同必用的注册资料</h2>
 </div>
+
+<?php include ('timeline/step_three.php'); ?>
+
 <div id="tagnav" class="weui-navigator weui-navigator-wrapper">
     <ul class="weui-navigator-list">
         <li><a href="javascript:;" onclick="javascript: showForm('basic');">基本信息</a></li>
@@ -231,5 +234,5 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
 <br>
 <br>
 <br>
-<?php include ('timeline/step_two.php'); ?>
+
 <?php include ('footer.php'); ?>

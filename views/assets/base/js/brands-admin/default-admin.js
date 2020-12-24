@@ -149,8 +149,14 @@ function ShowBrands(p,c,u){
                     var lockS = '';
                     $.each(response.data.content, function(i,v){
                         if(v.logo != null){
-                            var logoL = '<a href="'+v.logo+'" data-toggle="lightbox" data-type="image"><img src="'+v.logo+'" width="50"></a>';
-                            var logoS = '<a href="'+v.logo+'" data-toggle="lightbox" data-type="image"><img src="'+v.logo+'" style="max-height: 30px; width: auto; display: inline-block;" class="img-responsive"></a>';
+                            var logo = '';
+                            if(v.logo.substr(0,10) == 'http://cre'){
+                                logo = v.logo;
+                            } else {
+                                logo = 'https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+v.logo;
+                            }
+                            var logoL = '<a href="'+logo+'" data-toggle="lightbox" data-type="image"><img src="'+logo+'" width="50"></a>';
+                            var logoS = '<a href="'+logo+'" data-toggle="lightbox" data-type="image"><img src="'+logo+'" style="max-height: 30px; width: auto; display: inline-block;" class="img-responsive"></a>';
                         } else {
                             var logoL = '';
                             var logoS = '';

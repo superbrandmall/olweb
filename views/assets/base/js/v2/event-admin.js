@@ -1,5 +1,8 @@
 $.favorites = new Array();
 $.favoritesId = new Array();
+$.updateFavorites = new Array();
+$.updateFavoritesId = new Array();
+
 $.eventTypes = new Array();
 
 $.order = {
@@ -22,14 +25,15 @@ var time = d.getTime();
 var date = d.getFullYear() + '-' +
         (month < 10 ? '0' : '') + month + '-' +
         (day < 10 ? '0' : '') + day;
+
 $(document).ready(function () {
-    getEventServices();
-    getShopInfo();
-    getEventScheduleInfo();
-    
     if($.cookie('uid') != '' && $.cookie('uid') != null){
         getMyFavorites();
     }
+    
+    getEventServices();
+    getShopInfo();
+    getEventScheduleInfo();
     
     if($.cookie('subTotal_event') != '' && $.cookie('subTotal_event') != null){
         $('#subTotal').text('¥'+numberWithCommas($.cookie('subTotal_event')));
@@ -70,12 +74,13 @@ $(document).ready(function () {
             $('#holidays_total').text('¥'+numberWithCommas(parseFloat(($.cookie('holidays_single_event')*$.cookie('holidays_event')).toFixed(2))));
         }
     }
-
-    $('.slide').swipeSlide({
-        autoSwipe: true,
-        continuousScroll: true,
-        transitionType: 'ease-in',
-        lazyLoad: true
+    
+    $('.weui-dialog__btn').on('click', function(){
+        $(this).parents('.js_dialog').fadeOut(200);
+    });
+    
+    $('#floor_plan').on('click', function(){
+        $('#floor_plan_viewer').fadeIn(200);
     });
     
     $('#cad').click(function(){
@@ -154,7 +159,7 @@ $(document).ready(function () {
         weui.datePicker({
             id: "start"+id,
             start: formatTime(date_n),
-            end: "2020-12-31",
+            end: "2021-01-31",
             cron: '* * *',
             defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
             depth: 2,
@@ -163,14 +168,27 @@ $(document).ready(function () {
                 var dates = '';
                 $.each($.parseJSON(sessionStorage.getItem("events_schedule")), function(i,v){
                     if(startD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
+                        if(v.enable == 1){
+                            dates = dates + v.date.split('-')[2] + ',';
+                        }
                     }
                 })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,startD,dates,0);
-                })
+                
+                if(dates != ''){
+                    dates = dates.substring(0,dates.length-1);
+                    // 二级调用：日期
+                    $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        showExpectDatePicker(result,startD,dates,0);
+                    })
+                } else {
+                    var $toast = $('#js_toast_4');
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
+                }
             },
             className: 'ma_expect_month_picker'
         });
@@ -185,7 +203,7 @@ $(document).ready(function () {
         weui.datePicker({
             id: "end" + id,
             start: formatTime(date_n),
-            end: "2020-12-31",
+            end: "2021-01-31",
             defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
             depth: 2,
             onConfirm: function (result) {
@@ -193,14 +211,27 @@ $(document).ready(function () {
                 var dates = '';
                 $.each($.parseJSON(sessionStorage.getItem("events_schedule")), function(i,v){
                     if(endD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
+                        if(v.enable == 1){
+                            dates = dates + v.date.split('-')[2] + ',';
+                        }
                     }
                 })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,endD,dates,1);
-                })
+                
+                if(dates != ''){
+                    dates = dates.substring(0,dates.length-1);
+                    // 二级调用：日期
+                    $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
+                        showExpectDatePicker(result,endD,dates,1);
+                    })
+                } else {
+                    var $toast = $('#js_toast_4');
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
+                }
             },
             className: 'ma_expect_month_picker'
         });
@@ -257,8 +288,8 @@ function getEventServices() {
 function showExpectDatePicker(month,id,dates,type) {
     weui.datePicker({
         cron: dates+' '+month[1].value+' *',
-        start: '2020-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
-        end: '2020-12-31',
+        start: month[0].value+'-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
+        end: '2021-01-31',
         depth: 3,
         onConfirm: function (result) {
             var month = result[1].label.replace("月","");
@@ -267,6 +298,11 @@ function showExpectDatePicker(month,id,dates,type) {
             }
 
             var date = result[2].label.replace("日","");
+
+            if(date < day) {
+                date = day;
+            }
+            
             if(date < 10) {
                 date = "0"+date;
             }
@@ -277,17 +313,16 @@ function showExpectDatePicker(month,id,dates,type) {
                 $.cookie('startDate_event',result[0].label.replace("年","-") + month + ("-") + date);
                 var vdate = [];
                 $.each($.parseJSON(sessionStorage.getItem("events_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo){
-                        vdate.push(v.date);
+                    if(id.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
+                        if(v.enable == 1){
+                            vdate.push(v.date);
+                        }
                     }
                 })
    
                 for(var x=0;x<vdate.length;x++){
                     if($.inArray(sEnd, vdate) == -1){
-                        if($('.date-end').val() != '' && $('.date-end').val() > DecrDate(sEnd)){
-                            $('.date-end').val(DecrDate(sEnd));
-                            $.cookie('endDate_event',DecrDate(sEnd));
-                        } else if($('.date-end').val() == '') {
+                        if($('.date-end').val() == '') {
                             $('.date-end').val(DecrDate(sEnd));
                             $.cookie('endDate_event',DecrDate(sEnd));
                         }
@@ -302,17 +337,16 @@ function showExpectDatePicker(month,id,dates,type) {
                 $.cookie('endDate_event',result[0].label.replace("年","-") + month + ("-") + date);
                 var vdate = [];
                 $.each($.parseJSON(sessionStorage.getItem("events_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo){
-                        vdate.push(v.date);
+                    if(id.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
+                        if(v.enable == 1){
+                            vdate.push(v.date);
+                        }
                     }
                 })
                 
                 for(var x=0;x<vdate.length;x++){
                     if($.inArray(sStart, vdate) == -1){
-                        if($('.date-start').val() != '' && $('.date-start').val() < IncrDate(sStart)){
-                            $('.date-start').val(IncrDate(sStart));
-                            $.cookie('startDate_event',IncrDate(sStart));
-                        } else if($('.date-start').val() == '') {
+                        if($('.date-start').val() == '') {
                             $('.date-start').val(IncrDate(sStart));
                             $.cookie('startDate_event',IncrDate(sStart));
                         }
@@ -403,7 +437,6 @@ function getSubTotal(id) {
             if(code == v.shopNo && d == v.date){
                 if(result >= 1 && result < 8){
                     amount = v.cprice;
-                     
                     if(v.dateType == 'HOLIDAY'){
                         holidays++;
                         $.cookie('holidays_single_event',parseFloat((amount*1.05).toFixed(2)));
@@ -413,7 +446,6 @@ function getSubTotal(id) {
                     }
                 } else if(result >= 8){
                     amount = v.dprice;
-                    
                     if(v.dateType == 'HOLIDAY'){
                         holidays++;
                         $.cookie('holidays_single_event',parseFloat((amount*1.05).toFixed(2)));
@@ -447,10 +479,32 @@ function getSubTotal(id) {
 }
 
 function getShopInfo() {
-    var shopCode = getURLParameter('id') || null;
-    var userCode = $.cookie('uid');
+    var storeCode = 'OLMALL180917000003';
+    var mall = 'shanghai-sbm';
+    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+        storeCode = getURLParameter('storeCode');
+        
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                mall = 'luoyang-sbm';
+                break;
+            case 'OLMALL180917000002':
+                mall = 'baoshan-tm';
+                break;
+            case 'OLMALL180917000003':
+                mall = 'shanghai-sbm';
+                break;
+            case 'OLMALL180917000001':
+                mall = 'xuhui-tm';
+                break;
+            default:
+                mall = 'shanghai-sbm';
+                break;
+        }
+    }
+    
     $.ajax({
-        url: $.api.baseNew + "/onlineleasing-customer/api/shop/" + shopCode + "?userCode=" + userCode + "",
+        url: $.api.baseNew+"/comm-wechatol/api/event/info/findAllByStoreCode?storeCode="+storeCode,
         type: "GET",
         async: false,
         beforeSend: function (request) {
@@ -467,32 +521,61 @@ function getShopInfo() {
                 if (xhr.getResponseHeader("Authorization") !== null) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-
-                if (response.data.code == shopCode) {
-                    getShopsMoreInfo(response.data.unit);
-                    
-                    $('#vr').click(function () {
-                        showVR(response.data.vr);
-                    })
-                        
-                    $('#shopName').text(response.data.shopName);
-                    $.cookie('shopName',response.data.shopName);
-                    $('#area').text(response.data.area);
-                    $.cookie('area',response.data.area);
-                    $('#area_spesifc').text(response.data.remark_1 != null ? '(' + response.data.remark_1 + ')' : '');
-                    $('#height').text(response.data.remark_2 != null ? response.data.remark_2 : '');
-                    $('#desc').text(response.data.remark_7 != null ? response.data.remark_7 : '');
                 
-                    var index = $.inArray(getURLParameter('id'), $.favorites);
-                    if (index >= 0) {
-                        $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
-                    }
+                if(response.data.length > 0){
+                    $.each(response.data, function (i, v) {
+                        if(v.shopCode == getURLParameter('id')) {
+                            getShopsMoreInfo(v.unitCode);
+                            
+                            var floor = v.floor;
+                            if(floor == "B1") {
+                                floor = "0";
+                            }
 
-                    $('#favourite').click(function () {
-                        if (index >= 0) {
-                            removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], response.data.buildingCode, getURLParameter('id'), response.data.mallCode, response.data.unit);
-                        } else {
-                            addToFavorite(response.data.buildingCode, getURLParameter('id'), response.data.mallCode, response.data.unit);
+                            if(v.unitCode != null) {
+                                $('#floor_plan').on('click', function(){
+                                    $('#map').attr({
+                                        'src': '/views/assets/base/img/content/floor-plan/'+mall+'/'+floor+'F.png',
+                                        'alt': floor+'F',
+                                        'usemap': '#Map_'+floor+'F_s'
+                                     });
+
+                                    $('#map').parent().append('<map name="Map_'+floor+'F_s" id="Map_'+floor+'F_s"></map>');
+
+                                    $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.shopCode+'" href="event?id='+v.shopCode+'&type=events&storeCode='+storeCode+'" shape="poly" coords="'+v.coords+'" />');
+
+                                    drawShops();
+                                });
+                            }
+                        
+                            if(v.vr != null){
+                                $('#vr').attr('src',v.vr);
+                            }
+
+                            $('#shopName').text(v.shopNo);
+                            $.cookie('shopName',v.shopNo);
+                            $('#area').text(v.area);
+                            $.cookie('area',v.area);
+                            $('#area_spesifc').text(v.size != null ? '(' + v.size + ')' : '');
+                            $('#height').text(v.height != null ? v.height : '');
+                            $('#electricity').text(v.electricity != null ? v.electricity : '');
+                            $('#material').text(v.material != null ? v.material : '');
+                            $('#internet').text(v.internet != null ? v.internet : '');
+                            $('#lift').text(v.lift != null ? v.lift : '');
+                            $('#desc').text(v.descript != null ? v.descript : '');
+
+                            var index = $.inArray(getURLParameter('id'), $.favorites);
+                            if (index >= 0) {
+                                $('#favourite').html('<i class="fa fa-heart" aria-hidden="true" style="color: #f60;"></i><br>取消收藏');
+                            }
+
+                            $('#favourite').click(function () {
+                                if (index >= 0) {
+                                    removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                } else {
+                                    addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                }
+                            })
                         }
                     })
                 }
@@ -517,18 +600,39 @@ function getShopsMoreInfo(u) {
         if($('.date-start').val() == ''){
             $('.date-start').addClass('red-border');
             goCheck = 0;
+        } else {
+            $('.date-start.red-border').removeClass('red-border');
+            goCheck = 1;
         }
+       
         if($('.date-end').val() == ''){
             $('.date-end').addClass('red-border');
             goCheck = 0;
+        } else {
+            $('.date-end.red-border').removeClass('red-border');
+            goCheck = 1;
         }
+        
+        if(dateCompare($('.date-start').val(),$('.date-end').val()) == false){
+            $('.date-start').addClass('red-border');
+            $('.date-end').addClass('red-border');
+            goCheck = 0;
+        }
+        
         if($('#event_name').val() == ''){
             $('#event_name').addClass('red-border');
             goCheck = 0;
+        } else {
+            $('#event_name.red-border').removeClass('red-border');
+            goCheck = 1;
         }
+        
         if($('#event_type').val() == ''){
             $('#event_type').addClass('red-border');
             goCheck = 0;
+        }  else {
+            $('#event_type.red-border').removeClass('red-border');
+            goCheck = 1;
         }
                 
         if(goCheck == 1){
@@ -816,9 +920,14 @@ function getMyFavorites() {
         success: function (response, status, xhr) {
             if (response.code === 'C0') {
                 $.each(response.data, function (i, v) {
-                    if (v.remarkSecond == 1) {
-                        $.favorites.push(v.shopCode);
-                        $.favoritesId.push(v.id);
+                    if(v.unitType == 'event'){
+                        if(v.remarkSecond == 1){
+                            $.favorites.push(v.shopCode);
+                            $.favoritesId.push(v.id);
+                        } else if(v.remarkSecond == 0){
+                            $.updateFavorites.push(v.shopCode);
+                            $.updateFavoritesId.push(v.id);
+                        }
                     }
                 });
             } else {
@@ -831,8 +940,9 @@ function getMyFavorites() {
     });
 }
 
-function addToFavorite(bc, c, sc, uc) {
+function addToFavorite(id, bc, c, sc, uc) {
     var map = {
+        "id": id,
         "buildingCode": bc,
         "code": "",
         "favoritesDate": "",
@@ -845,7 +955,7 @@ function addToFavorite(bc, c, sc, uc) {
         "remarkThird": "",
         "storeCode": sc,
         "unitCode": uc,
-        "unitType": "event",
+        "unitType": "event"
     }
 
     $.ajax({
@@ -1006,4 +1116,121 @@ function sendMail(email,file) {
         }
     }); 
     
+}
+
+function drawShops(){
+    var areas = $.map($('area'),function(el) {
+        if(getURLParameter('id') === $(el).attr('alt')){
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: "本场地",
+                fillColor: 'e12330',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        } else {
+            return { 
+                key: $(el).attr('data-key'),
+                fillColor: 'ffff00',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        }
+    });
+
+    $('#map').mapster({
+        fillColor: 'AFBEDE',
+        fillOpacity: 0.8,
+        strokeColor: 'ffd62c',
+        strokeWidth: 0,
+        clickNavigate: false,
+        mapKey: 'data-key',
+        showToolTip: true,
+        areas:  areas,
+        onShowToolTip: function () {
+            $(".mapster_tooltip").css({
+                "font-weight": "bold",
+                "color": "#fff",
+                "background": "rgba(0,0,0,0.8)",
+                "font-size": "26px",
+                "width": "auto"
+            });
+
+            $("area").on("mouseenter",  function (data) {
+               xOffset = data.pageX;
+               yOffset = data.pageY;
+               $(".mapster_tooltip").css("left", xOffset);
+               $(".mapster_tooltip").css("top", yOffset);
+            });
+        }
+    });
+    
+    addLogoLayer();
+    $('#floor_plan_viewer').fadeIn(200);
+}
+
+function addLogoLayer(){
+    $('map area').each(function(i,elem){
+        if($(this).attr('data-area') > 100 && $(this).attr('data-logo') != null && $(this).attr('data-logo') != 'null' && $(this).attr('data-logo') != ''){
+            var pos;
+            pos = $(this).attr('coords').split(',');
+            var x = 0;
+            var posLeftMin = parseInt(pos[0]), posLeftMax = parseInt(pos[0]), width, height;
+            while(x < pos.length){
+                if(parseInt(pos[x]) < posLeftMin){
+                    posLeftMin = parseInt(pos[x]);
+                } 
+
+                if(parseInt(pos[x]) > posLeftMax){
+                    posLeftMax = parseInt(pos[x]);
+                }
+                x = x + 2;
+            }
+            width = parseInt(posLeftMax - posLeftMin - 10);             
+
+            var y = 1;
+            var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
+            while(y < pos.length){
+                if(parseInt(pos[y]) < posTopMin){
+                    posTopMin = parseInt(pos[y]);
+                }
+                if(parseInt(pos[y]) > posTopMax){
+                    posTopMax = parseInt(pos[y]);
+                }
+                y = y + 2;
+            }
+
+            height = parseInt(posTopMax - posTopMin - 10);
+
+            var spanid = 'span_'+$(this).attr('data-key');
+            $('#mapster_wrap_0').append(
+                '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
+            );
+            resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+        }
+    })
+}
+
+function resetLogoSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
+    var divLogo = $('#'+spanid);
+    for (var i = minSize; i < maxSize; i++) {
+        if ($(divLogo).width() > maxWidth || $(divLogo).height() > maxHeight) {
+            $(divLogo).css({
+                'max-width': i + 'px',
+                'max-height': maxHeight,
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'  
+            }); 
+                break;
+        } else {
+            $(divLogo).css({
+                'max-height': i + 'px',
+                'max-width': maxWidth,
+                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 4.7) + 'px',
+                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 3.5) + 'px'
+            });
+        }
+    }
 }

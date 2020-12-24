@@ -9,7 +9,36 @@ $(document).ready(function(){
         $(this).click(function () {
             var radio = $(this).find(':radio');
             radio.prop('checked', !radio.prop('checked'));
+            
+            if($("input[id=unionPay]").prop("checked")){
+                $('#transferDetail').slideUp();
+                $('#emailDialog').slideDown();
+            } else if($("input[id=transfer]").prop("checked")){
+                $('#emailDialog').slideUp();
+                $('#transferDetail').slideDown();
+            } 
         })
+    })
+    
+    $("#emailDialogForm").validate({
+        rules: {
+            unionPayEmail: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            unionPayEmail: {
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>请填写付款人邮箱',
+                email: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>邮箱格式不对，请正确填写'
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            sendMail($('#unionPayEmail').val());
+        }
     })
 });
 
@@ -33,45 +62,142 @@ function getOrderByTradeNO() {
                 var taxAmount = 0; //不含税总额
                 var tax = 0; //税费
                 var qty,tax;
-                if(response.data[0].remarkSecond == 'leasing' || response.data[0].remarkSecond == 'events'){
-                    //应缴金额=保证金+首月固定租金与物业管理费(含税)
-                    $.each(response.data[0].contractInfos, function(i,v){
-                        taxAmount = parseFloat((taxAmount + v.depositAmount).toFixed(2));
-                        amount = taxAmount;
-                    })
+                var deposit = 0;
+                
+                var mallName,orgName,payeeAccount,payeeBank,type;
+                switch (response.data.orgCode) {
+                    case '301001':
+                        mallName = '河南洛阳正大广场';
+                        orgName = '洛阳正大置业有限公司';
+                        payeeAccount = '413069600018010009891';
+                        payeeBank = '交通银行洛阳分行营业部';
+                        $('#unionPayLabel').remove();
+                        $("input[id=transfer]").attr("checked", "checked");  
+                        break;
+                    case '201001':
+                        mallName = '上海宝山正大乐城';
+                        orgName = '上海正大帝盈商业发展有限公司';
+                        payeeAccount = '1001014219006800273';
+                        payeeBank = '工商银行顾村支行';
+                        $('#unionPayLabel').remove();
+                        $("input[id=transfer]").attr("checked", "checked");  
+                        break;
+                    case '100001':
+                        mallName = '上海陆家嘴正大广场';
+                        orgName = '上海帝泰发展有限公司';
+                        payeeAccount = '310066030018170043300';
+                        payeeBank = '交通银行上海虹口支行'; 
+                        break;
+                    case '204001':
+                        mallName = '上海徐汇正大乐城';
+                        orgName = '上海正大乐城百货有限公司';
+                        payeeAccount = '0243014210002166';
+                        payeeBank = '中国民生银行上海吴中支行';
+                        $('#unionPayLabel').remove();
+                        $("input[id=transfer]").attr("checked", "checked");  
+                        break;
+                    default:
+                        mallName = '上海陆家嘴正大广场';
+                        orgName = '上海帝泰发展有限公司';
+                        payeeAccount = '310066030018170043300';
+                        payeeBank = '交通银行上海虹口支行';
+                        break;
+                }
+                
+                if(response.data.remarkSecond == 'leasing' || response.data.remarkSecond == 'events'){                    
+                    if(response.data.remarkSecond == 'leasing'){
+                        //应缴金额=保证金+首月固定租金与物业管理费(含税)
+                        $('#leasing_price').show();
+                        type = '租赁';
+                        
+                        $.each(response.data.contractInfos, function(i,v){
+                            taxAmount = parseFloat((taxAmount + v.depositAmount).toFixed(2));
+                            amount = taxAmount;
+                        })
 
-                    $.each(response.data[0].contractTermInfos, function(i,v){
-                        if((v.termTypeName == '固定租金' || v.termTypeName == '物业管理费') && v.code == 1){
+                        $.each(response.data.contractTermInfos, function(i,v){
+                            if((v.termTypeName == '固定租金' || v.termTypeName == '物业管理费') && v.code == 1){
+                                taxAmount = parseFloat((taxAmount + v.taxAmount).toFixed(2));
+                                amount = parseFloat((amount + v.amount).toFixed(2));
+                                if(v.termTypeName == '固定租金'){
+                                    $('#rent').text(numberWithCommas(v.amount));
+                                }
+                                if(v.termTypeName == '物业管理费'){
+                                    $('#maintenance').text(numberWithCommas(v.amount));
+                                }
+                            }
+                        })
+                       
+                        amount = parseFloat((amount + 3000).toFixed(2));
+                        taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                        $('#amount').text(numberWithCommas(amount));
+                        $('#deposit').text(numberWithCommas(response.data.contractInfos[0].depositAmount));
+                        $('#tax').text(numberWithCommas(parseFloat((amount - taxAmount).toFixed(2))));
+                    } else {
+                        $('#adevent_price').show();
+                        type = '场地';
+                        
+                        $.each(response.data.contractInfos, function(i,v){
+                            deposit = parseFloat((deposit + v.depositAmount).toFixed(2));
+                        })
+                        
+                        $.each(response.data.contractTermInfos, function(i,v){
                             taxAmount = parseFloat((taxAmount + v.taxAmount).toFixed(2));
                             amount = parseFloat((amount + v.amount).toFixed(2));
-                        }
-                    })
-
+                        })
+                        
+                        $('#adevent_rent').text(numberWithCommas(amount));
+                        $('#adevent_deposit').text(numberWithCommas(deposit));
+                        $('#amount').text(numberWithCommas(parseFloat((amount + deposit).toFixed(2))));
+                        $('#tax').text(numberWithCommas(parseFloat((amount - taxAmount).toFixed(2))));
+                        
+                    }
                     tax = parseFloat((amount - taxAmount).toFixed(2));
                     qty = 1;
                     
-                    $.order.shopName = '【'+response.data[0].contractInfos[0].unitDesc+'】';
-                } else if(response.data[0].remarkSecond == 'advertising'){
-                    amount = response.data[0].amount;
-                    tax = (response.data[0].amount*0.06).toFixed(2);
-                    qty = response.data[0].remarkThird || response.data[0].contractInfos.length;
+                    $.order.shopName = '【'+response.data.contractInfos[0].unitDesc+'】';
+                } else if(response.data.remarkSecond == 'advertising'){
+                    $('#adevent_price').show();
+                    type = '广告';
                     
-                    $.each(response.data[0].contractInfos, function(i,v){
+                    $.each(response.data.contractInfos, function(i,v){
+                        deposit = parseFloat((deposit + v.depositAmount).toFixed(2));
+                    })
+                    
+                    $.each(response.data.contractTermInfos, function(i,v){
+                        taxAmount = parseFloat((taxAmount + v.taxAmount).toFixed(2));
+                        amount = parseFloat((amount + v.amount).toFixed(2));
+                    })
+
+                    $('#adevent_rent').text(numberWithCommas(amount));
+                    $('#adevent_deposit').text(numberWithCommas(deposit));
+                    $('#amount').text(numberWithCommas(parseFloat((amount + deposit).toFixed(2))));
+                    $('#tax').text(numberWithCommas(parseFloat((amount - taxAmount).toFixed(2))));
+                    
+                    $.each(response.data.contractInfos, function(j,w){
+                        amount = amount + w.amount;
+                        tax = parseFloat(tax + (w.amount*0.06).toFixed(2));
+                        qty = qty + w.remarkThird;
+                    })
+                    
+                    $.each(response.data.contractInfos, function(i,v){
                         $.order.shopName = $.order.shopName + '【' + v.unitDesc + '】 ';
                     });
                 }
                 
-                $('#amount').text(numberWithCommas(amount));
-                $('#unitDesc').text(response.data[0].contractInfos[0].unitDesc);
-                if(response.data[0].remarkSecond == 'leasing') {
+                $('#type').text(type);
+                $('.org').text(orgName);
+                $('#payeeAccount').text(payeeAccount);
+                $('#payeeBank').text(payeeBank);
+                $('#outTradeNo').text(response.data.outTradeNo);
+                $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
+                if(response.data.remarkSecond == 'leasing') {
                     $('.leasing-terms').show();
-                    $('#unitDesc').text('商铺: '+response.data[0].contractInfos[0].unitDesc);
-                } else if(response.data[0].remarkSecond == 'event') {
-                    $('.leasing-terms').show();
-                    $('#unitDesc').text('场地: '+response.data[0].contractInfos[0].unitDesc);
-                } else if(response.data[0].remarkSecond == 'advertising') {
-                    $('#unitDesc').text('广告位: ');
-                    $.each(response.data[0].contractInfos, function(i,v){
+                    $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
+                } else if(response.data.remarkSecond == 'events') {
+                    $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
+                } else if(response.data.remarkSecond == 'advertising') {
+                    $.each(response.data.contractInfos, function(i,v){
                         taxAmount = parseFloat((taxAmount + v.depositAmount).toFixed(2));
                         amount = taxAmount;
                         $('#unitDesc').append(''+v.unitDesc+'<br>');
@@ -79,11 +205,17 @@ function getOrderByTradeNO() {
                 }
                 
                 $('#startPay').click(function(){
-                    sendMail(numberWithCommas(amount),response.data[0].contractInfos[0].unitDesc, $('#unionPayEmail').val());
+                    /*if($("input[id=unionPay]").prop("checked")){
+                        sendMail($('#unionPayEmail').val());
+                    } else if($("input[id=transfer]").prop("checked")){
+                        sendMail($('#unionPayEmail').val());
+                    }*/
+                    showDialog();
                 })
                 
                 $('#confirm').click(function(){
-                    updateOrderToPayed(response.data[0].id,response.data[0].remarkSecond,response.data[0].outTradeNo,response.data[0].contractInfos[0].unitCode);
+                    window.location.href = '/v2/stamping';
+                    //updateOrderToPayed(response.data.id,response.data.remarkSecond,response.data.outTradeNo,response.data.contractInfos[0].unitCode);
                 });
                 
             } else {
@@ -96,73 +228,37 @@ function getOrderByTradeNO() {
     });
 }
 
-function updateOrderToPayed(id,type,trade,unit){
-    showLoading();
+function showDialog(){
+    var authDialog = $('#emailDialog');
+    authDialog.fadeIn(200);
+}
+
+function hideDialog(){
+    var authDialog = $('#emailDialog');
+    authDialog.hide();
+}
+
+function sendMail(email) {
+    hideDialog();
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+id+"&orderStates=已完成订单",
-        type: "POST",
+        url: $.api.baseNew+"/comm-wechatol/api/mail/sendBillMail?mobileNo="+$.cookie('uid')+"&outTradeNo="+getURLParameter('trade')+"&email="+email,
+        type: "GET",
         async: false,
+        dataType: "json",
+        contentType: "application/json",
         beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            showLoading();
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
         complete: function(){},
         success: function (response, status, xhr) {
+            hideLoading();
             if(response.code === 'C0') {
                 hideLoading();
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                var types;
-                if(type == 'leasing') {
-                    types = '商铺单元';
-                } else if(type == 'advertising') {
-                    types = '广告位';
-                } else if(type == 'events') {
-                    types = '场地单元';
-                }
-                
-                saveMsgLog('已完成订单','订单【陆家嘴正大广场】'+types+$.order.shopName+'，我们已收到您的付款，您可联系我们的进场对接负责人Kobe,沟通现场设计交底会的时间，我们会在您选择的时间安排会面。',trade, '我的消息',unit,'/v2/to-pay');
-            } else {
-                interpretBusinessCode(response.customerMessage);
+                $('.page__bd').hide();
+                $('.page').fadeIn();
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
         }
-    });
-}
-
-function sendMail(a,b,c) {
-    $.ajax({
-        url: "/controllers/api/2.0/ApiInformPayment.php",
-        type: "POST",
-        data: {
-            amount: a,
-            unit: b,
-            email: c
-        },
-        async: false,
-        beforeSend: function(request) {
-            showLoading();
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            hideLoading();
-            $('.page__bd').hide();
-            $('.page').fadeIn();
-
-            if($("input[id=offline]").prop("checked")){
-                //startOfflinePay();
-            } else if($("input[id=unionPay]").prop("checked")){
-                //startUnionPay();
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
+    })
 }

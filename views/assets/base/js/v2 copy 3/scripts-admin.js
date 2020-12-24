@@ -28,6 +28,8 @@ $(document).ready(function(){
             $.cookie(location.pathname.split("/")[2],1);
         }
     }
+    
+    new WOW().init();
             
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
@@ -139,8 +141,21 @@ function showGallery(src){
 }
 
 function showVR(url){
-    $("#vr_viewer iframe").attr('src',url);
-    $("#vr_viewer").show();
+    showLoading();
+    setTimeout(function () {
+        hideLoading();
+        $("#vr_viewer iframe").attr('src',url);
+        $("#vr_viewer").show();
+    },100);  
+}
+
+function showVideo(url){
+    showLoading();
+    setTimeout(function () {
+        hideLoading();
+        $("#video_viewer iframe").attr('src',url);
+        $("#video_viewer").show();
+    },100);  
 }
 
 function scrollTo(e){
@@ -168,6 +183,15 @@ function hideLoading() {
     var $loadingToast = $('#loadingToast');
     if ($loadingToast.css('display') == 'none') return;
     $loadingToast.fadeOut();
+}
+
+function audioplay(id){
+    var audio = document.getElementById(id);
+    !audio.paused?audio.pause():audio.play();
+
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        !audio.paused?audio.pause():audio.play();
+    }, false);
 }
 
 function bgAudioPlay() {

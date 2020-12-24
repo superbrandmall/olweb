@@ -2,8 +2,6 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/order-to-be-stamped-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，恭喜您！合同已经准备好，您可以"查看合同并用印"，接下来我们将和您一起为合同盖章哦！</div>
 
 <div class="page__bd" style="background-color: #EDEDED;">

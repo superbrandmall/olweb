@@ -8,9 +8,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <div class="weui-navbar__item" onclick="window.location='/v2/all-orders'">
                 全部
             </div>
-            <div class="weui-navbar__item" onclick="window.location='/v2/order-to-be-stamped'">
-                待确认
-            </div>
             <div class="weui-navbar__item weui-bar__item_on" style="background-color: rgb(230, 176, 76); color: #fff;">
                 流程中
             </div>
@@ -27,6 +24,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_three.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

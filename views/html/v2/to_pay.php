@@ -2,6 +2,9 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/to-pay-admin.js"></script>'
         . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
+
+<?php include ('timeline/step_five.php'); ?>
+
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-tab">
         <div class="weui-navbar">
@@ -11,7 +14,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <div class="weui-navbar__item" onclick="window.location='/v2/stamping'">
                 流程中
             </div>
-            <div class="weui-navbar__item weui-bar__item_on" style="background-color: rgb(230, 176, 76); color: #fff;">
+            <div class="weui-navbar__item weui-bar__item_on" style="border-bottom: solid 1px #3F4E72; background: transparent;">
                 已完成
             </div>
         </div>
@@ -41,8 +44,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_five.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

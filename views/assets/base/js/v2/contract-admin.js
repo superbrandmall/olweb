@@ -271,7 +271,7 @@ function eSignFlow(){
         url: $.api.baseNew+"/comm-wechatol/api/esign/flow",
         type: "POST",
         data: JSON.stringify(map),
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {

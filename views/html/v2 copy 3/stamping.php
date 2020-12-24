@@ -2,9 +2,6 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/stamping-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 太棒了！尊敬的阁下，还差最后一步，请点击"用印完成"来进入支付环节吧！</div>
-
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-tab">
         <div class="weui-navbar">

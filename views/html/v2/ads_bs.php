@@ -7,6 +7,7 @@
 </div>
 
 <div class="page__bd">
+    <?php include ('timeline/step_one.php'); ?>    
     <div class="weui-panel__hd">
         5个广告区
     </div>
@@ -120,6 +121,72 @@
                 </div>
             </div>
         </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/baoshan-metro-exit.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/baoshan-metro-exit.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=59729696");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201120000003&storeCode=OLMALL180917000002">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201120000003&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">吊旗B1地铁出口（10个）</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        B1F
+                    </small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">B1F</span>
+                    <span class="weui-mark-rb">吊幅</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/baoshan-metro-exit-left.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/baoshan-metro-exit-left.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=59729697");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201120000004&storeCode=OLMALL180917000002">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201120000004&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">吊旗B1左侧通道（10个）</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        B1F
+                    </small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">B1F</span>
+                    <span class="weui-mark-rb">吊幅</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/baoshan-metro-exit-right.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/baoshan-metro-exit-right.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/1fvks7dypdh?scene_id=59729699");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201120000005&storeCode=OLMALL180917000002">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201120000005&storeCode=OLMALL180917000002'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">吊旗B1右侧通道（10个）</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        B1F
+                    </small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">B1F</span>
+                    <span class="weui-mark-rb">吊幅</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -143,8 +210,6 @@
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

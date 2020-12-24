@@ -3,7 +3,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
 <div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 尊敬的阁下，谢谢您的支持！付完款的订单都在这里哦！</div>
 
 <div class="page__bd" style="background-color: #EDEDED;">
@@ -40,6 +39,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         </div>
         <div class="weui-actionsheet__action">
             <div class="weui-actionsheet__cell" id="iosActionsheetCancel">取消</div>
+        </div>
+    </div>
+</div>
+
+<div class="js_dialog" id="iosDialog1" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__hd"><strong class="weui-dialog__title">弹窗标题</strong></div>
+        <div class="weui-dialog__bd">弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内</div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_default">辅助操作</a>
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">主操作</a>
         </div>
     </div>
 </div>

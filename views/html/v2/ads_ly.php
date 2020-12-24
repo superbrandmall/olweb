@@ -7,8 +7,9 @@
 </div>
 
 <div class="page__bd">
+    <?php include ('timeline/step_one.php'); ?>    
     <div class="weui-panel__hd">
-        19个广告区
+        23个广告区
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
@@ -390,6 +391,85 @@
                 </div>
             </div>
         </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luoyang-tvled.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luoyang-tvled.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/29vksq790ie?scene_id=53544501");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201124000003&type=ad&storeCode=OLMALL190117000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201124000003&type=ad&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">场内LED电子屏（横）</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">1F场内 LED 横屏</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">场内</span>
+                    <span class="weui-mark-rb">LED</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luoyang-dengganqi.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luoyang-dengganqi.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/29vksq790ie?scene_id=53544502");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201124000005&type=ad&storeCode=OLMALL190117000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201124000005&type=ad&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">灯杆旗12个</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">外场迎风旗</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">迎风旗</span>
+                    <span class="weui-mark-rb">木板＋喷绘布</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luoyang-diku-dengxiang.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luoyang-diku-dengxiang.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/29vksq790ie?scene_id=53544503");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201124000006&type=ad&storeCode=OLMALL190117000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201124000006&type=ad&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">地库扶梯厅灯箱</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">B2灯箱</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">灯箱</span>
+                    <span class="weui-mark-rb">卡布灯箱</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/luoyang-dianti-led.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/luoyang-dianti-led.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href="/v2/ad?id=OLSHOP201124000004&type=ad&storeCode=OLMALL190117000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201124000004&type=ad&storeCode=OLMALL190117000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">电梯广告</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">1F电梯 Led 广告</small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">led</span>
+                    <span class="weui-mark-rb">33寸</span>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -413,8 +493,6 @@
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

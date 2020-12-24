@@ -7,6 +7,7 @@
 </div>
 
 <div class="page__bd">
+    <?php include ('timeline/step_one.php'); ?>
     <div class="weui-panel__hd">
         5个广告区
     </div>
@@ -104,7 +105,7 @@
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/central-plaza-led.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/central-plaza-led.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/03vkO7ph5pw?scene_id=55036506");'>VR</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200921000003&type=ad&storeCode=OLMALL180917000001">查看详情</a></li>
                     </ul>
                 </div>
@@ -117,6 +118,50 @@
                 <div style="margin: 5px 15px 10px;">
                     <span class="weui-mark-rb">中庭</span>
                     <span class="weui-mark-rb">LED大屏</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/xuhui-zhongting-yingfengqi.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/xuhui-zhongting-yingfengqi.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/03vkO7ph5pw?scene_id=55036506");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201120000001&type=ad&storeCode=OLMALL180917000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201120000001&type=ad&storeCode=OLMALL180917000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">中庭迎风旗组 10根</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        中庭
+                    </small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">中庭</span>
+                    <span class="weui-mark-rb">迎风旗</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+            <div class="weui-media-box__bd">
+                <div style="position: relative;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/xuhui-tongdao-yingfengqi.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/xuhui-tongdao-yingfengqi.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <ul class="leasing-areas">
+                        <li><a href='javascript: showVR("https://720yun.com/t/03vkO7ph5pw?scene_id=55296914");'>VR</a></li>
+                        <li><a href="/v2/ad?id=OLSHOP201120000002&type=ad&storeCode=OLMALL180917000001">查看详情</a></li>
+                    </ul>
+                </div>
+                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201120000002&type=ad&storeCode=OLMALL180917000001'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">通道内迎风旗组 12根</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">
+                        1F通道
+                    </small>
+                </div>
+                <div style="margin: 5px 15px 10px;">
+                    <span class="weui-mark-rb">1F通道</span>
+                    <span class="weui-mark-rb">迎风旗</span>
                 </div>
             </div>
         </div>
@@ -143,8 +188,6 @@
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

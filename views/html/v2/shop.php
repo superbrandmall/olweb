@@ -6,8 +6,7 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     }
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/plugins/zepto.weui.js"></script>'
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/zepto.weui.js"></script>'
         . '<script type="text/javascript" src="/views/assets/base/js/v2/shop-admin.js"></script>';
 ?>
 
@@ -24,10 +23,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <div class="page__bd" style="position: relative; margin-top: -20px;">
     <ul class="collapse shop-collapse">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="300">
+            <?php include ('timeline/step_two.php'); ?>            
             <div class="weui-flex js-category-1">
                 <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载常见问答</a></h3>
                 <div class="weui-flex__item"><strong>¥<span id="rentAmount"></span> /m<sup>2</sup>/天</strong></div>
-                <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(使用面积)</div>
+                <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(租赁面积)</div>
                 <div class="weui-flex__item">推荐业态 <span id="businessFormatChs"></span></div>
             </div>
         </li>
@@ -116,7 +116,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         </li>
         <li class="wow fadeInUp" data-wow-delay="0.9s" data-wow-offset="100">
             <div class="weui-flex js-category-3" style="padding-bottom: 0;">
-                <h3 class="weui-flex__item">工程图纸
+                <h3 class="weui-flex__item">工程信息
                     <a href="javascript:;" id="cad" data-file="/upload/docs/cad/<?= $id?>.dwg" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载CAD</a>                
                     <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载工程条件</a>            
                     <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载图纸</a>
@@ -289,7 +289,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

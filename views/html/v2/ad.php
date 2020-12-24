@@ -6,20 +6,72 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     }
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>'
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
 ?>
 
-<div style="position: relative;" class="wow lightSpeedIn" data-wow-delay="0.2s" data-wow-offset="300">
-    <div class="slide">
-        <ul></ul>
-    </div>
+<link href="/views/assets/plugins/jquery-weui-calendar/calendar.css" rel="stylesheet" type="text/css"/>
+<style type="text/css">
+    .weui_cell {
+        padding: 10px 15px;
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    
+    .weui_cell::before {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #d9d9d9;
+        color: #d9d9d9;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+        left: 15px;
+    }
+    
+    .calendar {
+        padding-bottom: 150px;
+    }
+    
+    .old.scheduled span {
+        color: #fff;
+        background-color: #e0e0e0;
+        display: inline-block;
+        width: 99%;
+        height: 37px;
+        line-height: 38px;
+        margin-top: 1px;
+        border-radius: 3px;
+        text-decoration: line-through;
+        color: #666;
+    }
+    
+    .calendar-month span.error {
+        background-color: #f00 !important;
+    }
+</style>
+<div style="position: relative;">
+    <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
 </div>
 
 <div class="page__bd" style="position: relative; margin-top: -16px;">
     <ul class="collapse shop-collapse">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400">
+            <?php include ('timeline/step_two.php'); ?>
             <div class="weui-flex js-category-1">
-                <h3 class="weui-flex__item"><span id="ad_name"></span><a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">VR看广告位</a></h3>
+                <h3 class="weui-flex__item"><span id="ad_name"></span></h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
                 <div class="weui-flex__item">楼层: <strong id="ad_floor"></strong></div>
                 <div class="weui-flex__item">类型: <strong id="ad_type"></strong></div>
@@ -112,15 +164,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
-    <div class="weui-gallery__opr">
-        <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
-        </a>
-    </div>
-</div>
-
 <div class="js_dialog" id="floor_plan_viewer" style="display: none;">
     <div class="weui-mask"></div>
     <div class="weui-dialog">
@@ -162,7 +205,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

@@ -5,6 +5,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <div class="page__bd" style="font-size: 15px;">
     <div class="page__bd">
+        <?php include ('timeline/step_five.php'); ?>
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
                 <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。贵我双方已经签定<span id="mall"></span>的<span id="type"></span>合同双方已完成签章, 已到付款环节。</p>
@@ -159,6 +160,5 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-<?php include ('timeline/step_five.php'); ?>
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

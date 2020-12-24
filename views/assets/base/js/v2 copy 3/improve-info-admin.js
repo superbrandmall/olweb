@@ -135,8 +135,14 @@ function findUserCompanyByMobileNo() {
                 if(response.data.length > 0){
                     $.info.company = response.data[0].id;
                     $.info.name = response.data[0].name;
-                    $('#invoice_company_name').val(response.data[0].invoiceCompanyName);
-                    $('#invoice_tax_no').val(response.data[0].invoiceTaxNo);
+                    if(response.data[0].name != null){
+                        $('#invoice_company_name').attr('readonly',true);
+                    }
+                    if(response.data[0].uscc != null){
+                        $('#invoice_tax_no').attr('readonly',true);
+                    }
+                    $('#invoice_company_name').val(response.data[0].name);
+                    $('#invoice_tax_no').val(response.data[0].uscc);
                     $('#mailing_address').val(response.data[0].mailingAddress);
                     $('#invoice_address').val(response.data[0].invoiceAddress);
                     $('#invoice_phone').val(response.data[0].invoicePhone);

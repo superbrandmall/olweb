@@ -53,7 +53,7 @@ function fileUpload() {
     formData.append('file', $('#avatar_selector input')[0].files[0]);
     $.ajax({
         type: "POST",
-        url: $.api.baseNew+"/comm-wechatol/api/upload/upload?mobileNo="+$.cookie('uid')+"&fileType=avatar",
+        url: $.api.baseNew+"/zuul/comm-wechatol/api/upload/upload?mobileNo="+$.cookie('uid')+"&fileType=avatar",
         data: formData,
         async: false,
         cache: false,

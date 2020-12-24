@@ -117,7 +117,7 @@ function fileUpload(id) {
     formData.append('file', $('#'+id)[0].files[0]);
     $.ajax({
         type: "POST",
-        url: $.api.baseNew+"/comm-wechatol/api/upload/upload?mobileNo="+$.cookie('uid')+"&fileType="+id+"&orderId="+$.order.id,
+        url: $.api.baseNew+"/zuul/comm-wechatol/api/upload/upload?mobileNo="+$.cookie('uid')+"&fileType="+id+"&orderId="+$.order.id,
         data: formData,
         async: false,
         cache: false,

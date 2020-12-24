@@ -2,11 +2,7 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/improve-info-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 太好了！人工智能已经开始准备合同了！您还需要再确认一遍以下信息，麻烦您看一下这些信息是否完善了？</div>
-
-<form id="improve_form">
+<form id="improve_form" style="margin-top: 20px;">
     <div class="weui-form__text-area">
         <h2 class="weui-form__title">签约信息</h2>
     </div>
@@ -16,13 +12,13 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells__title">开票信息</div>
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-invoice_company_name"><label class="weui-label">企业名称*</label></div>
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-invoice_company_name"><label class="weui-label">企业名称</label></div>
                         <div class="weui-cell__bd">
                             <input name="invoice_company_name" id="invoice_company_name" class="weui-input" required placeholder="填写企业名称"/>
                         </div>
                     </div>
                     <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-invoice_tax_no"><label class="weui-label">税号*</label></div>
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-invoice_tax_no"><label class="weui-label">税号</label></div>
                         <div class="weui-cell__bd">
                             <input name="invoice_tax_no" id="invoice_tax_no" class="weui-input" required placeholder="填写税号"/>
                         </div>

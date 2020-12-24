@@ -5,8 +5,14 @@ $.order = {
     businessScope: ""
 };
 
-$.range = new Array();
 $.availableAdsUnit = new Array();
+$.availableAdsUnitCode = new Array();
+
+$.schedule = {
+    startDate: [],
+    endDate: [],
+    available: 1
+}
 
 var d = new Date();
 var month = d.getMonth()+1;
@@ -17,144 +23,55 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
-    getAdScheduleInfo();
+    if($.cookie('dateStartAdPackage') != '' && $.cookie('dateStartAdPackage') != null){
+        $('#date-start').text($.cookie('dateStartAdPackage'));
+    } else {
+        $.cookie('dateStartAdPackage',date);
+    }
+    
+    if($.cookie('dateEndAdPackage') != '' && $.cookie('dateEndAdPackage') != null){
+        $('#date-end').text($.cookie('dateEndAdPackage'));
+    }  else {
+        $.cookie('dateEndAdPackage',IncrMonth(date));
+    }
+    
     getAdBaseInfo();
     getAdPackage();
     
-    //开始日期
-    $('.date-start').on('focus', function () {
-        var dt = new Date();
-        weui.datePicker({
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            cron: '* * *',
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(v.shopNo == 'OLSHOP200323000002' && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
-                    }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,dates,0);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
-    });
+    var startDate = [], endDate = [];
+    if($.schedule.startDate.length > 0) {
+        startDate = $.schedule.startDate;
+    } else {
+        startDate = ['2020-01-01'];
+    }
     
-    //结束日期
-    $('.date-end').on('focus', function () {
-        var dt = new Date();
-        weui.datePicker({
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(v.shopNo == 'OLSHOP200323000002' && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
-                    }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,dates,1);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
+    if($.schedule.endDate.length > 0) {
+        endDate = $.schedule.endDate;
+    } else {
+        endDate = ['2020-01-01'];
+    }
+    
+    $(".date-input").MultiCalendar({
+        scheduleStart : startDate,
+        scheduleEnd: endDate,
+        title: '档期选择',
+        totalMohth: 6,
+        dayText: ['开始', '结束'],
+        valueTypes: ''
     });
-})
+  
+    
+    $('.picker-button').click(function(){
+        if($.schedule.available == 1){
+            $('#date-start').text($('#checkin-date').text() || '');
+            $.cookie('dateStartAdPackage',$('#date-start').text());
+            $('#date-end').text($('#checkout-date').text() || '');
+            $.cookie('dateEndAdPackage',$('#date-end').text());
 
-function showExpectDatePicker(month,dates,type) {
-    showLoading();
-    weui.datePicker({
-        cron: dates+' '+month[1].value+' *',
-        start: '2020-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
-        end: '2020-12-31',
-        depth: 3,
-        onConfirm: function (result) {
-            var month = result[1].label.replace("月","");
-            if(month < 10) {
-                month = "0"+month;
-            }
-
-            var date = result[2].label.replace("日","");
-            if(date < 10) {
-                date = "0"+date;
-            }
-            
-            if(type == 0){
-                $('.date-start').text(result[0].label.replace("年","-") + month + ("-") + date);
-                var sEnd = IncrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('sStart',result[0].label.replace("年","-") + month + ("-") + date);
-                
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(v.shopNo == 'OLSHOP200323000002' && $.inArray(v.date, vdate) == -1){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sEnd, vdate) == -1){
-                        if($('.date-end').text() != '填写档期终止日' && $('.date-end').text() > DecrDate(sEnd)){
-                            $('.date-end').text(DecrDate(sEnd));
-                            $.cookie('sEnd',DecrDate(sEnd));
-                        } else if($('.date-end').text() == '填写档期终止日') {
-                            $('.date-end').text(DecrDate(sEnd));
-                            $.cookie('sEnd',DecrDate(sEnd));
-                        }
-                
-                        getSubTotal();
-                        return false;
-                    } else {
-                        sEnd = IncrDate(sEnd);
-                    }
-                }
-            } else if(type == 1){
-                $('.date-end').text(result[0].label.replace("年","-") + month + ("-") + date);
-                
-                var sStart = DecrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('sEnd',result[0].label.replace("年","-") + month + ("-") + date);
-
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(v.shopNo == 'OLSHOP200323000002' && $.inArray(v.date, vdate) == -1){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sStart, vdate) == -1){
-                        if($('.date-start').text() != '填写档期起始日' && $('.date-start').text() < IncrDate(sStart)){
-                            $('.date-start').text(IncrDate(sStart));
-                            $.cookie('sStart',DecrDate(IncrDate(sStart)));
-                        } else if($('.date-start').text() == '填写档期起始日') {
-                            $('.date-start').text(IncrDate(sStart));
-                            $.cookie('sStart',DecrDate(IncrDate(sStart)));
-                        }
-                
-                        getSubTotal();
-                        return false;
-                    } else {
-                        sStart = DecrDate(sStart);
-                    }
-                }
-                
-            }
+            getSubTotal();
         }
     })
-}
+})
 
 function getAdPackage() {
     var package = [
@@ -190,7 +107,15 @@ function getAdPackage() {
    
     sessionStorage.setItem("ad_package", JSON.stringify(package));
     $.each(package, function(i,v){
+        $.availableAdsUnit.push({
+            'code': v.shopCode,
+            'unitCode': v.unitCode
+        });
+        
+         $.availableAdsUnitCode.push(v.unitCode);
+                                    
         renderAdsList(JSON.stringify(v)); 
+        getAdScheduleInfo(v.shopCode);
     });
     
     getSubTotal();
@@ -239,11 +164,11 @@ function renderAdsList(s){
                                 套餐价: ¥ <span>'+numberWithCommas(discountAmount)+'</span> <small>/'+frequency+' (含6%税费)</small>\n\
                             </span>\n\
                             <span class="weui-form-preview__value" style="text-align: left;">\n\
-                                <small style="text-decoration: line-through;">原总价: <span id="originalAmount_'+w.shopCode+'" style="color: #b43018;">¥ '+numberWithCommas(taxAmount)+'</span></small>\n\
+                                <small style="text-decoration: line-through;">原总价: <span id="originalAmount_'+w.shopCode+'">¥ '+numberWithCommas(taxAmount)+'</span></small>\n\
                             </span>\n\
                             <span class="weui-form-preview__value" style="text-align: left;">\n\
                                 <span style="color: #b43018; font-weight: bold;">¥ </span>\n\
-                                <span id="totalAmount_'+w.shopCode+'" style="color: #b43018; font-size: 18px; font-weight: bold;">'+numberWithCommas(discountAmount)+'</span> \n\
+                                <span id="totalAmount_'+w.shopCode+'" style="color: #b43018;">'+numberWithCommas(discountAmount)+'</span> \n\
                                 <small>(含6%税费及20%押金)</small>\n\
                             </span>\n\
                         </div>\n\
@@ -252,20 +177,7 @@ function renderAdsList(s){
             </div>\n\
         </div>\n\
     </div>\n\
-    ');
-        
-    if($.cookie('sStart') != '' && $.cookie('sStart') != null){
-        $('.date-start').text($.cookie('sStart'));
-    } else {
-        $('.date-start').text(date);
-    }
-    
-    if($.cookie('sEnd') != '' && $.cookie('sEnd') != null){
-        $('.date-end').text($.cookie('sEnd'));
-    } else {
-        $('.date-end').text('2020-12-31');
-    }
-    
+    ');    
 }
 
 function getAdBaseInfo() {
@@ -304,14 +216,27 @@ function getAdBaseInfo() {
     });
 }
 
-function getAdScheduleInfo() {
-    var storeCode = 'OLMALL180917000003';
+function getAdScheduleInfo(shopCode) {
+    var orgCode = '100001';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        storeCode = getURLParameter('storeCode');
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
     }
     
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/schedule/findAllByStoreCodeAndEnable?storeCode="+storeCode+"&enable=1",
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByOrgCodeAndShopCode?orgCode="+orgCode+"&shopCode="+shopCode,
         type: "GET",
         async: false,
         dataType: "json",
@@ -325,16 +250,15 @@ function getAdScheduleInfo() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 hideLoading();
-                var adsSchedule = [];
-                
                 if(response.data.length > 0){
                     $.each(response.data, function(i,v){
-                        if(v.unitType == 'ADS'){
-                            adsSchedule.push(v);
+                        var index = $.inArray(v.unitCode, $.availableAdsUnitCode);
+                        if (index >= 0 && v.state == 1) {
+                            $.schedule.startDate.push(v.startDate);
+                            $.schedule.endDate.push(v.endDate);  
                         }
-                    });
+                    })
                 }
-                sessionStorage.setItem("ads_schedule", JSON.stringify(adsSchedule));
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -343,6 +267,86 @@ function getAdScheduleInfo() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function checkAdSchedule() {
+    var orgCode = '100001';
+    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
+    }
+
+    var advertisingScheduleList = [];
+    for(var i=0; i<$.availableAdsUnit.length; i++){
+        advertisingScheduleList.push({
+            "endDate": $('#checkout-date').text(),
+            "shopCode": $.availableAdsUnit[i].code,
+            "startDate": $('#checkin-date').text(),
+            "unitCode": $.availableAdsUnit[i].unitCode,
+            "orgCode": orgCode
+        })
+    }
+
+    var map = {
+        "advertisingScheduleList": advertisingScheduleList,
+        "mobileNo": $.cookie('uid'),
+        "orgCode": "",
+        "outTradeNo": "",
+    }
+
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                $('.calendar-month .error').removeClass('error');
+                if(response.data.returnCode == 'OK'){
+                    $.schedule.available = 1;
+                } else {
+                    $.schedule.available = 0;
+                    $('.calendar-month .cal_select span').addClass('error');
+                    $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                    var $toast = $('#js_toast_3');
+
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.remove();
+                    }, 2000);
+                }
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+    
 }
 
 function getSubTotal() {
@@ -364,14 +368,14 @@ function getSubTotal() {
         var result = 1;
         subItems = parseInt(subItems) + parseInt(qty);
         
-        var sDate = $('.date-start').text() || $.cookie('sStart');
-        var eDate = $('.date-end').text() || $.cookie('sEnd');
+        var sDate = $.cookie('dateStartAdPackage');
+        var eDate = $.cookie('dateEndAdPackage');
         var sArr = sDate.split("-");
         var eArr = eDate.split("-");
         var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
         var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
         result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
-        $.cookie('result_ad',result);
+        $.cookie('result_adPackage',result);
         originalAmount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
         amount = parseFloat((rentAmount * 0.807 * 1.06 * qty * result).toFixed(2));
         deposit = parseFloat((amount*0.2).toFixed(2));
@@ -382,9 +386,9 @@ function getSubTotal() {
     })
     
     $('#subTotal').text(numberWithCommas(subTotal.toFixed(2)));
-    $.cookie('subtotal',subTotal.toFixed(2));
+    $.cookie('subtotal_adPackage',subTotal.toFixed(2));
     $('#subQTY').text(subItems);
-    $.cookie('subqty',subItems);
+    $.cookie('subqty_adPackage',subItems);
     
     hideLoading();
 }
@@ -491,8 +495,8 @@ function saveOrder(sc){
     var units = ""; 
     var indexs = 0;
     var unitDesc, size, spec, frequency, amount, taxAmount, rentAmount, deposit, src;
-    var sDate = $('.date-start').val() || $.cookie('sStart');
-    var eDate =  $('.date-end').val() || $.cookie('sEnd');
+    var sDate = $.cookie('dateStartAdPackage');
+    var eDate = $.cookie('dateEndAdPackage');
     
     $.each($.parseJSON(sessionStorage.getItem("ad_package")), function(index,value){
         $.each($.parseJSON(sessionStorage.getItem("ads")), function(k,y){
@@ -501,8 +505,8 @@ function saveOrder(sc){
                 size = y.size;
                 spec = y.material;
                 frequency = y.remarkFirst;
-                amount = parseFloat((y.dailyPrice * 0.807 * $.cookie('result_ad') * 1.06).toFixed(2));
-                taxAmount = parseFloat((y.dailyPrice * 0.807 * $.cookie('result_ad')).toFixed(2));
+                amount = parseFloat((y.dailyPrice * 0.807 * $.cookie('result_adPackage') * 1.06).toFixed(2));
+                taxAmount = parseFloat((y.dailyPrice * 0.807 * $.cookie('result_adPackage')).toFixed(2));
                 rentAmount = parseFloat((y.dailyPrice * 0.807).toFixed(2));
                 deposit = parseFloat((amount * 0.2).toFixed(2));
                 src = '/views/assets/base/img/content/mall/1s.jpg';

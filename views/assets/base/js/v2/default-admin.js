@@ -1,7 +1,19 @@
 $(document).ready(function(){
+    $('.skip').click(function(){
+        $('#welcome').slideUp();
+        
+        setTimeout(function () {
+            $('#welcome').remove();
+        }, 500);
+    });
+    
     setTimeout(function () {
-        $('#welcome').fadeOut();
-    }, 2500);
+        $('#welcome').slideUp();
+        
+        setTimeout(function () {
+            $('#welcome').remove();
+        }, 500);
+    }, 17000);
                 
     $('.weui-tabbar a').removeClass('weui-bar__item_on');
     $('.weui-tabbar a:eq(0)').addClass('weui-bar__item_on');

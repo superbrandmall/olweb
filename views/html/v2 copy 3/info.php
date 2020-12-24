@@ -2,137 +2,24 @@
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/info-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 这里是您的个人主页，您能随时"完善信息"，也可以在"订单管理"追踪订单进度哦！</div>
-
-<div class="page__bd" style="background-color: #EDEDED;">
-    <div class="weui-panel weui-cell_access">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_appmsg">
-                <div class="weui-media-box__hd">
-                    <img class="weui-media-box__thumb" src="/views/assets/base/img/content/brands-admin/avatar.png" alt="">
-                </div>
-                <div class="weui-media-box__bd">
-                    <h4 id="uid" class="weui-media-box__title"></h4>
-                    <p id="contact_name_1" class="weui-media-box__desc"></p>
-                </div>
-                <a class="weui-cell__ft" href="/v2/register" style="font-size: 15px; color: #576b95;">完善个人资料</a>
-            </div>
-        </div>
-    </div>
-
-    <img style="width: 100%;" src="/views/assets/base/img/content/backgrounds/640.gif" alt="">
-
-    <div class="weui-panel" style="margin-top: -7px;">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/all-orders">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-clipboard" aria-hidden="true" style="margin-right: 10px; color: #fa9d3b;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>订单管理</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/my-files">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-upload" aria-hidden="true" style="margin-right: 10px; color: #fa5151;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>文件管理</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                    <!--<a class="weui-cell weui-cell_active weui-cell_access" href="#!">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-comment-o" aria-hidden="true" style="margin-right: 10px; color: #1485ee;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>我的询价</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="#!">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-heart" aria-hidden="true" style="margin-right: 10px; color: #fa5151;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>我的关注</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="weui-header bg-orange" style="height: 40px; margin-top: 10px;"> 
-        <div class="weui-header-left" style="font-size: 14px; top: 10px;"><i class="fa fa-info-circle" aria-hidden="true"></i> 完善签约信息，才可完成线上用印哦</div>
-    </div>
-    
-    <div class="weui-panel" style="margin-top: 0;">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/improve-info">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-print" aria-hidden="true" style="margin-right: 10px; color: #ffc300;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>签约信息</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/company-info">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-user-circle-o" aria-hidden="true" style="margin-right: 10px; color: #6467f0;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>公司信息</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="weui-panel">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/contact">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-question-circle" aria-hidden="true" style="margin-right: 10px; color: #10aeff;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>联系客服</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                    <a class="weui-cell weui-cell_active weui-cell_access" href="/v2/qa">
-                        <div class="weui-cell__hd">
-                            <i class="fa fa-life-saver" aria-hidden="true" style="margin-right: 10px; color: #91d300;"></i>
-                        </div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>帮助中心</p>
-                        </div>
-                        <span class="weui-cell__ft"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="profile">
+    <img src="/views/assets/base/img/content/backgrounds/profile-hjdd.png" class="wow slideInLeft" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
+    <img src="/views/assets/base/img/content/backgrounds/profile-avatar.jpg" class="avatar wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" alt="">
+    <p id="uid" style="position: absolute; font-weight: bold; font-size: 14px; color: #fff; right: 26px; bottom: 200px;"></p>
+    <a href="/v2/register" style="position: absolute; font-size: 13px; color: #fff; right: 20px; bottom: 180px;">完善品牌信息</a>
+    <a href="/v2/favourites" style="position: absolute; font-size: 13px; color: #fff; right: 20px; bottom: 160px;">我的收藏</a>
 </div>
-<br><br><br><br>
+
+<div class="wow slideInLeft" data-wow-delay="0.4s" data-wow-offset="300" style="position: relative; margin-top: -100px; height: 50vh; margin-bottom: 200px;">
+    <a href="/v2/all-orders" class="profile-links info-link" style="left: -27px; top: 0; width: 210px;">订单管理</a> 
+    <a href="/v2/my-files" class="profile-links info-link" style="left: -27px; top: 70px; width: 220px;">文件管理</a>
+    
+    <a href="/v2/improve-info" class="profile-links manage-link" style="left: -30px; top: 160px; width: 250px;">签约信息</a> 
+    <a href="/v2/company-info" class="profile-links manage-link" style="left: -30px; top: 230px; width: 240px;">公司信息</a>
+    
+    <a href="/v2/contact" class="profile-links help-link" style="left: -20px; top: 280px; width: 100px;">联系客服</a> 
+    <a href="/v2/qa" class="profile-links help-link" style="left: -20px; top: 350px; width: 90px;">帮助中心</a>
+</div>
 
 <?php include ('menu_bottom.php'); ?>
 

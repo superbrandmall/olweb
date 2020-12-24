@@ -38,7 +38,7 @@ $(document).ready(function(){
             $.ajax({
                 url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+key,
                 type: "GET",
-                async: false,
+                async: true,
                 beforeSend: function(request) {
                     showLoading();
                     $('#login').attr('disabled','disabled');
@@ -66,7 +66,7 @@ $(document).ready(function(){
                                 url: $.api.baseNew+"/comm-wechatol/api/user/login/wx/saveOrUpdate",
                                 type: "POST",
                                 data: JSON.stringify(map),
-                                async: false,
+                                async: true,
                                 dataType: "json",
                                 contentType: "application/json",
                                 beforeSend: function(request) {

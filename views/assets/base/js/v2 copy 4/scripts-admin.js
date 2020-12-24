@@ -14,20 +14,8 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     document.addEventListener('WeixinJSBridgeReady', function() {
-        bgAudioPlay();
+        document.getElementById('welcome_video').play(); 
     });
-    
-    if($('.weui-toptips.topTips').length > 0){
-        if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
-            $('.weui-toptips.topTips').hide();  
-        } else {
-            $('.weui-toptips.topTips').slideDown();
-            setTimeout(function () {
-                $('.weui-toptips.topTips').slideUp();  
-            }, 10000);
-            $.cookie(location.pathname.split("/")[2],1);
-        }
-    }
     
     new WOW().init();
             
@@ -146,15 +134,6 @@ function showVR(url){
         hideLoading();
         $("#vr_viewer iframe").attr('src',url);
         $("#vr_viewer").show();
-    },100);  
-}
-
-function showVideo(url){
-    showLoading();
-    setTimeout(function () {
-        hideLoading();
-        $("#video_viewer iframe").attr('src',url);
-        $("#video_viewer").show();
     },100);  
 }
 
@@ -338,7 +317,7 @@ function IncrMonths(date_str, months){
           parseInt(parts[1], 10),  // month (starts with 0)
           parseInt(parts[2], 10)       // date
         );
-        dt.setDate(dt.getDate() - 1);
+        dt.setDate(dt.getDate());
         parts[0] = "" + dt.getFullYear();
         parts[1] = "" + (Number(dt.getMonth()) + Number(months));
         if (parts[1].length < 2) {
@@ -387,7 +366,7 @@ function IncrYears(date_str, years){
           parseInt(parts[1], 10) - 1,  // month (starts with 0)
           parseInt(parts[2], 10)       // date
         );
-        dt.setDate(dt.getDate() - 1);
+        dt.setDate(dt.getDate());
         parts[0] = "" + (Number(dt.getFullYear()) + Number(years));
         parts[1] = "" + (dt.getMonth() + 1);
         if (parts[1].length < 2) {
@@ -411,13 +390,13 @@ $.validator.addMethod('numChar',function(text){
 var date_n = new Date();
 
 function formatTime(date_n) {
-    var year = date_n.getFullYear()
-    var month = date_n.getMonth() + 1
-    var day = date_n.getDate()
-    var hour = date_n.getHours()
-    var minute = date_n.getMinutes()
-    var second = date_n.getSeconds() 
-    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    var year = date_n.getFullYear();
+    var month = date_n.getMonth() + 1;
+    var day = date_n.getDate();
+    var hour = date_n.getHours();
+    var minute = date_n.getMinutes();
+    var second = date_n.getSeconds(); 
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
 }
   
 function formatNumber (n){
@@ -471,7 +450,9 @@ function saveMsgLog (name,content,trade,type,unit,url){
     })
 }
 
-function sendSMS (name,content){
+function sendSMS (name,cont){
+    var reg = new RegExp('/',"g");
+    var content = cont.replace(reg,'／');
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/sms/sendCommMessage?mobileNo="+$.cookie('uid')+"&reason="+name+"&message="+content,
         type: "POST",
@@ -492,4 +473,18 @@ function sendSMS (name,content){
            console.log(textStatus, errorThrown);
         }
     })
+}
+
+function dateCompare(date1,date2){
+    date1 = date1.replace(/\-/gi,"/");
+    date2 = date2.replace(/\-/gi,"/");
+    var time1 = new Date(date1).getTime();
+    var time2 = new Date(date2).getTime();
+    if(time1 > time2){
+        return false;
+    }else if(time1 == time2){
+        return false;
+    }else{
+        return true;
+    }
 }

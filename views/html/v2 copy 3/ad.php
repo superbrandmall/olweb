@@ -6,9 +6,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
 <link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-smile-o" aria-hidden="true"></i> 在这里您可以查看广告位说明，不仅有图文介绍，还有全景VR可以看哦。对了，如果都满意的话就点击"加入购物车"吧！</div>
-
 <div class="slide" id="slide1">
     <ul></ul>
     <div class="dot"></div>
@@ -71,12 +68,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     
     <h4 class="page-header" style="margin: 16px 16px 8px; font-weight: 500;">其他广告位推荐</h4>
     <div style="text-align: center; margin: 10px 0 0;">
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000017" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东南口转角</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000018" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东南口</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000019" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">墙面广告 户外 东北口</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200420000001" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">黄金大道悬挂分屏LED</a>
+        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200420000001" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 300px; font-size: 11px;">黄金大道悬挂分屏LED</a>
         <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000002" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">3F入口全包LED环绕屏</a>
-        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200323000038" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">8F东区悬挂式LED</a>
+        <a class="weui-btn weui-btn_default" href="/v2/ad?id=OLSHOP200802000001" style="display: inline-block; margin: 2px; padding: 8px 0; text-align: center; width: 150px; font-size: 11px;">东中庭大屏LED</a>
     </div>
     
     <a id="add_ad" href="javascript:;" class="weui-btn weui-btn_primary" style="position: fixed; right: 0; top: 40%; border-radius: 50%; padding: 14px; height: 80px; width: 80px; font-weight: 300; font-size: 16px; z-index: 5;">

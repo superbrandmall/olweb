@@ -37,8 +37,10 @@ $(document).ready(function(){
         drawShopsByFloor('L',j);
       }
     }
-        
-    $('.macaroon a').click(function(){
+    
+    showFloorVR('4F');
+    
+    $('.macaroon a').click(function(e){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
         }else{
@@ -177,11 +179,10 @@ function renderShopList(s,category){
             jfl = Math.floor(Math.random() * 99); 
         }
         
-        $('#empty_stores').append('<a id="shop_'+w.unitCode+'" href="/v2/category?id='+w.remarkSecond+'&type=leasing&storeCode=OLMALL190117000001">\n\
-<div style="position: relative; text-align: center;">\n\
+        $('#empty_stores').append('<div style="position: relative; text-align: center;">\n\
 <p id="mapp_'+jfl+'" class="weui-grid__label" style="text-align: center; color: #fff; padding: 0 30px 50px;">\n\
 <strong>'+shopNo+'</strong>\
-<br>'+desc+'</p>\n\</div></a>');
+<br>'+desc+'</p>\n\</div>');
        
         getCoordsRecommand(mc,FN,fc,j,jfl,w.unitCode);
     }
@@ -219,63 +220,44 @@ function renderShopList(s,category){
     }
 }
 
-function showVR(){
-    $("#vr_viewer").fadeIn();
-}
-
-function closeVR($s){
-    $("#vr_viewer").hide();
-    $s.parents('js-show').find('.js-category').find('i').removeClass('icon-35').addClass('icon-74');
-    $s.parents('js-show').removeClass('js-show');
-};
-
 function GetMap(fn,lk,mc){
     var fc,FN;
     switch (fn) {
         case '7F':
             fc = '7';
             FN = '七楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44188807';
             break;    
         case '6F':
             fc = '6';
             FN = '六楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511784';
             break;
         case '5F':
             fc = '5';
             FN = '五楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511782';
             break;
         case '4F':
             fc = '4';
             FN = '四楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511780';
             break;
         case '3F':
             fc = '3';
             FN = '三楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502948';
             break;
         case '2F':
             fc = '2';
             FN = '二楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502945';
             break;
         case '1F':
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502942';
             break;
         case 'B1F':
             fc = '0';
             FN = '负一楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502951';
             break;
         default:
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502942';
             break;
     }
     
@@ -292,7 +274,6 @@ function GetMap(fn,lk,mc){
     });
     
     $('#floorNo').text(fn);
-    $('#floorVRLink').attr('href','javascript: showFloorVR(vr)');
     getCoords(mc,FN,fc);
 }
 
@@ -334,9 +315,42 @@ function recommendStores(category){
     renderShopList(sessionStorage.getItem("shopList"),category);
 }
 
-function showFloorVR(vr){
-    $("#floor_vr iframe").attr('src',vr);
-    $("#floor_vr").show();
+function showFloorVR(floor){
+    var vr;
+    switch (floor) {
+        case '7F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=56638705';
+            break;    
+        case '6F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511785';
+            break;
+        case '5F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511783';
+            break;
+        case '4F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53511781';
+            break;
+        case '3F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502949';
+            break;
+        case '2F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502947';
+            break;
+        case '1F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502944';
+            break;
+        case 'B1F':
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502950';
+            break;
+        default:
+            vr = 'https://720yun.com/t/29vksq790ie?scene_id=53502944';
+            break;
+    }
+    
+    $('.floors, .floors_desc').hide();
+    $('#'+floor+', #'+floor+'_desc').fadeIn();
+    $('.floors iframe').attr("src","javascript:;");
+    $('#'+floor+' iframe').attr("src",vr);
 }
 
 function getCoordsByFloor(fl) {
@@ -559,6 +573,11 @@ function addLogoLayer(map,level,J,jfl){
                 '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
             );
             resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+            
+            $('.weui-grid__icon img[id^=span_]').click(function(){
+                $("#logo_gallery .weui-gallery__img").attr('style','background-image: url('+$(this).attr('src')+')');
+                $("#logo_gallery").show();
+            })
         } else if($(this).attr('data-area') > 200 && $(this).attr('name') != null && $(this).attr('name') != 'null' && $(this).attr('name') != ''){
             var pos;
             pos = $(this).attr('coords').split(',');

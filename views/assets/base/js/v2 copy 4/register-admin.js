@@ -276,13 +276,17 @@ function saveUserBrand() {
                 }
                 $.cookie('brand_1',$('#brand_1').val());
                 
-                if(getURLParameter('type')){
-                    if(getURLParameter('type') == 'leasing'){
-                        window.location.href = '/v2/leasing?f='+getURLParameter('f')+'&type=leasing';
-                    } else if(getURLParameter('type') == 'ads'){
-                        window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
-                    } else if(getURLParameter('type') == 'events'){
-                        window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
+                if(getURLParameter('type') && getURLParameter('type') != ''){
+                    if(getURLParameter('type') == 'leasing') {
+                        window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                    } else if(getURLParameter('type') == 'events') {
+                        window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                    } else if(getURLParameter('type') == 'ads') {
+                        window.location.href = '/v2/advertising-shopping-cart?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                    } else if(getURLParameter('type') == 'ad') {
+                        window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                    } else {
+                        window.location.href = '/v2/info';
                     }
                 } else {
                     window.location.href = '/v2/info';

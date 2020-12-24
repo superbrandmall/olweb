@@ -5,7 +5,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div class="page__bd">
     <div class="weui-tab">
         <div class="weui-navbar">
-            <div class="weui-navbar__item weui-bar__item_on" style="background-color: rgb(230, 176, 76); color: #fff;">
+            <div class="weui-navbar__item weui-bar__item_on" style="border-bottom: solid 1px #3F4E72; background: transparent;">
                 我的消息
             </div>
             <div class="weui-navbar__item">

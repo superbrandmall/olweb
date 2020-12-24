@@ -2,46 +2,6 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
         . '<script type="text/javascript" src="/views/assets/base/js/v2/ly-admin.js"></script>';
 ?>
-<style>
-.floors {
-    background-size: cover;
-    background-position: 0 center;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    animation: animatedBackground 20s linear infinite;
-    -moz-animation: animatedBackground 20s linear infinite;
-    -o-animation: animatedBackground 20s linear infinite;
-}
-
-@keyframes animatedBackground {
-    0% { background-position: 0 75%; }
-    40% { background-position: 40% 50%; }
-    50% { background-position: 40% 50%; }
-    90% {background-position: 91% 75%; }
-    100% {background-position: 91% 75%; }
-}
-@-moz-keyframes animatedBackground {
-    0% { background-position: 0 75%; }
-    40% { background-position: 40% 50%; }
-    50% { background-position: 40% 50%; }
-    90% {background-position: 91% 75%; }
-    100% {background-position: 91% 75%; }
-}
-@-o-keyframes animatedBackground {
-    0% { background-position: 0 75%; }
-    40% { background-position: 40% 50%; }
-    50% { background-position: 40% 50%; }
-    90% {background-position: 91% 75%; }
-    100% {background-position: 91% 75%; }
-}
-@keyframes animatedBackground {
-    0% { background-position: 0 75%; }
-    40% { background-position: 40% 50%; }
-    50% { background-position: 40% 50%; }
-    90% {background-position: 91% 75%; }
-    100% {background-position: 91% 75%; }
-}
-</style>
 
 <div style="position: relative; margin-bottom: 20px;">
     <img src="/views/assets/base/img/content/backgrounds/grey-blue-leasing.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
@@ -52,6 +12,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 </div>
 
 <div class="page__bd">
+    <?php include ('timeline/step_one.php'); ?>    
     <ul class="collapse">
         <li class="js-show">
             <div class="weui-flex js-category">
@@ -123,50 +84,57 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                     <div class="content">
                         <div class="weui-flex">
                             <div class="weui-flex__item" style="position: relative;">
-                                <img src="/views/assets/base/img/content/backgrounds/transparent_by.png" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 1;"/>
-                                <div id="7F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/7F.jpg);">
+                                <div id="7F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/07F.png" alt="07F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>                
-                                <div id="6F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/6F.jpg);">
+                                <div id="6F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/06F.png" alt="06F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>                
-                                <div id="5F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/5F.jpg);">
+                                <div id="5F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/05F.png" alt="05F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>
-                                <div id="4F" class="floors floor_plan" style="position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/4F.jpg);">
+                                <div id="4F" class="floors floor_plan" style="position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/04F.png" alt="04F" height="35" style="position: absolute; bottom: 20px; left: 20px;" /> 
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>
-                                <div id="3F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/3F.jpg);">
+                                <div id="3F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/03F.png" alt="03F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>
-                                <div id="2F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/2F.jpg);">
+                                <div id="2F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/02F.png" alt="02F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>
-                                <div id="1F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/1F.jpg);">
+                                <div id="1F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/01F.png" alt="01F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
                                     </span>
                                 </div>
-                                <div id="B1F" class="floors floor_plan" style="display: none; position: relative; background: url(/views/assets/base/img/content/backgrounds/ly/Floor/B1F.jpg);">
+                                <div id="B1F" class="floors floor_plan" style="display: none; position: relative;">
+                                    <iframe src="javascript:;" width="100%" height="100%" frameborder="0"></iframe>
                                     <img src="/views/assets/base/img/content/backgrounds/ly/Floor/0B1F.png" alt="B1F" height="35" style="position: absolute; bottom: 20px; left: 20px;" />
                                     <span style="position: absolute; bottom: 15px; left: 100px; color: #efefef; z-index: 2;">
                                         <img src="/views/assets/base/img/content/backgrounds/circle.gif" alt="点击" height="30" style="margin-bottom: -9px;" />点击打开楼层图                                    
@@ -182,36 +150,36 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                 <div id="1F_desc" class="floors_desc" style="display: none; margin-top: 10px;">国际一线快时尚，紧跟最新时尚潮流</div>
                                 <div id="B1F_desc" class="floors_desc" style="display: none; margin-top: 10px;">精品生活集市，体会文化传承，乐享高端生活</div>
                             </div>
-                            <div style="margin-top: -30px;">
+                            <div style="margin-top: -40px;">
                                 <div class="macaroon">
-                                    <a href="javascript: showFloorImg('7F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('7F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/7F.png" alt="7F">
                                     </a>
-                                    <a href="javascript: showFloorImg('6F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('6F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/6F.png" alt="6F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">2</span>
                                     </a>
-                                    <a href="javascript: showFloorImg('5F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('5F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/5F.png" alt="5F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">2</span>
                                     </a>
-                                    <a href="javascript: showFloorImg('4F')" class="active" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('4F')" class="active" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/4F.png" alt="4F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">3</span>
                                     </a>
-                                    <a href="javascript: showFloorImg('3F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('3F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/3F.png" alt="3F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">1</span>
                                     </a>
-                                    <a href="javascript: showFloorSlide('2F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('2F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/2F.png" alt="2F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">1</span>
                                     </a>
-                                    <a href="javascript: showFloorSlide('1F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('1F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/1F.png" alt="1F">
                                         <span class="weui-badge" style="position: absolute; top: -0.4em; right: -0.4em;">1</span>
                                     </a>
-                                    <a href="javascript: showFloorSlide('B1F')" style="margin-top: 6px; margin-bottom: 10px;">
+                                    <a href="javascript: showFloorVR('B1F')" style="margin-top: 6px; margin-bottom: 10px;">
                                         <img src="/views/assets/base/img/content/backgrounds/ly/macaroon/B1.png" alt="B1">
                                     </a>
                                 </div>
@@ -233,11 +201,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                         <?php 
                             for($i=7;$i>=0;$i--) {
                         ?>
-                            <div id="L<?= $i ?>" class="weui-grid__icon" style="width: 100%;">
-                                <img src="/views/assets/base/img/content/floor-plan/luoyang-sbm/<?= $i ?>F.png" usemap="#Map_L<?= $i ?>">
-                                <map name="Map_L<?= $i ?>" id="Map_L<?= $i ?>"></map>
+                            <div style="position: relative;">
+                                <div id="L<?= $i ?>" class="weui-grid__icon" style="width: 100%;">
+                                    <img src="/views/assets/base/img/content/floor-plan/luoyang-sbm/<?= $i ?>F.png" usemap="#Map_L<?= $i ?>">
+                                    <map name="Map_L<?= $i ?>" id="Map_L<?= $i ?>"></map>
+                                </div>
+                                <p class="weui-grid__label" style="font-size: 16px; position: absolute; top: 0; left: 0; width: auto; padding: 2px 4px; background: #DFDFDF;"><?php $i > 0 ? $level = $i.'F' : $level = 'B1'; echo $level; ?></p>
                             </div>
-                            <p class="weui-grid__label" style="font-size: 16px; text-align: center;"><?php $i > 0 ? $level = $i.'F' : $level = 'B1'; echo $level; ?></p>
                         <?php 
                             }
                         ?>
@@ -253,26 +223,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
             </div>
             <?php include ('categories.php'); ?>
         </li>
-        <li>
-            <div class="weui-flex js-category" onclick="javascript: showVR();">
-                <div class="weui-flex__item"><i class="fa fa-street-view" aria-hidden="true"></i> 360°全景</div>
-                <i class="icon icon-74"></i>
-            </div>
-            <div class="page-category js-categoryInner">
-                <div class="weui-cells page-category-content">
-                    <div class="content">
-                        <div id="vr_viewer" class="weui-gallery" style="position: relative;">
-                            <iframe src="https://720yun.com/t/29vksq790ie?scene_id=53502941" width="100%" frameborder="0" style="height: 90vh;"></iframe>
-                            <div class="weui-gallery__opr" style="position: relative;">
-                                <a href="javascript:" class="weui-gallery__del">
-                                    <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick="javascript: closeVR(this);"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
     </ul>
 </div>
 
@@ -284,7 +234,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
             <div style="margin: 10px; color: #565d66;">
                 <strong id="floorNo"></strong>
                 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 推荐位置可点击    
-                <a id="floorVRLink" href='javascript:;' style="margin-left: 9px; display: inline-block; color: #F26A85;"><i class="fa fa-street-view" aria-hidden="true"></i> 360°全景</a> 
             </div>
     
             <img src="javascript:;" width="320" height="160" id="map">
@@ -296,7 +245,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     </div>
 </div>
 
-<div id="recommend_empty_stores" class="weui-gallery" style="display: none; z-index: 2000; background: rgba(0,0,0,0.8); color: #fff;">
+<div id="recommend_empty_stores" class="weui-gallery" style="display: none; background: rgba(0,0,0,0.8); color: #fff;">
     <h3 style="text-align: center; margin: 20px;"><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> <small>推荐位置可点击</small></h3>
     <div id="empty_stores" class="weui-grids" style="height: 80vh; overflow: scroll;"></div>
     <?php 
@@ -316,18 +265,16 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     </div>
 </div>
 
-<div id="floor_vr" class="weui-gallery" style="display: none; z-index: 2000;">
-    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+<div id="logo_gallery" class="weui-gallery" style="display: none">
+    <span class="weui-gallery__img"></span>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#floor_vr iframe").attr("src","javascript:;");  $("#floor_vr").hide();'></i>
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#logo_gallery").hide();'></i>
         </a>
     </div>
 </div>
 
 <br><br><br>
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('menu_bottom.php'); ?>
 

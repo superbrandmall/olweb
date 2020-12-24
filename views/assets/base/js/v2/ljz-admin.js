@@ -1,5 +1,5 @@
 var index=0;
-var unitCodes = ["01FL053","01FL064","02FL011","02FL023","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060"];
+var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060"];
 var vr;
 
 $(document).ready(function(){
@@ -53,7 +53,9 @@ $(document).ready(function(){
         }
     });
     
-    $('.macaroon a').click(function(){
+    showFloorVR('7F');
+    
+    $('.macaroon a').click(function(e){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
         }else{
@@ -77,34 +79,6 @@ $(document).ready(function(){
     
     getShopsInfo();
 });
-
-/*function change(){
-    index++;
-    
-    if(index > 1){
-        index=0;
-    }
-    console.log(index);
-    var imgs=["/views/assets/base/img/content/backgrounds/sbm/Floor/4F-1.jpg","/views/assets/base/img/content/backgrounds/sbm/Floor/4F-2.jpg"];
-    
-    $("#4F").css('background','url('+imgs[index]+')');
-}*/
-
-function showFloorImg(floor){
-    $('.slide, .floors_desc').hide();
-    $('.floors, .floors_desc').hide();
-    $('#'+floor+', #'+floor+'_desc').fadeIn();
-}
-
-function showFloorSlide(floor){
-    $('.floors, .floors_desc').hide();
-    $('.slide, .floors_desc').hide();
-    
-    $('.slide').css('height',$('.macaroon').innerHeight());
-    
-    $('#'+floor+', #'+floor+'_desc').fadeIn();
-    $('#'+floor).parent('.slide').fadeIn();
-}
 
 function getShopsInfo() {
     $.ajax({
@@ -213,11 +187,10 @@ function renderShopList(s,category){
             jfl = Math.floor(Math.random() * 99); 
         }
         
-        $('#empty_stores').append('<a id="shop_'+w.unitCode+'" href="/v2/category?id='+w.remarkSecond+'&type=leasing">\n\
-<div style="position: relative; text-align: center;">\n\
+        $('#empty_stores').append('<div style="position: relative; text-align: center;">\n\
 <p id="mapp_'+jfl+'" class="weui-grid__label" style="text-align: center; color: #fff; padding: 0 30px 50px;">\n\
 <strong>'+shopNo+'</strong>\
-<br>'+desc+'</p>\n\</div></a>');
+<br>'+desc+'</p>\n\</div');
        
         getCoordsRecommand(mc,FN,fc,j,jfl,w.unitCode);
     }
@@ -255,73 +228,52 @@ function renderShopList(s,category){
     }
 }
 
-function showVR(){
-    $("#vr_viewer").fadeIn();
-}
-
-function closeVR($s){
-    $("#vr_viewer").hide();
-    $s.parents('js-show').find('.js-category').find('i').removeClass('icon-35').addClass('icon-74');
-    $s.parents('js-show').removeClass('js-show');
-};
-
 function GetMap(fn,lk,mc){
     var fc,FN;
     switch (fn) {
         case '9F':
             fc = '9';
             FN = '九楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44188809';
             break;
         case '8F':
             fc = '8';
             FN = '八楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=48463594';
             break;
         case '7F':
             fc = '7';
             FN = '七楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44188807';
             break;    
         case '6F':
             fc = '6';
             FN = '六楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44186925';
             break;
         case '5F':
             fc = '5';
             FN = '五楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44186892';
             break;
         case '4F':
             fc = '4';
             FN = '四楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=48463593';
             break;
         case '3F':
             fc = '3';
             FN = '三楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182613';
             break;
         case '2F':
             fc = '2';
             FN = '二楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182612';
             break;
         case '1F':
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
             break;
         case 'B1F':
             fc = '0';
             FN = '负一楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57444230';
             break;
         default:
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
             break;
     }
     
@@ -338,7 +290,6 @@ function GetMap(fn,lk,mc){
     });
         
     $('#floorNo').text(fn);
-    $('#floorVRLink').attr('href','javascript: showFloorVR(vr)');
     getCoords(mc,FN,fc);
 }
 
@@ -380,10 +331,51 @@ function recommendStores(category){
     renderShopList(sessionStorage.getItem("shopList"),category);
 }
 
-function showFloorVR(vr){
-    $('#floor_plan_viewer').hide();
-    $("#floor_vr iframe").attr('src',vr);
-    $("#floor_vr").show();
+function showFloorVR(floor){
+    var vr;
+    switch (floor) {
+        case '10F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57839129';
+            break;
+        case '9F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57825023';
+            break;
+        case '8F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=58301036';
+            break;
+        case '7F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44188807';
+            break;    
+        case '6F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44186925';
+            break;
+        case '5F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=52392278';
+            break;
+        case '4F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=48463593';
+            break;
+        case '3F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182613';
+            break;
+        case '2F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182612';
+            break;
+        case '1F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
+            break;
+        case 'B1F':
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57444230';
+            break;
+        default:
+            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
+            break;
+    }
+    
+    $('.floors, .floors_desc').hide();
+    $('#'+floor+', #'+floor+'_desc').fadeIn();
+    $('.floors iframe').attr("src","javascript:;");
+    $('#'+floor+' iframe').attr("src",vr);
 }
 
 function getCoordsByFloor(fl) {
@@ -609,6 +601,11 @@ function addLogoLayer(map,level,J,jfl){
                 '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
             );
             resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+            
+            $('.weui-grid__icon img[id^=span_]').click(function(){
+                $("#logo_gallery .weui-gallery__img").attr('style','background-image: url('+$(this).attr('src')+')');
+                $("#logo_gallery").show();
+            })
             
         } else if($(this).attr('data-area') > 200 && $(this).attr('name') != null && $(this).attr('name') != 'null' && $(this).attr('name') != ''){
             var pos;

@@ -14,20 +14,8 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     document.addEventListener('WeixinJSBridgeReady', function() {
-        bgAudioPlay();
+        document.getElementById('welcome_video').play(); 
     });
-    
-    if($('.weui-toptips.topTips').length > 0){
-        if($.cookie(location.pathname.split("/")[2]) && $.cookie(location.pathname.split("/")[2]) == 1){
-            $('.weui-toptips.topTips').hide();  
-        } else {
-            $('.weui-toptips.topTips').slideDown();
-            setTimeout(function () {
-                $('.weui-toptips.topTips').slideUp();  
-            }, 10000);
-            $.cookie(location.pathname.split("/")[2],1);
-        }
-    }
     
     new WOW().init();
             
@@ -41,41 +29,7 @@ $(document).ready(function(){
 
     if(!sessionStorage.getItem("category") || sessionStorage.getItem("category") == null || sessionStorage.getItem("category") == '') {
         getNewCategories();
-    }
-    
-    var collapsed = 0;
-    $(".timeline_btn").click(function(){
-        if(collapsed == 0){
-            $(this).animate({
-                left: '160px'
-            }, 200);
-            $("#timeline").animate({
-                left: '0'
-            }, 200);
-            collapsed = 1;
-            
-            setTimeout(function() {
-                $("#timeline").animate({
-                    left: '-160px'
-                }, 200);
-
-                $(".timeline_btn").animate({
-                    left: '0'
-                }, 200);
-                collapsed = 0;
-            }, 10000)
-        } else {
-            $(this).animate({
-                left: '0'
-            }, 200);
-
-            $("#timeline").animate({
-                    left: '-160px'
-            }, 200);
-            collapsed = 0;
-        }
-    })
-    
+    } 
 });
 
 function getURLParameter(sParam) {
@@ -436,13 +390,13 @@ $.validator.addMethod('numChar',function(text){
 var date_n = new Date();
 
 function formatTime(date_n) {
-    var year = date_n.getFullYear()
-    var month = date_n.getMonth() + 2
-    var day = date_n.getDate()
-    var hour = date_n.getHours()
-    var minute = date_n.getMinutes()
-    var second = date_n.getSeconds() 
-    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    var year = date_n.getFullYear();
+    var month = date_n.getMonth() + 1;
+    var day = date_n.getDate();
+    var hour = date_n.getHours();
+    var minute = date_n.getMinutes();
+    var second = date_n.getSeconds(); 
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
 }
   
 function formatNumber (n){
@@ -519,4 +473,18 @@ function sendSMS (name,cont){
            console.log(textStatus, errorThrown);
         }
     })
+}
+
+function dateCompare(date1,date2){
+    date1 = date1.replace(/\-/gi,"/");
+    date2 = date2.replace(/\-/gi,"/");
+    var time1 = new Date(date1).getTime();
+    var time2 = new Date(date2).getTime();
+    if(time1 > time2){
+        return false;
+    }else if(time1 == time2){
+        return false;
+    }else{
+        return true;
+    }
 }

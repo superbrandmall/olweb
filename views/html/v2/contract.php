@@ -13,6 +13,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         . '<script src="/views/assets/base/js/v2/my-files-admin.js" type="text/javascript" ></script>';
 ?>
 
+<?php include ('timeline/step_four.php'); ?>
+
 <div class="weui-cells" id="download_links" style="margin-top: 20px; font-size: 13px;">
     <a class="weui-cell weui-cell_access" href="javascript: showContract();" style="width: 23%; float: left;">
         <div class="weui-cell__bd">
@@ -304,6 +306,6 @@ if($type == 'leasing'){
 <br>
 <br>
 <br>
-<?php include ('timeline/step_four.php'); ?>
+
 <?php include ('menu_bottom.php'); ?>
 <?php include ('footer.php'); ?>

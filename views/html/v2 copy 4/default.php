@@ -9,11 +9,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         height: 100vh;
         overflow: hidden;
     }
-    body {
-        background-color: #838da9;
-    }
     
-    .ta_c {
+    /**.ta_c {
         text-align: center;
         margin-top: 100px;
     }
@@ -29,6 +26,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         -moz-animation: rotation 3s linear infinite;
         -webkit-animation: rotation 3s linear infinite;
         -o-animation: rotation 3s linear infinite;
+    }*/
+    
+    .skip {
+        position: absolute; 
+        top: 15px; 
+        right: 15px; 
+        border: solid 2px #fff; 
+        padding: 5px 15px; 
+        color: #fff;
     }
 
 </style>
@@ -46,56 +52,46 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div class="slide" id="slide2">
-    <ul>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-6.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-7.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-8.jpg' alt="">
-            </a>
-        </li>
-    </ul>
-    <div class="dot">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+<div id="welcome" style="position: relative; height: 110vh;">
+    <video id="welcome_video" autoplay muted playsinline preload="preload" style="width: auto; height: 100%">
+        <source src="/upload/video/judy.mp4" type="video/mp4">
+    </video>
+    <img src='/views/assets/base/img/content/backgrounds/judyhao.png' width="50px;" alt="" style="position: absolute; top: 15px; left: 15px;">
+    <a class="skip" href="javascript:;">x 跳过</a>
+</div>
+
+<div id="slide2">
+    <img src='/views/assets/base/img/content/backgrounds/judyhao.png' alt="" style="margin: 20px 0;">
 </div>
 
 <div class="slide" id="slide1">
-    <div style="position: absolute; left: 0; right: 0; text-align: center; top: 14px; color: #fff; font-weight: bold;">
-        <div class="mall_names" style="display: none;">上海<br>陆家嘴正大广场</div>
-        <div class="mall_names" style="display: none;">洛阳<br>陆家嘴正大广场</div>
-        <div class="mall_names" style="display: none;">上海<br>宝山正大乐城</div>
+    <div style="background: #0C31FA; text-align: center; font-size: 22px; font-weight: bold; color: #fff; line-height: 40px;">
+        <div class="mall_names" style="display: none; position: relative;">上海陆家嘴正大广场 <img src='/views/assets/base/img/content/backgrounds/arrow-right-w.png' alt="" height="54" style="position: absolute; right: 10px; top: -2px;"></div>
+        <div class="mall_names" style="display: none; position: relative;">河南洛阳正大广场 <img src='/views/assets/base/img/content/backgrounds/arrow-right-w.png' alt="" height="54" style="position: absolute; right: 10px; top: -2px;"></div>
+        <div class="mall_names" style="display: none; position: relative;">上海徐汇正大乐城 <img src='/views/assets/base/img/content/backgrounds/arrow-right-w.png' alt="" height="54" style="position: absolute; right: 10px; top: -2px;"></div>
+        <div class="mall_names" style="display: none; position: relative;">上海宝山正大乐城 <img src='/views/assets/base/img/content/backgrounds/arrow-right-w.png' alt="" height="54" style="position: absolute; right: 10px; top: -2px;"></div>
     </div>
-    <img src='/views/assets/base/img/content/backgrounds/v2-banner-top.jpg' alt="" style="width: 100%; margin-bottom: -8px;">
+    <div style="background: #0C31FA; height: 15px;"></div>
     <ul class="main">
         <li class="view" onclick="window.location='/v2/ljz'">
             <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
         </li>
-        <li class="view">
+        <li class="view" onclick="window.location='/v2/ly'">
             <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
+        </li>
+        <li class="view" onclick="window.location='/v2/xh'">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-4.jpg' alt="">
         </li>
         <li class="view" onclick="window.location='/v2/bs'">
             <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
         </li>
     </ul>
-    <div style="position: relative; margin-top: -50px;">
+    <div style="position: relative; margin-top: -30px;">
         <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-1.png' alt="" style="width: 100%;"></div>
         <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-2.png' alt="" style="width: 100%;"></div>
-        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-3.png' alt="" style="width: 100%;"></div>   
+        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-4.png' alt="" style="width: 100%;"></div>
+        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-3.png' alt="" style="width: 100%;"></div>
     </div>
 </div>
-
-<?php //include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

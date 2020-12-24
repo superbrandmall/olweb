@@ -5,8 +5,9 @@ $.order = {
     businessScope: ""
 };
 
-$.range = new Array();
 $.availableAdsUnit = new Array();
+$.shopCodeTemp = '';
+$.multipleTemp = 0;
 
 var d = new Date();
 var month = d.getMonth()+1;
@@ -21,69 +22,64 @@ $(document).ready(function(){
         $(this).val($.cookie('quantity_'+$(this).attr('id').split('_')[1]) || 1);
     })
     
-    getAdScheduleInfo();
     getAdBaseInfo();
     getShoppingCart();
     
-    //开始日期
-    $('.date-start').on('focus', function () {
-        var dt = new Date();
-        var id=dt.getFullYear()+""+dt.getMonth() +""+dt.getDate()+""+dt.getHours()+""+ dt.getMinutes()+""+dt.getSeconds();
-        var startD = $(this).attr('id');
-        weui.datePicker({
-            id: "start"+id,
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            cron: '* * *',
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(startD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
+    $(".date-start, .date-end").each(function(){
+        $(this).click(function() {
+            $.shopCodeTemp = $(this).attr('id').split('_')[1];
+            $.multipleTemp = $(this).attr('data-multiple');
+            if($(this).attr('data-multiple') == 0) {
+                var sD, eD, startDate = [], endDate = [];
+                if($.cookie('startDate_'+$.shopCodeTemp) != '' && $.cookie('startDate_'+$.shopCodeTemp) != null) {
+                    var sD = $.cookie('startDate_'+$.shopCodeTemp).split(',');
+                    for(var i=0;i<sD.length;i++){
+                        startDate.push(sD[i]);
                     }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,startD,dates,0);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
-    });
-    
-    //结束日期
-    $('.date-end').on('focus', function () {
-        var dt = new Date();
-        var id = dt.getFullYear() + "" + dt.getMonth() + "" + dt.getDate() + "" + dt.getHours() + "" + dt.getMinutes() + "" + dt.getSeconds();
+                } else {
+                    startDate = ['2020-01-01'];
+                }
+                
+                if($.cookie('endDate_'+$.shopCodeTemp) != '' && $.cookie('endDate_'+$.shopCodeTemp) != null) {
+                    var eD = $.cookie('endDate_'+$.shopCodeTemp).split(',');
+                    for(var i=0;i<eD.length;i++){
+                        endDate.push(eD[i]);
+                    }
+                } else {
+                    endDate = ['2020-01-01'];
+                }
+                
+                $(this).MultiCalendar({
+                    scheduleStart : startDate,
+                    scheduleEnd: endDate,
+                    title: '档期选择',
+                    totalMohth: 6,
+                    dayText: ['开始', '结束'],
+                    valueTypes: ''
+                });
+            } else {
+                $(this).MultiCalendar({
+                    scheduleStart : ['2020-01-01'],
+                    scheduleEnd: ['2020-01-01'],
+                    title: '档期选择',
+                    totalMohth: 6,
+                    dayText: ['开始', '结束'],
+                    valueTypes: ''
+                });
+            }
+            
+            $('.picker-button').click(function(){
+                if($.cookie('available_'+$.shopCodeTemp) == 1){
+                    $('#dateStart_'+$.shopCodeTemp).val($('#checkin-date').text() || '');
+                    $.cookie('dateStart_'+$.shopCodeTemp,$('#dateStart_'+$.shopCodeTemp).val());
+                    $('#dateEnd_'+$.shopCodeTemp).val($('#checkout-date').text() || '');
+                    $.cookie('dateEnd_'+$.shopCodeTemp,$('#dateEnd_'+$.shopCodeTemp).val());
 
-        var endD = $(this).attr('id');
-        weui.datePicker({
-            id: "end" + id,
-            start: formatTime(date_n),
-            end: "2020-12-31",
-            defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
-            depth: 2,
-            onConfirm: function (result) {
-                var month = result[1].value < 10 ? '0'+result[1].value : result[1].value;
-                var dates = '';
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(endD.split('_')[1] == v.shopNo && month == v.date.split('-')[1]){
-                        dates = dates + v.date.split('-')[2] + ',';
-                    }
-                })
-                dates = dates.substring(0,dates.length-1);
-                // 二级调用：日期
-                $('.ma_expect_month_picker .weui-picker').on('animationend webkitAnimationEnd', function() {
-                    showExpectDatePicker(result,endD,dates,1);
-                })
-            },
-            className: 'ma_expect_month_picker'
-        });
-    });
+                    getSubTotal();
+                }
+            })
+        })
+    })
     
     $('.weui-count__decrease').click(function (e) {
         showLoading();
@@ -139,117 +135,9 @@ $(document).ready(function(){
     })
 
     $('.weui-cell_swiped').swipeout('open');
-    $(document).on("swipeout-open",'.weui-cell_swiped',function(){
-        //监听打开触发
-    })
-    $(document).on("swipeout-close",'.weui-cell_swiped',function(){
-        //监听关闭触发
-    })
+    //$(document).on("swipeout-open",'.weui-cell_swiped',function(){ })  监听打开触发
+    //$(document).on("swipeout-close",'.weui-cell_swiped',function(){ }) 监听关闭触发
 })
-
-function showExpectDatePicker(month,id,dates,type) {
-    showLoading();
-    weui.datePicker({
-        cron: dates+' '+month[1].value+' *',
-        start: '2020-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
-        end: '2020-12-31',
-        depth: 3,
-        onConfirm: function (result) {
-            var month = result[1].label.replace("月","");
-            if(month < 10) {
-                month = "0"+month;
-            }
-
-            var date = result[2].label.replace("日","");
-            if(date < 10) {
-                date = "0"+date;
-            }
-
-            $('#'+id).val(result[0].label.replace("年","-") + month + ("-") + date);
-            if(type == 0){
-                var sEnd = IncrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('sStart',result[0].label.replace("年","-") + month + ("-") + date);
-                $(".date-start").each(function(){
-                    if($(this).val() == '') {
-                        $(this).val(result[0].label.replace("年","-") + month + ("-") + date);
-                    }
-                })
-                
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) == -1){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sEnd, vdate) == -1){
-                        if($('#'+id).parent().parent().parent().find('.date-end').val() != '' && $('#'+id).parent().parent().parent().find('.date-end').val() > DecrDate(sEnd)){
-                            $('#'+id).parent().parent().parent().find('.date-end').val(DecrDate(sEnd));
-                            $.cookie('sEnd',DecrDate(sEnd));
-                        } else if($('#'+id).parent().parent().parent().find('.date-end').val() == '') {
-                            $('#'+id).parent().parent().parent().find('.date-end').val(DecrDate(sEnd));
-                            $.cookie('sEnd',DecrDate(sEnd));
-                        }
-                        
-                        $(".date-end").each(function(){
-                            if($(this).val() == '') {
-                                $(this).val(DecrDate(sEnd));
-                                $.cookie('sEnd',DecrDate(sEnd));
-                            }
-                        })
-                
-                        getSubTotal();
-                        return false;
-                    } else {
-                        sEnd = IncrDate(sEnd);
-                    }
-                }
-            } else if(type == 1){
-                var sStart = DecrDate(result[0].label.replace("年","-") + month + ("-") + date);
-                $.cookie('sEnd',result[0].label.replace("年","-") + month + ("-") + date);
-                
-                $(".date-end").each(function(){
-                    if($(this).val() == '') {
-                        $(this).val(result[0].label.replace("年","-") + month + ("-") + date);
-                    }
-                })
-                
-                var vdate = [];
-                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                    if(id.split('_')[1] == v.shopNo && $.inArray(v.date, vdate) == -1){
-                        vdate.push(v.date);
-                    }
-                })
-                
-                for(var x=0;x<vdate.length;x++){
-                    if($.inArray(sStart, vdate) == -1){
-                        if($('#'+id).parent().parent().parent().find('.date-start').val() != '' && $('#'+id).parent().parent().parent().find('.date-start').val() < IncrDate(sStart)){
-                            $('#'+id).parent().parent().parent().find('.date-start').val(IncrDate(sStart));
-                            $.cookie('sStart',DecrDate(IncrDate(sStart)));
-                        } else if($('#'+id).parent().parent().parent().find('.date-start').val() == '') {
-                            $('#'+id).parent().parent().parent().find('.date-start').val(IncrDate(sStart));
-                            $.cookie('sStart',DecrDate(IncrDate(sStart)));
-                        }
-                        
-                        $(".date-start").each(function(){
-                            if($(this).val() == '') {
-                                $(this).val(IncrDate(sStart));
-                                $.cookie('sStart',DecrDate(IncrDate(sStart)));
-                            }
-                        })
-                
-                        getSubTotal();
-                        return false;
-                    } else {
-                        sStart = DecrDate(sStart);
-                    }
-                }
-                
-            }
-        }
-    })
-}
 
 function getShoppingCart() {
     var storeCode = 'OLMALL180917000003';
@@ -278,7 +166,17 @@ function getShoppingCart() {
                     
                     $.each(response.data, function(i,v){
                         if(v.unitType == 'shopping-cart' && v.storeCode == storeCode){
+                            $.each($.parseJSON(sessionStorage.getItem("ads")), function(j,w){
+                                if(v.shopCode == w.code){
+                                    $.availableAdsUnit.push({
+                                        'code': w.code,
+                                        'unitCode': w.unitCode
+                                    });
+                                }
+                            })
+                            
                             renderAdsList(JSON.stringify(v));
+                            getAdScheduleInfo(v.shopCode);
                         }
                     });
                     
@@ -399,6 +297,7 @@ function renderAdsList(s){
     var unitCode;
     var taxAmount;
     var frequency;
+    var multiple = 1;
     
     $.each($.parseJSON(sessionStorage.getItem("ads")), function(k,y){
         if(w.shopCode == y.code){
@@ -415,6 +314,7 @@ function renderAdsList(s){
     var style = '';
     if(quantity == 1){
         style = " display: none;";
+        multiple = 0;
     }
 
     $('.page__bd').append('<div class="weui-panel" style="margin-top: 0;">\n\
@@ -438,12 +338,12 @@ function renderAdsList(s){
                             <span class="weui-form-preview__value" style="text-align: left;">'+type+'</span>\n\
                             <span class="weui-form-preview__value">\n\
                                 <div class="weui-cell__bd">\n\
-                                    <input class="weui-input date-start" id="dateStart_'+w.shopCode+'" placeholder="填写档期起始日" readonly>\n\
+                                    <input class="weui-input date-start" id="dateStart_'+w.shopCode+'" data-multiple="'+multiple+'" placeholder="填写档期起始日" readonly>\n\
                                 </div>\n\
                             </span>\n\
                             <span class="weui-form-preview__value">\n\
                                 <div class="weui-cell__bd">\n\
-                                    <input class="weui-input date-end" id="dateEnd_'+w.shopCode+'" placeholder="填写档期终止日" readonly>\n\
+                                    <input class="weui-input date-end" id="dateEnd_'+w.shopCode+'" data-multiple="'+multiple+'" placeholder="填写档期终止日" readonly>\n\
                                 </div>\n\
                             </span>\n\
                         </div>\n\
@@ -471,22 +371,12 @@ function renderAdsList(s){
     </div>\n\
     ');
     
+    $('#dateStart_'+w.shopCode).val(($.cookie('dateStart_'+w.shopCode) || ''));
+    $('#dateEnd_'+w.shopCode).val(($.cookie('dateEnd_'+w.shopCode) || ''));
+    
     if($.cookie('quantity_'+w.shopCode) && $.cookie('quantity_'+w.shopCode) != null && $.cookie('quantity_'+w.shopCode) >= 0 && $.cookie('quantity_'+w.shopCode) <= quantity) {
         $('#qty_'+w.shopCode).val($.cookie('quantity_'+w.shopCode));
     }
-        
-    if($.cookie('sStart') != '' && $.cookie('sStart') != null){
-        $('.date-start').val($.cookie('sStart'));
-    } else {
-        $('.date-start').val(date);
-    }
-    
-    if($.cookie('sEnd') != '' && $.cookie('sEnd') != null){
-        $('.date-end').val($.cookie('sEnd'));
-    } else {
-        $('.date-end').val('2020-12-31');
-    }
-    
 }
 
 function getAdBaseInfo() {
@@ -511,7 +401,7 @@ function getAdBaseInfo() {
             if(response.code === 'C0') {
                 hideLoading();
                 sessionStorage.setItem("ads", JSON.stringify(response.data));
-                
+                                
                 $('#confirm_price').click(function(){
                     datesAlignCheck();
                 });
@@ -525,14 +415,27 @@ function getAdBaseInfo() {
     });
 }
 
-function getAdScheduleInfo() {
-    var storeCode = 'OLMALL180917000003';
+function getAdScheduleInfo(shopCode) {
+    var orgCode = '100001';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        storeCode = getURLParameter('storeCode');
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
     }
     
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/schedule/findAllByStoreCodeAndEnable?storeCode="+storeCode+"&enable=1",
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByOrgCodeAndShopCode?orgCode="+orgCode+"&shopCode="+shopCode,
         type: "GET",
         async: false,
         dataType: "json",
@@ -546,18 +449,187 @@ function getAdScheduleInfo() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 hideLoading();
-                var adsSchedule = [];
-                
                 if(response.data.length > 0){
+                    sessionStorage.setItem("ads_schedule_"+shopCode, JSON.stringify(response.data));
+                    
+                    var startDate = [], endDate = [], unitCode = [];
                     $.each(response.data, function(i,v){
-                        if(v.unitType == 'ADS'){
-                            adsSchedule.push(v);
+                        if(v.state == 1) {
+                            startDate.push(v.startDate);
+                            endDate.push(v.endDate);
+                            unitCode.push(v.unitCode);
                         }
-                    });
+                    })
+                    
+                    $.cookie('startDate_'+shopCode,startDate);
+                    $.cookie('endDate_'+shopCode,endDate);  
+                    $.cookie('unit_'+shopCode,unitCode);  
+                    
                 }
-                sessionStorage.setItem("ads_schedule", JSON.stringify(adsSchedule));
             } else {
                 interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function checkAdSchedule() {
+    if($.multipleTemp == 1) {
+        $.cookie('available_'+$.shopCodeTemp,1);
+    } else {
+        if($.cookie('unit_'+$.shopCodeTemp) == 'undefined' || $.cookie('unit_'+$.shopCodeTemp) == '' || $.cookie('unit_'+$.shopCodeTemp) == null){
+            $.cookie('available_'+$.shopCodeTemp,1);
+        } else {
+            var orgCode = '100001';
+            if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+                switch (getURLParameter('storeCode')) {
+                    case 'OLMALL190117000001':
+                        orgCode = '301001';
+                        break;
+                    case 'OLMALL180917000002':
+                        orgCode = '201001';
+                        break;
+                    case 'OLMALL180917000003':
+                        orgCode = '100001';
+                        break;
+                    default:
+                        orgCode = '100001';
+                        break;
+                }
+            }
+
+            var map = {
+                "advertisingScheduleList": [
+                  {
+                    "endDate": $('#checkout-date').text(),
+                    "shopCode": $.shopCodeTemp,
+                    "startDate": $('#checkin-date').text(),
+                    "unitCode": $.cookie('unit_'+$.shopCodeTemp)[0],
+                    "orgCode": orgCode
+                  }
+                ],
+                "mobileNo": $.cookie('uid'),
+                "orgCode": "",
+                "outTradeNo": "",
+            }
+
+            $.ajax({
+                url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    showLoading();
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    if(response.code === 'C0') {
+                        hideLoading();
+                        $('.calendar-month .error').removeClass('error');
+                        if(response.data.returnCode == 'OK'){
+                            $.cookie('available_'+$.shopCodeTemp,1);
+                        } else {
+                            $.cookie('available_'+$.shopCodeTemp,0);
+                            $('.calendar-month .cal_select span').addClass('error');
+                            $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                            var $toast = $('#js_toast_3');
+
+                            $('.page.cell').removeClass('slideIn');
+
+                            $toast.fadeIn(100);
+                            setTimeout(function () {
+                                $toast.remove();
+                            }, 2000);
+                        }
+                    } else {
+                        interpretBusinessCode(response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                   console.log(textStatus, errorThrown);
+                }
+            });
+        }
+    }
+}
+
+function checkAdSubtotalSchedule(code) {
+    var orgCode = '100001';
+    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+        switch (getURLParameter('storeCode')) {
+            case 'OLMALL190117000001':
+                orgCode = '301001';
+                break;
+            case 'OLMALL180917000002':
+                orgCode = '201001';
+                break;
+            case 'OLMALL180917000003':
+                orgCode = '100001';
+                break;
+            default:
+                orgCode = '100001';
+                break;
+        }
+    }
+
+    var advertisingScheduleList = [];
+    for(var i=0; i<$.availableAdsUnit.length; i++){
+        if($.availableAdsUnit[i].code == code){
+            advertisingScheduleList.push({
+                "endDate": $('#dateEnd_'+code).val(),
+                "shopCode": code,
+                "startDate": $('#dateStart_'+code).val(),
+                "unitCode": $.availableAdsUnit[i].unitCode,
+                "orgCode": orgCode
+            })
+        }
+    }
+
+    var map = {
+        "advertisingScheduleList": advertisingScheduleList,
+        "mobileNo": $.cookie('uid'),
+        "orgCode": "",
+        "outTradeNo": "",
+    }
+
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                if(response.data.returnCode == 'ERROR'){
+                    $.cookie('available_'+code,0);
+                    $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                    var $toast = $('#js_toast_3');
+                    $('#dateStart_'+code).val('');
+                    $('#dateEnd_'+code).val('');
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.remove();
+                    }, 2000);
+                } else {
+                    $.cookie('available_'+code,1);
+                }
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -597,13 +669,18 @@ function getSubTotal() {
                             qty = $(this).parents('.weui-panel__bd').find('.weui-count__number').val();
                         }
                         
-                        var sDate = $('#dateStart_'+code).val() || $.cookie('sStart');
-                        var eDate =  $('#dateEnd_'+code).val() || $.cookie('sEnd');
-                        var sArr = sDate.split("-");
-                        var eArr = eDate.split("-");
-                        var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
-                        var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-                        result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+                        if($('#dateStart_'+code).val() != '' && $('#dateEnd_'+code).val() != ''){
+                            var sDate = $('#dateStart_'+code).val();
+                            var eDate =  $('#dateEnd_'+code).val();
+                            var sArr = sDate.split("-");
+                            var eArr = eDate.split("-");
+                            var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
+                            var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
+                            result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+                        } else {
+                            result = 0;
+                        }
+                        
                         $.cookie('result_ad',result);
                         amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
                         deposit = parseFloat((amount*0.2).toFixed(2));
@@ -611,44 +688,42 @@ function getSubTotal() {
                         $('#totalAmount_'+code).text(numberWithCommas(amount.toFixed(2)));
                         subTotal = parseFloat((subTotal+amount).toFixed(2));
                         subItems = parseInt(subItems) + parseInt(qty);
-                       
-                        $.range = [];
-                        for(var d=0;d<result;d++){
-                            $.range.push({
-                                'code': code,
-                                'sDate': sDate
-                            });
-                            sDate = IncrDate(sDate);
-                        }
-
-                        $.each($.range, function(index,value){
-                            if(value.code == code){
-                                $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                                    if(v.unitType == 'ADS' && v.date == value.sDate && v.shopNo == code){
-                                        var adsUnit = {
-                                            'code': code,
-                                            'unitCode': v.unitCode
-                                        };
-                                        var inArray = JSON.stringify($.availableAdsUnit).indexOf(JSON.stringify(adsUnit));
-                                        if(v.enable == 1 && inArray == -1){
-                                            $.availableAdsUnit.push({
-                                                'code': code,
-                                                'unitCode': v.unitCode
-                                            });
-                                        }
-                                    }
-                                })
-                            }
-                        })
                     }
                 }
             })
         }
     })
     
+    var aau = [];
+    var code;
     $(".weui-panel .weui-check").each(function(){
         if($(this).prop("checked") && $(this).parent().parent().parent().find('.date-start').val() != '' && $(this).parent().parent().parent().find('.date-end').val() != '') {
-            var code = $(this).attr('id').split('_')[1];
+            code = $(this).attr('id').split('_')[1];
+
+            if(sessionStorage.getItem("ads_schedule_"+code) != null && sessionStorage.getItem("ads_schedule_"+code) != ''){
+                $.each($.parseJSON(sessionStorage.getItem("ads_schedule_"+code)), function(i,v){
+                    if((dateCompare(v.startDate,$('#dateStart_'+code).val()) == true || dateCompare(v.endDate,$('#dateEnd_'+code).val()) == true) && v.shopCode == code){
+                        aau.push({
+                            'code': code,
+                            'unitCode': v.unitCode
+                        });
+                    }
+                })
+                
+                for (var i = $.availableAdsUnit.length - 1; i >= 0; i--) {
+                    var a = JSON.stringify($.availableAdsUnit[i]);
+                    for (var j = aau.length - 1; j >= 0; j--) {
+                        var b = JSON.stringify(aau[j]);
+
+                        if (a == b) {
+                            $.availableAdsUnit.splice(i, 1);
+                            aau.splice(j, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+            
             var quantity = 0;
 
             $.each($.availableAdsUnit, function(index,value){
@@ -660,6 +735,8 @@ function getSubTotal() {
             $('#qty_'+code).attr('max',quantity);     
         }
     })
+    
+    checkAdSubtotalSchedule(code);
     
     $('#subTotal').text(numberWithCommas(subTotal.toFixed(2)));
     $.cookie('subtotal',subTotal.toFixed(2));
@@ -773,44 +850,12 @@ function saveOrder(sc){
         if($(this).prop("checked")) {
             var code = $(this).attr('id').split('_')[1];
             var qty = $.cookie('quantity_'+code) || $(this).parents('.weui-panel__bd').find('.weui-count__number').val();
-            var sDate = $('.date-start').val() || $.cookie('sStart');
-            var eDate =  $('.date-end').val() || $.cookie('sEnd');
+            var sDate = $('.date-start').val();
+            var eDate =  $('.date-end').val();
             var sArr = sDate.split("-");
             var eArr = eDate.split("-");
             var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
             var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-            var result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
-            
-            
-            $.range = [];
-            for(var d=0;d<result;d++){
-                $.range.push({
-                    'code': code,
-                    'sDate': sDate
-                });
-                sDate = IncrDate(sDate);
-            }
-
-            $.each($.range, function(index,value){
-                if(value.code == code){
-                    $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-                        if(v.unitType == 'ADS' && v.date == value.sDate && v.shopNo == code){
-                            var adsUnit = {
-                                'code': code,
-                                'unitCode': v.unitCode
-                            };
-                            var inArray = JSON.stringify($.availableAdsUnit).indexOf(JSON.stringify(adsUnit));
-                            if(v.enable == 1 && inArray == -1){
-                                
-                                $.availableAdsUnit.push({
-                                    'code': code,
-                                    'unitCode': v.unitCode
-                                });
-                            }
-                        }
-                    })
-                }
-            })
             
             var indexs = 0;
             var unitDesc, size, spec, frequency, amount, taxAmount, rentAmount, deposit, src;
@@ -842,15 +887,15 @@ function saveOrder(sc){
                         "code": value.unitCode,
                         "depositAmount": deposit,
                         "electricBillFlag": "1",
-                        "endDate": $('.date-end').val() || $.cookie('sEnd'),
-                        "enterDate": $('.date-start').val() || $.cookie('sStart'),
+                        "endDate": $('.date-end').val(),
+                        "enterDate": $('.date-start').val(),
                         "isCleaning": "1",
                         "isSecurity": "1",
                         "isService": "1",
                         "mobileNo": $.cookie('uid'),
                         "name": "test name",
                         "num": 1,
-                        "openDate": $('.date-start').val() || $.cookie('sStart'),
+                        "openDate": $('.date-start').val(),
                         "orgCode": orgCode,
                         "otherFlag": "",
                         "outTradeNo": outTradeNo,
@@ -863,7 +908,7 @@ function saveOrder(sc){
                         "serviceDepositAmount": 0,
                         "size": size, //广告尺寸规格
                         "spec": spec,
-                        "startDate": $('.date-start').val() || $.cookie('sStart'),
+                        "startDate": $('.date-start').val(),
                         "unitCode": value.unitCode,
                         "unitDesc": unitDesc,
                         "unitId": "", //uuid
@@ -877,12 +922,12 @@ function saveOrder(sc){
                     contractTermInfos.push({
                         "amount": amount,
                         "code": "1",
-                        "endDate": $('.date-end').val() || $.cookie('sEnd'),
+                        "endDate": $('.date-end').val(),
                         "name": unitDesc,
                         "orgCode": orgCode,
                         "outTradeNo": outTradeNo,
                         "rentAmount": rentAmount,
-                        "startDate": $('.date-start').val() || $.cookie('sStart'),
+                        "startDate": $('.date-start').val(),
                         "taxAmount": taxAmount,
                         "termType": "B033",
                         "termTypeName": "固定租金",

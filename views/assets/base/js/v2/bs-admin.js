@@ -1,5 +1,5 @@
 var index=0;
-var unitCodes = ["B1FC011","B1FL022","B1FL010","01FL009","01FL015"];
+var unitCodes = ["B1FL009","B1FL022","B1FL010","01FL009","01FL015"];
 var vr;
 
 $(document).ready(function(){
@@ -37,8 +37,10 @@ $(document).ready(function(){
         drawShopsByFloor('L',j);
       }
     }
-        
-    $('.macaroon a').click(function(){
+    
+    showFloorVR('1F');
+    
+    $('.macaroon a').click(function(e){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
         }else{
@@ -167,11 +169,10 @@ function renderShopList(s,category){
             jfl = Math.floor(Math.random() * 99); 
         }
         
-        $('#empty_stores').append('<a id="shop_'+w.unitCode+'" href="/v2/category?id='+w.remarkSecond+'&type=leasing&storeCode=OLMALL180917000002">\n\
-<div style="position: relative; text-align: center;">\n\
+        $('#empty_stores').append('<div style="position: relative; text-align: center;">\n\
 <p id="mapp_'+jfl+'" class="weui-grid__label" style="text-align: center; color: #fff; padding: 0 30px 50px;">\n\
 <strong>'+shopNo+'</strong>\
-<br>'+desc+'</p>\n\</div></a>');
+<br>'+desc+'</p>\n\</div>');
        
         getCoordsRecommand(mc,FN,fc,j,jfl,w.unitCode);
     }
@@ -209,33 +210,20 @@ function renderShopList(s,category){
     }
 }
 
-function showVR(){
-    $("#vr_viewer").fadeIn();
-}
-
-function closeVR($s){
-    $("#vr_viewer").hide();
-    $s.parents('js-show').find('.js-category').find('i').removeClass('icon-35').addClass('icon-74');
-    $s.parents('js-show').removeClass('js-show');
-};
-
 function GetMap(fn,lk,mc){
     var fc,FN;
     switch (fn) {
         case '3F':
             fc = '3';
             FN = '三楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182613';
             break;
         case '2F':
             fc = '2';
             FN = '二楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182612';
             break;
         case '1F':
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
             break;
         case 'B1F':
             fc = '0';
@@ -244,7 +232,6 @@ function GetMap(fn,lk,mc){
         default:
             fc = '1';
             FN = '一楼';
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
             break;
     }
     
@@ -261,7 +248,6 @@ function GetMap(fn,lk,mc){
     });
     
     $('#floorNo').text(fn);
-    $('#floorVRLink').attr('href','javascript: showFloorVR(vr)');
     getCoords(mc,FN,fc);
 }
 
@@ -303,9 +289,30 @@ function recommendStores(category){
     renderShopList(sessionStorage.getItem("shopList"),category);
 }
 
-function showFloorVR(vr){
-    $("#floor_vr iframe").attr('src',vr);
-    $("#floor_vr").show();
+function showFloorVR(floor){
+    var vr;
+    switch (floor) {
+        case '3F':
+            vr = 'https://720yun.com/t/1fvks7dypdh?scene_id=50976360';
+            break;
+        case '2F':
+            vr = 'https://720yun.com/t/1fvks7dypdh?scene_id=48965597';
+            break;
+        case '1F':
+            vr = 'https://720yun.com/t/1fvks7dypdh?scene_id=48961253';
+            break;
+        case 'B1F':
+            vr = 'https://720yun.com/t/1fvks7dypdh?scene_id=47733922';
+            break;
+        default:
+            vr = 'https://720yun.com/t/1fvks7dypdh?scene_id=48961253';
+            break;
+    }
+    
+    $('.floors, .floors_desc').hide();
+    $('#'+floor+', #'+floor+'_desc').fadeIn();
+    $('.floors iframe').attr("src","javascript:;");
+    $('#'+floor+' iframe').attr("src",vr);
 }
 
 function getCoordsByFloor(fl) {
@@ -519,6 +526,11 @@ function addLogoLayer(map,level,J,jfl){
                 '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
             );
             resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+            
+            $('.weui-grid__icon img[id^=span_]').click(function(){
+                $("#logo_gallery .weui-gallery__img").attr('style','background-image: url('+$(this).attr('src')+')');
+                $("#logo_gallery").show();
+            })
         } else if($(this).attr('data-area') > 200 && $(this).attr('name') != null && $(this).attr('name') != 'null' && $(this).attr('name') != ''){
             var pos;
             pos = $(this).attr('coords').split(',');

@@ -13,37 +13,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         background-color: #838da9;
     }
     
-    .ta_c {
-        text-align: center;
-        margin-top: 100px;
+    .skip {
+        position: absolute; 
+        top: 15px; 
+        right: 15px; 
+        border: solid 2px #fff; 
+        padding: 5px 15px; 
+        color: #fff;
     }
-
-    @-webkit-keyframes rotation {
-        from {-webkit-transform: rotate(0deg);}
-        to {-webkit-transform: rotate(360deg);}
-    }
-
-    .Rotation{
-        -webkit-transform: rotate(360deg);
-        animation: rotation 3s linear infinite;
-        -moz-animation: rotation 3s linear infinite;
-        -webkit-animation: rotation 3s linear infinite;
-        -o-animation: rotation 3s linear infinite;
-    }
-
 </style>
 
-<div id="welcome" style="position: relative; background-color: #fff; height: 100vh; text-align: center;">
-    <div style="position: absolute; top: 150px; left: 0; right: 0;">
-        <div class="ta_c">
-            <img class="Rotation img" src="/views/assets/base/img/content/backgrounds/spin-logo.png" width="100" height="100"/>
-        </div>
-    </div>
-    
-    <div class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="position: absolute; top: 400px; left: 0; right: 0;">
-        <h3>正大商业地产</h3>
-        <h3>在线招商平台</h3>
-    </div>
+<div id="welcome" style="position: relative; height: 110vh;">
+    <video id="welcome_video" autoplay muted playsinline preload="preload" style="width: auto; height: 100%">
+        <source src="/upload/video/judy.mp4" type="video/mp4">
+    </video>
+    <a class="skip" href="javascript:;">x 跳过</a>
 </div>
 
 <div class="slide" id="slide2">

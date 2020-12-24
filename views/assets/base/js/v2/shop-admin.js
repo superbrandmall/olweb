@@ -1,5 +1,7 @@
 $.favorites = new Array();
 $.favoritesId = new Array();
+$.updateFavorites = new Array();
+$.updateFavoritesId = new Array();
 
 $.order = {
     copy: "",
@@ -12,9 +14,9 @@ $.order = {
     businessScope: ""
 };
 
-var unitCodes = ["01FL053","01FL064","02FL011","02FL023","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
+var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
     "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
-    "B1FC011","B1FL022","B1FL010","01FL009","01FL015",
+    "B1FL009","B1FL022","B1FL010","01FL009","01FL015",
     "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
 var vr;
 
@@ -117,8 +119,8 @@ $(document).ready(function(){
     var datetime = '';
     $("#appointmentTime").datetimePicker({
         title: '请选择看铺时间',
-        years: [2020],
-        monthes: ['10', '11'],
+        years: [2020,2021],
+        monthes: ['12', '01'],
         times: function () {
             return [
                 {
@@ -211,7 +213,14 @@ function getShopInfo(){
                             }
                         });
                     } else {
-                        $('body').remove();
+                        $('body').html('<div class="weui-gallery" style="display: block; opacity: 1;">\n\
+                            <span class="weui-gallery__img" style="background-image: url(/views/assets/base/img/content/backgrounds/product_removed.jpg);"></span>\n\
+                            <div class="weui-gallery__opr">\n\
+                                <a href="javascript:" class="weui-gallery__del">\n\
+                                    <i class="weui-icon-cancel" style="color: #fff;" onclick="$(&quot;.weui-gallery&quot;).hide();"></i>\n\
+                                </a>\n\
+                            </div>\n\
+                        </div>');
                     }
                 }
             } else {
@@ -258,6 +267,31 @@ function getShopsMoreInfo(u) {
                 var promotionRate = '';
 
                 if(u == response.data.unitCode){
+                    var leasingState;
+                    var expireDay = '';
+                    
+                    switch (response.data.state) {
+                        case 1:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                            break;
+                        case 2:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                            break;
+                        case 3:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
+                            break;
+                        case 4:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
+                            break;
+                        case 0:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已下架</small>';
+                            break;    
+                        default:
+                            leasingState = '';
+                            break;
+                    }
+                    
+                    $('.page__bd ul li:first-child .js-category-1').prepend(leasingState);
                     $('#desc').text(response.data.descript);
                     $('#businessFormatChs').text($.cookie('categorySelected').split('::')[1]);
                     $('#freeOfGroundRent').text(response.data.freeOfGroundRent);
@@ -366,7 +400,7 @@ function getShopsMoreInfo(u) {
                         if(index >= 0){
                             removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
                         } else {
-                            addToFavorite(response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
+                            addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
                         }
                     })
 
@@ -864,9 +898,14 @@ function getMyFavorites(){
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
-                    if(v.remarkSecond == 1){
-                        $.favorites.push(v.shopCode);
-                        $.favoritesId.push(v.id);                        
+                    if(v.unitType == 'leasing'){
+                        if(v.remarkSecond == 1){
+                            $.favorites.push(v.shopCode);
+                            $.favoritesId.push(v.id);
+                        } else if(v.remarkSecond == 0){
+                            $.updateFavorites.push(v.shopCode);
+                            $.updateFavoritesId.push(v.id);
+                        }
                     }
                 });
             } else {
@@ -879,8 +918,9 @@ function getMyFavorites(){
     });
 }
 
-function addToFavorite(bc,c,sc,uc){
+function addToFavorite(id,bc,c,sc,uc){
     var map = {
+        "id": id,
         "buildingCode": bc,
         "code": "",
         "favoritesDate": "",
@@ -893,7 +933,7 @@ function addToFavorite(bc,c,sc,uc){
         "remarkThird": "",
         "storeCode": sc,
         "unitCode": uc,
-        "unitType": "leasing",
+        "unitType": "leasing"
     }
     
     $.ajax({
@@ -1268,96 +1308,113 @@ function resetFontSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin
     }
 };
 
+function checkAppointment() {
+    saveAppointment();
+}
+
 function saveAppointment() {
     var dt = $('#appointmentTime2').val();
     var year = dt.substring(0,4);
     var month = dt.substring(4,6);
     var date = dt.substring(6,8);
     var hour = dt.substring(8,10);
-
-    var orgCode = '100001';
-    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        switch (getURLParameter('storeCode')) {
-            case 'OLMALL190117000001':
-                orgCode = '301001';
-                break;
-            case 'OLMALL180917000002':
-                orgCode = '201001';
-                break;
-            case 'OLMALL180917000003':
-                orgCode = '100001';
-                break;
-            case 'OLMALL180917000001':
-                orgCode = '204001';
-                break;
-            default:
-                orgCode = '100001';
-                break;
+    
+    var goCheck = 1;
+    if(dt == '' || year == '' || month == '' || date == '' || hour == ''){
+        $('#appointmentTime').addClass('red-border');
+        goCheck = 0;
+    }
+        
+    if(goCheck == 1){
+        if($('.red-border').length > 0){
+             $('.red-border').removeClass('red-border');
         }
-    }
-
-    var map = {
-        "appointmentDate": year+'-'+month+'-'+date,
-        "appointmentHour": hour+'时',
-        "mobileNo": $.cookie('uid'),
-        "mail": $('#appointmentEmail').val(),
-        "orgCode": orgCode,
-        "state": 1,
-        "status": "已预约",
-        "unitCode": $.cookie('shopNo'),
-        "unitDesc": $.cookie('shopName'),
-        "name": $('#appointmentName').val(),
-        "tenantName": $('#appointmentCompany').val()
-    }
-
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/appointment/saveOrUpdate",
-        type: "POST",
-        data: JSON.stringify(map),
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){ 
-        },
-        success: function (response, status, xhr) {
-            var mallName;
-            switch (response.data.orgCode) {
-                case '301001':
-                    mallName = '河南洛阳国际广场';
+        
+        var orgCode = '100001';
+        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+            switch (getURLParameter('storeCode')) {
+                case 'OLMALL190117000001':
+                    orgCode = '301001';
                     break;
-                case '201001':
-                    mallName = '上海宝山正大乐城';
+                case 'OLMALL180917000002':
+                    orgCode = '201001';
                     break;
-                case '100001':
-                    mallName = '上海陆家嘴正大广场';
+                case 'OLMALL180917000003':
+                    orgCode = '100001';
                     break;
-                case '204001':
-                    mallName = '上海徐汇正大乐城';
+                case 'OLMALL180917000001':
+                    orgCode = '204001';
                     break;
                 default:
-                    mallName = '上海陆家嘴正大广场';
+                    orgCode = '100001';
                     break;
             }
-
-            hideLoading();
-            $(function(){
-                var $toast = $('#js_toast_3');
-                $toast.fadeIn(100);
-                setTimeout(function () {
-                    $toast.fadeOut(100);
-                }, 2000);
-            });
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
         }
-    });
+
+        var map = {
+            "appointmentDate": year+'-'+month+'-'+date,
+            "appointmentHour": hour+'时',
+            "mobileNo": $.cookie('uid'),
+            "mail": $('#appointmentEmail').val(),
+            "orgCode": orgCode,
+            "state": 1,
+            "status": "已预约",
+            "unitCode": $.cookie('shopNo'),
+            "unitDesc": $.cookie('shopName'),
+            "name": $('#appointmentName').val(),
+            "tenantName": $('#appointmentCompany').val(),
+            "shopCode": getURLParameter('id')
+        }
+
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/appointment/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){ 
+            },
+            success: function (response, status, xhr) {
+                var mallName;
+                switch (response.data.orgCode) {
+                    case '301001':
+                        mallName = '河南洛阳国际广场';
+                        break;
+                    case '201001':
+                        mallName = '上海宝山正大乐城';
+                        break;
+                    case '100001':
+                        mallName = '上海陆家嘴正大广场';
+                        break;
+                    case '204001':
+                        mallName = '上海徐汇正大乐城';
+                        break;
+                    default:
+                        mallName = '上海陆家嘴正大广场';
+                        break;
+                }
+
+                hideLoading();
+                $(function(){
+                    var $toast = $('#js_toast_3');
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+               console.log(textStatus, errorThrown);
+            }
+        });
+    }
 }
 
 function showDialog(){
@@ -1431,7 +1488,7 @@ function showAppointmentDialog(){
         submitHandler: function() {
             hideAppointmentDialog();
             showLoading();
-            saveAppointment();
+            checkAppointment();
         }
     })
 }

@@ -1,69 +1,66 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>'
+        . '<script type="text/javascript" src="/views/assets/plugins/folding/modernizr.custom.js"></script>';
 ?>
 
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
-<link href="/views/assets/plugins/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
+<link href="/views/assets/plugins/folding/style.css" rel="stylesheet" type="text/css"/>
+<style>
+    html {
+        height: 100vh;
+        overflow: hidden;
+    }
+    body {
+        background-color: #838da9;
+    }
+    
+    .ta_c {
+        text-align: center;
+        margin-top: 100px;
+    }
 
-<?php include ('navbar_top.php'); ?>
+    @-webkit-keyframes rotation {
+        from {-webkit-transform: rotate(0deg);}
+        to {-webkit-transform: rotate(360deg);}
+    }
 
-<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
-    <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">您好！欢迎来到正大商业地产智能招商平台！</div>
+    .Rotation{
+        -webkit-transform: rotate(360deg);
+        animation: rotation 3s linear infinite;
+        -moz-animation: rotation 3s linear infinite;
+        -webkit-animation: rotation 3s linear infinite;
+        -o-animation: rotation 3s linear infinite;
+    }
+
+</style>
+
+<div id="welcome" style="position: relative; background-color: #fff; height: 100vh; text-align: center;">
+    <div style="position: absolute; top: 150px; left: 0; right: 0;">
+        <div class="ta_c">
+            <img class="Rotation img" src="/views/assets/base/img/content/backgrounds/spin-logo.png" width="100" height="100"/>
+        </div>
     </div>
-    <div id="hint2" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">接下去我会陪您一起挑选您心仪的铺位、场地和广告位哦！</div>
-    </div>
-    <div class="animated-circles">
-        <div class="circle c-1"></div>
-        <div class="circle c-2"></div>
-        <div class="circle c-3"></div>
+    
+    <div class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="position: absolute; top: 400px; left: 0; right: 0;">
+        <h3>正大商业地产</h3>
+        <h3>在线招商平台</h3>
     </div>
 </div>
 
-<audio id="voiceplayer" src="/upload/audio/home-voice.mp3" preload="meta" style="display: none;"></audio>
-
-<div class="slide" id="slide1">
+<div class="slide" id="slide2">
     <ul>
         <li>
             <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
+                <img src='/views/assets/base/img/content/backgrounds/banner-6.jpg' alt="">
             </a>
         </li>
         <li>
             <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
+                <img src='/views/assets/base/img/content/backgrounds/banner-7.jpg' alt="">
             </a>
         </li>
         <li>
             <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-4.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-5.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-6.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-7.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/v2-banner-8.jpg' alt="">
+                <img src='/views/assets/base/img/content/backgrounds/banner-8.jpg' alt="">
             </a>
         </li>
     </ul>
@@ -71,65 +68,34 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         <span></span>
         <span></span>
         <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
     </div>
 </div>
 
-<div class="page__bd" style="font-size: 15px;">
-    <h4 class="page-header" style="margin: 16px;">上海正大广场
-        <small><a href="/v2/ljz" class="weui-link pull-right">看看合作机会</a></small>
-    </h4>
-
-    <div class="owl-carousel owl-theme c-theme" style="margin: 0 20px;">
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ljz-carousel-1.jpg" alt=""/></a>
-        </div>
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ljz-carousel-2.jpg" alt=""/></a>
-        </div>
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ljz-carousel-3.jpg" alt=""/></a>
-        </div>
+<div class="slide" id="slide1">
+    <div style="position: absolute; left: 0; right: 0; text-align: center; top: 14px; color: #fff; font-weight: bold;">
+        <div class="mall_names" style="display: none;">上海<br>陆家嘴正大广场</div>
+        <div class="mall_names" style="display: none;">洛阳<br>陆家嘴正大广场</div>
+        <div class="mall_names" style="display: none;">上海<br>宝山正大乐城</div>
     </div>
-    <div style="position: relative; margin: 8px 20px;">
-        <span class="weui-mark-rb">上海CBD</span>
-        <span class="weui-mark-rb">毗邻东方明珠</span>
-        <span class="weui-mark-rb">客流量超3000万</span>
-    </div>
-</div>
-
-<div class="page__bd" style="margin-top: 32px; font-size: 15px;">
-    <h4 class="page-header" style="margin: 16px;">上海宝山正大乐城
-        <small><a href="javascript:;" class="weui-link pull-right">看看合作机会</a></small>
-    </h4>
-
-    <div class="owl-carousel owl-theme c-theme" style="margin: 0 20px;">
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ly-carousel-1.jpg" alt=""/></a>
-        </div>
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ly-carousel-2.jpg" alt=""/></a>
-        </div>
-        <div class="item">
-            <a href="javascript:;"><img src="/views/assets/base/img/content/backgrounds/ly-carousel-3.jpg" alt=""/></a>
-        </div>
-    </div>
-    <div style="position: relative; margin: 8px 20px;">
-        <span class="weui-mark-rb">上海宝山顾村核心</span>
-        <span class="weui-mark-rb">7、15号线双轨交</span>
-        <span class="weui-mark-rb">樱花节期间客流15万~20万每天</span>
-        <span class="weui-mark-rb">年客流超1300万</span>
+    <img src='/views/assets/base/img/content/backgrounds/v2-banner-top.jpg' alt="" style="width: 100%; margin-bottom: -8px;">
+    <ul class="main">
+        <li class="view" onclick="window.location='/v2/ljz'">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
+        </li>
+        <li class="view">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
+        </li>
+        <li class="view" onclick="window.location='/v2/bs'">
+            <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
+        </li>
+    </ul>
+    <div style="position: relative; margin-top: -50px;">
+        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-1.png' alt="" style="width: 100%;"></div>
+        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-2.png' alt="" style="width: 100%;"></div>
+        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-3.png' alt="" style="width: 100%;"></div>   
     </div>
 </div>
 
-<br>
-<br>
-<br>
-    
-<?php include ('menu_bottom.php'); ?>
+<?php //include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

@@ -3,9 +3,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-<div class="weui-toptips bg-success topTips"><i class="fa fa-gratipay" aria-hidden="true"></i> 太激动了，我们快要成交了！在这里您可以看到"应缴金额"并选择支付方式，付款成交后会有服务人员与您联系哦。</div>
-
 <div class="page__bd" style="font-size: 15px;">
     <div class="page__bd">
         <div class="weui-form-preview">
@@ -33,19 +30,33 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cells_radio">
                     <label class="weui-cell weui-cell_active weui-check__label" for="unionPay">
                         <div class="weui-cell__bd">
-                            <p><i class="fa fa-credit-card" aria-hidden="true"></i> 对公转账</p>
-                            <small>大额轻松付，担保无忧</small><br>
-                            <small>收款户名: 上海帝泰发展有限公司</small>
+                            <p><i class="fa fa-credit-card" aria-hidden="true"></i> 银联在线支付</p>
+                            <small>大额轻松付，担保无忧</small>
                         </div>
                         <div class="weui-cell__ft">
                             <input type="radio" name="payment" class="weui-check" id="unionPay" checked="checked" />
                             <span class="weui-icon-checked"></span>
                         </div>
                     </label>
+                    <div class="weui-cell__bd" style="padding: 16px 32px;">
+                        <i class="fa fa-envelope" aria-hidden="true"></i> <input name="unionPayEmail" id="unionPayEmail" type="email" class="weui-input" required placeholder="银联支付链接需要发送到的邮箱" style="width: auto; margin-left: 5px;" />
+                    </div>
+                    <label class="weui-cell weui-cell_active weui-check__label" for="offline">
+                        <div class="weui-cell__bd">
+                            <p><i class="fa fa-desktop" aria-hidden="true"></i> 对公转账</p>
+                            <small>收款户名: 上海帝泰发展有限公司</small>
+                        </div>
+                        <div class="weui-cell__ft">
+                            <input type="radio" name="payment" class="weui-check" id="offline" />
+                            <span class="weui-icon-checked"></span>
+                        </div>
+                    </label>
+                    <div class="weui-cell__bd" style="padding: 16px 32px;">
+                        <i class="fa fa-envelope" aria-hidden="true"></i> <input name="offlineEmail" id="offlineEmail" type="email" class="weui-input" required placeholder="账单需要发送到的邮箱" style="width: auto; margin-left: 5px;"/>
+                    </div>
                     <label class="weui-cell weui-cell_active weui-check__label" for="wechatPay" style="color: #999;">
                         <div class="weui-cell__bd">
                             <p><span class="icon icon-14"></span> 微信</p>
-                            <small>微信支付,不止支付</small><br>
                             <small>此服务尚未开通</small>
                         </div>
                         <div class="weui-cell__ft">
@@ -56,7 +67,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <label class="weui-cell weui-cell_active weui-check__label" for="aliPay" style="color: #999;">
                         <div class="weui-cell__bd">
                             <p><span class="icon icon-11"></span> 支付宝</p>
-                            <small>支付宝，知托付</small><br>
                             <small>此服务尚未开通</small>
                         </div>
                         <div class="weui-cell__ft">
@@ -77,14 +87,29 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     </div>
 </div>
 
-<div id="pay_1" class="weui-gallery" style="display: none; background-color: #fff;">
-    <a id="facial" href='#!'><img src="/views/assets/base/img/content/backgrounds/890000-1.jpg" width="100%" /></a>
-    <div class="weui-gallery__opr">
-        <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#pay_1").hide();'></i>
-        </a>
+<div class="page" style="display: none">
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">邮件发送成功</h2>
+            <p class="weui-msg__desc">请在24小时内通过<b style="font-size: 18px; color: red;">收到的银联支付链接</b>或<b style="font-size: 18px; color: red;">线下付款</b>向我司转账</p>
+        </div>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+                <a href="javascript:;" id="confirm" class="weui-btn weui-btn_primary">确定</a>
+            </p>
+        </div>
+        <div class="weui-msg__tips-area">
+        <span style="color: red;">特别提醒</span>（转账前必读）
+        <ol style="margin: 0 15px; font-size: smaller">
+            <li><span style="color: red;">转账金额与订单金额务必保持一致</span>。不得多转，不得少转，不得分次转账，否则无法完成支付；</li>
+            <li><span style="color: red;">请您务必使用上述提供的账号进行转账</span>，不得向其它任何银行账户转账，否则造成的损失由您自行承担（可能钱货两空），平台不负任何责任；</li>
+            <li>我司收款账户到账后，订单即支持成功；</li>
+        </ol>
+        </div>
     </div>
 </div>
+
 <br>
 <br>
 <br>

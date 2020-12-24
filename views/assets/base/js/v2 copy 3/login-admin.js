@@ -126,7 +126,7 @@ $(document).ready(function(){
                                                                     } else if(getURLParameter('f') && getURLParameter('type') == 'ads'){
                                                                         window.location.href = '/v2/advertising?f='+getURLParameter('f')+'&type=ads';
                                                                     } else if(getURLParameter('id') && getURLParameter('type') == 'events'){
-                                                                        window.location.href = '/v2/choose-event?id='+getURLParameter('id')+'&type=events';
+                                                                        window.location.href = '/v2/event?id='+getURLParameter('id')+'&type=events';
                                                                     }
                                                                 } else {
                                                                     window.location.href = '/v2/info';

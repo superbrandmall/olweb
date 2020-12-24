@@ -9,33 +9,29 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/event-admin.js"></script>';
 ?>
 
-<div style="position: relative;" class="wow lightSpeedIn" data-wow-delay="0.2s" data-wow-offset="300">
-    <div class="slide">
-        <ul>
-            <li>
-                <img src="/views/assets/base/img/content/backgrounds/events/<?= $id ?>_1.jpg" style="width: 100%; text-align: center;" />
-            </li>
-            <li>
-                <img src="/views/assets/base/img/content/backgrounds/events/<?= $id ?>_2.jpg" style="width: 100%; text-align: center;" />
-            </li>
-        </ul>
-    </div>
+<div style="position: relative;">
+    <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
 </div>
 
 <div class="page__bd" style="position: relative; margin-top: -16px;">
     <ul class="collapse shop-collapse">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400">
+            <?php include ('timeline/step_two.php'); ?>
             <div class="weui-flex js-category-1">
-                <h3 class="weui-flex__item"><span id="shopName"></span><a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">VR看场</a></h3>
+                <h3 class="weui-flex__item"><span id="shopName"></span></h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
                 <div class="weui-flex__item">面积: <strong id="area"></strong>m<sup>2</sup> <strong id="area_spesifc"></strong></div>
                 <div class="weui-flex__item">限高: <strong id="height"></strong></div>
+                <div class="weui-flex__item">电源: <strong id="electricity"></strong></div>
+                <div class="weui-flex__item">材质: <strong id="material"></strong></div>
+                <div class="weui-flex__item">网络: <strong id="internet"></strong></div>
+                <div class="weui-flex__item">货梯: <strong id="lift"></strong></div>
                 <div class="weui-flex__item" id="desc"></div>
             </div>
         </li>
         <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="300" style="margin: -90px 0 0;">
             <div class="weui-flex js-category-2">
-                <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格</h3>
+                <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
                 <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
                     <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
                     <div class="weui-cell__bd">
@@ -187,15 +183,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
-    <div class="weui-gallery__opr">
-        <a href="javascript:" class="weui-gallery__del">
-            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
-        </a>
-    </div>
-</div>
-
 <div class="js_dialog" id="cadDialog" style="display: none;">
     <div class="weui-mask"></div>
     <div class="weui-dialog" style="background: #fff;">
@@ -219,6 +206,24 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div class="js_dialog" id="floor_plan_viewer" style="display: none;">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd" style="padding: 0; margin: 0;">
+            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" style="top: 0px; right: 10px; position: absolute;">x</a>
+            <div style="margin: 10px; color: #565d66;">
+                <strong id="floorNo"></strong>
+                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 本位置    
+            </div>
+    
+            <img src="javascript:;" width="320px" height="160px" id="map">
+        </div>
+        <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
+            
+        </div>
     </div>
 </div>
 
@@ -250,10 +255,18 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<br>
-<br>
-<br>
+<div id="js_toast_4" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i>
+        <p class="weui-toast__content">
+            本月暂无档期<br>请重新选择～
+        </p>
+    </div>
+</div>
 
-<?php include ('timeline/step_two.php'); ?>
+<br>
+<br>
+<br>
 
 <?php include ('footer.php'); ?>

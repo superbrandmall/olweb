@@ -1,3 +1,10 @@
+var d = new Date();
+var month = d.getMonth()+1;
+var day = d.getDate();
+var date = d.getFullYear() + '-' +
+    (month<10 ? '0' : '') + month + '-' +
+    (day<10 ? '0' : '') + day;
+    
 $(document).ready(function(){
     getAllOrdersToStamping();
 });
@@ -26,6 +33,8 @@ function getAllOrdersToStamping() {
                             empty = 0;
                             var alink = '';
                             var shopName = '';
+                            var leasingState = '';
+                            var expireDay = '';
                             
                             if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
                                 img = "/views/assets/base/img/content/backgrounds/events/"+v.remarkFirst+"_1.jpg";
@@ -34,6 +43,7 @@ function getAllOrdersToStamping() {
                             
                                 var taxAmount = 0; //不含税总额
                                 var amount = 0; //含税总额
+                                var singlePrice = 0;
                                 
                                 var tax = 0; //税费
                                 $.each(v.contractInfos, function(j,w){
@@ -48,11 +58,72 @@ function getAllOrdersToStamping() {
                                     }
                                 })
                                 
+                                var mark = '<span class="bg-blue f-white" style="font-size: 12px; padding: 2px 4px;">办活动</span>';
+                                
                                 if(v.remarkSecond == 'leasing'){
+                                    var mallCode;
+                                    switch (v.orgCode) {
+                                        case '301001':
+                                            mallCode = 'OLMALL190117000001';
+                                            break;
+                                        case '201001':
+                                            mallCode = 'OLMALL180917000002';
+                                            break;
+                                        case '100001':
+                                            mallCode = 'OLMALL180917000003';
+                                            break;
+                                        case '204001':
+                                            mallCode = 'OLMALL180917000001';
+                                            break;
+                                        default:
+                                            mallCode = 'OLMALL180917000003';
+                                            break;
+                                    }
+                                    
+                                    var shopState = 1;
+                                    shopState = getShopState(mallCode,v.contractInfos[0].unitCode);
+                                    
+                                    switch (shopState) {
+                                        case 1:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                                            break;
+                                        case 2:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                                            break;
+                                        case 3:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
+                                            break;
+                                        case 4:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
+                                            break;
+                                        case 0:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已下架</small>';
+                                            break;    
+                                        default:
+                                            leasingState = '';
+                                            break;
+                                    }
+                                    
                                     img = getShopInfo(v.remarkFirst);
                                     amount = parseFloat((amount + 3000).toFixed(2));
                                     taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                    mark = '<span class="bg-green f-white" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
+                                
+                                    if(v.completeDate != null && v.completeDate != 'NULL' && v.completeDate != ''){
+                                        var isExpired = '';
+                                        
+                                        if(dateCompare(IncrDates(v.completeDate,6),date) == true){
+                                            isExpired = ' <span class="f-orange">已结束</span>';
+                                        }
+                                        if(v.payStates == '未支付'){
+                                            expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">付款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
+                                        } else if(v.payStates == '已支付'){
+                                            expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">退款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
+                                        }
+                                    }
                                 }
+                                
+                                singlePrice = numberWithCommas(amount);
                                 tax = parseFloat((amount - taxAmount).toFixed(2));
                                 var qty = 1;
                             } else if(v.remarkSecond == 'advertising'){
@@ -71,10 +142,41 @@ function getAllOrdersToStamping() {
                                 taxAmount = parseFloat((amount/1.06).toFixed(2));
                                 var tax = (amount-taxAmount).toFixed(2);
                                 amount = parseFloat((amount*1.2).toFixed(2));
+                                
+                                var mark = '<span class="bg-purple f-white" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
+                            }
+                            
+                            var mallName, mallCode, buildingCode;
+                            switch (v.orgCode) {
+                                case '301001':
+                                    mallName = '河南洛阳正大广场';
+                                    mallCode = 'OLMALL190117000001';
+                                    buildingCode = 'OLBUILDING190117000001';
+                                    break;
+                                case '201001':
+                                    mallName = '上海宝山正大乐城';
+                                    mallCode = 'OLMALL180917000002';
+                                    buildingCode = 'OLBUILDING180917000005';
+                                    break;
+                                case '100001':
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
+                                case '204001':
+                                    mallName = '上海徐汇正大乐城';
+                                    mallCode = 'OLMALL180917000001';
+                                    buildingCode = 'OLBUILDING180917000006';
+                                    break;
+                                default:
+                                    mallName = '上海陆家嘴正大广场';
+                                    mallCode = 'OLMALL180917000003';
+                                    buildingCode = 'OLBUILDING180917000001';
+                                    break;
                             }
                             
                             if(v.orderStates === '合同已生成'){
-                                alink = '<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'" style="color: #fa5151;">查看合同并用印</a></a></li>';
+                                alink = '<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同并用印</a></a></li>';
                             } else if(v.orderStates === '合同用印中'){
                                 alink = '<li><a class="current" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.orderStates === '待付款订单'){
@@ -82,39 +184,39 @@ function getAllOrdersToStamping() {
 <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             }
                             
-                            var mallName;
-                            switch (v.orgCode) {
-                                case '301001':
-                                    mallName = '河南洛阳正大广场';
-                                    break;
-                                case '201001':
-                                    mallName = '上海宝山正大乐城';
-                                    break;
-                                case '100001':
-                                    mallName = '上海陆家嘴正大广场';
-                                    break;
-                                case '204001':
-                                    mallName = '上海徐汇正大乐城';
-                                    break;
-                                default:
-                                    mallName = '上海陆家嘴正大广场';
-                                    break;
+                            $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel">\n\
+        <div class="weui-panel__hd">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
+        <div class="f-orange" style="float: right;">'+v.orderStates+'</div></div></div>');
+         
+                            var weuiPanelBdId = '';
+                            for(var c=0;c<v.contractInfos.length;c++){
+                                if(v.remarkSecond == 'advertising'){                            
+                                    img = getAdInfo(v.orgCode,v.contractInfos[c].unitCode);
+                                    singlePrice = numberWithCommas(parseFloat((v.contractInfos[c].amount*1.2).toFixed(2)));
+                                    weuiPanelBdId = ' id=weui-panel__bd_'+v.id+'_'+v.contractInfos[c].shopCode;
+                                }
+                                
+                                if($('#weui-panel__bd_'+v.id+'_'+v.contractInfos[c].shopCode).length <= 0){
+                                    $('#weui_panel_'+v.id).append('<div class="weui-panel__bd"'+weuiPanelBdId+'><div class="weui-media-box weui-media-box_appmsg">\n\
+                        <div class="weui-media-box__hd" style="position: relative; width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
+                        <div class="weui-media-box__bd">\n\
+                        <div class="weui-form-preview__bd" style="font-size: 15px; padding: 0;">\n\
+                        <div class="weui-form-preview__item">\n\
+                        <span class="weui-form-preview__value">'+v.contractInfos[c].unitDesc+'</span>\n\
+                        <span class="weui-form-preview__value"><small>从</small> '+v.contractInfos[c].startDate+' <small>到</small> '+v.contractInfos[c].endDate+'</span>\n\
+                        '+leasingState+'\n\
+                        <span class="weui-form-preview__value"><small>¥</small> '+singlePrice+' <small style="color: rgba(0,0,0,.5)">x <span id=weui-panel__qty_'+v.id+'_'+v.contractInfos[c].shopCode+'>'+qty+'</span></small></span>\n\
+                        </div></div>\n\
+                        </div></div>');
+                                } else {
+                                    $('#weui-panel__qty_'+v.id+'_'+v.contractInfos[c].shopCode).text(parseFloat($('#weui-panel__qty_'+v.id+'_'+v.contractInfos[c].shopCode).text())+1);
+                                }
                             }
                             
-                            $('#orders').append('<div class="weui-panel">\n\
-        <div class="weui-panel__hd">'+mallName+' <i class="fa fa-angle-right" aria-hidden="true"></i>\n\
-        <div style="color: rgba(0,0,0,.5); float: right;">'+v.orderStates+'</div></div>\n\
-        <div class="weui-panel__bd"><div class="weui-media-box weui-media-box_appmsg">\n\
-        <div class="weui-media-box__hd" style="width: 100px; height: 67px;"><img class="weui-media-box__thumb" src="'+img+'" alt=""></div>\n\
-        <div class="weui-media-box__bd">\n\
-        <div class="weui-form-preview__bd" style="font-size: 15px; padding: 0;">\n\
-        <div class="weui-form-preview__item">\n\
-        <span class="weui-form-preview__value">'+v.contractInfos[0].unitDesc+'</span>\n\
-        <span class="weui-form-preview__value">共'+qty+'件商品 合计: <small>¥</small>'+numberWithCommas(amount)+'</span>\n\
-        <span class="weui-form-preview__value"><small>(含税费 ¥'+numberWithCommas(tax)+')</small></span></div></div>\n\
-        </div></div><ul class="weui-media-box__button">\n\
-'+alink+'\n\
-        </ul></div>'); 
+                            $('#weui_panel_'+v.id).append(expireDay+'<div style="float: right; padding: 5px 16px 16px 16px;">总价 <small>¥</small> '+numberWithCommas(amount)+' <small>(含税费 ¥'+numberWithCommas(tax)+')</small></div>\n\
+<ul class="weui-media-box__button">\n\
+        '+alink+'\n\
+        </ul>');
                         }
                     });
                 }
@@ -136,37 +238,123 @@ function getAllOrdersToStamping() {
     });
 }
 
-function getShopInfo(sc){
-    var img;
-    $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+sc,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                img = '/' + response.data.firstImage;
-                
-                if(response.data.firstImage == null || response.data.firstImage == ''){
-                    img = response.data.images[0].image;
-                }
-                
-                if(response.data.unit != null && response.data.subType == '正柜'){
-                    img = "/views/assets/base/img/content/backgrounds/leasing/"+response.data.unit+".jpg";
+function getAdInfo(og,unit){
+    if(!sessionStorage.getItem("ads_"+og+"_"+unit) || sessionStorage.getItem("ads_"+og+"_"+unit) == '' || sessionStorage.getItem("ads_"+og+"_"+unit) == null || sessionStorage.getItem("ads_"+og+"_"+unit) == 'undefined'){
+            var mallCode;
+            switch (og) {
+            case '301001':
+                mallCode = 'OLMALL190117000001';
+                break;
+            case '201001':
+                mallCode = 'OLMALL180917000002';
+                break;
+            case '100001':
+                mallCode = 'OLMALL180917000003';
+                break;
+            case '204001':
+                mallCode = 'OLMALL180917000001';
+                break;
+            default:
+                mallCode = 'OLMALL180917000003';
+                break;
+        }
+
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCodeAndUnitCode?storeCode="+mallCode+"&unitCode="+unit,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    sessionStorage.setItem("ads_"+og+"_"+unit, JSON.stringify(response.data));
                 }
             }
-        }
-    })
+        });
+    }
+    
+    var temp = $.parseJSON(sessionStorage.getItem("ads_"+og+"_"+unit));
+    var img = temp[0].advertisingImagesWxList[0].imagePath;
     
     return img;
+}
+
+function getShopInfo(sc){
+    if(!sessionStorage.getItem("shop_"+sc) || sessionStorage.getItem("shop_"+sc) == '' || sessionStorage.getItem("shop_"+sc) == null || sessionStorage.getItem("shop_"+sc) == 'undefined'){
+        $.ajax({
+            url: $.api.baseNew+"/onlineleasing-customer/api/shop/"+sc,
+            type: "GET",
+            async: false,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    
+                    sessionStorage.setItem("shop_"+sc, JSON.stringify(response.data));
+                }
+            }
+        })
+    }
+    
+    var temp = $.parseJSON(sessionStorage.getItem("shop_"+sc));
+    var img = '/' + temp.firstImage;
+
+    if(temp.firstImage == null || temp.firstImage == ''){
+        img = temp.images[0].image;
+    }
+
+    if(temp.unit != null && temp.subType == '正柜'){
+        img = "/views/assets/base/img/content/backgrounds/leasing/"+temp.unit+".jpg";
+    }
+    
+    return img;
+    
+}
+
+function getShopState(mall,unit){
+    //if(!sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == '' || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == null || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == 'undefined'){
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndUnitCode?storeCode="+mall+"&unitCode="+unit,
+            type: "GET",
+            async: false,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    
+                    sessionStorage.setItem("shopmoreinfo_"+mall+"_"+unit, JSON.stringify(response.data));
+                }
+            }
+        })
+    //}
+    
+    var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit));
+    
+    var state = 1;
+    if(temp != '' && temp != [] && temp != 'undefined'){
+        state = temp[0].state;
+    }
+    
+    return state;
 }

@@ -2,8 +2,6 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/all-orders-admin.js"></script>';
 ?>
 
-<?php include ('navbar_top.php'); ?>
-
 <div class="page__bd" style="background-color: #EDEDED;">
     <div class="weui-tab">
         <div class="weui-navbar">
