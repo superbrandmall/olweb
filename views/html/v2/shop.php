@@ -6,9 +6,14 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     }
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/zepto.weui.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/shop-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/zepto.weui.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/v2/shop-admin.js"></script>';
 ?>
+
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
 <style type="text/css">
     #mapster_wrap_0 {
@@ -16,16 +21,23 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     }  
 </style>
 
-<div style="position: relative;">
-    <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
+<div style="position: relative; margin-top: 65px;">
+    <video id="video_4" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
+        <?php 
+            if($id == 'OLSHOP180917000537'){
+                echo '<source src="/upload/video/5f58.mp4" type="video/mp4">';
+            } else {
+                echo '<source src="/upload/video/4F21.mp4" type="video/mp4">';
+            }
+        ?>
+    </video>
 </div>
 
-<div class="page__bd" style="position: relative; margin-top: -20px;">
-    <ul class="collapse shop-collapse">
+<div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">
+    <ul class="collapse shop-collapse" style="display: block;">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="300">
-            <?php include ('timeline/step_two.php'); ?>            
             <div class="weui-flex js-category-1">
-                <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载常见问答</a></h3>
+                <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">下载常见问答</a></h3>
                 <div class="weui-flex__item"><strong>¥<span id="rentAmount"></span> /m<sup>2</sup>/天</strong></div>
                 <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(租赁面积)</div>
                 <div class="weui-flex__item">推荐业态 <span id="businessFormatChs"></span></div>
@@ -33,12 +45,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         </li>
         <li class="wow fadeInUp" data-wow-delay="0.7s" data-wow-offset="200">
             <div class="weui-flex js-category-2">
-                <h3 class="weui-flex__item">租约信息<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
+                <h3 class="weui-flex__item">租约信息
+                    <a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">查看落位图</a>
+                    <a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: #007bff; font-weight: bold; padding: 8px 10px;border-radius: 5px;margin-right: 5px;">VR看铺</a>
+                </h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
-                <div class="weui-flex__item weui-cell_access" style="float: left; width: 35%;"><small>进场日期</small><br><h4 id="settleDate" class="weui-cell__ft" style="text-align: left; color: #000;"></h4></div>
+                <div class="weui-flex__item weui-cell_access" style="float: left; width: 35%;"><small>进场日期</small><br><h6 id="settleDate" class="weui-cell__ft" style="text-align: left; color: #000;"></h6></div>
                 <div style="float: left; width: 5%;">&nbsp;</div>
-                <div class="weui-flex__item" style="float: left; width: 30%;"><small>开业日期</small><br><h4 id="openDate"></h4></div>
-                <div class="weui-flex__item" style="float: left; width: 30%;"><small>装修免租期</small><br><h4><span id="freeOfGroundRent"></span>天</h4></div>
+                <div class="weui-flex__item" style="float: left; width: 30%;"><small>开业日期</small><br><h6 id="openDate"></h6></div>
+                <div class="weui-flex__item" style="float: left; width: 30%;"><small>装修免租期</small><br><h6><span id="freeOfGroundRent"></span>天</h6></div>
             </div>
             <div class="page-category js-categoryInner" style="clear: both; padding: 15px 20px;">
                 <div class="weui-cells page-category-content">
@@ -117,9 +132,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         <li class="wow fadeInUp" data-wow-delay="0.9s" data-wow-offset="100">
             <div class="weui-flex js-category-3" style="padding-bottom: 0;">
                 <h3 class="weui-flex__item">工程信息
-                    <a href="javascript:;" id="cad" data-file="/upload/docs/cad/<?= $id?>.dwg" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载CAD</a>                
-                    <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载工程条件</a>            
-                    <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载图纸</a>
+                    <a href="javascript:;" id="cad" data-file="/upload/docs/cad/<?= $id?>.dwg" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">下载CAD</a>                
+                    <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px; margin-right: 5px;">下载工程条件</a>            
+                    <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px; margin-right: 5px;">下载图纸</a>
                 </h3>
                 <hr color=#d2d2d0 size=1 style="margin: 5px 0;">
                 <div class="weui-flex__item">
@@ -139,18 +154,43 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     </ul>
 </div>
 
+<div class="nikola-steps" style="bottom: 65px;">
+    <div class="nikola-tab">
+        <div class="nikola-navbar">
+            <div class="nikola-navbar__item">
+                1.介绍
+            </div>
+            <div class="nikola-navbar__item nikola-bar__item_on">
+                2.选择
+            </div>
+            <div class="nikola-navbar__item">
+                3.付款
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
-    <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
-        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
             收藏
         </a>
-        <a id="call" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+        <a id="call" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-calendar" aria-hidden="true"></i><br>
             联系看铺
         </a>
-        <a id="confirm_price" href="javascript:;" style="float: right; background: #50691a; border: solid 2px #668161; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 20px; text-align: center; width: 60px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">接受报价</a>
-        <a id="negotiate" href="javascript:;" style="float: right; background: #961912; border: solid 2px #bb6965; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 20px; margin-right: 10px; text-align: center; width: 30px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">谢绝</a>
+        <a id="confirm_price" href="javascript:;" class="weui-btn btn-primary" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; width: initial;">接受报价</a>
+        <a id="negotiate" href="javascript:;" class="weui-btn btn-danger" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; margin-right: 10px; width: initial;">谢绝</a>
+    </div>
+</div>
+
+<div id="vr_viewer" class="weui-gallery" style="display: none;">
+    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
+        </a>
     </div>
 </div>
 
@@ -190,7 +230,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                     </div>
                 </div>
             </div>
-            <div class="weui-dialog__ft">
+            <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">
                 <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
             </div>
@@ -242,7 +282,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                     </div>
                 </div>
             </div>
-            <div class="weui-dialog__ft">
+            <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">
                 <a href="javascript: hideAppointmentDialog();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
             </div>

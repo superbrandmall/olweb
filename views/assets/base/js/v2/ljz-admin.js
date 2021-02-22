@@ -3,23 +3,6 @@ var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07
 var vr;
 
 $(document).ready(function(){
-    //setInterval("change()",6000);
-    $(function(){
-        $('.collapse .js-category').click(function(){
-            $parent = $(this).parent('li');
-            if($parent.hasClass('js-show')){
-                $parent.removeClass('js-show');
-                $(this).children('i').removeClass('icon-35').addClass('icon-74');
-            } else{
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $(this).children('i').removeClass('icon-74').addClass('icon-35');
-                $parent.siblings().find('i').removeClass('icon-35').addClass('icon-74');
-            }
-        });
-
-    });
-    
     for(var j=0;j<=8;j++){
       if(!sessionStorage.getItem('ljz_fl_'+j) || sessionStorage.getItem('ljz_fl_'+j) == null || sessionStorage.getItem('ljz_fl_'+j) == ''){
         getCoordsByFloor(j);
@@ -39,45 +22,30 @@ $(document).ready(function(){
       }
     }
     
-    $('#slide3').swipeSlide({
-        autoSwipe:true,//自动切换默认是
-        speed:4000,//速度默认4000
-        continuousScroll:true,//默认否
-        transitionType:'cubic-bezier(0.22, 0.69, 0.72, 0.88)',//过渡动画linear/ease/ease-in/ease-out/ease-in-out/cubic-bezier
-        lazyLoad:true,//懒加载默认否
-        firstCallback : function(i,sum,me){
-            me.find('.dot').children().first().addClass('cur');
-        },
-        callback : function(i,sum,me){
-            me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
-        }
-    });
-    
-    showFloorVR('7F');
-    
-    $('.macaroon a').click(function(e){
-        if($(this).hasClass('active')){
-            $(this).removeClass('active');
-        }else{
-            $(this).siblings().removeClass('active');
-            $(this).addClass('active');
-        }
-    });
-    
-    window.onload = function(){ 
-        $('.floors').css('height',$('.macaroon').innerHeight());
-    }
-    
     $('.weui-dialog__btn').on('click', function(){
         $(this).parents('.js_dialog').fadeOut(200);
     });
     
-    $('.floor_plan').on('click', function(){
-        $('map').html('');
-        GetMap($(this).attr('id'),'shanghai-sbm','OLMALL180917000003');
-    });
-    
     getShopsInfo();
+    
+    
+    // GL版命名空间为BMapGL
+    // 按住鼠标右键，修改倾斜角和角度
+    var map = new BMapGL.Map("ContactMap");    // 创建Map实例
+    var pt = new BMapGL.Point(121.505934, 31.242497);
+    map.centerAndZoom(pt, 13);  // 初始化地图,设置中心点坐标和地图级别
+    loadmap();
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+    map.setHeading(64.5);
+    map.setTilt(73);
+    
+    function loadmap() {
+        map.clearOverlays();
+
+        var myIcon = new BMapGL.Icon("/views/assets/base/img/content/backgrounds/sbm-logo.png", new BMapGL.Size(50,54));
+        var marker = new BMapGL.Marker(pt,{icon:myIcon}); 
+        map.addOverlay(marker);              // 将标注添加到地图中
+    }
 });
 
 function getShopsInfo() {
@@ -372,10 +340,8 @@ function showFloorVR(floor){
             break;
     }
     
-    $('.floors, .floors_desc').hide();
-    $('#'+floor+', #'+floor+'_desc').fadeIn();
-    $('.floors iframe').attr("src","javascript:;");
-    $('#'+floor+' iframe').attr("src",vr);
+    $("#vr_viewer iframe").attr('src',vr);
+    $("#vr_viewer").show();
 }
 
 function getCoordsByFloor(fl) {
@@ -600,9 +566,9 @@ function addLogoLayer(map,level,J,jfl){
             $(wrap).append(
                 '<img id="'+spanid+'" src="https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+$(this).attr('data-logo')+'" style="position:absolute;line-height:1;text-align:center;" />'
             );
-            resetLogoSize(spanid,width,height,20,60,posLeftMin,posTopMin);
+            resetLogoSize(spanid,width,height,15,60,posLeftMin,posTopMin);
             
-            $('.weui-grid__icon img[id^=span_]').click(function(){
+            $('.weui-dialog__bd img[id^=span_]').click(function(){
                 $("#logo_gallery .weui-gallery__img").attr('style','background-image: url('+$(this).attr('src')+')');
                 $("#logo_gallery").show();
             })
@@ -665,28 +631,14 @@ function addLogoLayer(map,level,J,jfl){
 
 function resetLogoSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
     var divLogo = $('#'+spanid);
-    for (var i = minSize; i < maxSize; i++) {
-        if ($(divLogo).width() > maxWidth || $(divLogo).height() > maxHeight) {
-            $(divLogo).css({
-                'width': 'auto',
-                'height': 'auto',
-                'max-width': i + 'px',
-                'max-height': maxHeight,
-                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 18 + 25) + 'px',
-                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 15 + 20) + 'px' 
-            }); 
-                break;
-        } else {
-            $(divLogo).css({
-                'width': 'auto',
-                'height': 'auto',
-                'max-height': i + 'px',
-                'max-width': maxWidth,
-                'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 18 + 25) + 'px',
-                'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 15 + 20) + 'px' 
-            });
-        }
-    }
+        $(divLogo).css({
+            'width': 'auto',
+            'height': 'auto',
+            'max-width': minSize + 'px',
+            'max-height': minSize + 'px',
+            'left': parseInt(posLeftMin - ($(divLogo).width() - maxWidth) / 18) + 'px',
+            'top': parseInt(posTopMin - ($(divLogo).height() - maxHeight) / 15) + 'px' 
+        });
 };
 
 function resetFontSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {

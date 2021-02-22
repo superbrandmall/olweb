@@ -1,6 +1,11 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/category-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/category-admin.js"></script>';
 ?>
+
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
 <style>
     .categories {
@@ -44,8 +49,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 
-<div class="page__bd">
-    <?php include ('timeline/step_two.php'); ?>
+<div class="page__bd" style="margin-top: 65px;">
     <div class="weui-form__text-area" style="margin: 20px 0;">
         <h2 class="weui-form__title">请选择您的业态</h2>
     </div>
@@ -57,9 +61,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div class="weui-btn-area">
-    <button type="submit" class="weui-btn weui-btn_primary" id="confirm_category">确定</button>
+    <button type="submit" class="weui-btn btn-primary" id="confirm_category" style="border-radius: 20px;">确定</button>
 </div>
 <br><br><br>
 
-<?php include ('menu_bottom.php'); ?>
+<?php include ('timeline/step_two.php'); ?>
 <?php include ('footer.php'); ?>

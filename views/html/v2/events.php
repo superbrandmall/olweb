@@ -1,17 +1,13 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/events-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+<script type="text/javascript" src="/views/assets/base/js/v2/events-admin.js"></script>';
 ?>
 
-<div style="position: relative;">
-    <img src="/views/assets/base/img/content/backgrounds/grey-blue-events.png" class="wow fadeInUp" data-wow-delay="0.2s" data-wow-offset="300" style="width: 100%; text-align: center;" />
-    <img src="/views/assets/base/img/content/backgrounds/events-title.png" class="wow slideInRight" data-wow-delay="0.4s" data-wow-offset="300" style="position: absolute; left: 16px; right: 16px; width: 90%; bottom: 0; margin: 0 auto;" />
-    <a href="/v2/ljz?type=leasing" class="wow fadeInUp" data-wow-delay="0.6s" data-wow-offset="300" style="position: absolute; color: #838383; top: 46%; left: 7%; font-size: 14px; font-weight: 700;">开新铺</a>
-    <a href="javascript:;" class="wow fadeInUp" data-wow-delay="0.8s" data-wow-offset="300" style="position: absolute; color: #fff; top: 37%; left: 45%; font-size: 14px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,.6);">办活动</a>
-    <a href="/v2/ads?type=ads" class="wow fadeInUp" data-wow-delay="1.0s" data-wow-offset="300" style="position: absolute; color: #838383; top: 24%; left: 70%; font-size: 14px; font-weight: 700;">做广告</a>
-</div>
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd">
-    <?php include ('timeline/step_one.php'); ?>
+<div class="page__bd" style="margin-top: 65px">
     <div class="weui-panel__hd">
         6个场地区
     </div>
@@ -243,6 +239,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 
-<?php include ('menu_bottom.php'); ?>
+<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

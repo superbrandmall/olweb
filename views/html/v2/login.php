@@ -1,44 +1,37 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/login-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/login-admin.js"></script>';
 ?>
 
-<div style="position: relative;">
-    <img src="/views/assets/base/img/content/backgrounds/login-logo.png" style="position: absolute; height: 705px; width: 100%; left: 0; margin: auto 0; top: 705px; bottom: 0;" />
-    <img src="/views/assets/base/img/content/backgrounds/login-welcome.png" class="wow slideInDown" data-wow-delay="0.1s" data-wow-offset="300" width="180" style="margin: 20px 0 0 10px;" />
-    <form id="login_form" class="wow slideInLeft" data-wow-delay="0.2s" data-wow-offset="300">
-        <div class="page__hd" style="padding-left: 15px;">
-            <h1 class="page__title">登 录</h1>
-        </div>
-        <div class="page__bd">
-            <div class="weui-form" style="padding: 0;">
-                <div class="weui-form__control-area">
-                    <div class="weui-cells__group weui-cells__group_form">
-                        <div class="weui-cells weui-cells_form">
-                            <div class="weui-cell weui-cell_active">
-                                <div class="weui-cell__hd errorDiv" id="errorcontainer-login_username" style="padding-right: 0;"><label class="weui-label" style="margin-right: 0; max-width: 3.5em;">手机号</label></div>
-                                <div class="weui-cell__bd">
-                                    <input class="weui-input" type="number" pattern="[0-9]*" name="login_username" id="login_username" required placeholder="" value=""/>
-                                </div>
-                            </div>
-                            <div class="weui-cell weui-cell_active weui-cell_vcode">
-                                <div class="weui-cell__hd errorDiv" id="errorcontainer-login_verify" style="padding-right: 0;"><label class="weui-label" style="margin-right: 0; max-width: 3.5em;">验证码</label></div>
-                                <div class="weui-cell__bd">
-                                    <input autofocus class="weui-input" type="text" pattern="[0-9]*" id="login_verify" name="login_verify" required placeholder="" maxlength="6"/>
-                                </div>
-                                <div class="weui-cell__ft">
-                                    <button id="login_verify_link" onClick="javascript: VeryficationCodeLogin();" class="weui-btn weui-btn_default weui-vcode-btn">获取验证码</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<form id="login_form" class="form-signin">
+    <h1 class="h3 mb-3 font-weight-normal">登录</h1>
+    <label for="login_username">手机号</label>
+    <input type="number" class="form-control" pattern="[0-9]*" name="login_username" id="login_username" placeholder="" required autofocus>
+    <div class="errorDiv" id="errorcontainer-login_username"></div>
+    <br>
+    <label for="login_verify">验证码</label>
+    <button id="login_verify_link" onClick="javascript: VeryficationCodeLogin();">获取验证码</button>
+    <input type="text" class="form-control" pattern="[0-9]*" id="login_verify" name="login_verify" placeholder="" required maxlength="4">
+    <div class="errorDiv" id="errorcontainer-login_verify"></div>
+    <br><br>
+    <button type="submit" id="login" class="btn btn-lg btn-primary btn-block">登录</button>
+    <div class="container mt-5 mb-3 text-muted">
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center">&copy; COPYRIGHT <?= date("Y") ?></p>
+                <p class="text-center">上海帝泰发展有限公司版权所有</p>
+                <p class="text-center">
+                    <a class="text-muted" target="_blank" href="https://beian.miit.gov.cn/">
+                        沪ICP备14029636号-1
+                    </a>
+                </p>
+                <p class="text-center">
+                    <a class="text-muted" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111">
+                        <img src="/views/assets/base/img/content/misc/gongan.png" />
+                        沪公网安备 31011502015111号
+                    </a>
+                </p>
             </div>
         </div>
-        
-        <div style="width: 220px; text-align: right; margin-top: 10px;">
-            <button type="submit" id="login" style="background: url(/views/assets/base/img/content/backgrounds/login-btn.png); background-size: 100% auto; width: 50px; height: 50px; border: 0 none;"></button>
-        </div>
-    </form>
-</div>
-
+    </div>
+</form>
 <?php include ('footer.php'); ?>

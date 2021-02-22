@@ -1,88 +1,219 @@
-<?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/plugins/folding/modernizr.custom.js"></script>';
-?>
-
-<link href="/views/assets/plugins/folding/style.css" rel="stylesheet" type="text/css"/>
-<style>
-    html {
-        height: 100vh;
-        overflow: hidden;
-    }
-    body {
-        background-color: #838da9;
-    }
-    
-    .skip {
-        position: absolute; 
-        top: 15px; 
-        right: 15px; 
-        border: solid 2px #fff; 
-        padding: 5px 15px; 
-        color: #fff;
-    }
-</style>
-
-<div id="welcome" style="position: relative; height: 110vh;">
-    <video id="welcome_video" autoplay muted playsinline preload="preload" style="width: auto; height: 100%">
-        <source src="/upload/video/judy.mp4" type="video/mp4">
-    </video>
-    <a class="skip" href="javascript:;">x 跳过</a>
-</div>
-
-<div class="slide" id="slide2">
-    <ul>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-6.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-7.jpg' alt="">
-            </a>
-        </li>
-        <li>
-            <a href="javascript:;">
-                <img src='/views/assets/base/img/content/backgrounds/banner-8.jpg' alt="">
-            </a>
-        </li>
-    </ul>
-    <div class="dot">
-        <span></span>
-        <span></span>
-        <span></span>
+<!-- ljz -->
+<div class="bloc bloc-fill-screen full-width-bloc bgc-black tc-white d-bloc " id="ljz-hero-background">
+    <div class="container fill-bloc-top-edge">
+        <div class="row">
+            <div class="col-lg-12 cp-hero-titlte">
+                <h4 class="text-center mg-clear sm-shadow animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">正大广场</h4>
+                <h1 class="text-center mg-clear sm-shadow none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">上海 陆家嘴</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <ul class="snap-scroll-pagination snap-scroll-paginate-dashes" data-min-breakpoint="768"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container fill-bloc-bottom-edge">
+        <div class="row no-gutters">
+            <div class="col-12 offset-lg-0 col-lg-12">
+                <div class="card border-0 card-sq bgc-white cp-hero-bottom">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">13&nbsp;<span class="cp-subtext-small">层</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">全业态购物空间</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">32&nbsp;<span class="cp-subtext-small">亿</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年销售</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年客流量</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
+                            <div class="text-center" style="margin: 0 20px;">
+                                <a href="/v2/ljz" class="btn btn-d btn-lg cp-wire-button-white sm-shadow">了解详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 cp-bottom-arrow">
+                <div class="text-center">
+                    <a href="#" data-scroll-speed="1000" onclick="scrollToTarget('#xh-hero-background', this)"><span class="fa fa-angle-down icon-md icon-white animLoopInfinite animated pulse none" data-appear-anim-style="pulse"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<!-- ljz -->
 
-<div class="slide" id="slide1">
-    <div style="position: absolute; left: 0; right: 0; text-align: center; top: 14px; color: #fff; font-weight: bold;">
-        <div class="mall_names" style="display: none; line-height: 22px;">上海，陆家嘴<br>正大广场</div>
-        <div class="mall_names" style="display: none; line-height: 22px;">河南，洛阳<br>正大广场</div>
-        <div class="mall_names" style="display: none; line-height: 22px;">上海，徐汇<br>正大乐城</div>
-        <div class="mall_names" style="display: none; line-height: 22px;">上海，宝山<br>正大乐城</div>
+<!-- xh -->
+<div class="bloc bloc-fill-screen full-width-bloc bgc-black tc-white d-bloc " id="xh-hero-background">
+    <div class="container fill-bloc-top-edge">
+        <div class="row">
+            <div class="col-lg-12 cp-hero-titlte">
+                <h4 class="text-center mg-clear sm-shadow animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">正大乐城</h4>
+                <h1 class="text-center mg-clear sm-shadow none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">上海 徐汇</h1>
+            </div>
+        </div>
     </div>
-    <img src='/views/assets/base/img/content/backgrounds/v2-banner-top.jpg' alt="" style="width: 100%; margin-bottom: -8px;">
-    <ul class="main">
-        <li class="view" onclick="window.location='/v2/ljz'">
-            <img src='/views/assets/base/img/content/backgrounds/v2-banner-1.jpg' alt="">
-        </li>
-        <li class="view" onclick="window.location='/v2/ly'">
-            <img src='/views/assets/base/img/content/backgrounds/v2-banner-2.jpg' alt="">
-        </li>
-        <li class="view" onclick="window.location='/v2/xh'">
-            <img src='/views/assets/base/img/content/backgrounds/v2-banner-4.jpg' alt="">
-        </li>
-        <li class="view" onclick="window.location='/v2/bs'">
-            <img src='/views/assets/base/img/content/backgrounds/v2-banner-3.jpg' alt="">
-        </li>
-    </ul>
-    <div style="position: relative; margin-top: -50px;">
-        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-1.png' alt="" style="width: 100%;"></div>
-        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-2.png' alt="" style="width: 100%;"></div>
-        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-4.png' alt="" style="width: 100%;"></div>
-        <div class="mall_footers" style="display: none;"><img src='/views/assets/base/img/content/backgrounds/v2-banner-footer-3.png' alt="" style="width: 100%;"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <ul class="snap-scroll-pagination snap-scroll-paginate-dashes" data-min-breakpoint="768"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container fill-bloc-bottom-edge">
+        <div class="row no-gutters">
+            <div class="col-12 offset-lg-0 col-lg-12">
+                <div class="card border-0 card-sq bgc-white cp-hero-bottom">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow"><span class="cp-subtext-small">徐汇</span>&nbsp;滨江</h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">地处</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">7<span class="cp-subtext-small">、</span>12&nbsp;<span class="cp-subtext-small">号线</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">双轨交</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">1200&nbsp;<span class="cp-subtext-small">万</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年客流量
+                            </p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
+                            <div class="text-center" style="margin: 0 20px;">
+                                <a href="/v2/xh" class="btn btn-d btn-lg cp-wire-button-white sm-shadow">了解详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 cp-bottom-arrow">
+                <div class="text-center">
+                    <a href="#" data-scroll-speed="1000" onclick="scrollToTarget('#bs-hero-background', this)"><span class="fa fa-angle-down icon-md icon-white animLoopInfinite animated pulse none" data-appear-anim-style="pulse"></span></a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<!-- xh -->
 
+<!-- bs -->
+<div class="bloc bloc-fill-screen full-width-bloc bgc-black tc-white d-bloc " id="bs-hero-background">
+    <div class="container fill-bloc-top-edge">
+        <div class="row">
+            <div class="col-lg-12 cp-hero-titlte">
+                <h4 class="text-center mg-clear sm-shadow animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">正大乐城</h4>
+                <h1 class="text-center mg-clear sm-shadow none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">上海 宝山</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <ul class="snap-scroll-pagination snap-scroll-paginate-dashes" data-min-breakpoint="768"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container fill-bloc-bottom-edge">
+        <div class="row no-gutters">
+            <div class="col-12 offset-lg-0 col-lg-12">
+                <div class="card border-0 card-sq bgc-white cp-hero-bottom">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">顾村&nbsp;<span class="cp-subtext-small">核心</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">地处</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">7<span class="cp-subtext-small">、</span>15&nbsp;<span class="cp-subtext-small">号线</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">双轨交</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">1300&nbsp;<span class="cp-subtext-small">万</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年客流量</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
+                            <div class="text-center" style="margin: 0 20px;">
+                                <a href="/v2/bs" class="btn btn-d btn-lg cp-wire-button-white sm-shadow">了解详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 cp-bottom-arrow">
+                <div class="text-center">
+                    <a href="#" data-scroll-speed="1000" onclick="scrollToTarget('#ly-hero-background', this)"><span class="fa fa-angle-down icon-md icon-white animLoopInfinite animated pulse none" data-appear-anim-style="pulse"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- bs -->
+
+<!-- ly -->
+<div class="bloc bloc-fill-screen full-width-bloc bgc-black tc-white d-bloc " id="ly-hero-background">
+    <div class="container fill-bloc-top-edge">
+        <div class="row">
+            <div class="col-lg-12 cp-hero-titlte">
+                <h4 class="text-center mg-clear sm-shadow animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">正大广场</h4>
+                <h1 class="text-center mg-clear sm-shadow none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">河南 洛阳</h1>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div>
+                    <ul class="snap-scroll-pagination snap-scroll-paginate-dashes" data-min-breakpoint="768"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container fill-bloc-bottom-edge">
+        <div class="row no-gutters">
+            <div class="col-12 offset-lg-0 col-lg-12">
+                <div class="card border-0 card-sq bgc-white cp-hero-bottom">
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">2&nbsp;<span class="cp-subtext-small">公里</span></h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">南距龙门站 (高铁)</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">开元湖畔</h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">厚载门前</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
+                            <h2 class="text-center tc-white mg-clear sm-shadow">牡丹园</h2>
+                            <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">步行街</p>
+                        </div>
+                        <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
+                            <div class="text-center" style="margin: 0 20px;">
+                                <a href="/v2/ly" class="btn btn-d btn-lg cp-wire-button-white sm-shadow">了解详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 cp-bottom-arrow">
+                <div class="text-center">
+                    <a href="#" data-scroll-speed="1000" onclick="scrollToTarget('#ljz-hero-background', this)" style="bottom: 120px;"><span class="fa fa-angle-down icon-md icon-white animLoopInfinite animated pulse none" data-appear-anim-style="pulse"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ly -->
+
+<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1', this)"><span class="fa fa-chevron-up"></span></a>
 <?php include ('footer.php'); ?>

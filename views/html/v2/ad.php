@@ -6,11 +6,16 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     }
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/v2/ad-admin.js"></script>';
 ?>
 
 <link href="/views/assets/plugins/jquery-weui-calendar/calendar.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
 <style type="text/css">
     .weui_cell {
         padding: 10px 15px;
@@ -62,14 +67,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         background-color: #f00 !important;
     }
 </style>
-<div style="position: relative;">
+<div style="position: relative; margin-top: 65px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
 </div>
 
-<div class="page__bd" style="position: relative; margin-top: -16px;">
-    <ul class="collapse shop-collapse">
+<div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">
+    <ul class="collapse shop-collapse" style="display: block;">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400">
-            <?php include ('timeline/step_two.php'); ?>
             <div class="weui-flex js-category-1">
                 <h3 class="weui-flex__item"><span id="ad_name"></span></h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
@@ -149,18 +153,34 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     </ul>
 </div>
 
+<div class="nikola-steps" style="bottom: 65px;">
+    <div class="nikola-tab">
+        <div class="nikola-navbar">
+            <div class="nikola-navbar__item">
+                1.介绍
+            </div>
+            <div class="nikola-navbar__item nikola-bar__item_on">
+                2.选择
+            </div>
+            <div class="nikola-navbar__item">
+                3.付款
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
-    <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
-        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
             收藏
         </a>
-        <a id="ad_shopping_cart" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+        <a id="ad_shopping_cart" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i><br>
             购物车
         </a>
-        <a id="confirm_price" href="javascript:;" style="float: right; background: #50691a; border: solid 2px #668161; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 15px; text-align: center; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">接受报价</a>
-        <a id="add_ad" href="javascript:;" style="float: right; background: #e69c2e; border: solid 2px #eeb96b; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 15px; margin-right: 5px; text-align: center; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">加入购物车</a>
+        <a id="confirm_price" href="javascript:;" class="weui-btn btn-primary" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; width: initial;">接受报价</a>
+        <a id="add_ad" href="javascript:;" class="weui-btn btn-warning" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; margin-right: 5px; width: initial;">加入购物车</a>
     </div>
 </div>
 

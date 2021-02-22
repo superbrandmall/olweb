@@ -1,11 +1,15 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/bill-admin.js"></script>'
-        . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/bill-admin.js"></script>
+                    <script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
 ?>
 
-<div class="page__bd" style="font-size: 15px;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div class="page__bd" style="margin-top: 65px; font-size: 15px;">
     <div class="page__bd">
-        <?php include ('timeline/step_five.php'); ?>
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
                 <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。贵我双方已经签定<span id="mall"></span>的<span id="type"></span>合同双方已完成签章, 已到付款环节。</p>
@@ -149,7 +153,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     </div>
                 </div>
             </div>
-            <div class="weui-dialog__ft">
+            <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">
                 <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
             </div>
@@ -160,5 +164,5 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-<?php include ('menu_bottom.php'); ?>
+<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

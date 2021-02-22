@@ -1,8 +1,13 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/negotiation-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/negotiation-admin.js"></script>';
 ?>
 
-<div class="weui-article" style="padding: 24px 32px 0;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div class="weui-article" style="margin-top: 65px; padding: 24px 32px 0;">
     <h1>很遗憾未能与您达成合作···</h1>
 </div>
 
@@ -94,7 +99,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
             <br>
             <div class="weui-form__opr-area">
-                <a href="javascript:;" class="weui-btn weui-btn_default" id="submit_negotiation">提交反馈</a>
+                <a href="javascript:;" class="weui-btn btn-primary" id="submit_negotiation" style="border-radius: 20px;">提交反馈</a>
             </div>
         </div>
     </div>

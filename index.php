@@ -1,5 +1,5 @@
 <?php
-if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'uat-ol.superbrandmall.com'){
+if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] == 'www.eatnwork-china.com'){
     if(strpos ($_SERVER['REQUEST_URI'] , 'advertising' ) == true){
         include ('views/html/advertising/index.php');
     } else {
@@ -19,6 +19,9 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'hf-admin')) !== false) { // 合肥内部汇报
         include ('views/html/hf-admin/header.php');
         include 'views/html/hf-admin/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'v2-admin')) !== false) { // 2.0 admin
+        include ('views/html/v2-admin/header.php');
+        include 'views/html/v2-admin/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'v2')) !== false) { // 2.0
         include ('views/html/v2/header.php');
         include 'views/html/v2/'.$page;

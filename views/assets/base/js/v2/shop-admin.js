@@ -44,7 +44,12 @@ $(document).ready(function(){
     
     if(getURLParameter('info') && getURLParameter('info') == 'done'){
         showLoading();
-    } 
+    }
+    
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        document.getElementById('video_4').play(); 
+    });
+    
     getMyFavorites();
     getShopInfo();
     
@@ -382,10 +387,12 @@ function getShopsMoreInfo(u) {
 
                     $('#openDate').text(openDate);
                     $.cookie('openDate',openDate);
-
-                    if(response.data.remarkFirst != null){
-                        $('#vr').attr('src',response.data.remarkFirst);
-                    }
+                    
+                    $('#vr').click(function () {
+                        if(response.data.remarkFirst != null){
+                            showVR(response.data.remarkFirst);
+                        }
+                    })
 
                     $('#engineering_qa').click(function(){
                         //showVideo("https://www.xinpianchang.com/a10824429");

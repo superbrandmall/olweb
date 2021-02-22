@@ -1,9 +1,14 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/advertising-package-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/v2/advertising-package-admin.js"></script>';
 ?>
 
 <link href="/views/assets/plugins/jquery-weui-calendar/calendar.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
 <style type="text/css">
     .weui_cell {
         padding: 10px 15px;
@@ -55,7 +60,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
         background-color: #f00 !important;
     }
 </style>
-<div class="weui-article" style="margin-top: 20px; padding: 0 16px;">
+
+<div class="weui-article" style="margin-top: 65px; padding: 0 16px;">
     <h1 style="margin-bottom: 0.5em;">广告位特价套餐</h1>
 </div>
 <div class="page__bd">
@@ -82,7 +88,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                 <p style="font-size: 14px;">合计: <span style="color: #b43018;">¥</span> <span id="subTotal" style="color: #b43018; font-size: 18px;">请先选择档期</span><small> (含税含押金)</small></p>
             </div>
             <div class="weui-cell__ft">
-                <a class="weui-btn weui-btn_primary" id="confirm_price" href="javascript:;" style="width: initial; font-size: 14px;">结算 <small>(<span id="subQTY"></span><small>)</small></a>
+                <a class="weui-btn btn-primary" id="confirm_price" href="javascript:;" style="width: initial; font-size: 14px; border-radius: 20px;">结算 <small>(<span id="subQTY"></span><small>)</small></a>
             </div>
         </div>
     </div>
@@ -90,7 +96,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 <br><br><br><br><br>
 
 <?php include ('timeline/step_two.php'); ?>
-
-<?php include ('menu_bottom.php'); ?>
 
 <?php include ('footer.php'); ?>

@@ -11,7 +11,9 @@
                     <?= $lang['copyright'] ?>
                 </div>
                 <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
+                    <a class="c-copyright c-font-oswald c-font-14" target="_blank" href="https://beian.miit.gov.cn/">
                     沪ICP备14029636号-1
+                    </a>
                 </div>
                 <div class="col-md-3 c-copyright c-font-oswald c-font-14 text-center">
                     <a class="c-copyright c-font-oswald c-font-14" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111">

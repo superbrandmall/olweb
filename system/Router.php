@@ -115,6 +115,62 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $session = new Session();
         $session->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'v2-admin')) !== false) {
+    $target = array(
+        'v2-admin/home' => array(
+            'url' => 'default.php'
+        ),
+        'v2-admin/login' => array(
+            'url' => 'login.php'
+        ),
+        'v2-admin/logout' => array(
+            'url' => 'logout.php'
+        ),
+        'v2-admin/brands' => array(
+            'url' => 'brands.php'
+        ),
+        'v2-admin/brand' => array(
+            'url' => 'brand.php'
+        ),
+        'v2-admin/malls' => array(
+            'url' => 'malls.php'
+        ),
+        'v2-admin/mall' => array(
+            'url' => 'mall.php'
+        ),
+        'v2-admin/buildings' => array(
+            'url' => 'buildings.php'
+        ),
+        'v2-admin/building' => array(
+            'url' => 'building.php'
+        ),
+        'v2-admin/floors' => array(
+            'url' => 'floors.php'
+        ),
+        'v2-admin/floor' => array(
+            'url' => 'floor.php'
+        ),
+        'v2-admin/shops' => array(
+            'url' => 'shops.php'
+        ),
+        'v2-admin/shop' => array(
+            'url' => 'shop.php'
+        )
+    );
+
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php', 'default.php','logout.php','brands.php','brand.php',
+        'malls.php','mall.php','buildings.php','building.php','floors.php','floor.php');
+    if (in_array($page, $session_required)) {
+        include_once 'models/v2-admin/Session.class.php';
+        $session = new Session();
+        $session->_session();
+    }
 } else if (isset($_GET['p']) && (strpos($_GET['p'], 'v2')) !== false) { // Ol 2.0
     $target = array(
         'v2/login' => array(
@@ -179,6 +235,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'v2/pay-done' => array(
             'url' => 'pay_done.php'
+        ),
+        'v2/leasing' => array(
+            'url' => 'leasing.php'
         ),
         'v2/shop' => array(
             'url' => 'shop.php'

@@ -390,6 +390,7 @@ transform:scale(1);
 /******* Willa  ********/
 .weui-grid {
     width: 50%;
+    height: 170px;
 }
 
 .weui-grid:active {
@@ -552,11 +553,7 @@ transform:scale(1);
 }
 
 #profile .avatar {
-    position: absolute;
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    top: 122px;
+    margin: 40px auto;
     width: 105px;
     height: 105px;
     background-image: url("/views/assets/base/img/content/brands-admin/avatar.png");
@@ -566,97 +563,3 @@ transform:scale(1);
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.7);
     -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.7);
 }
-
-.profile-links {
-    position: absolute;
-    display: block;
-    text-align: right;
-    padding: 8px 15px;
-    font-size: 16px;
-    font-weight: normal;
-    transform: rotate(30deg);
-    box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.7);
-    -webkit-box-shadow: 0 2px 20px 0 rgba(0, 0, 0, 0.7);
-}
-
-.info-link {
-    background-color: #ffc000;
-    color: #111;
-}
-
-.manage-link {
-    background-color: #3c3c3c;
-    color: #fff;
-}
-
-.help-link {
-    background-color: #cec1a8;
-    color: #111;
-}
-
-#login_form {
-    position: absolute;
-    top: 235px;
-}
-
-#login_form .page__title {
-    font-size: 28px; 
-    color: #504631;
-    text-shadow: 1px 1px 1px rgba(150,145,145,0.7);
-    font-weight: 400;
-}
-
-#login_form .weui-form {
-    padding: 0;
-    background-color: transparent;
-}
-
-#login_form .weui-cells__group_form .weui-cell:before, 
-#login_form .weui-cells:after {
-    border-top: 2px solid #504631;
-    left: 15px;
-}
-
-#login_form .weui-cells_form {
-    background-color: transparent;
-    width: 260px;
-}
-
-#login_form .weui-cell_active {
-    color: #504631;
-    padding-left: 15px;
-}
-
-#login_form .weui-vcode-btn {
-    background: rgba(229,229,229,0.8);
-    color: #504631;
-    border-radius: 20px;
-    font-size: 12px;
-}
-
-@media (device-height:480px) and (-webkit-min-device-pixel-ratio:2){ // iPhone4/4s
-} 
-
-@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){ // iPhone5
-} 
-
-@media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){ // iPhone6，iPhone7，iPhone8s
-}
-
-@media (device-height:736px) and (-webkit-min-device-pixel-ratio:2){ // iPhone6 Plus,iPhone7 Plus,iPhone8 Plus
-} 
-
-@media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){ // iPhone X
-}
-
-@media only screen  and (min-device-width : 768px)  and (max-device-width : 1024px){  // 兼容ipad
-/* style */  
-} 
-
-@media only screen  and (min-device-width : 768px)  and (max-device-width : 1024px)  and (orientation : landscape){  // 兼容ipad横屏 
-/* style */  
-}  
-
-@media only screen  and (min-device-width : 768px)  and (max-device-width : 1024px)  and (orientation : portrait){  // 兼容ipad竖屏
-/* style */  
-}  

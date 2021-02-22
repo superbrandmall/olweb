@@ -8,21 +8,24 @@ if (explode('?type=', $_SERVER['REQUEST_URI'])[1] != null) {
     $type = null;
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/contract-admin.js"></script>'
-        . '<script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>'
-        . '<script src="/views/assets/base/js/v2/my-files-admin.js" type="text/javascript" ></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/contract-admin.js"></script>
+                    <script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>
+                    <script src="/views/assets/base/js/v2/my-files-admin.js" type="text/javascript" ></script>';
 ?>
 
-<?php include ('timeline/step_four.php'); ?>
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-cells" id="download_links" style="margin-top: 20px; font-size: 13px;">
-    <a class="weui-cell weui-cell_access" href="javascript: showContract();" style="width: 23%; float: left;">
+<div class="weui-cells" id="download_links" style="margin-top: 65px; font-size: 13px;">
+    <a class="weui-cell weui-cell_access" href="javascript: showContract();" style="float: left;">
         <div class="weui-cell__bd">
             <p>查看合同</p>
         </div>
         <div class="weui-cell__ft"></div>
     </a>
-    <a id="download_file" class="weui-cell weui-cell_access" href="javascript:;" style="width: 23%; float: left;">
+    <a id="download_file" class="weui-cell weui-cell_access" href="javascript:;" style="float: left;">
         <div class="weui-cell__bd">
             <p>下载合同</p>
         </div>
@@ -188,8 +191,8 @@ if($type == 'leasing'){
 
 <div class="weui-btn-area" style="margin-top: 20px;">
     <center>
-        <button type="button" class="weui-btn weui-btn_mini bg-red" id="negotiate">谢绝</button>
-        <button type="button" class="weui-btn weui-btn_mini weui-btn_primary" id="confirm_contract">确认上传文件并用印</button>
+        <button type="button" class="weui-btn btn-danger weui-btn_mini" id="negotiate" style="border-radius: 20px;">谢绝</button>
+        <button type="button" class="weui-btn btn-primary weui-btn_mini" id="confirm_contract" style="border-radius: 20px;">确认上传文件并用印</button>
     </center>
 </div>
 
@@ -245,7 +248,7 @@ if($type == 'leasing'){
                     </div>
                 </div>
             </div>
-            <div class="weui-dialog__ft">
+            <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">
                 <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交信息</button>
             </div>
@@ -271,7 +274,7 @@ if($type == 'leasing'){
                     </div>
                 </div>
             </div>
-            <div class="weui-dialog__ft">
+            <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">
                 <a href="javascript: hideDialog2();" class="weui-dialog__btn weui-dialog__btn_default">取消</a>
                 <button type="submit" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">提交</button>
             </div>
@@ -307,5 +310,5 @@ if($type == 'leasing'){
 <br>
 <br>
 
-<?php include ('menu_bottom.php'); ?>
+<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

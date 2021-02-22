@@ -1,10 +1,15 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/iscroll-lite.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/bankCardAttribution.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/improve-info-admin.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/iscroll-lite.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/v2/bankCardAttribution.js">
+            </script><script type="text/javascript" src="/views/assets/base/js/v2/improve-info-admin.js"></script>';
 ?>
 
-<div class="weui-form__text-area" style="margin: 20px 0;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div class="weui-form__text-area" style="margin: 65px 0 20px;">
     <h2 class="weui-form__title">请填写合同必用的注册资料</h2>
 </div>
 
@@ -94,7 +99,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
             </div>
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="improve_basic">提交基本信息</button>
+            <button type="submit" class="weui-btn btn-primary" id="improve_basic" style="border-radius: 20px;">提交基本信息</button>
         </div>
     </form>
         
@@ -160,7 +165,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
             </div>
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="improve_invoice">提交开票信息</button>
+            <button type="submit" class="weui-btn btn-primary" id="improve_invoice" style="border-radius: 20px;">提交开票信息</button>
         </div>
     </form>
         
@@ -183,7 +188,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
             </div>
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="improve_bank">提交银行信息</button>
+            <button type="submit" class="weui-btn btn-primary" id="improve_bank" style="border-radius: 20px;">提交银行信息</button>
         </div>
     </form>
         
@@ -218,7 +223,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
             </div>
         </div>
         <div class="weui-btn-area">
-            <button type="submit" class="weui-btn weui-btn_primary" id="improve_authorization">提交授权人信息</button>
+            <button type="submit" class="weui-btn btn-primary" id="improve_authorization" style="border-radius: 20px;">提交授权人信息</button>
         </div>
     </form>
 </div>
@@ -234,5 +239,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/plugins/
 <br>
 <br>
 <br>
+
+<?php include ('timeline/step_three.php'); ?>
 
 <?php include ('footer.php'); ?>

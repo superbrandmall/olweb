@@ -6,17 +6,21 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     }
 }
 
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/event-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/base/js/v2/event-admin.js"></script>';
 ?>
 
-<div style="position: relative;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div style="position: relative; margin-top: 65px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
 </div>
 
-<div class="page__bd" style="position: relative; margin-top: -16px;">
-    <ul class="collapse shop-collapse">
+<div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">
+    <ul class="collapse shop-collapse" style="display: block;">
         <li class="wow fadeInUp" data-wow-delay="0.5s" data-wow-offset="400">
-            <?php include ('timeline/step_two.php'); ?>
             <div class="weui-flex js-category-1">
                 <h3 class="weui-flex__item"><span id="shopName"></span></h3>
                 <hr color=#baad9b size=1 style="margin: 5px 0;">
@@ -173,13 +177,29 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </ul>
 </div>
 
+<div class="nikola-steps" style="bottom: 65px;">
+    <div class="nikola-tab">
+        <div class="nikola-navbar">
+            <div class="nikola-navbar__item">
+                1.介绍
+            </div>
+            <div class="nikola-navbar__item nikola-bar__item_on">
+                2.选择
+            </div>
+            <div class="nikola-navbar__item">
+                3.付款
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
-    <div class="weui-panel__bd" style="padding: 10px 20px; position: relative; background-color: #e5e5e5; border-radius: 10px; margin-top: -50px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">
-        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #000; padding: 5px 0; text-align: center; width: 60px;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
             收藏
         </a>
-        <a id="choose_event" href="javascript:;" style="float: right; background: #50691a; border: solid 2px #668161; border-radius: 50px; font-size: 12px; color: #fff; margin-top: 5px; padding: 5px 20px; text-align: center; width: 60px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);-webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.5);">接受报价</a>
+        <a id="choose_event" href="javascript:;" class="weui-btn btn-primary" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px;">接受报价</a>
     </div>
 </div>
 

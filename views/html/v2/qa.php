@@ -1,8 +1,13 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/qa-admin.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/qa-admin.js"></script>';
 ?>
 
-<div class="page-hd" style="margin-top: 20px;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div class="page-hd" style="margin-top: 65px;">
     <h1 class="page-hd-title">
         F&Q
     </h1>
@@ -11,7 +16,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 
 <div class="page-bd">
     <div class="weui-media-box">
-        <ul class="collapse">
+        <ul class="collapse" style="display: block;">
             <li>
                 <div class="weui-flex js-category" >
                     <div class="weui-flex__item">项目介绍</div>
@@ -96,8 +101,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         </ul>
     </div>
 </div>
-<br><br><br><br>
-
-<?php include ('menu_bottom.php'); ?>
+<br><br><br>
 
 <?php include ('footer.php'); ?>

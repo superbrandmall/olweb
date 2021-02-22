@@ -17,14 +17,14 @@ $(document).ready(function(){
         },
         messages: {
             login_username: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
-                digits: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
-                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+                required: '请输入手机号码',
+                digits: '请输入正确手机号码',
+                rangelength: '请输入正确手机号码'
             },
             login_verify: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
-                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
-                digits: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+                required: '请输入验证码',
+                rangelength: '验证码须为{0}位数字',
+                digits: '验证码须为{0}位数字'
             }
         },
         errorPlacement: function(error, element) {

@@ -14,7 +14,9 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     document.addEventListener('WeixinJSBridgeReady', function() {
-        document.getElementById('welcome_video').play(); 
+        document.getElementById('video_1').play();
+        document.getElementById('video_2').play();
+        document.getElementById('video_3').play(); 
     });
     
     new WOW().init();

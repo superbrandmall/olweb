@@ -192,7 +192,7 @@ function getAllOrdersToBeConfirmed() {
                             if(v.payStates != '退款中' && v.payStates != '已退款'){
                                 refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';
                             } else {
-                                refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 4px 8px; color: #999;">'+v.payStates+'</span></li>';
+                                refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 6px 10px; color: #999;">'+v.payStates+'</span></li>';
                             }
                             
                             $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel">\n\

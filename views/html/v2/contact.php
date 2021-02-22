@@ -1,8 +1,13 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/v2/contact-admin.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+                    <script type="text/javascript" src="/views/assets/base/js/v2/contact-admin.js"></script>';
 ?>
 
-<div class="page-hd" style="margin-top: 20px;">
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<div class="page-hd" style="margin-top: 65px;">
     <h1 class="page-hd-title">
         联系客服
     </h1>
@@ -49,7 +54,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 </div>
             </div>
             <div class="weui-btn-area">
-                <button type="submit" class="weui-btn weui-btn_primary">提交信息</button>
+                <button type="submit" class="weui-btn btn-primary" style="border-radius: 20px;">提交信息</button>
             </div>
         </form>
     </div>
@@ -63,8 +68,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     </div>
 </div>
 
-<br><br><br><br>
-
-<?php include ('menu_bottom.php'); ?>
+<br><br><br>
 
 <?php include ('footer.php'); ?>
