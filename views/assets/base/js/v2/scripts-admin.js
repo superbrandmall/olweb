@@ -1,10 +1,3 @@
-$.api = {
-    base: "http://10.130.12.15:8080/oldataservice/ol/api",
-    baseNew: $.base,
-    emailVC: "",
-    mobileVC: ""
-};
-
 var d = new Date();
 var month = d.getMonth()+1;
 var day = d.getDate();
@@ -13,12 +6,6 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
-    document.addEventListener('WeixinJSBridgeReady', function() {
-        document.getElementById('video_1').play();
-        document.getElementById('video_2').play();
-        document.getElementById('video_3').play(); 
-    });
-    
     new WOW().init();
             
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {

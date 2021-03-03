@@ -316,6 +316,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
     $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'pay_done.php', 'my_reservation.php', 
         'advertising_shopping_cart.php', 'advertising_package.php', 'negotiation.php', 'all_orders.php', 'my_favourites.php', 'order_to_be_stamped.php', 
         'stamping.php', 'to_pay.php', 'bill.php', 'engineering.php', 'improve_info.php', 'company_info.php', 'contract.php','contract_view.php','unionpay.php');
+    $page_nikola = array('default.php', 'login.php', 'ljz.php', 'xh.php', 'bs.php', 'ly.php');
+    
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
         $session = new Session();

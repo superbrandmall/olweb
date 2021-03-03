@@ -3,6 +3,12 @@ var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07
 var vr;
 
 $(document).ready(function(){
+    document.addEventListener('WeixinJSBridgeReady', function() {
+        document.getElementById('video_1').play();
+        document.getElementById('video_2').play();
+        document.getElementById('video_3').play(); 
+    });
+    
     for(var j=0;j<=8;j++){
       if(!sessionStorage.getItem('ljz_fl_'+j) || sessionStorage.getItem('ljz_fl_'+j) == null || sessionStorage.getItem('ljz_fl_'+j) == ''){
         getCoordsByFloor(j);

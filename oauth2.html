@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+
+<script>
+var code = getUrlQueryString('code');
+window.location.href = "https://ol.superbrandmall.com/oauth2.php?code="+code;
+
+function getUrlQueryString(param) {
+	urls = window.location.href;
+	urls && urls.indexOf("?") > -1 ? urls = urls
+			.substring(urls.indexOf("?") + 1) : "";
+	var reg = new RegExp("(^|&)" + param + "=([^&]*)(&|$)", "i");
+	var r = urls ? urls.match(reg) : window.location.search.substr(1)
+			.match(reg);
+	if (r != null && r[2] != "")
+		return unescape(r[2]);
+	return null;
+};
+</script>
+
+</body>
+</html>

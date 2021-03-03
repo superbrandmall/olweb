@@ -1,0 +1,77 @@
+ {
+    "button": [
+        {
+            "name": "线上租赁", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "商场选择", 
+                    "url": "https://ol.superbrandmall.com/v2/"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "会员中心", 
+                    "url": "https://ol.superbrandmall.com/v2/info"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "我的订单", 
+                    "url": "https://ol.superbrandmall.com/v2/all-orders"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "我的预约", 
+                    "url": "https://ol.superbrandmall.com/v2/my-reservation"
+                }
+            ]
+        }, 
+        {
+            "name": "行业信息", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "最新信息", 
+                    "url": "http://"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "新店开业", 
+                    "url": "http://"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "旺铺推荐", 
+                    "url": "http://"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "商务合作", 
+                    "url": "http://"
+                }
+            ]
+        }, 
+        {
+            "name": "关于租得好", 
+            "sub_button": [
+                {
+                    "type": "view", 
+                    "name": "平台简介", 
+                    "url": "http://"
+                },
+                {
+                    "type": "view", 
+                    "name": "品牌概览", 
+                    "url": "http://"
+                }, 
+                {
+                    "type": "view", 
+                    "name": "Q&A", 
+                    "url": "http://"
+                }
+            ]
+        }
+    ]
+}
+
+
+ 42_u-pgvCVZtF1SGJP9w2HLORkcZItavmg-NLUx318tCrRtdBjit9LyB9WJRcRN_QVX6zqhmqXkxheRHYmXcgDwERAZsVK97MA11SJWcjl4B4YRA825sVeFjoMBfDf4unxnhZIPjOgkCJim3XJvDLMeAAAMUV

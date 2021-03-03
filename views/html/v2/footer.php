@@ -10,9 +10,8 @@
 <div id="aplayer" class="aplayer" style="display: none;"></div>
 
 <?php
-if ($page !== 'default.php' && $page !== 'login.php' && $page !== 'ljz.php') {
+if(!in_array($page, $page_nikola)) {
     ?>
-<script type="text/javascript" src="/views/assets/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/weui/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/wow/wow.min.js"></script>
@@ -30,7 +29,6 @@ if ($page !== 'default.php' && $page !== 'login.php' && $page !== 'ljz.php') {
 <?php
 } else {
 ?>
-<script type="text/javascript" src="/views/assets/base/js/nikola/jquery-3.3.1.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/wow/wow.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
@@ -41,7 +39,6 @@ if ($page !== 'default.php' && $page !== 'login.php' && $page !== 'ljz.php') {
 <?php
     echo $scripts; 
 ?>
-<script type="text/javascript" src="/views/assets/base/js/protocol.js"></script>
 <script type="text/javascript" src="/views/assets/base/js/v2/scripts-admin.js"></script>
 <?php
 }
