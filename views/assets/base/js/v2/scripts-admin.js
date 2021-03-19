@@ -18,7 +18,13 @@ $(document).ready(function(){
 
     if(!sessionStorage.getItem("category") || sessionStorage.getItem("category") == null || sessionStorage.getItem("category") == '') {
         getNewCategories();
-    } 
+    }
+    
+    setTimeout(function () {
+        if($('.livechat-girl').length > 0){
+            liveChat();
+        }
+    }, 5000);
 });
 
 function getURLParameter(sParam) {
@@ -476,4 +482,34 @@ function dateCompare(date1,date2){
     }else{
         return true;
     }
+}
+
+function liveChat() {
+    $('.livechat-girl').show().animate({right:'0'},'fast',function(){
+        $("#hint1").removeClass("hide_hint").addClass("show_hint");
+    });
+    setInterval(function(){
+        if($(".animated-circles").hasClass("animated")){
+            $(".animated-circles").removeClass("animated");
+        }else{
+            $(".animated-circles").addClass('animated');
+        }
+    },3000);
+    var hint1 = setInterval(function(){
+        $("#hint1").removeClass("show_hint").addClass("hide_hint");
+        $("#hint2").removeClass("hide_hint").addClass("show_hint");
+        clearInterval(hint1);
+    },5500);
+
+    var hint2 = setInterval(function(){
+        $("#hint2").removeClass("show_hint").addClass("hide_hint");
+        $("#hint3").removeClass("hide_hint").addClass("show_hint");
+        clearInterval(hint2);
+    },10500);
+
+    var hint3 = setInterval(function(){
+        $("#hint3").removeClass("show_hint").addClass("hide_hint");
+        clearInterval(hint3);
+        $('.livechat-girl').animate({right:'-100px'},'slow');
+    },15500);
 }

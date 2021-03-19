@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 id="floorNo" style="display: inline-block; margin-right: 5px; color: rgb(120, 128, 163);"></h1>
-                <div class="c-label" id="fmap" style="display: inline-block; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
+                <div class="c-label" id="fmap" style="display: none; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
                     <span style="margin-left: 15px; background-color: #7d9fe9; width: 20px; height: 13px; display: inline-block;"></span> Leased <span id="leased"></span>%
                     <span style="margin-left: 15px; background-color: #FE9E9E; width: 20px; height: 13px; display: inline-block;"></span> Vacancy <span id="empty"></span>%
                     <span style="margin-left: 15px; background-color: #FEED99; width: 20px; height: 13px; display: inline-block;"></span> Expiring <span id="to_be_lease"></span>%
@@ -19,6 +19,11 @@
                         <input type="radio" name="daysBeforeExpiration" value="30"> 30d
                     </label>)
                     <span style="margin-left: 15px; background-color: #D5C8AA; width: 20px; height: 13px; display: inline-block;"></span> Renovation <span id="renovation"></span>%
+                </div>
+                
+                <div class="c-label" style="display: inline-block; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
+                    <span style="margin-left: 15px; background-color: #64D2FF; width: 20px; height: 13px; display: inline-block;"></span> 零售业态
+                    <span style="margin-left: 15px; background-color: #FF453A; width: 20px; height: 13px; display: inline-block;"></span> 餐饮业态
                 </div>
             </div>
         </div>

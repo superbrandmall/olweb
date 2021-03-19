@@ -5,6 +5,23 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js"></script>';
 ?>
 
+<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
+    <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
+        <div class="rd-notice-content">这是上海陆家嘴正大广场</div>
+    </div>
+    <div id="hint2" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
+        <div class="rd-notice-content">我们为您全方位介绍商场，还有全景VR可以看</div>
+    </div>
+    <div id="hint3" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
+        <div class="rd-notice-content">点击"开新铺"更有旺铺供您选择，快试试吧！</div>
+    </div>
+    <div class="animated-circles">
+        <div class="circle c-1"></div>
+        <div class="circle c-2"></div>
+        <div class="circle c-3"></div>
+    </div>
+</div>
+
 <!-- all-wheel-drive -->
 <div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="all-wheel-drive" style="margin-top: 65px;">
     <div class="container ">

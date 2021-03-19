@@ -266,7 +266,108 @@ function getShopFloorInfo(fl) {
     
 function drawShops(){
     var areas = $.map($('area'),function(el) {
-        if(getURLParameter('id') === $(el).attr('alt')){
+        var level_retail = ['01FL004',
+'01FL009',
+'01FL010',
+'01FL011',
+'01FL017',
+'01FL047',
+'01FL048',
+'01FL112',
+'01FL111',
+'01FL110',
+'01FL109',
+'01FL108',
+'01FL107',
+'01FL106',
+'01FL099',
+'01FL097',
+'01FL096',
+'01FL087',
+'01FL071',
+'01FL065',
+'01FL059',
+'01FL053',
+'01FL115',
+'02FL060',
+'02FL057',
+'02FL011',
+'02FL041',
+'02FL048',
+'03FL130',
+'03FL128',
+'03FL127',
+'03FL126',
+'03FL119',
+'03FL117',
+'03FL041',
+'03FL034',
+'03FL012',
+'04FL007',
+'04FL014',
+'05FL137',
+'05FL136',
+'05FL130',
+'05FL124',
+'05FL123',
+'05FL087',
+'05FL079',
+'05FL078',
+'05FL070',
+'05FL069',
+'05FL068',
+'05FL034',
+'05FL025',
+'05FL017',
+'05FL016',
+'05FL018',
+'05FL140',
+'06FL054',
+'07FL073',
+'07FL013',
+'07FL058',
+'B1FL030',
+'B1FL028',
+'B1FL027'
+];
+var level_eat = ['01FL024',
+'01FL116',
+'02FL016',
+'02FL023',
+'02FC102',
+'02FC101',
+'03FL021',
+'07FL060',
+'07FL059',
+'07FL036'];
+        /*var level_retail = ['01FL053'];
+        var level_eat = [];*/
+        var index_retail = $.inArray($(el).attr('data-key'), level_retail);
+        
+        if(index_retail >= 0){
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: '',
+                fillColor: '64D2FF',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        }
+        
+        var index_eat = $.inArray($(el).attr('data-key'), level_eat);
+        
+        if(index_eat >= 0){
+            return { 
+                key: $(el).attr('data-key'),
+                toolTip: '',
+                fillColor: 'FF453A',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
+            };
+        }
+        /*if(getURLParameter('id') === $(el).attr('alt')){
             return { 
                 key: $(el).attr('data-key'),
                 toolTip: '本店铺',
@@ -314,7 +415,7 @@ function drawShops(){
                 };
             }
             
-        }
+        }*/
     });
     
     var xOffset;

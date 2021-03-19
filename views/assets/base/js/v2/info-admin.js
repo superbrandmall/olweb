@@ -1,22 +1,23 @@
-$(document).ready(function(){
-    $('.weui-tabbar a').removeClass('weui-bar__item_on');
-    $('.weui-tabbar a:eq(3)').addClass('weui-bar__item_on');
-    
+$(document).ready(function(){ 
     $('#uid').text($.cookie('uid'));
-    $('#contact_name_1').text($.cookie('contact_name_1'));
+
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        var headimgurl = $.parseJSON(sessionStorage.getItem("wechat_user_info")).headimgurl;
+        var nickname = $.parseJSON(sessionStorage.getItem("wechat_user_info")).nickname;
+        $('#avatar').css('backgroundImage','url('+headimgurl+')');
+        $('#nickname').text(nickname);
+    }
     
-    getUserFiles();
-    
-    $('#avatar_selector input').on("change", function () {
+    /*$('#avatar_selector input').on("change", function () {
         fileUpload();
     })
     
     $('#change_avatar').click(function(){
         $('#avatar_selector input').trigger("click");
-    });
+    });*/
 });
 
-function getUserFiles() {
+/*function getUserFiles() {
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNo?mobileNo="+$.cookie('uid'),
         type: "GET",
@@ -94,4 +95,4 @@ function fileUpload() {
            console.log(textStatus, errorThrown);
         }
     });
-}
+}*/

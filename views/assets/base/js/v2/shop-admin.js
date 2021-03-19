@@ -53,54 +53,6 @@ $(document).ready(function(){
     getMyFavorites();
     getShopInfo();
     
-    $(function(){
-        $('.collapse .js-category-1').click(function(){
-            $parent = $(this).parent('li');
-            if($parent.hasClass('js-show')){
-                $parent.removeClass('js-show');
-            }else{
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-            }
-            $('.shop-collapse li').animate({
-                marginTop: '-25px'
-            }, 200);
-        });
-        
-        $('.collapse .js-category-2').click(function(){
-            $parent = $(this).parent('li');
-            if($parent.hasClass('js-show')){
-                $parent.removeClass('js-show');
-                $parent.animate({
-                    marginTop: '-25px'
-                }, 200);
-            }else{
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $parent.animate({
-                    marginTop: '-110px'
-                }, 200);
-            }
-        });
-        
-        $('.collapse .js-category-3').click(function(){
-            $parent = $(this).parent('li');
-            if($parent.hasClass('js-show')){
-                $parent.removeClass('js-show');
-                $parent.animate({
-                    marginTop: '-25px'
-                }, 200);
-            }else{
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $parent.animate({
-                    marginTop: '-110px'
-                }, 200);
-            }
-        });
-
-    });
-    
     $('#cad').click(function(){
         showDialog();
     })
@@ -120,6 +72,20 @@ $(document).ready(function(){
             showAppointmentDialog();
         }
     })
+    
+    $('#orderType').click(function(){
+        showOrderTypeDialog();
+    })
+    
+    $(".radio-label").change(function() {
+        if($('#reserve_button').prop("checked")) {
+            $('#reserve_p').fadeIn();
+            $('#esign_p').hide();
+        } else if($('#esign_button').prop("checked")) {
+            $('#esign_p').fadeIn();
+            $('#reserve_p').hide();
+        }
+    }); 
     
     var datetime = '';
     $("#appointmentTime").datetimePicker({
@@ -414,9 +380,13 @@ function getShopsMoreInfo(u) {
                     if(getURLParameter('info') && getURLParameter('info') == 'done'){
                         findUserCompanyByMobileNo(u);
                     }
-
-                    $('#confirm_price').click(function(){
-                        window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+                    
+                    $("#confirm_price").click(function () {
+                        if($('#reserve_button').prop("checked")) {
+                            window.location.href = '/v2/improve-info2?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+                        } else if($('#esign_button').prop("checked")) {
+                            window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');                       
+                        }
                     });
                 }
                 
@@ -1508,6 +1478,16 @@ function hideDialog(){
 function hideAppointmentDialog(){
     var appointmentDialog = $('#appointmentDialog');
     appointmentDialog.hide();
+}
+
+function showOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.fadeIn(200)
+}
+
+function hideOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.hide();
 }
 
 function sendMail(email,file) {

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
     <head>
-        <title>Online Leasing | 正大商业地产</title>
-        <meta name="description" content="Online Leasing | 正大商业地产" />
+        <title>租得好商业地产租赁平台</title>
+        <meta name="description" content="租得好商业地产租赁平台" />
         <meta charset="utf-8" />
         <script src="/views/assets/plugins/jquery.min.js" type="text/javascript"></script>
         <script src="/views/assets/base/js/v2/api-configure.js" type="text/javascript" ></script>
@@ -53,6 +53,6 @@
         </script>
     </head>
     <body>
-        页面跳转中...
+        <cetner>页面跳转中...</cetner>
     </body>
 </html>

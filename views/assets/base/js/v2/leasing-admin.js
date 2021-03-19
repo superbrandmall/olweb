@@ -3,7 +3,6 @@ var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07
 var vr;
 
 $(document).ready(function(){
-    //setInterval("change()",6000);
     $(function(){
         $('.collapse .js-category').click(function(){
             $parent = $(this).parent('li');

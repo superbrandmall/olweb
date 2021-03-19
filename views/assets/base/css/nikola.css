@@ -625,7 +625,7 @@ button {
     display: block;
 }
 
-.weui-mask {
+/*.weui-mask {
     opacity: 1;
     visibility: visible;
     -webkit-transition-duration: .3s;
@@ -703,7 +703,7 @@ button {
     text-decoration: none;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     position: relative;
-}
+}*/
 
 .weui-gallery {
     display: none;

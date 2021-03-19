@@ -28,8 +28,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         <div id="avatar" style="background-image: url(/views/assets/base/img/content/brands-admin/avatar.png)" class="avatar"></div>
         <input type="file" accept="image/*" multiple style="position: absolute; top: 122px; left: 0; right: 0; padding: 0px; margin: 0 auto; opacity: 0; height: 112px; width: 112px;" />
     </div>
-    <h4 id="uid" style="margin-top: 20px; text-align: center;"></h4>
-    <a href="javascript:;" id="change_avatar" style="text-align: center; display: block;">修改头像</a>
+    <h4 id="nickname" style="margin-top: 20px; text-align: center;"></h4>
+    <h4 id="uid" style="text-align: center;"></h4>
 </div>
 
 <div>

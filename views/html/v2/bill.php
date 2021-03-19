@@ -1,8 +1,7 @@
 <?php
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
                     <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
-                    <script type="text/javascript" src="/views/assets/base/js/v2/bill-admin.js"></script>
-                    <script src="/views/assets/plugins/pdfjs/build/pdf.worker.js" type="text/javascript"></script>';
+                    <script type="text/javascript" src="/views/assets/base/js/v2/bill-admin.js"></script>';
 ?>
 
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />

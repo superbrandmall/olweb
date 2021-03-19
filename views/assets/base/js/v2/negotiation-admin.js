@@ -57,6 +57,7 @@ function saveUserRefusal() {
         "rentReason": $("#rent_reason").val(),
         "storeCode": getURLParameter('mall'),
         "unitCode": getURLParameter('unit'),
+        "outTradeNo": getURLParameter('trade') || 'NULL',
         "yearsReason": $("#years_reason").val(),
         "termReason": $("#term_reason").val()
     }
@@ -89,6 +90,7 @@ function saveUserRefusal() {
                         "date": date,
                         "storeCode": getURLParameter('mall'),
                         "unitCode": getURLParameter('unit'),
+                        "outTradeNo": getURLParameter('trade') || 'NULL',
                         "yearsFlag": parseInt($("#years_result").val()),
                         "deductFlag": parseInt($("#deduct_result").val()),
                         "deductReason": $("#deduct_reason").val(),

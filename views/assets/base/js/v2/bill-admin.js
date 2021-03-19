@@ -187,6 +187,7 @@ function getOrderByTradeNO() {
                 
                 $('#type').text(type);
                 $('.org').text(orgName);
+                $('#mall').text(mallName);
                 $('#payeeAccount').text(payeeAccount);
                 $('#payeeBank').text(payeeBank);
                 $('#outTradeNo').text(response.data.outTradeNo);
