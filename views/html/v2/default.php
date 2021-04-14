@@ -37,12 +37,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">全业态购物空间</p>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
-                                <h2 class="text-center tc-white mg-clear sm-shadow">32&nbsp;<span class="cp-subtext-small">亿</span></h2>
-                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年销售</p>
+                                <h2 class="text-center tc-white mg-clear sm-shadow">30&nbsp;<span class="cp-subtext-small">亿</span></h2>
+                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年均销售</p>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
                                 <h2 class="text-center tc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
-                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年客流量</p>
+                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">商圈年客流</p>
                             </div>
                             <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
                                 <div class="text-center" style="margin: 0 20px;">
@@ -52,11 +52,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                 </div>
-                <div class="col-12 cp-bottom-arrow">
+                <!--<div class="col-12 cp-bottom-arrow">
                     <div class="text-center">
                         <a href="#" data-scroll-speed="1000" onclick="scrollToTarget('#xh-hero-background', this)"><span class="fa fa-angle-down icon-md icon-white animLoopInfinite animated pulse none" data-appear-anim-style="pulse"></span></a>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

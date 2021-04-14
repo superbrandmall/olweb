@@ -138,6 +138,16 @@ $(document).ready(function(){
         }
         getSubTotal();
     });
+    
+    $(".radio-label").change(function() {
+        if($('#msg_button').prop("checked")) {
+            $('#msg_p').fadeIn();
+            $('#esign_p').hide();
+        } else if($('#esign_button').prop("checked")) {
+            $('#esign_p').fadeIn();
+            $('#msg_p').hide();
+        }
+    });
 });
 
 function GetAdInfo(){
@@ -214,17 +224,30 @@ function GetAdInfo(){
                             }
                         });
                         
-                        $('#confirm_price').click(function(){
-                            window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=ad&storeCode='+getURLParameter('storeCode');
+                        $('#orderType').click(function(){
+                            showOrderTypeDialog();
+                        });
+                        
+                        $("#confirm_price").click(function () {
+                            if($('#msg_button').prop("checked")) {
+                                window.location.href = '/v2/contact?type=ad&storeCode='+getURLParameter('storeCode');
+                            } else if($('#esign_button').prop("checked")) {
+                                window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=ad&storeCode='+getURLParameter('storeCode');                      
+                            }
                         });
                         
                         if(getURLParameter('info') && getURLParameter('info') == 'done'){
-                            var src = '/views/assets/base/img/content/mall/1s.jpg';
-                            if(v.advertisingImagesWxList != null && v.advertisingImagesWxList.length > 0){
-                                src = v.advertisingImagesWxList[0].imagePath;
+                            if($.cookie('orderShopCode') != getURLParameter('id')){
+                                var src = '/views/assets/base/img/content/mall/1s.jpg';
+                                
+                                if(v.advertisingImagesWxList != null && v.advertisingImagesWxList.length > 0){
+                                    src = v.advertisingImagesWxList[0].imagePath;
+                                }
+
+                                findUserCompanyByMobileNo(v.unitCode,v.code,v.size,v.material);
+                            } else {
+                                window.location.replace('/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode'));
                             }
-                
-                            findUserCompanyByMobileNo(v.unitCode,v.code,v.size,v.material);
                         }
                         
                         var index = $.inArray(getURLParameter('id'), $.favorites);
@@ -791,6 +814,8 @@ function saveOrder(ut,sc,sz,sp){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                $.cookie('orderShopCode',getURLParameter('id'));
                 getOrderByTradeNO(outTradeNo,unit);
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -1251,4 +1276,14 @@ function removeFavorite(id, bc, c, sc, uc) {
             console.log(textStatus, errorThrown);
         }
     });
+}
+
+function showOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.fadeIn(200)
+}
+
+function hideOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.hide();
 }

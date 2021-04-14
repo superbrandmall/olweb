@@ -1,5 +1,5 @@
 var index=0;
-var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060"];
+var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07FL059","07FL060"];
 var vr;
 
 $(document).ready(function(){

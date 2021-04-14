@@ -22,9 +22,9 @@
                 <div class="collapse navbar-collapse navbar-1 sidebar-nav">
                     <ul class="site-navigation nav navbar-nav ml-auto">
                         <li class="nav-item"><a href="/v2/ljz" class="nav-link cp-navigation">上海陆家嘴正大广场</a></li>
-                        <li class="nav-item"><a href="/v2/xh" class="nav-link cp-navigation">上海徐汇正大乐城</a></li>
-                        <li class="nav-item"><a href="/v2/bs" class="nav-link cp-navigation">上海宝山正大乐城</a></li>
-                        <li class="nav-item"><a href="/v2/ly" class="nav-link cp-navigation">河南洛阳正大广场</a></li>
+                        <li class="nav-item"><a href="javascript:;" class="nav-link cp-navigation">上海徐汇正大乐城 (敬请期待)</a></li>
+                        <li class="nav-item"><a href="javascript:;" class="nav-link cp-navigation">上海宝山正大乐城 (敬请期待)</a></li>
+                        <li class="nav-item"><a href="javascript:;" class="nav-link cp-navigation">河南洛阳正大广场 (敬请期待)</a></li>
                         <li class="nav-item"><a href="/v2/info" class="nav-link cp-navigation">Online Leasing 账户</a></li>
                     </ul>
                 </div>

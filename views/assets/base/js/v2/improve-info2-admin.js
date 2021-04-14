@@ -340,7 +340,7 @@ function saveUserBrand() {
                         $toast.fadeOut(100);
                         if(getURLParameter('type') && getURLParameter('type') != ''){
                             if(getURLParameter('type') == 'leasing') {
-                                window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done';
+                                window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&info=done&payment=deposit';
                             } else {
                                 window.location.href = '/v2/info';
                             }

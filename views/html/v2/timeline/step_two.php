@@ -1,4 +1,4 @@
-<div class="nikola-steps">
+<div class="nikola-steps" style="z-index: 1;">
     <div class="nikola-tab">
         <div class="nikola-navbar">
             <div class="nikola-navbar__item">

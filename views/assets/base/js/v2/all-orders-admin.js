@@ -50,7 +50,7 @@ function getAllOrders() {
                 var empty = 1;
                 if(response.data.length > 0){
                     $.each(response.data.reverse(), function(i,v){
-                        if(v.state == 1 && (v.orderStates == '合同已生成' || v.orderStates == '合同用印中' || v.orderStates == '待付款订单' || v.orderStates == '已完成订单')){
+                        if(v.state == 1 && (v.orderStates == '合同已生成' || v.orderStates == '合同用印中' || v.orderStates == '待付款订单' || v.orderStates == '定金待支付' || v.orderStates == '已完成订单' || v.orderStates == '已关闭订单')){
                             empty = 0;
                             var alink = '';
                             var shopName = '';
@@ -126,8 +126,12 @@ function getAllOrders() {
                                                                         
                                     img = getShopInfo(v.remarkFirst);
                                     amount = parseFloat((amount + 3000).toFixed(2));
-                                    taxAmount = parseFloat((taxAmount + 3000).toFixed(2)); 
-                                    mark = '<span class="bg-green f-white" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
+                                    taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                                    if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
+                                        mark = '<span class="bg-orange f-white" style="font-size: 12px; padding: 2px 4px;">定金支付</span>';
+                                    } else {
+                                        mark = '<span class="bg-green f-white" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
+                                    }
                                 
                                     if(v.completeDate != null && v.completeDate != 'NULL' && v.completeDate != ''){
                                         var isExpired = '';
@@ -137,7 +141,7 @@ function getAllOrders() {
                                         }
                                         if(v.payStates == '未支付'){
                                             expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">付款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
-                                        } else if(v.payStates == '已支付'){
+                                        } else if(v.payStates == '已支付' && v.payType != 'deposit'  && v.payType != 'aliPay'  && v.payType != 'wxPay'){
                                             expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">退款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
                                         }
                                     }
@@ -195,7 +199,11 @@ function getAllOrders() {
                             }
                             
                             if(v.payStates != '退款中' && v.payStates != '已退款'){
-                                refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';
+                                if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
+                                    refundLink = '';
+                                } else {
+                                    refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';                                    
+                                }
                             } else {
                                 refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 4px 8px; color: #999;">'+v.payStates+'</span></li>';
                             }
@@ -207,11 +215,20 @@ function getAllOrders() {
                             } else if(v.state == 1 && v.orderStates === '待付款订单'){
                                 alink = '<li><a class="current" href="/v2/bill?trade='+v.outTradeNo+'">查看账单</a></li>\n\
 <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                            } else if(v.state == 1 && v.orderStates === '定金待支付'){
+                                alink = '<li><a class="current" href="/v2/bill2?trade='+v.outTradeNo+'">支付定金</a></li>\n\
+<li><a href="/v2/contract-view2?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.state == 1 && v.orderStates === '已完成订单'){
-                                alink = '<li><a class="current tenant-guide" href="javascript:;">进场指导</a></li>\n\
-        <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
-        '+refundLink+'';
-                            }
+                                if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
+                                    alink = '<li><a class="current tenant-guide" href="javascript:;">进场指导</a></li><li><a href="/v2/contract-view2?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                } else {
+                                    alink = '<li><a class="current tenant-guide" href="javascript:;">进场指导</a></li>\n\
+                                            <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>\n\
+                                            '+refundLink+'';
+                                }
+                            } else if(v.state == 1 && v.orderStates === '已关闭订单'){
+                                alink = '<li><a href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a></li>';
+                            } 
                                                         
                             $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel">\n\
         <div class="weui-panel__hd">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
@@ -242,10 +259,18 @@ function getAllOrders() {
                                 }
                             }
                             
-                            $('#weui_panel_'+v.id).append(expireDay+'<div style="float: right; padding: 5px 16px 16px 16px;">总价 <small>¥</small> '+numberWithCommas(amount)+' <small>(含税费 ¥'+numberWithCommas(tax)+')</small></div>\n\
+                            var iniInstall = '';
+                            if(v.payType == 'deposit' || v.payType == 'aliPay' || v.payType == 'wxPay') {
+                                iniInstall = '<div style="clear: both;"></div><div style="float: right; padding: 0 16px 16px 16px;"><span style="float: left; margin-right: 20px;">第一笔付款<br><span style="font-size: 9px;">不可退款，不可转让</span></span> <small>¥</small> 1,000</div>'
+                            }
+                            
+                            $('#weui_panel_'+v.id).append(expireDay+'<div style="float: right; padding: 5px 16px 16px 16px;">总价 <small>¥</small> '+numberWithCommas(amount)+' <small>(含税费 ¥'+numberWithCommas(tax)+')</small></div>'+iniInstall+'\n\
 <ul class="weui-media-box__button">\n\
         '+alink+'\n\
-        </ul>');
+        </ul>');            
+                            if(v.orderStates == '已关闭订单'){
+                                $('#weui_panel_'+v.id).append('<img src="/views/assets/base/img/content/backgrounds/closed.png" style="position: absolute; bottom: 60px; left: 5px;"/>');
+                            }                                                                
                         }     
                     });
                 }
@@ -381,7 +406,7 @@ function getShopState(mall,unit){
     var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit));
     
     var state = 1;
-    if(temp != '' && temp != [] && temp != 'undefined'){
+    if(temp != '' && temp != [] && temp != 'undefined' && temp.length > 0){
         state = temp[0].state;
     }
     

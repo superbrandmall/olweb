@@ -8,8 +8,8 @@ if(!in_array($page, $page_nikola)) {
     <!DOCTYPE html>
     <html lang="zh-cmn-Hans">
         <head>
-            <title>租得好商业地产租赁平台</title>
-            <meta name="description" content="租得好商业地产租赁平台" />
+            <title>OLL线上租 | online leasing</title>
+            <meta name="description" content="OLL线上租 | online leasing" />
             <meta charset="utf-8" />
             <meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
             <meta content="yes" name="apple-mobile-web-app-capable" />
@@ -25,6 +25,7 @@ if(!in_array($page, $page_nikola)) {
             <link rel="shortcut icon" type="image/x-icon" href="/views/assets/base/img/layout/logos/favicon.ico" />
             <script type="text/javascript" src="/views/assets/plugins/jquery.min.js"></script>
             <script type="text/javascript" src="/views/assets/base/js/v2/api-configure.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
         </head>
         <body ontouchstart>
             <div class="weui-toptips bg-warning" id="ui_alert" style="opacity: 1;"></div>
@@ -36,7 +37,8 @@ if(!in_array($page, $page_nikola)) {
         <!DOCTYPE html>
         <html>
             <head>
-                <title>租得好商业地产租赁平台</title>
+                <title>OLL线上租 | online leasing</title>
+                <meta name="description" content="OLL线上租 | online leasing" />
                 <meta charset="utf-8" />
                 <meta name="keywords" content="" />
                 <meta name="description" content="" />
@@ -52,6 +54,7 @@ if(!in_array($page, $page_nikola)) {
                 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:200,300,500,600,700&amp;subset=latin,latin-ext" />
                 <script type="text/javascript" src="/views/assets/base/js/nikola/jquery-3.3.1.min.js"></script>
                 <script type="text/javascript" src="/views/assets/base/js/v2/api-configure.js"></script>
+                <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
             </head>
             <body>
                 <!-- Main container -->
@@ -70,6 +73,9 @@ if(!in_array($page, $page_nikola)) {
                 if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
                     var wechat_user_info = $.parseJSON(sessionStorage.getItem('wechat_user_info'));
                     var openid = wechat_user_info.openid;
+                    
+                    $.cookie('uid',wechat_user_info.mobileNo);
+                    
                     if(openid == undefined || openid == null || openid == ''){
                         window.location.href = strUrl;
                     } else {
@@ -80,6 +86,6 @@ if(!in_array($page, $page_nikola)) {
                 } else {
                     window.location.href = strUrl;
                 }
-            </script>
-
+                </script>
+                <div id="ui_alert" style="display: none;"></div>
        <?php include ('navbar_top.php'); ?>             

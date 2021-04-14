@@ -61,7 +61,7 @@ function getOrderByTradeNO() {
                 var amount = 0; //含税总额
                 var taxAmount = 0; //不含税总额
                 var tax = 0; //税费
-                var qty,tax;
+                var qty;
                 var deposit = 0;
                 
                 var mallName,orgName,payeeAccount,payeeBank,type;
@@ -131,7 +131,7 @@ function getOrderByTradeNO() {
                         amount = parseFloat((amount + 3000).toFixed(2));
                         taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
                         $('#amount').text(numberWithCommas(amount));
-                        $('#deposit').text(numberWithCommas(response.data.contractInfos[0].depositAmount));
+                        $('#deposit').text(numberWithCommas(response.data.contractInfos[0].depositAmount.toFixed(2)));
                         $('#tax').text(numberWithCommas(parseFloat((amount - taxAmount).toFixed(2))));
                     } else {
                         $('#adevent_price').show();

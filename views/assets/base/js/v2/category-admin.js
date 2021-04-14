@@ -49,7 +49,7 @@ $(document).ready(function(){
     $(".categories").find(":checkbox").each(function(){
         $(this).on('click',function(){
             if($(this).is(':checked')){
-                $.cookie('categorySelected',$(this).attr('id')+'::'+$(this).parent().parent().find('p').text()+'::'+storeCode);
+                $.cookie('categorySelected',$(this).attr('id')+'::'+$(this).parent().parent().find('p').text()+'::'+storeCode+'::'+getURLParameter('id'));
                 console.log($.cookie('categorySelected'));
                 
                 $(this).attr('checked',true).parent().parent().siblings().find(":checkbox").attr('checked',false);

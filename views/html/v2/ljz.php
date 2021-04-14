@@ -34,21 +34,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <div class="col">
                                     <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
                                         <h2 class="tc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
                                         <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">建筑面积<br></p>
                                     </div>
                                 </div>
                                 <div class="col nikola-center-divider">
                                     <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
+                                        <h2 class="tc-white mg-sm sm-shadow">14<small>万<sup>2</sup></small></h2>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
                                         <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">租赁面积<br></p>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
                                         <h2 class="tc-white mg-sm sm-shadow">13<small>层</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
                                         <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">楼层布局<br></p>
                                     </div>
                                 </div>
@@ -60,7 +60,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
                                 <p class="tesla-uptitle-extra-light mg-clear tc-orange mg-clear-md mg-clear-sm">地理位置</p>
                                 <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
-                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正大广场Super Brand Mall汇集各业态最具代表性品牌（super brands），13层全业态购物空间，汇聚数百个全球⻛尚品牌，上百家国际美⾷；三大特色主题区域——Venus女性生活方式轻奢主题区、eat n work江景餐厅与共享办公空间、儿童的第三个家；创新功能区域划分，满足不同圈层消费者需求。<br></p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正大广场Super Brand Mall汇集各业态极具代表性品牌（super brands），13层全业态购物空间，汇聚数百个全球⻛尚品牌，上百家国际美⾷；三大特色主题区域——Venus女性生活方式轻奢主题区、eat n work江景餐厅与共享办公空间、儿童的第三个家；创新功能区域划分，满足不同圈层消费者需求。<br></p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
@@ -97,21 +97,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <div class="col">
                                     <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
                                         <h2 class="tc-white mg-sm sm-shadow">30<small>亿</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
-                                        <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">年营业额<br></p>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                        <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">年均销售<br></p>
                                     </div>
                                 </div>
                                 <div class="col nikola-center-divider">
                                     <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
                                         <h2 class="tc-white mg-sm sm-shadow">3000<small>万</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">年客流量<br></p>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">商圈年客流<br></p>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">750<small>个</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">Long description will go here. Replace this with your own text.<br /></p>
+                                        <h2 class="tc-white mg-sm sm-shadow">658<small>个</small></h2>
+                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
                                         <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">停车位<br></p>
                                     </div>
                                 </div>
@@ -193,7 +193,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     上海市浦东陆家嘴西路168号
                                 </p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">
-                                    停车位: 750个
+                                    停车位: 658个
                                 </p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">
                                     地铁: 轨道交通2号线陆家嘴站

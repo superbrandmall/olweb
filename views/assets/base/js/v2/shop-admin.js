@@ -14,7 +14,7 @@ $.order = {
     businessScope: ""
 };
 
-var unitCodes = ["01FL053","02FL023","03FL039","04FL012","05FL078","05FL137","07FL036","07FL059","07FL060",
+var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07FL059","07FL060",
     "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
     "B1FL009","B1FL022","B1FL010","01FL009","01FL015",
     "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
@@ -32,13 +32,17 @@ $(document).ready(function(){
     if(!$.cookie('categorySelected') || $.cookie('categorySelected') == '' || $.cookie('categorySelected') == null) {
         window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
     } else {
-        var storeCode = 'OLMALL180917000003';
-        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-            storeCode = getURLParameter('storeCode');
-        }
-        
-        if(storeCode != $.cookie('categorySelected').split('::')[2]){
-            window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+        if($.cookie('categorySelected').split('::')[3] == getURLParameter('id')){
+            var storeCode = 'OLMALL180917000003';
+            if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
+                storeCode = getURLParameter('storeCode');
+            }
+
+            if(storeCode != $.cookie('categorySelected').split('::')[2]){
+                window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
+            }
+        } else {
+            window.location.href = '/v2/category?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');        
         }
     }
     
@@ -90,8 +94,8 @@ $(document).ready(function(){
     var datetime = '';
     $("#appointmentTime").datetimePicker({
         title: '请选择看铺时间',
-        years: [2020,2021],
-        monthes: ['12', '01'],
+        years: [2021],
+        monthes: ['04','05'],
         times: function () {
             return [
                 {
@@ -378,7 +382,11 @@ function getShopsMoreInfo(u) {
                     })
 
                     if(getURLParameter('info') && getURLParameter('info') == 'done'){
-                        findUserCompanyByMobileNo(u);
+                        if($.cookie('orderShopCode') != getURLParameter('id')){
+                            findUserCompanyByMobileNo(u);
+                        } else {
+                            window.location.replace('/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&payment='+getURLParameter('payment'));
+                        }
                     }
                     
                     $("#confirm_price").click(function () {
@@ -460,6 +468,13 @@ function saveOrder(ut){
         }
     }
     
+    var payType = 'full';
+    var orderStates = '合同已生成';
+    if(getURLParameter('payment') && getURLParameter('payment') == 'deposit'){
+        payType= 'deposit';
+        orderStates = '定金待支付';
+    }
+    
     var unit = ut;
     var endDate;
     if($.cookie('contractLength') > 1) {
@@ -477,12 +492,13 @@ function saveOrder(ut){
      *  合同已生成
      *  合同用印中
      *  待付款订单
+     *  定金待支付
      *  已完成订单
      *  已关闭订单
      */
 
     var map = {
-        "amount": 100000,
+        "amount": 1000,
         "appid": "",
         "brandId": "",
         "brandName": $.cookie('brand_1'),
@@ -619,10 +635,11 @@ function saveOrder(ut){
         "contractType": "R1",//R1租赁 R4广告 R5场地
         "mobileNo": $.cookie('uid'),
         "name": "wechatol",
-        "orderStates": "合同已生成", //订单状态
+        "orderStates": orderStates, //订单状态
         "orgCode": orgCode,
         "outTradeNo": outTradeNo,
         "payStates": "未支付", //支付状态
+        "payType": payType,
         "tenantId": "",
         "tenantName": $.order.company,
         "tenantNo": "",
@@ -775,6 +792,7 @@ function saveOrder(ut){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
+                $.cookie('orderShopCode',getURLParameter('id'));
                 getOrderByTradeNO(outTradeNo,unit);
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -822,7 +840,12 @@ function getOrderByTradeNO(outTradeNo,unit) {
         complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
-                generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                if(response.data.payType != 'deposit'){
+                    generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                } else {
+                    generateContract(response.data.id,'订单已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】有一笔1,000元的定金待支付，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                }
+                
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

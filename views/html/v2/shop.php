@@ -160,7 +160,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
 </div>
 
-<div class="nikola-steps" style="bottom: 65px;">
+<div class="nikola-steps" style="bottom: 65px; z-index: 1;">
     <div class="nikola-tab">
         <div class="nikola-navbar">
             <div class="nikola-navbar__item">
@@ -176,19 +176,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0;">
+<div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0; z-index: 1;">
     <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
-        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 30px;">
-            <i class="fa fa-heart-o" aria-hidden="true"></i><br>
-            收藏
+        <a id="call" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 48px;">
+            <i class="fa fa-calendar" aria-hidden="true"></i><br>
+            联系看铺
         </a>
         <a id="negotiate" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 30px;">
             <i class="fa fa-times" aria-hidden="true"></i><br>
             谢绝
         </a>
-        <a id="call" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 50px;">
-            <i class="fa fa-calendar" aria-hidden="true"></i><br>
-            联系看铺
+        <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 48px;">
+            <i class="fa fa-heart-o" aria-hidden="true"></i><br>
+            收藏
         </a>
         <a id="orderType" href="javascript:;" class="weui-btn btn-primary" style="float: right; border-radius: 20px; padding: 8px 80px; font-size: 12px; margin-top: 5px; width: initial;">下一步</a>
     </div>

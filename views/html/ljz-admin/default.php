@@ -22,8 +22,9 @@
                 </div>
                 
                 <div class="c-label" style="display: inline-block; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
-                    <span style="margin-left: 15px; background-color: #64D2FF; width: 20px; height: 13px; display: inline-block;"></span> 零售业态
-                    <span style="margin-left: 15px; background-color: #FF453A; width: 20px; height: 13px; display: inline-block;"></span> 餐饮业态
+                    <span style="margin-left: 15px; background-color: #FF9500; width: 20px; height: 13px; display: inline-block;"></span> Online Leasing
+                    <span style="margin-left: 15px; background-color: #34C759; width: 20px; height: 13px; display: inline-block;"></span> 零售业态
+                    <span style="margin-left: 15px; background-color: #AF52DE; width: 20px; height: 13px; display: inline-block;"></span> 餐饮业态
                 </div>
             </div>
         </div>

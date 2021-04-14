@@ -108,42 +108,62 @@ $(document).ready(function(){
                                                     
                                                     findUserBrandByMobileNo();
                                                     
+                                                    var openid = '';
+                                                    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+                                                        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+                                                    }
+                                                    
                                                     $.ajax({
-                                                        type: 'POST',
-                                                        url: '/controllers/api/2.0/ApiLoginSession.php',
-                                                        data: {
-                                                            uid: userName
-                                                        },
+                                                        url: $.api.baseNew+"/comm-wechatol/api/user/info/wx/updateMobileNo?openid="+openid+"&mobileNo="+userName,
+                                                        type: "GET",
+                                                        async: false,
                                                         dataType: "json",
+                                                        contentType: "application/json",
                                                         beforeSend: function(request) {
+                                                            showLoading();
+                                                            request.setRequestHeader("Lang", $.cookie('lang'));
+                                                            request.setRequestHeader("Source", "onlineleasing");
                                                         },
-                                                        complete: function(){
-                                                            hideLoading();
-                                                            if(getURLParameter('id') && getURLParameter('id') != ''){
-                                                                if(getURLParameter('type') && getURLParameter('type') != ''){
-                                                                    if(getURLParameter('type') == 'leasing') {
-                                                                        window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                    } else if(getURLParameter('type') == 'events') {
-                                                                        window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                    } else if(getURLParameter('type') == 'ad') {
-                                                                        window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                        complete: function(){},
+                                                        success: function (response, status, xhr) {
+                                                            $.ajax({
+                                                                type: 'POST',
+                                                                url: '/controllers/api/2.0/ApiLoginSession.php',
+                                                                data: {
+                                                                    uid: userName
+                                                                },
+                                                                dataType: "json",
+                                                                beforeSend: function(request) {
+                                                                },
+                                                                complete: function(){
+                                                                    hideLoading();
+                                                                    if(getURLParameter('id') && getURLParameter('id') != ''){
+                                                                        if(getURLParameter('type') && getURLParameter('type') != ''){
+                                                                            if(getURLParameter('type') == 'leasing') {
+                                                                                window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                            } else if(getURLParameter('type') == 'events') {
+                                                                                window.location.href = '/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                            } else if(getURLParameter('type') == 'ad') {
+                                                                                window.location.href = '/v2/ad?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                            } else {
+                                                                                window.location.href = '/v2/info';
+                                                                            }
+                                                                        } else {
+                                                                            window.location.href = '/v2/info';
+                                                                        }
                                                                     } else {
-                                                                        window.location.href = '/v2/info';
+                                                                        if(getURLParameter('type') == 'ads') {
+                                                                            window.location.href = '/v2/advertising-shopping-cart?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                        } if(getURLParameter('type') == 'ad-package') {
+                                                                            window.location.href = '/v2/advertising-package?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
+                                                                        } else {
+                                                                            window.location.href = '/v2/info';
+                                                                        }
                                                                     }
-                                                                } else {
-                                                                    window.location.href = '/v2/info';
                                                                 }
-                                                            } else {
-                                                                if(getURLParameter('type') == 'ads') {
-                                                                    window.location.href = '/v2/advertising-shopping-cart?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                } if(getURLParameter('type') == 'ad-package') {
-                                                                    window.location.href = '/v2/advertising-package?type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
-                                                                } else {
-                                                                    window.location.href = '/v2/info';
-                                                                }
-                                                            }
+                                                            });
                                                         }
-                                                    });
+                                                    })
                                                 }
                                             }
                                         })

@@ -25,7 +25,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd" style="margin-top: 65px">
     <div class="weui-panel__hd">
-        10个铺位
+        8个铺位
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
@@ -33,17 +33,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/women_accessory.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/women_accessory.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=59748634");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP180917000044&type=leasing">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://beyond.3dnest.cn/newhouse/?m=c757d482_1fcI_b6f9");'>VR</a></li>
+                        <li><a href="/v2/shop?id=OLSHOP190423000002&type=leasing">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP180917000044&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">GF08</p>
+                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP190423000002&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">GF12a-2</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合女性鞋包、服饰以及美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 79.23m<sup>2</sup></span>
+                    <span class="weui-mark-rb">租金 ¥12/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">面积 100.48m<sup>2</sup></span>
                 </div>
             </div>
         </div>
@@ -53,37 +53,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/women_accessory.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/women_accessory.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895032");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP181024000002&type=leasing">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://beyond.3dnest.cn/newhouse/?m=65070dec_qWcg_b6f9");'>VR</a></li>
+                        <li><a href="/v2/shop?id=OLSHOP181024000008&type=leasing">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP181024000002&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">GF12b</p>
+                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP181024000008&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">GF13b</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥26/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 20.88m<sup>2</sup></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/f_b.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/f_b.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895076");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP180917000192&type=leasing">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP180917000192&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">2F19</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合非中餐</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 186.63m<sup>2</sup></span>
+                    <span class="weui-mark-rb">租金 ¥22/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">面积 41.86m<sup>2</sup></span>
                 </div>
             </div>
         </div>
@@ -93,17 +73,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/women_accessory.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/women_accessory.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895077");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP180917000343&type=leasing">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://beyond.3dnest.cn/newhouse/?m=7af18d8a_yZjR_b6f9");'>VR</a></li>
+                        <li><a href="/v2/shop?id=OLSHOP181024000014&type=leasing">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP180917000343&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">3F44</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合女性服饰、鞋包、配饰以及美妆个护</small>
+                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP181024000014&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">GF14c</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥30/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 81.33m<sup>2</sup></span>
+                    <span class="weui-mark-rb">租金 ¥20/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">面积 38.41m<sup>2</sup></span>
                 </div>
             </div>
         </div>
@@ -111,19 +91,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/men_wear.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/men_wear.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/women_accessory.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/women_accessory.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895079");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP180917000424&type=leasing">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://beyond.3dnest.cn/newhouse/?m=d5eec302_HXzp_b6f9");'>VR</a></li>
+                        <li><a href="/v2/shop?id=OLSHOP181024000020&type=leasing">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP180917000424&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">4F21</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合男性服饰</small>
+                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP181024000020&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">GF15e</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥20/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 108.52m<sup>2</sup></span>
+                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">面积 23.67m<sup>2</sup></span>
                 </div>
             </div>
         </div>
@@ -131,39 +111,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/lifestyle.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/lifestyle.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/women_accessory.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/women_accessory.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895080");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP180917000537&type=leasing">查看详情</a></li>
+                        <li><a href='javascript: showVR("https://beyond.3dnest.cn/newhouse/?m=3a7c992a_M2K3_b6f9");'>VR</a></li>
+                        <li><a href="/v2/shop?id=OLSHOP190918000001&type=leasing">查看详情</a></li>
                     </ul>
                 </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP180917000537&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">5F58</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合非中餐/运动服饰/电子产品/生活方式</small>
+                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP190918000001&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
+                    <p style="font-size: 14px;">GF16bcdefg</p>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥10/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 116.78m<sup>2</sup></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/lifestyle.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/lifestyle.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895078");'>VR</a></li>
-                        <li><a href="/v2/shop?id=OLSHOP190918000003&type=leasing">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP190918000003&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">5F63</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合电子产品/生活方式</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥10/m<sup>2</sup>/天</span>
-                    <span class="weui-mark-rb">面积 109.88m<sup>2</sup></span>
+                    <span class="weui-mark-rb">租金 ¥16/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">面积 127.04m<sup>2</sup></span>
                 </div>
             </div>
         </div>
@@ -182,7 +142,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合非中餐</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天</span>
+                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天，以详情页为准</span>
                     <span class="weui-mark-rb">面积 102.6m<sup>2</sup></span>
                 </div>
             </div>
@@ -202,7 +162,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合非中餐</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天</span>
+                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天，以详情页为准</span>
                     <span class="weui-mark-rb">面积 95.51m<sup>2</sup></span>
                 </div>
             </div>
@@ -222,7 +182,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合非中餐</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天</span>
+                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天，以详情页为准</span>
                     <span class="weui-mark-rb">面积 147.97m<sup>2</sup></span>
                 </div>
             </div>

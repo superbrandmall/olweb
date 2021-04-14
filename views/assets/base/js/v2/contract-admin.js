@@ -572,10 +572,10 @@ function filesCheck() {
     $(function(){
         var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
 <div class="weui-mask">\n\
-</div><div class="weui-dialog">\n\
-<div class="weui-dialog__bd">您好，E签宝平台稍后会以短信形式将签章链接发送到签章授权人的手机，请注意查收并及时盖章，谢谢！</div>\n\
-<div class="weui-dialog__ft">\n\
-<a href="javascript: showDialog();" class="weui-dialog__btn weui-dialog__btn_primary">知道了</a>\n\
+</div><div class="weui-dialog" style="background: #fff;">\n\
+<div class="weui-dialog__bd" style="padding-bottom: 32px;">您好，E签宝平台稍后会以短信形式将签章链接发送到签章授权人的手机，请注意查收并及时盖章，谢谢！</div>\n\
+<div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">\n\
+<a href="javascript: showDialog();" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">知道了</a>\n\
 </div>\n\
 </div> \n\
 </div>';

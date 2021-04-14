@@ -23,7 +23,10 @@ function getOrderByTradeNO() {
         complete: function(){},
         success: function (response, status, xhr) {
             hideLoading();
-            if(response.code === 'C0') {
+            if(response.code === 'C0' && response.data.payStates == '未支付') {
+                var amount = 0; //含税总额
+                var taxAmount = 0; //不含税总额
+                
                 var mallName,orgName,payeeAccount,payeeBank,type;
                 switch (response.data.orgCode) {
                     case '301001':
@@ -61,6 +64,30 @@ function getOrderByTradeNO() {
                 $.order.expectDate = IncrDates(date,6);
                 $.order.expect = $.order.expectDate.split('-')[0]+'年'+$.order.expectDate.split('-')[1]+'月'+$.order.expectDate.split('-')[2]+'日 23:59:59';
 
+                $.each(response.data.contractInfos, function(i,v){
+                    taxAmount = parseFloat((taxAmount + v.depositAmount).toFixed(2));
+                    amount = taxAmount;
+                })
+
+                $.each(response.data.contractTermInfos, function(i,v){
+                    if((v.termTypeName == '固定租金' || v.termTypeName == '物业管理费') && v.code == 1){
+                        taxAmount = parseFloat((taxAmount + v.taxAmount).toFixed(2));
+                        amount = parseFloat((amount + v.amount).toFixed(2));
+                        if(v.termTypeName == '固定租金'){
+                            $('#rent').text(numberWithCommas(v.amount));
+                        }
+                        if(v.termTypeName == '物业管理费'){
+                            $('#maintenance').text(numberWithCommas(v.amount));
+                        }
+                    }
+                })
+
+                amount = parseFloat((amount + 3000).toFixed(2));
+                taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
+                $('#amount').text(numberWithCommas(amount));
+                $('#deposit').text(numberWithCommas(response.data.contractInfos[0].depositAmount.toFixed(2)));
+                $('#tax').text(numberWithCommas(parseFloat((amount - taxAmount).toFixed(2))));
+                
                 $('.org').text(orgName);
                 $('#mall').text(mallName);
                 $('#expect').text($.order.expect);
@@ -70,13 +97,19 @@ function getOrderByTradeNO() {
 
                 $('#startPay').click(function(){
                     if($("input[id=wechatPay]").prop("checked")){
-                        showDialog();
+                        showWXDialog();
                     } else if($("input[id=aliPay]").prop("checked")){
-
+                        showALIDialog();
                     }
                     
                 })
                 
+                $('#leasing_price').append('<p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</small></p>');
+                
+                if(response.data.orderPays.length > 0) {
+                    sessionStorage.setItem("wxPay_"+getURLParameter('trade'), JSON.stringify(response.data.orderPays) );
+                }
+            
                 $('#confirm').click(function(){
                     window.location.href = '/v2/stamping';
                     //updateOrderToPayed(response.data.id,response.data.remarkSecond,response.data.outTradeNo,response.data.contractInfos[0].unitCode);
@@ -92,15 +125,36 @@ function getOrderByTradeNO() {
     });
 }
 
-function showDialog(){
+function showWXDialog(){
     $(function(){
         var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
     <div class="weui-mask">\n\
-    </div><div class="weui-dialog">\n\
-    <div class="weui-dialog__bd">您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
-    <div class="weui-dialog__ft">\n\
+    </div><div class="weui-dialog" style="background: #fff;">\n\
+    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
+    <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">\n\
     <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">再考虑一下</a>\n\
-    <a href="javascript: getBrandWCPayRequest();" class="weui-dialog__btn weui-dialog__btn_primary">确认</a>\n\
+    <a href="javascript: getBrandWCPayRequest();" class="weui-dialog__btn weui-dialog__btn_primary"  style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">确认</a>\n\
+    </div>\n\
+    </div> \n\
+    </div>';
+
+        if($('#iosDialog2').length > 0){
+            $('#iosDialog2').remove();
+        }
+        $('body').append($iosDialog2);
+        $('#iosDialog2').fadeIn(200);
+    });
+}
+
+function showALIDialog(){
+    $(function(){
+        var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
+    <div class="weui-mask">\n\
+    </div><div class="weui-dialog" style="background: #fff;">\n\
+    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
+    <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">\n\
+    <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">再考虑一下</a>\n\
+    <a href="javascript: getAliPayRequest();" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">确认</a>\n\
     </div>\n\
     </div> \n\
     </div>';
@@ -117,37 +171,45 @@ function hideDialog(){
     $('#iosDialog2').fadeOut();
 }
                     
-function getBrandWCPayRequest(){  ////v2
-    if(sessionStorage.getItem("wxPay_"+getURLParameter('trade')) != undefined && sessionStorage.getItem("wxPay_"+getURLParameter('trade')) != null && sessionStorage.getItem("wxPay_"+getURLParameter('trade')) != '') {
+function getBrandWCPayRequest(){  ////v3
+    var wxPayTrade = sessionStorage.getItem("wxPay_"+getURLParameter('trade'));
+    if(wxPayTrade != undefined && wxPayTrade != null && wxPayTrade != '') {
         hideDialog();
         
-        var appId = $.parseJSON(sessionStorage.getItem("wxPay_"+getURLParameter('trade'))).appId;
-        var timeStamp = $.parseJSON(sessionStorage.getItem("wxPay_"+getURLParameter('trade'))).timeStamp;
-        var nonceStr = $.parseJSON(sessionStorage.getItem("wxPay_"+getURLParameter('trade'))).nonceStr;
-        var package = $.parseJSON(sessionStorage.getItem("wxPay_"+getURLParameter('trade'))).prepayId;
-        var paySign = $.parseJSON(sessionStorage.getItem("wxPay_"+getURLParameter('trade'))).sign;
-        //var paySign = md5('appId='+appId+'&nonceStr='+nonceStr+'&package='+package+'&signType=MD5&timeStamp='+timeStamp+'&key='+'LJZzhengdaguangchang202011weixin').toUpperCase();
-
+        var appId, timeStamp, nonceStr, package, paySign;
+        if($.parseJSON(wxPayTrade).length > 0){
+            appId = $.parseJSON(wxPayTrade)[0].appId;
+            timeStamp = $.parseJSON(wxPayTrade)[0].timeStamp;
+            nonceStr = $.parseJSON(wxPayTrade)[0].nonceStr;
+            package = $.parseJSON(wxPayTrade)[0].prepayId;
+            paySign = $.parseJSON(wxPayTrade)[0].sign;
+        } else {
+            appId = $.parseJSON(wxPayTrade).appId;
+            timeStamp = $.parseJSON(wxPayTrade).timeStamp;
+            nonceStr = $.parseJSON(wxPayTrade).nonceStr;
+            package = $.parseJSON(wxPayTrade).prepayId;
+            paySign = $.parseJSON(wxPayTrade).sign;
+        }
+        
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
               "appId": appId, 
               "timeStamp": timeStamp,    
               "nonceStr": nonceStr,   
               "package": package,    
-              "signType":"MD5",         //微信签名方式：     
+              "signType":"RSA",         //微信签名方式：     
               "paySign": paySign
            },
            function(res){
-           if(res.err_msg == "get_brand_wcpay_request:ok" ){
-           // 使用以上方式判断前端返回,微信团队郑重提示：
-                 //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-           } 
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                queryWxPay();   
+            }
         }); 
     } else {
         callWechatPay();
     }
 }
-if (typeof WeixinJSBridge == "undefined"){
+/*if (typeof WeixinJSBridge == "undefined"){
    if( document.addEventListener ){
        document.addEventListener('WeixinJSBridgeReady', getBrandWCPayRequest, false);
    }else if (document.attachEvent){
@@ -156,7 +218,7 @@ if (typeof WeixinJSBridge == "undefined"){
    }
 }else{
    getBrandWCPayRequest();
-}                  
+}*/                  
 
 function callWechatPay() {
     var openid = '';
@@ -173,11 +235,12 @@ function callWechatPay() {
         "outTradeNo": outTradeNo,
         "totalAmount": 1,
         "unionId": unionid,
-        "mobileNo": $.cookie('uid')
+        "mobileNo": $.cookie('uid'),
+        "payType": 'wxPay'
     }
 
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/pay/wxPay",
+        url: $.api.baseNew+"/comm-wechatol/api/pay/wxV3Pay",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -203,4 +266,105 @@ function callWechatPay() {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function queryWxPay() {
+    var openid = '';
+    var outTradeNo = getURLParameter('trade');
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+    }
+    
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/pay/queryWxV3Pay?mobileNo="+$.cookie('uid')+"&openId="+openid+"&outTradeNo="+outTradeNo,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            hideLoading();
+            if(response.data.resultCode == 'OK') {
+                window.location.href = 'https://ol.superbrandmall.com/v2/to-pay';
+            } else {
+                alert(response.data.resultInfo);
+            }
+        }
+    })
+}
+
+function getAliPayRequest() {
+    var openid = '';
+    var unionid = '';
+    var outTradeNo = getURLParameter('trade');
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+    }
+
+    var map = {
+        "openId": openid,
+        "orgCode": "100001",
+        "outTradeNo": outTradeNo,
+        "totalAmount": 1,
+        "unionId": unionid,
+        "mobileNo": $.cookie('uid'),
+        "payType": 'aliPay'
+    }
+
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/pay/aliWapPay",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                sessionStorage.setItem("aliPay_"+getURLParameter('trade'), JSON.stringify(response.data) );
+                
+                callAliPay();
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function callAliPay(){
+    var url = $.parseJSON(sessionStorage.getItem("aliPay_"+getURLParameter('trade'))).orderPay.sign;
+    
+    /*var form = '<form name="punchout_form" method="post" action="https://openapi.alipay.com/gateway.do?charset=utf-8&method=alipay.trade.wap.pay&sign=DLtozptsQEMV%2B76VyOKShuA1oqAwd86lZ8Bl8qCk57jHBmak1UWZclfXCxgObhaDPbZqLwTPCXv8JnwbEZUGcdSrkt%2BtwDkkfI2u0z41zuMsjS5GkOeAIahMIyS2lVVWYUb8YlOcI09U0ndZKOCk64tHqgTr4z11EU3X8QLxDcca2JENYqYMmZ0leaReVdvDp1txW%2FvBhC%2BoJPztx3Kd76UVzKYqkmLA%2B0BQYtE6WCZG8USHQa4rnnCT1k9EsAsGQZ4%2FevacQqd3KvZKR5UXS1jShWXxawO0OhZjLMyDG4Em7ewb47%2FEzODtILVGyzTVULQ3z8%2BPZER6PCNuQhQPAw%3D%3D&return_url=tsst&notify_url=https%3A%2F%2Fol.superbrandmall.com%2Fapi%2Falipay%2Fnotify&version=1.0&app_id=2021002131649197&sign_type=RSA2&timestamp=2021-03-23+17%3A08%3A53&alipay_sdk=alipay-easysdk-java&format=JSON">\n\
+<input type="hidden" name="biz_content" value="{&quot;out_trade_no&quot;:&quot;10JT1000012020081715976439987429&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_WAY&quot;,&quot;subject&quot;:&quot;支付定金&quot;,&quot;total_amount&quot;:&quot;1&quot;}">\n\
+<input type="submit" value="立即支付" style="display:none" >\n\
+</form>\n\
+<script>document.forms[0].submit();</script>';*/
+    
+    /*if($('#alipayForm').length > 0) {
+        $('#alipayForm').remove();
+    }
+
+    *var alipay = '<form name="punchout_form" id="alipayForm" method="post" action="'+url+'" accept-charset="UTF-8">\n\
+<input type="submit" value="立即支付" style="display:none" >\n\
+</form>\n\
+<script>document.forms[0].submit();</script>';
+    $('body').append(alipay);*/
+    
+    _AP.pay(url);
+    return false;
 }

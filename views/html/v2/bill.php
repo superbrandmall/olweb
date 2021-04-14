@@ -47,8 +47,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <label class="weui-form-preview__label">数据采集设备押金</label>
                         <span class="weui-form-preview__value">¥ 3,000.00</span>
                     </div>
-                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额=保证金+数据采集设备押金+首月固定租金与物业管理费(含税)</small></p>
-                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 保证金=3x(最高月固定租金+物业管理费)(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额 = 租赁保证金 + 数据采集设备押金 + 首月固定租金与物业管理费(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 租赁保证金 = 3 x (最高月固定租金 + 物业管理费)(含税)</small></p>
                 </div>
                 <div id="adevent_price" style="display: none;">
                     <div class="weui-form-preview__item">
@@ -59,8 +59,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <label class="weui-form-preview__label">保证金</label>
                         <span class="weui-form-preview__value">¥ <span id="adevent_deposit"></span></span>
                     </div>
-                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额=保证金+租金(含税)</small></p>
-                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 保证金=20%租金(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 应缴金额 = 保证金 + 租金(含税)</small></p>
+                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 保证金 = 20%租金(含税)</small></p>
                 </div>
             </div>
         </div>

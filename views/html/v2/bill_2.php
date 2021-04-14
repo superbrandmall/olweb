@@ -1,7 +1,7 @@
 <?php
 $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
                     <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
-                    <script type="text/javascript" src="/views/assets/plugins/md5.js"></script>
+                    <script type="text/javascript" src="/views/assets/plugins/ap.js"></script>
                     <script type="text/javascript" src="/views/assets/base/js/v2/bill2-admin.js"></script>';
 ?>
 
@@ -14,11 +14,11 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             <div class="weui-form-preview__hd">
                 <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。请于<strong id="expect"></strong>日内前往<span id="mall"></span>完成签约。</p>
                 <div class="weui-form-preview__item">
-                    <h2 class="weui-form-preview__label">应付金额</h2>
+                    <h2 class="weui-form-preview__label">第一笔付款</h2>
                     <em class="weui-form-preview__value">¥ 1,000.00</em>
                 </div>
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label"></label>
+                    <label class="weui-form-preview__label"><small>不可退款，不可转让</small></label>
                     <em class="weui-form-preview__value"><small>(此定金不可退)</small></em>
                 </div>
             </div>
@@ -31,6 +31,25 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <label class="weui-form-preview__label">位置</label>
                     <span class="weui-form-preview__value"><span id="unitDesc"></span></span>
                 </div>
+                <div id="leasing_price">
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">装修期满后首月固定租金(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="rent"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">租赁期内首月物业管理费(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="maintenance"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">租赁保证金(含税)</label>
+                        <span class="weui-form-preview__value">¥ <span id="deposit"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">数据采集设备押金</label>
+                        <span class="weui-form-preview__value">¥ 3,000.00</span>
+                    </div>
+                    <p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> 租赁保证金 = 3 x (最高月固定租金 + 物业管理费)(含税)</small></p>
+                </div>
             </div>
         </div>
         
@@ -40,7 +59,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <label class="weui-cell weui-cell_active weui-check__label">
                         <h3>支付方式选择</h3>
                     </label>
-                    <label id="unionPayLabel" class="weui-cell weui-cell_active weui-check__label" for="wechatPay">
+                    <label class="weui-cell weui-cell_active weui-check__label" for="wechatPay">
                         <div class="weui-cell__bd">
                             <img src="/views/assets/base/img/content/banks/wechatpay.png" height="30">
                             <label class="label f-red b-red" style="padding: 2px; font-size: 11px; border-radius: 3px;">推荐</label>
@@ -55,7 +74,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <img src="/views/assets/base/img/content/banks/alipay.png" height="30">
                         </div>
                         <div class="weui-cell__ft" style="border: solid 1px rgba(0,0,0,.3); padding-left: 0;">
-                            <input type="radio" name="payment" class="weui-check placeholder" id="aliPay" disabled />
+                            <input type="radio" name="payment" class="weui-check placeholder" id="aliPay" />
                             <span class="weui-icon-checked"></span>
                         </div>
                     </label>

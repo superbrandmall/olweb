@@ -87,70 +87,6 @@ $(document).ready(function () {
         showDialog();
     })
     
-    $(function () {
-        $('.collapse .js-category-1').click(function () {
-            $parent = $(this).parent('li');
-            if ($parent.hasClass('js-show')) {
-                $parent.removeClass('js-show');
-            } else {
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-            }
-            $('.shop-collapse li').animate({
-                marginTop: '0'
-            }, 200);
-        });
-
-        $('.collapse .js-category-2').click(function () {
-            $parent = $(this).parent('li');
-            if ($parent.hasClass('js-show')) {
-                $parent.removeClass('js-show');
-                $parent.animate({
-                    marginTop: '0'
-                }, 200);
-            } else {
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $parent.animate({
-                    marginTop: '-90px'
-                }, 200);
-            }
-        });
-
-        $('.collapse .js-category-3').click(function () {
-            $parent = $(this).parent('li');
-            if ($parent.hasClass('js-show')) {
-                $parent.removeClass('js-show');
-                $parent.animate({
-                    marginTop: '0'
-                }, 200);
-            } else {
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $parent.animate({
-                    marginTop: '-90px'
-                }, 200);
-            }
-        });
-        
-        $('.collapse .js-category-4').click(function () {
-            $parent = $(this).parent('li');
-            if ($parent.hasClass('js-show')) {
-                $parent.removeClass('js-show');
-                $parent.animate({
-                    marginTop: '0'
-                }, 200);
-            } else {
-                $parent.siblings().removeClass('js-show');
-                $parent.addClass('js-show');
-                $parent.animate({
-                    marginTop: '-90px'
-                }, 200);
-            }
-        });
-
-    });
-    
     //开始日期
     $('.date-start').on('focus', function () {
         var dt = new Date();
@@ -159,7 +95,7 @@ $(document).ready(function () {
         weui.datePicker({
             id: "start"+id,
             start: formatTime(date_n),
-            end: "2021-01-31",
+            end: "2021-12-31",
             cron: '* * *',
             defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
             depth: 2,
@@ -203,7 +139,7 @@ $(document).ready(function () {
         weui.datePicker({
             id: "end" + id,
             start: formatTime(date_n),
-            end: "2021-01-31",
+            end: "2021-12-31",
             defaultValue: [dt.getFullYear(),dt.getMonth()+1,dt.getDate()],
             depth: 2,
             onConfirm: function (result) {
@@ -242,6 +178,16 @@ $(document).ready(function () {
             $(this).removeClass("red-border");
         })
     })
+    
+    $(".radio-label").change(function() {
+        if($('#msg_button').prop("checked")) {
+            $('#msg_p').fadeIn();
+            $('#esign_p').hide();
+        } else if($('#esign_button').prop("checked")) {
+            $('#esign_p').fadeIn();
+            $('#msg_p').hide();
+        }
+    }); 
 });
 
 function getEventServices() {
@@ -289,7 +235,7 @@ function showExpectDatePicker(month,id,dates,type) {
     weui.datePicker({
         cron: dates+' '+month[1].value+' *',
         start: month[0].value+'-'+(month[1].value < 10 ? '0'+month[1].value : month[1].value)+'-01',
-        end: '2021-01-31',
+        end: '2021-12-31',
         depth: 3,
         onConfirm: function (result) {
             var month = result[1].label.replace("月","");
@@ -591,12 +537,15 @@ function getShopInfo() {
 
 function getShopsMoreInfo(u) {
     if(getURLParameter('info') && getURLParameter('info') == 'done'){
-       findUserCompanyByMobileNo(u);
+       if($.cookie('orderShopCode') != getURLParameter('id')){
+            findUserCompanyByMobileNo(u);
+        } else {
+            window.location.replace('/v2/event?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode'));
+        }
     }
 
-    var goCheck;
+    var goCheck = 1;
     $('#choose_event').click(function(){
-        goCheck = 1;
         if($('.date-start').val() == ''){
             $('.date-start').addClass('red-border');
             goCheck = 0;
@@ -638,7 +587,17 @@ function getShopsMoreInfo(u) {
         if(goCheck == 1){
             $.cookie('eventName',$('#event_name').val());
             $.cookie('eventType',$('#event_type').val());
-            window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=events&storeCode='+getURLParameter('storeCode');
+            showOrderTypeDialog();      
+        }
+    });
+    
+    $("#confirm_price").click(function () {
+        if(goCheck == 1){
+            if($('#msg_button').prop("checked")) {
+                window.location.href = '/v2/contact?type=events&storeCode='+getURLParameter('storeCode');
+            } else if($('#esign_button').prop("checked")) {
+                window.location.href = '/v2/improve-info?id='+getURLParameter('id')+'&type=events&storeCode='+getURLParameter('storeCode');                       
+            }
         }
     });
 }
@@ -819,7 +778,7 @@ function saveOrder(ut){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
+                $.cookie('orderShopCode',getURLParameter('id'));
                 getOrderByTradeNO(outTradeNo,unit);
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -1088,6 +1047,16 @@ function showDialog(){
 function hideDialog(){
     var authDialog = $('#cadDialog');
     authDialog.hide();
+}
+
+function showOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.fadeIn(200)
+}
+
+function hideOrderTypeDialog(){
+    var orderTypeDialog = $('#orderTypeDialog');
+    orderTypeDialog.hide();
 }
 
 function sendMail(email,file) {

@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    if(getURLParameter('type') && getURLParameter('type') == 'events'){
+        $('#bu').val('events');
+    } else if(getURLParameter('type') && getURLParameter('type') == 'ad'){
+        $('#bu').val('advertising');
+    }
+    
     $("#contact form").validate({
         onkeyup: false,
         rules: {

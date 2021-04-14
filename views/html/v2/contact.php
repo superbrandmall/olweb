@@ -25,9 +25,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cell__bd">
                     <select class="weui-select" name="target_mall" id="target_mall">
                         <option value="OLMALL180917000003">上海陆家嘴正大广场</option>
-                        <option value="OLMALL190117000001">河南洛阳正大广场</option>
+                        <!--<option value="OLMALL190117000001">河南洛阳正大广场</option>
                         <option value="OLMALL180917000002">上海宝山正大乐城</option>
-                        <option value="OLMALL180917000001">上海徐汇正大乐城</option>
+                        <option value="OLMALL180917000001">上海徐汇正大乐城</option>-->
                     </select>
                     <div id="errorcontainer-target_mall" class="errorDiv"></div>
                 </div>
