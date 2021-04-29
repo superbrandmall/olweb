@@ -111,32 +111,69 @@ $(document).ready(function(){
         }
     })
     
+    var goCheck = 1;
     $('.weui-count__decrease').click(function (e) {
-        var $input = $(e.currentTarget).parent().find('.weui-count__number');
-        var number = parseInt($input.val() || "0") - 1;
-        if (number < $(this).parent().find('.weui-count__number').attr('min')) number = $(this).parent().find('.weui-count__number').attr('min');
-        $input.val(number);
-        if(number == 0){
-            $(this).hide();
-            $(this).parent().find('.weui-count__increase').show();
-        } else if(number < $(this).parent().find('.weui-count__number').attr('max')){
-            $(this).parent().find('.weui-count__increase').show();
+        if($('.date-start').val() == ''){
+            $('.date-start').addClass('red-border');
+            goCheck = 0;
+        } else {
+            $('.date-start.red-border').removeClass('red-border');
+            goCheck = 1;
         }
-        getSubTotal();
+       
+        if($('.date-end').val() == ''){
+            $('.date-end').addClass('red-border');
+            goCheck = 0;
+        } else {
+            $('.date-end.red-border').removeClass('red-border');
+            goCheck = 1;
+        }
+        
+        if(goCheck == 1) {
+            var $input = $(e.currentTarget).parent().find('.weui-count__number');
+            var number = parseInt($input.val() || "0") - 1;
+            if (number < $(this).parent().find('.weui-count__number').attr('min')) number = $(this).parent().find('.weui-count__number').attr('min');
+            $input.val(number);
+            if(number == 0){
+                $(this).hide();
+                $(this).parent().find('.weui-count__increase').show();
+            } else if(number < $(this).parent().find('.weui-count__number').attr('max')){
+                $(this).parent().find('.weui-count__increase').show();
+            }
+            getSubTotal();
+        }
     })
     
     $('.weui-count__increase').click(function (e) {
-        var $input = $(e.currentTarget).parent().find('.weui-count__number');
-        var number = parseInt($input.val() || "0") + 1;
-        if (number > $(this).parent().find('.weui-count__number').attr('max')) number = $(this).parent().find('.weui-count__number').attr('max');
-        $input.val(number);
-        if(number == $(this).parent().find('.weui-count__number').attr('max')){
-            $(this).hide();
-            $(this).parent().find('.weui-count__decrease').show();
-        } else if(number >   $(this).parent().find('.weui-count__number').attr('min')){
-            $(this).parent().find('.weui-count__decrease').show();
+        if($('.date-start').val() == ''){
+            $('.date-start').addClass('red-border');
+            goCheck = 0;
+        } else {
+            $('.date-start.red-border').removeClass('red-border');
+            goCheck = 1;
         }
-        getSubTotal();
+       
+        if($('.date-end').val() == ''){
+            $('.date-end').addClass('red-border');
+            goCheck = 0;
+        } else {
+            $('.date-end.red-border').removeClass('red-border');
+            goCheck = 1;
+        }
+        
+        if(goCheck == 1) {
+            var $input = $(e.currentTarget).parent().find('.weui-count__number');
+            var number = parseInt($input.val() || "0") + 1;
+            if (number > $(this).parent().find('.weui-count__number').attr('max')) number = $(this).parent().find('.weui-count__number').attr('max');
+            $input.val(number);
+            if(number == $(this).parent().find('.weui-count__number').attr('max')){
+                $(this).hide();
+                $(this).parent().find('.weui-count__decrease').show();
+            } else if(number >   $(this).parent().find('.weui-count__number').attr('min')){
+                $(this).parent().find('.weui-count__decrease').show();
+            }
+            getSubTotal();
+        }
     });
     
     $(".radio-label").change(function() {
@@ -306,7 +343,7 @@ function GetAdInfo(){
                     }
                     
                 });
-                
+
                 sessionStorage.setItem("availableAdsUnit_ad", JSON.stringify($.availableAdsUnit) );    
                 var quantity = $.availableAdsUnit.length;                
                 
@@ -314,7 +351,7 @@ function GetAdInfo(){
                 if(quantity == 1){
                     style = " display: none;";
                 }
-                
+
                 $('#ad_price_frequency').html('<div class="weui-cell__ft" style="text-align: center;">\n\
                     <div class="weui-count">\n\
                         <a class="weui-count__btn weui-count__decrease"></a>\n\
@@ -386,86 +423,6 @@ function getAdScheduleInfo() {
            console.log(textStatus, errorThrown);
         }
     });
-}
-
-function checkAdSchedule() {
-    if($.schedule.multiple == 1) {
-        $.schedule.available = 1;
-    } else {
-        var orgCode = '100001';
-        if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-            switch (getURLParameter('storeCode')) {
-                case 'OLMALL190117000001':
-                    orgCode = '301001';
-                    break;
-                case 'OLMALL180917000002':
-                    orgCode = '201001';
-                    break;
-                case 'OLMALL180917000003':
-                    orgCode = '100001';
-                    break;
-                default:
-                    orgCode = '100001';
-                    break;
-            }
-        }
-
-        var map = {
-            "advertisingScheduleList": [
-              {
-                "endDate": $('#checkout-date').text(),
-                "shopCode": getURLParameter('id'),
-                "startDate": $('#checkin-date').text(),
-                "unitCode": $.schedule.unit[0],
-                "orgCode": orgCode
-              }
-            ],
-            "mobileNo": $.cookie('uid'),
-            "orgCode": "",
-            "outTradeNo": "",
-        }
-
-        $.ajax({
-            url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/check",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                showLoading();
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                if(response.code === 'C0') {
-                    hideLoading();
-                    $('.calendar-month .error').removeClass('error');
-                    if(response.data.returnCode == 'OK'){
-                        $.schedule.available = 1;
-                    } else {
-                        $.schedule.available = 0;
-                        $('.calendar-month .cal_select span').addClass('error');
-                        $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
-                        var $toast = $('#js_toast_3');
-
-                        $('.page.cell').removeClass('slideIn');
-
-                        $toast.fadeIn(100);
-                        setTimeout(function () {
-                            $toast.remove();
-                        }, 2000);
-                    }
-                } else {
-                    interpretBusinessCode(response.customerMessage);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-               console.log(textStatus, errorThrown);
-            }
-        });
-    }
 }
 
 function checkAdSubtotalSchedule() {
@@ -574,6 +531,9 @@ function getSubTotal() {
     $.cookie('result_'+getURLParameter('id'),result);
     amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
     deposit = parseFloat((amount*0.2).toFixed(2));
+    if(deposit < 2000){
+        deposit = 2000.00;
+    }
     $.cookie('deposit_'+getURLParameter('id'),deposit);
     subTotal = parseFloat((amount+deposit).toFixed(2));
     subItems = qty;
@@ -584,11 +544,15 @@ function getSubTotal() {
     
     var aau = [];
     $.each($.parseJSON(sessionStorage.getItem("ads_schedule")), function(i,v){
-        if((dateCompare(v.startDate,sDate) == true || dateCompare(v.endDate,eDate) == true) && v.shopCode == getURLParameter('id')){
+        if(((TimelizeDate(v.startDate) <= TimelizeDate(sDate) &&  TimelizeDate(v.endDate) >= TimelizeDate(sDate)) 
+                || (TimelizeDate(v.startDate) >= TimelizeDate(sDate) &&  TimelizeDate(v.startDate) <= TimelizeDate(eDate)) 
+                || (TimelizeDate(v.endDate) >= TimelizeDate(sDate) &&  TimelizeDate(v.endDate) <= TimelizeDate(eDate)) 
+                || (TimelizeDate(v.startDate) <= TimelizeDate(sDate) &&  TimelizeDate(v.endDate) >= TimelizeDate(eDate))) 
+                && v.shopCode == getURLParameter('id')){
             aau.push(v.unitCode);
         }
     })
-    
+        
     for (var i = $.availableAdsUnit.length - 1; i >= 0; i--) {
         var a = $.availableAdsUnit[i];
         for (var j = aau.length - 1; j >= 0; j--) {
@@ -668,7 +632,14 @@ function saveOrder(ut,sc,sz,sp){
     var shopCode = sc;
     var size = sz;
     var spec = sp;
-        
+    
+    var openid = '';
+    var unionid = '';
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+    }
+    
     /* 
      * @订单状态  
     *  合同已生成
@@ -685,7 +656,9 @@ function saveOrder(ut,sc,sz,sp){
 
     var map = {
         "amount": 100000,
-        "appid": "",
+        "appid": $.api.appId,
+        "openid": openid,
+        "unionId": unionid,
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": unit,
@@ -724,6 +697,11 @@ function saveOrder(ut,sc,sz,sp){
                     taxAmount = parseFloat((y.dailyPrice * $.cookie('result_'+getURLParameter('id'))).toFixed(2));
                     rentAmount = y.dailyPrice;
                     deposit = parseFloat((amount * 0.2).toFixed(2));
+                    if(deposit < 2000){
+                        deposit = 2000.00;
+                    }
+                    
+                    amount = parseFloat((amount+deposit).toFixed(2));
                     src = '/views/assets/base/img/content/mall/1s.jpg';
                     if(y.advertisingImagesWxList != null && y.advertisingImagesWxList.length > 0){
                         src = y.advertisingImagesWxList[0].imagePath;

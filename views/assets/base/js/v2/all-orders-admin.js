@@ -261,7 +261,7 @@ function getAllOrders() {
                             
                             var iniInstall = '';
                             if(v.payType == 'deposit' || v.payType == 'aliPay' || v.payType == 'wxPay') {
-                                iniInstall = '<div style="clear: both;"></div><div style="float: right; padding: 0 16px 16px 16px;"><span style="float: left; margin-right: 20px;">第一笔付款<br><span style="font-size: 9px;">不可退款，不可转让</span></span> <small>¥</small> 1,000</div>'
+                                iniInstall = '<div style="clear: both;"></div><div style="float: right; padding: 0 16px 16px 16px;"><span style="float: left; margin-right: 20px;">第一笔付款<br><span style="font-size: 9px;">不可退还、不可转让</span></span> <small>¥</small> 1,000</div>'
                             }
                             
                             $('#weui_panel_'+v.id).append(expireDay+'<div style="float: right; padding: 5px 16px 16px 16px;">总价 <small>¥</small> '+numberWithCommas(amount)+' <small>(含税费 ¥'+numberWithCommas(tax)+')</small></div>'+iniInstall+'\n\

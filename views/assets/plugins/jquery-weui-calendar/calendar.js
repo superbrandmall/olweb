@@ -47,6 +47,12 @@
                 options.scheduleEnd[x] = new Date(options.scheduleEnd[x]) || new Date();
             }
         }
+        
+        Date.prototype.addDays = function (num) {
+            var value = this.valueOf();
+            value += 86400000 * num;
+            return new Date(value);
+        }
 
         this.classWeek   = options.classWeek || 'calendar-week';
         this.classTitle   = options.classTitle || 'calendar-title';
@@ -61,6 +67,8 @@
         this.class   = options.class || '';
         this.prependHtml   = options.prependHtml || '';
         this.today   = options.today || new Date();
+        this.today = this.today.addDays(1);
+        this.start = this.today.addDays(10); //可选择档期为10个自然日之后的档期
 
         this.fillDayInfo = options.fillDayInfo || null;
         this.getDayInfo  = options.getDayInfo || null;
@@ -166,7 +174,8 @@
         var checkDay = '';
         var isToday = this.getYmd(writeDay) == this.getYmd(this.today) ? 1 : 0;
         var dayText = isToday ? '今天' : day.d;
-        if (writeDay < this.today) old = this.classDayPass;
+        //if (writeDay < this.today) old = this.classDayPass;
+        if (writeDay <  this.start) old = this.classDayPass;   
         if ((this.checkIn && writeDay <= this.checkOut && writeDay > this.checkIn) ||
             (this.checkOut && this.getYmd(writeDay) == this.getYmd(this.checkOut))) {
             checkDay = this.classDaySelect + ' ' + this.checkedday;

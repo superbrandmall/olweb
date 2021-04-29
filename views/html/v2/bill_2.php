@@ -12,15 +12,18 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="page__bd">
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
-                <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。请于<strong id="expect"></strong>日内前往<span id="mall"></span>完成签约。</p>
+                <p style="text-align: left; margin-bottom: 20px;">感谢贵司对"<span class="org"></span>"的信赖。支付后请于<strong id="expect"></strong>日前往<span id="mall"></span>与我司完成线下签约。</p>
                 <div class="weui-form-preview__item">
                     <h2 class="weui-form-preview__label">第一笔付款</h2>
                     <em class="weui-form-preview__value">¥ 1,000.00</em>
                 </div>
                 <div class="weui-form-preview__item">
-                    <label class="weui-form-preview__label"><small>不可退款，不可转让</small></label>
+                    <label class="weui-form-preview__label"><small>不可退还、不可转让</small></label>
                     <em class="weui-form-preview__value"><small>(此定金不可退)</small></em>
                 </div>
+                <small>
+                    <i class="fa fa-exclamation" aria-hidden="true"></i> 温馨提示: 请您在支付定金前确认合同内容
+                </small>
             </div>
             <div class="weui-form-preview__bd">
                 <div class="weui-form-preview__item">

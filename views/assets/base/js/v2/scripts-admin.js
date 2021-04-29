@@ -20,11 +20,11 @@ $(document).ready(function(){
         getNewCategories();
     }
     
-    setTimeout(function () {
+    /*setTimeout(function () {
         if($('.livechat-girl').length > 0){
             liveChat();
         }
-    }, 5000);
+    }, 5000);*/
 });
 
 function getURLParameter(sParam) {
@@ -384,7 +384,8 @@ $.validator.addMethod('numChar',function(text){
 
 var date_n = new Date();
 
-function formatTime(date_n) {
+function formatTime(date_n,x) {
+    date_n = date_n.addDays(x);
     var year = date_n.getFullYear();
     var month = date_n.getMonth() + 1;
     var day = date_n.getDate();
@@ -392,6 +393,12 @@ function formatTime(date_n) {
     var minute = date_n.getMinutes();
     var second = date_n.getSeconds(); 
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
+}
+
+Date.prototype.addDays = function (num) {
+    var value = this.valueOf();
+    value += 86400000 * num;
+    return new Date(value);
 }
   
 function formatNumber (n){
@@ -484,6 +491,12 @@ function dateCompare(date1,date2){
     }
 }
 
+function TimelizeDate(d){
+    d = d.replace(/\-/gi,"/");
+    var time = new Date(d).getTime();
+    return time;
+}
+
 function liveChat() {
     $('.livechat-girl').show().animate({right:'0'},'fast',function(){
         $("#hint1").removeClass("hide_hint").addClass("show_hint");
@@ -512,4 +525,56 @@ function liveChat() {
         clearInterval(hint3);
         $('.livechat-girl').animate({right:'-100px'},'slow');
     },15500);
+}
+
+function formatIndex(n){
+    if(n == 0) {
+        return '000';
+    } else if(n < 10) {
+        return '00'+n;
+    } else if(n >= 10 && n < 100) {
+        return '0'+n;
+    } else {
+        return n;
+    }
+}
+
+function formatIndex2(n){
+    if(n == 0) {
+        return '0000';
+    } else if(n < 10) {
+        return '000'+n;
+    } else if(n >= 10 && n < 100) {
+        return '00'+n;
+    } else if(n >= 100 && n < 1000) {
+        return '0'+n;
+    } else {
+        return n;
+    }
+}
+
+function formatIndex3(n){
+    if(n == 0) {
+        return '00';
+    } else if(n < 10) {
+        return '0'+n;
+    } else {
+        return n;
+    }
+}
+
+function isAndroid() {
+    if (/(Android)/i.test(navigator.userAgent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isIos() {
+    if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+        return true;
+    } else {
+        return false;
+    }
 }

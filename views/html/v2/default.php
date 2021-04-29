@@ -2,12 +2,21 @@
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/v2/default-admin.js"></script>';
 ?>
 
+
+<style>
+    #pix_sbm img {
+        width: 100%;
+    }
+</style>
 <!-- ljz -->
 <div style="position: relative;">
     <div style="position: absolute; top: 0; bottom: 0;">
-        <video id="video_sbm" class="embed-responsive-item" autoplay muted playsinline loop="loop" style="width: 100%; height: auto; margin-top: -50px;">
+        <video id="video_sbm" class="embed-responsive-item" autoplay="true" muted playsinline loop="loop" style="width: 100%; height: auto; margin-top: -50px;">
             <source src="/upload/video/sbm.mp4" type="video/mp4">
         </video>
+    </div>
+    <div id="pix_sbm" style="position: absolute; top: 0; bottom: 0; display: none;">
+        <img src="/upload/video/sbm/sbm000.jpg" />
     </div>
     <div style="position: relative; height: 100vh;">
         <div class="container fill-bloc-top-edge tc-white">

@@ -1,3 +1,6 @@
+<?php
+if(!in_array($page, $page_no_footer)) {
+    ?>
 <div class="weui-footer" style="margin: 10px 0 70px;">
     <p class="weui-footer__links">
         <a class="weui-footer__link" target="_blank" href="https://beian.miit.gov.cn/">
@@ -10,7 +13,9 @@
     </p>
     <p class="weui-footer__text" style="font-size: 14px;">Copyright &copy; <?= date("Y") ?> 上海帝泰发展有限公司 <a class="weui-footer__link" href="/v2/privacy">隐私政策</a><br></p>
 </div>
-
+<?php
+}
+?>
 
 <!-- loading toast -->
 <div id="loadingToast" style="display: none;">

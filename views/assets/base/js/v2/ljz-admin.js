@@ -3,11 +3,20 @@ var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07
 var vr;
 
 $(document).ready(function(){
-    document.addEventListener('WeixinJSBridgeReady', function() {
-        document.getElementById('video_1').play();
-        document.getElementById('video_2').play();
-        document.getElementById('video_3').play(); 
-    });
+    if(isAndroid() == true) {
+        showIndexPix(1,1354,2);
+        showIndexPix(2,1031,2);
+        showIndexPix(3,298,1);
+    } else {
+        document.addEventListener('WeixinJSBridgeReady', function() {
+            $('#pix_1,#pix_2,#pix_3').hide();
+            $('#video_1,#video_2,#video_3').parent().show();
+            
+            document.getElementById('video_1').play();
+            document.getElementById('video_2').play();
+            document.getElementById('video_3').play();
+        },false);
+    }
     
     for(var j=0;j<=8;j++){
       if(!sessionStorage.getItem('ljz_fl_'+j) || sessionStorage.getItem('ljz_fl_'+j) == null || sessionStorage.getItem('ljz_fl_'+j) == ''){
@@ -33,25 +42,6 @@ $(document).ready(function(){
     });
     
     getShopsInfo();
-    
-    
-    // GL版命名空间为BMapGL
-    // 按住鼠标右键，修改倾斜角和角度
-    var map = new BMapGL.Map("ContactMap");    // 创建Map实例
-    var pt = new BMapGL.Point(121.505934, 31.242497);
-    map.centerAndZoom(pt, 13);  // 初始化地图,设置中心点坐标和地图级别
-    loadmap();
-    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-    map.setHeading(64.5);
-    map.setTilt(73);
-    
-    function loadmap() {
-        map.clearOverlays();
-
-        var myIcon = new BMapGL.Icon("/views/assets/base/img/content/backgrounds/sbm-logo.png", new BMapGL.Size(50,54));
-        var marker = new BMapGL.Marker(pt,{icon:myIcon}); 
-        map.addOverlay(marker);              // 将标注添加到地图中
-    }
 });
 
 function getShopsInfo() {
@@ -667,3 +657,67 @@ function resetFontSize(spanid, maxWidth, maxHeight, minSize, maxSize, posLeftMin
         }
     }
 };
+
+function showIndexPix(n,x,y){
+    var urlRoot = '/upload/video/sbm-'+n+'/sbm-'+n;
+    var indexRange = [0, x];
+    var maxLength = indexRange[1] - indexRange[0] + 1;
+    // loading
+    var eleContainer = document.getElementById('pix_'+n);
+    
+    $('#video_'+n).parent().hide();
+    $('#pix_'+n).show();
+    var store = {
+        length: 0
+    };
+    // 图片序列预加载
+    for ( var start = indexRange[0]; start <= indexRange[1]; start++) {
+        (function (index) {
+            var img = new Image();
+            img.onload = function () {
+                store.length++;
+                // 存储预加载的图片对象
+                store[index] = this;
+                play();
+            };
+            img.onerror = function () {
+                store.length++;
+                play();
+            };
+            if(y == 1){
+                img.src = urlRoot + formatIndex(index) + '.jpg';
+            } else {
+                img.src = urlRoot + formatIndex2(index) + '.jpg';
+            }
+        })(start);
+    }
+
+    var play = function () {
+        var percent = Math.round(100 * store.length / maxLength);
+        // 全部加载完毕，无论成功还是失败
+        if (percent == 100) {
+            var index = indexRange[0];
+            eleContainer.innerHTML = '';
+            // 依次append图片对象
+            var step = function () {
+                if (store[index - 1]) {
+                    store[index - 1].remove();
+                }
+                eleContainer.appendChild(store[index]);
+                // 序列增加
+                index++;
+                // 如果超过最大限制
+                if (index <= indexRange[1]) {
+                    // 15fps, 1000ms/15=67 每帧约0.067秒
+                    //setTimeout(step, 67);
+                    setTimeout(step, 42);
+                } else {
+                    // 本段播放结束回调
+                    play();
+                }
+            };
+            // 等100%动画结束后执行播放
+            setTimeout(step, 100);
+        }
+    };
+}

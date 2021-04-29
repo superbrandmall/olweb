@@ -8,11 +8,65 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
 
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
             <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+            <script type="text/javascript" src="/views/assets/plugins/jquery-weui-calendar/calendar.js"></script>
             <script type="text/javascript" src="/views/assets/base/js/v2/event-admin.js"></script>';
 ?>
 
+<link href="/views/assets/plugins/jquery-weui-calendar/calendar.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
+
+<style type="text/css">
+    .weui_cell {
+        padding: 10px 15px;
+        position: relative;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+    
+    .weui_cell::before {
+        content: " ";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        border-top: 1px solid #d9d9d9;
+        color: #d9d9d9;
+        -webkit-transform-origin: 0 0;
+        transform-origin: 0 0;
+        -webkit-transform: scaleY(.5);
+        transform: scaleY(.5);
+        left: 15px;
+    }
+    
+    .calendar {
+        padding-bottom: 150px;
+    }
+    
+    .old.scheduled span {
+        color: #fff;
+        background-color: #e0e0e0;
+        display: inline-block;
+        width: 99%;
+        height: 37px;
+        line-height: 38px;
+        margin-top: 1px;
+        border-radius: 3px;
+        text-decoration: line-through;
+        color: #666;
+    }
+    
+    .calendar-month span.error {
+        background-color: #f00 !important;
+    }
+</style>
 
 <div style="position: relative; margin-top: 65px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>

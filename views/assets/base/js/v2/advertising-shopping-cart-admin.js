@@ -684,6 +684,9 @@ function getSubTotal() {
                         $.cookie('result_ad',result);
                         amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
                         deposit = parseFloat((amount*0.2).toFixed(2));
+                        if(deposit < 2000){
+                            deposit = 2000.00;
+                        }
                         amount = parseFloat((amount+deposit).toFixed(2));
                         $('#totalAmount_'+code).text(numberWithCommas(amount.toFixed(2)));
                         subTotal = parseFloat((subTotal+amount).toFixed(2));
@@ -702,7 +705,11 @@ function getSubTotal() {
 
             if(sessionStorage.getItem("ads_schedule_"+code) != null && sessionStorage.getItem("ads_schedule_"+code) != ''){
                 $.each($.parseJSON(sessionStorage.getItem("ads_schedule_"+code)), function(i,v){
-                    if((dateCompare(v.startDate,$('#dateStart_'+code).val()) == true || dateCompare(v.endDate,$('#dateEnd_'+code).val()) == true) && v.shopCode == code){
+                    if(((TimelizeDate(v.startDate) <= TimelizeDate($('#dateStart_'+code).val()) &&  TimelizeDate(v.endDate) >= TimelizeDate(($('#dateStart_'+code).val())) 
+                || (TimelizeDate(v.startDate) >= TimelizeDate($('#dateStart_'+code).val()) &&  TimelizeDate(v.startDate) <= TimelizeDate($('#dateEnd_'+code).val())) 
+                || (TimelizeDate(v.endDate) >= TimelizeDate($('#dateStart_'+code).val()) &&  TimelizeDate(v.endDate) <= TimelizeDate($('#dateEnd_'+code).val())) 
+                || (TimelizeDate(v.startDate) <= TimelizeDate($('#dateStart_'+code).val()) &&  TimelizeDate(v.endDate) >= TimelizeDate($('#dateEnd_'+code).val()))) 
+                && v.shopCode == code)){    
                         aau.push({
                             'code': code,
                             'unitCode': v.unitCode
@@ -805,7 +812,14 @@ function saveOrder(sc){
     }
 
     var shopCode = sc;
-        
+    
+    var openid = '';
+    var unionid = '';
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+    }
+    
     /* 
      * @订单状态  
     *  合同已生成
@@ -822,7 +836,9 @@ function saveOrder(sc){
 
     var map = {
         "amount": 100000,
-        "appid": "",
+        "appid": $.api.appId,
+        "openid": openid,
+        "unionId": unionid,
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": "",
@@ -871,6 +887,11 @@ function saveOrder(sc){
                             taxAmount = parseFloat((y.dailyPrice * $.cookie('result_ad')).toFixed(2));
                             rentAmount = y.dailyPrice;
                             deposit = parseFloat((amount * 0.2).toFixed(2));
+                            if(deposit < 2000){
+                                deposit = 2000.00;
+                            }
+                            
+                            amount = parseFloat((amount+deposit).toFixed(2));
                             src = '/views/assets/base/img/content/mall/1s.jpg';
                             if(y.advertisingImagesWxList != null && y.advertisingImagesWxList.length > 0){
                                 src = y.advertisingImagesWxList[0].imagePath;

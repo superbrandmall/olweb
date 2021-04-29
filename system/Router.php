@@ -333,6 +333,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'stamping.php', 'to_pay.php', 'bill.php', 'bill_2.php', 'engineering.php', 'improve_info.php', 'improve_info2.php', 'company_info.php', 'contract.php',
         'contract_view.php','contract_view2.php','unionpay.php');
     $page_nikola = array('default.php', 'login.php', 'ljz.php', 'xh.php', 'bs.php', 'ly.php');
+    $page_no_footer = array('default.php','ljz.php','improve_info.php','improve_info2.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';

@@ -1,11 +1,26 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>'
         . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
-        . '<script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=DdYf3CaK3T14p9X01KgHmgH8nNAvtC6o"></script>'
         . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js"></script>';
 ?>
 
-<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
+<style>
+    #pix_1 img,#pix_3 img {
+        width: 100%;
+    }
+    
+    #pix_2 img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border: 0;
+        width: 100%;
+        height: auto;
+    }
+</style>
+
+<!--<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
     <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
         <div class="rd-notice-content">这是上海陆家嘴正大广场</div>
     </div>
@@ -20,7 +35,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="circle c-2"></div>
         <div class="circle c-3"></div>
     </div>
-</div>
+</div>-->
 
 <!-- all-wheel-drive -->
 <div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="all-wheel-drive" style="margin-top: 65px;">
@@ -83,9 +98,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <!-- utility -->
 <div class="bloc full-width-bloc tesla-no-padding l-bloc" id="utility">
     <div class="video-bg-container">
-        <video id="video_2" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
+        <video id="video_1" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
             <source src="/upload/video/sbm-1.mp4" type="video/mp4">
         </video>
+    </div>
+    <div id="pix_1" class="video-bg-container" style="display: none;">
+        <img src="/upload/video/sbm-1/sbm-10000.jpg" />
     </div>
     <div class="container d-block ">
         <div class="row no-gutters align-items-end nikola-range-row">
@@ -123,7 +141,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
                                 <p class="tesla-uptitle-extra-light tc-orange mg-clear mg-clear-md mg-clear-sm">项目介绍</p>
                                 <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
-                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商场每年客流超过3000万。<br></p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商圈每年客流超过3000万。<br></p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
@@ -168,9 +186,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
             <div class="col-lg-9 col-md-12 order-md-1 order-lg-2 order-sm-1 order-1 align-self-center">
                 <div class="embed-responsive embed-responsive-16by9 nikola-video-safety">
-                    <video id="video_1" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
+                    <video id="video_2" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
                         <source src="/upload/video/sbm-2.mp4" type="video/mp4">
                     </video>
+                </div>
+                <div id="pix_2" class="embed-responsive embed-responsive-16by9 nikola-video-safety" style="display: none;">
+                    <img src="/upload/video/sbm-2/sbm-20000.jpg" />
                 </div>
             </div>
         </div>
@@ -182,8 +203,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="container ">
         <div class="row no-gutters align-items-end">
             <div class="col-lg-12">
-                <div class="row no-gutters">
-                    <div id="ContactMap" style="width: 100%; height: 300px;"></div>
+                <div class="">
+                    <img src="/views/assets/base/img/content/mall/shanghai-sbm/map.png" id="ContactMap" style="width: 100%; max-width: 1000px;">
                     <div class="col-lg-3">
                         <div class="row no-gutters nikola-sidebar">
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
@@ -196,10 +217,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     停车位: 658个
                                 </p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">
-                                    地铁: 轨道交通2号线陆家嘴站
+                                    地铁: 2号线陆家嘴站，5分钟步行。<br>
+                                    首末班时间: 往徐泾东方向：5:32 / 23:06，往广兰路方向：6:07 / 23:22
                                 </p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md"> 
-                                    公交: 81路、82路、313路、314路、583路、779路、791路、795路、799路、870路、939路、961路、985路、993路、蔡陆专线
+                                    公交: 81路、82路、313路、314路、583路、774路、791路、795路、798路、799路、870路、939路、961路、971路、985路、992路、993路、蔡陆专线、陆家嘴金融城1路、陆家嘴金融城4路
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">
+                                    轮渡: 东昌路轮渡口，富城路出口10分钟步行。<br>
+                                    首末摆渡时间: 往金陵东路渡口：7:00 – 22:00，往复兴东路渡口：7:00 – 19:00
                                 </p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
@@ -228,6 +254,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <source src="/upload/video/sbm-3.mp4" type="video/mp4">
                 </video>
             </div>
+            <div id="pix_3" class="col-lg-7 col-md-5 offset-md-0 col-sm-8 offset-sm-2" style="display: none;">
+                    <img src="/upload/video/sbm-3/sbm-3000.jpg" />
+                </div>
             <div class="col-lg-5 col-md-7 col-sm-8 offset-sm-2 offset-md-0">
                 <h2 class="mg-md tc-white none">推荐&nbsp;<span class="tesla-thin-text">位置</span></h2>
                 <ul class="nav nav-tabs none" id="nav-45045-tab" role="tablist">

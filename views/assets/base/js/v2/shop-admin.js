@@ -11,7 +11,9 @@ $.order = {
     id: "",
     uscc: "",
     company: "",
-    businessScope: ""
+    businessScope: "",
+    expectDate: "",
+    expect: ""
 };
 
 var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07FL059","07FL060",
@@ -50,9 +52,16 @@ $(document).ready(function(){
         showLoading();
     }
     
-    document.addEventListener('WeixinJSBridgeReady', function() {
-        document.getElementById('video_4').play(); 
-    });
+    if(isAndroid() == true) {
+        showIndexPix();
+    } else {
+        document.addEventListener('WeixinJSBridgeReady', function() {
+            $('#pix_4').hide();
+            $('#video_4').show();
+            
+            document.getElementById('video_4').play(); 
+        },false);
+    }
     
     getMyFavorites();
     getShopInfo();
@@ -486,7 +495,14 @@ function saveOrder(ut){
                 (month<10 ? '0' : '') + month +
                 (day<10 ? '0' : '') + day + time
                 + parseInt(Math.random()*10);
-
+    
+    var openid = '';
+    var unionid = '';
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+    }
+    
     /* 
      * @订单状态  
      *  合同已生成
@@ -499,7 +515,9 @@ function saveOrder(ut){
 
     var map = {
         "amount": 1000,
-        "appid": "",
+        "appid": $.api.appId,
+        "openid": openid,
+        "unionId": unionid,
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": unit,
@@ -1505,7 +1523,11 @@ function hideAppointmentDialog(){
 
 function showOrderTypeDialog(){
     var orderTypeDialog = $('#orderTypeDialog');
-    orderTypeDialog.fadeIn(200)
+    orderTypeDialog.fadeIn(200);
+    
+    $.order.expectDate = IncrDates(date,6);
+    $.order.expect = $.order.expectDate.split('-')[0]+'年'+$.order.expectDate.split('-')[1]+'月'+$.order.expectDate.split('-')[2]+'日 23:59:59';
+    $('#expect').text($.order.expect);
 }
 
 function hideOrderTypeDialog(){
@@ -1537,7 +1559,66 @@ function sendMail(email,file) {
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);
         }
-    }); 
+    });
+}
+
+function showIndexPix(){
+    var urlRoot = '/upload/video/'+getURLParameter('id')+'/'+getURLParameter('id');
+    var indexRange = [0, 82];
+    var maxLength = indexRange[1] - indexRange[0] + 1;
+    var eleContainer = document.getElementById('pix_4');
     
+    $('#video_4').hide();
+    $('#pix_4').show();
+    // 存储预加载的DOM对象和长度信息
+    var store = {
+        length: 0
+    };
+    // 图片序列预加载
+    for ( var start = indexRange[0]; start <= indexRange[1]; start++) {
+        (function (index) {
+            var img = new Image();
+            img.onload = function () {
+                store.length++;
+                // 存储预加载的图片对象
+                store[index] = this;
+                play();
+            };
+            img.onerror = function () {
+                store.length++;
+                play();
+            };
+            img.src = urlRoot + formatIndex3(index) + '.jpg';
+        })(start);
+    }
+
+    var play = function () {
+        var percent = Math.round(100 * store.length / maxLength);
+        // 全部加载完毕，无论成功还是失败
+        if (percent == 100) {
+            var index = indexRange[0];
+            eleContainer.innerHTML = '';
+            // 依次append图片对象
+            var step = function () {
+                if (store[index - 1]) {
+                    store[index - 1].remove();
+                }
+                eleContainer.appendChild(store[index]);
+                // 序列增加
+                index++;
+                // 如果超过最大限制
+                if (index <= indexRange[1]) {
+                    // 15fps, 1000ms/15=67 每帧约0.067秒
+                    //setTimeout(step, 67);
+                    setTimeout(step, 42);
+                } else {
+                    // 本段播放结束回调
+                    play();
+                }
+            };
+            // 等100%动画结束后执行播放
+            setTimeout(step, 100);
+        }
+    };
 }
 

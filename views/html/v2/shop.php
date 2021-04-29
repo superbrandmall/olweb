@@ -16,6 +16,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
 <style type="text/css">
+    #pix_4 img {
+        width: 100%;
+    }
+    
     #mapster_wrap_0 {
         margin: 0 auto;
     }
@@ -43,13 +47,16 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <div style="position: relative; margin-top: 65px;">
     <video id="video_4" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
         <?php 
-            if($id == 'OLSHOP180917000537'){
-                echo '<source src="/upload/video/5f58.mp4" type="video/mp4">';
+            if($id == 'OLSHOP190918000001' || $id == 'OLSHOP181024000008' || $id == 'OLSHOP190423000002' || $id == 'OLSHOP181024000020' || $id == 'OLSHOP181024000014'){
+                echo '<source src="/upload/video/'.$id.'.mp4" type="video/mp4">';
             } else {
-                echo '<source src="/upload/video/4F21.mp4" type="video/mp4">';
+                echo '<source src="/upload/video/5f58.mp4" type="video/mp4">';
             }
         ?>
     </video>
+</div>
+<div id="pix_4" style="position: relative; margin-top: 65px; display: none;">
+    <img src="/upload/video/<?= $id ?>/<?= $id ?>00.jpg" />
 </div>
 
 <div class="page__bd">
@@ -127,7 +134,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <table class="content">
                 <tbody>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333;">总计需要交纳金额</td>
+                        <td style="background: #F2F2F2; color: #333;">首期总计交纳金额</td>
                         <td>¥<span id="totalAmount"></span></td>
                     </tr>
                     <tr>
@@ -251,12 +258,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-mask"></div>
     <div class="weui-dialog" style="background: #f4f4f4;">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">请选择订单形式</strong></div>
-        <form id="appointmentDialogForm">
+        <form>
             <div class="weui-dialog__bd" style="padding: 0;">
                 <div class="text-center" style="margin: 0 20px 20px;">
                     <input type="radio" name="accept-offers" id="reserve_button" class="hidden radio-label" checked/>
                     <label for="reserve_button" class="button-label">无e签宝,线上支付定金 ¥1,000元</label>
-                    <p id="reserve_p">第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。</p>
+                    <p id="reserve_p">第一笔款项为定金壹仟元，支付后请于<strong id="expect"></strong>日与我司完成线下签约。该笔付款不可退还、不可转让。</p>
                 </div>
                 <div class="text-center" style="margin:0 20px;">
                     <input type="radio" name="accept-offers" id="esign_button" class="hidden radio-label" />

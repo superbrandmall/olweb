@@ -379,6 +379,9 @@ function getSubTotal() {
         originalAmount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
         amount = parseFloat((rentAmount * 0.807 * 1.06 * qty * result).toFixed(2));
         deposit = parseFloat((amount*0.2).toFixed(2));
+        if(deposit < 2000){
+            deposit = 2000.00;
+        }
         amount = parseFloat((amount+deposit).toFixed(2));
         $('#originalAmount_'+v.shopCode).text('¥ '+numberWithCommas(originalAmount.toFixed(2)));
         $('#totalAmount_'+v.shopCode).text(numberWithCommas(amount.toFixed(2)));
@@ -452,7 +455,13 @@ function saveOrder(sc){
     }
 
     var shopCode = sc;
-        
+    
+    var openid = '';
+    var unionid = '';
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+    }
     /* 
      * @订单状态  
     *  合同已生成
@@ -469,7 +478,9 @@ function saveOrder(sc){
 
     var map = {
         "amount": 100000,
-        "appid": "",
+        "appid": $.api.appId,
+        "openid": openid,
+        "unionId": unionid,
         "brandId": "",
         "brandName": $.cookie('brand_1'),
         "code": "",
@@ -509,6 +520,11 @@ function saveOrder(sc){
                 taxAmount = parseFloat((y.dailyPrice * 0.807 * $.cookie('result_adPackage')).toFixed(2));
                 rentAmount = parseFloat((y.dailyPrice * 0.807).toFixed(2));
                 deposit = parseFloat((amount * 0.2).toFixed(2));
+                if(deposit < 2000){
+                    deposit = 2000.00;
+                }
+                
+                amount = parseFloat((amount+deposit).toFixed(2));
                 src = '/views/assets/base/img/content/mall/1s.jpg';
                 if(y.advertisingImagesWxList != null && y.advertisingImagesWxList.length > 0){
                     src = y.advertisingImagesWxList[0].imagePath;

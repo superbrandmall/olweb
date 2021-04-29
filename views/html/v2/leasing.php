@@ -25,7 +25,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd" style="margin-top: 65px">
     <div class="weui-panel__hd">
-        8个铺位
+        5个铺位
     </div>
     <div class="weui-panel__bd">
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
@@ -39,10 +39,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/shop?id=OLSHOP190423000002&type=leasing'" style="position: relative; margin: 10px 0 0 15px;">
                     <p style="font-size: 14px;">GF12a-2</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">适合女性鞋包、服饰以及美妆个护</small>
+                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥12/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">首年固定租金 ¥12/m<sup>2</sup>/天</span>
                     <span class="weui-mark-rb">面积 100.48m<sup>2</sup></span>
                 </div>
             </div>
@@ -62,7 +62,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥22/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">首年固定租金 ¥22/m<sup>2</sup>/天</span>
                     <span class="weui-mark-rb">面积 41.86m<sup>2</sup></span>
                 </div>
             </div>
@@ -82,7 +82,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥20/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">首年固定租金 ¥20/m<sup>2</sup>/天</span>
                     <span class="weui-mark-rb">面积 38.41m<sup>2</sup></span>
                 </div>
             </div>
@@ -102,7 +102,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥15/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">首年固定租金 ¥15/m<sup>2</sup>/天</span>
                     <span class="weui-mark-rb">面积 23.67m<sup>2</sup></span>
                 </div>
             </div>
@@ -122,13 +122,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">一楼Venus女性生活馆,统一精装修,浓郁女性氛围,拎包入驻; 推荐做女性鞋包/配饰/美妆个护</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">租金 ¥16/m<sup>2</sup>/天，以详情页为准</span>
+                    <span class="weui-mark-rb">首年固定租金 ¥16/m<sup>2</sup>/天</span>
                     <span class="weui-mark-rb">面积 127.04m<sup>2</sup></span>
                 </div>
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <!--<div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/category/chinese_food.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/category/chinese_food.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
@@ -186,7 +186,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <span class="weui-mark-rb">面积 147.97m<sup>2</sup></span>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 

@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 function getUserFiles() {
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNo?mobileNo="+$.cookie('uid'),
+        url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNoAndOrderId?mobileNo="+$.cookie('uid')+"&orderId="+$.order.id,
         type: "GET",
         async: false,
         dataType: "json",
@@ -134,7 +134,8 @@ function fileUpload(id) {
         success: function(response, status, xhr) {
             hideLoading();
             if(response.code === 'C0') {
-                getUserFile(id);
+                var fn = response.data[0].fileName;
+                getUserFile(id, fn);
                 $(function(){
                     var $toast = $('#js_toast');
                     $toast.fadeIn(100);
@@ -152,9 +153,9 @@ function fileUpload(id) {
     });
 }
 
-function getUserFile(id) {
+function getUserFile(id, fn) {
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNoAndFileType?mobileNo="+$.cookie('uid')+"&fileType="+id,
+        url: $.api.baseNew+"/comm-wechatol/api/user/file/findAllByMobileNoAndFileTypeAndFileName?mobileNo="+$.cookie('uid')+"&fileType="+id+"&fileName="+fn,
         type: "GET",
         async: false,
         dataType: "json",

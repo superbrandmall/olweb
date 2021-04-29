@@ -8,10 +8,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd" style="margin-top: 65px">
     <div class="weui-panel__hd">
-        11个广告区
+        10个广告区
     </div>
     <div class="weui-panel__bd">
-        <a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>
+        <!--<a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>-->
         
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
@@ -89,26 +89,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div style="margin: 5px 15px 10px;">
                     <span class="weui-mark-rb">西区中庭</span>
                     <span class="weui-mark-rb">可视范围广</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/yingfengqi.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/yingfengqi.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895036");'>VR</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000002&type=ad">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000002&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">迎风旗(陆家嘴西路12根)</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">陆家嘴西路户外迎风旗，吸引周围白领/游客/家庭出行顾客眼球，延续式广告形式，视觉效果震撼，适合品牌形象建立及引流客群。</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">户外</span>
-                    <span class="weui-mark-rb">吸引周围出行顾客</span>
                 </div>
             </div>
         </div>

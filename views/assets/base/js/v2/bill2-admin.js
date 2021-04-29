@@ -104,7 +104,7 @@ function getOrderByTradeNO() {
                     
                 })
                 
-                $('#leasing_price').append('<p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</small></p>');
+                $('#leasing_price').append('<p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您支付的第一笔款项为定金壹仟元，该笔付款不可退还、不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</small></p>');
                 
                 if(response.data.orderPays.length > 0) {
                     sessionStorage.setItem("wxPay_"+getURLParameter('trade'), JSON.stringify(response.data.orderPays) );
@@ -130,7 +130,7 @@ function showWXDialog(){
         var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
     <div class="weui-mask">\n\
     </div><div class="weui-dialog" style="background: #fff;">\n\
-    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
+    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退还、不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
     <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">\n\
     <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">再考虑一下</a>\n\
     <a href="javascript: getBrandWCPayRequest();" class="weui-dialog__btn weui-dialog__btn_primary"  style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">确认</a>\n\
@@ -151,7 +151,7 @@ function showALIDialog(){
         var $iosDialog2 = '<div class="js_dialog" id="iosDialog2" style="display: none;">\n\
     <div class="weui-mask">\n\
     </div><div class="weui-dialog" style="background: #fff;">\n\
-    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退款，不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
+    <div class="weui-dialog__bd" style="padding-bottom: 32px;">您支付的第一笔款项为定金壹仟元，该笔付款不可退还、不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</div>\n\
     <div class="weui-dialog__ft" style="line-height: 56px; min-height: 56px; font-size: 17px; -webkit-flex-direction: initial;">\n\
     <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_default">再考虑一下</a>\n\
     <a href="javascript: getAliPayRequest();" class="weui-dialog__btn weui-dialog__btn_primary" style="color: var(--weui-FG-HALF); font-size: 17px; border: 0 none; background: #fff;">确认</a>\n\
