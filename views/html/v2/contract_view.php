@@ -18,7 +18,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-cells" id="download_links" style="margin-top: 65px; font-size: 13px;">
+<div class="weui-cells" id="download_links" style="font-size: 13px;">
     <a class="weui-cell weui-cell_access" href="javascript: showContract();" style="float: left;">
         <div class="weui-cell__bd">
             <p>查看合同</p>
@@ -192,7 +192,7 @@ if($type == 'leasing'){
 <div class="weui-btn-area" style="margin-top: 20px;">
     <center>
         <button type="button" class="weui-btn weui-btn_mini btn-default" onclick="javascript: window.history.back(-1);" style="border-radius: 20px; color: #000;">返回</button>
-        <button type="button" class="weui-btn weui-btn_mini btn-danger" id="negotiate" style="border-radius: 20px;">谢绝</button>
+        <button type="button" class="weui-btn weui-btn_mini btn-warning" id="negotiate" style="border-radius: 20px;">谢绝</button>
         <button type="button" class="weui-btn weui-btn_mini btn-primary" id="update_files" style="border-radius: 20px;">更新文件</button>
     </center>
 </div>

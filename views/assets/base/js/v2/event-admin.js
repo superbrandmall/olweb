@@ -170,7 +170,7 @@ function getEventServices() {
 
 function getEventScheduleInfo() {    
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/schedule/findAllByShopNo?shopNo="+getURLParameter('id'),
+        url: $.api.baseNew+"/comm-wechatol/api/shop/schedule/findAllByShopCode?shopCode="+getURLParameter('id'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -194,7 +194,7 @@ function getEventScheduleInfo() {
                 }
                 
                 $.each(response.data.shopScheduleList, function(i,v){
-                    if(v.unitType == 'EVENTS' && v.shopNo == getURLParameter('id')){                        
+                    if(v.unitType == 'EVENTS' && v.shopCode == getURLParameter('id')){                        
                         if(v.dateType == 'HOLIDAY' && $('#eventCHPriceTax').text() == '') {
                             $('#eventCHPrice').text('¥'+numberWithCommas(parseFloat((v.cprice*1.05).toFixed(2))));
                             $('#eventCHPriceTax').text('¥'+numberWithCommas(v.cprice));
@@ -227,7 +227,7 @@ function getEventScheduleInfo() {
 function checkEventSchedule(u) {
     var map = {   
         "endDate": $.cookie('dateEnd_'+getURLParameter('id')),
-        "shopNo": getURLParameter('id'),
+        "shopCode": getURLParameter('id'),
         "startDate": $.cookie('dateStart_'+getURLParameter('id'))  
     }
 
@@ -411,8 +411,13 @@ function getShopInfo() {
                                 });
                             }
                         
-                            if(v.vr != null){
+                            if(v.vr != null && v.vr != ''){
                                 $('#vr').attr('src',v.vr);
+                                $('#video').hide();
+                            } else {
+                                $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                                $("#video").get(0).play();
+                                $('#vr').hide();
                             }
 
                             $('#shopName').text(v.shopNo);
@@ -505,6 +510,19 @@ function getShopsMoreInfo(u) {
             $.cookie('eventName',$('#event_name').val());
             $.cookie('eventType',$('#event_type').val());
             showOrderTypeDialog();      
+        } else {
+            $('body').append('<div id="js_toast_6" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">请完成必填项</p></div></div>');
+            var $toast = $('#js_toast_6');
+            $('.page.cell').removeClass('slideIn');
+            
+            $('html, body').animate({
+                scrollTop: $('.red-border').offset().top
+            }, 0);
+        
+            $toast.fadeIn(100);
+            setTimeout(function () {
+                $toast.fadeOut(100);
+            }, 2000);
         }
     });
     
@@ -540,11 +558,11 @@ function findUserCompanyByMobileNo(u){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
-                        $.order.uscc = response.data[0].uscc;
-                        $.order.company = response.data[0].name;
-                        $.order.businessScope = response.data[0].businessScope;
+                if(response.data != null && response.data != ''){
+                    if(response.data.name != '' && response.data.uscc != '' && response.data.name != null && response.data.uscc != null){
+                        $.order.uscc = response.data.uscc;
+                        $.order.company = response.data.name;
+                        $.order.businessScope = response.data.businessScope;
                         checkEventSchedule(u);
                     }
                 } else {
@@ -639,7 +657,7 @@ function saveOrder(ut){
             "startDate": $.cookie('dateStart_'+getURLParameter('id')),
             "unitCode": unit,
             "unitDesc":  $.cookie('shopName'),
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "userId": $.cookie('uid'),
             "vipFlag": "1",
             "wxCardFlag": "1",
@@ -662,7 +680,7 @@ function saveOrder(ut){
             "termType": "B013", // 工作日 B013 节假日 B103
             "termTypeName": "固定租金",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "shopCode": getURLParameter('id')
           }

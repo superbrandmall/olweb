@@ -16,7 +16,7 @@ $(document).ready(function(){
             },
             contact_msg: {
                 required: true,
-                maxlength: 200
+                maxlength: 201
             }
         },
         messages: {
@@ -52,15 +52,17 @@ $(document).ready(function(){
                 },
                 async: false,
                 beforeSend: function(request) {},
-                complete: function(){},
+                complete: function(){
+                    hideLoading();
+                },
                 success: function (response, status, xhr) {
                     $(function(){
                         var $toast = $('#js_toast');
                         $toast.fadeIn(100);
                         setTimeout(function () {
                             $toast.fadeOut(100);
-                            window.location.href = '/v2/default';
-                        }, 2000);
+                            window.history.back(-1);
+                        }, 3000);
                     });
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd" style="margin-top: 65px; font-size: 15px;">
+<div class="page__bd" style="font-size: 15px;">
     <div class="page__bd">
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">

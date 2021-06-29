@@ -269,10 +269,10 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         <div class="c-content-title-1">
                             <h3 class="c-font-bold"><?= $lang['mall_fivestar_hotel'] ?></h3>
                             <ul class="c-content-list-1 c-theme c-separator-dot c-square">
-                                <li class="c-bg-before-red"><a href="http://www.inzonegarland.com/" target="_blank"><?= $lang['mall_hf_grand_hyatt_hotel'] ?></a> <small><?= $lang['mall_hf_grand_hyatt_hotel_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><a href="https://www.hyatt.com/zh-CN/hotel/china/grand-hyatt-hefei/hfegh" target="_blank"><?= $lang['mall_hf_grand_hyatt_hotel'] ?></a> <small><?= $lang['mall_hf_grand_hyatt_hotel_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="https://www.langhamhotels.com/sc/the-langham/hefei/" target="_blank"><?= $lang['mall_hf_langham_hotel'] ?></a> <small><?= $lang['mall_hf_langham_hotel_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="http://www.iccchotel.cn/" target="_blank"><?= $lang['mall_hf_iccc_hotel'] ?></a> <small><?= $lang['mall_hf_iccc_hotel_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="#!"><?= $lang['mall_hf_fpsheraton_hotel'] ?></a> <small><?= $lang['mall_hf_fpsheraton_hotel_addr'] ?></small></li>                            
+                                <li class="c-bg-before-red"><a href="http://www.hefeihotel.cn/"><?= $lang['mall_hf_fpsheraton_hotel'] ?></a> <small><?= $lang['mall_hf_fpsheraton_hotel_addr'] ?></small></li>                            
                             </ul>
                         </div>
                     </div>

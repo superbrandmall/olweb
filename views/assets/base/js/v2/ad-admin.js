@@ -331,8 +331,13 @@ function GetAdInfo(){
                             });
                         }
                         
-                        if(v.vr != null){
+                        if(v.vr != null && v.vr != ''){
                             $('#vr').attr('src',v.vr);
+                            $('#video').hide();
+                        } else {
+                            $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                            $("#video").get(0).play();
+                            $('#vr').hide();
                         }
                         
                         if(v.typeChs != 'LED/LCD/数字化'){
@@ -370,26 +375,8 @@ function GetAdInfo(){
 }
 
 function getAdScheduleInfo() {
-    var orgCode = '100001';
-    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        switch (getURLParameter('storeCode')) {
-            case 'OLMALL190117000001':
-                orgCode = '301001';
-                break;
-            case 'OLMALL180917000002':
-                orgCode = '201001';
-                break;
-            case 'OLMALL180917000003':
-                orgCode = '100001';
-                break;
-            default:
-                orgCode = '100001';
-                break;
-        }
-    }
-    
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByOrgCodeAndShopCode?orgCode="+orgCode+"&shopCode="+getURLParameter('id'),
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByShopCode?shopCode="+getURLParameter('id'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -594,11 +581,11 @@ function findUserCompanyByMobileNo(ut,sc,sz,sp){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
-                        $.order.uscc = response.data[0].uscc;
-                        $.order.company = response.data[0].name;
-                        $.order.businessScope = response.data[0].businessScope;
+                if(response.data != null && response.data != ''){
+                    if(response.data.name != '' && response.data.uscc != '' && response.data.name != null && response.data.uscc != null){
+                        $.order.uscc = response.data.uscc;
+                        $.order.company = response.data.name;
+                        $.order.businessScope = response.data.businessScope;
                         saveOrder(ut,sc,sz,sp);
                     }
                 } else {

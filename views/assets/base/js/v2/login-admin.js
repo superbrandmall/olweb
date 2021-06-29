@@ -126,6 +126,9 @@ $(document).ready(function(){
                                                         },
                                                         complete: function(){},
                                                         success: function (response, status, xhr) {
+                                                            
+                                                            sessionStorage.setItem('wechat_user_info', JSON.stringify(response.data.wechatUserInfo));
+                                                            
                                                             $.ajax({
                                                                 type: 'POST',
                                                                 url: '/controllers/api/2.0/ApiLoginSession.php',

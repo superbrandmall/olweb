@@ -298,46 +298,25 @@ function recommendStores(category){
 function showFloorVR(floor){
     var vr;
     switch (floor) {
-        case '10F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57839129';
-            break;
-        case '9F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57825023';
-            break;
-        case '8F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=58301036';
-            break;
-        case '7F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44188807';
-            break;    
         case '6F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44186925';
-            break;
-        case '5F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=52392278';
-            break;
-        case '4F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=48463593';
-            break;
-        case '3F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182613';
+            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71055917';
             break;
         case '2F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44182612';
-            break;
-        case '1F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
-            break;
-        case 'B1F':
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=57444230';
+            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71055570';
             break;
         default:
-            vr = 'https://720yun.com/t/d0vksldepqe?scene_id=44042266';
+            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71054380';
             break;
     }
     
     $("#vr_viewer iframe").attr('src',vr);
     $("#vr_viewer").show();
+}
+
+function showFloorVideo(floor){
+    $("#video_viewer video").attr('src','/upload/video/ljz-'+floor+'.mp4');
+    $("#video_viewer video").get(0).play();
+    $("#video_viewer").show();
 }
 
 function getCoordsByFloor(fl) {

@@ -119,14 +119,14 @@ function findUserCompanyByMobileNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    $.info.copy = JSON.stringify(response.data[0]);
-                    $.info.name = response.data[0].name;
-                    $.info.uscc = response.data[0].uscc;
-                    $('#authName').val(response.data[0].authName);
-                    $('#authPhone').val(response.data[0].authPhone);
-                    $('#authIdentity').val(response.data[0].authIdentity);
-                    $('#authEmail').val(response.data[0].authEmail);
+                if(response.data != null && response.data != ''){
+                    $.info.copy = JSON.stringify(response.data);
+                    $.info.name = response.data.name;
+                    $.info.uscc = response.data.uscc;
+                    $('#authName').val(response.data.authName);
+                    $('#authPhone').val(response.data.authPhone);
+                    $('#authIdentity').val(response.data.authIdentity);
+                    $('#authEmail').val(response.data.authEmail);
                 }
             }
         }

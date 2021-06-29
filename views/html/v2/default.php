@@ -9,7 +9,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 <!-- ljz -->
-<div style="position: relative;">
+<div style="position: relative; height: 100vh; overflow: hidden;">
     <div style="position: absolute; top: 0; bottom: 0;">
         <video id="video_sbm" class="embed-responsive-item" autoplay="true" muted playsinline loop="loop" style="width: 100%; height: auto; margin-top: -50px;">
             <source src="/upload/video/sbm.mp4" type="video/mp4">
@@ -19,11 +19,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <img src="/upload/video/sbm/sbm000.jpg" />
     </div>
     <div style="position: relative; height: 100vh;">
-        <div class="container fill-bloc-top-edge tc-white">
+        <div class="container fill-bloc-top-edge tc-white" style="-webkit-text-stroke: 1px #000;">
             <div class="row">
                 <div class="col-lg-12 cp-hero-titlte">
-                    <h4 class="text-center mg-clear sm-shadow animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">正大广场</h4>
-                    <h1 class="text-center mg-clear sm-shadow none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">上海 陆家嘴</h1>
+                    <h4 class="text-center mg-clear animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp" style="font-weight: bold;">正大广场</h4>
+                    <h1 class="text-center mg-clear none animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp">上海 陆家嘴</h1>
                 </div>
             </div>
         </div>
@@ -41,21 +41,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div class="col-12 offset-lg-0 col-lg-12">
                     <div class="card border-0 card-sq bgc-white cp-hero-bottom">
                         <div class="row no-gutters">
-                            <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                <h2 class="text-center tc-white mg-clear sm-shadow">13&nbsp;<span class="cp-subtext-small">层</span></h2>
-                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">全业态购物空间</p>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
-                                <h2 class="text-center tc-white mg-clear sm-shadow">30&nbsp;<span class="cp-subtext-small">亿</span></h2>
-                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年均销售</p>
-                            </div>
-                            <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
-                                <h2 class="text-center tc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
-                                <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">商圈年客流</p>
+                            <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
+                                <div class="text-center" style="margin: 0 20px;">
+                                    <a href="/v2/leasing?type=leasing" class="btn btn-d btn-lg cp-button-yellow sm-shadow">从上海正大广场选择铺位</a>
+                                </div>
                             </div>
                             <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
                                 <div class="text-center" style="margin: 0 20px;">
-                                    <a href="/v2/ljz" class="btn btn-d btn-lg cp-wire-button-white sm-shadow">了解详情</a>
+                                    <a href="/v2/ljz" class="btn btn-d btn-lg cp-button-pink sm-shadow">了解上海正大广场</a>
                                 </div>
                             </div>
                         </div>

@@ -18,7 +18,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-cells" id="download_links" style="margin-top: 65px; font-size: 13px;">
+<div class="weui-cells" id="download_links" style="font-size: 13px;">
     <a class="weui-cell weui-cell_access" href="javascript: showContract();" style="float: left;">
         <div class="weui-cell__bd">
             <p>查看合同</p>

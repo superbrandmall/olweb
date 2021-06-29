@@ -11,10 +11,6 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
     
 $(document).ready(function(){
-    $('#submit_negotiation').on('click', function(){
-        inputCheck();
-    });
-    
     $(".weui-check").each(function(){
         $(this).click(function(){
             var textarea_id = $(this).attr('id').split('_')[0];
@@ -29,7 +25,75 @@ $(document).ready(function(){
     if(getURLParameter('outTradeNo') && getURLParameter('outTradeNo') != ''){
         getOrderByTradeNO();
     }
+    
+    $("#negotiation form").validate({
+        onkeyup: false,
+        rules: {
+            years_reason: {
+                maxlength: 51
+            },
+            term_reason: {
+                maxlength: 51
+            },
+            free_reason: {
+                maxlength: 51
+            },
+            rent_reason: {
+                maxlength: 51
+            },
+            deduct_reason: {
+                maxlength: 51
+            },
+            reason: {
+                maxlength: 201
+            }
+        },
+        messages: {
+            years_reason: {
+                maxlength: "留言文字数不对"
+            },
+            term_reason: {
+                maxlength: "留言文字数不对"
+            },
+            free_reason: {
+                maxlength: "留言文字数不对"
+            },
+            rent_reason: {
+                maxlength: "留言文字数不对"
+            },
+            deduct_reason: {
+                maxlength: "留言文字数不对"
+            },
+            reason: {
+                maxlength: "留言文字数不对"
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            inputCheck();
+        }
+    });
 });
+
+function inputCheck() {
+    var flag = 1;
+    
+    if($('#years_reason').val() == '' && $('#term_reason').val() == '' && $('#free_reason').val() == '' && $('#rent_reason').val() == '' && $('#deduct_reason').val() == '' && $('#reason').val() == ''){
+        flag = 0;
+        $('#reason').css('border','solid 1px #f00');
+    } else {
+        $('#reason').css('border','0 none');
+    }        
+    
+    if(flag == 1){
+        if($.order.id != ''){
+            deleteOrder();
+        }
+        saveUserRefusal();
+    }
+}
 
 function saveUserRefusal() {
     $(".weui-check").each(function(){
@@ -76,7 +140,9 @@ function saveUserRefusal() {
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
-        complete: function(){},
+        complete: function(){
+            hideLoading();
+        },
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Authorization") !== null) {
@@ -136,7 +202,7 @@ function saveUserRefusal() {
                                 $toast.fadeIn(100);
                                 setTimeout(function () {
                                     $toast.fadeOut(100);
-                                    window.location.href = '/v2/default';
+                                    window.history.back(-1);
                                 }, 2000);
                             });
                         }
@@ -151,24 +217,6 @@ function saveUserRefusal() {
            console.log(textStatus, errorThrown);
         }
     })
-}
-
-function inputCheck() {
-    var flag = 1;
-    
-    if($('#years_reason').val() == '' && $('#term_reason').val() == '' && $('#free_reason').val() == '' && $('#rent_reason').val() == '' && $('#deduct_reason').val() == '' && $('#reason').val() == ''){
-        flag = 0;
-        $('#reason').css('border','solid 1px #f00');
-    } else {
-        $('#reason').css('border','0 none');
-    }        
-    
-    if(flag == 1){
-        if($.order.id != ''){
-            deleteOrder();
-        }
-        saveUserRefusal();
-    }
 }
 
 function getOrderByTradeNO() {
@@ -253,4 +301,21 @@ function updatePayStates(){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function textarea(input) {
+    var content = $(input);
+      var max =  content.next().find('i') .text();
+    var value = content.val();
+    if (value.length>0) {
+
+        value = value.replace(/\n|\r/gi,"");
+        var len = value.length;
+        content.next().find('span').text(len) ;
+         if(len>max){
+             content.next().addClass('f-red');
+         }else{
+             content.next().removeClass('f-red');
+         }
+    }
 }

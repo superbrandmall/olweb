@@ -1,14 +1,15 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>';
+<script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
+<script type="text/javascript" src="/views/assets/base/js/v2/ads-admin.js"></script>';
 ?>
 
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd" style="margin-top: 65px">
+<div class="page__bd">
     <div class="weui-panel__hd">
-        10个广告区
+        6个广告区
     </div>
     <div class="weui-panel__bd">
         <!--<a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>-->
@@ -16,9 +17,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="slide">
+                        <ul>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                        </ul>
+                        <div class="dot" style="right: 50%;">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895045");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP200323000002");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200323000002&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -36,9 +50,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="slide">
+                        <ul>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                        </ul>
+                        <div class="dot" style="right: 50%;">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895070");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP200420000001");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200420000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -56,9 +83,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="slide">
+                        <ul>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                        </ul>
+                        <div class="dot" style="right: 50%;">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895048");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP200802000001");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP200802000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -76,9 +116,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="slide">
+                        <ul>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                        </ul>
+                        <div class="dot" style="right: 50%;">
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58001049");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP201025000001");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP201025000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -96,49 +149,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/shoufudiantitie.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/shoufudiantitie.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58011747");'>VR</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000003&type=ad">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000003&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">手扶电梯贴(北区1F-2F)</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">位于北区主入口，延续上升式宣传方式，配合活动宣传效果好。</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">北区主入口</span>
-                    <span class="weui-mark-rb">1F-2F</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/shoufudiantitie2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/shoufudiantitie2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58011749");'>VR</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000004&type=ad">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000004&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">手扶电梯贴(东区3F-4F)</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">位于东区由低层通往黄金大道的必经之地，画面形式感强，活动宣传效果好。</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">东区</span>
-                    <span class="weui-mark-rb">通往黄金大道</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895045");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP201025000005");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP201025000005&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -156,9 +169,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang2.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang2.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58011746");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP201025000006");'>视频</a></li>
                         <li><a href="/v2/ad?id=OLSHOP201025000006&type=ad">查看详情</a></li>
                     </ul>
                 </div>
@@ -169,46 +182,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div style="margin: 5px 15px 10px;">
                     <span class="weui-mark-rb">直通国金中心、地铁二号线</span>
                     <span class="weui-mark-rb">人流量巨大</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diantiguahua.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diantiguahua.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58011748");'>VR</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000007&type=ad">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000007&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">电梯挂画东面1号(左)</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">贯穿东区1-8楼竖向交通，指引效果良好。</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">贯穿东区</span>
-                    <span class="weui-mark-rb">覆盖1-8楼</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
-            <div class="weui-media-box__bd">
-                <div style="position: relative;">
-                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diantiguahua2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diantiguahua2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                    <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=58001048");'>VR</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000008&type=ad">查看详情</a></li>
-                    </ul>
-                </div>
-                <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000008&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">电梯挂画西面1号(中)</p>
-                    <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">贯穿西区1-9楼竖向交通，指引效果良好。</small>
-                </div>
-                <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">贯穿西区</span>
-                    <span class="weui-mark-rb">覆盖1-9楼</span>
                 </div>
             </div>
         </div>
@@ -228,6 +201,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
+        </a>
+    </div>
+</div>
+
+<div id="video_viewer" class="weui-gallery" style="display: none;">
+    <video class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto; margin-top: 50%;">
+        <source src="javascript:;" type="video/mp4">
+    </video>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#video_viewer video").trigger("pause"); $("#video_viewer video").attr("src","javascript:;"); $("#video_viewer").hide();'></i>
         </a>
     </div>
 </div>

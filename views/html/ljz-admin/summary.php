@@ -27,7 +27,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     </select>
                                 </th>
                                 <th>空铺</th>
-                                <th>改造</th>
+                                <!--<th>改造</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     </select>
                                 </th>
                                 <th>空铺</th>
-                                <th>改造</th>
+                                <!--<th>改造</th>-->
                                 <th>合计</th>
                             </tr>
                         </thead>
@@ -85,7 +85,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     </select>
                                 </th>
                                 <th>空铺</th>
-                                <th>改造</th>
+                                <!--<th>改造</th>-->
                             </tr>
                         </thead>
                         <tbody>
@@ -110,7 +110,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                                     </select>
                                 </th>
                                 <th>空铺</th>
-                                <th>改造</th>
+                                <!--<th>改造</th>-->
                                 <th>合计</th>
                             </tr>
                         </thead>

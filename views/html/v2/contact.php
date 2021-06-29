@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page-hd" style="margin-top: 65px;">
+<div class="page-hd">
     <h1 class="page-hd-title">
         联系客服
     </h1>
@@ -25,9 +25,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 <div class="weui-cell__bd">
                     <select class="weui-select" name="target_mall" id="target_mall">
                         <option value="OLMALL180917000003">上海陆家嘴正大广场</option>
-                        <!--<option value="OLMALL190117000001">河南洛阳正大广场</option>
-                        <option value="OLMALL180917000002">上海宝山正大乐城</option>
-                        <option value="OLMALL180917000001">上海徐汇正大乐城</option>-->
                     </select>
                     <div id="errorcontainer-target_mall" class="errorDiv"></div>
                 </div>
@@ -40,11 +37,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <select class="weui-select" name="bu" id="bu">
                         <option value="leasing">租赁商铺</option>
                         <option value="events">举办活动</option>
-                        <option value="advertising">广告投放<option>
+                        <option value="advertising">广告投放</option>
                     </select>
                     <div id="errorcontainer-bu" class="errorDiv"></div>
                 </div>
-                <div id="errorcontainer-bu" class="errorDiv"></div>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
@@ -64,7 +60,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     <div class="weui-mask_transparent"></div>
     <div class="weui-toast">
         <i class="weui-icon-success-no-circle weui-icon_toast"></i>
-        <p class="weui-toast__content">已完成</p>
+        <p class="weui-toast__content">发送成功</p>
     </div>
 </div>
 

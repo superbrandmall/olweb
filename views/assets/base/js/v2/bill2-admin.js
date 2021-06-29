@@ -223,17 +223,21 @@ function getBrandWCPayRequest(){  ////v3
 function callWechatPay() {
     var openid = '';
     var unionid = '';
+    var appid = '';
     var outTradeNo = getURLParameter('trade');
     if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
-        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
-        unionid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).unionid;
+        var wechatUserInfo = $.parseJSON(sessionStorage.getItem("wechat_user_info"));
+        openid = wechatUserInfo.openid;
+        unionid = wechatUserInfo.unionid;
+        appid = wechatUserInfo.appId;
     }
-
+    alert(appid);
     var map = {
+        "appId": appid,
         "openId": openid,
         "orgCode": "100001",
         "outTradeNo": outTradeNo,
-        "totalAmount": 1,
+        "totalAmount": 1000,
         "unionId": unionid,
         "mobileNo": $.cookie('uid'),
         "payType": 'wxPay'
@@ -311,7 +315,7 @@ function getAliPayRequest() {
         "openId": openid,
         "orgCode": "100001",
         "outTradeNo": outTradeNo,
-        "totalAmount": 1,
+        "totalAmount": 1000,
         "unionId": unionid,
         "mobileNo": $.cookie('uid'),
         "payType": 'aliPay'
@@ -348,23 +352,7 @@ function getAliPayRequest() {
 
 function callAliPay(){
     var url = $.parseJSON(sessionStorage.getItem("aliPay_"+getURLParameter('trade'))).orderPay.sign;
-    
-    /*var form = '<form name="punchout_form" method="post" action="https://openapi.alipay.com/gateway.do?charset=utf-8&method=alipay.trade.wap.pay&sign=DLtozptsQEMV%2B76VyOKShuA1oqAwd86lZ8Bl8qCk57jHBmak1UWZclfXCxgObhaDPbZqLwTPCXv8JnwbEZUGcdSrkt%2BtwDkkfI2u0z41zuMsjS5GkOeAIahMIyS2lVVWYUb8YlOcI09U0ndZKOCk64tHqgTr4z11EU3X8QLxDcca2JENYqYMmZ0leaReVdvDp1txW%2FvBhC%2BoJPztx3Kd76UVzKYqkmLA%2B0BQYtE6WCZG8USHQa4rnnCT1k9EsAsGQZ4%2FevacQqd3KvZKR5UXS1jShWXxawO0OhZjLMyDG4Em7ewb47%2FEzODtILVGyzTVULQ3z8%2BPZER6PCNuQhQPAw%3D%3D&return_url=tsst&notify_url=https%3A%2F%2Fol.superbrandmall.com%2Fapi%2Falipay%2Fnotify&version=1.0&app_id=2021002131649197&sign_type=RSA2&timestamp=2021-03-23+17%3A08%3A53&alipay_sdk=alipay-easysdk-java&format=JSON">\n\
-<input type="hidden" name="biz_content" value="{&quot;out_trade_no&quot;:&quot;10JT1000012020081715976439987429&quot;,&quot;product_code&quot;:&quot;QUICK_WAP_WAY&quot;,&quot;subject&quot;:&quot;支付定金&quot;,&quot;total_amount&quot;:&quot;1&quot;}">\n\
-<input type="submit" value="立即支付" style="display:none" >\n\
-</form>\n\
-<script>document.forms[0].submit();</script>';*/
-    
-    /*if($('#alipayForm').length > 0) {
-        $('#alipayForm').remove();
-    }
 
-    *var alipay = '<form name="punchout_form" id="alipayForm" method="post" action="'+url+'" accept-charset="UTF-8">\n\
-<input type="submit" value="立即支付" style="display:none" >\n\
-</form>\n\
-<script>document.forms[0].submit();</script>';
-    $('body').append(alipay);*/
-    
     _AP.pay(url);
     return false;
 }

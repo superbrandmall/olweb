@@ -132,6 +132,16 @@ function showVR(url){
     },100);  
 }
 
+function showVideo(file){
+    showLoading();
+    setTimeout(function () {
+        hideLoading();
+        $("#video_viewer video").attr('src','/upload/video/'+file+'.mp4');
+        $("#video_viewer video").get(0).play();
+        $("#video_viewer").show();
+    },100);  
+}
+
 function scrollTo(e){
     $('html, body').animate({
         scrollTop: e.offset().top

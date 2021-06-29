@@ -5,6 +5,9 @@ $.api = {
     mobileVC: ""
 };
 
+//$.events = ['OLSHOP180917001116','OLSHOP180917001126','OLSHOP180917001150','OLSHOP180917001166','OLSHOP190809000001','OLSHOP180917001169'];
+
+
 var d = new Date();
 var month = d.getMonth()+1;
 var day = d.getDate();
@@ -28,6 +31,10 @@ $(document).ready(function(){
     if (!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
         getUsers();
     }
+    
+    /*if (!sessionStorage.getItem("ads") || sessionStorage.getItem("ads") == null || sessionStorage.getItem("ads") == '') {
+        GetAdInfo();
+    }*/
 
     var floorDesc, floor = '1F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
@@ -115,11 +122,22 @@ $(document).ready(function(){
     } else {
         $('input[name=daysBeforeExpiration]').eq(0).prop('checked',true);
     }
+    
+    /*if(getURLParameter('show') && getURLParameter('show') != '') {
+        $('input[name=eventAds][value='+getURLParameter('show')+']').attr('checked',true);
+    } else {
+        $('input[name=eventAds]').eq(0).prop("checked", false);
+    }*/
 
     $('input[name=daysBeforeExpiration]').change(function() {
         var exp = $('input[name=daysBeforeExpiration]:checked').val();
         insertParam('expire',exp);
     });
+    
+    /*$('input[name=eventAds]').change(function() {
+        var exp = $('input[name=eventAds]:checked').val();
+        insertParam('show',exp);
+    });*/
     
     var size = 0.85;
     $('#zoom_in').click(function (){
@@ -158,7 +176,6 @@ $(function() {
 //collapses the sidebar on window resize.
 $(function() {
     $(window).bind("load resize", function() {
-        console.log($(this).width());
         if ($(this).width() < 768) {
             $('div.sidebar-collapse').addClass('collapse');
         } else {
@@ -197,6 +214,7 @@ function getShopFloorInfo(fl) {
                 }*/
 
                 var itm = 0;
+                //.var ifEvents = 0;
                 $.each(response.data, function(i,v){
                     if((v.subType == '正柜' || v.subType == 'THEAT') && v.state != 0 ){
                         stores = stores + v.area;
@@ -237,8 +255,8 @@ function getShopFloorInfo(fl) {
                             itm++;
                         }*/
                     }
-
-                    if((v.subType == '正柜' || v.subType == 'THEAT') && v.coords != null && v.coords != '' && v.state != 0){
+                    //ifEvents = $.inArray(v.code, $.events);
+                    if((v.subType == '正柜' || v.subType == 'THEAT'/* || (getURLParameter('show') && getURLParameter('show') != '' && ifEvents != -1)*/) && v.coords != null && v.coords != '' && v.state != 0){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });
@@ -253,6 +271,10 @@ function getShopFloorInfo(fl) {
                     $('#leased').text('0');
                 }
                 
+                /*if(getURLParameter('show') == 'ads') {
+                    ShowAd(getURLParameter('f'));
+                }*/
+                
                 drawShops();
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -266,113 +288,7 @@ function getShopFloorInfo(fl) {
     
 function drawShops(){
     var areas = $.map($('area'),function(el) {
-        var level_ol = ['01FL059', 
-            '01FL097', 
-            '01FL065',  
-            '01FL071', 
-            '01FL087',
-            '02FL016',
-            '03FL117',
-            '03FL015',
-            '05FL105',
-            '06FL005',
-            '07FL060'];
-        var level_retail = ['01FL004',
-'01FL009',
-'01FL017',
-'01FL048',
-'01FL053',
-'01FL054',
-'01FL056',
-'01FL096',
-'01FL106',
-'01FL108',
-'01FL109',
-'01FL110',
-'01FL112',
-'01FL113',
-'01FL115',
-'01FL118',
-'02FL011',
-'02FL048',
-'03FL034',
-'03FL041',
-'03FL122',
-'03FL123',
-'03FL124',
-'03FL130',
-'04FL011',
-'05FL017',
-'05FL034',
-'05FL068',
-'05FL069',
-'05FL100',
-'05FL130',
-'05FL134',
-'05FL136',
-'05FL137',
-'05FL140',
-'05FL143',
-'06FL004',
-'01FL012',
-'03FL004',
-'05FL018',
-'05FL087',
-'01FL062',
-'01FL063',
-'03FL108'
-];
-var level_eat = [
-'01FL116',
-'02FL057',
-'03FL119',
-'07FL013',
-'07FL036',
-'07FL059',
-'07FL061',
-'03FL032',
-'05FL002'
-];
-
-        var index_ol = $.inArray($(el).attr('data-key'), level_ol);
-        
-        if(index_ol >= 0){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: '',
-                fillColor: 'FF9500',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        }
-        
-        var index_retail = $.inArray($(el).attr('data-key'), level_retail);
-        
-        if(index_retail >= 0){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: '',
-                fillColor: '34C759',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        }
-        
-        var index_eat = $.inArray($(el).attr('data-key'), level_eat);
-        
-        if(index_eat >= 0){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: '',
-                fillColor: 'AF52DE',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
-            };
-        }
-        /*if(getURLParameter('id') === $(el).attr('alt')){
+        if(getURLParameter('id') === $(el).attr('alt')){
             return { 
                 key: $(el).attr('data-key'),
                 toolTip: '本店铺',
@@ -420,7 +336,7 @@ var level_eat = [
                 };
             }
             
-        }*/
+        }
     });
     
     var xOffset;
@@ -438,9 +354,9 @@ var level_eat = [
         onShowToolTip: function () {
             $(".mapster_tooltip").css({
                 "font-weight": "bold",
-                "color": "#a3aec2",
-                "background": "rgba(28,34,56,1)",
-                "font-size": "22px",
+                "color": "#fff",
+                "background": "rgba(0,0,0,0.8)",
+                "font-size": "26px",
                 "width": "auto"
             });
 
@@ -505,6 +421,11 @@ function addTextLayer(){
                     
                     $(this).after(
                         '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                    );
+                } else if($(this).attr('data-full') == 'ad') {
+                    shopName = $(this).attr('data-shop-name');
+                    $(this).after(
+                        '<span style="position:absolute;line-height:1;text-align:center;font-size:20px;color:FF0000;">'+shopName+'</span>'
                     );
                 } else {
                     shopName = $(this).attr('data-shop-name');
@@ -604,22 +525,22 @@ function GetShopInfo(sc){
                 var shopStateClass = 'badge-default';
                 switch(shop.shopState){
                     case 0:
-                        state = "Leased";
+                        state = "在租";
                         break;
                     case 1:
-                        state = "Vacancy";
+                        state = "空铺";
                         shopStateClass = 'badge-danger';
                         break;
                     case 2:
-                        state = "Expiring";
+                        state = "待租";
                         shopStateClass = 'badge-warning';
                         break;
                     case 3:
-                        state = "Renovation";
+                        state = "改造";
                         shopStateClass = 'badge-renovation';
                         break;
                     default:
-                        state = "Leased";
+                        state = "在租";
                         shopStateClass = 'badge-default';
                         break;
                 }
@@ -1002,3 +923,38 @@ function interpretBusinessCode(msg) {
         }, 0);
     }
 }
+
+/*function GetAdInfo(){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                sessionStorage.setItem("ads", JSON.stringify(response.data) );
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function ShowAd(floor){
+    var uc = [];
+    $.each($.parseJSON(sessionStorage.getItem("ads")), function(i,v) {
+        if(v.state == 1 && v.remarkSecond == floor && $.inArray(v.code, uc) == -1) {
+            uc.push(v.code);
+            $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="ad" data-modality="0" data-area="1"  data-shop-name="'+v.unitDescChs+'" name="'+v.unitDescChs+'" href="javascript:;" shape="poly" coords="'+v.coords+'" data-shop-name="'+v.unitDescChs+'" />');
+        }
+    });
+}*/

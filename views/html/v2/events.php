@@ -7,7 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd" style="margin-top: 65px">
+<div class="page__bd">
     <div class="weui-panel__hd">
         6个场地区
     </div>
@@ -30,7 +30,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57904443");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/davkt9d7zfh?scene_id=71054380");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001126&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -64,7 +64,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895034");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP180917001116");'>视频</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001116&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -98,7 +98,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895073");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/davkt9d7zfh?scene_id=71055576");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP180917001150");'>视频</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001150&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -132,7 +133,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895047");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/davkt9d7zfh?scene_id=71055822");'>VR</a></li>
                         <li><a href="/v2/event?id=OLSHOP190809000001&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -166,7 +167,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895075");'>VR</a></li>
+                        <li><a href='javascript: showVR("https://720yun.com/t/davkt9d7zfh?scene_id=71055851");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP180917001166");'>视频</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001166&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -188,19 +190,27 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="slide">
                         <ul>
                             <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_3.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_3.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                             <li>
                                 <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_4.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_4.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                            </li>
+                            <li>
+                                <img onclick='javascript: showGallery("/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/events/OLSHOP180917001169_1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                             </li>
                         </ul>
                         <div class="dot" style="right: 50%;">
                             <span></span>
                             <span></span>
+                            <span></span>
+                            <span></span>
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVR("https://720yun.com/t/97vkOhrq01y?scene_id=57895074");'>VR</a></li>
+                        <li><a href='javascript: showVideo("OLSHOP180917001169");'>视频</a></li>
                         <li><a href="/v2/event?id=OLSHOP180917001169&type=events">查看详情</a></li>
                     </ul>
                 </div>
@@ -231,6 +241,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
+        </a>
+    </div>
+</div>
+
+<div id="video_viewer" class="weui-gallery" style="display: none;">
+    <video class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto; margin-top: 50%;">
+        <source src="javascript:;" type="video/mp4">
+    </video>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#video_viewer video").trigger("pause"); $("#video_viewer video").attr("src","javascript:;"); $("#video_viewer").hide();'></i>
         </a>
     </div>
 </div>

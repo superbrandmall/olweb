@@ -5,26 +5,31 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 id="floorNo" style="display: inline-block; margin-right: 5px; color: rgb(120, 128, 163);"></h1>
-                <div class="c-label" id="fmap" style="display: none; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
-                    <span style="margin-left: 15px; background-color: #7d9fe9; width: 20px; height: 13px; display: inline-block;"></span> Leased <span id="leased"></span>%
-                    <span style="margin-left: 15px; background-color: #FE9E9E; width: 20px; height: 13px; display: inline-block;"></span> Vacancy <span id="empty"></span>%
-                    <span style="margin-left: 15px; background-color: #FEED99; width: 20px; height: 13px; display: inline-block;"></span> Expiring <span id="to_be_lease"></span>%
+                <div class="c-label" id="fmap" style="background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
+                    <span style="margin-left: 15px; background-color: #7d9fe9; width: 20px; height: 13px; display: inline-block;"></span> 在租 <span id="leased"></span>%
+                    <span style="margin-left: 15px; background-color: #FE9E9E; width: 20px; height: 13px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
+                    <span style="margin-left: 15px; background-color: #FEED99; width: 20px; height: 13px; display: inline-block;"></span> 即将到期 <span id="to_be_lease"></span>%
                     (<label class="radio-inline">
-                        <input type="radio" name="daysBeforeExpiration" value="90"> 90d
+                        <input type="radio" name="daysBeforeExpiration" value="90"> 90天内
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="daysBeforeExpiration" value="60"> 60d
+                        <input type="radio" name="daysBeforeExpiration" value="60"> 60天内
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="daysBeforeExpiration" value="30"> 30d
+                        <input type="radio" name="daysBeforeExpiration" value="30"> 30天内
                     </label>)
-                    <span style="margin-left: 15px; background-color: #D5C8AA; width: 20px; height: 13px; display: inline-block;"></span> Renovation <span id="renovation"></span>%
+                    <!--<label class="radio-inline">
+                        <input type="radio" name="eventAds" value="event"><span style="background-color: #5CC8F9; width: 20px; height: 13px; display: inline-block;"></span> 显示场地位
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="eventAds" value="ads"><span style="background-color: #4ED964; width: 20px; height: 13px; display: inline-block;"></span> 显示广告位
+                    </label>-->
                 </div>
                 
-                <div class="c-label" style="display: inline-block; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
-                    <span style="margin-left: 15px; background-color: #FF9500; width: 20px; height: 13px; display: inline-block;"></span> Online Leasing
-                    <span style="margin-left: 15px; background-color: #34C759; width: 20px; height: 13px; display: inline-block;"></span> 零售业态
-                    <span style="margin-left: 15px; background-color: #AF52DE; width: 20px; height: 13px; display: inline-block;"></span> 餐饮业态
+                <div class="c-label" style="display: none; background-color: transparent; margin: 10px 0; color: #fff; font-size: 16px;">
+                    <span style="margin-left: 15px; background-color: #FF9302; width: 20px; height: 13px; display: inline-block;"></span> Online Leasing
+                    <span style="margin-left: 15px; background-color: #4ED964; width: 20px; height: 13px; display: inline-block;"></span> 零售业态
+                    <span style="margin-left: 15px; background-color: #5954D5; width: 20px; height: 13px; display: inline-block;"></span> 餐饮业态
                 </div>
             </div>
         </div>

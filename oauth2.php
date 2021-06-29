@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
     <head>
-        <title>租得好商业地产租赁平台</title>
-        <meta name="description" content="租得好商业地产租赁平台" />
+        <title>OLL线上租 | OnLine Leasing</title>
+        <meta name="description" content="OLL线上租 | OnLine Leasing" />
         <meta charset="utf-8" />
         <script src="/views/assets/plugins/jquery.min.js" type="text/javascript"></script>
         <script src="/views/assets/base/js/v2/api-configure.js" type="text/javascript"></script>

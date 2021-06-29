@@ -206,17 +206,11 @@ function getOrderByTradeNO() {
                 }
                 
                 $('#startPay').click(function(){
-                    /*if($("input[id=unionPay]").prop("checked")){
-                        sendMail($('#unionPayEmail').val());
-                    } else if($("input[id=transfer]").prop("checked")){
-                        sendMail($('#unionPayEmail').val());
-                    }*/
                     showDialog();
                 })
                 
                 $('#confirm').click(function(){
                     window.location.href = '/v2/stamping';
-                    //updateOrderToPayed(response.data.id,response.data.remarkSecond,response.data.outTradeNo,response.data.contractInfos[0].unitCode);
                 });
                 
             } else {

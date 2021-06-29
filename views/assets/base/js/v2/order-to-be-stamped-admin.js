@@ -189,8 +189,8 @@ function findUserCompanyByMobileNo(sc,outTradeNo,type){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    if(response.data[0].name != '' && response.data[0].uscc != ''){
+                if(response.data != null && response.data != ''){
+                    if(response.data.name != '' && response.data.uscc != ''){
                         if(type == 'leasing') {
                             window.location.href = '/v2/price?id='+sc+'&trade='+outTradeNo;
                         } else if(type == 'advertising') {

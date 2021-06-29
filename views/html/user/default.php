@@ -1,15 +1,7 @@
 <div class="c-layout-page">
-    <section class="c-layout-revo-slider c-layout-revo-slider-7" style="max-width: 960px; margin: 0 auto;">
-        <div class="tp-banner-container">
-            <div class="tp-banner">
-                <ul>
-                    <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="6000" data-thumb="">
-                        <img src="views/assets/base/img/layout/sliders/revo-slider/base/blank.png" alt="">
-                        <div class="caption fulllscreenvideo tp-videolayer" data-x="0" data-y="0" data-speed="600" data-start="1000" data-easing="Power4.easeOut" data-endspeed="500" data-endeasing="Power4.easeOut" data-autoplay="true" data-autoplayonlyfirsttime="false" data-nextslideatend="true" data-videowidth="100%" data-videoheight="100%" data-videopreload="meta" data-videomp4="upload/video/video-1.mp4" data-videowebm="" data-videocontrols="controls" data-forcecover="1" data-forcerewind="on" data-aspectratio="16:9" data-volume="mute" data-videoloop="loop" data-videoposter="views/assets/base/img/layout/sliders/revo-slider/base/blank.png">
-                        </div>
-                    </li>
-                </ul>
-            </div>
+    <section class="" style="max-width: 960px; margin: 0 auto; overflow: auto;">
+        <div class="col-xs-12" style="padding: 0;">
+            <img alt="" src="views/assets/base/img/content/backgrounds/oll-banner.jpg" class="img-responsive">
         </div>
     </section>
 
@@ -38,44 +30,86 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000695"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/07/IMG_4658-240x180.jpg" width="187" alt=""/></a>
-                        Ringside Boxing
+                        <a href="shop?id=OLSHOP210218000019"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0001-5-240x180.jpg" width="187" alt=""/></a>
+                        Luneurs
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200624000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/CRL_9517-240x180.jpg" width="187" alt=""/></a>
+                        <a href="shop?id=OLSHOP180917000506"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0002-4-240x180.jpg" width="187" alt=""/></a>
+                        HUAWEI
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000557"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0003-3-240x180.jpg" width="187" alt=""/></a>
+                        52Toys
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP181115000006"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0002-2-240x180.jpg" width="187" alt=""/></a>
+                        霜花店
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP201125000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0002-1-240x180.jpg" width="187" alt=""/></a>
+                        优复UPFit
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000730"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_0002-240x180.jpg" width="187" alt=""/></a>
+                        鲍两金
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000321"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8969-240x180.jpg" width="187" alt=""/></a>
+                        波司登
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200624000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2020/12/CRL_9517-240x180.jpg" width="187" alt=""/></a>
                         奥飞欢乐世界
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200115000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/IMG_9341-240x180.jpg" width="187" alt=""/></a>
-                        始祖鸟
+                        <a href="shop?id=OLSHOP210327000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8974-240x180.jpg" width="187" alt=""/></a>
+                        六克茶方
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP201017000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_1699-240x180.jpg" width="187" alt=""/></a>
-                        临家
+                        <a href="shop?id=OLSHOP180917000495"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8944-240x180.jpg" width="187" alt=""/></a>
+                        马记永
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP191026000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/04/IMG_9604-240x180.jpg" width="187" alt=""/></a>
-                        之禾 ICICLE
+                        <a href="shop?id=OLSHOP190423000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/04/ZHX4900-240x180.jpg" width="187" alt=""/></a>
+                        咬金
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000472"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/IMG_9207-240x180.jpg" width="187" alt=""/></a>
-                        Joy&Apply
+                        <a href="shop?id=OLSHOP180917000697"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8926-240x180.jpg" width="187" alt=""/></a>
+                        锦鲤祠
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190622000001"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_9791-240x180.jpg" width="187" alt=""/></a>
-                        锦之楼
+                        <a href="shop?id=OLSHOP210318000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8948-240x180.jpg" width="187" alt=""/></a>
+                        FLOWCYCLE
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000375"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/11/CRL_9821-240x180.jpg" width="187" alt=""/></a>
-                        LELECHA
+                        <a href="shop?id=OLSHOP200624000004"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8959-240x180.jpg" width="187" alt=""/></a>
+                        好利来Holiland
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000343"><img src="http://photobank.superbrandmall.com/wp-content/uploads/2020/12/IMG_9383-240x180.jpg" width="187" alt=""/></a>
-                        Riotlily
+                        <a href="shop?id=OLSHOP180917000660"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8938-240x180.jpg" width="187" alt=""/></a>
+                        富士烧肉牧场
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190514000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/02/CRL_0923-240x180.jpg" width="187" alt=""/></a>
+                        Sephora
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000172"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8984-240x180.jpg" width="187" alt=""/></a>
+                        SHARK
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191227000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8933-240x180.jpg" width="187" alt=""/></a>
+                        FINE RAO
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210218000015"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/02/CRL_1048-240x180.jpg" width="187" alt=""/></a>
+                        MLB
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000179"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8978-240x180.jpg" width="187" alt=""/></a>
+                        balabala巴拉巴拉
                     </div>
                 </div>
-                
-                
             </div>
         </div>
     </div>

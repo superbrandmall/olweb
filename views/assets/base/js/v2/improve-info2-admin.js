@@ -110,42 +110,42 @@ function findUserCompanyByMobileNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    $.info.company = response.data[0].id;
-                    $('#company_name').val(response.data[0].name);
-                    $('#uscc').val(response.data[0].uscc);
-                    $('#business_scope').val(response.data[0].businessScope);
-                    $('#contact_name_1').val(response.data[0].contactName);
-                    $('#id_card').val(response.data[0].idCard);
-                    $('#contact_phone_1').val(response.data[0].contactPhone);
-                    $('#contact_email').val(response.data[0].contactEmail);
-                    if(response.data[0].title != '业务拓展负责人' && response.data[0].title != '公司负责人/总经理' && response.data[0].title != '中介') {
+                if(response.data != null && response.data != ''){
+                    $.info.company = response.data.id;
+                    $('#company_name').val(response.data.name);
+                    $('#uscc').val(response.data.uscc);
+                    $('#business_scope').val(response.data.businessScope);
+                    $('#contact_name_1').val(response.data.contactName);
+                    $('#id_card').val(response.data.idCard);
+                    $('#contact_phone_1').val(response.data.contactPhone);
+                    $('#contact_email').val(response.data.contactEmail);
+                    if(response.data.title != '业务拓展负责人' && response.data.title != '公司负责人/总经理' && response.data.title != '中介') {
                         $('#job_title').val('others');
-                        $('#other_job').val(response.data[0].title);
+                        $('#other_job').val(response.data.title);
                         $('#other_jobs').css('display','flex');
                     } else {
-                        $('#job_title').val(response.data[0].title);
+                        $('#job_title').val(response.data.title);
                     }
                     
-                    $('#mailing_address').val(response.data[0].mailingAddress);
-                    $('#invoice_address').val(response.data[0].invoiceAddress);
-                    $('#invoice_phone').val(response.data[0].invoicePhone);
-                    $('#street_address').val(response.data[0].streetAddress);
-                    $('#billing_address').val(response.data[0].billingAddress);
-                    if(response.data[0].taxPayerType != '' && response.data[0].taxPayerType != null){
-                        $('#tax_payer_type').val(response.data[0].taxPayerType);
+                    $('#mailing_address').val(response.data.mailingAddress);
+                    $('#invoice_address').val(response.data.invoiceAddress);
+                    $('#invoice_phone').val(response.data.invoicePhone);
+                    $('#street_address').val(response.data.streetAddress);
+                    $('#billing_address').val(response.data.billingAddress);
+                    if(response.data.taxPayerType != '' && response.data.taxPayerType != null){
+                        $('#tax_payer_type').val(response.data.taxPayerType);
                     }
-                    if(response.data[0].invoiceType != '' && response.data[0].invoiceType != null){
-                        $('#invoice_type').val(response.data[0].invoiceType);
+                    if(response.data.invoiceType != '' && response.data.invoiceType != null){
+                        $('#invoice_type').val(response.data.invoiceType);
                     }
                     
-                    $('#bank_account').val(response.data[0].bankAccount);
-                    $('#bank_name').val(response.data[0].bankName);
+                    $('#bank_account').val(response.data.bankAccount);
+                    $('#bank_name').val(response.data.bankName);
                     
-                    $('#authName').val(response.data[0].authName);
-                    $('#authPhone').val(response.data[0].authPhone);
-                    $('#authIdentity').val(response.data[0].authIdentity);
-                    $('#authEmail').val(response.data[0].authEmail);
+                    $('#authName').val(response.data.authName);
+                    $('#authPhone').val(response.data.authPhone);
+                    $('#authIdentity').val(response.data.authIdentity);
+                    $('#authEmail').val(response.data.authEmail);
                 }
             }
         }
@@ -244,8 +244,13 @@ function saveUserCompany() {
         title = $('#job_title').val();
     }
     
-    
+    var openid = '';
+    if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
+        openid = $.parseJSON(sessionStorage.getItem("wechat_user_info")).openid;
+    }
+
     var map = {
+        "openid": openid,
         "mobileNo": $.cookie('uid'),
         "name": $('#company_name').val(),
         "uscc": $('#uscc').val(),

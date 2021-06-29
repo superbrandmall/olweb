@@ -44,25 +44,20 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 
-<div style="position: relative; margin-top: 65px;">
+<div style="position: relative; margin-top: -11px;">
+    <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
     <video id="video_4" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
-        <?php 
-            if($id == 'OLSHOP190918000001' || $id == 'OLSHOP181024000008' || $id == 'OLSHOP190423000002' || $id == 'OLSHOP181024000020' || $id == 'OLSHOP181024000014'){
-                echo '<source src="/upload/video/'.$id.'.mp4" type="video/mp4">';
-            } else {
-                echo '<source src="/upload/video/5f58.mp4" type="video/mp4">';
-            }
-        ?>
+        <source src="javascript:;" type="video/mp4">
     </video>
 </div>
-<div id="pix_4" style="position: relative; margin-top: 65px; display: none;">
+<div id="pix_4" style="position: relative; display: none;">
     <img src="/upload/video/<?= $id ?>/<?= $id ?>00.jpg" />
 </div>
 
 <div class="page__bd">
     <section style="padding: 20px 15px 10px;">
         <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">下载常见问答</a></h3>
-        <div class="weui-flex__item"><strong>¥<span id="rentAmount"></span> /m<sup>2</sup>/天</strong></div>
+        <div class="weui-flex__item"><strong>¥<span id="taxAmount"></span> <small>/m<sup>2</sup>/月</small></strong> <small>(¥<span id="rentAmount"></span> /m<sup>2</sup>/天)</small></div>
         <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(租赁面积)</div>
         <div class="weui-flex__item">推荐业态 <span id="businessFormatChs"></span></div>
     </section>

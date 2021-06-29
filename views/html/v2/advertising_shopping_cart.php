@@ -62,7 +62,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 
-<div class="weui-article" style="margin-top: 65px; padding: 0 16px;">
+<div class="weui-article" style="padding: 0 16px;">
     <h1 style="margin-bottom: 0.5em;">购物车</h1>
 </div>
 

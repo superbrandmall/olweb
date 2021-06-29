@@ -121,9 +121,9 @@ function findUserCompanyByMobileNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 findUserBrandByMobileNo();
-                if(response.data.length > 0){
-                    $.info.company = response.data[0].id;
-                    $('#company_name').val(response.data[0].name);
+                if(response.data != null && response.data != ''){
+                    $.info.company = response.data.id;
+                    $('#company_name').val(response.data.name);
                 }
             }
         }

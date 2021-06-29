@@ -2,6 +2,7 @@ $.favorites = new Array();
 $.favoritesId = new Array();
 $.updateFavorites = new Array();
 $.updateFavoritesId = new Array();
+$.shopCodes = new Array();
 
 $.order = {
     copy: "",
@@ -16,10 +17,6 @@ $.order = {
     expect: ""
 };
 
-var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07FL059","07FL060",
-    "1F-37","2F-44B","3F-11","4F-37","4F-38","4F","5F-06","5F-50B","6F-24","6F-50",
-    "B1FL009","B1FL022","B1FL010","01FL009","01FL015",
-    "HB1FL070H","HB1FL072H","C01FL003C","E02FL001E","F02FL002F"];
 var vr;
 
 var d = new Date();
@@ -52,15 +49,10 @@ $(document).ready(function(){
         showLoading();
     }
     
+    findAllShopsByStoreCode();
+    
     if(isAndroid() == true) {
         showIndexPix();
-    } else {
-        document.addEventListener('WeixinJSBridgeReady', function() {
-            $('#pix_4').hide();
-            $('#video_4').show();
-            
-            document.getElementById('video_4').play(); 
-        },false);
     }
     
     getMyFavorites();
@@ -125,6 +117,41 @@ $(document).ready(function(){
     });
 });
 
+function findAllShopsByStoreCode() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                
+                if(response.data.length > 0){
+                    var unavailable = [0,4,5];
+                    $.each(response.data, function(i,v){
+                        if($.inArray(v.state, unavailable) < 0){
+                            $.shopCodes.push(v.remarkSecond);
+                        }
+                    });
+                }                
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
 function getShopInfo(){
     var shopCode = getURLParameter('id') || null;
     
@@ -169,9 +196,9 @@ function getShopInfo(){
                 }
                 
                 if(response.data.code == shopCode){
-                    var index = $.inArray(response.data.unit, unitCodes);
+                    var index = $.inArray(shopCode, $.shopCodes);
                     if(index >= 0){
-                        getShopsMoreInfo(response.data.unit);
+                        getShopsMoreInfo();
 
                         $('#shopName').text(response.data.shopName);
                         $.cookie('shopName',response.data.shopName);
@@ -217,14 +244,14 @@ function getShopInfo(){
     });
 }
 
-function getShopsMoreInfo(u) {
+function getShopsMoreInfo() {
     var storeCode = 'OLMALL180917000003';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         storeCode = getURLParameter('storeCode');
     }
     
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndUnitCodeAndCategoryCode?storeCode="+storeCode+"&unitCode="+u+"&categoryCode="+$.cookie('categorySelected').split('::')[0],
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndShopCodeAndCategoryCode?storeCode="+storeCode+"&shopCode="+getURLParameter('id')+"&categoryCode="+$.cookie('categorySelected').split('::')[0],
         type: "GET",
         async: false,
         dataType: "json",
@@ -250,16 +277,25 @@ function getShopsMoreInfo(u) {
                 var propertyMaintenance = '';
                 var promotionRate = '';
 
-                if(u == response.data.unitCode){
+                if(getURLParameter('id') == response.data.shopCode){
+                    if(response.data.remarkFourth != null && response.data.remarkFourth != ''){
+                        $('#vr').attr('src',response.data.remarkFourth);
+                        $('#video_4').hide();
+                    } else {
+                        $("#video_4").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                        $("#video_4").get(0).play();
+                        $('#vr').hide();
+                    }
+                        
                     var leasingState;
                     var expireDay = '';
                     
                     switch (response.data.state) {
                         case 1:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                            leasingState = '<small class="f-green" style="padding: 2px 5px;">该铺位目前可签约</small>';
                             break;
                         case 2:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                            leasingState = '<small class="f-green" style="padding: 2px 5px;">该铺位目前可签约</small>';
                             break;
                         case 3:
                             leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
@@ -267,6 +303,9 @@ function getShopsMoreInfo(u) {
                         case 4:
                             leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
                             break;
+                        case 5:
+                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前已被预定</small>';
+                            break; 
                         case 0:
                             leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已下架</small>';
                             break;    
@@ -329,6 +368,7 @@ function getShopsMoreInfo(u) {
                     $('#totalAmount').text(numberWithCommas(totalAmount));
                     $.cookie('totalAmount', totalAmount);
                     
+                    $('#taxAmount').text(numberWithCommas($.cookie('taxAmount_1')));
                     $('#rentAmount').text($.cookie('rentAmount_1'));
                     $('#propertyMaintenance').html('<tr>\n\
                         <td style="text-align: center;">¥'+propertyMaintenanceRentAmount+'</td>\n\
@@ -392,7 +432,7 @@ function getShopsMoreInfo(u) {
 
                     if(getURLParameter('info') && getURLParameter('info') == 'done'){
                         if($.cookie('orderShopCode') != getURLParameter('id')){
-                            findUserCompanyByMobileNo(u);
+                            findUserCompanyByMobileNo(response.data.unitCode);
                         } else {
                             window.location.replace('/v2/shop?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode')+'&payment='+getURLParameter('payment'));
                         }
@@ -438,11 +478,11 @@ function findUserCompanyByMobileNo(u){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
-                        $.order.uscc = response.data[0].uscc;
-                        $.order.company = response.data[0].name;
-                        $.order.businessScope = response.data[0].businessScope;
+                if(response.data != null && response.data != ''){
+                    if(response.data.name != '' && response.data.uscc != '' && response.data.name != null && response.data.uscc != null){
+                        $.order.uscc = response.data.uscc;
+                        $.order.company = response.data.name;
+                        $.order.businessScope = response.data.businessScope;
                         saveOrder(u);
                     }
                 } else {
@@ -555,7 +595,7 @@ function saveOrder(ut){
             "startDate": $.cookie('settleDate'),
             "unitCode": unit,
             "unitDesc": $.cookie('shopName'),
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "userId": $.cookie('uid'),
             "vipFlag": "1",
             "wxCardFlag": "1",
@@ -578,7 +618,7 @@ function saveOrder(ut){
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "shopCode": getURLParameter('id')
           },
@@ -595,7 +635,7 @@ function saveOrder(ut){
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area":  $.cookie('area'),
             "shopCode": getURLParameter('id')
           },
@@ -612,7 +652,7 @@ function saveOrder(ut){
             "termType": "B031",
             "termTypeName": "装修期物业管理费",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area":  $.cookie('area'),
             "shopCode": getURLParameter('id')
           },
@@ -628,7 +668,7 @@ function saveOrder(ut){
             "termType": "G021",
             "termTypeName": "推广费",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "shopCode": getURLParameter('id')
           },
@@ -645,7 +685,7 @@ function saveOrder(ut){
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "shopCode": getURLParameter('id')
           }
@@ -681,7 +721,7 @@ function saveOrder(ut){
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -700,7 +740,7 @@ function saveOrder(ut){
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -719,7 +759,7 @@ function saveOrder(ut){
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -742,7 +782,7 @@ function saveOrder(ut){
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -761,7 +801,7 @@ function saveOrder(ut){
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -780,7 +820,7 @@ function saveOrder(ut){
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
-            "unitId": "sfsdfsfasfsfasdfasdf",
+            "unitId": "",
             "area": $.cookie('area'),
             "id": 0,
             "shopCode": getURLParameter('id')
@@ -1118,7 +1158,7 @@ function getCoords(mc,fn) {
             if(response.code === 'C0') {
                 $.each(response.data, function(i,v){
                     if(v.state !== 0 && v.coords != null && v.coords != ''){
-                        var index = $.inArray(v.unit, unitCodes);
+                        var index = $.inArray(v.code, $.shopCodes);
                         if(index >= 0){
                             $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" data-logo="'+v.logo+'"  href="shop?id='+v.code+'&type=leasing" shape="poly" coords="'+v.coords+'" />');
                         } else {
@@ -1568,7 +1608,7 @@ function showIndexPix(){
     var maxLength = indexRange[1] - indexRange[0] + 1;
     var eleContainer = document.getElementById('pix_4');
     
-    $('#video_4').hide();
+    $('#video_4,#vr').hide();
     $('#pix_4').show();
     // 存储预加载的DOM对象和长度信息
     var store = {

@@ -150,7 +150,7 @@ function ShowBrands(p,c,u){
                     $.each(response.data.content, function(i,v){
                         if(v.logo != null){
                             var logo = '';
-                            if(v.logo.substr(0,10) == 'http://cre'){
+                            if(v.logo.substr(0,17) == 'https://photobank'){
                                 logo = v.logo;
                             } else {
                                 logo = 'https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+v.logo;

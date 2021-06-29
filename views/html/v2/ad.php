@@ -67,8 +67,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         background-color: #f00 !important;
     }
 </style>
-<div style="position: relative; margin-top: 65px;">
+
+<div style="position: relative; margin-top: -11px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
+    <video id="video" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
+        <source src="javascript:;" type="video/mp4">
+    </video>
 </div>
 
 <div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">

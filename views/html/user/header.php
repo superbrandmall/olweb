@@ -16,13 +16,8 @@ if (strpos($_SERVER['REQUEST_URI'], 'lang=en') == true) {
 $filename = "lang/" . $_SESSION["lang"] . ".php";
 include("views/assets/base/" . $filename);
 
-if (isset($_GET['p']) && $_GET['p'] == 'events' || isset($_GET['p']) && $_GET['p'] == 'event') { // 场地页
-    $hm = 'c969aa05170b06a39efcbccc40cc620d';
-} else if (isset($_GET['p']) && $_GET['p'] == 'olmall190117000001') { // 洛阳页
-    $hm = 'cfcaa07557189638526beda641ad5724';
-} else {
-    $hm = '3938fbddbfea6dc8c77359c58664c361';
-}
+$hm = '3938fbddbfea6dc8c77359c58664c361';
+
 ?>
 <!DOCTYPE html>
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->

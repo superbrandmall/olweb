@@ -416,26 +416,8 @@ function getAdBaseInfo() {
 }
 
 function getAdScheduleInfo(shopCode) {
-    var orgCode = '100001';
-    if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
-        switch (getURLParameter('storeCode')) {
-            case 'OLMALL190117000001':
-                orgCode = '301001';
-                break;
-            case 'OLMALL180917000002':
-                orgCode = '201001';
-                break;
-            case 'OLMALL180917000003':
-                orgCode = '100001';
-                break;
-            default:
-                orgCode = '100001';
-                break;
-        }
-    }
-    
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByOrgCodeAndShopCode?orgCode="+orgCode+"&shopCode="+shopCode,
+        url: $.api.baseNew+"/comm-wechatol/api/advertising/schedule/findAllByShopCode?shopCode="+shopCode,
         type: "GET",
         async: false,
         dataType: "json",
@@ -774,11 +756,11 @@ function findUserCompanyByMobileNo(sc){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    if(response.data[0].name != '' && response.data[0].uscc != '' && response.data[0].name != null && response.data[0].uscc != null){
-                        $.order.uscc = response.data[0].uscc;
-                        $.order.company = response.data[0].name;
-                        $.order.businessScope = response.data[0].businessScope;
+                if(response.data != null && response.data != ''){
+                    if(response.data.name != '' && response.data.uscc != '' && response.data.name != null && response.data.uscc != null){
+                        $.order.uscc = response.data.uscc;
+                        $.order.company = response.data.name;
+                        $.order.businessScope = response.data.businessScope;
                         saveOrder(sc);
                     }
                 } else {

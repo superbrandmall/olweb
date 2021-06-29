@@ -34,6 +34,7 @@ function getAllOrdersToStamping() {
                             var alink = '';
                             var shopName = '';
                             var leasingState = '';
+                            var shopState = 1;
                             var expireDay = '';
                             
                             if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
@@ -80,31 +81,39 @@ function getAllOrdersToStamping() {
                                             break;
                                     }
                                     
-                                    var shopState = 1;
-                                    shopState = getShopState(mallCode,v.contractInfos[0].unitCode);
+                                    shopState = getShopState(mallCode,v.contractInfos[0].shopCode);
                                     
                                     switch (shopState) {
-                                        case 1:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                                        case 1: //该铺位目前可签约
                                             break;
-                                        case 2:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前可签约</small>';
+                                        case 2: //该铺位目前可签约
                                             break;
                                         case 3:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
+                                            if(v.orderStates != '合同用印中'){
+                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经准备签约该铺位</small>';
+                                            }
                                             break;
                                         case 4:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
+                                            if(v.orderStates != '待付款订单'){
+                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经签约该铺位,请重新选择</small>';
+                                            }
+                                            break;
+                                        case 5:
+                                            if(v.orderStates != '已完成订单'){
+                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位目前已被预定,请重新选择</small>';
+                                            }
                                             break;
                                         case 0:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已下架</small>';
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
                                             break;    
                                         default:
                                             leasingState = '';
                                             break;
                                     }
                                     
-                                    img = getShopInfo(v.remarkFirst);
+                                    getShopInfo(v.remarkFirst);
+                                    
+                                    img = "/views/assets/base/img/content/backgrounds/leasing/"+v.remarkFirst+".jpg";
                                     amount = parseFloat((amount + 3000).toFixed(2));
                                     taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
                                     if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
@@ -148,6 +157,8 @@ function getAllOrdersToStamping() {
                                 amount = parseFloat((amount*1.2).toFixed(2));
                                 
                                 var mark = '<span class="bg-purple f-white" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
+                                
+                                img = "/views/assets/base/img/content/backgrounds/ads/"+v.remarkFirst+".jpg";
                             }
                             
                             var mallName, mallCode, buildingCode;
@@ -179,14 +190,14 @@ function getAllOrdersToStamping() {
                                     break;
                             }
                             
-                            if(v.state == 1 && v.orderStates === '合同已生成'){
+                            if(v.state == 1 && v.orderStates === '合同已生成' && (shopState == 1 || shopState == 2 || shopState == 3)){
                                 alink = '<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同并用印</a></a></li>';
-                            } else if(v.state == 1 && v.orderStates === '合同用印中'){
+                            } else if(v.state == 1 && v.orderStates === '合同用印中' && (shopState == 1 || shopState == 2 || shopState == 3)){
                                 alink = '<li><a class="current" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
-                            } else if(v.state == 1 && v.orderStates === '待付款订单'){
+                            } else if(v.state == 1 && v.orderStates === '待付款订单' && shopState == 4){
                                 alink = '<li><a class="current" href="/v2/bill?trade='+v.outTradeNo+'">查看账单</a></li>\n\
 <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
-                            } else if(v.state == 1 && v.orderStates === '定金待支付'){
+                            } else if(v.state == 1 && v.orderStates === '定金待支付' && (shopState == 1 || shopState == 2)){
                                 alink = '<li><a class="current" href="/v2/bill2?trade='+v.outTradeNo+'">支付定金</a></li>\n\
 <li><a href="/v2/contract-view2?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             }
@@ -196,9 +207,12 @@ function getAllOrdersToStamping() {
         <div class="f-orange" style="float: right;">'+v.orderStates+'</div></div></div>');
          
                             var weuiPanelBdId = '';
+                            //var adInfo= '';
                             for(var c=0;c<v.contractInfos.length;c++){
-                                if(v.remarkSecond == 'advertising'){                            
-                                    img = getAdInfo(v.orgCode,v.contractInfos[c].unitCode);
+                                if(v.remarkSecond == 'advertising'){
+                                    getAdInfo(v.orgCode,v.contractInfos[c].shopCode);
+                                    //adInfo = $.parseJSON(sessionStorage.getItem("ads_"+v.orgCode+"_"+v.contractInfos[c].shopCode));
+                                    //img = adInfo[0].advertisingImagesWxList[0].imagePath;
                                     singlePrice = numberWithCommas(parseFloat((v.contractInfos[c].amount*1.2).toFixed(2)));
                                     weuiPanelBdId = ' id=weui-panel__bd_'+v.id+'_'+v.contractInfos[c].shopCode;
                                 }
@@ -250,8 +264,8 @@ function getAllOrdersToStamping() {
     });
 }
 
-function getAdInfo(og,unit){
-    if(!sessionStorage.getItem("ads_"+og+"_"+unit) || sessionStorage.getItem("ads_"+og+"_"+unit) == '' || sessionStorage.getItem("ads_"+og+"_"+unit) == null || sessionStorage.getItem("ads_"+og+"_"+unit) == 'undefined'){
+function getAdInfo(og,sc){
+    if(!sessionStorage.getItem("ads_"+og+"_"+sc) || sessionStorage.getItem("ads_"+og+"_"+sc) == '' || sessionStorage.getItem("ads_"+og+"_"+sc) == null || sessionStorage.getItem("ads_"+og+"_"+sc) == 'undefined'){
             var mallCode;
             switch (og) {
             case '301001':
@@ -272,7 +286,7 @@ function getAdInfo(og,unit){
         }
 
         $.ajax({
-            url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCodeAndUnitCode?storeCode="+mallCode+"&unitCode="+unit,
+            url: $.api.baseNew+"/comm-wechatol/api/advertising/base/findAllByStoreCodeAndShopCode?storeCode="+mallCode+"&shopCode="+sc,
             type: "GET",
             async: false,
             dataType: "json",
@@ -284,16 +298,11 @@ function getAdInfo(og,unit){
             complete: function(){},
             success: function (response, status, xhr) {
                 if(response.code === 'C0') {
-                    sessionStorage.setItem("ads_"+og+"_"+unit, JSON.stringify(response.data));
+                    sessionStorage.setItem("ads_"+og+"_"+sc, JSON.stringify(response.data));
                 }
             }
         });
     }
-    
-    var temp = $.parseJSON(sessionStorage.getItem("ads_"+og+"_"+unit));
-    var img = temp[0].advertisingImagesWxList[0].imagePath;
-    
-    return img;
 }
 
 function getShopInfo(sc){
@@ -320,53 +329,31 @@ function getShopInfo(sc){
             }
         })
     }
-    
-    var temp = $.parseJSON(sessionStorage.getItem("shop_"+sc));
-    var img = '/' + temp.firstImage;
-
-    if(temp.firstImage == null || temp.firstImage == ''){
-        img = temp.images[0].image;
-    }
-
-    if(temp.unit != null && temp.subType == '正柜'){
-        img = "/views/assets/base/img/content/backgrounds/leasing/"+temp.unit+".jpg";
-    }
-    
-    return img;
-    
 }
 
-function getShopState(mall,unit){
-    //if(!sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == '' || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == null || sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit) == 'undefined'){
-        $.ajax({
-            url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndUnitCode?storeCode="+mall+"&unitCode="+unit,
-            type: "GET",
-            async: false,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    
-                    sessionStorage.setItem("shopmoreinfo_"+mall+"_"+unit, JSON.stringify(response.data));
+function getShopState(mall,sc){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndShopCode?storeCode="+mall+"&shopCode="+sc,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+
+                sessionStorage.setItem("shopmoreinfo_"+mall+"_"+sc, JSON.stringify(response.data));
+                var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc));
+                var state = temp.state;
+                return state;
             }
-        })
-    //}
-    
-    var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+unit));
-    
-    var state = 1;
-    if(temp != '' && temp != [] && temp != 'undefined' && temp.length > 0){
-        state = temp[0].state;
-    }
-    
-    return state;
+        }
+    })
 }

@@ -277,7 +277,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                             <h3 class="c-font-bold"><?= $lang['mall_fivestar_hotel'] ?></h3>
                             <ul class="c-content-list-1 c-theme c-separator-dot c-square">
                                 <li class="c-bg-before-red"><a href="#!"><?= $lang['mall_ly_lee_royal_hotel'] ?></a> <small><?= $lang['mall_ly_lee_royal_hotel_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.lydongshanhotel.cn/" target="_blank"><?= $lang['mall_ly_dongshan_hotel'] ?></a> <small><?= $lang['mall_ly_dongshan_hotel_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><a href="#!" target="_blank"><?= $lang['mall_ly_dongshan_hotel'] ?></a> <small><?= $lang['mall_ly_dongshan_hotel_addr'] ?></small></li>
                                 <li class="c-bg-before-red"><a href="#!"><?= $lang['mall_ly_yading_peninsula_hotel'] ?></a> <small><?= $lang['mall_ly_yading_peninsula_hotel_addr'] ?></small></li>
                             </ul>
                         </div>

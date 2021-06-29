@@ -62,7 +62,7 @@ function GetBrandInfo(){
                 $('#attribute').val(brand.attribute || '');
                 if(brand.logo !== null) {
                     var logo = '';
-                    if(brand.logo.substr(0,10) == 'http://cre'){
+                    if(brand.logo.substr(0,17) == 'https://photobank'){
                         logo = brand.logo;
                     } else {
                         logo = 'https://ol.superbrandmall.com/views/assets/base/img/content/client-logos/web/'+brand.logo;

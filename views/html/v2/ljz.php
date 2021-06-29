@@ -38,43 +38,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>-->
 
 <!-- all-wheel-drive -->
-<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="all-wheel-drive" style="margin-top: 65px;">
+<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="all-wheel-drive">
     <div class="container ">
         <div class="row no-gutters align-items-end" style="background: url(/views/assets/base/img/content/backgrounds/ljz-4.jpg); background-size: 100%; background-position: top; background-repeat: no-repeat;">
             <div class="col-lg-12">
                 <div class="row no-gutters">
-                    <div class="col-lg-9 align-self-end nikola-range-content">
-                        <div class="nikola-content">
-                            <div class="row no-gutters">
-                                <div class="col">
-                                    <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">建筑面积<br></p>
-                                    </div>
-                                </div>
-                                <div class="col nikola-center-divider">
-                                    <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">14<small>万<sup>2</sup></small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">租赁面积<br></p>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">13<small>层</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">楼层布局<br></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-12">
                         <div class="row no-gutters nikola-sidebar">
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
-                                <p class="tesla-uptitle-extra-light mg-clear tc-orange mg-clear-md mg-clear-sm">地理位置</p>
-                                <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
+                                <div class="parallax-text-wrap">
+                                    <h3>项目介绍</h3>
+                                    <span class="parallax-text">上海正大广场</span>
+                                </div>
+                                <hr class="divider divider-default">
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正大广场Super Brand Mall汇集各业态极具代表性品牌（super brands），13层全业态购物空间，汇聚数百个全球⻛尚品牌，上百家国际美⾷；三大特色主题区域——Venus女性生活方式轻奢主题区、eat n work江景餐厅与共享办公空间、儿童的第三个家；创新功能区域划分，满足不同圈层消费者需求。<br></p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
                             </div>
@@ -96,7 +72,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 <!-- all-wheel-drive END -->
 <!-- utility -->
-<div class="bloc full-width-bloc tesla-no-padding l-bloc" id="utility">
+<div class="bloc full-width-bloc tesla-no-padding tc-dark-jungle-green l-bloc" id="utility">
     <div class="video-bg-container">
         <video id="video_1" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
             <source src="/upload/video/sbm-1.mp4" type="video/mp4">
@@ -105,33 +81,24 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div id="pix_1" class="video-bg-container" style="display: none;">
         <img src="/upload/video/sbm-1/sbm-10000.jpg" />
     </div>
-    <div class="container d-block ">
+    <div class="container d-block">
         <div class="row no-gutters align-items-end nikola-range-row">
             <div class="col align-self-end">
                 <div class="row no-gutters">
                     <div class="col-lg-9 align-self-end nikola-range-content">
                         <div class="nikola-content">
                             <div class="row no-gutters">
-                                <div class="col">
-                                    <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">30<small>亿</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">年均销售<br></p>
-                                    </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                                    <h2 class="text-center tc-white mg-clear sm-shadow">13&nbsp;<span class="cp-subtext-small">层</span></h2>
+                                    <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">全业态购物空间</p>
                                 </div>
-                                <div class="col nikola-center-divider">
-                                    <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">3000<small>万</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">商圈年客流<br></p>
-                                    </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
+                                    <h2 class="text-center tc-white mg-clear sm-shadow">30&nbsp;<span class="cp-subtext-small">亿</span></h2>
+                                    <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年均销售</p>
                                 </div>
-                                <div class="col">
-                                    <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                        <h2 class="tc-white mg-sm sm-shadow">658<small>个</small></h2>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                        <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">停车位<br></p>
-                                    </div>
+                                <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
+                                    <h2 class="text-center tc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
+                                    <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">商圈年客流</p>
                                 </div>
                             </div>
                         </div>
@@ -139,8 +106,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="col-lg-3">
                         <div class="row no-gutters nikola-sidebar">
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
-                                <p class="tesla-uptitle-extra-light tc-orange mg-clear mg-clear-md mg-clear-sm">项目介绍</p>
-                                <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
+                                <div class="parallax-text-wrap" style="margin-top: 20px;">
+                                    <h3>地理位置</h3>
+                                    <span class="parallax-text">上海正大广场</span>
+                                </div>
+                                <hr class="divider divider-default">
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商圈每年客流超过3000万。<br></p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
@@ -161,27 +131,33 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 <!-- utility END -->
 <!-- safety -->
-<div class="bloc none full-width-bloc tc-dark-jungle-green bloc-fill-screen nikola-bloc-padding bgc-white-smoke" id="safety">
+<div class="bloc none full-width-bloc tc-dark-jungle-green bloc-fill-screen nikola-bloc-padding" id="safety">
     <div class="container">
         <div class="row no-gutters nikola-safety-row align-items-end">
             <div class="col-lg-3 order-md-2 order-lg-1 order-sm-2 order-2">
-                <div class="row no-gutters nikola-sidebar">
+                <div class="row no-gutters nikola-sidebar" style="background-color: #6a0dac; background: linear-gradient(-39deg, #8b0fe4 10%, #6d0eb1 40%);">
                     <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
-                        <p class="tesla-uptitle-extra-light mg-clear tc-orange mg-clear-md mg-clear-sm">全新升级</p>
-                        <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
-                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                        <p class="mg-clear tc-yellow mg-clear-md mg-clear-sm" style="font-weight: bold;">全新升级</p>
+                        <h3 class="tc-white mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海正大广场</h3>
+                        <hr class="divider divider-default">
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md tc-white">
                             2020年，软硬件配套升级之后的正大广场也将汇聚全球风尚品牌，尚、食、乐、美一网打尽，精彩呈现购物娱乐、主题展览、创意体验、文化互动、新奇潮流。顾客将能在这里体验主题特色区、浦江景观餐饮、办公区、精致文创空间、同步世界潮流的主题活动及全智能系统一体化服务。
                         </p>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
-                        <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
+                        <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">开新铺</a>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
-                        <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
+                        <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">办活动</a>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
-                        <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
+                        <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">做广告</a>
                     </div>
+                </div>
+                <div class="section-wave" style="margin-bottom: 20px; line-height: 0; background-color: #6a0dac; background: linear-gradient(-39deg, #8b0fe4 10%, #6d0eb1 40%);">
+                    <svg x="0px" y="0px" width="100%" height="12px" viewBox="0 0 1920 46" preserveAspectRatio="none" style="fill: white;">
+                      <path d="M1920,0.5c-82.8,0-109.1,44-192.3,44c-78.8,0-116.2-44-191.7-44c-77.1,0-115.9,44-192,44c-78.2,0-114.6-44-192-44c-78.4,0-115.3,44-192,44c-76.9-0.1-119-44-192-44c-77,0-115.2,44-192,44c-73.6,0-114-44-190.9-44c-78.5,0-117.2,44-194.1,44c-75.9,0-113-44-191-44V46h1920V0.5z"></path>
+                    </svg>
                 </div>
             </div>
             <div class="col-lg-9 col-md-12 order-md-1 order-lg-2 order-sm-1 order-1 align-self-center">
@@ -192,6 +168,31 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
                 <div id="pix_2" class="embed-responsive embed-responsive-16by9 nikola-video-safety" style="display: none;">
                     <img src="/upload/video/sbm-2/sbm-20000.jpg" />
+                </div>
+                <div class="nikola-content" style="position: absolute; bottom: 0; width: 100%;">
+                    <div class="row no-gutters">
+                        <div class="col">
+                            <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
+                                <h2 class="tc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
+                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">建筑面积<br></p>
+                            </div>
+                        </div>
+                        <div class="col nikola-center-divider">
+                            <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
+                                <h2 class="tc-white mg-sm sm-shadow">14<small>万<sup>2</sup></small></h2>
+                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">租赁面积<br></p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
+                                <h2 class="tc-white mg-sm sm-shadow">658<small>个</small></h2>
+                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">停车位<br></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,8 +209,11 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="col-lg-3">
                         <div class="row no-gutters nikola-sidebar">
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
-                                <p class="tesla-uptitle-extra-light mg-clear tc-orange mg-clear-md mg-clear-sm">项目地址</p>
-                                <h3 class="tc-black mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海陆家嘴正大广场</h3>
+                                <div class="parallax-text-wrap">
+                                    <h3>项目地址</h3>
+                                    <span class="parallax-text">上海正大广场</span>
+                                </div>
+                                <hr class="divider divider-default">
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md"> 
                                     上海市浦东陆家嘴西路168号
                                 </p>
@@ -270,80 +274,67 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>10</strong>F</h6>
-                                <h6 class="mg-clear">联合办公</h6>
-                                <a href="javascript: showFloorVR('10F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>9</strong>F<br /></h6>
+                                <h6 class="mg-clear">高档餐饮</h6>
+                                <a href="javascript: showFloorVideo('9F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>8</strong>F<br /></h6>
-                                <h6 class="mg-clear">餐饮&娱乐</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('8F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('8F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>7</strong>F<br /></h6>
+                                <h6 class="mg-clear">健康塑形及特色餐饮</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('7F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('7F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>6</strong>F<br /></h6>
-                                <h6 class="mg-clear">餐饮&中国风</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('6F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('6F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>5</strong>F<br /></h6>
+                                <h6 class="mg-clear">运动&生活</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('5F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('5F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>4</strong>F<br /></h6>
-                                <h6 class="mg-clear">男装&数码</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('4F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('4F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>3</strong>F<br /></h6>
+                                <h6 class="mg-clear">快时尚</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('3F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('3F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                 <h6 class="mg-clear tesla-white "><strong>2</strong>F<br /></h6>
-                                <h6 class="mg-clear">儿童第三个家</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('2F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('2F')" class="tesla-btn-xs">VR</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
-                                <h6 class="mg-clear tesla-white "><strong>B1</strong>F<br /></h6>
-                                <h6 class="mg-clear">配套服务及快时尚</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('B1F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('B1F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>1</strong>F<br /></h6>
+                                <h6 class="mg-clear">轻奢及休闲餐饮娱乐街</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('1F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('1F')" class="tesla-btn-xs">视频</a>
                             </div>
                             <div class="col">
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>9</strong>F<br /></h6>
-                                <h6 class="mg-clear">高档餐饮</h6>
-                                <a href="javascript: showFloorVR('9F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>8</strong>F<br /></h6>
+                                <h6 class="mg-clear">餐饮&娱乐</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('8F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('8F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>7</strong>F<br /></h6>
-                                <h6 class="mg-clear">健康塑形及特色餐饮</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('7F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('7F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>6</strong>F<br /></h6>
+                                <h6 class="mg-clear">餐饮&中国风</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('6F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVR('6F')" class="tesla-btn-xs tc-yellow">VR</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>5</strong>F<br /></h6>
-                                <h6 class="mg-clear">运动&生活</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('5F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('5F')" class="tesla-btn-xs">VR</a>
+                                <h6 class="mg-clear"><strong>4</strong>F<br /></h6>
+                                <h6 class="mg-clear">男装&数码</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('4F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVideo('4F')" class="tesla-btn-xs">视频</a>
                                 <div class="divider-h tesla-specs-divider">
                                     <span class="divider"></span>
                                 </div>
-                                <h6 class="mg-clear tesla-white "><strong>3</strong>F<br /></h6>
-                                <h6 class="mg-clear">快时尚</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('3F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('3F')" class="tesla-btn-xs">VR</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
-                                <h6 class="mg-clear tesla-white "><strong>1</strong>F<br /></h6>
-                                <h6 class="mg-clear">轻奢及休闲餐饮娱乐街</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('1F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('1F')" class="tesla-btn-xs">VR</a>
+                                 <h6 class="mg-clear"><strong>2</strong>F<br /></h6>
+                                <h6 class="mg-clear">儿童第三个家</h6>
+                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('2F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
+                                <a href="javascript: showFloorVR('2F')" class="tesla-btn-xs tc-yellow">VR</a>
                             </div>
                         </div>
                     </div>
@@ -361,6 +352,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
+        </a>
+    </div>
+</div>
+
+<div id="video_viewer" class="weui-gallery" style="display: none;">
+    <video class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto; margin-top: 50%;">
+        <source src="javascript:;" type="video/mp4">
+    </video>
+    <div class="weui-gallery__opr">
+        <a href="javascript:" class="weui-gallery__del">
+            <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#video_viewer video").trigger("pause"); $("#video_viewer video").attr("src","javascript:;"); $("#video_viewer").hide();'></i>
         </a>
     </div>
 </div>

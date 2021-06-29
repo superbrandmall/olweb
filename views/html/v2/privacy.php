@@ -7,7 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page" style="margin-top: 65px;">
+<div class="page">
     <div class="page__bd">
         <article class="weui-article">
             <h1>《OLL线上租隐私政策》</h1>
@@ -181,7 +181,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <a><b><span style="font-size:11.0pt;font-family:&quot;color:#555555;">（六）您可选择是否授权我们收集和使用您的个人信息的情形</span></b></a><a class="msocomanchor" id="_anchor_10" href="#_msocom_10" name="_msoanchor_10"></a><span></span><span style="font-size:11.0pt;font-family:&quot;color:#555555;"></span>
                 </p>
                 <p style="text-indent:2em;">
-                    <span style="font-size:11.0pt;font-family:&quot;color:#555555;">1<span>、为使您使用我们的服务更便捷或更有乐趣，从而提升您在租得好的体验，我们的以下附加功能中可能会收集和使用您的个人信息。<b>如果您不提供这些个人信息，您依然可以使用本平台的产品或服务中的核心功能，但您可能无法使用这些可以为您所带来更多乐趣的附加功能或在使用某些产品或服务时需要重复填写一些信息。</b>这些附加功能包括：</span></span>
+                    <span style="font-size:11.0pt;font-family:&quot;color:#555555;">1<span>、为使您使用我们的服务更便捷或更有乐趣，从而提升您在OLL线上租的体验，我们的以下附加功能中可能会收集和使用您的个人信息。<b>如果您不提供这些个人信息，您依然可以使用本平台的产品或服务中的核心功能，但您可能无法使用这些可以为您所带来更多乐趣的附加功能或在使用某些产品或服务时需要重复填写一些信息。</b>这些附加功能包括：</span></span>
                 </p>
                 <p style="text-indent:2em;">
                     <span style="font-size:11.0pt;font-family:&quot;color:#555555;">1<span>）个性化推荐功能：<b>我们可能会收集您的看铺记录、浏览信息、您设备的位置信息、您向本平台提供的其他信息进行数据分析以形成用户画像，用来将您感兴趣的商铺、场地空间、广告位或服务信息展示给您；或在您搜索时向您展示您可能希望找到的信息。例如，我们会收集您浏览的商铺、看铺记录向您推荐您可能希望找到的商铺；我们会收集您的浏览信息等，为您推荐您可能感兴趣的相关资讯。如果您不希望接收到此类推荐信息，可以通过账户设置或按照我们提示的方式进行退订。</b></span></span>
@@ -580,7 +580,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <p>感谢您对OLL线上租的支持和关注！</p>
         </div>
         <div class="weui-dialog__ft">
-            <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary">我知道了</a>
+            <a href="javascript: hideDialog();" class="weui-dialog__btn weui-dialog__btn_primary">我知道了</a>
         </div>
     </div>
 </div>

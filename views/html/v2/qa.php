@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page-hd" style="margin-top: 65px;">
+<div class="page-hd">
     <h1 class="page-hd-title">
         F&Q
     </h1>

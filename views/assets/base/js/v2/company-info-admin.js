@@ -84,14 +84,14 @@ function findUserCompanyByMobileNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    $.info.company = response.data[0].id;
-                    $('#company_name').val(response.data[0].name);
-                    $('#uscc').val(response.data[0].uscc);
-                    $('#business_scope').val(response.data[0].businessScope);
-                    $('#contact_name_1').val(response.data[0].contactName);
-                    $('#contact_phone_1').val(response.data[0].contactPhone);
-                    $('#contact_email').val(response.data[0].contactEmail);
+                if(response.data != null && response.data != ''){
+                    $.info.company = response.data.id;
+                    $('#company_name').val(response.data.name);
+                    $('#uscc').val(response.data.uscc);
+                    $('#business_scope').val(response.data.businessScope);
+                    $('#contact_name_1').val(response.data.contactName);
+                    $('#contact_phone_1').val(response.data.contactPhone);
+                    $('#contact_email').val(response.data.contactEmail);
                 }
             }
         }
