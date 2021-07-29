@@ -12,8 +12,8 @@ $(document).ready(function(){
 })
 
 function showIndexPix(){
-    var urlRoot = '/upload/video/sbm/sbm';
-    var indexRange = [0, 152];
+    var urlRoot = '/upload/video/sbm-0/sbm';
+    var indexRange = [0, 150];
     var maxLength = indexRange[1] - indexRange[0] + 1;
     // loading
     var eleContainer = document.getElementById('pix_sbm');

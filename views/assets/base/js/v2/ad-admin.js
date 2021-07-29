@@ -16,6 +16,7 @@ $.schedule = {
 }
 
 $.order = {
+    goCheck: 1,
     copy: "",
     uscc: "",
     company: "",
@@ -48,6 +49,10 @@ $(document).ready(function(){
     
     if($.cookie('result_'+getURLParameter('id')) != '' && $.cookie('result_'+getURLParameter('id')) != null){
         $('#days').text($.cookie('result_'+getURLParameter('id'))+'天');
+    }
+    
+    if($.cookie('amount_'+getURLParameter('id')) != '' && $.cookie('amount_'+getURLParameter('id')) != null){
+        $('#amount').text('¥'+numberWithCommas($.cookie('amount_'+getURLParameter('id'))));
     }
     
     if($.cookie('deposit_'+getURLParameter('id')) != '' && $.cookie('deposit_'+getURLParameter('id')) != null){
@@ -111,25 +116,24 @@ $(document).ready(function(){
         }
     })
     
-    var goCheck = 1;
     $('.weui-count__decrease').click(function (e) {
         if($('.date-start').val() == ''){
             $('.date-start').addClass('red-border');
-            goCheck = 0;
+            $.order.goCheck = 0;
         } else {
             $('.date-start.red-border').removeClass('red-border');
-            goCheck = 1;
+            $.order.goCheck = 1;
         }
-       
+
         if($('.date-end').val() == ''){
             $('.date-end').addClass('red-border');
-            goCheck = 0;
+            $.order.goCheck = 0;
         } else {
             $('.date-end.red-border').removeClass('red-border');
-            goCheck = 1;
+            $.order.goCheck = 1;
         }
-        
-        if(goCheck == 1) {
+
+        if($.order.goCheck == 1) {
             var $input = $(e.currentTarget).parent().find('.weui-count__number');
             var number = parseInt($input.val() || "0") - 1;
             if (number < $(this).parent().find('.weui-count__number').attr('min')) number = $(this).parent().find('.weui-count__number').attr('min');
@@ -143,25 +147,25 @@ $(document).ready(function(){
             getSubTotal();
         }
     })
-    
+
     $('.weui-count__increase').click(function (e) {
         if($('.date-start').val() == ''){
             $('.date-start').addClass('red-border');
-            goCheck = 0;
+            $.order.goCheck = 0;
         } else {
             $('.date-start.red-border').removeClass('red-border');
-            goCheck = 1;
+            $.order.goCheck = 1;
         }
-       
+
         if($('.date-end').val() == ''){
             $('.date-end').addClass('red-border');
-            goCheck = 0;
+            $.order.goCheck = 0;
         } else {
             $('.date-end.red-border').removeClass('red-border');
-            goCheck = 1;
+            $.order.goCheck = 1;
         }
-        
-        if(goCheck == 1) {
+
+        if($.order.goCheck == 1) {
             var $input = $(e.currentTarget).parent().find('.weui-count__number');
             var number = parseInt($input.val() || "0") + 1;
             if (number > $(this).parent().find('.weui-count__number').attr('max')) number = $(this).parent().find('.weui-count__number').attr('max');
@@ -262,7 +266,44 @@ function GetAdInfo(){
                         });
                         
                         $('#orderType').click(function(){
-                            showOrderTypeDialog();
+                            if($('.date-start').val() == ''){
+                                $('.date-start').addClass('red-border');
+                                $.order.goCheck = 0;
+                            } else {
+                                $('.date-start.red-border').removeClass('red-border');
+                                $.order.goCheck = 1;
+                            }
+
+                            if($('.date-end').val() == ''){
+                                $('.date-end').addClass('red-border');
+                                $.order.goCheck = 0;
+                            } else {
+                                $('.date-end.red-border').removeClass('red-border');
+                                $.order.goCheck = 1;
+                            }
+
+                            if(dateCompare($('.date-start').val(),$('.date-end').val()) == false){
+                                $('.date-start').addClass('red-border');
+                                $('.date-end').addClass('red-border');
+                                $.order.goCheck = 0;
+                            }
+                            
+                            if($.order.goCheck == 1){
+                                showOrderTypeDialog();      
+                            } else {
+                                $('body').append('<div id="js_toast_4" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">请完成必填项</p></div></div>');
+                                var $toast = $('#js_toast_4');
+                                $('.page.cell').removeClass('slideIn');
+
+                                $('html, body').animate({
+                                    scrollTop: $('.red-border').offset().top
+                                }, 0);
+
+                                $toast.fadeIn(100);
+                                setTimeout(function () {
+                                    $toast.fadeOut(100);
+                                }, 2000);
+                            }
                         });
                         
                         $("#confirm_price").click(function () {
@@ -293,10 +334,14 @@ function GetAdInfo(){
                         }
                         
                         $('#favourite').click(function () {
-                            if (index >= 0) {
-                                removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                            if($.cookie('uid') == '' || $.cookie('uid') == null){
+                                window.location.href = '/v2/login?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
                             } else {
-                                addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                if (index >= 0) {
+                                    removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                } else {
+                                    addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                }
                             }
                         })
     
@@ -335,9 +380,11 @@ function GetAdInfo(){
                             $('#vr').attr('src',v.vr);
                             $('#video').hide();
                         } else {
-                            $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
-                            $("#video").get(0).play();
-                            $('#vr').hide();
+                            document.addEventListener('WeixinJSBridgeReady', function() {
+                                $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                                $("#video").get(0).play();
+                                $('#vr').hide();
+                            })
                         }
                         
                         if(v.typeChs != 'LED/LCD/数字化'){
@@ -360,7 +407,7 @@ function GetAdInfo(){
                 $('#ad_price_frequency').html('<div class="weui-cell__ft" style="text-align: center;">\n\
                     <div class="weui-count">\n\
                         <a class="weui-count__btn weui-count__decrease"></a>\n\
-                        <input id="qty_'+getURLParameter('id')+'" class="weui-count__number" type="number" value="1" min="0" max="'+quantity+'" readonly />\n\
+                        <input id="qty_'+getURLParameter('id')+'" class="weui-count__number" type="number" value="1" min="1" max="'+quantity+'" readonly />\n\
                         <a class="weui-count__btn weui-count__increase" style="'+style+'"></a>\n\
                     </div>\n\
                 </div>');
@@ -511,12 +558,14 @@ function getSubTotal() {
     var eDate =  $('#dateEnd_'+getURLParameter('id')).val();
     var sArr = sDate.split("-");
     var eArr = eDate.split("-");
-    var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
-    var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-    result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+    var sRDate = new Date(sArr[1]+'/'+sArr[2]+'/'+sArr[0]);
+    var eRDate = new Date(eArr[1]+'/'+eArr[2]+'/'+eArr[0]);
+    var result = parseInt(Math.abs(sRDate - eRDate) / 1000 / 60 / 60 /24 + 1);
     $('#days').text(result+'天');
     $.cookie('result_'+getURLParameter('id'),result);
     amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
+    $.cookie('amount_'+getURLParameter('id'),amount);
+    $('#amount').text('¥'+numberWithCommas(amount));
     deposit = parseFloat((amount*0.2).toFixed(2));
     if(deposit < 2000){
         deposit = 2000.00;

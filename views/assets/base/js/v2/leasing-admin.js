@@ -31,15 +31,15 @@ function findAllShopsByStoreCode() {
                         if(v.state === 9) {
                             return true;
                         }
-                        
+                        setTimeout(function () {
                         if($.inArray(v.state, unavailable) >= 0){
                             layer = 'white_box';
                             offline = '<img src="/views/assets/base/img/content/backgrounds/offline.png" style="position: absolute; left: 0; right: 0; top: 15%; margin: 0 auto;" />';
                             moreInfo = '';
                             onClick = '';
                         } else {
-                            moreInfo = '<li><a href="/v2/shop?id='+v.remarkSecond+'&type=leasing">查看详情</a></li>';
-                            onClick = 'onclick="window.location=\'/v2/shop?id='+v.remarkSecond+'&type=leasing\'"';
+                            moreInfo = '<li><a href="/v2/shop?id='+v.shopCode+'&type=leasing">查看详情</a></li>';
+                            onClick = 'onclick="window.location=\'/v2/shop?id='+v.shopCode+'&type=leasing\'"';
                             layer = '';
                             offline = '';
                            
@@ -53,14 +53,12 @@ function findAllShopsByStoreCode() {
                         $.each(businessFormatChs, function(j,w){
                             businessFormat += '<span class="weui-mark-rb">'+w+'</span>&nbsp;';
                         })
-                  
                         
                         $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">\n\
             <div class="'+layer+'"><div class="weui-media-box__bd">\n\
                 <div style="position: relative;">\n\
-                    <img onclick=\'javascript: showGallery("/views/assets/base/img/content/backgrounds/leasing/'+v.remarkSecond+'.'+v.remarkThird+'");\' class="weui-media-box__thumb" src="/views/assets/base/img/content/backgrounds/leasing/'+v.remarkSecond+'.'+v.remarkThird+'" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">\n\
+                    <iframe loading="lazy" src="'+vr+'" frameborder="no" width="100%" height="300" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"></iframe>\n\
                     <ul class="leasing-areas">\n\
-                        <li><a href=\'javascript: showVR("'+vr+'");\'>VR</a></li>\n\
                         '+moreInfo+'\n\
                     </ul>\n\
                 </div>\n\
@@ -73,8 +71,8 @@ function findAllShopsByStoreCode() {
                     <span class="weui-mark-rb">面积 '+v.area+'m<sup>2</sup></span>\n\
                 </div>\n\
             </div>\n\
-        </div>'+offline+'</div>');          
-                    
+        </div>'+offline+'</div>');
+                        }, i*500)
                     });
                 }
             } else {

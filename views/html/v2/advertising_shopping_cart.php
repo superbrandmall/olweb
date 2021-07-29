@@ -80,7 +80,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div id="checkPay" style="position: fixed; bottom: 63px; left: 0; right: 0;text-align: center; z-index: 2;">
+<div id="checkPay" style="position: fixed; bottom: 0; left: 0; right: 0;text-align: center; z-index: 2;">
     <div class="weui-cells" style="margin-top: 0;">
         <div class="weui-cell" style="margin-bottom: 6px;">
             <div class="weui-cells_checkbox">

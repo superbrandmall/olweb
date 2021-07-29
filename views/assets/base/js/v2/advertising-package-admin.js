@@ -354,9 +354,9 @@ function getSubTotal() {
         var eDate = $.cookie('dateEndAdPackage');
         var sArr = sDate.split("-");
         var eArr = eDate.split("-");
-        var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
-        var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-        result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+        var sRDate = new Date(sArr[1]+'/'+sArr[2]+'/'+sArr[0]);
+        var eRDate = new Date(eArr[1]+'/'+eArr[2]+'/'+eArr[0]);
+        var result = parseInt(Math.abs(sRDate - eRDate) / 1000 / 60 / 60 /24 + 1);
         $.cookie('result_adPackage',result);
         originalAmount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
         amount = parseFloat((rentAmount * 0.807 * 1.06 * qty * result).toFixed(2));

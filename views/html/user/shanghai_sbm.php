@@ -317,14 +317,14 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         <div class="c-content-title-1">
                             <h3 class="c-font-bold"><?= $lang['mall_fivestar_hotel'] ?></h3>
                             <ul class="c-content-list-1 c-theme c-separator-dot c-square">
-                                <li class="c-bg-before-red"><a href="http://www.shangri-la.com/cn/shanghai/pudongshangrila/" target="_blank"><?= $lang['mall_shangri_la'] ?></a> <small><?= $lang['mall_shangri_la_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.riverside-beijing.com/" target="_blank"><?= $lang['mall_oriental_riverside'] ?></a> <small><?= $lang['mall_oriental_riverside_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.ritzcarlton.com/zh-cn/hotels/china/shanghai-pudong" target="_blank"><?= $lang['mall_ritz_carlton'] ?></a> <small><?= $lang['mall_ritz_carlton_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="https://shanghai.grand.hyatt.com/zh-Hans/hotel/home.html" target="_blank"><?= $lang['mall_grand_hyatt'] ?></a> <small><?= $lang['mall_grand_hyatt_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.kempinskishanghaihotel.com/" target="_blank"><?= $lang['mall_grand_kempinski'] ?></a> <small><?= $lang['mall_grand_kempinski_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://shanghai-hyatt.com/" target="_blank"><?= $lang['mall_park_hyatt'] ?></a> <small><?= $lang['mall_park_hyatt_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="https://cn.mandarinoriental.com/" target="_blank"><?= $lang['mall_mandarin_oriental'] ?></a> <small><?= $lang['mall_mandarin_oriental_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="https://www.fourseasons.com/zh/pudong/offers/" target="_blank"><?= $lang['mall_four_seasons'] ?></a> <small><?= $lang['mall_four_seasons_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_shangri_la'] ?> <small><?= $lang['mall_shangri_la_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_oriental_riverside'] ?> <small><?= $lang['mall_oriental_riverside_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_ritz_carlton'] ?> <small><?= $lang['mall_ritz_carlton_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_grand_hyatt'] ?> <small><?= $lang['mall_grand_hyatt_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_grand_kempinski'] ?> <small><?= $lang['mall_grand_kempinski_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_park_hyatt'] ?> <small><?= $lang['mall_park_hyatt_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_mandarin_oriental'] ?> <small><?= $lang['mall_mandarin_oriental_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_four_seasons'] ?> <small><?= $lang['mall_four_seasons_addr'] ?></small></li>
                             </ul>
                         </div>
                     </div>

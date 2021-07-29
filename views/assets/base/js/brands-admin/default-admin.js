@@ -171,7 +171,7 @@ function ShowBrands(p,c,u){
                         
                         var user = '管理员';
                         
-                        if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
+                        if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015' || $.cookie('login') == 'CUSER200524000004'){
                             if(v.status == 1){
                                 lockL = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockL_'+v.code+'" class="btn btn-success btn-sm" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
                                 lockS = '<a href=\'javascript: lockBrand("'+v.code+'",0);\' id="lockS_'+v.code+'" class="btn btn-success btn-xs" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
@@ -199,7 +199,7 @@ function ShowBrands(p,c,u){
                         }
                         
                         if(v.userCode == $.cookie('login')){ // 如果登录者为该品牌所有者
-                            if(v.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015'){ // 如果该品牌已锁定并且登录者没有最大权限
+                            if(v.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015' && $.cookie('login') != 'CUSER200524000004'){ // 如果该品牌已锁定并且登录者没有最大权限
                                 updateL = '<span class="btn btn-sm btn-warning">已锁定</span>';
                                 updateS = '<span class="btn btn-xs btn-warning">已锁定</span>';
                             } else {

@@ -54,7 +54,7 @@ function findOneBrandByCode(id) {
                 
                 var brand = response.data;
                 
-                if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
+                if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015' || $.cookie('login') == 'CUSER200524000004'){
                     if(brand.status == 1){
                         $('.lock-link').attr('href','javascript: lockBrand("'+brand.code+'",0)').text('锁定品牌');
                         $('#lock2').removeClass('btn-warning').addClass('btn-success');
@@ -67,7 +67,7 @@ function findOneBrandByCode(id) {
                 }
 
                 if(brand.userCode == $.cookie('login')){ // 如果登录者为该品牌所有者
-                    if(brand.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015'){ // 如果该品牌已锁定并且登录者没有最大权限
+                    if(brand.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015' && $.cookie('login') != 'CUSER200524000004'){ // 如果该品牌已锁定并且登录者没有最大权限
                         $('.lock-link').attr('href','#!').removeClass('btn-success').addClass('btn-warning').text('已锁定');
                         $('.lock-link').parent().show();
                     } else {
@@ -368,7 +368,7 @@ function findContacts(url) {
                             }
                         });
                         
-                        if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015'){
+                        if($.cookie('login') == 'CUSER190709000022' || $.cookie('login') == 'CUSER190709000015' || $.cookie('login') == 'CUSER200524000004'){
                             if(v.status == 1){
                                 lock = '<a href=\'javascript: lockContact("'+v.code+'",0);\' id="lock_'+v.code+'" class="btn btn-success btn-xs" title="Lock"><i class="fa fa-unlock"></i></a>&nbsp;';
                             } else {
@@ -377,7 +377,7 @@ function findContacts(url) {
                         }
                         
                         if(v.userCode == $.cookie('login')){ // 如果登录者为该联系人所有者
-                            if(v.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015'){ // 如果该联系人已锁定并且登录者没有最大权限
+                            if(v.status == 0 && $.cookie('login') != 'CUSER190709000022' && $.cookie('login') != 'CUSER190709000015' && $.cookie('login') != 'CUSER200524000004'){ // 如果该联系人已锁定并且登录者没有最大权限
                                 update = '<span class="btn btn-xs btn-warning">已锁定</span>';
                             } else {
                                 update = '<a href=\'javascript: deleteContact("'+v.code+'");\' class="btn btn-danger btn-xs delete-asset" data-tooltip="true" data-toggle="modal" data-content="是否确定删除该联系人 ?" data-title="删除联系人" onclick="return false;"><i class="fa fa-trash"></i></a>&nbsp;'+lock;

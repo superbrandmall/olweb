@@ -86,9 +86,9 @@ function getUsers() {
         {code: 'CUSER190709000010',name: 'Kevin Jiang'},
         {code: 'CUSER191225000001',name: "Mikayla Deng"},
         {code: 'CUSER191225000002',name: 'Joy Gu'},
-        {code: 'CUSER200524000002',name: 'Amanda Tian'},
+        {code: 'CUSER200524000002',name: 'Yiyi Chen'},
         {code: 'CUSER200524000003',name: 'Willa Sun'},
-        {code: 'CUSER200524000004',name: 'Nick Li'},
+        {code: 'CUSER200524000004',name: 'Johnson Ma'},
         {code: 'CUSER190709000015',name: 'Selena Song'},
         {code: 'CUSER190709000016',name: 'Di Cui'},
         {code: 'CUSER190709000018',name: 'George Qiao'},
@@ -97,8 +97,8 @@ function getUsers() {
         {code: 'CUSER190709000022',name: 'Claude Ma'},
         {code: 'CUSER190709000023',name: 'Abby Shi'},
         {code: 'CUSER190709000024',name: 'Wei Ye'},
-        {code: 'CUSER190927000001',name: 'Barnny Chen'},
-        {code: 'CUSER190924000001',name: 'Mia Hang'}
+        {code: 'CUSER190927000001',name: 'Olivia Xie'},
+        {code: 'CUSER190924000001',name: 'Yiyi Chen'}
         
     )
     
@@ -113,7 +113,9 @@ function getAdmins() {
         'CUSER190709000023',
         'CUSER190709000024',
         'CUSER190924000001',
-        'CUSER190927000001'
+        'CUSER200524000002',
+        'CUSER190927000001',
+        'CUSER200524000004'
     )
     
     sessionStorage.setItem("admins", JSON.stringify(admins));

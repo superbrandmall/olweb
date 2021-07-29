@@ -124,6 +124,7 @@ if($type == 'leasing'){
                             <div class="weui-uploader">
                                 <div class="weui-uploader__hd">
                                     <p class="weui-uploader__title">上传电子签章人授权书</p>
+                                    <div class="weui-uploader__info"><a href="/upload/docs/guides/esign_proxy.docx" download="/upload/docs/guides/esign_proxy.docx">《电子签章授权书》</a></div>
                                 </div>
                                 <div class="weui-uploader__bd">
                                     <p class="weui-cells__title" style="padding: 0;">请上传电子签章人授权书并加盖公章</p>

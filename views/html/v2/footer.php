@@ -1,7 +1,7 @@
 <?php
 if(!in_array($page, $page_no_footer)) {
     ?>
-<div class="weui-footer" style="margin: 10px 0 70px;">
+<div class="weui-footer" style="margin: 10px 0 0; padding-bottom: 70px;">
     <p class="weui-footer__links">
         <a class="weui-footer__link" target="_blank" href="https://beian.miit.gov.cn/">
             沪ICP备14029636号-1

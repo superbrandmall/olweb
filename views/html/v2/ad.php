@@ -66,6 +66,25 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     .calendar-month span.error {
         background-color: #f00 !important;
     }
+    
+    .button-label {
+        border: solid 2px #a2a3a5;
+        color: #a2a3a5;
+        border-radius: 100px;
+        padding: 10px 0;
+        width: 250px;
+        font-size: 12px;
+    }
+
+    .radio-label:checked + .button-label {
+        border: solid 3px #3e6ae1;
+        color: #222;
+        background: #fff;
+    }
+    
+    .hidden {
+        display: none;
+    }
 </style>
 
 <div style="position: relative; margin-top: -11px;">
@@ -99,7 +118,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <input class="weui-input date-end" id="dateEnd_<?= $id; ?>" placeholder="填写档期终止日" readonly>
             </div>
         </div>
-        <div class="weui-flex__item"><small>*我司对档期有最终解释权</small></div>
         <div class="weui-flex__item">
             <table class="content" style="font-size: 11px;">
                 <thead style="background: #F2F2F2; color: #333;">
@@ -130,19 +148,25 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <tr>
                         <td style="background: #F2F2F2; color: #333; font-size: 12px;">天数</td>
                         <td>
-                            <span id="days">请选择档期查看天数</span>
+                            <span id="days">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">押金</td>
+                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">合同总金额</td>
                         <td>
-                            <span id="deposit">请选择档期查看押金</span>
+                            <span id="amount">请选择档期查看</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">押金<br>(合同总金额的20%，<br>押金最少为¥ 2,000)</td>
+                        <td>
+                            <span id="deposit">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="background: #F2F2F2; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
                         <td>
-                            <span id="subTotal" style="color: #b43018">请选择档期查看总价</span>
+                            <span id="subTotal" style="font-weight: bold;">请选择档期查看</span>
                         </td>
                     </tr>
                 </tbody>
@@ -187,13 +211,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-dialog" style="background: #f4f4f4;">
         <div class="weui-dialog__hd"><strong class="weui-dialog__title">请选择</strong></div>
         <form id="appointmentDialogForm">
-            <div class="weui-dialog__bd" style="padding: 0 0 20px;">
+            <div class="weui-dialog__bd" style="padding: 0;">
                 <div class="text-center" style="margin: 0 20px 20px;">
                     <input type="radio" name="accept-offers" id="msg_button" class="hidden radio-label" checked/>
                     <label for="msg_button" class="button-label">无e签宝,线上留言</label>
                     <p id="msg_p">请您留下联系方式，我司稍后会与您联系。</p>
                 </div>
-                <div class="text-center" style="margin:0 20px;">
+                <div class="text-center" style="margin: 0 20px 20px;">
                     <input type="radio" name="accept-offers" id="esign_button" class="hidden radio-label" />
                     <label for="esign_button" class="button-label">e签宝,线上签约并付全款</label>
                     <p id="esign_p" class="hidden">需上传资质文件，待审核后通过e签宝电子签章平台完成双方用印。</p>

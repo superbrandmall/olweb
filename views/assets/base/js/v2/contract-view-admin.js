@@ -42,14 +42,14 @@ function sendFiles() {
         success: function (response, status, xhr) {
             hideLoading();
             if(response.code === 'C0') {
-                /*$(function(){
+                $(function(){
                     var $toast = $('#js_toast');
                     $toast.fadeIn(100);
                     setTimeout(function () {
                         $toast.fadeOut(100);
-                        window.history.back(-1);
+                        location.reload();
                     }, 2000);
-                });*/
+                });
             } else {
                 interpretBusinessCode(response.customerMessage);
             }

@@ -547,10 +547,10 @@ function GetShopInfo(sc){
                 
                 $('#brand_name').append(' <span class="badge '+shopStateClass+'">'+state+'</span>');
                 
-                $('#rent').text((shop.deadRent || '-' ) + ' yuan/m²/day');
+                $('#rent').text((shop.deadRent || '-' ) + '元/m²/天');
                 $('#float_rent').text((Math.round(shop.floatingRentalRate * 100) || '-' ) + '%');
                 
-                $('#area').text((shop.area || '-' ) + ' m²');
+                $('#area').text((shop.area || '-' ) + 'm²');
                 
                 if(shop.brandName != null && shop.brandName != '') {
                     if(shop.shopState == 1) {
@@ -753,10 +753,10 @@ function showShopSales(brand,bu,date) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 $('#weeks').text(response.data.weeks > 0 ? response.data.weeks : 4); 
-                $('#sales').text((numberWithCommas(response.data.total) || 0 ) + ' yuan'); 
+                $('#sales').text((numberWithCommas(response.data.total) || 0 ) + '元'); 
             } else {
                 $('#weeks').text('4');
-                $('#sales').text('0 yuan'); 
+                $('#sales').text('0'); 
             }
         }
     });
@@ -862,32 +862,28 @@ function getFloors() {
 function getUsers() {
     var users = [];
     users.push(
-        {code: 'CUSER190709000001',name: 'Victor Jiang'},
+        {code: 'CUSER190709000008',name: 'Tanya Chen'},
         {code: 'CUSER190709000002',name: 'Chris Chen'},
-        {code: 'CUSER190709000003',name: 'Grace Xu'},
+        {code: 'CUSER200524000001',name: 'Nicole Zhang'},
         {code: 'CUSER190709000004',name: 'Maggie Li'},
         {code: 'CUSER190709000005',name: 'Jeff Xu'},
         {code: 'CUSER190709000006',name: "Austin Rao"},
         {code: 'CUSER191225000001',name: "Mikayla Deng"},
-        {code: 'CUSER190709000008',name: 'Doris Zhou'},
-        {code: 'CUSER191225000002',name: 'Joy Gu'},
         {code: 'CUSER190709000009',name: 'Megan Jing'},
-        {code: 'CUSER190709000010',name: 'Kevin Jiang'},
-        {code: 'CUSER190709000011',name: 'Melissa Bing'},
-        {code: 'CUSER190709000012',name: "Pierre Fang"},
-        {code: 'CUSER190709000013',name: 'Sylvia Wei'},
+        {code: 'CUSER200524000003',name: 'Willa Sun'},
+        {code: 'CUSER190709000021',name: 'Anna Li'},
+        {code: 'CUSER190709000010',name: 'Emma Yang'},
+        {code: 'CUSER190924000001',name: 'Yiyi Chen'},
+        {code: 'CUSER200524000002',name: "Yiyi Chen"},
+        {code: 'CUSER190927000001',name: 'Olivia Xie'},
         {code: 'CUSER190709000015',name: 'Selena Song'},
         {code: 'CUSER190709000016',name: 'Di Cui'},
-        {code: 'CUSER190709000017',name: 'Echo Zhou'},
-        {code: 'CUSER190709000018',name: 'George Qiao'},
-        {code: 'CUSER190709000019',name: 'Dolby Li'},
+        {code: 'CUSER200524000004',name: 'Johnson Ma'},
+        {code: 'CUSER210628000002',name: 'Soking Huang'},
         {code: 'CUSER190709000020',name: 'Ariel Huang'},
-        {code: 'CUSER190709000021',name: 'Joy Zhou'},
         {code: 'CUSER190709000022',name: 'Claude Ma'},
         {code: 'CUSER190709000023',name: 'Abby Shi'},
-        {code: 'CUSER190709000024',name: 'Wei Ye'},
-        {code: 'CUSER190924000001',name: 'Mia Hang'},
-        {code: 'CUSER190927000001',name: 'Barnny Chen'}
+        {code: 'CUSER190709000024',name: 'Wei Ye'}
     )
     
     sessionStorage.setItem("users", JSON.stringify(users));

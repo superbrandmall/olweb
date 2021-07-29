@@ -395,7 +395,9 @@
                 }
                 if (this.checkOut ) {
                     $checkoutDate.html(this.checkOut.format('yyyy-MM-dd'));
-                    checkAdSchedule();
+                    if(getURLParameter('type') && getURLParameter('type') == 'ads'){
+                        checkAdSchedule();
+                    }
                 }
 
                 $totalDays.text('_');

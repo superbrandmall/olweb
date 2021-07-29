@@ -9,6 +9,8 @@ $.availableAdsUnit = new Array();
 $.shopCodeTemp = '';
 $.multipleTemp = 0;
 
+$.subTotal = 0;
+
 var d = new Date();
 var month = d.getMonth()+1;
 var day = d.getDate();
@@ -362,7 +364,7 @@ function renderAdsList(s){
                 <div class="weui-cell__ft">\n\
                     <div class="weui-count">\n\
                         <a class="weui-count__btn weui-count__decrease"></a>\n\
-                        <input id="qty_'+w.shopCode+'" class="weui-count__number" type="number" value="1" min="0" max="'+quantity+'" readonly />\n\
+                        <input id="qty_'+w.shopCode+'" class="weui-count__number" type="number" value="1" min="1" max="'+quantity+'" readonly />\n\
                         <a class="weui-count__btn weui-count__increase" style="'+style+'"></a>\n\
                     </div>\n\
                 </div>\n\
@@ -403,7 +405,18 @@ function getAdBaseInfo() {
                 sessionStorage.setItem("ads", JSON.stringify(response.data));
                                 
                 $('#confirm_price').click(function(){
-                    datesAlignCheck();
+                    if($.subTotal > 0){
+                        datesAlignCheck();
+                    } else {
+                        $('body').append('<div id="js_toast_4" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">无法结算</p></div></div>');
+                        var $toast = $('#js_toast_4');
+                        $('.page.cell').removeClass('slideIn');
+
+                        $toast.fadeIn(100);
+                        setTimeout(function () {
+                            $toast.fadeOut(100);
+                        }, 2000);
+                    }
                 });
             } else {
                 interpretBusinessCode(response.customerMessage);
@@ -599,8 +612,8 @@ function checkAdSubtotalSchedule(code) {
                 hideLoading();
                 if(response.data.returnCode == 'ERROR'){
                     $.cookie('available_'+code,0);
-                    $('body').append('<div id="js_toast_3" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
-                    var $toast = $('#js_toast_3');
+                    $('body').append('<div id="js_toast_1" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+response.data.returnMessage+'</p></div></div>');
+                    var $toast = $('#js_toast_1');
                     $('#dateStart_'+code).val('');
                     $('#dateEnd_'+code).val('');
                     $('.page.cell').removeClass('slideIn');
@@ -621,7 +634,7 @@ function checkAdSubtotalSchedule(code) {
 }
 
 function getSubTotal() {
-    var subTotal = 0;
+    $.subTotal = 0;
     var subItems = 0;
     var storeCode = 'OLMALL180917000003';
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
@@ -656,9 +669,9 @@ function getSubTotal() {
                             var eDate =  $('#dateEnd_'+code).val();
                             var sArr = sDate.split("-");
                             var eArr = eDate.split("-");
-                            var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
-                            var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-                            result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+                            var sRDate = new Date(sArr[1]+'/'+sArr[2]+'/'+sArr[0]);
+                            var eRDate = new Date(eArr[1]+'/'+eArr[2]+'/'+eArr[0]);
+                            var result = parseInt(Math.abs(sRDate - eRDate) / 1000 / 60 / 60 /24 + 1);
                         } else {
                             result = 0;
                         }
@@ -666,12 +679,12 @@ function getSubTotal() {
                         $.cookie('result_ad',result);
                         amount = parseFloat((rentAmount * 1.06 * qty * result).toFixed(2));
                         deposit = parseFloat((amount*0.2).toFixed(2));
-                        if(deposit < 2000){
+                        if(amount > 0 && deposit < 2000){
                             deposit = 2000.00;
                         }
                         amount = parseFloat((amount+deposit).toFixed(2));
                         $('#totalAmount_'+code).text(numberWithCommas(amount.toFixed(2)));
-                        subTotal = parseFloat((subTotal+amount).toFixed(2));
+                        $.subTotal = parseFloat(($.subTotal+amount).toFixed(2));
                         subItems = parseInt(subItems) + parseInt(qty);
                     }
                 }
@@ -727,8 +740,8 @@ function getSubTotal() {
     
     checkAdSubtotalSchedule(code);
     
-    $('#subTotal').text(numberWithCommas(subTotal.toFixed(2)));
-    $.cookie('subtotal',subTotal.toFixed(2));
+    $('#subTotal').text(numberWithCommas($.subTotal.toFixed(2)));
+    $.cookie('subtotal',$.subTotal.toFixed(2));
     $('#subQTY').text(subItems);
     $.cookie('subqty',subItems);
     

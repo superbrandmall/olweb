@@ -49,6 +49,31 @@ function getAllOrders() {
                 var img = '';
                 var empty = 1;
                 if(response.data.length > 0){
+                    $.each(response.data, function(i,v){
+                        if(v.remarkSecond == 'leasing'){
+                            var mallCode;
+                            switch (v.orgCode) {
+                                case '301001':
+                                    mallCode = 'OLMALL190117000001';
+                                    break;
+                                case '201001':
+                                    mallCode = 'OLMALL180917000002';
+                                    break;
+                                case '100001':
+                                    mallCode = 'OLMALL180917000003';
+                                    break;
+                                case '204001':
+                                    mallCode = 'OLMALL180917000001';
+                                    break;
+                                default:
+                                    mallCode = 'OLMALL180917000003';
+                                    break;
+                            }
+                            
+                            getShopState(mallCode,v.contractInfos[0].shopCode);
+                        }
+                    })
+                    
                     $.each(response.data.reverse(), function(i,v){
                         if(v.state == 1 && (v.orderStates == '合同已生成' || v.orderStates == '合同用印中' || v.orderStates == '待付款订单' || v.orderStates == '定金待支付' || v.orderStates == '已完成订单' || v.orderStates == '已关闭订单')){
                             empty = 0;
@@ -102,7 +127,13 @@ function getAllOrders() {
                                             break;
                                     }
                                     
-                                    shopState = getShopState(mallCode,v.contractInfos[0].shopCode);
+                                    var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mallCode+"_"+v.contractInfos[0].shopCode));
+                                    if(temp != null){
+                                        var shopState = temp.state;
+                                    } else {
+                                        shopState = 0;
+                                    }
+                                                                        
                                     switch (shopState) {
                                         case 1: //该铺位目前可签约
                                             break;
@@ -125,7 +156,10 @@ function getAllOrders() {
                                             break;
                                         case 0:
                                             leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
-                                            break;    
+                                            break;
+                                        case 9:
+                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
+                                            break;
                                         default:
                                             leasingState = '';
                                             break;
@@ -179,33 +213,38 @@ function getAllOrders() {
                                 img = "/views/assets/base/img/content/backgrounds/ads/"+v.remarkFirst+".jpg";
                             }
 
-                            var mallName, mallCode, buildingCode;
+                            var mallName, mallCode, buildingCode, mallSpell;
                             var refundLink = '';
                             switch (v.orgCode) {
                                 case '301001':
                                     mallName = '河南洛阳正大广场';
                                     mallCode = 'OLMALL190117000001';
                                     buildingCode = 'OLBUILDING190117000001';
+                                    mallSpell = 'ly';
                                     break;
                                 case '201001':
                                     mallName = '上海宝山正大乐城';
                                     mallCode = 'OLMALL180917000002';
                                     buildingCode = 'OLBUILDING180917000005';
+                                    mallSpell = 'bs';
                                     break;
                                 case '100001':
                                     mallName = '上海陆家嘴正大广场';
                                     mallCode = 'OLMALL180917000003';
                                     buildingCode = 'OLBUILDING180917000001';
+                                    mallSpell = 'ljz';
                                     break;
                                 case '204001':
                                     mallName = '上海徐汇正大乐城';
                                     mallCode = 'OLMALL180917000001';
                                     buildingCode = 'OLBUILDING180917000006';
+                                    mallSpell = 'xh';
                                     break;
                                 default:
                                     mallName = '上海陆家嘴正大广场';
                                     mallCode = 'OLMALL180917000003';
                                     buildingCode = 'OLBUILDING180917000001';
+                                    mallSpell = 'ljz';
                                     break;
                             }
                             
@@ -220,9 +259,11 @@ function getAllOrders() {
                             }
                                 
                             if(v.state == 1 && v.orderStates == '合同已生成' && (shopState == 1 || shopState == 2 || shopState == 3)){
-                                alink = '<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同并用印</a></a></li>';
+                                alink = '<li><a class="current" href="/upload/docs/guides/esign_proxy.docx" download="/upload/docs/guides/esign_proxy.docx">下载电子签章授权书</a></li>\n\
+<li><a class="current" href="/v2/contract?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同并用印</a></a></li>';
                             } else if(v.state == 1 && v.orderStates == '合同用印中' && (shopState == 1 || shopState == 2 || shopState == 3)){
-                                alink = '<li><a class="current" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
+                                alink = '<li><a class="current" href="/upload/docs/guides/esign_proxy.docx" download="/upload/docs/guides/esign_proxy.docx">下载电子签章授权书</a></li>\n\
+<li><a class="current" href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
                             } else if(v.state == 1 && v.orderStates === '待付款订单' && shopState == 4){
                                 alink = '<li><a class="current" href="/v2/bill?trade='+v.outTradeNo+'">查看账单</a></li>\n\
 <li><a href="/v2/contract-view?type='+v.remarkSecond+'&trade='+v.outTradeNo+'">查看合同</a></li>';
@@ -241,8 +282,8 @@ function getAllOrders() {
                                 alink = '<li><a href=\'javascript: hideOrder("'+v.id+'");\'>隐藏已关闭订单</a></li>';
                             } 
                                                         
-                            $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel">\n\
-        <div class="weui-panel__hd">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
+                            $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel" onclick="window.location.href=\'/v2/order-details?trade='+v.outTradeNo+'\'">\n\
+        <div class="weui-panel__hd" onclick="window.location.href=\'/v2/'+mallSpell+'\'">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
         <div class="f-orange" style="float: right;">'+v.orderStates+'</div></div></div>');
          
                             var weuiPanelBdId = '';
@@ -374,30 +415,44 @@ function getShopInfo(sc){
 }
 
 function getShopState(mall,sc){
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndShopCode?storeCode="+mall+"&shopCode="+sc,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-
-                sessionStorage.setItem("shopmoreinfo_"+mall+"_"+sc, JSON.stringify(response.data));
-                var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc));
-                var state = temp.state;
-                return state;
-            }
+    if(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc) && sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc) != '' && sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc) != null){
+        var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc));
+        if(temp != null){
+            var state = temp.state;
+        } else {
+            state = 0;
         }
-    })
+        return state;
+    } else {
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCodeAndShopCode?storeCode="+mall+"&shopCode="+sc,
+            type: "GET",
+            async: false,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    sessionStorage.setItem("shopmoreinfo_"+mall+"_"+sc, JSON.stringify(response.data));
+                    var temp = $.parseJSON(sessionStorage.getItem("shopmoreinfo_"+mall+"_"+sc));
+                    if(temp != null){
+                        var state = temp.state;
+                    } else {
+                        state = 0;
+                    }
+                    return state;
+                }
+            }
+        })
+    }
 }
 
 function deleteOrder(id){

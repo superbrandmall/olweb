@@ -93,7 +93,6 @@ function getOrderByTradeNO() {
                 $('#expect').text($.order.expect);
                 $('#outTradeNo').text(response.data.outTradeNo);
                 $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
-                $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
 
                 $('#startPay').click(function(){
                     if($("input[id=wechatPay]").prop("checked")){

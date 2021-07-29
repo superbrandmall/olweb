@@ -278,6 +278,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'v2/to-pay' => array(
             'url' => 'to_pay.php'
         ),
+        'v2/order-details' => array(
+            'url' => 'order_details.php'
+        ),
         'v2/bill' => array(
             'url' => 'bill.php'
         ),
@@ -330,8 +333,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
 
     $session_required = array('login.php', 'info.php', 'contact.php', 'my_files.php', 'qa.php', 'my_msg.php', 'register.php', 'pay_done.php', 'my_reservation.php', 
         'advertising_shopping_cart.php', 'advertising_package.php', 'negotiation.php', 'all_orders.php', 'my_favourites.php', 'order_to_be_stamped.php', 
-        'stamping.php', 'to_pay.php', 'bill.php', 'bill_2.php', 'engineering.php', 'improve_info.php', 'improve_info2.php', 'company_info.php', 'contract.php',
-        'contract_view.php','contract_view2.php','unionpay.php');
+        'stamping.php', 'to_pay.php', 'order_details.php', 'bill.php', 'bill_2.php', 'engineering.php', 'improve_info.php', 'improve_info2.php', 'company_info.php',
+        'contract.php', 'contract_view.php','contract_view2.php','unionpay.php');
     $page_nikola = array('default.php', 'login.php', 'ljz.php', 'xh.php', 'bs.php', 'ly.php');
     $page_no_footer = array('default.php','ljz.php','improve_info.php','improve_info2.php');
     

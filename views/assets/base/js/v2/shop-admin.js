@@ -137,8 +137,12 @@ function findAllShopsByStoreCode() {
                 if(response.data.length > 0){
                     var unavailable = [0,4,5];
                     $.each(response.data, function(i,v){
+                        if(v.state === 9) {
+                            return true;
+                        }
+                        
                         if($.inArray(v.state, unavailable) < 0){
-                            $.shopCodes.push(v.remarkSecond);
+                            $.shopCodes.push(v.shopCode);
                         }
                     });
                 }                
@@ -282,9 +286,11 @@ function getShopsMoreInfo() {
                         $('#vr').attr('src',response.data.remarkFourth);
                         $('#video_4').hide();
                     } else {
-                        $("#video_4").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
-                        $("#video_4").get(0).play();
-                        $('#vr').hide();
+                        document.addEventListener('WeixinJSBridgeReady', function() {
+                            $("#video_4").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                            $("#video_4").get(0).play();
+                            $('#vr').hide();
+                        })
                     }
                         
                     var leasingState;
@@ -316,7 +322,6 @@ function getShopsMoreInfo() {
                     
                     $('.page__bd ul li:first-child .js-category-1').prepend(leasingState);
                     $('#desc').text(response.data.descript);
-                    $('#businessFormatChs').text($.cookie('categorySelected').split('::')[1]);
                     $('#freeOfGroundRent').text(response.data.freeOfGroundRent);
                     $.cookie('contractLength',response.data.contractLength);
 
@@ -407,7 +412,7 @@ function getShopsMoreInfo() {
                     $('#openDate').text(openDate);
                     $.cookie('openDate',openDate);
                     
-                    $('#vr').click(function () {
+                    $('#vr_3d').click(function () {
                         if(response.data.remarkFirst != null){
                             showVR(response.data.remarkFirst);
                         }
@@ -423,10 +428,14 @@ function getShopsMoreInfo() {
                     }
 
                     $('#favourite').click(function(){
-                        if(index >= 0){
-                            removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
+                        if($.cookie('uid') == '' || $.cookie('uid') == null){
+                            window.location.href = '/v2/login?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
                         } else {
-                            addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,u);
+                            if(index >= 0){
+                                removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,response.data.unitCode);
+                            } else {
+                                addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],response.data.buildingCode,getURLParameter('id'),response.data.storeCode,response.data.unitCode);
+                            }
                         }
                     })
 

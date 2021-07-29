@@ -48,6 +48,10 @@ $(document).ready(function () {
         $('.date-end').val($.cookie('dateEnd_'+getURLParameter('id')));
     }
     
+    if($.cookie('amount_'+getURLParameter('id')) != '' && $.cookie('amount_'+getURLParameter('id')) != null){
+        $('#amount').text('¥'+numberWithCommas($.cookie('amount_'+getURLParameter('id'))));
+    }
+    
     if($.cookie('deposit_'+getURLParameter('id')) != '' && $.cookie('deposit_'+getURLParameter('id')) != null){
         $('#deposit').text('¥'+numberWithCommas($.cookie('deposit_'+getURLParameter('id'))));
     }
@@ -150,6 +154,7 @@ function getEventServices() {
             });
 
             $('#event_type').on('click', function () {
+                $(this).blur(); 
                 weui.picker($.eventTypes, {
                     onChange: function (result) {},
                     onConfirm: function (result) {
@@ -279,9 +284,9 @@ function getSubTotal() {
     var deposit = 0;
     var sArr = sDate.split("-");
     var eArr = eDate.split("-");
-    var sRDate = new Date(sArr[0], sArr[1], sArr[2]);
-    var eRDate = new Date(eArr[0], eArr[1], eArr[2]);
-    var result = (eRDate-sRDate)/(24*60*60*1000)+1 || 1;
+    var sRDate = new Date(sArr[1]+'/'+sArr[2]+'/'+sArr[0]);
+    var eRDate = new Date(eArr[1]+'/'+eArr[2]+'/'+eArr[0]);
+    var result = parseInt(Math.abs(sRDate - eRDate) / 1000 / 60 / 60 /24 + 1);
     var d = sDate;
     
     $.subTotal = 0;
@@ -312,6 +317,8 @@ function getSubTotal() {
 
                 $.subTotal = parseFloat(($.subTotal + parseFloat((amount*1.05).toFixed(2))).toFixed(2));
                 $.cookie('total_'+getURLParameter('id'),$.subTotal);
+                $.cookie('amount_'+getURLParameter('id'),$.subTotal);
+                $('#amount').text('¥'+numberWithCommas($.subTotal));
                 return false;
             }
         })
@@ -335,7 +342,7 @@ function getSubTotal() {
     if(deposit < 5000){
         deposit = 5000.00;
     }
-    $.cookie('eventDeposit',deposit);
+    $.cookie('deposit_'+getURLParameter('id'),deposit);
     $('#deposit').text('¥'+numberWithCommas(deposit));
     
     $.cookie('total_'+getURLParameter('id'),parseFloat(($.subTotal+deposit).toFixed(2)));
@@ -415,9 +422,11 @@ function getShopInfo() {
                                 $('#vr').attr('src',v.vr);
                                 $('#video').hide();
                             } else {
-                                $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
-                                $("#video").get(0).play();
-                                $('#vr').hide();
+                                document.addEventListener('WeixinJSBridgeReady', function() {
+                                    $("#video").attr('src','/upload/video/'+getURLParameter('id')+'.mp4');
+                                    $("#video").get(0).play();
+                                    $('#vr').hide();
+                                })
                             }
 
                             $('#shopName').text(v.shopNo);
@@ -438,10 +447,14 @@ function getShopInfo() {
                             }
 
                             $('#favourite').click(function () {
-                                if (index >= 0) {
-                                    removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                if($.cookie('uid') == '' || $.cookie('uid') == null){
+                                    window.location.href = '/v2/login?id='+getURLParameter('id')+'&type='+getURLParameter('type')+'&storeCode='+getURLParameter('storeCode');
                                 } else {
-                                    addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                    if (index >= 0) {
+                                        removeFavorite($.favoritesId[$.inArray(getURLParameter('id'), $.favorites)], v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                    } else {
+                                        addToFavorite($.updateFavoritesId[$.inArray(getURLParameter('id'), $.updateFavorites)],v.buildingCode, getURLParameter('id'), v.storeCode, v.unitCode);
+                                    }
                                 }
                             })
                         }
@@ -631,7 +644,7 @@ function saveOrder(ut){
             "bizScope": $.order.businessScope,
             "breachAmount": "",
             "code": unit,
-            "depositAmount": $.cookie('eventDeposit'),
+            "depositAmount": $.cookie('deposit_'+getURLParameter('id')),
             "electricBillFlag": "1",
             "endDate": $.cookie('dateEnd_'+getURLParameter('id')),
             "enterDate": "",

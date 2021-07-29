@@ -44,7 +44,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea id="contact_msg" name="contact_msg" class="weui-textarea" placeholder="请您留言" name="contact_msg" rows="5" onkeyup="textarea(this);"></textarea>
+                    <textarea id="contact_msg" name="contact_msg" class="weui-textarea" placeholder="请您留言" name="contact_msg" rows="5"></textarea>
                     <div class="weui-textarea-counter"><span>0</span>/<i>200</i></div>
                     <div id="errorcontainer-contact_msg" class="errorDiv"></div>
                 </div>

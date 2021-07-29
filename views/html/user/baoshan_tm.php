@@ -197,9 +197,9 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                         <div class="c-content-title-1">
                             <h3 class="c-font-bold"><?= $lang['mall_fivestar_hotel'] ?></h3>
                             <ul class="c-content-list-1 c-theme c-separator-dot c-square">
-                                <li class="c-bg-before-red"><a href="http://hotels.huazhu.com/hotel/detail/9001006" target="_blank"><?= $lang['mall_bs_ji_gucun_park_station_hotel'] ?></a> <small><?= $lang['mall_bs_ji_gucun_park_station_hotel_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://hotels.huazhu.com/hotel/detail/2019071" target="_blank"><?= $lang['mall_bs_ji_julian_rd_hotel'] ?></a> <small><?= $lang['mall_bs_ji_julian_rd_hotel_addr'] ?></small></li>
-                                <li class="c-bg-before-red"><a href="http://www.hengshanbjhotel.com/" target="_blank"><?= $lang['mall_bs_hengshanbj_hotel'] ?></a> <small><?= $lang['mall_bs_hengshanbj_hotel_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_bs_ji_gucun_park_station_hotel'] ?> <small><?= $lang['mall_bs_ji_gucun_park_station_hotel_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_bs_ji_julian_rd_hotel'] ?> <small><?= $lang['mall_bs_ji_julian_rd_hotel_addr'] ?></small></li>
+                                <li class="c-bg-before-red"><?= $lang['mall_bs_hengshanbj_hotel'] ?> <small><?= $lang['mall_bs_hengshanbj_hotel_addr'] ?></small></li>
                             </ul>
                         </div>
                     </div>

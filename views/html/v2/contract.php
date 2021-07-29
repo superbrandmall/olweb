@@ -124,6 +124,7 @@ if($type == 'leasing'){
                             <div class="weui-uploader">
                                 <div class="weui-uploader__hd">
                                     <p class="weui-uploader__title">上传电子签章人授权书</p>
+                                    <div class="weui-uploader__info"><a href="/upload/docs/guides/esign_proxy.docx" download="/upload/docs/guides/esign_proxy.docx">《电子签章授权书》</a></div>
                                 </div>
                                 <div class="weui-uploader__bd">
                                     <p class="weui-cells__title" style="padding: 0;">请上传电子签章人授权书并加盖公章</p>
@@ -215,35 +216,35 @@ if($type == 'leasing'){
 </div>
 
 <div class="js_dialog" id="authDialog" style="display: none;">
-    <form id="authDialogForm">
+    <form id="authDialogForm" onsubmit="return false;" action="">
         <div class="weui-mask"></div>
         <div class="weui-dialog" style="background: #fff;">
             <div class="weui-dialog__hd"><strong class="weui-dialog__title">授权人信息</strong></div>
             <div class="weui-dialog__bd">
-                <div class="weui-cells__title" style="padding: 0;"><i class="fa fa-info-circle"></i> 授权人即贵司法务签章授权人,请务必使用真实信息以完成签章。</div>
+                <div class="weui-cells__title text-left" style="padding: 0;"><i class="fa fa-info-circle"></i> 授权人即贵司法务签章授权人,请务必使用真实信息以完成签章。</div>
                 <div class="weui-cells weui-cells_form">
-                    <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authName" style="text-align: left;"><label class="weui-label">姓名*</label></div>
+                    <div class="weui-cell weui-cell_active" style="padding: 10px 0;">
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authName" style="text-align: left; padding-right: 0;"><label class="weui-label" style="width: 65px; margin-top: 10px;">姓名*</label></div>
                         <div class="weui-cell__bd">
                             <input name="authName" id="authName" class="weui-input" required placeholder="填写授权人姓名"/>
                         </div>
                     </div>
-                    <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authPhone" style="text-align: left;"><label class="weui-label">手机号*</label></div>
+                    <div class="weui-cell weui-cell_active" style="padding: 10px 0;">
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authPhone" style="text-align: left; padding-right: 0;"><label class="weui-label" style="width: 65px; margin-top: 10px;">手机号*</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" type="number" pattern="[0-9]*" name="authPhone" id="authPhone" required placeholder="填写授权人手机号" value=""/>
                         </div>
                     </div>
-                    <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authIdentity" style="text-align: left;"><label class="weui-label">身份证号*</label></div>
+                    <div class="weui-cell weui-cell_active" style="padding: 10px 0;">
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authIdentity" style="text-align: left; padding-right: 0;"><label class="weui-label" style="width: 65px; margin-top: 10px;">身份证号*</label></div>
                         <div class="weui-cell__bd">
                             <input name="authIdentity" id="authIdentity" class="weui-input" required placeholder="填写授权人身份证号"/>
                         </div>
                     </div>
-                    <div class="weui-cell weui-cell_active">
-                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authEmail" style="text-align: left;"><label class="weui-label">邮箱*</label></div>
+                    <div class="weui-cell weui-cell_active" style="padding: 10px 0;">
+                        <div class="weui-cell__hd errorDiv" id="errorcontainer-authEmail" style="text-align: left; padding-right: 0;"><label class="weui-label" style="width: 65px; margin-top: 10px;">邮箱*</label></div>
                         <div class="weui-cell__bd">
-                            <input type="email" name="authEmail" id="authEmail" class="weui-input placeholder" required placeholder="填写授权人邮箱"/>
+                            <input type="email" name="authEmail" id="authEmail" class="weui-input" required placeholder="填写授权人邮箱"/>
                         </div>
                     </div>
                 </div>

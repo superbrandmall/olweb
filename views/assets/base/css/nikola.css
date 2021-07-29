@@ -714,7 +714,6 @@ button {
     -webkit-overflow-scrolling: touch;
     margin: 0;
     font-size: 17px;
-    line-height: 1.4;
     word-wrap: break-word;
     -webkit-hyphens: auto;
     hyphens: auto;
@@ -754,6 +753,10 @@ button {
     position: absolute;
     left: 0;
     right: 0;
+}
+
+.weui-uploader__input-box {
+    margin-top: -8px;
 }
 
 @media screen and (min-width: 352px) {
@@ -886,6 +889,7 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a {
 }
 
 .nikola-steps {
+    display: none;
     position: fixed; 
     bottom: 0; 
     left: 0; 

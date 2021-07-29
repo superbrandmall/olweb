@@ -26,26 +26,32 @@ $(document).ready(function(){
         getOrderByTradeNO();
     }
     
+    $(".weui-textarea").each(function(){
+        $(this).on("input propertychange",function(){
+            textarea($(this));
+        })
+    })
+    
     $("#negotiation form").validate({
         onkeyup: false,
         rules: {
             years_reason: {
-                maxlength: 51
+                maxlength: 50
             },
             term_reason: {
-                maxlength: 51
+                maxlength: 50
             },
             free_reason: {
-                maxlength: 51
+                maxlength: 50
             },
             rent_reason: {
-                maxlength: 51
+                maxlength: 50
             },
             deduct_reason: {
-                maxlength: 51
+                maxlength: 50
             },
             reason: {
-                maxlength: 201
+                maxlength: 200
             }
         },
         messages: {
@@ -156,7 +162,7 @@ function saveUserRefusal() {
                         "date": date,
                         "storeCode": getURLParameter('mall'),
                         "unitCode": getURLParameter('unit'),
-                        "outTradeNo": getURLParameter('trade') || 'NULL',
+                        "outTradeNo": getURLParameter('trade') || '',
                         "yearsFlag": parseInt($("#years_result").val()),
                         "deductFlag": parseInt($("#deduct_result").val()),
                         "deductReason": $("#deduct_reason").val(),
@@ -211,6 +217,16 @@ function saveUserRefusal() {
                        console.log(textStatus, errorThrown);
                     }
                 }); 
+            } else {
+                $('body').append('<div id="js_toast_error" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">不支持特殊字符</p></div></div>');
+                var $toast = $('#js_toast_error');
+
+                $('.page.cell').removeClass('slideIn');
+
+                $toast.fadeIn(100);
+                setTimeout(function () {
+                    $toast.fadeOut(100);
+                }, 2000);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -307,7 +323,7 @@ function textarea(input) {
     var content = $(input);
       var max =  content.next().find('i') .text();
     var value = content.val();
-    if (value.length>0) {
+    if (value.length >= 0) {
 
         value = value.replace(/\n|\r/gi,"");
         var len = value.length;

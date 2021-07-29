@@ -27,7 +27,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </label>
                     <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <textarea class="weui-textarea" placeholder="请填写您对合同年限的意见" rows="1" id="years_reason" name="years_reason" onkeyup="textarea(this);"></textarea>
+                        <textarea class="weui-textarea" placeholder="请填写您对合同年限的意见" rows="1" id="years_reason" name="years_reason"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/50</div>
                         <div id="errorcontainer-years_reason" class="errorDiv"></div>
                     </div>
@@ -42,7 +42,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </label>
                     <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <textarea class="weui-textarea" placeholder="请填写您对合同条款的意见" rows="1" id="term_reason" name="term_reason" onkeyup="textarea(this);"></textarea>
+                        <textarea class="weui-textarea" placeholder="请填写您对合同条款的意见" rows="1" id="term_reason" name="term_reason"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/50</div>
                         <div id="errorcontainer-term_reason" class="errorDiv"></div>
                     </div>
@@ -57,7 +57,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </label>
                     <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <textarea class="weui-textarea" placeholder="请填写您对装修免租期的意见" rows="1" id="free_reason" name="free_reason" onkeyup="textarea(this);"></textarea>
+                        <textarea class="weui-textarea" placeholder="请填写您对装修免租期的意见" rows="1" id="free_reason" name="free_reason"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/50</div>
                         <div id="errorcontainer-free_reason" class="errorDiv"></div>
                     </div>
@@ -72,7 +72,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </label>
                     <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <textarea class="weui-textarea" placeholder="请填写您对租金的意见" rows="1" id="rent_reason" name="rent_reason" onkeyup="textarea(this);"></textarea>
+                        <textarea class="weui-textarea" placeholder="请填写您对租金的意见" rows="1" id="rent_reason" name="rent_reason"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/50</div>
                         <div id="errorcontainer-rent_reason" class="errorDiv"></div>
                     </div>
@@ -87,7 +87,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </label>
                     <div class="weui-cell__bd" style="padding: 16px 32px; display: none;">
-                        <textarea class="weui-textarea" placeholder="请填写您对扣率的意见" rows="1" id="deduct_reason" name="deduct_reason" onkeyup="textarea(this);"></textarea>
+                        <textarea class="weui-textarea" placeholder="请填写您对扣率的意见" rows="1" id="deduct_reason" name="deduct_reason"></textarea>
                         <div class="weui-textarea-counter"><span>0</span>/50</div>
                         <div id="errorcontainer-deduct_reason" class="errorDiv"></div>
                     </div>
@@ -98,7 +98,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 <div class="weui-cells weui-cells_form">
                     <div class="weui-cell">
                         <div class="weui-cell__bd">
-                            <textarea id="reason" name="reason" class="weui-textarea" placeholder="请填写其他反馈" rows="3" onkeyup="textarea(this);"></textarea>
+                            <textarea id="reason" name="reason" class="weui-textarea" placeholder="请填写其他反馈" rows="3"></textarea>
                             <div class="weui-textarea-counter"><span>0</span>/200</div>
                             <div id="errorcontainer-reason" class="errorDiv"></div>
                         </div>

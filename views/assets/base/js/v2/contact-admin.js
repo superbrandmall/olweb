@@ -5,6 +5,10 @@ $(document).ready(function(){
         $('#bu').val('advertising');
     }
     
+    $("#contact_msg").on("input propertychange",function(){
+        textarea($(this));
+    })
+    
     $("#contact form").validate({
         onkeyup: false,
         rules: {
@@ -16,7 +20,7 @@ $(document).ready(function(){
             },
             contact_msg: {
                 required: true,
-                maxlength: 201
+                maxlength: 200
             }
         },
         messages: {
@@ -77,7 +81,7 @@ function textarea(input) {
     var content = $(input);
       var max =  content.next().find('i') .text();
     var value = content.val();
-    if (value.length>0) {
+    if (value.length >= 0) {
 
         value = value.replace(/\n|\r/gi,"");
         var len = value.length;

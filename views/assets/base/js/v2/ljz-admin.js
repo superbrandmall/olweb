@@ -1,8 +1,10 @@
 var index=0;
-var unitCodes = ["01FL087","01FL059","01FL065","01FL071","01FL097","07FL036","07FL059","07FL060"];
+var unitCodes = [];
 var vr;
 
 $(document).ready(function(){
+    findShopsByStoreCode();
+    
     if(isAndroid() == true) {
         showIndexPix(1,1354,2);
         showIndexPix(2,1031,2);
@@ -18,31 +20,65 @@ $(document).ready(function(){
         },false);
     }
     
-    for(var j=0;j<=8;j++){
-      if(!sessionStorage.getItem('ljz_fl_'+j) || sessionStorage.getItem('ljz_fl_'+j) == null || sessionStorage.getItem('ljz_fl_'+j) == ''){
-        getCoordsByFloor(j);
-      } else {
-        $.each($.parseJSON(sessionStorage.getItem('ljz_fl_'+j)), function(i,v){
-            if(v.state !== 0 && v.coords != null && v.coords != ''){
-                var index = $.inArray(v.unit, unitCodes);
-                if(index >= 0){
-                    $('#Map_L'+j).append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" href="/v2/category?id='+v.code+'&type=leasing" shape="poly" coords="'+v.coords+'" />');
-                } else {
-                    $('#Map_L'+j).append('<area data-key="'+v.unit+'" data-logo="'+v.logo+'" data-area="'+v.area+'" name="'+v.brandName+'" shape="poly" coords="'+v.coords+'" />');
-                }
-            }
-        });
-
-        drawShopsByFloor('L',j);
-      }
-    }
-    
     $('.weui-dialog__btn').on('click', function(){
         $(this).parents('.js_dialog').fadeOut(200);
     });
     
     getShopsInfo();
 });
+
+function findShopsByStoreCode() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                
+                if(response.data.length > 0){
+                    var unavailable = [0,4,5];
+                    $.each(response.data, function(i,v){
+                        if(v.state === 9) {
+                            return true;
+                        }
+                        
+                        if($.inArray(v.state, unavailable) < 0){
+                            unitCodes.push(v.unitCode);
+                        }
+                    })
+                    
+                    for(var j=0;j<=8;j++){
+                        if(!sessionStorage.getItem('ljz_fl_'+j) || sessionStorage.getItem('ljz_fl_'+j) == null || sessionStorage.getItem('ljz_fl_'+j) == ''){
+                            getCoordsByFloor(j);
+                        } else {
+                            $.each($.parseJSON(sessionStorage.getItem('ljz_fl_'+j)), function(i,v){
+                                if(v.state !== 0 && v.coords != null && v.coords != ''){
+                                    var index = $.inArray(v.unit, unitCodes);
+                                    if(index >= 0){
+                                        $('#Map_L'+j).append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-area="'+v.area+'" href="/v2/category?id='+v.code+'&type=leasing" shape="poly" coords="'+v.coords+'" />');
+                                    } else {
+                                        $('#Map_L'+j).append('<area data-key="'+v.unit+'" data-logo="'+v.logo+'" data-area="'+v.area+'" name="'+v.brandName+'" shape="poly" coords="'+v.coords+'" />');
+                                    }
+                                }
+                            });
+                            drawShopsByFloor('L',j);
+                        }
+                    }
+                }
+                
+            }
+        }
+    })
+}
 
 function getShopsInfo() {
     $.ajax({

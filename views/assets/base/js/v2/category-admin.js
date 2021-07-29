@@ -3,6 +3,10 @@ $(document).ready(function(){
     if(getURLParameter('storeCode') && getURLParameter('storeCode') != 'undefined') {
         storeCode = getURLParameter('storeCode');
     }
+
+    if(!sessionStorage.getItem("categoryList") || sessionStorage.getItem("categoryList") == null || sessionStorage.getItem("categoryList") == '') {
+        findAllCategoriesByStoreCode(storeCode);
+    }
     
     if(!sessionStorage.getItem("shopList") || sessionStorage.getItem("shopList") == null || sessionStorage.getItem("shopList") == '') {
         $.ajax({
@@ -31,16 +35,19 @@ $(document).ready(function(){
         });
     }
     
+    var categoryMap = new Map();
+    $.each($.parseJSON(sessionStorage.getItem("categoryList")), function(i,v){
+        categoryMap.set(v.code,v.name);
+    })
+    
     $.each($.parseJSON(sessionStorage.getItem("shopList")), function(j,w){
-        if(getURLParameter('id') == w.remarkSecond){
-            $('.categories p.weui-cell_active').html(w.businessFormatChs);
+        if(getURLParameter('id') == w.shopCode){
             var categoriesCode = w.categoryCode.split(',');
-            var categoriesName = w.categoryName.split(',');
             for(var i=0;i<categoriesCode.length;i++){
                 $('.categories').append('<label class="weui-cell weui-cell_active weui-check__label" for="'+categoriesCode[i]+'">\n\
 <div class="weui-cell__hd"><input type="checkbox" class="weui-check" name="category" id="'+categoriesCode[i]+'" />\n\
 <i class="weui-icon-checked"></i></div>\n\
-<div class="weui-cell__bd"><p>'+categoriesName[i]+'</p></div>\n\
+<div class="weui-cell__bd"><p>'+categoryMap.get(categoriesCode[i])+'</p></div>\n\
 </label>');        
             }
         }
@@ -63,3 +70,40 @@ $(document).ready(function(){
          window.location.href = '/v2/shop?id='+getURLParameter('id')+'&type=leasing&storeCode='+getURLParameter('storeCode');
     })
 });
+
+function findAllCategoriesByStoreCode(storeCode){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/brand/wx/base/findAllByStoreCode?storeCode="+storeCode,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            showLoading();
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                hideLoading();
+                
+                var categoryList = [];
+                
+                $.each(response.data, function(i,v){
+                    categoryList.push({
+                        'code' : v.code,
+                        'name' : v.categorySecondName
+                    })
+                })
+                
+                sessionStorage.setItem("categoryList", JSON.stringify(categoryList));
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}

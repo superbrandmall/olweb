@@ -16,7 +16,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </video>
     </div>
     <div id="pix_sbm" style="position: absolute; top: 0; bottom: 0; display: none;">
-        <img src="/upload/video/sbm/sbm000.jpg" />
+        <img src="/upload/video/sbm-0/sbm000.jpg" />
     </div>
     <div style="position: relative; height: 100vh;">
         <div class="container fill-bloc-top-edge tc-white" style="-webkit-text-stroke: 1px #000;">

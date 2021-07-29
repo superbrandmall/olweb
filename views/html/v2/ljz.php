@@ -54,13 +54,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正大广场Super Brand Mall汇集各业态极具代表性品牌（super brands），13层全业态购物空间，汇聚数百个全球⻛尚品牌，上百家国际美⾷；三大特色主题区域——Venus女性生活方式轻奢主题区、eat n work江景餐厅与共享办公空间、儿童的第三个家；创新功能区域划分，满足不同圈层消费者需求。<br></p>
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
                             </div>
                         </div>
@@ -113,13 +113,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <hr class="divider divider-default">
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商圈每年客流超过3000万。<br></p>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
                             </div>
                         </div>
@@ -144,13 +144,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             2020年，软硬件配套升级之后的正大广场也将汇聚全球风尚品牌，尚、食、乐、美一网打尽，精彩呈现购物娱乐、主题展览、创意体验、文化互动、新奇潮流。顾客将能在这里体验主题特色区、浦江景观餐饮、办公区、精致文创空间、同步世界潮流的主题活动及全智能系统一体化服务。
                         </p>
                     </div>
-                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                         <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">开新铺</a>
                     </div>
-                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                         <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">办活动</a>
                     </div>
-                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                    <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                         <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">做广告</a>
                     </div>
                 </div>
@@ -232,13 +232,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     首末摆渡时间: 往金陵东路渡口：7:00 – 22:00，往复兴东路渡口：7:00 – 19:00
                                 </p>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
                             </div>
-                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 none">
+                            <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
                             </div>
                         </div>

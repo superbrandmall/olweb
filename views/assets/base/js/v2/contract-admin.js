@@ -74,6 +74,7 @@ $(document).ready(function(){
             $('#authDialogForm button').attr('disabled','disabled');
             $('#authDialog').hide();
             showLoading();
+            $('#confirm_contract').text('更新文件');
             saveUserCompany();
         }
     });
@@ -160,69 +161,13 @@ function saveUserCompany() {
                 if(xhr.getResponseHeader("Authorization") !== null) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
-                updateOrderToStamping();
+                eSignFlow();
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
            console.log(textStatus, errorThrown);
         }
     })
-}
-
-function updateOrderToStamping(){
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+$.order.id+"&orderStates=合同用印中",
-        type: "POST",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                sendFiles();
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}
-
-function sendFiles() {
-    $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/mail/sendFile?mobileNo="+$.cookie('uid')+"&outTradeNo="+getURLParameter('trade'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            hideLoading();
-            if(response.code === 'C0') {
-                eSignFlow();
-            } else {
-                interpretBusinessCode(response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    }); 
 }
 
 function eSignFlow(){
@@ -257,7 +202,7 @@ function eSignFlow(){
         "org": {
           "agentAccountId": "",
           "contactsMobile": $('#authPhone').val(),
-          "licenseNumber": $.info.copy.uscc,
+          "licenseNumber": $.info.uscc,
           "licenseType": "SOCNO",
           "legalLicenseType":"IDCard",
           "legalLicenseNumber": $('#authIdentity').val(),
@@ -265,7 +210,6 @@ function eSignFlow(){
           "organizeNo": $.info.uscc
         }
     }
-
       
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/esign/flow",
@@ -286,32 +230,54 @@ function eSignFlow(){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                $.cookie('oid',$.order.id);
-                $.cookie('flowid',response.data.data.signFlowId);
                 
-                var mallName;
-                switch ($.order.orgCode) {
-                    case '301001':
-                        mallName = '河南洛阳正大广场';
-                        break;
-                    case '201001':
-                        mallName = '上海宝山正大乐城';
-                        break;
-                    case '100001':
-                        mallName = '上海陆家嘴正大广场';
-                        break;
-                    case '204001':
-                        mallName = '上海徐汇正大乐城';
-                        break;
-                    default:
-                        mallName = '上海陆家嘴正大广场';
-                        break;
+                hideLoading();
+                if(response.data.errCode == '10000000'){
+                    $.cookie('oid',$.order.id);
+                    $.cookie('flowid',response.data.data.signFlowId);
+
+                    var mallName;
+                    switch ($.order.orgCode) {
+                        case '301001':
+                            mallName = '河南洛阳正大广场';
+                            break;
+                        case '201001':
+                            mallName = '上海宝山正大乐城';
+                            break;
+                        case '100001':
+                            mallName = '上海陆家嘴正大广场';
+                            break;
+                        case '204001':
+                            mallName = '上海徐汇正大乐城';
+                            break;
+                        default:
+                            mallName = '上海陆家嘴正大广场';
+                            break;
+                    }
+                    
+                    updateOrderToStamping();
+                    sendFiles();
+                    
+                    saveMsgLog('签章链接发送提醒','签章链接已经通过短信发送到您的手机，您可以用手机直接操作；如需要用电脑，请将链接复制到电脑中操作。',$.order.trade, '我的消息',$.order.unit,'');
+                    saveMsgLog('订单合同用印中','您的订单【'+mallName+'】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
+                } else {
+                    var msg = response.data.msg;
+                    if(response.data.errCode == '20050420' || response.data.errCode == '20050389' || response.data.errCode == '20050368' || response.data.errCode == '20050372' || response.data.errCode == '20050386'){
+                        msg = "授权人信息错误";
+                    }
+                    
+                    $('body').append('<div id="js_toast_error" style="display: none;"><div class="weui-mask_transparent"></div><div class="weui-toast"><i class="weui-icon-cancel weui-icon_toast" style="color: #FA5151;"></i><p class="weui-toast__content">'+msg+'</p></div></div>');
+                    var $toast = $('#js_toast_error');
+
+                    $('.page.cell').removeClass('slideIn');
+
+                    $toast.fadeIn(100);
+                    setTimeout(function () {
+                        $toast.fadeOut(100);
+                    }, 2000);
                 }
                 
                 
-                hideLoading();
-                saveMsgLog('签章链接发送提醒','签章链接已经通过短信发送到您的手机，您可以用手机直接操作；如需要用电脑，请将链接复制到电脑中操作。',$.order.trade, '我的消息',$.order.unit,'');
-                saveMsgLog('订单合同用印中','您的订单【'+mallName+'】'+$.order.type+$.order.shopName+'正在用印中，请前往我的订单管理页面查看。',$.order.trade, '我的消息',$.order.unit,'/v2/stamping');
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -320,6 +286,59 @@ function eSignFlow(){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function updateOrderToStamping(){
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/order/updateOrderStates?id="+$.order.id+"&orderStates=合同用印中",
+        type: "POST",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function sendFiles() {
+    $.ajax({
+        url: $.api.baseNew+"/comm-wechatol/api/mail/sendFile?mobileNo="+$.cookie('uid')+"&outTradeNo="+getURLParameter('trade'),
+        type: "GET",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            hideLoading();
+            if(response.code === 'C0') {
+                
+            } else {
+                interpretBusinessCode(response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    }); 
 }
 
 function getOrderByTradeNO() {

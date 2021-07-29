@@ -34,7 +34,8 @@ $(document).ready(function(){
                 required: true
             },
             id_card: {
-                required: true
+                required: true,
+                rangelength: [18,18]
             },
             contact_phone_1: {
                 required: true
@@ -66,7 +67,8 @@ $(document).ready(function(){
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             id_card: {
-                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
+                required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>',
+                rangelength: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
             },
             contact_phone_1: {
                 required: '<i class="fa fa-exclamation-circle" aria-hidden="true"></i>'
@@ -83,7 +85,12 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            checkCredit();
+            if($('#job_title').val() == 'others' && $('#other_job').val() == ''){
+                $('#other_jobs').addClass('red-border');
+            } else {
+                $('.red-border').removeClass('red-border');
+                checkCredit();
+            }
         }
     });
 });

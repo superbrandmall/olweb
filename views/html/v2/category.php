@@ -54,9 +54,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <h2 class="weui-form__title">请选择您的业态</h2>
     </div>
     <div class="weui-cells__group weui-cells__group_form">
-        <div class="weui-cells weui-cells_checkbox categories">
-            <p class="weui-cell weui-cell_active"></p>
-        </div>
+        <div class="weui-cells weui-cells_checkbox categories"></div>
     </div>
 </div>
 

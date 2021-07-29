@@ -59,12 +59,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">下载常见问答</a></h3>
         <div class="weui-flex__item"><strong>¥<span id="taxAmount"></span> <small>/m<sup>2</sup>/月</small></strong> <small>(¥<span id="rentAmount"></span> /m<sup>2</sup>/天)</small></div>
         <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(租赁面积)</div>
-        <div class="weui-flex__item">推荐业态 <span id="businessFormatChs"></span></div>
+        <div class="weui-flex__item" id="desc"></div>
     </section>
     <section style="padding: 20px 15px 10px;">
         <h3 class="weui-flex__item">租约信息
             <a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 10px;border-radius: 5px;">查看落位图</a>
-            <a id="vr" href="javascript:;" class="weui-badge" style="float: right;background: #007bff; font-weight: bold; padding: 8px 10px;border-radius: 5px;margin-right: 5px;">VR看铺</a>
+            <a id="vr_3d" href="javascript:;" class="weui-badge" style="float: right;background: #007bff; font-weight: bold; padding: 8px 10px;border-radius: 5px;margin-right: 5px;">VR看铺</a>
         </h3>
         <div class="weui-flex__item weui-cell_access" style="float: left; width: 35%;"><small>进场日期</small><br><h6 id="settleDate" class="weui-cell__ft" style="text-align: left; color: #000;"></h6></div>
         <div style="float: left; width: 5%;">&nbsp;</div>
@@ -137,10 +137,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     </tr>
                 </tbody>
             </table>
-            <br>
-            <h3 class="weui-flex__item">铺位简介</h3>
-            <hr color=#baad9b size=1 style="margin: 5px 0;">
-            <p class="content" id="desc"></p>
         </div>
     </section>
     <section style="padding: 20px 15px 10px;">
@@ -233,7 +229,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="weui-cells weui-cells_form">
                         <div class="weui-cell weui-cell_active" style="padding: 16px 0;">
                             <div class="weui-cell__hd" style="padding-right: 0;"><label class="weui-label">Email</label></div>
-                            <div class="weui-cell__bd">
+                            <div class="weui-cell__bd" style="margin-top: -8px;">
                                 <input name="cadEmail" id="cadEmail" type="email" class="weui-input placeholder" required placeholder="如:first.last@company.com" />
                             </div>
                         </div>
@@ -260,7 +256,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <label for="reserve_button" class="button-label">无e签宝,线上支付定金 ¥1,000元</label>
                     <p id="reserve_p">第一笔款项为定金壹仟元，支付后请于<strong id="expect"></strong>日与我司完成线下签约。该笔付款不可退还、不可转让。</p>
                 </div>
-                <div class="text-center" style="margin:0 20px;">
+                <div class="text-center" style="margin: 0 20px 20px;">
                     <input type="radio" name="accept-offers" id="esign_button" class="hidden radio-label" />
                     <label for="esign_button" class="button-label">e签宝,线上签约并付全款</label>
                     <p id="esign_p" class="hidden">需上传资质文件，待审核后通过e签宝电子签章平台完成双方用印。</p>
@@ -305,7 +301,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="errorDiv" id="errorcontainer-appointmentEmail"></div>
                         <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
                             <div class="weui-cell" style="padding: 16px 0;">
-                                <div class="weui-cell__hd" style="padding-right: 0;">
+                                <div class="weui-cell__hd" style="padding-right: 0; margin-top: 8px;">
                                     <label for="appointmentTime" class="weui-label">看铺时间*</label>
                                 </div>
                                 <div class="weui-cell__bd">
