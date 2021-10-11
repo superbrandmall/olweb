@@ -1,7 +1,6 @@
 <?php
 $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js"></script>';
+        . '<script type="text/javascript" src="/views/assets/base/js/v2/ljz-admin.js?t='.date("Y-m-d").'"></script>';
 ?>
 
 <style>
@@ -38,13 +37,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>-->
 
 <!-- all-wheel-drive -->
-<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="all-wheel-drive">
+<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc">
     <div class="container ">
         <div class="row no-gutters align-items-end" style="background: url(/views/assets/base/img/content/backgrounds/ljz-4.jpg); background-size: 100%; background-position: top; background-repeat: no-repeat;">
             <div class="col-lg-12">
                 <div class="row no-gutters">
                     <div class="col-lg-12">
-                        <div class="row no-gutters nikola-sidebar">
+                        <div class="row no-gutters nikola-sidebar" style="margin-top: 280px;">
                             <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
                                 <div class="parallax-text-wrap">
                                     <h3>项目介绍</h3>
@@ -55,13 +54,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
+                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
+                                <a href="/v2/events?type=events" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">办活动</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
+                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">做广告</a>
                             </div>
                         </div>
                     </div>
@@ -70,9 +69,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
     </div>
 </div>
-<!-- all-wheel-drive END -->
-<!-- utility -->
-<div class="bloc full-width-bloc tesla-no-padding tc-dark-jungle-green l-bloc" id="utility">
+
+<div class="bloc full-width-bloc cp-no-padding tc-dark-jungle-green l-bloc">
     <div class="video-bg-container">
         <video id="video_1" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
             <source src="/upload/video/sbm-1.mp4" type="video/mp4">
@@ -89,15 +87,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="nikola-content">
                             <div class="row no-gutters">
                                 <div class="col-lg-3 col-md-3 col-sm-4 cp-hero-right-divider align-self-center cp-card-no-padding col-4 animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                    <h2 class="text-center tc-white mg-clear sm-shadow">13&nbsp;<span class="cp-subtext-small">层</span></h2>
+                                    <h2 class="text-center ltc-white mg-clear sm-shadow">13&nbsp;<span class="cp-subtext-small">层</span></h2>
                                     <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">全业态购物空间</p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-hero-right-divider cp-card-no-padding col-4 animated fadeIn animDelay06" data-appear-anim-style="fadeIn">
-                                    <h2 class="text-center tc-white mg-clear sm-shadow">30&nbsp;<span class="cp-subtext-small">亿</span></h2>
+                                    <h2 class="text-center ltc-white mg-clear sm-shadow">30&nbsp;<span class="cp-subtext-small">亿</span></h2>
                                     <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">年均销售</p>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-4 align-self-center cp-card-no-padding col-4 animated fadeIn animDelay08" data-appear-anim-style="fadeIn">
-                                    <h2 class="text-center tc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
+                                    <h2 class="text-center ltc-white mg-clear sm-shadow">3000&nbsp;<span class="cp-subtext-small">万</span></h2>
                                     <p class="text-center cp-subtitle-small-white mg-clear sm-shadow">商圈年客流</p>
                                 </div>
                             </div>
@@ -114,13 +112,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商圈每年客流超过3000万。<br></p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
+                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
+                                <a href="/v2/events?type=events" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">办活动</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
+                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">做广告</a>
                             </div>
                         </div>
                     </div>
@@ -129,35 +127,29 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
     </div>
 </div>
-<!-- utility END -->
-<!-- safety -->
-<div class="bloc none full-width-bloc tc-dark-jungle-green bloc-fill-screen nikola-bloc-padding" id="safety">
+
+<div class="bloc none full-width-bloc tc-dark-jungle-green bloc-fill-screen nikola-bloc-padding">
     <div class="container">
         <div class="row no-gutters nikola-safety-row align-items-end">
             <div class="col-lg-3 order-md-2 order-lg-1 order-sm-2 order-2">
-                <div class="row no-gutters nikola-sidebar" style="background-color: #6a0dac; background: linear-gradient(-39deg, #8b0fe4 10%, #6d0eb1 40%);">
+                <div class="row no-gutters nikola-sidebar" style="background-color: #323030;">
                     <div class="col-12 order-lg-1 order-sm-1 order-1 col-lg-12 align-self-start col-md-12">
-                        <p class="mg-clear tc-yellow mg-clear-md mg-clear-sm" style="font-weight: bold;">全新升级</p>
-                        <h3 class="tc-white mg-clear tesla-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海正大广场</h3>
+                        <p class="mg-clear tc-brown mg-clear-md mg-clear-sm" style="font-weight: bold;">全新升级</p>
+                        <h3 class="ltc-white mg-clear cp-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海正大广场</h3>
                         <hr class="divider divider-default">
-                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md tc-white">
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
                             2020年，软硬件配套升级之后的正大广场也将汇聚全球风尚品牌，尚、食、乐、美一网打尽，精彩呈现购物娱乐、主题展览、创意体验、文化互动、新奇潮流。顾客将能在这里体验主题特色区、浦江景观餐饮、办公区、精致文创空间、同步世界潮流的主题活动及全智能系统一体化服务。
                         </p>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                        <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">开新铺</a>
+                        <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                        <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">办活动</a>
+                        <a href="/v2/events?type=events" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">办活动</a>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                        <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block tc-white">做广告</a>
+                        <a href="/v2/ads?type=ads" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">做广告</a>
                     </div>
-                </div>
-                <div class="section-wave" style="margin-bottom: 20px; line-height: 0; background-color: #6a0dac; background: linear-gradient(-39deg, #8b0fe4 10%, #6d0eb1 40%);">
-                    <svg x="0px" y="0px" width="100%" height="12px" viewBox="0 0 1920 46" preserveAspectRatio="none" style="fill: white;">
-                      <path d="M1920,0.5c-82.8,0-109.1,44-192.3,44c-78.8,0-116.2-44-191.7-44c-77.1,0-115.9,44-192,44c-78.2,0-114.6-44-192-44c-78.4,0-115.3,44-192,44c-76.9-0.1-119-44-192-44c-77,0-115.2,44-192,44c-73.6,0-114-44-190.9-44c-78.5,0-117.2,44-194.1,44c-75.9,0-113-44-191-44V46h1920V0.5z"></path>
-                    </svg>
                 </div>
             </div>
             <div class="col-lg-9 col-md-12 order-md-1 order-lg-2 order-sm-1 order-1 align-self-center">
@@ -173,23 +165,23 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <div class="row no-gutters">
                         <div class="col">
                             <div class="text-lg-left nikola-tab-div animated fadeIn" data-appear-anim-style="fadeIn">
-                                <h2 class="tc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
-                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                <p class="mg-clear d-lg-none d-xl-none d-block tesla-subtitle-small-white tc-white sm-shadow">建筑面积<br></p>
+                                <h2 class="ltc-white mg-sm sm-shadow">25<small>万<sup>2</sup></small></h2>
+                                <p class="cp-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="mg-clear d-lg-none d-xl-none d-block cp-subtitle-small-white ltc-white sm-shadow">建筑面积<br></p>
                             </div>
                         </div>
                         <div class="col nikola-center-divider">
                             <div class="nikola-tab-div animated fadeIn animDelay02" data-appear-anim-style="fadeIn">
-                                <h2 class="tc-white mg-sm sm-shadow">14<small>万<sup>2</sup></small></h2>
-                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">租赁面积<br></p>
+                                <h2 class="ltc-white mg-sm sm-shadow">14<small>万<sup>2</sup></small></h2>
+                                <p class="cp-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="cp-subtitle-small-white mg-clear d-lg-none d-xl-none d-block ltc-white sm-shadow">租赁面积<br></p>
                             </div>
                         </div>
                         <div class="col">
                             <div class="nikola-tab-div animated fadeIn animDelay04" data-appear-anim-style="fadeIn">
-                                <h2 class="tc-white mg-sm sm-shadow">658<small>个</small></h2>
-                                <p class="tesla-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
-                                <p class="tesla-subtitle-small-white mg-clear d-lg-none d-xl-none d-block tc-white sm-shadow">停车位<br></p>
+                                <h2 class="ltc-white mg-sm sm-shadow">658<small>个</small></h2>
+                                <p class="cp-subtitle-small-white mg-clear d-lg-block d-none">...<br /></p>
+                                <p class="cp-subtitle-small-white mg-clear d-lg-none d-xl-none d-block ltc-white sm-shadow">停车位<br></p>
                             </div>
                         </div>
                     </div>
@@ -198,13 +190,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
     </div>
 </div>
-<!-- safety END -->
-<!-- interior -->
-<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" id="interior">
+
+<div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc" style="margin-top: 20px;">
     <div class="container ">
         <div class="row no-gutters align-items-end">
             <div class="col-lg-12">
-                <div class="">
+                <div>
                     <img src="/views/assets/base/img/content/mall/shanghai-sbm/map.png" id="ContactMap" style="width: 100%; max-width: 1000px;">
                     <div class="col-lg-3">
                         <div class="row no-gutters nikola-sidebar">
@@ -233,13 +224,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 </p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">开新铺</a>
+                                <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/events?type=events" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">办活动</a>
+                                <a href="/v2/events?type=events" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">办活动</a>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
-                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd tesla-wire-button-black d-inline-block">做广告</a>
+                                <a href="/v2/ads?type=ads" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">做广告</a>
                             </div>
                         </div>
                     </div>
@@ -248,9 +239,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
     </div>
 </div>
-<!-- interior END -->
-<!-- specs -->
-<div class="bloc bloc-fill-screen bgc-black none tesla-no-padding d-bloc" id="specs" style="padding-bottom: 100px;">
+
+<div class="bloc bloc-fill-screen bgc-brown none cp-no-padding d-bloc" style="padding-top: 20px; padding-bottom: 50px;">
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-5 offset-md-0 col-sm-8 offset-sm-2">
@@ -262,79 +252,60 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <img src="/upload/video/sbm-3/sbm-3000.jpg" />
                 </div>
             <div class="col-lg-5 col-md-7 col-sm-8 offset-sm-2 offset-md-0">
-                <h2 class="mg-md tc-white none">推荐&nbsp;<span class="tesla-thin-text">位置</span></h2>
+                <h2 class="mg-md ltc-white none">楼层&nbsp;<span class="cp-thin-text">业态</span></h2>
                 <ul class="nav nav-tabs none" id="nav-45045-tab" role="tablist">
-                    <li class="nav-item"><a class="a-btn nav-link active" id="nav-45045-tab-1" data-toggle="tab" href="#nav-45045-content-1" role="tab" aria-controls="nav-45045-content-1" aria-selected="true">按楼层寻找</a></li>
-                    <li class="nav-item"><a class="a-btn nav-link" id="nav-45045-tab-2" data-toggle="tab" href="#nav-45045-content-2" role="tab" aria-controls="nav-45045-content-2" aria-selected="false">按业态寻找</a></li>
+                    <li class="nav-item"><a class="a-btn nav-link active" id="nav-45045-tab-1" data-toggle="tab" href="#nav-45045-content-1" role="tab" aria-controls="nav-45045-content-1" aria-selected="true">按楼层</a></li>
+                    <li class="nav-item"><a class="a-btn nav-link" id="nav-45045-tab-2" data-toggle="tab" href="#nav-45045-content-2" role="tab" aria-controls="nav-45045-content-2" aria-selected="false">按业态</a></li>
                 </ul>
                 <div class="tab-content none">
                     <div class="tab-pane fade show active" id="nav-45045-content-1" role="tabpanel" aria-labelledby="nav-45045-content-1">
                         <div class="row">
                             <div class="col">
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
                                 <h6 class="mg-clear"><strong>9</strong>F<br /></h6>
                                 <h6 class="mg-clear">高档餐饮</h6>
-                                <a href="javascript: showFloorVideo('9F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript: showFloorVideo('9F')" class="cp-btn-xs tc-white">视频</a>
+
                                 <h6 class="mg-clear"><strong>7</strong>F<br /></h6>
                                 <h6 class="mg-clear">健康塑形及特色餐饮</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('7F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('7F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('7F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('7F')" class="cp-btn-xs tc-white">视频</a>
+
                                 <h6 class="mg-clear"><strong>5</strong>F<br /></h6>
                                 <h6 class="mg-clear">运动&生活</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('5F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('5F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('5F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('5F')" class="cp-btn-xs tc-white">视频</a>
+
                                 <h6 class="mg-clear"><strong>3</strong>F<br /></h6>
                                 <h6 class="mg-clear">快时尚</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('3F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('3F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('3F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('3F')" class="cp-btn-xs tc-white">视频</a>
+ 
                                 <h6 class="mg-clear"><strong>1</strong>F<br /></h6>
                                 <h6 class="mg-clear">轻奢及休闲餐饮娱乐街</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('1F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('1F')" class="tesla-btn-xs">视频</a>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('1F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('1F')" class="cp-btn-xs tc-white">视频</a>
                             </div>
                             <div class="col">
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+
                                 <h6 class="mg-clear"><strong>8</strong>F<br /></h6>
                                 <h6 class="mg-clear">餐饮&娱乐</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('8F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('8F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('8F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('8F')" class="cp-btn-xs tc-white">视频</a>
+
                                 <h6 class="mg-clear"><strong>6</strong>F<br /></h6>
                                 <h6 class="mg-clear">餐饮&中国风</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('6F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('6F')" class="tesla-btn-xs tc-yellow">VR</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('6F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVR('6F')" class="cp-btn-xs tc-gold">VR</a>
+
                                 <h6 class="mg-clear"><strong>4</strong>F<br /></h6>
                                 <h6 class="mg-clear">男装&数码</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('4F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVideo('4F')" class="tesla-btn-xs">视频</a>
-                                <div class="divider-h tesla-specs-divider">
-                                    <span class="divider"></span>
-                                </div>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('4F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVideo('4F')" class="cp-btn-xs tc-white">视频</a>
+   
                                  <h6 class="mg-clear"><strong>2</strong>F<br /></h6>
                                 <h6 class="mg-clear">儿童第三个家</h6>
-                                <a href="javascript:;" onclick="javascript: $('map').html(''); GetMap('2F','shanghai-sbm','OLMALL180917000003')" class="tesla-btn-xs">楼层图</a>
-                                <a href="javascript: showFloorVR('2F')" class="tesla-btn-xs tc-yellow">VR</a>
+                                <a href="javascript:;" onclick="javascript: GetFloorPlan('2F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
+                                <a href="javascript: showFloorVR('2F')" class="cp-btn-xs tc-gold">VR</a>
                             </div>
                         </div>
                     </div>
@@ -348,7 +319,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div id="vr_viewer" class="weui-gallery" style="display: none;">
-    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 90vh;"></iframe>
+    <iframe src="javascript:;" width="100%" frameborder="0" style="height: 92vh;"></iframe>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#vr_viewer iframe").attr("src","javascript:;"); $("#vr_viewer").hide();'></i>
@@ -372,33 +343,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <div class="weui-dialog">
         <div class="weui-dialog__bd" style="padding: 0; margin: 0;">
             <a href="javascript:" class="weui-dialog__btn weui-dialog__btn_primary" style="top: 0px; right: 10px; position: absolute;">x</a>
-            <div style="margin: 10px; color: #565d66;">
-                <strong id="floorNo"></strong>
-                <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> 推荐位置可点击    
-            </div>
-    
-            <img src="#" width="320" height="160" id="map">
-            <map></map>
-        </div>
-        <div class="weui-dialog__ft" style="line-height: 28px; min-height: 28px;">
-            
+            <img src="#" width="320" id="map">
         </div>
     </div>
 </div>
 
-<div id="recommend_empty_stores" class="weui-gallery" style="display: none; background: rgba(0,0,0,0.8); color: #fff;">
-    <h3><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐 <span style="margin-left: 9px; background-color: #F26A85; border: solid 1px #DC143C; height: 10px; width: 15px; display: inline-block;"></span> <small>推荐位置可点击</small></h3>
+<div id="recommend_empty_stores" class="weui-gallery" style="display: none; background: rgba(80,80,80,75,.8); color: #f3f3f3;">
+    <h3><i class="fa fa-star-o" aria-hidden="true"></i> 铺位推荐</h3>
     <div id="empty_stores" class="weui-grids"></div>
-    <?php 
-        for($i=0;$i<100;$i++) {
-    ?>
-        <div id="J<?= $i ?>" class="weui-grid__icon" style="width: 100%; display: none;">
-            <img src="javascript:;" usemap="#Map_J<?= $i ?>" width="320" height="160">
-            <map name="Map_J<?= $i ?>" id="Map_J<?= $i ?>"></map>
-        </div>
-    <?php 
-        }
-    ?>
     <div class="weui-gallery__opr">
         <a href="javascript:" class="weui-gallery__del">
             <i class="fa fa-times" aria-hidden="true" style="color: #fff;" onclick='$("#empty_stores").html("");  $("#recommend_empty_stores").hide();'></i>
@@ -414,35 +366,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </a>
     </div>
 </div>
-<!-- specs END -->
-<!-- ScrollToTop Button -->
 <a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1', this)" style="bottom: 120px;"><span class="fa fa-chevron-up"></span></a>
-<!-- ScrollToTop Button END-->
-<!-- download 
-<div class="bloc bgc-black tc-white bloc-fill-screen tesla-white-border d-bloc" id="download">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 offset-lg-2 offset-md-1 col-md-10">
-                <h1 class="mg-md mx-auto d-block text-center">Nikola</h1>
-                <h4 class="mx-auto d-block text-center mg-md">Nikola is a mockup of Telsa Model Y website.</h4>
-                <p class="text-center">All content is a property of Tesla, Inc. This website was recreated in&nbsp;<a class="ltc-white" href="https://eldargezalov.com/get-blocs" target="_blank">Blocs for Mac</a>&nbsp;to showcase capabilities of this web design app. If you are a member of Blocs Templates, you can download the files, but only for educational purposes.</p>
-                <div class="text-center">
-                    <a href="https://blocstemplates.com/nikola.html" class="btn btn-d btn-lg tesla-wire-button-white" target="_blank">download</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container fill-bloc-bottom-edge">
-        <div class="row">
-            <div class="col-12">
-                <p class="text-center">Recreated by&nbsp;<a class="ltc-white" href="https://eldargezalov.com" target="_blank">Eldar Gezalov</a></p>
-            </div>
-        </div>
-    </div>
-</div>
-download END -->
-
-
-<?php include ('timeline/step_one.php'); ?>
 
 <?php include ('footer.php'); ?>

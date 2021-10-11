@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page-hd">
+<div class="page-hd" style="margin-top: 65px;">
     <h1 class="page-hd-title">
         F&Q
     </h1>
@@ -24,12 +24,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                 </div>
                 <div class="page-category js-categoryInner">
                     <div class="weui-cells page-category-content">
-                        <p class="content">请至各项目首页查看项目具体介绍</p>
+                        <p class="content">点击查看项目具体介绍</p>
                         <ul class="content">
                             <li><a href="/v2/ljz">上海陆家嘴正大广场</a></li>
-                            <li><a href="/v2/ly">河南洛阳正大广场</a></li>
-                            <li><a href="/v2/xh">上海徐汇正大乐城</a></li>
-                            <li><a href="/v2/bs">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>
@@ -57,9 +54,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <p class="content">我们提供线上预订场地的服务，请至场地活动页面选择您有意向的场地</p>
                         <ul class="content">
                             <li><a href="/v2/events?type=events">上海陆家嘴正大广场</a></li>
-                            <li><a href="/v2/events-ly?type=events">河南洛阳正大广场</a></li>
-                            <li><a href="/v2/events-xh?type=events">上海徐汇正大乐城</a></li>
-                            <li><a href="/v2/events-bs?type=events">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,9 +68,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <p class="content">我们提供线上预订场地的服务，请至广告投放页面选择您有意向的广告点位</p>
                         <ul class="content">
                             <li><a href="/v2/ads?type=ads">上海陆家嘴正大广场</a></li>
-                            <li><a href="/v2/ads-ly?type=ads">河南洛阳正大广场</a></li>
-                            <li><a href="/v2/ads-xh?type=ads">上海徐汇正大乐城</a></li>
-                            <li><a href="/v2/ads-bs?type=ads">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>
@@ -91,9 +82,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <p class="content">请至各项目首页查看各项目人流数据</p>
                         <ul class="content">
                             <li><a href="/v2/ljz">上海陆家嘴正大广场</a></li>
-                            <li><a href="/v2/ly">河南洛阳正大广场</a></li>
-                            <li><a href="/v2/xh">上海徐汇正大乐城</a></li>
-                            <li><a href="/v2/bs">上海宝山正大乐城</a></li>
                         </ul>
                     </div>
                 </div>

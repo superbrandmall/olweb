@@ -57,7 +57,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
     
     .calendar-month span.error {
-        background-color: #f00 !important;
+        background-color: #523634 !important;
     }
 </style>
 
@@ -94,7 +94,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 <br><br><br><br><br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

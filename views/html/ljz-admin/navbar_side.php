@@ -34,6 +34,9 @@
             <li id="nav_f_0">
                 <a href="/ljz-admin/?f=0">B1</a>
             </li>
+            <li id="nav_f_00">
+                <a href="/ljz-admin/?f=00">B2</a>
+            </li>
             <li id="nav_summary">
                 <a href="/ljz-admin/summary">Summary</a>
             </li>

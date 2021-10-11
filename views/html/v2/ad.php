@@ -64,7 +64,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
     
     .calendar-month span.error {
-        background-color: #f00 !important;
+        background-color: #523634 !important;
     }
     
     .button-label {
@@ -77,7 +77,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 
     .radio-label:checked + .button-label {
-        border: solid 3px #3e6ae1;
+        border: solid 3px #D9B791;
         color: #222;
         background: #fff;
     }
@@ -87,16 +87,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 
-<div style="position: relative; margin-top: -11px;">
+<div style="position: relative; margin-top: 65px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
     <video id="video" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
         <source src="javascript:;" type="video/mp4">
     </video>
 </div>
 
-<div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">
-    <section style="padding: 20px 15px 10px;">
+<div class="page__bd" style="position: relative; margin-top: -7px;">
+    <section class="cp-white" style="padding: 20px 15px; background-color: #323030;">
         <h3 class="weui-flex__item"><span id="ad_name"></span></h3>
+        <hr class="divider divider-default">
         <div class="weui-flex__item">楼层: <strong id="ad_floor"></strong></div>
         <div class="weui-flex__item">类型: <strong id="ad_type"></strong></div>
         <div class="weui-flex__item">尺寸<sup>3</sup>(mm): <strong id="ad_size"></strong></div>
@@ -105,7 +106,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
         
     <section style="padding: 20px 15px 10px;">
-        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
+        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">查看落位图</a></h3>
         <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
             <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
             <div class="weui-cell__bd">
@@ -120,7 +121,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
         <div class="weui-flex__item">
             <table class="content" style="font-size: 11px;">
-                <thead style="background: #F2F2F2; color: #333;">
+                <thead style="background: #FEDDB8; background: -webkit-linear-gradient(to bottom, #DAB892, #FEDDB8); background: linear-gradient(to bottom, #DAB892, #FEDDB8); color: #333;">
                     <tr>
                         <th style="text-align: center;">不含税单价</th>
                         <th style="text-align: center;">含税单价(税率6%)</th>
@@ -138,7 +139,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <table class="content">
                 <tbody>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333;">播放频次</td>
+                        <td style="background: #FEDDB8; color: #333;">播放频次</td>
                         <td id="ad_price_frequency"></td>
                     </tr>
                 </tbody>
@@ -146,25 +147,25 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <table class="content">
                 <tbody>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">天数</td>
+                        <td style="background: #FEDDB8; color: #333; font-size: 12px;">天数</td>
                         <td>
                             <span id="days">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">合同总金额</td>
+                        <td style="background: #FEDDB8; color: #333; font-size: 12px;">合同总金额</td>
                         <td>
                             <span id="amount">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">押金<br>(合同总金额的20%，<br>押金最少为¥ 2,000)</td>
+                        <td style="background: #FEDDB8; color: #333; font-size: 12px;">押金<br>(合同总金额的20%，<br>押金最少为¥ 2,000)</td>
                         <td>
                             <span id="deposit">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td style="background: #F2F2F2; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
+                        <td style="background: #FEDDB8; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
                         <td>
                             <span id="subTotal" style="font-weight: bold;">请选择档期查看</span>
                         </td>
@@ -175,24 +176,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
 </div>
 
-<div class="nikola-steps" style="bottom: 65px; z-index: 1;">
-    <div class="nikola-tab">
-        <div class="nikola-navbar">
-            <div class="nikola-navbar__item">
-                1.介绍
-            </div>
-            <div class="nikola-navbar__item nikola-bar__item_on">
-                2.选择
-            </div>
-            <div class="nikola-navbar__item">
-                3.付款
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0; z-index: 1;">
-    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #323030;">
         <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
             收藏
@@ -202,7 +187,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             购物车
         </a>
         <a id="orderType" href="javascript:;" class="weui-btn btn-primary" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; width: initial;">接受报价</a>
-        <a id="add_ad" href="javascript:;" class="weui-btn btn-warning" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; margin-right: 5px; width: initial;">加入购物车</a>
+        <a id="add_ad" href="javascript:;" class="weui-btn btn-secondary" style="float: right; border-radius: 20px; font-size: 12px; margin-top: 5px; margin-right: 5px; width: initial;">加入购物车</a>
     </div>
 </div>
 

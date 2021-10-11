@@ -37,7 +37,6 @@ if(!in_array($page, $page_nikola)) {
 <script type="text/javascript" src="/views/assets/plugins/weui/js/weui.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>
-<script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/weui/js/APlayer.min.js"></script>
 <?php
     echo $scripts; 

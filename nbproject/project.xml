@@ -15,6 +15,7 @@
             <word>开始日期</word>
             <word>开户银行</word>
             <word>服务台</word>
+            <word>浦东新区</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

@@ -45,7 +45,6 @@
                                         $.cookie('uid',response.data.wechatUserInfo.mobileNo);
                                         sessionStorage.setItem('wechat_user_info', JSON.stringify(response.data.wechatUserInfo));
                                         sessionStorage.setItem('authorize_time', timestamp);
-
                                         var strUrl = sessionStorage.getItem('location_href') || 'v2/';
                                         window.location.href = strUrl;
                                     }
@@ -53,7 +52,6 @@
                             } else {
                                 sessionStorage.setItem('wechat_user_info', JSON.stringify(response.data.wechatUserInfo));
                                 sessionStorage.setItem('authorize_time', timestamp);
-
                                 var strUrl = sessionStorage.getItem('location_href') || 'v2/';
                                 window.location.href = strUrl;
                             }

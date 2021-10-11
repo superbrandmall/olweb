@@ -1,9 +1,3 @@
-/*
-* @Author: 卓文理
-* @Email : 531840344@qq.com
-* @Desc  : 基于jQuery的多日期选择插件
-*/
-
 (function (factory) {
     if ( typeof define === 'function' && define.amd ) {
         define(['jquery'], factory);
@@ -410,7 +404,7 @@
             }
         });
 
-        $input.attr('placeholder', "请选择");
+        //$input.attr('placeholder', "请选择");
         $input.attr('readonly', '');
     }
 

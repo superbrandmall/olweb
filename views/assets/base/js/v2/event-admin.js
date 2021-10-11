@@ -430,9 +430,9 @@ function getShopInfo() {
                             }
 
                             $('#shopName').text(v.shopNo);
-                            $.cookie('shopName',v.shopNo);
+                            $.cookie('shopName',v.shopNo+'::'+v.shopCode);
                             $('#area').text(v.area);
-                            $.cookie('area',v.area);
+                            $.cookie('area',v.area+'::'+v.shopCode);
                             $('#area_spesifc').text(v.size != null ? '(' + v.size + ')' : '');
                             $('#height').text(v.height != null ? v.height : '');
                             $('#electricity').text(v.electricity != null ? v.electricity : '');
@@ -669,12 +669,12 @@ function saveOrder(ut){
             "spec": "",
             "startDate": $.cookie('dateStart_'+getURLParameter('id')),
             "unitCode": unit,
-            "unitDesc":  $.cookie('shopName'),
+            "unitDesc":  $.cookie('shopName').split('::')[0],
             "unitId": "",
             "userId": $.cookie('uid'),
             "vipFlag": "1",
             "wxCardFlag": "1",
-            "area": $.cookie('area'), //广告默认传1
+            "area": $.cookie('area').split('::')[0], //广告默认传1
             "shopCode": getURLParameter('id')
           }
         ],
@@ -687,14 +687,14 @@ function saveOrder(ut){
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": parseFloat(($.cookie('total_'+getURLParameter('id'))/1.05/$.cookie('area')).toFixed(2)), //单价
+            "rentAmount": parseFloat(($.cookie('total_'+getURLParameter('id'))/1.05/$.cookie('area').split('::')[0]).toFixed(2)), //单价
             "startDate": $.cookie('dateStart_'+getURLParameter('id')),
             "taxAmount": parseFloat(($.cookie('total_'+getURLParameter('id'))/1.05).toFixed(2)),//不含税总价
             "termType": "B013", // 工作日 B013 节假日 B103
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           }
         ],

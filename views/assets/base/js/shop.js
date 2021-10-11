@@ -153,7 +153,9 @@ function GetShopInfo(){
                         $('.owl-carousel').append('<div class="c-content-media-2 c-bg-img-center" style="background-image: url(/views/assets/base/img/content/mall/empty'+getRndInteger(1,5)+'.jpg); min-height: 380px;"><div class="c-panel"><div class="c-fav"></div></div></div>');
                     } else {
                         $.each(response.data.images, function(i,v){
-                            $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
+                            if(i < 4) {
+                                $('.owl-carousel').append('<div class="item"><div class="c-content-media-2 c-bg-img-center" style="background-image: url('+v.image+'); min-height: 380px;"></div></div>');
+                            }
                         });
                     }
                 }
@@ -204,7 +206,7 @@ function GetShopInfo(){
                     $('.c-content-media-1 .c-content-list-1').after('<a href="javascript:;" data-toggle="modal" data-target="#login-form" class="btn c-btn btn-lg c-font-bold c-font-white c-theme-btn c-btn-square c-font-uppercase">'+$.lang.addToFavorites+'</a>');
                 }
                 
-                if(response.data.vr !== null) {
+                if(response.data.vrValidated == 1 && response.data.vr !== null) {
                     NetPing(response.data.vr);
                 } else {
                     $('#vr_video').hide();
@@ -323,6 +325,9 @@ function GetMap(fn,lk,mc){
             break;
         case '负一楼':
             fc = '0';
+            break;
+        case '负二楼':
+            fc = '00';
             break;
         default:
             fc = '1';

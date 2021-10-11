@@ -13,9 +13,9 @@ var stores_2_units_total = 0;
 $(document).ready(function(){
     $('#nav_summary').addClass('active');
 
-    var floorDesc = ['九楼','八楼','七楼','六楼','五楼','四楼','三楼','二楼','一楼','负一楼'];
+    var floorDesc = ['九楼','八楼','七楼','六楼','五楼','四楼','三楼','二楼','一楼','负一楼','负二楼'];
     
-    for(var i=0;i<10;i++){
+    for(var i=0;i<11;i++){
         getFloorsRentalInfo(floorDesc[i]);
     }
     

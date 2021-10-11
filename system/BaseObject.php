@@ -46,12 +46,16 @@ abstract class BaseObject {
                 $this->domain = 'http://ol.superbrandmall.com/hf-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/brands-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'lotus-admin') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/lotus-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'portal') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/portal';
             } else if(strpos($_SERVER['REQUEST_URI'],'v2-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/v2-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'v2') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/v2';
+            } else if(strpos($_SERVER['REQUEST_URI'],'lotus') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/lotus';
             } else if(strpos($_SERVER['REQUEST_URI'],'gateway') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/gateway';
             } else {

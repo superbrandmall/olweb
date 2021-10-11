@@ -7,7 +7,6 @@
 </div>
 
 <div class="page__bd">
-    <?php include ('timeline/step_one.php'); ?>
     <div class="weui-panel__hd">
         5个广告区
     </div>

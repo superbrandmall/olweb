@@ -38,7 +38,7 @@ function findAllShopsByStoreCode() {
                             moreInfo = '';
                             onClick = '';
                         } else {
-                            moreInfo = '<li><a href="/v2/shop?id='+v.shopCode+'&type=leasing">查看详情</a></li>';
+                            moreInfo = '<li><a class="cp-btn-xs tc-gold" href="/v2/shop?id='+v.shopCode+'&type=leasing">查看详情</a></li>';
                             onClick = 'onclick="window.location=\'/v2/shop?id='+v.shopCode+'&type=leasing\'"';
                             layer = '';
                             offline = '';
@@ -54,7 +54,7 @@ function findAllShopsByStoreCode() {
                             businessFormat += '<span class="weui-mark-rb">'+w+'</span>&nbsp;';
                         })
                         
-                        $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">\n\
+                        $('.weui-panel__bd').append('<div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">\n\
             <div class="'+layer+'"><div class="weui-media-box__bd">\n\
                 <div style="position: relative;">\n\
                     <iframe loading="lazy" src="'+vr+'" frameborder="no" width="100%" height="300" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"></iframe>\n\

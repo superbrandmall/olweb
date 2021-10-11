@@ -36,6 +36,8 @@ function getOrderByTradeNO() {
                     var expireDay = '';
                     var blink = ':;';
 
+                    $('#brandName').text(v.brandName);
+                            
                     if(v.remarkSecond == 'leasing' || v.remarkSecond == 'events'){
                         $('#unitDesc').text(response.data.contractInfos[0].unitDesc);
                         img = "/views/assets/base/img/content/backgrounds/events/"+v.remarkFirst+"_1.jpg";
@@ -70,7 +72,7 @@ function getOrderByTradeNO() {
                             }
                         })
 
-                        var mark = '<span class="bg-blue f-white" style="font-size: 12px; padding: 2px 4px;">办活动</span>';
+                        var mark = '<span class="bg-pink" style="font-size: 12px; padding: 2px 4px;">办活动</span>';
 
                         if(v.remarkSecond == 'leasing'){
                             $('#leasing_price').show();
@@ -108,24 +110,24 @@ function getOrderByTradeNO() {
                                     break;
                                 case 3:
                                     if(v.orderStates != '合同用印中'){
-                                        leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经准备签约该铺位</small>';
+                                        leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经准备签约该铺位</small>';
                                     }
                                     break;
                                 case 4:
                                     if(v.orderStates != '待付款订单'){
-                                        leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经签约该铺位,请重新选择</small>';
+                                        leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经签约该铺位,请重新选择</small>';
                                     }
                                     break;
                                 case 5:
                                     if(v.orderStates != '已完成订单'){
-                                        leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位目前已被预定,请重新选择</small>';
+                                        leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位目前已被预定,请重新选择</small>';
                                     }
                                     break;
                                 case 0:
-                                    leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
+                                    leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
                                     break;
                                 case 9:
-                                    leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
+                                    leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
                                     break;
                                 default:
                                     leasingState = '';
@@ -138,16 +140,16 @@ function getOrderByTradeNO() {
                             amount = parseFloat((amount + 3000).toFixed(2));
                             taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
                             if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
-                                mark = '<span class="bg-orange f-white" style="font-size: 12px; padding: 2px 4px;">定金支付</span>';
+                                mark = '<span class="bg-gold" style="font-size: 12px; padding: 2px 4px;">定金支付</span>';
                             } else {
-                                mark = '<span class="bg-green f-white" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
+                                mark = '<span class="bg-gold" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
                             }
 
                             if(v.completeDate != null && v.completeDate != 'NULL' && v.completeDate != ''){
                                 var isExpired = '';
 
                                 if(dateCompare(IncrDates(v.completeDate,6),date) == true){
-                                    isExpired = ' <span class="f-orange">已结束</span>';
+                                    isExpired = ' <span class="tc-brown">已结束</span>';
                                 }
                                 if(v.payStates == '未支付'){
                                     expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">付款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
@@ -185,7 +187,7 @@ function getOrderByTradeNO() {
                         var tax = (amount-taxAmount).toFixed(2);
                         amount = parseFloat((amount*1.2).toFixed(2));
 
-                        var mark = '<span class="bg-purple f-white" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
+                        var mark = '<span class="bg-yellow" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
 
                         img = "/views/assets/base/img/content/backgrounds/ads/"+v.remarkFirst+".jpg";
                         $('#adevent_rent').text(numberWithCommas(parseFloat((amount-deposit).toFixed(2))));
@@ -238,7 +240,7 @@ function getOrderByTradeNO() {
                             refundLink = '<li><a href=\'javascript: requireRefund("'+v.remarkFirst+'","'+v.contractInfos[0].unitCode+'","'+buildingCode+'","'+mallCode+'","'+v.outTradeNo+'","'+v.id+'");\'>申请退款</a></li>';                                    
                         }
                     } else {
-                        refundLink = '<li><span style="background-color: #eee; border: solid 1px #eee; border-radius: 50px; padding: 4px 8px; color: #999;">'+v.payStates+'</span></li>';
+                        refundLink = '<li><span style="background-color: #f3f3f3; border: solid 1px #f3f3f3; border-radius: 50px; padding: 6px 10px; color: #323030;">'+v.payStates+'</span></li>';
                     }
 
                     if(v.state == 1 && v.orderStates == '合同已生成' && (shopState == 1 || shopState == 2 || shopState == 3)){
@@ -274,7 +276,7 @@ function getOrderByTradeNO() {
 
                     $('#order').html('<div id="weui_panel_'+v.id+'" class="weui-panel" onclick="window.location.href=\''+blink+'\'">\n\
             <div class="weui-panel__hd" onclick="window.location.href=\'/v2/'+mallSpell+'\'">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
-            <div class="f-orange" style="float: right;">'+v.orderStates+'</div></div></div>');
+            <div class="tc-brown" style="float: right;">'+v.orderStates+'</div></div></div>');
 
                     var weuiPanelBdId = '';
                     for(var c=0;c<v.contractInfos.length;c++){
@@ -313,8 +315,14 @@ function getOrderByTradeNO() {
                     }
                     
                     $('#orderTitle').html(orderTitle);
-                    $('#outTradeNo').text(v.outTradeNo);
+                    $('#outTradeNo').text(v.outTradeNowei);
                     $('#createDate').text(v.created);
+                    if(v.payStates == '已支付') {
+                        $('#createDate').parent().parent().append('<div class="weui-form-preview__item">\n\
+                        <span class="weui-form-preview__label">支付时间</span>\n\
+                        <span class="weui-form-preview__value"><span id="payDate">'+v.orderPays[0].payTime.split('+')[0].replace('T',' ')+'</span></span>\n\
+                    </div>');
+                    }
                     
                     $('#orderDetails').append('<ul class="weui-media-box__button">'+alink+'</ul>');
                 } else {

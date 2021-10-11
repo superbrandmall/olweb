@@ -63,7 +63,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;">请上传营业执照电子版或复印件并加盖公章</p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__business_license"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="business_license" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="business_license" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;">请上传法人代表身份证件复印件并加盖公章</p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__id_card"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="id_card" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="id_card" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;"></p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__trademark"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="trademark" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="trademark" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +113,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;"></p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__brand_authorization"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="brand_authorization" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="brand_authorization" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;">请上传电子签章人授权书并加盖公章</p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__esign_authorization"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="esign_authorization" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="esign_authorization" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;">请上传活动方案</p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__event_program"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="event_program" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="event_program" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +175,7 @@ if($type == 'leasing'){
                                     <p class="weui-cells__title" style="padding: 0;">请上传广告效果图</p>
                                     <ul class="weui-uploader__files" id="uploaderFiles__ad_design_sketch"></ul>
                                     <div class="weui-uploader__input-box">
-                                        <input id="ad_design_sketch" class="weui-uploader__input" type="file" accept="image/*,application/pdf" multiple/>
+                                        <input id="ad_design_sketch" class="weui-uploader__input" type="file" accept="image/*,application/pdf" />
                                     </div>
                                 </div>
                             </div>
@@ -192,8 +192,8 @@ if($type == 'leasing'){
 
 <div class="weui-btn-area" style="margin-top: 20px;">
     <center>
-        <button type="button" class="weui-btn weui-btn_mini btn-default" onclick="javascript: window.history.back(-1);" style="border-radius: 20px; color: #000;">返回</button>
-        <button type="button" class="weui-btn weui-btn_mini btn-warning" id="negotiate" style="border-radius: 20px;">谢绝</button>
+        <button type="button" class="weui-btn weui-btn_mini btn-secondary" onclick="javascript: window.history.back(-1);" style="border-radius: 20px; color: #000;">返回</button>
+        <button type="button" class="weui-btn weui-btn_mini btn-secondary" id="negotiate" style="border-radius: 20px;">谢绝</button>
         <button type="button" class="weui-btn weui-btn_mini btn-primary" id="update_files" style="border-radius: 20px;">更新文件</button>
     </center>
 </div>
@@ -271,5 +271,4 @@ if($type == 'leasing'){
 <br>
 <br>
 
-<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

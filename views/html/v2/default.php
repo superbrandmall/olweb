@@ -19,7 +19,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <img src="/upload/video/sbm-0/sbm000.jpg" />
     </div>
     <div style="position: relative; height: 100vh;">
-        <div class="container fill-bloc-top-edge tc-white" style="-webkit-text-stroke: 1px #000;">
+        <div class="container fill-bloc-top-edge ltc-white" style="text-shadow: 1px 1px 10px #000;">
             <div class="row">
                 <div class="col-lg-12 cp-hero-titlte">
                     <h4 class="text-center mg-clear animated fadeInUp animDelay08" data-appear-anim-style="fadeInUp" style="font-weight: bold;">正大广场</h4>
@@ -43,12 +43,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <div class="row no-gutters">
                             <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
                                 <div class="text-center" style="margin: 0 20px;">
-                                    <a href="/v2/leasing?type=leasing" class="btn btn-d btn-lg cp-button-yellow sm-shadow">从上海正大广场选择铺位</a>
+                                    <a href="/v2/leasing?type=leasing" class="btn btn-d btn-lg cp-button-gold sm-shadow">从上海正大广场选择铺位</a>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animated fadeIn animDelay1" data-appear-anim-style="fadeIn">
                                 <div class="text-center" style="margin: 0 20px;">
-                                    <a href="/v2/ljz" class="btn btn-d btn-lg cp-button-pink sm-shadow">了解上海正大广场</a>
+                                    <a href="/v2/ljz" class="btn btn-d btn-lg cp-button-white sm-shadow">了解上海正大广场</a>
                                 </div>
                             </div>
                         </div>

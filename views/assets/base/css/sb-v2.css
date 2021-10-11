@@ -97,6 +97,10 @@ input::-ms-input-placeholder {
     z-index: 20000;
 }
 
+.weui-footer a, .weui-footer navigator {
+    color: #452B26;
+}
+
 .weui-toast {
     opacity: 1;
     visibility: visible;
@@ -121,15 +125,6 @@ input::-ms-input-placeholder {
    float: left;
    list-style: none;
    margin-right: 5px;
-}
-
-.leasing-areas li a {
-    display: block;
-    color: #000;
-    background: rgba(255,255,255,0.8);
-    border-radius: 5px;
-    padding: 2px 6px;
-    font-size: 11px;
 }
 
 #mall_shortcuts .weui-grid {
@@ -185,7 +180,7 @@ input::-ms-input-placeholder {
 }
 
 .red-border {
-    border: solid 1px #f00;
+    border: solid 1px #523634;
 }
 
 .weui-media-box__button {
@@ -206,15 +201,19 @@ input::-ms-input-placeholder {
 }
 
 .weui-media-box__button a {
-    border: solid 1px #666;
     border-radius: 50px;
     padding: 6px 10px;
-    color: #666;
+    color: #494949;
+    border: solid 1px #EFE2D2;
+    background: #fff;
 }
 
 .weui-media-box__button a.current {
-    border: solid 1px #FF6600;
-    color: #FF6600;
+    color: #583D35;
+    border: solid 1px #968077;
+    background: #FEDDB8;
+    background: -webkit-linear-gradient(to bottom, #DAB892, #FEDDB8);
+    background: linear-gradient(to bottom, #DAB892, #FEDDB8);
 }
 /******* CHAT  ********/
 @keyframes scaleToggleOne { 0 {
@@ -287,8 +286,9 @@ transform:scale(1);
     background-color: purple;
 }
 
-.bg-light-red {
-    background-color: #FADCDE;
+.bg-light-brown {
+    background-color: #D9B791;
+    color: #323030;
 }
 
 .weui-mark-rb {
@@ -297,7 +297,8 @@ transform:scale(1);
     left: 0;
     padding: 3px 8px;
     font-size: 12px;
-    background: rgb(198, 198, 198);
+    background: #D9B791;
+    color: #323030;
 }
 
 .owl-carousel .owl-item img {

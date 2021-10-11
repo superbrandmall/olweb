@@ -64,7 +64,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
     
     .calendar-month span.error {
-        background-color: #f00 !important;
+        background-color: #523634 !important;
     }
     
     .button-label {
@@ -77,7 +77,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 
     .radio-label:checked + .button-label {
-        border: solid 3px #3e6ae1;
+        border: solid 3px #D9B791;
         color: #222;
         background: #fff;
     }
@@ -87,16 +87,17 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 </style>
 
-<div style="position: relative; margin-top: -11px;">
+<div style="position: relative; margin-top: 65px;">
     <iframe id="vr" src="javascript:;" width="100%" height="300px" frameborder="0"></iframe>
     <video id="video" class="embed-responsive-item" autoplay muted playsinline preload="preload" loop="loop" style="width: 100%; height: auto">
         <source src="javascript:;" type="video/mp4">
     </video>
 </div>
 
-<div class="page__bd" style="position: relative; margin-top: -16px; margin-bottom: 66px;">
-    <section style="padding: 20px 15px 10px;">
+<div class="page__bd" style="margin-top: -6px;">
+    <section class="cp-white" style="padding: 20px 15px; background-color: #323030;">
         <h3 class="weui-flex__item"><span id="shopName"></span></h3>
+        <hr class="divider divider-default">
         <div class="weui-flex__item">面积: <strong id="area"></strong>m<sup>2</sup> <strong id="area_spesifc"></strong></div>
         <div class="weui-flex__item">限高: <strong id="height"></strong></div>
         <div class="weui-flex__item">电源: <strong id="electricity"></strong></div>
@@ -107,7 +108,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
         
     <section style="padding: 20px 15px 10px;">
-        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">查看落位图</a></h3>
+        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">查看落位图</a></h3>
         <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
             <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
             <div class="weui-cell__bd">
@@ -122,7 +123,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </div>
         <div class="weui-flex__item">
             <table class="content" style="font-size: 11px;">
-                <thead style="background: #F2F2F2; color: #333;">
+                <thead style="background: #FEDDB8; background: -webkit-linear-gradient(to bottom, #DAB892, #FEDDB8); background: linear-gradient(to bottom, #DAB892, #FEDDB8); color: #333;">
                     <tr>
                         <th rowspan="2" style="text-align: center;">单价</th>
                         <th colspan="2" style="text-align: center;">1-7天</th>
@@ -153,7 +154,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </tbody>
             </table>
             <table class="content">
-                <thead style="background: #F2F2F2; color: #333; font-size: 12px;">
+                <thead style="background: #FEDDB8; background: -webkit-linear-gradient(to bottom, #DAB892, #FEDDB8); background: linear-gradient(to bottom, #DAB892, #FEDDB8); color: #333; font-size: 12px;">
                     <tr>
                         <th style="text-align: center;">类型</th>
                         <th style="text-align: center;">天数</th>
@@ -177,19 +178,19 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </tbody>
                 <tbody>
                     <tr>
-                        <td colspan="2" style="background: #F2F2F2; color: #333; font-size: 12px;">合同总金额</td>
+                        <td colspan="2" style="background: #FEDDB8; color: #333; font-size: 12px;">合同总金额</td>
                         <td colspan="2">
                             <span id="amount">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="background: #F2F2F2; color: #333; font-size: 12px;">押金</td>
+                        <td colspan="2" style="background: #FEDDB8; color: #333; font-size: 12px;">押金</td>
                         <td colspan="2">
                             <span id="deposit">请选择档期查看</span>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="background: #F2F2F2; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
+                        <td colspan="2" style="background: #FEDDB8; color: #333; font-size: 12px;">总计需要交纳金额<br>(含税含押金)</td>
                         <td colspan="2">
                             <span id="subTotal" style="font-weight: bold;">请选择档期查看</span>
                         </td>
@@ -236,9 +237,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     
     <section style="padding: 20px 15px 10px;">
         <h3 class="weui-flex__item">工程信息 
-            <a id="cad" href="javascript:;" data-file="/upload/docs/cad/<?= $id?>.dwg" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px;">下载CAD</a>                
-            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载工程条件</a>
-            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="weui-badge" style="float: right;background: rgba(0,0,0,0.1);color: #333;padding: 8px 12px;border-radius: 5px; margin-right: 5px;">下载图纸</a>
+            <a id="cad" href="javascript:;" data-file="/upload/docs/cad/<?= $id?>.dwg" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载CAD</a>                
+            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载工程条件</a>
+            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载图纸</a>
         </h3>
         <div class="weui-flex__item">
             <img src="/upload/docs/converted-jpg/<?= $id?>.jpg" style="width: 100%;" />
@@ -252,24 +253,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
 </div>
 
-<div class="nikola-steps" style="bottom: 65px; z-index: 1;">
-    <div class="nikola-tab">
-        <div class="nikola-navbar">
-            <div class="nikola-navbar__item">
-                1.介绍
-            </div>
-            <div class="nikola-navbar__item nikola-bar__item_on">
-                2.选择
-            </div>
-            <div class="nikola-navbar__item">
-                3.付款
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="page__bd" style="position: fixed;left: 0;right: 0;bottom: 0; z-index: 1;">
-    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #333;">
+    <div class="weui-panel__bd" style="padding: 10px 20px; background-color: #323030;">
         <a id="favourite" href="javascript:;" style="display: inline-block; font-size: 12px; color: #fff; padding: 5px 0; text-align: center; width: 60px;">
             <i class="fa fa-heart-o" aria-hidden="true"></i><br>
             收藏

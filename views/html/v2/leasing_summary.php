@@ -1,25 +1,25 @@
-<center><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
+<center style="margin-top: 30px;"><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
 <div class="weui-cells">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i></div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i></div>
         <div class="weui-cell__bd">
             <p>承租方用于签约的证件和执照应合法有效；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>不得擅自转租，否则转租人需承担违约责任甚至会导致合同解除；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;"  aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;"  aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>中途解约需提前3个月申请；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;"  aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;"  aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>承租方应在本合同签订之日向出租方足额支付租赁保证金、装修期满后首月租金、租赁期内首月物业管理费等费用。</p>
         </div>

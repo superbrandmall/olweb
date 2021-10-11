@@ -12,7 +12,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
 </div>
 
 <div class="page__bd">
-    <?php include ('timeline/step_one.php'); ?>    
     <ul class="collapse">
         <li class="js-show">
             <div class="weui-flex js-category">

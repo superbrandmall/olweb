@@ -1,0 +1,46 @@
+.main-header .navbar, .main-header .logo {
+    background-color: #E43C24;
+    background: -webkit-linear-gradient(top,  #E43C24 0%,#E43C24 100%);
+    background: linear-gradient(to bottom, #E43C24 0%,#E43C24 100%);
+    border-color: #E43C24;
+}
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+    border-left-color: #E43C24;
+}
+
+.btn-primary {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-zoom {
+    box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+    cursor: pointer;
+    background-color: #FFF;
+    display: block;
+    color: #999;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+}
+
+.btn-zoom:hover {
+    color: #64A3FF;
+}
+
+@media (max-width: 400px) {
+    .navbar-left {
+        margin: 2px;
+    }
+
+    .nav::after {
+        clear: none;
+    }
+}
+
+label.error {
+    color: orange;
+}
+
+.login-failed {
+    display: none;
+}

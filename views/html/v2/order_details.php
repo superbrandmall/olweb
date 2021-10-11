@@ -7,11 +7,11 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd" style="background-color: #EDEDED;">
+<div class="page__bd" style="margin-top: 65px; background-color: #EDEDED;">
     <div class="page__bd">
         <div class="weui-cells">
             <div class="weui-cell">
-                <div id="orderTitle" class="icon-box"></div>
+                <div id="orderTitle" class="icon-box" style="margin-bottom: 0;"></div>
             </div>
         </div>
         
@@ -32,6 +32,10 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                     <div class="weui-form-preview__item">
                         <span class="weui-form-preview__label">位置</span>
                         <span class="weui-form-preview__value"><span id="unitDesc"></span></span>
+                    </div>
+                    <div class="weui-form-preview__item">
+                        <span class="weui-form-preview__label">品牌</span>
+                        <span class="weui-form-preview__value"><span id="brandName"></span></span>
                     </div>
                     <div id="leasing_price" style="display: none;">
                         <div class="weui-form-preview__item">
@@ -75,5 +79,4 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

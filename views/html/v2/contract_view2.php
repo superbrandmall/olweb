@@ -42,7 +42,7 @@ if($type == 'leasing'){
 
 <div class="weui-btn-area" style="margin-top: 20px;">
     <center>
-        <button type="button" class="weui-btn weui-btn_mini btn-default" onclick="javascript: window.history.back(-1);" style="border-radius: 20px; color: #000;">返回</button>
+        <button type="button" class="weui-btn weui-btn_mini btn-secondary" onclick="javascript: window.history.back(-1);" style="border-radius: 20px; color: #000;">返回</button>
     </center>
 </div>
 
@@ -103,5 +103,4 @@ if($type == 'leasing'){
 <br>
 <br>
 
-<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

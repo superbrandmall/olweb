@@ -1,13 +1,13 @@
-<center><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
+<center style="margin-top: 30px;"><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
 <div class="weui-cells">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i></div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i></div>
         <div class="weui-cell__bd">
             <p>发布方用于签约的证件和执照应合法有效，广告内容须符合法律法规规定；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>发布方应在签约之日起七日内或广告发布起始日前（取其早）向商场方一次性足额支付全部保证金和含税服务费。</p>
         </div>

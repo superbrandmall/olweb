@@ -9,11 +9,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-form__text-area" style="margin: 20px 0;">
+<div class="weui-form__text-area" style="margin: 90px 0 20px;">
     <h2 class="weui-form__title">编辑账户</h2>
 </div>
-
-<?php include ('timeline/step_three.php'); ?>
 
 <div class="page__bd">
     <form id="basic" class="weui-form__control-area" style="margin-top: 20px;">
@@ -107,7 +105,5 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_three.php'); ?>
 
 <?php include ('footer.php'); ?>

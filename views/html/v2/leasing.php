@@ -24,7 +24,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 
-<div class="page__bd">
+<div class="page__bd" style="margin-top: 65px;">
     <div class="weui-panel__hd"></div>
     <div class="weui-panel__bd"></div>
 </div>
@@ -49,7 +49,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

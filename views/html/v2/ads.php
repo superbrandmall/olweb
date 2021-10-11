@@ -7,14 +7,14 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd">
+<div class="page__bd" style="margin-top: 65px;">
     <div class="weui-panel__hd">
         6个广告区
     </div>
     <div class="weui-panel__bd">
         <!--<a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>-->
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <div class="slide">
@@ -32,8 +32,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP200323000002");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP200323000002&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200323000002");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200323000002&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200323000002&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -47,7 +47,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <div class="slide">
@@ -65,8 +65,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP200420000001");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP200420000001&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200420000001");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200420000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200420000001&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -80,7 +80,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <div class="slide">
@@ -98,8 +98,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP200802000001");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP200802000001&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200802000001");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200802000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200802000001&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -113,7 +113,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <div class="slide">
@@ -131,8 +131,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         </div>
                     </div>
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP201025000001");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000001&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP201025000001");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP201025000001&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000001&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -146,13 +146,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP201025000005");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000005&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP201025000005");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP201025000005&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000005&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -166,13 +166,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
         
-        <div class="weui-media-box weui-media-box_appmsg" style="background: rgb(245, 245, 245); padding: 0; margin: 0 16px 16px;">
+        <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
                     <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/tongdaodengxiang2.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/tongdaodengxiang2.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
-                        <li><a href='javascript: showVideo("OLSHOP201025000006");'>视频</a></li>
-                        <li><a href="/v2/ad?id=OLSHOP201025000006&type=ad">查看详情</a></li>
+                        <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP201025000006");'>视频</a></li>
+                        <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP201025000006&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP201025000006&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
@@ -219,7 +219,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

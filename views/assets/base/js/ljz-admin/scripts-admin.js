@@ -39,6 +39,10 @@ $(document).ready(function(){
     var floorDesc, floor = '1F';
     if(getURLParameter('f') && getURLParameter('f') != '') {
         switch (getURLParameter('f')) {
+            case '00':
+                floorDesc = '负二楼';
+                floor = 'B2';
+                break;
             case '0':
                 floorDesc = '负一楼';
                 floor = 'B1';
@@ -256,7 +260,7 @@ function getShopFloorInfo(fl) {
                         }*/
                     }
                     //ifEvents = $.inArray(v.code, $.events);
-                    if((v.subType == '正柜' || v.subType == 'THEAT'/* || (getURLParameter('show') && getURLParameter('show') != '' && ifEvents != -1)*/) && v.coords != null && v.coords != '' && v.state != 0){
+                    if((v.subType == '正柜' || v.subType == 'THEAT' || v.subType == 'kiosk' /* || (getURLParameter('show') && getURLParameter('show') != '' && ifEvents != -1)*/) && v.coords != null && v.coords != '' && v.state != 0){
                         $('map').append('<area data-key="'+v.unit+'" alt="'+v.code+'" data-full="'+v.shopState+'" data-modality="'+v.modality+'" data-area="'+v.area+'" data-shop-name="'+v.shopName+'" name="'+(v.brandName || '')+'" href=\'javascript: GetShopInfo("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                     }
                 });

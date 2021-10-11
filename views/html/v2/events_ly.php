@@ -11,7 +11,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 </div>
 
 <div class="page__bd">
-    <?php include ('timeline/step_one.php'); ?>    
     <div class="weui-panel__hd">
         3个场地区
     </div>

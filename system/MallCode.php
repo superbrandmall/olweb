@@ -17,4 +17,8 @@
     $bs_tm = 'OLMALL180917000002';
     $luoyang_sbm = 'OLMALL190117000001';
     $hefei_sbm = 'OLMALL190409000001';
+    
+    $chuansha = 'SC033';
+    $mudanjiang = 'SC126';
+    $wencheng = 'SC055';
 //}

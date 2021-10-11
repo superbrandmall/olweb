@@ -84,7 +84,7 @@ function getAllOrdersToStamping() {
                                     }
                                 })
                                 
-                                var mark = '<span class="bg-blue f-white" style="font-size: 12px; padding: 2px 4px;">办活动</span>';
+                                var mark = '<span class="bg-pink" style="font-size: 12px; padding: 2px 4px;">办活动</span>';
                                 
                                 if(v.remarkSecond == 'leasing'){
                                     var mallCode;
@@ -120,24 +120,24 @@ function getAllOrdersToStamping() {
                                             break;
                                         case 3:
                                             if(v.orderStates != '合同用印中'){
-                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经准备签约该铺位</small>';
+                                                leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经准备签约该铺位</small>';
                                             }
                                             break;
                                         case 4:
                                             if(v.orderStates != '待付款订单'){
-                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经签约该铺位,请重新选择</small>';
+                                                leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>有其他用户已经签约该铺位,请重新选择</small>';
                                             }
                                             break;
                                         case 5:
                                             if(v.orderStates != '已完成订单'){
-                                                leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位目前已被预定,请重新选择</small>';
+                                                leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位目前已被预定,请重新选择</small>';
                                             }
                                             break;
                                         case 0:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
+                                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
                                             break;
                                         case 9:
-                                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
+                                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>该铺位已下架,请重新选择</small>';
                                             break;
                                         default:
                                             leasingState = '';
@@ -150,16 +150,16 @@ function getAllOrdersToStamping() {
                                     amount = parseFloat((amount + 3000).toFixed(2));
                                     taxAmount = parseFloat((taxAmount + 3000).toFixed(2));
                                     if(v.payType == 'deposit' || v.payType == 'wxPay' || v.payType == 'aliPay'){
-                                        mark = '<span class="bg-orange f-white" style="font-size: 12px; padding: 2px 4px;">定金支付</span>';
+                                        mark = '<span class="bg-gold" style="font-size: 12px; padding: 2px 4px;">定金支付</span>';
                                     } else {
-                                        mark = '<span class="bg-green f-white" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
+                                        mark = '<span class="bg-gold" style="font-size: 12px; padding: 2px 4px;">租新铺</span>';
                                     }
                                 
                                     if(v.completeDate != null && v.completeDate != 'NULL' && v.completeDate != ''){
                                         var isExpired = '';
                                         
                                         if(dateCompare(IncrDates(v.completeDate,6),date) == true){
-                                            isExpired = ' <span class="f-orange">已结束</span>';
+                                            isExpired = ' <span class="tc-brown">已结束</span>';
                                         }
                                         if(v.payStates == '未支付'){
                                             expireDay = '<small style="float: right; padding: 16px 16px 0 16px; width: 90%; text-align: right;">付款截止日 <span style="color: rgba(0,0,0,.5);">'+IncrDates(v.completeDate,6)+'<span>'+isExpired+'<hr style="margin-top: 8px;"></small>';
@@ -189,7 +189,7 @@ function getAllOrdersToStamping() {
                                 var tax = (amount-taxAmount).toFixed(2);
                                 amount = parseFloat((amount*1.2).toFixed(2));
                                 
-                                var mark = '<span class="bg-purple f-white" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
+                                var mark = '<span class="bg-yellow" style="font-size: 12px; padding: 2px 4px;">做广告</span>';
                                 
                                 img = "/views/assets/base/img/content/backgrounds/ads/"+v.remarkFirst+".jpg";
                             }
@@ -244,7 +244,7 @@ function getAllOrdersToStamping() {
                             
                             $('#orders').append('<div id="weui_panel_'+v.id+'" class="weui-panel" onclick="window.location.href=\'/v2/order-details?trade='+v.outTradeNo+'\'">\n\
         <div class="weui-panel__hd" onclick="window.location.href=\'/v2/'+mallSpell+'\'">'+mark+' '+mallName+' <i class="fa fa-angle-right" style="color: rgba(0,0,0,.5)" aria-hidden="true"></i>\n\
-        <div class="f-orange" style="float: right;">'+v.orderStates+'</div></div></div>');
+        <div class="tc-brown" style="float: right;">'+v.orderStates+'</div></div></div>');
          
                             var weuiPanelBdId = '';
                             //var adInfo= '';

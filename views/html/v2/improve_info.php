@@ -9,11 +9,9 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-form__text-area" style="margin: 20px 0;">
+<div class="weui-form__text-area" style="margin: 90px 0 20px;">
     <h2 class="weui-form__title">请填写合同必用的注册资料</h2>
 </div>
-
-<?php include ('timeline/step_three.php'); ?>
 
 <div id="tagnav" class="weui-navigator weui-navigator-wrapper">
     <ul class="weui-navigator-list">
@@ -239,7 +237,5 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-
-<?php include ('timeline/step_three.php'); ?>
 
 <?php include ('footer.php'); ?>

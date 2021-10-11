@@ -7,7 +7,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="weui-article" style="padding: 24px 32px 0;">
+<div class="weui-article" style="padding: 80px 32px 0;">
     <h1>很遗憾未能与您达成合作···</h1>
 </div>
 

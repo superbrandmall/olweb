@@ -58,7 +58,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
     
     .calendar-month span.error {
-        background-color: #f00 !important;
+        background-color: #523634 !important;
     }
 </style>
 
@@ -66,7 +66,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     <h1 style="margin-bottom: 0.5em;">购物车</h1>
 </div>
 
-<div class="page__bd">
+<div class="page__bd" style="margin-top: 30px;">
     <div id="shoppingCartEmpty" class="weui-panel">
         <div class="weui-panel__hd">
             <div class="icon-box">
@@ -102,7 +102,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
 </div>
 <br><br><br><br><br>
-
-<?php include ('timeline/step_two.php'); ?>
 
 <?php include ('footer.php'); ?>

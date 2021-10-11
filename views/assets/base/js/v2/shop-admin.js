@@ -51,9 +51,9 @@ $(document).ready(function(){
     
     findAllShopsByStoreCode();
     
-    if(isAndroid() == true) {
+    /*if(isAndroid() == true) {
         showIndexPix();
-    }
+    }*/
     
     getMyFavorites();
     getShopInfo();
@@ -92,11 +92,16 @@ $(document).ready(function(){
         }
     }); 
     
-    var datetime = '';
+    var thisYear = d.getFullYear();
+    var thisMonth = d.getMonth()+1;
+    thisMonth = (thisMonth<10 ? '0' : '') + thisMonth;
+    var nextMonth = d.getMonth()+2;
+    nextMonth = (nextMonth<10 ? '0' : '') + nextMonth;
+
     $("#appointmentTime").datetimePicker({
         title: '请选择看铺时间',
-        years: [2021],
-        monthes: ['04','05'],
+        years: [d.getFullYear()],
+        monthes: [thisMonth,nextMonth],
         times: function () {
             return [
                 {
@@ -205,10 +210,10 @@ function getShopInfo(){
                         getShopsMoreInfo();
 
                         $('#shopName').text(response.data.shopName);
-                        $.cookie('shopName',response.data.shopName);
+                        $.cookie('shopName',response.data.shopName+'::'+response.data.code);
                         $('#area').text(response.data.area);
-                        $.cookie('area',response.data.area);
-                        $.cookie('shopNo',response.data.unit);
+                        $.cookie('area',response.data.area+'::'+response.data.area);
+                        $.cookie('shopNo',response.data.unit+'::'+response.data.code);
 
                         $('#negotiate').click(function(){
                             window.location.href = '/v2/negotiation?code='+getURLParameter('id')+'&unit='+response.data.unit+'&building='+response.data.buildingCode+'&mall='+response.data.mallCode+'&name=0';
@@ -224,7 +229,8 @@ function getShopInfo(){
 
                         $('#floor_plan').on('click', function(){
                             if(response.data.floorCode != null) {
-                                GetMap(floorName,mall,response.data.mallCode);
+                                //GetMap(floorName,mall,response.data.mallCode);
+                                GetFloorPlan();
                             }
                         });
                     } else {
@@ -304,16 +310,16 @@ function getShopsMoreInfo() {
                             leasingState = '<small class="f-green" style="padding: 2px 5px;">该铺位目前可签约</small>';
                             break;
                         case 3:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
+                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;">该铺位已与租户进入线上签约阶段</small>';
                             break;
                         case 4:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
+                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;">该铺位已与租户完成签约进入付款阶段</small>';
                             break;
                         case 5:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位目前已被预定</small>';
+                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;">该铺位目前已被预定</small>';
                             break; 
                         case 0:
-                            leasingState = '<small class="bg-light-red f-orange" style="padding: 2px 5px;">该铺位已下架</small>';
+                            leasingState = '<small class="bg-light-brown" style="padding: 2px 5px;">该铺位已下架</small>';
                             break;    
                         default:
                             leasingState = '';
@@ -323,40 +329,40 @@ function getShopsMoreInfo() {
                     $('.page__bd ul li:first-child .js-category-1').prepend(leasingState);
                     $('#desc').text(response.data.descript);
                     $('#freeOfGroundRent').text(response.data.freeOfGroundRent);
-                    $.cookie('contractLength',response.data.contractLength);
+                    $.cookie('contractLength',response.data.contractLength+'::'+response.data.shopCode);
 
                     var totalAmount = 0;
                     for(var x = 1; x <= response.data.contractLength; x++){
                         $.each(response.data.shopRentWxs, function(k,y){
                             if(y.code == x && y.termTypeName == "固定租金"){
                                 rentAmount = y.rentAmount;
-                                $.cookie('rentAmount_'+x, y.rentAmount);
+                                $.cookie('rentAmount_'+x, y.rentAmount+'::'+response.data.shopCode);
                                 taxAmount = y.taxAmount;
-                                $.cookie('taxAmount_'+x, y.taxAmount);
+                                $.cookie('taxAmount_'+x, y.taxAmount+'::'+response.data.shopCode);
                                 amount = y.amount;
-                                $.cookie('amount_'+x, y.amount);
+                                $.cookie('amount_'+x, y.amount+'::'+response.data.shopCode);
                             }
                             if(y.code == x && y.termTypeName == "提成扣率"){
                                 deductionTaxAmount = y.taxAmount;
-                                $.cookie('taxDeductionTaxAmount_'+x, y.taxAmount);
-                                $.cookie('deductionTaxAmount_'+x, y.amount);
+                                $.cookie('taxDeductionTaxAmount_'+x, y.taxAmount+'::'+response.data.shopCode);
+                                $.cookie('deductionTaxAmount_'+x, y.amount+'::'+response.data.shopCode);
                             }
                             if(y.code == x && y.termTypeName == "物业管理费"){
                                 propertyMaintenanceRentAmount = y.rentAmount;
-                                $.cookie('propertyMaintenanceRentAmount_'+x, y.rentAmount);
+                                $.cookie('propertyMaintenanceRentAmount_'+x, y.rentAmount+'::'+response.data.shopCode);
                                 taxPropertyMaintenance = y.taxAmount;
-                                $.cookie('taxPropertyMaintenance_'+x, y.taxAmount);
+                                $.cookie('taxPropertyMaintenance_'+x, y.taxAmount+'::'+response.data.shopCode);
                                 propertyMaintenance = y.amount;
-                                $.cookie('propertyMaintenance_'+x, y.amount);
+                                $.cookie('propertyMaintenance_'+x, y.amount+'::'+response.data.shopCode);
                             }
                             if(y.code == x && y.termTypeName == "推广费"){
                                 promotionRate = y.taxAmount;
-                                $.cookie('taxPromotionRate_'+x, y.taxAmount);
-                                $.cookie('promotionRate_'+x, y.amount);
+                                $.cookie('taxPromotionRate_'+x, y.taxAmount+'::'+response.data.shopCode);
+                                $.cookie('promotionRate_'+x, y.amount+'::'+response.data.shopCode);
                             }
                             if(y.termTypeName == "租赁保证金"){
                                 $('#deposit').text(numberWithCommas(y.amount));
-                                $.cookie('deposit',y.amount);
+                                $.cookie('deposit',y.amount+'::'+response.data.shopCode);
                                 totalAmount = y.amount;
                             }
                         })
@@ -369,23 +375,23 @@ function getShopsMoreInfo() {
                         <td style="text-align: center;">¥'+numberWithCommas(amount)+'</td></tr>');
                     }
 
-                    totalAmount = (totalAmount + parseFloat(($.cookie('amount_1'))) + parseFloat($.cookie('propertyMaintenance_1')) + 3000).toFixed(2);
+                    totalAmount = (totalAmount + parseFloat(($.cookie('amount_1').split('::')[0])) + parseFloat($.cookie('propertyMaintenance_1').split('::')[0]) + 3000).toFixed(2);
                     $('#totalAmount').text(numberWithCommas(totalAmount));
-                    $.cookie('totalAmount', totalAmount);
+                    $.cookie('totalAmount', totalAmount+'::'+response.data.shopCode);
                     
-                    $('#taxAmount').text(numberWithCommas($.cookie('taxAmount_1')));
-                    $('#rentAmount').text($.cookie('rentAmount_1'));
+                    $('#taxAmount').text(numberWithCommas($.cookie('taxAmount_1').split('::')[0]));
+                    $('#rentAmount').text($.cookie('rentAmount_1').split('::')[0]);
                     $('#propertyMaintenance').html('<tr>\n\
                         <td style="text-align: center;">¥'+propertyMaintenanceRentAmount+'</td>\n\
                         <td style="text-align: center;">¥'+numberWithCommas(taxPropertyMaintenance)+'</td>\n\
                         <td style="text-align: center;">¥'+numberWithCommas(propertyMaintenance)+'</td></tr>');
                     $('#promotionRate').text(promotionRate);
-                    if(!$.cookie('settleDate') || $.cookie('settleDate') == '' || $.cookie('settleDate') == null) {
+                    //if(!$.cookie('settleDate') || $.cookie('settleDate') == '' || $.cookie('settleDate') == null) {
                         $('#settleDate').text(IncrDates(date,7));
-                        $.cookie('settleDate',IncrDates(date,7));
-                    } else {
-                        $('#settleDate').text($.cookie('settleDate'));
-                    }
+                        $.cookie('settleDate',IncrDates(date,7)+'::'+response.data.shopCode);
+                    /*} else {
+                        $('#settleDate').text($.cookie('settleDate').split('::')[0]);
+                    }*/
 
                     $('#settleDate').on('click', function () {
                         weui.datePicker({
@@ -396,21 +402,21 @@ function getShopsMoreInfo() {
                                 var dates = result[2].value < 10 ? '0'+result[2].value : result[2].value;
                                 settleDate = result[0].value+'-'+month+'-'+dates;
                                 $('#settleDate').text(settleDate);
-                                $.cookie('settleDate',settleDate);
+                                $.cookie('settleDate',settleDate+'::'+response.data.shopCode);
                                 openDate = IncrDates(settleDate,parseInt(response.data.freeOfGroundRent));
                                 $('#openDate').text(openDate);
-                                $.cookie('openDate',openDate);
+                                $.cookie('openDate',openDate+'::'+response.data.shopCode);
                             },
                             title: '选择进场日期'
                         });
                     });
 
                     if(response.data.freeOfGroundRent != ''){
-                        openDate = IncrDates($.cookie('settleDate'),parseInt(response.data.freeOfGroundRent)) || '';
+                        openDate = IncrDates($.cookie('settleDate').split('::')[0],parseInt(response.data.freeOfGroundRent)) || '';
                     }
 
                     $('#openDate').text(openDate);
-                    $.cookie('openDate',openDate);
+                    $.cookie('openDate',openDate+'::'+response.data.shopCode);
                     
                     $('#vr_3d').click(function () {
                         if(response.data.remarkFirst != null){
@@ -534,12 +540,6 @@ function saveOrder(ut){
     }
     
     var unit = ut;
-    var endDate;
-    if($.cookie('contractLength') > 1) {
-        endDate = $.cookie('termEndDate_2');
-    } else if($.cookie('contractLength') > 2) {
-        endDate = $.cookie('termEndDate_3');
-    }
     var outTradeNo = '10JT' + orgCode + d.getFullYear() +
                 (month<10 ? '0' : '') + month +
                 (day<10 ? '0' : '') + day + time
@@ -572,23 +572,23 @@ function saveOrder(ut){
         "code": unit,
         "contractInfos": [
           {
-            "amount": $.cookie('totalAmount'),
+            "amount": $.cookie('totalAmount').split('::')[0],
             "bizScope": $.order.businessScope,
             "breachAmount": "",
             "categoryCode": $.cookie('categorySelected').split('::')[0],
             "categoryName": $.cookie('categorySelected').split('::')[1],
             "code": unit,
-            "depositAmount": $.cookie('deposit'),
+            "depositAmount": $.cookie('deposit').split('::')[0],
             "electricBillFlag": "1",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),$.cookie('contractLength'))),
-            "enterDate": $.cookie('settleDate'),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],$.cookie('contractLength').split('::')[0])),
+            "enterDate": $.cookie('settleDate').split('::')[0],
             "isCleaning": "0",
             "isSecurity": "0",
             "isService": "0",
             "mobileNo": $.cookie('uid'),
             "name": "test name",
             "num": 1,
-            "openDate": $.cookie('openDate'),
+            "openDate": $.cookie('openDate').split('::')[0],
             "orgCode": orgCode,
             "otherFlag": "",
             "outTradeNo": outTradeNo,
@@ -601,101 +601,101 @@ function saveOrder(ut){
             "serviceDepositAmount": 0, // 公共事业费押金
             "size": "", //广告尺寸规格
             "spec": "",
-            "startDate": $.cookie('settleDate'),
+            "startDate": $.cookie('settleDate').split('::')[0],
             "unitCode": unit,
-            "unitDesc": $.cookie('shopName'),
+            "unitDesc": $.cookie('shopName').split('::')[0],
             "unitId": "",
             "userId": $.cookie('uid'),
             "vipFlag": "1",
             "wxCardFlag": "1",
-            "area": $.cookie('area'), //广告默认传1
+            "area": $.cookie('area').split('::')[0], //广告默认传1
             "shopCode": getURLParameter('id')
           }
         ],
         "contractNo": "",
         "contractTermInfos": [
           {
-            "amount": $.cookie('amount_1'),
+            "amount": $.cookie('amount_1').split('::')[0],
             "code": "1",
-            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate').split('::')[0])),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('rentAmount_1'),
-            "startDate": $.cookie('openDate'),
-            "taxAmount": $.cookie('taxAmount_1'),
+            "rentAmount": $.cookie('rentAmount_1').split('::')[0],
+            "startDate": $.cookie('openDate').split('::')[0],
+            "taxAmount": $.cookie('taxAmount_1').split('::')[0],
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           },
           {
-            "amount": $.cookie('propertyMaintenance_1'),
+            "amount": $.cookie('propertyMaintenance_1').split('::')[0],
             "code": "1",
-            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate').split('::')[0])),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1'),
-            "startDate": $.cookie('openDate'),
-            "taxAmount":  $.cookie('taxPropertyMaintenance_1'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1').split('::')[0],
+            "startDate": $.cookie('openDate').split('::')[0],
+            "taxAmount":  $.cookie('taxPropertyMaintenance_1').split('::')[0],
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "",
-            "area":  $.cookie('area'),
+            "area":  $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           },
           {
-            "amount": $.cookie('propertyMaintenance_1'),
+            "amount": $.cookie('propertyMaintenance_1').split('::')[0],
             "code": "1",
-            "endDate": DecrDate($.cookie('openDate')),
+            "endDate": DecrDate($.cookie('openDate').split('::')[0]),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1'),
-            "startDate": $.cookie('settleDate'),
-            "taxAmount":  $.cookie('taxPropertyMaintenance_1'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_1').split('::')[0],
+            "startDate": $.cookie('settleDate').split('::')[0],
+            "taxAmount":  $.cookie('taxPropertyMaintenance_1').split('::')[0],
             "termType": "B031",
             "termTypeName": "装修期物业管理费",
             "unitCode": unit,
             "unitId": "",
-            "area":  $.cookie('area'),
+            "area":  $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           },
           {
-            "amount": $.cookie('promotionRate_1'),
+            "amount": $.cookie('promotionRate_1').split('::')[0],
             "code": "1",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),$.cookie('contractLength'))),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],$.cookie('contractLength').split('::')[0])),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "startDate": $.cookie('openDate'),
-            "taxAmount": $.cookie('taxPromotionRate_1'),
+            "startDate": $.cookie('openDate').split('::')[0],
+            "taxAmount": $.cookie('taxPromotionRate_1').split('::')[0],
             "termType": "G021",
             "termTypeName": "推广费",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           },
           {
-            "amount": $.cookie('deductionTaxAmount_1'),
+            "amount": $.cookie('deductionTaxAmount_1').split('::')[0],
             "code": "1",
-            "endDate": DecrDate(IncrYear($.cookie('settleDate'))),
+            "endDate": DecrDate(IncrYear($.cookie('settleDate').split('::')[0])),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo, //订单号需动态调用
             "rentAmount": "",
-            "startDate": $.cookie('openDate'),
-            "taxAmount":  $.cookie('taxDeductionTaxAmount_1'),
+            "startDate": $.cookie('openDate').split('::')[0],
+            "taxAmount":  $.cookie('taxDeductionTaxAmount_1').split('::')[0],
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "shopCode": getURLParameter('id')
           }
         ],
@@ -716,60 +716,60 @@ function saveOrder(ut){
         "remarkSecond": 'leasing'
     };
     
-    if($.cookie('contractLength') > 1) {
+    if($.cookie('contractLength').split('::')[0] > 1) {
         var secondYearPrice = {
-            "amount": $.cookie('amount_2'),
+            "amount": $.cookie('amount_2').split('::')[0],
             "code": "2",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('rentAmount_2'),
-            "startDate": IncrYear($.cookie('settleDate')),
-            "taxAmount": $.cookie('taxAmount_2'),
+            "rentAmount": $.cookie('rentAmount_2').split('::')[0],
+            "startDate": IncrYear($.cookie('settleDate').split('::')[0]),
+            "taxAmount": $.cookie('taxAmount_2').split('::')[0],
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
 
         var secondYearMaintenance = {
-            "amount": $.cookie('propertyMaintenance_2'),
+            "amount": $.cookie('propertyMaintenance_2').split('::')[0],
             "code": "2",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('propertyMaintenanceRentAmount_2'),
-            "startDate": IncrYear($.cookie('settleDate')),
-            "taxAmount": $.cookie('taxPropertyMaintenance_2'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_2').split('::')[0],
+            "startDate": IncrYear($.cookie('settleDate').split('::')[0]),
+            "taxAmount": $.cookie('taxPropertyMaintenance_2').split('::')[0],
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
 
         var secondYearRate = {
-            "amount": $.cookie('deductionTaxAmount_2'),
+            "amount": $.cookie('deductionTaxAmount_2').split('::')[0],
             "code": "2",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),2)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],2)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": "",
-            "startDate": IncrYear($.cookie('settleDate')),
-            "taxAmount": $.cookie('taxDeductionTaxAmount_2'),
+            "startDate": IncrYear($.cookie('settleDate').split('::')[0]),
+            "taxAmount": $.cookie('taxDeductionTaxAmount_2').split('::')[0],
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
@@ -777,60 +777,60 @@ function saveOrder(ut){
         map.contractTermInfos.push(secondYearPrice,secondYearMaintenance,secondYearRate);
     }
     
-    if($.cookie('contractLength') > 2) {
+    if($.cookie('contractLength').split('::')[0] > 2) {
         var thirdYearPrice = {
-            "amount": $.cookie('amount_3'),
+            "amount": $.cookie('amount_3').split('::')[0],
             "code": "3",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('rentAmount_3'),
-            "startDate": IncrYears($.cookie('settleDate'),2),
-            "taxAmount": $.cookie('taxAmount_3'),
+            "rentAmount": $.cookie('rentAmount_3').split('::')[0],
+            "startDate": IncrYears($.cookie('settleDate').split('::')[0],2),
+            "taxAmount": $.cookie('taxAmount_3').split('::')[0],
             "termType": "B011",
             "termTypeName": "固定租金",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
 
         var thirdYearMaintenance = {
-            "amount": $.cookie('propertyMaintenance_3'),
+            "amount": $.cookie('propertyMaintenance_3').split('::')[0],
             "code": "3",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
-            "rentAmount": $.cookie('propertyMaintenanceRentAmount_3'),
-            "startDate": IncrYears($.cookie('settleDate'),2),
-            "taxAmount": $.cookie('taxPropertyMaintenance_3'),
+            "rentAmount": $.cookie('propertyMaintenanceRentAmount_3').split('::')[0],
+            "startDate": IncrYears($.cookie('settleDate').split('::')[0],2),
+            "taxAmount": $.cookie('taxPropertyMaintenance_3').split('::')[0],
             "termType": "B021",
             "termTypeName": "物业管理费",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
 
         var thirdYearRate = {
-            "amount": $.cookie('deductionTaxAmount_3'),
+            "amount": $.cookie('deductionTaxAmount_3').split('::')[0],
             "code": "3",
-            "endDate": DecrDate(IncrYears($.cookie('settleDate'),3)),
+            "endDate": DecrDate(IncrYears($.cookie('settleDate').split('::')[0],3)),
             "name": "",
             "orgCode": orgCode,
             "outTradeNo": outTradeNo,
             "rentAmount": "",
-            "startDate": IncrYears($.cookie('settleDate'),2),
-            "taxAmount": $.cookie('taxDeductionTaxAmount_3'),
+            "startDate": IncrYears($.cookie('settleDate').split('::')[0],2),
+            "taxAmount": $.cookie('taxDeductionTaxAmount_3').split('::')[0],
             "termType": "D011",
             "termTypeName": "提成扣率",
             "unitCode": unit,
             "unitId": "",
-            "area": $.cookie('area'),
+            "area": $.cookie('area').split('::')[0],
             "id": 0,
             "shopCode": getURLParameter('id')
         }
@@ -908,9 +908,9 @@ function getOrderByTradeNO(outTradeNo,unit) {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 if(response.data.payType != 'deposit'){
-                    generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                    generateContract(response.data.id,'订单合同已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName').split('::')[0]+'】合同已生成，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
                 } else {
-                    generateContract(response.data.id,'订单已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName')+'】有一笔1,000元的定金待支付，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
+                    generateContract(response.data.id,'订单已生成','您的订单【'+mallName+'】商铺位置【'+$.cookie('shopName').split('::')[0]+'】有一笔1,000元的定金待支付，请前往我的订单管理页面查看。',outTradeNo, '我的消息',unit,'/v2/stamping');
                 }
                 
             } else {
@@ -1099,6 +1099,10 @@ function removeFavorite(id,bc,c,sc,uc){
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function GetFloorPlan() {
+    $('#map').attr('src','/views/assets/base/img/content/backgrounds/leasing/'+getURLParameter('id')+'_map.png');
 }
 
 function GetMap(fn,lk,mc){
@@ -1426,8 +1430,8 @@ function saveAppointment() {
             "orgCode": orgCode,
             "state": 1,
             "status": "已预约",
-            "unitCode": $.cookie('shopNo'),
-            "unitDesc": $.cookie('shopName'),
+            "unitCode": $.cookie('shopNo').split('::')[0],
+            "unitDesc": $.cookie('shopName').split('::')[0],
             "name": $('#appointmentName').val(),
             "tenantName": $('#appointmentCompany').val(),
             "shopCode": getURLParameter('id')

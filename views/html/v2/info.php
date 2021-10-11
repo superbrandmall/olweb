@@ -7,7 +7,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd">
+<div class="page__bd" style="margin-top: 65px;">
     <div class="weui-tab">
         <div class="weui-navbar">
             <div class="weui-navbar__item" onclick="window.location='/v2/all-orders'">
@@ -26,7 +26,6 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <div id="profile">
     <div id="avatar_selector">
         <div id="avatar" style="background-image: url(/views/assets/base/img/content/brands-admin/avatar.png)" class="avatar"></div>
-        <input type="file" accept="image/*" multiple style="position: absolute; top: 122px; left: 0; right: 0; padding: 0px; margin: 0 auto; opacity: 0; height: 112px; width: 112px;" />
     </div>
     <h4 id="nickname" style="margin-top: 20px; text-align: center;"></h4>
     <h4 id="uid" style="text-align: center;"></h4>
@@ -40,7 +39,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
     </div>
     <div data-appear-anim-style="fadeIn" class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animDelay1 animated" style="visibility: visible;">
         <div class="text-center" style="margin: 0 20px;">
-            <a href="/v2/contact" class="btn btn-default btn-lg" style="background-color: #f4f4f4; width: 100%; border-width: 3px;">联系客服</a>
+            <a href="/v2/contact" class="btn btn-secondary btn-lg" style="background-color: #f4f4f4; width: 100%; border-width: 3px;">联系客服</a>
         </div>
     </div>
     <div data-appear-anim-style="fadeIn" class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animDelay1 animated" style="visibility: visible;">

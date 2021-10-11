@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include ('system/Router.php');
 $scripts = null;
 
@@ -113,10 +114,12 @@ if(!in_array($page, $page_nikola)) {
 		var appID = $.api.appId;
 		var redirectUri = encodeURIComponent($.api.share+"/oauth2.php");
                 var state = "1";
-                var strUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appID + "&redirect_uri=" + redirectUri + "&response_type=code&scope=snsapi_userinfo&state=" + state + "#wechat_redirect";
+                var strUrl = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + appID + "&redirect_uri=" + redirectUri + "&response_type=code&scope=snsapi_userinfo&state=" + state + "&callback=" + sessionStorage.getItem('location_href') + "#wechat_redirect";
                 var timestamp = Date.parse(new Date());
                 
-                sessionStorage.setItem('location_href',window.location.href);
+                if(window.location.href.indexOf('login') == -1){
+                    sessionStorage.setItem('location_href',window.location.href);
+                }
                 
                 if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
                     var wechat_user_info = $.parseJSON(sessionStorage.getItem('wechat_user_info'));

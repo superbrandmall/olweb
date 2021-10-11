@@ -88,7 +88,7 @@ function inputCheck() {
     
     if($('#years_reason').val() == '' && $('#term_reason').val() == '' && $('#free_reason').val() == '' && $('#rent_reason').val() == '' && $('#deduct_reason').val() == '' && $('#reason').val() == ''){
         flag = 0;
-        $('#reason').css('border','solid 1px #f00');
+        $('#reason').css('border','solid 1px #523634');
     } else {
         $('#reason').css('border','0 none');
     }        

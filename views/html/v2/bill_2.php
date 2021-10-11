@@ -8,7 +8,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
 
-<div class="page__bd" style="font-size: 15px;">
+<div class="page__bd" style="margin-top: 65px; font-size: 15px;">
     <div class="page__bd">
         <div class="weui-form-preview">
             <div class="weui-form-preview__hd">
@@ -67,7 +67,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                             <img src="/views/assets/base/img/content/banks/wechatpay.png" height="30">
                             <label class="label f-red b-red" style="padding: 2px; font-size: 11px; border-radius: 3px;">推荐</label>
                         </div>
-                        <div class="weui-cell__ft" style="border: solid 1px rgba(0,0,0,.3); padding-left: 0;">
+                        <div class="weui-cell__ft" style="border: solid 1px #FEDEBA; padding-left: 0;">
                             <input type="radio" name="payment" class="weui-check placeholder" id="wechatPay" checked="checked" />
                             <span class="weui-icon-checked"></span>
                         </div>
@@ -76,7 +76,7 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
                         <div class="weui-cell__bd">
                             <img src="/views/assets/base/img/content/banks/alipay.png" height="30">
                         </div>
-                        <div class="weui-cell__ft" style="border: solid 1px rgba(0,0,0,.3); padding-left: 0;">
+                        <div class="weui-cell__ft" style="border: solid 1px #FEDEBA; padding-left: 0;">
                             <input type="radio" name="payment" class="weui-check placeholder" id="aliPay" />
                             <span class="weui-icon-checked"></span>
                         </div>
@@ -89,8 +89,8 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
         
         <div class="weui-form-preview">
             <div class="weui-form-preview__ft">
-                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:history.back(-1);">返回</a>
-                <a class="weui-form-preview__btn weui-form-preview__btn_primary" id="startPay" style="background: #07c160; color: #fff;">下一步</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn_default" href="javascript:history.back(-1);" style="color: #494949; border: solid 1px #EFE2D2; background: #fff;">返回</a>
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" id="startPay" style="color: #583D35; border: solid 1px #968077; background: #FEDDB8; background: -webkit-linear-gradient(to bottom, #DAB892, #FEDDB8); background: linear-gradient(to bottom, #DAB892, #FEDDB8);">下一步</a>
             </div>
         </div>
     </div>
@@ -122,5 +122,4 @@ $scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/
 <br>
 <br>
 <br>
-<?php include ('timeline/step_three.php'); ?>
 <?php include ('footer.php'); ?>

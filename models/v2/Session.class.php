@@ -16,7 +16,7 @@ class Session extends BaseObject {
                 } else {
                     $param = '';
                 }
-                
+
                 header("location: $this->domain/login".$param);
                 die();
             }

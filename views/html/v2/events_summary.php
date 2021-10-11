@@ -1,19 +1,19 @@
-<center><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
+<center style="margin-top: 30px;"><h2 class="weui-form__title" style="margin-top: 10px;">签约须知</h2></center>
 <div class="weui-cells">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i></div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i></div>
         <div class="weui-cell__bd">
             <p>承租方用于签约的证件和执照应合法有效；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>不可擅自转租，否则转租人需承担违约责任甚至会导致合同解除；</p>
         </div>
     </div>
     <div class="weui-cell">
-        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #07c160; margin-right: 16px;" aria-hidden="true"></i> </div>
+        <div class="weui-cell__hd"><i class="fa fa-check" style="color: #d9b791; margin-right: 16px;" aria-hidden="true"></i> </div>
         <div class="weui-cell__bd">
             <p>承租方应在签约之日起五个工作日内或租用时间开始前（取其早）向出租方一次性足额支付全部保证金和含税租金。</p>
         </div>

@@ -28,58 +28,56 @@ $(document).ready(function(){
     getShoppingCart();
     
     $(".date-start, .date-end").each(function(){
-        $(this).click(function() {
-            $.shopCodeTemp = $(this).attr('id').split('_')[1];
-            $.multipleTemp = $(this).attr('data-multiple');
-            if($(this).attr('data-multiple') == 0) {
-                var sD, eD, startDate = [], endDate = [];
-                if($.cookie('startDate_'+$.shopCodeTemp) != '' && $.cookie('startDate_'+$.shopCodeTemp) != null) {
-                    var sD = $.cookie('startDate_'+$.shopCodeTemp).split(',');
-                    for(var i=0;i<sD.length;i++){
-                        startDate.push(sD[i]);
-                    }
-                } else {
-                    startDate = ['2020-01-01'];
+        $.shopCodeTemp = $(this).attr('id').split('_')[1];
+        $.multipleTemp = $(this).attr('data-multiple');
+        if($(this).attr('data-multiple') == 0) {
+            var sD, eD, startDate = [], endDate = [];
+            if($.cookie('startDate_'+$.shopCodeTemp) != '' && $.cookie('startDate_'+$.shopCodeTemp) != null) {
+                var sD = $.cookie('startDate_'+$.shopCodeTemp).split(',');
+                for(var i=0;i<sD.length;i++){
+                    startDate.push(sD[i]);
                 }
-                
-                if($.cookie('endDate_'+$.shopCodeTemp) != '' && $.cookie('endDate_'+$.shopCodeTemp) != null) {
-                    var eD = $.cookie('endDate_'+$.shopCodeTemp).split(',');
-                    for(var i=0;i<eD.length;i++){
-                        endDate.push(eD[i]);
-                    }
-                } else {
-                    endDate = ['2020-01-01'];
-                }
-                
-                $(this).MultiCalendar({
-                    scheduleStart : startDate,
-                    scheduleEnd: endDate,
-                    title: '档期选择',
-                    totalMohth: 6,
-                    dayText: ['开始', '结束'],
-                    valueTypes: ''
-                });
             } else {
-                $(this).MultiCalendar({
-                    scheduleStart : ['2020-01-01'],
-                    scheduleEnd: ['2020-01-01'],
-                    title: '档期选择',
-                    totalMohth: 6,
-                    dayText: ['开始', '结束'],
-                    valueTypes: ''
-                });
+                startDate = ['2020-01-01'];
             }
-            
-            $('.picker-button').click(function(){
-                if($.cookie('available_'+$.shopCodeTemp) == 1){
-                    $('#dateStart_'+$.shopCodeTemp).val($('#checkin-date').text() || '');
-                    $.cookie('dateStart_'+$.shopCodeTemp,$('#dateStart_'+$.shopCodeTemp).val());
-                    $('#dateEnd_'+$.shopCodeTemp).val($('#checkout-date').text() || '');
-                    $.cookie('dateEnd_'+$.shopCodeTemp,$('#dateEnd_'+$.shopCodeTemp).val());
 
-                    getSubTotal();
+            if($.cookie('endDate_'+$.shopCodeTemp) != '' && $.cookie('endDate_'+$.shopCodeTemp) != null) {
+                var eD = $.cookie('endDate_'+$.shopCodeTemp).split(',');
+                for(var i=0;i<eD.length;i++){
+                    endDate.push(eD[i]);
                 }
-            })
+            } else {
+                endDate = ['2020-01-01'];
+            }
+
+            $(this).MultiCalendar({
+                scheduleStart : startDate,
+                scheduleEnd: endDate,
+                title: '档期选择',
+                totalMohth: 6,
+                dayText: ['开始', '结束'],
+                valueTypes: ''
+            });
+        } else {
+            $(this).MultiCalendar({
+                scheduleStart : ['2020-01-01'],
+                scheduleEnd: ['2020-01-01'],
+                title: '档期选择',
+                totalMohth: 6,
+                dayText: ['开始', '结束'],
+                valueTypes: ''
+            });
+        }
+
+        $('.picker-button').click(function(){
+            if($.cookie('available_'+$.shopCodeTemp) == 1){
+                $('#dateStart_'+$.shopCodeTemp).val($('#checkin-date').text() || '');
+                $.cookie('dateStart_'+$.shopCodeTemp,$('#dateStart_'+$.shopCodeTemp).val());
+                $('#dateEnd_'+$.shopCodeTemp).val($('#checkout-date').text() || '');
+                $.cookie('dateEnd_'+$.shopCodeTemp,$('#dateEnd_'+$.shopCodeTemp).val());
+
+                getSubTotal();
+            }
         })
     })
     
