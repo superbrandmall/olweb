@@ -17,24 +17,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         width: 100%;
         height: auto;
     }
+    
+    #nav-45045-content-1 span.col {
+        display: inline-block;
+        width: 60%;
+        font-size: small;
+        vertical-align: top;
+    }
+    
+    #nav-45045-content-1 .col.odd-col {
+        width: 40%;
+    }
+    
+    #nav-45045-content-2 img {
+        width: 100%;
+    }
 </style>
-
-<!--<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
-    <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">这是上海陆家嘴正大广场</div>
-    </div>
-    <div id="hint2" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">我们为您全方位介绍商场，还有全景VR可以看</div>
-    </div>
-    <div id="hint3" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
-        <div class="rd-notice-content">点击"开新铺"更有旺铺供您选择，快试试吧！</div>
-    </div>
-    <div class="animated-circles">
-        <div class="circle c-1"></div>
-        <div class="circle c-2"></div>
-        <div class="circle c-3"></div>
-    </div>
-</div>-->
 
 <!-- all-wheel-drive -->
 <div class="bloc none full-width-bloc tc-dark-jungle-green bg-valley d-bloc">
@@ -50,8 +48,33 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     <span class="parallax-text">上海正大广场</span>
                                 </div>
                                 <hr class="divider divider-default">
-                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正大广场Super Brand Mall汇集各业态极具代表性品牌（super brands），13层全业态购物空间，汇聚数百个全球⻛尚品牌，上百家国际美⾷；三大特色主题区域——Venus女性生活方式轻奢主题区、eat n work江景餐厅与共享办公空间、儿童的第三个家；创新功能区域划分，满足不同圈层消费者需求。<br></p>
-                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">上海GDP居中国城市第一位，亚洲城市第二位。上海是全球著名的金融中心，全球人口规模和面积最大的都会区之一，被评为世界一线城市。上海港货物吞吐量和集装箱吞吐量均居世界第一，是良好的江海国际性港口，设有中国大陆首个自贸区中国（上海）自由贸易试验区。</p>
+                                <strong class="mg-md-xs mg-md-sm mg-clear mg-md-md">
+                                    定义城市的中心，又将重塑城市中心
+                                </strong>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md">
+                                    上海正大广场雄踞黄浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴黄金地段，总建筑面积接近25万平方米，地上10层、地下3层，是正大集团在中国最大的投资项目之一。
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                                    自2002年10月开业以来，在集团核心原则指导下始终走在创新发展的前列，经过多年的悉心经营，已成就国内第一座真正意义上的商业旗舰，更是上海陆家嘴的标志性建筑之一。
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                                    曾摘得“中国商业名牌企业”、 “最佳消费体验商场”、“中国购物中心杰出运营大奖”等多项荣誉，受到业界人士与权威机构的认可和嘉许。
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                                    项目位置：上海市浦东陆家嘴金融贸易区
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                                    项目体量：250,000平方米
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">    
+                                    项目定位：多功能生活场所
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">    
+                                    开业时间：2002年10月
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ">
+                                    核心业态：国际零售、国际餐饮、家庭娱乐、健康护理、科技数码
+                                </p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
@@ -109,7 +132,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                     <span class="parallax-text">上海正大广场</span>
                                 </div>
                                 <hr class="divider divider-default">
-                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">上海正⼤广场雄踞⻩浦江畔，坐落在被称为“东方华尔街”的上海浦东陆家嘴核心地段，与商场无缝衔接的明珠环每年人流量达1亿人次，周边30万白领精英消费群在此驻⾜，商圈每年客流超过3000万。<br></p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-md-md">
+                                    如今正大广场已形成了高度主题化的全天候、全客层的多功能生活场所，东接陆家嘴明珠环，西连滨江走廊，串联起一艘屹立江海之畔的商业巨舰。
+                                </p>
+                                <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md">
+                                    13层全业态购物体量，汇聚全球各类美食，每天都在上演着精彩纷呈的各类活动，全新主题区和业态也随之呈现：由正大集团携手MUSE GROUP联合创立的eat n work美食与联合办公双生一体的全新空间、旨在为儿童打造除家庭和学校之外的儿童第三个家、Venus女性主题轻奢生活方式空间、以及助力于发扬传统文化的罍+村主题街区。
+                                </p>
                             </div>
                             <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
                                 <a href="/v2/leasing?type=leasing" class="btn btn-d btn-rd cp-wire-button-gold d-inline-block">开新铺</a>
@@ -138,7 +166,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                         <h3 class="ltc-white mg-clear cp-heading-padding mg-clear-sm mg-clear-md mg-clear-xs">上海正大广场</h3>
                         <hr class="divider divider-default">
                         <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
-                            2020年，软硬件配套升级之后的正大广场也将汇聚全球风尚品牌，尚、食、乐、美一网打尽，精彩呈现购物娱乐、主题展览、创意体验、文化互动、新奇潮流。顾客将能在这里体验主题特色区、浦江景观餐饮、办公区、精致文创空间、同步世界潮流的主题活动及全智能系统一体化服务。
+                            除了得天独厚的地理位置，正大广场还拥有诸多“人无我有”的亮点：例如首创“生活在艺术中”的建筑设计美学理念、上海首家5G三千兆智慧商场、即将打造的新晋陆家嘴旅游打卡地滨江屋顶花园等。
+                        </p>
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
+                            秉承“利国、利民、利企业”的三利原则，上海正大广场将继续落实一系列战略调改举措，夯实运营管理能力，重塑地标级购物中心。
+                        </p>
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
+                            作为全球美食地标，拥有全天候西式餐酒吧Bites&Brews、地道德国风味的海森堡、意式顶级咖啡Lavazza、上海首店闽菜代表品牌临家和杭帮菜系高端人气品牌锦楼等。
+                        </p>
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
+                            一楼东门区4大品牌双层旗舰店：高端设计师女装之禾ICICLE旗舰店、专业级户外品牌始祖鸟Arc’teryx、日本高端专业运动品牌迪桑特DESCENTE旗舰店，全球高端美妆零售品牌丝芙兰。
+                        </p>
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
+                            另一方面，依托集团深耕商超领域的多年经验，智慧新零售超市“世界的厨房”——正大集团旗下自有O2O超市产品，也在紧锣密鼓的筹备中。
+                        </p>
+                        <p class="mg-md-xs mg-md-sm mg-clear mg-clear-md ltc-white">
+                            未来正大广场新一轮的升级改造进程中也将融入更多新兴元素，全面打造多功能生活场所，提升消费者体验感和获得感，为消费者带来更多的惊喜。
                         </p>
                     </div>
                     <div class="col-4 offset-md-0 order-sm-3 order-3 order-lg-2 col-lg-12 align-self-end col-md-12 order-md-2 text-center">
@@ -252,65 +295,79 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                     <img src="/upload/video/sbm-3/sbm-3000.jpg" />
                 </div>
             <div class="col-lg-5 col-md-7 col-sm-8 offset-sm-2 offset-md-0">
-                <h2 class="mg-md ltc-white none">楼层&nbsp;<span class="cp-thin-text">业态</span></h2>
+                <h2 class="mg-md ltc-white none">楼层<span class="cp-thin-text">指南</span></h2>
                 <ul class="nav nav-tabs none" id="nav-45045-tab" role="tablist">
-                    <li class="nav-item"><a class="a-btn nav-link active" id="nav-45045-tab-1" data-toggle="tab" href="#nav-45045-content-1" role="tab" aria-controls="nav-45045-content-1" aria-selected="true">按楼层</a></li>
-                    <li class="nav-item"><a class="a-btn nav-link" id="nav-45045-tab-2" data-toggle="tab" href="#nav-45045-content-2" role="tab" aria-controls="nav-45045-content-2" aria-selected="false">按业态</a></li>
+                    <li class="nav-item"><a class="a-btn nav-link active" id="nav-45045-tab-1" data-toggle="tab" href="#nav-45045-content-1" role="tab" aria-controls="nav-45045-content-1" aria-selected="true">品牌列表</a></li>
+                    <li class="nav-item"><a class="a-btn nav-link" id="nav-45045-tab-2" data-toggle="tab" href="#nav-45045-content-2" role="tab" aria-controls="nav-45045-content-2" aria-selected="false">品牌详情</a></li>
                 </ul>
                 <div class="tab-content none">
                     <div class="tab-pane fade show active" id="nav-45045-content-1" role="tabpanel" aria-labelledby="nav-45045-content-1">
                         <div class="row">
                             <div class="col">
-                                <h6 class="mg-clear"><strong>9</strong>F<br /></h6>
-                                <h6 class="mg-clear">高档餐饮</h6>
-                                <a href="javascript: showFloorVideo('9F')" class="cp-btn-xs tc-white">视频</a>
-
-                                <h6 class="mg-clear"><strong>7</strong>F<br /></h6>
-                                <h6 class="mg-clear">健康塑形及特色餐饮</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('7F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('7F')" class="cp-btn-xs tc-white">视频</a>
-
-                                <h6 class="mg-clear"><strong>5</strong>F<br /></h6>
-                                <h6 class="mg-clear">运动&生活</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('5F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('5F')" class="cp-btn-xs tc-white">视频</a>
-
-                                <h6 class="mg-clear"><strong>3</strong>F<br /></h6>
-                                <h6 class="mg-clear">快时尚</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('3F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('3F')" class="cp-btn-xs tc-white">视频</a>
- 
-                                <h6 class="mg-clear"><strong>1</strong>F<br /></h6>
-                                <h6 class="mg-clear">轻奢及休闲餐饮娱乐街</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('1F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('1F')" class="cp-btn-xs tc-white">视频</a>
-                            </div>
-                            <div class="col">
-
-                                <h6 class="mg-clear"><strong>8</strong>F<br /></h6>
-                                <h6 class="mg-clear">餐饮&娱乐</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('8F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('8F')" class="cp-btn-xs tc-white">视频</a>
-
-                                <h6 class="mg-clear"><strong>6</strong>F<br /></h6>
-                                <h6 class="mg-clear">餐饮&中国风</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('6F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVR('6F')" class="cp-btn-xs tc-gold">VR</a>
-
-                                <h6 class="mg-clear"><strong>4</strong>F<br /></h6>
-                                <h6 class="mg-clear">男装&数码</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('4F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVideo('4F')" class="cp-btn-xs tc-white">视频</a>
-   
-                                 <h6 class="mg-clear"><strong>2</strong>F<br /></h6>
-                                <h6 class="mg-clear">儿童第三个家</h6>
-                                <a href="javascript:;" onclick="javascript: GetFloorPlan('2F','shanghai-sbm2','OLMALL180917000003')" class="cp-btn-xs tc-white">楼层图</a>
-                                <a href="javascript: showFloorVR('2F')" class="cp-btn-xs tc-gold">VR</a>
+                                <div class="mg-clear">
+                                    <h4 style="float: left; width: 10%; color: #d9B791;">L<strong>8</strong></h4>
+                                    <a class="bloc-button btn btn-d" data-toggle="collapse" href="#f08F_s" role="button" aria-expanded="false" style="float: left; width: 5%; background: transparent;"><span class="fa fa-chevron-up"></span></a>
+                                    <div id="f08F" style="float: left; width: 85%;">
+                                        <div id="f08F_l"></div>
+                                        <div id="f08F_s" class="collapse show"></div>
+                                    </div>
+                                </div>
+                                <?php for($i=7;$i>0;$i--) { ?>
+                                <hr class="divider divider-default">
+                                <div class="mg-clear">
+                                    <h4 style="float: left; width: 10%; color: #d9B791;">L<strong><?= $i ?></strong></h4>
+                                    <a class="bloc-button btn btn-d" data-toggle="collapse" href="#f0<?= $i ?>F_s" role="button" aria-expanded="false" style="float: left; width: 5%; background: transparent;"><span class="fa fa-chevron-down"></span></a>
+                                    <div id="f0<?= $i ?>F" style="float: left; width: 85%;">
+                                        <div id="f0<?= $i ?>F_l"></div>
+                                        <div id="f0<?= $i ?>F_s" class="collapse"></div>
+                                    </div>
+                                </div>
+                                <?php } ?>
+                                <hr class="divider divider-default">
+                                <div class="mg-clear">
+                                    <h4 style="float: left; width: 10%; color: #d9B791;">B<strong>1</strong></h4>
+                                    <a class="bloc-button btn btn-d" data-toggle="collapse" href="#B01f_s" role="button" aria-expanded="false" style="float: left; width: 5%; background: transparent;"><span class="fa fa-chevron-down"></span></a>
+                                    <div id="B01f" style="float: left; width: 85%;">
+                                        <div id="B01f_l"></div>
+                                        <div id="B01f_s" class="collapse"></div>
+                                    </div>
+                                </div>
+                                <hr class="divider divider-default">
+                                <div class="mg-clear">
+                                    <h4 style="float: left; width: 10%; color: #d9B791;">B<strong>2</strong></h4>
+                                    <a class="bloc-button btn btn-d" data-toggle="collapse" href="#B02f_s" role="button" aria-expanded="false" style="float: left; width: 5%; background: transparent;"><span class="fa fa-chevron-down"></span></a>
+                                    <div id="B02f" style="float: left; width: 85%;">
+                                        <div id="B02f_l"></div>
+                                        <div id="B02f_s" class="collapse"></div>
+                                    </div>
+                                </div>
+                                <hr class="divider divider-default">
+                                <div class="mg-clear">
+                                    <h4 style="float: left; width: 15%; color: #d9B791;">L<strong>9/10</strong></h4>
+                                    <div id="f09F" style="float: left; width: 85%;">
+                                        <div id="f09F_l"></div>
+                                        <div id="f09F_s" class="collapse show"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade-tab-bs" id="nav-45045-content-2" role="tabpanel" aria-labelledby="nav-45045-content-2">
-                        <?php include ('categories.php'); ?>
+                        <div class="row">
+                            <div class="col">
+                                <img src="/views/assets/base/img/content/floor-plan/shanghai-sbm2/8F.png" />
+                                <?php for($i=7;$i>=0;$i--) { ?>
+                                    <hr class="divider divider-default">
+                                    <img src="/views/assets/base/img/content/floor-plan/shanghai-sbm2/<?= $i ?>F.png" />
+                                <?php } ?>
+                                <hr class="divider divider-default">
+                                <img src="/views/assets/base/img/content/floor-plan/shanghai-sbm2/00F.png" />
+                                <hr class="divider divider-default">
+                                <img src="/views/assets/base/img/content/floor-plan/shanghai-sbm2/9F.png" />
+                                <hr class="divider divider-default">
+                                <img src="/views/assets/base/img/content/floor-plan/shanghai-sbm2/10F.png" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,6 +423,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </a>
     </div>
 </div>
-<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1', this)" style="bottom: 120px;"><span class="fa fa-chevron-up"></span></a>
 
 <?php include ('footer.php'); ?>

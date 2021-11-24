@@ -106,7 +106,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
         
     <section style="padding: 20px 15px 10px;">
-        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">查看落位图</a></h3>
+        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -6px; border-radius: 14px;">查看落位图</a></h3>
         <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
             <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
             <div class="weui-cell__bd">

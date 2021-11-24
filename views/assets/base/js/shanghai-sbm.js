@@ -10,6 +10,7 @@ floor['f3'] = true;
 floor['f2'] = true;
 floor['f1'] = true;
 floor['fb1'] = true;
+floor['fb2'] = true;
 
 $(document).ready(function(){
     $(window).scroll(function() {
@@ -93,6 +94,14 @@ $(document).ready(function(){
             $( "#f2_g" ).addClass('floor-guide-active-next');
             $( "#f1_g" ).addClass('floor-guide-active-next-next');
             getFloorInfo($.mallCode.shanghaiSbm,'负一楼','fb1');
+        } else if (y <= $('#fb2').offset().top && y > $('#fb1').offset().top) {
+            $(".floor-guide").removeClass('floor-guide-active').removeClass('floor-guide-active-pre-pre').removeClass('floor-guide-active-pre').removeClass('floor-guide-active-next').removeClass('floor-guide-active-next-next');
+            $( "#f4_g" ).addClass('floor-guide-active-pre-pre');
+            $( "#f3_g" ).addClass('floor-guide-active-pre');
+            $( "#f2_g" ).addClass('floor-guide-active');
+            $( "#f1_g" ).addClass('floor-guide-active-next');
+            $( "#fb1_g" ).addClass('floor-guide-active-next-next');
+            getFloorInfo($.mallCode.shanghaiSbm,'负二楼','fb2');
         }
     });
     
@@ -107,6 +116,10 @@ $(document).ready(function(){
             $('header, footer').css('display','block');
             $('video').parent().parent().css('height','auto');
         }
+    });
+    
+    $('#floor_map_F').on('hidden.bs.modal', function (){
+        $(this).removeData('bs.modal');
     });
 });
 

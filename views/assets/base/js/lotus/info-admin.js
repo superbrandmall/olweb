@@ -1,5 +1,6 @@
 $(document).ready(function(){ 
-    $('#uid').text($.cookie('uid'));
+    var uid = $.cookie('uid');
+    $('#uid').text(uid.substr(0,3)+'****'+uid.substr(7,uid.length));
 
     if(sessionStorage.getItem('wechat_user_info') != undefined && sessionStorage.getItem('wechat_user_info') != null && sessionStorage.getItem('wechat_user_info') != '') {
         var headimgurl = $.parseJSON(sessionStorage.getItem("wechat_user_info")).headimgurl;
@@ -7,14 +8,6 @@ $(document).ready(function(){
         $('#avatar').css('backgroundImage','url('+headimgurl+')');
         $('#nickname').text(nickname);
     }
-    
-    /*$('#avatar_selector input').on("change", function () {
-        fileUpload();
-    })
-    
-    $('#change_avatar').click(function(){
-        $('#avatar_selector input').trigger("click");
-    });*/
 });
 
 /*function getUserFiles() {

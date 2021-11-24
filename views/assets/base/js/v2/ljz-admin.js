@@ -1,6 +1,4 @@
 var index=0;
-var unitCodes = [];
-var vr;
 
 $(document).ready(function(){
     if(isAndroid() == true) {
@@ -22,12 +20,18 @@ $(document).ready(function(){
         $(this).parents('.js_dialog').fadeOut(200);
     });
     
-    getShopsInfo();
+    if(!sessionStorage.getItem("brandGuides") || sessionStorage.getItem("brandGuides") == null || sessionStorage.getItem("brandGuides") == '') {
+        getBrandGuides();
+    } else {
+        showBrandGuides();
+    }
+    
+    
 });
 
-function getShopsInfo() {
+function getBrandGuides() {
     $.ajax({
-        url: $.api.baseNew+"/comm-wechatol/api/shop/base/findAllByStoreCode?storeCode=OLMALL180917000003",
+        url: $.api.baseNew+"/onlineleasing-customer/api/brandGuide/findAllByOrgCode?orgCode=100001&size=1000&page=0&sort=floorCode,asc",
         type: "GET",
         async: false,
         dataType: "json",
@@ -41,7 +45,8 @@ function getShopsInfo() {
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 hideLoading();
-                sessionStorage.setItem("shopList", JSON.stringify(response.data) );
+                sessionStorage.setItem("brandGuides", JSON.stringify(response.data.content) );
+                showBrandGuides();
             } else {
                 interpretBusinessCode(response.customerMessage);
             }
@@ -52,115 +57,31 @@ function getShopsInfo() {
     });
 }
 
-function renderShopList(s,category){
-    var desc = '';
-    var shopNo;
-    var shop = $.parseJSON(s);
-    
-    var count = 0;
-    $.each(shop, function(j,w){
-        if(w.state == 1 && w.businessFormatChs.indexOf(category) >= 0){
-            count++;
-            desc = w.descript || '';
-            shopNo = w.shopNo || '';
-            GetMapRecommand(w.shopCode);
+function showBrandGuides(){
+    $.each($.parseJSON(sessionStorage.getItem("brandGuides")), function(i,v){
+        if($('#f'+v.floorCode).length > 0){
+            if($('#f'+v.floorCode+'_l').html() == ''){
+                $('#f'+v.floorCode+'_l').append('<div style="margin-bottom:5px;"><span class="col odd-col">'+v.unitName+'</span><span class="col">'+v.brandName+'</span></div>');
+            } else {
+                $('#f'+v.floorCode+'_s').append('<div style="margin-bottom:5px;"><span class="col odd-col">'+v.unitName+'</span><span class="col">'+v.brandName+'</span></div>');
+            }
+        }
+        if($('#'+v.floorCode+'f').length > 0){
+            if($('#'+v.floorCode+'f_l').html() == ''){
+                $('#'+v.floorCode+'f_l').append('<div style="margin-bottom:5px;"><span class="col odd-col">'+v.unitName+'</span><span class="col">'+v.brandName+'</span></div>');
+            } else {
+                $('#'+v.floorCode+'f_s').append('<div style="margin-bottom:5px;"><span class="col odd-col">'+v.unitName+'</span><span class="col">'+v.brandName+'</span></div>');
+            }
         }
     })
     
-    if(count == 0) {
-        $('#empty_stores').html('<p style="padding: 0 30px 50px;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> 抱歉，暂无对应该业态的铺位推荐，你可以选择其他业态看看。</p>');
-    }
+    $('.collapse').on('show.bs.collapse', function () {
+        $(this).parent().parent().find('.fa').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+    });
     
-    $("#recommend_empty_stores").show();
-    
-    
-    function GetMapRecommand(c){
-        $('#empty_stores').append('<div style="position: relative; text-align: center;">\n\
-<img src="/views/assets/base/img/content/backgrounds/leasing/'+c+'_map.png" width="320px">\n\
-<p style="text-align: center; color: #fff; padding: 0 30px 50px;"><strong>'+shopNo+'</strong>\
-<br>'+desc+'</p>\n\</div');
-    }
-}
-
-function GetFloorPlan(fn,lk,mc) {
-    var fc,FN;
-    switch (fn) {
-        case '9F':
-            fc = '9';
-            FN = '九楼';
-            break;
-        case '8F':
-            fc = '8';
-            FN = '八楼';
-            break;
-        case '7F':
-            fc = '7';
-            FN = '七楼';
-            break;    
-        case '6F':
-            fc = '6';
-            FN = '六楼';
-            break;
-        case '5F':
-            fc = '5';
-            FN = '五楼';
-            break;
-        case '4F':
-            fc = '4';
-            FN = '四楼';
-            break;
-        case '3F':
-            fc = '3';
-            FN = '三楼';
-            break;
-        case '2F':
-            fc = '2';
-            FN = '二楼';
-            break;
-        case '1F':
-            fc = '1';
-            FN = '一楼';
-            break;
-        case 'B1F':
-            fc = '0';
-            FN = '负一楼';
-            break;
-        default:
-            fc = '1';
-            FN = '一楼';
-            break;
-    }
-    
-    $('#map').attr('src','/views/assets/base/img/content/floor-plan/'+lk+'/'+fc+'F.png');
-    $('#floor_plan_viewer').fadeIn(200);
-}
-
-function recommendStores(category){
-    renderShopList(sessionStorage.getItem("shopList"),category);
-}
-
-function showFloorVR(floor){
-    var vr;
-    switch (floor) {
-        case '6F':
-            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71055917';
-            break;
-        case '2F':
-            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71055570';
-            break;
-        default:
-            vr = 'https://720yun.com/t/davkt9d7zfh?scene_id=71054380';
-            break;
-    }
-    
-    $("#vr_viewer iframe").attr('src',vr);
-    $("#vr_viewer").show();
-}
-
-function showFloorVideo(floor){
-    $("#video_viewer video").attr('src','/upload/video/ljz-'+floor+'.mp4');
-    $("#video_viewer video").get(0).play();
-    $("#video_viewer").show();
+    $('.collapse').on('hidden.bs.collapse', function () {
+        $(this).parent().parent().find('.fa').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+    })
 }
 
 function showIndexPix(n,x,y){

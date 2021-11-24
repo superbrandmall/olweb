@@ -11,7 +11,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </h1>
         <div class="pull-right">
             <a href="/lotus-admin/create-tenant" class="btn btn-primary pull-right">
-                创建租户
+                新建租户
             </a>
         </div>
     </section>
@@ -21,10 +21,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        创建租户成功!
+                        新建租户成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        创建租户失败!
+                        新建租户失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
                         该租户已存在!

@@ -1,60 +1,72 @@
 <?php
-$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/nikola/bootstrap.bundle.min.js"></script>
-            <script type="text/javascript" src="/views/assets/base/js/nikola/blocs.min.js"></script>
-            <script type="text/javascript" src="/views/assets/base/js/v2/info-admin.js"></script>';
+$scripts = $scripts. '<script type="text/javascript" src="/views/assets/base/js/lotus/info-admin.js"></script>';
 ?>
 
-<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="/views/assets/base/css/nikola.css" />
-
-<div class="page__bd">
-    <div class="weui-tab">
-        <div class="weui-navbar">
-            <div class="weui-navbar__item" onclick="window.location='/v2/all-orders'">
-                我的订单
-            </div>
-            <div class="weui-navbar__item" onclick="window.location='/v2/favourites'">
-                我的收藏
-            </div>
-            <div class="weui-navbar__item" onclick="window.location='/v2/my-reservation'">
-                我的预约
-            </div>
+<div class="weui-cells bg-lotus f-white" style="margin-top: 0; height: 200px; display: flex; background-image: url(/views/assets/base/img/content/lotus-admin/center-top-bj.jpg); background-position: left center;">
+    <div class="weui-cell" style="width: 100%;">
+        <div class="weui-cell__hd">
+            <div id="avatar" style="background-image: url(/views/assets/base/img/content/brands-admin/avatar.png); width: 100px; height: 100px; background-size: 100px; border-radius: 50%; "></div>
+        </div>
+        <div class="weui-cell__bd" style="margin-left: 20px;">
+            <p><h4 id="nickname"></h4><small id="uid">138****8168</small></p>
+        </div>
+        <div class="weui-cell__ft">
+            <a href="javascript:;" class="f-white"><i class="fa fa-cog f20" aria-hidden="true"></i></a>
         </div>
     </div>
 </div>
 
-<div id="profile">
-    <div id="avatar_selector">
-        <div id="avatar" style="background-image: url(/views/assets/base/img/content/brands-admin/avatar.png)" class="avatar"></div>
+<div class="weui-content" style="padding: 20px 10px;">    
+    <div class="weui-flex">
+        <div class="weui-flex__item tcenter">
+            <a class="f-black" href="javascript:" role="button">
+                <i class="fa fa-pencil-square-o f24" aria-hidden="true"></i>
+                <p class="weui-grid__label">待确认</p>
+            </a>
+        </div>
+        <div class="weui-flex__item tcenter">
+            <a class="f-black" href="javascript:" role="button">
+                <i class="fa fa-spinner f24" aria-hidden="true"></i>
+                <p class="weui-grid__label">流程中</p>
+            </a>
+        </div>
+        <div class="weui-flex__item tcenter">
+            <a class="f-black" href="javascript:" role="button">
+                <i class="fa fa-check-square-o f24" aria-hidden="true"></i>
+                <p class="weui-grid__label">已完成</p>
+            </a>
+        </div>
+        <div class="weui-flex__item tcenter">
+            <a class="f-black" href="javascript:" role="button">
+                <i class="fa fa-list-alt f24" aria-hidden="true"></i>
+                <p class="weui-grid__label">全部订单</p>
+            </a>
+        </div>
     </div>
-    <h4 id="nickname" style="margin-top: 20px; text-align: center;"></h4>
-    <h4 id="uid" style="text-align: center;"></h4>
 </div>
 
-<div>
-    <div data-appear-anim-style="fadeIn" class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animDelay1 animated" style="visibility: visible;">
-        <div class="text-center" style="margin: 0 20px;">
-            <a href="/v2/improve-info" class="btn btn-primary btn-lg" style="width: 100%; border-width: 3px;">完善信息</a>
+<div class="weui-cells">
+    <a class="weui-cell weui-cell_access" href="/lotus/improve-info">
+        <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+            <p>完善信息</p>
         </div>
-    </div>
-    <div data-appear-anim-style="fadeIn" class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animDelay1 animated" style="visibility: visible;">
-        <div class="text-center" style="margin: 0 20px;">
-            <a href="/v2/contact" class="btn btn-default btn-lg" style="background-color: #f4f4f4; width: 100%; border-width: 3px;">联系客服</a>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="/lotus/contact">
+        <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+            <p>联系客服</p>
         </div>
-    </div>
-    <div data-appear-anim-style="fadeIn" class="col-lg-3 col-md-3 align-self-center cp-hero-button-column animDelay1 animated" style="visibility: visible;">
-        <div class="text-center" style="margin: 0 20px;">
-            <a href="/v2/qa" class="btn btn-d btn-lg tesla-wire-button-black" style="width: 100%;">帮助中心</a>
+        <div class="weui-cell__ft"></div>
+    </a>
+    <a class="weui-cell weui-cell_access" href="/lotus/qa">
+        <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+        <div class="weui-cell__bd">
+            <p>帮助中心</p>
         </div>
-    </div>
-</div>
-
-<div id="js_toast" style="display: none;">
-    <div class="weui-mask_transparent"></div>
-    <div class="weui-toast">
-        <i class="weui-icon-success-no-circle weui-icon_toast"></i>
-        <p class="weui-toast__content">上传成功</p>
-    </div>
+        <div class="weui-cell__ft"></div>
+    </a>
 </div>
 
 <?php include ('footer.php'); ?>

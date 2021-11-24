@@ -13,7 +13,7 @@ $(document).ready(function(){
 
 function showIndexPix(){
     var urlRoot = '/upload/video/sbm-0/sbm';
-    var indexRange = [0, 150];
+    var indexRange = [0, 179];
     var maxLength = indexRange[1] - indexRange[0] + 1;
     // loading
     var eleContainer = document.getElementById('pix_sbm');
@@ -60,7 +60,8 @@ function showIndexPix(){
                 if (index <= indexRange[1]) {
                     // 15fps, 1000ms/15=67 每帧约0.067秒
                     //setTimeout(step, 67);
-                    setTimeout(step, 42);
+                    // 59.94fps, 1000ms/60=17 每帧约0.017秒
+                    setTimeout(step, 17);
                 } else {
                     // 本段播放结束回调
                     play();

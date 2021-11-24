@@ -18,7 +18,16 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
 ?>
 
 <div style="margin: 50px 50px 20px; color: #565d66;">
-    <strong><?php if($i == 0) { echo 'B1'; } else { echo $i; } ?>F</strong>
+    <strong>
+        <?php 
+        if($i === '00') { 
+            echo 'B2F';
+        } else if($i === '0') { 
+            echo 'B1F';
+        } else { 
+            echo $i.'F';
+        } ?>
+    </strong>
     <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_lift'] ?>
     <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -30px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_escalator'] ?>
     <span style="margin-left: 9px; background: url(views/assets/base/img/content/floor-plan/sprite.png); background-size: 238px; background-position: -59px 0; vertical-align: bottom; height: 30px; width: 30px; display: inline-block;"></span> <?= $lang['floor_parking'] ?>
@@ -39,6 +48,9 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
     $(document).ready(function(){
         var floorDesc;
         switch (<?= $i ?>) {
+            case 00:
+                floorDesc = '负二楼';
+                break;
             case 0:
                 floorDesc = '负一楼';
                 break;
@@ -118,9 +130,9 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
                 return { 
                     key: $(el).attr('data-key'),
                     toolTip: $(el).attr('name'),
-                    fillColor: '7d9fe9',
+                    fillColor: 'd3b690',
                     fillOpacity: 1,
-                    strokeColor: '6a90e1',
+                    strokeColor: 'A9A6A3',
                     strokeWidth: 1,
                     stroke: true
                 };
@@ -131,9 +143,9 @@ include_once "../../../../views/assets/base/lang/".$_SESSION["lang"].".php";
         var yOffset;
 
         $('#floor_map_F').find('img').mapster({
-            fillColor: '7d9fe9',
+            fillColor: 'd3b690',
             fillOpacity: 0.8,
-            strokeColor: '6a90e1',
+            strokeColor: 'A9A6A3',
             strokeWidth: 1,
             clickNavigate: true,
             mapKey: 'data-key',

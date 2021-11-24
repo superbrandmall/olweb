@@ -29,6 +29,12 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
         } else {
             include 'views/html/v2/pay.htm';
         }
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
+        include ('views/html/brands-admin/header.php');
+        include 'views/html/brands-admin/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'lotus-admin')) !== false) { // 莲花管理
+        include ('views/html/lotus-admin/header.php');
+        include 'views/html/lotus-admin/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'lotus')) !== false) { // 莲花
         if((strpos($_GET['p'],'alipay')) === false){
             include ('views/html/lotus/header.php');
@@ -36,12 +42,6 @@ if($_SERVER['SERVER_NAME'] == 'eatnwork-china.com' || $_SERVER['SERVER_NAME'] ==
         } else {
             include 'views/html/lotus/pay.htm';
         }
-    } else if (isset($_GET['p']) && (strpos($_GET['p'],'brands-admin')) !== false) { // 品牌库
-        include ('views/html/brands-admin/header.php');
-        include 'views/html/brands-admin/'.$page;
-    } else if (isset($_GET['p']) && (strpos($_GET['p'],'lotus-admin')) !== false) { // 莲花管理
-        include ('views/html/lotus-admin/header.php');
-        include 'views/html/lotus-admin/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'portal')) !== false) { // 内部portal
         include ('views/html/portal/header.php');
         include 'views/html/portal/'.$page;

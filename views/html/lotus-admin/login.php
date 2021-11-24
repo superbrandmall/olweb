@@ -49,13 +49,18 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                             <div class="col-md-12">
                                 <fieldset>
                                     <div class="form-group">
-                                        <input class="form-control" id="login_username" placeholder="手机或邮箱地址" name="login_username" type="text"  autocomplete="off" required autofocus>
+                                        <input class="form-control" id="login_username" placeholder="手机" name="login_username" type="text"  autocomplete="off" required autofocus>
                                         <div id="errorcontainer-login_username" class="errorDiv"></div>
                                     </div>
+                                    
                                     <div class="form-group">
-                                        <input class="form-control" id="login_password" placeholder="密码" name="login_password" type="password" required autocomplete="off">
-                                        <div id="errorcontainer-login_password" class="errorDiv"></div>
+                                        <div style="position: relative;">
+                                            <input class="form-control" id="login_verify" placeholder="验证码" name="login_verify" type="text" required autocomplete="off">
+                                            <a href="javascript: VeryficationCodeLogin()" id="login_verify_link" style="display: block; position: absolute; z-index: 10; right: 9px; font-size: 14px; top: 7px;">发送验证码</a>
+                                        </div>
+                                        <div id="errorcontainer-login_verify" class="errorDiv"></div>
                                     </div>
+                                    
                                 </fieldset>
                             </div>
                         </div>

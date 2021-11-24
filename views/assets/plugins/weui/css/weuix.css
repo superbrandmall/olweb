@@ -2799,9 +2799,11 @@ input.b-orange {
 /*swipe*/
 .slide{
     position: relative;
-    max-width:100%;max-height:80%;
+    max-width:100%;
+    max-height:80%;
     overflow: hidden;
     margin: 0px auto;
+    height: 200px;
 }
 .slide:after{
     content: '';

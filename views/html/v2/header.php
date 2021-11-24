@@ -34,7 +34,6 @@ if(!in_array($page, $page_nikola)) {
             <link rel="stylesheet" type="text/css" href="/views/assets/plugins/weui/css/weuix.css" />
             <link rel="stylesheet" type="text/css" href="/views/assets/plugins/animate/animate.min.css" />
             <link rel="stylesheet" type="text/css" href="/views/assets/plugins/font-awesome-4.7.0/css/font-awesome.min.css" />
-            <link rel="stylesheet" type="text/css" href="/views/assets/plugins/weui/css/APlayer.min.css" />
             <link rel="stylesheet" type="text/css" href="/views/assets/base/css/live-chat.css" />
             <link rel="stylesheet" type="text/css" href="/views/assets/base/css/sb-v2.css" />
             <link rel="shortcut icon" type="image/x-icon" href="/views/assets/base/img/layout/logos/favicon.ico" />

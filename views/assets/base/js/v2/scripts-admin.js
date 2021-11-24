@@ -7,7 +7,11 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     new WOW().init();
-            
+    
+    if(!sessionStorage.getItem("wechat_user_info") || sessionStorage.getItem("wechat_user_info") == null || sessionStorage.getItem("wechat_user_info") == '') {
+        window.location.href = '/v2/login';
+    }
+    
     if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == '') {
         getMalls();
     }
@@ -20,11 +24,11 @@ $(document).ready(function(){
         getNewCategories();
     }
     
-    /*setTimeout(function () {
+    setTimeout(function () {
         if($('.livechat-girl').length > 0){
             liveChat();
         }
-    }, 5000);*/
+    }, 5000);
 });
 
 function getURLParameter(sParam) {
@@ -526,15 +530,9 @@ function liveChat() {
 
     var hint2 = setInterval(function(){
         $("#hint2").removeClass("show_hint").addClass("hide_hint");
-        $("#hint3").removeClass("hide_hint").addClass("show_hint");
         clearInterval(hint2);
-    },10500);
-
-    var hint3 = setInterval(function(){
-        $("#hint3").removeClass("show_hint").addClass("hide_hint");
-        clearInterval(hint3);
         $('.livechat-girl').animate({right:'-100px'},'slow');
-    },15500);
+    },10500);
 }
 
 function formatIndex(n){

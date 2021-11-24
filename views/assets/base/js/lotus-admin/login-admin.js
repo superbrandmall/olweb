@@ -4,41 +4,40 @@ $(document).ready(function(){
         rules: {
             login_username: {
                 required: true,
-                xor: [{
-                    digits: true,
-                    rangelength: [11,11]
-                },{
-                    email: true
-                }]
+                digits: true,
+                rangelength: [11,11]
             },
-            login_password: {
+            login_verify: {
                 required: true,
-                minlength: 8
+                rangelength: [4,4],
+                digits: true
             }
         },
         messages: {
             login_username: {
-                required: "请输入手机号码或者邮箱地址",
-                xor: "请输入正确的手机号码或者邮箱地址"
+                required: "请输入手机号码",
+                digits: "请输入正确的手机号码",
+                rangelength: "请输入正确的手机号码"
             },
-            login_password: {
+            login_verify: {
                 required: "请输入密码",
-                minlength: "密码须为{0}位及{0}位以上字母和数字"
+                rangelength: "验证码须为{0}位字母和数字",
+                digits: "验证码须为数字"
             }
         },
         errorPlacement: function(error, element) {
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
-        submitHandler: function() {            
-            var map = {
-                username: $('#login_username').val(),
-                password: $('#login_password').val()
-            };
+        submitHandler: function() {
+            var key = $('#login_verify').val();           
+            var userName = $('#login_username').val();
+            
             $.ajax({
-                url: $.api.baseNew+"/onlineleasing-customer/api/login/login",
-                type: "POST",
-                data: map,
+                url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+key,
+                type: "GET",
                 async: false,
+                dataType: "json",
+                contentType: "application/json",
                 beforeSend: function(request) {
                     $('#loader').show();
                     request.setRequestHeader("Lang", 1);
@@ -46,7 +45,8 @@ $(document).ready(function(){
                 },
                 complete: function(){},
                 success: function (response, status, xhr) {
-                    if(response.code === 'C0') {
+                    $('#loader').hide();
+                    if(response.code === 'C0' && response.data.resultCode == '00') {
                         if(xhr.getResponseHeader("Login") !== null){
                             $.cookie('login', xhr.getResponseHeader("Login"));
                         }
@@ -54,26 +54,30 @@ $(document).ready(function(){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         
-                        var ucode = response.data.code;
-                        var uname = response.data.settings.name;
-                        
                         $.ajax({
-                            url: $.api.baseNew+"/common-authorization/api/passport/check/exist/userrole?userCode="+ucode+"&role=admin",
-                            type: "GET",
+                            url: $.api.baseNew+"/onlineleasing-customer/api/login/loginByMobile?mobile="+userName,
+                            type: "POST",
                             async: false,
+                            dataType: "json",
+                            contentType: "application/json",
                             beforeSend: function(request) {
-                                request.setRequestHeader("Lang", $.cookie('lang'));
+                                $('#loader').show();
+                                request.setRequestHeader("Lang", 1);
                                 request.setRequestHeader("Source", "onlineleasing");
                             },
+                            complete: function(){},
                             success: function (response, status, xhr) {
-                                if(response.code === 'C0') {
+                                $('#loader').hide();
+                                if(response.code === 'C0' && $.isEmptyObject(response.data) == false ) {
                                     if(xhr.getResponseHeader("Login") !== null){
                                         $.cookie('login', xhr.getResponseHeader("Login"));
                                     }
                                     if(xhr.getResponseHeader("Authorization") !== null){
                                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                     }
-                                    $('#loader').hide();
+                                    
+                                    var ucode = response.data.code;
+                                    var uname = response.data.settings.name;
                                     $.cookie('uid', ucode);
                                     $.ajax({
                                         type: 'POST',
@@ -85,27 +89,43 @@ $(document).ready(function(){
                                         dataType: "json",
                                         beforeSend: function(request) {
                                             $('#loader').show();
-                                            request.setRequestHeader("Lang", $.cookie('lang'));
+                                            request.setRequestHeader("Lang", 1);
                                             request.setRequestHeader("Source", "onlineleasing");
                                         },
                                         complete: function(){
                                             $('#loader').hide();
+                                            if(response.data.userModules.length > 0){
+                                                var userModules = [];
+                                                $.each(response.data.userModules, function(i,v) {
+                                                    if(v.code == 'CROLE211008000002' || v.code == 'CROLE210706000001' || v.code == 'CROLE211008000001'){
+                                                        userModules.push(v);
+                                                    }
+                                                })
+                                                $.cookie('userModules',JSON.stringify(userModules));
+                                            }
+                                            
+                                            $.cookie('mallSelected',);
                                             window.location.href = "home";
                                         }
                                     });
                                 } else {
                                     $('#loader').hide();
                                     $('.login-failed').show().delay(10000).hide(0);
-                                }                               
+                                }
+                            },
+                            error: function(jqXHR, textStatus, errorThrown) {
+                                $('#loader').hide();
+                                $('.login-failed').show().delay(10000).hide(0);
                             }
-                        }); 
+                        });
                     } else {
                         $('#loader').hide();
                         $('.login-failed').show().delay(10000).hide(0);
                     }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
+                    $('#loader').hide();
+                    $('.login-failed').show().delay(10000).hide(0);
                 }
             });
             
@@ -113,32 +133,50 @@ $(document).ready(function(){
     });
 });
 
-$.validator.addMethod('xor', function(val, el, param) {
-    var valid = false;
+var countdownLogin=60;
+
+function VeryficationCodeLogin() {
+    var obj = $("#login_verify_link");
+    var userName = $('#login_username').val();
     
-    //loop through sets of nested rules
-    for(var i=0;i<param.length;i++){
-        var setResult = true;
-        
-        //loop through nested rules in the set
-        for(var x in param[i]){
-            var result = $.validator.methods[x].call(this, val, el, param[i][x]);
-            
-            // If the input breaks one rule in a set we stop and move
-            // to the next set...
-            if(!result){
-                setResult = false;
-                break;
+    if(userName != '') {
+        $.ajax({
+            url: $.api.baseNew+"/comm-wechatol/api/sms/sendIdentifyCode?mobileNo="+userName,
+            type: "GET",
+            async: false,
+            beforeSend: function(request) {
+                request.setRequestHeader("Lang", 1);
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    $('#loader').hide();
+                    setTimeLogin(obj);
+                } else {
+                    $('#loader').hide();
+                    $('.login-failed').show().delay(10000).hide(0);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                $('#loader').hide();
+                $('.login-failed').show().delay(10000).hide(0);
             }
-        }
-    
-        // If the value passes for one set we stop with a true result
-        if(setResult == true) {
-            valid = true;
-            break;
-        }
+        });
     }
-    
-    // Return the validation result
-    return this.optional(el) || valid;
-}, "The value entered is invalid");
+}
+
+function setTimeLogin(obj) {
+    if (countdownLogin == 0) { 
+        obj.attr('href','javascript: VeryficationCodeLogin()');
+        obj.html("发送验证码");
+        countdownLogin = 60; 
+        return;
+    } else { 
+        obj.attr('href','javascript: void(0)');
+        obj.html("重新发送(" + countdownLogin + ")秒");
+        countdownLogin--; 
+    } 
+setTimeout(function() { 
+    setTimeLogin(obj); }
+    ,1000); 
+}

@@ -337,10 +337,69 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
         'stamping.php', 'to_pay.php', 'order_details.php', 'bill.php', 'bill_2.php', 'engineering.php', 'improve_info.php', 'improve_info2.php', 'company_info.php',
         'contract.php', 'contract_view.php','contract_view2.php','unionpay.php');
     $page_nikola = array('default.php', 'login.php', 'ljz.php', 'xh.php', 'bs.php', 'ly.php');
+    $page_no_landing = array('default.php', 'login.php');
     $page_no_footer = array('default.php', 'login.php', 'ljz.php','improve_info.php','improve_info2.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/v2/Session.class.php';
+        $session = new Session();
+        $session->_session();
+    }
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'lotus-admin')) !== false) { // 莲花
+    $target = array(
+        'lotus-admin/home' => array(
+            'url' => 'default.php'
+        ),
+        'lotus-admin/login' => array(
+            'url' => 'login.php'
+        ),
+        'lotus-admin/logout' => array(
+            'url' => 'logout.php'
+        ),
+        'lotus-admin/brands' => array(
+            'url' => 'brands.php'
+        ),
+        'lotus-admin/create-brand' => array(
+            'url' => 'create-brand.php'
+        ),
+        'lotus-admin/reset' => array(
+            'url' => 'reset.php'
+        ),
+        'lotus-admin/tenants' => array(
+            'url' => 'tenants.php'
+        ),
+        'lotus-admin/create-tenant' => array(
+            'url' => 'create-tenant.php'
+        ),
+        'lotus-admin/contracts' => array(
+            'url' => 'contracts.php'
+        ),
+        'lotus-admin/create-contract' => array(
+            'url' => 'create-contract.php'
+        ),
+        'lotus-admin/users' => array(
+            'url' => 'users.php'
+        ),
+        'lotus-admin/create-user' => array(
+            'url' => 'create-user.php'
+        ),
+        'lotus-admin/edit-user' => array(
+            'url' => 'edit-user.php'
+        ),
+        'lotus-admin/sales' => array(
+            'url' => 'sales.php'
+        ),
+    );
+
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'tenants.php', 'create-tenant.php', 'contracts.php', 'create-contract.php', 'users.php', 'create-user.php', 'edit-user.php', 'sales.php');
+    if (in_array($page, $session_required)) {
+        include_once 'models/lotus-admin/Session.class.php';
         $session = new Session();
         $session->_session();
     }
@@ -500,52 +559,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
     $session_required = array('login.php', 'default.php', 'brand.php', 'create-brand.php', 'create-brand-contact.php', 'edit-brand.php', 'levels.php', 'hd-brands.php', 'log.php');
     if (in_array($page, $session_required)) {
         include_once 'models/brands-admin/Session.class.php';
-        $session = new Session();
-        $session->_session();
-    }
-} else if (isset($_GET['p']) && (strpos($_GET['p'], 'lotus-admin')) !== false) { // 莲花
-    $target = array(
-        'lotus-admin/home' => array(
-            'url' => 'default.php'
-        ),
-        'lotus-admin/login' => array(
-            'url' => 'login.php'
-        ),
-        'lotus-admin/logout' => array(
-            'url' => 'logout.php'
-        ),
-        'lotus-admin/brands' => array(
-            'url' => 'brands.php'
-        ),
-        'lotus-admin/create-brand' => array(
-            'url' => 'create-brand.php'
-        ),
-        'lotus-admin/reset' => array(
-            'url' => 'reset.php'
-        ),
-        'lotus-admin/tenants' => array(
-            'url' => 'tenants.php'
-        ),
-        'lotus-admin/contracts' => array(
-            'url' => 'contracts.php'
-        ),
-        'lotus-admin/create-tenant' => array(
-            'url' => 'create-tenant.php'
-        ),
-        'lotus-admin/create-contract' => array(
-            'url' => 'create-contract.php'
-        )
-    );
-
-    if (array_key_exists($getTarget, $target)) {
-        $page = $target[$getTarget]['url'];
-    } else {
-        $page = 'default.php';
-    }
-
-    $session_required = array('login.php', 'default.php', 'brands.php', 'tenants.php', 'create-brand.php','contracts.php', 'create-tenant.php', 'create-contract.php');
-    if (in_array($page, $session_required)) {
-        include_once 'models/lotus-admin/Session.class.php';
         $session = new Session();
         $session->_session();
     }

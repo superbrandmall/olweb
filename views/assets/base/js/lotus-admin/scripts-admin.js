@@ -13,26 +13,38 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
-    if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
-        $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
-    } else {
-        $('#mallSelected').text('文诚店');
-        $.cookie('mallSelected','文诚店:::SC055');
+    if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+                $('.mall-select ul li').show();
+                return false;
+            } else if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                $('.mall-select ul li').each(function(i,elem){
+                    if($(elem).find('a').attr('data-code') == v.moduleCode){
+                        $(this).show();
+                    }
+                })
+            }
+        })
+        
+        if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
+            $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
+        } else {
+            $('.mall-select ul li').each(function(i,elem){
+                if($(elem).css('display') != 'none'){
+                    $('#mallSelected').text($(elem).find('span').text());
+                    $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
+                    return false;
+                }
+            })
+        }
+        
+        if(!sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == null || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == '') {
+            getFloors();
+        }
+        
+        getSideBarFloor();
     }
-    
-    if(!sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == null || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == '') {
-        getFloors();
-    }
-    
-    if (!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
-        getUsers();
-    }
-    
-    if (!sessionStorage.getItem("admins") || sessionStorage.getItem("admins") == null || sessionStorage.getItem("admins") == '') {
-        getAdmins();
-    }
-    
-    getSideBarFloor();
     
     $('.mall-select .text-blue').click(function(){
         $.cookie('mallSelected',$(this).find('span').text()+':::'+$(this).attr('data-code'));
@@ -73,8 +85,11 @@ function getFloors() {
 function getSideBarFloor() {
     $.each($.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1])), function(i,v){
         var url = window.location.href;
-        if(url.indexOf("home") >= 0 && v.code == getURLParameter('f')) {
-            var floorClass = 'active';
+        var floorClass;
+        if(v.code == getURLParameter('f') || getURLParameter('f') == undefined) {
+            floorClass = 'active';
+        } else if(getURLParameter('f') == undefined && i == 0) {
+            floorClass = 'active';
         } else {
             floorClass = '';
         }
@@ -83,93 +98,45 @@ function getSideBarFloor() {
     })
 }
 
-function getUsers() {
-    var users = [];
-    users.push(
-        {code: 'CUSER190709000005',name: 'Jeff Xu'},
-        {code: 'CUSER190709000002',name: 'Chris Chen'},
-        {code: 'CUSER190709000004',name: 'Maggie Li'},
-        {code: 'CUSER190709000006',name: "Austin Rao"},
-        {code: 'CUSER200524000001',name: "Nicole Zhang"},
-        {code: 'CUSER190709000008',name: 'Doris Zhou'},
-        {code: 'CUSER190709000009',name: 'Megan Jing'},
-        {code: 'CUSER190709000010',name: 'Kevin Jiang'},
-        {code: 'CUSER191225000001',name: "Mikayla Deng"},
-        {code: 'CUSER191225000002',name: 'Joy Gu'},
-        {code: 'CUSER200524000002',name: 'Yiyi Chen'},
-        {code: 'CUSER200524000003',name: 'Willa Sun'},
-        {code: 'CUSER200524000004',name: 'Johnson Ma'},
-        {code: 'CUSER190709000015',name: 'Selena Song'},
-        {code: 'CUSER190709000016',name: 'Di Cui'},
-        {code: 'CUSER190709000018',name: 'George Qiao'},
-        {code: 'CUSER190709000020',name: 'Ariel Huang'},
-        {code: 'CUSER190709000021',name: 'Anna Li'},
-        {code: 'CUSER190709000022',name: 'Claude Ma'},
-        {code: 'CUSER190709000023',name: 'Abby Shi'},
-        {code: 'CUSER190709000024',name: 'Wei Ye'},
-        {code: 'CUSER190927000001',name: 'Olivia Xie'},
-        {code: 'CUSER190924000001',name: 'Yiyi Chen'}
-        
-    )
-    
-    sessionStorage.setItem("users", JSON.stringify(users));
-}
-
-function getAdmins() {
-    var admins = [];
-    admins.push(
-        'CUSER190709000015',
-        'CUSER190709000022',
-        'CUSER190709000023',
-        'CUSER190709000024',
-        'CUSER190924000001',
-        'CUSER200524000002',
-        'CUSER190927000001',
-        'CUSER200524000004'
-    )
-    
-    sessionStorage.setItem("admins", JSON.stringify(admins));
-}
-
 function generatePages(currentPage, LastPage, items) {
     var pages = '';
     if (LastPage <= 6) {
         for(var i=1;i<=LastPage;i++) {
             if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+                pages += '<li class="page-item active"><a class="page-link" href="?page='+i+'&items='+items+'">'+i+'</a></li>';
             } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+                pages += '<li class="page-item"><a class="page-link" href="?page='+i+'&items='+items+'">'+i+'</a></li>';
             }
         }
     } else {
         if(currentPage>1){
-            var previousPage = +currentPage-1;
-            pages += '<li><a href="?page='+previousPage+'&items='+items+'">&lt;</a></li>';
+            pages += '<li class="page-item"><a class="page-link" href="?page=1&items='+items+'">&laquo;</a></li>';
         } else {
-            pages += '<li class="c-space"><span>&lt;</span></li>';
+            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);">&laquo;</a></li>';
         }
-        for(var i=1;i<=3;i++) {
-            if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
-            } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
-            }
+        var index = 1;
+        if(currentPage<=(LastPage-6)*1) {
+            index = currentPage;
+        } else {
+            index = (LastPage-6)*1;
         }
-        pages += '<li class="c-space"><span>...</span></li>';
-        for(var i=LastPage-2;i<=LastPage;i++) {
+        var pindex, qindex;
+        index > 1 ? pindex = index-1 : pindex = 1;
+        index > 1 ? qindex = index*1+7: qindex = index*1+8;
+        for(var i=pindex;i<qindex;i++) {
             if(i == currentPage ) {
-                pages += '<li class="paginate_button active"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+                pages += '<li class="page-item active"><a class="page-link" href="?page='+i+'&items='+items+'">'+i+'</a></li>';
             } else {
-                pages += '<li class="paginate_button"><a href="?page='+i+'&items='+items+'">'+i+'</a></li>';
+                pages += '<li class="page-item"><a class="page-link" href="?page='+i+'&items='+items+'">'+i+'</a></li>';
             }
         }
         if(currentPage<LastPage){
-            var nextPage = +currentPage+1;
-            pages += '<li><a href="?page='+nextPage+'&items='+items+'">&gt;</a></li>';
+            pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'">&raquo;</a></li>';
         } else {
-            pages += '<li class="c-space"><span>&gt;</span></li>';
+            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);">&raquo;</a></li>';
         }
     }
+    
     $(".pagination .pagination").append(pages);
 }
 

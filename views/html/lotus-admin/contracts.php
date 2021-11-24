@@ -11,7 +11,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </h1>
         <div class="pull-right">
             <a href="/lotus-admin/create-contract" class="btn btn-primary pull-right">
-                创建合同
+                新建合同
             </a>
         </div>
     </section>
@@ -21,10 +21,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        创建合同成功!
+                        新建合同成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        创建合同失败!
+                        新建合同失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
                         该合同已存在!

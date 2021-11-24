@@ -13,36 +13,22 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </div>
     <div class="weui-panel__bd">
         <!--<a href="/v2/advertising-package?type=ad-package" style="position: fixed; right: 0; top: 50%; z-index: 1;"><img src="/views/assets/base/img/content/backgrounds/special_package.png" width="75"></a>-->
-        
         <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/3f-east-entrance-led.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/3f-east-entrance-led.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200323000002");'>视频</a></li>
                         <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200323000002&type=ad">查看详情</a></li>
                     </ul>
                 </div>
                 <div class="weui-cell_select" onclick="window.location='/v2/ad?id=OLSHOP200323000002&type=ad'" style="position: relative; margin: 10px 0 0 15px;">
-                    <p style="font-size: 14px;">明珠环入口环绕屏LED</p>
+                    <p style="font-size: 14px;">明珠环入口环绕屏LED国金通道灯箱</p>
                     <small class="weui-cell__bd" style="margin-right: 40px; display: block; font-size: 12px;">东方明珠天桥处唯一通往场内的主入口，国内外游客首选主干道；为3F东平台入口处场地活动聚揽人气，直接引流。</small>
                 </div>
                 <div style="margin: 5px 15px 10px;">
-                    <span class="weui-mark-rb">明珠环入口</span>
-                    <span class="weui-mark-rb">上刊周期短，手续简便</span>
+                    <span class="weui-mark-rb">直通国金中心、地铁二号线</span>
+                    <span class="weui-mark-rb">人流量巨大</span>
                 </div>
             </div>
         </div>
@@ -50,20 +36,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/golden-avenue-led.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/golden-avenue-led.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200420000001");'>视频</a></li>
                         <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200420000001&type=ad">查看详情</a></li>
@@ -83,20 +56,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/8f-eastside-led.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/8f-eastside-led.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP200802000001");'>视频</a></li>
                         <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP200802000001&type=ad">查看详情</a></li>
@@ -116,20 +76,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         <div class="weui-media-box weui-media-box_appmsg" style="background: #F3F3F3; padding: 0; margin: 0 16px 16px;">
             <div class="weui-media-box__bd">
                 <div style="position: relative;">
-                    <div class="slide">
-                        <ul>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi1.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi1.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                            <li>
-                                <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi2.jpg");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi2.jpg" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
-                            </li>
-                        </ul>
-                        <div class="dot" style="right: 50%;">
-                            <span></span>
-                            <span></span>
-                        </div>
-                    </div>
+                    <img onclick='javascript: showGallery("/views/assets/base/img/content/ads/diaofu-xi.gif");' class="weui-media-box__thumb" src="/views/assets/base/img/content/ads/diaofu-xi.gif" alt="" style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
                     <ul class="leasing-areas">
                         <li><a class="cp-btn-xs tc-white" href='javascript: showVideo("OLSHOP201025000001");'>视频</a></li>
                         <li><a class="cp-btn-xs tc-white" href="/v2/ad?id=OLSHOP201025000001&type=ad">查看详情</a></li>

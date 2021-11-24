@@ -108,7 +108,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
         
     <section style="padding: 20px 15px 10px;">
-        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">查看落位图</a></h3>
+        <h3 class="weui-flex__item" style="margin-bottom: 5px;">档期及价格<a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -6px; border-radius: 14px;">查看落位图</a></h3>
         <div class="weui-cell weui-cell_active" style="padding: 16px 2px;">
             <div class="weui-cell__hd"><label class="weui-label">档期起始</label></div>
             <div class="weui-cell__bd">
@@ -237,9 +237,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     
     <section style="padding: 20px 15px 10px;">
         <h3 class="weui-flex__item">工程信息 
-            <a id="cad" href="javascript:;" data-file="/upload/docs/cad/<?= $id?>.dwg" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载CAD</a>                
-            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载工程条件</a>
-            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载图纸</a>
+            <a id="cad" href="javascript:;" data-file="/upload/docs/cad/<?= $id?>.dwg" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -3px; border-radius: 14px;">下载CAD</a>                
+            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -3px; border-radius: 14px;">下载工程条件</a>
+            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -3px; border-radius: 14px;">下载图纸</a>
         </h3>
         <div class="weui-flex__item">
             <img src="/upload/docs/converted-jpg/<?= $id?>.jpg" style="width: 100%;" />

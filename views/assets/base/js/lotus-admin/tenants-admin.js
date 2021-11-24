@@ -82,9 +82,9 @@ function ShowBrands(p,c){
                         <tr data-index="'+i+'">\n\
                         <td>'+v.name+''+tianyancha+'</td>\n\
                         <td>'+(v.type == 1? '个人' : '公司')+'</td>\n\
-                        <td>'+v.businessScope+'</td>\n\
-                        <td>'+(v.capital == '' ? '' : numberWithCommas(v.capital) + '元')+'</td>\n\
-                        <td>'+v.uscc+'</td>\n\
+                        <td>'+(v.businessScope || '')+'</td>\n\
+                        <td>'+(v.capital == null ? '' : numberWithCommas(v.capital) + '元')+'</td>\n\
+                        <td>'+(v.uscc || '')+'</td>\n\
                         </tr>');
                         
                         $('#tenantsS').append('\
@@ -92,9 +92,9 @@ function ShowBrands(p,c){
 <td colspan="65">\n\
 <div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value">'+v.name+''+tianyancha+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">类型</span><span class="value">'+(v.type == 1? '个人' : '公司')+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">行业</span><span class="value">'+v.businessScope+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">注册资本</span><span class="value">'+(v.capital == '' ? '' : numberWithCommas(v.capital) + '元')+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">组织机构代码证</span><span class="value">'+v.uscc+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">行业</span><span class="value">'+(v.businessScope || '')+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">注册资本</span><span class="value">'+(v.capital == null ? '' : numberWithCommas(v.capital) + '元')+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">组织机构代码证</span><span class="value">'+(v.uscc || '')+'</span></div></div>\n\
 </td></tr>');
 
                     });

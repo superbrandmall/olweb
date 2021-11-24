@@ -56,15 +56,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
 
 <div class="page__bd" style="margin-top: -6px;">
     <section class="cp-white" style="padding: 20px 15px 10px; background-color: #323030;">
-        <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载常见问答</a></h3>
+        <h3 class="weui-flex__item"><span id="shopName"></span><a id="engineering_qa" href="/upload/docs/qa/<?= $id?>.pdf" download="/upload/docs/qa/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">下载常见问答</a></h3>
         <div class="weui-flex__item"><strong>¥<span id="taxAmount"></span> <small>/m<sup>2</sup>/月</small></strong> <small>(¥<span id="rentAmount"></span> /m<sup>2</sup>/天)</small></div>
         <div class="weui-flex__item">面积 <span id="area">8</span>m<sup>2</sup>(租赁面积)</div>
         <div class="weui-flex__item" id="desc"></div>
     </section>
     <section class="cp-white" style="padding: 20px 15px 10px; background-color: #323030; overflow: auto;">
         <h3 class="weui-flex__item">租约信息
-            <a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">查看落位图</a>
-            <a id="vr_3d" href="javascript:;" class="cp-btn-xs tc-gold" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">VR看铺</a>
+            <a id="floor_plan" href="javascript:;" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">查看落位图</a>
+            <a id="vr_3d" href="javascript:;" class="cp-btn-xs tc-gold" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">VR看铺</a>
         </h3>
         <div class="weui-flex__item weui-cell_access" style="float: left; width: 35%;"><small>进场日期</small><br><h6 id="settleDate" class="weui-cell__ft" style="text-align: left; color: #fff;"></h6></div>
         <div style="float: left; width: 5%;">&nbsp;</div>
@@ -141,9 +141,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
     <section style="padding: 20px 15px 10px;">
         <h3 class="weui-flex__item">工程信息
-            <a href="javascript:;" id="cad" data-file="/upload/docs/cad/<?= $id?>.dwg" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载CAD</a>                
-            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载工程条件</a>            
-            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: 0; border-radius: 14px;">下载图纸</a>
+            <a href="javascript:;" id="cad" data-file="/upload/docs/cad/<?= $id?>.dwg" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">下载CAD</a>                
+            <a id="engineering_qa" href="/upload/docs/standards/<?= $id?>.pdf" download="/upload/docs/standards/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">下载工程条件</a>            
+            <a id="engineering" href="/upload/docs/layout/<?= $id?>.pdf" download="/upload/docs/layout/<?= $id?>.pdf" class="cp-btn-xs tc-white" style="float: right; border-width: 2px; padding: 0 10px; margin-top: -4px; border-radius: 14px;">下载图纸</a>
         </h3>
         <div class="weui-flex__item">
             <img src="/upload/docs/converted-jpg/<?= $id?>.jpg" style="width: 100%;" />

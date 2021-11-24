@@ -26,7 +26,25 @@ if(!in_array($page, $page_no_footer)) {
     </div>
 </div>
 
-<div id="aplayer" class="aplayer" style="display: none;"></div>
+<?php
+if(!in_array($page, $page_no_landing)) {
+    ?>
+<div class="livechat-girl animated"> <img class="girl" src="/views/assets/base/img/content/backgrounds/en_3.png">
+    <div id="hint1" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
+        <div class="rd-notice-content">不要给红包哦 ;)</div>
+    </div>
+    <div id="hint2" class="livechat-hint rd-notice-tooltip rd-notice-type-success rd-notice-position-left single-line hide_hint">
+        <div class="rd-notice-content">有人要红包的话请通知我哦</div>
+    </div>
+    <div class="animated-circles">
+        <div class="circle c-1"></div>
+        <div class="circle c-2"></div>
+        <div class="circle c-3"></div>
+    </div>
+</div>
+<?php
+}
+?>
 
 <?php
 if(!in_array($page, $page_nikola)) {
@@ -37,7 +55,6 @@ if(!in_array($page, $page_nikola)) {
 <script type="text/javascript" src="/views/assets/plugins/weui/js/weui.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>
-<script type="text/javascript" src="/views/assets/plugins/weui/js/APlayer.min.js"></script>
 <?php
     echo $scripts; 
 ?>

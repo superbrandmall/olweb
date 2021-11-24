@@ -10,7 +10,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
 <div class="content-wrapper">
     <section class="content-header" style="padding-bottom: 30px;">
         <h1 class="pull-left">
-            创建合同
+            新建合同
         </h1>
         <div class="pull-right">
             <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
@@ -24,10 +24,10 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        创建合同成功!
+                        新建合同成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        创建合同失败!
+                        新建合同失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
                         该合同已存在!

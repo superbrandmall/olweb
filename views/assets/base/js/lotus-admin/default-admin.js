@@ -1,10 +1,3 @@
-$.api = {
-    base: "http://10.130.12.15:8080/oldataservice/ol/api",
-    baseNew: $.base,
-    emailVC: "",
-    mobileVC: ""
-};
-
 var d = new Date();
 var month = d.getMonth()+1;
 var year = d.getFullYear();
@@ -81,9 +74,26 @@ $(function() {
 });
 
 function getShopFloorInfo(fc) {
+    var mallCodes;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+            mallCodes = v.moduleCode;
+            return false;
+        } else {
+            mallCodes = $.cookie('mallSelected').split(':::')[1];
+        }
+    })
+    
+    var map = {
+        "floorCode": fc,
+        "mallCodes": mallCodes,
+        "userCode": $.cookie('uid')
+    };
+        
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/vshop/lotus/findAllByMallCodeAndFloorCode?mallCode="+$.cookie('mallSelected').split(':::')[1]+"&floorCode="+fc+"&page=0&size=100&sort=id,desc",
-        type: "GET",
+        url: $.api.baseNew+"/onlineleasing-customer/api/vshop/lotus/findAllByCondition?page=0&size=100",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -301,47 +311,49 @@ function GetShopInfo(sc){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                var shop = response.data[response.data.length - 1];
-                var state;
-                var shopStateClass = 'badge-default';
-                switch(shop.vshopLotus.shopStatus){
-                    case '0':
-                        state = shop.contractName;
-                        break;
-                    case '1':
-                        state = "空铺";
-                        shopStateClass = 'badge-danger';
-                        break;
-                    default:
-                        state = "在租";
-                        shopStateClass = 'badge-default';
-                        break;
+                if(response.data.length > 0){
+                    var shop = response.data[response.data.length - 1];
+                    var state;
+                    var shopStateClass = 'badge-default';
+                    switch(shop.vshopLotus.shopStatus){
+                        case '0':
+                            state = shop.contractName;
+                            break;
+                        case '1':
+                            state = "空铺";
+                            shopStateClass = 'badge-danger';
+                            break;
+                        default:
+                            state = "在租";
+                            shopStateClass = 'badge-default';
+                            break;
+                    }
+
+                    $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+'</span>');
+                    $('#contractType').text(shop.contractType || '-' );
+                    $('#contractStatus').text(shop.contractStatus || '-' );
+                    $('#unitCode').text(shop.unitCode || '-' );
+                    $('#unitArea').text((shop.unitArea || '-' ) + 'm²');
+                    $('#startDate').text(shop.startDate || '-' );
+                    $('#endDate').text(shop.endDate || '-' );
+                    $('#tenantName').text(shop.tenantName || '-' );
+                    $('#totalAmount').text(numberWithCommas(shop.totalAmount) + '元');
+                    $('#totalAmountDay').text(shop.totalAmountDay || '-' );
+                    $('#rentAmount').text(numberWithCommas(shop.rentAmount) + '元');
+                    $('#managerAmount').text(numberWithCommas(shop.managerAmount) + '元');
+                    $('#floorName').text(shop.vshopLotus.floorName || '-' );
+                    $('#promotionAmount').text(numberWithCommas(shop.promotionAmount) + '元');
+                    $('#depositAmount').text(numberWithCommas(shop.depositAmount) + '元');
+                    $('#deduct').text(shop.deduct == 0 ? shop.deduct : parseFloat(shop.deduct * 100).toFixed(2)+'%');
+                    $('#contactName').text(shop.contactName || '-' );
+                    $('#contactPhone').text(shop.contactPhone || '-' );
+                    $('#modality1').text(shop.brandLotus.modality1 || '-' );
+                    $('#modality2').text(shop.brandLotus.modality2 || '-' );
+                    $('#modality3').text(shop.brandLotus.modality3 || '-' );
+
+                    $('#shop_detail').css('opacity', 1);
+                    $('#shop_detail').modal('toggle');
                 }
-
-                $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+'</span>');
-                $('#contractType').text(shop.contractType || '-' );
-                $('#contractStatus').text(shop.contractStatus || '-' );
-                $('#unitCode').text(shop.unitCode || '-' );
-                $('#unitArea').text((shop.unitArea || '-' ) + 'm²');
-                $('#startDate').text(shop.startDate || '-' );
-                $('#endDate').text(shop.endDate || '-' );
-                $('#tenantName').text(shop.tenantName || '-' );
-                $('#totalAmount').text(numberWithCommas(shop.totalAmount) + '元');
-                $('#totalAmountDay').text(shop.totalAmountDay || '-' );
-                $('#rentAmount').text(numberWithCommas(shop.rentAmount) + '元');
-                $('#managerAmount').text(numberWithCommas(shop.managerAmount) + '元');
-                $('#floorName').text(shop.vshopLotus.floorName || '-' );
-                $('#promotionAmount').text(numberWithCommas(shop.promotionAmount) + '元');
-                $('#depositAmount').text(numberWithCommas(shop.depositAmount) + '元');
-                $('#deduct').text(shop.deduct == 0 ? shop.deduct : parseFloat(shop.deduct * 100).toFixed(2)+'%');
-                $('#contactName').text(shop.contactName || '-' );
-                $('#contactPhone').text(shop.contactPhone || '-' );
-                $('#modality1').text(shop.brandLotus.modality1 || '-' );
-                $('#modality2').text(shop.brandLotus.modality2 || '-' );
-                $('#modality3').text(shop.brandLotus.modality3 || '-' );
-
-                $('#shop_detail').css('opacity', 1);
-                $('#shop_detail').modal('toggle');
             } else {
                 console.log(response.customerMessage);
             }

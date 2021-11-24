@@ -50,19 +50,19 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="col-md-4">
                         <h4 class="c-title c-first c-font-bold"><?= $lang['mall_gdp'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            1,392
+                            38,700
                         </span><?= $lang['mall_yiyuan'] ?>
                     </div>
                     <div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_resident_population'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            2,042,300
+                            24,870,900
                         </span><?= $lang['mall_ren'] ?>
                     </div>
                     <div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_retail_sales'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            683
+                            15,900
                         </span><?= $lang['mall_yiyuan'] ?>
                     </div>
                 </div>

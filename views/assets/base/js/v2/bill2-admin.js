@@ -106,7 +106,15 @@ function getOrderByTradeNO() {
                 $('#leasing_price').append('<p style="text-align: left; padding: 0 16px 16px;"><small><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>您支付的第一笔款项为定金壹仟元，该笔付款不可退还、不可转让。请您在'+$.order.expect+'前至我司签订正式《房屋租赁合同》，如果逾期则视为您放弃该房屋所有租赁权利，我司有权将该房屋另租他人，定金不予退还。</small></p>');
                 
                 if(response.data.orderPays.length > 0) {
-                    sessionStorage.setItem("wxPay_"+getURLParameter('trade'), JSON.stringify(response.data.orderPays) );
+                    $.each(response.data.orderPays, function(i,v){
+                        if(v.payType == 'wxPay' && (v.status == 'NOTPAY' || v.status == 'INIT_PAY' )) {
+                            sessionStorage.setItem("wxPay_"+getURLParameter('trade'), JSON.stringify(v) );
+                        } 
+                        
+                        if (v.payType == 'aliPay' && (v.status == 'NOTPAY' || v.status == 'INIT_PAY' )) {
+                            sessionStorage.setItem("aliPay_"+getURLParameter('trade'), JSON.stringify(v) );
+                        }
+                    })
                 }
             
                 $('#confirm').click(function(){
@@ -189,7 +197,7 @@ function getBrandWCPayRequest(){  ////v3
             package = $.parseJSON(wxPayTrade).prepayId;
             paySign = $.parseJSON(wxPayTrade).sign;
         }
-        
+                
         WeixinJSBridge.invoke(
            'getBrandWCPayRequest', {
               "appId": appId, 
@@ -241,7 +249,7 @@ function callWechatPay() {
         "mobileNo": $.cookie('uid'),
         "payType": 'wxPay'
     }
-
+    
     $.ajax({
         url: $.api.baseNew+"/comm-wechatol/api/pay/wxV3Pay",
         type: "POST",

@@ -50,19 +50,19 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
                     <div class="col-md-4">
                         <h4 class="c-title c-first c-font-bold"><?= $lang['mall_gdp'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            32,680
+                            38,700
                         </span><?= $lang['mall_yiyuan'] ?>
                     </div>
                     <div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_resident_population'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            24,152,700
+                            24,870,900
                         </span><?= $lang['mall_ren'] ?>
                     </div>
                     <div class="col-md-4">
                         <h4 class="c-title c-font-bold"><?= $lang['mall_retail_sales'] ?></h4>
                         <span class="c-counter c-font-bold c-theme-font" data-counter="counterup">
-                            12,669
+                            15,900
                         </span><?= $lang['mall_yiyuan'] ?>
                     </div>
                 </div>
@@ -71,30 +71,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
         </div>
     </div>
 
-    <!--<div id="f10" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/10F.jpg); margin-bottom: 0;">
+    <div id="f9" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/9F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
                 <div class="col-md-5 col-xs-12">
                     <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">10F <?= $lang['mall_shanghai_sbm_10'] ?></h2>
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">9、10F <?= $lang['mall_shanghai_sbm_9'] ?></h2>
                         <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="http://eatnwork-china.com/" target="_blank"><?= $lang['home_enter'] ?></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>-->
-
-    <div id="f9" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/9F.jpg); margin-bottom: 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-offset-7 col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
-                        <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">9、10F <?= $lang['mall_shanghai_sbm_9'] ?></h2>
-                        <img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" alt="eat n work" class="c-desktop-logo" style="display: block; margin-bottom: 15px;" height="20">
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="http://uat-ol.superbrandmall.com/" target="_blank"><?= $lang['home_enter'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=9" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -104,15 +89,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f8" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/8F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                <div class="col-md-offset-7 col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">8F <?= $lang['mall_shanghai_sbm_8'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
+                        <h2 class="c-feature-16-title c-font-bold">8F <?= $lang['mall_shanghai_sbm_8'] ?></h2>
+                        <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f8"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=8" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=8" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -122,15 +107,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f7" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/7F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-7 col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
+                <div class="col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">7F <?= $lang['mall_shanghai_sbm_7'] ?></h2>
-                        <p class="c-feature-16-desc">
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">7F <?= $lang['mall_shanghai_sbm_7'] ?></h2>
+                        <p class="c-feature-16-desc c-font-grey">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f7"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=7" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=7" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -140,15 +125,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f6" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/6F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                <div class="col-md-offset-7 col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">6F <?= $lang['mall_shanghai_sbm_6'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
+                        <h2 class="c-feature-16-title c-font-bold">6F <?= $lang['mall_shanghai_sbm_6'] ?></h2>
+                        <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f6"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=6" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=6" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -158,15 +143,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f5" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/5F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-7 col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
+                <div class="col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">5F <?= $lang['mall_shanghai_sbm_5'] ?></h2>
-                        <p class="c-feature-16-desc">
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">5F <?= $lang['mall_shanghai_sbm_5'] ?></h2>
+                        <p class="c-feature-16-desc c-font-grey">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f5"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=5" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=5" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -176,15 +161,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f4" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/4F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                <div class="col-md-offset-7 col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">4F <?= $lang['mall_shanghai_sbm_4'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
+                        <h2 class="c-feature-16-title c-font-bold">4F <?= $lang['mall_shanghai_sbm_4'] ?></h2>
+                        <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f4"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=4" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=4" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -194,15 +179,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f3" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/3F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-7 col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
+                <div class="col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">3F <?= $lang['mall_shanghai_sbm_3'] ?></h2>
-                        <p class="c-feature-16-desc">
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">3F <?= $lang['mall_shanghai_sbm_3'] ?></h2>
+                        <p class="c-feature-16-desc c-font-grey">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f3"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=3" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=3" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -212,15 +197,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f2" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/2F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                <div class="col-md-offset-7 col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">2F <?= $lang['mall_shanghai_sbm_2'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
+                        <h2 class="c-feature-16-title c-font-bold">2F <?= $lang['mall_shanghai_sbm_2'] ?></h2>
+                        <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f2"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=2" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=2" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -230,15 +215,15 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="f1" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/1F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-7 col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
+                <div class="col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold">1F <?= $lang['mall_shanghai_sbm_1'] ?></h2>
-                        <p class="c-feature-16-desc">
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">1F <?= $lang['mall_shanghai_sbm_1'] ?></h2>
+                        <p class="c-feature-16-desc c-font-grey">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_f1"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=1" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=1" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -248,15 +233,33 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <div id="fb1" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/B1F.jpg); margin-bottom: 0;">
         <div class="container">
             <div class="row">
-                <div class="col-md-5 col-xs-12">
-                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                <div class="col-md-offset-7 col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-white c-bg-opacity-5">
                         <div class="c-feature-16-line c-theme-bg"></div>
-                        <h2 class="c-feature-16-title c-font-bold c-font-white">B1F <?= $lang['mall_shanghai_sbm_0'] ?></h2>
-                        <p class="c-feature-16-desc c-font-grey">
+                        <h2 class="c-feature-16-title c-font-bold">B1F <?= $lang['mall_shanghai_sbm_0'] ?></h2>
+                        <p class="c-feature-16-desc">
                             <?= $lang['mall_modality_shop_proportion'] ?>
                         </p>
                         <div id="proportion_fb1"></div>
-                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=0" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-theme-btn c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=0" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="fb2" class="c-content-box c-bg-parallax c-content-feature-16" style="background-image: url(views/assets/base/img/content/mall/shanghai-sbm/B2F.jpg); margin-bottom: 0;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-xs-12">
+                    <div class="c-feature-16-container c-bg-dark c-bg-opacity-4">
+                        <div class="c-feature-16-line c-theme-bg"></div>
+                        <h2 class="c-feature-16-title c-font-bold c-font-white">B2F <?= $lang['mall_shanghai_sbm_00'] ?></h2>
+                        <p class="c-feature-16-desc c-font-grey">
+                            <?= $lang['mall_modality_shop_proportion'] ?>
+                        </p>
+                        <div id="proportion_fb2"></div>
+                        <a class="c-feature-15-btn btn c-btn btn-lg c-btn-blue c-font-uppercase c-btn-square" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=00" data-toggle="modal" data-target="#floor_map_F"><?= $lang['mall_open_floor_map'] ?></a>
                     </div>
                 </div>
             </div>
@@ -333,8 +336,7 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
         </div>
     </div>
 
-    <!--<a id="f10_g" href="http://eatnwork-china.com/" target="_blank" class="hidden-xs hidden-sm hidden-md floor-guide" style="background-color: #fff; padding: 5px;"><span class="badge c-bg-white c-font-red c-font-bold">10F</span><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" style="margin-top: 15px;" class="img-responsive" alt="" /></a>-->
-    <a id="f9_g" href="http://uat-ol.superbrandmall.com/" target="_blank" class="hidden-xs hidden-sm hidden-md floor-guide" style="background-color: #fff; padding: 5px;"><span class="badge c-bg-white c-font-red c-font-bold">9、10F</span><img src="/views/assets/base/img/content/mall/ozone/eat_n_work.png" style="margin-top: 15px;" class="img-responsive" alt="" /></a>
+    <a id="f9_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=9" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">9F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/9F.png" class="img-responsive" alt="" /></a>
     <a id="f8_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=8" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">8F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/8F.png" class="img-responsive" alt="" /></a>
     <a id="f7_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=7" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">7F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/7F.png" class="img-responsive" alt="" /></a>
     <a id="f6_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=6" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">6F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/6F.png" class="img-responsive" alt="" /></a>
@@ -344,7 +346,8 @@ $scripts = $scripts . '<script type="text/javascript" src="views/assets/base/js/
     <a id="f2_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=2" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">2F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/2F.png" class="img-responsive" alt="" /></a>
     <a id="f1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=1" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/1F.png" class="img-responsive" alt="" /></a>
     <a id="fb1_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=0" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B1F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/0F.png" class="img-responsive" alt="" /></a>
-
+    <a id="fb2_g" href="views/html/user/component/floor-plan-shanghai-sbm.php?m=<?= $shanghai_sbm ?>&f=00" data-toggle="modal" data-target="#floor_map_F" class="hidden-xs hidden-sm hidden-md floor-guide"><span class="badge c-bg-white c-font-red c-font-bold">B2F</span><img src="views/assets/base/img/content/floor-plan/shanghai-sbm/00F.png" class="img-responsive" alt="" /></a>
+    
     <div id="floor_map_F" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

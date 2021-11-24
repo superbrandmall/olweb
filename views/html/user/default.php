@@ -30,20 +30,40 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210218000167"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_4527-240x180.jpg" width="187" alt=""/></a>
-                        霓裳茶舞
+                        <a href="shop?id=OLSHOP180917000505"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_0081-240x180.jpg" width="187" alt=""/></a>
+                        Lenovo
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210218000165"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_4531-240x180.jpg" width="187" alt=""/></a>
-                        Double Win
+                        <a href="shop?id=OLSHOP180917000181"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9998-240x180.jpg" width="187" alt=""/></a>
+                        LES ENPHANTS
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210218000164"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_4534-240x180.jpg" width="187" alt=""/></a>
-                        绿塔市集
+                        <a href="shop?id=OLSHOP180917000822"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_0003-240x180.jpg" width="187" alt=""/></a>
+                        FamilyMart
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP191121000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3884-240x180.jpg" width="187" alt=""/></a>
-                        麦隆咖啡
+                        <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
+                        锅物新语
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000738"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9988-240x180.jpg" width="187" alt=""/></a>
+                        不二君
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200711000009"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8101-240x180.jpg" width="187" alt=""/></a>
+                        东风日产
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210218000005"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8104-240x180.jpg" width="187" alt=""/></a>
+                        趁热集合
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200702000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8095-240x180.jpg" width="187" alt=""/></a>
+                        MINE 梦洁
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000546"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_7947-240x180.jpg" width="187" alt=""/></a>
+                        飞跃
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3892-240x180.jpg" width="187" alt=""/></a>
@@ -62,12 +82,12 @@
                         六克茶方
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190423000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/04/ZHX4900-240x180.jpg" width="187" alt=""/></a>
-                        咬金
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200624000004"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8959-240x180.jpg" width="187" alt=""/></a>
                         好利来Holiland
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190423000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/04/ZHX4900-240x180.jpg" width="187" alt=""/></a>
+                        咬金
                     </div>
                 </div>
             </div>

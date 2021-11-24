@@ -11,7 +11,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
         </h1>
         <div class="pull-right">
             <a href="/lotus-admin/create-brand" class="btn btn-primary pull-right">
-                创建品牌
+                新建品牌
             </a>
         </div>
     </section>
@@ -21,10 +21,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        创建品牌成功!
+                        新建品牌成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        创建品牌失败!
+                        新建品牌失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
                         该品牌已存在!
