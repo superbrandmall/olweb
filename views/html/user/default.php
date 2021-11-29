@@ -30,12 +30,12 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000505"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_0081-240x180.jpg" width="187" alt=""/></a>
-                        Lenovo
+                        <a href="shop?id=OLSHOP180917000317"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1947-240x180.jpg" width="187" alt=""/></a>
+                        OVV
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000181"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9998-240x180.jpg" width="187" alt=""/></a>
-                        LES ENPHANTS
+                        <a href="shop?id=OLSHOP190417000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1503-240x180.jpg" width="187" alt=""/></a>
+                        MUJI
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000822"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_0003-240x180.jpg" width="187" alt=""/></a>
