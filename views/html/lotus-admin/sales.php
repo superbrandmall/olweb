@@ -15,12 +15,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
     <section class="content">
         <div id="webui">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-12">
                     <div class="box">
                         <div class="box-body">
                             <h4>按条件查询</h4>
                             <form id="condition_form" class="form-horizontal" role="form" enctype="multipart/form-data">
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="department" class="col-md-5 control-label">选择门店 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="department" name="department" style="width: 100%">
@@ -46,7 +46,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                         <div id="errorcontainer-department" class="errorDiv"></div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="contract" class="col-md-5 control-label">选择品牌 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="contract" name="contract" style="width: 100%"></select>
@@ -54,21 +54,21 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="startDate" class="col-md-5 control-label">开始时间 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="startDate" name="startDate" readonly style="background: #fff; border: solid 1px #d2d6de;">
                                         <div id="errorcontainer-startDate" class="errorDiv"></div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-5">
+                                <div class="form-group col-md-4">
                                     <label for="endDate" class="col-md-5 control-label">结束时间 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 col-sm-12 required">
                                         <input class="form-control" type="text" id="endDate" name="endDate" readonly style="background: #fff; border: solid 1px #d2d6de;">
                                         <div id="errorcontainer-endDate" class="errorDiv"></div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-1" style="padding-left: 30px;">
+                                <div class="form-group col-md-4" style="padding-left: 30px;">
                                     <button type="submit" class="btn btn-info"><i class="fa fa-question-circle-o icon-white"></i> 查询</button>
                                 </div>
                             </form>
@@ -108,6 +108,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                                         <tr>
                                                             <th>
                                                                 <div class="th-inner">日期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">品牌</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

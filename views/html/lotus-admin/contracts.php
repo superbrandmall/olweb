@@ -81,8 +81,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="th-inner">店铺位置代码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                             <th>
+                                                            <th>
                                                                 <div class="th-inner">合同面积㎡</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">授权用户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
@@ -128,4 +132,5 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     </section>
 
 </div>
+
 <?php include 'footer.php'; ?>

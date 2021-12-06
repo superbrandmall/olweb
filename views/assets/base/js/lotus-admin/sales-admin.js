@@ -164,11 +164,22 @@ function findSaleRecordByDate(p,c) {
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v) {
-                        $('#salesL').append('<tr><td>'+v.salesDate+'</td><td>'+numberWithCommas(v.amount)+'元</td><td>'+numberWithCommas(v.saleNum)+'笔</td></tr>');
+                        var contract_name = '';
+                        $.each($.parseJSON(sessionStorage.getItem("contracts_"+$.cookie('sales_department'))), function(j,w){
+                            if(w.code == v.contractNo) {
+                                contract_name = w.contractName;
+                            }
+                        })
+                        
+                        
+                        
+                        
+                        $('#salesL').append('<tr><td>'+v.salesDate+'</td><td>'+contract_name+'</td><td>'+numberWithCommas(v.amount)+'元</td><td>'+numberWithCommas(v.saleNum)+'笔</td></tr>');
                         $('#salesS').append('\
 <tr data-index="'+i+'">\n\
 <td colspan="65">\n\
 <div class="card-views"><div class="card-view"><span class="title">日期</span><span class="value">'+v.salesDate+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value">'+contract_name+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">金额</span><span class="value">'+numberWithCommas(v.amount)+'元</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">笔数</span><span class="value">'+numberWithCommas(v.saleNum)+'笔</span></div></div>\n\
 </td></tr>');
@@ -217,6 +228,9 @@ function findAllContracts(mc) {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                sessionStorage.setItem("contracts_"+mc, JSON.stringify(response.data.content));
+                
                 $('#contract').html('');
                 $('#contract').append('<option value="">未选择</option>');
                 $.each(response.data.content, function(i,v) {

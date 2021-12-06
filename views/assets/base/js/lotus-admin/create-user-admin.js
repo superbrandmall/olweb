@@ -256,6 +256,9 @@ function findAllContracts(mc) {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                sessionStorage.setItem("contracts_"+mc, JSON.stringify(response.data.content));
+                
                 $('#contract').html('');
                 $('#contract').append('<option value="">未选择</option>');
                 $.each(response.data.content, function(i,v) {

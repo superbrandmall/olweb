@@ -86,7 +86,7 @@ function getSideBarFloor() {
     $.each($.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1])), function(i,v){
         var url = window.location.href;
         var floorClass;
-        if(v.code == getURLParameter('f') || getURLParameter('f') == undefined) {
+        if(v.code == getURLParameter('f')) {
             floorClass = 'active';
         } else if(getURLParameter('f') == undefined && i == 0) {
             floorClass = 'active';

@@ -30,6 +30,14 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190613000012"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_2736-240x180.jpg" width="187" alt=""/></a>
+                        snowplus
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
+                        璞徽
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000317"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1947-240x180.jpg" width="187" alt=""/></a>
                         OVV
                     </div>
@@ -60,10 +68,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200702000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8095-240x180.jpg" width="187" alt=""/></a>
                         MINE 梦洁
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000546"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_7947-240x180.jpg" width="187" alt=""/></a>
-                        飞跃
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3892-240x180.jpg" width="187" alt=""/></a>

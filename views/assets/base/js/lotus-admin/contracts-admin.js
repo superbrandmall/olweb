@@ -71,17 +71,27 @@ function ShowContracts(p,c){
                 if(response.data.content.length > 0) { 
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
+                    
+                    sessionStorage.setItem("contracts_"+$.cookie('mallSelected').split(':::')[1], JSON.stringify(response.data.content));
 
                     $.each(response.data.content, function(i,v){
-
+                        var name = '';
+                        if(v.userContractLotus.length > 0){
+                            $.each(v.userContractLotus, function(j,w) {
+                                if(w.user != null && w.user.settings != null) {
+                                    name += '<a href="javascript: void(0);" onclick=\'javascript: modalToggle("'+w.user.settings.name+'","'+w.user.mobile+'","'+w.user.email+'")\'>'+w.user.settings.name+'</a> '
+                                }
+                            })
+                        }
                         
                         $('#contractsL').append('\
-                        <tr data-index="'+i+'">\n\
-                        <td>'+(v.contractName || '无')+'</td>\n\
-                        <td>'+v.contractType+'</td>\n\
-                        <td>'+v.contractStatus+'</td>\n\
-                        <td>'+v.unitCode+'</td>\n\
-                        <td>'+v.unitArea+'</td>\n\
+                            <tr data-index="'+i+'">\n\
+                            <td>'+(v.contractName || '无')+'</td>\n\
+                            <td>'+v.contractType+'</td>\n\
+                            <td>'+v.contractStatus+'</td>\n\
+                            <td>'+v.unitCode+'</td>\n\
+                            <td>'+v.unitArea+'</td>\n\
+                            <td>'+name+'</td>\n\
                         </tr>');
                         
                         $('#contractsS').append('\
@@ -92,6 +102,7 @@ function ShowContracts(p,c){
 <div class="card-views"><div class="card-view"><span class="title">签约情况</span><span class="value">'+v.contractStatus+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">店铺位置代码</span><span class="value">'+v.unitCode+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">合同面积㎡</span><span class="value">'+v.unitArea+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">授权用户</span><span class="value">'+name+'</span></div></div>\n\
 </td></tr>');
 
                     });
@@ -105,4 +116,40 @@ function ShowContracts(p,c){
             } 
         }
     });
+}
+
+function modalToggle(name,mobile,email){
+    if($('#user_detail').length > 0) {
+        $('#user_detail').remove();
+    }
+    
+    $('body').append('<div class="modal fade" id="user_detail" tabindex="-1" role="dialog" aria-hidden="true">\n\
+    <div class="modal-dialog modal-md">\n\
+        <div class="modal-content c-square">\n\
+            <div class="modal-header">\n\
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n\
+                    <span aria-hidden="true">×</span></button>\n\
+                <h4 class="modal-title">用户详情</h4>\n\
+            </div>\n\
+            <div class="modal-body">\n\
+                <div class="col-md-12">\n\
+                    <div class="form-group">\n\
+                        <span class="control-label">姓名:</span>\n\
+                        <strong class="control-label">'+name+'</strong>\n\
+                    </div>\n\
+                    <div class="form-group">\n\
+                        <span class="control-label">手机:</span>\n\
+                        <strong class="control-label">'+mobile+'</strong>\n\
+                    </div>\n\
+                    <div class="form-group">\n\
+                        <span class="control-label">邮箱:</span>\n\
+                        <strong class="control-label">'+email+'</strong>\n\
+                    </div>\n\
+                </div>\n\
+            </div>\n\
+        </div>\n\
+    </div>\n\
+</div>');
+    
+    $('#user_detail').modal('toggle');
 }
