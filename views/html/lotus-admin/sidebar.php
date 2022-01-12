@@ -9,12 +9,27 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
+            <li class="<?php if ($_GET['p'] == 'lotus-admin/mall') { echo 'active'; }?>">
+                <a href="/lotus-admin/mall"><i class="fa fa-building-o"></i>
+                    <span>门店</span>
+                </a>
+            </li>
             <li class="<?php if (isset($_GET['p']) && ($_GET['p'] == 'lotus-admin/' || $_GET['p'] == 'lotus-admin/home')) { echo 'active '; }?>">            
-                <a href="#"><i class="fa fa-building-o"></i>
+                <a href="#"><i class="fa fa-cubes"></i>
                     <span>楼层</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul id="floorList" class="treeview-menu">
+                </ul>
+            </li>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/create-store') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-home"></i>
+                    <span>铺位</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores') { echo 'active'; }?>"><a href="/lotus-admin/stores?items=10">铺位列表</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-store') { echo 'active'; }?>"><a href="/lotus-admin/create-store">新建铺位</a></li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand') { echo 'active'; }?>">
@@ -28,7 +43,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/create-tenant') { echo 'active'; }?>">
-                <a href="#"><i class="fa fa-hotel"></i>
+                <a href="#"><i class="fa fa-users"></i>
                     <span>租户</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -44,11 +59,26 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                 </a>
                 <ul class="treeview-menu">
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contracts') { echo 'active'; }?>"><a href="/lotus-admin/contracts?items=10">合同列表</a></li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-contract') { echo 'active'; }?>"><a href="/lotus-admin/create-contract">新建合同</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-contract') { echo 'active'; }?>">
+                        <a href="/lotus-admin/create-contract">
+                            <span>新建合同</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="/lotus-admin/create-contract">基本信息</a></li>
+                            <li><a href="#investmentContractEnteryterm">进场条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractSettleterm">结算周期</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractAccounttermList">账款条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractOverduetermList">滞纳金条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractDepositterm">预存款条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractProperteisterm">自定义条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#textareapanel">说明</a></li>
+                        </ol>
+                    </li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-user' || $_GET['p'] == 'lotus-admin/users') { echo 'active'; }?>">
-                <a href="#"><i class="fa fa-users"></i>
+                <a href="#"><i class="fa fa-key"></i>
                     <span>用户</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>

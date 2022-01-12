@@ -10,7 +10,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
 <div class="content-wrapper">
     <section class="content-header" style="padding-bottom: 30px;">
         <h1 class="pull-left">
-            新建合同
+            新租赁合同申请单
         </h1>
         <div class="pull-right">
             <a href="javascript: window.history.go(-1);" class="btn btn-primary pull-right">
@@ -35,18 +35,25 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="box box-default">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">
-                            </h3>
-                            <div class="box-tools pull-right">
-                                <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
+                <div class="col-md-12">
+                    <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
+                        <?php 
+                        include 'create-contract/investmentContractModel.php';
+                        include 'create-contract/investmentContractModelBasicinfo.php';
+                        include 'create-contract/investmentContractEnteryterm.php';
+                        include 'create-contract/investmentContractSettleterm.php'; 
+                        include 'create-contract/investmentContractAccounttermList.php';
+                        include 'create-contract/investmentContractOverduetermList.php';
+                        include 'create-contract/investmentContractDepositterm.php';
+                        include 'create-contract/investmentContractProperteisterm.php';
+                        include 'create-contract/textareapanel.php';
+                        ?>
+                        
+                        <!--<div class="box box-default">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">滞纳金条款</h3>
                             </div>
-                        </div>
-
-                        <div class="box-body">
-                            <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
+                            <div class="box-body">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="contractType" class="col-md-6 control-label">合同类型 <span class="btn-box-tool-lg">*</span></label>
@@ -215,9 +222,9 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
                                     <a class="btn btn-link text-left" href="/lotus-admin/contracts">取消</a>
                                     <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> 保存</button>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
+                            </div>
+                        </div>-->
+                    </form>
                 </div>
 
                 <div class="slideout-menu">

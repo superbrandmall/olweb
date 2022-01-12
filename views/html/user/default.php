@@ -30,6 +30,14 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190918000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_5462-240x180.jpg" width="187" alt=""/></a>
+                        全季养 
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000044"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_3723-240x180.jpg" width="187" alt=""/></a>
+                        钻石世家
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190613000012"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_2736-240x180.jpg" width="187" alt=""/></a>
                         snowplus
                     </div>
@@ -38,16 +46,8 @@
                         璞徽
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000317"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1947-240x180.jpg" width="187" alt=""/></a>
-                        OVV
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190417000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1503-240x180.jpg" width="187" alt=""/></a>
                         MUJI
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000822"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_0003-240x180.jpg" width="187" alt=""/></a>
-                        FamilyMart
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
@@ -58,16 +58,8 @@
                         不二君
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200711000009"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8101-240x180.jpg" width="187" alt=""/></a>
-                        东风日产
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210218000005"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8104-240x180.jpg" width="187" alt=""/></a>
                         趁热集合
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200702000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8095-240x180.jpg" width="187" alt=""/></a>
-                        MINE 梦洁
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3892-240x180.jpg" width="187" alt=""/></a>
@@ -76,10 +68,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000035"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3900-240x180.jpg" width="187" alt=""/></a>
                         亨得利钟表
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190616000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3877-240x180.jpg" width="187" alt=""/></a>
-                        程
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210327000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8974-240x180.jpg" width="187" alt=""/></a>

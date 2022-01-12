@@ -365,14 +365,26 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/reset' => array(
             'url' => 'reset.php'
         ),
+        'lotus-admin/mall' => array(
+            'url' => 'mall.php'
+        ),
         'lotus-admin/tenants' => array(
             'url' => 'tenants.php'
         ),
         'lotus-admin/create-tenant' => array(
             'url' => 'create-tenant.php'
         ),
+        'lotus-admin/stores' => array(
+            'url' => 'stores.php'
+        ),
+        'lotus-admin/create-store' => array(
+            'url' => 'create-store.php'
+        ),
         'lotus-admin/contracts' => array(
             'url' => 'contracts.php'
+        ),
+        'lotus-admin/contract-detail' => array(
+            'url' => 'contract-detail.php'
         ),
         'lotus-admin/create-contract' => array(
             'url' => 'create-contract.php'
@@ -389,6 +401,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/sales' => array(
             'url' => 'sales.php'
         ),
+        'lotus-admin/pilot' => array(
+            'url' => 'pilot.php'
+        )
     );
 
     if (array_key_exists($getTarget, $target)) {
@@ -397,7 +412,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'tenants.php', 'create-tenant.php', 'contracts.php', 'create-contract.php', 'users.php', 'create-user.php', 'edit-user.php', 'sales.php');
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'mall.php', 'tenants.php', 'create-tenant.php', 'stores.php', 'create-store.php', 'contracts.php', 'contract-detail.php', 'create-contract.php', 'users.php', 'create-user.php', 'edit-user.php', 'sales.php');
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';
         $session = new Session();

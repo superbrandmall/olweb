@@ -86,6 +86,10 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">操作</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">授权用户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -128,9 +132,57 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
             </div>
         </div>
-
     </section>
+</div>
 
+<div class="modal fade" id="contract_terms" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content c-square">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="fixed-table-body">
+                        <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
+                            <thead id="assetsListingTable-sticky-header" class="hidden-xs">
+                                <tr>
+                                    <th>
+                                        <div class="th-inner">开始日期</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">结束日期</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">面积(m<sup>2</sup>)</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">含税金额(元)</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">不含税金额(元)</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">坪效(元/<small>m<sup>2</sup>/天</small>)</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="deadRentL" class="hidden-xs"></tbody>
+                            <tbody id="deadRentS" class="hidden-sm hidden-md hidden-lg"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include 'footer.php'; ?>

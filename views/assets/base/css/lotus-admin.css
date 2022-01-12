@@ -27,14 +27,23 @@
     color: #64A3FF;
 }
 
-@media (max-width: 400px) {
-    .navbar-left {
-        margin: 2px;
-    }
+.yellow-light {
+    width: 10px;
+    height: 10px;
+    background: #f00;
+    display: block;
+    border-radius: 50%;
+    background-color: #FF9302;
+}
 
-    .nav::after {
-        clear: none;
-    }
+.green-light {
+    width: 10px;
+    height: 10px;
+    background: #f00;
+    display: block;
+    border-radius: 50%;
+    background-color: #4ED964;
+    border: solid 1px #5CC8F9;
 }
 
 label.error {
@@ -43,4 +52,157 @@ label.error {
 
 .login-failed {
     display: none;
+}
+
+/***** FengMap ******/
+
+ul li {
+    list-style: none;
+}
+
+#fengMap {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    outline: none;
+}
+
+/* 浏览器不兼容webGL 时的提示 */
+.noWebGL {
+    position: fixed;
+    font-family: 'Microsoft YaHei';
+    top: 50%;
+    color: rgba(212, 43, 43, 1);
+    margin-top: -60px;
+    padding-left: 40%;
+    background-color: rgba(178, 226, 240, 1);
+    width: 100%;
+    height: 120px;
+    font-weight: 100;
+}
+
+/* 按钮组样式 */
+.btnsGroup {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    display: none;
+}
+
+.btnsGroup button {
+    cursor: pointer;
+    padding: 8px;
+}
+
+.btnsGroup button.active {
+    background-color: #3385ff;
+    border: none;
+    color: #fff;
+}
+
+
+/* 放大缩小提示信息 */
+.message {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 15px;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+    display: none;
+}
+
+.message.active {
+    display: block;
+}
+
+/* 自定义工具控件 */
+.btnsFloor {
+    width: 40px;
+    position: absolute;
+    right: 20px;
+    top: 76px;
+    display: none;
+    -moz-box-shadow: 10px 10px 5px #888888;
+    /* 老的 Firefox */
+    box-shadow: 2px 2px 2px #888888;
+    background-color: #fff;
+}
+
+.btnsFloor span {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: url('../img/content/fengniao/layer.png') no-repeat center;
+    background-size: 80% 80%;
+}
+
+.btnsFloor span.multi {
+    background: url('../img/content/fengniao/layers.png') no-repeat center;
+    background-size: 60% 60%;
+}
+
+.btnsFloor ul {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.btnsFloor ul li {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.btnsFloor ul li.active {
+    color: #fff;
+    background-color: #1e82fa;
+    border-bottom: 1px solid #1e82fa;
+}
+
+.btnsSwitch {
+    width: 40px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: none;
+    -moz-box-shadow: 10px 10px 5px #888888;
+    /* 老的 Firefox */
+    box-shadow: 2px 2px 2px #888888;
+    background-color: #fff;
+}
+
+.btnsSwitch span {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+    background: url('../img/content/fengniao/3D.png') center center no-repeat;
+}
+
+.btnsSwitch span.planar {
+    background: url('../img/content/fengniao/2D.png') center center no-repeat;
+}
+
+/***** FengMap ******/
+
+@media (max-width: 400px) {
+    .navbar-left {
+        margin: 2px;
+    }
+
+    .nav::after {
+        clear: none;
+    }
 }

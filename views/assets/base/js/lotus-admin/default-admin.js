@@ -5,33 +5,30 @@ var day = d.getDate();
 var date = d.getFullYear() + '-' +
     (month<10 ? '0' : '') + month + '-' +
     (day<10 ? '0' : '') + day;
+var deFC = '';
 
 $(document).ready(function(){
     setTimeout(function () { 
-        var deFC = '', floor = '';
+        var floor = '';
         if(getURLParameter('f') && getURLParameter('f') != '') {
             deFC = getURLParameter('f');
         } else {
             deFC = $.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]))[0].code;  
         }
-
+        
         $.each($.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1])), function(i,v){
             if(v.code == deFC) {
                 floor = v.floorName;
             }
         })
+        
+        NetPing('/views/assets/base/img/content/floor-plan/'+$.cookie('mallSelected').split(':::')[1]+'-lotus/'+deFC+'.png',deFC);
 
-        $('#map').attr({
-            'src'   : '/views/assets/base/img/content/floor-plan/'+$.cookie('mallSelected').split(':::')[1]+'-lotus/'+deFC+'.png',
-            'alt'   : deFC,
-            'usemap': '#Map_'+deFC
-        });
-        $('map').attr({
-            'name'  : 'Map_'+deFC,
-            'id'    : '"Map_'+deFC
-        });
-
-        getShopFloorInfo(deFC);
+        if(!sessionStorage.getItem("coords_"+deFC) || sessionStorage.getItem("coords_"+deFC) == null || sessionStorage.getItem("coords_"+deFC) == '') {
+            getShopFloorInfo(deFC);
+        } else {
+            renderMap(deFC);
+        }
 
         $('#mallName').text($.cookie('mallSelected').split(':::')[0]);
         $('#floorNo').text(floor);
@@ -73,6 +70,33 @@ $(function() {
     });
 });
 
+function NetPing(url,deFC) {
+    $.ajax({
+        type: "GET",
+        cache: false,
+        url: url,
+        data: "",
+        success: function() {
+           $('#map').attr({
+                'src'   : url,
+                'alt'   : deFC,
+                'usemap': '#Map_'+deFC
+            });
+            $('map').attr({
+                'name'  : 'Map_'+deFC,
+                'id'    : '"Map_'+deFC
+            });
+        },
+        error: function() {
+            $('#map').attr({
+                'src'   : '/views/assets/base/img/content/lotus-admin/noImage.jpg',
+                'alt'   : deFC
+            });
+            $('#fmap').hide();
+        }
+    });
+}
+
 function getShopFloorInfo(fc) {
     var mallCodes;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -105,38 +129,9 @@ function getShopFloorInfo(fc) {
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            if(response.code === 'C0') {  
-                var stores = 0;
-                var stores_0 = 0;
-                var stores_1 = 0;
-
-                var itm = 0;
-                if(response.data.content.length > 0) {
-                    $.each(response.data.content, function(i,v){
-                        if(v.coords != null && v.coords != '' && v.state != 0 ){
-                            stores = stores + v.unitArea;
-                            switch (v.shopStatus) {
-                                case '0':
-                                    stores_0 = stores_0 + v.unitArea;
-                                    break;
-                                case '1':
-                                    stores_1 = stores_1 + v.unitArea;
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                        
-                        if(v.coords != null && v.coords != '' && v.state != 0){
-                            $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
-                        }
-                    });
-                }
-
-                $('#leased').text(Math.round(stores_0/stores*100));
-                $('#empty').text(Math.round(100-$('#leased').text()-$('#to_be_lease').text()-$('#renovation').text()));
-                
-                drawShops();
+            if(response.code === 'C0') {
+                sessionStorage.setItem("coords_"+fc, JSON.stringify(response.data.content) );
+                renderMap(fc);
             } else {
                 console.log(response.customerMessage);
             }
@@ -145,6 +140,43 @@ function getShopFloorInfo(fc) {
            console.log(textStatus, errorThrown);
         }
     });
+}
+
+function renderMap(fc) {
+    setTimeout(function () { 
+        var stores = 0;
+        var stores_0 = 0;
+        var stores_1 = 0;
+
+        var itm = 0;
+        var coords = $.parseJSON(sessionStorage.getItem("coords_"+fc));
+        if(coords.length > 0) {
+            $.each(coords, function(i,v){
+                if(v.coords != null && v.coords != '' && v.state != 0 ){
+                    stores = stores + v.unitArea;
+                    switch (v.shopStatus) {
+                        case '0':
+                            stores_0 = stores_0 + v.unitArea;
+                            break;
+                        case '1':
+                            stores_1 = stores_1 + v.unitArea;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                if(v.coords != null && v.coords != '' && v.state != 0){
+                    $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                }
+            });
+        }
+
+        $('#leased').text(Math.round(stores_0/stores*100));
+        $('#empty').text(Math.round(100-$('#leased').text()-$('#to_be_lease').text()-$('#renovation').text()));
+
+        drawShops();
+    }, 500);
 }
     
 function drawShops(){
@@ -208,7 +240,10 @@ function drawShops(){
 }
 
 function addTextLayer(){
-    $('map span').remove();
+    $('map span').each(function(i,elem){
+        $(this).remove();
+    })
+    
     if(document.body.clientWidth > 1000){
         setTimeout(function () {
             var pos, shopName, area, brand;
@@ -310,10 +345,12 @@ function GetShopInfo(sc){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
+                                
+                var state = "空铺";
+                var shopStateClass = 'badge-danger';
+                    
                 if(response.data.length > 0){
                     var shop = response.data[response.data.length - 1];
-                    var state;
                     var shopStateClass = 'badge-default';
                     switch(shop.vshopLotus.shopStatus){
                         case '0':
@@ -328,35 +365,140 @@ function GetShopInfo(sc){
                             shopStateClass = 'badge-default';
                             break;
                     }
+                } else {
+                    
+                }
+                
+                $('.figure').text(0);
+                
+                $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+': '+(response.data.length > 0 ? shop.contractStatus : '未签约')+'</span>');
+                $('#contractType').text(response.data.length > 0 ? shop.contractType : '-' );
+                $('#startDate').text(response.data.length > 0 ? shop.startDate : '-' );
+                $('#endDate').text(response.data.length > 0 ? shop.endDate : '-' );
+                $('#tenantName').text(response.data.length > 0 ? shop.tenantName : '-' );
+                $('#totalAmount').text(response.data.length > 0 ? numberWithCommas(shop.totalAmount.toFixed(2)) : 0);
+                $('#totalAmountDay').text(response.data.length > 0 ? shop.totalAmountDay.toFixed(2) : 0 );
+                $('#B011_amount').text(response.data.length > 0 ? numberWithCommas(shop.rentAmount.toFixed(2)) : 0);
+                $('#B021_amount').text(response.data.length > 0 ? ((shop.managerAmount == 0 || shop.managerAmount == null) ? 0 : numberWithCommas(shop.managerAmount.toFixed(2))) : 0);
+                $('#G021_amount').text(response.data.length > 0 ? ((shop.promotionAmount == 0 || shop.promotionAmount == null) ? 0 : numberWithCommas(shop.promotionAmount.toFixed(2))) : 0);
+                if(response.data.length > 0) {
+                    if(shop.promotionAmount >= 10){
+                        $('#G011_amount').text(numberWithCommas(shop.promotionAmount.toFixed(2)));
+                        $('#G021_amount').text(0);
+                    } else if (shop.promotionAmount > 0 && shop.promotionAmount < 10){
+                        $('#G011_amount').text(0);
+                        $('#G021_amount').text(parseFloat(shop.promotionAmount * 100).toFixed(2));
+                    } else {
+                        $('#G011_amount').text(0);
+                        $('#G021_amount').text(0);
+                    }
+                } else {
+                    $('#G011_amount').text(0);
+                    $('#G021_amount').text(0);
+                }
+                
+                $('#E02_amount').text(response.data.length > 0 ? ((shop.depositAmount == 0 || shop.depositAmount == null) ? 0 : numberWithCommas(shop.depositAmount.toFixed(2))) : 0);
+                $('#D011_amount').text(response.data.length > 0 ? ((shop.deduct == 0 || shop.deduct == null) ? 0 : parseFloat(shop.deduct * 100).toFixed(2)) : 0);
+                $('#contactName').text(response.data.length > 0 ? shop.contactName : '-' );
+                $('#contactPhone').text(response.data.length > 0 ? shop.contactPhone : '-' );
+                $('#modality1').text(response.data.length > 0 ? shop.brandLotus.modality1 : '-' );
+                $('#modality2').text(response.data.length > 0 ? shop.brandLotus.modality2 : '-' );
+                $('#modality3').text(response.data.length > 0 ? shop.brandLotus.modality3 : '-' );
 
-                    $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+'</span>');
-                    $('#contractType').text(shop.contractType || '-' );
-                    $('#contractStatus').text(shop.contractStatus || '-' );
-                    $('#unitCode').text(shop.unitCode || '-' );
-                    $('#unitArea').text((shop.unitArea || '-' ) + 'm²');
-                    $('#startDate').text(shop.startDate || '-' );
-                    $('#endDate').text(shop.endDate || '-' );
-                    $('#tenantName').text(shop.tenantName || '-' );
-                    $('#totalAmount').text(numberWithCommas(shop.totalAmount) + '元');
-                    $('#totalAmountDay').text(shop.totalAmountDay || '-' );
-                    $('#rentAmount').text(numberWithCommas(shop.rentAmount) + '元');
-                    $('#managerAmount').text(numberWithCommas(shop.managerAmount) + '元');
-                    $('#floorName').text(shop.vshopLotus.floorName || '-' );
-                    $('#promotionAmount').text(numberWithCommas(shop.promotionAmount) + '元');
-                    $('#depositAmount').text(numberWithCommas(shop.depositAmount) + '元');
-                    $('#deduct').text(shop.deduct == 0 ? shop.deduct : parseFloat(shop.deduct * 100).toFixed(2)+'%');
-                    $('#contactName').text(shop.contactName || '-' );
-                    $('#contactPhone').text(shop.contactPhone || '-' );
-                    $('#modality1').text(shop.brandLotus.modality1 || '-' );
-                    $('#modality2').text(shop.brandLotus.modality2 || '-' );
-                    $('#modality3').text(shop.brandLotus.modality3 || '-' );
+                $('#shop_detail').css('opacity', 1);
+                $('#shop_detail').modal('toggle');
 
-                    $('#shop_detail').css('opacity', 1);
-                    $('#shop_detail').modal('toggle');
+                $('#store_img').html('');
+                var coords = $.parseJSON(sessionStorage.getItem("coords_"+deFC));
+                if(coords.length > 0) {
+                    $.each(coords, function(i,v){
+                        if(v.code == sc){
+                            if(v.shopBudgetList.length > 0){
+                                GetShopBudget(JSON.stringify(v.shopBudgetList));
+                            } else {
+                                $('#budgetL').html('');
+                            }
+                    
+                            if(v.images != null && v.images.length > 0) {
+                                $('#store_img').html('<img src="'+v.images[0].image+'" style="width: 100%;" />');
+                            } else {
+                                $('#store_img').html('<img src="/views/assets/base/img/content/lotus-admin/noImage.jpg" style="width: 100%;" />');
+                            }
+                            
+                            $('#unitName').text(v.unitName);
+                            $('#unitCode').text(v.unitCode);
+                            $('#unitArea').text(v.unitArea + 'm²');
+                            $('#floorName').text(v.floorName);
+                            return false;
+                        }
+
+                        if(v.coords != null && v.coords != '' && v.state != 0){
+                            $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                        }
+                    });
                 }
             } else {
                 console.log(response.customerMessage);
             }
         }
     });
+}
+
+function GetShopBudget(b){
+    var budget = $.parseJSON(b);
+    $.each(budget, function(i,v){
+        $('#'+v.termType).text((v.december == 0 || v.december == null) ? 0 : numberWithCommas(v.december.toFixed(2)));
+        if($('#'+v.termType+'_amount').text() != '' && $('#'+v.termType+'_amount').text() != 0){
+            if(numberWithoutCommas($('#'+v.termType+'_amount').text()) >= numberWithoutCommas($('#'+v.termType).text())){
+                $('#'+v.termType+'_grade').html('<div class="green-light"></div>');
+            } else {
+                $('#'+v.termType+'_grade').html('<div class="red-light"></div>');
+            }
+        }
+    })
+    
+    /*$('#budgetL').html('');
+    $.each(budget, function(i,v){
+        var termType;
+        switch (v.termType) {
+            case "B011":
+                termType = '固定租金';
+                break;
+            case "B021":
+                termType = '物业管理费';
+                break;
+            case "G021":
+                termType = '推广费';
+                break;
+            case "D011":
+                termType = '提成扣率';
+                break;
+            case "E02":
+                termType = '保证金';
+                break;
+            case "E22":
+                termType = '履约保证金';
+                break;
+            default:
+                break;
+        }
+        
+        $('#budgetL').append('<tr>\n\
+            <td>'+termType+'</td>\n\
+            <td>'+v.startDate+'</td>\n\
+            <td>'+v.endDate+'</td>\n\
+            <td>'+numberWithCommas(v.january)+'</td>\n\
+            <td>'+numberWithCommas(v.february)+'</td>\n\
+            <td>'+numberWithCommas(v.march)+'</td>\n\
+            <td>'+numberWithCommas(v.april)+'</td>\n\
+            <td>'+numberWithCommas(v.may)+'</td>\n\
+            <td>'+numberWithCommas(v.june)+'</td>\n\
+            <td>'+numberWithCommas(v.july)+'</td>\n\
+            <td>'+numberWithCommas(v.august)+'</td>\n\
+            <td>'+numberWithCommas(v.september)+'</td>\n\
+            <td>'+numberWithCommas(v.october)+'</td>\n\
+            <td>'+numberWithCommas(v.november)+'</td>\n\
+            <td>'+numberWithCommas(v.december)+'</td></tr>'
+        );
+    })*/
 }

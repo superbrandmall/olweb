@@ -16,7 +16,7 @@ $(document).ready(function(){
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
-                $('.mall-select ul li').show();
+                $('.location-select ul li, .mall-select ul li').show();
                 return false;
             } else if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 $('.mall-select ul li').each(function(i,elem){
@@ -27,11 +27,23 @@ $(document).ready(function(){
             }
         })
         
+        if($.cookie('locationSelected') && $.cookie('locationSelected') != ''){
+            $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);
+        } else {
+            $('.location-select ul li').each(function(i,elem){
+                if($(elem).hasClass('to-select') && $(elem).css('display') != 'none'){
+                    $('#locationSelected').text($(elem).find('span').text());
+                    $.cookie('locationSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
+                    return false;
+                }
+            })
+        }
+        
         if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
             $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
         } else {
             $('.mall-select ul li').each(function(i,elem){
-                if($(elem).css('display') != 'none'){
+                if($(elem).hasClass('to-select') && $(elem).css('display') != 'none'){
                     $('#mallSelected').text($(elem).find('span').text());
                     $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
                     return false;
@@ -45,6 +57,12 @@ $(document).ready(function(){
         
         getSideBarFloor();
     }
+    
+    $('.location-select .text-blue').click(function(){
+        $.cookie('locationSelected',$(this).find('span').text()+':::'+$(this).attr('data-code'));
+        $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);
+        window.location.href = location.protocol + location.pathname;
+    })
     
     $('.mall-select .text-blue').click(function(){
         $.cookie('mallSelected',$(this).find('span').text()+':::'+$(this).attr('data-code'));
@@ -94,7 +112,7 @@ function getSideBarFloor() {
             floorClass = '';
         }
         
-        $('#floorList').append('<li class="'+floorClass+'"><a href="/lotus-admin/home?f='+v.code+'"><i class="fa fa-level-up text-blue"></i> '+v.floorName+'</a></li>');
+        $('#floorList').append('<li class="'+floorClass+'"><a href="/lotus-admin/home?f='+v.code+'"><i class="fa fa-level-up"></i> '+v.floorName+'</a></li>');
     })
 }
 

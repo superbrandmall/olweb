@@ -91,17 +91,19 @@ function ShowContracts(p,c){
                             <td>'+v.contractStatus+'</td>\n\
                             <td>'+v.unitCode+'</td>\n\
                             <td>'+v.unitArea+'</td>\n\
+                            <td><a href=\'javascript: termsModalToggle("'+v.code+'")\'>查看详情</a></td>\n\
                             <td>'+name+'</td>\n\
                         </tr>');
                         
                         $('#contractsS').append('\
-<tr data-index="'+i+'">\n\
+<tr data-index="'+i+'" onclick=\'javascript: termsModalToggle("'+v.code+'")\'>\n\
 <td colspan="65">\n\
 <div class="card-views"><div class="card-view"><span class="title">品牌名称</span><span class="value">'+(v.contractName || '无')+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">合同类型</span><span class="value">'+v.contractType+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">签约情况</span><span class="value">'+v.contractStatus+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">店铺位置代码</span><span class="value">'+v.unitCode+'</span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">合同面积㎡</span><span class="value">'+v.unitArea+'</span></div></div>\n\
+<div class="card-views"><div class="card-view"><span class="title">操作</span><span class="value"><a href=\'javascript: termsModalToggle("'+v.code+'")\'>查看详情</a></span></div></div>\n\
 <div class="card-views"><div class="card-view"><span class="title">授权用户</span><span class="value">'+name+'</span></div></div>\n\
 </td></tr>');
 
@@ -118,13 +120,50 @@ function ShowContracts(p,c){
     });
 }
 
+function termsModalToggle(code){
+    $.ajax({
+        url: $.api.baseNew+"/onlineleasing-customer/api/contract/rent/lotus/findAllByContractCode?contractCode="+code,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", 1);
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        $('#deadRentL').append('<tr>\n\
+<td>'+v.startDate+'</td>\n\
+<td>'+v.endDate+'</td>\n\
+<td>'+numberWithCommas(v.area)+'</td>\n\
+<td>'+numberWithCommas(v.amount)+'</td>\n\
+<td>'+numberWithCommas(v.taxAmount)+'</td>\n\
+<td>'+v.rentAmount+'</td></tr>');
+                    })
+                }
+            }
+        }
+    })
+    
+    $('#contract_terms').modal('toggle');
+}
+
 function modalToggle(name,mobile,email){
     if($('#user_detail').length > 0) {
         $('#user_detail').remove();
     }
     
     $('body').append('<div class="modal fade" id="user_detail" tabindex="-1" role="dialog" aria-hidden="true">\n\
-    <div class="modal-dialog modal-md">\n\
+    <div class="modal-dialog modal-md" style="max-width: 600px;">\n\
         <div class="modal-content c-square">\n\
             <div class="modal-header">\n\
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n\

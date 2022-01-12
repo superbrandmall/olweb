@@ -14,8 +14,16 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
     }
 
     .btn-primary {
-        background-color: #0da5be;
-        border-color: #0da5be;
+        background-color: #222d32;
+        color: #b8c7ce;
+    }
+    
+    .btn-primary:hover,
+    .btn-primary:active,
+    .btn-primary:focus    {
+        color: #425559;
+        font-weight: bold;
+        background: #1a2226;
     }
 </style>
 <body class="hold-transition login-page">

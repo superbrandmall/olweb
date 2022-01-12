@@ -26,6 +26,22 @@ $(document).ready(function(){
         'format': 'yyyy-mm-dd'
     });
     
+    $('input.form-control, .select2-selection').click(function(){
+        $(this).css('borderColor','#3c8dbc');
+    })
+    
+    $('input.form-control, .select2-selection').blur(function(){
+        $(this).css('borderColor','#d2d6de');
+    })
+    
+    $('.input-group input').focus(function(){
+        $(this).siblings('.input-group-addon:first').css('borderColor','#3c8dbc');
+    })
+    
+    $('.input-group input').blur(function(){
+        $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
+    })
+    
     $("#create-form").validate({
         rules: {
             brand_name: {

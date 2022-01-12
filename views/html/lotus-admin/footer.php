@@ -42,7 +42,6 @@ if(isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>
-        <script type="text/javascript" src="/views/assets/base/js/mall-code.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/protocol-admin.js"></script>
         <?php
             echo $scripts; 
