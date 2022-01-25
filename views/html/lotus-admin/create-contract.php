@@ -36,13 +36,18 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/create-con
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <div class="box box-default" id="investmentContractDepositterm">    
+                        <div class="box-header with-border text-center">
+                            <h3 class="box-title">新建新租赁合同申请单</h3>
+                        </div>
+                    </div>
                     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                         <?php 
-                        include 'create-contract/investmentContractModel.php';
-                        include 'create-contract/investmentContractModelBasicinfo.php';
+                        include 'create-contract/investmentContractModel.php'; //合同内容
+                        include 'create-contract/investmentContractModelBasicinfo.php'; //基本信息
                         include 'create-contract/investmentContractEnteryterm.php';
                         include 'create-contract/investmentContractSettleterm.php'; 
-                        include 'create-contract/investmentContractAccounttermList.php';
+                        include 'create-contract/investmentContractAccounttermList.php'; //账款条款
                         include 'create-contract/investmentContractOverduetermList.php';
                         include 'create-contract/investmentContractDepositterm.php';
                         include 'create-contract/investmentContractProperteisterm.php';

@@ -66,14 +66,14 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                         </a>
                         <ul class="treeview-menu">
                             <li class="active"><a href="/lotus-admin/create-contract">基本信息</a></li>
-                            <li><a href="#investmentContractEnteryterm">进场条款</a></li>
+                            <li><a href="/lotus-admin/create-contract#investmentContractEnteryterm">进场条款</a></li>
                             <li><a href="/lotus-admin/create-contract#investmentContractSettleterm">结算周期</a></li>
                             <li><a href="/lotus-admin/create-contract#investmentContractAccounttermList">账款条款</a></li>
                             <li><a href="/lotus-admin/create-contract#investmentContractOverduetermList">滞纳金条款</a></li>
                             <li><a href="/lotus-admin/create-contract#investmentContractDepositterm">预存款条款</a></li>
                             <li><a href="/lotus-admin/create-contract#investmentContractProperteisterm">自定义条款</a></li>
                             <li><a href="/lotus-admin/create-contract#textareapanel">说明</a></li>
-                        </ol>
+                        </ul>
                     </li>
                 </ul>
             </li>

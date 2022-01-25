@@ -34,12 +34,11 @@ if(isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/dist/all.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/bootstrap-table.min.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/extensions/mobile/bootstrap-table-mobile.js"></script>
-        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/FileSaver.min.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/xlsx.core.min.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/jspdf.min.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/extensions/cookie/bootstrap-table-cookie.js"></script>
-        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/plugins/chart-master/Chart.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.cookie.js"></script>
+        <script type="text/javascript" src="/views/assets/plugins/select2/select2.min.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.validate.min.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/jquery.imagemapster.js"></script>
         <script type="text/javascript" src="/views/assets/base/js/lotus-admin/protocol-admin.js"></script>

@@ -74,6 +74,24 @@ $(document).ready(function(){
         event.preventDefault();
         $(this).ekkoLightbox();
     });
+    
+    // An highlighted block
+    var fixedNavHeight = $('.main-header').outerHeight();
+    if (window.location.hash.indexOf('#') >= 0) {
+        $('html,body').animate({
+            scrollTop: ($(window.location.hash).offset().top - fixedNavHeight) + "px"
+        }, 300);
+    };
+    $('.sidebar-menu .treeview-menu a').click(function() {
+        var target = document.getElementById(this.hash.slice(1));
+        if (!target) return;
+        var targetOffset = $(target).offset().top - fixedNavHeight;
+        $('html,body').animate({
+                scrollTop: targetOffset
+            },
+            300);
+        return false;
+    });
 })
 
 function getFloors() {

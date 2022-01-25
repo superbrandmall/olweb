@@ -30,16 +30,36 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190416000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8482-240x180.jpg" width="187" alt=""/></a>
+                        花谷兰泰
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210326000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8287-240x180.jpg" width="187" alt=""/></a>
+                        乐影城
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200801000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8278-240x180.jpg" width="187" alt=""/></a>
+                        半天妖
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000571"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8362-240x180.jpg" width="187" alt=""/></a>
+                        广莲申
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210723000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8213-240x180.jpg" width="187" alt=""/></a>
+                        Samui Tea
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210325000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8207-240x180.jpg" width="187" alt=""/></a>
+                        GUAVA
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190918000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_5462-240x180.jpg" width="187" alt=""/></a>
                         全季养 
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000044"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_3723-240x180.jpg" width="187" alt=""/></a>
                         钻石世家
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190613000012"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_2736-240x180.jpg" width="187" alt=""/></a>
-                        snowplus
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
@@ -70,16 +90,8 @@
                         亨得利钟表
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210327000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8974-240x180.jpg" width="187" alt=""/></a>
-                        六克茶方
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200624000004"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/06/ZHX_8959-240x180.jpg" width="187" alt=""/></a>
                         好利来Holiland
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190423000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/04/ZHX4900-240x180.jpg" width="187" alt=""/></a>
-                        咬金
                     </div>
                 </div>
             </div>

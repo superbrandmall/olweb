@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>卜蜂莲花 - 招商管理系统</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="/views/assets/base/js/lotus-admin/plugins/select2/select2.min.css">
+        <link rel="stylesheet" href="/views/assets/plugins/select2/select2.min.css">
         <link rel="stylesheet" href="/views/assets/base/css/lotus-admin/dist/all.css?t=<?php echo date("Y-m-d") ?>">
         <link rel="stylesheet" href="/views/assets/base/css/lotus-admin/bootstrap-table.css">
         <link rel="icon" href="/views/assets/base/img/content/lotus-admin/favicon.ico" type="image/x-icon"/>
@@ -206,7 +206,7 @@
                                         if(isset($_SESSION['lotus_admin_name'])) {
                                             echo $_SESSION['lotus_admin_name'];
                                         } else {
-                                            echo "租赁部";
+                                            echo "未知人员";
                                         }
                                         ?>
                                         <b class="caret"></b></span>

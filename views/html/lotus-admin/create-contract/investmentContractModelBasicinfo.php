@@ -6,16 +6,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="col-md-4 control-label">租赁期限 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-4 col-sm-6 required" style="padding-right: 0;">
-                    <div class="input-group">
-                        <input class="form-control date-picker" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff;" />
+                <div class="col-md-8 col-sm-12 required">
+                    <div class="input-daterange input-group">
+                        <input type="text" class="form-control" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; padding: 0 2px;" />
                         <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">至</span>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6 required" style="padding-left: 0;">
-                    <div class="input-group">
-                        <input class="form-control date-picker" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                        <div class="input-group">
+                            <input type="text" class="form-control" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; padding: 0; border-right: none;" />
+                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                        </div>    
                     </div>
                 </div>
             </div>
@@ -104,7 +102,10 @@
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">位置 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-4 col-sm-6 required" style="padding-right: 2px;">
+                <div class="col-md-8 col-sm-12 required">
+                    <select id="selectStore" class="select2" style="width: 100%"></select>
+                </div>
+                <!--<div class="col-md-4 col-sm-6 required" style="padding-right: 2px;">
                     <select class="select2" style="width: 100%">
                         <option value="">未选择</option>
                         <option value="">正柜</option>
@@ -120,7 +121,7 @@
                     <select class="select2" style="width: 100%">
                         <option value="">未选择</option>
                     </select>
-                </div>
+                </div>-->
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">核算楼层 <span class="btn-box-tool-lg">*</span></label>

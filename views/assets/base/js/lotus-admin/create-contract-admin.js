@@ -20,10 +20,29 @@ $(document).ready(function(){
             window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
         },1000);
     }
+    
+    if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                $('#selectLocation option').each(function(i,elem){
+                    if($(elem).val() == v.moduleCode){
+                        $(this).addClass('to-select');
+                    }
+                })
+                
+                $('#selectLocation option').each(function(i,elem){
+                    if($(elem).hasClass('to-select') == false){
+                        $(this).remove();
+                    }
+                })
+            }
+        })
+    }
 
-    $('.date-picker').datepicker({
+    $('.date-picker, .input-daterange').datepicker({
         'language': 'zh-CN',
-        'format': 'yyyy-mm-dd'
+        'format': 'yyyy-mm-dd',
+        'todayBtn': "linked"
     });
     
     $('input.form-control, .select2-selection').click(function(){
@@ -41,6 +60,88 @@ $(document).ready(function(){
     $('.input-group input').blur(function(){
         $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
     })
+        
+    var data_count = 10;
+    $('#selectTenant').select2({
+        dropdownAutoWidth: true,
+        ajax: {
+            url: $.api.baseNew+"/onlineleasing-customer/api/tenant/lotus/findAll",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    sort: 'id,desc',
+                    search: params.term
+                }
+            },
+            processResults: function (data,params) {
+                var jsonData = data['data'].content;
+                params.page = params.page || 0;
+                return {
+                    results: $.map(jsonData, function(item) {
+                        var i = 1;
+                        return {
+                            id: i++,
+                            text: item.tenantCode +' | '+ item.name
+                        }
+                    }),
+                    pagination: {
+                        "more": data_count <= jsonData.length
+                    }
+                }
+            },
+            cache: true
+        }
+    });
+    
+    $('#selectStore').select2({
+        dropdownAutoWidth: true,
+        ajax: {
+            url: $.api.baseNew+"/onlineleasing-customer/api/shop/lotus/findAllByMallCode",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {  
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    search: params.term,
+                    mallCode: $.cookie('mallSelected').split(':::')[1]
+                }
+            },
+            processResults: function (data,params) {
+                var jsonData = data['data'].content;
+                params.page = params.page || 0;
+                return {
+                    results: $.map(jsonData, function(item) {
+                        var i = 1;
+                        return {
+                            id: i++,
+                            text: item.unitName +'['+ item.unitCode +'] | '+ item.area + '㎡'
+                        }
+                    }),
+                    pagination: {
+                        "more": data_count <= jsonData.length
+                    }
+                }
+            },
+            cache: true
+        }
+    });
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     $("#create-form").validate({
         rules: {

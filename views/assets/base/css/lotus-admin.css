@@ -119,6 +119,10 @@ ul li {
     display: block;
 }
 
+.select2-container {
+    max-width: 300px;
+}
+
 /* 自定义工具控件 */
 .btnsFloor {
     width: 40px;
