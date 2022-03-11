@@ -1,7 +1,7 @@
 <?php
-$scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-admin.js" type="text/javascript"></script>'
-    . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'
-    . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>';
+$scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-admin.js" type="text/javascript"></script>'.PHP_EOL
+    . '        <script src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'.PHP_EOL
+    . '        <script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>'.PHP_EOL;
 ?>
 <link href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 
@@ -9,11 +9,11 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-ad
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper" style="overflow: hidden;">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1  class="pull-left"><span id="mallName"></span> <span id="floorNo"></span></h1>
+    <section class="sub-header">
+        <h4><span id="mallName"></span> <span id="floorNo"></span></h4>
     </section>
     
-    <section class="content">
+    <section class="content" style="margin-top: 90px;">
         <div class="col-lg-12" id="map_canvas">
             <div id="webui">
                 <div class="box box-default" style="overflow: auto;">

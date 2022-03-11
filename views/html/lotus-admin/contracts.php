@@ -1,37 +1,107 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/contracts-admin.js"></script>';
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contracts-admin.js"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contracts.js"></script>'.PHP_EOL;
+}
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1 class="pull-left">
-            合同列表
-        </h1>
-        <div class="pull-right">
-            <a href="/lotus-admin/create-contract" class="btn btn-primary pull-right">
-                新建合同
-            </a>
-        </div>
-    </section>
-
-    <section class="content">
-        <div id="webui">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="callout callout-info" style="display: none;">
-                        新建合同成功!
-                    </div>
-                    <div class="callout callout-danger" style="display: none;">
-                        新建合同失败!
-                    </div>
-                    <div class="callout callout-warning" style="display: none;">
-                        该合同已存在!
+    <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
+        <section class="sub-header" style="height: 160px;">
+            <h4>
+                租赁合同
+            </h4>
+            <div class="pull-right">
+                <a href="/lotus-admin/make-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">新建新租赁合同申请单</span></a>
+            </div>
+            <div class="box-header">
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="contractStatus" style="width: 100%">
+                                        <option value="" selected>全部</option>
+                                        <option value="effect">已生效</option>
+                                        <option value="termination">已终止</option>
+                                        <option value="uneffect">未生效</option>
+                                        <option value="cancel">已作废</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">合同编号</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <input class="form-control" id="contractNo" type="text"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select id="selectTenant" class="select2" style="width: 100%"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">门店</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="department" name="department" style="width: 100%">
+                                        <option class="no-remove" value="">未选择</option>
+                                        <option value="SC033">川沙店</option>
+                                        <option value="SC001">杨高南路店</option>
+                                        <option value="SC005">上南店</option>
+                                        <option value="SC011">杨高北路店</option>
+                                        <option value="SC043">杨高中路店</option>
+                                        <option value="SC078">浦江店</option>
+                                        <option value="SC145">临港店</option>
+                                        <option value="SC055">文诚店</option>
+                                        <option value="SC027">岳阳店</option>
+                                        <option value="SC126">牡丹江路店</option>
+                                        <option value="SC060">蕴川店</option>
+                                        <option value="SC082">新港店</option>
+                                        <option value="SC010">汶水店</option>
+                                        <option value="SC040">保德店</option>
+                                        <option value="SC041">南奉店</option>
+                                        <option value="SC127">易买得-南桥店</option>
+                                        <option value="SC050">金山店</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="selectStore" style="width: 100%"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
+                                    <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+        </section>
+    </form>
+
+    <section class="content" style="margin-top: 210px;">
+        <div id="webui">
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -45,7 +115,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <span class="page-list">
                                                     <span class="btn-group dropdown">
                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="page-size">10</span>
+                                                            <span class="page-size">20</span>
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
@@ -60,43 +130,46 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <ul class="pagination"></ul>
                                             </div>
                                         </div>
-                                        <div class="fixed-table-container table-no-bordered">
+                                        <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive table-no-bordered" style="margin-top: 0">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
                                                     <thead id="assetsListingTable-sticky-header" class="hidden-xs">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">品牌名称</div>
+                                                                <div class="th-inner">单号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">合同类型</div>
+                                                                <div class="th-inner">合同编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">签约情况</div>
+                                                                <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">店铺位置代码</div>
+                                                                <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">合同面积㎡</div>
+                                                                <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">操作</div>
+                                                                <div class="th-inner">铺位</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">授权用户</div>
+                                                                <div class="th-inner">业态</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">店招</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="contractsL" class="hidden-xs"></tbody>
-                                                    <tbody id="contractsS" class="hidden-sm hidden-md hidden-lg"></tbody>
+                                                    <tbody id="contracts" class="hidden-xs"></tbody>
                                                 </table>
                                             </div>
 
@@ -106,7 +179,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                     <span class="page-list">
                                                         <span class="btn-group dropdown">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                                <span class="page-size">10</span>
+                                                                <span class="page-size">20</span>
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
@@ -133,56 +206,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
             </div>
         </div>
     </section>
-</div>
-
-<div class="modal fade" id="contract_terms" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content c-square">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="col-md-12">
-                    <div class="fixed-table-body">
-                        <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
-                            <thead id="assetsListingTable-sticky-header" class="hidden-xs">
-                                <tr>
-                                    <th>
-                                        <div class="th-inner">开始日期</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">结束日期</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">面积(m<sup>2</sup>)</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">含税金额(元)</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">不含税金额(元)</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">坪效(元/<small>m<sup>2</sup>/天</small>)</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="deadRentL" class="hidden-xs"></tbody>
-                            <tbody id="deadRentS" class="hidden-sm hidden-md hidden-lg"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <?php include 'footer.php'; ?>

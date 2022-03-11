@@ -33,7 +33,7 @@ $(document).ready(function(){
             var userName = $('#login_username').val();
             
             $.ajax({
-                url: $.api.baseNew+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+key,
+                url: $.api.base+"/comm-wechatol/api/sms/checkIdentifyCode?mobileNo="+userName+"&code="+key,
                 type: "GET",
                 async: false,
                 dataType: "json",
@@ -55,7 +55,7 @@ $(document).ready(function(){
                         }
                         
                         $.ajax({
-                            url: $.api.baseNew+"/onlineleasing-customer/api/login/loginByMobile?mobile="+userName,
+                            url: $.api.base+"/onlineleasing-customer/api/login/loginByMobile?mobile="+userName,
                             type: "POST",
                             async: false,
                             dataType: "json",
@@ -97,15 +97,16 @@ $(document).ready(function(){
                                             if(response.data.userModules.length > 0){
                                                 var userModules = [];
                                                 $.each(response.data.userModules, function(i,v) {
-                                                    if(v.code == 'CROLE211008000002' || v.code == 'CROLE210706000001' || v.code == 'CROLE211008000001'){
+                                                    if(v.code == 'CROLE211008000002' || v.code == 'CROLE210706000001' || v.code == 'CROLE211008000001' || v.code == 'CROLE211008000001'){
+                                                        // 云之家 v.code == 'CROLE211008000001'
                                                         userModules.push(v);
                                                     }
                                                 })
                                                 $.cookie('userModules',JSON.stringify(userModules));
                                             }
                                             
-                                            $.cookie('mallSelected',);
-                                            window.location.href = "home";
+                                            //$.cookie('mallSelected',);
+                                            window.location.href = "contracts";
                                         }
                                     });
                                 } else {
@@ -141,7 +142,7 @@ function VeryficationCodeLogin() {
     
     if(userName != '') {
         $.ajax({
-            url: $.api.baseNew+"/comm-wechatol/api/sms/sendIdentifyCode?mobileNo="+userName,
+            url: $.api.base+"/comm-wechatol/api/sms/sendIdentifyCode?mobileNo="+userName,
             type: "GET",
             async: false,
             beforeSend: function(request) {

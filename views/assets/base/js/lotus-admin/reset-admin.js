@@ -73,7 +73,7 @@ $(document).ready(function(){
             };
             
             $.ajax({
-                url: $.api.baseNew+"/common-authorization/api/passport/change/password2",
+                url: $.api.base+"/common-authorization/api/passport/change/password2",
                 type: "PUT",
                 data: JSON.stringify(map),
                 async: false,

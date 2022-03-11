@@ -115,7 +115,7 @@ function getShopFloorInfo(fc) {
     };
         
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/vshop/lotus/findAllByCondition?page=0&size=100",
+        url: $.api.baseLotus+"/api/vshop/lotus/findAllByCondition?page=0&size=100",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -133,7 +133,7 @@ function getShopFloorInfo(fc) {
                 sessionStorage.setItem("coords_"+fc, JSON.stringify(response.data.content) );
                 renderMap(fc);
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -329,7 +329,7 @@ function JumpToShopList(sc){
 
 function GetShopInfo(sc){
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/contract/lotus/findAllByMallCodeAndShopCode?mallCode="+$.cookie('mallSelected').split(':::')[1]+"&shopCode="+sc,
+        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByMallCodeAndShopCode?mallCode="+$.cookie('mallSelected').split(':::')[1]+"&shopCode="+sc,
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -438,7 +438,7 @@ function GetShopInfo(sc){
                     });
                 }
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         }
     });

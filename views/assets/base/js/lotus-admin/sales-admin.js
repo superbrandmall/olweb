@@ -23,14 +23,15 @@ $(document).ready(function(){
         $('#startDate').datepicker('setEndDate',endTime);
     })
     
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            $('#department option').each(function(i,elem){
-                if($(elem).val() != v.moduleCode){
-                    $(this).remove();
+    $('#department option').each(function(j, elem){
+        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
+            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                if($(elem).val() == v.moduleCode){
+                    $('#department option:eq('+j+')').addClass('no-remove');
                 }
-            })
-        }
+                $("#department").find("option:not(.no-remove)").remove();
+            }
+        })
     })
     
     if($('#department').val() != ''){
@@ -135,7 +136,7 @@ function findSaleRecordByDate(p,c) {
     $.cookie('sales_endDate', $('#endDate').val());
     
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/sales/lotus/findSaleRecodeByDate?contractNo="+$.cookie('sales_contract')+"&startDate="+$.cookie('sales_startDate')+"&endDate="+$.cookie('sales_endDate')+"&page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/sales/lotus/findSaleRecodeByDate?contractNo="+$.cookie('sales_contract')+"&startDate="+$.cookie('sales_startDate')+"&endDate="+$.cookie('sales_endDate')+"&page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "GET",
         async: false,
         dataType: "json",
@@ -171,9 +172,6 @@ function findSaleRecordByDate(p,c) {
                             }
                         })
                         
-                        
-                        
-                        
                         $('#salesL').append('<tr><td>'+v.salesDate+'</td><td>'+contract_name+'</td><td>'+numberWithCommas(v.amount)+'元</td><td>'+numberWithCommas(v.saleNum)+'笔</td></tr>');
                         $('#salesS').append('\
 <tr data-index="'+i+'">\n\
@@ -191,11 +189,11 @@ function findSaleRecordByDate(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#salesL').append('<tr><td colspan="3" style="text-align: center;">没有查到相关记录！</td></tr>');
+                    $('#salesL').append('<tr><td colspan="4" style="text-align: center;">没有查到相关记录！</td></tr>');
                     $('#salesS').append('<tr><td style="text-align: center;">没有查到相关记录！</td></tr>');
                 }
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -206,7 +204,7 @@ function findSaleRecordByDate(p,c) {
 
 function findAllContracts(mc) {
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/contract/lotus/findAllByMallCode?mallCode="+mc+"&size=100",
+        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByMallCode?mallCode="+mc+"&size=100",
         type: "GET",
         async: false,
         dataType: "json",
@@ -239,7 +237,7 @@ function findAllContracts(mc) {
                     }
                 })
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

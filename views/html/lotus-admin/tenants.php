@@ -1,33 +1,33 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/tenants-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/tenants-admin.js"></script>'.PHP_EOL;
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1 class="pull-left">
-            租户列表
-        </h1>
+    <section class="sub-header">
+        <h4>
+            商户列表
+        </h4>
         <div class="pull-right">
-            <a href="/lotus-admin/create-tenant" class="btn btn-primary pull-right">
-                新建租户
+            <a href="/lotus-admin/create-tenant" class="btn btn-primary btn-sm">
+                新建商户
             </a>
         </div>
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-top: 90px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
                     <div class="callout callout-info" style="display: none;">
-                        新建租户成功!
+                        新建商户成功!
                     </div>
                     <div class="callout callout-danger" style="display: none;">
-                        新建租户失败!
+                        新建商户失败!
                     </div>
                     <div class="callout callout-warning" style="display: none;">
-                        该租户已存在!
+                        该商户已存在!
                     </div>
                 </div>
             </div>
@@ -60,13 +60,13 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <ul class="pagination"></ul>
                                             </div>
                                         </div>
-                                        <div class="fixed-table-container table-no-bordered">
+                                        <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive table-no-bordered" style="margin-top: 0">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
                                                     <thead id="assetsListingTable-sticky-header" class="hidden-xs">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">租户</div>
+                                                                <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -82,12 +82,12 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                              <th>
-                                                                <div class="th-inner">组织机构代码证</div>
+                                                                <div class="th-inner">组织机构代码证/身份证号码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="tenantsL" class="hidden-xs"></tbody>
+                                                    <tbody id="tenantsL" class="hidden-xs" style="text-align: center;"></tbody>
                                                     <tbody id="tenantsS" class="hidden-sm hidden-md hidden-lg"></tbody>
                                                 </table>
                                             </div>

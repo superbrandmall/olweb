@@ -23,9 +23,9 @@ $(document).ready(function(){
     
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        ShowBrands(getURLParameter('page'),items);
+        ShowTenants(getURLParameter('page'),items);
     } else {
-        ShowBrands(1,items);
+        ShowTenants(1,items);
     }
 
     switch (getURLParameter('items')) {
@@ -47,9 +47,9 @@ $(document).ready(function(){
     }
 });
 
-function ShowBrands(p,c){
+function ShowTenants(p,c){
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/tenant/lotus/findAll?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/tenant/lotus/findAll?page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "GET",
         async: false,
         dataType: "json",
@@ -105,6 +105,8 @@ function ShowBrands(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 }
+            } else {
+                alertMsg(response.code,response.customerMessage);
             } 
         }
     });

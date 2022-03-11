@@ -10,7 +10,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/pilot-admi
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper" style="overflow: hidden;">
-    <section class="content-header" style="padding-bottom: 30px;">
+    <section class="content-header">
         <h1  class="pull-left"><span id="mallName"></span> <span id="floorNo"></span></h1>
     </section>
     

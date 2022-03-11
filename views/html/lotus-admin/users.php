@@ -1,22 +1,22 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/users-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/users-admin.js"></script>'.PHP_EOL;
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1 class="pull-left">
+    <section class="sub-header">
+        <h4>
             用户列表
-        </h1>
+        </h4>
         <div class="pull-right">
-            <a href="/lotus-admin/create-user" class="btn btn-primary pull-right">
-                新建用户
+            <a href="/lotus-admin/create-user" class="btn btn-primary btn-sm">
+                <i class="fa fa-plus"></i> 新建用户
             </a>
         </div>
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-top: 90px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">

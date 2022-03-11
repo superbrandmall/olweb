@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 function ShowUsers(){
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/findAllByUserType?userType=10",
+        url: $.api.baseLotus+"/api/user/lotus/findAllByUserType?userType=10",
         type: "GET",
         async: false,
         dataType: "json",
@@ -65,6 +65,8 @@ function ShowUsers(){
 
                     });
                 }
+            } else {
+                alertMsg(response.code,response.customerMessage);
             } 
         }
     });

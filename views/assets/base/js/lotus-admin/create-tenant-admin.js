@@ -47,8 +47,8 @@ $(document).ready(function(){
         },
         messages: {
             name: {
-                required: "请输入租户名称",
-                minlength: "请输入完整租户名称"
+                required: "请输入商户名称",
+                minlength: "请输入完整商户名称"
             },
             type: {
                 required: "请选择类型"
@@ -64,8 +64,8 @@ $(document).ready(function(){
                 numChar: "请输入正确组织机构代码证"
             },
             tenantCode: {
-                required: "请输入租户编号",
-                minlength: "请输入正确租户编号"
+                required: "请输入商户编号",
+                minlength: "请输入正确商户编号"
             }
         },
         errorPlacement: function(error, element) {
@@ -79,7 +79,7 @@ $(document).ready(function(){
 
 function checkTenantName(name) {
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/tenant/lotus/findAllByName?name="+name,
+        url: $.api.baseLotus+"/api/tenant/lotus/findAllByName?name="+name,
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -148,7 +148,7 @@ function addTenant() {
         };
 
         $.ajax({
-            url: $.api.baseNew+"/onlineleasing-customer/api/tenant/lotus/saveOrUpdate",
+            url: $.api.baseLotus+"/api/tenant/lotus/saveOrUpdate",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -174,7 +174,7 @@ function addTenant() {
 
                     window.location.href = 'home?s=succeed';
                 } else {
-                    console.log(response.customerMessage);
+                    alertMsg(response.code,response.customerMessage);
                     window.location.href = 'create-tenant?s=fail';
                 }
             },

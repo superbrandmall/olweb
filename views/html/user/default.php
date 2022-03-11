@@ -30,6 +30,18 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000728"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8594-240x180.jpg" width="187" alt=""/></a>
+                        难得一面
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190212000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8577-240x180.jpg" width="187" alt=""/></a>
+                        PEAK-TAICHI
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000599"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8534-240x180.jpg" width="187" alt=""/></a>
+                        NINTEN ASOBI
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP190416000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8482-240x180.jpg" width="187" alt=""/></a>
                         花谷兰泰
                     </div>
@@ -54,14 +66,6 @@
                         GUAVA
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190918000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_5462-240x180.jpg" width="187" alt=""/></a>
-                        全季养 
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000044"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/12/ZHX_3723-240x180.jpg" width="187" alt=""/></a>
-                        钻石世家
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
                         璞徽
                     </div>
@@ -72,10 +76,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
                         锅物新语
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000738"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9988-240x180.jpg" width="187" alt=""/></a>
-                        不二君
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210218000005"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8104-240x180.jpg" width="187" alt=""/></a>

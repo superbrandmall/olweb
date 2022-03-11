@@ -377,17 +377,23 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/stores' => array(
             'url' => 'stores.php'
         ),
-        'lotus-admin/create-store' => array(
-            'url' => 'create-store.php'
+        'lotus-admin/requests' => array(
+            'url' => 'requests.php'
+        ),
+        'lotus-admin/request-summary' => array(
+            'url' => 'request-summary.php'
         ),
         'lotus-admin/contracts' => array(
             'url' => 'contracts.php'
         ),
+        'lotus-admin/contract-summary' => array(
+            'url' => 'contract-summary.php'
+        ),
         'lotus-admin/contract-detail' => array(
             'url' => 'contract-detail.php'
         ),
-        'lotus-admin/create-contract' => array(
-            'url' => 'create-contract.php'
+        'lotus-admin/make-request' => array(
+            'url' => 'make-request.php'
         ),
         'lotus-admin/users' => array(
             'url' => 'users.php'
@@ -401,6 +407,18 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/sales' => array(
             'url' => 'sales.php'
         ),
+        'lotus-admin/dict' => array(
+            'url' => 'dict.php'
+        ),
+        'lotus-admin/create-dict-type' => array(
+            'url' => 'create-dict-type.php'
+        ),
+        'lotus-admin/create-dict-data' => array(
+            'url' => 'create-dict-data.php'
+        ),
+        'lotus-admin/edit-dict-data' => array(
+            'url' => 'edit-dict-data.php'
+        ),
         'lotus-admin/pilot' => array(
             'url' => 'pilot.php'
         )
@@ -412,7 +430,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'mall.php', 'tenants.php', 'create-tenant.php', 'stores.php', 'create-store.php', 'contracts.php', 'contract-detail.php', 'create-contract.php', 'users.php', 'create-user.php', 'edit-user.php', 'sales.php');
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'mall.php', 'tenants.php', 'create-tenant.php', 'stores.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php',  
+        'requests.php', 'request-summary.php', 'make-request.php', 'users.php', 'create-user.php', 'edit-user.php', 'sales.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php');
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';
         $session = new Session();

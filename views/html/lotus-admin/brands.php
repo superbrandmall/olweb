@@ -1,22 +1,22 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/brands-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/brands-admin.js"></script>'.PHP_EOL;
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1 class="pull-left">
+    <section class="sub-header">
+        <h4>
             品牌列表
-        </h1>
+        </h4>
         <div class="pull-right">
-            <a href="/lotus-admin/create-brand" class="btn btn-primary pull-right">
+            <a href="/lotus-admin/create-brand" class="btn btn-primary btn-sm">
                 新建品牌
             </a>
         </div>
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-top: 90px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -60,9 +60,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <ul class="pagination"></ul>
                                             </div>
                                         </div>
-                                        <div class="fixed-table-container table-no-bordered">
+                                        <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive table-no-bordered" style="margin-top: 0">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
                                                     <thead id="assetsListingTable-sticky-header" class="hidden-xs">
                                                         <tr>
                                                             <th>
@@ -91,7 +91,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="brandsL" class="hidden-xs"></tbody>
+                                                    <tbody id="brandsL" class="hidden-xs" style="text-align: center;"></tbody>
                                                     <tbody id="brandsS" class="hidden-sm hidden-md hidden-lg"></tbody>
                                                 </table>
                                             </div>
@@ -128,8 +128,6 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
             </div>
         </div>
-
     </section>
-
 </div>
 <?php include 'footer.php'; ?>

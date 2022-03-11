@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 function checkBrandName(name) {
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/brand/lotus/findAllByName?name="+name,
+        url: $.api.baseLotus+"/api/brand/lotus/findAllByName?name="+name,
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -150,7 +150,7 @@ function addBrand() {
         };
 
         $.ajax({
-            url: $.api.baseNew+"/onlineleasing-customer/api/brand/lotus/saveOrUpdate",
+            url: $.api.baseLotus+"/api/brand/lotus/saveOrUpdate",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -176,7 +176,7 @@ function addBrand() {
 
                     window.location.href = 'home?s=succeed';
                 } else {
-                    console.log(response.customerMessage);
+                    alertMsg(response.code,response.customerMessage);
                     window.location.href = 'create-brand?s=fail';
                 }
             },

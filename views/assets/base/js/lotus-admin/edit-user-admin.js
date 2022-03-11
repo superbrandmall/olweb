@@ -33,14 +33,15 @@ $(document).ready(function(){
         },1000);
     }
     
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            $('#department option').each(function(i,elem){
-                if($(elem).val() != v.moduleCode){
-                    $(this).remove();
+    $('#department option').each(function(j, elem){
+        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
+            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                if($(elem).val() == v.moduleCode){
+                    $('#department option:eq('+j+')').addClass('no-remove');
                 }
-            })
-        }
+                $("#department").find("option:not(.no-remove)").remove();
+            }
+        })
     })
     
     if($('#department').val() != ''){
@@ -148,7 +149,7 @@ function addUser() {
         };
 
         $.ajax({
-            url: $.api.baseNew+"/common-authorization/api/user/save",
+            url: $.api.base+"/common-authorization/api/user/save",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -174,7 +175,7 @@ function addUser() {
 
                     addUserRole(response.data.code);
                 } else {
-                    console.log(response.customerMessage);
+                    alertMsg(response.code,response.customerMessage);
                     //window.location.href = 'create-user?s=create-user-fail';
                 }
             },
@@ -194,7 +195,7 @@ function addUserRole(uc) {
         }];
 
         $.ajax({
-            url: $.api.baseNew+"/common-authorization/api/userrole/save",
+            url: $.api.base+"/common-authorization/api/userrole/save",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -220,7 +221,7 @@ function addUserRole(uc) {
                     
                     saveUserContract(uc);
                 } else {
-                    console.log(response.customerMessage);
+                    alertMsg(response.code,response.customerMessage);
                     window.location.href = 'create-user?s=create-user-role-fail';
                 }
             },
@@ -234,7 +235,7 @@ function addUserRole(uc) {
 
 function findAllContracts(mc) {
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/contract/lotus/findAllByMallCode?mallCode="+mc+"&size=100",
+        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByMallCode?mallCode="+mc+"&size=100",
         type: "GET",
         async: false,
         dataType: "json",
@@ -267,7 +268,7 @@ function findAllContracts(mc) {
                     }
                 })
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -291,7 +292,7 @@ function saveUserContract(uc) {
         };
 
         $.ajax({
-            url: $.api.baseNew+"/onlineleasing-customer/api/user/contract/lotus/saveOrUpdate",
+            url: $.api.baseLotus+"/api/user/contract/lotus/saveOrUpdate",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -317,7 +318,7 @@ function saveUserContract(uc) {
                     
                     window.location.href = 'users?s=succeed';
                 } else {
-                    console.log(response.customerMessage);
+                    alertMsg(response.code,response.customerMessage);
                     window.location.href = 'users?s=bind-user-contract-fail';
                 }
             },

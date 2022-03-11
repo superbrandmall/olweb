@@ -1,31 +1,28 @@
 $(document).ready(function(){
-    if(getURLParameter('s')) {
-        switch (getURLParameter('s')) {
-            case "succeed":
-                $('.callout-info').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
-                break;
-            case "fail":
-                $('.callout-danger').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
-                break;
-            default:
-                break;
-        }
-        setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-        },1000);
+    if($.cookie('searchContractsContractStatus') != ''){
+        $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
+    }
+    if($.cookie('searchContractsContractNo') != ''){
+        $('#contractNo').val($.cookie('searchContractsContractNo'));
+    }
+    
+    if($.cookie('searchContractsSelectTenantVal') != 'null'){
+        var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
+        $('#selectTenant').append(newOption).trigger('change');
+    }
+    if($.cookie('searchContractsSelectDepartmentVal') != 'null'){
+        $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
+    }
+    if($.cookie('searchContractsSelectStoreVal') != 'null'){
+        var newOption = new Option($.cookie('searchContractsSelectStoreTxt'), $.cookie('searchContractsSelectStoreVal'), true, true);
+        $('#selectStore').append(newOption).trigger('change');
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        ShowContracts(getURLParameter('page'),items);
+        findAllContractsByKVCondition(getURLParameter('page'),items);
     } else {
-        ShowContracts(1,items);
+        findAllContractsByKVCondition(1,items);
     }
 
     switch (getURLParameter('items')) {
@@ -42,15 +39,132 @@ $(document).ready(function(){
             $('.page-size').text('50');
             break;
         default:
-            $('.page-size').text('10');
+            $('.page-size').text('20');
             break;
     }
+    
+    $('#department option').each(function(j, elem){
+        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
+            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                if($(elem).val() == v.moduleCode){
+                    $('#department option:eq('+j+')').addClass('no-remove');
+                }
+            } else if(v.code == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
+                $('#department option:eq('+j+')').addClass('no-remove');
+            }
+        })
+    })
+    $("#department").find("option:not(.no-remove)").remove();
+    
+    if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
+        findContractStatus('CONTRACT_STATUS');
+    }
+    
+    updateSelectTenantDropDown(10);
+    updateSelectStoreDropDown(10);
+    
+    $('#clear').click(function(){
+        $('#contractNo').val('');
+        $('#selectTenant, #selectStore').empty(); 
+        $('#department, #contractStatus').val("").trigger('change');
+        $('#selectTenant, #selectStore').select2("val", "");
+        
+        $.cookie('searchContractsContractStatus','');
+        $.cookie('searchContractsContractNo', '');
+        $.cookie('searchContractsSelectTenantVal', null);
+        $.cookie('searchContractsSelectStoreVal', null);
+        $.cookie('searchContractsSelectDepartmentVal', null);
+    })
+    
+    $('#search').click(function(){
+        $.cookie('searchContractsContractStatus', $('#contractStatus').val());
+        $.cookie('searchContractsContractNo', $('#contractNo').val());
+        $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
+        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
+        $.cookie('searchContractsSelectStoreVal', $('#selectStore').val());
+        $.cookie('searchContractsSelectStoreTxt', $('#selectStore').text());
+        findAllContractsByKVCondition(1,items);
+    })
 });
 
-function ShowContracts(p,c){
+function findAllContractsByKVCondition(p,c){
+    $('#contracts').html('');
+    var params = [];
+    var param = {};
+    
+    if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''){
+        param = {
+            "columnName": "contractStatus",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsContractStatus')
+        }
+    } else {
+            param = {
+            "columnName": "state",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": 1
+        }
+    }
+    
+    if($.cookie('searchContractsSelectDepartmentVal') != null && $.cookie('searchContractsSelectDepartmentVal') != '' && $.cookie('searchContractsSelectDepartmentVal') != 'null'){
+        param = {
+            "columnName": "mallCode",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsSelectDepartmentVal')
+        }
+    } else {
+        param = {
+            "columnName": "mallCode",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('mallSelected').split(':::')[1]
+        }
+    }
+    
+    params.push(param);
+    
+    if($.cookie('searchContractsContractNo') != null && $.cookie('searchContractsContractNo') != ''){
+        param = {
+            "columnName": "contractNo",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsContractNo')
+        }
+        params.push(param);
+    }
+
+    if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != '' && $.cookie('searchContractsSelectTenantVal') != 'null'){
+        param = {
+            "columnName": "tenantNo",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsSelectTenantVal')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchContractsSelectStoreVal') != null && $.cookie('searchContractsSelectStoreVal') != '' && $.cookie('searchContractsSelectStoreVal') != 'null'){
+        param = {
+            "columnName": "shopCode",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsSelectStoreVal').split(':::')[1]
+        }
+        params.push(param);
+    }
+        
+    var map = {
+        "params": params
+    }
+    
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/user/contract/lotus/findAllByMallCode?mallCode="+$.cookie('mallSelected').split(':::')[1]+"&page="+(p-1)+"&size="+c+"&sort=id,desc",
-        type: "GET",
+        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -72,41 +186,18 @@ function ShowContracts(p,c){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
-                    sessionStorage.setItem("contracts_"+$.cookie('mallSelected').split(':::')[1], JSON.stringify(response.data.content));
-
                     $.each(response.data.content, function(i,v){
-                        var name = '';
-                        if(v.userContractLotus.length > 0){
-                            $.each(v.userContractLotus, function(j,w) {
-                                if(w.user != null && w.user.settings != null) {
-                                    name += '<a href="javascript: void(0);" onclick=\'javascript: modalToggle("'+w.user.settings.name+'","'+w.user.mobile+'","'+w.user.email+'")\'>'+w.user.settings.name+'</a> '
-                                }
-                            })
-                        }
-                        
-                        $('#contractsL').append('\
+                        $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td>'+(v.contractName || '无')+'</td>\n\
-                            <td>'+v.contractType+'</td>\n\
-                            <td>'+v.contractStatus+'</td>\n\
-                            <td>'+v.unitCode+'</td>\n\
-                            <td>'+v.unitArea+'</td>\n\
-                            <td><a href=\'javascript: termsModalToggle("'+v.code+'")\'>查看详情</a></td>\n\
-                            <td>'+name+'</td>\n\
+                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+v.contractCode+'</a></td>\n\
+                            <td>'+v.contractNo+'</td>\n\
+                            <td>'+(v.contractStatus || '')+'</td>\n\
+                            <td>'+(v.tenantName || '')+'</td>\n\
+                            <td>'+(v.vshopLotus.mallName || '')+'</td>\n\
+                            <td>'+v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']</td>\n\
+                            <td>'+(v.vshopLotus.modality || '')+'</td>\n\
+                            <td>'+(v.contractName || '')+'</td>\n\
                         </tr>');
-                        
-                        $('#contractsS').append('\
-<tr data-index="'+i+'" onclick=\'javascript: termsModalToggle("'+v.code+'")\'>\n\
-<td colspan="65">\n\
-<div class="card-views"><div class="card-view"><span class="title">品牌名称</span><span class="value">'+(v.contractName || '无')+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">合同类型</span><span class="value">'+v.contractType+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">签约情况</span><span class="value">'+v.contractStatus+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">店铺位置代码</span><span class="value">'+v.unitCode+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">合同面积㎡</span><span class="value">'+v.unitArea+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">操作</span><span class="value"><a href=\'javascript: termsModalToggle("'+v.code+'")\'>查看详情</a></span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">授权用户</span><span class="value">'+name+'</span></div></div>\n\
-</td></tr>');
-
                     });
                     
                     if(p == pages){
@@ -114,15 +205,19 @@ function ShowContracts(p,c){
                     } else {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
+                    
+                    renderContractStatus();
                 }
+            } else {
+                alertMsg(response.code,response.customerMessage);
             } 
         }
     });
 }
 
-function termsModalToggle(code){
+function findContractStatus(dictTypeCode){
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/contract/rent/lotus/findAllByContractCode?contractCode="+code,
+        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -139,56 +234,144 @@ function termsModalToggle(code){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    $.each(response.data, function(i,v) {
-                        $('#deadRentL').append('<tr>\n\
-<td>'+v.startDate+'</td>\n\
-<td>'+v.endDate+'</td>\n\
-<td>'+numberWithCommas(v.area)+'</td>\n\
-<td>'+numberWithCommas(v.amount)+'</td>\n\
-<td>'+numberWithCommas(v.taxAmount)+'</td>\n\
-<td>'+v.rentAmount+'</td></tr>');
-                    })
-                }
+                sessionStorage.setItem("contractStatus", JSON.stringify(response.data.dictDataList) );
+            } else {
+                alertMsg(response.code,response.customerMessage);
             }
         }
     })
-    
-    $('#contract_terms').modal('toggle');
 }
 
-function modalToggle(name,mobile,email){
-    if($('#user_detail').length > 0) {
-        $('#user_detail').remove();
-    }
-    
-    $('body').append('<div class="modal fade" id="user_detail" tabindex="-1" role="dialog" aria-hidden="true">\n\
-    <div class="modal-dialog modal-md" style="max-width: 600px;">\n\
-        <div class="modal-content c-square">\n\
-            <div class="modal-header">\n\
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">\n\
-                    <span aria-hidden="true">×</span></button>\n\
-                <h4 class="modal-title">用户详情</h4>\n\
-            </div>\n\
-            <div class="modal-body">\n\
-                <div class="col-md-12">\n\
-                    <div class="form-group">\n\
-                        <span class="control-label">姓名:</span>\n\
-                        <strong class="control-label">'+name+'</strong>\n\
-                    </div>\n\
-                    <div class="form-group">\n\
-                        <span class="control-label">手机:</span>\n\
-                        <strong class="control-label">'+mobile+'</strong>\n\
-                    </div>\n\
-                    <div class="form-group">\n\
-                        <span class="control-label">邮箱:</span>\n\
-                        <strong class="control-label">'+email+'</strong>\n\
-                    </div>\n\
-                </div>\n\
-            </div>\n\
-        </div>\n\
-    </div>\n\
-</div>');
-    
-    $('#user_detail').modal('toggle');
+function renderContractStatus() {
+    if(sessionStorage.getItem("contractStatus") && sessionStorage.getItem("contractStatus") != null && sessionStorage.getItem("contractStatus") != '') {
+        var status = $.parseJSON(sessionStorage.getItem("contractStatus"));
+        $.each(status, function(i,v){
+            $("#contracts tr td:nth-child(3)").each(function() {
+                if(v.dictCode == $(this).text()){
+                    $(this).text(v.dictName);
+                }          
+            })
+            return false;
+        })
+   }
+}
+
+function updateSelectTenantDropDown(data_count) {
+    $('#selectTenant').select2({
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseLotus+"/api/tenant/lotus/findAll",
+            type: 'GET',
+            dataType: 'json',
+            delay: 25,
+            data: function (params) {
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    sort: 'id,desc',
+                    search: params.term
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.tenantCode,
+                                text: item.tenantCode +' | '+ item.name
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function updateSelectStoreDropDown(data_count) {
+    $('#selectStore').select2({
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodes",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) { 
+                var mallCodes = $.cookie('mallSelected').split(':::')[1];
+                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                    if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+                        mallCodes = 'ALL';
+                        return false;
+                    }
+                })
+                
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    search: params.term,
+                    userCode: $.cookie('uid'),
+                    mallCodes: mallCodes
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.unitCode+':::'+item.code+':::'+item.unitName,
+                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
 }

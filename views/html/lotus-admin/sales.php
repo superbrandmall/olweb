@@ -1,18 +1,18 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>'
-        . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/sales-admin.js"></script>';
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/sales-admin.js"></script>'.PHP_EOL;
 ?>
 
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="content-header" style="padding-bottom: 30px;">
-        <h1 class="pull-left">
+    <section class="sub-header">
+        <h4>
             销售查询
-        </h1>
+        </h4>
     </section>
 
-    <section class="content">
+    <section class="content" style="margin-top: 90px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -24,7 +24,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                     <label for="department" class="col-md-5 control-label">选择门店 <span class="btn-box-tool-lg">*</span></label>
                                     <div class="col-md-7 required">
                                         <select class="select2" id="department" name="department" style="width: 100%">
-                                            <option value="">未选择</option>
+                                            <option class="no-remove" value="" >未选择</option>
                                             <option value="SC033">川沙店</option>
                                             <option value="SC001">杨高南路店</option>
                                             <option value="SC005">上南店</option>

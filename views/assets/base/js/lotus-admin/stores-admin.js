@@ -60,11 +60,8 @@ $(document).ready(function(){
             break;
     }
     
-    if(!sessionStorage.getItem("shops_"+deFC) || sessionStorage.getItem("shops_"+deFC) == null || sessionStorage.getItem("shops_"+deFC) == '') {
-        getShops(deFC, page, items);
-    } else {
-        renderShops(deFC, page, items);
-    }
+    getShops(deFC, page, items);
+    
 });
 
 function getShops(fc, page, items) {
@@ -85,7 +82,7 @@ function getShops(fc, page, items) {
     };
         
     $.ajax({
-        url: $.api.baseNew+"/onlineleasing-customer/api/vshop/lotus/findAllByCondition?page=0&size=100",
+        url: $.api.baseLotus+"/api/vshop/lotus/findAllByCondition?page="+(page-1)+"&size="+items+"&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -103,7 +100,7 @@ function getShops(fc, page, items) {
                 sessionStorage.setItem("shops_"+fc, JSON.stringify(response.data) );
                 renderShops(fc, page, items);
             } else {
-                console.log(response.customerMessage);
+                alertMsg(response.code,response.customerMessage);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

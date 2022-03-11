@@ -5,7 +5,8 @@
 }
 
 body {
-	margin: 0
+	margin: 0;
+        color: #666;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
@@ -2669,7 +2670,7 @@ caption {
 	color: #777
 }
 
-caption,th {
+caption {
 	text-align: left
 }
 
@@ -3005,7 +3006,8 @@ input[disabled], input[readonly] {
 }
 
 .form-group {
-	margin-bottom: 15px
+	margin-bottom: 15px;
+        overflow: auto;
 }
 
 .checkbox,.radio {
@@ -3342,7 +3344,7 @@ select[multiple].form-group-lg .form-control,textarea.form-group-lg .form-contro
 
 @media (min-width:768px) {
 	.form-horizontal .control-label {
-		text-align: right;
+		text-align: left;
 		margin-bottom: 0;
 		padding-top: 7px
 	}
@@ -3393,7 +3395,6 @@ select[multiple].form-group-lg .form-control,textarea.form-group-lg .form-contro
 }
 
 .btn.focus,.btn:focus,.btn:hover {
-	color: #fff;
 	text-decoration: none
 }
 
@@ -4920,26 +4921,20 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 }
 
 .breadcrumb {
-	list-style: none;
-	background-color: #f5f5f5;
-	border-radius: 4px;
-        padding-left: 0;
 }
 
 .breadcrumb>li {
 	display: inline-block;
         padding: 8px 15px;
-        background-color: #b8c7ce;
 }
 
 .breadcrumb>li a {
         color: #000;
 }
 
-.breadcrumb>.active {
-	color: #000;
-        background-color: #fff;
-        border-top: solid 2px #b8c7ce;
+.breadcrumb>.active,
+.breadcrumb>li:hover {
+        border-bottom: solid 2px #E43C24;
 }
 
 .pagination {
@@ -6127,7 +6122,8 @@ button.close {
 
 .modal-body {
 	position: relative;
-	padding: 15px
+	padding: 15px;
+        overflow: auto;
 }
 
 .modal-footer {
@@ -7497,7 +7493,8 @@ body.hold-transition .content-wrapper,body.hold-transition .left-side,body.hold-
 }
 
 .h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6 {
-	font-family: Source Sans Pro,sans-serif
+	font-family: Microsoft Yahei, '微软雅黑', verdana, helvetica, arial, sans-serif;
+        font-weight: 700;
 }
 
 a {
@@ -7566,6 +7563,12 @@ a:active,a:focus,a:hover {
 
 .main-header .navbar-custom-menu,.main-header .navbar-right {
 	float: right
+}
+
+.pull-left.breadcrumb {
+    margin-bottom: 0;
+    margin-left: 160px;
+    margin-top: 10px;
 }
 
 @media (max-width:991px) {
@@ -7757,6 +7760,12 @@ a:active,a:focus,a:hover {
 	.main-header .navbar-custom-menu {
 		float: right;
 	}
+        
+        .pull-left.breadcrumb {
+            margin-bottom: 0;
+            margin-left: -30px;
+            margin-top: 10px;
+        }
 }
 
 @media (max-width:991px) {
@@ -9833,10 +9842,6 @@ a:active,a:focus,a:hover {
 	margin-right: 5px
 }
 
-.nav-pills>li.active>a,.nav-pills>li.active>a:focus,.nav-pills>li.active>a:hover {
-	border-top-color: #3c8dbc
-}
-
 .nav-pills>li.active>a {
 	font-weight: 600
 }
@@ -9984,7 +9989,9 @@ a:active,a:focus,a:hover {
 }
 
 .table>tbody>tr>td,.table>tbody>tr>th,.table>tfoot>tr>td,.table>tfoot>tr>th,.table>thead>tr>td,.table>thead>tr>th {
+        position: relative;
 	border-top: 0 none;
+        vertical-align: middle;
 }
 
 .table>thead>tr>th {
@@ -10087,7 +10094,7 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .modal-header {
-	border-bottom-color: #f4f4f4
+	border-bottom: 0 none;
 }
 
 .modal-footer {
@@ -11080,7 +11087,9 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .skin-blue .content-header {
-	background: 0 0
+	background: 0 0;
+        padding-bottom: 30px;
+        margin-top: 60px;
 }
 
 .skin-blue .left-side,.skin-blue .main-sidebar,.skin-blue .wrapper {
@@ -14452,10 +14461,6 @@ table.text-center,table.text-center td,table.text-center th {
 	margin-top: 3px
 }
 
-.input-daterange input {
-	text-align: center
-}
-
 .input-daterange input:first-child {
 	-webkit-border-radius: 3px 0 0 3px;
 	-moz-border-radius: 3px 0 0 3px;
@@ -14489,7 +14494,7 @@ table.text-center,table.text-center td,table.text-center th {
 	position: absolute;
 	top: 100%;
 	left: 0;
-	z-index: 1000;
+	z-index: 1029 !important;
 	float: left;
 	display: none;
 	min-width: 160px;
@@ -14632,12 +14637,14 @@ a.accordion-header {
 	background-color: inherit
 }
 
-.sidebar-toggle-mobile {
+.sidebar-toggle-mobile,
+.sidebar-toggle-mobile:hover,
+.sidebar-toggle-mobile:focus {
 	z-index: 100;
 	width: 50px;
 	padding-top: 10px;
         float: left;
-        color: #fff;
+        color: #E43C24;
 }
 
 .main-header .sidebar-toggle:before {
@@ -14647,10 +14654,6 @@ a.accordion-header {
 .direct-chat-contacts {
 	padding: 10px;
 	height: 150px
-}
-
-.select2-container {
-	width: 100%
 }
 
 .error input {

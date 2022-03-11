@@ -100,7 +100,7 @@
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" data-code="SC001">
+                                        <a href="javascript: void(0);" class="text-blue" data-code="SC001">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>杨高南路店</span>
                                         </a>
@@ -118,7 +118,7 @@
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" data-code="SC043">
+                                        <a href="javascript: void(0);" class="text-blue" data-code="SC043">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>杨高中路店</span>
                                         </a>
@@ -142,7 +142,7 @@
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" data-code="SC027">
+                                        <a href="javascript: void(0);" class="text-blue" data-code="SC027">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>岳阳店</span>
                                         </a>
@@ -166,13 +166,13 @@
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" data-code="SC010">
+                                        <a href="javascript: void(0);" class="text-blue" data-code="SC010">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>汶水店</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" data-code="SC040">
+                                        <a href="javascript: void(0);" class="text-blue" data-code="SC040">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>保德店</span>
                                         </a>
@@ -206,25 +206,12 @@
                                         if(isset($_SESSION['lotus_admin_name'])) {
                                             echo $_SESSION['lotus_admin_name'];
                                         } else {
-                                            echo "未知人员";
+                                            echo "管理员";
                                         }
                                         ?>
                                         <b class="caret"></b></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                <?php
-                                if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] != '管理员') {
-                                ?>
-                                    <li>
-                                        <a href="/lotus-admin/reset">
-                                            <i class="fa fa-asterisk fa-fw"></i>
-                                            修改密码
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                <?php
-                                }
-                                ?>
                                     <li>
                                         <a href="javascript: logout();" title="登出">
                                             <i class="fa fa-sign-out fa-fw"></i>
