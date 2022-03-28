@@ -94,19 +94,27 @@ $(document).ready(function(){
                                         },
                                         complete: function(){
                                             $('#loader').hide();
+                                            var flag = 1;
                                             if(response.data.userModules.length > 0){
                                                 var userModules = [];
+                                                
                                                 $.each(response.data.userModules, function(i,v) {
-                                                    if(v.code == 'CROLE211008000002' || v.code == 'CROLE210706000001' || v.code == 'CROLE211008000001' || v.code == 'CROLE211008000001'){
-                                                        // 云之家 v.code == 'CROLE211008000001'
+                                                    if(v.code == 'CROLE211008000002' || v.code == 'CROLE210706000001' || v.code == 'CROLE211008000001' || v.roleCode == 'CROLE220301000001'){
+                                                        // 云之家openId v.roleCode == 'CROLE220301000001'
                                                         userModules.push(v);
                                                     }
+                                                    
+                                                    /*if (v.userCode == 'CUSER200524000004') {
+                                                        flag = 0;
+                                                    }*/
                                                 })
                                                 $.cookie('userModules',JSON.stringify(userModules));
                                             }
                                             
-                                            //$.cookie('mallSelected',);
-                                            window.location.href = "contracts";
+                                            if(flag == 1){
+                                                window.location.href = "contracts";
+                                            }
+                                            
                                         }
                                     });
                                 } else {

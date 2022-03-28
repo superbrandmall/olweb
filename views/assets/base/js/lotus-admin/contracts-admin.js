@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
+        findContractStatus('CONTRACT_STATUS');
+    }
+    
     if($.cookie('searchContractsContractStatus') != ''){
         $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
     }
@@ -55,10 +59,6 @@ $(document).ready(function(){
         })
     })
     $("#department").find("option:not(.no-remove)").remove();
-    
-    if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
-        findContractStatus('CONTRACT_STATUS');
-    }
     
     updateSelectTenantDropDown(10);
     updateSelectStoreDropDown(10);
@@ -207,6 +207,8 @@ function findAllContractsByKVCondition(p,c){
                     }
                     
                     renderContractStatus();
+                } else {
+                    $('#contracts').html('<tr><td colspan="8" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -258,6 +260,7 @@ function renderContractStatus() {
 
 function updateSelectTenantDropDown(data_count) {
     $('#selectTenant').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -311,6 +314,7 @@ function updateSelectTenantDropDown(data_count) {
 
 function updateSelectStoreDropDown(data_count) {
     $('#selectStore').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -332,8 +336,14 @@ function updateSelectStoreDropDown(data_count) {
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
-            data: function (params) { 
-                var mallCodes = $.cookie('mallSelected').split(':::')[1];
+            data: function (params) {
+                var mallCodes;
+                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
+                    mallCodes = $('#department').val();
+                } else {
+                    mallCodes = $.cookie('mallSelected').split(':::')[1];
+                }
+                
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                         mallCodes = 'ALL';

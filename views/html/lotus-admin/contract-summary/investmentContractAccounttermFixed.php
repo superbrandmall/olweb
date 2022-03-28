@@ -29,7 +29,7 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">月单价(元/月/平米)</div>
+                                                <div class="th-inner">单价(元/m²/天)</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                         </tr>

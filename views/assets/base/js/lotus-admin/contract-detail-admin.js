@@ -6,7 +6,8 @@ $.contract = {
     commission: [],
     propertyMgmt: [],
     promotion: [],
-    deposit: []
+    deposit: [],
+    mallCode: ''
 };
 
 $(document).ready(function(){
@@ -14,22 +15,13 @@ $(document).ready(function(){
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "succeed":
-                $('.callout-info').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
-                break;
-            case "fail":
-                $('.callout-danger').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
+                successMsg('00','保存成功！');
                 break;
             default:
                 break;
         }
         setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineUpdateUrl() );
         },1000);
     }
     
@@ -104,13 +96,10 @@ $(document).ready(function(){
     findCommissionByDictTypeCode('PRODUCT_CATEGORY'); // 商品分类
     findCommissionByDictTypeCode('DEDUCT_TYPE'); // 全额/差额
     
-    updateApprovalNameDropDownByRoleId('b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f');
     findFeeItemByContractType($('#contractType').val()); 
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
     });
-    calBackPushNextCalendar('fixedRent');
-    calBackPushNextCalendar('commission');
     
     // change事件
     $("input[id*='fixedRentEndDate_']").on('changeDate',function(){
@@ -335,7 +324,7 @@ function findCommissionByDictTypeCode(dictTypeCode) {
 
 function jumpTo(id) {
     $('html, body').animate({
-        scrollTop: $('#'+id).offset().top - 150
+        scrollTop: $('#'+id).offset().top - 195
     }, 0);
     
     $('.breadcrumb li').removeClass('active');
@@ -485,7 +474,7 @@ function addRowInvestmentContractAccounttermFixed() {
     input.setAttribute("style","border: none");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/天";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -503,7 +492,7 @@ function addRowInvestmentContractAccounttermFixed() {
     input.setAttribute("style","border: none");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/天";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -536,7 +525,7 @@ function addRowInvestmentContractAccounttermFixed() {
     updateFeeItems('fixedFeeItemDropDown','fixedVATDropDown','fixedRent');
     var tmp = $('#fixedRentEndDate_'+(parseInt(count)-1).toLocaleString()).val();
     
-    $('#investmentContractAccounttermFixed .input-daterange input').datepicker({
+    $('#investmentContractAccounttermFixed .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
@@ -890,7 +879,7 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
     input.setAttribute("style","border: none");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/月";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -908,7 +897,7 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
     input.setAttribute("style","border: none");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/月";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -1270,7 +1259,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.cookie('mallSelected').split(':::')[1] == 'SC126' || $.cookie('mallSelected').split(':::')[1] == 'SC127'){
+                if($.contract.mallCode == 'SC126' || $.contract.mallCode == 'SC127'){
                     $('.'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
@@ -1577,59 +1566,6 @@ function updateUserRoleYZJDropDownByRoleId(id) {
     })
 }
 
-function updateApprovalNameDropDownByRoleId(id) {
-    $('#approvalName').find('select').select2({
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/user/role/yzj/findAllByRoleId",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {         
-                return {
-                    search: params.term,
-                    roleId: id
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'];
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.openId,
-                                text: item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        })
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    })
-}
-
 function mandatoryCheck() {
     $('.mandatory-error').remove();
     var flag = 1;
@@ -1688,15 +1624,14 @@ function calBackPushFixedRentTaxAmount() {
 
 function calBackPushNextCalendar(Exid){
     $("input[id*='"+Exid+"EndDate_']").each(function(i){  
-        var num = $(this).attr('id').split('_')[1];
-        for(var i=1;i<30;i++){
-            num = parseInt(num) + 1;
-            if($('#'+Exid+'StartDate_'+num).length > 0){
-                var tmp = $(this).val();
-                $('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp)).val(IncrDate(tmp));
-                $('#'+Exid+'EndDate_'+num).datepicker('setStartDate', IncrDate(tmp)).val($('#endDate').val());
-            } else {
-                return false;
+        var num0 = $(this).attr('id').split('_')[1];
+        var num = parseInt(num0) + 1;
+        if($('#'+Exid+'StartDate_'+num).length > 0){
+            var tmp = $(this).val();
+            $('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp)).val(IncrDate(tmp));
+        } else {
+            if($('#'+Exid+'EndDate_'+num0).val() == ''){
+                $('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp)).val($('#endDate').val());
             }
         }
     })
@@ -1718,9 +1653,9 @@ function calBackPushPropertyMgmtAmount() {
             var num = $(this).attr('id').split('_')[1];
             var taxAmount = Math.round(numberWithoutCommas($(this).val()) / (1 + parseFloat($('#propertyMgmtTaxRate_'+num).val())) * 100) / 100;
             $('#propertyMgmtTaxAmount_'+num).val(accounting.formatNumber(taxAmount));
-            var rentAmount = Math.round(numberWithoutCommas($(this).val()) * 12 / 365 / $('#area').val() * 100) / 100;
+            var rentAmount = Math.round(numberWithoutCommas($(this).val()) / $('#area').val() * 100) / 100;
             $('#propertyMgmtRentAmount_'+num).val(accounting.formatNumber(rentAmount));
-            var taxRentAmount = Math.round(numberWithoutCommas($(this).val()) * 12 / 365 / $('#area').val() / (1 + parseFloat($('#propertyMgmtTaxRate_'+num).val())) * 100) / 100;
+            var taxRentAmount = Math.round(numberWithoutCommas($(this).val()) / $('#area').val() / (1 + parseFloat($('#propertyMgmtTaxRate_'+num).val())) * 100) / 100;
             $('#propertyMgmtTaxRentAmount_'+num).val(accounting.formatNumber(taxRentAmount));
         }
     });
@@ -1732,7 +1667,7 @@ function calBackPushPropertyMgmtTaxAmount(){
     $("input[id*='propertyMgmtTaxAmount_']").each(function(i){  
         if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
             var num = $(this).attr('id').split('_')[1];
-            var taxRentAmount = Math.round(numberWithoutCommas($(this).val()) * 12 / 365 / $('#area').val() * 100) / 100;
+            var taxRentAmount = Math.round(numberWithoutCommas($(this).val()) / $('#area').val() * 100) / 100;
             $('#propertyMgmtTaxRentAmount_'+num).val(accounting.formatNumber(taxRentAmount));
         }
     });
@@ -1979,6 +1914,7 @@ function findContractByContractNo() {
                     $('#selectTenant').append(temp).trigger('change');
                     $('#contractNo').val(data.contractNo);
                     $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
+                    $.contract.mallCode = data.mallCode;
                     
                     updateSelectStoreDropDown(10,data.mallCode);
                     temp = new Option((data.unitName +'['+ data.unitCode +'] | '+ data.area + '㎡'), data.unitCode+':::'+data.shopCode+':::'+data.unitName+':::'+data.floorName+':::'+data.floorCode, true, true);
@@ -2012,10 +1948,9 @@ function findContractByContractNo() {
                     }
                     
                     if(data.rentCalculationMode == 'deduct' || data.rentCalculationMode == 'fixedRentAndAddDeduct'){
-                        $('#investmentContractAccounttermCommission').show();
+                        $('#investmentContractAccounttermCommission, #tab_investmentContractAccounttermCommission').show();
                     } else if(data.rentCalculationMode == 'fixedRentAndHigherDeduct'){
-                        $('#investmentContractAccounttermCommission').show();
-                        $('#investmentContractAccounttermCompare').show();
+                        $('#investmentContractAccounttermCommission, #tab_investmentContractAccounttermCommission, #investmentContractAccounttermCompare').show();
                     }
                     
                     $('.date-picker, .input-daterange').datepicker({
@@ -2049,6 +1984,9 @@ function findContractByContractNo() {
                     $('#enterDate').val(data.enterDate);
                     $('#freeStartDate_1').val(data.freeStartDate);
                     $('#freeEndDate_1').val(data.freeEndDate);
+                    $('#openStartTime').val(data.openStartTime);
+                    $('#openEndTime').val(data.openEndTime);
+                    $('#freeDays').val(data.freeDays);
                     $('#remark').val(data.remark);
                     
                     $('#compareFirstFrequency').val(data.firstCompareCycle).trigger('change');
@@ -2518,7 +2456,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     input.setAttribute("value",value.rentAmount);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/天";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -2537,7 +2475,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     input.setAttribute("value",value.taxRentAmount);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/天";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -2571,12 +2509,14 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     updateTaxVAT();
     updateFeeItems('fixedFeeItemDropDown','fixedVATDropDown','fixedRent');
     var tmp = $('#fixedRentEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    $('#investmentContractAccounttermFixed .input-daterange input').datepicker({
+    var sd;
+    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
+    $('#investmentContractAccounttermFixed .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
         'todayHighlight': true,
-        'startDate': IncrDate(tmp),
+        'startDate': sd,
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -2785,14 +2725,15 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
     updateFeeItems('commissionFeeItemDropDown','commissionVATDropDown','deductRent');
-    
     var tmp = $('#commissionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
+    var sd;
+    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermCommission .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
         'todayHighlight': true,
-        'startDate': IncrDate(tmp),
+        'startDate': sd,
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -2931,7 +2872,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     input.setAttribute("value",value.rentAmount);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/月";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -2950,7 +2891,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     input.setAttribute("value",value.taxRentAmount);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/m²/月";
     percent.setAttribute("class", "input-group-addon");
     percent.setAttribute("className", "input-group-addon");
     div.appendChild(percent);
@@ -2984,11 +2925,13 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     updateTaxVAT();
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property');
     var tmp = $('#propertyMgmtEndDate_'+(parseInt(count)-1).toLocaleString()).val();
+    var sd;
+    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPropertyMgmt .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
-        'startDate': IncrDate(tmp),
+        'startDate': sd,
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -3185,12 +3128,14 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     updateTaxVAT();
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee');
     var tmp = $('#promotionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
+    var sd;
+    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
         'todayHighlight': true,
-        'startDate': IncrDate(tmp),
+        'startDate': sd,
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -3340,9 +3285,12 @@ function saveContractFixedRent() {
         
         var index;
         var fixedRent = {};
+        var len = $("#fixedRent").find("tr").length;
         $("#fixedRent").find("tr").each(function(i,e){
             index = i * 1 + 1;
             if(index <= $.contract.fixedRent.length){
+                $.contract.fixedRent[i].created = null;
+                $.contract.fixedRent[i].updated = null;
                 $.contract.fixedRent[i].itemCode = $('#fixedRentItem_'+index).val();
                 $.contract.fixedRent[i].itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
 
@@ -3385,8 +3333,8 @@ function saveContractFixedRent() {
                 fixedRent.itemCode = $('#fixedRentItem_'+index).val();
                 fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
                 
-                fixedRent.shopCode = $.contract.propertyMgmt[0].shopCode;
-                fixedRent.area = $.contract.propertyMgmt[0].area;
+                fixedRent.shopCode = $.contract.content.shopCode;
+                fixedRent.area = $.contract.content.area;
                 
                 fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
                 fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
@@ -3427,56 +3375,80 @@ function saveContractFixedRent() {
             }
         })
         
-        var openId = 'admin';
-        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE220301000001'){
-                openId = v.moduleName;
-                return false;
+        var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+        var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+        var check3 = 'smaller';
+        for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+            var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
+            if(check33 != 'smaller'){
+                check3 = check33;
             }
-        })
+        }
+        var check4 = 'equal';
+        for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+            var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
+            if(check44 != 'equal'){
+                check4 = check44;
+            }
+        }
         
-        var map = {
-            "bizId": "",
-            "contractNo": getURLParameter('id'),
-            "contractVersion": $('#contractVersion').text(),
-            "fixedRentList": $.contract.fixedRent,
-            "updateOpenId": openId
-        };
-
-        $.ajax({
-            url: $.api.baseLotus+"/api/contract/fixed/rent/saveOrUpdate",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                $('#loader').show();
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                $('#loader').hide();
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Login") !== null){
-                        $.cookie('login', xhr.getResponseHeader("Login"));
-                    }
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    successMsg(response.code,response.customerMessage);
-
-                } else {
-                    alertMsg(response.code,response.customerMessage);
+        if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+            alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
+        } else {
+            var openId = 'admin';
+            $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                if(v.roleCode == 'CROLE220301000001'){
+                    openId = v.moduleName;
+                    return false;
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
+            })
+
+            var map = {
+                "bizId": "",
+                "contractNo": getURLParameter('id'),
+                "contractVersion": $('#contractVersion').text(),
+                "fixedRentList": $.contract.fixedRent,
+                "updateOpenId": openId
+            };
+
+            $.ajax({
+                url: $.api.baseLotus+"/api/contract/fixed/rent/saveOrUpdate",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    $('#loader').show();
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    $('#loader').hide();
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+                        if(response.data.resultCode == 'SUCCESS') {
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     })
 }
 
@@ -3496,9 +3468,12 @@ function saveContractPropertyMgmt() {
         
         var index;
         var propertyMgmt = {};
+        var len = $("#propertyMgmt").find("tr").length;
         $("#propertyMgmt").find("tr").each(function(i,e){
             index = i * 1 + 1;
             if(index <= $.contract.propertyMgmt.length){
+                $.contract.propertyMgmt[i].created = null;
+                $.contract.propertyMgmt[i].updated = null;
                 $.contract.propertyMgmt[i].itemCode = $('#propertyMgmtItem_'+index).val();
                 $.contract.propertyMgmt[i].itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
 
@@ -3541,8 +3516,8 @@ function saveContractPropertyMgmt() {
                 propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
                 propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
                 
-                propertyMgmt.shopCode = $.contract.propertyMgmt[0].shopCode;
-                propertyMgmt.area = $.contract.propertyMgmt[0].area;
+                propertyMgmt.shopCode = $.contract.content.shopCode;
+                propertyMgmt.area = $.contract.content.area;
                 
                 propertyMgmt.settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
                 propertyMgmt.settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
@@ -3583,56 +3558,80 @@ function saveContractPropertyMgmt() {
             }
         })
         
-        var openId = 'admin';
-        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE220301000001'){
-                openId = v.moduleName;
-                return false;
+        var check1 = dateCompare($('#propertyMgmtStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+        var check2 = dateCompare($('#propertyMgmtEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+        var check3 = 'smaller';
+        for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+            var check33 = dateCompare($('#propertyMgmtStartDate_'+(ln+1)).val(),$('#propertyMgmtEndDate_'+(ln+1)).val());
+            if(check33 != 'smaller'){
+                check3 = check33;
             }
-        })
+        }
+        var check4 = 'equal';
+        for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+            var check44 = dateCompare(IncrDate($('#propertyMgmtEndDate_'+ln).val()), $('#propertyMgmtStartDate_'+(ln+1)).val());
+            if(check44 != 'equal'){
+                check4 = check44;
+            }
+        }
         
-        var map = {
-            "bizId": "",
-            "contractNo": getURLParameter('id'),
-            "contractVersion": $('#contractVersion').text(),
-            "propertyFeeList": $.contract.propertyMgmt,
-            "updateOpenId": openId
-        };
-
-        $.ajax({
-            url: $.api.baseLotus+"/api/contract/property/saveOrUpdate",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                $('#loader').show();
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                $('#loader').hide();
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Login") !== null){
-                        $.cookie('login', xhr.getResponseHeader("Login"));
-                    }
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    successMsg(response.code,response.customerMessage);
-
-                } else {
-                    alertMsg(response.code,response.customerMessage);
+        if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+            alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
+        } else {
+            var openId = 'admin';
+            $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                if(v.roleCode == 'CROLE220301000001'){
+                    openId = v.moduleName;
+                    return false;
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
+            })
+
+            var map = {
+                "bizId": "",
+                "contractNo": getURLParameter('id'),
+                "contractVersion": $('#contractVersion').text(),
+                "propertyFeeList": $.contract.propertyMgmt,
+                "updateOpenId": openId
+            };
+
+            $.ajax({
+                url: $.api.baseLotus+"/api/contract/property/saveOrUpdate",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    $('#loader').show();
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    $('#loader').hide();
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+                        if(response.data.resultCode == 'SUCCESS') {
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     })
 }
 
@@ -3652,9 +3651,12 @@ function saveContractCommission() {
         
         var index;
         var commission = {};
+        var len = $("#commission").find("tr").length;
         $("#commission").find("tr").each(function(i,e){
             index = i * 1 + 1;
             if(index <= $.contract.commission.length){
+                $.contract.commission[i].created = null;
+                $.contract.commission[i].updated = null;
                 $.contract.commission[i].itemCode = $('#commissionItem_'+index).val();
                 $.contract.commission[i].itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
 
@@ -3701,8 +3703,8 @@ function saveContractCommission() {
                 commission.itemCode = $('#commissionItem_'+index).val();
                 commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
                 
-                commission.shopCode = $.contract.propertyMgmt[0].shopCode;
-                commission.area = $.contract.propertyMgmt[0].area;
+                commission.shopCode = $.contract.content.shopCode;
+                commission.area = $.contract.content.area;
                 
                 commission.salesType = $('#commissionSalesType_1').val();
                 commission.settlePeriodCode = $('#commissionSettlePeriod_1').val();
@@ -3747,56 +3749,80 @@ function saveContractCommission() {
             }
         })
         
-        var openId = 'admin';
-        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE220301000001'){
-                openId = v.moduleName;
-                return false;
+        var check1 = dateCompare($('#commissionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+        var check2 = dateCompare($('#commissionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+        var check3 = 'smaller';
+        for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+            var check33 = dateCompare($('#commissionStartDate_'+(ln+1)).val(),$('#commissionEndDate_'+(ln+1)).val());
+            if(check33 != 'smaller'){
+                check3 = check33;
             }
-        })
+        }
+        var check4 = 'equal';
+        for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+            var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
+            if(check44 != 'equal'){
+                check4 = check44;
+            }
+        }
         
-        var map = {
-            "bizId": "",
-            "contractNo": getURLParameter('id'),
-            "contractVersion": $('#contractVersion').text(),
-            "deductList": $.contract.commission,
-            "updateOpenId": openId
-        };
-
-        $.ajax({
-            url: $.api.baseLotus+"/api/contract/deduct/saveOrUpdate",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                $('#loader').show();
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                $('#loader').hide();
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Login") !== null){
-                        $.cookie('login', xhr.getResponseHeader("Login"));
-                    }
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    successMsg(response.code,response.customerMessage);
-
-                } else {
-                    alertMsg(response.code,response.customerMessage);
+        if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+            alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
+        } else {
+            var openId = 'admin';
+            $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                if(v.roleCode == 'CROLE220301000001'){
+                    openId = v.moduleName;
+                    return false;
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
+            })
+
+            var map = {
+                "bizId": "",
+                "contractNo": getURLParameter('id'),
+                "contractVersion": $('#contractVersion').text(),
+                "deductList": $.contract.commission,
+                "updateOpenId": openId
+            };
+
+            $.ajax({
+                url: $.api.baseLotus+"/api/contract/deduct/saveOrUpdate",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    $('#loader').show();
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    $('#loader').hide();
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+                        if(response.data.resultCode == 'SUCCESS') {
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     })
 }
 
@@ -3816,9 +3842,12 @@ function saveContractPromotion() {
         
         var index;
         var promotion = {};
+        var len = $("#promotion").find("tr").length;
         $("#promotion").find("tr").each(function(i,e){
             index = i * 1 + 1;
             if(index <= $.contract.promotion.length){
+                $.contract.promotion[i].created = null;
+                $.contract.promotion[i].updated = null;
                 $.contract.promotion[i].itemCode = $('#promotionItem_'+index).val();
                 $.contract.promotion[i].itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
 
@@ -3861,8 +3890,8 @@ function saveContractPromotion() {
                 promotion.itemCode = $('#promotionItem_'+index).val();
                 promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
                 
-                promotion.shopCode = $.contract.propertyMgmt[0].shopCode;
-                promotion.area = $.contract.propertyMgmt[0].area;
+                promotion.shopCode = $.contract.content.shopCode;
+                promotion.area = $.contract.content.area;
                 
                 promotion.settlePeriodCode = $('#promotionSettlePeriod_1').val();
                 promotion.settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
@@ -3903,56 +3932,80 @@ function saveContractPromotion() {
             }
         })
         
-        var openId = 'admin';
-        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE220301000001'){
-                openId = v.moduleName;
-                return false;
+        var check1 = dateCompare($('#promotionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+        var check2 = dateCompare($('#promotionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+        var check3 = 'smaller';
+        for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+            var check33 = dateCompare($('#promotionStartDate_'+(ln+1)).val(),$('#promotionEndDate_'+(ln+1)).val());
+            if(check33 != 'smaller'){
+                check3 = check33;
             }
-        })
+        }
+        var check4 = 'equal';
+        for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+            var check44 = dateCompare(IncrDate($('#promotionEndDate_'+ln).val()), $('#promotionStartDate_'+(ln+1)).val());
+            if(check44 != 'equal'){
+                check4 = check44;
+            }
+        }
         
-        var map = {
-            "bizId": "",
-            "contractNo": getURLParameter('id'),
-            "contractVersion": $('#contractVersion').text(),
-            "promotionFeeList": $.contract.promotion,
-            "updateOpenId": openId
-        };
-
-        $.ajax({
-            url: $.api.baseLotus+"/api/contract/promotion/saveOrUpdate",
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                $('#loader').show();
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                $('#loader').hide();
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Login") !== null){
-                        $.cookie('login', xhr.getResponseHeader("Login"));
-                    }
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    successMsg(response.code,response.customerMessage);
-
-                } else {
-                    alertMsg(response.code,response.customerMessage);
+        if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+            alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
+        } else {
+            var openId = 'admin';
+            $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                if(v.roleCode == 'CROLE220301000001'){
+                    openId = v.moduleName;
+                    return false;
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
+            })
+
+            var map = {
+                "bizId": "",
+                "contractNo": getURLParameter('id'),
+                "contractVersion": $('#contractVersion').text(),
+                "promotionFeeList": $.contract.promotion,
+                "updateOpenId": openId
+            };
+
+            $.ajax({
+                url: $.api.baseLotus+"/api/contract/promotion/saveOrUpdate",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    $('#loader').show();
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    $('#loader').hide();
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+                        if(response.data.resultCode == 'SUCCESS') {
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     })
 }
 
@@ -3975,6 +4028,8 @@ function saveContractDeposit() {
         $("#deposit").find("tr").each(function(i,e){
             index = i * 1 + 1;
             if(index <= $.contract.deposit.length){
+                $.contract.deposit[i].created = null;
+                $.contract.deposit[i].updated = null;
                 $.contract.deposit[i].itemCode = $('#deposittermItem_'+index).val();
                 $.contract.deposit[i].itemName = $('#select2-deposittermItem_'+index+'-container').text().split('[')[0];
 
@@ -4035,8 +4090,11 @@ function saveContractDeposit() {
                     if(xhr.getResponseHeader("Authorization") !== null){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
-                    successMsg(response.code,response.customerMessage);
-
+                    if(response.data.resultCode == 'SUCCESS') {
+                        window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                    } else {
+                        alertMsg(response.data.resultCode,response.data.resultMsg);
+                    }
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }
@@ -4054,13 +4112,34 @@ function saveContract() {
             return;
         }
         
-        $.contract.content.bizId = "900001";
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        $.contract.content.updateOpenId = openId;
+        $.contract.content.created = null;
+        $.contract.content.updated = null;
         $.contract.content.contractName = $('#contractName2').val();
         $.contract.content.awardDate = $('#awardDate').val();
-        $.contract.content.openStartTime = $('#openStartTime').val();
-        $.contract.content.openEndTime = $('#openEndTime').val();
-        $.contract.content.freeStartDate = $('#freeStartDate').val();
-        $.contract.content.freeEndTime = $('#freeEndTime').val();
+        
+        var sHour = $('#openStartTime').val().split(':')[0];
+        var sMinute = $('#openStartTime').val().split(':')[1];
+        if (sHour < 10) {
+            sHour = "0" + sHour;  
+        }
+        $.contract.content.openStartTime = sHour+':'+sMinute;
+        var eHour = $('#openEndTime').val().split(':')[0];
+        var eMinute = $('#openEndTime').val().split(':')[1];
+        if (eHour < 10) {
+            eHour = "0" + eHour;  
+        }
+        $.contract.content.openEndTime = eHour+':'+eMinute;
+        $.contract.content.freeStartDate = $('#freeStartDate_1').val();
+        $.contract.content.freeEndDate = $('#freeEndDate_1').val();
         $.contract.content.freeDays = $('#freeDays').val();
         $.contract.content.bizDate = $('#bizDate').val();
         $.contract.content.remark = $('#remark').val();
@@ -4090,9 +4169,11 @@ function saveContract() {
                     if(xhr.getResponseHeader("Authorization") !== null){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
-                    
-                    successMsg(response.code,response.customerMessage);
-
+                    if(response.data.resultCode == 'SUCCESS') {
+                        window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                    } else {
+                        alertMsg(response.data.resultCode,response.data.resultMsg);
+                    }
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }

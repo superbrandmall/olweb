@@ -421,6 +421,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'lotus-admin/pilot' => array(
             'url' => 'pilot.php'
+        ),
+        'lotus-admin/kow' => array(
+            'url' => 'kow.php'
         )
     );
 

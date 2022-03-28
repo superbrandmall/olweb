@@ -98,13 +98,13 @@
                                                 <td>
                                                     <div class="input-group">
                                                         <input class="form-control money" id="fixedRentRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
+                                                        <span class="input-group-addon">元/m²/天</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
                                                         <input class="form-control money" id="fixedRentTaxRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
+                                                        <span class="input-group-addon">元/m²/天</span>
                                                     </div>
                                                 </td>
                                                 <td>

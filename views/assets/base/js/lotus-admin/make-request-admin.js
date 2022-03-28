@@ -118,7 +118,6 @@ $(document).ready(function(){
     findCommissionByDictTypeCode('PRODUCT_CATEGORY'); // 商品分类
     findCommissionByDictTypeCode('DEDUCT_TYPE'); // 全额/差额
     
-    updateApprovalNameDropDownByRoleId('b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f');
     findFeeItemByContractType($('#contractType').val()); 
     findMainSigningBody($.cookie('mallSelected').split(':::')[0]);
     $('input.money').on('blur',function(){
@@ -1516,6 +1515,7 @@ function updateSelectStoreDropDown(data_count) {
 
 function updateSelectTenantDropDown(data_count) {
     $('#selectTenant').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -1612,59 +1612,6 @@ function updateRoleYZJLabel() {
         
 function updateUserRoleYZJDropDownByRoleId(id) {
     $('#'+id).find('select').select2({
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/user/role/yzj/findAllByRoleId",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {         
-                return {
-                    search: params.term,
-                    roleId: id
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'];
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.openId,
-                                text: item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        })
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    })
-}
-
-function updateApprovalNameDropDownByRoleId(id) {
-    $('#approvalName').find('select').select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -2106,19 +2053,19 @@ function saveContractForm() {
     var selectRentCalculationMode = $('#selectRentCalculationMode').val();
 
     var map = {
-        "id": ltconform_id,
-        "code": ltconform_code,
-        "bizId": bizId,
-        "formType": "NEW",
-        "area": area,
-        "shopCode": shopCode,
-        "rentCalculationMode": selectRentCalculationMode,
-        "endDate": endDate,
-        "contractType": contractType,
-        "unitCode": unitCode,
-        "mallCode": $.cookie('mallSelected').split(':::')[1],
-        "startDate": startDate,
-        "unitName": unitName
+        "id": ltconform_id, //必填
+        "code": ltconform_code, //必填
+        "bizId": bizId, //必填
+        "formType": "NEW", //必填
+        "area": area, //必填
+        "shopCode": shopCode, //必填
+        "rentCalculationMode": selectRentCalculationMode, //必填
+        "endDate": endDate, //必填
+        "contractType": contractType, //必填
+        "unitCode": unitCode, //必填
+        "mallCode": $.cookie('mallSelected').split(':::')[1], //必填
+        "startDate": startDate, //必填
+        "unitName": unitName //必填
     };
 
     $.ajax({

@@ -26,9 +26,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <h4>
             <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <span id="contractName"></span> - V<span id="contractVersion"></span>
         </h4>
-        <div class="pull-right">
+        <!--<div class="pull-right">
             <a href="/lotus-admin/make-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">新建新租赁合同申请单</span></a>
-        </div>
+        </div>-->
         <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">

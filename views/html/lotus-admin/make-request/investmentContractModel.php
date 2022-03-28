@@ -27,10 +27,16 @@
                     <input class="form-control" id="bizId" type="text" readonly />
                 </div>
             </div>
-            <div class="form-group" id="approvalName">
+            <div class="form-group">
                 <label class="col-md-4 control-label">招商人员 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12 required">
-                    <select class="select2" id="creatorName" style="width: 100%"></select>
+                <div class="col-md-8 col-sm-12">
+                    <?php
+                    if(isset($_SESSION['lotus_admin_name'])) {
+                        echo '<input class="form-control" id="creatorName" type="text" value="'.$_SESSION['lotus_admin_name'].'" readonly />';
+                    } else {
+                        echo '<input class="form-control" id="creatorName" type="text" value="管理员" readonly />';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

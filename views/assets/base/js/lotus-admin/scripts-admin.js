@@ -147,12 +147,12 @@ function alertMsg(code,m) {
         case "JWT0002":
             msg = m+"，请重新 <strong><a href='javascript: logout();'>登录</a></strong>！";
             color = "danger";
-            style = ' style="position: fixed; z-index: 9999; left: 20%; right: 20%; top: 40%;"';
+            style = ' style="z-index: 1000;position: fixed;width: 100%;top: 200px;"';
             break;
         default:
             msg = m;
             color = "danger";
-            style = '';
+            style = ' style="z-index: 1000;position: fixed;width: 100%;top: 200px;"';
             break;
     }
     
@@ -311,6 +311,13 @@ function refineCreateUrl() {
     return value;     
 }
 
+function refineUpdateUrl() {
+    var url = window.location.href;
+    var value = url.substring(url.lastIndexOf('/') + 1);
+    value  = value.split("&s")[0];   
+    return value;     
+}
+
 function logout() {
     var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 
     if (keys) { 
@@ -379,6 +386,22 @@ function IncrDate(date_str){
     } else {
         return '';
     }
+}
+
+function dateCompare(date1,date2){
+    date1 = date1.replace(/\-/gi,"/");
+    date2 = date2.replace(/\-/gi,"/");
+    var time1 = new Date(date1).getTime();
+    var time2 = new Date(date2).getTime();
+    var result;
+    if(time1 > time2){
+        result = "larger";
+    }else if(time1 == time2){
+        result = "equal";
+    }else{
+        result = "smaller";
+    }
+    return result;
 }
 
 (function ($) {

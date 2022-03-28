@@ -31,13 +31,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractModel')">合同内容</a></li>
                     <li id="tab_investmentContractAccounttermFixed"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermFixed')">固定租金</a></li>
-                    <li id="tab_investmentContractAccounttermCommission"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermCommission')">提成租金</a></li>
+                    <li id="tab_investmentContractAccounttermCommission" style="display: none;"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermCommission')">提成租金</a></li>
                     <li id="tab_investmentContractAccounttermPropertyMgmt"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermPropertyMgmt')">物业管理费</a></li>
                     <li id="tab_investmentContractAccounttermPromotion"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermPromotion')">推广费</a></li>
                     <li id="tab_investmentContractDepositterm"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractDepositterm')">预存款条款</a></li>
                 </ol>
             </div>
-            <div class="box-header" style="background-color: #ecf0f5; margin-top: -3px;">
+            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px;">
                 <div class="pull-left">
                     <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                         <li><a href="/lotus-admin/contract-summary?id=<?= $id; ?>">合同概要</a></li>

@@ -193,6 +193,8 @@ function findAllRequestsByKVCondition(p,c){
                     }
                     
                     renderFormStatus();
+                } else {
+                    $('#requests').html('<tr><td colspan="7" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -244,6 +246,7 @@ function renderFormStatus() {
 
 function updateSelectTenantDropDown(data_count) {
     $('#selectTenant').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -297,6 +300,7 @@ function updateSelectTenantDropDown(data_count) {
 
 function updateSelectStoreDropDown(data_count) {
     $('#selectStore').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -319,7 +323,13 @@ function updateSelectStoreDropDown(data_count) {
                 request.setRequestHeader("Source", "onlineleasing");
             },
             data: function (params) { 
-                var mallCodes = $.cookie('mallSelected').split(':::')[1];
+                var mallCodes;
+                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
+                    mallCodes = $('#department').val();
+                } else {
+                    mallCodes = $.cookie('mallSelected').split(':::')[1];
+                }
+                
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                         mallCodes = 'ALL';

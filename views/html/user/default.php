@@ -30,6 +30,50 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000311"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1988-240x180.jpg" width="187" alt=""/></a>
+                        Joy&Peace
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP191022000065"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1378-240x180.jpg" width="187" alt=""/></a>
+                        锦鲤拿趣
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000631"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1363-240x180.jpg" width="187" alt=""/></a>
+                        费大厨
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000821"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1358-240x180.jpg" width="187" alt=""/></a>
+                        福奈特
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000415"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1354-240x180.jpg" width="187" alt=""/></a>
+                        Salomon
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200728000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1350-240x180.jpg" width="187" alt=""/></a>
+                        Lann Massage
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190108000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1345-240x180.jpg" width="187" alt=""/></a>
+                        BELLE
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190926000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1340-240x180.jpg" width="187" alt=""/></a>
+                        STACCATO
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP190613000006"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1338-240x180.jpg" width="187" alt=""/></a>
+                        颖内
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP210610000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1312-240x180.jpg" width="187" alt=""/></a>
+                        LI-NING
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP180917000733"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_8704-240x180.jpg" width="187" alt=""/></a>
+                        哲平鳗满
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000728"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8594-240x180.jpg" width="187" alt=""/></a>
                         难得一面
                     </div>
@@ -76,10 +120,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
                         锅物新语
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210218000005"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/10/ZHX_8104-240x180.jpg" width="187" alt=""/></a>
-                        趁热集合
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3892-240x180.jpg" width="187" alt=""/></a>

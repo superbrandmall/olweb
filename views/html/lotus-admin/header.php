@@ -23,6 +23,9 @@
                 }
             };
         </script>
+        <?php if ($_GET['p'] == 'lotus-admin/kow') { ?>
+            <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=fVgYajbwMUplLq0gZsLdh1AzeEfWUPpG"></script>
+        <?php } ?>
     </head>
     <?php
     if(isset($_SESSION['lotus_admin_login'])) {
@@ -138,19 +141,19 @@
                                     <li class="to-select" style="display: none;">
                                         <a href="javascript: void(0);" class="text-blue" data-code="SC055">
                                             <i class="fa fa-location-arrow"></i>
-                                            <span>文诚店</span>
+                                            <span>松江文诚店</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
                                         <a href="javascript: void(0);" class="text-blue" data-code="SC027">
                                             <i class="fa fa-location-arrow"></i>
-                                            <span>岳阳店</span>
+                                            <span>松江岳阳店</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
                                         <a href="javascript: void(0);" class="text-blue" data-code="SC126">
                                             <i class="fa fa-location-arrow"></i>
-                                            <span>牡丹江路店</span>
+                                            <span>牡丹江店</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
@@ -186,7 +189,7 @@
                                     <li class="to-select" style="display: none;">
                                         <a href="javascript: void(0);" class="text-blue" data-code="SC127">
                                             <i class="fa fa-location-arrow"></i>
-                                            <span>易买得-南桥店</span>
+                                            <span>南桥店</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">

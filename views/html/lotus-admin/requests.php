@@ -1,5 +1,9 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/requests-admin.js"></script>';
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/requests-admin.js"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/requests.js"></script>'.PHP_EOL;
+}
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
@@ -59,15 +63,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                         <option value="SC043">杨高中路店</option>
                                         <option value="SC078">浦江店</option>
                                         <option value="SC145">临港店</option>
-                                        <option value="SC055">文诚店</option>
-                                        <option value="SC027">岳阳店</option>
-                                        <option value="SC126">牡丹江路店</option>
+                                        <option value="SC055">松江文诚店</option>
+                                        <option value="SC027">松江岳阳店</option>
+                                        <option value="SC126">牡丹江店</option>
                                         <option value="SC060">蕴川店</option>
                                         <option value="SC082">新港店</option>
                                         <option value="SC010">汶水店</option>
                                         <option value="SC040">保德店</option>
                                         <option value="SC041">南奉店</option>
-                                        <option value="SC127">易买得-南桥店</option>
+                                        <option value="SC127">南桥店</option>
                                         <option value="SC050">金山店</option>
                                     </select>
                                 </div>
@@ -120,7 +124,9 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                             <li role="menuitem"><a href="/lotus-admin/requests?items=30">30</a></li>
                                                             <li role="menuitem"><a href="/lotus-admin/requests?items=50">50</a></li>
                                                         </ul>
-                                                    </span> 行每页</span>
+                                                    </span> 
+                                                    行每页
+                                                </span>
                                             </div>
                                             <div class="pull-right pagination">
                                                 <ul class="pagination"></ul>
@@ -128,8 +134,8 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
-                                                    <thead id="assetsListingTable-sticky-header" class="hidden-xs">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
+                                                    <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
                                                                 <div class="th-inner">单号</div>
@@ -161,7 +167,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="requests" class="hidden-xs"></tbody>
+                                                    <tbody id="requests"></tbody>
                                                 </table>
                                             </div>
 

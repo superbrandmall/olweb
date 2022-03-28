@@ -98,13 +98,13 @@
                                                 <td>
                                                     <div class="input-group">
                                                         <input class="form-control money" id="propertyMgmtRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
+                                                        <span class="input-group-addon">元/m²/月</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
                                                         <input class="form-control money" id="propertyMgmtTaxRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
+                                                        <span class="input-group-addon">元/m²/月</span>
                                                     </div>
                                                 </td>
                                                 <td>

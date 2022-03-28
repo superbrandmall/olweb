@@ -32,15 +32,15 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins
                                             <option value="SC043">杨高中路店</option>
                                             <option value="SC078">浦江店</option>
                                             <option value="SC145">临港店</option>
-                                            <option value="SC055">文诚店</option>
-                                            <option value="SC027">岳阳店</option>
-                                            <option value="SC126">牡丹江路店</option>
+                                            <option value="SC055">松江文诚店</option>
+                                            <option value="SC027">松江岳阳店</option>
+                                            <option value="SC126">牡丹江店</option>
                                             <option value="SC060">蕴川店</option>
                                             <option value="SC082">新港店</option>
                                             <option value="SC010">汶水店</option>
                                             <option value="SC040">保德店</option>
                                             <option value="SC041">南奉店</option>
-                                            <option value="SC127">易买得-南桥店</option>
+                                            <option value="SC127">南桥店</option>
                                             <option value="SC050">金山店</option>
                                         </select>
                                         <div id="errorcontainer-department" class="errorDiv"></div>

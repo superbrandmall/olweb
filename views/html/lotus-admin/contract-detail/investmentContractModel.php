@@ -41,7 +41,7 @@
                     <input class="form-control" id="bizId" type="text" readonly />
                 </div>
             </div>
-            <div class="form-group" id="approvalName">
+            <div class="form-group">
                 <label class="col-md-4 control-label">招商人员</label>
                 <div class="col-md-8 col-sm-12">
                     <?php
