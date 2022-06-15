@@ -1,11 +1,11 @@
 .main-header .navbar, .main-header .logo {
-    background-color: #E43C24;
-    background: -webkit-linear-gradient(top,  #E43C24 0%,#E43C24 100%);
-    background: linear-gradient(to bottom, #E43C24 0%,#E43C24 100%);
-    border-color: #E43C24;
+    background-color: #666219;
+    background: -webkit-linear-gradient(top,  #666219 0%,#666219 100%);
+    background: linear-gradient(to bottom, #666219 0%,#666219 100%);
+    border-color: #666219;
 }
 .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
-    border-left-color: #E43C24;
+    border-left-color: #8fb957;
 }
 
 #login_form .btn-primary {

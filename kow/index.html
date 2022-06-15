@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>KOW - 工作管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <style>
+    body,
+    html,
+    #container {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        font-family: "微软雅黑";
+    }
+    </style>
+    <script type="text/javascript" src="https://api.map.baidu.com/api?type=webgl&v=1.0&ak=fVgYajbwMUplLq0gZsLdh1AzeEfWUPpG"></script>
+</head>
+<body>
+<div id="container"></div>
+<script>
+var map = new BMapGL.Map('container', {
+    restrictCenter: false
+});
+var point = new BMapGL.Point(121.483415,31.234941);
+map.centerAndZoom(point, 13); // 初始化地图,设置中心点坐标和地图级别
+map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
+//map.setHeading(44.5);
+map.setTilt(70);
+
+var scaleCtrl = new BMapGL.ScaleControl();  // 添加比例尺控件
+map.addControl(scaleCtrl);
+var zoomCtrl = new BMapGL.ZoomControl();  // 添加缩放控件
+map.addControl(zoomCtrl);
+var navi3DCtrl = new BMapGL.NavigationControl3D();  // 添加3D控件
+map.addControl(navi3DCtrl);
+
+var cr = new BMapGL.CopyrightControl({
+    anchor: BMAP_ANCHOR_TOP_RIGHT,
+    offset: new BMapGL.Size(20, 20)
+});   //设置版权控件位置
+    map.addControl(cr); //添加版权控件
+var bs = map.getBounds();   //返回地图可视区域
+    cr.addCopyright({
+    id: 1, 
+    content: "<img src='/views/assets/base/img/content/backgrounds/logo-o.png' height='20'/>", 
+    bounds: bs
+});
+// map.setCopyrightOffset();
+
+function popupFlag() {
+    var citysTag = window.parent.document.getElementById('citys').innerHTML;
+    var citys = [];
+    if(citysTag != ''){
+       citys = JSON.parse(citysTag);
+    }
+
+    /*var citys = [{
+        name: '大宁音乐广场',
+        addr: '上海市静安区万荣路777号',
+        status: '即将上线'
+    }, {
+        name: '长宁中山公园龙之梦',
+        addr: '上海市长宁路1018号',
+        status: '即将上线'
+    }, {
+        name: '金桥国际商业广场',
+        addr: '上海市浦东新区张杨路3611号',
+        status: '即将上线'
+    }, {
+        name: '汇智国际商业中心',
+        addr: '上海市金科路3057号',
+        status: '即将上线'
+    }, {
+        name: '汇暻生活广场',
+        addr: '上海市黄浦区瞿溪路988号',
+        status: '即将上线'
+    }, {
+        name: '上海世茂广场',
+        addr: '上海市黄浦区南京东路829号',
+        status: '即将上线'
+    }, {
+        name: '国华广场',
+        addr: '上海市杨浦区闸殷路1599号',
+        status: '即将上线'
+    }, {
+        name: '上海我格广场',
+        addr: '上海市普陀区武宁路99号',
+        status: '即将上线'
+    }, {
+        name: '宝山宝龙广场',
+        addr: '上海市宝山区杨南路2211号',
+        status: '即将上线'
+    }, {
+        name: '百联又一城',
+        addr: '上海市杨浦区淞沪路8号',
+        status: '即将上线'
+    }, {
+        name: '瑞虹太阳宫',
+        addr: '上海市虹口区瑞虹路181号',
+        status: '即将上线'
+    }, {
+        name: '吴江路集市',
+        addr: '上海市静安区吴江路',
+        status: '即将上线'
+    }, {
+        name: '杨浦悠方购物中心',
+        addr: '上海市杨浦区殷行路1388号',
+        status: '即将上线'
+    }, {
+        name: '思南公馆集市',
+        addr: '上海市黄浦区复兴中路523号',
+        status: '即将上线'
+    }, {
+        name: '上海正大广场',
+        addr: '上海市浦东新区陆家嘴西路168号',
+        status: '正在进行'
+    }, {
+        name: '徐汇乐城',
+        addr: '上海市中山南二路699号',
+        status: '正在进行'
+    }, {
+        name: '宝山乐城',
+        addr: '上海市宝山区陆翔路111号',
+        status: '正在进行'
+    }, {
+        name: '瑞虹月亮湾',
+        addr: '上海市虹口区瑞虹路188号',
+        status: '正在进行'
+    }, {
+        name: 'BFC集市',
+        addr: '上海市黄浦区中山东二路600号',
+        status: '正在进行'
+    }, {
+        name: '静安大融城',
+        addr: '上海市静安区沪太路1111弄',
+        status: '正在进行'
+    }];*/
+
+    var cityGeo = new BMapGL.Geocoder();
+    var myIcon;
+    for (let i = 0; i < citys.length; i++) {
+        cityGeo.getPoint(citys[i].addr, function (point) { // 地址解析获取对应经纬度
+            var pt = new BMapGL.Point(point.lng, point.lat);
+            switch(citys[i].status) {
+                    case '即将上线':
+                    myIcon = new BMapGL.Icon("icon-pink.png", new BMapGL.Size(40, 62),{anchor: new BMapGL.Size(0,55)});
+                    break;
+                case '待定':
+                    myIcon = new BMapGL.Icon("icon-gray.png", new BMapGL.Size(40, 62),{anchor: new BMapGL.Size(0,55)});
+                    break;
+                case '正在进行':
+                    myIcon = new BMapGL.Icon("icon-green.png", new BMapGL.Size(40, 62),{anchor: new BMapGL.Size(0,55)});
+                    break;
+                default:
+                    myIcon = new BMapGL.Icon("icon-pink.png", new BMapGL.Size(40, 62),{anchor: new BMapGL.Size(0,55)});
+            }
+            var marker = new BMapGL.Marker(pt, {
+                icon: myIcon
+            });
+            map.addOverlay(marker);
+            map.setDisplayOptions({
+                poiIcon: false
+            })
+
+            // 创建图文信息窗口
+            var sContent = "<h4 id='imgDemo' style='margin:0 0 5px 0;'>"+citys[i].name+"</h4><p>"+citys[i].addr+"</p>";
+            var infoWindow = new BMapGL.InfoWindow(sContent);
+            // marker添加点击事件
+            marker.addEventListener('click', function () {
+                this.openInfoWindow(infoWindow);
+                // 图片加载完毕重绘infoWindow
+                document.getElementById('imgDemo').onload = function () {
+                    infoWindow.redraw(); // 防止在网速较慢时生成的信息框高度比图片总高度小，导致图片部分被隐藏
+                };
+            });
+        });
+    }
+}
+</script>
+</body>
+</html>
