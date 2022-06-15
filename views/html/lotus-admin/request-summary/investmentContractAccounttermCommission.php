@@ -25,7 +25,11 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">提成</div>
+                                                <div class="th-inner">去税提成率</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">含税提成率</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>

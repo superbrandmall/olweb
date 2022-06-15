@@ -1,19 +1,32 @@
 $(document).ready(function(){
+    if(!sessionStorage.getItem("FORM_STATUS") || sessionStorage.getItem("FORM_STATUS") == null || sessionStorage.getItem("FORM_STATUS") == '') {
+        findDictCodeByDictTypeCode('FORM_STATUS');
+    }
+    
+    if(!sessionStorage.getItem("FORM_TYPE") || sessionStorage.getItem("FORM_TYPE") == null || sessionStorage.getItem("FORM_TYPE") == '') {
+        findDictCodeByDictTypeCode('FORM_TYPE');
+    }
+    
     if($.cookie('searchRequestsFormStatus') != ''){
         $('#formStatus').val($.cookie('searchRequestsFormStatus')).trigger('change');
     }
-    if($.cookie('searchRequestsBizId') != ''){
-        $('#bizId').val($.cookie('searchRequestsBizId'));
+    if($.cookie('searchRequestsContractNo') != ''){
+        $('#contractNo').val($.cookie('searchRequestsContractNo'));
     }
     
-    if($.cookie('searchRequestsSelectTenantVal') != 'null'){
+    if($.cookie('searchRequestsSelectFormTypeVal') != null){
+        updateDictDropDownByDictTypeCode('FORM_TYPE','formType',$.cookie('searchRequestsSelectFormTypeTxt'),$.cookie('searchRequestsSelectFormTypeVal')); // 表单类型
+    } else {
+        updateDictDropDownByDictTypeCode('FORM_TYPE','formType','未选择',null); // 表单类型
+    }
+    if($.cookie('searchRequestsSelectTenantVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectTenantTxt'), $.cookie('searchRequestsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
     }
-    if($.cookie('searchContractsSelectDepartmentVal') != 'null'){
+    if($.cookie('searchContractsSelectDepartmentVal') != null){
         $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
     }
-    if($.cookie('searchRequestsSelectStoreVal') != 'null'){
+    if($.cookie('searchRequestsSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectStoreTxt'), $.cookie('searchRequestsSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
     }
@@ -43,21 +56,31 @@ $(document).ready(function(){
             break;
     }
     
-    if(!sessionStorage.getItem("formStatus") || sessionStorage.getItem("formStatus") == null || sessionStorage.getItem("formStatus") == '') {
-        findFormStatus('FORM_STATUS');
-    }
+    $('#department option').each(function(j, elem){
+        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
+            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                if($(elem).val() == v.moduleCode){
+                    $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
+                }
+            } else if(v.code == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
+                $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
+            }
+        })
+    })
+    $("#department, #renewDepartment").find("option:not(.no-remove)").remove();
     
-    updateSelectTenantDropDown(10);
+    updateSelectTenantDropDown(50);
     updateSelectStoreDropDown(10);
     
     $('#clear').click(function(){
-        $('#bizId').val('');
-        $('#selectTenant, #selectStore').empty(); 
-        $('#department, #contractStatus').val("").trigger('change');
-        $('#selectTenant, #selectStore').select2("val", "");
+        $('#contractNo').val('');
+        $('#selectTenant, #selectStore, #formType').empty(); 
+        $('#selectTenant, #department, #formStatus').val("").trigger('change');
+        $('#selectStore, #formType').select2("val", "");
         
         $.cookie('searchRequestsFormStatus','');
-        $.cookie('searchRequestsBizId', '');
+        $.cookie('searchRequestsContractNo', '');
+        $.cookie('searchRequestsSelectFormTypeVal', null);
         $.cookie('searchRequestsSelectTenantVal', null);
         $.cookie('searchRequestsSelectStoreVal', null);
         $.cookie('searchContractsSelectDepartmentVal', null);
@@ -65,12 +88,14 @@ $(document).ready(function(){
     
     $('#search').click(function(){
         $.cookie('searchRequestsFormStatus', $('#formStatus').val());
-        $.cookie('searchRequestsBizId', $('#bizId').val());
-        $.cookie('searchRequestsSelectTenantVal', $('#selectTenant').val());
-        $.cookie('searchRequestsSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('searchRequestsContractNo', $('#contractNo').val());
+        $.cookie('searchRequestsSelectFormTypeVal', $('#formType').find('option:selected').val());
+        $.cookie('searchRequestsSelectFormTypeTxt', $('#formType').find('option:selected').text());
+        $.cookie('searchRequestsSelectTenantVal', $('#selectTenant').find('option:selected').val());
+        $.cookie('searchRequestsSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
-        $.cookie('searchRequestsSelectStoreVal', $('#selectStore').val());
-        $.cookie('searchRequestsSelectStoreTxt', $('#selectStore').text());
+        $.cookie('searchRequestsSelectStoreVal', $('#selectStore').find('option:selected').val());
+        $.cookie('searchRequestsSelectStoreTxt', $('#selectStore').find('option:selected').text());
         findAllRequestsByKVCondition(1,items);
     })
 });
@@ -79,6 +104,16 @@ function findAllRequestsByKVCondition(p,c){
     $('#requests').html('');
     var params = [];
     var param = {};
+    
+    param = {
+        "columnName": "contractName",
+        "columnPatten": "",
+        "conditionOperator": "",
+        "operator": "!=",
+        "value": 'KOW'
+    }
+    
+    params.push(param);
     
     if($.cookie('searchRequestsFormStatus') != null && $.cookie('searchRequestsFormStatus') != ''){
         param = {
@@ -96,6 +131,8 @@ function findAllRequestsByKVCondition(p,c){
         }
     }
     
+    params.push(param);
+    
     if($.cookie('searchContractsSelectDepartmentVal') != null && $.cookie('searchContractsSelectDepartmentVal') != '' && $.cookie('searchContractsSelectDepartmentVal') != 'null'){
         param = {
             "columnName": "mallCode",
@@ -103,23 +140,25 @@ function findAllRequestsByKVCondition(p,c){
             "operator": "AND",
             "value": $.cookie('searchContractsSelectDepartmentVal')
         }
-    } else {
-        param = {
-            "columnName": "mallCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('mallSelected').split(':::')[1]
-        }
+        params.push(param);
     }
     
-    params.push(param);
-    
-    if($.cookie('searchRequestsBizId') != null && $.cookie('searchRequestsBizId') != ''){
+    if($.cookie('searchRequestsContractNo') != null && $.cookie('searchRequestsContractNo') != ''){
         param = {
-            "columnName": "bizId",
+            "columnName": "contractNo",
             "columnPatten": "",
             "operator": "AND",
-            "value": $.cookie('searchRequestsBizId')
+            "value": $.cookie('searchRequestsContractNo')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchRequestsSelectFormTypeVal') != null && $.cookie('searchRequestsSelectFormTypeVal') != '' && $.cookie('searchRequestsSelectFormTypeVal') != 'null'){
+        param = {
+            "columnName": "formType",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchRequestsSelectFormTypeVal')
         }
         params.push(param);
     }
@@ -174,16 +213,38 @@ function findAllRequestsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        $('#requests').append('\
-                            <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/request-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
-                            <td>'+(v.contractNo || '')+'</td>\n\
-                            <td>'+(v.formStatus || '')+'</td>\n\
-                            <td>'+(v.mallName || '')+'</td>\n\
-                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
-                            <td>'+(v.bizTypeName || '')+'</td>\n\
-                            <td>'+(v.contractName || '')+'</td>\n\
-                        </tr>');
+                        if(v.bizId.indexOf('_OLD') == -1){
+                            var page;
+                            switch (v.formType) {
+                                case "new":
+                                    page = 'request';
+                                    break;
+                                case "renew":
+                                    page = 'renew';
+                                    break;
+                                default:
+                                    break;
+                            }
+                            
+                            var contractLink = '';
+                            if(v.formStatus == 9){
+                                contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
+                            }
+                            
+                            $('#requests').append('\
+                                <tr data-index="'+i+'">\n\
+                                <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                                <td>'+contractLink+'</td>\n\
+                                <td>'+(v.contractNo || '')+'</td>\n\
+                                <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
+                                <td>'+(renderFormType(v.formType) || '')+'</td>\n\
+                                <td>'+(v.tenantName || '')+'</td>\n\
+                                <td>'+(v.mallName || '')+'</td>\n\
+                                <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                                <td>'+(v.bizTypeName || '')+'</td>\n\
+                                <td>'+(v.contractName || '')+'</td>\n\
+                            </tr>');
+                        }
                     });
                     
                     if(p == pages){
@@ -191,10 +252,8 @@ function findAllRequestsByKVCondition(p,c){
                     } else {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
-                    
-                    renderFormStatus();
                 } else {
-                    $('#requests').html('<tr><td colspan="7" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#requests').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -203,45 +262,30 @@ function findAllRequestsByKVCondition(p,c){
     });
 }
 
-function findFormStatus(dictTypeCode){
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", 1);
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                sessionStorage.setItem("formStatus", JSON.stringify(response.data.dictDataList) );
-            } else {
-                alertMsg(response.code,response.customerMessage);
+function renderFormStatus(s) {
+    var status = '';
+    if(sessionStorage.getItem("FORM_STATUS") && sessionStorage.getItem("FORM_STATUS") != null && sessionStorage.getItem("FORM_STATUS") != '') {
+        var status = $.parseJSON(sessionStorage.getItem("FORM_STATUS"));
+        $.each(status, function(i,v){
+            if(v.dictCode == s){
+                status = v.dictName;
             }
-        }
-    })
+        })
+    }  
+    return status;
 }
 
-function renderFormStatus() {
-    if(sessionStorage.getItem("formStatus") && sessionStorage.getItem("formStatus") != null && sessionStorage.getItem("formStatus") != '') {
-        var status = $.parseJSON(sessionStorage.getItem("formStatus"));
-        $.each(status, function(i,v){
-            $("#requests tr td:nth-child(3)").each(function() {
-                if(v.dictCode == $(this).text()){
-                    $(this).text(v.dictName);
-                    return false;
-                }
-            })
+function renderFormType(t) {
+    var type = '';
+    if(sessionStorage.getItem("FORM_TYPE") && sessionStorage.getItem("FORM_TYPE") != null && sessionStorage.getItem("FORM_TYPE") != '') {
+        var type = $.parseJSON(sessionStorage.getItem("FORM_TYPE"));
+        $.each(type, function(i,v){
+            if(v.dictCode == t){
+                type = v.dictName;
+            }
         })
-   }  
+    }
+    return type;
 }
 
 function updateSelectTenantDropDown(data_count) {
@@ -354,7 +398,8 @@ function updateSelectStoreDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.unitCode+':::'+item.code+':::'+item.unitName,
-                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            }
+                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
+                            }
                             var returnData = [];
                             returnData.push(data);
                             return returnData;

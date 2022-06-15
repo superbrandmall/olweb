@@ -1,128 +1,165 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-brand-admin.js"></script>'.PHP_EOL;
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-brand-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/create-brand.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+}
 ?>
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper">
+<div class="content-wrapper create-brand">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header">
+        <section class="sub-header" style="height: 90px;">
             <h4>
-                新建品牌
+                创建品牌
             </h4>
             <div class="pull-right">
-                <a href="javascript: window.history.go(-1);" class="btn btn-primary btn-sm">
-                返回
-            </a>
-                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> 保存</button>
+                <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','tenants');">取消</a>
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
+            </div>
+            <div class="box-header" id="navbarTop">
+                <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="#brandBasicInfo">基本信息</a></li>
+                    <li><a href="#brandContacts">联系方式</a></li>
+                    <li><a href="#brandCertificates">证照</a></li>
+                </ul>
             </div>
         </section>
 
-        <section class="content" style="margin-top: 90px;">
+        <section class="content" style="margin-top: 140px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="callout callout-info" style="display: none;">
-                            新建品牌成功!
-                        </div>
-                        <div class="callout callout-danger" style="display: none;">
-                            新建品牌失败!
-                        </div>
-                        <div class="callout callout-warning" style="display: none;">
-                            该品牌已存在!
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box box-default">
+                        <div class="box box-default" id="brandBasicInfo">    
                             <div class="box-header with-border">
-                                <h3 class="box-title">
-                                </h3>
-                                <div class="box-tools pull-right">
-                                    <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
+                                <h3 class="box-title">基本信息</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
                                 </div>
                             </div>
-
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="brand_name" class="col-md-3 control-label" style="text-align: right;">品牌名称 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="brand_name" name="brand_name">
-                                        <div id="errorcontainer-brand_name" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="brand_name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="brand_name" name="brand_name">
+                                            <div id="errorcontainer-brand_name" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_1" class="col-md-3 control-label" style="text-align: right;">一级业态 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="儿童">儿童</option>
-                                            <option value="基站">基站</option>
-                                            <option value="娱乐服务">娱乐服务</option>
-                                            <option value="工程设备">工程设备</option>
-                                            <option value="服务">服务</option>
-                                            <option value="零售">零售</option>
-                                            <option value="餐饮">餐饮</option>
-                                        </select>
-                                        <div id="errorcontainer-modality_1" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="brandAttribute" class="col-md-4 control-label">品牌档次</label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="brandAttribute" name="brandAttribute" style="width: 100%"></select>
+                                            <div id="errorcontainer-brandAttribute" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_2" class="col-md-3 control-label" style="text-align: right;">二级业态 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" id="modality_2" name="modality_2" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="F&B Retail">F&B Retail</option>
-                                            <option value="个人护理">个人护理</option>
-                                            <option value="休闲娱乐">休闲娱乐</option>
-                                            <option value="儿童育乐">儿童育乐</option>
-                                            <option value="儿童零售">儿童零售</option>
-                                            <option value="娱乐">娱乐</option>
-                                            <option value="快时尚">快时尚</option>
-                                            <option value="快餐">快餐</option>
-                                            <option value="服务">服务</option>
-                                            <option value="服装">服装</option>
-                                            <option value="服饰">服饰</option>
-                                            <option value="珠宝首饰">珠宝首饰</option>
-                                            <option value="甜品">甜品</option>
-                                            <option value="生活方式">生活方式</option>
-                                            <option value="科技数码">科技数码</option>
-                                            <option value="美容及个人护理">美容及个人护理</option>
-                                            <option value="茶饮">茶饮</option>
-                                            <option value="茶饮咖啡/甜品">茶饮咖啡/甜品</option>
-                                            <option value="鞋服">鞋服</option>
-                                            <option value="饮品">饮品</option>
-                                            <option value="饰品">饰品</option>
-                                        </select>
-                                        <div id="errorcontainer-modality_2" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="modality_1" class="col-md-4 control-label">一级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
+                                                <option value="">未选择</option>
+                                                <option value="零售">零售</option>
+                                                <option value="餐饮">餐饮</option>
+                                                <option value="娱乐服务">娱乐服务</option>
+                                                <option value="儿童">儿童</option>
+                                                <option value="主力店">主力店</option>
+                                            </select>
+                                            <div id="errorcontainer-modality_1" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="modality_3" class="col-md-3 control-label" style="text-align: right;">三级业态 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="modality_3" name="modality_3" />
-                                        <div id="errorcontainer-modality_3" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="modality_2" class="col-md-4 control-label">二级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="modality_2" name="modality_2" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-modality_2" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="contact_name_1" class="col-md-3 control-label" style="text-align: right;">联系人 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
-                                        <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="modality_3" class="col-md-4 control-label">三级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="modality_3" name="modality_3" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-modality_3" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="contact_phone_1"  class="col-md-3 control-label" style="text-align: right;">联系电话 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
-                                        <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="modality_4" class="col-md-4 control-label">四级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="modality_4" name="modality_4" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-modality_4" class="errorDiv"></div>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="brandContacts">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">联系方式</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="contact_name_1" class="col-md-4 control-label">联系人 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
+                                            <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="title" class="col-md-4 control-label">岗位 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="title" name="title" />
+                                            <div id="errorcontainer-title" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="contact_phone_1" class="col-md-4 control-label">联系电话 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
+                                            <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="brandCertificates">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">证照</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12">
+                                    <h5><i class="fa fa-exclamation-triangle"></i> 请先提交保存品牌，然后在编辑品牌时再添加相关证照。</h5>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +175,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
             </div>
         </section>
-    </form>    
+    </form>
 </div>
 
 <?php include 'footer.php'; ?>

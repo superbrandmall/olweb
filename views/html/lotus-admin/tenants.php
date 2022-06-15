@@ -1,37 +1,82 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/tenants-admin.js"></script>'.PHP_EOL;
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/tenants-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/tenants.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+}
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header">
-        <h4>
-            商户列表
-        </h4>
-        <div class="pull-right">
-            <a href="/lotus-admin/create-tenant" class="btn btn-primary btn-sm">
-                新建商户
-            </a>
-        </div>
-    </section>
-
-    <section class="content" style="margin-top: 90px;">
-        <div id="webui">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="callout callout-info" style="display: none;">
-                        新建商户成功!
-                    </div>
-                    <div class="callout callout-danger" style="display: none;">
-                        新建商户失败!
-                    </div>
-                    <div class="callout callout-warning" style="display: none;">
-                        该商户已存在!
+    <form id="search-form" class="form-horizontal" role="form" enctype="multipart/form-data">
+        <section class="sub-header" style="height: 160px;">
+            <h4>
+                商户
+            </h4>
+            <div class="pull-right">
+                <a href="/lotus-admin/create-tenant" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建商户</span></a>
+            </div>
+            <div class="box-header">
+                <div class="box-body">
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="state" style="width: 100%">
+                                        <option value="" selected>全部</option>
+                                        <option value="1">使用中</option>
+                                        <option value="0">已删除</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">代码</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <input class="form-control" id="tenantCode" type="text"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <input class="form-control" id="name" type="text"  />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">类型</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="type" style="width: 100%">
+                                        <option value="" selected>全部</option>
+                                        <option value="2">公司</option>
+                                        <option value="1">个人</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"></label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
+                                    <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
+        </section>
+    </form>
+
+    <section class="content" style="margin-top: 210px;">
+        <div id="webui">
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
@@ -45,7 +90,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                 <span class="page-list">
                                                     <span class="btn-group dropdown">
                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="page-size">10</span>
+                                                            <span class="page-size">20</span>
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
@@ -62,33 +107,32 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
-                                                    <thead id="assetsListingTable-sticky-header" class="hidden-xs">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
+                                                    <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
+                                                                <div class="th-inner">代码</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">商户</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
-                                                                <div class="th-inner">行业</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">注册资本</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
                                                              <th>
-                                                                <div class="th-inner">组织机构代码证/身份证号码</div>
+                                                                <div class="th-inner">地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="tenantsL" class="hidden-xs" style="text-align: center;"></tbody>
-                                                    <tbody id="tenantsS" class="hidden-sm hidden-md hidden-lg"></tbody>
+                                                    <tbody id="tenants"></tbody>
                                                 </table>
                                             </div>
 
@@ -98,7 +142,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                     <span class="page-list">
                                                         <span class="btn-group dropdown">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                                <span class="page-size">10</span>
+                                                                <span class="page-size">20</span>
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
@@ -124,8 +168,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                 </div>
             </div>
         </div>
-
     </section>
-
 </div>
+
 <?php include 'footer.php'; ?>

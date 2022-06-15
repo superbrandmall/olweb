@@ -1,10 +1,7 @@
 <?php
 $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/pilot-admin.js" type="text/javascript"></script>'
-    . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'
-    . '<script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>'
     . '<script src="/views/assets/plugins/fengniao_SDK_v3.0.6_Lib/fengmap.core.min.js" type="text/javascript"></script>';
 ?>
-<link href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>

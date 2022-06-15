@@ -1,6 +1,5 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/sales-admin.js"></script>'.PHP_EOL;
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/sales-admin.js"></script>'.PHP_EOL;
 ?>
 
 <?php include 'sidebar.php'; ?>

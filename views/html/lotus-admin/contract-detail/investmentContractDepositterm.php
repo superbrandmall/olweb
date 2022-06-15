@@ -40,7 +40,7 @@
                                         <div class="fht-cell"></div>
                                     </th>
                                     <th>
-                                        <div class="th-inner">税率</div>
+                                        <div class="th-inner">最后缴款期</div>
                                         <div class="fht-cell"></div>
                                     </th>
                                     <th>
@@ -67,8 +67,8 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="deposittermTaxRate_1" type="text" value="0" readonly style="border: none;" />                                                
-                                            <span class="input-group-addon">%</span>
+                                            <input class="form-control date-picker" id="deposittermPaymentDate_1" type="text" style="width: 100%" readonly="">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </td>
                                     <td>
@@ -94,8 +94,8 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="deposittermTaxRate_2" type="text" value="0" readonly style="border: none;" />                                                
-                                            <span class="input-group-addon">%</span>
+                                            <input class="form-control date-picker" id="deposittermPaymentDate_2" type="text" style="width: 100%" readonly="">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </td>
                                     <td>

@@ -1,6 +1,6 @@
 <div class="box box-default" id="investmentContractAccounttermPropertyMgmt">    
     <div class="box-header with-border">
-        <h3 class="box-title">其他固定费用</h3>
+        <h3 class="box-title">物业管理费</h3>
         <div class="box-tools">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -25,11 +25,19 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">月合计(元/月)</div>
+                                                <div class="th-inner">去税月面积单价(元/m²/月)</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">月单价(元/m²/月)</div>
+                                                <div class="th-inner">去税月金额(元)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">含税月金额(元)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">含税月面积单价(元/m²/月)</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                         </tr>

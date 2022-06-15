@@ -1,100 +1,301 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-tenant-admin.js"></script>'.PHP_EOL;
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-tenant-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/create-tenant.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+}
 ?>
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper">
+<div class="content-wrapper create-tenant">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header">
+        <section class="sub-header" style="height: 90px;">
             <h4>
-                新建商户
+                创建商户
             </h4>
             <div class="pull-right">
-                <a href="javascript: window.history.go(-1);" class="btn btn-primary btn-sm">
-                返回
-            </a>
-                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> 保存</button>
+                <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','tenants');">取消</a>
+                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
+            </div>
+            <div class="box-header" id="navbarTop">
+                <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="#tenantBasicInfo">基本信息</a></li>
+                    <li><a href="#tenantInvoices">开票信息</a></li>
+                    <li><a href="#tenantBanks">银行资料</a></li>
+                    <li><a href="#tenantContacts">联系方式</a></li>
+                    <li><a href="#tenantContactList">联系人</a></li>
+                    <li><a href="#tenantCertificates">证照</a></li>
+                </ul>
             </div>
         </section>
 
-        <section class="content" style="margin-top: 90px;">
+        <section class="content" style="margin-top: 140px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="callout callout-info" style="display: none;">
-                            新建商户成功!
-                        </div>
-                        <div class="callout callout-danger" style="display: none;">
-                            新建商户失败!
-                        </div>
-                        <div class="callout callout-warning" style="display: none;">
-                            该商户已存在!
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box box-default">
+                        <div class="box box-default" id="tenantBasicInfo">    
                             <div class="box-header with-border">
-                                <h3 class="box-title">
-                                </h3>
-                                <div class="box-tools pull-right">
-                                    <button class="slideout-menu-toggle btn btn-box-tool btn-box-tool-lg" data-toggle="tooltip" title="Help"><i class="fa fa-question"></i></button>
+                                <h3 class="box-title">基本信息</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
                                 </div>
                             </div>
-
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label for="name" class="col-md-3 control-label" style="text-align: right;">商户名称 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="name" name="name">
-                                        <div id="errorcontainer-name" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="name" name="name">
+                                            <div id="errorcontainer-name" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label for="tenantCode" class="col-md-3 control-label" style="text-align: right;">商户编号 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 col-sm-12 required">
-                                        <input class="form-control" type="text" id="tenantCode" name="tenantCode">
-                                        <div id="errorcontainer-tenantCode" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="type" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="type" name="type" style="width: 100%">
+                                                <option value="">未选择</option>
+                                                <option value="2">公司</option>
+                                                <option value="1">个人</option>
+                                            </select>
+                                            <div id="errorcontainer-type" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="type" class="col-md-3 control-label" style="text-align: right;">类型 <span class="btn-box-tool-lg">*</span></label>
-                                    <div class="col-md-7 required">
-                                        <select class="select2" id="type" name="type" style="width: 100%">
-                                            <option value="">未选择</option>
-                                            <option value="2">公司</option>
-                                            <option value="1">个人</option>
-                                        </select>
-                                        <div id="errorcontainer-type" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="capital" class="col-md-4 control-label">注册资金</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control money" type="text" id="capital" name="capital" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" />
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="businessScope" class="col-md-3 control-label" style="text-align: right;">行业</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="businessScope" name="businessScope" />
-                                        <div id="errorcontainer-businessScope" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="businessScope" class="col-md-4 control-label">经营范围</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="businessScope" name="businessScope" />
+                                            <div id="errorcontainer-businessScope" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="capital" class="col-md-3 control-label" style="text-align: right;">注册资本</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="number" id="capital" name="capital" />
-                                        <div id="errorcontainer-capital" class="errorDiv"></div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="uscc"  class="col-md-4 control-label">统一社会信用代码 / 身份证号码</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="uscc" name="uscc" />
+                                            <div id="errorcontainer-uscc" class="errorDiv"></div>
+                                        </div>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group">
-                                    <label for="uscc"  class="col-md-3 control-label" style="text-align: right;">组织机构代码证 / 身份证号码</label>
-                                    <div class="col-md-7 col-sm-12">
-                                        <input class="form-control" type="text" id="uscc" name="uscc" />
-                                        <div id="errorcontainer-uscc" class="errorDiv"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="tenantInvoices">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">开票信息</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="regAddress" class="col-md-4 control-label">注册地址 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="regAddress" name="regAddress" />
+                                            <div id="errorcontainer-regAddress" class="errorDiv"></div>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="deliveryAddress" class="col-md-4 control-label">账单地址 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="deliveryAddress" name="deliveryAddress" />
+                                            <div id="errorcontainer-deliveryAddress" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="tenantBanks">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">银行资料</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bankName" class="col-md-4 control-label">银行名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="bankName" name="bankName" />
+                                            <div id="errorcontainer-bankName" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bankAccount" class="col-md-4 control-label">银行账号 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="bankAccount" name="bankAccount" />
+                                            <div id="errorcontainer-bankAccount" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="tenantContacts">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">联系方式</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="shareHolder" class="col-md-4 control-label">企业法人</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="shareHolder" name="shareHolder" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="remarkFirst" class="col-md-4 control-label">办公地址 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="remarkFirst" name="remarkFirst" />
+                                            <div id="errorcontainer-remarkFirst" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phoneNum" class="col-md-4 control-label">联系电话 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="phoneNum" name="phoneNum" />
+                                            <div id="errorcontainer-phoneNum" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mail" class="col-md-4 control-label">送达邮箱 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="mail" name="mail" />
+                                            <div id="errorcontainer-mail" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="tenantContactList">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">联系人</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <div class="pull-right" style="margin-right: 40px;">
+                                    <a href="javascript:void(0);" onClick="addRowContactList()" style="margin-right: 10px;">
+                                        <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12">
+                                    <div class="bootstrap-table">
+                                        <div class="fixed-table-container">
+                                            <div class="fixed-table-body">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
+                                                    <thead id="assetsListingTable-sticky-header">
+                                                        <tr>
+                                                            <th>
+                                                                <div class="th-inner">行</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">姓名</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">身份证号</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">岗位</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">分类</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">手机</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">办公电话</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">电子邮件</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">详细地址</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">线上签章人</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">接收财函</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">接收法函</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">操作</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="contactList"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="tenantCertificates">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">证照</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12">
+                                    <h5><i class="fa fa-exclamation-triangle"></i> 请先提交保存商户，然后在编辑商户时再上传相关证照。</h5>
                                 </div>
                             </div>
                         </div>

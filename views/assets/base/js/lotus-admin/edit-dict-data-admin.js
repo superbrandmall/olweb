@@ -11,7 +11,7 @@ $(document).ready(function(){
                 break;
         }
         setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineUpdateUrl() );
         },1000);
     }
     
@@ -128,8 +128,8 @@ function findDictDataByType(){
                                 $('#dictCode').val(v.dictCode);
                                 $('#dictOrder').val(v.dictOrder);
                                 $('#dictInfo').val(v.dictInfo);
+                                return false;
                             }
-                            return;
                         });
                     }
                 }

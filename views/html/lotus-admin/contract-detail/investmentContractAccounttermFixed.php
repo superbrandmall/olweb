@@ -37,7 +37,7 @@
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">单价(去税) <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
@@ -45,11 +45,11 @@
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">单价(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">单价(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">单价(含税) <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
@@ -85,8 +85,8 @@
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentAmount_1" type="text" />                                                
-                                                        <span class="input-group-addon">元</span>
+                                                        <input class="form-control money" id="fixedRentTaxRentAmount_1" type="text" readonly style="border: none;" />                                                
+                                                        <span class="input-group-addon">元/m²/天</span>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -97,16 +97,17 @@
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元/m²/天</span>
+                                                        <input class="form-control money" id="fixedRentAmount_1" type="text" />                                                
+                                                        <span class="input-group-addon">元</span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentTaxRentAmount_1" type="text" readonly style="border: none;" />                                                
+                                                        <input class="form-control money" id="fixedRentRentAmount_1" type="text" readonly style="border: none;" />                                                
                                                         <span class="input-group-addon">元/m²/天</span>
                                                     </div>
                                                 </td>
+                                                
                                                 <td>
                                                     <select class="select2 taxVat newVAT fixedVATDropDown newFee" id="fixedRentTaxRate_1"></select>
                                                 </td>
@@ -152,13 +153,9 @@
                     <select class="select2" id="fixedRentSettleDay_1" style="width: 100%">
                         <?php 
                         {
-                           for($i=1;$i<25;$i++){
+                           for($i=1;$i<=31;$i++){
                                echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
-                           echo '<option value="25">25日</option>';
-                           for($i=26;$i<=31;$i++){
-                               echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
+                           }
                         }
                         ?>
                     </select>

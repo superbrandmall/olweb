@@ -45,19 +45,19 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                <div class="fht-cell"></div>
-                                            </th>
-                                            <th>
                                                 <div class="th-inner">提成率(去税) <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
+                                            <!--<th>
+                                                <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>-->
                                             <th>
-                                                <div class="th-inner">最低营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
@@ -99,22 +99,22 @@
                                             </td>
                                             <td>
                                                 <div class="input-group">
-                                                    <input class="form-control money" id="commissionDeduct_1" type="text" value="0" />                                                
+                                                    <input class="form-control money" id="commissionTaxDeduct_1" type="text" value="0" />                                                
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="input-group">
-                                                    <input class="form-control money" id="commissionTaxDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
+                                                    <input class="form-control money" id="commissionDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
                                                     <span class="input-group-addon">%</span>
                                                 </div>
                                             </td>
-                                            <td>
+                                            <!--<td>
                                                 <div class="input-group">
                                                     <input class="form-control money" id="commissionAmount_1" type="text" value="0" style="min-width: 60px;" />
                                                     <span class="input-group-addon">元/月</span>
                                                 </div>
-                                            </td>
+                                            </td>-->
                                             <td>
                                                 <div class="input-group">
                                                     <input class="form-control money" id="commissionMinSales_1" type="text" style="min-width: 60px;" />
@@ -172,13 +172,9 @@
                     <select class="select2" id="commissionSettleDay_1" style="width: 100%">
                         <?php 
                         {
-                           for($i=1;$i<25;$i++){
+                           for($i=1;$i<=31;$i++){
                                echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
-                           echo '<option value="25">25日</option>';
-                           for($i=26;$i<=31;$i++){
-                               echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
+                           }
                         }
                         ?>
                     </select>

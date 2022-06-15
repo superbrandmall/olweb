@@ -1,18 +1,15 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/make-request-admin.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/make-request-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/html2canvas.min.js"></script>'.PHP_EOL;            
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/make-request.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/make-request.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/html2canvas.min.js"></script>'.PHP_EOL;            
 }
 
 ?>
-<link href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 <link href="/views/assets/plugins/timepicker/bootstrap-timepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <?php include 'sidebar.php'; ?>
@@ -21,44 +18,32 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
             <h4>
-                新建新租赁合同申请单
+                新签租赁合同申请单
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','requests');">取消</a>
                 <button type="button" class="btn btn-info btn-sm" id="saveDraft"><i class="fa fa-save icon-white"></i> <span class="hidden-xs">保存草稿</span></button>
-                <button type="button" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交审核</span></button>
+                <button type="button" class="btn btn-success btn-sm" id="submitForm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交审核</span></button>
             </div>
-            <div class="box-header">
-                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                    <li><a href="javascript: void(0);">基本信息</a></li>
-                    <li id="tab_investmentContractEnteryterm"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractEnteryterm')">进场条款</a></li>
-                    <li id="tab_investmentContractAccounttermFixed"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermFixed')">固定租金</a></li>
-                    <li id="tab_investmentContractAccounttermCommission"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermCommission')">提成租金</a></li>
-                    <li id="tab_investmentContractAccounttermPropertyMgmt"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermPropertyMgmt')">物业管理费</a></li>
-                    <li id="tab_investmentContractAccounttermPromotion"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractAccounttermPromotion')">推广费</a></li>
-                    <li id="tab_investmentContractDepositterm"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractDepositterm')">预存款条款</a></li>
-                    <li id="tab_investmentContractProperteisterm"><a href="javascript: void(0);" onclick="javascript: jumpTo('investmentContractProperteisterm')">其他商务条件</a></li>
-                    <li id="tab_textareapanel"><a href="javascript: void(0);" onclick="javascript: jumpTo('textareapanel')">说明</a></li>
-                    <li id="tab_approvalProcess"><a href="javascript: void(0);" onclick="javascript: jumpTo('approvalProcess')">审批流程</a></li>
-                </ol>
+            <div class="box-header" id="navbarTop">
+                <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="#investmentContractModel">基本信息</a></li>
+                    <li><a href="#investmentContractEnteryterm">进场条款</a></li>
+                    <li><a href="#investmentContractAccounttermFixed">固定租金</a></li>
+                    <li><a href="#investmentContractAccounttermCommission">提成租金</a></li>
+                    <li><a href="#investmentContractAccounttermPropertyMgmt">物业管理费</a></li>
+                    <li><a href="#investmentContractAccounttermPromotion">推广费</a></li>
+                    <li><a href="#investmentContractDepositterm">预存款条款</a></li>
+                    <li><a href="#investmentContractProperteisterm">其它新签条件</a></li>
+                    <li><a href="#investmentContractCertificates">合同附件</a></li>
+                    <li><a href="#textareapanel">说明</a></li>
+                    <li><a href="#approvalProcess">审批流程</a></li>
+                </ul>
             </div>
         </section>
 
         <section class="content" style="margin-top: 140px;">
             <div id="webui">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="callout callout-info" style="display: none;">
-                            新建合同成功!
-                        </div>
-                        <div class="callout callout-danger" style="display: none;">
-                            新建合同失败!
-                        </div>
-                        <div class="callout callout-warning" style="display: none;">
-                            该合同已存在!
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
@@ -72,6 +57,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         include 'make-request/investmentContractAccounttermPromotion.php'; //推广费
                         include 'make-request/investmentContractDepositterm.php';
                         include 'make-request/investmentContractProperteisterm.php';
+                        include 'make-request/investmentContractCertificates.php';
                         include 'make-request/textareapanel.php';
                         include 'make-request/approvalProcess.php';
                         ?>
@@ -108,7 +94,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="fixed-table-body">
                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
                                     <thead id="assetsListingTable-sticky-header">
-                                        <tr>
+                                        <tr style="text-align: left;">
                                             <th>
                                                 <div class="th-inner">行</div>
                                                 <div class="fht-cell"></div>

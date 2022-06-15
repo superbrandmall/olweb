@@ -15,7 +15,8 @@
         <link rel="stylesheet" href="/views/assets/base/css/lotus-admin/bootstrap-table.css">
         <link rel="icon" href="/views/assets/base/img/content/lotus-admin/favicon.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="/views/assets/base/img/content/lotus-admin/favicon.ico" type="image/x-icon"/>
-        <link href="/views/assets/base/css/lotus-admin.css" rel="stylesheet">
+        <link rel="stylesheet" href="/views/assets/base/css/lotus-admin.css">
+        <link rel="stylesheet" href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" type="text/css" media="all" />
         <script>
             window.snipeit = {
                 settings: {
@@ -31,7 +32,7 @@
     if(isset($_SESSION['lotus_admin_login'])) {
         if(isset($_GET['p']) && $_GET['p'] != 'lotus-admin/reset') {
     ?>
-    <body class="sidebar-mini skin-blue ">
+    <body class="sidebar-mini skin-blue " data-spy="scroll" data-target="#navbarTop" data-offset="190">
         <div id="loader"></div>
         <div class="wrapper">
             <header class="main-header">

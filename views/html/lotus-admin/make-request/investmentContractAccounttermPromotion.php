@@ -41,14 +41,14 @@
                                                     <div class="th-inner">月金额(去税)</div>
                                                     <div class="fht-cell"></div>
                                                 </th>
-                                                <th>
+                                                <!--<th>
                                                     <div class="th-inner">提成率(含税)</div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
                                                     <div class="th-inner">提成率(去税)</div>
                                                     <div class="fht-cell"></div>
-                                                </th>
+                                                </th>-->
                                                 <th>
                                                     <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
@@ -63,58 +63,7 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody id="promotion">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select class="select2 promotionFeeItemDropDown new" id="promotionItem_1"></select>
-                                                </td>
-                                                <td>
-                                                    <div class="input-daterange input-group">
-                                                        <input type="text" class="form-control" id="promotionStartDate_1" style="min-width: 80px;" readonly />
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <span class="input-group-addon">-</span>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="promotionEndDate_1" style="min-width: 80px;" readonly />
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        </div>    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionAmount_1" type="text" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionTaxAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionDeduct_1" type="text" value="0"  />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionTaxDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <select class="select2 taxVat newVAT promotionVATDropDown newFee" id="promotionTaxRate_1"></select>
-                                                </td>
-                                                <td><input type="checkbox" id="promotionInvoiceFlag_1" value="" checked></td>
-                                                <td>
-                                                    <a href="javascript:void(0);" onClick="deleteRow(this)" >
-                                                        <i class="fa fa-minus-circle" style="color: #ED4A52; font-size: 16px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody id="promotion"></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -130,8 +79,8 @@
                 <label class="col-md-4 control-label">提成基数</label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" style="width: 100%;">
-                        <option value="" selected>包含营业额中的增值税</option>
-                        <option value="">不包含营业额中的增值税</option>
+                        <option value="1" selected>包含营业额中的增值税</option>
+                        <option value="2">不包含营业额中的增值税</option>
                     </select>
                 </div>
             </div>
@@ -141,7 +90,7 @@
                 <label class="col-md-4 control-label">最低营业额</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="promotionTargetSales" type="text" style="border-right: none;" value="1" />
+                        <input class="form-control" id="promotionTargetSales" type="text" style="border-right: none;" />
                         <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
                     </div>
                 </div>
@@ -163,16 +112,12 @@
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-6" style="padding-left: 2px;">
-                    <select class="select2" id="promotionPeriodTypeCode_1" style="width: 100%">
+                    <select class="select2" id="promotionSettleDay_1" style="width: 100%">
                         <?php 
                         {
-                           for($i=1;$i<25;$i++){
+                           for($i=1;$i<=31;$i++){
                                echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
-                           echo '<option value="25">25日</option>';
-                           for($i=26;$i<=31;$i++){
-                               echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
+                           }
                         }
                         ?>
                     </select>
@@ -208,17 +153,17 @@
                 <label class="col-md-4 control-label">税率 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" id="promotionOverdueTaxRate_1" style="width: 100%">
-                        <option value="">增值税0%</option>
-                        <option value="">增值税5%</option>
-                        <option value="" selected>增值税6%</option>
-                        <option value="">增值税11%</option>
-                        <option value="">增值税13%</option>
-                        <option value="">增值税17%</option>
-                        <option value="">增值税5%(价内)</option>
-                        <option value="">增值税16%</option>
-                        <option value="">增值税10%</option>
-                        <option value="">增值税9%</option>
-                        <option value="">增值税3%</option>
+                        <option value="0">增值税0%</option>
+                        <option value="0.05">增值税5%</option>
+                        <option value="0.06" selected>增值税6%</option>
+                        <option value="0.11">增值税11%</option>
+                        <option value="0.13">增值税13%</option>
+                        <option value="0.17">增值税17%</option>
+                        <option value="0.05">增值税5%(价内)</option>
+                        <option value="0.16">增值税16%</option>
+                        <option value="0.1">增值税10%</option>
+                        <option value="0.09">增值税9%</option>
+                        <option value="0.03">增值税3%</option>
                     </select>
                 </div>
             </div>

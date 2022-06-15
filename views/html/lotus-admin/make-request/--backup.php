@@ -33,8 +33,8 @@
             </label>
             <button type="button" class="btn btn-default btn-sm disabled">销售返款</button>
             <button type="button" class="btn btn-default btn-sm disabled">临时费用</button>
-            <button type="button" class="btn btn-default btn-sm disabled">其他费用</button>
-            <button type="button" class="btn btn-default btn-sm disabled">其他固定费用</button>
+            <button type="button" class="btn btn-default btn-sm disabled">其它费用</button>
+            <button type="button" class="btn btn-default btn-sm disabled">其它固定费用</button>
             <label type="button" class="btn btn-default btn-sm" for="tab_pay_first_8">
                 <input type="checkbox" id="tab_pay_first_8" checked>滞纳金
             </label>

@@ -10,12 +10,28 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 160px;">
+        <section class="sub-header" style="height: 200px;">
             <h4>
-                新租赁合同申请单
+                租赁合同申请单
             </h4>
             <div class="pull-right">
-                <a href="/lotus-admin/make-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">新建新租赁合同申请单</span></a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-plus icon-white"></i> 创建
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
+                        <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>
+                        <?php
+                        if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+                        ?>                    
+                        <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
+                        <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
             </div>
             <div class="box-header">
                 <div class="box-body">
@@ -36,17 +52,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">单号</label>
+                                <label class="col-md-4 control-label" style="text-align: right;">签约编号</label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <input class="form-control" id="bizId" type="text"  />
+                                    <input class="form-control" id="contractNo" type="text"  />
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                                <label class="col-md-4 control-label" style="text-align: right;">表单类型</label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select id="selectTenant" class="select2" style="width: 100%"></select>
+                                    <select class="select2" id="formType" style="width: 100%"></select>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +89,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <option value="SC041">南奉店</option>
                                         <option value="SC127">南桥店</option>
                                         <option value="SC050">金山店</option>
+                                        <?php
+                                        if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+                                        ?>   
+                                        <option value="SC999">测试店</option>
+                                        <?php
+                                        }
+                                        ?>
                                     </select>
                                 </div>
                             </div>
@@ -82,6 +105,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="selectStore" style="width: 100%"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="selectTenant" style="width: 100%"></select>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +131,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </section>
     </form>
 
-    <section class="content" style="margin-top: 210px;">
+    <section class="content" style="margin-top: 250px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -142,11 +173,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">来源单据</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">状态</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">表单类型</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -205,5 +248,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 </div>
+
+<?php include 'component/investment-contract-request-modify-create.php'; ?>
 
 <?php include 'footer.php'; ?>

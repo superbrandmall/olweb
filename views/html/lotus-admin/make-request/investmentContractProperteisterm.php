@@ -1,6 +1,6 @@
  <div class="box box-default" id="investmentContractProperteisterm">    
     <div class="box-header with-border">
-        <h3 class="box-title">其他商务条件</h3>
+        <h3 class="box-title">其它新签条件</h3>
         <div class="box-tools">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -9,50 +9,66 @@
     <div class="box-body">
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">营业开始时间 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">目标营业额 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <div class="input-group">
-                        <input type="text" class="form-control timepicker" id="openStartTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
-                        <span class="input-group-addon" style="border: none; background: transparent;">-</span>
-                        <div class="input-group">
-                            <input type="text" class="form-control timepicker" id="openEndTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
-                        </div>    
+                        <input class="form-control money" id="targetSales" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">目标营业额 <span class="btn-box-tool-lg">*</span></label>
-                <div class="input-group">
-                    <input class="form-control" type="text" style="border-right: none;" />                                                
-                    <span class="input-group-addon" id="targetSales" style="border-left: none; background: transparent;">元/月</span>
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-md-4 control-label">附件上传</label>
-                <div class="col-md-8 col-sm-12">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="javascript:$('input[type=\'file\']').click();">点击上传</button>
-                    <input type="file" style="display: none;" onchange="javascript:$('li[id=\'fileName\']').text(this.files[0].name);" accept="image/*,application/pdf" multiple />
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <ul id="fileNames" style="padding-left: 0;">
-                        <li id="fileName"></li>
-                    </ul>
+                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="posMode" style="width: 100%"></select>
                 </div>
             </div>
         </div>
     </div>
+    <div class="box-body">
+        <div class="col-md-12">
+            <h5 style="float: left;">预估销售额 <span class="btn-box-tool-lg">*</span></h5>
+            <div class="pull-right" style="margin: 10px 0;">
+                <a href="javascript:void(0);" onClick="addRowMinSales()">
+                    <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="bootstrap-table">
+                <div class="fixed-table-container">
+                    <div class="fixed-table-body">
+                        <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
+                            <thead id="assetsListingTable-sticky-header">
+                                <tr>
+                                    <th>
+                                        <div class="th-inner">行</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">金额 <span class="btn-box-tool-lg">*</span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">操作</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="minSales"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div> 
     <!--
     <div class="box-body">
         <div class="col-md-12">
@@ -98,7 +114,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">其他费用与原合同是否一致 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">其它费用与原合同是否一致 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-6">
                     <select class="select2" style="width: 100%">
                         <option value="">是</option>
@@ -134,7 +150,7 @@
                 </div>
             </div>
             <div class="form-group" style="margin-bottom: 0;">
-                <label class="col-md-4 control-label">条款二: 其他各项费用(含预估费用)总计</label>
+                <label class="col-md-4 control-label">条款二: 其它各项费用(含预估费用)总计</label>
                 <div class="col-md-8 col-sm-12">
                      <input class="form-control" type="text" />
                 </div>
@@ -181,7 +197,7 @@
                 </div>
             </div>
             <div class="form-group" style="margin-bottom: 0;">
-                <label class="col-md-4 control-label">条款二: 其他各项费用支付时间</label>
+                <label class="col-md-4 control-label">条款二: 其它各项费用支付时间</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control date-picker" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
@@ -223,14 +239,14 @@
                 <div class="col-md-8 col-sm-6">
                     <select class="select2" style="width: 100%">
                         <option value="">A 双方互无需承担任何赔偿和/或补偿和/或违约责任</option>
-                        <option value="">B 乙方应补交装修期内和/或其他减免的费用</option>
+                        <option value="">B 乙方应补交装修期内和/或其它减免的费用</option>
                         <option value="">C 乙方还需支付甲方租赁期内最高年度月租金和月物业管理费之和的三倍金额</option>
-                        <option value="">D 其他违约金</option>
+                        <option value="">D 其它违约金</option>
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">保证金及其他费用 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">保证金及其它费用 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-6">
                     <select class="select2" style="width: 100%">
                         <option value="">A 退还扣除乙方应付未付款项后的余额</option>

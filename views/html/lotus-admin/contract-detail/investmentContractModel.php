@@ -44,13 +44,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">招商人员</label>
                 <div class="col-md-8 col-sm-12">
-                    <?php
-                    if(isset($_SESSION['lotus_admin_name'])) {
-                        echo '<input class="form-control" type="text" value="'.$_SESSION['lotus_admin_name'].'" readonly />';
-                    } else {
-                        echo '<input class="form-control" type="text" value="管理员" readonly />';
-                    }
-                    ?>
+                    <input class="form-control" id="approvalName" type="text" readonly />
                 </div>
             </div>
         </div>
@@ -83,11 +77,11 @@
                 <label class="col-md-4 control-label">租赁期限</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-daterange input-group">
-                        <input type="text" class="form-control" id="startDate" readonly />
+                        <input type="text" class="form-control" id="startDate" disabled />
                         <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                         <span class="input-group-addon" style="border: none; background: transparent;">-</span>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="endDate" readonly />
+                            <input type="text" class="form-control" id="endDate" disabled />
                             <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                         </div>    
                     </div>
@@ -96,7 +90,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">业态</label>
                 <div class="col-md-8 col-sm-12">
-                    <input id="modality" class="form-control" id="bizTypeName" type="text" readonly />
+                    <input class="form-control" id="bizTypeName" type="text" readonly />
                 </div>
             </div>
             <div class="form-group">
@@ -115,6 +109,12 @@
                 <label class="col-md-4 control-label">合同类型</label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" id="contractType" style="width: 100%;" disabled="readonly"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">条款计算方式 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="termCalcMode" style="width: 100%"></select>
                 </div>
             </div>
         </div>
@@ -147,9 +147,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">收银方式</label>
+                <label class="col-md-4 control-label">支付方式</label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="posMode" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="paymentMode" style="width: 100%;" disabled="readonly"></select>
                 </div>
             </div>
         </div>
@@ -167,26 +167,27 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">营业开始时间 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12 required">
+                <label class="col-md-4 control-label">目标营业额</label>
+                <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input type="text" class="form-control timepicker" id="openStartTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
-                        <span class="input-group-addon" style="border: none; background: transparent;">-</span>
-                        <div class="input-group">
-                            <input type="text" class="form-control timepicker" id="openEndTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
-                        </div>    
+                        <input class="form-control money" id="targetSales" type="text" style="border: none;" readonly />                                                
+                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">目标营业额</label>
+                <label class="col-md-4 control-label">预估销售额</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="targetSales" type="text" style="border: none;" readonly />                                                
+                        <input class="form-control money" id="minSales" type="text" style="border-right: none;" readonly />                                                
                         <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">收银方式</label>
+                <div class="col-md-8 col-sm-12">
+                    <select class="select2" id="posMode" style="width: 100%;" disabled="readonly"></select>
                 </div>
             </div>
         </div>
@@ -202,7 +203,7 @@
                 <label class="col-md-4 control-label">交付日期</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control date-picker" id="deliveryDate" type="text" data-plugin="datepicker" readonly />
+                        <input class="form-control date-picker" id="deliveryDate" type="text" data-plugin="datepicker" disabled />
                         <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -211,7 +212,7 @@
                 <label class="col-md-4 control-label">进场日期</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control date-picker" id="enterDate" type="text" data-plugin="datepicker" readonly />
+                        <input class="form-control date-picker" id="enterDate" type="text" data-plugin="datepicker" disabled />
                         <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
@@ -234,10 +235,10 @@
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">装修天数</label>
-                <div class="col-md-8 col-sm-12 required">
+                <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="freeDays" placeholder="请选择装修期限" type="text" style="border-right: none;" readonly />                                                
-                        <span class="input-group-addon" style="border: 0 none; background: #eee;">天</span>
+                        <input class="form-control" id="freeDays" placeholder="请选择装修期限" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="border: 1px solid #ccc; background: #fff; border-right: none; ime-mode:disabled;" />                                      
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">天</span>
                     </div>
                 </div>
             </div>
@@ -252,10 +253,24 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">营业时间 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <div class="input-group">
+                        <input type="text" class="form-control timepicker" id="openStartTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
+                        <span class="input-group-addon" style="border: none; background: transparent;">-</span>
+                        <div class="input-group">
+                            <input type="text" class="form-control timepicker" id="openEndTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
+                        </div>    
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div class="box-body" id="investmentContractAccounttermCompare" style="display: none;">
+    <div class="box-body" id="investmentContractAccounttermCompare">
         <div class="col-md-12">
             <h5 style="margin-bottom: 0;">取高明细</h5>
             <hr>

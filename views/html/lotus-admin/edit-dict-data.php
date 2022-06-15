@@ -68,7 +68,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <p>p.s. 数据描述中正柜租赁请填1，pop-up租赁请填2，kiosk租赁请填3，广告位租赁请填4，场地租赁请填5，用逗号隔开。如1,2,3</p>
+                                        <p>p.s. 数据描述中正柜租赁请填1，kow租赁请填2，pop-up租赁请填3，kiosk租赁请填4，广告位租赁请填5，场地租赁请填6，用逗号隔开。如1,2,3</p>
                                     </div>
                                 </div>
                                                        

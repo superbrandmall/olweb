@@ -1,5 +1,7 @@
 $.mallCode = {
-    shanghaiSbm: "OLMALL180424000005",
-    xuhuiTm: "OLMALL180424000004",
-    baoshanTm: "OLMALL180424000006"
+    shanghaiSbm: "OLMALL180917000003",
+    xuhuiTm: "OLMALL180917000001",
+    baoshanTm: "OLMALL180917000002",
+    luoyangSbm: "OLMALL190117000001",
+    hefeiSbm: "OLMALL190409000001"
 };

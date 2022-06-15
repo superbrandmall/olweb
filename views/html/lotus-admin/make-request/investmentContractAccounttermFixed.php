@@ -15,111 +15,61 @@
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
-                        <div class="bootstrap-table">
-                            <div class="fixed-table-container">
-                                <div class="fixed-table-body">
-                                    <table class="table table-striped snipe-table table-responsive">
-                                        <thead id="assetsListingTable-sticky-header">
-                                            <tr>
-                                                <th>
-                                                    <div class="th-inner">行</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(去税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">单价(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">单价(去税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">开发票</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">操作</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="fixedRent">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select class="select2 fixedFeeItemDropDown new" id="fixedRentItem_1"></select>
-                                                </td>
-                                                <td>
-                                                    <div class="input-daterange input-group">
-                                                        <input type="text" class="form-control" id="fixedRentStartDate_1" style="min-width: 80px;" readonly />
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <span class="input-group-addon">-</span>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="fixedRentEndDate_1" style="min-width: 80px;" readonly />
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        </div>    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentAmount_1" type="text" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentTaxAmount_1" type="text" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="fixedRentTaxRentAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <select class="select2 taxVat newVAT fixedVATDropDown newFee" id="fixedRentTaxRate_1"></select>
-                                                </td>
-                                                <td><input type="checkbox" id="fixedRentInvoiceFlag_1" value="" checked></td>
-                                                <td>
-                                                    <a href="javascript:void(0);" onClick="deleteRow(this)" >
-                                                        <i class="fa fa-minus-circle" style="color: #ED4A52; font-size: 16px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-body">
+                                <table class="table table-striped snipe-table table-responsive">
+                                    <thead id="assetsListingTable-sticky-header">
+                                        <tr>
+                                            <th>
+                                                <div class="th-inner">行</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">单价(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">单价(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+
+                                            <th>
+                                                <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">开发票</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="fixedRent"></tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -146,16 +96,12 @@
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-6" style="padding-left: 2px;">
-                    <select class="select2" id="fixedRentPeriodTypeCode_1" style="width: 100%">
+                    <select class="select2" id="fixedRentSettleDay_1" style="width: 100%">
                         <?php 
                         {
-                           for($i=1;$i<25;$i++){
+                           for($i=1;$i<=31;$i++){
                                echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
-                           echo '<option value="25">25日</option>';
-                           for($i=26;$i<=31;$i++){
-                               echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
+                           }
                         }
                         ?>
                     </select>
@@ -191,17 +137,17 @@
                 <label class="col-md-4 control-label">税率 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" id="fixedRentOverdueTaxRate_1" style="width: 100%">
-                        <option value="">增值税0%</option>
-                        <option value="">增值税5%</option>
-                        <option value="" selected>增值税6%</option>
-                        <option value="">增值税11%</option>
-                        <option value="">增值税13%</option>
-                        <option value="">增值税17%</option>
-                        <option value="">增值税5%(价内)</option>
-                        <option value="">增值税16%</option>
-                        <option value="">增值税10%</option>
-                        <option value="">增值税9%</option>
-                        <option value="">增值税3%</option>
+                        <option value="0">增值税0%</option>
+                        <option value="0.05">增值税5%</option>
+                        <option value="0.06" selected>增值税6%</option>
+                        <option value="0.11">增值税11%</option>
+                        <option value="0.13">增值税13%</option>
+                        <option value="0.17">增值税17%</option>
+                        <option value="0.05">增值税5%(价内)</option>
+                        <option value="0.16">增值税16%</option>
+                        <option value="0.1">增值税10%</option>
+                        <option value="0.09">增值税9%</option>
+                        <option value="0.03">增值税3%</option>
                     </select>
                 </div>
             </div>

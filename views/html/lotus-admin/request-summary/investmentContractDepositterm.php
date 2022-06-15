@@ -1,6 +1,6 @@
 <div class="box box-default" id="investmentContractDepositterm">    
     <div class="box-header with-border">
-        <h3 class="box-title">保证金</h3>
+        <h3 class="box-title">预存款条款</h3>
         <div class="box-tools">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
@@ -21,11 +21,11 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">费用期间</div>
+                                                <div class="th-inner">金额(元)</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">合计(元)</div>
+                                                <div class="th-inner">最后缴款期</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                         </tr>

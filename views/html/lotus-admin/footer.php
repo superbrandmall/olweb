@@ -2,29 +2,24 @@
 if(isset($_SESSION['lotus_admin_login'])) {
     if(isset($_GET['p']) && $_GET['p'] != 'lotus-admin/reset') {
 ?>
-            <footer class="main-footer hidden-print">
-                <div class="pull-right hidden-xs">
-                </div>
-                &copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
-            </footer>
-        </div>
-
-        <div class="modal  modal-danger fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer">
-                        <form method="post" id="deleteForm" role="form">
-                            <button type="button" class="btn btn-default  pull-left" data-dismiss="modal">取消</button>
-                            <button type="submit" class="btn btn-outline" id="dataConfirmOK">确定</button>
-                        </form>
+<div class="modal fade" id="submitStateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">提交审核中，请稍后</h4>
+                        </div>
+                        <div id="submitState" class="modal-body"></div>
                     </div>
                 </div>
             </div>
+
+            <footer class="main-footer hidden-print text-center">
+                <div class="pull-right hidden-xs">
+                </div>
+                &copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
+                . <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
+                . <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
+            </footer>
         </div>
 <?php
     }
@@ -43,13 +38,15 @@ if(isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/plugins/accounting.min.js"></script>
         <?php
         if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/scripts-admin.js"></script>';
+            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>';
         } else {
-            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/script.js"></script>';
+            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/script.js?t='.date("Y-m-d").'"></script>';
         }
         ?>
         <?php
             echo $scripts; 
         ?>
+        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
+        <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>
     </body>
 </html>

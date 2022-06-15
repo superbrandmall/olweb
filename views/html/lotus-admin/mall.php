@@ -1,9 +1,6 @@
 <?php
-$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/mall-admin.js"></script>'.PHP_EOL
-    . '        <script src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js" type="text/javascript"></script>'.PHP_EOL
-    . '        <script src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>'.PHP_EOL;
+$scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/mall-admin.js"></script>'.PHP_EOL;
 ?>
-<link href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <?php include 'sidebar.php'; ?>
 

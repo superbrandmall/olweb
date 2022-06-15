@@ -2,22 +2,23 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
         findContractStatus('CONTRACT_STATUS');
     }
-    
     if($.cookie('searchContractsContractStatus') != ''){
         $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
+    }
+    if($.cookie('searchContractsContractVersion') != ''){
+        $('#contractVersion').val($.cookie('searchContractsContractVersion')).trigger('change');
     }
     if($.cookie('searchContractsContractNo') != ''){
         $('#contractNo').val($.cookie('searchContractsContractNo'));
     }
-    
-    if($.cookie('searchContractsSelectTenantVal') != 'null'){
+    if($.cookie('searchContractsSelectTenantVal') != null){
         var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
     }
-    if($.cookie('searchContractsSelectDepartmentVal') != 'null'){
+    if($.cookie('searchContractsSelectDepartmentVal') != null){
         $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
     }
-    if($.cookie('searchContractsSelectStoreVal') != 'null'){
+    if($.cookie('searchContractsSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchContractsSelectStoreTxt'), $.cookie('searchContractsSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
     }
@@ -60,17 +61,18 @@ $(document).ready(function(){
     })
     $("#department").find("option:not(.no-remove)").remove();
     
-    updateSelectTenantDropDown(10);
+    updateSelectTenantDropDown(50);
     updateSelectStoreDropDown(10);
     
     $('#clear').click(function(){
         $('#contractNo').val('');
         $('#selectTenant, #selectStore').empty(); 
-        $('#department, #contractStatus').val("").trigger('change');
+        $('#department, #contractStatus, #contractVersion').val("").trigger('change');
         $('#selectTenant, #selectStore').select2("val", "");
         
         $.cookie('searchContractsContractStatus','');
         $.cookie('searchContractsContractNo', '');
+        $.cookie('searchContractsContractVersion','');
         $.cookie('searchContractsSelectTenantVal', null);
         $.cookie('searchContractsSelectStoreVal', null);
         $.cookie('searchContractsSelectDepartmentVal', null);
@@ -79,6 +81,7 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('searchContractsContractStatus', $('#contractStatus').val());
         $.cookie('searchContractsContractNo', $('#contractNo').val());
+        $.cookie('searchContractsContractVersion',$('#contractVersion').val());
         $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
         $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
@@ -109,6 +112,8 @@ function findAllContractsByKVCondition(p,c){
         }
     }
     
+    params.push(param);
+    
     if($.cookie('searchContractsSelectDepartmentVal') != null && $.cookie('searchContractsSelectDepartmentVal') != '' && $.cookie('searchContractsSelectDepartmentVal') != 'null'){
         param = {
             "columnName": "mallCode",
@@ -116,16 +121,18 @@ function findAllContractsByKVCondition(p,c){
             "operator": "AND",
             "value": $.cookie('searchContractsSelectDepartmentVal')
         }
-    } else {
-        param = {
-            "columnName": "mallCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('mallSelected').split(':::')[1]
-        }
+        params.push(param);
     }
     
-    params.push(param);
+    if($.cookie('searchContractsContractVersion') != null && $.cookie('searchContractsContractVersion') != ''){
+        param = {
+            "columnName": "contractVersion",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContractsContractVersion')
+        }
+        params.push(param);
+    }
     
     if($.cookie('searchContractsContractNo') != null && $.cookie('searchContractsContractNo') != ''){
         param = {
@@ -189,13 +196,14 @@ function findAllContractsByKVCondition(p,c){
                     $.each(response.data.content, function(i,v){
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+v.contractCode+'</a></td>\n\
+                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a></td>\n\
                             <td>'+v.contractNo+'</td>\n\
-                            <td>'+(v.contractStatus || '')+'</td>\n\
+                            <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
+                            <td>'+('V'+v.contractVersion || '')+'</td>\n\
                             <td>'+(v.tenantName || '')+'</td>\n\
-                            <td>'+(v.vshopLotus.mallName || '')+'</td>\n\
-                            <td>'+v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']</td>\n\
-                            <td>'+(v.vshopLotus.modality || '')+'</td>\n\
+                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.mallName : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.modality : '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                         </tr>');
                     });
@@ -205,8 +213,6 @@ function findAllContractsByKVCondition(p,c){
                     } else {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
-                    
-                    renderContractStatus();
                 } else {
                     $('#contracts').html('<tr><td colspan="8" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
@@ -244,18 +250,16 @@ function findContractStatus(dictTypeCode){
     })
 }
 
-function renderContractStatus() {
-    if(sessionStorage.getItem("contractStatus") && sessionStorage.getItem("contractStatus") != null && sessionStorage.getItem("contractStatus") != '') {
-        var status = $.parseJSON(sessionStorage.getItem("contractStatus"));
-        $.each(status, function(i,v){
-            $("#contracts tr td:nth-child(3)").each(function() {
-                if(v.dictCode == $(this).text()){
-                    $(this).text(v.dictName);
-                }          
-            })
-            return false;
+function renderContractStatus(s) {
+    var status = '';
+    if(sessionStorage.getItem("contractStatus") && sessionStorage.getItem("contractStatus") != null && sessionStorage.getItem("contractStatus") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("contractStatus")), function(i,v){
+            if(v.dictCode == s){
+                status = v.dictName;
+            }
         })
-   }
+    }
+    return status;
 }
 
 function updateSelectTenantDropDown(data_count) {
@@ -368,7 +372,8 @@ function updateSelectStoreDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.unitCode+':::'+item.code+':::'+item.unitName,
-                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            }
+                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
+                            }
                             var returnData = [];
                             returnData.push(data);
                             return returnData;

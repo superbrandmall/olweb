@@ -1,17 +1,10 @@
 $(document).ready(function(){
+    findDictCodeByDictTypeCode('BRAND_ATTRIBUTE');
+    
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "succeed":
-                $('.callout-info').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
-                break;
-            case "fail":
-                $('.callout-danger').show().delay(2000).hide(0);
-                $('html, body').animate({
-                    scrollTop: $('#webui').offset().top
-                }, 0);
+                successMsg('00','保存成功！');
                 break;
             default:
                 break;
@@ -21,11 +14,23 @@ $(document).ready(function(){
         },1000);
     }
     
+    if($.cookie('searchBrandStatus') != null){
+        $('#status').val($.cookie('searchBrandStatus')).trigger('change');
+    }
+    
+    if($.cookie('searchBrandName') != ''){
+        $('#name').val($.cookie('searchBrandName'));
+    }
+    
+    if($.cookie('searchBrandAttribute') != null){
+        $('#brandAttribute').val($.cookie('searchBrandAttribute')).trigger('change');
+    }
+    
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        ShowBrands(getURLParameter('page'),items);
+        findAllBrandsByKVCondition(getURLParameter('page'),items);
     } else {
-        ShowBrands(1,items);
+        findAllBrandsByKVCondition(1,items);
     }
 
     switch (getURLParameter('items')) {
@@ -42,15 +47,90 @@ $(document).ready(function(){
             $('.page-size').text('50');
             break;
         default:
-            $('.page-size').text('10');
+            $('.page-size').text('20');
             break;
     }
+    
+    updateBrandAttribute();
+    
+    $('#clear').click(function(){
+        $('#name').val('');
+        $('#status, #brandAttribute').val('').trigger('change');
+        
+        $.cookie('searchBrandStatus',null);
+        $.cookie('searchBrandName', '');
+        $.cookie('searchBrandAttribute', null);
+    })
+    
+    $('#search').click(function(){
+        $.cookie('searchBrandStatus',$('#status').val());
+        $.cookie('searchBrandName', $('#name').val());
+        $.cookie('searchBrandAttribute', $('#brandAttribute').val());
+        findAllBrandsByKVCondition(1,items);
+    })
 });
 
-function ShowBrands(p,c){
+function updateBrandAttribute() {
+    $('#brandAttribute').html('<option value="">未选择</option>');
+    var brandAttribute  = JSON.parse(sessionStorage.getItem("BRAND_ATTRIBUTE"));
+    if(brandAttribute.length > 0){
+        $.each(brandAttribute, function(i,v) {
+            $('#brandAttribute').append('<option value="'+v.dictCode+'">'+v.dictName+'</option>');
+        })
+    }
+}
+
+function findAllBrandsByKVCondition(p,c){
+    $('#brands').html('');
+    var params = [];
+    var param = {};
+    
+    if($.cookie('searchBrandStatus') != null && $.cookie('searchBrandStatus') != '' && $.cookie('searchBrandStatus') != 'null'){
+        param = {
+            "columnName": "status",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchBrandStatus')
+        }
+    } else {
+            param = {
+            "columnName": "status",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": 1
+        }
+    }
+    
+    params.push(param);
+        
+    if($.cookie('searchBrandName') != null && $.cookie('searchBrandName') != ''){
+        param = {
+            "columnName": "name",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchBrandName')
+        }
+        params.push(param);
+    }
+
+    if($.cookie('searchBrandAttribute') != null && $.cookie('searchBrandAttribute') != '' && $.cookie('searchBrandAttribute') != 'null'){
+        param = {
+            "columnName": "brandAttribute",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchBrandAttribute')
+        }
+        params.push(param);
+    }
+        
+     var map = {
+        "params": params
+    }
+    
     $.ajax({
-        url: $.api.baseLotus+"/api/brand/lotus/findAll?page="+(p-1)+"&size="+c+"&sort=id,desc",
-        type: "GET",
+        url: $.api.baseLotus+"/api/brand/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -73,26 +153,17 @@ function ShowBrands(p,c){
                     generatePages(p, pages, c);
 
                     $.each(response.data.content, function(i,v){
-                        $('#brandsL').append('\
+                        $('#brands').append('\
                         <tr data-index="'+i+'">\n\
-                        <td>'+v.name+'</td>\n\
-                        <td>'+v.modality1+'</td>\n\
-                        <td>'+v.modality2+'</td>\n\
-                        <td>'+v.modality3+'</td>\n\
-                        <td>'+(v.contactName || '')+'</td>\n\
-                        <td>'+(v.contactPhone || '')+'</td>\n\
+                        <td><a href="/lotus-admin/brand-detail?id='+v.code+'">'+v.name+'</a></td>\n\
+                        <td>'+(v.status == 1? '使用中' : '已删除')+'</td>\n\
+                        <td>'+(v.remarkFirst || '')+'</td>\n\
+                        <td>'+(v.modality1 || '')+'/'+(v.modality2 || '')+'/'+(v.modality3 || '')+'</td>\n\
+                        <td>'+(v.modality1 || '')+'</td>\n\
+                        <td>'+(v.modality2 || '')+'</td>\n\
+                        <td>'+(v.modality3 || '')+'</td>\n\
+                        <td>'+(v.modality4 || '')+'</td>\n\
                         </tr>');
-                        
-                        $('#brandsS').append('\
-<tr data-index="'+i+'">\n\
-<td colspan="65">\n\
-<div class="card-views"><div class="card-view"><span class="title">品牌</span><span class="value">'+v.name+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">一级业态</span><span class="value">'+v.modality1+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">一级业态</span><span class="value">'+v.modality2+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">一级业态</span><span class="value">'+v.modality3+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">联系人</span><span class="value">'+(v.contactName || '')+'</span></div></div>\n\
-<div class="card-views"><div class="card-view"><span class="title">联系电话</span><span class="value">'+(v.contactPhone || '')+'</span></div></div>\n\
-</td></tr>');
 
                     });
                     
@@ -101,6 +172,8 @@ function ShowBrands(p,c){
                     } else {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
+                } else {
+                    $('#brands').html('<tr><td colspan="8" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

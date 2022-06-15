@@ -39,8 +39,8 @@
                 <div class="col-md-8 col-sm-12" id="deliveryDate"></div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">合作方式:</label>
-                <div class="col-md-8 col-sm-12" id="cooperationMode"></div>
+                <label class="col-md-4 control-label">支付方式:</label>
+                <div class="col-md-8 col-sm-12" id="paymentMode"></div>
             </div>
         </div>
         <div class="col-md-4">

@@ -42,19 +42,19 @@
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
                                                     <div class="th-inner">提成率(去税) <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
+                                                <!--<th>
+                                                    <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="fht-cell"></div>
+                                                </th>-->
                                                 <th>
-                                                    <div class="th-inner">最低营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
@@ -71,64 +71,7 @@
                                                 </th>
                                             </tr>
                                         </thead>
-                                        <tbody id="commission">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select class="select2 commissionFeeItemDropDown new" id="commissionItem_1"></select>
-                                                </td>
-                                                <td>
-                                                    <div class="input-daterange input-group">
-                                                        <input type="text" class="form-control" id="commissionStartDate_1" style="min-width: 80px;" readonly />
-                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <span class="input-group-addon">-</span>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="commissionEndDate_1" style="min-width: 80px;" readonly />
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        </div>    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <select class="select2 commissionDeductTypeDropDown new" id="commissionDeductType_1"></select>
-                                                </td>
-                                                <td>
-                                                    <select class="select2 commissionCategoryDropDown new" id="commissionCategory_1"></select>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="commissionDeduct_1" type="text" value="0" />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="commissionTaxDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="commissionAmount_1" type="text" value="0" style="min-width: 60px;" />
-                                                        <span class="input-group-addon">元/月</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="commissionMinSales_1" type="text" style="min-width: 60px;" />
-                                                        <span class="input-group-addon">元/月</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <select class="select2 taxVat newVAT commissionVATDropDown newFee" id="commissionTaxRate_1"></select>
-                                                </td>
-                                                <td><input type="checkbox" id="commissionInvoiceFlag_1" value="" checked></td>
-                                                <td>
-                                                    <a href="javascript:void(0);" onClick="deleteRow(this)" >
-                                                        <i class="fa fa-minus-circle" style="color: #ED4A52; font-size: 16px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        <tbody id="commission"></tbody>
                                     </table>
                                 </div>
                             </div>
@@ -144,8 +87,8 @@
                 <label class="col-md-4 control-label">提成基数 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" style="width: 100%;">
-                        <option value="" selected>包含营业额中的增值税</option>
-                        <option value="">不包含营业额中的增值税</option>
+                        <option value="1" selected>包含营业额中的增值税</option>
+                        <option value="2">不包含营业额中的增值税</option>
                     </select>
                 </div>
             </div>
@@ -166,16 +109,12 @@
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-6" style="padding-left: 2px;">
-                    <select class="select2" id="commissionPeriodTypeCode_1" style="width: 100%">
+                    <select class="select2" id="commissionSettleDay_1" style="width: 100%">
                         <?php 
                         {
-                           for($i=1;$i<25;$i++){
+                           for($i=1;$i<=31;$i++){
                                echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
-                           echo '<option value="25">25日</option>';
-                           for($i=26;$i<=31;$i++){
-                               echo '<option value="'.$i.'">'.$i.'日</option>';
-                           } 
+                           }
                         }
                         ?>
                     </select>
@@ -211,17 +150,17 @@
                 <label class="col-md-4 control-label">税率 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" id="commissionOverdueTaxRate_1" style="width: 100%">
-                        <option value="">增值税0%</option>
-                        <option value="">增值税5%</option>
-                        <option value="" selected>增值税6%</option>
-                        <option value="">增值税11%</option>
-                        <option value="">增值税13%</option>
-                        <option value="">增值税17%</option>
-                        <option value="">增值税5%(价内)</option>
-                        <option value="">增值税16%</option>
-                        <option value="">增值税10%</option>
-                        <option value="">增值税9%</option>
-                        <option value="">增值税3%</option>
+                        <option value="0">增值税0%</option>
+                        <option value="0.05">增值税5%</option>
+                        <option value="0.06" selected>增值税6%</option>
+                        <option value="0.11">增值税11%</option>
+                        <option value="0.13">增值税13%</option>
+                        <option value="0.17">增值税17%</option>
+                        <option value="0.05">增值税5%(价内)</option>
+                        <option value="0.16">增值税16%</option>
+                        <option value="0.1">增值税10%</option>
+                        <option value="0.09">增值税9%</option>
+                        <option value="0.03">增值税3%</option>
                     </select>
                 </div>
             </div>
