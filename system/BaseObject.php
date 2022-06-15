@@ -38,24 +38,20 @@ abstract class BaseObject {
         } else {*/
             if(strpos($_SERVER['REQUEST_URI'],'ljz-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/ljz-admin';
-            } else if(strpos($_SERVER['REQUEST_URI'],'ly-admin') !== false) {
-                $this->domain = 'http://ol.superbrandmall.com/ly-admin';
-            } else if(strpos($_SERVER['REQUEST_URI'],'bs-admin') !== false) {
-                $this->domain = 'http://ol.superbrandmall.com/bs-admin';
-            } else if(strpos($_SERVER['REQUEST_URI'],'hf-admin') !== false) {
-                $this->domain = 'http://ol.superbrandmall.com/hf-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'brands-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/brands-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'lotus-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/lotus-admin';
+            } else if(strpos($_SERVER['REQUEST_URI'],'kow-admin') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/kow-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'portal') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/portal';
             } else if(strpos($_SERVER['REQUEST_URI'],'v2-admin') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/v2-admin';
             } else if(strpos($_SERVER['REQUEST_URI'],'v2') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/v2';
-            } else if(strpos($_SERVER['REQUEST_URI'],'lotus') !== false) {
-                $this->domain = 'http://ol.superbrandmall.com/lotus';
+            } else if(strpos($_SERVER['REQUEST_URI'],'v3') !== false) {
+                $this->domain = 'http://ol.superbrandmall.com/v3';
             } else if(strpos($_SERVER['REQUEST_URI'],'gateway') !== false) {
                 $this->domain = 'http://ol.superbrandmall.com/gateway';
             } else {

@@ -10,7 +10,7 @@ if (file_exists('system/BaseObject.php')) {
 class Session extends BaseObject {
     public function _session() {
         if(!isset($_SESSION['uid'])) {
-            if(isset($_GET['p']) && $_GET['p'] != 'lotus/login') {
+            if(isset($_GET['p']) && $_GET['p'] != 'v3/login') {
                 if (explode('?', $_SERVER['REQUEST_URI'])[1] != null) {
                     $param = '?'.explode('?', $_SERVER['REQUEST_URI'])[1];
                 } else {
@@ -21,7 +21,7 @@ class Session extends BaseObject {
                 die();
             }
         } else {
-            if(isset($_GET['p']) && $_GET['p'] == 'lotus/login') {
+            if(isset($_GET['p']) && $_GET['p'] == 'v3/login') {
                 header("location: $this->domain/default".$param);
                 die();
             }
