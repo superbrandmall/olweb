@@ -1,7 +1,7 @@
 <div class="modal fade" id="investment-contract-request-modify-create" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md">
         <div class="modal-content c-square" style="background: #fff;">
-            <div class="modal-header"><h4>续签合同申请</h4></div>
+            <div class="modal-header"><h4 class="text-center"></h4></div>
             <div class="modal-body">
                 <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                     <div class="col-md-12">
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg">*</span> 表单类型</label>
                             <div class="col-md-8 col-sm-12" required>
-                                <select class="select2" id="renewFormType" style="width: 100%" disabled></select>
+                                <select class="select2" id="updateFormType" style="width: 100%" disabled></select>
                             </div>
                         </div>
                     </div>

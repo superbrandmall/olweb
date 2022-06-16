@@ -104,8 +104,25 @@ $(document).ready(function(){
         return false;
     });
     
-    $('#createRenew').click(function(){
-        updateDictDropDownByDictTypeCode('FORM_TYPE','renewFormType',$.api.formType[2],$.api.formType[3]);
+    $('#createRenew, #createTerminate').click(function(){
+        var ftTxt, ftVal,headTxt;
+        switch ($(this).attr('id')) {
+        case "createRenew":
+            ftTxt = $.api.formType[2];
+            ftVal = $.api.formType[3];
+            headTxt = '续签合同申请';
+            break;
+        case "createTerminate":
+            ftTxt = $.api.formType[4];
+            ftVal = $.api.formType[5];
+            headTxt = '终止合同申请';
+            break;
+        default:
+            break;
+        }
+        
+        updateDictDropDownByDictTypeCode('FORM_TYPE','updateFormType',ftTxt,ftVal);
+        $('#investment-contract-request-modify-create .modal-header').find('h4').text(headTxt);
         $('#investment-contract-request-modify-create').modal('toggle');
         $('.date-picker').datepicker({
             'language': 'zh-CN',
@@ -2503,19 +2520,17 @@ function redirectCheck() {
         $('#renewContract').parent().append(error);
     }
     
-    if($('#renewFormType').val() == '') {
+    if($('#updateFormType').val() == '') {
         flag = 0;
-        $('#renewFormType').parent().append(error);
+        $('#updateFormType').parent().append(error);
     }
     
     if(flag == 1){
-        if($('#renewFormType').val() == 'renew'){
-            saveContractInfoForRenew();
-        }
+        saveContractInfoForRenew($('#updateFormType').val());
     }
 }
 
-function saveContractInfoForRenew() {
+function saveContractInfoForRenew(ft) {
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.roleCode == 'CROLE220301000001'){
@@ -2526,7 +2541,7 @@ function saveContractInfoForRenew() {
         
     var map = {
         contractNo: $('#renewContract').val(),
-        formType: $('#renewFormType').val(),
+        formType: ft,
         updateOpenId: openId
     }
     $.ajax({
@@ -2555,7 +2570,18 @@ function saveContractInfoForRenew() {
                 }
                 
                 if(response.data.bizId != null){
-                    window.location.href = '/lotus-admin/renew-request?id='+response.data.bizId;
+                    var path;
+                    switch (ft) {
+                        case "renew":
+                            path = 'renew';
+                            break;
+                        case "termination":
+                            path = 'terminate';
+                            break;
+                        default:
+                            break;
+                    }
+                    window.location.href = '/lotus-admin/'+path+'-request?id='+response.data.bizId;
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

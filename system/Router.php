@@ -320,6 +320,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/renew-summary' => array(
             'url' => 'renew-summary.php'
         ),
+        'lotus-admin/terminate-detail' => array(
+            'url' => 'terminate-detail.php'
+        ),
+        'lotus-admin/terminate-request' => array(
+            'url' => 'terminate-request.php'
+        ),
+        'lotus-admin/terminate-summary' => array(
+            'url' => 'terminate-summary.php'
+        ),
         'lotus-admin/contracts' => array(
             'url' => 'contracts.php'
         ),
@@ -367,8 +376,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'mall.php', 'sales.php', 
-    'requests.php', 'request-summary.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php','users.php', 'create-user.php', 'edit-user.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php');
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'mall.php', 'sales.php', 'requests.php', 'request-summary.php', 
+    'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php','users.php', 'create-user.php', 'edit-user.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';

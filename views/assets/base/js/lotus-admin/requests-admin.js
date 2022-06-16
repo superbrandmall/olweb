@@ -112,7 +112,15 @@ function findAllRequestsByKVCondition(p,c){
         "operator": "!=",
         "value": 'KOW'
     }
+    params.push(param);
     
+    param = {
+        "columnName": "bizId",
+        "columnPatten": "",
+        "conditionOperator": "",
+        "operator": "not like",
+        "value": '%_OLD'
+    }
     params.push(param);
     
     if($.cookie('searchRequestsFormStatus') != null && $.cookie('searchRequestsFormStatus') != ''){
@@ -213,38 +221,37 @@ function findAllRequestsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        if(v.bizId.indexOf('_OLD') == -1){
-                            var page;
-                            switch (v.formType) {
-                                case "new":
-                                    page = 'request';
-                                    break;
-                                case "renew":
-                                    page = 'renew';
-                                    break;
-                                default:
-                                    break;
-                            }
-                            
-                            var contractLink = '';
-                            if(v.formStatus == 9){
-                                contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
-                            }
-                            
-                            $('#requests').append('\
-                                <tr data-index="'+i+'">\n\
-                                <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
-                                <td>'+contractLink+'</td>\n\
-                                <td>'+(v.contractNo || '')+'</td>\n\
-                                <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
-                                <td>'+(renderFormType(v.formType) || '')+'</td>\n\
-                                <td>'+(v.tenantName || '')+'</td>\n\
-                                <td>'+(v.mallName || '')+'</td>\n\
-                                <td>'+v.unitName+'['+v.unitCode+']</td>\n\
-                                <td>'+(v.bizTypeName || '')+'</td>\n\
-                                <td>'+(v.contractName || '')+'</td>\n\
-                            </tr>');
+                        var page;
+                        switch (v.formType) {
+                            case "new":
+                                page = 'request';
+                                break;
+                            case "renew":
+                                page = 'renew';
+                                break;
+                            default:
+                                break;
                         }
+
+                        var contractLink = '';
+                        if(v.formStatus == 9){
+                            contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
+                        }
+
+                        $('#requests').append('\
+                            <tr data-index="'+i+'">\n\
+                            <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                            <td>'+contractLink+'</td>\n\
+                            <td>'+(v.contractNo || '')+'</td>\n\
+                            <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
+                            <td>'+(renderFormType(v.formType) || '')+'</td>\n\
+                            <td>'+(v.tenantName || '')+'</td>\n\
+                            <td>'+(v.mallName || '')+'</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+(v.bizTypeName || '')+'</td>\n\
+                            <td>'+(v.contractName || '')+'</td>\n\
+                        </tr>');
+                        
                     });
                     
                     if(p == pages){
