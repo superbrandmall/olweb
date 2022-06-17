@@ -62,19 +62,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        include 'terminate-detail/investmentContractModel.php'; //合同内容
-                        include 'terminate-detail/investmentContractModelBasicinfo.php'; //基本信息
-                        include 'terminate-detail/investmentContractEnteryterm.php';
-                        include 'terminate-detail/investmentContractAccounttermFixed.php'; //固定租金
-                        include 'terminate-detail/investmentContractAccounttermCommission.php'; //提成租金
-                        include 'terminate-detail/investmentContractAccounttermCompare.php'; //取高明细
-                        include 'terminate-detail/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
-                        include 'terminate-detail/investmentContractAccounttermPromotion.php'; //推广费
-                        include 'terminate-detail/investmentContractDepositterm.php';
-                        include 'terminate-detail/investmentContractProperteisterm.php';
-                        include 'terminate-detail/investmentContractCertificates.php';
-                        include 'terminate-detail/textareapanel.php';
-                        include 'terminate-detail/approvalProcess.php';
+                        include 'terminate/investmentContractModel.php'; //合同内容
+                        include 'terminate/investmentContractModelBasicinfo.php'; //基本信息
+                        include 'terminate/investmentContractEnteryterm.php';
+                        include 'terminate/investmentContractAccounttermFixed.php'; //固定租金
+                        include 'terminate/investmentContractAccounttermCommission.php'; //提成租金
+                        include 'terminate/investmentContractAccounttermCompare.php'; //取高明细
+                        include 'terminate/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
+                        include 'terminate/investmentContractAccounttermPromotion.php'; //推广费
+                        include 'terminate/investmentContractDepositterm.php';
+                        include 'terminate/investmentContractProperteisterm.php';
+                        include 'terminate/investmentContractCertificates.php';
+                        include 'terminate/textareapanel.php';
+                        include 'terminate/approvalProcess.php';
                         ?>
                     </div>
 

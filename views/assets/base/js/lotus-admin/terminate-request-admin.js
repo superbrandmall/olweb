@@ -57,7 +57,7 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('TERM_CALC_MODE','termCalcMode',$.api.termCalcMode[0],$.api.termCalcMode[1]); // 条款计算方式
     updateDictDropDownByDictTypeCode('POS_MODE','posMode',$.api.posMode[0],$.api.posMode[1]); // 收银方式
     updateDictDropDownByDictTypeCode('CONTRACT_TYPE','contractType',$.api.contractType[0],$.api.contractType[1]); // 合同类型
-    updateDictDropDownByDictTypeCode('FORM_TYPE','formType',$.api.formType[2],$.api.formType[3]); // 表单类型
+    updateDictDropDownByDictTypeCode('FORM_TYPE','formType',$.api.formType[4],$.api.formType[5]); // 表单类型
     updateDictDropDownByDictTypeCode('PAYMENT_MODE','paymentMode',$.api.paymentMode[0],$.api.paymentMode[1]); // 支付方式
     updateSelectTenantDropDown(50);
     updateBrandNameDropDown(10);
@@ -555,7 +555,7 @@ function findRequestbyBizId() {
                 }
                 
                 var temp;
-                if(response.data != '' && response.data != null && response.data.formType == 'renew'){
+                if(response.data != '' && response.data != null && response.data.formType == 'termination'){
                     $.request.content = response.data;
                     if(response.data.oldContractInfo != '' && response.data.oldContractInfo != null){
                         var data = response.data.oldContractInfo;
@@ -873,8 +873,6 @@ function findRequestbyBizId() {
                         $('input.money').each(function(){
                             $(this).val(accounting.formatNumber($(this).val()));
                         })
-
-                        //preCheck();
                     }
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
@@ -1950,41 +1948,6 @@ function updateRowInvestmentContractDepositterm(v) {
         });
         $(this).parent().parent().removeClass('success');
     });
-}
-
-function preCheck() {
-    if($('#bizScope').val() == ''){
-        $('#bizScope').removeAttr('readonly');
-    }
-    
-    if($('#freeDays').val() == '' || $('#freeDays').val() != 0){
-        if($('#freeStartDate_1').val() == '' || $('#freeEndDate_1').val() == '') {
-            $('#freeStartDate_1, #freeEndDate_1').attr({
-                'disabled': false,
-                'readonly': true
-            }).css({
-                'border': '1px solid #ccc',
-                'background': '#fff',
-                'border-right': 'none'
-            })
-            $('#freeStartDate_1, #freeEndDate_1').next().attr({
-                'disabled': false,
-                'readonly': true
-            }).css({
-                'border': '1px solid #d2d6de',
-                'borderLeft': 'none',
-                'background': 'transparent'
-            })
-
-            $('#freeDays').removeAttr('readonly').css({
-                'borderRight': 'none',
-            }).next().css({
-                'border': '1px solid #d2d6de',
-                'borderLeft': 'none',
-                'background': 'transparent'
-            })
-        }
-    }
 }
 
 function mandatoryCheck(s) {

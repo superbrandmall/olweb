@@ -54,19 +54,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        include 'renew-request/investmentContractModel.php'; //合同内容
-                        include 'renew-request/investmentContractModelBasicinfo.php'; //基本信息
-                        include 'renew-request/investmentContractEnteryterm.php';
-                        include 'renew-request/investmentContractAccounttermFixed.php'; //固定租金
-                        include 'renew-request/investmentContractAccounttermCommission.php'; //提成租金
-                        include 'renew-request/investmentContractAccounttermCompare.php'; //取高明细
-                        include 'renew-request/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
-                        include 'renew-request/investmentContractAccounttermPromotion.php'; //推广费
-                        include 'renew-request/investmentContractDepositterm.php';
-                        include 'renew-request/investmentContractProperteisterm.php';
-                        include 'renew-request/investmentContractCertificates.php';
-                        include 'renew-request/textareapanel.php';
-                        include 'renew-request/approvalProcess.php';
+                        include 'renew/investmentContractModel.php'; //合同内容
+                        include 'renew/investmentContractModelBasicinfo.php'; //基本信息
+                        include 'renew/investmentContractEnteryterm.php';
+                        include 'renew/investmentContractAccounttermFixed.php'; //固定租金
+                        include 'renew/investmentContractAccounttermCommission.php'; //提成租金
+                        include 'renew/investmentContractAccounttermCompare.php'; //取高明细
+                        include 'renew/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
+                        include 'renew/investmentContractAccounttermPromotion.php'; //推广费
+                        include 'renew/investmentContractDepositterm.php';
+                        include 'renew/investmentContractProperteisterm.php';
+                        include 'renew/investmentContractCertificates.php';
+                        include 'renew/textareapanel.php';
+                        include 'renew/approvalProcess.php';
                         ?>
                     </div>
 
