@@ -3120,7 +3120,7 @@ function saveContractForm(s) {
                                                 }).then(canvas => {
                                                     var image = canvas.toDataURL("image/png");
                                                     var formData = new FormData();
-                                                    var fileName = $.cookie('mallSelected').split(':::')[0]+'_'+brandName+'_'+unitCode+'_续签租赁合同申请单_'+bizId;
+                                                    var fileName = $.request.content.mallName+'_'+brandName+'_'+unitCode+'_续签租赁合同申请单_'+bizId;
                                                     formData.append('file', dataURLtoFile(image,fileName+'.png','image/png'));
                                                     
                                                     var upload = $.ajax({

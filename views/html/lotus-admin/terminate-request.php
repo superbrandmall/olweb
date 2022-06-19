@@ -41,7 +41,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#investmentContractAccounttermPropertyMgmt">物业管理费</a></li>
                     <li><a href="#investmentContractAccounttermPromotion">推广费</a></li>
                     <li><a href="#investmentContractDepositterm">预存款条款</a></li>
-                    <li><a href="#investmentContractProperteisterm">其它续约条件</a></li>
+                    <li><a href="#investmentContractProperteisterm">其它终止条件</a></li>
                     <li><a href="#investmentContractCertificates">合同附件</a></li>
                     <li><a href="#textareapanel">说明</a></li>
                     <li><a href="#approvalProcess">审批流程</a></li>

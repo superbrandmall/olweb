@@ -16,8 +16,8 @@
                         <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                         <span class="input-group-addon" style="border: none; background: transparent;">-</span>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="endDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control" id="endDate" disabled />
+                            <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
                         </div>    
                     </div>
                 </div>
