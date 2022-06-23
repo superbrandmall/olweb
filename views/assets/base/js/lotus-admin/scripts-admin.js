@@ -24,10 +24,10 @@ var date = d.getFullYear() + '-' +
 $(document).ready(function(){
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+            if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                 $('.location-select ul li, .mall-select ul li').show();
                 return false;
-            } else if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 $('.sidebar-menu > li').hide();
                 $('.sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5), .sidebar-menu > li:eq(6)').show();
                 $('.mall-select ul li').each(function(i,elem){
@@ -513,6 +513,24 @@ function updateEndDatepicker(Exid) {
             return false;
         }
     });  
+}
+
+function updateEndDatepickerAndRemove(Exid) {
+    $("input[id*='"+Exid+"EndDate_']").each(function(i){  
+        var num = i + 1;
+        if($('#'+Exid+'EndDate_'+(parseInt(num)+1)).length <= 0){
+            $('#'+Exid+'EndDate_'+num).datepicker('setEndDate',$('#endDate').val());
+            $('#'+Exid+'EndDate_'+num).datepicker('update',$('#endDate').val());
+            
+            if($('#'+Exid+'EndDate_'+num).val() == '' ){
+                deleteRow(document.getElementById(Exid+'EndDate_'+num).parentNode.parentNode);
+            }
+            return false;
+        }
+    });
+    if(Exid == 'fixedRent' || Exid == 'propertyMgmt'){
+        calBackPush(Exid);
+    }
 }
 
 function findFeeItemByContractType(type) {

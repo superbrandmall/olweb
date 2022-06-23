@@ -486,7 +486,7 @@ function updateSelectStoreDropDown(data_count,mall_code) {
                 var mallCodes = mall_code;
                 var mallCode = mallCodes;
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+                    if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                         mallCodes = 'ALL';
                         return false;
                     }

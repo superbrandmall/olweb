@@ -31,17 +31,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-md-4 control-label">合同终止日 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control date-picker" id="cancelDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" required />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
          <div class="col-md-4">
             <div class="form-group">
                 <label class="col-md-4 control-label">终止支付类型 <span class="btn-box-tool-lg">*</span></label>
@@ -89,7 +78,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">其它费用(含预估费)总计</label>
+                <label class="col-md-4 control-label">其它费用总计</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="cancelPaymentOtherAmount" type="text" style="border-right: none;" />                                                
@@ -100,7 +89,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">保证金及其它费用 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">保证金等费用 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="cancelDepositType" style="width: 100%">
                         <option value="">未选择</option>

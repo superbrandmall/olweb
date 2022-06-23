@@ -58,11 +58,11 @@ $(document).ready(function(){
     
     $('#department option').each(function(j, elem){
         $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 if($(elem).val() == v.moduleCode){
                     $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
                 }
-            } else if(v.code == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
+            } else if(v.roleCode == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
                 $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
             }
         })
@@ -385,7 +385,7 @@ function updateSelectStoreDropDown(data_count) {
                 }
                 
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if(v.code == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+                    if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                         mallCodes = 'ALL';
                         return false;
                     }

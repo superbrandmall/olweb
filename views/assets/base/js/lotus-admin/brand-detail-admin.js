@@ -96,6 +96,10 @@ $(document).ready(function(){
     $("div[id*='uploadFile_']").on('click',function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
+    
+    if($('#modality_3').val() != '' && $('#modality_4').val() == '') {
+        findBizByBiz3($('#modality_3').val());
+    }
 })
 
 function updateBrandAttribute() {
@@ -185,8 +189,10 @@ function findBrandByCode() {
                     var modality_3 = new Option(response.data.modality3, response.data.modality3, true, true);
                     $('#modality_3').append(modality_3).trigger('change');
                     
-                    var modality_4 = new Option(response.data.modality4, response.data.modality4, true, true);
-                    $('#modality_4').append(modality_4).trigger('change');
+                    if(response.data.modality4 != null && response.data.modality4 != ''){
+                        var modality_4 = new Option(response.data.modality4, response.data.modality4, true, true);
+                        $('#modality_4').append(modality_4).trigger('change');
+                    }
                     
                     $('#contact_name_1').val(response.data.contactName);
                     $('#title').val(response.data.title);

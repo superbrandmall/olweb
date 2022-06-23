@@ -35,7 +35,7 @@ $(document).ready(function(){
     
     $('#department option').each(function(j, elem){
         $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.code == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 if($(elem).val() == v.moduleCode){
                     $('#department option:eq('+j+')').addClass('no-remove');
                 }

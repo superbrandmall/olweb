@@ -99,14 +99,14 @@ function findRequestByBizId() {
                     $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
                     $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
                     
-                    $('#endDateBefore').text(data.endDate).attr('title',data.endDate);
+                    $('#endDateBefore').text(data.oldEndDate).attr('title',data.oldEndDate);
                     $('#endDateAfter').text(data.cancelDate).attr('title',data.cancelDate);
                     
                     $('#awardDateBefore').text(oldContractInfo.awardDate).attr('title',oldContractInfo.awardDate);
                     $('#awardDateAfter').text(data.awardDate).attr('title',data.awardDate);
                     
-                    if(data.fixedRentList.length > 0){
-                        $.each(data.fixedRentList, function(i,v) {
+                    if(oldContractInfo.fixedRentList.length > 0){
+                        $.each(oldContractInfo.fixedRentList, function(i,v) {
                             $('#fixedRentBefore').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
@@ -115,26 +115,22 @@ function findRequestByBizId() {
                         })
                         
                         $.each(data.fixedRentList, function(i,v) {
-                            if(dateCompare(v.startDate, data.cancelDate) == 'smaller'){
-                                var ed;
-                                if(dateCompare(v.endDate, data.cancelDate) != 'smaller'){
-                                    ed = '<span style="color: #E43C24;">'+v.endDate+'</span>';
-                                } else {
-                                    ed = v.endDate;
-                                }
-                                $('#fixedRentAfter').append('<tr>\n\
+                            var ed = v.endDate;
+                            if(v.endDate == data.cancelDate){
+                                ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                            }
+                            $('#fixedRentAfter').append('<tr>\n\
         <td>'+v.itemName+'['+v.itemCode+']</td>\n\
         <td>'+v.startDate+' ～ '+ed+'</td>\n\
         <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
-                            }
+        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>') 
                         })
                     } else {
                         $('#investmentContractAccounttermFixed').hide();
                     }
                     
-                    if(data.deductList.length > 0){
-                        $.each(data.deductList, function(i,v) {
+                    if(oldContractInfo.deductList.length > 0){
+                        $.each(oldContractInfo.deductList, function(i,v) {
                             $('#commissionBefore').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
@@ -155,20 +151,15 @@ function findRequestByBizId() {
                         }
                         
                         $.each(data.deductList, function(i,v) {
-                            if(dateCompare(v.startDate, data.cancelDate) == 'smaller'){
-                                var ed;
-                                if(dateCompare(v.endDate, data.cancelDate) != 'smaller'){
-                                    ed = '<span style="color: #E43C24;">'+v.endDate+'</span>';
-                                } else {
-                                    ed = v.endDate;
-                                }
-                                
-                                $('#commissionAfter').append('<tr>\n\
+                            var ed = v.endDate;
+                            if(v.endDate == data.cancelDate){
+                                ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                            }
+                            $('#commissionAfter').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+ed+'</td>\n\
     <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
     <td>'+data.rentCalculationMode+'</td></tr>')
-                            }
                         })
 
                         if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
@@ -182,13 +173,12 @@ function findRequestByBizId() {
                                 })
                             })
                        }
-                        
                     } else {
                         $('#investmentContractAccounttermCommission').hide();
                     }
                     
-                    if(data.propertyFeeList.length > 0){
-                        $.each(data.propertyFeeList, function(i,v) {
+                    if(oldContractInfo.propertyFeeList.length > 0){
+                        $.each(oldContractInfo.propertyFeeList, function(i,v) {
                             $('#propertyMgmtBefore').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
@@ -197,27 +187,22 @@ function findRequestByBizId() {
                         })
                     
                         $.each(data.propertyFeeList, function(i,v) {
-                            if(dateCompare(v.startDate, data.cancelDate) == 'smaller'){
-                                var ed;
-                                if(dateCompare(v.endDate, data.cancelDate) != 'smaller'){
-                                    ed = '<span style="color: #E43C24;">'+v.endDate+'</span>';
-                                } else {
-                                    ed = v.endDate;
-                                }
-                                
-                                $('#propertyMgmtAfter').append('<tr>\n\
+                            var ed = v.endDate;
+                            if(v.endDate == data.cancelDate){
+                                ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                            }
+                            $('#propertyMgmtAfter').append('<tr>\n\
         <td>'+v.itemName+'['+v.itemCode+']</td>\n\
         <td>'+v.startDate+' ～ '+ed+'</td>\n\
         <td>'+accounting.formatNumber(v.amount)+'</td>\n\
         <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
-                            }
                         })
                     } else {
                         $('#investmentContractAccounttermPropertyMgmt').hide();
                     }
                     
-                    if(data.promotionFeeList.length > 0){
-                        $.each(data.promotionFeeList, function(i,v) {
+                    if(oldContractInfo.promotionFeeList.length > 0){
+                        $.each(oldContractInfo.promotionFeeList, function(i,v) {
                             $('#promotionBefore').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
@@ -226,20 +211,15 @@ function findRequestByBizId() {
                         })
                         
                         $.each(data.promotionFeeList, function(i,v) {
-                            if(dateCompare(v.startDate, data.cancelDate) == 'smaller'){
-                                var ed;
-                                if(dateCompare(v.endDate, data.cancelDate) != 'smaller'){
-                                    ed = '<span style="color: #E43C24;">'+v.endDate+'</span>';
-                                } else {
-                                    ed = v.endDate;
-                                }
-                                
-                                $('#promotionAfter').append('<tr>\n\
+                            var ed = v.endDate;
+                            if(v.endDate == data.cancelDate){
+                                ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                            }
+                            $('#promotionAfter').append('<tr>\n\
         <td>'+v.itemName+'['+v.itemCode+']</td>\n\
         <td>'+v.startDate+' ～ '+ed+'</td>\n\
         <td>'+accounting.formatNumber(v.amount)+'</td>\n\
         <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
-                            }
                         })
                     } else {
                         $('#investmentContractAccounttermPromotion').hide();
