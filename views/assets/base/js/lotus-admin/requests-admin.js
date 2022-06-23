@@ -229,6 +229,9 @@ function findAllRequestsByKVCondition(p,c){
                             case "renew":
                                 page = 'renew';
                                 break;
+                            case "termination":
+                                page = 'terminate';
+                                break;
                             default:
                                 break;
                         }

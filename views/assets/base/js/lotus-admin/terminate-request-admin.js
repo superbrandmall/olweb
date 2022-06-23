@@ -228,6 +228,11 @@ $(document).ready(function(){
     })
     
     findRequestbyBizId();
+    
+    $('#investmentContractProperteisterm .select2').select2({
+        placeholder: "未选择",
+        allowClear: true
+    });
 })
 
 function findFilesByBizId(id) {
@@ -2308,6 +2313,10 @@ function saveContractForm(s) {
         var cancelPaymentOtherAmount = numberWithoutCommas($('#cancelPaymentOtherAmount').val());
         var cancelPaymentType = $('#cancelPaymentType').find('option:selected').val();
         var cancelDemolishAmount = numberWithoutCommas($('#cancelDemolishAmount').val());
+        var newBizDate = $('#newBizDate').val();
+        var newBrandName = $('#newBrandName').val();
+        var newDeliveryDate = $('#newDeliveryDate').val();
+        var newDrDate = $('#newDrDate').val();
 
         var processBizApprove = 0;
         if($('.step-progress li:eq(4)').hasClass('active') == true){
@@ -2466,6 +2475,10 @@ function saveContractForm(s) {
             "lastBrandName": "",
             "mallName": $.request.content.mallName,
             "minSales": 0,
+            "newBizDate": newBizDate,
+            "newBrandName": newBrandName,
+            "newDeliveryDate": newDeliveryDate,
+            "newDrDate": newDrDate,
             "oldEndDate": $.request.content.endDate,
             "oldStartDate": $.request.content.startDate,
             "openEndTime": $.request.content.openEndTime,

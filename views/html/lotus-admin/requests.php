@@ -22,14 +22,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu">
                         <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
-                        <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>
-                        <?php
-                        if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-                        ?>                    
+                        <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                    
                         <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
-                        <?php
-                        }
-                        ?>
                     </ul>
                 </div>
             </div>

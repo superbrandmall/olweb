@@ -15,7 +15,7 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
         findDictCodeByDictTypeCode('FLOW_STEPS');
     }
-    findDictCodeByDictTypeCode
+    
     findRequestByBizId();
     findRentCalculationMode('RENT_CALCULATION_MODE');
 })

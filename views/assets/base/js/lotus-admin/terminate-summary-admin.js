@@ -15,7 +15,7 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
         findDictCodeByDictTypeCode('FLOW_STEPS');
     }
-    findDictCodeByDictTypeCode
+    
     findRequestByBizId();
     findRentCalculationMode('RENT_CALCULATION_MODE');
 })
@@ -56,51 +56,31 @@ function findRequestByBizId() {
                         findProcessInstByBizId();
                     }
                     
-                    /*$('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
+                    $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
                     $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
                     $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
                     $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
-                    
-                    if(oldContractInfo.endDate == data.endDate){
-                        $('#essayDuration').text(0);
-                    } else {
-                        $('#essayDuration').text(data.duration);
+                    if(data.cancelDate != null && data.cancelDate != ''){
+                        $('#essayCancelDate').html('<span class="txt">'+data.cancelDate.split('-')[0]+'年'+data.cancelDate.split('-')[1]+'月'+data.cancelDate.split('-')[2]+'日</span>');
                     }
-                    
-                    $('#essayRenewBrandHoldFlag').text('');
-                    $('#essayRenewBrandHoldReason').text('');
-                    if(data.renewBrandHoldFlag == 1){
-                        $('#essayRenewBrandHoldFlag').text('是需要保留的品牌。');
-                    } else if(data.renewBrandHoldFlag == 0){
-                        $('#essayRenewBrandHoldFlag').html('<span class="txt">不是需要保留的品牌，</span>');
-                        $('#essayRenewBrandHoldReason').html('<span class="txt">'+data.renewBrandHoldReason+'</span>【暂时保留的原因】。');
+                    if(data.cancelType == 'A'){
+                        $('#essayCancelType').html('<span class="txt">到期终止。</span>');
+                    } else if(data.cancelType == 'B' || data.cancelType == 'C'){
+                        $('#essayCancelType').html('<span class="txt">提前终止。</span>');
                     }
-                    var saleRentalRatio = '';
-                    if(data.fixedRentList.length > 0){
-                        $('#essayFixedRent').html('固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
-                        if(data.renewRentSameFlag == 1){
-                            $('#essayGrowthRate').text('平续，');
-                        } else {
-                            $('#essayGrowthRate').html('增长<span class="txt">'+Math.round(data.growthRate * 100)+'</span>%，');
-                        }
-                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100;
+                    $('#essayNewBrandName').html('<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                    if(data.newDrDate != null && data.newDrDate != ''){
+                        $('#essayNewDrDate').html('<span class="txt">预计'+data.newDrDate.split('-')[0]+'年'+data.newDrDate.split('-')[1]+'月'+data.newDrDate.split('-')[2]+'日</span>上会，');
                     }
-                    if(data.deductList.length > 0){
-                        $('#essayCommission').html('扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
+                    if(data.newDeliveryDate != null && data.newDeliveryDate != ''){
+                        $('#essayNewDeliveryDate').html('<span class="txt">'+data.newDeliveryDate.split('-')[0]+'年'+data.newDeliveryDate.split('-')[1]+'月'+data.newDeliveryDate.split('-')[2]+'日</span>交楼，');
                     }
-                    if(data.propertyFeeList.length > 0){
-                        $('#essayPropertyMgmt').html('物管费<span class="txt">'+data.propertyFeeList[0].taxRentAmount+'</span>元/月/平米，');
+                    if(data.newBizDate != null && data.newBizDate != ''){
+                        $('#essayNewBizDate').html('<span class="txt">'+data.newBizDate.split('-')[0]+'年'+data.newBizDate.split('-')[1]+'月'+data.newBizDate.split('-')[2]+'日</span>开业。');
                     }
-                    if(data.promotionFeeList.length > 0){
-                        $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
-                    }
-                    $('#essayRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%。');
-                    $('#essayBudgetRentAmount').text('预算租金元/月/平米，');
-                    $('#essayBudgetRentAmountRateOfReach').text('单价达成率%。');
-                    $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
-                    $('#essayBudgetYearAmountRateOfReach').text('全年预算达成率%，');
-                    $('#essayBudgetDifference').text('差异元。');*/
+                    $('#essayBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
+                    $('#essayBudgetDifference').text('与预算差异元。');
                     $('#remark').val(data.remark);
  
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);

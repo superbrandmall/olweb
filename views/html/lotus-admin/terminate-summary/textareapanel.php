@@ -16,22 +16,18 @@
                     <span id="essayFloor"></span>
                     <span id="essayModality"></span>
                     <span id="essayBrand"></span>，
-                    <span id="essayArea"></span>续约
-                    <span id="essayDuration" class="txt"></span>个月，
-                    <span id="essayRenewBrandHoldFlag"></span>
-                    <span id="essayRenewBrandHoldReason"></span>
-                    <span id="essayFixedRent"></span>
-                    <span id="essayGrowthRate"></span>
-                    <span id="essayCommission"></span>
-                    <span id="essayPropertyMgmt"></span>
-                    <span id="essayPromotion"></span>
-                    <span id="essayRenewAvgSales"></span>
+                    <span id="essayArea"></span>
+                    <span id="essayCancelDate"></span>
+                    <span id="essayCancelType"></span>
                 </p>
                 <p>
-                    <span id="essayBudgetRentAmount"></span>
-                    <span id="essayBudgetRentAmountRateOfReach"></span>
-                    <span id="renewBudgetDesc"></span>
-                    <span id="essayBudgetYearAmountRateOfReach"></span>
+                    后续洽谈品牌<span id="essayNewBrandName"></span>
+                    <span id="essayNewDrDate"></span>
+                    <span id="essayNewDeliveryDate"></span>
+                    <span id="essayNewBizDate"></span>
+                </p>
+                <p>
+                    <span id="essayBudgetDesc"></span>
                     <span id="essayBudgetDifference"></span>
                 </p>
             </div>

@@ -956,6 +956,7 @@ function findRequestbyBizId() {
                                         action = '<a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
                                         <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
                                         <input type="hidden" id="file_'+v.id+'" />';
+                                        break;
                                     default:
                                         break;
                                 }

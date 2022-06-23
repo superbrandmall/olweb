@@ -2695,7 +2695,11 @@ function saveContractInfoForRenew(ft) {
                     id: id,
                     on: function (callback) {
                         if (callback && callback instanceof Function) {
-                            modal.find('.ok').click(function () { callback(true); });
+                            modal.find('.ok').click(function () { 
+                                modal.on('hide.bs.modal', function (e) {
+                                    callback(true);
+                                });
+                            });
                             //modal.find('.cancel').click(function () { callback(false); });
                         }
                     },
