@@ -68,42 +68,16 @@
     <div class="box-body">
         <div class="col-md-6">
             <h5>变更前</h5>
-            <div class="box-body">
-                <div class="row">
-                    <div class="bootstrap-table">
-                        <div class="fixed-table-container">
-                            <div class="fixed-table-body">
-                                <table class="table table-striped snipe-table table-responsive">
-                                    <tbody align="center">
-                                        <tr><td>截止日期</td><td id="endDateBefore"></td></tr>
-                                        <tr><td>签约日期</td><td id="awardDateBefore"></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">截止日期:</label>
+                <div class="col-md-8 col-sm-12" id="endDateBefore"></div>
             </div>
         </div>
         <div class="col-md-6">
             <h5>变更后</h5>
-            <div class="box-body">
-                <div class="row">
-                    <div class="bootstrap-table">
-                        <div class="fixed-table-container">
-                            <div class="fixed-table-body">
-                                <table class="table table-striped snipe-table table-responsive">
-                                    <tbody align="center">
-                                        <tr><td>截止日期</td><td id="endDateAfter" style="color: #E43C24;"></td></tr>
-                                        <tr><td>签约日期</td><td id="awardDateAfter" style="color: #E43C24;"></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">截止日期:</label>
+                <div class="col-md-8 col-sm-12" id="endDateAfter" style="color: #E43C24;"></div>
             </div>
         </div>
     </div>

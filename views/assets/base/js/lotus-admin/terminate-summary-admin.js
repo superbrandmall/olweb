@@ -102,9 +102,6 @@ function findRequestByBizId() {
                     $('#endDateBefore').text(data.oldEndDate).attr('title',data.oldEndDate);
                     $('#endDateAfter').text(data.cancelDate).attr('title',data.cancelDate);
                     
-                    $('#awardDateBefore').text(oldContractInfo.awardDate).attr('title',oldContractInfo.awardDate);
-                    $('#awardDateAfter').text(data.awardDate).attr('title',data.awardDate);
-                    
                     if(oldContractInfo.fixedRentList.length > 0){
                         $.each(oldContractInfo.fixedRentList, function(i,v) {
                             $('#fixedRentBefore').append('<tr>\n\

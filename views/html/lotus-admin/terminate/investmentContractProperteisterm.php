@@ -151,6 +151,17 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
+                <label class="col-md-4 control-label">停止经营时间 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input type="text" class="form-control timepicker" id="cancelBizHour" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
                 <label class="col-md-4 control-label">房屋交还条款 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="cancelDemolishType" style="width: 100%">

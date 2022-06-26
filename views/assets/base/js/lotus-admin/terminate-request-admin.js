@@ -27,6 +27,12 @@ $(document).ready(function(){
         showMeridian:false
     });
     
+    $("#cancelBizHour").timepicker({
+        defaultTime:'22:00',
+        showMeridian:false,
+        minuteStep: 60
+    });
+    
     $('#propertyMgmtSettleDay_1,#promotionSettleDay_1,#commissionSettleDay_1,#fixedRentSettleDay_1').val('25').trigger('change');
     
     $('input.form-control, .select2-selection').click(function(){
@@ -231,71 +237,6 @@ $(document).ready(function(){
         allowClear: true
     });
 })
-
-function findFilesByBizId(id) {
-    $.ajax({
-        url: $.api.baseLotus+"/api/co/file/findAllByBizId?bizId="+id,
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(response.data != null && response.data != '' && response.data.length > 0){
-                    $.each(response.data, function(i,v) {
-                        sessionStorage.setItem("uploadFile_"+v.id,JSON.stringify(v));
-                        var bizType = v.bizType.split('_')[1];
-                        var type;
-                        switch (bizType) {
-                            case "BL":
-                                type = 'businessLicense';
-                                break;
-                            case "IC":
-                                type = 'idCard';
-                                break;
-                            case "TM":
-                                type = 'trademark';
-                                break;
-                            case "BA":
-                                type = 'brandAuthorization';
-                                break;
-                            default:
-                                break;
-                        }
-                        
-                        $("input[id*='"+type+"_']").each(function(j,e){
-                            if($('#'+type+'_'+j).val() == ''){
-                                $('#'+type+'_'+j).val(v.fileName);
-                                var fileSize;
-                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
-                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
-                                } else if(v.fileSize >= 1048576){
-                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
-                                } else {
-                                    fileSize = v.fileSize + 'b';
-                                }
-                                $('#'+type+'FileSize'+'_'+j).text(fileSize);
-                                $('#'+type+'Created'+'_'+j).text(v.created);
-                                $('#'+type+'Action'+'_'+j).html('\
-    <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a>\n\
-    <input type="hidden" id="file_'+v.id+'" />');
-                                $('#'+type+'_'+j).parent().parent().show();
-                                return false;
-                            }
-                        })
-                    })
-                }
-            }
-        }
-    })
-}
 
 function fileUpload(id) {
     if($('#uploadFile_'+id).parent().find("input[type=file]").val() != ''){
@@ -594,12 +535,6 @@ function findRequestbyBizId() {
                             calBackPushPropertyMgmtTaxRentAmount();
                         })
 
-                        $("#selectTenant").change(function(){
-                            if($.request.content.formStatus == 1 || $.request.content.formStatus == 3){
-                                findFilesByBizId($(this).val());
-                            }
-                        })
-
                         temp = new Option(data.floorName, data.floorCode, true, true);
                         $('#floor').append(temp).trigger('change');
                         $('#contractName').val(data.contractName);
@@ -692,10 +627,6 @@ function findRequestbyBizId() {
                             var bizTypeName = $('#select2-brandName-container').text().split('[')[1];
                             bizTypeName = bizTypeName.split(']')[0];
                             $('#bizTypeName').val(bizTypeName);
-
-                            if($.request.content.formStatus == 1 || $.request.content.formStatus == 3){
-                                findFilesByBizId($(this).val());
-                            }
                         })
 
                         $('#deliveryDate').datepicker('update', data.deliveryDate);
@@ -865,14 +796,6 @@ function findRequestbyBizId() {
                                 $('#deposit tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#deposit tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
-                        }
-
-                        if($("#selectTenant").val() != null && ($.request.content.formStatus == 1 || $.request.content.formStatus == 3)){
-                            findFilesByBizId($("#selectTenant").val());
-                        }
-
-                        if($("#brandName").val() != null && ($.request.content.formStatus == 1 || $.request.content.formStatus == 3)){
-                            findFilesByBizId($("#brandName").val());
                         }
 
                         $('input.money').each(function(){
@@ -2116,6 +2039,11 @@ function submitCheck() {
         $('#cancelBizDate').parent().append(error);
     }
     
+    if($('#cancelBizHour').val() == '') {
+        flag = 0;
+        $('#cancelBizHour').parent().append(error);
+    }
+    
     if($('#cancelType').val() == '') {
         flag = 0;
         $('#cancelType').parent().append(error);
@@ -2162,6 +2090,26 @@ function submitCheck() {
             flag = 0;
             $('#cancelKeepDate').parent().append(error);
         }
+    }
+    
+    if($('#newBizDate').val() == '') {
+        flag = 0;
+        $('#newBizDate').parent().append(error);
+    }
+    
+    if($('#newBrandName').val() == '') {
+        flag = 0;
+        $('#newBrandName').parent().append(error);
+    }
+    
+    if($('#newDeliveryDate').val() == '') {
+        flag = 0;
+        $('#newDeliveryDate').parent().append(error);
+    }
+    
+    if($('#newDrDate').val() == '') {
+        flag = 0;
+        $('#newDrDate').parent().append(error);
     }
     
     if($('#selectRentCalculationMode').find('option:selected').val() == 'fixRent' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
@@ -2216,26 +2164,6 @@ function submitCheck() {
             flag = 0;
             $('#investmentContractAccounttermCommission').append(error);
         }
-    }
-    
-    if($('#businessLicense_0').val() == '') {
-        flag = 0;
-        $('#businessLicense_0').parent().append(error);
-    }
-    
-    if($('#idCard_0').val() == '') {
-        flag = 0;
-        $('#idCard_0').parent().append(error);
-    }
-    
-    if($('#trademark_0').val() == '') {
-        flag = 0;
-        $('#trademark_0').parent().append(error);
-    }
-    
-    if($('#brandAuthorization_0').val() == '') {
-        flag = 0;
-        $('#brandAuthorization_0').parent().append(error);
     }
     
     if($('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').val() == null) {
@@ -2307,6 +2235,7 @@ function saveContractForm(s) {
         var endDate = $('#endDate').val();
         var cancelBizDate = $('#cancelBizDate').val();
         var cancelDate = $('#endDate').val();
+        var cancelBizHour = $('#cancelBizHour').val().split(':')[0];
         var cancelBreachPaymentDate = $('#cancelBreachPaymentDate').val();
         var cancelPaymentDate = $('#cancelPaymentDate').val();
         var cancelPaymentOtherDate = $('#cancelPaymentOtherDate').val();
@@ -2768,6 +2697,7 @@ function saveContractForm(s) {
             "brandCode": $.request.content.brandCode,
             "brandName": $.request.content.brandName,
             "cancelBizDate": cancelBizDate,
+            "cancelBizHour": cancelBizHour,
             "cancelBreachAmount": cancelBreachAmount,
             "cancelBreachPaymentDate": cancelBreachPaymentDate,
             "cancelBreachType": cancelBreachType,
@@ -2945,7 +2875,7 @@ function saveContractForm(s) {
                                                 }).then(canvas => {
                                                     var image = canvas.toDataURL("image/png");
                                                     var formData = new FormData();
-                                                    var fileName = $.request.content.mallName +'_'+$.request.content.brandName+'_'+$.request.content.unitCode+'_续签租赁合同申请单_'+bizId;
+                                                    var fileName = $.request.content.mallName +'_'+$.request.content.brandName+'_'+$.request.content.unitCode+'_终止租赁合同申请单_'+bizId;
                                                     formData.append('file', dataURLtoFile(image,fileName+'.png','image/png'));
                                                     
                                                     var upload = $.ajax({
