@@ -1,8 +1,8 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/requests-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/todo-admin.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/requests.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/todo.js"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
@@ -12,21 +12,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 200px;">
             <h4>
-                租赁合同申请单
+                待办事项
             </h4>
-            <div class="pull-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-plus icon-white"></i> 创建
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
-                        <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                    
-                        <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
-                    </ul>
-                </div>
-            </div>
             <div class="box-header">
                 <div class="box-body">
                     <div class="col-md-12">
@@ -38,11 +25,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <option value="" selected>全部</option>
                                         <option value="1">保存</option>
                                         <option value="2">提交</option>
-                                        <option value="4">未用印合同上传</option>
-                                        <option value="5">租户用印合同上传</option>
-                                        <option value="6">双方用印合同上传</option>
                                         <option value="9">已完成</option>
-                                        <option value="3">驳回</option>
                                         <option value="0">已终止</option>
                                     </select>
                                 </div>
@@ -148,10 +131,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=50">50</a></li>
                                                         </ul>
                                                     </span> 
                                                     行每页
@@ -168,10 +151,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                         <tr>
                                                             <th>
                                                                 <div class="th-inner">单号</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">来源单据</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -208,7 +187,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="requests"></tbody>
+                                                    <tbody id="todo"></tbody>
                                                 </table>
                                             </div>
 
@@ -222,10 +201,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>
@@ -247,6 +226,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     </section>
 </div>
 
-<?php include 'component/investment-contract-request-modify-create.php'; ?>
+<?php include 'component/investment-todo-request-modify-create.php'; ?>
 
 <?php include 'footer.php'; ?>

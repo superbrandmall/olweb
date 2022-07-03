@@ -113,7 +113,16 @@ function findContractCoFilesByBizId(id){
                                         type = '单据快照';
                                         break;
                                     case "CONTRACT":
-                                        type = '合同';
+                                        type = '系统生成合同';
+                                        break;
+                                    case "INIT":
+                                        type = '未盖章合同';
+                                        break;
+                                    case "TENANT":
+                                        type = '商户盖章合同';
+                                        break;
+                                    case "SIGN":
+                                        type = '双方盖章合同';
                                         break;
                                     default:
                                         break;
@@ -129,14 +138,14 @@ function findContractCoFilesByBizId(id){
                                 }
                                 
                                 if(v.success == 'SUCCESS' || v.success == 'true'){
-                                    if(bizType == 'CONTRACT'){
+                                    if($.inArray(bizType, ['CONTRACT','INIT','TENANT','SIGN']) != -1){
                                         $('#fileList2').prepend('<tr>\n\
                                     <td>'+type+'</td>\n\
                                     <td>'+v.created+'</td>\n\
                                     <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
                                     <td>'+fileSize+'</td>\n\
                                     </tr>');
-                                    }  else if(bizType == 'screenshot') {
+                                    } else if(bizType == 'screenshot') {
                                         $('#fileList2').append('<tr>\n\
                                     <td>'+type+'</td>\n\
                                     <td>'+v.created+'</td>\n\

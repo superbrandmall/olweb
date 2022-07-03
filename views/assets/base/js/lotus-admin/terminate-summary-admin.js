@@ -102,6 +102,88 @@ function findRequestByBizId() {
                     $('#endDateBefore').text(data.oldEndDate).attr('title',data.oldEndDate);
                     $('#endDateAfter').text(data.cancelDate).attr('title',data.cancelDate);
                     
+                    if(data.coFileList.length > 0){
+                        $.each(data.coFileList, function(i,v) {
+                            if(v.bizType != null){
+                                var bizType = 'CONTRACT';
+                                if(v.bizType != bizType){
+                                    bizType = v.bizType.split('_')[1];
+                                }
+                                var type;
+                                switch (bizType) {
+                                    case "BL":
+                                        type = '营业执照';
+                                        break;
+                                    case "IC":
+                                        type = '法人代表身份证件';
+                                        break;
+                                    case "TM":
+                                        type = '商标注册证';
+                                        break;
+                                    case "BA":
+                                        type = '品牌授权书';
+                                        break;
+                                    case "OF":
+                                        type = '其它文件';
+                                        break;
+                                    case "screenshot":
+                                        type = '单据快照';
+                                        break;
+                                    case "CONTRACT":
+                                        type = '系统生成合同';
+                                        break;
+                                    case "INIT":
+                                        type = '未盖章合同';
+                                        break;
+                                    case "TENANT":
+                                        type = '商户盖章合同';
+                                        break;
+                                    case "SIGN":
+                                        type = '双方盖章合同';
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                
+                                var fileSize;
+                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                                } else if(v.fileSize >= 1048576){
+                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                                } else {
+                                    v.fileSize == null ? fileSize = '' : fileSize = v.fileSize + 'b';
+                                }
+                                
+                                if(v.success == 'SUCCESS' || v.success == 'true'){
+                                    if($.inArray(bizType, ['CONTRACT','INIT','TENANT','SIGN']) != -1){
+                                        $('#fileList2').prepend('<tr>\n\
+                                    <td>'+type+'</td>\n\
+                                    <td>'+v.created+'</td>\n\
+                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
+                                    <td>'+fileSize+'</td>\n\
+                                    </tr>');
+                                    } else if(bizType == 'screenshot') {
+                                        $('#fileList2').append('<tr>\n\
+                                    <td>'+type+'</td>\n\
+                                    <td>'+v.created+'</td>\n\
+                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
+                                    <td>'+fileSize+'</td>\n\
+                                    </tr>');
+                                    } else {
+                                        $('#fileList').append('<tr>\n\
+                                    <td>'+type+'</td>\n\
+                                    <td>'+v.created+'</td>\n\
+                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
+                                    <td>'+fileSize+'</td>\n\
+                                    </tr>');
+                                    }
+                                }
+                            }
+                        })
+                    } else {
+                        $('#investmentContractContractScreenshot, #investmentContractCertificates').hide();
+                    }
+                    
                     if(oldContractInfo.fixedRentList.length > 0){
                         $.each(oldContractInfo.fixedRentList, function(i,v) {
                             $('#fixedRentBefore').append('<tr>\n\

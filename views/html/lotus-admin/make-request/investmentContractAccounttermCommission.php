@@ -104,8 +104,8 @@
                 <label class="col-md-4 control-label">周期类型</label>
                 <div class="col-md-5 col-sm-6" style="padding-right: 2px;">
                     <select class="select2" id="commissionPeriodType_1" style="width: 100%">
-                        <option value="" selected>自然月</option>
-                        <option value="">合同月</option>
+                        <option value="1" selected>自然月</option>
+                        <option value="2">合同月</option>
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-6" style="padding-left: 2px;">

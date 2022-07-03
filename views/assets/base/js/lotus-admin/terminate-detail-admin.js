@@ -507,6 +507,12 @@ function findRequestbyBizId() {
                             $('#saveDraft').hide();
                             $('#submitForm').hide();
                         }
+                        
+                        if(data.formStatus == '4' || data.formStatus == '5' || data.formStatus == '6'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
+                        } else if(data.formStatus == '9'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                        }
 
                         $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
                         $('#requestName').text(data.bizId);
@@ -648,7 +654,7 @@ function findRequestbyBizId() {
                         $('#targetSales').val(data.targetSales);
                         $('#cancelType').val(data.cancelType).trigger("change");
                         $('#cancelBizDate').datepicker('update', data.cancelBizDate);
-                        $('#cancelBizHour').val(data.cancelBizHour != null ? data.data.cancelBizHour : '22'+':00');
+                        $('#cancelBizHour').val(data.cancelBizHour != null ? data.cancelBizHour : '22'+':00');
                         $('#cancelDepositType').val(data.cancelDepositType).trigger("change");
                         $('#cancelBreachPaymentDate').datepicker('update', data.cancelBreachPaymentDate);
                         $('#cancelBreachAmount').val(data.cancelBreachAmount);
@@ -822,6 +828,13 @@ function findRequestbyBizId() {
                             })
                         }
                         
+                        appendLotusLeasingHead();
+                        
+                        $('#Lotus_leasing_head select').val('').select2({
+                            placeholder: "未选择",
+                            allowClear: true
+                        });
+                        
                         if(data.processApproveList.length > 0) {
                             var temp;
                             $.each(data.processApproveList, function(i,v) {
@@ -844,6 +857,9 @@ function findRequestbyBizId() {
                                         break;
                                     case "法务预审":
                                         $('#legal_pre_check select').append(temp).trigger('change');
+                                        break;
+                                    case "Lotus招商负责人":
+                                        $('#Lotus_leasing_head select').append(temp).trigger('change');
                                         break;
                                     default:
                                         $('#hq_leasing_head select').append(temp).trigger('change');
@@ -1046,7 +1062,9 @@ function findRoleYZJByParentId() {
 function updateRoleYZJLabel() {
     $.each($.parseJSON(sessionStorage.getItem('roleYZJ')), function(i,v){
         $('#'+v.roleId).find('label').prepend(v.roleName);
-        updateUserRoleYZJDropDownByRoleId(v.roleId);
+        if(v.roleId != 'Lotus_leasing_head'){
+            updateUserRoleYZJDropDownByRoleId(v.roleId);
+        }
     })
 }
         
@@ -2310,6 +2328,11 @@ function submitCheck() {
         $('#legal_pre_check select').parent().append(error);
     }
     
+    if($('#Lotus_leasing_head select').val() == null) {
+        flag = 0;
+        $('#Lotus_leasing_head select').parent().append(error);
+    }
+    
     if(flag == 1){
         saveContractForm('submit');
     } else {
@@ -2422,6 +2445,10 @@ function saveContractForm(s) {
                     case "法务预审":
                         processApprove.approveName = $('#legal_pre_check select').find('option:selected').text();
                         processApprove.approveOpenId = $('#legal_pre_check select').find('option:selected').val();
+                        break;
+                    case "Lotus招商负责人":
+                        processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
                         break;
                     default:
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();

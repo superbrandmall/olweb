@@ -8,7 +8,7 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
-            <h5 style="margin-bottom: 0;">租赁-合同云之家审批流程</h5>
+            <h5 style="margin-bottom: 0;">租赁-新签合同云之家审批流程</h5>
             <div class="box-body">
                 <div class="row">
                     <div class="bootstrap-table">
@@ -21,7 +21,7 @@
                                                 <div class="th-inner">行</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 110px;">
+                                            <th style="width: 150px;">
                                                 <div class="th-inner">操作</div>
                                                 <div class="fht-cell"></div>
                                             </th>
@@ -29,7 +29,7 @@
                                                 <div class="th-inner">执行人</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="min-width: 60px;">
+                                            <th style="width: 80px;">
                                                 <div class="th-inner">状态</div>
                                                 <div class="fht-cell"></div>
                                             </th>
@@ -37,11 +37,11 @@
                                                 <div class="th-inner">意见</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 90px;">
+                                            <th style="width: 150px;">
                                                 <div class="th-inner">开始日期</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 90px;">
+                                            <th style="width: 150px;">
                                                 <div class="th-inner">结束日期</div>
                                                 <div class="fht-cell"></div>
                                             </th>

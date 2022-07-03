@@ -42,8 +42,18 @@
                     </a>
                     <ul class="nav navbar-nav navbar-left">
                         <li class="left-navblock">
-                            <a class="logo navbar-brand no-hover" href="/lotus-admin/home">
+                            <a class="logo navbar-brand no-hover" href="/lotus-admin/">
                                 <img class="navbar-brand-img" src="/views/assets/base/img/content/lotus-admin/logo.png">
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm">
+                            <a href="/lotus-admin/" style="font-size: 15px;font-weight: bold;">
+                                招商区
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm">
+                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;">
+                              快闪店
                             </a>
                         </li>
                     </ul>

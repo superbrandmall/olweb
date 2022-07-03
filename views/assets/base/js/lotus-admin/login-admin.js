@@ -112,7 +112,7 @@ $(document).ready(function(){
                                             }
                                             
                                             if(flag == 1){
-                                                window.location.href = "contracts";
+                                                window.location.href = "todo";
                                             }
                                             
                                         }

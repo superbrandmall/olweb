@@ -285,6 +285,13 @@ $(document).ready(function(){
             $('.step li:nth-child(6)').removeClass('active');
         }
     })
+    
+    appendLotusLeasingHead();
+    
+    $('#Lotus_leasing_head select').val('').select2({
+        placeholder: "未选择",
+        allowClear: true
+    });
 })
 
 function findFilesByBizId(id) {
@@ -683,7 +690,9 @@ function findRoleYZJByParentId() {
 function updateRoleYZJLabel() {
     $.each($.parseJSON(sessionStorage.getItem('roleYZJ')), function(i,v){
         $('#'+v.roleId).find('label').prepend(v.roleName);
-        updateUserRoleYZJDropDownByRoleId(v.roleId);
+        if(v.roleId != 'Lotus_leasing_head'){
+            updateUserRoleYZJDropDownByRoleId(v.roleId);
+        }
     })
 }
         
@@ -727,6 +736,7 @@ function updateUserRoleYZJDropDownByRoleId(id) {
                                 id: item.openId,
                                 text: item.name
                             }
+                            
                             var returnData = [];
                             returnData.push(data);
                             return returnData;
@@ -1036,6 +1046,11 @@ function submitCheck() {
         $('#legal_pre_check select').parent().append(error);
     }
     
+    if($('#Lotus_leasing_head select').val() == null) {
+        flag = 0;
+        $('#Lotus_leasing_head select').parent().append(error);
+    }
+    
     if(flag == 1){
         saveContractForm('submit');
     } else {
@@ -1146,6 +1161,10 @@ function saveContractForm(s) {
                         processApprove.approveName = $('#legal_pre_check select').find('option:selected').text();
                         processApprove.approveOpenId = $('#legal_pre_check select').find('option:selected').val();
                         break;
+                    case "Lotus招商负责人":
+                        processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
+                        break;    
                     default:
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();

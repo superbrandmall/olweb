@@ -59,8 +59,8 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/requests' || $_GET['p'] == 'lotus-admin/request-summary' || $_GET['p'] == 'lotus-admin/request-detail' || $_GET['p'] == 'lotus-admin/make-request' 
-                    || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' 
-                    || $_GET['p'] == 'lotus-admin/terminate-summary' || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request') { echo 'active'; }?>">
+                    || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' || $_GET['p'] == 'lotus-admin/terminate-summary' 
+                    || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request' || $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-th-list"></i>
                     <span>流程</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -70,6 +70,9 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                             || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' 
                             || $_GET['p'] == 'lotus-admin/terminate-summary' || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request') { echo 'active'; }?>">
                         <a href="/lotus-admin/requests?items=20">租赁合同申请单</a>
+                    </li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>">
+                        <a href="/lotus-admin/todo?items=20">待办事项</a>
                     </li>
                 </ul>
             </li>

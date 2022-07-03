@@ -52,6 +52,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div class="row">
                 <div class="col-md-12">
                     <?php 
+                    include 'request-summary/investmentContractCertificates.php'; //附件信息
                     include 'request-summary/investmentContractModel.php'; //签约信息
                     include 'request-summary/investmentContractModelBasicinfo.php'; // 品牌信息以及商务合作条件
                     include 'request-summary/investmentContractAccounttermFixed.php'; //固定租金
