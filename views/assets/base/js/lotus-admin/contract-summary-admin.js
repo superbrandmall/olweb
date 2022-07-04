@@ -336,7 +336,7 @@ function findContractCommissionByContractNo(rentCalcMode) {
                     if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                         var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                         $.each(mode, function(i,v){
-                            $("#commission tr td:nth-child(4)").each(function() {
+                            $("#commission tr td:nth-child(5)").each(function() {
                                 if(v.dictCode == $(this).text()){
                                     $(this).text(v.dictName);
                                     return false;

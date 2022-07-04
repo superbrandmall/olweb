@@ -53,6 +53,46 @@ function findRequestByBizId() {
                     if(data.formStatus != 1){
                         findProcessInstByBizId();
                     }
+                    
+                    $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
+                    $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
+                    $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
+                    $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
+                    $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
+                    
+                    $('#essayDuration').text(data.duration);
+                    var saleRentalRatio = '';
+                    if(data.fixedRentList.length > 0){
+                        $('#essayFixedRent').html('新签首年固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
+                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                    }
+                    if(data.deductList.length > 0){
+                        $('#essayCommission').html('首年扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
+                    }
+                    if(data.propertyFeeList.length > 0){
+                        $('#essayPropertyMgmt').html('首年物管费<span class="txt">'+data.propertyFeeList[0].taxRentAmount+'</span>元/月/平米，');
+                    }
+                    if(data.promotionFeeList.length > 0){
+                        $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
+                    }
+                    $('#essayTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
+                    if(data.awardDate != null && data.awardDate != ''){
+                        $('#essayAwardDate').html('<span class="txt">预计'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
+                    }
+                    if(data.deliveryDate != null && data.deliveryDate != ''){
+                        $('#essayDeliveryDate').html('<span class="txt">'+data.deliveryDate.split('-')[0]+'年'+data.deliveryDate.split('-')[1]+'月'+data.deliveryDate.split('-')[2]+'日</span>交楼，');
+                    }
+                    if(data.bizDate != null && data.bizDate != ''){
+                        $('#essayBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业。');
+                    }
+                    
+                    $('#essayBudgetRentAmount').text('首年预算租金0元/月/平米，');
+                    $('#essayBudgetRentAmountRateOfReach').text('首年单价达成率100%。');
+                    $('#essayBudgetBizDate').text('预算中/年/月/日开业，');
+                    $('#essayBudgetYearAmountRateOfReach').text('全年预算达成率%，');
+                    $('#essayBudgetDifference').text('差异元。');
+                    $('#remark').val(data.remark);
+                    
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
                     $('#bizId').text(data.bizId).attr('title',data.bizId);
                     $('#mallName').text(data.mallName).attr('title',data.mallName);
@@ -177,7 +217,7 @@ function findRequestByBizId() {
                         if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                             var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                             $.each(mode, function(i,v){
-                                $("#commission tr td:nth-child(4)").each(function() {
+                                $("#commission tr td:nth-child(5)").each(function() {
                                     if(v.dictCode == $(this).text()){
                                         $(this).text(v.dictName);
                                         return false;
