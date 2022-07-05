@@ -40,7 +40,7 @@ if(isset($_SESSION['lotus_admin_login'])) {
         if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
             echo '<script type="text/javascript" src="/views/assets/base/js/kow-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>';
         } else {
-            echo '<script type="text/javascript" src="/views/assets/base/js/kow-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>';
+            echo '<script type="text/javascript" src="/views/assets/base/js/kow-admin/encrypted/script.js?t='.date("Y-m-d").'"></script>';
         }
         ?>
         <?php

@@ -50,20 +50,17 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'kow-admin/requests' || $_GET['p'] == 'kow-admin/request-summary' || $_GET['p'] == 'kow-admin/request-detail' || $_GET['p'] == 'kow-admin/make-request') { echo 'active'; }?>"><a href="/kow-admin/requests?items=20">租赁合同申请单</a></li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'kow-admin/sales') { echo 'active'; }?>">
-                <a href="/kow-admin/sales"><i class="fa fa-dollar"></i>
-                    <span>销售</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'kow-admin/sales') { echo 'active'; }?>"><a href="/kow-admin/sales">销售查询</a></li>
-                </ul>
-            </li>
             <!--<li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'kow-admin/contracts' || $_GET['p'] == 'kow-admin/contract-summary' || $_GET['p'] == 'kow-admin/contract-detail') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-file-archive-o"></i>
                     <span>合同</span>
                 </a>
             </li>-->
+            <li>
+                <a href="/kow-admin/sales"><i class="fa fa-dollar"></i>
+                    <span>销售</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>

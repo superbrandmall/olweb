@@ -440,9 +440,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'kow-admin/request-summary' => array(
             'url' => 'request-summary.php'
         ),
-        'kow-admin/sales' => array(
-            'url' => 'sales.php'
-        )
+        'kow-admin/contracts' => array(
+            'url' => 'contracts.php'
+        ),
+        'kow-admin/contract-summary' => array(
+            'url' => 'contract-summary.php'
+        ),
+        'kow-admin/contract-detail' => array(
+            'url' => 'contract-detail.php'
+        ),
     );
 
     if (array_key_exists($getTarget, $target)) {
@@ -451,8 +457,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'stores.php', 'create-store.php', 'store-detail.php', 'malls.php', 'create-mall.php', 'mall-detail.php',  
-    'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'requests.php', 'request-summary.php', 'make-request.php', 'request-detail.php', 'sales.php');
+    $session_required = array('login.php', 'default.php', 'stores.php', 'create-store.php', 'store-detail.php', 'malls.php', 'create-mall.php', 'mall-detail.php', 'tenants.php',  
+    'create-tenant.php', 'tenant-detail.php', 'requests.php', 'request-summary.php', 'make-request.php', 'request-detail.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/kow-admin/Session.class.php';
