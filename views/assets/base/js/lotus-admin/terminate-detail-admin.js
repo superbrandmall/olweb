@@ -840,9 +840,6 @@ function findRequestbyBizId() {
                             $.each(data.processApproveList, function(i,v) {
                                 temp = new Option(v.approveName, v.approveOpenId, true, true);
                                 switch (v.activityName) {
-                                    case "分管负责人":
-                                        $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').append(temp).trigger('change');
-                                        break;
                                     case "财务负责人":
                                         $('#66bfb352-903b-490a-a25b-4c554bc16756 select').append(temp).trigger('change');
                                         break;
@@ -861,8 +858,10 @@ function findRequestbyBizId() {
                                     case "Lotus招商负责人":
                                         $('#Lotus_leasing_head select').append(temp).trigger('change');
                                         break;
-                                    default:
+                                    case "总部招商负责人":
                                         $('#hq_leasing_head select').append(temp).trigger('change');
+                                        break;
+                                    default:
                                         break;
                                 }
                             })
@@ -2303,11 +2302,6 @@ function submitCheck() {
         }
     }
     
-    if($('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').val() == null) {
-        flag = 0;
-        $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').parent().append(error);
-    }
-    
     if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
         flag = 0;
         $('#66bfb352-903b-490a-a25b-4c554bc16756 select').parent().append(error);
@@ -2422,10 +2416,6 @@ function saveContractForm(s) {
                 processApprove.activityCode = v.dictCode;
                 processApprove.activityName = v.dictName;
                 switch (v.dictName) {
-                    case "分管负责人":
-                        processApprove.approveName = $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').find('option:selected').val();
-                        break;
                     case "财务负责人":
                         processApprove.approveName = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').text();
                         processApprove.approveOpenId = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').val();
@@ -2450,9 +2440,11 @@ function saveContractForm(s) {
                         processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
                         break;
-                    default:
+                    case "总部招商负责人":
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
+                        break;
+                    default:
                         break;
                 }
                 processApprove.bizId = bizId;

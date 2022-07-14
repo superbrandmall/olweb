@@ -37,7 +37,7 @@ if(isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/base/js/kow-admin/protocol-admin.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/accounting.min.js"></script>
         <?php
-        if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+        if(isset($_SESSION['lotus_admin_name']) && ($_SESSION['lotus_admin_name'] == '马俊' || $_SESSION['lotus_admin_name'] == '张彩琳')) {
             echo '<script type="text/javascript" src="/views/assets/base/js/kow-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>';
         } else {
             echo '<script type="text/javascript" src="/views/assets/base/js/kow-admin/encrypted/script.js?t='.date("Y-m-d").'"></script>';

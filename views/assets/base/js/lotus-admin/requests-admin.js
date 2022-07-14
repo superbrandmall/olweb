@@ -232,6 +232,9 @@ function findAllRequestsByKVCondition(p,c){
                             case "termination":
                                 page = 'terminate';
                                 break;
+                            case "modify":
+                                page = 'modify';
+                                break;
                             default:
                                 break;
                         }

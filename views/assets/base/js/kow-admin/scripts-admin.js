@@ -22,24 +22,24 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
-        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
-                $('.location-select ul li, .mall-select ul li').show();
-                if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002']) == -1){
-                    $('.sidebar-menu > li').hide();
-                    $('.sidebar-menu > li:eq(0), .sidebar-menu > li:eq(5)').show();
-                }
-                return false;
-            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == 'KOW') {
-                $('.sidebar-menu > li').hide();
-                $('.sidebar-menu > li:eq(0), .sidebar-menu > li:eq(5)').show();
-                $('.mall-select ul li').each(function(i,elem){
-                    if($(elem).find('a').attr('data-code') == v.moduleCode){
-                        $(this).show();
-                    }
-                })
-            }
-        })
+//        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+//            if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+//                $('.location-select ul li, .mall-select ul li').show();
+//                if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002']) == -1){
+//                    $('.sidebar-menu > li').hide();
+//                    $('.sidebar-menu > li:eq(0), .sidebar-menu > li:eq(5)').show();
+//                }
+//                return false;
+//            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == 'KOW') {
+//                $('.sidebar-menu > li').hide();
+//                $('.sidebar-menu > li:eq(0), .sidebar-menu > li:eq(5)').show();
+//                $('.mall-select ul li').each(function(i,elem){
+//                    if($(elem).find('a').attr('data-code') == v.moduleCode){
+//                        $(this).show();
+//                    }
+//                })
+//            }
+//        })
         
         if($.cookie('locationSelected') && $.cookie('locationSelected') != ''){
             $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);

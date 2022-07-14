@@ -1021,11 +1021,6 @@ function submitCheck() {
         $('#brandAuthorization_0').parent().append(error);
     }
     
-    if($('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').val() == null) {
-        flag = 0;
-        $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').parent().append(error);
-    }
-    
     if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
         flag = 0;
         $('#66bfb352-903b-490a-a25b-4c554bc16756 select').parent().append(error);
@@ -1137,10 +1132,6 @@ function saveContractForm(s) {
                 processApprove.activityCode = v.dictCode;
                 processApprove.activityName = v.dictName;
                 switch (v.dictName) {
-                    case "分管负责人":
-                        processApprove.approveName = $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#b58eb43c-aa63-4b0d-84c0-6ddcd9c8d07f select').find('option:selected').val();
-                        break;
                     case "财务负责人":
                         processApprove.approveName = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').text();
                         processApprove.approveOpenId = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').val();
@@ -1164,10 +1155,12 @@ function saveContractForm(s) {
                     case "Lotus招商负责人":
                         processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
-                        break;    
-                    default:
+                        break;
+                    case "总部招商负责人":
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
+                        break;
+                    default:
                         break;
                 }
                 processApprove.bizId = bizId;
