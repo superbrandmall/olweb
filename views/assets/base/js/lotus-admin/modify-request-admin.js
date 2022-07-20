@@ -192,6 +192,16 @@ $(document).ready(function(){
         }
     })
     
+    $("#endDate").on('changeDate',function(){
+        updateEndDatepicker('fixedRent');
+        updateEndDatepicker('commission');
+        updateEndDatepicker('propertyMgmt');
+        updateEndDatepicker('promotion');
+        updateEndDatepicker('minSales');
+        $('#freeStartDate_1').datepicker('setEndDate',$(this).val());
+        $('#freeEndDate_1').datepicker('setEndDate',$(this).val());
+    })
+    
     $("#freeEndDate_1").on('changeDate',function(){
         $('#bizDate').datepicker('update', IncrDate($(this).val()));
     })
