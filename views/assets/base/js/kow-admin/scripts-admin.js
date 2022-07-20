@@ -1888,10 +1888,10 @@ function calBackPushPropertyMgmtAmount() { //金额(含税)
             var taxAmount = Math.round(numberWithoutCommas($(this).val()) / (1 + parseFloat($('#propertyMgmtTaxRate_'+num).val())) * 100) / 100; //金额(去税)
             var rentAmount; //月面积单价(含税)
             var taxRentAmount; //月面积单价(去税)
-            if($('#fixedRentSettlePeriod_1').val() == 'D'){
+            if($('#propertyMgmtSettlePeriod_1').val() == 'D'){
                 rentAmount = Math.round(numberWithoutCommas($(this).val()) * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(含税)
                 taxRentAmount = Math.round(taxAmount * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(去税)
-            } else if($('#fixedRentSettlePeriod_1').val() == 'T' && $('#propertyMgmtStartDate_'+num).val() != '' && $('#propertyMgmtEndDate_'+num).val() != ''){
+            } else if($('#propertyMgmtSettlePeriod_1').val() == 'T' && $('#propertyMgmtStartDate_'+num).val() != '' && $('#propertyMgmtEndDate_'+num).val() != ''){
                 rentAmount = Math.round(numberWithoutCommas($(this).val()) / calDatesDiff($('#propertyMgmtStartDate_'+num).val(),$('#propertyMgmtEndDate_'+num).val()) * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(含税)
                 taxRentAmount = Math.round(taxAmount / calDatesDiff($('#propertyMgmtStartDate_'+num).val(),$('#propertyMgmtEndDate_'+num).val()) * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(去税)
             } else {
@@ -1913,9 +1913,9 @@ function calBackPushPropertyMgmtRentAmount() { //月面积单价(含税)
             var amount = Math.round(numberWithoutCommas($(this).val()) * $('#area').val() * 100) / 100; //金额(含税)
             var taxAmount = Math.round(amount / (1 + parseFloat($('#propertyMgmtTaxRate_'+num).val())) * 100) / 100; //金额(去税)
             var taxRentAmount; //月面积单价(去税)
-            if($('#fixedRentSettlePeriod_1').val() == 'D'){
+            if($('#propertyMgmtSettlePeriod_1').val() == 'D'){
                 taxRentAmount = Math.round(taxAmount * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(去税)
-            } else if($('#fixedRentSettlePeriod_1').val() == 'T' && $('#propertyMgmtStartDate_'+num).val() != '' && $('#propertyMgmtEndDate_'+num).val() != ''){
+            } else if($('#propertyMgmtSettlePeriod_1').val() == 'T' && $('#propertyMgmtStartDate_'+num).val() != '' && $('#propertyMgmtEndDate_'+num).val() != ''){
                 taxRentAmount = Math.round(taxAmount / calDatesDiff($('#propertyMgmtStartDate_'+num).val(),$('#propertyMgmtEndDate_'+num).val()) * 365 / 12 / $('#area').val() * 100) / 100; //月面积单价(去税)
             } else {
                 taxRentAmount = Math.round(taxAmount / $('#area').val() * 100) / 100; //月面积单价(去税)

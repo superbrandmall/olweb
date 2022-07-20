@@ -108,50 +108,41 @@ $(document).ready(function(){
         return false;
     });
     
-    $('#createRenew, #createTerminate').click(function(){
-        var ftTxt, ftVal,headTxt;
+    $('#createRenew, #createTerminate, #createModify').click(function(){
+        var ftTxt, ftVal,headTxt,rcdd,ftid,fheader;
         switch ($(this).attr('id')) {
-        case "createRenew":
-            ftTxt = $.api.formType[2];
-            ftVal = $.api.formType[3];
-            headTxt = '续签合同申请';
-            break;
-        case "createTerminate":
-            ftTxt = $.api.formType[4];
-            ftVal = $.api.formType[5];
-            headTxt = '终止合同申请';
-            break;
-        default:
-            break;
+            case "createRenew":
+                ftTxt = $.api.formType[2];
+                ftVal = $.api.formType[3];
+                headTxt = '续签合同申请';
+                rcdd = 'renewContract';
+                ftid = 'renewUpdateFormType';
+                fheader = 'renew-termination';
+                break;
+            case "createTerminate":
+                ftTxt = $.api.formType[4];
+                ftVal = $.api.formType[5];
+                headTxt = '终止合同申请';
+                rcdd = 'renewContract';
+                ftid = 'renewUpdateFormType';
+                fheader = 'renew-termination';
+                break;
+            case "createModify":
+                ftTxt = $.api.formType[6];
+                ftVal = $.api.formType[7];
+                headTxt = '变更合同申请';
+                rcdd = 'modifyContract';
+                ftid = 'modifyUpdateFormType';
+                fheader = 'modify';
+                break;
+            default:
+                break;
         }
         
-        updateDictDropDownByDictTypeCode('FORM_TYPE','updateFormType',ftTxt,ftVal);
-        $('#investment-contract-request-renew-termination-create .modal-header').find('h4').text(headTxt);
-        $('#investment-contract-request-renew-termination-create').modal('toggle');
-        updateRequestContractDropDown('renewContract',10);
-        $('.date-picker').datepicker({
-            'language': 'zh-CN',
-            'format': 'yyyy-mm-dd',
-            'todayBtn': "linked",
-            'todayHighlight': true,
-            'startDate': '',
-            'endDate': '',
-            'autoclose': true
-        });
-    })
-    
-    $('#createModify').click(function(){
-        var ftTxt = $.api.formType[6];
-        var ftVal = $.api.formType[7];
-        var ftTxt2 = '未选择';
-        var ftVal2 = '';
-        var headTxt = '变更合同申请';
-
-        updateDictDropDownByDictTypeCode('FORM_TYPE','updateFormType',ftTxt,ftVal);
-        updateDictDropDownByDictTypeCode('CONTRACT_MODIFY_TYPE','updateFormType2',ftTxt2,ftVal2);
-        $('#investment-contract-request-modify-create .modal-header').find('h4').text(headTxt);
-        $('#investment-contract-request-modify-create').modal('toggle');
-        updateRequestContractDropDown('modifyContract',10);
+        updateDictDropDownByDictTypeCode('FORM_TYPE',ftid,ftTxt,ftVal);
+        $('#investment-contract-request-'+fheader+'-create .modal-header').find('h4').text(headTxt);
+        $('#investment-contract-request-'+fheader+'-create').modal('toggle');
+        updateRequestContractDropDown(rcdd,10);
         $('.date-picker').datepicker({
             'language': 'zh-CN',
             'format': 'yyyy-mm-dd',
@@ -171,26 +162,17 @@ $(document).ready(function(){
         dropdownParent: $('#investment-contract-request-modify-create')
     })
     
-    $("#renewContract").on("select2:select",function(){
-        $("#renewTenant").text($('#select2-renewContract-container').text().split(' | ')[0].split('[')[0]);
-        $("#renewContractName").text($('#select2-renewContract-container').text().split(' | ')[1]);
-        $("#renewUnitName").text($('#select2-renewContract-container').text().split(' | ')[2]);
-        $("#renewStartEndDate").text($('#select2-renewContract-container').text().split(' | ')[3]);
+    $("#renewContract, #modifyContract").on("select2:select",function(){
+        var id = $(this).attr('id').split('Contract')[0];
+        $("#"+id+"Tenant").text($('#select2-'+id+'Contract-container').text().split(' | ')[0].split('[')[0]);
+        $("#"+id+"ContractName").text($('#select2-'+id+'Contract-container').text().split(' | ')[1]);
+        $("#"+id+"UnitName").text($('#select2-'+id+'Contract-container').text().split(' | ')[2]);
+        $("#"+id+"StartEndDate").text($('#select2-'+id+'Contract-container').text().split(' | ')[3]);
     })
     
-    $("#modifyContract").on("select2:select",function(){
-        $("#modifyTenant").text($('#select2-modifyContract-container').text().split(' | ')[0].split('[')[0]);
-        $("#modifyContractName").text($('#select2-modifyContract-container').text().split(' | ')[1]);
-        $("#modifyUnitName").text($('#select2-modifyContract-container').text().split(' | ')[2]);
-        $("#modifyStartEndDate").text($('#select2-modifyContract-container').text().split(' | ')[3]);
-    })
-    
-    $('#createRequestRenew').click(function(){
-        redirectCheck();
-    })
-    
-    $('#createRequestModify').click(function(){
-        redirectCheck2();
+    $('#renewCreateRequest, #modifyCreateRequest').click(function(){
+        var id = $(this).attr('id').split('CreateRequest')[0];
+        redirectCheck(id);
     })
     
     scrollJump();
@@ -2148,14 +2130,14 @@ function calBackPushNextCalendar(Exid){
     $("input[id*='"+Exid+"EndDate_']").each(function(i){  
         var num0 = $(this).attr('id').split('_')[1];
         var num = parseInt(num0) + 1;
+        var tmp = $(this).val();
         if($('#'+Exid+'StartDate_'+num).length > 0){
-            var tmp = $(this).val();
-            $('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp)).val(IncrDate(tmp));
-            $('#'+Exid+'StartDate_'+num).datepicker('update', IncrDate(tmp)).val(IncrDate(tmp));
+            $('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp));
+            $('#'+Exid+'StartDate_'+num).datepicker('update', IncrDate(tmp));
         } else {
-            if($('#'+Exid+'EndDate_'+num0).val() == ''){
-                $('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp)).val($('#endDate').val());
-                $('#'+Exid+'EndDate_'+num0).datepicker('update', IncrDate(tmp)).val($('#endDate').val());
+            if($('#'+Exid+'EndDate_'+num0).val() == '' && $('#'+Exid+'StartDate_'+num0).val() != ''){
+                $('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp));
+                $('#'+Exid+'EndDate_'+num0).datepicker('update', $('#endDate').val());
             }
         }
     })
@@ -2592,52 +2574,27 @@ function updateRequestContractDropDown(id, data_count) {
     });
 }
 
-function redirectCheck() {
+function redirectCheck(id) {
     $('.mandatory-error').remove();
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
     
-    if($('#renewContract').val() == null) {
+    if($('#'+id+'Contract').val() == null) {
         flag = 0;
-        $('#renewContract').parent().append(error);
+        $('#'+id+'Contract').parent().append(error);
     }
     
-    if($('#updateFormType').val() == '') {
+    if($('#'+id+'UpdateFormType').val() == '') {
         flag = 0;
-        $('#updateFormType').parent().append(error);
+        $('#'+id+'UpdateFormType').parent().append(error);
     }
     
     if(flag == 1){
-        saveContractInfoForRequest($('#updateFormType').val());
+        saveContractInfoForRequest($('#'+id+'UpdateFormType').val());
     }
 }
 
-function redirectCheck2() {
-    $('.mandatory-error').remove();
-    var flag = 1;
-    var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
-    
-    if($('#modifyContract').val() == null) {
-        flag = 0;
-        $('#modifyContract').parent().append(error);
-    }
-    
-    if($('#updateFormType').val() == '') {
-        flag = 0;
-        $('#updateFormType').parent().append(error);
-    }
-    
-    if($('#updateFormType2').val() == '') {
-        flag = 0;
-        $('#updateFormType2').parent().append(error);
-    }
-    
-    if(flag == 1){
-        saveContractInfoForRequest($('#updateFormType2').val());
-    }
-}
-
-function saveContractInfoForRequest(ft) {
+function saveContractInfoForRequest(id) {
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.roleCode == 'CROLE220301000001'){
@@ -2645,46 +2602,10 @@ function saveContractInfoForRequest(ft) {
             return false;
         }
     })
-    
-    var path, contractNo, formType;
-    switch (ft) {
-        case "renew":
-            contractNo = $('#renewContract').val();
-            path = 'renew';
-            formType = ft;
-            break;
-        case "termination":
-            contractNo = $('#renewContract').val();
-            path = 'terminate';
-            formType = ft;
-            break;
-        case "TENANT_CHANGE":
-            contractNo = $('#modifyContract').val();
-            path = 'modify';
-            formType = $('#updateFormType').val();
-            break;
-        case "BRAND_CHANGE":
-            contractNo = $('#modifyContract').val();
-            path = 'modify';
-            formType = $('#updateFormType').val();
-            break;
-        case "TIME_CHANGE":
-            contractNo = $('#modifyContract').val();
-            path = 'modify';
-            formType = $('#updateFormType').val();
-            break;
-        case "CLAUSE_CHANGE":
-            contractNo = $('#modifyContract').val();
-            path = 'modify';
-            formType = $('#updateFormType').val();
-            break;
-        default:
-            break;
-    }
-        
+       
     var map = {
-        contractNo: contractNo,
-        formType: formType,
+        contractNo: $('#'+id+'Contract').val(),
+        formType: $('#'+id+'UpdateFormType').val(),
         updateOpenId: openId
     }
     $.ajax({
@@ -2713,7 +2634,17 @@ function saveContractInfoForRequest(ft) {
                 }
                 
                 if(response.data.bizId != null){
-                    window.location.href = '/lotus-admin/'+path+'-request?id='+response.data.bizId+'&cmt='+ft;
+                    var path;
+                    switch (response.data.formType) {
+                        case "termination":
+                            path = 'terminate';
+                            break;
+                        default:
+                            path = response.data.formType;
+                            break;
+                    }
+                    
+                    window.location.href = '/lotus-admin/'+path+'-request?id='+response.data.bizId;
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

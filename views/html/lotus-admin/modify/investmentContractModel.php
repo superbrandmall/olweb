@@ -34,15 +34,9 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">招商人员 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12">
-                    <?php
-                    if(isset($_SESSION['lotus_admin_name'])) {
-                        echo '<input class="form-control" id="creatorName" type="text" value="'.$_SESSION['lotus_admin_name'].'" readonly />';
-                    } else {
-                        echo '<input class="form-control" id="creatorName" type="text" value="管理员" readonly />';
-                    }
-                    ?>
+                <label class="col-md-4 control-label">变更模版 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="contractModifyType" style="width: 100%"></select>
                 </div>
             </div>
         </div>
@@ -63,17 +57,17 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg">*</span> 变更模版</label>
-                <div class="col-md-8 col-sm-12" required>
-                    <select class="select2" id="updateFormType2" style="width: 100%"></select>
+                <label class="col-md-4 control-label">招商人员 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <?php
+                    if(isset($_SESSION['lotus_admin_name'])) {
+                        echo '<input class="form-control" id="creatorName" type="text" value="'.$_SESSION['lotus_admin_name'].'" readonly />';
+                    } else {
+                        echo '<input class="form-control" id="creatorName" type="text" value="管理员" readonly />';
+                    }
+                    ?>
                 </div>
             </div>
-            <!--<div class="form-group">
-                <label class="col-md-4 control-label">e签宝用印 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                    <input type="checkbox" id="esignFlag">
-                </div>
-            </div>-->
         </div>
     </div>
 </div>

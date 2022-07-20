@@ -722,12 +722,6 @@ function findRequestbyBizId() {
                         }
                         $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
 
-                        /*if(data.esignFlag == 1) {
-                            $('#esignFlag').prop('checked', true);
-                        } else {
-                            $('#esignFlag').prop('checked', false);
-                        }*/
-
                         $('input.money').each(function(){
                             $(this).val(accounting.formatNumber($(this).val()));
                         })
@@ -888,8 +882,6 @@ function findRequestbyBizId() {
                         $('input.money').each(function(){
                             $(this).val(accounting.formatNumber($(this).val()));
                         })
-
-                        //preCheck();
                     }
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
@@ -2081,41 +2073,6 @@ function updateRowMinSales(v) {
     })
 }
 
-function preCheck() {
-    if($('#bizScope').val() == ''){
-        $('#bizScope').removeAttr('readonly');
-    }
-    
-    if($('#freeDays').val() == '' || $('#freeDays').val() != 0){
-        if($('#freeStartDate_1').val() == '' || $('#freeEndDate_1').val() == '') {
-            $('#freeStartDate_1, #freeEndDate_1').attr({
-                'disabled': false,
-                'readonly': true
-            }).css({
-                'border': '1px solid #ccc',
-                'background': '#fff',
-                'border-right': 'none'
-            })
-            $('#freeStartDate_1, #freeEndDate_1').next().attr({
-                'disabled': false,
-                'readonly': true
-            }).css({
-                'border': '1px solid #d2d6de',
-                'borderLeft': 'none',
-                'background': 'transparent'
-            })
-
-            $('#freeDays').removeAttr('readonly').css({
-                'borderRight': 'none',
-            }).next().css({
-                'border': '1px solid #d2d6de',
-                'borderLeft': 'none',
-                'background': 'transparent'
-            })
-        }
-    }
-}
-
 function mandatoryCheck(s) {
     $('.mandatory-error').remove();
     var flag = 1;
@@ -2487,13 +2444,6 @@ function saveContractForm(s) {
         if($('.step-progress li:eq(5)').hasClass('active') == true){
             processHqRentApprove = 1;
         }
-        
-        /*var esignFlag;
-        if($('#esignFlag').prop('checked') == true){
-            esignFlag = 1;
-        } else {
-            esignFlag = 0;
-        }*/
         
         var processApproveList = [];
         var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_RENT_FLOW_STEP'));
@@ -2982,7 +2932,6 @@ function saveContractForm(s) {
             "depositTimes": depositTimes,
             "duration": 0,
             "enterDate": $.request.content.enterDate,
-            //"esignFlag": esignFlag,
             "esignFlag": 0,
             "exclusiveCondition": "",
             "firstCompareCycle": $.request.content.compareFirstFrequency,

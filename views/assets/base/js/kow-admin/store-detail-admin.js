@@ -45,6 +45,9 @@ $(document).ready(function(){
             },
             height: {
                 required: true
+            },
+            area: {
+                required: true
             }
         },
         messages: {
@@ -82,6 +85,9 @@ $(document).ready(function(){
             },
             height: {
                 required: "请输入铺位高度"
+            },
+            area: {
+                required: "请输入铺位面积"
             }
         },
         errorPlacement: function(error, element) {
@@ -129,10 +135,9 @@ function findStoreByCode() {
                     updateSelectMallDropDown(20) // 所属项目
                     var mallCode = new Option(response.data.mallName, response.data.mallCode, true, true);
                     $('#mallCode').append(mallCode).trigger('change');
-                    var floorName = new Option(response.data.floorName, response.data.floorCode, true, true);
-                    $('#floorName').append(floorName).trigger('change');
-                    $('#startDate').datepicker('update',date);
-                    $('#endDate').datepicker('update','2099-12-31');
+                    $('#floorName').val(response.data.floorName).trigger('change');
+                    $('#startDate').datepicker('update',response.data.startDate);
+                    $('#endDate').datepicker('update',response.data.endDate);
                     var approveFirst = new Option(response.data.approveFirst, response.data.approveFirst, true, true);
                     $('#approveFirst').append(approveFirst).trigger('change');
                     if(response.data.approveSecond != null) {
@@ -220,7 +225,7 @@ function saveStore() {
         }
         var unitDesc = $('#unitDesc').val() || null;
 
-        if(approveFirst != '' && unitName != '' && length != '' && width != '' && height != ''){
+        if(approveFirst != '' && unitName != '' && length != '' && width != '' && height != '' && area != ''){
             var map = {
                 "abcRent": $.store.abcRent,
                 "approveFirst": approveFirst,

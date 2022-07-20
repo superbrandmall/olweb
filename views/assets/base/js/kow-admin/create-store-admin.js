@@ -50,6 +50,9 @@ $(document).ready(function(){
             },
             height: {
                 required: true
+            },
+            area: {
+                required: true
             }
         },
         messages: {
@@ -87,6 +90,9 @@ $(document).ready(function(){
             },
             height: {
                 required: "请输入铺位高度"
+            },
+            area: {
+                required: "请输入铺位面积"
             }
         },
         errorPlacement: function(error, element) {
@@ -141,7 +147,7 @@ function addStore() {
         }
         var unitDesc = $('#unitDesc').val() || null;
 
-        if(unitCode!= '' && unitType != '' && mallCode != '' && floorName != '' && startDate != '' && endDate != '' && approveFirst != '' && unitName != '' && length != '' && width != '' && height != ''){
+        if(unitCode!= '' && unitType != '' && mallCode != '' && floorName != '' && startDate != '' && endDate != '' && approveFirst != '' && unitName != '' && length != '' && width != '' && height != '' && area != ''){
             var map = {
                 "abcRent": 0,
                 "approveFirst": approveFirst,
