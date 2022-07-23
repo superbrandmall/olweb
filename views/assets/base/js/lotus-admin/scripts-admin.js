@@ -2653,6 +2653,80 @@ function saveContractInfoForRequest(id) {
     })
 }
 
+function activateAddDeleteRow(){
+    if($('#investmentContractAccounttermFixed tbody tr').length > 0){
+        $('#investmentContractAccounttermFixed .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermFixed()').css('opacity',1);
+    }
+    if($('#investmentContractAccounttermCommission tbody tr').length > 0){
+        $('#investmentContractAccounttermCommission .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermCommission()').css('opacity',1);
+    }
+    if($('#investmentContractAccounttermPropertyMgmt tbody tr').length > 0){
+        $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermPropertyMgmt()').css('opacity',1);
+    }
+    if($('#investmentContractAccounttermPromotion tbody tr').length > 0){
+        $('#investmentContractAccounttermPromotion .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermPromotion()').css('opacity',1);
+    }
+    $('#investmentContractProperteisterm .box-body .pull-right a').attr('onClick','addRowMinSales()').css('opacity',1);
+    
+    $('tbody .fa-minus-circle').parent().attr('onClick','deleteRow(this)').css('opacity',1);
+}
+
+function modifyTypeCheck() {
+    if($('#contractModifyType').val() != ''){
+        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode").attr('disabled','disabled');
+        $('#startDate, #endDate, #investmentContractEnteryterm input').next().css({
+            'border': 'none',
+            'background': '#eee'
+        });
+        $('#investmentContractAccounttermFixed .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
+        $('#investmentContractAccounttermCommission .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
+        $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
+        $('#investmentContractAccounttermPromotion .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
+        $('#investmentContractProperteisterm .box-body .pull-right a').removeAttr('onClick').css('opacity',0.5);
+        $('tbody .fa-minus-circle').removeAttr('onClick').css('opacity',0.5);
+        
+        $("input[id*='StartDate_']").datepicker('setStartDate',$('#startDate').val());
+        $("input[id*='StartDate_']").datepicker('setEndDate',$('#endDate').val());
+        $("input[id*='EndDate_']").datepicker('setStartDate',$('#startDate').val());
+        $("input[id*='EndDate_']").datepicker('setEndDate',$('#endDate').val());
+        
+        switch ($('#contractModifyType').val()) {
+            case "TENANT_CHANGE":
+                $("#selectTenant, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                
+                activateAddDeleteRow();
+                break;
+            case "BRAND_CHANGE":
+                $("#brandName, #contractName, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                
+                activateAddDeleteRow();
+                break;
+            case "TIME_CHANGE":
+                $('#startDate, #endDate, #investmentContractEnteryterm input').removeAttr('disabled').css({
+                    'borderRight': 'none'
+                });
+                $("#startDate, #endDate, #investmentContractEnteryterm input").next().css({
+                    'border': '1px solid #d2d6de',
+                    'borderLeft': 'none',
+                    'background': 'transparent'
+                })
+                
+                $("tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").removeAttr('disabled');
+                
+                activateAddDeleteRow();
+                break;
+            case "CLAUSE_CHANGE":
+                $("#selectRentCalculationMode, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                $('input.money').removeAttr('disabled');
+                
+                activateAddDeleteRow();
+                break;
+            default:
+                break;
+        }
+    }
+}
+
 (function ($) {
     window.Ewin = function () {
         var html = '<div id="[Id]" class="modal fade" role="dialog" aria-labelledby="modalLabel">' +

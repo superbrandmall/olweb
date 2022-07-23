@@ -609,7 +609,6 @@ function findRequestbyBizId() {
                         $('#startDate, #compareStartDate_1, #compareStartDate_2').datepicker('update', data.startDate);
                         $('#endDate, #compareEndDate_1, #compareEndDate_2').datepicker('update', data.endDate);
                         $('#endDate').datepicker('setStartDate',data.startDate);
-                        $('#endDate').datepicker('setEndDate',data.endDate);
 
                         if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                             var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
@@ -864,6 +863,14 @@ function findRequestbyBizId() {
                             })
                         }
                         
+                        if(data.salesList != null && data.salesList.length > 0) {                        
+                            $.each(data.salesList, function(i,v) {
+                                updateRowMinSales(JSON.stringify(v));
+                                $('#salesList tr:eq("'+i+'")').find('input').attr('disabled','disabled');
+                                $('#salesList tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+                        }
+                        
                         appendLotusLeasingHead();
                         
                         $('#Lotus_leasing_head select').val('').select2({
@@ -1089,10 +1096,7 @@ function updateUserRoleYZJDropDownByRoleId(id) {
 function updateRowInvestmentContractAccounttermFixed(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(dateCompare(value.endDate, date) == 'smaller'){
-        past = ' past';
-    }
+
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1117,6 +1121,10 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //期限
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","fixedRentStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1137,6 +1145,10 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div2 = document.createElement("div");
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
     input2.setAttribute("class","form-control"+past);
     input2.setAttribute("id","fixedRentEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
@@ -1300,10 +1312,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
 function updateRowInvestmentContractAccounttermCommission(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(dateCompare(value.endDate, date) == 'smaller'){
-        past = ' past';
-    }
+
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1329,6 +1338,10 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //期限
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","commissionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1349,6 +1362,10 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div2 = document.createElement("div");
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
     input2.setAttribute("class","form-control"+past);
     input2.setAttribute("id","commissionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
@@ -1499,10 +1516,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
 function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(dateCompare(value.endDate, date) == 'smaller'){
-        past = ' past';
-    }
+    
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1527,6 +1541,10 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //期限
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","propertyMgmtStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1547,6 +1565,10 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div2 = document.createElement("div");
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
     input2.setAttribute("class","form-control"+past);
     input2.setAttribute("id","propertyMgmtEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
@@ -1710,10 +1732,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
 function updateRowInvestmentContractAccounttermPromotion(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(dateCompare(value.endDate, date) == 'smaller'){
-        past = ' past';
-    }
+
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1737,6 +1756,10 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div = document.createElement("div"); //期限
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","promotionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1757,6 +1780,10 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div2 = document.createElement("div");
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
     input2.setAttribute("class","form-control"+past);
     input2.setAttribute("id","promotionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
@@ -1979,62 +2006,125 @@ function updateRowInvestmentContractDepositterm(v) {
     });
 }
 
-function modifyTypeCheck() {
-    if($('#contractModifyType').val() != ''){
-        $('#selectTenant').attr('disabled','disabled');
-        $('#brandName').attr('disabled','disabled');
-        $('#contractName').attr('readonly','readonly');
-                
-        switch ($('#contractModifyType').val()) {
-            case "TENANT_CHANGE":
-                $('#selectTenant').removeAttr('disabled');
-                break;
-            case "BRAND_CHANGE":
-                $('#brandName').removeAttr('disabled');
-                $('#contractName').removeAttr('readonly');
-                break;
-            case "TIME_CHANGE":
-                break;
-            case "CLAUSE_CHANGE":
-                break;
-            default:
-                
-                break;
-        }
-    }
+function updateRowMinSales(v) {
+    var value = JSON.parse(v);
+    var newrow = document.createElement("tr");
     
-//    if($('#bizScope').val() == ''){
-//        $('#bizScope').removeAttr('readonly');
-//    }
-//    
-//    if($('#freeDays').val() == '' || $('#freeDays').val() != 0){
-//        if($('#freeStartDate_1').val() == '' || $('#freeEndDate_1').val() == '') {
-//            $('#freeStartDate_1, #freeEndDate_1').attr({
-//                'disabled': false,
-//                'readonly': true
-//            }).css({
-//                'border': '1px solid #ccc',
-//                'background': '#fff',
-//                'border-right': 'none'
-//            })
-//            $('#freeStartDate_1, #freeEndDate_1').next().attr({
-//                'disabled': false,
-//                'readonly': true
-//            }).css({
-//                'border': '1px solid #d2d6de',
-//                'borderLeft': 'none',
-//                'background': 'transparent'
-//            })
-//
-//            $('#freeDays').removeAttr('readonly').css({
-//                'borderRight': 'none',
-//            }).next().css({
-//                'border': '1px solid #d2d6de',
-//                'borderLeft': 'none',
-//                'background': 'transparent'
-//            })
-//        }
-//    }
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    
+    var table = document.getElementById('investmentContractProperteisterm');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var div = document.createElement("div"); //期限
+    div.setAttribute("class","input-daterange input-group");
+    var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
+    input.setAttribute("class","form-control past");
+    input.setAttribute("id","minSalesStartDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","min-width: 80px");
+    input.setAttribute("readonly","");
+    input.setAttribute("value",value.startDate);
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    var to = document.createElement("span");
+    to.innerText = "-";
+    to.setAttribute("class", "input-group-addon");
+    div.appendChild(to);
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","input-group");
+    var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
+    input2.setAttribute("class","form-control past");
+    input2.setAttribute("id","minSalesEndDate_"+count.toLocaleString());
+    input2.setAttribute("type","text");
+    input2.setAttribute("style","min-width: 80px");
+    input2.setAttribute("readonly","");
+    input2.setAttribute("value",value.endDate);
+    div2.appendChild(input2);
+    var icon2 = document.createElement("i");
+    icon2.setAttribute("class", "fa fa-calendar");
+    var span2 = document.createElement("span");
+    span2.setAttribute("class", "input-group-addon");
+    span2.appendChild(icon2);
+    div2.appendChild(span2);
+    div.appendChild(div2);
+    column2.appendChild(div);
+    
+    var div = document.createElement("div"); //金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money past");
+    input.setAttribute("id","minSalesAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value",value.amount);
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column3.appendChild(div);
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column4.appendChild(remove);
+
+    tbody.appendChild(newrow);
+    var tmp = $('#minSalesEndDate_'+(parseInt(count)-1).toLocaleString()).val();
+    var sd;
+    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
+    $('#investmentContractProperteisterm .input-daterange').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'startDate': sd,
+        'endDate': $('#endDate').val(),
+        'autoclose': true
+    });
+
+    $('input.money').on('focus',function(){
+        $(this).val(accounting.unformat($(this).val()));
+        $(this).css({
+            'backgroundColor': '#fff',
+            'boxShadow': 'inset 6px 6px 2px -6px #000'
+        });
+        $(this).select();
+        $(this).parent().parent().addClass('success');
+    });
+    
+    $('input.money').on('blur',function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+        $(this).css({
+            'backgroundColor': 'transparent',
+            'boxShadow': 'none'
+        });
+        $(this).parent().parent().removeClass('success');
+    });
+    
+    $("#minSalesEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('minSales');
+    })
 }
 
 function mandatoryCheck(s) {
@@ -2160,6 +2250,11 @@ function submitCheck() {
         $('#targetSales').parent().append(error);
     }
     
+    if($("input[id*='minSalesAmount_']").val() == '' || parseFloat(numberWithoutCommas($("input[id*='minSalesAmount_']").val())) <= 0) {
+        flag = 0;
+        $('#minSales').parent().append(error);
+    }
+    
     if($('#paymentMode').val() == '') {
         flag = 0;
         $('#paymentMode').parent().append(error);
@@ -2217,6 +2312,26 @@ function submitCheck() {
             flag = 0;
             $('#investmentContractAccounttermCommission').append(error);
         }
+    }
+    
+    if($('#minSales tr').length > 0) {
+        if($('#minSalesStartDate_1').val() == ''){
+            flag = 0;
+            $('#minSalesStartDate_1').parent().prepend(error);
+        }
+
+        if($('#minSalesEndDate_1').val() == ''){
+            flag = 0;
+            $('#minSalesEndDate_1').parent().prepend(error);
+        }
+
+        if($('#minSalesAmount_1').val() == ''){
+            flag = 0;
+            $('#minSalesAmount_1').parent().append(error);
+        }
+    } else {
+        flag = 0;
+        $('#minSales').append(error);
     }
     
     if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
@@ -2281,9 +2396,13 @@ function saveContractForm(s) {
         var bizId = $('#bizId').val();
         var creatorName = $('#creatorName').val();
         var formType = $('#formType').find('option:selected').val();
+        var endDate = $('#endDate').val();
         var shopCode = $.request.content.shopCode;
         var area = $.request.content.area;
         var awardDate = $('#rewardDate').val();
+        var freeDays = $('#freeDays').val();
+        var freeEndDate = $('#freeEndDate_1').val();
+        var freeStartDate = $('#freeStartDate_1').val();
         var modifyEffectTime = $('#modifyEffectTime').val();
         var remark = $('#remark').val();
         var modifyEffectTime = "";
@@ -2693,6 +2812,43 @@ function saveContractForm(s) {
                 } 
             }
         }
+        
+        var salesList = [];
+        var len = $("#minSales").find("tr.new").length;
+        $("#minSales").find("tr.new").each(function(i,e){
+            var minSales = {};
+            index = i * 1 + 1;
+            minSales.startDate = $('#minSalesStartDate_'+index).val();
+            minSales.endDate = $('#minSalesEndDate_'+index).val();
+            minSales.amount =  numberWithoutCommas($('#minSalesAmount_'+index).val());
+            salesList.push(minSales);
+        })
+        
+        if(s == 'submit'){
+            if(salesList.length > 0) {
+                var check1 = dateCompare($('#minSalesStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+                var check2 = dateCompare($('#minSalesEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check3 = 'smaller';
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                    var check33 = dateCompare($('#minSalesStartDate_'+(ln+1)).val(),$('#minSalesEndDate_'+(ln+1)).val());
+                    if(check33 != 'smaller'){
+                        check3 = check33;
+                    }
+                }
+                var check4 = 'equal';
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                    var check44 = dateCompare(IncrDate($('#minSalesEndDate_'+ln).val()), $('#minSalesStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
+                }
+
+                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+                    alertMsg('9999','预估销售额条款开始日与结束日错误，请修改重新提交！');
+                    return false;
+                } 
+            }
+        }
 
         var map = {
             "id": $.request.content.id, //必填
@@ -2702,7 +2858,7 @@ function saveContractForm(s) {
             "area": area, //必填
             "shopCode": shopCode, //必填
             "rentCalculationMode": $.request.content.rentCalculationMode, //必填
-            "endDate": $.request.content.endDate, //必填
+            "endDate": endDate, //必填
             "contractType": $.request.content.contractType, //必填
             "unitCode": $.request.content.unitCode, //必填
             "mallCode": $.request.mallCode, //必填
@@ -2748,10 +2904,10 @@ function saveContractForm(s) {
             "floorName": $.request.content.floorName,
             "formStatus": formStatus,
             "freeDayBizRental": 0,
-            "freeDays": $.request.content.freeDays,
-            "freeEndDate": $.request.content.freeEndDate,
+            "freeDays": freeDays,
+            "freeEndDate": freeEndDate,
             "freeOverdueDays": 0,
-            "freeStartDate": $.request.content.freeStartDate,
+            "freeStartDate": freeStartDate,
             "graphFee": 0,
             "growthRate": 0,
             "intentDate": "",
@@ -2785,7 +2941,7 @@ function saveContractForm(s) {
             "remark": remark,
             "rentDeductRate": 0,
             "rentSalesRate": 0,
-            "salesList": $.request.content.oldContractInfo.salesList,
+            "salesList": salesList,
             "secondCompareCycle": $.request.content.compareSecondFrequency,
             "secondCompareFlag": $.request.content.secondCompareFlag,
             "secondCompareValueType": $.request.content.compareSecondValue,

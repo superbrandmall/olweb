@@ -50,7 +50,7 @@
                 <label class="col-md-4 control-label">装修天数</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="freeDays" placeholder="请在原合同中完善" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:disabled;" readonly />                                      
+                        <input class="form-control" id="freeDays" placeholder="请在原合同中完善" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="ime-mode:disabled;" disabled />                                      
                         <span class="input-group-addon" style="border: none; background: #eee;">天</span>
                     </div>
                 </div>

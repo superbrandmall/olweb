@@ -98,7 +98,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">店招 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="contractName" type="text" readonly />
+                    <input class="form-control" id="contractName" type="text" disabled />
                 </div>
             </div>
             <div class="form-group">
