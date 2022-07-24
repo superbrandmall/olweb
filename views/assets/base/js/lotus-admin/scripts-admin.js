@@ -494,6 +494,30 @@ function IncrDates(date_str,dates){
     }
 }
 
+function DecrDate(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 1,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate() - 1);
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (dt.getMonth() + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
 function dateCompare(date1,date2){
     date1 = date1.replace(/\-/gi,"/");
     date2 = date2.replace(/\-/gi,"/");
@@ -2668,13 +2692,14 @@ function activateAddDeleteRow(){
     }
     $('#investmentContractProperteisterm .box-body .pull-right a').attr('onClick','addRowMinSales()').css('opacity',1);
     
-    $('tbody .fa-minus-circle').parent().attr('onClick','deleteRow(this)').css('opacity',1);
+    $('tbody tr').not('.past').find('.fa-minus-circle').parent().attr('onClick','deleteRow(this)');
+    $('tbody tr').not('.past').find('.fa-minus-circle').parent().css('opacity',1);
 }
 
 function modifyTypeCheck() {
     if($('#contractModifyType').val() != ''){
-        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode").attr('disabled','disabled');
-        $('#startDate, #endDate, #investmentContractEnteryterm input').next().css({
+        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
+        $('#startDate, #endDate, #investmentContractEnteryterm input, #targetSales').next().css({
             'border': 'none',
             'background': '#eee'
         });
@@ -2683,7 +2708,8 @@ function modifyTypeCheck() {
         $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
         $('#investmentContractAccounttermPromotion .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
         $('#investmentContractProperteisterm .box-body .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('tbody .fa-minus-circle').removeAttr('onClick').css('opacity',0.5);
+        $('tbody .fa-minus-circle').parent().removeAttr('onClick');
+        $('tbody .fa-minus-circle').parent().css('opacity',0.5);
         
         $("input[id*='StartDate_']").datepicker('setStartDate',$('#startDate').val());
         $("input[id*='StartDate_']").datepicker('setEndDate',$('#endDate').val());
@@ -2709,15 +2735,19 @@ function modifyTypeCheck() {
                     'border': '1px solid #d2d6de',
                     'borderLeft': 'none',
                     'background': 'transparent'
-                })
-                
+                });
                 $("tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").removeAttr('disabled');
                 
                 activateAddDeleteRow();
                 break;
             case "CLAUSE_CHANGE":
-                $("#selectRentCalculationMode, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                $("#selectRentCalculationMode, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #targetSales").not('.past').removeAttr('disabled');
                 $('input.money').removeAttr('disabled');
+                $("#targetSales").next().css({
+                    'border': '1px solid #d2d6de',
+                    'borderLeft': 'none',
+                    'background': 'transparent'
+                });
                 
                 activateAddDeleteRow();
                 break;

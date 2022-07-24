@@ -723,7 +723,6 @@ function findRequestbyBizId() {
                         $('#freeDays').val(data.freeDays);
                         $('#remark').val(data.remark);
                         $('#rewardDate').datepicker('update', data.awardDate);
-                        $('#modifyEffectTime').datepicker('update', data.modifyEffectTime);
                         $('#targetSales').val(data.targetSales);
         
                         if(data.firstCompareCycle != null && data.firstCompareCycle != null){
@@ -742,150 +741,198 @@ function findRequestbyBizId() {
                         $('input.money').each(function(){
                             $(this).val(accounting.formatNumber($(this).val()));
                         })
-
-                        if(data.fixedRentList.length > 0) {
-                            $.each(data.fixedRentList, function(i,v) {
-                                updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
-                                $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                        
+                        if(data.oldContractInfo.fixedRentList.length > 0) {
+                            $.each(data.oldContractInfo.fixedRentList, function(i,v) {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
+                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                                    $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                } else {
+                                    v.endDate = DecrDate(data.modifyEffectTime);
+                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                                    $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                }
                             })
+                            
+                            if(data.fixedRentList.length > 0) {
+                                $.each(data.fixedRentList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                                })
+                            }
 
-                            $('#fixedRentPeriodType_1').val(data.fixedRentList[0].periodTypeCode).trigger('change');
+                            $('#fixedRentPeriodType_1').val(data.oldContractInfo.fixedRentList[0].periodTypeCode).trigger('change');
 
-                            $('#fixedRentSettleDay_1').val(data.fixedRentList[0].settleDay).trigger('change');
+                            $('#fixedRentSettleDay_1').val(data.oldContractInfo.fixedRentList[0].settleDay).trigger('change');
 
-                            $('#fixedRentSettlePeriod_1').val(data.fixedRentList[0].settlePeriodCode).trigger('change');
+                            $('#fixedRentSettlePeriod_1').val(data.oldContractInfo.fixedRentList[0].settlePeriodCode).trigger('change');
 
-                            if(data.fixedRentList[0].isOverdueFlag == 1) {
+                            if(data.oldContractInfo.fixedRentList[0].isOverdueFlag == 1) {
                                 $('#fixedRentIsOverdueFlag_1').prop('checked', true);
                             } else {
                                 $('#fixedRentIsOverdueFlag_1').prop('checked', false);
                             }
 
-                            $('#fixedRentOverdueTaxRate_1').val(data.fixedRentList[0].overdueTaxRate).trigger('change');
+                            $('#fixedRentOverdueTaxRate_1').val(data.oldContractInfo.fixedRentList[0].overdueTaxRate).trigger('change');
 
 
-                            $('#fixedRentOverdueRate_1').val(parseFloat(data.fixedRentList[0].overdueRate * 1000));
+                            $('#fixedRentOverdueRate_1').val(parseFloat(data.oldContractInfo.fixedRentList[0].overdueRate * 1000));
 
-                            if(data.fixedRentList[0].overdueInvoiceFlag == 1) {
+                            if(data.oldContractInfo.fixedRentList[0].overdueInvoiceFlag == 1) {
                                 $('#fixedRentOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#fixedRentOverdueInvoiceFlag_1').prop('checked', false);
                             }
                         }
 
-                        if(data.deductList.length > 0) {
-                            $.each(data.deductList, function(i,v) {
-                                updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
-                                $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                        if(data.oldContractInfo.deductList.length > 0) {
+                            $.each(data.oldContractInfo.deductList, function(i,v) {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
+                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                                    $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                } else {
+                                    v.endDate = DecrDate(data.modifyEffectTime);
+                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                                    $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                }
                             })
+                            
+                            if(data.deductList.length > 0) {
+                                $.each(data.deductList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                                })
+                            }
 
-                            $('#commissionPeriodType_1').val(data.deductList[0].periodTypeCode).trigger('change');
+                            $('#commissionPeriodType_1').val(data.oldContractInfo.deductList[0].periodTypeCode).trigger('change');
 
-                            $('#commissionSettleDay_1').val(data.deductList[0].settleDay).trigger('change');
+                            $('#commissionSettleDay_1').val(data.oldContractInfo.deductList[0].settleDay).trigger('change');
 
-                            $('#commissionSettlePeriod_1').val(data.deductList[0].settlePeriodCode).trigger('change');
+                            $('#commissionSettlePeriod_1').val(data.oldContractInfo.deductList[0].settlePeriodCode).trigger('change');
 
-                            if(data.deductList[0].isOverdueFlag == 1) {
+                            if(data.oldContractInfo.deductList[0].isOverdueFlag == 1) {
                                 $('#commissionIsOverdueFlag_1').prop('checked', true);
                             } else {
                                 $('#commissionIsOverdueFlag_1').prop('checked', false);
                             }
 
-                            $('#commissionOverdueTaxRate_1').val(data.deductList[0].overdueTaxRate).trigger('change');
+                            $('#commissionOverdueTaxRate_1').val(data.oldContractInfo.deductList[0].overdueTaxRate).trigger('change');
 
 
-                            $('#commissionOverdueRate_1').val(parseFloat(data.deductList[0].overdueRate * 1000));
+                            $('#commissionOverdueRate_1').val(parseFloat(data.oldContractInfo.deductList[0].overdueRate * 1000));
 
-                            if(data.deductList[0].overdueInvoiceFlag == 1) {
+                            if(data.oldContractInfo.deductList[0].overdueInvoiceFlag == 1) {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', false);
                             }
                         }
 
-                        if(data.propertyFeeList.length > 0) {
-                            $.each(data.propertyFeeList, function(i,v) {
-                                updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
-                                $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                        if(data.oldContractInfo.propertyFeeList.length > 0) {
+                            $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
+                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                                    $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                } else {
+                                    v.endDate = DecrDate(data.modifyEffectTime);
+                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                                    $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                }
                             })
+                            
+                            if(data.propertyFeeList.length > 0) {
+                                $.each(data.propertyFeeList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                                })
+                            }
 
-                            $('#propertyMgmtPeriodType_1').val(data.propertyFeeList[0].periodTypeCode).trigger('change');
+                            $('#propertyMgmtPeriodType_1').val(data.oldContractInfo.propertyFeeList[0].periodTypeCode).trigger('change');
 
-                            $('#propertyMgmtSettleDay_1').val(data.propertyFeeList[0].settleDay).trigger('change');
+                            $('#propertyMgmtSettleDay_1').val(data.oldContractInfo.propertyFeeList[0].settleDay).trigger('change');
 
-                            $('#propertyMgmtSettlePeriod_1').val(data.propertyFeeList[0].settlePeriodCode).trigger('change');
+                            $('#propertyMgmtSettlePeriod_1').val(data.oldContractInfo.propertyFeeList[0].settlePeriodCode).trigger('change');
 
-                            if(data.propertyFeeList[0].isOverdueFlag == 1) {
+                            if(data.oldContractInfo.propertyFeeList[0].isOverdueFlag == 1) {
                                 $('#propertyMgmtIsOverdueFlag_1').prop('checked', true);
                             } else {
                                 $('#propertyMgmtIsOverdueFlag_1').prop('checked', false);
                             }
 
-                            $('#propertyMgmtOverdueTaxRate_1').val(data.propertyFeeList[0].overdueTaxRate).trigger('change');
+                            $('#propertyMgmtOverdueTaxRate_1').val(data.oldContractInfo.propertyFeeList[0].overdueTaxRate).trigger('change');
 
 
-                            $('#propertyMgmtOverdueRate_1').val(parseFloat(data.propertyFeeList[0].overdueRate * 1000));
+                            $('#propertyMgmtOverdueRate_1').val(parseFloat(data.oldContractInfo.propertyFeeList[0].overdueRate * 1000));
 
-                            if(data.propertyFeeList[0].overdueInvoiceFlag == 1) {
+                            if(data.oldContractInfo.propertyFeeList[0].overdueInvoiceFlag == 1) {
                                 $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', false);
                             }
                         }
 
-                        if(data.promotionFeeList.length > 0) {
-                            $.each(data.promotionFeeList, function(i,v) {
-                                updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
-                                $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                        if(data.oldContractInfo.promotionFeeList.length > 0) {
+                            $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
+                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                                    $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                } else {
+                                    v.endDate = DecrDate(data.modifyEffectTime);
+                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                                    $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                    $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                }
                             })
+                            
+                            if(data.promotionFeeList.length > 0) {
+                                $.each(data.promotionFeeList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                                })
+                            }
 
-                            $('#promotionPeriodType_1').val(data.promotionFeeList[0].periodTypeCode).trigger('change');
+                            $('#promotionPeriodType_1').val(data.oldContractInfo.promotionFeeList[0].periodTypeCode).trigger('change');
 
-                            $('#promotionSettleDay_1').val(data.promotionFeeList[0].settleDay).trigger('change');
+                            $('#promotionSettleDay_1').val(data.oldContractInfo.promotionFeeList[0].settleDay).trigger('change');
 
-                            $('#promotionSettlePeriod_1').val(data.promotionFeeList[0].settlePeriodCode).trigger('change');
+                            $('#promotionSettlePeriod_1').val(data.oldContractInfo.promotionFeeList[0].settlePeriodCode).trigger('change');
 
-                            if(data.promotionFeeList[0].isOverdueFlag == 1) {
+                            if(data.oldContractInfo.promotionFeeList[0].isOverdueFlag == 1) {
                                 $('#promotionIsOverdueFlag_1').prop('checked', true);
                             } else {
                                 $('#promotionIsOverdueFlag_1').prop('checked', false);
                             }
 
-                            $('#promotionOverdueTaxRate_1').val(data.promotionFeeList[0].overdueTaxRate).trigger('change');
+                            $('#promotionOverdueTaxRate_1').val(data.oldContractInfo.promotionFeeList[0].overdueTaxRate).trigger('change');
 
 
-                            $('#promotionOverdueRate_1').val(parseFloat(data.promotionFeeList[0].overdueRate * 1000));
+                            $('#promotionOverdueRate_1').val(parseFloat(data.oldContractInfo.promotionFeeList[0].overdueRate * 1000));
 
-                            if(data.promotionFeeList[0].overdueInvoiceFlag == 1) {
+                            if(data.oldContractInfo.promotionFeeList[0].overdueInvoiceFlag == 1) {
                                 $('#promotionOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#promotionOverdueInvoiceFlag_1').prop('checked', false);
                             }
                         }
-
+                        
                         if(data.depositList.length > 0) {
                             $.each(data.depositList, function(i,v) {
                                 updateRowInvestmentContractDepositterm(JSON.stringify(v));
-                                $('#deposit tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                $('#deposit tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
                         }
                         
                         if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
                             $.each(data.oldContractInfo.salesList, function(i,v) {
-                                updateRowMinSales(JSON.stringify(v),'');
-                                $('#salesList tr:eq("'+i+'")').find('input').attr('disabled','disabled');
-                                $('#salesList tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                updateRowMinSales(JSON.stringify(v));
                             })
                         }
                         
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
-                                updateRowMinSales(JSON.stringify(v),'new');
+                                updateRowMinSales(JSON.stringify(v));
                             })
                         }
                         
@@ -1204,13 +1251,9 @@ function updateUserRoleYZJDropDownByRoleId(id) {
     })
 }
 
-function updateRowInvestmentContractAccounttermFixed(v,p) {
+function updateRowInvestmentContractAccounttermFixed(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(p != '' && p == 'new'){
-        newrow.setAttribute("class","new");
-    }
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1239,6 +1282,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
+    newrow.setAttribute("class",past);
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","fixedRentStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1282,7 +1326,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","fixedRentTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1296,7 +1340,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","fixedRentTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1310,7 +1354,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","fixedRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1324,7 +1368,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","fixedRentRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1336,7 +1380,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee"+past);
+    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee");
     select.setAttribute("id","fixedRentTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1423,13 +1467,9 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     })
 }
 
-function updateRowInvestmentContractAccounttermCommission(v,p) {
+function updateRowInvestmentContractAccounttermCommission(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(p != '' && p == 'new'){
-        newrow.setAttribute("class","new");
-    }
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1459,6 +1499,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
+    newrow.setAttribute("class",past);
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","commissionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1513,7 +1554,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     var div = document.createElement("div"); //去税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionTaxDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",(parseFloat(value.deduct) * 100));
@@ -1527,7 +1568,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     var div = document.createElement("div"); //含税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1543,7 +1584,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionMinSales_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.targetSales);
@@ -1555,7 +1596,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     column9.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee"+past);
+    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee");
     select.setAttribute("id","commissionTaxRate_"+count.toLocaleString());
     column10.appendChild(select);
     
@@ -1630,13 +1671,9 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     })
 }
 
-function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
+function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(p != '' && p == 'new'){
-        newrow.setAttribute("class","new");
-    }
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1665,6 +1702,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
+    newrow.setAttribute("class",past);
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","propertyMgmtStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1708,7 +1746,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","propertyMgmtTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1722,7 +1760,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","propertyMgmtTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1736,7 +1774,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","propertyMgmtAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1750,7 +1788,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","propertyMgmtRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1762,7 +1800,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee"+past);
+    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee");
     select.setAttribute("id","propertyMgmtTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1849,13 +1887,9 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     })
 }
 
-function updateRowInvestmentContractAccounttermPromotion(v,p) {
+function updateRowInvestmentContractAccounttermPromotion(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(p != '' && p == 'new'){
-        newrow.setAttribute("class","new");
-    }
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1883,6 +1917,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
+    newrow.setAttribute("class",past);
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","promotionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -1926,7 +1961,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","promotionAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1940,7 +1975,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","promotionTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1954,7 +1989,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     column5.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee"+past);
+    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee");
     select.setAttribute("id","promotionTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -2129,13 +2164,9 @@ function updateRowInvestmentContractDepositterm(v) {
     });
 }
 
-function updateRowMinSales(v,p) {
+function updateRowMinSales(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
-    var past = "";
-    if(p != '' && p == 'new'){
-        newrow.setAttribute("class","new");
-    }
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -2153,6 +2184,7 @@ function updateRowMinSales(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
+    newrow.setAttribute("class",past);
     input.setAttribute("class","form-control"+past);
     input.setAttribute("id","minSalesStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
@@ -2196,7 +2228,7 @@ function updateRowMinSales(v,p) {
     var div = document.createElement("div"); //金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("class","form-control money");
     input.setAttribute("id","minSalesAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -2319,11 +2351,6 @@ function submitCheck() {
     if($('#rewardDate').val() == '') {
         flag = 0;
         $('#rewardDate').parent().append(error);
-    }
-    
-    if($('#modifyEffectTime').val() == '') {
-        flag = 0;
-        $('#modifyEffectTime').parent().append(error);
     }
     
     if($('#brandName').val() == null) {
@@ -2539,21 +2566,76 @@ function saveContractForm(s) {
             }
         })
         
-        var bizId = $('#bizId').val();
+        var modifyType = $('#contractModifyType').val();
+        var startDate = $.request.content.startDate;
+        var endDate = $.request.content.endDate;
+        var selectRentCalculationMode = $.request.content.rentCalculationMode;
+        var brandCode = $.request.content.brandCode;
+        var brandName = $.request.content.brandName;
+        var contractName = $.request.content.contractName;
+        var deliveryDate = $.request.content.deliveryDate;
+        var enterDate = $.request.content.enterDate;
+        var firstCompareCycle = $.request.content.compareFirstFrequency;
+        var freeDays = $.request.content.freeDays;
+        var freeEndDate = $.request.content.freeEndDate;
+        var freeStartDate = $.request.content.freeStartDate;
+        var openEndTime = $.request.content.openEndTime;
+        var openStartTime = $.request.content.openStartTime;
+        var secondCompareCycle = $.request.content.compareSecondFrequency;
+        var secondCompareFlag = $.request.content.secondCompareFlag;
+        var secondCompareValueType = $.request.content.compareSecondValue;
+        var targetSales = $.request.content.targetSales;
+        var tenantCode = $.request.content.tenantCode;
+        var tenantName = $.request.content.tenantName;
+        var tenantNo = $.request.content.tenantNo;
+        switch (modifyType) {
+            case "TENANT_CHANGE":
+                tenantCode = $('#selectTenant').val();
+                tenantName = $('#select2-selectTenant-container').text().split(' | ')[1];
+                tenantNo = $('#select2-selectTenant-container').text().split(' | ')[0];
+                break;
+            case "BRAND_CHANGE":
+                brandCode = $('#brandName').val();
+                brandName = $('#select2-brandName-container').text().split('[')[0];
+                contractName = $('#contractName').val();
+                break;
+            case "TIME_CHANGE":
+                startDate = $('#startDate').val();
+                endDate = $('#endDate').val();
+                deliveryDate = $('#deliveryDate').val();
+                enterDate = $('#enterDate').val();
+                freeDays = $('#freeDays').val();
+                freeEndDate = $('#freeEndDate_1').val();
+                freeStartDate = $('#freeStartDate_1').val();
+                openEndTime = $('#openEndTime').val();
+                openStartTime = $('#openStartTime').val();
+                secondCompareCycle = $('#compareSecondFrequency').val() != "" ? $('#compareSecondFrequency').val() : "";
+                secondCompareFlag = 0;
+                if($('#compareSecond').prop('checked') == true){
+                    secondCompareFlag = 1;
+                }
+                secondCompareValueType = $('#compareSecondValue').val();
+                break;
+            case "CLAUSE_CHANGE":
+                selectRentCalculationMode = $('#selectRentCalculationMode').val();
+                firstCompareCycle = $('#compareFirstFrequency').val() != "" ? $('#compareFirstFrequency').val() : "";
+                targetSales = numberWithoutCommas($('#targetSales').val());
+                break;
+            default:
+                break;
+        }
+        
+        var bizId = $.request.content.bizId;
         var creatorName = $('#creatorName').val();
-        var formType = $('#formType').find('option:selected').val();
-        var endDate = $('#endDate').val();
         var shopCode = $.request.content.shopCode;
         var area = $.request.content.area;
         var awardDate = $('#rewardDate').val();
-        var freeDays = $('#freeDays').val();
-        var freeEndDate = $('#freeEndDate_1').val();
-        var freeStartDate = $('#freeStartDate_1').val();
-        var modifyEffectTime = $('#modifyEffectTime').val();
         var remark = $('#remark').val();
-        var modifyEffectTime = "";
-        var modifyType = $('#contractModifyType').val();
-        
+        var taxTotalPropertyAmount = numberWithoutCommas($('#propertyMgmtTaxTotalPropertyAmount').text());
+        var taxTotalRentAmount = numberWithoutCommas($('#fixedRentTaxTotalRentAmount').text());
+        var totalPropertyAmount = numberWithoutCommas($('#propertyMgmtTotalPropertyAmount').text());
+        var totalRentAmount = numberWithoutCommas($('#fixedRentTotalRentAmount').text());
+            
         var processBizApprove = 0;
         if($('.step-progress li:eq(4)').hasClass('active') == true){
             processBizApprove = 1;
@@ -2625,10 +2707,12 @@ function saveContractForm(s) {
         var index;
         var deductList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'fixRent') {
-            var len = $("#commission").find("tr").length;
-            $("#commission").find("tr").each(function(i,e){
+            var len = $("#commission").find("tr").not('.past').length;
+            var lenOld = $("#commission").find("tr.past").length;
+            var lenTotle = len * 1 + lenOld * 1;
+            $("#commission").find("tr").not('.past').each(function(i,e){
                 var commission = {};
-                index = i * 1 + 1;
+                index = i * 1 + lenOld * 1 + 1;
                 commission.itemCode = $('#commissionItem_'+index).val();
                 commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
 
@@ -2689,16 +2773,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(deductList.length > 0) {
                 var check1 = dateCompare($('#commissionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#commissionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#commissionEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#commissionStartDate_'+(ln+1)).val(),$('#commissionEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2731,10 +2815,12 @@ function saveContractForm(s) {
         
         var fixedRentList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
-            var len = $("#fixedRent").find("tr").length;
-            $("#fixedRent").find("tr").each(function(i,e){
+            var len = $("#fixedRent").find("tr").not('.past').length;
+            var lenOld = $("#fixedRent").find("tr.past").length;
+            var lenTotle = len * 1 + lenOld * 1;
+            $("#fixedRent").find("tr").not('.past').each(function(i,e){
                 var fixedRent = {};
-                index = i * 1 + 1;
+                index = i * 1 + lenOld * 1 + 1;
                 fixedRent.itemCode = $('#fixedRentItem_'+index).val();
                 fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
 
@@ -2789,16 +2875,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(fixedRentList.length > 0) {
                 var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#fixedRentEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2813,10 +2899,12 @@ function saveContractForm(s) {
         }
         
         var promotionFeeList = [];
-        var len = $("#promotion").find("tr").length;
-        $("#promotion").find("tr").each(function(i,e){
+        var len = $("#promotion").find("tr").not('.past').length;
+        var lenOld = $("#promotion").find("tr.past").length;
+        var lenTotle = len * 1 + lenOld * 1;
+        $("#promotion").find("tr").not('.past').each(function(i,e){
             var promotion = {};
-            index = i * 1 + 1;
+            index = i * 1 + lenOld * 1 + 1;
             promotion.itemCode = $('#promotionItem_'+index).val();
             promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
 
@@ -2867,16 +2955,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(promotionFeeList.length > 0) {
                 var check1 = dateCompare($('#promotionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#promotionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#promotionEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#promotionStartDate_'+(ln+1)).val(),$('#promotionEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#promotionEndDate_'+ln).val()), $('#promotionStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2891,10 +2979,12 @@ function saveContractForm(s) {
         }
         
         var propertyFeeList = [];
-        var len = $("#propertyMgmt").find("tr").length;
-        $("#propertyMgmt").find("tr").each(function(i,e){
+        var len = $("#propertyMgmt").find("tr").not('.past').length;
+        var lenOld = $("#propertyMgmt").find("tr.past").length;
+        var lenTotle = len * 1 + lenOld * 1;
+        $("#propertyMgmt").find("tr").not('.past').each(function(i,e){
             var propertyMgmt = {};
-            index = i * 1 + 1;
+            index = i * 1 + lenOld * 1 + 1;
             propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
             propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
 
@@ -2948,16 +3038,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(propertyFeeList.length > 0) {
                 var check1 = dateCompare($('#propertyMgmtStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#propertyMgmtEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#propertyMgmtEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#propertyMgmtStartDate_'+(ln+1)).val(),$('#propertyMgmtEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#propertyMgmtEndDate_'+ln).val()), $('#propertyMgmtStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2973,9 +3063,11 @@ function saveContractForm(s) {
         
         var salesList = [];
         var len = $("#minSales").find("tr").length;
+        var lenOld = $("#minSales").find("tr.past").length;
+        var lenTotle = len * 1 + lenOld * 1;
         $("#minSales").find("tr").each(function(i,e){
             var minSales = {};
-            index = i * 1 + 1;
+            index = i * 1 + lenOld * 1 + 1;
             minSales.startDate = $('#minSalesStartDate_'+index).val();
             minSales.endDate = $('#minSalesEndDate_'+index).val();
             minSales.amount =  numberWithoutCommas($('#minSalesAmount_'+index).val());
@@ -2985,16 +3077,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(salesList.length > 0) {
                 var check1 = dateCompare($('#minSalesStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#minSalesEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#minSalesEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#minSalesStartDate_'+(ln+1)).val(),$('#minSalesEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#minSalesEndDate_'+ln).val()), $('#minSalesStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -3008,19 +3100,34 @@ function saveContractForm(s) {
             }
         }
         
+        var ex = 'commission';
+        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
+            ex = 'fixedRent';
+        }
+        
+        var modifyEffectTime = $('#startDate').val();
+        var len = $("input[id*='"+ex+"StartDate_']").not('.past').length;
+        var lenTotle = $("input[id*='"+ex+"StartDate_']").length;
+        var lenOld = lenTotle * 1 - len * 1;
+        $("input[id*='"+ex+"StartDate_']").not('.past').each(function(i,e){
+            var index = i * 1 + lenOld * 1 + 1;
+            modifyEffectTime = $('#'+ex+'StartDate_'+index).val();
+            return false;
+        })
+        
         var map = {
             "id": $.request.content.id, //必填
             "code": $.request.content.code, //必填
             "bizId": bizId, //必填
-            "formType": formType, //必填
+            "formType": $.request.content.formType, //必填
             "area": area, //必填
             "shopCode": shopCode, //必填
-            "rentCalculationMode": $.request.content.rentCalculationMode, //必填
+            "rentCalculationMode": selectRentCalculationMode, //必填
             "endDate": endDate, //必填
             "contractType": $.request.content.contractType, //必填
             "unitCode": $.request.content.unitCode, //必填
             "mallCode": $.request.mallCode, //必填
-            "startDate": $.request.content.startDate, //必填
+            "startDate": startDate, //必填
             "unitName": $.request.content.unitName, //必填
             "activityTimes": 0,
             "approvalName": $.request.content.creatorName,
@@ -3033,10 +3140,10 @@ function saveContractForm(s) {
             "bizScope": $.request.content.bizScope,
             "bizTypeCode": "",
             "bizTypeName": $.request.content.bizTypeName,
-            "brandCode": $.request.content.brandCode,
-            "brandName": $.request.content.brandName,
+            "brandCode": brandCode,
+            "brandName": brandName,
             "cardDiscount": 0,
-            "contractName": $.request.content.contractName,
+            "contractName": contractName,
             "contractNo": $.request.content.contractNo,
             "contractTemplate": null,
             "contractVersion": $.request.content.contractVersion,
@@ -3048,13 +3155,13 @@ function saveContractForm(s) {
             "dayRent": 0,
             "deductList": deductList,
             "deliveryCondition": "",
-            "deliveryDate": $.request.content.deliveryDate,
+            "deliveryDate": deliveryDate,
             "depositList": depositList,
             "duration": 0,
-            "enterDate": $.request.content.enterDate,
+            "enterDate": enterDate,
             "esignFlag": 0,
             "exclusiveCondition": "",
-            "firstCompareCycle": $.request.content.compareFirstFrequency,
+            "firstCompareCycle": firstCompareCycle,
             "firstYearRentFee": "",
             "firstYearRentFeeUnit": "",
             "fixedRentList": fixedRentList,
@@ -3079,8 +3186,8 @@ function saveContractForm(s) {
             "modifyType": modifyType,
             "oldEndDate": $.request.content.oldContractInfo.endDate,
             "oldStartDate": $.request.content.oldContractInfo.startDate,
-            "openEndTime": $.request.content.openEndTime,
-            "openStartTime": $.request.content.openStartTime,
+            "openEndTime": openEndTime,
+            "openStartTime": openStartTime,
             "overdueBizAmount": 0,
             "overdueFee": 0,
             "paymentMode": $.request.content.paymentMode,
@@ -3100,23 +3207,23 @@ function saveContractForm(s) {
             "rentDeductRate": 0,
             "rentSalesRate": 0,
             "salesList": salesList,
-            "secondCompareCycle": $.request.content.compareSecondFrequency,
-            "secondCompareFlag": $.request.content.secondCompareFlag,
-            "secondCompareValueType": $.request.content.compareSecondValue,
-            "targetSales": $.request.content.targetSales,
+            "secondCompareCycle": secondCompareCycle,
+            "secondCompareFlag": secondCompareFlag,
+            "secondCompareValueType": secondCompareValueType,
+            "targetSales": targetSales,
             "taxReimbursement": "",
-            "taxTotalPropertyAmount": $.request.content.taxTotalPropertyAmount,
-            "taxTotalRentAmount": $.request.content.taxTotalRentAmount,
+            "taxTotalPropertyAmount": taxTotalPropertyAmount,
+            "taxTotalRentAmount": taxTotalRentAmount,
             "telLineNum": 0,
-            "tenantCode": $.request.content.tenantCode,
+            "tenantCode": tenantCode,
             "tenantLicenseCode": "",
-            "tenantName": $.request.content.tenantName,
-            "tenantNo": $.request.content.tenantNo,
+            "tenantName": tenantName,
+            "tenantNo": tenantNo,
             "tenantOrgCode": "",
             "tenantTaxCode": "",
             "termCalcMode": $.request.content.termCalcMode,
-            "totalPropertyAmount": $.request.content.totalPropertyAmount,
-            "totalRentAmount": $.request.content.totalRentAmount,
+            "totalPropertyAmount": totalPropertyAmount,
+            "totalRentAmount": totalRentAmount,
             "unitBuildingArea": 0,
             "updateCode": userCode,
             "updateName": creatorName,
