@@ -2583,6 +2583,9 @@ function saveContractForm(s) {
                 } else {
                     commission.invoiceFlag = 0;
                 }
+                
+                commission.contractNo = $.request.content.contractNo;
+                commission.contractVersion = $.request.content.contractVersion;
 
                 deductList.push(commission);  
             })
@@ -2626,6 +2629,9 @@ function saveContractForm(s) {
                 deposit.taxRate = 0;
                 deposit.taxCode = $('#deposittermTaxRate_'+index).find('option:selected').attr('data-code');
 
+                deposit.contractNo = $.request.content.contractNo;
+                deposit.contractVersion = $.request.content.contractVersion;
+                
                 depositList.push(deposit);
             }
         })
@@ -2682,7 +2688,10 @@ function saveContractForm(s) {
                 } else {
                     fixedRent.invoiceFlag = 0;
                 }
-
+                
+                fixedRent.contractNo = $.request.content.contractNo;
+                fixedRent.contractVersion = $.request.content.contractVersion;
+                
                 fixedRentList.push(fixedRent);
             })
         }
@@ -2761,6 +2770,9 @@ function saveContractForm(s) {
             } else {
                 promotion.invoiceFlag = 0;
             }
+            
+            promotion.contractNo = $.request.content.contractNo;
+            promotion.contractVersion = $.request.content.contractVersion;
             
             promotionFeeList.push(promotion);
         })
@@ -2842,6 +2854,10 @@ function saveContractForm(s) {
             } else {
                 propertyMgmt.invoiceFlag = 0;
             }
+            
+            propertyMgmt.contractNo = $.request.content.contractNo;
+            propertyMgmt.contractVersion = $.request.content.contractVersion;
+            
             propertyFeeList.push(propertyMgmt);
         })
         
@@ -2881,6 +2897,10 @@ function saveContractForm(s) {
             minSales.startDate = $('#minSalesStartDate_'+index).val();
             minSales.endDate = $('#minSalesEndDate_'+index).val();
             minSales.amount =  numberWithoutCommas($('#minSalesAmount_'+index).val());
+            
+            minSales.contractNo = $.request.content.contractNo;
+            minSales.contractVersion = $.request.content.contractVersion;
+            
             salesList.push(minSales);
         })
         

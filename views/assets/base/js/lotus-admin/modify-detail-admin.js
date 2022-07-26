@@ -744,21 +744,17 @@ function findRequestbyBizId() {
                         
                         if(data.oldContractInfo.fixedRentList.length > 0) {
                             $.each(data.oldContractInfo.fixedRentList, function(i,v) {
-                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
-                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
-                                    $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                } else {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
                                     v.endDate = DecrDate(data.modifyEffectTime);
-                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
-                                    $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                 }
+                                updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
+                                $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
                             
                             if(data.fixedRentList.length > 0) {
                                 $.each(data.fixedRentList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),'');
                                 })
                             }
 
@@ -788,21 +784,17 @@ function findRequestbyBizId() {
 
                         if(data.oldContractInfo.deductList.length > 0) {
                             $.each(data.oldContractInfo.deductList, function(i,v) {
-                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
-                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
-                                    $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                } else {
+                                if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
                                     v.endDate = DecrDate(data.modifyEffectTime);
-                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
-                                    $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                 }
+                                updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
+                                $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
                             
                             if(data.deductList.length > 0) {
                                 $.each(data.deductList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),'');
                                 })
                             }
 
@@ -832,21 +824,17 @@ function findRequestbyBizId() {
 
                         if(data.oldContractInfo.propertyFeeList.length > 0) {
                             $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
-                                if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
-                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                } else {
-                                    v.endDate = DecrDate(data.modifyEffectTime);
-                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
+                                    v.endDate = DecrDate(data.modifyEffectTime); 
                                 }
+                                updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
+                                $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
                             
                             if(data.propertyFeeList.length > 0) {
                                 $.each(data.propertyFeeList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),'');
                                 })
                             }
 
@@ -877,20 +865,16 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.promotionFeeList.length > 0) {
                             $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
                                 if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
-                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
-                                    $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                } else {
-                                    v.endDate = DecrDate(data.modifyEffectTime);
-                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
-                                    $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                    v.endDate = DecrDate(data.modifyEffectTime); 
                                 }
+                                updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
+                                $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                             })
                             
                             if(data.promotionFeeList.length > 0) {
                                 $.each(data.promotionFeeList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),'');
                                 })
                             }
 
@@ -926,13 +910,13 @@ function findRequestbyBizId() {
                         
                         if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
                             $.each(data.oldContractInfo.salesList, function(i,v) {
-                                updateRowMinSales(JSON.stringify(v));
+                                updateRowMinSales(JSON.stringify(v),' past');
                             })
                         }
                         
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
-                                updateRowMinSales(JSON.stringify(v));
+                                updateRowMinSales(JSON.stringify(v),'');
                             })
                         }
                         
@@ -1251,7 +1235,7 @@ function updateUserRoleYZJDropDownByRoleId(id) {
     })
 }
 
-function updateRowInvestmentContractAccounttermFixed(v) {
+function updateRowInvestmentContractAccounttermFixed(v,p) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
@@ -1326,7 +1310,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","fixedRentTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1340,7 +1324,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","fixedRentTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1354,7 +1338,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","fixedRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1368,7 +1352,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","fixedRentRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1380,7 +1364,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee"+p);
     select.setAttribute("id","fixedRentTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1467,7 +1451,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     })
 }
 
-function updateRowInvestmentContractAccounttermCommission(v) {
+function updateRowInvestmentContractAccounttermCommission(v,p) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
@@ -1554,7 +1538,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //去税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","commissionTaxDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",(parseFloat(value.deduct) * 100));
@@ -1568,7 +1552,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //含税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1584,7 +1568,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","commissionMinSales_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.targetSales);
@@ -1596,7 +1580,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     column9.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee"+p);
     select.setAttribute("id","commissionTaxRate_"+count.toLocaleString());
     column10.appendChild(select);
     
@@ -1671,7 +1655,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     })
 }
 
-function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
+function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
@@ -1746,7 +1730,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","propertyMgmtTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1760,7 +1744,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","propertyMgmtTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1774,7 +1758,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","propertyMgmtAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1788,7 +1772,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","propertyMgmtRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1800,7 +1784,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee"+p);
     select.setAttribute("id","propertyMgmtTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1887,7 +1871,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     })
 }
 
-function updateRowInvestmentContractAccounttermPromotion(v) {
+function updateRowInvestmentContractAccounttermPromotion(v,p) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
@@ -1961,7 +1945,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","promotionAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1975,7 +1959,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","promotionTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1989,7 +1973,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     column5.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee"+p);
     select.setAttribute("id","promotionTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -2164,7 +2148,7 @@ function updateRowInvestmentContractDepositterm(v) {
     });
 }
 
-function updateRowMinSales(v) {
+function updateRowMinSales(v,p) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
@@ -2228,7 +2212,7 @@ function updateRowMinSales(v) {
     var div = document.createElement("div"); //金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","minSalesAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -2764,6 +2748,9 @@ function saveContractForm(s) {
                 } else {
                     commission.invoiceFlag = 0;
                 }
+                
+                commission.contractNo = $.request.content.contractNo;
+                commission.contractVersion = $.request.content.contractVersion;
 
                 deductList.push(commission);  
 
@@ -2807,7 +2794,10 @@ function saveContractForm(s) {
                 deposit.paymentDate = $('#deposittermPaymentDate_'+index).val();
                 deposit.taxRate = 0;
                 deposit.taxCode = $('#deposittermTaxRate_'+index).find('option:selected').attr('data-code');
-
+                
+                deposit.contractNo = $.request.content.contractNo;
+                deposit.contractVersion = $.request.content.contractVersion;
+                
                 depositList.push(deposit);
             }
             
@@ -2867,6 +2857,9 @@ function saveContractForm(s) {
                 } else {
                     fixedRent.invoiceFlag = 0;
                 }
+                
+                fixedRent.contractNo = $.request.content.contractNo;
+                fixedRent.contractVersion = $.request.content.contractVersion;
 
                 fixedRentList.push(fixedRent);
             })
@@ -2948,7 +2941,10 @@ function saveContractForm(s) {
             } else {
                 promotion.invoiceFlag = 0;
             }
-
+            
+            promotion.contractNo = $.request.content.contractNo;
+            promotion.contractVersion = $.request.content.contractVersion;
+            
             promotionFeeList.push(promotion);
         })
         
@@ -3031,7 +3027,10 @@ function saveContractForm(s) {
             } else {
                 propertyMgmt.invoiceFlag = 0;
             }
-
+            
+            propertyMgmt.contractNo = $.request.content.contractNo;
+            propertyMgmt.contractVersion = $.request.content.contractVersion;
+            
             propertyFeeList.push(propertyMgmt);
         })
         
@@ -3071,6 +3070,10 @@ function saveContractForm(s) {
             minSales.startDate = $('#minSalesStartDate_'+index).val();
             minSales.endDate = $('#minSalesEndDate_'+index).val();
             minSales.amount =  numberWithoutCommas($('#minSalesAmount_'+index).val());
+            
+            minSales.contractNo = $.request.content.contractNo;
+            minSales.contractVersion = $.request.content.contractVersion;
+            
             salesList.push(minSales);
         })
         

@@ -2050,7 +2050,7 @@ function updateSelectTenantDropDown(data_count) {
 
 function calBackPushFixedRentSingleRow(num) {
     if(numberWithoutCommas($('#fixedRentTaxRentAmount_'+num).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
-        if($('#termCalcMode').val() == 'NEW'){
+        if($('#termCalcMode').val() != 'OLD'){
             var taxAmount = Math.round(numberWithoutCommas($('#fixedRentTaxRentAmount_'+num).val()) * $('#area').val() * 365 / 12 * 100) / 100; //月金额(去税)
             var amount = Math.round(taxAmount * (1 + parseFloat($('#fixedRentTaxRate_'+num).val())) * 100) / 100; //月金额(含税)
             var rentAmount = Math.round(amount * 12 / 365 / $('#area').val() * 100) / 100; //单价(含税)    
@@ -2070,7 +2070,7 @@ function calBackPushFixedRentTaxRentAmount() { //单价(去税)
     $("input[id*='fixedRentTaxRentAmount_']").not('.past').each(function(i){  
         if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
             var num = $(this).attr('id').split('_')[1];
-            if($('#termCalcMode').val() == 'NEW'){
+            if($('#termCalcMode').val() != 'OLD'){
                 var taxAmount = Math.round(numberWithoutCommas($(this).val()) * $('#area').val() * 365 / 12 * 100) / 100; //月金额(去税)
                 var amount = Math.round(taxAmount * (1 + parseFloat($('#fixedRentTaxRate_'+num).val())) * 100) / 100; //月金额(含税)
                 var rentAmount = Math.round(amount * 12 / 365 / $('#area').val() * 100) / 100; //单价(含税)
@@ -2091,7 +2091,7 @@ function calBackPushFixedRentTaxAmount() { //月金额(去税)
     $("input[id*='fixedRentTaxAmount_']").not('.past').each(function(i){  
         if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
             var num = $(this).attr('id').split('_')[1];
-            if($('#termCalcMode').val() == 'NEW'){
+            if($('#termCalcMode').val() != 'OLD'){
                 var taxRentAmount = Math.round(numberWithoutCommas($(this).val()) * 12 / 365 / $('#area').val() * 100) / 100; //单价(去税)
                 var amount = Math.round(numberWithoutCommas($(this).val()) * (1 + parseFloat($('#fixedRentTaxRate_'+num).val())) * 100) / 100; //月金额(含税)
                 var rentAmount = Math.round(amount * 12 / 365 / $('#area').val() * 100) / 100; //单价(含税)
@@ -2112,7 +2112,7 @@ function calBackPushFixedRentAmount() { //月金额(含税)
     $("input[id*='fixedRentAmount_']").not('.past').each(function(i){  
         if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
             var num = $(this).attr('id').split('_')[1];
-            if($('#termCalcMode').val() == 'NEW'){
+            if($('#termCalcMode').val() != 'OLD'){
                 var taxAmount = Math.round(numberWithoutCommas($(this).val()) / (1 + parseFloat($('#fixedRentTaxRate_'+num).val())) * 100) / 100; //月金额(去税)
                 var rentAmount = Math.round(numberWithoutCommas($(this).val()) * 12 / 365 / $('#area').val() * 100) / 100; //单价(含税)
                 var taxRentAmount = Math.round(taxAmount * 12 / 365 / $('#area').val() * 100) / 100; //单价(去税)
@@ -2133,7 +2133,7 @@ function calBackPushFixedRentRentAmount() { //单价(含税)
     $("input[id*='fixedRentRentAmount_']").not('.past').each(function(i){  
         if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
             var num = $(this).attr('id').split('_')[1];
-            if($('#termCalcMode').val() == 'NEW'){
+            if($('#termCalcMode').val() != 'OLD'){
                 var amount = Math.round(numberWithoutCommas($(this).val()) * $('#area').val() * 365 / 12 * 100) / 100; //月金额(含税)
                 var taxAmount = Math.round(amount / (1 + parseFloat($('#fixedRentTaxRate_'+num).val())) * 100) / 100; //月金额(去税)
                 var taxRentAmount = Math.round(taxAmount * 12 / 365 / $('#area').val() * 100) / 100; //单价(去税)
@@ -2698,7 +2698,7 @@ function activateAddDeleteRow(){
 
 function modifyTypeCheck() {
     if($('#contractModifyType').val() != ''){
-        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
+        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, .past input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
         $('#startDate, #endDate, #investmentContractEnteryterm input, #targetSales').next().css({
             'border': 'none',
             'background': '#eee'
