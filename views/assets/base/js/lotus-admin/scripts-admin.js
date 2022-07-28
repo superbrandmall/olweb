@@ -2698,7 +2698,8 @@ function activateAddDeleteRow(){
 
 function modifyTypeCheck() {
     if($('#contractModifyType').val() != ''){
-        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, .past input.money, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
+        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_'], \n\
+        tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
         $('#startDate, #endDate, #investmentContractEnteryterm input, #targetSales').next().css({
             'border': 'none',
             'background': '#eee'
@@ -2742,7 +2743,7 @@ function modifyTypeCheck() {
                 break;
             case "CLAUSE_CHANGE":
                 $("#selectRentCalculationMode, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #targetSales").not('.past').removeAttr('disabled');
-                $('input.money').removeAttr('disabled');
+                $("input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
                 $("#targetSales").next().css({
                     'border': '1px solid #d2d6de',
                     'borderLeft': 'none',

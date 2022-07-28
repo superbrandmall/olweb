@@ -113,15 +113,6 @@
                     <select class="select2" id="contractType" style="width: 100%" disabled></select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label">变更签署日 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control date-picker" id="rewardDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" required />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

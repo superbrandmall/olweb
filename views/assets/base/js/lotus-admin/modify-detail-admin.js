@@ -723,6 +723,7 @@ function findRequestbyBizId() {
                         $('#freeDays').val(data.freeDays);
                         $('#remark').val(data.remark);
                         $('#rewardDate').datepicker('update', data.awardDate);
+                        $('#modifyEffectTime').datepicker('update', data.modifyEffectTime);
                         $('#targetSales').val(data.targetSales);
         
                         if(data.firstCompareCycle != null && data.firstCompareCycle != null){
@@ -2337,6 +2338,11 @@ function submitCheck() {
         $('#rewardDate').parent().append(error);
     }
     
+    if($('#modifyEffectTime').val() == '') {
+        flag = 0;
+        $('#modifyEffectTime').parent().append(error);
+    }
+    
     if($('#brandName').val() == null) {
         flag = 0;
         $('#brandName').parent().append(error);
@@ -2551,8 +2557,8 @@ function saveContractForm(s) {
         })
         
         var modifyType = $('#contractModifyType').val();
-        var startDate = $.request.content.startDate;
-        var endDate = $.request.content.endDate;
+        var startDate = $('#modifyEffectTime').val();
+        var endDate = $('#endDate').val();
         var selectRentCalculationMode = $.request.content.rentCalculationMode;
         var brandCode = $.request.content.brandCode;
         var brandName = $.request.content.brandName;
@@ -2572,6 +2578,7 @@ function saveContractForm(s) {
         var tenantCode = $.request.content.tenantCode;
         var tenantName = $.request.content.tenantName;
         var tenantNo = $.request.content.tenantNo;
+        
         switch (modifyType) {
             case "TENANT_CHANGE":
                 tenantCode = $('#selectTenant').val();
@@ -2584,8 +2591,6 @@ function saveContractForm(s) {
                 contractName = $('#contractName').val();
                 break;
             case "TIME_CHANGE":
-                startDate = $('#startDate').val();
-                endDate = $('#endDate').val();
                 deliveryDate = $('#deliveryDate').val();
                 enterDate = $('#enterDate').val();
                 freeDays = $('#freeDays').val();
@@ -2619,7 +2624,8 @@ function saveContractForm(s) {
         var taxTotalRentAmount = numberWithoutCommas($('#fixedRentTaxTotalRentAmount').text());
         var totalPropertyAmount = numberWithoutCommas($('#propertyMgmtTotalPropertyAmount').text());
         var totalRentAmount = numberWithoutCommas($('#fixedRentTotalRentAmount').text());
-            
+        var modifyEffectTime = $('#modifyEffectTime').val();
+        
         var processBizApprove = 0;
         if($('.step-progress li:eq(4)').hasClass('active') == true){
             processBizApprove = 1;
@@ -3061,10 +3067,11 @@ function saveContractForm(s) {
         }
         
         var salesList = [];
-        var len = $("#minSales").find("tr").length;
+        var len = $("#minSales").find("tr").not('.past').length;
         var lenOld = $("#minSales").find("tr.past").length;
         var lenTotle = len * 1 + lenOld * 1;
-        $("#minSales").find("tr").each(function(i,e){
+        
+        $("#minSales").find("tr").not('.past').each(function(i,e){
             var minSales = {};
             index = i * 1 + lenOld * 1 + 1;
             minSales.startDate = $('#minSalesStartDate_'+index).val();
@@ -3102,21 +3109,6 @@ function saveContractForm(s) {
                 } 
             }
         }
-        
-        var ex = 'commission';
-        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
-            ex = 'fixedRent';
-        }
-        
-        var modifyEffectTime = $('#startDate').val();
-        var len = $("input[id*='"+ex+"StartDate_']").not('.past').length;
-        var lenTotle = $("input[id*='"+ex+"StartDate_']").length;
-        var lenOld = lenTotle * 1 - len * 1;
-        $("input[id*='"+ex+"StartDate_']").not('.past').each(function(i,e){
-            var index = i * 1 + lenOld * 1 + 1;
-            modifyEffectTime = $('#'+ex+'StartDate_'+index).val();
-            return false;
-        })
         
         var map = {
             "id": $.request.content.id, //必填
