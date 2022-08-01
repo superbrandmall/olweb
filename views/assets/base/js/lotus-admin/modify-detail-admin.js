@@ -751,6 +751,7 @@ function findRequestbyBizId() {
                                 updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
                                 $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                return false;
                             })
                             
                             if(data.fixedRentList.length > 0) {
@@ -791,6 +792,7 @@ function findRequestbyBizId() {
                                 updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
                                 $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                return false;
                             })
                             
                             if(data.deductList.length > 0) {
@@ -831,6 +833,7 @@ function findRequestbyBizId() {
                                 updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
                                 $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                return false;
                             })
                             
                             if(data.propertyFeeList.length > 0) {
@@ -871,6 +874,7 @@ function findRequestbyBizId() {
                                 updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
                                 $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                return false;
                             })
                             
                             if(data.promotionFeeList.length > 0) {
@@ -912,6 +916,7 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
                             $.each(data.oldContractInfo.salesList, function(i,v) {
                                 updateRowMinSales(JSON.stringify(v),' past');
+                                return false;
                             })
                         }
                         

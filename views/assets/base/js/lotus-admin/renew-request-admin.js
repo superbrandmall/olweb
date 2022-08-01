@@ -3130,6 +3130,8 @@ function saveContractForm(s) {
                                                                     },
                                                                     success: function (response, status, xhr) {
                                                                         if(response.code === 'C0') {
+                                                                            $('#submitState').text('');
+                                                                            $('#submitStateModal').modal('hide');
                                                                             if(response.data.resultCode == "ERROR" && response.data.id != ""){
                                                                                 $.request.content.id = response.data.id;
                                                                                 alertMsg(response.data.resultCode,response.data.resultMsg);

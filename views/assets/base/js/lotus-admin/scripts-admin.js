@@ -2720,11 +2720,13 @@ function modifyTypeCheck() {
         switch ($('#contractModifyType').val()) {
             case "TENANT_CHANGE":
                 $("#selectTenant, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
                 
                 activateAddDeleteRow();
                 break;
             case "BRAND_CHANGE":
                 $("#brandName, #contractName, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
+                $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
                 
                 activateAddDeleteRow();
                 break;
@@ -2738,6 +2740,7 @@ function modifyTypeCheck() {
                     'background': 'transparent'
                 });
                 $("tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").removeAttr('disabled');
+                $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
                 
                 activateAddDeleteRow();
                 break;
