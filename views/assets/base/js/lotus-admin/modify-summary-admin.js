@@ -107,10 +107,20 @@ function findRequestByBizId() {
 <td>'+data.startDate+'</td></tr>');
                                 break;
                             case "TIME_CHANGE":
-
+                                $('#basicInfoBefore').html('\
+<tr><td>开始日期</td>\n\
+<td>'+oldContractInfo.startDate+'</td></tr>');
+                                $('#basicInfoAfter').html('\
+<tr><td>开始日期</td>\n\
+<td>'+data.startDate+'</td></tr>');
                                 break;
                             case "CLAUSE_CHANGE":
-
+                                $('#basicInfoBefore').html('\
+<tr><td>开始日期</td>\n\
+<td>'+oldContractInfo.startDate+'</td></tr>');
+                                $('#basicInfoAfter').html('\
+<tr><td>开始日期</td>\n\
+<td>'+data.startDate+'</td></tr>');
                                 break;
                             default:
                                 break;
@@ -278,7 +288,7 @@ function findRequestByBizId() {
                     
                         if(data.propertyFeeList.length > 0){
                             $.each(data.propertyFeeList, function(i,v) {
-                                $('#propertyMgmtAfter').append('<tr">\n\
+                                $('#propertyMgmtAfter').append('<tr>\n\
         <td>'+v.itemName+'['+v.itemCode+']</td>\n\
         <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
         <td>'+accounting.formatNumber(v.amount)+'</td>\n\

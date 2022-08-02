@@ -280,24 +280,22 @@ function findFilesByBizId(id) {
                         }
                         
                         $("input[id*='"+type+"_']").each(function(j,e){
-                            if($('#'+type+'_'+j).val() == ''){
-                                $('#'+type+'_'+j).val(v.fileName);
-                                var fileSize;
-                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
-                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
-                                } else if(v.fileSize >= 1048576){
-                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
-                                } else {
-                                    fileSize = v.fileSize + 'b';
-                                }
-                                $('#'+type+'FileSize'+'_'+j).text(fileSize);
-                                $('#'+type+'Created'+'_'+j).text(v.created);
-                                $('#'+type+'Action'+'_'+j).html('\
-    <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a>\n\
-    <input type="hidden" id="file_'+v.id+'" />');
-                                $('#'+type+'_'+j).parent().parent().show();
-                                return false;
+                            $('#'+type+'_'+j).val(v.fileName);
+                            var fileSize;
+                            if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                            } else if(v.fileSize >= 1048576){
+                                fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                            } else {
+                                fileSize = v.fileSize + 'b';
                             }
+                            $('#'+type+'FileSize'+'_'+j).text(fileSize);
+                            $('#'+type+'Created'+'_'+j).text(v.created);
+                            $('#'+type+'Action'+'_'+j).html('\
+<a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a>\n\
+<input type="hidden" id="file_'+v.id+'" />');
+                            $('#'+type+'_'+j).parent().parent().show();
+                            return false;
                         })
                     })
                 }
@@ -2504,6 +2502,27 @@ function submitCheck() {
     if($('#Lotus_leasing_head select').val() == null) {
         flag = 0;
         $('#Lotus_leasing_head select').parent().append(error);
+    }
+    
+    var area = $('#area').val();
+    var yearLength = calDatesDiff($('#startDate').val(),$('#endDate').val()) / 365;
+    if(area >= 500){
+        if($('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+            flag = 0;
+            $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+        }
+        
+        if($('#hq_leasing_head select').val() == null) {
+            flag = 0;
+            $('#hq_leasing_head select').parent().append(error);
+        }
+    } else if(area > 40 && area < 500) {
+        if((area >= 100 && yearLength > 3) || (area < 100 && yearLength > 2)){
+            if($('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+                flag = 0;
+                $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+            }
+        }
     }
     
     if(flag == 1){
