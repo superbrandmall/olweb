@@ -1282,8 +1282,8 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
-    newrow.setAttribute("class",past);
-    input.setAttribute("class","form-control"+past);
+    newrow.setAttribute("class",p);
+    input.setAttribute("class","form-control"+(p=''? past : ''));
     input.setAttribute("id","fixedRentStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1307,7 +1307,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("class","form-control"+(p=''? past : ''));
     input2.setAttribute("id","fixedRentEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1499,8 +1499,8 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
-    newrow.setAttribute("class",past);
-    input.setAttribute("class","form-control"+past);
+    newrow.setAttribute("class",p);
+    input.setAttribute("class","form-control"+(p=''? past : ''));
     input.setAttribute("id","commissionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1524,7 +1524,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("class","form-control"+(p=''? past : ''));
     input2.setAttribute("id","commissionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1702,8 +1702,8 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
-    newrow.setAttribute("class",past);
-    input.setAttribute("class","form-control"+past);
+    newrow.setAttribute("class",p);
+    input.setAttribute("class","form-control"+(p=''? past : ''));
     input.setAttribute("id","propertyMgmtStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1727,7 +1727,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("class","form-control"+(p=''? past : ''));
     input2.setAttribute("id","propertyMgmtEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1917,8 +1917,8 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
-    newrow.setAttribute("class",past);
-    input.setAttribute("class","form-control"+past);
+    newrow.setAttribute("class",p);
+    input.setAttribute("class","form-control"+(p=''? past : ''));
     input.setAttribute("id","promotionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1942,7 +1942,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("class","form-control"+(p=''? past : ''));
     input2.setAttribute("id","promotionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -2184,8 +2184,8 @@ function updateRowMinSales(v,p) {
     if(dateCompare(value.startDate, date) == 'smaller'){
         past = ' past';
     }
-    newrow.setAttribute("class",past);
-    input.setAttribute("class","form-control"+past);
+    newrow.setAttribute("class",p);
+    input.setAttribute("class","form-control"+(p=''? past : ''));
     input.setAttribute("id","minSalesStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -2209,7 +2209,7 @@ function updateRowMinSales(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("class","form-control"+(p=''? past : ''));
     input2.setAttribute("id","minSalesEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");

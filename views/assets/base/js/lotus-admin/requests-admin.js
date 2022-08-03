@@ -7,6 +7,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('FORM_TYPE');
     }
     
+    if(!sessionStorage.getItem("CONTRACT_MODIFY_TYPE") || sessionStorage.getItem("CONTRACT_MODIFY_TYPE") == null || sessionStorage.getItem("CONTRACT_MODIFY_TYPE") == '') {
+        findDictCodeByDictTypeCode('CONTRACT_MODIFY_TYPE');
+    }
+    
     if($.cookie('searchRequestsFormStatus') != ''){
         $('#formStatus').val($.cookie('searchRequestsFormStatus')).trigger('change');
     }
@@ -250,7 +254,7 @@ function findAllRequestsByKVCondition(p,c){
                             <td>'+contractLink+'</td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
-                            <td>'+(renderFormType(v.formType) || '')+'</td>\n\
+                            <td>'+(renderFormType(v.formType,v.modifyType) || '')+'</td>\n\
                             <td>'+(v.tenantName || '')+'</td>\n\
                             <td>'+(v.mallName || '')+'</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
@@ -288,7 +292,7 @@ function renderFormStatus(s) {
     return status;
 }
 
-function renderFormType(t) {
+function renderFormType(t,m) {
     var type = '';
     if(sessionStorage.getItem("FORM_TYPE") && sessionStorage.getItem("FORM_TYPE") != null && sessionStorage.getItem("FORM_TYPE") != '') {
         var type = $.parseJSON(sessionStorage.getItem("FORM_TYPE"));
@@ -298,6 +302,18 @@ function renderFormType(t) {
             }
         })
     }
+    
+    if(m != null){
+        if(sessionStorage.getItem("CONTRACT_MODIFY_TYPE") && sessionStorage.getItem("CONTRACT_MODIFY_TYPE") != null && sessionStorage.getItem("CONTRACT_MODIFY_TYPE") != '') {
+            var modifyType = $.parseJSON(sessionStorage.getItem("CONTRACT_MODIFY_TYPE"));
+            $.each(modifyType, function(i,v){
+                if(v.dictCode == m){
+                    type = v.dictName;
+                }
+            })
+        }
+    }
+    
     return type;
 }
 

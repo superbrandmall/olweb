@@ -56,8 +56,45 @@ function findRequestByBizId() {
                         findProcessInstByBizId();
                     }
                     
+                    $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
+                    $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
+                    $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
+                    $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
+                    $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
+                    $('#essayDuration').html('<span class="txt">'+data.duration+'</span>【合同租期】个月，');
+                    var modifyType = '';
+                    switch (data.modifyType) {
+                        case "TENANT_CHANGE":
+                            modifyType = '租户主体发生变更。从租户【'+oldContractInfo.tenantName+'】变更为【'+data.tenantName+'】';
+                            break;
+                        case "BRAND_CHANGE":
+                            modifyType = '品牌主体发生变更。从品牌【'+oldContractInfo.brandName+'】变更为【'+data.brandName+'】';
+                            break;
+                        case "TIME_CHANGE":
+                            modifyType = '合同租期发生变更';
+                            break;
+                        case "CLAUSE_CHANGE":
+                            modifyType = '合同商务条件发生变更';
+                            break;
+                        default:
+                            break;
+                    }
+                    $('#essayModifyType').html('<span class="txt">'+modifyType+'</span>【变更类型】。');
+                    var saleRentalRatio = '';
+                    if(data.fixedRentList.length > 0){
+                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                    }
+                    $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
+                    if(data.awardDate != null && data.awardDate != ''){
+                        $('#essayAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约。');
+                    }
+                    $('#essayBudgetRentAmount').text('首年预算租金0元/月/平米，');
+                    $('#essayBudgetRentAmountRateOfReach').text('首年单价达成率100%。');
+                    $('#essayBudgetBizDate').text('预算中/年/月/日开业，');
+                    $('#essayBudgetYearAmountRateOfReach').text('全年预算达成率%，');
+                    $('#essayBudgetDifference').text('差异元。');
+                    
                     $('#remark').val(data.remark);
- 
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
                     $('#bizId').text(data.bizId).attr('title',data.bizId);
                     $('#mallName').text(data.mallName).attr('title',data.mallName);
