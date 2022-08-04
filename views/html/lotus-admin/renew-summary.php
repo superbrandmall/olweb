@@ -34,6 +34,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
                     <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                 
                     <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
+                    <li><a href="javascript: void(0);" id="createModify">变更租赁合同申请单</a></li>
                 </ul>
             </div>
         </div>
