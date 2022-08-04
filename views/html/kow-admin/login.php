@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-info">
-                                    <p>欢迎来到KOW工作管理系统! </p>
+                                    <p>欢迎来到快闪管理系统! </p>
                                 </div>
                             </div>
 

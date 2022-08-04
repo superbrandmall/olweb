@@ -6,7 +6,7 @@ $.api = {
     unitType: ['KOW','kow'],
     dictContractType: 2, //KOW
     contractType: ['租赁','leasing'],
-    formType: ['新签','new'],
+    formType: ['新签','new','续签','renew'],
     paymentMode: ['月付','M'],
     posMode: ['不用POS自收银','unUse'],
     profitCenter: ['KOW部','kow'],
@@ -82,6 +82,53 @@ $(document).ready(function(){
             300);
         return false;
     });
+    
+    $('#createRenew').click(function(){
+        var ftTxt, ftVal,headTxt,rcdd,ftid,fheader;
+        switch ($(this).attr('id')) {
+            case "createRenew":
+                ftTxt = $.api.formType[2];
+                ftVal = $.api.formType[3];
+                headTxt = '续签合同申请';
+                rcdd = 'renewContract';
+                ftid = 'renewUpdateFormType';
+                fheader = 'renew-termination';
+                break;
+            default:
+                break;
+        }
+        
+        updateDictDropDownByDictTypeCode('FORM_TYPE',ftid,ftTxt,ftVal);
+        $('#investment-contract-request-'+fheader+'-create .modal-header').find('h4').text(headTxt);
+        $('#investment-contract-request-'+fheader+'-create').modal('toggle');
+        updateRequestContractDropDown(rcdd,10);
+        $('.date-picker').datepicker({
+            'language': 'zh-CN',
+            'format': 'yyyy-mm-dd',
+            'todayBtn': "linked",
+            'todayHighlight': true,
+            'startDate': '',
+            'endDate': '',
+            'autoclose': true
+        });
+    })
+    
+    $('#renewDepartment').select2({
+        dropdownParent: $('#investment-contract-request-renew-termination-create')
+    })
+    
+    $("#renewContract").on("select2:select",function(){
+        var id = $(this).attr('id').split('Contract')[0];
+        $("#"+id+"Tenant").text($('#select2-'+id+'Contract-container').text().split(' | ')[0].split('[')[0]);
+        $("#"+id+"ContractName").text($('#select2-'+id+'Contract-container').text().split(' | ')[1]);
+        $("#"+id+"UnitName").text($('#select2-'+id+'Contract-container').text().split(' | ')[2]);
+        $("#"+id+"StartEndDate").text($('#select2-'+id+'Contract-container').text().split(' | ')[3]);
+    })
+    
+    $('#renewCreateRequest').click(function(){
+        var id = $(this).attr('id').split('CreateRequest')[0];
+        redirectCheck(id);
+    })
     
     scrollJump();
     
@@ -536,6 +583,24 @@ function updateEndDatepicker(Exid) {
     });  
 }
 
+function updateEndDatepickerAndRemove(Exid) {
+    $("input[id*='"+Exid+"EndDate_']").each(function(i){  
+        var num = i + 1;
+        if($('#'+Exid+'EndDate_'+(parseInt(num)+1)).length <= 0){
+            $('#'+Exid+'EndDate_'+num).datepicker('setEndDate',$('#endDate').val());
+            $('#'+Exid+'EndDate_'+num).datepicker('update',$('#endDate').val());
+            
+            if($('#'+Exid+'EndDate_'+num).val() == '' ){
+                deleteRow(document.getElementById(Exid+'EndDate_'+num).parentNode.parentNode);
+            }
+            return false;
+        }
+    });
+    if(Exid == 'fixedRent' || Exid == 'propertyMgmt'){
+        calBackPush(Exid);
+    }
+}
+
 function findFeeItemByContractType(type) {
     $.ajax({
         url: $.api.baseAdmin+"/api/finance/feeItem/findAllByContractType/"+type,
@@ -721,6 +786,7 @@ function createRowColumn(row) {
 
 function addRowInvestmentContractAccounttermFixed() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -906,6 +972,7 @@ function addRowInvestmentContractAccounttermFixed() {
 
 function addRowInvestmentContractAccounttermCommission() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1095,6 +1162,7 @@ function addRowInvestmentContractAccounttermCommission() {
 
 function addRowInvestmentContractAccounttermPropertyMgmt() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1279,6 +1347,7 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
 
 function addRowInvestmentContractAccounttermPromotion() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1438,6 +1507,7 @@ function addRowInvestmentContractAccounttermPromotion() {
 
 function addRowInvestmentContractDepositterm() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1531,6 +1601,7 @@ function addRowInvestmentContractDepositterm() {
 
 function addRowContactList() {
     var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
@@ -1645,16 +1716,16 @@ function deleteRow(button) {
 
     // refactoring numbering
     var rows = tbody.getElementsByTagName("tr");
+    var id = tbody.getAttribute("id");
     for (var i = 0; i < rows.length; i++) {
         var currentRow = rows[i];
         currentRow.childNodes[0].innerText = (i+1).toLocaleString();
-        //var td = currentRow.cells;
-        var id = tbody.getAttribute("id");
         var td = $("#"+id+" tr:eq(" + i + ") td");
         td.find("input, select").each(function(){
             $(this).attr('id',$(this).attr('id').split('_')[0]+'_'+(i+1).toLocaleString());
         });
     }
+    calBackPush(id);
 }
 
 function updateTaxVAT() {
@@ -1971,6 +2042,8 @@ function calBackPush(prefix){
     var fixedRentList = [];
     var propertyFee = {};
     var propertyFeeList = [];
+    sessionStorage.setItem("rentCalcList",null);
+    sessionStorage.setItem("propertyCalcList",null);
     $("#"+prefix).find("tr").each(function(){
         var tdArr = $(this).children();
         var amount = tdArr.eq(3).find('input').val();
@@ -2155,11 +2228,192 @@ function calBackPush(prefix){
         if(path == 'fixedRentCalc'){
             $('#'+prefix+'TotalRentAmount').text(accounting.formatNumber(0));
             $('#'+prefix+'TaxTotalRentAmount').text(accounting.formatNumber(0));
+            sessionStorage.setItem("rentCalcList", null);
         } else if (path == 'propertyFeeCalc'){
             $('#'+prefix+'TotalPropertyAmount').text(accounting.formatNumber(0));
             $('#'+prefix+'TaxTotalPropertyAmount').text(accounting.formatNumber(0));
+            sessionStorage.setItem("propertyCalcList", null);
         } 
     }
+}
+
+function dataURLtoFile(dataurl,filename,filetype) {
+    var arr = dataurl.split(","),
+    bstr =atob(arr[1]),
+    n = bstr.length,
+
+    u8arr =new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, {
+        type: filetype
+    });
+}
+
+function updateRequestContractDropDown(id, data_count) {
+    var dropdownParent;
+    switch (id) {
+        case "renewContract":
+            dropdownParent = 'investment-contract-request-renew-termination-create';
+            break;
+        default:
+            break;
+    }
+    
+    $('#'+id).select2({
+        dropdownParent: $('#'+dropdownParent),
+        placeholder: '输入合同编号、商户名称或店招',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: function (params) {
+                return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) {
+                var term;
+                switch (id) {
+                    case "renewContract":
+                        term = params.term || $('#renewDepartment').val();
+                        break;
+                    default:
+                        break;
+                }
+                var map = {
+                    key: term,
+                    operator: "OR",
+                    params: [
+                      "mallCode","tenantName","contractNo"
+                    ],
+                    sorts: []
+                }
+                return JSON.stringify(map);
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.contractNo,
+                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate            
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function redirectCheck(id) {
+    $('.mandatory-error').remove();
+    var flag = 1;
+    var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
+    
+    if($('#'+id+'Contract').val() == null) {
+        flag = 0;
+        $('#'+id+'Contract').parent().append(error);
+    }
+    
+    if($('#'+id+'UpdateFormType').val() == '') {
+        flag = 0;
+        $('#'+id+'UpdateFormType').parent().append(error);
+    }
+    
+    if(flag == 1){
+        saveContractInfoForRequest($('#'+id+'UpdateFormType').val());
+    }
+}
+
+function saveContractInfoForRequest(id) {
+    var openId = 'admin';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            return false;
+        }
+    })
+       
+    var map = {
+        contractNo: $('#'+id+'Contract').val(),
+        formType: $('#'+id+'UpdateFormType').val(),
+        updateOpenId: openId
+    }
+    $.ajax({
+        url: $.api.baseLotus+"/api/rent/contract/form/saveContractInfoForRenew",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.bizId != null){
+                    var path;
+                    switch (response.data.formType) {
+                        case "termination":
+                            path = 'terminate';
+                            break;
+                        default:
+                            path = response.data.formType;
+                            break;
+                    }
+                    
+                    window.location.href = '/kow-admin/'+path+'-request?id='+response.data.bizId;
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
 }
 
 function dataURLtoFile(dataurl,filename,filetype) {

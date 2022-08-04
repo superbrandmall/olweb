@@ -765,7 +765,7 @@ function updateDictByDictTypeCodeAndVal(dictTypeCode, id, val) {
                         if(v.dictCode == val){
                             var newOption = new Option(v.dictName, val, true, true);
                             $('#'+id).append(newOption).trigger('change');
-                            return false;
+                            return;
                         }
                     })
                 }
@@ -2046,6 +2046,9 @@ function updateSelectTenantDropDown(data_count) {
             cache: true
         }
     });
+
+    var newOption = new Option(dataTxt, dataVal, true, true);
+    $('#'+id).append(newOption).trigger('change');
 }
 
 function calBackPushFixedRentSingleRow(num) {
