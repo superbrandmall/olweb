@@ -578,7 +578,7 @@ function updateEndDatepicker(Exid) {
         if($('#'+Exid+'EndDate_'+(parseInt(num)+1)).length <= 0){
             $('#'+Exid+'EndDate_'+num).datepicker('setEndDate',$('#endDate').val());
             $('#'+Exid+'EndDate_'+num).datepicker('update',$('#endDate').val());
-            return;
+            return false;
         }
     });  
 }
@@ -758,7 +758,7 @@ function updateDictByDictTypeCodeAndVal(dictTypeCode, id, val) {
                         if(v.dictCode == val){
                             var newOption = new Option(v.dictName, val, true, true);
                             $('#'+id).append(newOption).trigger('change');
-                            return;
+                            return false;
                         }
                     })
                 }

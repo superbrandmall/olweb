@@ -1425,7 +1425,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     input.setAttribute("class","form-control money"+past);
     input.setAttribute("id","commissionTaxDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
-    input.setAttribute("value",(parseFloat(value.deduct) * 100));
+    input.setAttribute("value",(parseFloat(value.taxDeduct) * 100));
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "%";
@@ -1441,7 +1441,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
     input.setAttribute("style","border: none");
-    input.setAttribute("value",(parseFloat(value.taxDeduct) * 100));
+    input.setAttribute("value",(parseFloat(value.deduct) * 100));
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "%";
