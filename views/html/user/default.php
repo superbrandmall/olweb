@@ -34,10 +34,6 @@
                         Joy&Peace
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP191022000065"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1378-240x180.jpg" width="187" alt=""/></a>
-                        锦鲤拿趣
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000631"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1363-240x180.jpg" width="187" alt=""/></a>
                         费大厨
                     </div>
@@ -62,68 +58,28 @@
                         STACCATO
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190613000006"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1338-240x180.jpg" width="187" alt=""/></a>
-                        颖内
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210610000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1312-240x180.jpg" width="187" alt=""/></a>
-                        LI-NING
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000733"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_8704-240x180.jpg" width="187" alt=""/></a>
-                        哲平鳗满
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000728"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8594-240x180.jpg" width="187" alt=""/></a>
                         难得一面
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190212000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8577-240x180.jpg" width="187" alt=""/></a>
-                        PEAK-TAICHI
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000599"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8534-240x180.jpg" width="187" alt=""/></a>
-                        NINTEN ASOBI
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190416000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8482-240x180.jpg" width="187" alt=""/></a>
-                        花谷兰泰
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210326000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8287-240x180.jpg" width="187" alt=""/></a>
                         乐影城
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200801000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8278-240x180.jpg" width="187" alt=""/></a>
-                        半天妖
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000571"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8362-240x180.jpg" width="187" alt=""/></a>
-                        广莲申
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210723000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8213-240x180.jpg" width="187" alt=""/></a>
                         Samui Tea
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP210325000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8207-240x180.jpg" width="187" alt=""/></a>
-                        GUAVA
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
                         璞徽
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP190417000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_1503-240x180.jpg" width="187" alt=""/></a>
-                        MUJI
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
                         锅物新语
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3892-240x180.jpg" width="187" alt=""/></a>
-                        ifidol
+                        <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/07/ZHX_3892-240x180.jpg" width="187" alt=""/></a>
+                        LACOSTE
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000035"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/08/ZHX_3900-240x180.jpg" width="187" alt=""/></a>
