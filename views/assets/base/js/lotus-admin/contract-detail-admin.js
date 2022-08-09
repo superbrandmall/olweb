@@ -93,22 +93,20 @@ $(document).ready(function(){
     // change事件
     $("input[id*='fixedRentEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('fixedRent');
-        calBackPushFixedRentSingleRow($(this).attr('id').split('_')[1]);
+        calBackPush('fixedRent');
     })
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
-        calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('propertyMgmt');
-        calBackPushPropertyMgmtSingleRow($(this).attr('id').split('_')[1]);
+        calBackPush('propertyMgmt');
     })
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
-        calBackPushPromotionSingleRow($(this).attr('id').split('_')[1]);
     })
     
     $("#contractType").change(function(){
@@ -981,7 +979,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     calBackPush('fixedRent');
     
     $("#fixedRentEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushFixedRentSingleRow($(this).attr('id').split('_')[1]);
+        calBackPush('fixedRent');
     })
     
     $("#fixedRentTaxRentAmount_"+count.toLocaleString()).on('change',function(){
@@ -1202,10 +1200,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
-    });
-    
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
     })
@@ -1398,7 +1392,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     calBackPush('propertyMgmt');
     
     $("#propertyMgmtEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushPropertyMgmtSingleRow($(this).attr('id').split('_')[1]);
+        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtTaxRentAmount_"+count.toLocaleString()).on('change',function(){
@@ -1605,10 +1599,6 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
         });
         $(this).parent().parent().removeClass('success');
     });
-    
-    $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushPromotionSingleRow($(this).attr('id').split('_')[1]);
-    })
     
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
         calBackPushPromotionAmount();

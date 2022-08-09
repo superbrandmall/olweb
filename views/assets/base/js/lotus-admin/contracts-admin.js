@@ -96,6 +96,15 @@ function findAllContractsByKVCondition(p,c){
     var params = [];
     var param = {};
     
+    param = {
+        "columnName": "contractName",
+        "columnPatten": "",
+        "conditionOperator": "",
+        "operator": "!=",
+        "value": 'KOW'
+    }
+    params.push(param);
+    
     if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''){
         param = {
             "columnName": "contractStatus",
