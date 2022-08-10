@@ -564,17 +564,14 @@ function updateEndDatepicker(Exid) {
 
 function updateEndDatepickerAndRemove(Exid) {
     $("input[id*='"+Exid+"EndDate_']").each(function(i){  
-        var num = i + 1;
-        if($('#'+Exid+'EndDate_'+(parseInt(num)+1)).length <= 0){
-            $('#'+Exid+'EndDate_'+num).datepicker('setEndDate',$('#endDate').val());
-            $('#'+Exid+'EndDate_'+num).datepicker('update',$('#endDate').val());
-            
-            if($('#'+Exid+'EndDate_'+num).val() == '' ){
-                deleteRow(document.getElementById(Exid+'EndDate_'+num).parentNode.parentNode);
-            }
-            return false;
+        var num = $(this).attr('id').split('_')[1];
+        if($('#'+Exid+'StartDate_'+num).val() != '' && dateCompare($("#endDate").val(), $('#'+Exid+'StartDate_'+num).val()) == 'smaller'){
+            deleteRow(document.getElementById(Exid+'EndDate_'+num).parentNode.parentNode);
         }
     });
+    var id = $("input[id*='"+Exid+"EndDate_']").length;
+    $('#'+Exid+'EndDate_'+id).datepicker('setEndDate',$('#endDate').val());
+    $('#'+Exid+'EndDate_'+id).datepicker('update',$('#endDate').val());
     if(Exid == 'fixedRent' || Exid == 'propertyMgmt'){
         calBackPush(Exid);
     }
@@ -2612,7 +2609,7 @@ function redirectCheck(id) {
     }
     
     if(flag == 1){
-        saveContractInfoForRequest($('#'+id+'UpdateFormType').val());
+        saveContractInfoForRequest(id);
     }
 }
 

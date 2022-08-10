@@ -723,6 +723,35 @@ function findRequestbyBizId() {
                             } else {
                                 $('#fixedRentOverdueInvoiceFlag_1').prop('checked', false);
                             }
+                        } else if(data.oldContractInfo.fixedRentList.length > 0) {
+                            $.each(data.oldContractInfo.fixedRentList, function(i,v) {
+                                updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                                $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+
+                            $('#fixedRentPeriodType_1').val(data.oldContractInfo.fixedRentList[0].periodTypeCode).trigger('change');
+
+                            $('#fixedRentSettleDay_1').val(data.oldContractInfo.fixedRentList[0].settleDay).trigger('change');
+
+                            $('#fixedRentSettlePeriod_1').val(data.oldContractInfo.fixedRentList[0].settlePeriodCode).trigger('change');
+
+                            if(data.oldContractInfo.fixedRentList[0].isOverdueFlag == 1) {
+                                $('#fixedRentIsOverdueFlag_1').prop('checked', true);
+                            } else {
+                                $('#fixedRentIsOverdueFlag_1').prop('checked', false);
+                            }
+
+                            $('#fixedRentOverdueTaxRate_1').val(data.oldContractInfo.fixedRentList[0].overdueTaxRate).trigger('change');
+
+
+                            $('#fixedRentOverdueRate_1').val(parseFloat(data.oldContractInfo.fixedRentList[0].overdueRate * 1000));
+
+                            if(data.oldContractInfo.fixedRentList[0].overdueInvoiceFlag == 1) {
+                                $('#fixedRentOverdueInvoiceFlag_1').prop('checked', true);
+                            } else {
+                                $('#fixedRentOverdueInvoiceFlag_1').prop('checked', false);
+                            }
                         }
 
                         if(data.deductList.length > 0) {
@@ -750,6 +779,35 @@ function findRequestbyBizId() {
                             $('#commissionOverdueRate_1').val(parseFloat(data.deductList[0].overdueRate * 1000));
 
                             if(data.deductList[0].overdueInvoiceFlag == 1) {
+                                $('#commissionOverdueInvoiceFlag_1').prop('checked', true);
+                            } else {
+                                $('#commissionOverdueInvoiceFlag_1').prop('checked', false);
+                            }
+                        } else if(data.oldContractInfo.deductList.length > 0) {
+                            $.each(data.oldContractInfo.deductList, function(i,v) {
+                                updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                                $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+
+                            $('#commissionPeriodType_1').val(data.oldContractInfo.deductList[0].periodTypeCode).trigger('change');
+
+                            $('#commissionSettleDay_1').val(data.oldContractInfo.deductList[0].settleDay).trigger('change');
+
+                            $('#commissionSettlePeriod_1').val(data.oldContractInfo.deductList[0].settlePeriodCode).trigger('change');
+
+                            if(data.oldContractInfo.deductList[0].isOverdueFlag == 1) {
+                                $('#commissionIsOverdueFlag_1').prop('checked', true);
+                            } else {
+                                $('#commissionIsOverdueFlag_1').prop('checked', false);
+                            }
+
+                            $('#commissionOverdueTaxRate_1').val(data.oldContractInfo.deductList[0].overdueTaxRate).trigger('change');
+
+
+                            $('#commissionOverdueRate_1').val(parseFloat(data.oldContractInfo.deductList[0].overdueRate * 1000));
+
+                            if(data.oldContractInfo.deductList[0].overdueInvoiceFlag == 1) {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', false);
@@ -785,6 +843,35 @@ function findRequestbyBizId() {
                             } else {
                                 $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', false);
                             }
+                        } else if(data.oldContractInfo.propertyFeeList.length > 0) {
+                            $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
+                                updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                                $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+
+                            $('#propertyMgmtPeriodType_1').val(data.oldContractInfo.propertyFeeList[0].periodTypeCode).trigger('change');
+
+                            $('#propertyMgmtSettleDay_1').val(data.oldContractInfo.propertyFeeList[0].settleDay).trigger('change');
+
+                            $('#propertyMgmtSettlePeriod_1').val(data.oldContractInfo.propertyFeeList[0].settlePeriodCode).trigger('change');
+
+                            if(data.oldContractInfo.propertyFeeList[0].isOverdueFlag == 1) {
+                                $('#propertyMgmtIsOverdueFlag_1').prop('checked', true);
+                            } else {
+                                $('#propertyMgmtIsOverdueFlag_1').prop('checked', false);
+                            }
+
+                            $('#propertyMgmtOverdueTaxRate_1').val(data.oldContractInfo.propertyFeeList[0].overdueTaxRate).trigger('change');
+
+
+                            $('#propertyMgmtOverdueRate_1').val(parseFloat(data.oldContractInfo.propertyFeeList[0].overdueRate * 1000));
+
+                            if(data.oldContractInfo.propertyFeeList[0].overdueInvoiceFlag == 1) {
+                                $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', true);
+                            } else {
+                                $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', false);
+                            }
                         }
 
                         if(data.promotionFeeList.length > 0) {
@@ -816,10 +903,45 @@ function findRequestbyBizId() {
                             } else {
                                 $('#promotionOverdueInvoiceFlag_1').prop('checked', false);
                             }
+                        } else if(data.oldContractInfo.promotionFeeList.length > 0) {
+                            $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
+                                updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                                $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+
+                            $('#promotionPeriodType_1').val(data.oldContractInfo.promotionFeeList[0].periodTypeCode).trigger('change');
+
+                            $('#promotionSettleDay_1').val(data.oldContractInfo.promotionFeeList[0].settleDay).trigger('change');
+
+                            $('#promotionSettlePeriod_1').val(data.oldContractInfo.promotionFeeList[0].settlePeriodCode).trigger('change');
+
+                            if(data.oldContractInfo.promotionFeeList[0].isOverdueFlag == 1) {
+                                $('#promotionIsOverdueFlag_1').prop('checked', true);
+                            } else {
+                                $('#promotionIsOverdueFlag_1').prop('checked', false);
+                            }
+
+                            $('#promotionOverdueTaxRate_1').val(data.oldContractInfo.promotionFeeList[0].overdueTaxRate).trigger('change');
+
+
+                            $('#promotionOverdueRate_1').val(parseFloat(data.oldContractInfo.promotionFeeList[0].overdueRate * 1000));
+
+                            if(data.oldContractInfo.promotionFeeList[0].overdueInvoiceFlag == 1) {
+                                $('#promotionOverdueInvoiceFlag_1').prop('checked', true);
+                            } else {
+                                $('#promotionOverdueInvoiceFlag_1').prop('checked', false);
+                            }
                         }
 
                         if(data.depositList.length > 0) {
                             $.each(data.depositList, function(i,v) {
+                                updateRowInvestmentContractDepositterm(JSON.stringify(v));
+                                $('#deposit tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                $('#deposit tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                            })
+                        } else if(data.oldContractInfo.depositList.length > 0) {
+                            $.each(data.oldContractInfo.depositList, function(i,v) {
                                 updateRowInvestmentContractDepositterm(JSON.stringify(v));
                                 $('#deposit tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
                                 $('#deposit tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');

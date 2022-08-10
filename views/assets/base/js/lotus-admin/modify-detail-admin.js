@@ -744,7 +744,7 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.fixedRentList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.fixedRentList, function(i,v) {
-                                    if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
+                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
                                         v.endDate = DecrDate(data.modifyEffectTime);
                                     }
                                     updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
@@ -787,7 +787,7 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.deductList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.deductList, function(i,v) {
-                                    if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
+                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
                                         v.endDate = DecrDate(data.modifyEffectTime);
                                     }
                                     updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
@@ -830,7 +830,7 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.propertyFeeList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
-                                    if(dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
+                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
                                         v.endDate = DecrDate(data.modifyEffectTime); 
                                     }
                                     updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
@@ -873,7 +873,7 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.promotionFeeList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
-                                    if(dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
+                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
                                         v.endDate = DecrDate(data.modifyEffectTime); 
                                     }
                                     updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
