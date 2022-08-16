@@ -32,6 +32,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 </button>
                 <ul class="dropdown-menu pull-right" role="menu">
                     <li><a href="/kow-admin/make-request">新签租赁合同申请单</a></li>
+                    <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>
                 </ul>
             </div>
         </div>
