@@ -38,7 +38,7 @@ function findDoingRequestsByKVCondition(p,c){
     params.push(param);
     
     param = {
-        "columnName": "startDate",
+        "columnName": "endDate",
         "columnPatten": "",
         "conditionOperator": "",
         "operator": "<",

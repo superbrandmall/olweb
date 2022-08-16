@@ -160,7 +160,8 @@ label.error {
     font-size: 16px;
     color: #E43C24;
     top: 30%;
-    z-index: 2;
+    right: 0;
+    z-index: 3;
 }
 
 .form-group div {
