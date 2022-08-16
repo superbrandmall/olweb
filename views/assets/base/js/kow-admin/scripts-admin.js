@@ -435,6 +435,17 @@ function dateCompare(date1,date2){
     return result;
 }
 
+function getLastDayOfMonth(year,month){
+    var isrun = year % 400 == 0 || (year % 4 == 0 & year % 100 != 0);
+    var d = 30;
+    if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+        d = 31; //大月31号
+    } else if(month == 2) { //二月
+        d = isrun ? 29 : 28; //闰年29号,平年28号
+    }
+    return d;
+}
+
 function scrollJump() {
     $("#navbarTop a").on('click',function(e) {
         var id = $(this).attr('href').substr(1);
