@@ -2,6 +2,19 @@ var toDoMalls = [];
 var doingMalls = [];
 
 $(document).ready(function(){
+    if($.cookie('searchHomeStartDate') != null && $.cookie('searchHomeStartDate') != ''){
+        $('#startDate').datepicker('update', $.cookie('searchHomeStartDate'));
+    } else {
+        $('#startDate').datepicker('update', d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + '01');
+    }
+    
+    if($.cookie('searchHomeEndDate') != null && $.cookie('searchHomeEndDate') != ''){
+        $('#endDate').datepicker('update', $.cookie('searchHomeEndDate'));
+    } else {
+        var ldm = getLastDayOfMonth(d.getFullYear(),month);
+        $('#endDate').datepicker('update', d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + ldm);
+    }
+    
     $('#clear').click(function(){
         $('#startDate, #endDate').val('');
         $.cookie('searchHomeStartDate', '');
@@ -15,6 +28,10 @@ $(document).ready(function(){
         findToDoRequestsByKVCondition(1,100);
     })
 });
+
+window.onload = function(){
+    $('#search').trigger('click');
+}
 
 function findDoingRequestsByKVCondition(p,c){
     var params = [];

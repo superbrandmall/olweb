@@ -283,7 +283,7 @@ function findRequestByBizId() {
                                 $("#commissionBefore tr td:nth-child(5)").each(function() {
                                     if(v.dictCode == $(this).text()){
                                         $(this).text(v.dictName);
-                                        return false;
+                                        return;
                                     }
                                 })
                             })
@@ -304,7 +304,7 @@ function findRequestByBizId() {
                                     $("#commissionAfter tr td:nth-child(5)").each(function() {
                                         if(v.dictCode == $(this).text()){
                                             $(this).text(v.dictName);
-                                            return false;
+                                            return;
                                         }
                                     })
                                 })
