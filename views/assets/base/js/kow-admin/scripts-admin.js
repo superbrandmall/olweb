@@ -113,7 +113,7 @@ $(document).ready(function(){
         });
     })
     
-    $('#renewDepartment').select2({
+    $('#renewMallCode').select2({
         dropdownParent: $('#investment-contract-request-renew-termination-create')
     })
     
@@ -513,7 +513,7 @@ function updateUserRoleYZJDropDownByRoleId(id) {
 }
 
 function updateSelectMallDropDown(data_count) {
-    $('#mallCode').select2({
+    $('#mallCode, #renewMallCode').select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -2305,7 +2305,7 @@ function updateRequestContractDropDown(id, data_count) {
                 var term;
                 switch (id) {
                     case "renewContract":
-                        term = params.term || $('#renewDepartment').val();
+                        term = params.term || $('#renewMallCode').val();
                         break;
                     default:
                         break;

@@ -452,6 +452,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'kow-admin/request-summary' => array(
             'url' => 'request-summary.php'
         ),
+        'kow-admin/renew-detail' => array(
+            'url' => 'renew-detail.php'
+        ),
+        'kow-admin/renew-request' => array(
+            'url' => 'renew-request.php'
+        ),
+        'kow-admin/renew-summary' => array(
+            'url' => 'renew-summary.php'
+        ),
         'kow-admin/contracts' => array(
             'url' => 'contracts.php'
         ),
@@ -469,8 +478,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'stores.php', 'create-store.php', 'store-detail.php', 'malls.php', 'create-mall.php', 'mall-detail.php', 'tenants.php',  
-    'create-tenant.php', 'tenant-detail.php', 'requests.php', 'request-summary.php', 'make-request.php', 'request-detail.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php');
+    $session_required = array('login.php', 'default.php', 'stores.php', 'create-store.php', 'store-detail.php', 'malls.php', 'create-mall.php', 'mall-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 
+        'requests.php', 'request-summary.php', 'make-request.php', 'request-detail.php', 'renew-detail.php', 'renew-request.php', 'renew-summary.php','contracts.php', 'contract-summary.php', 'contract-detail.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/kow-admin/Session.class.php';
