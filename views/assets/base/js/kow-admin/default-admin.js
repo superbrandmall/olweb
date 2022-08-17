@@ -40,28 +40,47 @@ function findDoingRequestsByKVCondition(p,c){
     param = {
         "columnName": "contractName",
         "columnPatten": "",
-        "operator": "AND",
+        "conditionOperator": "AND",
+        "operator": "=",
         "value": 'KOW'
     }
     params.push(param);
     
-    param = {
-        "columnName": "startDate",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": ">=",
-        "value": $.cookie('searchHomeStartDate')
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "endDate",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": "<",
-        "value": $.cookie('searchHomeEndDate')
-    }
-    params.push(param);
+//    param = {
+//        "columnName": "startDate",
+//        "columnPatten": "YYYY-MM-DD",
+//        "conditionOperator": "AND",
+//        "operator": "<=",
+//        "value": $.cookie('searchHomeStartDate')
+//    }
+//    params.push(param);
+//    
+//    param = {
+//        "columnName": "endDate",
+//        "columnPatten": "YYYY-MM-DD",
+//        "conditionOperator": "AND",
+//        "operator": ">=",
+//        "value": $.cookie('searchHomeStartDate')
+//    }
+//    params.push(param);
+//    
+//    param = {
+//        "columnName": "startDate",
+//        "columnPatten": "YYYY-MM-DD",
+//        "conditionOperator": "OR",
+//        "operator": ">=",
+//        "value": $.cookie('searchHomeStartDate')
+//    }
+//    params.push(param);
+//    
+//    param = {
+//        "columnName": "startDate",
+//        "columnPatten": "YYYY-MM-DD",
+//        "conditionOperator": "OR",
+//        "operator": "<=",
+//        "value": $.cookie('searchHomeEndDate')
+//    }
+//    params.push(param);
         
     var map = {
         "params": params

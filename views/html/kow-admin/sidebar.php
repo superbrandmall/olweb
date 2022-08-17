@@ -55,12 +55,6 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <span>合同</span>
                 </a>
             </li>-->
-            <li>
-                <a href="/kow-admin/sales"><i class="fa fa-dollar"></i>
-                    <span>销售</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-            </li>
         </ul>
     </section>
 </aside>

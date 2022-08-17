@@ -73,4 +73,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     </section>
 </div>
 
+<?php include 'component/investment-contract-request-renew-termination-create.php'; ?>
+
 <?php include 'footer.php'; ?>

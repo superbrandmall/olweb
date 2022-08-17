@@ -11,7 +11,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper" style="overflow: hidden;">
     <section class="sub-header">
-        <h4>KOW上海项目概览</h4>
+        <h4>快闪上海项目概览</h4>
     </section>
     
     <section class="content" style="margin-top: 90px;">
@@ -35,11 +35,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-2" style="padding: 0;">
                             <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
                             <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
                         </div>
-                        <div class="col-md-4" style="padding-top: 5px;">
+                        <div class="col-md-4" style="padding-top: 5px; padding-left: 0;">
                             <span style="margin-left: 5px; background-color: #58A55B; width: 13px; height: 10px; display: inline-block;"></span> 时间段内: <strong id="doing" class="box-title" style="color: #58A55B;"></strong>
                             <span style="margin-left: 5px; background-color: #E85D7D; width: 13px; height: 10px; display: inline-block;"></span> 时间段后: <strong id="toDo" class="box-title" style="color: #E85D7D;"></strong>
                         </div>
