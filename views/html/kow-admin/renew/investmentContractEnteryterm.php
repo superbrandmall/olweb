@@ -13,7 +13,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">交付日期 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">交付日期</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control date-picker" id="deliveryDate" type="text" data-plugin="datepicker" disabled />
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">进场日期 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">进场日期</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control date-picker" id="enterDate" type="text" data-plugin="datepicker" disabled />
@@ -58,7 +58,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">开业日期 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">开业日期</label>
                 <div class="col-md-8 col-sm-12 required">
                     <div class="input-group">
                         <input class="form-control date-picker" id="bizDate" type="text" data-plugin="datepicker" disabled />
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">营业时间 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">营业时间</label>
                 <div class="col-md-8 col-sm-12 required">
                     <div class="input-group">
                         <input type="text" class="form-control timepicker" id="openStartTime" disabled />

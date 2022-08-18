@@ -8,14 +8,14 @@ $(document).ready(function(){
                 break;
         }
         setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/kow-admin/"+refineUpdateUrl() );
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineUpdateUrl() );
         },1000);
     }
     
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
         findDictCodeByDictTypeCode('FLOW_STEPS');
     }
-
+    
     findRequestByBizId();
     findRentCalculationMode('RENT_CALCULATION_MODE');
 })
@@ -45,8 +45,10 @@ function findRequestByBizId() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data != '' && response.data != null && response.data.formType == 'new'){
+                if(response.data != '' && response.data != null && response.data.formType == 'renew'){
                     var data = response.data;
+                    var oldContractInfo = data.oldContractInfo;
+                    
                     $('#requestName').text(data.bizId).attr('title',data.bizId);
                     findMainSigningBody(data.mallCode);
                     updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
@@ -57,48 +59,50 @@ function findRequestByBizId() {
                     $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
                     $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
                     $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
+                    $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
                     
-                    if(data.duration >= 1){
-                        $('#essayDuration').html('<span class="txt">'+data.duration+'</span>个月，');  
+                    if(oldContractInfo.endDate == data.endDate){
+                        $('#essayDuration').text(0);
                     } else {
-                        if(data.startDate != null && data.endDate != null){
-                            var duration = calDatesDiff(data.startDate,data.endDate);
-                            $('#essayDuration').html('<span class="txt">'+duration+'</span>天，');
+                        $('#essayDuration').text(data.duration);
+                    }
+                    
+                    $('#essayRenewBrandHoldFlag').text('');
+                    $('#essayRenewBrandHoldReason').text('');
+                    if(data.renewBrandHoldFlag == 1){
+                        $('#essayRenewBrandHoldFlag').text('是需要保留的品牌。');
+                    } else if(data.renewBrandHoldFlag == 0){
+                        $('#essayRenewBrandHoldFlag').html('<span class="txt">不是需要保留的品牌，</span>');
+                        $('#essayRenewBrandHoldReason').html('<span class="txt">'+data.renewBrandHoldReason+'</span>【暂时保留的原因】。');
+                    }
+                    var saleRentalRatio = '';
+                    if(data.fixedRentList.length > 0){
+                        $('#essayFixedRent').html('固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
+                        if(data.renewRentSameFlag == 1){
+                            $('#essayGrowthRate').text('平续，');
+                        } else {
+                            $('#essayGrowthRate').html('增长<span class="txt">'+Math.round(data.growthRate * 100)+'</span>%，');
                         }
+                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100;
                     }
-                    
-                    $('#essayFixedRent').html('含税固定租金<span class="txt">'+data.totalRentAmount+'</span>元，');
-
-                    var deduct = 0;
                     if(data.deductList.length > 0){
-                        deduct = Math.round(data.deductList[0].deduct * 100);
+                        $('#essayCommission').html('扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
                     }
-                    $('#essayCommission').html('含税扣率<span class="txt">'+deduct+'</span>%，');
-                    
-                    $('#essayPropertyMgmt').html('含税物管费<span class="txt">'+data.totalPropertyAmount+'</span>元，');
-                    $('#essayPromotion').html('含税推广费<span class="txt">'+data.promotionFee+'</span>元，');
-                    
-                    var deposit = 0;
-                    if(data.depositList.length > 0){
-                        deposit = data.depositList[0].amount;
+                    if(data.propertyFeeList.length > 0){
+                        $('#essayPropertyMgmt').html('物管费<span class="txt">'+data.propertyFeeList[0].taxRentAmount+'</span>元/月/平米，');
                     }
-                    $('#essayDeposit').html('押金<span class="txt">'+deposit+'</span>元。');
-                    
-                    if(data.awardDate != null && data.awardDate != ''){
-                        $('#essayAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
+                    if(data.promotionFeeList.length > 0){
+                        $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
-                    if(data.bizDate != null && data.bizDate != ''){
-                        $('#essayBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业，');
-                    }
-                    
-                    $('#essayKowTotalSales').html('总计营业额<span class="txt">'+data.kowTotalSales+'</span>元');
-                    $('#essayKowDaySales').html('(日均<span class="txt">'+data.kowDaySales+'</span>元)，');
-                    $('#essayKowProfitRate').html('毛利率<span class="txt">'+Math.round(data.kowProfitRate * 100)+'</span>%，');
-                    $('#essayKowNetRate').html('净利率<span class="txt">'+Math.round(data.kowNetRate * 100)+'</span>%，'); 
-                    $('#essayKowNetProfit').html('净利额<span class="txt">'+data.kowNetProfit+'</span>元。'); 
-
+                    $('#essayRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%。');
+                    $('#essayBudgetRentAmount').text('预算租金元/月/平米，');
+                    $('#essayBudgetRentAmountRateOfReach').text('单价达成率%。');
+                    $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
+                    $('#essayBudgetYearAmountRateOfReach').text('全年预算达成率%，');
+                    $('#essayBudgetDifference').text('差异元。');
                     $('#remark').val(data.remark);
+ 
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
                     $('#bizId').text(data.bizId).attr('title',data.bizId);
                     $('#mallName').text(data.mallName).attr('title',data.mallName);
@@ -111,8 +115,13 @@ function findRequestByBizId() {
                     updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
                     $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
                     $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
-                    $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
+                    
+                    var duration = parseInt(oldContractInfo.duration) + parseInt(data.duration);
+                    $('#duration').text(duration +'个月').attr('title',duration +'个月');
                     $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
+                    
+                    $('#endDateBefore').text(oldContractInfo.endDate).attr('title',oldContractInfo.endDate);
+                    $('#endDateAfter').text(data.endDate).attr('title',data.endDate);
                     
                     if(data.coFileList.length > 0){
                         $.each(data.coFileList, function(i,v) {
@@ -123,6 +132,18 @@ function findRequestByBizId() {
                                 }
                                 var type;
                                 switch (bizType) {
+                                    case "BL":
+                                        type = '营业执照';
+                                        break;
+                                    case "IC":
+                                        type = '法人代表身份证件';
+                                        break;
+                                    case "TM":
+                                        type = '商标注册证';
+                                        break;
+                                    case "BA":
+                                        type = '品牌授权书';
+                                        break;
                                     case "OF":
                                         type = '其它文件';
                                         break;
@@ -184,26 +205,33 @@ function findRequestByBizId() {
                         $('#investmentContractContractScreenshot, #investmentContractCertificates').hide();
                     }
                     
-                    if(data.fixedRentList.length > 0){
-                        $.each(data.fixedRentList, function(i,v) {
-                            $('#fixedRent').append('<tr>\n\
+                    if(oldContractInfo.fixedRentList.length > 0){
+                        $.each(oldContractInfo.fixedRentList, function(i,v) {
+                            $('#fixedRentBefore, #fixedRentAfter').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
     <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.rentAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td></tr>')
+    <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
                         })
+                    
+                        if(data.fixedRentList.length > 0){
+                            $.each(data.fixedRentList, function(i,v) {
+                                $('#fixedRentAfter').append('<tr style="color: #E43C24;">\n\
+        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
+                            })
+                        }
                     } else {
                         $('#investmentContractAccounttermFixed').hide();
                     }
                     
-                    if(data.deductList.length > 0){
-                        $.each(data.deductList, function(i,v) {
-                            $('#commission').append('<tr>\n\
+                    if(oldContractInfo.deductList.length > 0){
+                        $.each(oldContractInfo.deductList, function(i,v) {
+                            $('#commissionBefore, #commissionAfter').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxDeduct * 100)+'%</td>\n\
     <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
     <td>'+data.rentCalculationMode+'</td></tr>')
                         })
@@ -211,7 +239,7 @@ function findRequestByBizId() {
                         if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                             var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                             $.each(mode, function(i,v){
-                                $("#commission tr td:nth-child(5)").each(function() {
+                                $("#commissionBefore tr td:nth-child(5), #commissionAfter tr td:nth-child(5)").each(function() {
                                     if(v.dictCode == $(this).text()){
                                         $(this).text(v.dictName);
                                         return;
@@ -219,43 +247,92 @@ function findRequestByBizId() {
                                 })
                             })
                        }
+                       
+                        if(data.deductList.length > 0){
+                            $.each(data.deductList, function(i,v) {
+                                $('#commissionAfter').append('<tr style="color: #E43C24;">\n\
+        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+        <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
+        <td>'+data.rentCalculationMode+'</td></tr>')
+                            })
+
+                            if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
+                                var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
+                                $.each(mode, function(i,v){
+                                    $("#commissionAfter tr td:nth-child(5)").each(function() {
+                                        if(v.dictCode == $(this).text()){
+                                            $(this).text(v.dictName);
+                                            return;
+                                        }
+                                    })
+                                })
+                           }
+                        }
                     } else {
                         $('#investmentContractAccounttermCommission').hide();
                     }
                     
-                    if(data.propertyFeeList.length > 0){
-                        $.each(data.propertyFeeList, function(i,v) {
-                            $('#propertyMgmt').append('<tr>\n\
+                    if(oldContractInfo.propertyFeeList.length > 0){
+                        $.each(oldContractInfo.propertyFeeList, function(i,v) {
+                            $('#propertyMgmtBefore, #propertyMgmtAfter').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
     <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.rentAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td></tr>')
+    <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
                         })
+                    
+                        if(data.propertyFeeList.length > 0){
+                            $.each(data.propertyFeeList, function(i,v) {
+                                $('#propertyMgmtAfter').append('<tr style="color: #E43C24;">\n\
+        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
+                            })
+                        }
                     } else {
                         $('#investmentContractAccounttermPropertyMgmt').hide();
                     }
                     
-                    if(data.promotionFeeList.length > 0){
-                        $.each(data.promotionFeeList, function(i,v) {
-                            $('#promotion').append('<tr>\n\
+                    if(oldContractInfo.promotionFeeList.length > 0){
+                        $.each(oldContractInfo.promotionFeeList, function(i,v) {
+                            $('#promotionBefore, #promotionAfter').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
     <td>'+accounting.formatNumber(v.amount)+'</td>\n\
     <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
                         })
+                        
+                        if(data.promotionFeeList.length > 0){
+                            $.each(data.promotionFeeList, function(i,v) {
+                                $('#promotionAfter').append('<tr style="color: #E43C24;">\n\
+        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
+                            })
+                        }
                     } else {
                         $('#investmentContractAccounttermPromotion').hide();
                     }
                     
-                    if(data.depositList.length > 0){
-                        $.each(data.depositList, function(i,v) {
-                            $('#deposit').append('<tr>\n\
+                    if(oldContractInfo.depositList.length > 0){
+                        $.each(oldContractInfo.depositList, function(i,v) {
+                            $('#depositBefore').append('<tr>\n\
     <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+accounting.formatNumber(v.amount)+'</td>\n\
     <td>'+(v.paymentDate || '-')+'</td></tr>')
                         })
+                        
+                        if(data.depositList.length > 0){
+                            $.each(data.depositList, function(i,v) {
+                                $('#depositAfter').append('<tr style="color: #E43C24;">\n\
+        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td>'+(v.paymentDate || '-')+'</td></tr>')
+                            })
+                        }
                     } else {
                         $('#investmentContractDepositterm').hide();
                     }

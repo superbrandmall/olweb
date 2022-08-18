@@ -255,9 +255,6 @@ function findAllRequestsByKVCondition(p,c){
                     } else {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
-                    
-                    renderFormStatus();
-                    renderFormType();
                 } else {
                     $('#requests').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }

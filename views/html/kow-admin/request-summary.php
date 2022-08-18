@@ -50,12 +50,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
-                    <?php 
+                    <?php
+                    include 'request-summary/investmentContractCertificates.php'; //附件信息
+                    include 'request-summary/textareapanel.php'; //小作文
                     include 'request-summary/investmentContractModel.php'; //签约信息
                     include 'request-summary/investmentContractModelBasicinfo.php'; // 品牌信息以及商务合作条件
                     include 'request-summary/investmentContractAccounttermFixed.php'; //固定租金
                     include 'request-summary/investmentContractAccounttermCommission.php'; //提成租金
                     include 'request-summary/investmentContractAccounttermPropertyMgmt.php'; //其他固定费用
+                    include 'request-summary/investmentContractAccounttermPromotion.php'; //推广费
                     include 'request-summary/investmentContractDepositterm.php'; //首期费用以及保证金
                     include 'request-summary/investmentContractApprovalProcess.php'; //操作历史
                     ?>

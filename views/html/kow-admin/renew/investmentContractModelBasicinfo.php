@@ -23,13 +23,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">业态 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12 required">
-                    <input class="form-control" id="bizTypeName" placeholder="请选择品牌" type="text" readonly />
-                    <input id="bizTypeCode" type="hidden" />
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-4 control-label">计租方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="selectRentCalculationMode" style="width: 100%" disabled></select>
@@ -41,8 +34,39 @@
                     <select class="select2" id="profitCenter" style="width: 100%" disabled></select>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="kowSupplierStore" class="col-md-4 control-label">供货门店 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="kowSupplierStore" name="kowSupplierStore" multiple="multiple" style="width: 100%" disabled>
+                        <option value="">未选择</option>
+                        <option value="川沙店[SC033]">川沙店</option>
+                        <option value="杨高南路店[SC001]">杨高南路店</option>
+                        <option value="上南店[SC005]">上南店</option>
+                        <option value="杨高北路店[SC011]">杨高北路店</option>
+                        <option value="杨高中路店[SC043]">杨高中路店</option>
+                        <option value="浦江店[SC078]">浦江店</option>
+                        <option value="临港店[SC145]">临港店</option>
+                        <option value="松江文诚店[SC055]">松江文诚店</option>
+                        <option value="松江岳阳店[SC027]">松江岳阳店</option>
+                        <option value="牡丹江店[SC126]">牡丹江店</option>
+                        <option value="蕴川店[SC060]">蕴川店</option>
+                        <option value="新港店[SC082]">新港店</option>
+                        <option value="汶水店[SC010]">汶水店</option>
+                        <option value="保德店[SC040]">保德店</option>
+                        <option value="南奉店[SC041]">南奉店</option>
+                        <option value="南桥店[SC127]">南桥店</option>
+                        <option value="金山店[SC050]">金山店</option>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">品牌 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="brandName" style="width: 100%" disabled></select>
+                </div>
+            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">铺位 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
@@ -66,26 +90,8 @@
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label">经营内容</label>
-                <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="bizScope" type="text" placeholder="请在原合同中完善" readonly />
-                </div>
-            </div>
         </div>
         <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-md-4 control-label">品牌  <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12 required">
-                    <select class="select2" id="brandName" style="width: 100%" disabled></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label">店招 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="contractName" type="text" readonly />
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">支付方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
@@ -96,6 +102,12 @@
                 <label class="col-md-4 control-label">合同类型 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="contractType" style="width: 100%" disabled></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="posMode" style="width: 100%" disabled></select>
                 </div>
             </div>
         </div>

@@ -8,8 +8,7 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
-            <h5>营业执照和法人代表身份证件请从商户管理中上传，商标注册证和品牌授权书请从品牌管理中上传。</h5>
-            <span class="label label-danger">请先保存!</span>
+            <span class="label label-danger">上传附件前请先保存!</span>
             <span class="label label-danger">请先保存!!</span>
             <span class="label label-danger">请先保存!!!</span>
             <hr>
@@ -40,102 +39,6 @@
                 </thead>
                 <tbody id="fileList">
                     <tr>
-                        <td>营业执照</td>
-                        <td id="businessLicenseCreated_0"></td>
-                        <td>
-                            <input type="text" id="businessLicense_0" name="businessLicense_0" style="border: 0 none; text-align: left; width: 100%;" placeholder="请从商户管理中上传营业执照" readonly/>
-                        </td>
-                        <td id="businessLicenseFileSize_0"></td>
-                        <td id="businessLicenseAction_0"></td>
-                    </tr>
-                    <?php
-                        for($i=1;$i<10;$i++){
-                    ?>
-                    <tr style="display: none;">
-                        <td>营业执照</td>
-                        <td id="businessLicenseCreated_<?= $i; ?>"></td>
-                        <td>
-                            <input type="text" id="businessLicense_<?= $i; ?>" name="businessLicense_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                        </td>
-                        <td id="businessLicenseFileSize_<?= $i; ?>"></td>
-                        <td id="businessLicenseAction_<?= $i; ?>"></td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                    <tr>
-                        <td>法人代表身份证件</td>
-                        <td id="idCardCreated_0"></td>
-                        <td>
-                            <input type="text" id="idCard_0" name="idCard_0" style="border: 0 none; text-align: left; width: 100%;" placeholder="请从商户管理中上传法人代表身份证件" readonly/>
-                        </td>
-                        <td id="idCardFileSize_0"></td>
-                        <td id="idCardAction_0"></td>
-                    </tr>
-                    <?php
-                        for($i=1;$i<10;$i++){
-                    ?>
-                    <tr style="display: none;">
-                        <td>法人代表身份证件</td>
-                        <td id="idCardCreated_<?= $i; ?>"></td>
-                        <td>
-                            <input type="text" id="idCard_<?= $i; ?>" name="idCard_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                        </td>
-                        <td id="idCardFileSize_<?= $i; ?>"></td>
-                        <td id="idCardAction_<?= $i; ?>"></td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                    <tr>
-                        <td>商标注册证</td>
-                        <td id="trademarkCreated_0"></td>
-                        <td>
-                            <input type="text" id="trademark_0" name="trademark_0" style="border: 0 none; text-align: left; width: 100%;" placeholder="请从品牌管理中上传商标注册证" readonly/>
-                        </td>
-                        <td id="trademarkFileSize_0"></td>
-                        <td id="trademarkAction_0"></td>
-                    </tr>
-                    <?php
-                        for($i=1;$i<10;$i++){
-                    ?>
-                    <tr style="display: none;">
-                        <td>商标注册证</td>
-                        <td id="trademarkCreated_<?= $i; ?>"></td>
-                        <td>
-                            <input type="text" id="trademark_<?= $i; ?>" name="trademark_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                        </td>
-                        <td id="trademarkFileSize_<?= $i; ?>"></td>
-                        <td id="trademarkAction_<?= $i; ?>"></td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                    <tr>
-                        <td>品牌授权书</td>
-                        <td id="brandAuthorizationCreated_0"></td>
-                        <td>
-                            <input type="text" id="brandAuthorization_0" name="brandAuthorization_0" style="border: 0 none; text-align: left; width: 100%;" placeholder="请从品牌管理中上传品牌授权书" readonly/>
-                        </td>
-                        <td id="brandAuthorizationFileSize_0"></td>
-                        <td id="brandAuthorizationAction_0"></td>
-                    </tr>
-                    <?php
-                        for($i=1;$i<10;$i++){
-                    ?>
-                    <tr style="display: none;">
-                        <td>品牌授权书</td>
-                        <td id="brandAuthorizationCreated_<?= $i; ?>"></td>
-                        <td>
-                            <input type="text" id="brandAuthorization_<?= $i; ?>" name="brandAuthorization_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                        </td>
-                        <td id="brandAuthorizationFileSize_<?= $i; ?>"></td>
-                        <td id="brandAuthorizationAction_<?= $i; ?>"></td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                    <tr>
                         <td>其它文件</td>
                         <td id="otherFilesCreated_0"></td>
                         <td>
@@ -165,7 +68,7 @@
 
         <div class="col-md-12">
             <div class="col-md-12">
-                <label class="col-md-2 control-label">其它文件上传</label>
+                <label class="col-md-2 control-label">附件上传</label>
                 <div class="col-md-10 col-sm-12">
                     <div class="form-group input-group">
                         <input type="text" id="fileName_otherFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">

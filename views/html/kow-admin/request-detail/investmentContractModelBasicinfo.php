@@ -25,12 +25,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">计租方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
-                    <select class="select2" id="selectRentCalculationMode" style="width: 100%">
-                        <option value="fixRent" selected="">纯固租</option>
-                        <option value="deduct">纯提成</option>
-                        <option value="fixedRentAndHigherDeduct">固租与提成取高</option>
-                        <option value="fixedRentAndAddDeduct">固租与提成相加</option>
-                    </select>
+                    <select class="select2" id="selectRentCalculationMode" style="width: 100%"></select>
                 </div>
             </div>
             <div class="form-group">

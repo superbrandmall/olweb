@@ -15,6 +15,9 @@ $(document).ready(function(){
         $('#endDate').datepicker('update', d.getFullYear() + '-' + (month<10 ? '0' : '') + month + '-' + ldm);
     }
     
+    findDoingRequestsByKVCondition(1,100);
+    findToDoRequestsByKVCondition(1,100);
+    
     $('#clear').click(function(){
         $('#startDate, #endDate').val('');
         $.cookie('searchHomeStartDate', '');
