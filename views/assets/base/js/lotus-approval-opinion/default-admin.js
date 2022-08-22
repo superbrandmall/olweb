@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 function findRequestByBizId() {
     $.ajax({
-        url: $.api.baseLotus+"/api/rent/contract/form/findAllByBizId?bizId="+getURLParameter('id'),
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByBizId?bizId="+getURLBizId(),
         type: "GET",
         async: false,
         dataType: "json",
@@ -45,7 +45,7 @@ function findRequestByBizId() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data != '' && response.data != null && response.data.formType == 'new'){
+                if(response.data != '' && response.data != null){
                     var data = response.data;
                     
                     findMainSigningBody(data.mallCode);
@@ -328,7 +328,7 @@ function findRentCalculationMode(dictTypeCode) {
 
 function findProcessInstByBizId(){
     $.ajax({
-        url: $.api.baseLotus+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
+        url: $.api.baseLotus+"/api/process/inst/form/findAllByBizId?bizId="+getURLBizId(),
         type: "GET",
         async: false,
         dataType: "json",

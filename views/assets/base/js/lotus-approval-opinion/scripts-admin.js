@@ -136,6 +136,21 @@ function getURLParameter(sParam) {
     }
 }
 
+function getURLBizId() {
+    var pathName = window.location.pathname;
+    var part1 = '';
+    var part2 = '';
+    if(pathName.indexOf("id/") >= 0 ) { 
+        part1 = pathName.split('id/')[1];
+        if(part1.indexOf("/lotus-approval-opinion") >= 0 ) { 
+            part2 = part1.split('/lotus-approval-opinion')[0];
+            part2.replace("/","");
+            part2 = part2.toUpperCase();
+            return part2;
+        }
+    } 
+}
+
 function refineUrl() {
     //get full url
     var url = window.location.href;
