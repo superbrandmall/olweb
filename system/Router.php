@@ -399,6 +399,32 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
         $session = new Session();
         $session->_session();
     }
+} else if (isset($_GET['p']) && (strpos($_GET['p'], 'lotus-approval-opinion')) !== false) { // 莲花审批
+    $target = array(
+        'lotus-approval-opinion/home' => array(
+            'url' => 'default.php'
+        ),
+        'lotus-approval-opinion/login' => array(
+            'url' => 'login.php'
+        ),
+        'lotus-approval-opinion/logout' => array(
+            'url' => 'logout.php'
+        )
+    );
+
+    if (array_key_exists($getTarget, $target)) {
+        $page = $target[$getTarget]['url'];
+    } else {
+        $page = 'default.php';
+    }
+
+    $session_required = array('login.php');
+    
+    if (in_array($page, $session_required)) {
+        include_once 'models/lotus-approval-opinion/Session.class.php';
+        $session = new Session();
+        $session->_session();
+    }
 } else if (isset($_GET['p']) && (strpos($_GET['p'], 'kow-admin')) !== false) { // KOW
     $target = array(
         'kow-admin/home' => array(

@@ -47,7 +47,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#approvalProcess">审批流程</a></li>
                 </ul>
             </div>
-            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px;">
+            <div class="box-header" style="background-color: #f6f0b2; margin-top: -6px;">
                 <div class="pull-left">
                     <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                         <li><a href="/kow-admin/renew-summary?id=<?= $id; ?>">单据概要</a></li>

@@ -37,7 +37,7 @@
             <div class="form-group">
                 <label for="kowSupplierStore" class="col-md-4 control-label">供货门店 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
-                    <select class="select2" id="kowSupplierStore" name="kowSupplierStore" multiple="multiple" style="width: 100%" disabled>
+                    <select class="select2" id="kowSupplierStore" name="kowSupplierStore" multiple="multiple" style="width: 100%">
                         <option value="">未选择</option>
                         <option value="川沙店[SC033]">川沙店</option>
                         <option value="杨高南路店[SC001]">杨高南路店</option>

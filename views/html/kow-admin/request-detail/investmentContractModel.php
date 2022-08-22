@@ -16,7 +16,7 @@
             <div class="form-group" id="kow_leasing">
                 <label class="col-md-4 control-label">商务拓展 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="approvalName" name="approvalName" style="width: 100%" disabled></select>
+                    <select class="select2" id="approvalName" name="approvalName" style="width: 100%"></select>
                     <?php
                     if(isset($_SESSION['lotus_admin_name'])) {
                         echo '<input class="form-control" id="creatorName" type="hidden" value="'.$_SESSION['lotus_admin_name'].'" readonly />';

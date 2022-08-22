@@ -26,6 +26,9 @@
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'lotus-admin')) !== false) { // LOTUS
         include ('views/html/lotus-admin/header.php');
         include 'views/html/lotus-admin/'.$page;
+    } else if (isset($_GET['p']) && (strpos($_GET['p'],'lotus-approval-opinion')) !== false) { // LOTUS审批
+        include ('views/html/lotus-approval-opinion/header.php');
+        include 'views/html/lotus-approval-opinion/'.$page;
     } else if (isset($_GET['p']) && (strpos($_GET['p'],'kow-admin')) !== false) { // KOW
         include ('views/html/kow-admin/header.php');
         include 'views/html/kow-admin/'.$page;

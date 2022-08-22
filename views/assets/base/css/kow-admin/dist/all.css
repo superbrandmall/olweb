@@ -14505,7 +14505,7 @@ table.text-center,table.text-center td,table.text-center th {
 	position: absolute;
 	top: 100%;
 	left: 0;
-	z-index: 1040 !important;
+	z-index: 1052 !important;
 	float: left;
 	display: none;
 	min-width: 160px;

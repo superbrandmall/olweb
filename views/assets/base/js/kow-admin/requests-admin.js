@@ -230,15 +230,10 @@ function findAllRequestsByKVCondition(p,c){
                                 break;
                         }
 
-                        var contractLink = '';
-                        if(v.formStatus == 9){
-                            contractLink = '<a href="/kow-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
-                        }
-
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
                             <td><a href="/kow-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
-                            <td>'+contractLink+'</td>\n\
+                            <td>'+v.startDate+'~'+v.endDate+'</td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType) || '')+'</td>\n\

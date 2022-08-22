@@ -1,24 +1,23 @@
 $(document).ready(function(){
-    if(getURLParameter('s')) {
-        switch (getURLParameter('s')) {
-            case "succeed":
-                successMsg('00','保存成功！');
-                break;
-            default:
-                break;
-        }
-        setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/kow-admin/"+refineUpdateUrl() );
-        },1000);
-    }
+//    if(getURLParameter('s')) {
+//        switch (getURLParameter('s')) {
+//            case "succeed":
+//                successMsg('00','保存成功！');
+//                break;
+//            default:
+//                break;
+//        }
+//        setTimeout(function () {
+//            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineUpdateUrl() );
+//        },1000);
+//    }
     
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
         findDictCodeByDictTypeCode('FLOW_STEPS');
     }
-
+    
     findRequestByBizId();
     findRentCalculationMode('RENT_CALCULATION_MODE');
-    updateSelectMallDropDown(20);
 })
 
 function findRequestByBizId() {
@@ -48,72 +47,62 @@ function findRequestByBizId() {
                 
                 if(response.data != '' && response.data != null && response.data.formType == 'new'){
                     var data = response.data;
-                    $('#requestName').text(data.bizId).attr('title',data.bizId);
+                    
                     findMainSigningBody(data.mallCode);
-                    updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
                     if(data.formStatus != 1){
                         findProcessInstByBizId();
                     }
                     
-                    $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
-                    $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
-                    $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
-                    $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
+                    $('#updated').text(data.updated.split(' ')[0]);
+                    $('#unitName').text(data.unitName);
+                    $('#freeDays').text(data.freeDays);
                     
-                    if(data.duration >= 1){
-                        $('#essayDuration').html('<span class="txt">'+data.duration+'</span>个月，');  
-                    } else {
-                        if(data.startDate != null && data.endDate != null){
-                            var duration = calDatesDiff(data.startDate,data.endDate);
-                            $('#essayDuration').html('<span class="txt">'+duration+'</span>天，');
-                        }
+                    var rentalFloorEffect, rentalFloorTaxEffect;
+                    var totalAmount = 0;
+                    var totalTaxAmount = 0;
+                    if(data.fixedRentList.length > 0){
+                        $('#fixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[0].taxAmount));
+                        $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[0].amount));
+                        rentalFloorEffect = Math.round(data.fixedRentList[0].amount * 12 / 365 / data.area * 100) / 100;
+                        rentalFloorTaxEffect = Math.round(rentalFloorEffect / 1.09 * 100) / 100;
+                        $('#rentalFloorEffect').text(rentalFloorEffect);
+                        $('#rentalFloorTaxEffect').text(rentalFloorTaxEffect);
+                        totalAmount += data.fixedRentList[0].amount;
+                        totalTaxAmount += data.fixedRentList[0].taxAmount;
                     }
                     
-                    $('#essayFixedRent').html('含税固定租金<span class="txt">'+data.totalRentAmount+'</span>元，');
-
-                    var deduct = 0;
-                    if(data.deductList.length > 0){
-                        deduct = Math.round(data.deductList[0].deduct * 100);
+                    //日租金坪效含税（元/m²/天）= 月租金含税 * 12 / 365 / 面积;
+                    //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
+                    
+                    if(data.propertyFeeList.length > 0){
+                        $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[0].taxAmount));
+                        $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[0].amount));
+                        totalAmount += data.propertyFeeList[0].amount;
+                        totalTaxAmount += data.propertyFeeList[0].taxAmount;
                     }
-                    $('#essayCommission').html('含税扣率<span class="txt">'+deduct+'</span>%，');
                     
-                    $('#essayPropertyMgmt').html('含税物管费<span class="txt">'+data.totalPropertyAmount+'</span>元，');
-                    $('#essayPromotion').html('含税推广费<span class="txt">'+data.promotionFee+'</span>元，');
+                    if(data.promotionFeeList.length > 0){
+                        totalAmount += data.promotionFeeList[0].amount;
+                        totalTaxAmount += data.promotionFeeList[0].taxAmount;
+                    }
                     
-                    var deposit = 0;
+                    var depositFee = 0;
                     if(data.depositList.length > 0){
-                        deposit = data.depositList[0].amount;
-                    }
-                    $('#essayDeposit').html('押金<span class="txt">'+deposit+'</span>元。');
-                    
-                    if(data.awardDate != null && data.awardDate != ''){
-                        $('#essayAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
-                    }
-                    if(data.bizDate != null && data.bizDate != ''){
-                        $('#essayBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业，');
+                        for(var i=0; i < data.depositList.length; i++){
+                            depositFee += data.depositList[i].amount;
+                        }
+                        $('#depositFee').text(depositFee);
                     }
                     
-                    $('#essayKowTotalSales').html('总计营业额<span class="txt">'+data.kowTotalSales+'</span>元');
-                    $('#essayKowDaySales').html('(日均<span class="txt">'+data.kowDaySales+'</span>元)，');
-                    $('#essayKowProfitRate').html('毛利率<span class="txt">'+Math.round(data.kowProfitRate * 100)+'</span>%，');
-                    $('#essayKowNetRate').html('净利率<span class="txt">'+Math.round(data.kowNetRate * 100)+'</span>%，'); 
-                    $('#essayKowNetProfit').html('净利额<span class="txt">'+data.kowNetProfit+'</span>元。'); 
-
+                    $('#totalAmount').html(accounting.formatNumber(totalAmount));
+                    $('#totalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
                     $('#remark').val(data.remark);
-                    $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
-                    $('#bizId').text(data.bizId).attr('title',data.bizId);
-                    $('#mallName').text(data.mallName).attr('title',data.mallName);
-                    $('#floorName').text(data.floorName).attr('title',data.floorName);
-                    $('#requestName2').text(data.contractName).attr('title',data.contractName);
-                    $('#startEndDate').text(data.startDate+'至'+data.endDate).attr('title',data.startDate+'至'+data.endDate);
-                    $('#unitCode').text(data.unitCode).attr('title',data.unitCode);
-                    $('#brandName').text(data.brandName).attr('title',data.brandName);
-                    $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
-                    updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
-                    $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
-                    $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
-                    $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
-                    $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
+                    $('#selectTenant').text(data.tenantName);
+                    $('#mallName').text(data.mallName);
+                    $('#brandName').text(data.brandName);
+                    $('#area').html(data.area+'m<sup>2</sup>');
+                    $('#bizTypeName').text(data.bizTypeName);
+                    $('#duration').text(data.duration +'个月');
                     
                     if(data.coFileList.length > 0){
                         $.each(data.coFileList, function(i,v) {
@@ -122,78 +111,59 @@ function findRequestByBizId() {
                                 if(v.bizType != bizType){
                                     bizType = v.bizType.split('_')[1];
                                 }
-                                var type;
-                                switch (bizType) {
-                                    case "OF":
-                                        type = '其它文件';
-                                        break;
-                                    case "screenshot":
-                                        type = '单据快照';
-                                        break;
-                                    case "CONTRACT":
-                                        type = '系统生成合同';
-                                        break;
-                                    case "INIT":
-                                        type = '未盖章合同';
-                                        break;
-                                    case "TENANT":
-                                        type = '商户盖章合同';
-                                        break;
-                                    case "SIGN":
-                                        type = '双方盖章合同';
-                                        break;
-                                    default:
-                                        break;
-                                }
                                 
-                                var fileSize;
-                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
-                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
-                                } else if(v.fileSize >= 1048576){
-                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
-                                } else {
-                                    v.fileSize == null ? fileSize = '' : fileSize = v.fileSize + 'b';
-                                }
-                                
-                                if(v.success == 'SUCCESS' || v.success == 'true'){
-                                    if($.inArray(bizType, ['CONTRACT','INIT','TENANT','SIGN']) != -1){
-                                        $('#fileList2').prepend('<tr>\n\
-                                    <td>'+type+'</td>\n\
-                                    <td>'+v.created+'</td>\n\
-                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
-                                    <td>'+fileSize+'</td>\n\
-                                    </tr>');
-                                    } else if(bizType == 'screenshot') {
-                                        $('#fileList2').append('<tr>\n\
-                                    <td>'+type+'</td>\n\
-                                    <td>'+v.created+'</td>\n\
-                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
-                                    <td>'+fileSize+'</td>\n\
-                                    </tr>');
+                                if($.inArray(bizType, ['BL','IC','TM','BA','OF']) != -1){
+                                    var type;
+                                    switch (bizType) {
+                                        case "BL":
+                                            type = '营业执照';
+                                            break;
+                                        case "IC":
+                                            type = '法人代表身份证件';
+                                            break;
+                                        case "TM":
+                                            type = '商标注册证';
+                                            break;
+                                        case "BA":
+                                            type = '品牌授权书';
+                                            break;
+                                        case "OF":
+                                            type = '其它文件';
+                                            break;
+                                        default:
+                                            break;
+                                    }
+
+                                    var fileSize;
+                                    if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                        fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                                    } else if(v.fileSize >= 1048576){
+                                        fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
                                     } else {
-                                        $('#fileList').append('<tr>\n\
-                                    <td>'+type+'</td>\n\
-                                    <td>'+v.created+'</td>\n\
-                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
-                                    <td>'+fileSize+'</td>\n\
-                                    </tr>');
+                                        v.fileSize == null ? fileSize = '' : fileSize = v.fileSize + 'b';
+                                    }
+
+                                    if(v.success == 'SUCCESS' || v.success == 'true'){
+                                            $('#fileList').append('<tr>\n\
+                                        <td>'+type+'</td>\n\
+                                        <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
+                                        <td>'+fileSize+'</td>\n\
+                                        </tr>');
+
                                     }
                                 }
                             }
                         })
-                    } else {
-                        $('#investmentContractContractScreenshot, #investmentContractCertificates').hide();
                     }
                     
                     if(data.fixedRentList.length > 0){
                         $.each(data.fixedRentList, function(i,v) {
                             $('#fixedRent').append('<tr>\n\
-    <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-    <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.rentAmount)+'</td>\n\
+    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td>\n\
     <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td></tr>')
+    <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+    <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
                         })
                     } else {
                         $('#investmentContractAccounttermFixed').hide();
@@ -202,7 +172,6 @@ function findRequestByBizId() {
                     if(data.deductList.length > 0){
                         $.each(data.deductList, function(i,v) {
                             $('#commission').append('<tr>\n\
-    <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
     <td>'+accounting.formatNumber(v.taxDeduct * 100)+'%</td>\n\
     <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
@@ -227,12 +196,11 @@ function findRequestByBizId() {
                     if(data.propertyFeeList.length > 0){
                         $.each(data.propertyFeeList, function(i,v) {
                             $('#propertyMgmt').append('<tr>\n\
-    <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-    <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.rentAmount)+'</td>\n\
+    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td>\n\
     <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-    <td>'+accounting.formatNumber(v.taxRentAmount)+'</td></tr>')
+    <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+    <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
                         })
                     } else {
                         $('#investmentContractAccounttermPropertyMgmt').hide();
@@ -241,7 +209,6 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $.each(data.promotionFeeList, function(i,v) {
                             $('#promotion').append('<tr>\n\
-    <td>'+v.itemName+'['+v.itemCode+']</td>\n\
     <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
     <td>'+accounting.formatNumber(v.amount)+'</td>\n\
     <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')

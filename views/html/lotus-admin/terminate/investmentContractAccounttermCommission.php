@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">提成基数 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" style="width: 100%;">
+                    <select class="select2" style="width: 100%;" disabled>
                         <option value="1" selected>包含营业额中的增值税</option>
                         <option value="2">不包含营业额中的增值税</option>
                     </select>
@@ -103,13 +103,13 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">周期类型</label>
                 <div class="col-md-5 col-sm-6" style="padding-right: 2px;">
-                    <select class="select2" id="commissionPeriodType_1" style="width: 100%">
+                    <select class="select2" id="commissionPeriodType_1" style="width: 100%" disabled>
                         <option value="1" selected>自然月</option>
                         <option value="2">合同月</option>
                     </select>
                 </div>
                 <div class="col-md-3 col-sm-6" style="padding-left: 2px;">
-                    <select class="select2" id="commissionSettleDay_1" style="width: 100%">
+                    <select class="select2" id="commissionSettleDay_1" style="width: 100%" disabled>
                         <?php 
                         {
                            for($i=1;$i<=31;$i++){
@@ -125,7 +125,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">结算周期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="commissionSettlePeriod_1" style="width: 100%;">
+                    <select class="select2" id="commissionSettlePeriod_1" style="width: 100%;" disabled>
                         <option value="M" selected>月</option>
                         <option value="Q">季</option>
                         <option value="Y">年</option>
@@ -142,14 +142,14 @@
         <div class="col-md-3">
             <label class="col-md-5 control-label">产生滞纳金</label>
             <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                <input type="checkbox" id="commissionIsOverdueFlag_1" checked>
+                <input type="checkbox" id="commissionIsOverdueFlag_1" checked disabled>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label class="col-md-4 control-label">税率 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="commissionOverdueTaxRate_1" style="width: 100%">
+                    <select class="select2" id="commissionOverdueTaxRate_1" style="width: 100%" disabled>
                         <option value="0">增值税0%</option>
                         <option value="0.05">增值税5%</option>
                         <option value="0.06" selected>增值税6%</option>
@@ -170,8 +170,8 @@
                 <label class="col-md-5 control-label">滞纳金率 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-7 col-sm-12 required">
                     <div class="input-group">
-                        <input class="form-control" id="commissionOverdueRate_1" type="text" style="border-right: none;" value="1" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;">‰</span>
+                        <input class="form-control" id="commissionOverdueRate_1" type="text" style="border-right: none;" value="1" disabled />
+                        <span class="input-group-addon" style="border: none; background: #eee;">‰</span>
                     </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@
         <div class="col-md-3">
             <label class="col-md-4 control-label">开发票</label>
             <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                <input type="checkbox" id="commissionOverdueInvoiceFlag_1" checked>
+                <input type="checkbox" id="commissionOverdueInvoiceFlag_1" checked disabled>
             </div>
         </div>
     </div>

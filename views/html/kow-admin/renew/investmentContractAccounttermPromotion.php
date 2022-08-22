@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">提成基数</label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" style="width: 100%;" disabled>
+                    <select class="select2" style="width: 100%;">
                         <option value="1" selected>包含营业额中的增值税</option>
                         <option value="2">不包含营业额中的增值税</option>
                     </select>
@@ -82,8 +82,8 @@
                 <label class="col-md-4 control-label">最低营业额</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="promotionTargetSales" type="text" style="border-right: none;" disabled />
-                        <span class="input-group-addon" style="border: none; background: #eee;">元/月</span>
+                        <input class="form-control" id="promotionTargetSales" type="text" style="border-right: none;" value="1" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
                     </div>
                 </div>
             </div>
@@ -120,7 +120,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">结算周期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="promotionSettlePeriod_1" style="width: 100%;">
+                    <select class="select2" id="promotionSettlePeriod_1" style="width: 100%;" disabled>
                         <option value="D" selected>天</option>
                         <option value="M">月</option>
                         <option value="Q">季</option>

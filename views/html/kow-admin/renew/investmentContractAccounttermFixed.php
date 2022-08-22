@@ -110,7 +110,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">结算周期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="fixedRentSettlePeriod_1" style="width: 100%;">
+                    <select class="select2" id="fixedRentSettlePeriod_1" style="width: 100%;" disabled>
                         <option value="D" selected>天</option>
                         <option value="M">月</option>
                         <option value="Q">季</option>

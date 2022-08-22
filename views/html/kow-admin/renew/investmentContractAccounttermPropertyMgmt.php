@@ -77,7 +77,6 @@
             <h3 id="propertyMgmtTotalPropertyAmount" style="display: inline-block;">0.00</h3>
             <h3 style="display: inline-block;">|</h3>
             <h3 id="propertyMgmtTaxTotalPropertyAmount" style="display: inline-block;">0.00</h3>
-            <a href="javascript: void(0);" onclick="termsModalToggle('propertyMgmt');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
         </div>
     </div>
     <div class="box-body">
@@ -111,7 +110,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">结算周期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="propertyMgmtSettlePeriod_1" style="width: 100%;">
+                    <select class="select2" id="propertyMgmtSettlePeriod_1" style="width: 100%;" disabled>
                         <option value="D" selected>天</option>
                         <option value="M">月</option>
                         <option value="Q">季</option>
