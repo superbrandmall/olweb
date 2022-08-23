@@ -39,6 +39,9 @@ window.onload = function(){
 function findDoingRequestsByKVCondition(p,c){
     var params = [];
     var param = {};
+    var conditionGroups = [];
+    var conditionGroupsParams = [];
+    var conditionGroup = {};
     
     param = {
         "columnName": "contractName",
@@ -67,6 +70,10 @@ function findDoingRequestsByKVCondition(p,c){
     }
     params.push(param);
     
+    
+    
+    
+    
     param = {
         "columnName": "startDate",
         "columnPatten": "yyy-MM-dd",
@@ -74,7 +81,7 @@ function findDoingRequestsByKVCondition(p,c){
         "operator": "<=",
         "value": $.cookie('searchHomeStartDate')
     }
-    params.push(param);
+    conditionGroupsParams.push(param);
     
     param = {
         "columnName": "endDate",
@@ -83,7 +90,13 @@ function findDoingRequestsByKVCondition(p,c){
         "operator": ">=",
         "value": $.cookie('searchHomeStartDate')
     }
-    params.push(param);
+    conditionGroupsParams.push(param);
+    
+    conditionGroup = {
+        "conditionOperator": "OR",
+        "params": conditionGroupsParams
+    }
+    conditionGroups.push(conditionGroup);
     
     param = {
         "columnName": "startDate",
@@ -104,6 +117,7 @@ function findDoingRequestsByKVCondition(p,c){
     params.push(param);
         
     var map = {
+        "conditionGroups": conditionGroups,
         "params": params
     }
     
