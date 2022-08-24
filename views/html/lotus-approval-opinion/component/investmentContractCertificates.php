@@ -2,7 +2,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">附件</h3>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="padding-left: 0; padding-right: 0;">
         <div class="col-md-12">
             <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
                 <thead id="assetsListingTable-sticky-header">

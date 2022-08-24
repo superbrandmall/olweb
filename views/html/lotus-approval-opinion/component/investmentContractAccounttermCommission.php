@@ -2,7 +2,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">提成租金</h3>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="padding: 0;">
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
@@ -12,20 +12,16 @@
                                 <table class="table table-striped snipe-table table-responsive">
                                     <thead id="assetsListingTable-sticky-header">
                                         <tr>
-                                            <th>
-                                                <div class="th-inner">费用科目</div>
-                                                <div class="fht-cell"></div>
-                                            </th>
-                                            <th>
+                                            <th style="vertical-align: middle;">
                                                 <div class="th-inner">提成期间</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">去税提成率</div>
+                                                <div class="th-inner">去税<br>提成率</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">含税提成率</div>
+                                                <div class="th-inner">含税<br>提成率</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>

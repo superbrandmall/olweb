@@ -2,7 +2,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">承办部门</h3>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="padding: 0;">
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">

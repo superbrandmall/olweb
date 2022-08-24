@@ -1,8 +1,8 @@
 <div class="box box-default" id="investmentContractDepositterm">    
     <div class="box-header with-border">
-        <h3 class="box-title">预存款条款</h3>
+        <h3 class="box-title">预存款</h3>
     </div>
-    <div class="box-body">
+    <div class="box-body" style="padding: 0;">
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
