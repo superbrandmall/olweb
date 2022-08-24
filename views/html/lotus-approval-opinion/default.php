@@ -11,25 +11,11 @@ $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/view
 
 ?>
 
-<div class="content-wrapper" style="margin-left: 0;">
+<div class="content-wrapper" style="margin-left: 0; padding-bottom: 40px;">
     <section class="sub-header" style="height: 45px; left: 0;">
         <h4>
             招商租赁审批意见书
         </h4>
-        <div class="pull-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-plus icon-white"></i> 操作
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="/lotus-admin/make-request"><i class="fa fa-check-circle-o"></i> 同意</a></li>
-                    <li><a href="javascript: void(0);" id="createRenew"><i class="fa fa-arrow-left"></i> 撤回</a></li>
-                    <hr style="margin: 0;">
-                    <li><a href="javascript: void(0);" id="createRenew"><i class="fa fa-print"></i> 打印</a></li>
-                </ul>
-            </div>
-        </div>
     </section>
 
     <section class="content" style="margin-top: 96px;">

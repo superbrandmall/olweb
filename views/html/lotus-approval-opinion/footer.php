@@ -1,9 +1,18 @@
-<footer class="main-footer hidden-print text-center" style="margin-left: 0;">
-<div class="pull-right hidden-xs">
-</div>
-&copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
-. <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
-. <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
+
+<footer class="main-footer hidden-print text-center" style="margin-left: 0; font-size: 9px; position: fixed; bottom: 0; padding: 0 0 10px 0;">
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+        <div class="btn-group" role="group" style="padding: 10px 0;">
+            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-check-circle-o"></i> 同意</button>
+        </div>
+        <div class="btn-group" role="group" style="padding: 10px 0;">
+            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-arrow-left"></i> 撤回</button>
+        </div>
+        <div class="btn-group" role="group" style="padding: 10px 0;">
+            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-print"></i> 打印</button>
+        </div>
+    </div>
+    <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>&nbsp;
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
 </footer>
 </div>
 
