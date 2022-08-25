@@ -5,7 +5,7 @@
     <div class="box-body">
         <div class="col-md-12">
             <div style="line-height: 24px;">
-                <p id="new" style="display: none;">
+                <p id="newRemark" style="display: none;">
                     <span id="newMall"></span>
                     <span id="newFloor"></span>
                     <span id="newModality"></span>
@@ -21,7 +21,7 @@
                     <span id="newDeliveryDate"></span>
                     <span id="newBizDate"></span>
                 </p>
-                <p id="renew" style="display: none;">
+                <p id="renewRemark" style="display: none;">
                     <span id="renewMall"></span>
                     <span id="renewFloor"></span>
                     <span id="renewModality"></span>
@@ -36,6 +36,30 @@
                     <span id="renewPropertyMgmt"></span>
                     <span id="renewPromotion"></span>
                     <span id="renewRenewAvgSales"></span>
+                </p>
+                <p id="terminateRemark" style="display: none;">
+                    <span id="terminateMall"></span>
+                    <span id="terminateFloor"></span>
+                    <span id="terminateModality"></span>
+                    <span id="terminateBrand"></span>，
+                    <span id="terminateArea"></span>
+                    <span id="terminateCancelDate"></span>
+                    <span id="terminateCancelType"></span>
+                    后续洽谈品牌<span id="terminateNewBrandName"></span>
+                    <span id="terminateNewDrDate"></span>
+                    <span id="terminateNewDeliveryDate"></span>
+                    <span id="terminateNewBizDate"></span>
+                </p>
+                <p id="modifyRemark" style="display: none;">
+                    <span id="modifyMall"></span>
+                    <span id="modifyFloor"></span>
+                    <span id="modifyModality"></span>
+                    <span id="modifyBrand"></span>，
+                    <span id="modifyArea"></span>
+                    <span id="modifyDuration"></span>
+                    <span id="modifyModifyType"></span>
+                    <span id="modifyTargetSales"></span>
+                    <span id="modifyAwardDate"></span>
                 </p>
             </div>
         </div>

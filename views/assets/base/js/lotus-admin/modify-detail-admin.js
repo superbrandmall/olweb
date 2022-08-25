@@ -1444,20 +1444,37 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
         calBackPush('fixedRent');
     })
     
+    
     $("#fixedRentTaxRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentTaxRentAmount();
+        if(p != ''){
+            calBackPushFixedRentTaxRentAmount();
+        } else {
+            calBackPush('fixedRent');
+        }
     })
-    
+
     $("#fixedRentTaxAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentTaxAmount();
+        if(p != ''){
+            calBackPushFixedRentTaxAmount();
+        } else {
+            calBackPush('fixedRent');
+        }
     })
-    
+
     $("#fixedRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentAmount();
+        if(p != ''){
+            calBackPushFixedRentAmount();
+        } else {
+            calBackPush('fixedRent');
+        }
     })
-    
+
     $("#fixedRentRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentRentAmount();
+        if(p != ''){
+            calBackPushFixedRentRentAmount();
+        } else {
+            calBackPush('fixedRent');
+        }
     })
     
     $("#fixedRentTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1660,7 +1677,9 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     });
     
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
-        calBackPushCommissionDeduct();
+        if(p != ''){
+            calBackPushCommissionDeduct();
+        }
     })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1864,19 +1883,35 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     })
     
     $("#propertyMgmtTaxRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtTaxRentAmount();
+        if(p != ''){
+            calBackPushPropertyMgmtTaxRentAmount();
+        } else {
+            calBackPush('propertyMgmt');
+        }
     })
-    
+
     $("#propertyMgmtTaxAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtTaxAmount();
+        if(p != ''){
+           calBackPushPropertyMgmtTaxAmount();
+        } else {
+            calBackPush('propertyMgmt');
+        }
     })
-    
+
     $("#propertyMgmtAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtAmount();
+        if(p != ''){
+           calBackPushPropertyMgmtAmount();
+        } else {
+            calBackPush('propertyMgmt');
+        }
     })
-    
+
     $("#propertyMgmtRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtRentAmount();
+        if(p != ''){
+            calBackPushPropertyMgmtRentAmount();
+        } else {
+            calBackPush('propertyMgmt');
+        }
     })
     
     $("#propertyMgmtTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -2048,13 +2083,17 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('promotion');
     })
-    
+
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPromotionAmount();
+        if(p != ''){
+           calBackPushPromotionAmount();
+        }
     })
-    
+
     $("#promotionDeduct_"+count.toLocaleString()).on('change',function(){
-        calBackPushPromotionDeduct();
+        if(p != ''){
+            calBackPushPromotionDeduct();
+        }
     })
     
     $("#promotionTaxRate_"+count.toLocaleString()).on('change',function(){

@@ -24,7 +24,7 @@
                                     </thead>
                                     <tbody align="center">
                                         <tr>
-                                            <td id="contractAttr"></td>
+                                            <td id="contractTemplate"></td>
                                             <td>/</td>
                                         </tr>
                                     </tbody>

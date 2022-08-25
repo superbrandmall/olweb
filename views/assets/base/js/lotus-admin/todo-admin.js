@@ -188,9 +188,30 @@ function findAllRequestsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
+                        var page;
+                        switch (v.formType) {
+                            case "new":
+                                page = 'request';
+                                break;
+                            case "renew":
+                                page = 'renew';
+                                break;
+                            case "termination":
+                                page = 'terminate';
+                                break;
+                            case "modify":
+                                page = 'modify';
+                                break;
+                            default:
+                                break;
+                        }
+                        var link = '<a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a>';
+                        if($.inArray(v.formStatus, [4,5,7]) != -1){
+                            link = '<a href="javascript: void(0)" onclick=\'javascript: popUpToDo("'+v.bizId+'","'+(v.contractNo || '')+'","'+(renderFormStatus(v.formStatus) || '')+'","'+v.formType+'","'+v.tenantName+'")\'>'+v.bizId+'</a>';
+                        }
                         $('#todo').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="javascript: void(0)" onclick=\'javascript: popUpToDo("'+v.bizId+'","'+(v.contractNo || '')+'","'+(renderFormStatus(v.formStatus) || '')+'","'+v.formType+'","'+v.tenantName+'")\'>'+v.bizId+'</a></td>\n\
+                            <td>'+link+'</td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType) || '')+'</td>\n\

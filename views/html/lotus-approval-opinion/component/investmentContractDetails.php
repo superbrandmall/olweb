@@ -1,4 +1,4 @@
-<div class="box box-default">
+<div class="box box-default" id="investmentContractDetails">
     <div class="box-header with-border">
         <h3 class="box-title">商务明细</h3>
     </div>

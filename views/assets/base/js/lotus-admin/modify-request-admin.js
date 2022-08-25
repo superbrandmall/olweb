@@ -1283,19 +1283,19 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     })
     
     $("#fixedRentTaxRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentTaxRentAmount();
+        calBackPush('fixedRent');
     })
     
     $("#fixedRentTaxAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentTaxAmount();
+        calBackPush('fixedRent');
     })
     
     $("#fixedRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentAmount();
+        calBackPush('fixedRent');
     })
     
     $("#fixedRentRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushFixedRentRentAmount();
+        calBackPush('fixedRent');
     })
     
     $("#fixedRentTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1496,10 +1496,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('commission');
     });
-    
-    $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
-        calBackPushCommissionDeduct();
-    })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
@@ -1702,19 +1698,19 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     })
     
     $("#propertyMgmtTaxRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtTaxRentAmount();
+        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtTaxAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtTaxAmount();
+        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtAmount();
+        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtRentAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPropertyMgmtRentAmount();
+        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1885,14 +1881,6 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     
     $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('promotion');
-    })
-    
-    $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPushPromotionAmount();
-    })
-    
-    $("#promotionDeduct_"+count.toLocaleString()).on('change',function(){
-        calBackPushPromotionDeduct();
     })
     
     $("#promotionTaxRate_"+count.toLocaleString()).on('change',function(){

@@ -14,7 +14,7 @@ $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/view
 <div class="content-wrapper" style="margin-left: 0; padding-bottom: 40px;">
     <section class="sub-header" style="height: 45px; left: 0;">
         <h4>
-            招商租赁审批意见书
+            招商租赁审批意见书 <span id="formType"></span>
         </h4>
     </section>
 
