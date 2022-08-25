@@ -206,7 +206,7 @@ function findAllRequestsByKVCondition(p,c){
                                 break;
                         }
                         var link = '<a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a>';
-                        if($.inArray(v.formStatus, [4,5,7]) != -1){
+                        if($.inArray(v.formStatus, ['4','5','7']) != -1){
                             link = '<a href="javascript: void(0)" onclick=\'javascript: popUpToDo("'+v.bizId+'","'+(v.contractNo || '')+'","'+(renderFormStatus(v.formStatus) || '')+'","'+v.formType+'","'+v.tenantName+'")\'>'+v.bizId+'</a>';
                         }
                         $('#todo').append('\
