@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractApprovalProcess" style="display: none;">    
+<div class="box box-default hidden-print" id="investmentContractApprovalProcess" style="display: none;">    
     <div class="box-header with-border">
         <h3 class="box-title">审批流程</h3>
     </div>

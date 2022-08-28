@@ -1,4 +1,4 @@
-<div class="box box-default" id="textareapanel">    
+<div class="box box-default hidden-print" id="textareapanel">    
     <div class="box-header with-border">
         <h3 class="box-title">特别事项说明</h3>
     </div>

@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractAccounttermPropertyMgmt">    
+<div class="box box-default hidden-print" id="investmentContractAccounttermPropertyMgmt">    
     <div class="box-header with-border">
         <h3 class="box-title">物业管理费</h3>
     </div>

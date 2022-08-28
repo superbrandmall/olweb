@@ -174,84 +174,6 @@ table {
 
 td,th {
 	padding: 0
-}/*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */@media print {
-	*,:after,:before {
-		background: 0 0!important;
-		color: #000!important;
-		-webkit-box-shadow: none!important;
-		box-shadow: none!important;
-		text-shadow: none!important
-	}
-
-	a,a:visited {
-		text-decoration: underline
-	}
-
-	a[href]:after {
-		content: " (" attr(href) ")"
-	}
-
-	abbr[title]:after {
-		content: " (" attr(title) ")"
-	}
-
-	a[href^="#"]:after,a[href^="javascript:"]:after {
-		content: ""
-	}
-
-	blockquote,pre {
-		border: 1px solid #999;
-		page-break-inside: avoid
-	}
-
-	thead {
-		display: table-header-group
-	}
-
-	img,tr {
-		page-break-inside: avoid
-	}
-
-	img {
-		max-width: 100%!important
-	}
-
-	h2,h3,p {
-		orphans: 3;
-		widows: 3
-	}
-
-	h2,h3 {
-		page-break-after: avoid
-	}
-
-	select {
-		background: #fff!important
-	}
-
-	.navbar {
-		display: none
-	}
-
-	.btn>.caret,.dropup>.btn>.caret {
-		border-top-color: #000!important
-	}
-
-	.label {
-		border: 1px solid #000
-	}
-
-	.table {
-		border-collapse: collapse!important
-	}
-
-	.table td,.table th {
-		background-color: #fff!important
-	}
-
-	.table-bordered td,.table-bordered th {
-		border: 1px solid #ddd!important
-	}
 }
 
 @font-face {
@@ -2832,7 +2754,7 @@ table .form-control.date-picker {
     background: #CCF0F5 !important;
 }
 
-@media screen and (max-width:767px) {
+@media (max-width:767px) {
 	.table-responsive {
 		width: 100%;
 		margin-bottom: 15px;
@@ -2996,7 +2918,7 @@ input.file-caption-name {
     border: solid 1px #d2d6de;
 }
 
-@media screen and (-webkit-min-device-pixel-ratio:0) {
+@media (-webkit-min-device-pixel-ratio:0) {
 	input[type=date],input[type=datetime-local],input[type=month],input[type=time] {
 		line-height: 34px
 	}
@@ -5221,7 +5143,7 @@ a.badge:focus,a.badge:hover {
 	max-width: 100%
 }
 
-@media screen and (min-width:768px) {
+@media (min-width:768px) {
 	.jumbotron {
 		padding: 48px 0
 	}
@@ -6640,7 +6562,7 @@ button.close {
 	text-shadow: none
 }
 
-@media screen and (min-width:768px) {
+@media (min-width:768px) {
 	.carousel-control .glyphicon-chevron-left,.carousel-control .glyphicon-chevron-right,.carousel-control .icon-next,.carousel-control .icon-prev {
 		width: 30px;
 		height: 30px;
@@ -6899,58 +6821,16 @@ button.close {
 	display: none!important
 }
 
-@media print {
-	.visible-print {
-		display: block!important
-	}
-
-	table.visible-print {
-		display: table
-	}
-
-	tr.visible-print {
-		display: table-row!important
-	}
-
-	td.visible-print,th.visible-print {
-		display: table-cell!important
-	}
-}
-
 .visible-print-block {
 	display: none!important
-}
-
-@media print {
-	.visible-print-block {
-		display: block!important
-	}
 }
 
 .visible-print-inline {
 	display: none!important
 }
 
-@media print {
-	.visible-print-inline {
-		display: inline!important
-	}
-}
-
 .visible-print-inline-block {
 	display: none!important
-}
-
-@media print {
-	.visible-print-inline-block {
-		display: inline-block!important
-	}
-}
-
-@media print {
-	.hidden-print {
-		display: none!important
-	}
 }
 
 .ekko-lightbox {
@@ -9982,6 +9862,46 @@ a:active,a:focus,a:hover {
         vertical-align: middle;
 }
 
+@media print {
+    .fixed-table-container thead th,
+    .fixed-table-container tbody td {
+        border-left: 1px solid #000 !important;
+        border-bottom: 1px solid #000 !important;
+    }
+    
+    .fixed-table-body {
+        border: 1px solid #000 !important;
+    }
+    
+    .fixed-table-container tbody tr:first-child td {
+        border-top: 1px solid #000 !important;
+    }
+    
+    .box.box-default {
+        margin-bottom: 0 !important;
+    }
+    
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        line-height: 1.05 !important;
+    }
+    
+    section.sub-header {
+        margin-top: -50px !important;
+    }
+    
+    section.content {
+        margin-top: 40px !important;
+    }
+    
+    .hidden-print {
+	display: none !important; 
+    }
+    
+    .visible-print {
+        display: block !important;
+    }
+}
+
 .table>thead>tr>th {
 	border-bottom: 2px solid #f4f4f4
 }
@@ -10997,43 +10917,6 @@ table.text-center,table.text-center td,table.text-center th {
 
 .chart canvas,.chart svg {
 	width: 100%!important
-}
-
-@media print {
-	.content-header,.left-side,.main-header,.main-sidebar,.no-print {
-		display: none!important
-	}
-
-	.content-wrapper,.main-footer,.right-side {
-		margin-left: 0!important;
-		min-height: 0!important;
-		-webkit-transform: translate(0)!important;
-		transform: translate(0)!important
-	}
-
-	.fixed .content-wrapper,.fixed .right-side {
-		padding-top: 0!important
-	}
-
-	.invoice {
-		width: 100%;
-		border: 0;
-		margin: 0;
-		padding: 0
-	}
-
-	.invoice-col {
-		float: left;
-		width: 33.3333333%
-	}
-
-	.table-responsive {
-		overflow: auto
-	}
-
-	.table-responsive>.table tr td,.table-responsive>.table tr th {
-		white-space: normal!important
-	}
 }
 
 .skin-blue .main-header .navbar {
@@ -14899,18 +14782,6 @@ body {
 .sidebar-menu {
 	font-size: 14px;
 	white-space: normal
-}
-
-@media print {
-	a[href]:after {
-		content: none
-	}
-
-	.tab-content>.tab-pane {
-		display: block!important;
-		opacity: 1!important;
-		visibility: visible!important
-	}
 }
 
 .navbar-brand>img,img.navbar-brand-img {

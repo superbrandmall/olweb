@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractAccounttermCommission">    
+<div class="box box-default hidden-print" id="investmentContractAccounttermCommission">    
     <div class="box-header with-border">
         <h3 class="box-title">提成租金</h3>
     </div>

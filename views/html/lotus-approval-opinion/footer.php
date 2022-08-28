@@ -8,7 +8,7 @@
             <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-arrow-left"></i> 撤回</button>
         </div>
         <div class="btn-group" role="group" style="padding: 10px 0;">
-            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-print"></i> 打印</button>
+            <button type="button" class="btn" onclick="javascript: window.print();" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-print"></i> 打印</button>
         </div>
     </div>
     <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>&nbsp;

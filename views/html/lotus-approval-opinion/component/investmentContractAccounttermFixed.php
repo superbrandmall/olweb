@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractAccounttermFixed">    
+<div class="box box-default hidden-print" id="investmentContractAccounttermFixed">    
     <div class="box-header with-border">
         <h3 class="box-title">固定租金</h3>
     </div>

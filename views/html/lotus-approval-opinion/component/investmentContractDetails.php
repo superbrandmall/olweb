@@ -1,5 +1,5 @@
 <div class="box box-default" id="investmentContractDetails">
-    <div class="box-header with-border">
+    <div class="box-header with-border hidden-print">
         <h3 class="box-title">商务明细</h3>
     </div>
     <div class="box-body" style="padding: 0;">
@@ -13,7 +13,7 @@
                                     <thead>
                                         <tr>
                                             <th>
-                                                <div class="th-inner">事项</div>
+                                                <div class="th-inner"><span class="visible-print">商务明细</span><span class="hidden-print">事项</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>

@@ -26,7 +26,7 @@
     <body class="sidebar-mini skin-blue " data-spy="scroll" data-target="#navbarTop" data-offset="190">
         <div id="loader"></div>
         <div class="wrapper">
-            <header class="main-header">
+            <header class="main-header hidden-print">
                 <nav class="navbar navbar-static-top" role="navigation" style="margin-left: 0;">
                     <ul class="nav navbar-nav navbar-left">
                         <li class="left-navblock">

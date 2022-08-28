@@ -1,5 +1,5 @@
 <div class="box box-default">
-    <div class="box-header with-border">
+    <div class="box-header with-border hidden-print">
         <h3 class="box-title">基本信息</h3>
     </div>
     <div class="box-body" style="padding: 0;">

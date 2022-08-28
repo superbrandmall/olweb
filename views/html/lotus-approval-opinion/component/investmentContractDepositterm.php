@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractDepositterm">    
+<div class="box box-default hidden-print" id="investmentContractDepositterm">    
     <div class="box-header with-border">
         <h3 class="box-title">预存款</h3>
     </div>

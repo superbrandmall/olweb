@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractCertificates">    
+<div class="box box-default hidden-print" id="investmentContractCertificates">    
     <div class="box-header with-border">
         <h3 class="box-title">附件</h3>
     </div>

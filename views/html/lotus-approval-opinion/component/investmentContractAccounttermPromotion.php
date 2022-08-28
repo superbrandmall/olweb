@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentContractAccounttermPromotion">    
+<div class="box box-default hidden-print" id="investmentContractAccounttermPromotion">    
     <div class="box-header with-border">
         <h3 class="box-title">推广费</h3>
     </div>
