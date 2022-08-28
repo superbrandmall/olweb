@@ -210,9 +210,9 @@ function findAllContractsByKVCondition(p,c){
                             <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
                             <td>'+('V'+v.contractVersion || '')+'</td>\n\
                             <td>'+(v.tenantName || '')+'</td>\n\
-                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.mallName : '')+'</td>\n\
-                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
-                            <td>'+(v.vshopLotus != {} ? v.vshopLotus.modality : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != null ? v.vshopLotus.mallName : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != null ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != null ? v.vshopLotus.modality : '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                         </tr>');
                     });

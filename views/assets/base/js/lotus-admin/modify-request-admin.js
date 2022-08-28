@@ -1162,7 +1162,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","fixedRentTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1176,7 +1176,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","fixedRentTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1190,7 +1190,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","fixedRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1204,7 +1204,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","fixedRentRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1216,7 +1216,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee past");
     select.setAttribute("id","fixedRentTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1390,7 +1390,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //去税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","commissionTaxDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",(parseFloat(value.taxDeduct) * 100));
@@ -1404,7 +1404,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //含税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1420,7 +1420,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","commissionMinSales_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.targetSales);
@@ -1432,7 +1432,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     column9.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee past");
     select.setAttribute("id","commissionTaxRate_"+count.toLocaleString());
     column10.appendChild(select);
     
@@ -1577,7 +1577,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //去税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","propertyMgmtTaxRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxRentAmount);
@@ -1591,7 +1591,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","propertyMgmtTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.taxAmount);
@@ -1605,7 +1605,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","propertyMgmtAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1619,7 +1619,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     var div = document.createElement("div"); //含税单价
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","propertyMgmtRentAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.rentAmount);
@@ -1631,7 +1631,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     column7.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT propertyMgmtVATDropDown newFee past");
     select.setAttribute("id","propertyMgmtTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     
@@ -1792,7 +1792,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div = document.createElement("div"); //含税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","promotionAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.amount);
@@ -1806,7 +1806,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var div = document.createElement("div"); //去税金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","promotionTaxAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("readonly","");
@@ -1820,7 +1820,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     column5.appendChild(div);
     
     var select = document.createElement("select"); //税率
-    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee");
+    select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee past");
     select.setAttribute("id","promotionTaxRate_"+count.toLocaleString());
     column8.appendChild(select);
     

@@ -744,13 +744,19 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.fixedRentList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.fixedRentList, function(i,v) {
-                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
-                                        v.endDate = DecrDate(data.modifyEffectTime);
+                                    var newDate = ''; 
+                                    if(data.fixedRentList.length > 0) {
+                                        newDate = data.fixedRentList[0].startDate;
+                                        if(dateCompare(v.endDate, newDate) != 'smaller'){
+                                            v.endDate = DecrDate(newDate);
+                                        }
                                     }
-                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
-                                    $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                    return false;
+                                    
+                                    if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
+                                        updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
+                                        $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                        $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                    }
                                 })
                             }
                             
@@ -787,13 +793,19 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.deductList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.deductList, function(i,v) {
-                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
-                                        v.endDate = DecrDate(data.modifyEffectTime);
+                                    var newDate = ''; 
+                                    if(data.deductList.length > 0) {
+                                        newDate = data.deductList[0].startDate;
+                                        if(dateCompare(v.endDate, newDate) != 'smaller'){
+                                            v.endDate = DecrDate(newDate);
+                                        }
                                     }
-                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
-                                    $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                    return false;
+                                    
+                                    if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
+                                        updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
+                                        $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                        $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                    }
                                 })
                             }
                             
@@ -830,13 +842,19 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.propertyFeeList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
-                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) != 'smaller'){
-                                        v.endDate = DecrDate(data.modifyEffectTime); 
+                                    var newDate = ''; 
+                                    if(data.propertyFeeList.length > 0) {
+                                        newDate = data.propertyFeeList[0].startDate;
+                                        if(dateCompare(v.endDate, newDate) != 'smaller'){
+                                            v.endDate = DecrDate(newDate);
+                                        }
                                     }
-                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                    return false;
+                                    
+                                    if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
+                                        updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
+                                        $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                        $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                    }
                                 })
                             }
                             
@@ -873,13 +891,19 @@ function findRequestbyBizId() {
                         if(data.oldContractInfo.promotionFeeList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
-                                    if(data.modifyEffectTime != null && dateCompare(v.endDate, data.modifyEffectTime) == 'smaller'){
-                                        v.endDate = DecrDate(data.modifyEffectTime); 
+                                    var newDate = ''; 
+                                    if(data.promotionFeeList.length > 0) {
+                                        newDate = data.promotionFeeList[0].startDate;
+                                        if(dateCompare(v.endDate, newDate) != 'smaller'){
+                                            v.endDate = DecrDate(newDate);
+                                        }
                                     }
-                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
-                                    $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                    $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
-                                    return false;
+                                    
+                                    if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
+                                        updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
+                                        $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                                        $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
+                                    }
                                 })
                             }
                             
@@ -923,7 +947,6 @@ function findRequestbyBizId() {
                             if(data.modifyType != 'TIME_CHANGE'){
                                 $.each(data.oldContractInfo.salesList, function(i,v) {
                                     updateRowMinSales(JSON.stringify(v),' past');
-                                    return false;
                                 })
                             }
                         }
@@ -1281,7 +1304,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
         past = ' past';
     }
     newrow.setAttribute("class",p);
-    input.setAttribute("class","form-control"+(p=''? past : ''));
+    input.setAttribute("class","form-control"+(p=' past'? past : ''));
     input.setAttribute("id","fixedRentStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1305,7 +1328,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+(p=''? past : ''));
+    input2.setAttribute("class","form-control"+(p=' past'? past : ''));
     input2.setAttribute("id","fixedRentEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1515,7 +1538,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
         past = ' past';
     }
     newrow.setAttribute("class",p);
-    input.setAttribute("class","form-control"+(p=''? past : ''));
+    input.setAttribute("class","form-control"+(p=' past'? past : ''));
     input.setAttribute("id","commissionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1539,7 +1562,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+(p=''? past : ''));
+    input2.setAttribute("class","form-control"+(p=' past'? past : ''));
     input2.setAttribute("id","commissionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1719,7 +1742,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
         past = ' past';
     }
     newrow.setAttribute("class",p);
-    input.setAttribute("class","form-control"+(p=''? past : ''));
+    input.setAttribute("class","form-control"+(p=' past'? past : ''));
     input.setAttribute("id","propertyMgmtStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1743,7 +1766,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+(p=''? past : ''));
+    input2.setAttribute("class","form-control"+(p=' past'? past : ''));
     input2.setAttribute("id","propertyMgmtEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -1950,7 +1973,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
         past = ' past';
     }
     newrow.setAttribute("class",p);
-    input.setAttribute("class","form-control"+(p=''? past : ''));
+    input.setAttribute("class","form-control"+(p=' past'? past : ''));
     input.setAttribute("id","promotionStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -1974,7 +1997,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+(p=''? past : ''));
+    input2.setAttribute("class","form-control"+(p=' past'? past : ''));
     input2.setAttribute("id","promotionEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
@@ -2220,7 +2243,7 @@ function updateRowMinSales(v,p) {
         past = ' past';
     }
     newrow.setAttribute("class",p);
-    input.setAttribute("class","form-control"+(p=''? past : ''));
+    input.setAttribute("class","form-control"+(p=' past'? past : ''));
     input.setAttribute("id","minSalesStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
@@ -2244,7 +2267,7 @@ function updateRowMinSales(v,p) {
     if(dateCompare(value.endDate, date) == 'smaller'){
         past = ' past';
     }
-    input2.setAttribute("class","form-control"+(p=''? past : ''));
+    input2.setAttribute("class","form-control"+(p=' past'? past : ''));
     input2.setAttribute("id","minSalesEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
