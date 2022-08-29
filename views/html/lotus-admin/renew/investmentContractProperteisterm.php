@@ -95,6 +95,30 @@
         <div class="clearfix"></div>
         <div class="col-md-4">
             <div class="form-group">
+                <label class="col-md-4 control-label">是否需要配合调改 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="renewAdjustFlag" style="width: 100%">
+                        <option value="" selected>未选择</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">甲方可提前几日单方解除合同 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control" id="renewAdjustBeforeDays" type="number" min="1" step="1" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="border: 1px solid #ccc; background: #fff; border-right: none; ime-mode:disabled;" />                                      
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">天</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-4">
+            <div class="form-group">
                 <label class="col-md-4 control-label">是需要保留的品牌 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="renewBrandHoldFlag" style="width: 100%">

@@ -71,39 +71,60 @@ function findRequestByBizId() {
                     $('#updated').text(data.updated.split(' ')[0]);
                     $('#remark').val(data.remark);
                     $('#selectTenant').text(data.tenantName);
-                    $('#mallName').text(data.mallName);
-                    
-                    
+                    $('#mallName').text(data.mallName);                    
                     $('#unitName').text(data.unitName);
                     $('#freeDays').text(data.freeDays || 0);
+                    $('#growthRate').text(data.growthRate * 100 + '%' || '0%');
+                    $('#brandName').text(data.brandName);
+                    $('#area').html(data.area+'m<sup>2</sup>');
+                    $('#bizTypeName').text(data.bizTypeName);
+                    $('#duration').text(data.startDate + '-' + data.endDate);
                     
+                    var fixedRentListIndex = 0;
+                    var propertyFeeListIndex = 0;
+                    var promotionFeeListIndex = 0;
+                    if(data.formType == 'termination'){
+                        if(data.fixedRentList.length > 0){
+                            fixedRentListIndex = data.fixedRentList.length - 1;
+                        }
+                        
+                        if(data.propertyFeeList.length > 0){
+                            propertyFeeListIndex = data.propertyFeeList.length - 1;
+                        }
+                        
+                        if(data.promotionFeeList.length > 0){
+                            promotionFeeListIndex = data.promotionFeeList.length - 1;
+                        }
+                        
+                        $('#growthRate').text('/');
+                    }
                     var rentalFloorEffect, rentalFloorTaxEffect;
                     var totalAmount = 0;
                     var totalTaxAmount = 0;
                     if(data.fixedRentList.length > 0){
-                        $('#fixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[0].taxAmount));
-                        $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[0].amount));
-                        rentalFloorEffect = data.fixedRentList[0].rentAmount;
-                        rentalFloorTaxEffect = data.fixedRentList[0].taxRentAmount;
+                        $('#fixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].taxAmount));
+                        $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
+                        rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
+                        rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
                         $('#rentalFloorEffect').text(rentalFloorEffect);
                         $('#rentalFloorTaxEffect').text(rentalFloorTaxEffect);
-                        totalAmount += data.fixedRentList[0].amount;
-                        totalTaxAmount += data.fixedRentList[0].taxAmount;
+                        totalAmount += data.fixedRentList[fixedRentListIndex].amount;
+                        totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
                     }
                     
                     //日租金坪效含税（元/m²/天）= 月租金含税 * 12 / 365 / 面积;
                     //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
                     
                     if(data.propertyFeeList.length > 0){
-                        $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[0].taxAmount));
-                        $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[0].amount));
-                        totalAmount += data.propertyFeeList[0].amount;
-                        totalTaxAmount += data.propertyFeeList[0].taxAmount;
+                        $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
+                        $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
+                        totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
+                        totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
                     }
                     
                     if(data.promotionFeeList.length > 0){
-                        totalAmount += data.promotionFeeList[0].amount;
-                        totalTaxAmount += data.promotionFeeList[0].taxAmount;
+                        totalAmount += data.promotionFeeList[promotionFeeListIndex].amount;
+                        totalTaxAmount += data.promotionFeeList[promotionFeeListIndex].taxAmount;
                     }
                     
                     var depositFee = 0;
@@ -113,14 +134,8 @@ function findRequestByBizId() {
                         }
                     }
                     $('#depositFee').text(depositFee);
-                    
-                    $('#totalAmount').html(accounting.formatNumber(totalAmount));
                     $('#totalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
-                    $('#growthRate').text(data.growthRate * 100 + '%' || '0%');
-                    $('#brandName').text(data.brandName);
-                    $('#area').html(data.area+'m<sup>2</sup>');
-                    $('#bizTypeName').text(data.bizTypeName);
-                    $('#duration').text(data.startDate + '-' + data.endDate);
+                    $('#totalAmount').html(accounting.formatNumber(totalAmount));
                     
                     var oldContractInfo = data.oldContractInfo;
                     if(data.formType == 'new'){
@@ -228,15 +243,28 @@ function findRequestByBizId() {
                         if(data.bizDate != null && data.bizDate != ''){
                             $('#newBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业。');
                         }
-                    } else if($.inArray(data.formType, ['renew','modify']) != -1){
+                    } else if($.inArray(data.formType, ['renew','modify','termination']) != -1){
                         $('#oldUnitName').text(oldContractInfo.unitName);
                         $('#oldFreeDays').text(oldContractInfo.freeDays || 0);
+                        if(data.formType == 'termination'){
+                            $('#oldGrowthRate').text('/');
+                        } else {
+                            $('#oldGrowthRate').text(oldContractInfo.growthRate * 100 + '%' || '0%');
+                        }
+                        $('#oldBrandName').text(oldContractInfo.brandName);
+                        $('#oldArea').html(oldContractInfo.area+'m<sup>2</sup>');
+                        $('#oldBizTypeName').text(oldContractInfo.bizTypeName);
+                        $('#oldDuration').text(oldContractInfo.startDate + '-' + oldContractInfo.endDate);
 
                         var oldRentalFloorEffect, oldRentalFloorTaxEffect;
                         var oldTotalAmount = 0;
                         var oldTotalTaxAmount = 0;
+                        
                         if(oldContractInfo.fixedRentList.length > 0){
                             var ln = oldContractInfo.fixedRentList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = fixedRentListIndex;
+                            }
                             $('#oldFixedRentTaxAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].taxAmount));
                             $('#oldFixedRentAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].amount));
                             oldRentalFloorEffect = oldContractInfo.fixedRentList[ln].rentAmount;
@@ -249,6 +277,9 @@ function findRequestByBizId() {
 
                         if(oldContractInfo.propertyFeeList.length > 0){
                             var ln = oldContractInfo.propertyFeeList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = propertyFeeListIndex;
+                            }
                             $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].taxAmount));
                             $('#oldPropertyMgmtAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].amount));
                             oldTotalAmount += oldContractInfo.propertyFeeList[ln].amount;
@@ -257,6 +288,9 @@ function findRequestByBizId() {
 
                         if(oldContractInfo.promotionFeeList.length > 0){
                             var ln = oldContractInfo.promotionFeeList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = promotionFeeListIndex;
+                            }
                             oldTotalAmount += oldContractInfo.promotionFeeList[ln].amount;
                             oldTotalTaxAmount += oldContractInfo.promotionFeeList[ln].taxAmount;
                         }
@@ -271,11 +305,7 @@ function findRequestByBizId() {
 
                         $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
                         $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
-                        $('#oldGrowthRate').text(oldContractInfo.growthRate * 100 + '%' || '0%');
-                        $('#oldBrandName').text(oldContractInfo.brandName);
-                        $('#oldArea').html(oldContractInfo.area+'m<sup>2</sup>');
-                        $('#oldBizTypeName').text(oldContractInfo.bizTypeName);
-                        $('#oldDuration').text(oldContractInfo.startDate + '-' + oldContractInfo.endDate);
+                        
                         $('#changeFixed, #changeDeduct, #changeProperty, #changePromotion, #changeDeposit').show();
                         if(data.formType == 'renew'){
                             $('#renewRemark').show();
@@ -555,132 +585,132 @@ function findRequestByBizId() {
                             if(data.awardDate != null && data.awardDate != ''){
                                 $('#modifyAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约。');
                             }
-                        }
-                    } else if(data.formType == 'termination'){
-                        $('#investmentContractDetails').hide();
-                        $('#changeFixed, #changeDeduct, #changeProperty, #changePromotion, #changeDeposit, #terminateRemark').show();
-                        if(oldContractInfo.fixedRentList.length > 0){
-                            $.each(oldContractInfo.fixedRentList, function(i,v) {
-                                $('#fixedRentBefore').append('<tr>\n\
-        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
-                            })
-
-                            $.each(data.fixedRentList, function(i,v) {
-                                var ed = v.endDate;
-                                if(v.endDate == data.cancelDate){
-                                    ed = '<span style="color: #E43C24;">'+ed+'</span>';
-                                }
-                                $('#fixedRentAfter').append('<tr>\n\
-            <td>'+v.startDate+' ～ '+ed+'</td>\n\
-            <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-            <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>') 
-                            })
-                        } else {
-                            $('#investmentContractAccounttermFixed').hide();
-                        }
-
-                        if(oldContractInfo.deductList.length > 0){
-                            $.each(oldContractInfo.deductList, function(i,v) {
-                                $('#commissionBefore').append('<tr>\n\
-        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-        <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
-        <td>'+findRentCalculationMode('RENT_CALCULATION_MODE', data.rentCalculationMode)+'</td></tr>')
-                            })
-
-                            $.each(data.deductList, function(i,v) {
-                                var ed = v.endDate;
-                                if(v.endDate == data.cancelDate){
-                                    ed = '<span style="color: #E43C24;">'+ed+'</span>';
-                                }
-                                $('#commissionAfter').append('<tr>\n\
-        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-        <td>'+v.startDate+' ～ '+ed+'</td>\n\
-        <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
-        <td>'+findRentCalculationMode('RENT_CALCULATION_MODE', data.rentCalculationMode)+'</td></tr>')
-                            })
-                        } else {
-                            $('#investmentContractAccounttermCommission').hide();
-                        }
-
-                        if(oldContractInfo.propertyFeeList.length > 0){
-                            $.each(oldContractInfo.propertyFeeList, function(i,v) {
-                                $('#propertyMgmtBefore').append('<tr>\n\
-        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-        <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
-                            })
-
-                            $.each(data.propertyFeeList, function(i,v) {
-                                var ed = v.endDate;
-                                if(v.endDate == data.cancelDate){
-                                    ed = '<span style="color: #E43C24;">'+ed+'</span>';
-                                }
-                                $('#propertyMgmtAfter').append('<tr>\n\
-            <td>'+v.startDate+' ～ '+ed+'</td>\n\
+                        } else if(data.formType == 'termination') {
+                            $('#terminateRemark').show();
+                            
+                            if(oldContractInfo.fixedRentList.length > 0){
+                                $.each(oldContractInfo.fixedRentList, function(i,v) {
+                                    $('#fixedRentBefore').append('<tr>\n\
+            <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
             <td>'+accounting.formatNumber(v.amount)+'</td>\n\
             <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
-                            })
-                        } else {
-                            $('#investmentContractAccounttermPropertyMgmt').hide();
-                        }
+                                })
 
-                        if(oldContractInfo.promotionFeeList.length > 0){
-                            $.each(oldContractInfo.promotionFeeList, function(i,v) {
-                                $('#promotionBefore').append('<tr>\n\
-        <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-        <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
-                            })
+                                $.each(data.fixedRentList, function(i,v) {
+                                    var ed = v.endDate;
+                                    if(v.endDate == data.cancelDate){
+                                        ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                                    }
+                                    $('#fixedRentAfter').append('<tr>\n\
+                <td>'+v.startDate+' ～ '+ed+'</td>\n\
+                <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+                <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>') 
+                                })
+                            } else {
+                                $('#investmentContractAccounttermFixed').hide();
+                            }
 
-                            $.each(data.promotionFeeList, function(i,v) {
-                                var ed = v.endDate;
-                                if(v.endDate == data.cancelDate){
-                                    ed = '<span style="color: #E43C24;">'+ed+'</span>';
-                                }
-                                $('#promotionAfter').append('<tr>\n\
+                            if(oldContractInfo.deductList.length > 0){
+                                $.each(oldContractInfo.deductList, function(i,v) {
+                                    $('#commissionBefore').append('<tr>\n\
+            <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+            <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
+            <td>'+findRentCalculationMode('RENT_CALCULATION_MODE', data.rentCalculationMode)+'</td></tr>')
+                                })
+
+                                $.each(data.deductList, function(i,v) {
+                                    var ed = v.endDate;
+                                    if(v.endDate == data.cancelDate){
+                                        ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                                    }
+                                    $('#commissionAfter').append('<tr>\n\
+            <td>'+v.itemName+'['+v.itemCode+']</td>\n\
             <td>'+v.startDate+' ～ '+ed+'</td>\n\
+            <td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
+            <td>'+findRentCalculationMode('RENT_CALCULATION_MODE', data.rentCalculationMode)+'</td></tr>')
+                                })
+                            } else {
+                                $('#investmentContractAccounttermCommission').hide();
+                            }
+
+                            if(oldContractInfo.propertyFeeList.length > 0){
+                                $.each(oldContractInfo.propertyFeeList, function(i,v) {
+                                    $('#propertyMgmtBefore').append('<tr>\n\
+            <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
+            <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+            <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
+                                })
+
+                                $.each(data.propertyFeeList, function(i,v) {
+                                    var ed = v.endDate;
+                                    if(v.endDate == data.cancelDate){
+                                        ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                                    }
+                                    $('#propertyMgmtAfter').append('<tr>\n\
+                <td>'+v.startDate+' ～ '+ed+'</td>\n\
+                <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+                <td>'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
+                                })
+                            } else {
+                                $('#investmentContractAccounttermPropertyMgmt').hide();
+                            }
+
+                            if(oldContractInfo.promotionFeeList.length > 0){
+                                $.each(oldContractInfo.promotionFeeList, function(i,v) {
+                                    $('#promotionBefore').append('<tr>\n\
+            <td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
             <td>'+accounting.formatNumber(v.amount)+'</td>\n\
             <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
-                            })
-                        } else {
-                            $('#investmentContractAccounttermPromotion').hide();
-                        }
+                                })
 
-                        if(data.depositList.length > 0){
-                            $.each(data.depositList, function(i,v) {
-                                $('#depositBefore, #depositAfter').append('<tr>\n\
-        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-        <td>'+(v.paymentDate || '-')+'</td></tr>')
-                            })
-                        } else {
-                            $('#investmentContractDepositterm').hide();
-                        }
-                        
-                        $('#terminateMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
-                        $('#terminateFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
-                        $('#terminateModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
-                        $('#terminateBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
-                        $('#terminateArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
-                        if(data.cancelDate != null && data.cancelDate != ''){
-                            $('#terminateCancelDate').html('<span class="txt">'+data.cancelDate.split('-')[0]+'年'+data.cancelDate.split('-')[1]+'月'+data.cancelDate.split('-')[2]+'日</span>');
-                        }
-                        if(data.cancelType == 'A'){
-                            $('#terminateCancelType').html('<span class="txt">到期终止。</span>');
-                        } else if(data.cancelType == 'B' || data.cancelType == 'C'){
-                            $('#terminateCancelType').html('<span class="txt">提前终止。</span>');
-                        }
-                        $('#terminateNewBrandName').html('<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
-                        if(data.newDrDate != null && data.newDrDate != ''){
-                            $('#terminateNewDrDate').html('<span class="txt">预计'+data.newDrDate.split('-')[0]+'年'+data.newDrDate.split('-')[1]+'月'+data.newDrDate.split('-')[2]+'日</span>上会，');
-                        }
-                        if(data.newDeliveryDate != null && data.newDeliveryDate != ''){
-                            $('#terminateNewDeliveryDate').html('<span class="txt">'+data.newDeliveryDate.split('-')[0]+'年'+data.newDeliveryDate.split('-')[1]+'月'+data.newDeliveryDate.split('-')[2]+'日</span>交楼，');
-                        }
-                        if(data.newBizDate != null && data.newBizDate != ''){
-                            $('#terminateNewBizDate').html('<span class="txt">'+data.newBizDate.split('-')[0]+'年'+data.newBizDate.split('-')[1]+'月'+data.newBizDate.split('-')[2]+'日</span>开业。');
+                                $.each(data.promotionFeeList, function(i,v) {
+                                    var ed = v.endDate;
+                                    if(v.endDate == data.cancelDate){
+                                        ed = '<span style="color: #E43C24;">'+ed+'</span>';
+                                    }
+                                    $('#promotionAfter').append('<tr>\n\
+                <td>'+v.startDate+' ～ '+ed+'</td>\n\
+                <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+                <td>'+accounting.formatNumber(v.taxAmount)+'</td></tr>')
+                                })
+                            } else {
+                                $('#investmentContractAccounttermPromotion').hide();
+                            }
+
+                            if(data.depositList.length > 0){
+                                $.each(data.depositList, function(i,v) {
+                                    $('#depositBefore, #depositAfter').append('<tr>\n\
+            <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+            <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+            <td>'+(v.paymentDate || '-')+'</td></tr>')
+                                })
+                            } else {
+                                $('#investmentContractDepositterm').hide();
+                            }
+
+                            $('#terminateMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
+                            $('#terminateFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
+                            $('#terminateModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
+                            $('#terminateBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
+                            $('#terminateArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
+                            if(data.cancelDate != null && data.cancelDate != ''){
+                                $('#terminateCancelDate').html('<span class="txt">'+data.cancelDate.split('-')[0]+'年'+data.cancelDate.split('-')[1]+'月'+data.cancelDate.split('-')[2]+'日</span>');
+                            }
+                            if(data.cancelType == 'A'){
+                                $('#terminateCancelType').html('<span class="txt">到期终止。</span>');
+                            } else if(data.cancelType == 'B' || data.cancelType == 'C'){
+                                $('#terminateCancelType').html('<span class="txt">提前终止。</span>');
+                            }
+                            $('#terminateNewBrandName').html('<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                            if(data.newDrDate != null && data.newDrDate != ''){
+                                $('#terminateNewDrDate').html('<span class="txt">预计'+data.newDrDate.split('-')[0]+'年'+data.newDrDate.split('-')[1]+'月'+data.newDrDate.split('-')[2]+'日</span>上会，');
+                            }
+                            if(data.newDeliveryDate != null && data.newDeliveryDate != ''){
+                                $('#terminateNewDeliveryDate').html('<span class="txt">'+data.newDeliveryDate.split('-')[0]+'年'+data.newDeliveryDate.split('-')[1]+'月'+data.newDeliveryDate.split('-')[2]+'日</span>交楼，');
+                            }
+                            if(data.newBizDate != null && data.newBizDate != ''){
+                                $('#terminateNewBizDate').html('<span class="txt">'+data.newBizDate.split('-')[0]+'年'+data.newBizDate.split('-')[1]+'月'+data.newBizDate.split('-')[2]+'日</span>开业。');
+                            }
                         }
                     }
                     
