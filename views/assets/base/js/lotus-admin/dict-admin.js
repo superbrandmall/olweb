@@ -189,7 +189,7 @@ function findAllDict(p,c,u) {
                             $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                         }
                     } else {
-                        $('#dictL').append('<tr><td colspan="3" style="text-align: center;">没有查到相关记录！</td></tr>');
+                        $('#dictL').append('<tr><td colspan="4" style="text-align: center;">没有查到相关记录！</td></tr>');
                         $('#dictS').append('<tr><td style="text-align: center;">没有查到相关记录！</td></tr>');
                     }
                 } else {
@@ -212,7 +212,7 @@ function findAllDict(p,c,u) {
                         <a href="javascript: void(0);" onclick=\'javascript: dictTypeModalToggle("00")\' class="btn btn-warning btn-xs">修改</a></span></div></div>\n\
                         </td></tr>');
                     } else {
-                        $('#dictL').append('<tr><td colspan="3" style="text-align: center;">没有查到相关记录！</td></tr>');
+                        $('#dictL').append('<tr><td colspan="4" style="text-align: center;">没有查到相关记录！</td></tr>');
                         $('#dictS').append('<tr><td style="text-align: center;">没有查到相关记录！</td></tr>');
                     }
                 }

@@ -578,6 +578,7 @@ function findRequestbyBizId() {
                             $('#selectTenant').append(temp).trigger('change');
                         }
                         $('#contractNo').val(data.contractNo);
+                        $('#sapContractNo').val(data.sapContractNo);
                         $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
                         $.request.mallCode = data.mallCode;
 
@@ -720,6 +721,8 @@ function findRequestbyBizId() {
                         $('#depositTimes').val(data.depositTimes);
                         $('#renewPaymentSameFlag').val(data.renewPaymentSameFlag).trigger("change");
                         $('#renewPaymentContent').val(data.renewPaymentContent);
+                        $('#renewAdjustFlag').val(data.renewAdjustFlag).trigger("change");
+                        $('#renewAdjustBeforeDays').val(data.renewAdjustBeforeDays);
                         $('#renewBrandHoldFlag').val(data.renewBrandHoldFlag).trigger("change");
                         $('#renewBrandHoldReason').val(data.renewBrandHoldReason);
                         $('#renewAvgSales').val(data.renewAvgSales);
@@ -2385,6 +2388,18 @@ function submitCheck() {
         }
     }
     
+    if($('#renewAdjustFlag').val() == '') {
+        flag = 0;
+        $('#renewAdjustFlag').parent().append(error);
+    }
+    
+    if($('#renewAdjustFlag').val() == '1') {
+        if($('#renewAdjustBeforeDays').val() == '') {
+            flag = 0;
+            $('#renewAdjustBeforeDays').parent().append(error);
+        }
+    }
+    
     if($('#renewBrandHoldFlag').val() == '') {
         flag = 0;
         $('#renewBrandHoldFlag').parent().append(error);
@@ -2615,6 +2630,8 @@ function saveContractForm(s) {
             renewBrandHoldReason = null;
         }
         var renewBrandHoldFlag = $('#renewBrandHoldFlag').find('option:selected').val();
+        var renewAdjustFlag = $('#renewAdjustFlag').find('option:selected').val();
+        var renewAdjustBeforeDays = $('#renewAdjustBeforeDays').val();
         var renewAvgSales = numberWithoutCommas($('#renewAvgSales').val());
         var targetSales = numberWithoutCommas($('#targetSales').val());
         var taxTotalPropertyAmount = numberWithoutCommas($('#propertyMgmtTaxTotalPropertyAmount').text());
@@ -3119,7 +3136,6 @@ function saveContractForm(s) {
             "depositTimes": depositTimes,
             "duration": 0,
             "enterDate": $.request.content.enterDate,
-            //"esignFlag": esignFlag,
             "esignFlag": 0,
             "exclusiveCondition": "",
             "firstCompareCycle": $.request.content.compareFirstFrequency,
@@ -3163,17 +3179,20 @@ function saveContractForm(s) {
             "propertyManageFee": 0,
             "publicUtilitiesFee": 0,
             "remark": remark,
-            "renewRentSameFlag": renewRentSameFlag,
-            "renewPropertySameFlag": renewPropertySameFlag,
-            "renewBudgetDesc": renewBudgetDesc,
-            "renewPaymentSameFlag": renewPaymentSameFlag,
-            "renewPaymentContent": renewPaymentContent,
-            "renewBrandHoldReason": renewBrandHoldReason,
-            "renewBrandHoldFlag": renewBrandHoldFlag,
+            "renewAdjustBeforeDays": renewAdjustBeforeDays,
+            "renewAdjustFlag": renewAdjustFlag,
             "renewAvgSales": renewAvgSales,
+            "renewBrandHoldFlag": renewBrandHoldFlag,
+            "renewBrandHoldReason": renewBrandHoldReason,
+            "renewBudgetDesc": renewBudgetDesc,
+            "renewPaymentContent": renewPaymentContent,
+            "renewPaymentSameFlag": renewPaymentSameFlag,
+            "renewPropertySameFlag": renewPropertySameFlag,
+            "renewRentSameFlag": renewRentSameFlag,
             "rentDeductRate": 0,
             "rentSalesRate": 0,
             "salesList": salesList,
+            "sapContractNo": $.request.content.sapContractNo,
             "secondCompareCycle": $.request.content.compareSecondFrequency,
             "secondCompareFlag": $.request.content.secondCompareFlag,
             "secondCompareValueType": $.request.content.compareSecondValue,

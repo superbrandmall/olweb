@@ -570,6 +570,7 @@ function findRequestbyBizId() {
                             $('#selectTenant').append(temp).trigger('change');
                         }
                         $('#contractNo').val(data.contractNo);
+                        $('#sapContractNo').val(data.sapContractNo);
                         $('#approvalName').val((data.approvalName != null ? data.approvalName : 'admin'));
                         $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
                         $.request.mallCode = data.mallCode;
@@ -2212,6 +2213,18 @@ function submitCheck() {
         }
     }
     
+    if($('#renewAdjustFlag').val() == '') {
+        flag = 0;
+        $('#renewAdjustFlag').parent().append(error);
+    }
+    
+    if($('#renewAdjustFlag').val() == '1') {
+        if($('#renewAdjustBeforeDays').val() == '') {
+            flag = 0;
+            $('#renewAdjustBeforeDays').parent().append(error);
+        }
+    }
+    
     if($('#renewBrandHoldFlag').val() == '') {
         flag = 0;
         $('#renewBrandHoldFlag').parent().append(error);
@@ -2443,6 +2456,8 @@ function saveContractForm(s) {
             renewBrandHoldReason = null;
         }
         var renewBrandHoldFlag = $('#renewBrandHoldFlag').find('option:selected').val();
+        var renewAdjustFlag = $('#renewAdjustFlag').find('option:selected').val();
+        var renewAdjustBeforeDays = $('#renewAdjustBeforeDays').val();
         var renewAvgSales = numberWithoutCommas($('#renewAvgSales').val());
         var targetSales = numberWithoutCommas($('#targetSales').val());
         var taxTotalPropertyAmount = numberWithoutCommas($('#propertyMgmtTaxTotalPropertyAmount').text());
@@ -2990,17 +3005,20 @@ function saveContractForm(s) {
             "propertyManageFee": 0,
             "publicUtilitiesFee": 0,
             "remark": remark,
-            "renewRentSameFlag": renewRentSameFlag,
-            "renewPropertySameFlag": renewPropertySameFlag,
-            "renewBudgetDesc": renewBudgetDesc,
-            "renewPaymentSameFlag": renewPaymentSameFlag,
-            "renewPaymentContent": renewPaymentContent,
-            "renewBrandHoldReason": renewBrandHoldReason,
-            "renewBrandHoldFlag": renewBrandHoldFlag,
+            "renewAdjustBeforeDays": renewAdjustBeforeDays,
+            "renewAdjustFlag": renewAdjustFlag,
             "renewAvgSales": renewAvgSales,
+            "renewBrandHoldFlag": renewBrandHoldFlag,
+            "renewBrandHoldReason": renewBrandHoldReason,
+            "renewBudgetDesc": renewBudgetDesc,
+            "renewPaymentContent": renewPaymentContent,
+            "renewPaymentSameFlag": renewPaymentSameFlag,
+            "renewPropertySameFlag": renewPropertySameFlag,
+            "renewRentSameFlag": renewRentSameFlag,
             "rentDeductRate": 0,
             "rentSalesRate": 0,
             "salesList": salesList,
+            "sapContractNo": $.request.content.sapContractNo,
             "secondCompareCycle": $.request.content.compareSecondFrequency,
             "secondCompareFlag": $.request.content.secondCompareFlag,
             "secondCompareValueType": $.request.content.compareSecondValue,
