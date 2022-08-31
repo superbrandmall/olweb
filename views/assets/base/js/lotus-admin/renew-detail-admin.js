@@ -913,6 +913,109 @@ function findRequestbyBizId() {
                             })
                         }
                         
+                        /*** START 审批意见书 **/
+                        
+                        $('#newUnitName').text(data.unitName);
+                        $('#newArea').html(data.area+'m<sup>2</sup>');
+                        $('#newBrandName').text(data.brandName);
+                        $('#newBizTypeName').text(data.bizTypeName);
+                        $('#newDuration').text(data.startDate + '-' + data.endDate);
+                        
+                        var fixedRentListIndex = 0;
+                        var propertyFeeListIndex = 0;
+                        var promotionFeeListIndex = 0;
+                        var rentalFloorEffect, rentalFloorTaxEffect;
+                        var totalAmount = 0;
+                        var totalTaxAmount = 0;
+                        if(data.fixedRentList.length > 0){
+                            $('#newFixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].taxAmount));
+                            $('#newFixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
+                            rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
+                            rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
+                            $('#newRentalFloorEffect').text(rentalFloorEffect);
+                            $('#newRentalFloorTaxEffect').text(rentalFloorTaxEffect);
+                            totalAmount += data.fixedRentList[fixedRentListIndex].amount;
+                            totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
+                        }
+
+                        //日租金坪效含税（元/m²/天）= 月租金含税 * 12 / 365 / 面积;
+                        //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
+
+                        if(data.propertyFeeList.length > 0){
+                            $('#newPropertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
+                            $('#newPropertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
+                            totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
+                            totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
+                        }
+
+                        if(data.promotionFeeList.length > 0){
+                            totalAmount += data.promotionFeeList[promotionFeeListIndex].amount;
+                            totalTaxAmount += data.promotionFeeList[promotionFeeListIndex].taxAmount;
+                        }
+
+                        var depositFee = 0;
+                        if(data.depositList.length > 0){
+                            for(var i=0; i < data.depositList.length; i++){
+                                depositFee += data.depositList[i].amount;
+                            }
+                        }
+                        
+                        $('#newTotalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
+                        $('#newTotalAmount').html(accounting.formatNumber(totalAmount));
+                        $('#newGrowthRate').text(data.growthRate * 100 + '%' || '0%');
+                        $('#newDepositFee').text(depositFee);
+                        $('#newFreeDays').text(data.freeDays || 0);
+                        
+                        $('#oldUnitName').text(data.oldContractInfo.unitName);
+                        $('#oldFreeDays').text(data.oldContractInfo.freeDays || 0);
+                        $('#oldGrowthRate').text(data.oldContractInfo.growthRate * 100 + '%' || '0%');
+                        $('#oldBrandName').text(data.oldContractInfo.brandName);
+                        $('#oldArea').html(data.oldContractInfo.area+'m<sup>2</sup>');
+                        $('#oldBizTypeName').text(data.oldContractInfo.bizTypeName);
+                        $('#oldDuration').text(data.oldContractInfo.startDate + '-' + data.oldContractInfo.endDate);
+
+                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
+                        var oldTotalAmount = 0;
+                        var oldTotalTaxAmount = 0;
+                        
+                        if(data.oldContractInfo.fixedRentList.length > 0){
+                            var ln = data.oldContractInfo.fixedRentList.length - 1;
+                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].taxAmount));
+                            $('#oldFixedRentAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].amount));
+                            oldRentalFloorEffect = data.oldContractInfo.fixedRentList[ln].rentAmount;
+                            oldRentalFloorTaxEffect = data.oldContractInfo.fixedRentList[ln].taxRentAmount;
+                            $('#oldRentalFloorEffect').text(oldRentalFloorEffect);
+                            $('#oldRentalFloorTaxEffect').text(oldRentalFloorTaxEffect);
+                            oldTotalAmount += data.oldContractInfo.fixedRentList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.fixedRentList[ln].taxAmount;
+                        }
+
+                        if(data.oldContractInfo.propertyFeeList.length > 0){
+                            var ln = data.oldContractInfo.propertyFeeList.length - 1;
+                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].taxAmount));
+                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].amount));
+                            oldTotalAmount += data.oldContractInfo.propertyFeeList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.propertyFeeList[ln].taxAmount;
+                        }
+
+                        if(data.oldContractInfo.promotionFeeList.length > 0){
+                            var ln = data.oldContractInfo.promotionFeeList.length - 1;
+                            oldTotalAmount += data.oldContractInfo.promotionFeeList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.promotionFeeList[ln].taxAmount;
+                        }
+
+                        var oldDepositFee = 0;
+                        if(data.oldContractInfo.depositList.length > 0){
+                            for(var i=0; i < data.oldContractInfo.depositList.length; i++){
+                                oldDepositFee += data.oldContractInfo.depositList[i].amount;
+                            }
+                        }
+                        $('#oldDepositFee').text(oldDepositFee);
+                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
+                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
+                        
+                        /*** END 审批意见书 **/
+                        
                         appendLotusLeasingHead();
                         
                         $('#Lotus_leasing_head select').val('').select2({
