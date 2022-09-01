@@ -59,16 +59,7 @@ function findRequestByBizId() {
                     $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
                     $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
-                    
-                    if(data.duration >= 1){
-                        $('#essayDuration').html('<span class="txt">'+data.duration+'</span>个月，');  
-                    } else {
-                        if(data.startDate != null && data.endDate != null){
-                            var duration = calDatesDiff(data.startDate,data.endDate);
-                            $('#essayDuration').html('<span class="txt">'+duration+'</span>天，');
-                        }
-                    }
-                    
+                    $('#essayDuration').html('<span class="txt">'+ (data.kowDays || '/') +'</span>天，');
                     $('#essayFixedRent').html('含税固定租金<span class="txt">'+data.totalRentAmount+'</span>元，');
 
                     var deduct = 0;

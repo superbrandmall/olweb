@@ -26,7 +26,7 @@ $(document).ready(function(){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
                 $('.location-select ul li, .mall-select ul li').show();
-                if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002']) == -1){
+                if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
                     $('.sidebar-menu > li').hide();
                     $('.sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5), .sidebar-menu > li:eq(6)').show();
                 }
