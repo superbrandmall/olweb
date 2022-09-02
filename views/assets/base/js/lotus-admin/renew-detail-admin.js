@@ -963,56 +963,77 @@ function findRequestbyBizId() {
                         $('#newTotalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
                         $('#newTotalAmount').html(accounting.formatNumber(totalAmount));
                         $('#newGrowthRate').text(data.growthRate * 100 + '%' || '0%');
-                        $('#newDepositFee').text(depositFee);
+                        $('#newDepositFee').text(accounting.formatNumber(depositFee));
                         $('#newFreeDays').text(data.freeDays || 0);
                         
-                        $('#oldUnitName').text(data.oldContractInfo.unitName);
-                        $('#oldFreeDays').text(data.oldContractInfo.freeDays || 0);
-                        $('#oldGrowthRate').text(data.oldContractInfo.growthRate * 100 + '%' || '0%');
-                        $('#oldBrandName').text(data.oldContractInfo.brandName);
-                        $('#oldArea').html(data.oldContractInfo.area+'m<sup>2</sup>');
-                        $('#oldBizTypeName').text(data.oldContractInfo.bizTypeName);
-                        $('#oldDuration').text(data.oldContractInfo.startDate + '-' + data.oldContractInfo.endDate);
+                        if(data.oldContractTerm != null){
+                            $('#oldUnitName').val(data.oldContractTerm.unitName);
+                            $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
+                            $('#oldGrowthRate').val(data.oldContractTerm.growthRate * 100 || '0');
+                            $('#oldBrandName').val(data.oldContractTerm.brandName);
+                            $('#oldArea').val(data.oldContractTerm.area);
+                            $('#oldBizTypeName').val(data.oldContractTerm.bizTypeName);
+                            $('#oldStartDate').datepicker('update', data.oldContractTerm.startDate);
+                            $('#oldEndDate').datepicker('update', data.oldContractTerm.endDate);
+                            $('#oldFixedRentTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxAmount));
+                            $('#oldFixedRentAmount').val(accounting.formatNumber(data.oldContractTerm.amount));
+                            $('#oldRentalFloorEffect').val(accounting.formatNumber(data.oldContractTerm.rentAmount));
+                            $('#oldRentalFloorTaxEffect').val(accounting.formatNumber(data.oldContractTerm.taxRentAmount));
+                            $('#oldPropertyMgmtTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxPropertyFee));
+                            $('#oldPropertyMgmtAmount').val(accounting.formatNumber(data.oldContractTerm.propertyFee));
+                            $('#oldDepositFee').val(accounting.formatNumber(data.oldContractTerm.deposit));
+                            $('#oldTotalAmount').val(accounting.formatNumber(data.oldContractTerm.totalRent));
+                            $('#oldTotalTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
+                        } else {
+                            $('#oldUnitName').val(data.oldContractInfo.unitName);
+                            $('#oldFreeDays').val(data.oldContractInfo.freeDays || 0);
+                            $('#oldGrowthRate').val(data.oldContractInfo.growthRate * 100 || '0');
+                            $('#oldBrandName').val(data.oldContractInfo.brandName);
+                            $('#oldArea').val(data.oldContractInfo.area);
+                            $('#oldBizTypeName').val(data.oldContractInfo.bizTypeName);
+                            $('#oldStartDate').datepicker('update', data.oldContractInfo.startDate);
+                            $('#oldEndDate').datepicker('update', data.oldContractInfo.endDate);
 
-                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
-                        var oldTotalAmount = 0;
-                        var oldTotalTaxAmount = 0;
-                        
-                        if(data.oldContractInfo.fixedRentList.length > 0){
-                            var ln = data.oldContractInfo.fixedRentList.length - 1;
-                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].taxAmount));
-                            $('#oldFixedRentAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].amount));
-                            oldRentalFloorEffect = data.oldContractInfo.fixedRentList[ln].rentAmount;
-                            oldRentalFloorTaxEffect = data.oldContractInfo.fixedRentList[ln].taxRentAmount;
-                            $('#oldRentalFloorEffect').text(oldRentalFloorEffect);
-                            $('#oldRentalFloorTaxEffect').text(oldRentalFloorTaxEffect);
-                            oldTotalAmount += data.oldContractInfo.fixedRentList[ln].amount;
-                            oldTotalTaxAmount += data.oldContractInfo.fixedRentList[ln].taxAmount;
-                        }
+                            var oldRentalFloorEffect, oldRentalFloorTaxEffect;
+                            var oldTotalAmount = 0;
+                            var oldTotalTaxAmount = 0;
 
-                        if(data.oldContractInfo.propertyFeeList.length > 0){
-                            var ln = data.oldContractInfo.propertyFeeList.length - 1;
-                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].taxAmount));
-                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].amount));
-                            oldTotalAmount += data.oldContractInfo.propertyFeeList[ln].amount;
-                            oldTotalTaxAmount += data.oldContractInfo.propertyFeeList[ln].taxAmount;
-                        }
-
-                        if(data.oldContractInfo.promotionFeeList.length > 0){
-                            var ln = data.oldContractInfo.promotionFeeList.length - 1;
-                            oldTotalAmount += data.oldContractInfo.promotionFeeList[ln].amount;
-                            oldTotalTaxAmount += data.oldContractInfo.promotionFeeList[ln].taxAmount;
-                        }
-
-                        var oldDepositFee = 0;
-                        if(data.oldContractInfo.depositList.length > 0){
-                            for(var i=0; i < data.oldContractInfo.depositList.length; i++){
-                                oldDepositFee += data.oldContractInfo.depositList[i].amount;
+                            if(data.oldContractInfo.fixedRentList.length > 0){
+                                var ln = data.oldContractInfo.fixedRentList.length - 1;
+                                $('#oldFixedRentTaxAmount').val(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].taxAmount));
+                                $('#oldFixedRentAmount').val(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].amount));
+                                oldRentalFloorEffect = data.oldContractInfo.fixedRentList[ln].rentAmount;
+                                oldRentalFloorTaxEffect = data.oldContractInfo.fixedRentList[ln].taxRentAmount;
+                                $('#oldRentalFloorEffect').val(oldRentalFloorEffect);
+                                $('#oldRentalFloorTaxEffect').val(oldRentalFloorTaxEffect);
+                                oldTotalAmount += data.oldContractInfo.fixedRentList[ln].amount;
+                                oldTotalTaxAmount += data.oldContractInfo.fixedRentList[ln].taxAmount;
                             }
+
+                            if(data.oldContractInfo.propertyFeeList.length > 0){
+                                var ln = data.oldContractInfo.propertyFeeList.length - 1;
+                                $('#oldPropertyMgmtTaxAmount').val(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].taxAmount));
+                                $('#oldPropertyMgmtAmount').val(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].amount));
+                                oldTotalAmount += data.oldContractInfo.propertyFeeList[ln].amount;
+                                oldTotalTaxAmount += data.oldContractInfo.propertyFeeList[ln].taxAmount;
+                            }
+
+                            if(data.oldContractInfo.promotionFeeList.length > 0){
+                                var ln = data.oldContractInfo.promotionFeeList.length - 1;
+                                oldTotalAmount += data.oldContractInfo.promotionFeeList[ln].amount;
+                                oldTotalTaxAmount += data.oldContractInfo.promotionFeeList[ln].taxAmount;
+                            }
+
+                            var oldDepositFee = 0;
+                            if(data.oldContractInfo.depositList.length > 0){
+                                for(var i=0; i < data.oldContractInfo.depositList.length; i++){
+                                    oldDepositFee += data.oldContractInfo.depositList[i].amount;
+                                }
+                            }
+                            $('#oldDepositFee').val(accounting.formatNumber(oldDepositFee));
+                            $('#oldTotalAmount').val(accounting.formatNumber(oldTotalAmount));
+                            $('#oldTotalTaxAmount').val(accounting.formatNumber(oldTotalTaxAmount));
                         }
-                        $('#oldDepositFee').text(oldDepositFee);
-                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
-                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
                         
                         /*** END 审批意见书 **/
                         
@@ -3193,6 +3214,28 @@ function saveContractForm(s) {
                 } 
             }
         }
+        
+        var oldContractTerm = $.request.content.oldContractTerm;
+        oldContractTerm.amount = numberWithoutCommas($('#oldFixedRentAmount').val());
+        oldContractTerm.area = $('#oldArea').val();
+        oldContractTerm.bizId = bizId;
+        oldContractTerm.bizScope = $('#oldBizTypeName').val();
+        oldContractTerm.brandName = $('#oldBrandName').val();
+        oldContractTerm.budgetRentAmount = numberWithoutCommas($('#oldCostEffect').val());
+        oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
+        oldContractTerm.endDate = $('#oldEndDate').val();
+        oldContractTerm.freeDays = $('#oldFreeDays').val();
+        oldContractTerm.growthRate = Math.round($('#oldGrowthRate').val() / 100);
+        oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
+        oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
+        oldContractTerm.startDate = $('#oldStartDate').val();
+        oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
+        oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
+        oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
+        oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
+        oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
+        oldContractTerm.unitName = $('#oldUnitName').val();
+        oldContractTerm.updateOpenId = openId;
 
         var map = {
             "id": $.request.content.id, //必填
@@ -3262,6 +3305,7 @@ function saveContractForm(s) {
             "lastBrandName": "",
             "mallName": $.request.content.mallName,
             "minSales": 0,
+            "oldContractTerm": oldContractTerm,
             "oldEndDate": $.request.content.oldContractInfo.endDate,
             "oldStartDate": $.request.content.oldContractInfo.startDate,
             "openEndTime": $.request.content.openEndTime,
