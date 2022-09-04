@@ -604,7 +604,7 @@ function findRequestbyBizId() {
                         temp = new Option(data.floorName, data.floorCode, true, true);
                         $('#floor').append(temp).trigger('change');
                         $('#contractName').val(data.contractName);
-                        if(data.modifyType == 'TIME_CHANGE'){
+                        if(data.modifyType == 'TIME_CHANGE' && data.startDate != null){
                             $('#startDate').datepicker('update', data.startDate);
                         } else {
                             $('#startDate').datepicker('update', data.oldContractInfo.startDate);

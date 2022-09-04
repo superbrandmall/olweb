@@ -914,71 +914,20 @@ function findRequestbyBizId() {
                         }
                         
                         /*** START 审批意见书 **/
-                        
-                        $('#newUnitName').text(data.unitName);
-                        $('#newArea').html(data.area+'m<sup>2</sup>');
-                        $('#newBrandName').text(data.brandName);
-                        $('#newBizTypeName').text(data.bizTypeName);
-                        $('#newDuration').text(data.startDate + '-' + data.endDate);
-                        
-                        var fixedRentListIndex = 0;
-                        var propertyFeeListIndex = 0;
-                        var promotionFeeListIndex = 0;
-                        var rentalFloorEffect, rentalFloorTaxEffect;
-                        var totalAmount = 0;
-                        var totalTaxAmount = 0;
-                        if(data.fixedRentList.length > 0){
-                            $('#newFixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].taxAmount));
-                            $('#newFixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
-                            rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
-                            rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
-                            $('#newRentalFloorEffect').text(rentalFloorEffect);
-                            $('#newRentalFloorTaxEffect').text(rentalFloorTaxEffect);
-                            totalAmount += data.fixedRentList[fixedRentListIndex].amount;
-                            totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
-                        }
-
-                        //日租金坪效含税（元/m²/天）= 月租金含税 * 12 / 365 / 面积;
-                        //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
-
-                        if(data.propertyFeeList.length > 0){
-                            $('#newPropertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
-                            $('#newPropertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
-                            totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
-                            totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
-                        }
-
-                        if(data.promotionFeeList.length > 0){
-                            totalAmount += data.promotionFeeList[promotionFeeListIndex].amount;
-                            totalTaxAmount += data.promotionFeeList[promotionFeeListIndex].taxAmount;
-                        }
-
-                        var depositFee = 0;
-                        if(data.depositList.length > 0){
-                            for(var i=0; i < data.depositList.length; i++){
-                                depositFee += data.depositList[i].amount;
-                            }
-                        }
-                        
-                        $('#newTotalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
-                        $('#newTotalAmount').html(accounting.formatNumber(totalAmount));
-                        $('#newGrowthRate').text(data.growthRate * 100 + '%' || '0%');
-                        $('#newDepositFee').text(accounting.formatNumber(depositFee));
-                        $('#newFreeDays').text(data.freeDays || 0);
-                        
                         if(data.oldContractTerm != null){
                             $('#oldUnitName').val(data.oldContractTerm.unitName);
                             $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
                             $('#oldGrowthRate').val(data.oldContractTerm.growthRate * 100 || '0');
                             $('#oldBrandName').val(data.oldContractTerm.brandName);
                             $('#oldArea').val(data.oldContractTerm.area);
-                            $('#oldBizTypeName').val(data.oldContractTerm.bizTypeName);
+                            $('#oldBizTypeName').val(data.oldContractTerm.bizScope);
                             $('#oldStartDate').datepicker('update', data.oldContractTerm.startDate);
                             $('#oldEndDate').datepicker('update', data.oldContractTerm.endDate);
                             $('#oldFixedRentTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxAmount));
                             $('#oldFixedRentAmount').val(accounting.formatNumber(data.oldContractTerm.amount));
                             $('#oldRentalFloorEffect').val(accounting.formatNumber(data.oldContractTerm.rentAmount));
                             $('#oldRentalFloorTaxEffect').val(accounting.formatNumber(data.oldContractTerm.taxRentAmount));
+                            $('#oldCostEffect').val(accounting.formatNumber(data.oldContractTerm.budgetRentAmount));
                             $('#oldPropertyMgmtTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxPropertyFee));
                             $('#oldPropertyMgmtAmount').val(accounting.formatNumber(data.oldContractTerm.propertyFee));
                             $('#oldDepositFee').val(accounting.formatNumber(data.oldContractTerm.deposit));
@@ -3215,7 +3164,10 @@ function saveContractForm(s) {
             }
         }
         
-        var oldContractTerm = $.request.content.oldContractTerm;
+        var oldContractTerm = {};
+        if($.request.content.oldContractTerm != null) {
+            oldContractTerm = $.request.content.oldContractTerm;
+        }
         oldContractTerm.amount = numberWithoutCommas($('#oldFixedRentAmount').val());
         oldContractTerm.area = $('#oldArea').val();
         oldContractTerm.bizId = bizId;
@@ -3225,7 +3177,7 @@ function saveContractForm(s) {
         oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
         oldContractTerm.endDate = $('#oldEndDate').val();
         oldContractTerm.freeDays = $('#oldFreeDays').val();
-        oldContractTerm.growthRate = Math.round($('#oldGrowthRate').val() / 100);
+        oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
         oldContractTerm.startDate = $('#oldStartDate').val();
@@ -3567,7 +3519,7 @@ function saveContractForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
+                            //window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

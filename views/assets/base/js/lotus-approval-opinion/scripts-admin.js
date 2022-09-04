@@ -171,7 +171,7 @@ function refineCreateUrl() {
 function refineUpdateUrl() {
     var url = window.location.href;
     var value = url.substring(url.lastIndexOf('/') + 1);
-    value  = value.split("&s")[0];   
+    value  = value.split("?s")[0];   
     return value;     
 }
 

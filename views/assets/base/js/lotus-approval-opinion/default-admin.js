@@ -1,16 +1,16 @@
 $(document).ready(function(){
-//    if(getURLParameter('s')) {
-//        switch (getURLParameter('s')) {
-//            case "succeed":
-//                successMsg('00','保存成功！');
-//                break;
-//            default:
-//                break;
-//        }
-//        setTimeout(function () {
-//            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineUpdateUrl() );
-//        },1000);
-//    }
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", refineUpdateUrl() );
+        },1000);
+    }
     
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
         findDictCodeByDictTypeCode('FLOW_STEPS');
@@ -21,6 +21,27 @@ $(document).ready(function(){
     }
     
     findRequestByBizId();
+    
+    $('#opinion_agree, #opinion_return').click(function(){
+        var txt;
+        switch ($(this).attr('id').split('_')[1]) {
+            case "agree":
+                txt = '同意';
+                break;
+            case "return":
+                txt = '撤回';
+                break;
+            default:
+                break;
+        }
+        
+        $('#txt').text(txt);
+        $('#approval_form').modal('toggle');
+    })
+    
+    $('#submitApproval').click(function(){
+        approveFlowInput($('#txt').text());
+    })
 })
 
 function findRequestByBizId() {
@@ -942,4 +963,71 @@ function renderFormType(t) {
     }
     
     return type;
+}
+
+function approveFlowInput(txt) {
+    var opinion;
+    switch (txt) {
+        case "同意":
+            opinion = 'agree';
+            break;
+        case "撤回":
+            opinion = 'return';
+            break;
+        default:
+            break;
+    }
+    
+    var openId = 'admin';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            return false;
+        }
+    })
+    
+    var map = {
+        "activityName": "",
+        "approveOpenId": openId,
+        "approveType": opinion,
+        "bizId": getURLBizId,
+        "moduleType": "lotus",
+        "opinion": $('#opinion').val()
+    };
+
+    $.ajax({
+        url: $.api.baseLotus+"/api/flow/approveFlow",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                location.replace('lotus-approval-opinion?s=succeed');
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+            window.location.href = 'create-dict-type?s=create-dict-type-fail';
+        }
+    });
 }

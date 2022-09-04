@@ -2,10 +2,10 @@
 <footer class="main-footer hidden-print text-center" style="margin-left: 0; font-size: 9px; position: fixed; bottom: 0; padding: 0 0 10px 0;">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group" style="padding: 10px 0;">
-            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-check-circle-o"></i> 同意</button>
+            <button type="button" class="btn" id="opinion_agree" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-check-circle-o"></i> 同意</button>
         </div>
         <div class="btn-group" role="group" style="padding: 10px 0;">
-            <button type="button" class="btn" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-arrow-left"></i> 撤回</button>
+            <button type="button" class="btn" id="opinion_return" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-arrow-left"></i> 撤回</button>
         </div>
         <div class="btn-group" role="group" style="padding: 10px 0;">
             <button type="button" class="btn" onclick="javascript: window.print();" style="background: #fff; border-right: solid 1px #ddd;"><i class="fa fa-print"></i> 打印</button>
