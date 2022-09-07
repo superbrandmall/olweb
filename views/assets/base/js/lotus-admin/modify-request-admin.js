@@ -865,6 +865,58 @@ function findRequestbyBizId() {
                             })
                         }
                         
+                        /*** START 审批意见书 **/
+                        $('#oldUnitName').val(data.unitName);
+                        $('#oldFreeDays').val(data.freeDays || 0);
+                        $('#oldGrowthRate').val(data.growthRate * 100 || '0');
+                        $('#oldBrandName').val(data.brandName);
+                        $('#oldArea').val(data.area);
+                        $('#oldBizTypeName').val(data.bizTypeName);
+                        $('#oldStartDate').datepicker('update', data.startDate);
+                        $('#oldEndDate').datepicker('update', data.endDate);
+
+                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
+                        var oldTotalAmount = 0;
+                        var oldTotalTaxAmount = 0;
+                        
+                        if(data.fixedRentList.length > 0){
+                            var ln = data.fixedRentList.length - 1;
+                            $('#oldFixedRentTaxAmount').val(accounting.formatNumber(data.fixedRentList[ln].taxAmount));
+                            $('#oldFixedRentAmount').val(accounting.formatNumber(data.fixedRentList[ln].amount));
+                            oldRentalFloorEffect = data.fixedRentList[ln].rentAmount;
+                            oldRentalFloorTaxEffect = data.fixedRentList[ln].taxRentAmount;
+                            $('#oldRentalFloorEffect').val(oldRentalFloorEffect);
+                            $('#oldRentalFloorTaxEffect').val(oldRentalFloorTaxEffect);
+                            oldTotalAmount += data.fixedRentList[ln].amount;
+                            oldTotalTaxAmount += data.fixedRentList[ln].taxAmount;
+                        }
+
+                        if(data.propertyFeeList.length > 0){
+                            var ln = data.propertyFeeList.length - 1;
+                            $('#oldPropertyMgmtTaxAmount').val(accounting.formatNumber(data.propertyFeeList[ln].taxAmount));
+                            $('#oldPropertyMgmtAmount').val(accounting.formatNumber(data.propertyFeeList[ln].amount));
+                            oldTotalAmount += data.propertyFeeList[ln].amount;
+                            oldTotalTaxAmount += data.propertyFeeList[ln].taxAmount;
+                        }
+
+                        if(data.promotionFeeList.length > 0){
+                            var ln = data.promotionFeeList.length - 1;
+                            oldTotalAmount += data.promotionFeeList[ln].amount;
+                            oldTotalTaxAmount += data.promotionFeeList[ln].taxAmount;
+                        }
+
+                        var oldDepositFee = 0;
+                        if(data.depositList.length > 0){
+                            for(var i=0; i < data.depositList.length; i++){
+                                oldDepositFee += data.depositList[i].amount;
+                            }
+                        }
+                        $('#oldDepositFee').val(accounting.formatNumber(oldDepositFee));
+                        $('#oldTotalAmount').val(accounting.formatNumber(oldTotalAmount));
+                        $('#oldTotalTaxAmount').val(accounting.formatNumber(oldTotalTaxAmount));
+                        
+                        /*** END 审批意见书 **/
+                        
                         appendLotusLeasingHead();
                         
                         $('#Lotus_leasing_head select').val('').select2({
@@ -2979,6 +3031,34 @@ function saveContractForm(s) {
                 } 
             }
         }
+        
+        var oldContractTerm = {};
+        if($.request.content.oldContractTerm != null) {
+            oldContractTerm = $.request.content.oldContractTerm;
+        }
+        oldContractTerm.amount = numberWithoutCommas($('#oldFixedRentAmount').val());
+        oldContractTerm.area = $('#oldArea').val();
+        oldContractTerm.bizId = bizId;
+        oldContractTerm.bizScope = $('#oldBizTypeName').val();
+        oldContractTerm.brandName = $('#oldBrandName').val();
+        oldContractTerm.budgetRentAmount = numberWithoutCommas($('#oldCostEffect').val());
+        oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
+        oldContractTerm.endDate = $('#oldEndDate').val();
+        oldContractTerm.freeDays = $('#oldFreeDays').val();
+        oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
+        oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
+        oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
+        oldContractTerm.shopCode = shopCode;
+        oldContractTerm.startDate = $('#oldStartDate').val();
+        oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
+        oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
+        oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
+        oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
+        oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
+        oldContractTerm.unitCode = $.request.content.unitCode;
+        oldContractTerm.unitName = $('#oldUnitName').val();
+        oldContractTerm.updateOpenId = openId;
+        oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
 
         var map = {
             "id": $.request.content.id, //必填
@@ -3049,6 +3129,7 @@ function saveContractForm(s) {
             "minSales": 0,
             "modifyEffectTime": modifyEffectTime,
             "modifyType": modifyType,
+            "oldContractTerm": oldContractTerm,
             "oldEndDate": $.request.content.endDate,
             "oldStartDate": $.request.content.startDate,
             "openEndTime": openEndTime,

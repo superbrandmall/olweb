@@ -108,11 +108,15 @@ $(document).ready(function(){
                                                         flag = 0;
                                                     }*/
                                                 })
-                                                $.cookie('userModules',JSON.stringify(userModules));
+                                                $.cookie('userModules',JSON.stringify(userModules),{path:"/"});
                                             }
                                             
                                             if(flag == 1){
-                                                window.location.href = "todo";
+                                                if(getURLParameter('approval')){
+                                                    window.location.href = "/id/"+getURLParameter('approval').toLowerCase()+"/lotus-approval-opinion";
+                                                } else {
+                                                    window.location.href = "todo";
+                                                }
                                             }
                                             
                                         }

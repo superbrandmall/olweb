@@ -44,6 +44,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#investmentContractProperteisterm">其它变更条件</a></li>
                     <li><a href="#investmentContractCertificates">合同附件</a></li>
                     <li><a href="#textareapanel">说明</a></li>
+                    <li><a href="#investmentContractPriorTerms">原租户合同</a></li>
                     <li><a href="#approvalProcess">审批流程</a></li>
                 </ul>
             </nav>
@@ -66,6 +67,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         include 'modify/investmentContractProperteisterm.php';
                         include 'modify/investmentContractCertificates.php';
                         include 'modify/textareapanel.php';
+                        include 'modify/investmentContractPriorTerms.php';
                         include 'modify/approvalProcess.php';
                         ?>
                     </div>

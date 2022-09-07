@@ -2985,14 +2985,17 @@ function saveContractForm(s) {
         oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
+        oldContractTerm.shopCode = shopCode;
         oldContractTerm.startDate = $('#oldStartDate').val();
         oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
         oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
         oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
         oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
+        oldContractTerm.unitCode = unitCode;
         oldContractTerm.unitName = $('#oldUnitName').val();
         oldContractTerm.updateOpenId = openId;
+        oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         
         var map = {
             "id": $.request.content.id, //必填
@@ -3006,7 +3009,7 @@ function saveContractForm(s) {
             "contractType": $.request.content.contractType, //必填
             "unitCode": unitCode, //必填
             "mallCode": $.request.mallCode, //必填
-            "startDate": IncrDate($.request.content.endDate), //必填
+            "startDate": IncrDate($.request.content.oldContractInfo.endDate), //必填
             "unitName": unitName, //必填
             "activityTimes": 0,
             "approvalName": creatorName,
@@ -3324,7 +3327,7 @@ function saveContractForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            //window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

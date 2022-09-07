@@ -1,4 +1,11 @@
 <?php
+    if(explode('?logout=', $_SERVER['REQUEST_URI'])[1] != null) {
+        if(session_id() == '' || !isset($_SESSION)) {
+            session_start();
+        }
+        session_destroy();
+    }
+    
     session_start();
     include ('system/Router.php');
     $scripts = null;

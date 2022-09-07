@@ -9,7 +9,7 @@ $(document).ready(function(){
         }
         setTimeout(function () {
             window.history.pushState("object or string", "Title", refineUpdateUrl() );
-        },1000);
+        },10000);
     }
     
     if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
@@ -40,7 +40,11 @@ $(document).ready(function(){
     })
     
     $('#submitApproval').click(function(){
-        approveFlowInput($('#txt').text());
+        if($.cookie('userModules') == '' || $.cookie('userModules') == null){
+            window.location.href = '/lotus-admin/login?approval='+getURLBizId();
+        } else {
+            approveFlowInput($('#txt').text());
+        }
     })
 })
 
@@ -265,67 +269,67 @@ function findRequestByBizId() {
                             $('#newBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业。');
                         }
                     } else if($.inArray(data.formType, ['renew','modify','termination']) != -1){
-                        $('#oldUnitName').text(oldContractInfo.unitName);
-                        $('#oldFreeDays').text(oldContractInfo.freeDays || 0);
-                        if(data.formType == 'termination'){
-                            $('#oldGrowthRate').text('/');
-                        } else {
-                            $('#oldGrowthRate').text(oldContractInfo.growthRate * 100 + '%' || '0%');
-                        }
-                        $('#oldBrandName').text(oldContractInfo.brandName);
-                        $('#oldArea').html(oldContractInfo.area+'m<sup>2</sup>');
-                        $('#oldBizTypeName').text(oldContractInfo.bizTypeName);
-                        $('#oldDuration').text(oldContractInfo.startDate + '-' + oldContractInfo.endDate);
-
-                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
-                        var oldTotalAmount = 0;
-                        var oldTotalTaxAmount = 0;
-                        
-                        if(oldContractInfo.fixedRentList.length > 0){
-                            var ln = oldContractInfo.fixedRentList.length - 1;
-                            if(data.formType == 'termination'){
-                                ln = fixedRentListIndex;
-                            }
-                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].taxAmount));
-                            $('#oldFixedRentAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].amount));
-                            oldRentalFloorEffect = oldContractInfo.fixedRentList[ln].rentAmount;
-                            oldRentalFloorTaxEffect = oldContractInfo.fixedRentList[ln].taxRentAmount;
-                            $('#oldRentalFloorEffect').text(oldRentalFloorEffect);
-                            $('#oldRentalFloorTaxEffect').text(oldRentalFloorTaxEffect);
-                            oldTotalAmount += oldContractInfo.fixedRentList[ln].amount;
-                            oldTotalTaxAmount += oldContractInfo.fixedRentList[ln].taxAmount;
-                        }
-
-                        if(oldContractInfo.propertyFeeList.length > 0){
-                            var ln = oldContractInfo.propertyFeeList.length - 1;
-                            if(data.formType == 'termination'){
-                                ln = propertyFeeListIndex;
-                            }
-                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].taxAmount));
-                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].amount));
-                            oldTotalAmount += oldContractInfo.propertyFeeList[ln].amount;
-                            oldTotalTaxAmount += oldContractInfo.propertyFeeList[ln].taxAmount;
-                        }
-
-                        if(oldContractInfo.promotionFeeList.length > 0){
-                            var ln = oldContractInfo.promotionFeeList.length - 1;
-                            if(data.formType == 'termination'){
-                                ln = promotionFeeListIndex;
-                            }
-                            oldTotalAmount += oldContractInfo.promotionFeeList[ln].amount;
-                            oldTotalTaxAmount += oldContractInfo.promotionFeeList[ln].taxAmount;
-                        }
-
-                        var oldDepositFee = 0;
-                        if(oldContractInfo.depositList.length > 0){
-                            for(var i=0; i < oldContractInfo.depositList.length; i++){
-                                oldDepositFee += oldContractInfo.depositList[i].amount;
-                            }
-                        }
-                        $('#oldDepositFee').text(oldDepositFee);
-
-                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
-                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
+//                        $('#oldUnitName').text(oldContractInfo.unitName);
+//                        $('#oldFreeDays').text(oldContractInfo.freeDays || 0);
+//                        if(data.formType == 'termination'){
+//                            $('#oldGrowthRate').text('/');
+//                        } else {
+//                            $('#oldGrowthRate').text(oldContractInfo.growthRate * 100 + '%' || '0%');
+//                        }
+//                        $('#oldBrandName').text(oldContractInfo.brandName);
+//                        $('#oldArea').html(oldContractInfo.area+'m<sup>2</sup>');
+//                        $('#oldBizTypeName').text(oldContractInfo.bizTypeName);
+//                        $('#oldDuration').text(oldContractInfo.startDate + '-' + oldContractInfo.endDate);
+//
+//                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
+//                        var oldTotalAmount = 0;
+//                        var oldTotalTaxAmount = 0;
+//                        
+//                        if(oldContractInfo.fixedRentList.length > 0){
+//                            var ln = oldContractInfo.fixedRentList.length - 1;
+//                            if(data.formType == 'termination'){
+//                                ln = fixedRentListIndex;
+//                            }
+//                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].taxAmount));
+//                            $('#oldFixedRentAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].amount));
+//                            oldRentalFloorEffect = oldContractInfo.fixedRentList[ln].rentAmount;
+//                            oldRentalFloorTaxEffect = oldContractInfo.fixedRentList[ln].taxRentAmount;
+//                            $('#oldRentalFloorEffect').text(oldRentalFloorEffect);
+//                            $('#oldRentalFloorTaxEffect').text(oldRentalFloorTaxEffect);
+//                            oldTotalAmount += oldContractInfo.fixedRentList[ln].amount;
+//                            oldTotalTaxAmount += oldContractInfo.fixedRentList[ln].taxAmount;
+//                        }
+//
+//                        if(oldContractInfo.propertyFeeList.length > 0){
+//                            var ln = oldContractInfo.propertyFeeList.length - 1;
+//                            if(data.formType == 'termination'){
+//                                ln = propertyFeeListIndex;
+//                            }
+//                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].taxAmount));
+//                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].amount));
+//                            oldTotalAmount += oldContractInfo.propertyFeeList[ln].amount;
+//                            oldTotalTaxAmount += oldContractInfo.propertyFeeList[ln].taxAmount;
+//                        }
+//
+//                        if(oldContractInfo.promotionFeeList.length > 0){
+//                            var ln = oldContractInfo.promotionFeeList.length - 1;
+//                            if(data.formType == 'termination'){
+//                                ln = promotionFeeListIndex;
+//                            }
+//                            oldTotalAmount += oldContractInfo.promotionFeeList[ln].amount;
+//                            oldTotalTaxAmount += oldContractInfo.promotionFeeList[ln].taxAmount;
+//                        }
+//
+//                        var oldDepositFee = 0;
+//                        if(oldContractInfo.depositList.length > 0){
+//                            for(var i=0; i < oldContractInfo.depositList.length; i++){
+//                                oldDepositFee += oldContractInfo.depositList[i].amount;
+//                            }
+//                        }
+//                        $('#oldDepositFee').text(oldDepositFee);
+//
+//                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
+//                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
                         
                         $('#changeFixed, #changeDeduct, #changeProperty, #changePromotion, #changeDeposit').show();
                         if(data.formType == 'renew'){
@@ -735,6 +739,26 @@ function findRequestByBizId() {
                         }
                     }
                     
+                    if(data.oldContractTerm != null) {
+                        $('#oldUnitName').text(data.oldContractTerm.unitName);
+                        $('#oldFreeDays').text(data.oldContractTerm.freeDays || 0);
+                        $('#oldGrowthRate').text(data.oldContractTerm.growthRate * 100 + '%' || '0%');
+                        $('#oldBrandName').text(data.oldContractTerm.brandName);
+                        $('#oldArea').html(data.oldContractTerm.area+'m<sup>2</sup>');
+                        $('#oldBizTypeName').text(data.oldContractTerm.bizScope);
+                        $('#oldDuration').text(data.oldContractTerm.startDate + '-' + data.oldContractTerm.endDate);
+                        $('#oldFixedRentTaxAmount').text(accounting.formatNumber(data.oldContractTerm.taxAmount));
+                        $('#oldFixedRentAmount').text(accounting.formatNumber(data.oldContractTerm.amount));
+                        $('#oldRentalFloorEffect').text(accounting.formatNumber(data.oldContractTerm.rentAmount));
+                        $('#oldRentalFloorTaxEffect').text(accounting.formatNumber(data.oldContractTerm.taxRentAmount));
+                        $('#oldCostEffect').text(accounting.formatNumber(data.oldContractTerm.budgetRentAmount));
+                        $('#oldPropertyMgmtTaxAmount').text(accounting.formatNumber(data.oldContractTerm.taxPropertyFee));
+                        $('#oldPropertyMgmtAmount').text(accounting.formatNumber(data.oldContractTerm.propertyFee));
+                        $('#oldDepositFee').text(accounting.formatNumber(data.oldContractTerm.deposit));
+                        $('#oldTotalAmount').text(accounting.formatNumber(data.oldContractTerm.totalRent));
+                        $('#oldTotalTaxAmount').text(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
+                    }
+                
                     if(data.coFileList.length > 0){
                         $.each(data.coFileList, function(i,v) {
                             if(v.bizType != null){
@@ -990,7 +1014,7 @@ function approveFlowInput(txt) {
         "activityName": "",
         "approveOpenId": openId,
         "approveType": opinion,
-        "bizId": getURLBizId,
+        "bizId": getURLBizId(),
         "moduleType": "lotus",
         "opinion": $('#opinion').val()
     };
@@ -1019,9 +1043,20 @@ function approveFlowInput(txt) {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-
-                location.replace('lotus-approval-opinion?s=succeed');
+                
+                if(response.data != null){
+                    if(response.data.success == true){
+                        window.location.href = "/id/"+getURLBizId().toLowerCase()+"/lotus-approval-opinion?s=succeed";
+                    } else {
+                        $('#approval_form').modal('toggle');
+                        alertMsg(response.code,response.data.error); 
+                    }
+                } else {
+                    $('#approval_form').modal('toggle');
+                    alertMsg(response.code,'您无需审批'); 
+                }
             } else {
+                $('#approval_form').modal('toggle');
                 alertMsg(response.code,response.customerMessage);
             }
         },

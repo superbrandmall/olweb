@@ -544,7 +544,7 @@ function deleteFile(id) {
 
 function contractUpload(bizId, type) {
     $.ajax({
-        url: $.api.baseLotus+"/api/rent/contract/form/contractUpload?bizId="+bizId+"&stepType=CONTRACT_"+type,
+        url: $.api.baseLotus+"/api/rent/contract/form/contractUpload?bizId="+bizId+"&stepType=CONTRACT_"+type,  //参数加上openid
         type: "GET",
         async: false,
         beforeSend: function(request) {

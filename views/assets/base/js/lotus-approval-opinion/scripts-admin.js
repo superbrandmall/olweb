@@ -36,6 +36,12 @@ $(document).ready(function(){
     };
     
     scrollJump();
+    
+    if(getURLParameter('logout')) {
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", refineUpdateUrl() );
+        },5000);
+    }
 })
 
 function alertMsg(code,m) {
@@ -80,7 +86,7 @@ function successMsg(code,m) {
             break;
     }
     
-    var msgDiv = '<div id="msgDiv" class="row"'+style+'>\n\
+    var msgDiv = '<div id="msgDiv" class="row"'+style+' role="alert">\n\
             <div class="col-md-12">\n\
                     <h5 class="callout callout-'+color+'"><a href="javascript: void(0);" onclick=\'javascript: $("#msgDiv").remove()\' style="float: right;"><i class="fa fa-times"></i></a>'+msg+'</h5>\n\
                 </div>\n\
@@ -91,8 +97,10 @@ function successMsg(code,m) {
         scrollTop: $('#webui').offset().top
     }, 0);
     setTimeout(function () {
-        $('#msgDiv').remove();
-    }, 60000); 
+        if($('#msgDiv').length > 0){
+            $('#msgDiv').remove();
+        }
+    }, 6000000); 
 }
 
 function alertModalMsg(code,m) {
@@ -181,8 +189,8 @@ function logout() {
     for (var i = keys.length; i--;) 
         document.cookie = keys[i]+'=0;expires=' + new Date(0).toUTCString();
     }
-    
-    window.location.href = 'logout';
+    clearCookie();
+    window.location.href = "/id/"+getURLBizId().toLowerCase()+"/lotus-approval-opinion?logout=1";
 }
 
 (function (){
@@ -485,6 +493,17 @@ function calDatesDiff(s,e) {
     var time=enddate.getTime()-startdate.getTime();
     var days=parseInt(time/(1000 * 60 * 60 * 24) + 1);
     return days;
+}
+
+function clearCookie() {
+    var keys = document.cookie.match(/[^ =;]+(?=\=)/g);
+    if (keys) {
+        for (var i = keys.length; i--;) {
+            document.cookie = keys[i] + '=0;path=/;expires=' + new Date(0).toUTCString();//清除当前域名下的
+            document.cookie = keys[i] + '=0;path=/;domain=' + document.domain + ';expires=' + new Date(0).toUTCString();//清除当前域名下的
+            //document.cookie = keys[i] + '=0;path=/;domain=kevis.com;expires=' + new Date(0).toUTCString();//清除一级域名下的或指定的
+        }
+    }
 }
 
 (function ($) {

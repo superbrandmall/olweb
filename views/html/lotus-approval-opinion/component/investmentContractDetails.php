@@ -64,7 +64,7 @@
                                         </tr>
                                         <tr>
                                             <td>成本坪效(元/m²/天)</td>
-                                            <td>/</td>
+                                            <td id="oldCostEffect"></td>
                                             <td>/</td>
                                         </tr>
                                         <tr>

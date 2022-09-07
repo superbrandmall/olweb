@@ -1577,6 +1577,33 @@ function saveContractForm(s) {
             }
         }
         
+        var oldContractTerm = {};
+        oldContractTerm.amount = numberWithoutCommas($('#oldFixedRentAmount').val());
+        oldContractTerm.area = $('#oldArea').val();
+        oldContractTerm.bizId = bizId;
+        oldContractTerm.bizScope = $('#oldBizTypeName').val();
+        oldContractTerm.brandName = $('#oldBrandName').val();
+        oldContractTerm.budgetRentAmount = numberWithoutCommas($('#oldCostEffect').val());
+        oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
+        oldContractTerm.endDate = $('#oldEndDate').val();
+        oldContractTerm.freeDays = $('#oldFreeDays').val();
+        oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
+        oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
+        oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
+        oldContractTerm.shopCode = shopCode;
+        oldContractTerm.startDate = $('#oldStartDate').val();
+        oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
+        oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
+        oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
+        oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
+        oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
+        oldContractTerm.unitCode = unitCode;
+        oldContractTerm.unitName = $('#oldUnitName').val();
+        oldContractTerm.updateOpenId = openId;
+        if(oldContractTerm.startDate != '' && oldContractTerm.endDate != ''){
+            oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
+        }
+        
         var map = {
             "id": $.request.id, //必填
             "code": '', //必填
@@ -1645,6 +1672,7 @@ function saveContractForm(s) {
             "lastBrandName": "",
             "mallName": $.cookie('mallSelected').split(':::')[0],
             "minSales": 0,
+            "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),
             "openStartTime": $('#openStartTime').val(),
             "overdueBizAmount": 0,

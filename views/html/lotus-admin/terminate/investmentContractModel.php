@@ -54,6 +54,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-4 control-label">SAP编号</label>
+                <div class="col-md-8 col-sm-12">
+                    <input class="form-control" id="sapContractNo" type="text" readonly />
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-4 control-label">签约日期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
@@ -62,12 +68,6 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="form-group">
-                <label class="col-md-4 control-label">e签宝用印 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                    <input type="checkbox" id="esignFlag">
-                </div>
-            </div>-->
         </div>
     </div>
 </div>
