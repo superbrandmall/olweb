@@ -1,12 +1,10 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/make-request-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/html2canvas.min.js"></script>'.PHP_EOL;            
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;            
 } else {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/make-request.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/html2canvas.min.js"></script>'.PHP_EOL;            
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;            
 }
 
 ?>

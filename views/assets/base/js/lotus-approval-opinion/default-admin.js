@@ -268,69 +268,7 @@ function findRequestByBizId() {
                         if(data.bizDate != null && data.bizDate != ''){
                             $('#newBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业。');
                         }
-                    } else if($.inArray(data.formType, ['renew','modify','termination']) != -1){
-//                        $('#oldUnitName').text(oldContractInfo.unitName);
-//                        $('#oldFreeDays').text(oldContractInfo.freeDays || 0);
-//                        if(data.formType == 'termination'){
-//                            $('#oldGrowthRate').text('/');
-//                        } else {
-//                            $('#oldGrowthRate').text(oldContractInfo.growthRate * 100 + '%' || '0%');
-//                        }
-//                        $('#oldBrandName').text(oldContractInfo.brandName);
-//                        $('#oldArea').html(oldContractInfo.area+'m<sup>2</sup>');
-//                        $('#oldBizTypeName').text(oldContractInfo.bizTypeName);
-//                        $('#oldDuration').text(oldContractInfo.startDate + '-' + oldContractInfo.endDate);
-//
-//                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
-//                        var oldTotalAmount = 0;
-//                        var oldTotalTaxAmount = 0;
-//                        
-//                        if(oldContractInfo.fixedRentList.length > 0){
-//                            var ln = oldContractInfo.fixedRentList.length - 1;
-//                            if(data.formType == 'termination'){
-//                                ln = fixedRentListIndex;
-//                            }
-//                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].taxAmount));
-//                            $('#oldFixedRentAmount').html(accounting.formatNumber(oldContractInfo.fixedRentList[ln].amount));
-//                            oldRentalFloorEffect = oldContractInfo.fixedRentList[ln].rentAmount;
-//                            oldRentalFloorTaxEffect = oldContractInfo.fixedRentList[ln].taxRentAmount;
-//                            $('#oldRentalFloorEffect').text(oldRentalFloorEffect);
-//                            $('#oldRentalFloorTaxEffect').text(oldRentalFloorTaxEffect);
-//                            oldTotalAmount += oldContractInfo.fixedRentList[ln].amount;
-//                            oldTotalTaxAmount += oldContractInfo.fixedRentList[ln].taxAmount;
-//                        }
-//
-//                        if(oldContractInfo.propertyFeeList.length > 0){
-//                            var ln = oldContractInfo.propertyFeeList.length - 1;
-//                            if(data.formType == 'termination'){
-//                                ln = propertyFeeListIndex;
-//                            }
-//                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].taxAmount));
-//                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(oldContractInfo.propertyFeeList[ln].amount));
-//                            oldTotalAmount += oldContractInfo.propertyFeeList[ln].amount;
-//                            oldTotalTaxAmount += oldContractInfo.propertyFeeList[ln].taxAmount;
-//                        }
-//
-//                        if(oldContractInfo.promotionFeeList.length > 0){
-//                            var ln = oldContractInfo.promotionFeeList.length - 1;
-//                            if(data.formType == 'termination'){
-//                                ln = promotionFeeListIndex;
-//                            }
-//                            oldTotalAmount += oldContractInfo.promotionFeeList[ln].amount;
-//                            oldTotalTaxAmount += oldContractInfo.promotionFeeList[ln].taxAmount;
-//                        }
-//
-//                        var oldDepositFee = 0;
-//                        if(oldContractInfo.depositList.length > 0){
-//                            for(var i=0; i < oldContractInfo.depositList.length; i++){
-//                                oldDepositFee += oldContractInfo.depositList[i].amount;
-//                            }
-//                        }
-//                        $('#oldDepositFee').text(oldDepositFee);
-//
-//                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount));
-//                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount));
-                        
+                    } else if($.inArray(data.formType, ['renew','modify','termination']) != -1){                        
                         $('#changeFixed, #changeDeduct, #changeProperty, #changePromotion, #changeDeposit').show();
                         if(data.formType == 'renew'){
                             $('#renewRemark').show();
@@ -463,7 +401,7 @@ function findRequestByBizId() {
                                 } else {
                                     $('#renewGrowthRate').html('增长<span class="txt">'+Math.round(data.growthRate * 100)+'</span>%，');
                                 }
-                                saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100;
+                                saleRentalRatio = (data.renewAvgSales > 0 ? Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100 : '/');
                             }
                             if(data.deductList.length > 0){
                                 $('#renewCommission').html('扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
@@ -474,7 +412,7 @@ function findRequestByBizId() {
                             if(data.promotionFeeList.length > 0){
                                 $('#renewPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                             }
-                            $('#renewRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%。');
+                            $('#renewRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+saleRentalRatio+'</span>%。');
                         } else if(data.formType == 'modify') {
                             $('#modifyRemark').show();
                             
@@ -757,6 +695,70 @@ function findRequestByBizId() {
                         $('#oldDepositFee').text(accounting.formatNumber(data.oldContractTerm.deposit));
                         $('#oldTotalAmount').text(accounting.formatNumber(data.oldContractTerm.totalRent));
                         $('#oldTotalTaxAmount').text(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
+                    } else if(data.oldContractInfo != null) {
+                        $('#oldUnitName').html(data.oldContractInfo.unitName+' <span class="label label-info">系</span>');
+                        $('#oldFreeDays').html(data.oldContractInfo.freeDays != null ? data.oldContractInfo.freeDays+' <span class="label label-info">系</span>' : 0);
+                        if(data.formType == 'termination'){
+                            $('#oldGrowthRate').text('/');
+                        } else {
+                            $('#oldGrowthRate').html(data.oldContractInfo.growthRate * 100 + '%'+' <span class="label label-info">系</span>' || '0%');
+                        }
+                        $('#oldBrandName').html(data.oldContractInfo.brandName+' <span class="label label-info">系</span>');
+                        $('#oldArea').html(data.oldContractInfo.area+'m<sup>2</sup>'+' <span class="label label-info">系</span>');
+                        $('#oldBizTypeName').html(data.oldContractInfo.bizTypeName+' <span class="label label-info">系</span>');
+                        $('#oldDuration').html(data.oldContractInfo.startDate + '-' + data.oldContractInfo.endDate+' <span class="label label-info">系</span>');
+
+                        var oldRentalFloorEffect, oldRentalFloorTaxEffect;
+                        var oldTotalAmount = 0;
+                        var oldTotalTaxAmount = 0;
+                        
+                        if(data.oldContractInfo.fixedRentList.length > 0){
+                            var ln = data.oldContractInfo.fixedRentList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = fixedRentListIndex;
+                            }
+                            $('#oldFixedRentTaxAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].taxAmount)+' <span class="label label-info">系</span>');
+                            $('#oldFixedRentAmount').html(accounting.formatNumber(data.oldContractInfo.fixedRentList[ln].amount)+' <span class="label label-info">系</span>');
+                            oldRentalFloorEffect = data.oldContractInfo.fixedRentList[ln].rentAmount;
+                            oldRentalFloorTaxEffect = data.oldContractInfo.fixedRentList[ln].taxRentAmount;
+                            $('#oldRentalFloorEffect').html(oldRentalFloorEffect+' <span class="label label-info">系</span>');
+                            $('#oldRentalFloorTaxEffect').html(oldRentalFloorTaxEffect+' <span class="label label-info">系</span>');
+                            oldTotalAmount += data.oldContractInfo.fixedRentList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.fixedRentList[ln].taxAmount;
+                        }
+                        
+                        $('#oldCostEffect').text('/');
+
+                        if(data.oldContractInfo.propertyFeeList.length > 0){
+                            var ln = data.oldContractInfo.propertyFeeList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = propertyFeeListIndex;
+                            }
+                            $('#oldPropertyMgmtTaxAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].taxAmount)+' <span class="label label-info">系</span>');
+                            $('#oldPropertyMgmtAmount').html(accounting.formatNumber(data.oldContractInfo.propertyFeeList[ln].amount)+' <span class="label label-info">系</span>');
+                            oldTotalAmount += data.oldContractInfo.propertyFeeList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.propertyFeeList[ln].taxAmount;
+                        }
+
+                        if(data.oldContractInfo.promotionFeeList.length > 0){
+                            var ln = data.oldContractInfo.promotionFeeList.length - 1;
+                            if(data.formType == 'termination'){
+                                ln = promotionFeeListIndex;
+                            }
+                            oldTotalAmount += data.oldContractInfo.promotionFeeList[ln].amount;
+                            oldTotalTaxAmount += data.oldContractInfo.promotionFeeList[ln].taxAmount;
+                        }
+
+                        var oldDepositFee = 0;
+                        if(data.oldContractInfo.depositList.length > 0){
+                            for(var i=0; i < data.oldContractInfo.depositList.length; i++){
+                                oldDepositFee += data.oldContractInfo.depositList[i].amount;
+                            }
+                        }
+                        $('#oldDepositFee').html(oldDepositFee+' <span class="label label-info">系</span>');
+
+                        $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount)+' <span class="label label-info">系</span>');
+                        $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount)+' <span class="label label-info">系</span>');
                     }
                 
                     if(data.coFileList.length > 0){
