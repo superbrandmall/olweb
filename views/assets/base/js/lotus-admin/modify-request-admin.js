@@ -868,7 +868,7 @@ function findRequestbyBizId() {
                         /*** START 审批意见书 **/
                         $('#oldUnitName').val(data.unitName);
                         $('#oldFreeDays').val(data.freeDays || 0);
-                        $('#oldGrowthRate').val(data.growthRate * 100 || '0');
+                        $('#oldGrowthRate').val(Math.round(data.growthRate * 100) || '0');
                         $('#oldBrandName').val(data.brandName);
                         $('#oldArea').val(data.area);
                         $('#oldBizTypeName').val(data.bizTypeName);
@@ -2459,6 +2459,7 @@ function saveContractForm(s) {
         var freeDays = $.request.content.freeDays;
         var freeEndDate = $.request.content.freeEndDate;
         var freeStartDate = $.request.content.freeStartDate;
+        var bizDate = $.request.content.bizDate;
         var openEndTime = $.request.content.openEndTime;
         var openStartTime = $.request.content.openStartTime;
         var secondCompareCycle = $.request.content.compareSecondFrequency;
@@ -2485,6 +2486,7 @@ function saveContractForm(s) {
                 freeDays = $('#freeDays').val();
                 freeEndDate = $('#freeEndDate_1').val();
                 freeStartDate = $('#freeStartDate_1').val();
+                bizDate = $('#bizDate').val();
                 openEndTime = $('#openEndTime').val();
                 openStartTime = $('#openStartTime').val();
                 secondCompareCycle = $('#compareSecondFrequency').val() != "" ? $('#compareSecondFrequency').val() : "";
@@ -3079,7 +3081,7 @@ function saveContractForm(s) {
             "approvalOpenId": openId,
             "awardDate": awardDate,
             "bindCondition": "",
-            "bizDate": $.request.content.bizDate,
+            "bizDate": bizDate,
             "bizFreeEndDate": "",
             "bizFreeStartDate": "",
             "bizScope": $.request.content.bizScope,

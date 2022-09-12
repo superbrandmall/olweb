@@ -2,7 +2,7 @@
     <div class="box-header with-border">
         <h3 class="box-title">推广费</h3>
     </div>
-    <div class="box-body" id="newPromotion" style="padding: 0; display: none;">
+    <div class="box-body" id="newPromotionFee" style="padding: 0; display: none;">
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">

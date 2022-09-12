@@ -2693,7 +2693,7 @@ function activateAddDeleteRow(){
 
 function modifyTypeCheck() {
     if($('#contractModifyType').val() != ''){
-        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_'], \n\
+        $("#selectTenant, #brandName, #contractName, #startDate, #endDate, tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_'], \n\
         tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #investmentContractEnteryterm input, #selectRentCalculationMode, #targetSales").attr('disabled','disabled');
         $('#startDate, #endDate, #investmentContractEnteryterm input, #targetSales').next().css({
             'border': 'none',

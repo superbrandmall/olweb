@@ -1,6 +1,6 @@
 <div class="box box-default" id="investmentContractContractScreenshot">    
     <div class="box-header with-border">
-        <h3 class="box-title">合同以及单据快照</h3>
+        <h3 class="box-title">合同以及招商租赁审批意见书</h3>
         <div class="box-tools">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>

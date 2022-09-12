@@ -917,7 +917,7 @@ function findRequestbyBizId() {
                         if(data.oldContractTerm != null){
                             $('#oldUnitName').val(data.oldContractTerm.unitName);
                             $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
-                            $('#oldGrowthRate').val(data.oldContractTerm.growthRate * 100 || '0');
+                            $('#oldGrowthRate').val(Math.round(data.oldContractTerm.growthRate * 100) || '0');
                             $('#oldBrandName').val(data.oldContractTerm.brandName);
                             $('#oldArea').val(data.oldContractTerm.area);
                             $('#oldBizTypeName').val(data.oldContractTerm.bizScope);
@@ -936,7 +936,7 @@ function findRequestbyBizId() {
                         } else {
                             $('#oldUnitName').val(data.oldContractInfo.unitName);
                             $('#oldFreeDays').val(data.oldContractInfo.freeDays || 0);
-                            $('#oldGrowthRate').val(data.oldContractInfo.growthRate * 100 || '0');
+                            $('#oldGrowthRate').val(Math.round(data.oldContractInfo.growthRate * 100) || '0');
                             $('#oldBrandName').val(data.oldContractInfo.brandName);
                             $('#oldArea').val(data.oldContractInfo.area);
                             $('#oldBizTypeName').val(data.oldContractInfo.bizTypeName);

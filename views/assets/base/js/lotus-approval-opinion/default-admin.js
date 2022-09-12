@@ -99,7 +99,7 @@ function findRequestByBizId() {
                     $('#mallName').text(data.mallName);                    
                     $('#unitName').text(data.unitName);
                     $('#freeDays').text(data.freeDays || 0);
-                    $('#growthRate').text(data.growthRate * 100 + '%' || '0%');
+                    $('#growthRate').text(Math.round(data.growthRate * 100) + '%' || '0%');
                     $('#brandName').text(data.brandName);
                     $('#area').html(data.area+'m<sup>2</sup>');
                     $('#bizTypeName').text(data.bizTypeName);
@@ -131,8 +131,8 @@ function findRequestByBizId() {
                         $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
                         rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
                         rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
-                        $('#rentalFloorEffect').text(rentalFloorEffect);
-                        $('#rentalFloorTaxEffect').text(rentalFloorTaxEffect);
+                        $('#rentalFloorEffect').text(accounting.formatNumber(rentalFloorEffect));
+                        $('#rentalFloorTaxEffect').text(accounting.formatNumber(rentalFloorTaxEffect));
                         totalAmount += data.fixedRentList[fixedRentListIndex].amount;
                         totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
                     }
@@ -158,13 +158,13 @@ function findRequestByBizId() {
                             depositFee += data.depositList[i].amount;
                         }
                     }
-                    $('#depositFee').text(depositFee);
+                    $('#depositFee').text(accounting.formatNumber(depositFee));
                     $('#totalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
                     $('#totalAmount').html(accounting.formatNumber(totalAmount));
                     
                     var oldContractInfo = data.oldContractInfo;
                     if(data.formType == 'new'){
-                        $('#newFixed, #newDeduct, #newProperty, #newPromotion, #newDeposit, #newRemark').show();
+                        $('#newFixed, #newDeduct, #newProperty, #newPromotionFee, #newDeposit, #newRemark').show();
                         
                         if(data.fixedRentList.length > 0){
                             $.each(data.fixedRentList, function(i,v) {
@@ -680,7 +680,7 @@ function findRequestByBizId() {
                     if(data.oldContractTerm != null) {
                         $('#oldUnitName').text(data.oldContractTerm.unitName);
                         $('#oldFreeDays').text(data.oldContractTerm.freeDays || 0);
-                        $('#oldGrowthRate').text(data.oldContractTerm.growthRate * 100 + '%' || '0%');
+                        $('#oldGrowthRate').text(Math.round(data.oldContractTerm.growthRate * 100) + '%' || '0%');
                         $('#oldBrandName').text(data.oldContractTerm.brandName);
                         $('#oldArea').html(data.oldContractTerm.area+'m<sup>2</sup>');
                         $('#oldBizTypeName').text(data.oldContractTerm.bizScope);

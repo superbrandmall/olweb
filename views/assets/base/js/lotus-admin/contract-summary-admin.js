@@ -56,6 +56,15 @@ function findContractByContractNo() {
                     $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
                     $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
                     findContractCommissionByContractNo(data.rentCalculationMode);
+                    
+                    if(response.data.bizId != null){
+                        $('#fileList2').append('<tr>\n\
+                        <td>意见书</td>\n\
+                        <td></td>\n\
+                        <td><a href="/id/'+response.data.bizId.toLowerCase()+'/lotus-approval-opinion" target="_blank">招商租赁审批意见书</a></td>\n\
+                        <td></td>\n\
+                        </tr>');
+                    }
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -145,14 +154,7 @@ function findContractCoFilesByBizId(id){
                                     <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
                                     <td>'+fileSize+'</td>\n\
                                     </tr>');
-                                    } else if(bizType == 'screenshot') {
-                                        $('#fileList2').append('<tr>\n\
-                                    <td>'+type+'</td>\n\
-                                    <td>'+v.created+'</td>\n\
-                                    <td><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">'+v.fileName+'</a></td>\n\
-                                    <td>'+fileSize+'</td>\n\
-                                    </tr>');
-                                    } else {
+                                    } else if(bizType != 'screenshot') {
                                         $('#fileList').append('<tr>\n\
                                     <td>'+type+'</td>\n\
                                     <td>'+v.created+'</td>\n\

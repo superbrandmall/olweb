@@ -890,7 +890,7 @@ function findRequestbyBizId() {
                     if(data.oldContractTerm != null){
                         $('#oldUnitName').val(data.oldContractTerm.unitName);
                         $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
-                        $('#oldGrowthRate').val(data.oldContractTerm.growthRate * 100 || '0');
+                        $('#oldGrowthRate').val(Math.round(data.oldContractTerm.growthRate * 100) || '0');
                         $('#oldBrandName').val(data.oldContractTerm.brandName);
                         $('#oldArea').val(data.oldContractTerm.area);
                         $('#oldBizTypeName').val(data.oldContractTerm.bizScope);
@@ -2545,6 +2545,96 @@ function submitCheck() {
         }
     }
     
+    if($('#oldUnitName').val() == '') {
+        flag = 0;
+        $('#oldUnitName').parent().append(error);
+    }
+    
+    if($('#oldBizTypeName').val() == '') {
+        flag = 0;
+        $('#oldBizTypeName').parent().append(error);
+    }
+    
+    if($('#oldRentalFloorEffect').val() == '') {
+        flag = 0;
+        $('#oldRentalFloorEffect').parent().append(error);
+    }
+    
+    if($('#oldArea').val() == '') {
+        flag = 0;
+        $('#oldArea').parent().append(error);
+    }
+    
+    if($('#oldStartDate').val() == '') {
+        flag = 0;
+        $('#oldStartDate').parent().append(error);
+    }
+    
+    if($('#oldEndDate').val() == '') {
+        flag = 0;
+        $('#oldEndDate').parent().append(error);
+    }
+    
+    if($('#oldCostEffect').val() == '') {
+        flag = 0;
+        $('#oldCostEffect').parent().append(error);
+    }
+    
+    if($('#oldBrandName').val() == '') {
+        flag = 0;
+        $('#oldBrandName').parent().append(error);
+    }
+    
+    if($('#oldRentalFloorTaxEffect').val() == '') {
+        flag = 0;
+        $('#oldRentalFloorTaxEffect').parent().append(error);
+    }
+    
+    if($('#oldFixedRentTaxAmount').val() == '') {
+        flag = 0;
+        $('#oldFixedRentTaxAmount').parent().append(error);
+    }
+    
+    if($('#oldFixedRentAmount').val() == '') {
+        flag = 0;
+        $('#oldFixedRentAmount').parent().append(error);
+    }
+    
+    if($('#oldTotalTaxAmount').val() == '') {
+        flag = 0;
+        $('#oldTotalTaxAmount').parent().append(error);
+    }
+    
+    if($('#oldDepositFee').val() == '') {
+        flag = 0;
+        $('#oldDepositFee').parent().append(error);
+    }
+    
+    if($('#oldPropertyMgmtTaxAmount').val() == '') {
+        flag = 0;
+        $('#oldPropertyMgmtTaxAmount').parent().append(error);
+    }
+    
+    if($('#oldTotalAmount').val() == '') {
+        flag = 0;
+        $('#oldTotalAmount').parent().append(error);
+    }
+    
+    if($('#oldFreeDays').val() == '') {
+        flag = 0;
+        $('#oldFreeDays').parent().append(error);
+    }
+    
+    if($('#oldPropertyMgmtAmount').val() == '') {
+        flag = 0;
+        $('#oldPropertyMgmtAmount').parent().append(error);
+    }
+    
+    if($('#oldGrowthRate').val() == '') {
+        flag = 0;
+        $('#oldGrowthRate').parent().append(error);
+    }
+    
     if(flag == 1){
         saveContractForm('submit');
     } else {
@@ -2615,13 +2705,6 @@ function saveContractForm(s) {
         if($('#compareSecond').prop('checked') == true){
             secondCompareFlag = 1;
         }
-        
-        /*var esignFlag;
-        if($('#esignFlag').prop('checked') == true){
-            esignFlag = 1;
-        } else {
-            esignFlag = 0;
-        }*/
         
         var processApproveList = [];
         var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_RENT_FLOW_STEP'));
