@@ -9900,6 +9900,15 @@ a:active,a:focus,a:hover {
     .visible-print {
         display: block !important;
     }
+    
+    .txt {
+        background-color: inherit !important;
+        padding: 0 !important;
+    }
+    
+    td .label-info {
+        display: none;
+    }
 }
 
 .table>thead>tr>th {

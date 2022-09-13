@@ -1,5 +1,5 @@
-<div class="box box-default hidden-print" id="investmentContractApprovalProcess" style="display: none;">    
-    <div class="box-header with-border">
+<div class="box box-default" id="investmentContractApprovalProcess" style="display: none;">    
+    <div class="box-header with-border hidden-print">
         <h3 class="box-title">审批流程</h3>
     </div>
     <div class="box-body" style="padding: 0;">
@@ -13,7 +13,7 @@
                                     <thead id="assetsListingTable-sticky-header">
                                         <tr style="text-align: left;">
                                             <th>
-                                                <div class="th-inner">行</div>
+                                                <div class="th-inner"><span class="hidden-print">行</span><span class="visible-print">审批意见</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th style="width: 100px;">
@@ -24,7 +24,7 @@
                                                 <div class="th-inner">执行人</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 50px;">
+                                            <th style="width: 60px;">
                                                 <div class="th-inner">状态</div>
                                                 <div class="fht-cell"></div>
                                             </th>

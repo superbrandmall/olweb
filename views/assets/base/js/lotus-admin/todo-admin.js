@@ -116,45 +116,9 @@ function findAllRequestsByKVCondition(p,c){
     param = {
         "columnName": "formStatus",
         "columnPatten": "",
-        "conditionOperator": "OR",
-        "operator": "=",
-        "value": '1'
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "formStatus",
-        "columnPatten": "",
-        "conditionOperator": "OR",
-        "operator": "=",
-        "value": '3'
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "formStatus",
-        "columnPatten": "",
-        "conditionOperator": "OR",
-        "operator": "=",
-        "value": '4'
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "formStatus",
-        "columnPatten": "",
-        "conditionOperator": "OR",
-        "operator": "=",
-        "value": '5'
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "formStatus",
-        "columnPatten": "",
-        "conditionOperator": "OR",
-        "operator": "=",
-        "value": '6'
+        "conditionOperator": "AND",
+        "operator": "in",
+        "value": '1;3;4;5;6;7'
     }
     params.push(param);
     

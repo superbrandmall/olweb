@@ -755,7 +755,7 @@ function findRequestByBizId() {
                                 oldDepositFee += data.oldContractInfo.depositList[i].amount;
                             }
                         }
-                        $('#oldDepositFee').html(oldDepositFee+' <span class="label label-info">系</span>');
+                        $('#oldDepositFee').html(accounting.formatNumber(oldDepositFee)+' <span class="label label-info">系</span>');
 
                         $('#oldTotalAmount').html(accounting.formatNumber(oldTotalAmount)+' <span class="label label-info">系</span>');
                         $('#oldTotalTaxAmount').html(accounting.formatNumber(oldTotalTaxAmount)+' <span class="label label-info">系</span>');
