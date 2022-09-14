@@ -78,16 +78,6 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-user' || $_GET['p'] == 'lotus-admin/users') { echo 'active'; }?>">
-                <a href="#"><i class="fa fa-key"></i>
-                    <span>用户</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/users') { echo 'active'; }?>"><a href="/lotus-admin/users">用户列表</a></li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/create-user') { echo 'active'; }?>"><a href="/lotus-admin/create-user">新建用户</a></li>
-                </ul>
-            </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales') { echo 'active'; }?>">
                 <a href="/lotus-admin/sales"><i class="fa fa-dollar"></i>
                     <span>销售</span>

@@ -176,6 +176,9 @@ $(document).ready(function(){
     })
     
     scrollJump();
+    
+    $(document).off('click.bs.dropdown.data-api');
+    dropdownOpen();
 })
 
 function getFloors() {
@@ -2754,6 +2757,15 @@ function modifyTypeCheck() {
                 break;
         }
     }
+}
+
+function dropdownOpen() {
+    var $dropdownLi = $('li.dropdown');
+    $dropdownLi.mouseover(function() {
+        $(this).addClass('open');
+    }).mouseout(function() {
+        $(this).removeClass('open');
+    });
 }
 
 (function ($) {

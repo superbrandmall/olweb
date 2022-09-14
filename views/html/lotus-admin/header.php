@@ -47,14 +47,43 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/lotus-admin/" style="font-size: 15px;font-weight: bold;">
-                                招商区
+                            <a href="/kow-admin" style="font-size: 15px;font-weight: bold;">
+                                快闪店
                             </a>
                         </li>
-                        <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;">
-                              快闪店
+                        <li class="dropdown left-navblock hidden-xs hidden-sm">
+                            <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="font-size: 15px;font-weight: bold;">
+                                系统<b class="caret"></b>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <span>人员</span>
+                                    </a>
+                                </li><li>
+                                    <a href="javascript: void(0);" class="text-blue">
+                                        <i class="fa fa-user"></i>
+                                        <span>用户</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="text-blue">
+                                        <i class="fa fa-briefcase"></i>
+                                        <span>岗位</span>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript: void(0);">
+                                        <span>配置</span>
+                                    </a>
+                                </li><li>
+                                    <a href="javascript: void(0);" class="text-blue">
+                                        <i class="fa fa-coffee"></i>
+                                        <span>业态</span>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
 

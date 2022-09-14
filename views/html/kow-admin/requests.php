@@ -121,10 +121,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/requests?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/kow--admin/requests?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/kow--admin/requests?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/kow--admin/requests?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/kow--admin/requests?items=50">50</a></li>
                                                         </ul>
                                                     </span> 
                                                     行每页
@@ -151,7 +151,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
+                                                            <th style="width: 60px;">
                                                                 <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -181,44 +181,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="requests">
-                                                        <tr data-index="0">
-                                                            <td><a href="/kow-admin/request-summary?id=">RENT2022041800015</a></td>
-                                                            <td>800667</td>
-                                                            <td>保存</td>
-                                                            <td>新签</td>
-                                                            <td>静安大融城</td>
-                                                            <td>01FC003</td>
-                                                            <td>静安区</td>
-                                                        </tr>
-                                                        <tr data-index="1">
-                                                            <td><a href="/kow-admin/request-summary?id=">RENT2022041500029</a></td>
-                                                            <td>800638</td>
-                                                            <td>提交</td>
-                                                            <td>新签</td>
-                                                            <td>百联又一城</td>
-                                                            <td>B1FC001</td>
-                                                            <td>杨浦区</td>
-                                                        </tr>
-                                                        <tr data-index="0">
-                                                            <td><a href="/kow-admin/request-summary?id=">RENT2022041300009</a></td>
-                                                            <td>800531</td>
-                                                            <td>已完成</td>
-                                                            <td>新签</td>
-                                                            <td>金桥国际商业广场</td>
-                                                            <td>01FC002</td>
-                                                            <td>浦东新区</td>
-                                                        </tr>
-                                                        <tr data-index="1">
-                                                            <td><a href="/kow-admin/request-summary?id=">RENT2022041300001</a></td>
-                                                            <td>800523</td>
-                                                            <td>已终止</td>
-                                                            <td>新签</td>
-                                                            <td>思南公馆集市</td>
-                                                            <td>01FC001</td>
-                                                            <td>黄浦区</td>
-                                                        </tr>
-                                                    </tbody>
+                                                    <tbody id="requests"></tbody>
                                                 </table>
                                             </div>
 
@@ -232,10 +195,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/requests?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/kow-admin/requests?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/kow--admin/requests?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/kow--admin/requests?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/kow--admin/requests?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>
