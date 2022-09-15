@@ -78,7 +78,7 @@ $(document).ready(function(){
                                     
                                     var ucode = response.data.code;
                                     var uname = response.data.settings.name;
-                                    $.cookie('uid', ucode);
+                                    $.cookie('uid', ucode, { path: '/' });
                                     $.ajax({
                                         type: 'POST',
                                         url: '/controllers/api/1.0/ApiLotusAdminLoginSession.php',

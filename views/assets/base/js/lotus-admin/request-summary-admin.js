@@ -183,10 +183,10 @@ function findRequestByBizId() {
                         $('#investmentContractCertificates').hide();
                     }
                     
-                    $('#fileList2').prepend('<tr>\n\
-                    <td>意见书</td>\n\
+                    $('#fileList2').append('<tr>\n\
+                    <td>招商租赁审批意见书</td>\n\
                     <td></td>\n\
-                    <td><a href="/id/'+data.bizId.toLowerCase()+'/lotus-approval-opinion" target="_blank">招商租赁审批意见书</a></td>\n\
+                    <td><a href="/id/'+data.bizId.toLowerCase()+'/lotus-approval-opinion" target="_blank">http://'+window.location.host+'/id/'+data.bizId.toLowerCase()+'</a></td>\n\
                     <td></td>\n\
                     </tr>');
                     

@@ -1,5 +1,5 @@
 <?php
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/kow-admin/login-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/kow-admin/encrypted/login.js"></script>'.PHP_EOL;
 ?>
 
 <style>

@@ -30,6 +30,18 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP220628000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_4054-240x180.jpg" width="187" alt=""/></a>
+                        樾鲜食馆
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP220526000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_4018-240x180.jpg" width="187" alt=""/></a>
+                        超级泰
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP220727000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_3993-240x180.jpg" width="187" alt=""/></a>
+                        3AM HAIR SALON
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/07/ZHX_8141-240x180.jpg" width="187" alt=""/></a>
                         LACOSTE
                     </div>
@@ -44,18 +56,6 @@
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000415"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1354-240x180.jpg" width="187" alt=""/></a>
                         Salomon
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200728000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/02/ZHX_1350-240x180.jpg" width="187" alt=""/></a>
-                        Lann Massage
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000821"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1358-240x180.jpg" width="187" alt=""/></a>
-                        福奈特
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000728"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8594-240x180.jpg" width="187" alt=""/></a>
-                        难得一面
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210326000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8287-240x180.jpg" width="187" alt=""/></a>

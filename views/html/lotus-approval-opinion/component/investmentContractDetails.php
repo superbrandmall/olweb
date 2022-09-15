@@ -1,6 +1,9 @@
 <div class="box box-default" id="investmentContractDetails">
     <div class="box-header with-border hidden-print">
         <h3 class="box-title">商务明细</h3>
+        <div style="float: right;">
+            <span class="label label-info">系</span> 代表该数据为从系统直接获取
+        </div>
     </div>
     <div class="box-body" style="padding: 0;">
         <div class="col-md-12">
