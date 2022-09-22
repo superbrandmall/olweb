@@ -1,5 +1,9 @@
 <?php
-$scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-admin.js" type="text/javascript"></script>'.PHP_EOL;
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/default-admin.js"></script>'.PHP_EOL;
+} else {
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/default.js"></script>'.PHP_EOL;
+}
 ?>
 
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
@@ -7,6 +11,9 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-ad
 
 <div class="content-wrapper" style="overflow: hidden;">
     <section class="sub-header">
+        <div class="pull-left">
+            <a href="/lotus-admin/malls" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回</a>
+        </div>
         <h4><span id="mallName"></span> <span id="floorNo"></span></h4>
     </section>
     
@@ -34,6 +41,7 @@ $scripts = $scripts . '<script src="/views/assets/base/js/lotus-admin/default-ad
                                                 <i class="fa fa-minus"></i>
                                             </button>
                                         </div>
+                                        <div id="floorList" class="btn-group-vertical" style="position: absolute; bottom: 0;right: 5%; z-index: 1;"></div>
                                         <img src="#" class="img-responsive" usemap="" id="map" />
                                         <map name="" id=""></map>
                                     </div>

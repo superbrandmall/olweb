@@ -143,7 +143,7 @@ function findAllMallsByKVCondition(p,c){
                     
                     $.each(response.data.content, function(i,v){
                         $('#malls').append('<tr data-index="'+i+'">\n\
-                        <td><a href="/lotus-admin/mall-detail?id='+v.code+'">'+v.code+'</a></td>\n\
+                        <td><a href="/lotus-admin/default?id='+v.code+'">'+v.code+'</a></td>\n\
                         <td>'+v.mallName+'</td>\n\
                         <td>'+v.mallLotusBase.address+'</td>\n\
                         <td>'+v.mallLotusBase.name+'</td>\n\

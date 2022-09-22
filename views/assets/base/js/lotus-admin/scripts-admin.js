@@ -178,30 +178,6 @@ $(document).ready(function(){
     scrollJump();
 })
 
-function getFloors() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+$.cookie('mallSelected').split(':::')[1],
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", 1);
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                sessionStorage.setItem("floors-"+$.cookie('mallSelected').split(':::')[1], JSON.stringify(response.data) );             
-            } else {
-                alertMsg(response.code,response.customerMessage);
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
-        }
-    });
-}
-
 function alertMsg(code,m) {
     var msg,color,style;
     switch (code) {

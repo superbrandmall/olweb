@@ -8,32 +8,7 @@ var date = d.getFullYear() + '-' +
 var deFC = '';
 
 $(document).ready(function(){
-    setTimeout(function () { 
-        var floor = '';
-        if(getURLParameter('f') && getURLParameter('f') != '') {
-            deFC = getURLParameter('f');
-        } else {
-            deFC = $.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]))[0].code;  
-        }
-        
-        $.each($.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1])), function(i,v){
-            if(v.code == deFC) {
-                floor = v.floorName;
-            }
-        })
-        
-        NetPing('/views/assets/base/img/content/floor-plan/'+$.cookie('mallSelected').split(':::')[1]+'-lotus/'+deFC+'.png',deFC);
-
-        if(!sessionStorage.getItem("coords_"+deFC) || sessionStorage.getItem("coords_"+deFC) == null || sessionStorage.getItem("coords_"+deFC) == '') {
-            getShopFloorInfo(deFC);
-        } else {
-            renderMap(deFC);
-        }
-
-        $('#mallName').text($.cookie('mallSelected').split(':::')[0]);
-        $('#floorNo').text(floor);
-    }, 500);
-    
+    getFloors();
     var size = 0.85;
     $('#zoom_in').click(function (){
         size = size + 0.15;
@@ -69,6 +44,62 @@ $(function() {
         addTextLayer();
     });
 });
+
+function getFloors() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", 1);
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0' && response.data.length > 0) {
+                sessionStorage.setItem("floors-"+getURLParameter('id'), JSON.stringify(response.data) );
+                
+                $.each(response.data, function(i,v){
+                    $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/home?f='+v.code+'">'+v.floorName+'</a>');
+                });
+                
+                showFloors();
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function showFloors() {
+    var floor = '';
+    if(getURLParameter('f') && getURLParameter('f') != '') {
+        deFC = getURLParameter('f');
+    } else {
+        deFC = $.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id')))[0].code;  
+    }
+
+    $.each($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id'))), function(i,v){
+        if(v.code == deFC) {
+            floor = v.floorName;
+        }
+    })
+
+    NetPing('/views/assets/base/img/content/floor-plan/'+getURLParameter('id')+'-lotus/'+deFC+'.png',deFC);
+
+    if(!sessionStorage.getItem("coords_"+deFC) || sessionStorage.getItem("coords_"+deFC) == null || sessionStorage.getItem("coords_"+deFC) == '') {
+        getShopFloorInfo(deFC);
+    } else {
+        renderMap(deFC);
+    }
+
+    $('#mallName').text($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id')))[0].mallName);
+    $('#floorNo').text(floor);
+}
 
 function NetPing(url,deFC) {
     $.ajax({
