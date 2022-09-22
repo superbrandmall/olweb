@@ -9,18 +9,10 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
 <aside class="main-sidebar">
     <section class="sidebar">
         <ul class="sidebar-menu">
-            <li class="<?php if ($_GET['p'] == 'lotus-admin/mall') { echo 'active'; }?>">
-                <a href="/lotus-admin/mall"><i class="fa fa-building-o"></i>
-                    <span>项目</span>
+            <li class="<?php if ($_GET['p'] == 'lotus-admin/malls') { echo 'active'; }?>">
+                <a href="/lotus-admin/malls"><i class="fa fa-building-o"></i>
+                    <span>门店</span>
                 </a>
-            </li>
-            <li class="<?php if (isset($_GET['p']) && ($_GET['p'] == 'lotus-admin/' || $_GET['p'] == 'lotus-admin/home')) { echo 'active '; }?>">            
-                <a href="#"><i class="fa fa-cubes"></i>
-                    <span>楼层</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul id="floorList" class="treeview-menu">
-                </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-home"></i>
@@ -74,7 +66,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                         <a href="/lotus-admin/requests?items=20">租赁合同申请单</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>">
-                        <a href="/lotus-admin/todo?items=20">待办事项</a>
+                        <a href="/lotus-admin/todo?items=5">待办事项</a>
                     </li>
                 </ul>
             </li>

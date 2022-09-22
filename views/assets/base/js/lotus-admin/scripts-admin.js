@@ -25,20 +25,25 @@ $(document).ready(function(){
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
-                $('.location-select ul li, .mall-select ul li').show();
+                $('.location-select ul li').show();
+                if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
+                    $('.mall-select ul li.'+$.cookie('locationSelected').split(':::')[1]).show();
+                }
                 if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
                     $('.sidebar-menu > li').hide();
-                    $('.sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5), .sidebar-menu > li:eq(6)').show();
+                    $('.sidebar-menu > li:eq(2), .sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5)').show();
                 }
                 return false;
             } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 $('.sidebar-menu > li').hide();
-                $('.sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5), .sidebar-menu > li:eq(6)').show();
-                $('.mall-select ul li').each(function(i,elem){
-                    if($(elem).find('a').attr('data-code') == v.moduleCode){
-                        $(this).show();
-                    }
-                })
+                $('.sidebar-menu > li:eq(2), .sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5)').show();
+                if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
+                    $(".mall-select ul li."+$.cookie('locationSelected').split(':::')[1]+"").each(function(i,elem){
+                        if($(elem).find('a').attr('data-code') == v.moduleCode){
+                            $(this).show();
+                        }
+                    })
+                }
             }
         })
         
@@ -58,24 +63,19 @@ $(document).ready(function(){
             $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
         } else {
             $('.mall-select ul li').each(function(i,elem){
-                if($(elem).hasClass('to-select') && $(elem).css('display') != 'none'){
+                if($(elem).hasClass('to-select') && $(elem).hasClass($.cookie('locationSelected').split(':::')[1]) && $(elem).css('display') != 'none'){
                     $('#mallSelected').text($(elem).find('span').text());
                     $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
                     return false;
                 }
             })
         }
-        
-        if(!sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == null || sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1]) == '') {
-            getFloors();
-        }
-        
-        getSideBarFloor();
     }
     
     $('.location-select .text-blue').click(function(){
         $.cookie('locationSelected',$(this).find('span').text()+':::'+$(this).attr('data-code'));
         $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);
+        $.cookie('mallSelected','');
         window.location.href = location.protocol + location.pathname;
     })
     
@@ -200,22 +200,6 @@ function getFloors() {
            console.log(textStatus, errorThrown);
         }
     });
-}
-
-function getSideBarFloor() {
-    $.each($.parseJSON(sessionStorage.getItem("floors-"+$.cookie('mallSelected').split(':::')[1])), function(i,v){
-        var url = window.location.href;
-        var floorClass;
-        if(v.code == getURLParameter('f')) {
-            floorClass = 'active';
-        } else if(getURLParameter('f') == undefined && i == 0) {
-            floorClass = 'active';
-        } else {
-            floorClass = '';
-        }
-        
-        $('#floorList').append('<li class="'+floorClass+'"><a href="/lotus-admin/home?f='+v.code+'"><i class="fa fa-level-up"></i> '+v.floorName+'</a></li>');
-    })
 }
 
 function alertMsg(code,m) {

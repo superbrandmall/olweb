@@ -1,149 +1,28 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/todo-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/todo-admin.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/raphael.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/chinamapPath.js"></script>'.PHP_EOL;    
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/todo.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/todo.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/raphael.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/chinamapPath.js"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 200px;">
-            <h4>
-                待办事项
-            </h4>
-            <div class="box-header">
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">状态</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="formStatus" style="width: 100%">
-                                        <option value="" selected>全部</option>
-                                        <option value="1">保存</option>
-                                        <option value="2">提交</option>
-                                        <option value="9">已完成</option>
-                                        <option value="0">已终止</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">签约编号</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <input class="form-control" id="contractNo" type="text"  />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">表单类型</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="formType" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">门店</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="department" name="department" style="width: 100%">
-                                        <option value="">未选择</option>
-                                        <option value="SC033">川沙店</option>
-                                        <option value="SC001">杨高南路店</option>
-                                        <option value="SC005">上南店</option>
-                                        <option value="SC011">杨高北路店</option>
-                                        <option value="SC043">杨高中路店</option>
-                                        <option value="SC078">浦江店</option>
-                                        <option value="SC145">临港店</option>
-                                        <option value="SC055">松江文诚店</option>
-                                        <option value="SC027">松江岳阳店</option>
-                                        <option value="SC126">牡丹江店</option>
-                                        <option value="SC060">蕴川店</option>
-                                        <option value="SC082">新港店</option>
-                                        <option value="SC010">汶水店</option>
-                                        <option value="SC040">保德店</option>
-                                        <option value="SC041">南奉店</option>
-                                        <option value="SC127">南桥店</option>
-                                        <option value="SC050">金山店</option>
-                                        <?php
-                                        if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-                                        ?>   
-                                        <option value="SC999">测试店</option>
-                                        <?php
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="selectStore" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="selectTenant" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label"></label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
-                                    <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </form>
-
-    <section class="content" style="margin-top: 250px;">
+    <section class="content" style="margin-top: 50px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
-                        <div class="box-body">
+                        <div class="box-body" style="padding: 10px 20px 0;">
                             <div class="row">
                                 <div class="col-md-12">
+                                    <h4>待办事项</h4>
                                     <div class="bootstrap-table">
-                                        <div class="fixed-table-pagination" style="clear: both;">
-                                            <div class="pull-left pagination-detail">
-                                                <span class="pagination-info"></span>
-                                                <span class="page-list">
-                                                    <span class="btn-group dropdown">
-                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                            <span class="page-size">20</span>
-                                                            <span class="caret"></span>
-                                                        </button>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/todo?items=50">50</a></li>
-                                                        </ul>
-                                                    </span> 
-                                                    行每页
-                                                </span>
-                                            </div>
-                                            <div class="pull-right pagination">
-                                                <ul class="pagination"></ul>
-                                            </div>
-                                        </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
                                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
@@ -197,14 +76,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <span class="page-list">
                                                         <span class="btn-group dropdown">
                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                                <span class="page-size">20</span>
+                                                                <span class="page-size">5</span>
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=5">5</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>
@@ -216,6 +92,32 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div style="margin: 30px 15px;">
+                                        <h4>莲花项目概览</h4>
+                                        <hr>
+                                        项目数(已开业)<br><h4 class="text-red">23</h4><hr>
+                                        总面积(m²)<br><h4 class="text-red">368,506.82</h4><hr>
+                                        总铺位数<br><h4 class="text-red">2,319</h4><hr>
+                                        开业率<br><h4 class="text-red">80.55%</h4><hr>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="box" style="padding: 30px 30px 0 30px; margin-bottom: 0; box-shadow: -1px 0px 0px rgba(0,0,0,.1);">
+                                        <div id="map"></div>
+                                        <a href="/lotus-admin/malls" class="btn btn-primary btn-sm" style="position: absolute; right: 0; top: 0;">进入项目列表 <i class="fa fa-angle-right icon-white"></i></a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

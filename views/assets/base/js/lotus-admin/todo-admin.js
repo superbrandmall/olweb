@@ -44,34 +44,87 @@ $(document).ready(function(){
             $('.page-size').text('20');
             break;
     }
-    
-    $('#department option').each(function(j, elem){
-        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-                if($(elem).val() == v.moduleCode){
-                    $('#department option:eq('+j+')').addClass('no-remove');
-                }
-            } else if(v.roleCode == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
-                $('#department option:eq('+j+')').addClass('no-remove');
-            }
-        })
-    })
-    $("#department").find("option:not(.no-remove)").remove();
-    
-    updateSelectTenantDropDown(50);
-    updateSelectStoreDropDown(10);
-    
-    $('#clear').click(function(){
-        $('#contractNo').val('');
-        $('#selectTenant, #selectStore, #formType').empty(); 
-        $('#selectTenant, #department, #formStatus').val("").trigger('change');
-        $('#selectStore, #formType').select2("val", "");
-    })
-    
-    $('#search').click(function(){
-        findAllRequestsByKVCondition(1,items);
-    })
 });
+
+window.onload = function () {
+    var R = Raphael("map", 600, 500);
+	//调用绘制地图方法
+    paintMap(R);
+	
+	var textAttr = {
+        "fill": "#000",
+        "font-size": "12px",
+        "cursor": "pointer"
+    };
+			
+           
+    for (var state in china) {
+		china[state]['path'].color = Raphael.getColor(0.9);
+				
+        (function (st, state) {
+			
+			//获取当前图形的中心坐标
+            var xx = st.getBBox().x + (st.getBBox().width / 2);
+            var yy = st.getBBox().y + (st.getBBox().height / 2);
+			
+            //***修改部分地图文字偏移坐标
+            switch (china[state]['name']) {
+                case "江苏":
+                    xx += 5;
+                    yy -= 10;
+                    break;
+                case "河北":
+                    xx -= 10;
+                    yy += 20;
+                    break;
+                case "天津":
+                    xx += 10;
+                    yy += 10;
+                    break;
+                case "上海":
+                    xx += 10;
+                    break;
+                case "广东":
+                    yy -= 10;
+                    break;
+                case "澳门":
+                    yy += 10;
+                    break;
+                case "香港":
+                    xx += 20;
+                    yy += 5;
+                    break;
+                case "甘肃":
+                    xx -= 40;
+                    yy -= 30;
+                    break;
+                case "陕西":
+                    xx += 5;
+                    yy += 10;
+                    break;
+                case "内蒙古":
+                    xx -= 15;
+                    yy += 65;
+                    break;
+                default:
+            }
+			//写入文字
+			china[state]['text'] = R.text(xx, yy, china[state]['name']).attr(textAttr);
+			//china[state]['path'].setAttribute("fill","#113333"); //rgba(0,0,china[state]['nvalue'],0);
+			//x = china[state]['nvalue'] *255 * 16 + 10 * 255;
+			//china[state]['nvalue']=255-china[state]['nvalue'];
+			//x = "rgb(255, 255, " + china[state]['nvalue'] + ")";
+                        if($.inArray(china[state]['name'], ['江苏','上海']) != -1){
+                            x = "rgb(254, 0, 0)";
+                        } else {
+                            x = "rgb(246, 247, 246)";
+                        }
+			//x = "rgb(255," + china[state]['nvalue'] + ",255)";
+			//x = "rgb("+china[state]['nvalue'] +",255,255)";
+			china[state]['path'].attr("fill", x);	
+         })(china[state]['path'], state);
+    }
+}
 
 function findAllRequestsByKVCondition(p,c){
     $('#todo').html('');
@@ -227,135 +280,6 @@ function renderFormType(t) {
         })
     }
     return type;
-}
-
-function updateSelectTenantDropDown(data_count) {
-    $('#selectTenant').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/tenant/lotus/findAll",
-            type: 'GET',
-            dataType: 'json',
-            delay: 25,
-            data: function (params) {
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    sort: 'id,desc',
-                    search: params.term
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.tenantCode,
-                                text: item.tenantCode +' | '+ item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
-function updateSelectStoreDropDown(data_count) {
-    $('#selectStore').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodes",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) { 
-                var mallCodes;
-                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
-                    mallCodes = $('#department').val();
-                } else {
-                    mallCodes = $.cookie('mallSelected').split(':::')[1];
-                }
-                
-                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
-                        mallCodes = 'ALL';
-                        return false;
-                    }
-                })
-                
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.unitCode+':::'+item.code+':::'+item.unitName,
-                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
 }
 
 function popUpToDo(bizId,contractNo,formStatus,formType,tenantName) {
