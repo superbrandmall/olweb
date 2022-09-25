@@ -132,13 +132,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                         <tr>
                                                             <th>
                                                             </th>
-                                                            <th>
+                                                            <th style="text-align: left;">
                                                                 预算指标
                                                             </th>
-                                                            <th>
+                                                            <th style="text-align: left;">
                                                                 本合同
                                                             </th>
-                                                            <th>
+                                                            <th style="text-align: left;">
                                                             </th>
                                                         </tr>
                                                     </thead>

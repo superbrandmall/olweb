@@ -24,9 +24,6 @@
                 }
             };
         </script>
-        <?php if ($_GET['p'] == 'lotus-admin/kow') { ?>
-            <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=fVgYajbwMUplLq0gZsLdh1AzeEfWUPpG"></script>
-        <?php } ?>
     </head>
     <?php
     if(isset($_SESSION['lotus_admin_login'])) {
@@ -42,8 +39,13 @@
                     </a>
                     <ul class="nav navbar-nav navbar-left">
                         <li class="left-navblock">
-                            <a class="logo navbar-brand no-hover" href="/lotus-admin/">
+                            <a class="logo navbar-brand no-hover" href="javascript: void(0);">
                                 <img class="navbar-brand-img" src="/views/assets/base/img/content/lotus-admin/logo.png">
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm">
+                            <a href="/lotus-admin/todo" style="font-size: 15px;font-weight: bold;">
+                                招商区
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">

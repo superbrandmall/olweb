@@ -287,9 +287,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/malls' => array(
             'url' => 'malls.php'
         ),
-        'lotus-admin/mall-detail' => array(
-            'url' => 'mall-detail.php'
-        ),
         'lotus-admin/tenants' => array(
             'url' => 'tenants.php'
         ),
@@ -302,8 +299,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/stores' => array(
             'url' => 'stores.php'
         ),
-        'lotus-admin/store-requests' => array(
-            'url' => 'store-requests.php'
+        'lotus-admin/store-detail' => array(
+            'url' => 'store-detail.php'
         ),
         'lotus-admin/requests' => array(
             'url' => 'requests.php'
@@ -356,9 +353,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/todo' => array(
             'url' => 'todo.php'
         ),
-        'lotus-admin/sales' => array(
-            'url' => 'sales.php'
-        ),
         'lotus-admin/dict' => array(
             'url' => 'dict.php'
         ),
@@ -385,7 +379,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'default.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-requests.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'malls.php', 'mall-detail.php', 'sales.php', 'requests.php', 'request-summary.php',  
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-detail.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'malls.php', 'requests.php', 'request-summary.php',  
         'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php');
     
     if (in_array($page, $session_required)) {

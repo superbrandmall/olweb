@@ -59,11 +59,11 @@ function getFloors() {
         success: function (response, status, xhr) {
             if(response.code === 'C0' && response.data.length > 0) {
                 sessionStorage.setItem("floors-"+getURLParameter('id'), JSON.stringify(response.data) );
-                
+
                 $.each(response.data, function(i,v){
-                    $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/home?f='+v.code+'">'+v.floorName+'</a>');
+                    $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/home?id='+getURLParameter('id')+'&f='+v.code+'">'+v.floorName+'</a>');
                 });
-                
+
                 showFloors();
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -121,7 +121,8 @@ function NetPing(url,deFC) {
         error: function() {
             $('#map').attr({
                 'src'   : '/views/assets/base/img/content/lotus-admin/noImage.jpg',
-                'alt'   : deFC
+                'alt'   : deFC,
+                'style'   : 'margin:0 auto'
             });
             $('#fmap').hide();
         }

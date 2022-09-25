@@ -9,7 +9,7 @@
     <div class="box-body">
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">项目:</label>
+                <label class="col-md-4 control-label">门店:</label>
                 <div class="col-md-8 col-sm-12" id="mallName"></div>
             </div>
             <div class="form-group">

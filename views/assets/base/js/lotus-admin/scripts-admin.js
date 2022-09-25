@@ -30,13 +30,11 @@ $(document).ready(function(){
                     $('.mall-select ul li.'+$.cookie('locationSelected').split(':::')[1]).show();
                 }
                 if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
-                    $('.sidebar-menu > li').hide();
-                    $('.sidebar-menu > li:eq(2), .sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5)').show();
+                    $('.sidebar-menu > li').last().hide();
                 }
                 return false;
             } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-                $('.sidebar-menu > li').hide();
-                $('.sidebar-menu > li:eq(2), .sidebar-menu > li:eq(3), .sidebar-menu > li:eq(4), .sidebar-menu > li:eq(5)').show();
+                $('.sidebar-menu > li').last().hide();
                 if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
                     $(".mall-select ul li."+$.cookie('locationSelected').split(':::')[1]+"").each(function(i,elem){
                         if($(elem).find('a').attr('data-code') == v.moduleCode){
@@ -63,7 +61,7 @@ $(document).ready(function(){
             $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
         } else {
             $('.mall-select ul li').each(function(i,elem){
-                if($(elem).hasClass('to-select') && $(elem).hasClass($.cookie('locationSelected').split(':::')[1]) && $(elem).css('display') != 'none'){
+                if($(elem).hasClass('to-select') && $(elem).hasClass($.cookie('locationSelected').split(':::')[1])){
                     $('#mallSelected').text($(elem).find('span').text());
                     $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
                     return false;
