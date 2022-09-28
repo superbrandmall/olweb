@@ -11,7 +11,8 @@ $.api = {
     profitCenter: ['租赁部','rent'],
     termCalcMode: ['新计算方法','NEW'],
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
-    contractTemplate: ['租期 > 6个月','1']
+    contractTemplate: ['租期 > 6个月','1'],
+    fivePercentFixedRent: ['SC126','SC127','SC140','SC124']
 };
 
 var d = new Date();
@@ -313,6 +314,14 @@ function generatePages(currentPage, LastPage, items) {
     }
     
     $(".pagination .pagination").append(pages);
+}
+
+function numberWithCommas(x) {
+    if(x == null){
+        return '';
+    } else {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 }
 
 function numberWithoutCommas(x) {

@@ -216,7 +216,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.contract.mallCode == 'SC126' || $.contract.mallCode == 'SC127'){
+                if($.inArray($.contract.mallCode, $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -1713,7 +1713,7 @@ function updateRowInvestmentContractDepositterm(v) {
 }
 
 function saveContractFixedRent() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($("#fixedRent").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
         Ewin.confirm({ message: "确定要保存固定租金吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -1898,7 +1898,7 @@ function saveContractFixedRent() {
 }
 
 function saveContractPropertyMgmt() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($("#propertyMgmt").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
         Ewin.confirm({ message: "确定要保存物业管理费吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2083,7 +2083,7 @@ function saveContractPropertyMgmt() {
 }
 
 function saveContractCommission() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($("#commission").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
         Ewin.confirm({ message: "确定要保存提成租金吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2278,7 +2278,7 @@ function saveContractCommission() {
 }
 
 function saveContractPromotion() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($("#promotion").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
         Ewin.confirm({ message: "确定要保存推广费吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2463,7 +2463,7 @@ function saveContractPromotion() {
 }
 
 function saveContractDeposit() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($("#deposit").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
         Ewin.confirm({ message: "确定要保存预存款条款吗？" }).on(function (e) {
             if (!e) {
                 return;
