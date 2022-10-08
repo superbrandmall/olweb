@@ -12,7 +12,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     <form id="search-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 160px;">
             <h4>
-                门店
+                项目
             </h4>
             <div class="box-header">
                 <div class="box-body">
@@ -100,11 +100,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">门店编号</div>
+                                                                <div class="th-inner">项目编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">门店名称</div>
+                                                                <div class="th-inner">项目名称</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

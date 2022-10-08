@@ -34,18 +34,6 @@
                         樾鲜食馆
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP220526000002"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_4018-240x180.jpg" width="187" alt=""/></a>
-                        超级泰
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP220727000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_3993-240x180.jpg" width="187" alt=""/></a>
-                        3AM HAIR SALON
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP200711000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/07/ZHX_8141-240x180.jpg" width="187" alt=""/></a>
-                        LACOSTE
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
                         璞徽
                     </div>

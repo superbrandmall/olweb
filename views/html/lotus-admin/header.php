@@ -101,12 +101,12 @@
                             
                             <li class="dropdown mall-select">
                                 <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span id="mallSelected">选择门店</span><b class="caret"></b>
+                                    <span id="mallSelected">选择项目</span><b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <a href="javascript: void(0);">
-                                            <span>选择门店</span>
+                                            <span>选择项目</span>
                                         </a>
                                     </li>
                                     <li class="to-select shanghai" style="display: none;">

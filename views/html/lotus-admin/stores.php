@@ -54,7 +54,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">所属门店</label>
+                                <label class="col-md-4 control-label" style="text-align: right;">所属项目</label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="mallCode" name="mallCode" style="width: 100%">
                                         <option value="">未选择</option>
@@ -155,7 +155,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">所属门店</div>
+                                                                <div class="th-inner">所属项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

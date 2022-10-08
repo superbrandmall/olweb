@@ -49,7 +49,7 @@ $scripts = $scripts . '<script type="text/javascript" src="/views/assets/base/js
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">门店</div>
+                                                                <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

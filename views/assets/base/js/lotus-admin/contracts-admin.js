@@ -54,7 +54,7 @@ $(document).ready(function(){
                 if($(elem).val() == v.moduleCode){
                     $('#department option:eq('+j+')').addClass('no-remove');
                 }
-            } else if(v.roleCode == 'CROLE211008000002' && v.moduleName == 'Lotus门店管理员') {
+            } else if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL') {
                 $('#department option:eq('+j+')').addClass('no-remove');
             }
         })
@@ -271,63 +271,8 @@ function renderContractStatus(s) {
     return status;
 }
 
-function updateSelectTenantDropDown(data_count) {
-    $('#selectTenant').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/tenant/lotus/findAll",
-            type: 'GET',
-            dataType: 'json',
-            delay: 25,
-            data: function (params) {
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    sort: 'id,desc',
-                    search: params.term
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.tenantCode,
-                                text: item.tenantCode +' | '+ item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
 function updateSelectStoreDropDown(data_count) {
     $('#selectStore').select2({
-        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -358,7 +303,7 @@ function updateSelectStoreDropDown(data_count) {
                 }
                 
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
                         mallCodes = 'ALL';
                         return false;
                     }

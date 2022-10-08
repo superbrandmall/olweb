@@ -49,7 +49,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">门店</div>
+                                                                <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -105,9 +105,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="row">
                                 <div class="col-md-4">
                                     <div style="margin: 30px 15px;">
-                                        <h4>莲花门店概览</h4>
+                                        <h4>莲花项目概览</h4>
                                         <hr>
-                                        门店数(已开业)<br><h4 class="text-red">23</h4><hr>
+                                        项目数(已开业)<br><h4 class="text-red">23</h4><hr>
                                         总面积(m²)<br><h4 class="text-red">368,506.82</h4><hr>
                                         总铺位数<br><h4 class="text-red">2,319</h4><hr>
                                         出租率<br><h4 class="text-red">80.55%</h4><hr>
@@ -116,7 +116,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="col-md-8">
                                     <div class="box" style="padding: 30px 30px 0 30px; margin-bottom: 0; box-shadow: -1px 0px 0px rgba(0,0,0,.1);">
                                         <div id="map"></div>
-                                        <a href="/lotus-admin/malls" class="btn btn-primary btn-sm" style="position: absolute; right: 0; top: 0;">进入门店列表 <i class="fa fa-angle-right icon-white"></i></a>
+                                        <a href="/lotus-admin/malls" class="btn btn-primary btn-sm" style="position: absolute; right: 0; top: 0;">进入项目列表 <i class="fa fa-angle-right icon-white"></i></a>
                                     </div>
                                 </div>
                             </div>

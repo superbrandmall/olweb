@@ -25,7 +25,7 @@ var date = d.getFullYear() + '-' +
 $(document).ready(function(){
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+            if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
                 $('.location-select ul li').show();
                 if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
                     $('.mall-select ul li.'+$.cookie('locationSelected').split(':::')[1]).show();
@@ -1958,7 +1958,6 @@ function updateDictDropDownByDictTypeCode(dictTypeCode, id, dataTxt, dataVal) {
 
 function updateSelectTenantDropDown(data_count) {
     $('#selectTenant').select2({
-        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -1970,17 +1969,30 @@ function updateSelectTenantDropDown(data_count) {
             }
         },
         ajax: {
-            url: $.api.baseLotus+"/api/tenant/lotus/findAll",
-            type: 'GET',
-            dataType: 'json',
-            delay: 25,
+            url: function (params) {
+                return $.api.baseLotus+"/api/tenant/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
             data: function (params) {
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    sort: 'id,desc',
-                    search: params.term
+                var map = {
+                    key: params.term || '公司',
+                    operator: "OR",
+                    params: [
+                      "tenantCode", "name"
+                    ],
+                    sorts: []
                 }
+                return JSON.stringify(map);
             },
             processResults: function (data,params) {
                 if(data['code'] === 'C0') {
@@ -1990,7 +2002,7 @@ function updateSelectTenantDropDown(data_count) {
                     return {
                         results: $.map(jsonData, function(item) {
                             data = {
-                                id: item.code,
+                                id: item.tenantCode,
                                 text: item.tenantCode +' | '+ item.name
                             }
                             var returnData = [];

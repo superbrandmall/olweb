@@ -99,7 +99,7 @@ $(document).ready(function(){
                                                 var userModules = [];
                                                 
                                                 $.each(response.data.userModules, function(i,v) {
-                                                    if(v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE210706000001' || v.roleCode == 'CROLE211008000001' || v.roleCode == 'CROLE220301000001'){
+                                                    if(v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001' || v.roleCode == 'CROLE210706000001' || v.roleCode == 'CROLE211008000001' || v.roleCode == 'CROLE220301000001'){
                                                         // 云之家openId v.roleCode == 'CROLE220301000001'
                                                         userModules.push(v);
                                                     }

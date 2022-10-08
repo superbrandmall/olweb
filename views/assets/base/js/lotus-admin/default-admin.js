@@ -132,7 +132,7 @@ function NetPing(url,deFC) {
 function getShopFloorInfo(fc) {
     var mallCodes;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE211008000002' && v.moduleCode == 'ALL'){
+        if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
             mallCodes = v.moduleCode;
             return false;
         } else {

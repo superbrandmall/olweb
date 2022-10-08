@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">门店（甲方）</label>
+                <label class="col-md-4 control-label">项目（甲方）</label>
                 <div class="col-md-8 col-sm-12">
                     <input id="investmentContractModelMallSelect" class="form-control" type="text" readonly />
                 </div>
