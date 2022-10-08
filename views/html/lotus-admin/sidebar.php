@@ -43,6 +43,15 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                 </ul>
             </li>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-pie-chart"></i>
+                    <span>报表</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">报表分析</a></li>
+                </ul>
+            </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/dict' || $_GET['p'] == 'lotus-admin/create-dict-type' || $_GET['p'] == 'lotus-admin/create-dict-data' || $_GET['p'] == 'lotus-admin/edit-dict-data') { echo 'active'; }?>">
                 <a href="/lotus-admin/dict"><i class="fa fa-trademark"></i>
                     <span>字典</span>

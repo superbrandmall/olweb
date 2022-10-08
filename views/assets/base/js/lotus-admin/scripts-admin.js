@@ -175,6 +175,13 @@ $(document).ready(function(){
     })
     
     scrollJump();
+    
+    var title = $('.sub-header h4').text();
+    if(title != '' && title != null){
+        document.title = title;
+    } else {
+        document.title = '首页';
+    }
 })
 
 function alertMsg(code,m) {
