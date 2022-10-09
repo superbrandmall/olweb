@@ -296,15 +296,17 @@ function ShowResults(result,searchCode) {
             }
         }
         
-        $('.c-content-list').append('<div class="col-md-4" style="display: none;"><div class="c-content-person-1 c-option-2 c-shadow">\n\
-<div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
-<div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+img+'" alt=""></div>\n\
-<div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div>\n\
-</div>\n\
-<div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\
-<div class="c-position"><div style="float: left;margin-right: 5px">'+$.lang.pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
-</div></div>\n\
-</div></div>');
+        if(modality != undefined){
+            $('.c-content-list').append('<div class="col-md-4" style="display: none;"><div class="c-content-person-1 c-option-2 c-shadow">\n\
+    <div class="c-caption c-content-overlay"><div class="c-overlay-wrapper">\n\
+    <div class="c-overlay-content"><a class="cbp-l-caption-buttonLeft btn c-btn-square c-btn-border-1x c-btn-white c-btn-bold c-btn-uppercase" href="shop?id='+v.code+'&search='+searchCode+'">'+$.lang.dianpujieshao+'</a></div></div><img class="c-overlay-object img-responsive" src="'+img+'" alt=""></div>\n\
+    <div class="c-body"><div class="c-head"><div class="c-name c-font-uppercase c-font-bold">'+mallName+'</div>\n\
+    </div>\n\
+    <div class="c-position">'+$.lang.louceng+': '+floorName+'</div><div class="c-position">'+$.lang.mianji+': '+v.area+'m<sup>2</sup></div><div class="c-position" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 100%;">'+$.lang.modality+': '+modality+'</div>\n\
+    <div class="c-position"><div style="float: left;margin-right: 5px">'+$.lang.pipei+': </div><div style="float:left;height:20px;width:'+star_length+'px;background:url(views/assets/base/img/content/misc/star.png) 0 0 repeat-x;"></div>\n\
+    </div></div>\n\
+    </div></div>');
+        }
     });
 
     var size_li = $(".c-content-list > div").size();

@@ -1,5 +1,5 @@
 <?php
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/login.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/login-admin.js"></script>'.PHP_EOL;
 ?>
 
 <style>

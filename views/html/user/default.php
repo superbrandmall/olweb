@@ -1,7 +1,15 @@
 <div class="c-layout-page">
-    <section class="" style="max-width: 960px; margin: 0 auto; overflow: auto;">
-        <div class="col-xs-12" style="padding: 0;">
-            <img alt="" src="views/assets/base/img/content/backgrounds/oll-banner.jpg" class="img-responsive">
+    <section class="c-layout-revo-slider c-layout-revo-slider-7" style="max-width: 960px; margin: 0 auto;">
+        <div class="tp-banner-container">
+            <div class="tp-banner">
+                <ul>
+                    <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="6000" data-thumb="">
+                        <img src="views/assets/base/img/layout/sliders/revo-slider/base/blank.png" alt="">
+                        <div class="caption fulllscreenvideo tp-videolayer" data-x="0" data-y="0" data-speed="600" data-start="1000" data-easing="Power4.easeOut" data-endspeed="500" data-endeasing="Power4.easeOut" data-autoplay="true" data-autoplayonlyfirsttime="false" data-nextslideatend="true" data-videowidth="100%" data-videoheight="100%" data-videopreload="meta" data-videomp4="upload/video/video-1.mp4" data-videowebm="" data-videocontrols="controls" data-forcecover="1" data-forcerewind="on" data-aspectratio="16:9" data-volume="mute" data-videoloop="loop" data-videoposter="views/assets/base/img/layout/sliders/revo-slider/base/blank.png">
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </section>
 

@@ -75,7 +75,7 @@ $(document).ready(function(){
     }
     
     $('video').attr('controls','controls');
-    //getMallList();
+    getMallList();
     
     $('#c_link_cn').click(function(){
         $.cookie('lang','zh-cn');
@@ -148,7 +148,7 @@ function getMallList() {
             location = v.location;
         }
         
-        if(v.mallCode === $.mallCode.shanghaiSbm || v.mallCode === $.mallCode.luoyangSbm || v.mallCode === $.mallCode.baoshanTm || v.mallCode === $.mallCode.hefeiSbm){
+        if(v.mallCode === $.mallCode.shanghaiSbm){
             $('#mall_list_top').append('<li><a href="'+v.mallCode.toLowerCase()+'">'+mallName+'</a></li>');
         }
     });

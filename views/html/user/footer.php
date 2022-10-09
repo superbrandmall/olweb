@@ -52,6 +52,67 @@
 echo $scripts;
 ?>
 <script src="views/assets/base/js/components.js?t=<?php echo date("Y-m-d") ?>" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
+        App.init(); // init core
+
+        // init main slider
+        var slider = $('.c-layout-revo-slider .tp-banner');
+        var cont = $('.c-layout-revo-slider .tp-banner-container');
+        var api = slider.show().revolution({
+            delay: 0,
+            startwidth: 960,
+            startheight: 550,
+            navigationType: "hide",
+            navigationArrows: "none",
+            touchenabled: "on",
+            onHoverStop: "off",
+            keyboardNavigation: "off",
+            navigationStyle: "circle",
+            navigationHAlign: "center",
+            navigationVAlign: "bottom",
+            spinner: "spinner2",
+            fullScreen: "off",
+            fullScreenAlignForce: "on",
+            fullScreenOffsetContainer: (App.getViewPort().width < App.getBreakpoint('md') ? '.c-layout-header' : ''),
+            shadow: 0,
+            fullWidth: "off",
+            forceFullWidth: "off",
+            hideTimerBar: "on",
+            hideThumbsOnMobile: "on",
+            hideNavDelayOnMobile: 1500,
+            hideBulletsOnMobile: "on",
+            hideArrowsOnMobile: "on",
+            hideThumbsUnderResolution: 0
+        });
+        api.bind("revolution.slide.onchange", function (e, data) {
+            $('.c-layout-header').removeClass('hide');
+            setTimeout(function () {
+                //$('.c-singup-form').fadeIn();
+                $('video').attr({
+                    'controls': 'controls',
+                    'muted': false
+                });
+            }, 1500);
+        });
+
+        if ($('.tp-bgimg').length > 0) {
+            var element = document.getElementsByClassName('tp-bgimg')[0];
+            element.addEventListener('transitionend', handle, false);
+        }
+
+        function handle() {
+            change();
+        }
+        function change() {
+            if ($('.tp-bgimg').hasClass('zoom')) {
+                $('.tp-bgimg').removeClass('zoom');
+            } else {
+                $('.tp-bgimg').addClass('zoom');
+            }
+        }
+    });
+</script>
 <!-- END: THEME SCRIPTS -->
 <!-- END: LAYOUT/BASE/BOTTOM -->
 </body>
