@@ -1992,10 +1992,10 @@ function updateSelectTenantDropDown(data_count) {
             },
             data: function (params) {
                 var map = {
-                    key: params.term || '公司',
+                    key: params.term || 'LTTENANT',
                     operator: "OR",
                     params: [
-                      "tenantCode", "name"
+                      "tenantCode", "code"
                     ],
                     sorts: []
                 }
@@ -2011,6 +2011,143 @@ function updateSelectTenantDropDown(data_count) {
                             data = {
                                 id: item.tenantCode,
                                 text: item.tenantCode +' | '+ item.name
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function updateBrandNameDropDown(data_count) {
+    $('#brandName').select2({
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: function (params) {
+                return $.api.baseLotus+"/api/brand/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) {
+                var map = {
+                    key: params.term || '1',
+                    operator: "OR",
+                    params: [
+                      "name","status"
+                    ],
+                    sorts: []
+                }
+                return JSON.stringify(map);
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.code,
+                                text: item.name +'['+ item.modality3 +']'                        
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
+    $('#selectStore').select2({
+        minimumResultsForSearch: -1,
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodesAndMallCode",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) { 
+                var mallCodes = mall_code;
+                var mallCode = mallCodes;
+                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+                        mallCodes = 'ALL';
+                        return false;
+                    }
+                })
+                
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    search: params.term,
+                    userCode: $.cookie('uid'),
+                    mallCodes: mallCodes,
+                    mallCode: mallCode
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.floorName+':::'+item.floorCode,
+                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
                             }
                             var returnData = [];
                             returnData.push(data);

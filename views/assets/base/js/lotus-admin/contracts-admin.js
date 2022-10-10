@@ -273,6 +273,7 @@ function renderContractStatus(s) {
 
 function updateSelectStoreDropDown(data_count) {
     $('#selectStore').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {

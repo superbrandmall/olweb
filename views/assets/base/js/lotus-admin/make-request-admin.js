@@ -521,6 +521,7 @@ function updateFeeItems(FeeItem,VAT,type) {
 
 function updateSelectStoreDropDown(data_count) {
     $('#selectStore').select2({
+        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -571,64 +572,6 @@ function updateSelectStoreDropDown(data_count) {
                             data = {
                                 id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.floorName+':::'+item.floorCode,
                                 text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
-function updateBrandNameDropDown(data_count) {
-    $('#brandName').select2({
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/brand/lotus/findAll?sort=id,desc",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.code,
-                                text: item.name +'['+ item.modality3 +']'                        
                             }
                             var returnData = [];
                             returnData.push(data);

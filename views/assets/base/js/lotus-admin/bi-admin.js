@@ -38,7 +38,7 @@ function findBI(no) {
                     if(flag == 0){
                         alertMsg('9999','没有访问授权，请联系系统管理员。');
                     }
-                } {
+                } else {
                     alertMsg('9999','没有访问授权，请联系系统管理员。');
                 }
             } else {
