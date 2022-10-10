@@ -175,13 +175,6 @@ $(document).ready(function(){
     })
     
     scrollJump();
-    
-    var title = $('.sub-header h4').text();
-    if(title != '' && title != null){
-        document.title = title;
-    } else {
-        document.title = '首页';
-    }
 })
 
 function alertMsg(code,m) {
@@ -1995,7 +1988,7 @@ function updateSelectTenantDropDown(data_count) {
                     key: params.term || 'LTTENANT',
                     operator: "OR",
                     params: [
-                      "tenantCode", "code"
+                      "tenantCode", "code", "name"
                     ],
                     sorts: []
                 }
@@ -2009,7 +2002,7 @@ function updateSelectTenantDropDown(data_count) {
                     return {
                         results: $.map(jsonData, function(item) {
                             data = {
-                                id: item.tenantCode,
+                                id: item.code,
                                 text: item.tenantCode +' | '+ item.name
                             }
                             var returnData = [];

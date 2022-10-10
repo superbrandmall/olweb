@@ -155,7 +155,7 @@ function findAllContractsByKVCondition(p,c){
 
     if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != '' && $.cookie('searchContractsSelectTenantVal') != 'null'){
         param = {
-            "columnName": "tenantNo",
+            "columnName": "tenantCode",
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchContractsSelectTenantVal')

@@ -48,5 +48,15 @@ if(isset($_SESSION['lotus_admin_login'])) {
         ?>
         <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.zh-CN.min.js"></script>
         <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var title = $('.sub-header h4').text().replace(/<.>/g,"").replace(/\r|\n/ig,"").replace(/\s*/g,"");
+                if(title != '' && title != null){
+                    document.title = title;
+                } else {
+                    document.title = '首页';
+                }
+            })
+        </script>
     </body>
 </html>

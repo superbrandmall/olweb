@@ -177,7 +177,7 @@ function findAllRequestsByKVCondition(p,c){
 
     if($.cookie('searchRequestsSelectTenantVal') != null && $.cookie('searchRequestsSelectTenantVal') != '' && $.cookie('searchRequestsSelectTenantVal') != 'null'){
         param = {
-            "columnName": "tenantNo",
+            "columnName": "tenantCode",
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchRequestsSelectTenantVal')
@@ -315,60 +315,6 @@ function renderFormType(t,m) {
     }
     
     return type;
-}
-
-function updateSelectTenantDropDown(data_count) {
-    $('#selectTenant').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/tenant/lotus/findAll",
-            type: 'GET',
-            dataType: 'json',
-            delay: 25,
-            data: function (params) {
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    sort: 'id,desc',
-                    search: params.term
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.tenantCode,
-                                text: item.tenantCode +' | '+ item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
 }
 
 function updateSelectStoreDropDown(data_count) {
