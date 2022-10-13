@@ -431,8 +431,16 @@ function deleteFile(id) {
 }
 
 function contractUpload(bizId, type) {
+    var openId = 'admin';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            return false;
+        }
+    })
+        
     $.ajax({
-        url: $.api.baseLotus+"/api/rent/contract/form/contractUpload?bizId="+bizId+"&stepType=CONTRACT_"+type,  //参数加上openid
+        url: $.api.baseLotus+"/api/rent/contract/form/contractUpload?bizId="+bizId+"&stepType=CONTRACT_"+type+"&openId="+openId,
         type: "GET",
         async: false,
         beforeSend: function(request) {
