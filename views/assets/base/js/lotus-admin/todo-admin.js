@@ -28,20 +28,11 @@ $(document).ready(function(){
     }
 
     switch (getURLParameter('items')) {
-        case '10':
-            $('.page-size').text('10');
-            break;
-        case '20':
-            $('.page-size').text('20');
-            break;
-        case '30':
-            $('.page-size').text('30');
-            break;
-        case '50':
-            $('.page-size').text('50');
+        case '5':
+            $('.page-size').text('5');
             break;
         default:
-            $('.page-size').text('20');
+            $('.page-size').text('5');
             break;
     }
 });

@@ -16,7 +16,7 @@ class Session extends BaseObject {
             }
         } else {
             if(isset($_GET['p']) && $_GET['p'] == 'lotus-admin/login') {
-                header("location: $this->domain/contracts");
+                header("location: $this->domain/todo");
                 die();
             }
         }

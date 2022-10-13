@@ -263,8 +263,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
     }
 } else if (isset($_GET['p']) && (strpos($_GET['p'], 'lotus-admin')) !== false) { // 莲花
     $target = array(
-        'lotus-admin/home' => array(
+        'lotus-admin/default' => array(
             'url' => 'default.php'
+        ),
+        'lotus-admin/home' => array(
+            'url' => 'todo.php'
         ),
         'lotus-admin/login' => array(
             'url' => 'login.php'
@@ -379,7 +382,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
-        $page = 'default.php';
+        $page = 'todo.php';
     }
 
     $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-detail.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'malls.php', 'requests.php', 'request-summary.php', 'bi.php',    
