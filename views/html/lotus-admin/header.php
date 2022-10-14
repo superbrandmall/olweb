@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;">
+                            <a href="/authorization/#/user" style="font-size: 15px;font-weight: bold;">
                                 系统
                             </a>
                         </li>

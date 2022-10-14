@@ -76,8 +76,9 @@ $(document).ready(function(){
                                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                     }
                                     
-                                    var ucode = response.data.code;
-                                    var uname = response.data.settings.name;
+                                    var userInfo = response.data;
+                                    var ucode = userInfo.code;
+                                    var uname = userInfo.settings.name;
                                     $.cookie('uid', ucode, { path: '/' });
                                     $.ajax({
                                         type: 'POST',
@@ -95,10 +96,10 @@ $(document).ready(function(){
                                         complete: function(){
                                             $('#loader').hide();
                                             var flag = 1;
-                                            if(response.data.userModules.length > 0){
+                                            if(userInfo.userModules.length > 0){
                                                 var userModules = [];
                                                 
-                                                $.each(response.data.userModules, function(i,v) {
+                                                $.each(userInfo.userModules, function(i,v) {
                                                     if(v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001' || v.roleCode == 'CROLE210706000001' || v.roleCode == 'CROLE211008000001' || v.roleCode == 'CROLE220301000001'){
                                                         // 云之家openId v.roleCode == 'CROLE220301000001'
                                                         v.mobile = userName;
@@ -111,6 +112,11 @@ $(document).ready(function(){
                                                 })
                                                 $.cookie('userModules',JSON.stringify(userModules),{path:"/"});
                                             }
+                                            
+                                            localStorage.setItem("token",xhr.getResponseHeader("Authorization"));
+                                            localStorage.setItem("account",xhr.getResponseHeader("Login"));
+                                            localStorage.setItem("userInfo",JSON.stringify(userInfo));
+                                            localStorage.setItem("loginTime",Date.parse(new Date()));
                                             
                                             if(flag == 1){
                                                 if(getURLParameter('approval')){

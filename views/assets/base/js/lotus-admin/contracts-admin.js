@@ -223,7 +223,7 @@ function findAllContractsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#contracts').html('<tr><td colspan="8" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#contracts').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

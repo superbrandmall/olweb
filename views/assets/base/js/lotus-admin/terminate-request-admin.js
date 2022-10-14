@@ -2062,9 +2062,6 @@ function submitCheck() {
                 flag = 0;
                 $('#fixedRentTaxAmount_1').parent().append(error);
             }
-        } else {
-            flag = 0;
-            $('#investmentContractAccounttermFixed').append(error);
         }
     }
     
