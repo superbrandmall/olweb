@@ -255,11 +255,18 @@ function findAllRequestsByKVCondition(p,c){
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType,v.modifyType) || '')+'</td>\n\
-                            <td>'+(v.tenantName || '')+'</td>\n\
                             <td>'+(v.mallName || '')+'</td>\n\
-                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
+                            <td>'+(v.tenantName || '')+'</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+(v.area || '')+'㎡</td>\n\
+                            <td>'+(v.floorName || '')+'</td>\n\
+                            <td>'+(v.updateName || '')+'</td>\n\
+                            <td>'+(v.awardDate || '')+'</td>\n\
+                            <td>'+v.startDate+'～'+v.endDate+'</td>\n\
+                            <td>'+v.created+'['+(v.creatorName || '')+']</td>\n\
+                            <td>'+v.updated+'['+(v.updateName || '')+']</td>\n\
                         </tr>');
                         
                     });
@@ -270,7 +277,7 @@ function findAllRequestsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#requests').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#requests').html('<tr><td colspan="17" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

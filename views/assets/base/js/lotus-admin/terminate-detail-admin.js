@@ -2449,7 +2449,7 @@ function saveContractForm(s) {
         var area = $.request.content.area;
         var awardDate = $('#rewardDate').val();
         var remark = $('#remark').val();
-        var endDate = endDate;
+        var endDate = $('#endDate').val();
         var cancelBizDate = $('#cancelBizDate').val();
         var cancelBizHour = $('#cancelBizHour').val().split(':')[0];
         var cancelDate = $('#endDate').val();
@@ -2936,7 +2936,7 @@ function saveContractForm(s) {
             "area": area, //必填
             "shopCode": shopCode, //必填
             "rentCalculationMode": $.request.content.rentCalculationMode, //必填
-            "endDate": $.request.content.endDate, //必填
+            "endDate": endDate, //必填
             "contractType": $.request.content.contractType, //必填
             "unitCode": $.request.content.unitCode, //必填
             "mallCode": $.request.mallCode, //必填
