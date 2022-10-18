@@ -1,6 +1,9 @@
 $(document).ready(function(){
     if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
-        findContractStatus('CONTRACT_STATUS');
+        findDictCodeByDictTypeCode('CONTRACT_STATUS');
+    }
+    if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
+        findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
     }
     if($.cookie('searchContractsContractStatus') != ''){
         $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
@@ -203,17 +206,30 @@ function findAllContractsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
+                        var modality = '';
+                        if(v.brandLotus != null){
+                            modality = v.brandLotus.modality3;
+                            
+                            if(v.brandLotus.modality4 != null){
+                                modality += modality + '（' + v.brandLotus.modality4 + '）';
+                            }
+                        }
+                    
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
                             <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a></td>\n\
+                            <td>'+(v.vshopLotus != null ? v.vshopLotus.unitDesc : '')+'</td>\n\
+                            <td>'+modality+'</td>\n\
+                            <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
+                            <td>'+(v.contractName || '')+'</td>\n\
                             <td>'+v.contractNo+'</td>\n\
                             <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
-                            <td>'+('V'+v.contractVersion || '')+'</td>\n\
-                            <td>'+(v.tenantName || '')+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.mallName : '')+'</td>\n\
+                            <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
                             <td>'+(v.vshopLotus != null ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.modality : '')+'</td>\n\
-                            <td>'+(v.contractName || '')+'</td>\n\
+                            <td>'+(v.unitArea || '')+'㎡</td>\n\
+                            <td>'+(v.vshopLotus != null ? v.vshopLotus.floorName : '')+'</td>\n\
+                            <td>'+v.startDate+'～'+v.endDate+'</td>\n\
+                            <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
                         </tr>');
                     });
                     
@@ -223,7 +239,7 @@ function findAllContractsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#contracts').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#contracts').html('<tr><td colspan="12" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -232,43 +248,28 @@ function findAllContractsByKVCondition(p,c){
     });
 }
 
-function findContractStatus(dictTypeCode){
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", 1);
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                sessionStorage.setItem("contractStatus", JSON.stringify(response.data.dictDataList) );
-            } else {
-                alertMsg(response.code,response.customerMessage);
-            }
-        }
-    })
-}
-
 function renderContractStatus(s) {
     var status = '';
-    if(sessionStorage.getItem("contractStatus") && sessionStorage.getItem("contractStatus") != null && sessionStorage.getItem("contractStatus") != '') { 
-        $.each($.parseJSON(sessionStorage.getItem("contractStatus")), function(i,v){
+    if(sessionStorage.getItem("CONTRACT_STATUS") && sessionStorage.getItem("CONTRACT_STATUS") != null && sessionStorage.getItem("CONTRACT_STATUS") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("CONTRACT_STATUS")), function(i,v){
             if(v.dictCode == s){
                 status = v.dictName;
             }
         })
     }
     return status;
+}
+
+function renderRentCalculationMode(r) {
+    var rentCalculationMode = '';
+    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
+            if(v.dictCode == r){
+                rentCalculationMode = v.dictName;
+            }
+        })
+    }
+    return rentCalculationMode;
 }
 
 function updateSelectStoreDropDown(data_count) {

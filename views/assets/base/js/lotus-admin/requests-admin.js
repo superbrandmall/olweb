@@ -11,6 +11,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('CONTRACT_MODIFY_TYPE');
     }
     
+    if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
+        findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
+    }
+    
     if($.cookie('searchRequestsFormStatus') != ''){
         $('#formStatus').val($.cookie('searchRequestsFormStatus')).trigger('change');
     }
@@ -247,6 +251,10 @@ function findAllRequestsByKVCondition(p,c){
                         if(v.formStatus == 9){
                             contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
                         }
+                        
+                        var creatorName, updateName;
+                        v.creatorName != null ? creatorName = '['+v.creatorName+']' : creatorName = '';
+                        v.updateName != null ? updateName = '['+v.updateName+']' : updateName = '';
 
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
@@ -255,18 +263,19 @@ function findAllRequestsByKVCondition(p,c){
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType,v.modifyType) || '')+'</td>\n\
-                            <td>'+(v.mallName || '')+'</td>\n\
+                            <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
                             <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
-                            <td>'+(v.tenantName || '')+'</td>\n\
+                            <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+(v.area || '')+'㎡</td>\n\
                             <td>'+(v.floorName || '')+'</td>\n\
                             <td>'+(v.updateName || '')+'</td>\n\
                             <td>'+(v.awardDate || '')+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
-                            <td>'+v.created+'['+(v.creatorName || '')+']</td>\n\
-                            <td>'+v.updated+'['+(v.updateName || '')+']</td>\n\
+                            <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
+                            <td>'+v.created+creatorName+'</td>\n\
+                            <td>'+v.updated+updateName+'</td>\n\
                         </tr>');
                         
                     });
@@ -277,7 +286,7 @@ function findAllRequestsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#requests').html('<tr><td colspan="17" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#requests').html('<tr><td colspan="18" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -322,6 +331,18 @@ function renderFormType(t,m) {
     }
     
     return type;
+}
+
+function renderRentCalculationMode(r) {
+    var rentCalculationMode = '';
+    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
+            if(v.dictCode == r){
+                rentCalculationMode = v.dictName;
+            }
+        })
+    }
+    return rentCalculationMode;
 }
 
 function updateSelectStoreDropDown(data_count) {

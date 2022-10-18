@@ -168,26 +168,34 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">单号</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner">合同编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th style="width: 70px;">
-                                                                <div class="th-inner">状态</div>
+                                                            <th>
+                                                                <div class="th-inner">合同类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
-                                                                <div class="th-inner">版本</div>
+                                                            <th style="width: 140px;">
+                                                                <div class="th-inner">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
+                                                            <th style="width: 270px;">
                                                                 <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th style="width: 100px;">
+                                                            <th style="width: 120px;">
+                                                                <div class="th-inner">店招</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">签约编号</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="width: 120px;">
+                                                                <div class="th-inner">状态</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="width: 140px;">
                                                                 <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -196,11 +204,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">业态</div>
+                                                                <div class="th-inner">计租面积</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">店招</div>
+                                                                <div class="th-inner">核算楼层</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th style="width: 170px;">
+                                                                <div class="th-inner">合同周期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">合作方式</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
