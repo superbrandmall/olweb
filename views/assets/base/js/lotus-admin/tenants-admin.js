@@ -156,20 +156,13 @@ function findAllTenantsByKVCondition(p,c){
                     generatePages(p, pages, c);
 
                     $.each(response.data.content, function(i,v){
-                        var tianyancha = '';
-                        if(v.uscc != '' && v.uscc != null){
-                            tianyancha = ' <small><a href="javascript: void(0)">[天眼查]</a></small>';
-                        }
-                        
                         $('#tenants').append('\
                         <tr data-index="'+i+'">\n\
-                        <td><a href="/lotus-admin/tenant-detail?id='+v.code+'">'+v.tenantCode+'</a></td>\n\
-                        <td>'+v.name+''+tianyancha+'</td>\n\
+                        <td><a href="/lotus-admin/tenant-detail?id='+v.code+'">'+v.name+'['+v.tenantCode+']</a></td>\n\
                         <td>'+(v.state == 1? '使用中' : '已删除')+'</td>\n\
                         <td>'+(v.type == 1? '个人' : '公司')+'</td>\n\
                         <td>'+(v.remarkFirst || '')+'</td>\n\
                         </tr>');
-
                     });
                     
                     if(p == pages){
@@ -178,7 +171,7 @@ function findAllTenantsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#tenants').html('<tr><td colspan="5" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#tenants').html('<tr><td colspan="4" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

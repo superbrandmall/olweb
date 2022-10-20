@@ -111,10 +111,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">代码</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>

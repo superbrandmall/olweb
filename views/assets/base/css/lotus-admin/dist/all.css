@@ -10223,10 +10223,6 @@ table.text-center,table.text-center td,table.text-center th {
 	color: #444;
 }
 
-.login-page,.register-page {
-	background: #E43C24;
-}
-
 .login-box,.register-box {
 	width: 360px;
 	margin: 7% auto;

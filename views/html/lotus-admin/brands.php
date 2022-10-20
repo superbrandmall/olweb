@@ -115,6 +115,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">业态级别</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">一级业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -124,10 +128,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">三级业态</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">四级业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

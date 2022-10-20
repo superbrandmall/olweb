@@ -158,11 +158,11 @@ function findAllBrandsByKVCondition(p,c){
                         <td><a href="/lotus-admin/brand-detail?id='+v.code+'">'+v.name+'</a></td>\n\
                         <td>'+(v.status == 1? '使用中' : '已删除')+'</td>\n\
                         <td>'+(v.remarkFirst || '')+'</td>\n\
-                        <td>'+(v.modality1 || '')+'/'+(v.modality2 || '')+'/'+(v.modality3 || '')+'</td>\n\
+                        <td>'+(v.modality1 || '')+'/'+(v.modality2 || '')+'/'+(v.modality3 || '')+(v.modality4 == null ? '' : '/'+v.modality4)+'</td>\n\
+                        <td>细类</td>\n\
                         <td>'+(v.modality1 || '')+'</td>\n\
                         <td>'+(v.modality2 || '')+'</td>\n\
                         <td>'+(v.modality3 || '')+'</td>\n\
-                        <td>'+(v.modality4 || '')+'</td>\n\
                         </tr>');
 
                     });

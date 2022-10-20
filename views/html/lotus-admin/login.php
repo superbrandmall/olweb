@@ -25,15 +25,21 @@
         font-weight: bold;
         background: #1a2226;
     }
+    
+    .jumbotron {
+        background: #E43C24;
+    }
 </style>
 <body class="hold-transition login-page">
-<center>
-    <img id="login-logo" src="/views/assets/base/img/content/lotus-admin/logo.png">
-</center>
+<div class="jumbotron hero-spacer">
+    <center>
+        <img id="login-logo" src="/views/assets/base/img/content/lotus-admin/logo.png">
+    </center>
+</div>
 <form id="login_form">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-4 col-md-offset-4" style="background: #ecf0f5;">
                 <div class="box login-box">
                     <div class="box-header">
                         <h3 class="box-title"> 用户登录</h3>

@@ -143,8 +143,7 @@ function findAllMallsByKVCondition(p,c){
                     
                     $.each(response.data.content, function(i,v){
                         $('#malls').append('<tr data-index="'+i+'">\n\
-                        <td><a href="/lotus-admin/default?id='+v.code+'">'+v.code+'</a></td>\n\
-                        <td>'+v.mallName+'</td>\n\
+                        <td><a href="/lotus-admin/default?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
                         <td>'+v.mallLotusBase.address+'</td>\n\
                         <td>'+v.mallLotusBase.name+'</td>\n\
                         <td>'+v.mallLotusBase.uscc+'</td>\n\
@@ -161,7 +160,7 @@ function findAllMallsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#malls').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#malls').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

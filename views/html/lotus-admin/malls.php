@@ -100,19 +100,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">项目编号</div>
+                                                                <div class="th-inner" style="width: 120px;">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">项目名称</div>
+                                                                <div class="th-inner" style="width: 230px;">地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">地址</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">公司名称</div>
+                                                                <div class="th-inner" style="width: 170px;">公司名称</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -120,23 +116,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">注册地址</div>
+                                                                <div class="th-inner" style="width: 330px;">注册地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">开户银行</div>
+                                                                <div class="th-inner" style="width: 250px;">开户银行</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">账号</div>
+                                                                <div class="th-inner" style="width: 160px;">账号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">联系电话</div>
+                                                                <div class="th-inner" style="width: 100px;">联系电话</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">市区</div>
+                                                                <div class="th-inner" style="width: 100px;">项目所属地</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

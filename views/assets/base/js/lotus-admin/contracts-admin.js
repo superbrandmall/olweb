@@ -1,6 +1,9 @@
 $(document).ready(function(){
-    if(!sessionStorage.getItem("contractStatus") || sessionStorage.getItem("contractStatus") == null || sessionStorage.getItem("contractStatus") == '') {
+    if(!sessionStorage.getItem("CONTRACT_STATUS") || sessionStorage.getItem("CONTRACT_STATUS") == null || sessionStorage.getItem("CONTRACT_STATUS") == '') {
         findDictCodeByDictTypeCode('CONTRACT_STATUS');
+    }
+    if(!sessionStorage.getItem("UNIT_TYPE") || sessionStorage.getItem("UNIT_TYPE") == null || sessionStorage.getItem("UNIT_TYPE") == '') {
+        findDictCodeByDictTypeCode('UNIT_TYPE');
     }
     if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
         findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
@@ -218,7 +221,7 @@ function findAllContractsByKVCondition(p,c){
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
                             <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a></td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.unitDesc : '')+'</td>\n\
+                            <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
@@ -258,6 +261,18 @@ function renderContractStatus(s) {
         })
     }
     return status;
+}
+
+function renderUnitType(t) {
+    var type = '';
+    if(sessionStorage.getItem("UNIT_TYPE") && sessionStorage.getItem("UNIT_TYPE") != null && sessionStorage.getItem("UNIT_TYPE") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("UNIT_TYPE")), function(i,v){
+            if(v.dictCode == t){
+                type = v.dictName;
+            }
+        })
+    }
+    return type;
 }
 
 function renderRentCalculationMode(r) {
