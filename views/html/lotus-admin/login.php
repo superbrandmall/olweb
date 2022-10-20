@@ -32,26 +32,21 @@
 </style>
 <body class="hold-transition login-page">
 <div class="jumbotron hero-spacer">
-    <center>
+    <div style="width: 360px; margin: 0 auto;">
         <img id="login-logo" src="/views/assets/base/img/content/lotus-admin/logo.png">
-    </center>
+        <h5 style="display: inline-block; vertical-align: middle; color: #fff;">卜蜂莲花招商管理系统</h5>
+    </div>
 </div>
 <form id="login_form">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4" style="background: #ecf0f5;">
                 <div class="box login-box">
-                    <div class="box-header">
+                    <div class="box-header" style="background: #fff;">
                         <h3 class="box-title"> 用户登录</h3>
                     </div>
                     <div class="login-box-body">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="alert alert-info">
-                                    <p>欢迎来到卜蜂莲花招商管理系统! </p>
-                                </div>
-                            </div>
-
                             <div class="col-md-12">
                                 <div class="alert alert-danger login-failed">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
