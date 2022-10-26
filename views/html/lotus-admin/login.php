@@ -1,5 +1,5 @@
 <?php
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/login-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/login.js"></script>'.PHP_EOL;
 ?>
 
 <style>
@@ -98,8 +98,6 @@
         </div>
     </div>
 </form>
-<div class="text-center" style="padding-top: 100px;">
-</div>
 
 <?php
     include ('footer.php');

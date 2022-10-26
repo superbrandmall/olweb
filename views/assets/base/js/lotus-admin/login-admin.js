@@ -82,7 +82,7 @@ $(document).ready(function(){
                                     $.cookie('uid', ucode, { path: '/' });
                                     $.ajax({
                                         type: 'POST',
-                                        url: '/controllers/api/1.0/ApiLotusAdminLoginSession.php',
+                                        url: '/controllers/api/lotus-admin/ApiLotusAdminLoginSession.php',
                                         data: {
                                             user_code: ucode,
                                             user_name: uname

@@ -9,71 +9,69 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <form id="search-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 160px;">
-            <h4>
-                商户
-            </h4>
-            <div class="pull-right">
-                <a href="/lotus-admin/create-tenant" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建商户</span></a>
-            </div>
-            <div class="box-header">
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">状态</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="state" style="width: 100%">
-                                        <option value="" selected>全部</option>
-                                        <option value="1">使用中</option>
-                                        <option value="0">已删除</option>
-                                    </select>
-                                </div>
+    <section class="sub-header" style="height: 160px;">
+        <h4>
+            商户
+        </h4>
+        <div class="pull-right">
+            <a href="/lotus-admin/create-tenant" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建商户</span></a>
+        </div>
+        <div class="box-header">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="state" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="1">使用中</option>
+                                    <option value="0">已删除</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">代码</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <input class="form-control" id="tenantCode" type="text"  />
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">代码</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <input class="form-control" id="tenantCode" type="text"  />
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">商户</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <input class="form-control" id="name" type="text"  />
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <input class="form-control" id="name" type="text"  />
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">类型</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="type" style="width: 100%">
-                                        <option value="" selected>全部</option>
-                                        <option value="2">公司</option>
-                                        <option value="1">个人</option>
-                                    </select>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">类型</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="type" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="2">公司</option>
+                                    <option value="1">个人</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label"></label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
-                                    <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
+                                <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </form>
+        </div>
+    </section>
 
     <section class="content" style="margin-top: 210px;">
         <div id="webui">

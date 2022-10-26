@@ -252,7 +252,7 @@
 
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="/views/assets/base/img/content/lotus-admin/avatar.png" class="user-image" alt="User Image">
+                                    <i class="fa fa-user"></i>
                                     <span class="hidden-xs">
                                         <?php
                                         if(isset($_SESSION['lotus_admin_name'])) {

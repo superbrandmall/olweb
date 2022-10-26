@@ -1,26 +1,23 @@
-<?php
-if(isset($_SESSION['lotus_admin_login'])) {
-    if(isset($_GET['p']) && $_GET['p'] != 'lotus-admin/reset') {
-?>
 <div class="modal fade" id="submitStateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">提交审核中，请稍后</h4>
-                        </div>
-                        <div id="submitState" class="modal-body"></div>
-                    </div>
-                </div>
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">提交审核中，请稍后</h4>
             </div>
-
-            <footer class="main-footer hidden-print text-center">
-                <div class="pull-right hidden-xs">
-                </div>
-                &copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
-                . <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
-                . <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
-            </footer>
+            <div id="submitState" class="modal-body"></div>
         </div>
+    </div>
+</div>
+<?php
+if(!isset($_SESSION['lotus_admin_login'])) {
+    if(isset($_GET['p']) && $_GET['p'] == 'lotus-admin/login') {
+?>
+    <footer class="main-footer hidden-print text-center">
+        <div class="pull-right hidden-xs"></div>
+        &copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
+        . <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
+        . <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
+    </footer>
 <?php
     }
 }

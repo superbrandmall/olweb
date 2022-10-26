@@ -9,59 +9,57 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <form id="search-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 160px;">
-            <h4>
-                品牌
-            </h4>
-            <div class="pull-right">
-                <a href="/lotus-admin/create-brand" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建品牌</span></a>
-            </div>
-            <div class="box-header">
-                <div class="box-body">
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">状态</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="status" style="width: 100%">
-                                        <option value="" selected>全部</option>
-                                        <option value="1">使用中</option>
-                                        <option value="0">已删除</option>
-                                    </select>
-                                </div>
+    <section class="sub-header" style="height: 160px;">
+        <h4>
+            品牌
+        </h4>
+        <div class="pull-right">
+            <a href="/lotus-admin/create-brand" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建品牌</span></a>
+        </div>
+        <div class="box-header">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="status" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="1">使用中</option>
+                                    <option value="0">已删除</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">品牌</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <input class="form-control" id="name" type="text"  />
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">品牌</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <input class="form-control" id="name" type="text"  />
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label" style="text-align: right;">品牌档次</label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="brandAttribute" style="width: 100%"></select>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">品牌档次</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="brandAttribute" style="width: 100%"></select>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label"></label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
-                                    <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
-                                </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
+                                <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </form>
+        </div>
+    </section>
 
     <section class="content" style="margin-top: 210px;">
         <div id="webui">
@@ -70,7 +68,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <div class="box">
                         <div class="box-body">
                             <div class="row">
-                                <div class="col-md-12">
+                             <   <div class="col-md-12">
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
                                             <div class="pull-left pagination-detail">

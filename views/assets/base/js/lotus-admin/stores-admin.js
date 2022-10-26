@@ -82,8 +82,6 @@ function findAllStoresByKVCondition(p,c){
     var params = [];
     var param = {};
     var conditionGroups = [];
-    var conditionGroupsParams = [];
-    var conditionGroup = {};
     
     params = [{
         "columnName": "userCode",
@@ -110,32 +108,6 @@ function findAllStoresByKVCondition(p,c){
         "operator": "!=",
         "value": '测试店'
     }]
-    
-    if($.cookie('searchUnit') != null && $.cookie('searchUnit') != '' && $.cookie('searchUnit') != 'null'){
-        param = {
-            "columnName": "unitCode",
-            "columnPatten": "",
-            "conditionOperator": "OR",
-            "operator": "=",
-            "value": $.cookie('searchUnit')
-        }
-        conditionGroupsParams.push(param);
-    
-//    param = {
-//        "columnName": "unitName",
-//        "columnPatten": "",
-//        "conditionOperator": "OR",
-//        "operator": "=",
-//        "value": $.cookie('searchUnit')
-//    }
-//    conditionGroupsParams.push(param);
-    
-        conditionGroup = {
-            "conditionOperator": "AND",
-            "params": conditionGroupsParams
-        }
-        conditionGroups.push(conditionGroup);
-    }
     
     if($.cookie('searchShopStatus') != null && $.cookie('searchShopStatus') != '' && $.cookie('searchShopStatus') != 'null'){
         param = {
@@ -164,6 +136,26 @@ function findAllStoresByKVCondition(p,c){
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchMallCode')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchUnit') != null && $.cookie('searchUnit') != '' && $.cookie('searchUnit') != 'null'){
+        param = {
+            "columnName": "unitCode",
+            "columnPatten": "",
+            "conditionOperator": "OR",
+            "operator": "=",
+            "value": $.cookie('searchUnit')
+        }
+        params.push(param);
+    
+        param = {
+            "columnName": "unitName",
+            "columnPatten": "",
+            "conditionOperator": "OR",
+            "operator": "=",
+            "value": $.cookie('searchUnit')
         }
         params.push(param);
     }
