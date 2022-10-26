@@ -1,6 +1,7 @@
 $.api = {
     base: $.base,
     baseLotus: $.base+"/onlineleasing-lotus",
+    baseCommYZJ: $.base+"/comm-yunzhijia",
     baseAdmin: $.base+"/onlineleasing-admin",
     dictModule: [],
     dictContractType: 1, //租赁

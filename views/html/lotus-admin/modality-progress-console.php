@@ -1,8 +1,8 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/store-progress-console-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/modality-progress-console-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/store-progress-console.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/modality-progress-console.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
@@ -58,20 +58,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">招商人员</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">业态</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="leasingMgr" name="leasingMgr" style="width: 100%"></select>
+                                <input class="form-control" id="biz" placeholder="输入代码/名称" type="text"  />
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="unit" placeholder="代码/名称" type="text"  />
-                            </div>
-                        </div>
-                    </div>
+                    <div class="clearfix"></div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
@@ -88,8 +81,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div class="box-header" style="background-color: #ecf0f5; margin-top: -14px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                    <li class="active"><a href="javascript: void(0);">铺位</a></li>
-                    <li><a href="/lotus-admin/modality-progress-console?items=20">业态</a></li>
+                    <li><a href="/lotus-admin/store-progress-console?items=20">铺位</a></li>
+                    <li class="active"><a href="javascript: void(0);">业态</a></li>
                     <li><a href="/lotus-admin/floor-progress-console?items=20">楼层</a></li>
                 </ol>
             </div>
@@ -115,10 +108,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页</span>
                                             </div>
@@ -132,7 +125,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">铺位</div>
+                                                                <div class="th-inner">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -140,27 +133,27 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">招商人员</div>
+                                                                <div class="th-inner">正式签约数</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">空铺</div>
+                                                                <div class="th-inner">完成面积(m²)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">落位品牌</div>
+                                                                <div class="th-inner">完成面积比例</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">通过DR申请</div>
+                                                                <div class="th-inner">DR申请通过数</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">通过合同申请</div>
+                                                                <div class="th-inner">合同申请通过数</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">签订正式合同</div>
+                                                                <div class="th-inner">正式合同签订数</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
@@ -179,10 +172,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/modality-progress-console?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>

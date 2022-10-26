@@ -2419,7 +2419,6 @@ function submitCheck() {
 
 function saveContractForm(s) {
     var msg;
-    var formStatus = '保存';
     if(s == 'submit'){
         msg = '确定要将此内容提交审批吗？';
     } else {
@@ -2533,16 +2532,6 @@ function saveContractForm(s) {
                 
                 if(processApprove.approveOpenId != null){
                     processApproveList.push(processApprove);
-                }
-            })
-        }
-        
-        var fs = JSON.parse(sessionStorage.getItem('FORM_STATUS'));
-        if(fs.length > 0){
-            $.each(fs, function(i,v) {
-                if(v.dictName == formStatus){
-                    formStatus = v.dictCode;
-                    return false;
                 }
             })
         }
@@ -2998,7 +2987,7 @@ function saveContractForm(s) {
             "fixedRentList": fixedRentList,
             "floorCode": $.request.content.floorCode,
             "floorName": $.request.content.floorName,
-            "formStatus": formStatus,
+            "formStatus": $.request.content.formStatus,
             "freeDayBizRental": 0,
             "freeDays": $.request.content.freeDays,
             "freeEndDate": $.request.content.freeEndDate,

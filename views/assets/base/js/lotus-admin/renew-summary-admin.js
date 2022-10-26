@@ -437,7 +437,7 @@ function findRentCalculationMode(dictTypeCode) {
 
 function findProcessInstByBizId(){
     $.ajax({
-        url: $.api.baseLotus+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
+        url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
         type: "GET",
         async: false,
         dataType: "json",
