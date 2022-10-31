@@ -68,7 +68,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <div class="box">
                         <div class="box-body">
                             <div class="row">
-                             <   <div class="col-md-12">
+                                <div class="col-md-12">
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
                                             <div class="pull-left pagination-detail">
