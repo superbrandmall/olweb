@@ -112,7 +112,7 @@ function getShopFloorInfo(floor) {
                 if(response.data.content.length > 0){  
                     $.each(response.data.content, function(i,v){
                         if(v.state != 0 ){
-                            stores = Math.round(stores + v.unitArea);
+                            stores = stores + v.unitArea;
                             stores_units++;
 
                             switch (v.shopStatus) {
@@ -141,12 +141,14 @@ function getShopFloorInfo(floor) {
         }
     });
     
+    var rt = parseInt(100 - leased);
+    
     $('#console').append('<tr>\n\
         <td><a href="/lotus-admin/home?id='+$('#mallCode').val()+'&f='+fl.code+'">'+fl.mallName+fl.floorName+'</a></td>\n\
-        <td>'+stores+'</td>\n\
-        <td>'+stores_0_units+'</td>\n\
-        <td>'+stores_0+'</td>\n\
-        <td style="position: relative; width: 100px; height: 35px; padding: 0 !important; text-align: center; line-height: 35px;" align="center"><div style="background: #fff5f5;height: 100%; left: 0; position: absolute; top: 0; bottom: 0; right: 20px;">'+leased+'%</div></td>\n\
+        <td>'+parseFloat(stores).toFixed(2)+'</td>\n\
+        <td>'+Math.round(stores_0_units)+'</td>\n\
+        <td>'+parseFloat(stores_0).toFixed(2)+'</td>\n\
+        <td style="position: relative; width: 100px; background: #fff5f5; vertical-align: top;" align="center"><div style="background: #f16d7f; left: 0; position: absolute; top: 2px; bottom: 2px; right: '+rt+'px;"></div><div style="position: absolute;left: 0;right: 0;vertical-align: top;">'+leased+'%</div></td>\n\
         <td>0</td>\n\
         <td>0</td>\n\
         <td>0</td></tr>');

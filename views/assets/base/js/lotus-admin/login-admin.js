@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    if($.cookie('userModules') && $.cookie('userModules') != null && $.cookie('userModules') != ''){
+        var no = JSON.parse($.cookie('userModules'))[0].mobile;
+        $('#login_username').val(no);
+    }
     ///////////////////// Validate login form /////////////////////////
     $("#login_form").validate({
         rules: {
