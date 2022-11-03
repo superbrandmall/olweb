@@ -329,7 +329,7 @@ function fileUpload(bizId, contractNo, formType, type) {
 
         var upload = $.ajax({
             type: "POST",
-            url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+bizId+"&creatorOpenId="+openId+"&activityName=&bizType=CONTRACT_"+type,
+            url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+bizId+"&creatorOpenId="+openId+"&activityName=CONTRACT_"+type+"&bizType=CONTRACT_"+type,
             data: formData,
             async: false,
             cache: false,
