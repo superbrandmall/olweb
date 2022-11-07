@@ -943,7 +943,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var column5 = createRowColumn(newrow);
     var column6 = createRowColumn(newrow);
     var column7 = createRowColumn(newrow);
-    //var column8 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
     var column11 = createRowColumn(newrow);
@@ -1001,7 +1001,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var select = document.createElement("select"); //扣率类型
     select.setAttribute("class","select2 commissionDeductTypeDropDown new");
     select.setAttribute("id","commissionDeductType_"+count.toLocaleString());
-    select.setAttribute("disabled","disabled");
     column4.appendChild(select);
     
     var select = document.createElement("select"); //商品分类
@@ -1029,8 +1028,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
-    input.setAttribute("readonly","");
-    input.setAttribute("style","border: none");
     input.setAttribute("value",(parseFloat(value.deduct) * 100));
     div.appendChild(input);
     var percent = document.createElement("span");
@@ -1039,7 +1036,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     div.appendChild(percent);
     column7.appendChild(div);
     
-    /*var div = document.createElement("div"); //起始金额
+    var div = document.createElement("div"); //起始金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money");
@@ -1048,10 +1045,10 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("value",value.amount);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/月";
+    percent.innerText = "元/年";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
-    column8.appendChild(div);*/
+    column8.appendChild(div);
     
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
@@ -1062,7 +1059,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("value",value.targetSales);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/月";
+    percent.innerText = "元/年";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column9.appendChild(div);
@@ -1094,21 +1091,19 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
     updateFeeItems('commissionFeeItemDropDown','commissionVATDropDown','deductRent');
-    var tmp = $('#commissionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermCommission .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
     
     $("#commissionItem_"+count.toLocaleString()).val(value.itemCode).trigger("change");
     $('#investmentContractAccounttermCommission .select2').select2();
+    $("#commissionDeductType_"+count.toLocaleString()).val(value.deductType).trigger("change");
     $("#commissionTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
  
     $('input.money').on('focus',function(){
@@ -1132,6 +1127,10 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
+    })
+    
+    $("#commissionDeduct_"+count.toLocaleString()).on('change',function(){
+        calBackPushCommissionTaxDeduct();
     })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -2066,7 +2065,7 @@ function saveContractCommission() {
                     $.contract.commission[i].deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
                     $.contract.commission[i].taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
 
-                    //$.contract.commission[i].amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
+                    $.contract.commission[i].amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
                     $.contract.commission[i].amount =  0;
                     $.contract.commission[i].targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
 
@@ -2113,7 +2112,7 @@ function saveContractCommission() {
                     commission.deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
                     commission.taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
 
-                    //commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
+                    commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
                     commission.amount =  0;
                     commission.targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
 

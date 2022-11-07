@@ -911,105 +911,6 @@ function updateDictByDictTypeCode(dictTypeCode, id, val) {
     })
 }
 
-function findRoleYZJByParentId() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/role/yzj/findAllByParentId/?parentId=69bcb693-92c4-11ec-8a77-ecf4bbea1498",
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data.length > 0){
-                    sessionStorage.setItem("roleYZJ", JSON.stringify(response.data));
-                    updateRoleYZJLabel();
-                }
-            } else {
-                alertMsg(response.code,response.customerMessage);
-            }
-        }
-    })
-}
-
-function updateRoleYZJLabel() {
-    $.each($.parseJSON(sessionStorage.getItem('roleYZJ')), function(i,v){
-        $('#'+v.roleId).find('label').prepend(v.roleName);
-        if(v.roleId != 'Lotus_leasing_head'){
-            updateUserRoleYZJDropDownByRoleId(v.roleId);
-        }
-    })
-}
-        
-function updateUserRoleYZJDropDownByRoleId(id) {
-    $('#'+id).find('select').select2({
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        allowClear: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/user/role/yzj/findAllByRoleId",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {         
-                return {
-                    search: params.term,
-                    roleId: id
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'];
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.openId,
-                                text: item.name
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        })
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    })
-}
-
 function updateRowInvestmentContractAccounttermFixed(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
@@ -1163,14 +1064,11 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('fixedFeeItemDropDown','fixedVATDropDown','fixedRent');
-    var tmp = $('#fixedRentEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermFixed .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1236,6 +1134,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var column5 = createRowColumn(newrow);
     var column6 = createRowColumn(newrow);
     var column7 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
     var column11 = createRowColumn(newrow);
@@ -1302,7 +1201,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var select = document.createElement("select"); //扣率类型
     select.setAttribute("class","select2 commissionDeductTypeDropDown new");
     select.setAttribute("id","commissionDeductType_"+count.toLocaleString());
-    select.setAttribute("disabled","disabled");
     column4.appendChild(select);
     
     var select = document.createElement("select"); //商品分类
@@ -1330,8 +1228,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("class","form-control money past");
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
-    input.setAttribute("readonly","");
-    input.setAttribute("style","border: none");
     input.setAttribute("value",(parseFloat(value.deduct) * 100));
     div.appendChild(input);
     var percent = document.createElement("span");
@@ -1339,6 +1235,20 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column7.appendChild(div);
+    
+    var div = document.createElement("div"); //起始金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money past");
+    input.setAttribute("id","commissionAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value",value.amount);
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元/年";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column8.appendChild(div);
     
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
@@ -1349,7 +1259,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("value",value.targetSales);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/月";
+    percent.innerText = "元/年";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column9.appendChild(div);
@@ -1381,20 +1291,18 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
     updateFeeItems('commissionFeeItemDropDown','commissionVATDropDown','deductRent');
-    var tmp = $('#commissionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermCommission .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
     
     $("#commissionItem_"+count.toLocaleString()).val(value.itemCode).trigger("change");
     $('#investmentContractAccounttermCommission .select2').select2();
+    $("#commissionDeductType_"+count.toLocaleString()).val(value.deductType).trigger("change");
     $("#commissionTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
  
     $('input.money').on('focus',function(){
@@ -1419,6 +1327,14 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('commission');
     });
+    
+    $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
+        calBackPushCommissionDeduct();
+    })
+    
+    $("#commissionDeduct_"+count.toLocaleString()).on('change',function(){
+        calBackPushCommissionTaxDeduct();
+    })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
@@ -1578,14 +1494,11 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property');
-    var tmp = $('#propertyMgmtEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPropertyMgmt .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1767,14 +1680,11 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee');
-    var tmp = $('#promotionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1994,14 +1904,11 @@ function updateRowMinSales(v) {
     column4.appendChild(remove);
 
     tbody.appendChild(newrow);
-    var tmp = $('#minSalesEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractProperteisterm .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -2205,6 +2112,16 @@ function submitCheck() {
             if($('#commissionTaxDeduct_1').val() == ''){
                 flag = 0;
                 $('#commissionTaxDeduct_1').parent().append(error);
+            }
+            
+            if($('#commissionDeduct_1').val() == ''){
+                flag = 0;
+                $('#commissionDeduct_1').parent().append(error);
+            }
+            
+            if($('#commissionAmount_1').val() == ''){
+                flag = 0;
+                $('#commissionAmount_1').parent().append(error);
             }
             
             if($('#commissionMinSales_1').val() == ''){
@@ -2511,7 +2428,7 @@ function saveContractForm(s) {
                 commission.deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
                 commission.taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
 
-                commission.amount =  0;
+                commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
                 commission.targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
 
                 commission.taxRate = $('#commissionTaxRate_'+index).val();

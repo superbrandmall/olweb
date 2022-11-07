@@ -892,14 +892,11 @@ function addRowInvestmentContractAccounttermFixed() {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('fixedFeeItemDropDown','fixedVATDropDown','fixedRent');
-    var tmp = $('#fixedRentEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermFixed .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -962,7 +959,7 @@ function addRowInvestmentContractAccounttermCommission() {
     var column5 = createRowColumn(newrow);
     var column6 = createRowColumn(newrow);
     var column7 = createRowColumn(newrow);
-    //var column8 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
     var column11 = createRowColumn(newrow);
@@ -1018,7 +1015,6 @@ function addRowInvestmentContractAccounttermCommission() {
     var select = document.createElement("select"); //扣率类型
     select.setAttribute("class","select2 commissionDeductTypeDropDown new");
     select.setAttribute("id","commissionDeductType_"+count.toLocaleString());
-    select.setAttribute("disabled","disabled");
     column4.appendChild(select);
     
     var select = document.createElement("select"); //商品分类
@@ -1046,8 +1042,6 @@ function addRowInvestmentContractAccounttermCommission() {
     input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionDeduct_"+count.toLocaleString());
     input.setAttribute("type","text");
-    input.setAttribute("readonly","");
-    input.setAttribute("style","border: none");
     input.setAttribute("value","0");
     div.appendChild(input);
     var percent = document.createElement("span");
@@ -1056,7 +1050,7 @@ function addRowInvestmentContractAccounttermCommission() {
     div.appendChild(percent);
     column7.appendChild(div);
     
-    /*var div = document.createElement("div"); //起始金额
+    var div = document.createElement("div"); //起始金额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money");
@@ -1065,10 +1059,10 @@ function addRowInvestmentContractAccounttermCommission() {
     input.setAttribute("value","0");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/月";
+    percent.innerText = "元/年";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
-    column8.appendChild(div);*/
+    column8.appendChild(div);
     
     var div = document.createElement("div"); //保底营业额
     div.setAttribute("class","input-group");
@@ -1078,7 +1072,7 @@ function addRowInvestmentContractAccounttermCommission() {
     input.setAttribute("type","text");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/月";
+    percent.innerText = "元/年";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column9.appendChild(div);
@@ -1108,15 +1102,11 @@ function addRowInvestmentContractAccounttermCommission() {
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
     updateFeeItems('commissionFeeItemDropDown','commissionVATDropDown','deductRent');
-    
-    var tmp = $('#commissionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermCommission .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1149,6 +1139,10 @@ function addRowInvestmentContractAccounttermCommission() {
     
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
+    })
+    
+    $("#commissionDeduct_"+count.toLocaleString()).on('change',function(){
+        calBackPushCommissionTaxDeduct();
     })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1292,14 +1286,11 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property');
-    var tmp = $('#propertyMgmtEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPropertyMgmt .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1494,14 +1485,11 @@ function addRowInvestmentContractAccounttermPromotion() {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee');
-    var tmp = $('#promotionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1710,15 +1698,11 @@ function addRowMinSales() {
     column4.appendChild(remove);
 
     tbody.appendChild(newrow);
-    var tmp = $('#minSalesEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ? sd = $('#startDate').val() : sd = IncrDate(tmp);
-
     $('#investmentContractProperteisterm .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -2160,6 +2144,106 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     });
 }
 
+function findRoleYZJByParentId() {
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/role/yzj/findAllByParentId/?parentId=69bcb693-92c4-11ec-8a77-ecf4bbea1498",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    sessionStorage.setItem("roleYZJ", JSON.stringify(response.data));
+                    updateRoleYZJLabel();
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
+}
+
+function updateRoleYZJLabel() {
+    $.each($.parseJSON(sessionStorage.getItem('roleYZJ')), function(i,v){
+        $('#'+v.roleId).find('label').prepend(v.roleName);
+        if(v.roleId != 'Lotus_leasing_head'){
+            updateUserRoleYZJDropDownByRoleId(v.roleId);
+        }
+    })
+}
+        
+function updateUserRoleYZJDropDownByRoleId(id) {
+    $('#'+id).find('select').select2({
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        allowClear: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseCommYZJ+"/api/user/role/yzj/findAllByRoleId",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) {         
+                return {
+                    search: params.term,
+                    roleId: id
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'];
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.openId,
+                                text: item.name
+                            }
+                            
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        })
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    })
+}
+
 function calBackPushFixedRentSingleRow(num) {
     if(numberWithoutCommas($('#fixedRentTaxRentAmount_'+num).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
         if($('#termCalcMode').val() != 'OLD'){
@@ -2268,11 +2352,11 @@ function calBackPushNextCalendar(Exid){
         var num = parseInt(num0) + 1;
         var tmp = $(this).val();
         if($('#'+Exid+'StartDate_'+num).length > 0){
-            $('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp));
+            //$('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp));
             $('#'+Exid+'StartDate_'+num).datepicker('update', IncrDate(tmp));
         } else {
             if($('#'+Exid+'EndDate_'+num0).val() == '' && $('#'+Exid+'StartDate_'+num0).val() != ''){
-                $('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp));
+                //$('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp));
                 $('#'+Exid+'EndDate_'+num0).datepicker('update', $('#endDate').val());
             }
         }
@@ -2292,6 +2376,16 @@ function calBackPushCommissionDeduct(){
             var num = $(this).attr('id').split('_')[1];
             var taxDeduct = Math.round(numberWithoutCommas($(this).val()) * (1 + parseFloat($('#commissionTaxRate_'+num).val())) * 100) / 100;
             $('#commissionDeduct_'+num).val(accounting.formatNumber(taxDeduct)).fadeOut().fadeIn();
+        }
+    });
+}
+
+function calBackPushCommissionTaxDeduct(){
+    $("input[id*='commissionDeduct_']").not('.past').each(function(i){  
+        if(numberWithoutCommas($(this).val()) >= 0){
+            var num = $(this).attr('id').split('_')[1];
+            var deduct = Math.round(numberWithoutCommas($(this).val()) / (1 + parseFloat($('#commissionTaxRate_'+num).val())) * 100) / 100;
+            $('#commissionTaxDeduct_'+num).val(accounting.formatNumber(deduct)).fadeOut().fadeIn();
         }
     });
 }

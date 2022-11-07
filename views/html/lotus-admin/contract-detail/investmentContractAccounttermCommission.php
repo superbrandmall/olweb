@@ -52,10 +52,10 @@
                                                 <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <!--<th>
+                                            <th>
                                                 <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
-                                            </th>-->
+                                            </th>
                                             <th>
                                                 <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
