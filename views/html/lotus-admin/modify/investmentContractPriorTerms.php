@@ -63,7 +63,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="oldArea" type="text" style="border-right: none;" />                                                
-                        <span class="input-group-addon" style="background: transparent;">m<sup>2</sup></span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
                     </div>
                 </div>
             </div>

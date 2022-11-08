@@ -13,8 +13,6 @@ $(document).ready(function(){
     } else {
         findAllStoresByKVCondition(1,items);
     }
-    
-    updateSelectUserDropDown(20);
 
     switch (getURLParameter('items')) {
         case '10':
@@ -33,6 +31,18 @@ $(document).ready(function(){
             $('.page-size').text('20');
             break;
     }
+    
+    $('.date-picker, .input-daterange').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayBtn': "linked",
+        'todayHighlight': true,
+        'startDate': '',
+        'endDate': '',
+        'autoclose': true
+    });
+    
+    updateSelectStoreDropDown(10);
     
     $('#clear').click(function(){
         $('#unit').val('');

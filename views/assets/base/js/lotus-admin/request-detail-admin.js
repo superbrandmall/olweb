@@ -2328,16 +2328,6 @@ function submitCheck() {
         $('#oldArea').parent().append(error);
     }
     
-    if($('#oldStartDate').val() == '') {
-        flag = 0;
-        $('#oldStartDate').parent().append(error);
-    }
-    
-    if($('#oldEndDate').val() == '') {
-        flag = 0;
-        $('#oldEndDate').parent().append(error);
-    }
-    
     if($('#oldCostEffect').val() == '') {
         flag = 0;
         $('#oldCostEffect').parent().append(error);
@@ -2916,13 +2906,13 @@ function saveContractForm(s) {
         oldContractTerm.brandName = $('#oldBrandName').val();
         oldContractTerm.budgetRentAmount = numberWithoutCommas($('#oldCostEffect').val());
         oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
-        oldContractTerm.endDate = $('#oldEndDate').val();
+        oldContractTerm.endDate = $('#oldEndDate').val() || '';
         oldContractTerm.freeDays = $('#oldFreeDays').val();
         oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
         oldContractTerm.shopCode = shopCode;
-        oldContractTerm.startDate = $('#oldStartDate').val();
+        oldContractTerm.startDate = $('#oldStartDate').val() || '';
         oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
         oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());

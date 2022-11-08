@@ -73,20 +73,45 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">招商人员</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="leasingMgr" name="leasingMgr" style="width: 100%"></select>
+                                <select class="select2" id="selectStore" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="unit" placeholder="代码/名称" type="text"  />
+                            <label class="col-md-4 control-label" style="text-align: right;">开始日期</label>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="input-daterange input-group">
+                                    <input type="text" class="form-control" id="startStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                    <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    <span class="input-group-addon" style="border: none; background: transparent;">-</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="startEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">截止日期</label>
+                            <div class="col-md-8 col-sm-12">
+                                <div class="input-daterange input-group">
+                                    <input type="text" class="form-control" id="endStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                    <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    <span class="input-group-addon" style="border: none; background: transparent;">-</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="endEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
@@ -137,40 +162,80 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">铺位</div>
+                                                                <div class="th-inner">位置</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">计租面积(m²)</div>
+                                                                <div class="th-inner">位置类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">招商人员</div>
+                                                                <div class="th-inner">开始日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">空铺</div>
+                                                                <div class="th-inner">截止日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">落位品牌</div>
+                                                                <div class="th-inner">面积(m²)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">通过DR申请</div>
+                                                                <div class="th-inner">扣点</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">通过合同申请</div>
+                                                                <div class="th-inner">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">签订正式合同</div>
+                                                                <div class="th-inner">租金单价</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">月管理费(元/月/平米)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">租赁年限</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">装修期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">月管理费(元/月)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">推广费比例</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">销售额</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">租金总计</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">日租金(元/天)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">月租金(元/月/平米)</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">月租金(元/月)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="console"></tbody>
+                                                    <tbody id="budget"></tbody>
                                                 </table>
                                             </div>
 

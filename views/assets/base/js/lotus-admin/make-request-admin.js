@@ -519,77 +519,6 @@ function updateFeeItems(FeeItem,VAT,type) {
     }
 }
 
-function updateSelectStoreDropDown(data_count) {
-    $('#selectStore').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodesAndMallCode",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) { 
-                var mallCodes = $.cookie('mallSelected').split(':::')[1];
-                var mallCode = mallCodes;
-                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-                        mallCodes = 'ALL';
-                        return false;
-                    }
-                })
-                
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes,
-                    mallCode: mallCode
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.floorName+':::'+item.floorCode,
-                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
 function updateContractTemplate() {
     var start = $('#startDate').val(); 
     var end = $('#endDate').val(); 
@@ -929,16 +858,6 @@ function submitCheck() {
     if($('#oldArea').val() == '') {
         flag = 0;
         $('#oldArea').parent().append(error);
-    }
-    
-    if($('#oldStartDate').val() == '') {
-        flag = 0;
-        $('#oldStartDate').parent().append(error);
-    }
-    
-    if($('#oldEndDate').val() == '') {
-        flag = 0;
-        $('#oldEndDate').parent().append(error);
     }
     
     if($('#oldCostEffect').val() == '') {
@@ -1515,13 +1434,13 @@ function saveContractForm(s) {
         oldContractTerm.brandName = $('#oldBrandName').val();
         oldContractTerm.budgetRentAmount = numberWithoutCommas($('#oldCostEffect').val());
         oldContractTerm.deposit = numberWithoutCommas($('#oldDepositFee').val());
-        oldContractTerm.endDate = $('#oldEndDate').val();
+        oldContractTerm.endDate = $('#oldEndDate').val() || '';
         oldContractTerm.freeDays = $('#oldFreeDays').val();
         oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
         oldContractTerm.shopCode = shopCode;
-        oldContractTerm.startDate = $('#oldStartDate').val();
+        oldContractTerm.startDate = $('#oldStartDate').val() || '';
         oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
         oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
