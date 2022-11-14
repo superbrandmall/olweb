@@ -187,6 +187,22 @@ tbody .money {
   padding: 0;
 }
 
+.cUpdated {
+    background-color: #d3fae0; 
+}
+
+.cAdded {
+    background-color: #fdd; 
+}
+
+.cEnded {
+    background-color: #e2e2e2; 
+}
+
+.cUpdated .compared, .cAdded .compared, .cEnded .compared{
+    color: #BBBBBB; 
+}
+
 @media (max-width:767px) {
     .sub-header {
         left: 0;

@@ -295,19 +295,6 @@ function findAllRequestsByKVCondition(p,c){
     });
 }
 
-function renderFormStatus(s) {
-    var status = '';
-    if(sessionStorage.getItem("FORM_STATUS") && sessionStorage.getItem("FORM_STATUS") != null && sessionStorage.getItem("FORM_STATUS") != '') {
-        var status = $.parseJSON(sessionStorage.getItem("FORM_STATUS"));
-        $.each(status, function(i,v){
-            if(v.dictCode == s){
-                status = v.dictName;
-            }
-        })
-    }  
-    return status;
-}
-
 function renderFormType(t,m) {
     var type = '';
     if(sessionStorage.getItem("FORM_TYPE") && sessionStorage.getItem("FORM_TYPE") != null && sessionStorage.getItem("FORM_TYPE") != '') {
@@ -331,16 +318,4 @@ function renderFormType(t,m) {
     }
     
     return type;
-}
-
-function renderRentCalculationMode(r) {
-    var rentCalculationMode = '';
-    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
-        $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
-            if(v.dictCode == r){
-                rentCalculationMode = v.dictName;
-            }
-        })
-    }
-    return rentCalculationMode;
 }

@@ -7,15 +7,12 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
 }
 
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-summary-admin.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-summary-admin.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-summary.js"></script>'.PHP_EOL
-    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-summary.js"></script>'.PHP_EOL;
 }
 
 ?>
-<link href="/views/assets/plugins/timepicker/bootstrap-timepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <?php include 'sidebar.php'; ?>
 
@@ -43,6 +40,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li class="active"><a href="javascript: void(0);">合同概要</a></li>
                     <li><a href="/lotus-admin/contract-detail?id=<?= $id; ?>">合同内容</a></li>
+                    <li><a href="/lotus-admin/contract-history?id=<?= $id; ?>">合同历史</a></li>
                 </ol>
             </div>
         </div>

@@ -303,39 +303,6 @@ function findMainSigningBody(code){
     }); 
 }
 
-function updateDictByDictTypeCode(dictTypeCode, id, val) {
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data.dictDataList.length > 0){
-                    $.each(response.data.dictDataList, function(i,v) {
-                        if(v.dictCode == val){
-                            $('#'+id).text(v.dictName).attr('title',v.dictName);
-                            return false;
-                        }
-                    })
-                }
-            }                             
-        }
-    })
-}
-
 function findRentCalculationMode(dictTypeCode) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,

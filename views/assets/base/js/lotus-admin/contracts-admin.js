@@ -220,7 +220,7 @@ function findAllContractsByKVCondition(p,c){
                     
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a></td>\n\
+                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a></td>\n\
                             <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
@@ -242,47 +242,11 @@ function findAllContractsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#contracts').html('<tr><td colspan="12" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#contracts').html('<tr><td colspan="13" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             } 
         }
     });
-}
-
-function renderContractStatus(s) {
-    var status = '';
-    if(sessionStorage.getItem("CONTRACT_STATUS") && sessionStorage.getItem("CONTRACT_STATUS") != null && sessionStorage.getItem("CONTRACT_STATUS") != '') { 
-        $.each($.parseJSON(sessionStorage.getItem("CONTRACT_STATUS")), function(i,v){
-            if(v.dictCode == s){
-                status = v.dictName;
-            }
-        })
-    }
-    return status;
-}
-
-function renderUnitType(t) {
-    var type = '';
-    if(sessionStorage.getItem("UNIT_TYPE") && sessionStorage.getItem("UNIT_TYPE") != null && sessionStorage.getItem("UNIT_TYPE") != '') { 
-        $.each($.parseJSON(sessionStorage.getItem("UNIT_TYPE")), function(i,v){
-            if(v.dictCode == t){
-                type = v.dictName;
-            }
-        })
-    }
-    return type;
-}
-
-function renderRentCalculationMode(r) {
-    var rentCalculationMode = '';
-    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
-        $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
-            if(v.dictCode == r){
-                rentCalculationMode = v.dictName;
-            }
-        })
-    }
-    return rentCalculationMode;
 }

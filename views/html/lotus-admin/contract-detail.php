@@ -54,6 +54,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                         <li><a href="/lotus-admin/contract-summary?id=<?= $id; ?>">合同概要</a></li>
                         <li class="active"><a href="javascript: void(0);">合同内容</a></li>
+                        <li><a href="/lotus-admin/contract-history?id=<?= $id; ?>">合同历史</a></li>
                     </ol>
                 </div>
             </div>

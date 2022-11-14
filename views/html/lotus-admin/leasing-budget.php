@@ -49,7 +49,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="SC126">牡丹江店[SC0126]</option>
                                     <option value="SC060">蕴川店[SC060]</option>
                                     <option value="SC082">新港店[SC082]</option>
-                                    <option value="SC010">汶水店[SC010]</option>
+                                    <option value="SC010" selected>汶水店[SC010]</option>
                                     <option value="SC040">保德店[SC040]</option>
                                     <option value="SC041">南奉店[SC041]</option>
                                     <option value="SC127">南桥店[SC127]</option>
@@ -84,11 +84,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <label class="col-md-4 control-label" style="text-align: right;">开始日期</label>
                             <div class="col-md-8 col-sm-12">
                                 <div class="input-daterange input-group">
-                                    <input type="text" class="form-control" id="startStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                    <input type="text" class="form-control" id="startStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                    <span class="input-group-addon" style="border: none; background: transparent;">-</span>
+                                    <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="startEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <input type="text" class="form-control" id="startEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
                                         <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
@@ -100,11 +100,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <label class="col-md-4 control-label" style="text-align: right;">截止日期</label>
                             <div class="col-md-8 col-sm-12">
                                 <div class="input-daterange input-group">
-                                    <input type="text" class="form-control" id="endStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                    <input type="text" class="form-control" id="endStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                    <span class="input-group-addon" style="border: none; background: transparent;">-</span>
+                                    <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="endEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <input type="text" class="form-control" id="endEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
                                         <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
@@ -145,10 +145,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页</span>
                                             </div>
@@ -166,7 +166,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">位置类型</div>
+                                                                <div class="th-inner" style="width: 100px;">位置类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -210,7 +210,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">推广费比例</div>
+                                                                <div class="th-inner">推广费</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -237,29 +237,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     </thead>
                                                     <tbody id="budget"></tbody>
                                                 </table>
-                                            </div>
-
-                                            <div class="fixed-table-pagination">
-                                                <div class="pull-left pagination-detail">
-                                                    <span class="pagination-info"></span>
-                                                    <span class="page-list">
-                                                        <span class="btn-group dropdown">
-                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                                <span class="page-size">20</span>
-                                                                <span class="caret"></span>
-                                                            </button>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=50">50</a></li>
-                                                            </ul>
-                                                        </span> 行每页
-                                                    </span>
-                                                </div>
-                                                <div class="pull-right pagination">
-                                                    <ul class="pagination"></ul>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

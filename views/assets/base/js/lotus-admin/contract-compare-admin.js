@@ -1,15 +1,16 @@
 $(document).ready(function(){
-    findContractByContractNo();
-    findContractFixedRentByContractNo();
-    findRentCalculationMode('RENT_CALCULATION_MODE');
-    findContractPropertyMgmtByContractNo();
-    findContractPromotionByContractNo();
-    findContractDepositByContractNo();
+    findContractAByContractNo(getURLParameter('versionA'));
+    findContractBByContractNo(getURLParameter('versionB'));
+//    findContractFixedRentByContractNo();
+//    findRentCalculationMode('RENT_CALCULATION_MODE');
+//    findContractPropertyMgmtByContractNo();
+//    findContractPromotionByContractNo();
+//    findContractDepositByContractNo();
 })
 
-function findContractByContractNo() {
+function findContractAByContractNo(v) {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+v,
         type: "GET",
         async: false,
         dataType: "json",
@@ -37,10 +38,9 @@ function findContractByContractNo() {
                     if(data.bizId != null){
                         findContractCoFilesByBizId(data.bizId);
                     }
-                    $('#contractName').text(data.contractName).attr('title',data.contractName);
-                    $('#contractVersion').text(data.contractVersion).attr('title',data.contractVersion);
+                    
+                    $('#contractNo').text(data.contractNo).attr('title',data.contractNo);
                     findMainSigningBody(data.mallCode);
-                    updateDictByDictTypeCode('CONTRACT_STATUS','contractStatus',data.contractStatus);
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
                     $('#contractNo').text(data.contractNo).attr('title',data.contractNo);
                     $('#mallName').text(data.mallName).attr('title',data.mallName);
@@ -65,6 +65,69 @@ function findContractByContractNo() {
                         <td></td>\n\
                         </tr>');
                     }
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
+}
+
+function findContractBByContractNo(v) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+v,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    if(data.bizId != null){
+                        findContractCoFilesByBizId(data.bizId);
+                    }
+                    
+//                    $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);
+//                    $('#contractNo').text(data.contractNo).attr('title',data.contractNo);
+//                    $('#mallName').text(data.mallName).attr('title',data.mallName);
+//                    $('#floorName').text(data.floorName).attr('title',data.floorName);
+//                    $('#contractName2').text(data.contractName).attr('title',data.contractName);
+                    $('#startEndDate').append('<div class="compared">('+data.startDate+'至'+data.endDate).attr('title',data.startDate+'至'+data.endDate+')</div>').parent().addClass('cUpdated');
+//                    $('#unitCode').text(data.unitCode).attr('title',data.unitCode);
+//                    $('#brandName').text(data.brandName).attr('title',data.brandName);
+//                    $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
+//                    updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
+//                    $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
+//                    $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
+//                    $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
+//                    $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
+//                    findContractCommissionByContractNo(data.rentCalculationMode);
+//                    
+//                    if(response.data.bizId != null){
+//                        $('#fileList2').append('<tr>\n\
+//                        <td>意见书</td>\n\
+//                        <td></td>\n\
+//                        <td><a href="/id/'+response.data.bizId.toLowerCase()+'/lotus-approval-opinion" target="_blank">招商租赁审批意见书</a></td>\n\
+//                        <td></td>\n\
+//                        </tr>');
+//                    }
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -230,7 +293,7 @@ function findRentCalculationMode(dictTypeCode) {
 
 function findContractFixedRentByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/fixed/rent/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/fixed/rent/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -271,7 +334,7 @@ function findContractFixedRentByContractNo() {
 
 function findContractCommissionByContractNo(rentCalcMode) {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -324,7 +387,7 @@ function findContractCommissionByContractNo(rentCalcMode) {
 
 function findContractPropertyMgmtByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/property/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/property/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -365,7 +428,7 @@ function findContractPropertyMgmtByContractNo() {
 
 function findContractPromotionByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/promotion/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/promotion/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -404,7 +467,7 @@ function findContractPromotionByContractNo() {
 
 function findContractDepositByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/deposit/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/deposit/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
         type: "GET",
         async: false,
         dataType: "json",

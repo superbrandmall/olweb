@@ -247,19 +247,6 @@ function findAllRequestsByKVCondition(p,c){
     });
 }
 
-function renderFormStatus(s) {
-    var status = '';
-    if(sessionStorage.getItem("FORM_STATUS") && sessionStorage.getItem("FORM_STATUS") != null && sessionStorage.getItem("FORM_STATUS") != '') {
-        var status = $.parseJSON(sessionStorage.getItem("FORM_STATUS"));
-        $.each(status, function(i,v){
-            if(v.dictCode == s){
-                status = v.dictName;
-            }
-        })
-    }  
-    return status;
-}
-
 function renderFormType(t) {
     var type = '';
     if(sessionStorage.getItem("FORM_TYPE") && sessionStorage.getItem("FORM_TYPE") != null && sessionStorage.getItem("FORM_TYPE") != '') {

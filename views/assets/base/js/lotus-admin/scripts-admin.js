@@ -578,6 +578,55 @@ function findFeeItemByContractType(type) {
     })
 }
 
+function renderRentCalculationMode(r) {
+    var rentCalculationMode = '';
+    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
+            if(v.dictCode == r){
+                rentCalculationMode = v.dictName;
+            }
+        })
+    }
+    return rentCalculationMode;
+}
+
+function renderUnitType(t) {
+    var type = '';
+    if(sessionStorage.getItem("UNIT_TYPE") && sessionStorage.getItem("UNIT_TYPE") != null && sessionStorage.getItem("UNIT_TYPE") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("UNIT_TYPE")), function(i,v){
+            if(v.dictCode == t){
+                type = v.dictName;
+            }
+        })
+    }
+    return type;
+}
+
+function renderContractStatus(s) {
+    var status = '';
+    if(sessionStorage.getItem("CONTRACT_STATUS") && sessionStorage.getItem("CONTRACT_STATUS") != null && sessionStorage.getItem("CONTRACT_STATUS") != '') { 
+        $.each($.parseJSON(sessionStorage.getItem("CONTRACT_STATUS")), function(i,v){
+            if(v.dictCode == s){
+                status = v.dictName;
+            }
+        })
+    }
+    return status;
+}
+
+function renderFormStatus(s) {
+    var status = '';
+    if(sessionStorage.getItem("FORM_STATUS") && sessionStorage.getItem("FORM_STATUS") != null && sessionStorage.getItem("FORM_STATUS") != '') {
+        var status = $.parseJSON(sessionStorage.getItem("FORM_STATUS"));
+        $.each(status, function(i,v){
+            if(v.dictCode == s){
+                status = v.dictName;
+            }
+        })
+    }  
+    return status;
+}
+
 function findMainSigningBody(code){
     $.ajax({
         url: $.api.baseLotus+"/api/mall/lotus/findOneByCode?code="+code,
@@ -701,6 +750,39 @@ function findDictCodeByDictTypeCode(dictTypeCode) {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        }
+    })
+}
+
+function updateDictByDictTypeCode(dictTypeCode, id, val) {
+    $.ajax({
+        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.dictDataList.length > 0){
+                    $.each(response.data.dictDataList, function(i,v) {
+                        if(v.dictCode == val){
+                            $('#'+id).text(v.dictName).attr('title',v.dictName);
+                            return false;
+                        }
+                    })
+                }
+            }                             
         }
     })
 }

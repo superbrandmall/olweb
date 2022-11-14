@@ -231,7 +231,7 @@ function updateFeeItems(FeeItem,VAT,type) {
 
 function findContractByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -423,7 +423,7 @@ function findContractByContractNo() {
 
 function findContractFixedRentByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/fixed/rent/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/fixed/rent/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -473,7 +473,7 @@ function findContractFixedRentByContractNo() {
 
 function findContractCommissionByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -524,7 +524,7 @@ function findContractCommissionByContractNo() {
 
 function findContractPropertyMgmtByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/property/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/property/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -574,7 +574,7 @@ function findContractPropertyMgmtByContractNo() {
 
 function findContractPromotionByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/promotion/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/promotion/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -624,7 +624,7 @@ function findContractPromotionByContractNo() {
 
 function findContractDepositByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/deposit/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion=1",
+        url: $.api.baseLotus+"/api/contract/deposit/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -656,39 +656,6 @@ function findContractDepositByContractNo() {
                     })
                 }
             }
-        }
-    })
-}
-
-function updateDictByDictTypeCode(dictTypeCode, id, val) {
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data.dictDataList.length > 0){
-                    $.each(response.data.dictDataList, function(i,v) {
-                        if(v.dictCode == val){
-                            $('#'+id).val(val).trigger('change');
-                            return false;
-                        }
-                    })
-                }
-            }                             
         }
     })
 }
@@ -1779,7 +1746,7 @@ function saveContractFixedRent() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": $('#contractVersion').text(),
+                    "contractVersion": getURLParameter('contractVersion'),
                     "fixedRentList": $.contract.fixedRent,
                     "updateOpenId": openId
                 };
@@ -1809,7 +1776,7 @@ function saveContractFixedRent() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1964,7 +1931,7 @@ function saveContractPropertyMgmt() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": $('#contractVersion').text(),
+                    "contractVersion": getURLParameter('contractVersion'),
                     "propertyFeeList": $.contract.propertyMgmt,
                     "updateOpenId": openId
                 };
@@ -1994,7 +1961,7 @@ function saveContractPropertyMgmt() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2159,7 +2126,7 @@ function saveContractCommission() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": $('#contractVersion').text(),
+                    "contractVersion": getURLParameter('contractVersion'),
                     "deductList": $.contract.commission,
                     "updateOpenId": openId
                 };
@@ -2189,7 +2156,7 @@ function saveContractCommission() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2344,7 +2311,7 @@ function saveContractPromotion() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": $('#contractVersion').text(),
+                    "contractVersion": getURLParameter('contractVersion'),
                     "promotionFeeList": $.contract.promotion,
                     "updateOpenId": openId
                 };
@@ -2374,7 +2341,7 @@ function saveContractPromotion() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2448,7 +2415,7 @@ function saveContractDeposit() {
             var map = {
                 "bizId": $('#bizId').val(),
                 "contractNo": getURLParameter('id'),
-                "contractVersion": $('#contractVersion').text(),
+                "contractVersion": getURLParameter('contractVersion'),
                 "depositList": $.contract.deposit,
                 "updateOpenId": openId
             };
@@ -2478,7 +2445,7 @@ function saveContractDeposit() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -2560,7 +2527,7 @@ function saveContract() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

@@ -46,7 +46,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">合同编号</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">签约编号</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <input class="form-control" id="contractNo" type="text"  />
                             </div>
