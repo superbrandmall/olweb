@@ -38,6 +38,14 @@
                 
                 <div class="owl-carousel owl-theme c-theme owl-bordered1">
                     <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP200711000008"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/11/ZHX_4940-240x180.jpg" width="187" alt=""/></a>
+                        BYD
+                    </div>
+                    <div class="item" style="text-align: center;">
+                        <a href="shop?id=OLSHOP220928000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/10/ZHX_0072-240x180.jpg" width="187" alt=""/></a>
+                        魅KTV
+                    </div>
+                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP220628000001"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/09/ZHX_4054-240x180.jpg" width="187" alt=""/></a>
                         樾鲜食馆
                     </div>

@@ -16,7 +16,7 @@ $(document).ready(function(){
             })
             
             $('#compare').click(function(){
-                window.location.href = '/lotus-admin/contract-compare?id='+getURLParameter('id')+'&versionA='+vers[0]+'&versionB='+vers[1];
+                window.open('/lotus-admin/contract-compare?id='+getURLParameter('id')+'&versionA='+vers[0]+'&versionB='+vers[1]);
             })
         } else {
             $('#compare').attr('disabled', 'disabled');

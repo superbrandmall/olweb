@@ -16,8 +16,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper contract-summary">
-    <section class="sub-header" style="height: 200px;">
+<div class="content-wrapper contract-summary" style="font-size: 12px;">
+    <section class="sub-header" style="height: 210px;">
         <h4>
             合同版本比较: <span id="contractNo"></span>
         </h4>
@@ -35,7 +35,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
             <div class="row">
                 <div class="col-md-3 col-md-offset-3">
-                    <div style="border: solid 1px #ddd; padding-top: 10px;">
+                    <div style="border: solid 1px #ddd; padding-top: 15px;">
                         <div class="form-group">
                             <label class="col-md-6">版本号:</label>
                             <div class="col-md-6" id="versionA"></div>
@@ -51,7 +51,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div style="border: solid 1px #ddd; padding-top: 10px;">
+                    <div style="border: solid 1px #ddd; padding-top: 15px;">
                         <div class="form-group">
                             <label class="col-md-6">版本号:</label>
                             <div class="col-md-6" id="versionB"></div>
@@ -70,19 +70,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 250px;">
+    <section class="content" style="margin-top: 260px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
                     <?php
-                    include 'contract-summary/investmentContractModel.php'; //签约信息
-                    include 'contract-summary/investmentContractModelBasicinfo.php'; // 品牌信息以及商务合作条件
-                    include 'contract-summary/investmentContractAccounttermFixed.php'; //固定租金
-                    include 'contract-summary/investmentContractAccounttermCommission.php'; //提成租金
-                    include 'contract-summary/investmentContractAccounttermPropertyMgmt.php'; //其它固定费用
-                    include 'contract-summary/investmentContractAccounttermPromotion.php'; //推广费
-                    include 'contract-summary/investmentContractDepositterm.php'; //首期费用以及保证金
-                    include 'contract-summary/investmentContractCertificates.php'; //附件信息
+                    include 'contract-compare/investmentContractModel.php'; //签约信息
+                    include 'contract-compare/investmentContractModelBasicinfo.php'; // 品牌信息以及商务合作条件
+                    include 'contract-compare/investmentContractAccounttermFixed.php'; //固定租金
+                    include 'contract-compare/investmentContractAccounttermCommission.php'; //提成租金
+                    include 'contract-compare/investmentContractAccounttermPropertyMgmt.php'; //其它固定费用
+                    include 'contract-compare/investmentContractAccounttermPromotion.php'; //推广费
+                    include 'contract-compare/investmentContractDepositterm.php'; //首期费用以及保证金
+                    include 'contract-compare/investmentContractCertificates.php'; //附件信息
                     ?>
                 </div>
 
