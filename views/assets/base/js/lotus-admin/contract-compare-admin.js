@@ -104,7 +104,7 @@ function findContractByContractNo(v) {
                         var diffs = findObjOperate($.parseJSON($.compare.contractA), $.parseJSON($.compare.contractB));
                         $.each(diffs, function(key,value){
                             if($('#'+key).length > 0){        
-                                $('#'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                $('#'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('.form-group').addClass('c'+value.split(':::')[0]);
                             }
                         })
                         findContractCommissionByContractNo(data.rentCalculationMode, getURLParameter('versionB'));
@@ -313,7 +313,7 @@ function findContractFixedRentByContractNo(v) {
                             var diffs = findObjOperate($.parseJSON($.compare.fixedRentA)[i], $.parseJSON($.compare.fixedRentB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#fixedRent_'+i+'_'+key).length > 0){        
-                                    $('#fixedRent_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                    $('#fixedRent_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('td').addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
@@ -389,7 +389,7 @@ function findContractCommissionByContractNo(rentCalcMode,v) {
                             var diffs = findObjOperate($.parseJSON($.compare.commissionA)[i], $.parseJSON($.compare.commissionB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#commission_'+i+'_'+key).length > 0){        
-                                    $('#commission_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                    $('#commission_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('td').addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
@@ -477,7 +477,7 @@ function findContractPropertyMgmtByContractNo(v) {
                             var diffs = findObjOperate($.parseJSON($.compare.propertyMgmtA)[i], $.parseJSON($.compare.propertyMgmtB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#propertyMgmt_'+i+'_'+key).length > 0){        
-                                    $('#propertyMgmt_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                    $('#propertyMgmt_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('td').addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
@@ -552,7 +552,7 @@ function findContractPromotionByContractNo(v) {
                             var diffs = findObjOperate($.parseJSON($.compare.promotionA)[i], $.parseJSON($.compare.promotionB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#promotion_'+i+'_'+key).length > 0){        
-                                    $('#promotion_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                    $('#promotion_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('td').addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
@@ -624,7 +624,7 @@ function findContractDepositByContractNo(v) {
                             var diffs = findObjOperate($.parseJSON($.compare.depositA)[i], $.parseJSON($.compare.depositB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#deposit_'+i+'_'+key).length > 0){        
-                                    $('#deposit_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                    $('#deposit_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').closest('td').addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })

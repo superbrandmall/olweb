@@ -4844,6 +4844,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .breadcrumb>li {
 	display: inline-block;
         padding: 8px 15px;
+        background: #ebebf5;
 }
 
 .breadcrumb>li a {
@@ -4853,6 +4854,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .breadcrumb>.active,
 .breadcrumb>li:hover {
         border-bottom: solid 2px #E43C24;
+        background: #fff;
 }
 
 .pagination {
