@@ -162,7 +162,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
@@ -194,7 +194,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 140px;">项目</div>
+                                                                <div class="th-inner" style="width: 150px;">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

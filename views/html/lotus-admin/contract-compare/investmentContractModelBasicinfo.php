@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">商号名称:</label>
-                <div class="col-md-8 col-sm-12" id="contractName2"></div>
+                <div class="col-md-8 col-sm-12" id="contractName"></div>
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label">合同起止日:</label>

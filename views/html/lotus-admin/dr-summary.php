@@ -11,7 +11,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header" style="height: 45px;">
         <h4>
-            <span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> 新签租赁合同申请单: <span id="requestName"></span>
+            <span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> <span id="formType"></span>租赁合同申请单: <span id="requestName"></span>
         </h4>
         <div class="pull-right">
             <div class="btn-group">
@@ -30,8 +30,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                    <li><a href="/lotus-admin/request-summary?id=<?= $id; ?>">单据概要</a></li>
-                    <li><a href="/lotus-admin/request-detail?id=<?= $id; ?>">单据内容</a></li>
+                    <li><a href="javascript: void(0);">单据概要</a></li>
+                    <li><a href="javascript: void(0);">单据内容</a></li>
                     <li class="active"><a href="javascript: void(0);">DR概要</a></li>
                 </ol>
             </div>

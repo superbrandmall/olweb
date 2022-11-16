@@ -19,7 +19,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper contract-summary" style="font-size: 12px;">
     <section class="sub-header" style="height: 210px;">
         <h4>
-            合同版本比较: <span id="contractNo"></span>
+            合同版本比较: <span id="contractNo2"></span>
         </h4>
         <div class="col-md-12">
             <div class="row" style="margin-bottom: 10px;">

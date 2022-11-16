@@ -27,10 +27,19 @@ function findRequestByBizId() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data != '' && response.data != null && response.data.formType == 'new'){
+                if(response.data != '' && response.data != null){
                     var data = response.data;
                     $('#requestName').text(data.bizId).attr('title',data.bizId);
                     updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
+                    updateDictByDictTypeCode('FORM_TYPE', 'formType', data.formType);
+                    
+                    var path = data.formType;
+                    if(path == 'new'){
+                        path = 'request';
+                    }
+                    
+                    $('.box-header .breadcrumb li:eq(0)').find('a').attr('href','/lotus-admin/'+path+'-summary?id='+getURLParameter('id'));
+                    $('.box-header .breadcrumb li:eq(1)').find('a').attr('href','/lotus-admin/'+path+'-detail?id='+getURLParameter('id'));
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
                 }

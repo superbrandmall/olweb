@@ -2484,13 +2484,13 @@ function saveContract() {
 
             var sHour = $('#openStartTime').val().split(':')[0];
             var sMinute = $('#openStartTime').val().split(':')[1];
-            if (sHour < 10) {
+            if (sHour.length == 1) {
                 sHour = "0" + sHour;  
             }
             $.contract.content.openStartTime = sHour+':'+sMinute;
             var eHour = $('#openEndTime').val().split(':')[0];
             var eMinute = $('#openEndTime').val().split(':')[1];
-            if (eHour < 10) {
+            if (eHour == 1) {
                 eHour = "0" + eHour;  
             }
             $.contract.content.openEndTime = eHour+':'+eMinute;

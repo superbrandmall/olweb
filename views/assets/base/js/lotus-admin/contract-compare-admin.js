@@ -3,6 +3,8 @@ $.compare = {
     contractB: '',
     fixedRentA: '',
     fixedRentB: '',
+    commissionA: '',
+    commissionB: '',
     propertyMgmtA: '',
     propertyMgmtB: '',
     promotionA: '',
@@ -69,10 +71,10 @@ function findContractByContractNo(v) {
                     if(v == getURLParameter('versionA')){
                         $.compare.contractA = JSON.stringify(response.data);
                         
-                        $('#contractNo').text(data.contractNo).attr('title',data.contractNo);
+                        $('#contractNo2').text(data.contractNo).attr('title',data.contractNo);
 
                         $('#versionA').html('<a href="/lotus-admin/contract-summary?id='+data.contractNo+'&contractVersion='+data.contractVersion+'" target="_blank">V'+data.contractVersion+'</a>').attr('title','V'+data.contractVersion);
-                        $('#updatorA').text(data.updateName).attr('title',data.updateName);
+                        $('#updatorA').text((data.updateName || '系统管理员')).attr('title',(data.updateName || '系统管理员'));
                         $('#updateTimeA').text(data.updated).attr('title',data.updated);
 
                         findMainSigningBody(data.mallCode);
@@ -84,18 +86,19 @@ function findContractByContractNo(v) {
                         $('#endDate').text(data.endDate).attr('title',data.endDate);
                         $('#unitCode').text(data.unitCode).attr('title',data.unitCode);
                         $('#brandName').text(data.brandName).attr('title',data.brandName);
+                        $('#contractName').text(data.contractName).attr('title',data.contractName);
                         $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
                         updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
                         $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
                         $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
                         $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
                         $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
-                        findContractCommissionByContractNo(data.rentCalculationMode);
+                        findContractCommissionByContractNo(data.rentCalculationMode, getURLParameter('versionA'));
                     } else if(v == getURLParameter('versionB')) {
                         $.compare.contractB = JSON.stringify(response.data);
                         
                         $('#versionB').html('<a href="/lotus-admin/contract-summary?id='+data.contractNo+'&contractVersion='+data.contractVersion+'" target="_blank">V'+data.contractVersion+'</a>').attr('title','V'+data.contractVersion);
-                        $('#updatorB').text(data.updateName).attr('title',data.updateName);
+                        $('#updatorB').text((data.updateName || '系统管理员')).attr('title',(data.updateName || '系统管理员'));
                         $('#updateTimeB').text(data.updated).attr('title',data.updated);
                         
                         var diffs = findObjOperate($.parseJSON($.compare.contractA), $.parseJSON($.compare.contractB));
@@ -104,6 +107,7 @@ function findContractByContractNo(v) {
                                 $('#'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
                             }
                         })
+                        findContractCommissionByContractNo(data.rentCalculationMode, getURLParameter('versionB'));
                     }
                 }
             }
@@ -300,19 +304,40 @@ function findContractFixedRentByContractNo(v) {
     <td id="fixedRent_'+i+'_taxRentAmount">'+accounting.formatNumber(v.taxRentAmount)+'</td>\n\
     <td id="fixedRent_'+i+'_taxAmount">'+accounting.formatNumber(v.taxAmount)+'</td>\n\
     <td id="fixedRent_'+i+'_amount">'+accounting.formatNumber(v.amount)+'</td>\n\
-    <td id="fixedRent_'+i+'_rentAmount">'+accounting.formatNumber(v.rentAmount)+'</td></tr>')
+    <td id="fixedRent_'+i+'_rentAmount">'+accounting.formatNumber(v.rentAmount)+'</td></tr>');
                         })
                     } else if(v == getURLParameter('versionB')){
                         $.compare.fixedRentB = JSON.stringify(response.data);
                         
                         $.each($.parseJSON($.compare.fixedRentA), function(i,v) {
-                            var diffs = findObjOperate($.parseJSON($.compare.fixedRentA)[i], $.parseJSON($.compare.fixedRentB)[i]);
+                            var diffs = findObjOperate($.parseJSON($.compare.fixedRentA)[i], $.parseJSON($.compare.fixedRentB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#fixedRent_'+i+'_'+key).length > 0){        
                                     $('#fixedRent_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
+                        
+                        var b_a = $.parseJSON($.compare.fixedRentB).length - $.parseJSON($.compare.fixedRentA).length;
+                        if(b_a > 0){
+                            $.each($.parseJSON($.compare.fixedRentB).reverse(), function(i,v) {
+                                if(i >= $.parseJSON($.compare.fixedRentA).length){
+                                    $('#fixedRent').append('<tr class="cEnded">\n\
+        <td class="compared">'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td class="compared"><div style="float: left;">'+v.startDate+'</div> <div style="float: left;">～</div> <div style="float: left;">'+v.endDate+'</div></td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxRentAmount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxAmount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.rentAmount)+'</td></tr>');
+                                }
+                            })
+                        } else if(b_a > 0){
+                            $.each($.parseJSON($.compare.fixedRentA), function(i,v) {
+                                if(i > $.parseJSON($.compare.fixedRentB).length){
+                                    $('#fixedRent tr').eq(i).addClass('cAdded');
+                                }
+                            })
+                        }
                     }
                 } else {
                     $('#investmentContractAccounttermFixed').hide();
@@ -322,9 +347,9 @@ function findContractFixedRentByContractNo(v) {
     })
 }
 
-function findContractCommissionByContractNo(rentCalcMode) {
+function findContractCommissionByContractNo(rentCalcMode,v) {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('versionA'),
+        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+v,
         type: "GET",
         async: false,
         dataType: "json",
@@ -346,16 +371,51 @@ function findContractCommissionByContractNo(rentCalcMode) {
                 }
                 
                 if(response.data.length > 0){
-                    $.each(response.data, function(i,v) {
-                        $('#commission').append('<tr>\n\
-<td>'+v.itemName+'['+v.itemCode+']</td>\n\
-<td>'+v.startDate+' ～ '+v.endDate+'</td>\n\
-<td>'+accounting.formatNumber(v.taxDeduct * 100)+'%</td>\n\
-<td>'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
-<td>'+rentCalcMode+'</td></tr>')
-                    })
-                    
-                    if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
+                    if(v == getURLParameter('versionA')){
+                        $.compare.commissionA = JSON.stringify(response.data);
+                        
+                        $.each(response.data, function(i,v) {
+                            $('#commission').append('<tr>\n\
+    <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+    <td><div id="commission_'+i+'_startDate" style="float: left;">'+v.startDate+'</div> <div style="float: left;">～</div> <div id="commission_'+i+'_endDate" style="float: left;">'+v.endDate+'</div></td>\n\
+    <td id="commission_'+i+'_taxDeduct">'+accounting.formatNumber(v.taxDeduct * 100)+'%</td>\n\
+    <td id="commission_'+i+'_deduct">'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
+    <td id="commission_'+i+'_rentCalcMode">'+rentCalcMode+'</td></tr>')
+                        })
+                    } else if(v == getURLParameter('versionB')){
+                        $.compare.commissionB = JSON.stringify(response.data);
+                       
+                        $.each($.parseJSON($.compare.commissionA), function(i,v) {
+                            var diffs = findObjOperate($.parseJSON($.compare.commissionA)[i], $.parseJSON($.compare.commissionB).reverse()[i]);
+                            $.each(diffs, function(key,value){
+                                if($('#commission_'+i+'_'+key).length > 0){        
+                                    $('#commission_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
+                                }
+                            })
+                        })
+                        
+                        var b_a = $.parseJSON($.compare.commissionB).length - $.parseJSON($.compare.commissionA).length;
+                        if(b_a > 0){
+                            $.each($.parseJSON($.compare.commissionB).reverse(), function(i,v) {
+                                if(i >= $.parseJSON($.compare.commissionA).length){
+                                    $('#commission').append('<tr class="cEnded">\n\
+        <td class="compared">'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td class="compared"><div style="float: left;">'+v.startDate+'</div> <div style="float: left;">～</div> <div style="float: left;">'+v.endDate+'</div></td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxDeduct * 100)+'%</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.deduct * 100)+'%</td>\n\
+        <td class="compared">'+rentCalcMode+'</td></tr>');
+                                }
+                            })
+                        } else if(b_a > 0){
+                            $.each($.parseJSON($.compare.commissionA), function(i,v) {
+                                if(i > $.parseJSON($.compare.commissionB).length){
+                                    $('#commission tr').eq(i).addClass('cAdded');
+                                }
+                            })
+                        }
+                    }
+                   
+                   if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                         var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                         $.each(mode, function(i,v){
                             $("#commission tr td:nth-child(5)").each(function() {
@@ -364,9 +424,8 @@ function findContractCommissionByContractNo(rentCalcMode) {
                                     return;
                                 }
                             })
-                            
                         })
-                   }
+                    }
                 } else {
                     $('#investmentContractAccounttermCommission').hide();
                 }
@@ -415,13 +474,34 @@ function findContractPropertyMgmtByContractNo(v) {
                         $.compare.propertyMgmtB = JSON.stringify(response.data);
                         
                         $.each($.parseJSON($.compare.propertyMgmtA), function(i,v) {
-                            var diffs = findObjOperate($.parseJSON($.compare.propertyMgmtA)[i], $.parseJSON($.compare.propertyMgmtB)[i]);
+                            var diffs = findObjOperate($.parseJSON($.compare.propertyMgmtA)[i], $.parseJSON($.compare.propertyMgmtB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#propertyMgmt_'+i+'_'+key).length > 0){        
                                     $('#propertyMgmt_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
+                        
+                        var b_a = $.parseJSON($.compare.propertyMgmtB).length - $.parseJSON($.compare.propertyMgmtA).length;
+                        if(b_a > 0){
+                            $.each($.parseJSON($.compare.propertyMgmtB).reverse(), function(i,v) {
+                                if(i >= $.parseJSON($.compare.propertyMgmtA).length){
+                                    $('#propertyMgmt').append('<tr class="cEnded">\n\
+        <td class="compared">'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td class="compared"><div style="float: left;">'+v.startDate+'</div> <div style="float: left;">～</div> <div style="float: left;">'+v.endDate+'</div></td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxRentAmount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxAmount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.rentAmount)+'</td></tr>');
+                                }
+                            })
+                        } else if(b_a > 0){
+                            $.each($.parseJSON($.compare.propertyMgmtA), function(i,v) {
+                                if(i > $.parseJSON($.compare.propertyMgmtB).length){
+                                    $('#propertyMgmt tr').eq(i).addClass('cAdded');
+                                }
+                            })
+                        }
                     }
                 } else {
                     $('#investmentContractAccounttermPropertyMgmt').hide();
@@ -469,13 +549,32 @@ function findContractPromotionByContractNo(v) {
                         $.compare.promotionB = JSON.stringify(response.data);
                         
                         $.each($.parseJSON($.compare.promotionA), function(i,v) {
-                            var diffs = findObjOperate($.parseJSON($.compare.promotionA)[i], $.parseJSON($.compare.promotionB)[i]);
+                            var diffs = findObjOperate($.parseJSON($.compare.promotionA)[i], $.parseJSON($.compare.promotionB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#promotion_'+i+'_'+key).length > 0){        
                                     $('#promotion_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
+                        
+                        var b_a = $.parseJSON($.compare.promotionB).length - $.parseJSON($.compare.promotionA).length;
+                        if(b_a > 0){
+                            $.each($.parseJSON($.compare.promotionB).reverse(), function(i,v) {
+                                if(i >= $.parseJSON($.compare.promotionA).length){
+                                    $('#promotion').append('<tr class="cEnded">\n\
+        <td class="compared">'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td class="compared"><div style="float: left;">'+v.startDate+'</div> <div style="float: left;">～</div> <div style="float: left;">'+v.endDate+'</div></td>\n\
+        <td class="compared">'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.taxAmount)+'</td></tr>');
+                                }
+                            })
+                        } else if(b_a > 0){
+                            $.each($.parseJSON($.compare.promotionA), function(i,v) {
+                                if(i > $.parseJSON($.compare.promotionB).length){
+                                    $('#promotion tr').eq(i).addClass('cAdded');
+                                }
+                            })
+                        }
                     }
                 } else {
                     $('#investmentContractAccounttermPromotion').hide();
@@ -522,13 +621,31 @@ function findContractDepositByContractNo(v) {
                         $.compare.depositB = JSON.stringify(response.data);
                         
                         $.each($.parseJSON($.compare.depositA), function(i,v) {
-                            var diffs = findObjOperate($.parseJSON($.compare.depositA)[i], $.parseJSON($.compare.depositB)[i]);
+                            var diffs = findObjOperate($.parseJSON($.compare.depositA)[i], $.parseJSON($.compare.depositB).reverse()[i]);
                             $.each(diffs, function(key,value){
                                 if($('#deposit_'+i+'_'+key).length > 0){        
                                     $('#deposit_'+i+'_'+key).append('<div class="compared">('+value.split(':::')[1]+')</div>').parent().addClass('c'+value.split(':::')[0]);
                                 }
                             })
                         })
+                        
+                        var b_a = $.parseJSON($.compare.depositB).length - $.parseJSON($.compare.depositA).length;
+                        if(b_a > 0){
+                            $.each($.parseJSON($.compare.depositB).reverse(), function(i,v) {
+                                if(i >= $.parseJSON($.compare.depositA).length){
+                                    $('#deposit').append('<tr class="cEnded">\n\
+        <td class="compared">'+v.itemName+'['+v.itemCode+']</td>\n\
+        <td class="compared">'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td class="compared">'+(v.paymentDate || '-')+'</td></tr>')
+                                }
+                            })
+                        } else if(b_a > 0){
+                            $.each($.parseJSON($.compare.depositA), function(i,v) {
+                                if(i > $.parseJSON($.compare.depositB).length){
+                                    $('#deposit tr').eq(i).addClass('cAdded');
+                                }
+                            })
+                        }
                     }
                 } else {
                     $('#investmentContractDepositterm').hide();
