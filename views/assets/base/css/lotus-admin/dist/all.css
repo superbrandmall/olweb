@@ -4838,22 +4838,21 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 	color: #444
 }
 
-.breadcrumb {
-}
-
 .breadcrumb>li {
 	display: inline-block;
-        padding: 8px 15px;
-        background: #ebebf5;
+    padding: 8px 15px;
 }
 
-.breadcrumb>li a {
-        color: #000;
+.pull-left .breadcrumb>li {
+    background: #ebebf5;
 }
 
 .breadcrumb>.active,
 .breadcrumb>li:hover {
         border-bottom: solid 2px #E43C24;
+}
+
+.pull-left .breadcrumb>.active {
         background: #fff;
 }
 
