@@ -140,9 +140,11 @@
             <hr>
         </div>
         <div class="col-md-3">
-            <label class="col-md-5 control-label">产生滞纳金</label>
-            <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                <input type="checkbox" id="commissionIsOverdueFlag_1" checked>
+            <div class="form-group">
+                <label class="col-md-5 control-label">产生滞纳金</label>
+                <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
+                    <input type="checkbox" id="commissionIsOverdueFlag_1" checked>
+                </div>
             </div>
         </div>
         <div class="col-md-3">
@@ -177,9 +179,11 @@
             </div>
         </div>
         <div class="col-md-3">
-            <label class="col-md-4 control-label">开发票</label>
-            <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                <input type="checkbox" id="commissionOverdueInvoiceFlag_1" checked>
+            <div class="form-group">
+                <label class="col-md-4 control-label">开发票</label>
+                <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
+                    <input type="checkbox" id="commissionOverdueInvoiceFlag_1" checked>
+                </div>
             </div>
         </div>
     </div>

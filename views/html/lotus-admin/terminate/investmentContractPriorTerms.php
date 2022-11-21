@@ -25,7 +25,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldRentalFloorEffect" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元/m²/天</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/m²/天</span>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldFixedRentAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldTotalTaxAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldDepositFee" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldCostEffect" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元/m²/天</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/m²/天</span>
                     </div>
                 </div>
             </div>
@@ -95,7 +95,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldPropertyMgmtTaxAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldTotalAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -113,7 +113,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="oldFreeDays" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">天</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">天</span>
                     </div>
                 </div>
             </div>
@@ -130,7 +130,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldRentalFloorTaxEffect" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元/m²/天</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/m²/天</span>
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldFixedRentTaxAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldPropertyMgmtAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="background: transparent;">元</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -157,7 +157,7 @@
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="oldGrowthRate" type="text" style="border-right: none;" />                                                
-                        <span class="input-group-addon" style="background: transparent;">%</span>
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
                     </div>
                 </div>
             </div>

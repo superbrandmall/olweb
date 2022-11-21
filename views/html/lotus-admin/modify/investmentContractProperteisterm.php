@@ -33,11 +33,6 @@
     <div class="box-body">
         <div class="col-md-12">
             <h5 style="float: left;">预估销售额 <span class="btn-box-tool-lg">*</span></h5>
-            <div class="pull-right" style="margin: 10px 0;">
-                <a href="javascript:void(0);" style="opacity: 0.5;">
-                    <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
-                </a>
-            </div>
         </div>
         <div class="col-md-12">
             <div class="bootstrap-table">
@@ -56,10 +51,6 @@
                                     </th>
                                     <th>
                                         <div class="th-inner">金额 <span class="btn-box-tool-lg">*</span></div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">操作</div>
                                         <div class="fht-cell"></div>
                                     </th>
                                 </tr>

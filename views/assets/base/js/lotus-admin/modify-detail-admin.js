@@ -2047,7 +2047,6 @@ function updateRowMinSales(v,p) {
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
-    var column4 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractProperteisterm');
     var tbody = table.querySelector('tbody') || table;
@@ -2115,15 +2114,6 @@ function updateRowMinSales(v,p) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column3.appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column4.appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentContractProperteisterm .input-daterange').datepicker({

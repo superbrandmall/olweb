@@ -1029,6 +1029,10 @@ function addRowInvestmentContractAccounttermFixed() {
     $("#fixedRentTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushFixedRentSingleRow($(this).attr('id').split('_')[1]);
     })
+    
+    if($('#commission tr').length < 1 && $('#minSales tr').length < $('#fixedRent tr').length){
+        addRowMinSales();
+    }
 }
 
 function addRowInvestmentContractAccounttermCommission() {
@@ -1230,6 +1234,10 @@ function addRowInvestmentContractAccounttermCommission() {
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
     })
+    
+    if($('#minSales tr').length < $('#commission tr').length){
+        addRowMinSales();
+    }
 }
 
 function addRowInvestmentContractAccounttermPropertyMgmt() {
@@ -1713,7 +1721,6 @@ function addRowMinSales() {
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
-    var column4 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractProperteisterm');
     var tbody = table.querySelector('tbody') || table;
@@ -1769,15 +1776,6 @@ function addRowMinSales() {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column3.appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column4.appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentContractProperteisterm .input-daterange').datepicker({
@@ -1925,6 +1923,13 @@ function addRowContactList() {
     $('#tenantContactList .select2').select2();
 }
 
+function copyRow() {
+    var source_table = document.getElementById('commission');
+    var target_table = document.getElementById('minSales');
+    var the_row = source_table.rows.length - 1;
+    target_table.appendChild(source_table.rows[the_row].cells[2].cloneNode(true));
+}
+
 function deleteRow(button) {
     var row = button.parentNode.parentNode;
     var tbody = row.parentNode;
@@ -1942,6 +1947,16 @@ function deleteRow(button) {
         });
     }
     calBackPush(id);
+    
+    if(id == 'commission'){
+        if($('#minSales tr').length > $('#commission tr').length){
+            //删除
+        }
+    } else if(id == 'fixedRent'){
+        if($('#commission tr').length < 1 && $('#minSales tr').length > $('#fixedRent tr').length){
+            //删除
+        }
+    }
 }
 
 function updateTaxVAT() {
