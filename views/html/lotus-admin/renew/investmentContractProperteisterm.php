@@ -157,37 +157,4 @@
             </div>
         </div>
     </div>
-    <div class="box-body">
-        <div class="col-md-12">
-            <h5 style="float: left;">预估销售额 <span class="btn-box-tool-lg">*</span></h5>
-        </div>
-        <div class="col-md-12">
-            <div class="bootstrap-table">
-                <div class="fixed-table-container">
-                    <div class="fixed-table-body">
-                        <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
-                            <thead id="assetsListingTable-sticky-header">
-                                <tr>
-                                    <th>
-                                        <div class="th-inner">行</div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                    <th>
-                                        <div class="th-inner">金额 <span class="btn-box-tool-lg">*</span></div>
-                                        <div class="fht-cell"></div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody id="minSales"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-    </div>
 </div>

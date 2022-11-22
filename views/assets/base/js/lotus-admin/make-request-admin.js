@@ -743,6 +743,11 @@ function submitCheck() {
                 $('#commissionAmount_1').parent().append(error);
             }
             
+            if($('#commissionMinSales_1').val() == ''){
+                flag = 0;
+                $('#commissionMinSales_1').parent().append(error);
+            }
+            
             if($('#commissionMinSalesAmount_1').val() == ''){
                 flag = 0;
                 $('#commissionMinSalesAmount_1').parent().append(error);
@@ -1029,9 +1034,98 @@ function saveContractForm(s) {
         }
         
         var index;
-        var deductList = [];
+        
+        var fixedRentList = [];
         var salesList = [];
+        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
+            var len = $("#fixedRent").find("tr").length;
+            $("#fixedRent").find("tr").each(function(i,e){
+                var fixedRent = {};
+                var minSales = {}; 
+                index = i * 1 + 1;
+                fixedRent.itemCode = $('#fixedRentItem_'+index).val();
+                fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+
+                fixedRent.shopCode = shopCode;
+                fixedRent.area = area;
+
+                fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
+                fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
+                fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val();
+                fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
+                fixedRent.settleDay = $('#fixedRentSettleDay_1').val();
+
+                if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
+                    fixedRent.isOverdueFlag = 1;
+                } else {
+                    fixedRent.isOverdueFlag = 0;
+                }
+
+                fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
+                fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
+
+                if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
+                    fixedRent.overdueInvoiceFlag = 1;
+                } else {
+                    fixedRent.overdueInvoiceFlag = 0;
+                }
+
+                fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
+                fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
+
+                fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
+                fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
+
+                fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
+                fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
+
+                fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
+                fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
+                
+                minSales.startDate = fixedRent.startDate;
+                minSales.endDate = fixedRent.endDate;
+                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+index).val());
+
+                if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
+                    fixedRent.invoiceFlag = 1;
+                } else {
+                    fixedRent.invoiceFlag = 0;
+                }
+
+                fixedRentList.push(fixedRent);
+                salesList.push(minSales);
+            })
+        }
+        
+        if(s == 'submit'){
+            if(fixedRentList.length > 0) {
+                var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check3 = 'smaller';
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                    var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
+                    if(check33 != 'smaller'){
+                        check3 = check33;
+                    }
+                }
+                var check4 = 'equal';
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                    var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
+                }
+
+                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+                    alertMsg('9999','固定租金条款开始日与结束日错误，请修改重新提交！');
+                    return false;
+                } 
+            }
+        }
+        
+        var deductList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'fixRent') {
+            salesList = [];
             var len = $("#commission").find("tr").length;
             $("#commission").find("tr").each(function(i,e){
                 var commission = {};
@@ -1136,94 +1230,6 @@ function saveContractForm(s) {
                 depositList.push(deposit);
             }
         })
-        
-        var fixedRentList = [];
-        var salesList = [];
-        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
-            var len = $("#fixedRent").find("tr").length;
-            $("#fixedRent").find("tr").each(function(i,e){
-                var fixedRent = {};
-                var minSales = {}; 
-                index = i * 1 + 1;
-                fixedRent.itemCode = $('#fixedRentItem_'+index).val();
-                fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
-
-                fixedRent.shopCode = shopCode;
-                fixedRent.area = area;
-
-                fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
-                fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
-                fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val();
-                fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
-                fixedRent.settleDay = $('#fixedRentSettleDay_1').val();
-
-                if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
-                    fixedRent.isOverdueFlag = 1;
-                } else {
-                    fixedRent.isOverdueFlag = 0;
-                }
-
-                fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
-                fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
-
-                if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
-                    fixedRent.overdueInvoiceFlag = 1;
-                } else {
-                    fixedRent.overdueInvoiceFlag = 0;
-                }
-
-                fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
-                fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
-
-                fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
-                fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
-
-                fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
-                fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
-
-                fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
-                fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
-                
-                minSales.startDate = fixedRent.startDate;
-                minSales.endDate = fixedRent.endDate;
-                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+index).val());
-
-                if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
-                    fixedRent.invoiceFlag = 1;
-                } else {
-                    fixedRent.invoiceFlag = 0;
-                }
-
-                fixedRentList.push(fixedRent);
-                salesList.push(minSales);
-            })
-        }
-        
-        if(s == 'submit'){
-            if(fixedRentList.length > 0) {
-                var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
-                var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
-                    var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
-                    if(check33 != 'smaller'){
-                        check3 = check33;
-                    }
-                }
-                var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
-                    var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
-                    if(check44 != 'equal'){
-                        check4 = check44;
-                    }
-                }
-
-                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
-                    alertMsg('9999','固定租金条款开始日与结束日错误，请修改重新提交！');
-                    return false;
-                } 
-            }
-        }
         
         var promotionFeeList = [];
         var len = $("#promotion").find("tr").length;
