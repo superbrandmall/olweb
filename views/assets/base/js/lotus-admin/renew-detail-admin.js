@@ -1955,7 +1955,7 @@ function updateRowMinSales(v,p) {
     var column2 = createRowColumn(newrow);
     var column3 = createRowColumn(newrow);
     
-    var table = document.getElementById('investmentContractProperteisterm');
+    var table = document.getElementById('minSales');
     var tbody = table.querySelector('tbody') || table;
     var count = tbody.getElementsByTagName('tr').length + 1;
     column1.innerText = count.toLocaleString();

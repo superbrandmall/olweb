@@ -851,6 +851,7 @@ function addRowInvestmentContractAccounttermFixed() {
     var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
+    var column11 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractAccounttermFixed');
     var tbody = table.querySelector('tbody') || table;
@@ -951,16 +952,29 @@ function addRowInvestmentContractAccounttermFixed() {
     div.appendChild(percent);
     column7.appendChild(div);
     
+    var div = document.createElement("div"); //预估销售额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id","fixedRentMinSalesAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column8.appendChild(div);
+    
     var select = document.createElement("select"); //税率
     select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee");
     select.setAttribute("id","fixedRentTaxRate_"+count.toLocaleString());
-    column8.appendChild(select);
+    column9.appendChild(select);
     
     var checkbox = document.createElement("input"); //是否开发票
     checkbox.setAttribute("id","fixedRentInvoiceFlag_"+count.toLocaleString());
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("checked", "");
-    column9.appendChild(checkbox);
+    column10.appendChild(checkbox);
     
     var remove = document.createElement("a");
     remove.setAttribute("href", "javascript:void(0);");
@@ -969,7 +983,7 @@ function addRowInvestmentContractAccounttermFixed() {
     icon.setAttribute("class", "fa fa-minus-circle");
     icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
     remove.appendChild(icon);
-    column10.appendChild(remove);
+    column11.appendChild(remove);
 
     tbody.appendChild(newrow);
     updateTaxVAT();
@@ -1029,10 +1043,6 @@ function addRowInvestmentContractAccounttermFixed() {
     $("#fixedRentTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushFixedRentSingleRow($(this).attr('id').split('_')[1]);
     })
-    
-    if($('#commission tr').length < 1 && $('#minSales tr').length < $('#fixedRent tr').length){
-        addRowMinSales();
-    }
 }
 
 function addRowInvestmentContractAccounttermCommission() {
@@ -1050,6 +1060,7 @@ function addRowInvestmentContractAccounttermCommission() {
     var column10 = createRowColumn(newrow);
     var column11 = createRowColumn(newrow);
     var column12 = createRowColumn(newrow);
+    var column13 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractAccounttermCommission');
     var tbody = table.querySelector('tbody') || table;
@@ -1136,7 +1147,7 @@ function addRowInvestmentContractAccounttermCommission() {
     div.appendChild(percent);
     column7.appendChild(div);
     
-    var div = document.createElement("div"); //起始金额
+    var div = document.createElement("div"); //营业额上限
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money");
@@ -1156,6 +1167,7 @@ function addRowInvestmentContractAccounttermCommission() {
     input.setAttribute("class","form-control money");
     input.setAttribute("id","commissionMinSales_"+count.toLocaleString());
     input.setAttribute("type","text");
+    input.setAttribute("value","0");
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "元/年";
@@ -1163,16 +1175,30 @@ function addRowInvestmentContractAccounttermCommission() {
     div.appendChild(percent);
     column9.appendChild(div);
     
+    var div = document.createElement("div"); //预估营业额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id","commissionMinSalesAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value","0");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column10.appendChild(div);
+    
     var select = document.createElement("select"); //税率
     select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee");
     select.setAttribute("id","commissionTaxRate_"+count.toLocaleString());
-    column10.appendChild(select);
+    column11.appendChild(select);
     
     var checkbox = document.createElement("input"); //是否开发票
     checkbox.setAttribute("id","commissionInvoiceFlag_"+count.toLocaleString());
     checkbox.setAttribute("type", "checkbox");
     checkbox.setAttribute("checked", "");
-    column11.appendChild(checkbox);
+    column12.appendChild(checkbox);
     
     var remove = document.createElement("a");
     remove.setAttribute("href", "javascript:void(0);");
@@ -1181,7 +1207,7 @@ function addRowInvestmentContractAccounttermCommission() {
     icon.setAttribute("class", "fa fa-minus-circle");
     icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
     remove.appendChild(icon);
-    column12.appendChild(remove);
+    column13.appendChild(remove);
 
     tbody.appendChild(newrow);
     updateTaxVAT();
@@ -1234,10 +1260,6 @@ function addRowInvestmentContractAccounttermCommission() {
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionSingleRow($(this).attr('id').split('_')[1]);
     })
-    
-    if($('#minSales tr').length < $('#commission tr').length){
-        addRowMinSales();
-    }
 }
 
 function addRowInvestmentContractAccounttermPropertyMgmt() {
@@ -1715,104 +1737,6 @@ function addRowInvestmentContractDepositterm() {
     });
 }
 
-function addRowMinSales() {
-    var newrow = document.createElement("tr");
-    newrow.setAttribute("class","new");
-    var column1 = createRowColumn(newrow);
-    var column2 = createRowColumn(newrow);
-    var column3 = createRowColumn(newrow);
-    
-    var table = document.getElementById('investmentContractProperteisterm');
-    var tbody = table.querySelector('tbody') || table;
-    var count = tbody.getElementsByTagName('tr').length + 1;
-    column1.innerText = count.toLocaleString();
-    
-    var div = document.createElement("div"); //期限
-    div.setAttribute("class","input-daterange input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control");
-    input.setAttribute("id","minSalesStartDate_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("style","min-width: 80px");
-    input.setAttribute("readonly","");
-    div.appendChild(input);
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-calendar");
-    var span = document.createElement("span");
-    span.setAttribute("class", "input-group-addon");
-    span.appendChild(icon);
-    div.appendChild(span);
-    var to = document.createElement("span");
-    to.innerText = "-";
-    to.setAttribute("class", "input-group-addon");
-    div.appendChild(to);
-    var div2 = document.createElement("div");
-    div2.setAttribute("class","input-group");
-    var input2 = document.createElement("input");
-    input2.setAttribute("class","form-control");
-    input2.setAttribute("id","minSalesEndDate_"+count.toLocaleString());
-    input2.setAttribute("type","text");
-    input2.setAttribute("style","min-width: 80px");
-    input2.setAttribute("readonly","");
-    div2.appendChild(input2);
-    var icon2 = document.createElement("i");
-    icon2.setAttribute("class", "fa fa-calendar");
-    var span2 = document.createElement("span");
-    span2.setAttribute("class", "input-group-addon");
-    span2.appendChild(icon2);
-    div2.appendChild(span2);
-    div.appendChild(div2);
-    column2.appendChild(div);
-    
-    var div = document.createElement("div"); //金额
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","minSalesAmount_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column3.appendChild(div);
-
-    tbody.appendChild(newrow);
-    $('#investmentContractProperteisterm .input-daterange').datepicker({
-        'language': 'zh-CN',
-        'format': 'yyyy-mm-dd',
-        'todayHighlight': true,
-        'startDate': $('#startDate').val(),
-        'endDate': $('#endDate').val(),
-        'autoclose': true
-    });
-
-    calBackPushNextCalendar('minSales'); 
-    
-    $('input.money').on('focus',function(){
-        $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
-        $(this).select();
-        $(this).parent().parent().addClass('success');
-    });
-    
-    $('input.money').on('blur',function(){
-        $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
-        $(this).parent().parent().removeClass('success');
-    });
-    
-    $("#minSalesEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('minSales');
-    })
-}
-
 function addRowContactList() {
     var newrow = document.createElement("tr");
     newrow.setAttribute("class","new");
@@ -1923,13 +1847,6 @@ function addRowContactList() {
     $('#tenantContactList .select2').select2();
 }
 
-function copyRow() {
-    var source_table = document.getElementById('commission');
-    var target_table = document.getElementById('minSales');
-    var the_row = source_table.rows.length - 1;
-    target_table.appendChild(source_table.rows[the_row].cells[2].cloneNode(true));
-}
-
 function deleteRow(button) {
     var row = button.parentNode.parentNode;
     var tbody = row.parentNode;
@@ -1947,16 +1864,6 @@ function deleteRow(button) {
         });
     }
     calBackPush(id);
-    
-    if(id == 'commission'){
-        if($('#minSales tr').length > $('#commission tr').length){
-            //删除
-        }
-    } else if(id == 'fixedRent'){
-        if($('#commission tr').length < 1 && $('#minSales tr').length > $('#fixedRent tr').length){
-            //删除
-        }
-    }
 }
 
 function updateTaxVAT() {
@@ -3068,7 +2975,6 @@ function activateAddDeleteRow(){
     if($('#investmentContractAccounttermPromotion tbody tr').length > 0){
         $('#investmentContractAccounttermPromotion .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermPromotion()').css('opacity',1);
     }
-    $('#investmentContractProperteisterm .box-body .pull-right a').attr('onClick','addRowMinSales()').css('opacity',1);
     
     $('tbody tr').not('.past').find('.fa-minus-circle').parent().attr('onClick','deleteRow(this)');
     $('tbody tr').not('.past').find('.fa-minus-circle').parent().css('opacity',1);

@@ -50,11 +50,15 @@
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
-                                                    <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="th-inner">营业额上限 <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
                                                     <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                    <div class="fht-cell"></div>
+                                                </th>
+                                                <th>
+                                                    <div class="th-inner">预估营业额 <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
