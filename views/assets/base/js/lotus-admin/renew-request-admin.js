@@ -999,7 +999,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     var div = document.createElement("div"); //预估销售额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","fixedRentMinSalesAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     div.appendChild(input);
@@ -1229,7 +1229,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     var div = document.createElement("div"); //预估营业额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
+    input.setAttribute("class","form-control money past");
     input.setAttribute("id","commissionMinSalesAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value","0");
@@ -2253,7 +2253,6 @@ function saveContractForm(s) {
             var lenTotle = len * 1 + lenOld * 1;
             $("#fixedRent").find("tr.new").each(function(i,e){
                 var fixedRent = {};
-                var minSales = {};
                 index = i * 1 + lenOld * 1 + 1;
                 fixedRent.itemCode = $('#fixedRentItem_'+index).val();
                 fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
@@ -2293,10 +2292,6 @@ function saveContractForm(s) {
 
                 fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
                 fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
-
-                minSales.startDate = fixedRent.startDate;
-                minSales.endDate = fixedRent.endDate;
-                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+index).val());
                 
                 if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
                     fixedRent.invoiceFlag = 1;
@@ -2305,6 +2300,13 @@ function saveContractForm(s) {
                 }
 
                 fixedRentList.push(fixedRent);
+            })
+            
+            $("#fixedRent").find("tr").each(function(i,e){
+                var minSales = {};
+                minSales.startDate = $('#fixedRentStartDate_'+(i * 1 + 1)).val();
+                minSales.endDate = $('#fixedRentEndDate_'+(i * 1 + 1)).val();
+                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+(i * 1 + 1)).val());
                 salesList.push(minSales);
             })
         }
@@ -2343,7 +2345,6 @@ function saveContractForm(s) {
             var lenTotle = len * 1 + lenOld * 1;
             $("#commission").find("tr.new").each(function(i,e){
                 var commission = {};
-                var minSales = {};
                 index = i * 1 + lenOld * 1 + 1;
                 commission.itemCode = $('#commissionItem_'+index).val();
                 commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
@@ -2388,10 +2389,6 @@ function saveContractForm(s) {
                 commission.taxRate = $('#commissionTaxRate_'+index).val();
                 commission.taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
                 
-                minSales.startDate = commission.startDate;
-                minSales.endDate = commission.endDate;
-                minSales.amount =  numberWithoutCommas($('#commissionMinSalesAmount_'+index).val());
-                
                 if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
                     commission.invoiceFlag = 1;
                 } else {
@@ -2399,6 +2396,13 @@ function saveContractForm(s) {
                 }
 
                 deductList.push(commission);
+            })
+            
+            $("#commission").find("tr").each(function(i,e){
+                var minSales = {};
+                minSales.startDate = $('#commissionStartDate_'+(i * 1 + 1)).val();
+                minSales.endDate = $('#commissionEndDate_'+(i * 1 + 1)).val();
+                minSales.amount =  numberWithoutCommas($('#commissionMinSalesAmount_'+(i * 1 + 1)).val());
                 salesList.push(minSales);
             })
         }

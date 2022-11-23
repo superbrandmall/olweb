@@ -615,12 +615,6 @@ function findRequestbyBizId() {
                         }
                         $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
 
-                        /*if(data.esignFlag == 1) {
-                            $('#esignFlag').prop('checked', true);
-                        } else {
-                            $('#esignFlag').prop('checked', false);
-                        }*/
-
                         $('input.money').each(function(){
                             $(this).val(accounting.formatNumber($(this).val()));
                         })
@@ -683,6 +677,21 @@ function findRequestbyBizId() {
                             } else {
                                 $('#fixedRentOverdueInvoiceFlag_1').prop('checked', false);
                             }
+                            
+                            var minI = 0;
+                            if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
+                                $.each(data.oldContractInfo.salesList, function(i,v) {
+                                    updateRowOldMinSales('fixedRent', i, JSON.stringify(v));
+                                    minI++;
+                                })
+                            }
+                            
+                            if(data.salesList != null && data.salesList.length > 0) {                        
+                                $.each(data.salesList, function(i,v) {
+                                    updateRowMinSales('fixedRent', minI, JSON.stringify(v));
+                                    minI++;
+                                })
+                            }
                         }
 
                         if(data.deductList.length > 0) {
@@ -742,6 +751,21 @@ function findRequestbyBizId() {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', true);
                             } else {
                                 $('#commissionOverdueInvoiceFlag_1').prop('checked', false);
+                            }
+                            
+                            var minI = 0;
+                            if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
+                                $.each(data.oldContractInfo.salesList, function(i,v) {
+                                    updateRowOldMinSales('commission', i, JSON.stringify(v));
+                                    minI++;
+                                })
+                            }
+                            
+                            if(data.salesList != null && data.salesList.length > 0) {                        
+                                $.each(data.salesList, function(i,v) {
+                                    updateRowMinSales('commission', minI, JSON.stringify(v));
+                                    minI++;
+                                })
                             }
                         }
 
@@ -1075,6 +1099,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
+    var column11 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractAccounttermFixed');
     var tbody = table.querySelector('tbody') || table;
@@ -1181,10 +1206,23 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     div.appendChild(percent);
     column7.appendChild(div);
     
+    var div = document.createElement("div"); //预估销售额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("id","fixedRentMinSalesAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column8.appendChild(div);
+    
     var select = document.createElement("select"); //税率
     select.setAttribute("class","select2 taxVat newVAT fixedVATDropDown newFee"+past);
     select.setAttribute("id","fixedRentTaxRate_"+count.toLocaleString());
-    column8.appendChild(select);
+    column9.appendChild(select);
     
     var checkbox = document.createElement("input"); //是否开发票
     checkbox.setAttribute("id","fixedRentInvoiceFlag_"+count.toLocaleString());
@@ -1192,7 +1230,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     if(value.invoiceFlag == 1){
         checkbox.setAttribute("checked", "");
     }
-    column9.appendChild(checkbox);
+    column10.appendChild(checkbox);
     
     var remove = document.createElement("a");
     remove.setAttribute("href", "javascript:void(0);");
@@ -1201,7 +1239,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     icon.setAttribute("class", "fa fa-minus-circle");
     icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
     remove.appendChild(icon);
-    column10.appendChild(remove);
+    column11.appendChild(remove);
 
     tbody.appendChild(newrow);
     updateTaxVAT();
@@ -1289,6 +1327,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     var column10 = createRowColumn(newrow);
     var column11 = createRowColumn(newrow);
     var column12 = createRowColumn(newrow);
+    var column13 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractAccounttermCommission');
     var tbody = table.querySelector('tbody') || table;
@@ -1377,7 +1416,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     div.appendChild(percent);
     column7.appendChild(div);
     
-    var div = document.createElement("div"); //起始金额
+    var div = document.createElement("div"); //营业额上限
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money"+past);
@@ -1405,10 +1444,24 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     div.appendChild(percent);
     column9.appendChild(div);
     
+    var div = document.createElement("div"); //预估营业额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("id","commissionMinSalesAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value","0");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column10.appendChild(div);
+    
     var select = document.createElement("select"); //税率
     select.setAttribute("class","select2 taxVat newVAT commissionVATDropDown newFee"+past);
     select.setAttribute("id","commissionTaxRate_"+count.toLocaleString());
-    column10.appendChild(select);
+    column11.appendChild(select);
     
     var checkbox = document.createElement("input"); //是否开发票
     checkbox.setAttribute("id","commissionInvoiceFlag_"+count.toLocaleString());
@@ -1416,7 +1469,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     if(value.invoiceFlag == 1){
         checkbox.setAttribute("checked", "");
     }
-    column11.appendChild(checkbox);
+    column12.appendChild(checkbox);
     
     var remove = document.createElement("a");
     remove.setAttribute("href", "javascript:void(0);");
@@ -1425,7 +1478,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     icon.setAttribute("class", "fa fa-minus-circle");
     icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
     remove.appendChild(icon);
-    column12.appendChild(remove);
+    column13.appendChild(remove);
 
     tbody.appendChild(newrow);
     updateTaxVAT();
@@ -1966,6 +2019,16 @@ function updateRowInvestmentContractDepositterm(v) {
     });
 }
 
+function updateRowOldMinSales(id,index,v) {
+    var value = JSON.parse(v);
+    $('#'+id+'MinSalesAmount_'+(index*1+1)).val((value.amount || '0')).attr('disabled','disabled');
+}
+
+function updateRowMinSales(id,index,v) {
+    var value = JSON.parse(v);
+    $('#'+id+'MinSalesAmount_'+(index*1+1)).val((value.amount || '0'));
+}
+
 function mandatoryCheck(s) {
     $('.mandatory-error').remove();
     var flag = 1;
@@ -2205,6 +2268,11 @@ function submitCheck() {
                 flag = 0;
                 $('#fixedRentTaxAmount_1').parent().append(error);
             }
+            
+            if($('#fixedRentMinSalesAmount_1').val() == ''){
+                flag = 0;
+                $('#fixedRentMinSalesAmount_1').parent().append(error);
+            }
         }
     }
     
@@ -2238,6 +2306,11 @@ function submitCheck() {
             if($('#commissionMinSales_1').val() == ''){
                 flag = 0;
                 $('#commissionMinSales_1').parent().append(error);
+            }
+            
+            if($('#commissionMinSalesAmount_1').val() == ''){
+                flag = 0;
+                $('#commissionMinSalesAmount_1').parent().append(error);
             }
         } else {
             flag = 0;
@@ -2420,10 +2493,102 @@ function saveContractForm(s) {
         }
         
         var index;
+        var fixedRentList = [];
+        var salesList = [];
+        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
+            var len = $("#fixedRent").find("tr").length;
+            $("#fixedRent").find("tr").each(function(i,e){
+                var minSales = {};
+                var fixedRent = {};
+                index = i * 1 + 1;
+                fixedRent.itemCode = $('#fixedRentItem_'+index).val();
+                fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+
+                fixedRent.shopCode = shopCode;
+                fixedRent.area = area;
+
+                fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val(); // 结算周期
+                fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text(); // 结算周期
+
+                fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val(); // 周期类型
+                fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text(); // 周期类型
+
+                fixedRent.settleDay = $('#fixedRentSettleDay_1').val(); // 结算日期
+
+                if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
+                    fixedRent.isOverdueFlag = 1;
+                } else {
+                    fixedRent.isOverdueFlag = 0;
+                }
+
+                fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
+                fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
+
+                if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
+                    fixedRent.overdueInvoiceFlag = 1;
+                } else {
+                    fixedRent.overdueInvoiceFlag = 0;
+                }
+
+                fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
+                fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
+
+                fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
+                fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
+
+                fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
+                fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
+
+                minSales.startDate = $('#fixedRentStartDate_'+index).val();
+                minSales.endDate = $('#fixedRentEndDate_'+index).val();
+                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+index).val());
+                
+                fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
+                fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
+
+                if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
+                    fixedRent.invoiceFlag = 1;
+                } else {
+                    fixedRent.invoiceFlag = 0;
+                }
+
+                fixedRentList.push(fixedRent);
+                salesList.push(minSales);
+            })
+        }
+        
+        if(s == 'submit'){
+            if(fixedRentList.length > 0) {
+                var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check3 = 'smaller';
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                    var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
+                    if(check33 != 'smaller'){
+                        check3 = check33;
+                    }
+                }
+                var check4 = 'equal';
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                    var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
+                }
+
+                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+                    alertMsg('9999','固定租金条款开始日与结束日错误，请修改重新提交！');
+                    return false;
+                } 
+            }
+        }
+        
         var deductList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'fixRent') {
+            salesList = [];
             var len = $("#commission").find("tr").length;
             $("#commission").find("tr").each(function(i,e){
+                var minSales = {};
                 var commission = {};
                 index = i * 1 + 1;
                 commission.itemCode = $('#commissionItem_'+index).val();
@@ -2469,6 +2634,10 @@ function saveContractForm(s) {
                 commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
                 commission.targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
 
+                minSales.startDate = $('#commissionStartDate_'+index).val();
+                minSales.endDate = $('#commissionEndDate_'+index).val();
+                minSales.amount =  numberWithoutCommas($('#commissionMinSalesAmount_'+index).val());
+                
                 commission.taxRate = $('#commissionTaxRate_'+index).val();
                 commission.taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
 
@@ -2478,8 +2647,8 @@ function saveContractForm(s) {
                     commission.invoiceFlag = 0;
                 }
 
-                deductList.push(commission);  
-
+                deductList.push(commission);
+                salesList.push(minSales);
             })
         }
         
@@ -2525,89 +2694,6 @@ function saveContractForm(s) {
             }
             
         })
-        
-        var fixedRentList = [];
-        if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
-            var len = $("#fixedRent").find("tr").length;
-            $("#fixedRent").find("tr").each(function(i,e){
-                var fixedRent = {};
-                index = i * 1 + 1;
-                fixedRent.itemCode = $('#fixedRentItem_'+index).val();
-                fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
-
-                fixedRent.shopCode = shopCode;
-                fixedRent.area = area;
-
-                fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val(); // 结算周期
-                fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text(); // 结算周期
-
-                fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val(); // 周期类型
-                fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text(); // 周期类型
-
-                fixedRent.settleDay = $('#fixedRentSettleDay_1').val(); // 结算日期
-
-                if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
-                    fixedRent.isOverdueFlag = 1;
-                } else {
-                    fixedRent.isOverdueFlag = 0;
-                }
-
-                fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
-                fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
-
-                if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
-                    fixedRent.overdueInvoiceFlag = 1;
-                } else {
-                    fixedRent.overdueInvoiceFlag = 0;
-                }
-
-                fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
-                fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
-
-                fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
-                fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
-
-                fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
-                fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
-
-                fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
-                fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
-
-                if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
-                    fixedRent.invoiceFlag = 1;
-                } else {
-                    fixedRent.invoiceFlag = 0;
-                }
-
-                fixedRentList.push(fixedRent);
-            })
-        }
-        
-        if(s == 'submit'){
-            if(fixedRentList.length > 0) {
-                var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
-                var check3 = 'smaller';
-                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
-                    var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
-                    if(check33 != 'smaller'){
-                        check3 = check33;
-                    }
-                }
-                var check4 = 'equal';
-                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
-                    var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
-                    if(check44 != 'equal'){
-                        check4 = check44;
-                    }
-                }
-
-                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
-                    alertMsg('9999','固定租金条款开始日与结束日错误，请修改重新提交！');
-                    return false;
-                } 
-            }
-        }
         
         var promotionFeeList = [];
         var len = $("#promotion").find("tr").length;

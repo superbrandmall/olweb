@@ -2609,11 +2609,11 @@ function calBackPush(prefix){
         var itemCode = tdArr.eq(1).find('select').val();
         var rentAmount = tdArr.eq(6).find('input').val();
         var taxAmount = tdArr.eq(4).find('input').val();
-        var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
-        var taxRate = tdArr.eq(7).find('select').val();
         var taxRentAmount = tdArr.eq(3).find('input').val();
         
         if(path == 'fixedRentCalc'){
+            var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
+            var taxRate = tdArr.eq(8).find('select').val();
             if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
                 fixedRent = {
                     "amount": numberWithoutCommas(tdArr.eq(5).find('input').val()),
@@ -2623,12 +2623,14 @@ function calBackPush(prefix){
                     "rentAmount": numberWithoutCommas(tdArr.eq(6).find('input').val()),
                     "taxAmount": numberWithoutCommas(tdArr.eq(4).find('input').val()),
                     "taxCode": taxCode,
-                    "taxRate": tdArr.eq(7).find('select').val(),
+                    "taxRate": taxRate,
                     "taxRentAmount": numberWithoutCommas(tdArr.eq(3).find('input').val())
                 }
                 fixedRentList.push(fixedRent);
             }
         } else if(path == 'propertyFeeCalc'){
+            var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
+            var taxRate = tdArr.eq(7).find('select').val();
             if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
                 propertyFee = {
                     "amount": numberWithoutCommas(tdArr.eq(5).find('input').val()),
@@ -2638,7 +2640,7 @@ function calBackPush(prefix){
                     "rentAmount": numberWithoutCommas(tdArr.eq(6).find('input').val()),
                     "taxAmount": numberWithoutCommas(tdArr.eq(4).find('input').val()),
                     "taxCode": taxCode,
-                    "taxRate": tdArr.eq(7).find('select').val(),
+                    "taxRate": taxRate,
                     "taxRentAmount": numberWithoutCommas(tdArr.eq(3).find('input').val())
                 }
                 propertyFeeList.push(propertyFee);
