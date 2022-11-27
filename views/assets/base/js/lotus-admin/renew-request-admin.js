@@ -1990,6 +1990,11 @@ function submitCheck() {
                 flag = 0;
                 $('#fixedRentTaxAmount_1').parent().append(error);
             }
+            
+            if($('#fixedRentMinSalesAmount_1').val() == ''){
+                flag = 0;
+                $('#fixedRentMinSalesAmount_1').parent().append(error);
+            }
         } else {
             flag = 0;
             $('#investmentContractAccounttermFixed').append(error);
@@ -2028,9 +2033,9 @@ function submitCheck() {
                 $('#commissionMinSales_1').parent().append(error);
             }
             
-            if($('#fixedRentMinSalesAmount_1').val() == ''){
+            if($('#commissionMinSalesAmount_1').val() == ''){
                 flag = 0;
-                $('#fixedRentMinSalesAmount_1').parent().append(error);
+                $('#commissionMinSalesAmount_1').parent().append(error);
             }
         } else {
             flag = 0;
