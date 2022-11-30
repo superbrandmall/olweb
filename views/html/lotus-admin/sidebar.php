@@ -14,6 +14,15 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <span>首页</span>
                 </a>
             </li>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-pie-chart"></i>
+                    <span>报表</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">报表分析</a></li>
+                </ul>
+            </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || 
                     $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/create-tenant' || 
                     $_GET['p'] == 'lotus-admin/tenant-detail') { echo 'active'; }?>">
@@ -57,13 +66,24 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>">
-                <a href="#"><i class="fa fa-pie-chart"></i>
-                    <span>报表</span>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/sales-data-entry') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-calculator"></i>
+                    <span>账务</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">报表分析</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/sales-data-entry') { echo 'active'; }?>"><a href="/lotus-admin/sales-data-entries?items=20">销售数据录入单</a></li>
+                </ul>
+            </li>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/sales-data-entry') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-dashboard"></i>
+                    <span>物业</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/instruments') { echo 'active'; }?>"><a href="/lotus-admin/instruments?items=20">水电煤仪表</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/instrument-type') { echo 'active'; }?>"><a href="/lotus-admin/instrument-type?items=20">仪表类型</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/instrument-data-entris' || $_GET['p'] == 'lotus-admin/instrument-data-entry') { echo 'active'; }?>"><a href="/lotus-admin/instrument-data-entries?items=20">仪表数据录入单</a></li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/dict' || $_GET['p'] == 'lotus-admin/create-dict-type' || $_GET['p'] == 'lotus-admin/create-dict-data' || $_GET['p'] == 'lotus-admin/edit-dict-data') { echo 'active'; }?>">

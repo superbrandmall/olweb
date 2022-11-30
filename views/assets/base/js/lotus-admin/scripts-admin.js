@@ -2610,10 +2610,14 @@ function calBackPush(prefix){
         var rentAmount = tdArr.eq(6).find('input').val();
         var taxAmount = tdArr.eq(4).find('input').val();
         var taxRentAmount = tdArr.eq(3).find('input').val();
-        
         if(path == 'fixedRentCalc'){
-            var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
-            var taxRate = tdArr.eq(8).find('select').val();
+            if(getURLParameter('contractVersion') && getURLParameter('contractVersion') != ''){
+                var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(7).find('select').val();
+            } else {
+                var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(8).find('select').val();
+            }
             if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
                 fixedRent = {
                     "amount": numberWithoutCommas(tdArr.eq(5).find('input').val()),
