@@ -162,11 +162,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">位置</div>
+                                                                <div class="th-inner" style="width: 200px;">位置</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">位置类型</div>
+                                                                <div class="th-inner" style="width: 90px;">位置类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -186,7 +186,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">业态</div>
+                                                                <div class="th-inner" style="width: 90px;">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

@@ -119,7 +119,7 @@ function updateSalesContractDropDown(data_count) {
 
 function findSaleRecordByDate(p,c) {
     $.ajax({
-        url: $.api.baseLotus+"/api/sales/lotus/findSaleRecodeByDate?contractNo=LTCONTRACT20211026000122&startDate=2021-01-01&endDate=2021-12-31&page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/sales/lotus/findSaleRecodeByDate?contractNo=800427&startDate=2022-10-01&endDate=2022-10-31&page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "GET",
         async: false,
         dataType: "json",

@@ -38,11 +38,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <label class="col-md-4 control-label" style="text-align: right;">起止日期</label>
                             <div class="col-md-8 col-sm-12">
                                 <div class="input-daterange input-group">
-                                    <input type="text" class="form-control" id="startStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
+                                    <input type="text" class="form-control" id="startStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" value="2022-10-01" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                     <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" id="startEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" />
+                                        <input type="text" class="form-control" id="startEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none; text-align: right; font-size: 10px;" value="2022-10-31" />
                                         <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>

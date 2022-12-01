@@ -75,7 +75,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/sales-data-entry') { echo 'active'; }?>"><a href="/lotus-admin/sales-data-entries?items=20">销售数据录入单</a></li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/sales-data-entry') { echo 'active'; }?>">
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/instruments' || $_GET['p'] == 'lotus-admin/instrument-type' || $_GET['p'] == 'lotus-admin/instrument-data-entris' || $_GET['p'] == 'lotus-admin/instrument-data-entry') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-dashboard"></i>
                     <span>物业</span>
                     <i class="fa fa-angle-left pull-right"></i>

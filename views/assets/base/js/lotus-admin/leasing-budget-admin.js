@@ -153,26 +153,26 @@ function findShopBudget(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        if($('#budget_'+v.shopCode).length <= 0){
-                            $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.shopCode+'">\n\
-                            <td>'+v.unitCode+'['+v.unitCode+']</td>\n\
-                            <td>铺位-正柜</td>\n\
-                            <td>'+(v.startDate || '')+'</td>\n\
-                            <td>'+(v.endDate || '')+'</td>\n\
-                            <td><b>'+(accounting.formatNumber(v.area) || '')+'</b></td>\n\
-                            <td id="D011_'+v.shopCode+'"></td>\n\
+                        if($('#budget_'+v.code).length <= 0){
+                            $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.code+'">\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>铺位-'+(v.unitDesc || v.unitType)+'</td>\n\
+                            <td>2022-01-01</td>\n\
+                            <td>2022-12-31</td>\n\
+                            <td><b>'+(accounting.formatNumber(v.unitArea) || '')+'</b></td>\n\
+                            <td id="D011_'+v.code+'"></td>\n\
+                            <td>'+v.modality+'</td>\n\
                             <td></td>\n\
                             <td></td>\n\
                             <td></td>\n\
                             <td></td>\n\
-                            <td></td>\n\
-                            <td id="B021_'+v.shopCode+'"></td>\n\
-                            <td id="G021_'+v.shopCode+'"></td>\n\
-                            <td></td>\n\
+                            <td id="B021_'+v.code+'"></td>\n\
+                            <td id="G021_'+v.code+'"></td>\n\
                             <td></td>\n\
                             <td></td>\n\
                             <td></td>\n\
-                            <td id="B011_'+v.shopCode+'"></td></tr>');
+                            <td></td>\n\
+                            <td id="B011_'+v.code+'"></td></tr>');
                         }
                     });
 
