@@ -305,8 +305,14 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/store-progress-console' => array(
             'url' => 'store-progress-console.php'
         ),
+        'lotus-admin/create-store' => array(
+            'url' => 'create-store.php'
+        ),
         'lotus-admin/store-detail' => array(
             'url' => 'store-detail.php'
+        ),
+        'lotus-admin/store-contract' => array(
+            'url' => 'store-contract.php'
         ),
         'lotus-admin/requests' => array(
             'url' => 'requests.php'
@@ -415,7 +421,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'todo.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'store-detail.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'requests.php', 'request-summary.php', 'bi.php', 'modality.php', 'modality-progress-console.php',     
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'requests.php', 'request-summary.php', 'bi.php', 'modality.php', 'modality-progress-console.php',     
         'dr-summary.php', 'floor-progress-console.php', 'product-category.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php', 'leasing-budget.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 'sales-data-entries.php');
     
     if (in_array($page, $session_required)) {

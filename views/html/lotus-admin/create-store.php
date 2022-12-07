@@ -1,48 +1,32 @@
 <?php
-if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
-    $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
-    if (strpos($id, '&s=') !== false) {
-        $id = explode('&s=', $id)[0];
-    }
-}
-
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/store-detail-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-store-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/store-detail.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/create-store.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 }
 ?>
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper store-detail">
+<div class="content-wrapper create-store">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
             <h4>
-                <span class="badge badge-info" id="shopStatus" style="vertical-align: top;"></span> <span class="badge badge-success" id="state" style="vertical-align: top;"></span> <b id="name2"></b>
+                创建铺位
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','stores');">取消</a>
                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
             </div>
-            <div class="box-header" id="navbarTop" style="height: 53px;">
+            <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#storeBasicInfo">基本信息</a></li>
                     <li><a href="#storePropertyInfo">物业信息</a></li>
                 </ul>
             </div>
-            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px;">
-                <div class="pull-left">
-                    <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                        <li class="active"><a href="javascript: void(0);">详细资料</a></li>
-                        <li><a href="/lotus-admin/store-budget?id=<?= $id; ?>">租金计划</a></li>
-                        <li><a href="/lotus-admin/store-contract?id=<?= $id; ?>">签约合同</a></li>
-                    </ol>
-                </div>
-            </div>
         </section>
 
-        <section class="content" style="margin-top: 179px;">
+        <section class="content" style="margin-top: 140px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">

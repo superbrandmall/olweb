@@ -996,7 +996,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     div.appendChild(percent);
     column7.appendChild(div);
     
-    var div = document.createElement("div"); //预估销售额
+    var div = document.createElement("div"); //预估营业额
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money past");
@@ -1004,7 +1004,7 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     input.setAttribute("type","text");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/月";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column8.appendChild(div);
@@ -1221,7 +1221,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("value",value.targetSales);
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元/年";
+    percent.innerText = "元/月";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column9.appendChild(div);
@@ -1235,7 +1235,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     input.setAttribute("value","0");
     div.appendChild(input);
     var percent = document.createElement("span");
-    percent.innerText = "元";
+    percent.innerText = "元/月";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column10.appendChild(div);

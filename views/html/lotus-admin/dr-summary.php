@@ -38,15 +38,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
     
-    <section class="content" style="margin-top: 115px;">
+    <section class="content" style="margin-top: 130px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box">
+                    <div class="box" style="height: 0;">
                         <div class="box-body" style="padding-top: 0; padding-bottom: 0; margin: 0 2px;">
                             <div class="row">
                                 <div class="col-md-12" style="padding: 0;">
-                                    <iframe src ="https://uat-ol.superbrandmall.com/dr-summary/#/summary" width="100%" height="800" scrolling="auto" frameBorder="0" style="overflow: hidden;">
+                                    <iframe src ="/dr-summary/#/summary" width="100%" height="800" scrolling="auto" frameBorder="0" style="overflow: hidden;">
                                         <p>你的浏览器不支持iframes。</p>
                                     </iframe>
                                 </div>

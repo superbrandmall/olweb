@@ -4855,6 +4855,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 
 .pull-left .breadcrumb a {
     color: #444;
+    font-size: 13px;
 }
 
 .pull-left .breadcrumb>.active {

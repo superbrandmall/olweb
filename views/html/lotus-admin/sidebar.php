@@ -23,15 +23,15 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">报表分析</a></li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || 
-                    $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/create-tenant' || 
-                    $_GET['p'] == 'lotus-admin/tenant-detail') { echo 'active'; }?>">
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || 
+                    $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || 
+                    $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-address-card"></i>
                     <span>基础资料</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/store-detail') { echo 'active'; }?>"><a href="/lotus-admin/stores?items=20">物业资源</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || $_GET['p'] == 'lotus-admin/store-budget') { echo 'active'; }?>"><a href="/lotus-admin/stores?items=20">物业资源</a></li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail') { echo 'active'; }?>"><a href="/lotus-admin/brands?items=20">品牌</a></li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/modality') { echo 'active'; }?>"><a href="/lotus-admin/modality">业态</a></li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/product-category') { echo 'active'; }?>"><a href="/lotus-admin/product-category">商品类别</a></li>
