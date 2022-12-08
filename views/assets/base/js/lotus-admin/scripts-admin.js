@@ -2223,6 +2223,39 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     });
 }
 
+function findFloorDropDownByMallCode(mall_code) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+mall_code,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $('#selectFloor').html('<option value="">未选择</option>');
+                    $.each(response.data, function(i,v) {
+                        $('#selectFloor').append('<option value="'+v.code+'">'+v.floorName+'</option>');
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    });
+}
+
 function findRoleYZJByParentId() {
     $.ajax({
         url: $.api.baseCommYZJ+"/api/role/yzj/findAllByParentId/?parentId=69bcb693-92c4-11ec-8a77-ecf4bbea1498",

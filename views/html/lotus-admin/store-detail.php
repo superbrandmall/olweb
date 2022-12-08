@@ -75,16 +75,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitType" class="col-md-4 control-label">类型</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="unitType" style="width: 100%">
-                                                <option value="">未选择</option>
-                                                <option value="shoppe">正柜</option>
-                                                <option value="kiosk">临时柜</option>
-                                                <option value="stora">仓库</option>
-                                                <option value="base">基站</option>
-                                                <option value="parking">停车场</option>
-                                            </select>
+                                        <label for="unitType" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="unitType" style="width: 100%"></select>
+                                            <div id="errorcontainer-unitType" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>

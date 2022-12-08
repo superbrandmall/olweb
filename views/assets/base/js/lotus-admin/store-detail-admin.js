@@ -48,6 +48,8 @@ $(document).ready(function(){
         }
     });
     
+    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '', '');
+    
     $('.date-picker, .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
@@ -102,7 +104,7 @@ function findStoreByCode() {
                     
                     $('#unitCode').val(response.data.unitCode);
                     $('#unitName').val(response.data.unitName);
-                    $('#unitType').val(response.data.unitType).trigger('change');
+                    updateDictByDictTypeCodeAndVal('UNIT_TYPE', 'unitType', response.data.unitType);
                     $('#mallCode').val(response.data.mallCode).trigger('change');
                     $('#startDate').datepicker('update',response.data.startDate);
                     $('#endDate').datepicker('update',response.data.endDate);

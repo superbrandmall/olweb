@@ -1,5 +1,3 @@
-$.store = '';
-
 $(document).ready(function(){    
     $("#create-form").validate({
         rules: {
@@ -47,6 +45,11 @@ $(document).ready(function(){
             saveStore();
         }
     });
+    
+    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '未选择', '');
+    $("#mallCode").on('change',function(){
+        findFloorDropDownByMallCode($('#mallCode').val());
+    })
     
     $('.date-picker, .input-daterange').datepicker({
         'language': 'zh-CN',

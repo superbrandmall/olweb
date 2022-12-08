@@ -41,15 +41,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitCode" class="col-md-4 control-label">代码 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="unitCode" name="unitCode">
-                                            <div id="errorcontainer-unitCode" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="unitName" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="unitName" name="unitName">
@@ -59,16 +50,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitType" class="col-md-4 control-label">类型</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="unitType" style="width: 100%">
-                                                <option value="">未选择</option>
-                                                <option value="shoppe">正柜</option>
-                                                <option value="kiosk">临时柜</option>
-                                                <option value="stora">仓库</option>
-                                                <option value="base">基站</option>
-                                                <option value="parking">停车场</option>
-                                            </select>
+                                        <label for="unitType" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="unitType" style="width: 100%"></select>
+                                            <div id="errorcontainer-unitType" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,6 +88,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <option value="SC140">锡山东亭店[SC140]</option>
                                             </select>
                                             <div id="errorcontainer-mallCode" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectFloor" class="col-md-4 control-label">所属楼层 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="selectFloor" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-selectFloor" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
