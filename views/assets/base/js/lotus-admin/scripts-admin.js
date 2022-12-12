@@ -1,8 +1,9 @@
 $.api = {
     base: $.base,
     baseLotus: $.base+"/onlineleasing-lotus",
-    baseCommYZJ: $.base+"/comm-yunzhijia",
     baseAdmin: $.base+"/onlineleasing-admin",
+    baseCommYZJ: $.base+"/comm-yunzhijia",
+    baseAuth: $.base+"/common-authorization",
     dictModule: [],
     dictContractType: 1, //租赁
     contractType: ['租赁','leasing'],
@@ -2252,6 +2253,65 @@ function findFloorDropDownByMallCode(mall_code) {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }                               
+        }
+    });
+}
+
+function updateUserDropDown(data_count) {
+    $('.selectUser').select2({
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseAuth+"/api/user/findAll",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) {
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    sort: 'id,desc',
+                    search: params.term
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData.reverse(), function(item) {
+                            data = {
+                                id: item.settings.name,
+                                text: item.settings.name                          
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
         }
     });
 }
