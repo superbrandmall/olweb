@@ -203,6 +203,15 @@ tbody .money {
     color: #BBBBBB; 
 }
 
+#salesEntries tr td {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#salesEntries tr td input {
+    border: 0 none;
+}
+
 @media (max-width:767px) {
     .sub-header {
         left: 0;

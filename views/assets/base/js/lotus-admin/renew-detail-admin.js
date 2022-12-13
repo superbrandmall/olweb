@@ -860,7 +860,6 @@ function findRequestbyBizId() {
                         
                         /*** START 审批意见书 **/
                         if(data.oldContractTerm != null){
-                            $('#oldUnitName').val(data.oldContractTerm.unitName);
                             $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
                             $('#oldGrowthRate').val(Math.round(data.oldContractTerm.growthRate * 100) || '0');
                             $('#oldBrandName').val(data.oldContractTerm.brandName);
@@ -878,8 +877,11 @@ function findRequestbyBizId() {
                             $('#oldDepositFee').val(accounting.formatNumber(data.oldContractTerm.deposit));
                             $('#oldTotalAmount').val(accounting.formatNumber(data.oldContractTerm.totalRent));
                             $('#oldTotalTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
+                            $('#oldMonthAvgAmount').val(accounting.formatNumber(data.oldContractTerm.monthAvgAmount));
+                            updateOldSelectStoreDropDown(10);
+                            temp = new Option((data.oldContractTerm.unitName +'['+ data.oldContractTerm.unitCode +']'), data.oldContractTerm.unitCode+':::'+data.oldContractTerm.shopCode+':::'+data.oldContractTerm.unitName, true, true);
+                            $('#oldSelectStore').append(temp).trigger('change');
                         } else {
-                            $('#oldUnitName').val(data.oldContractInfo.unitName);
                             $('#oldFreeDays').val(data.oldContractInfo.freeDays || 0);
                             $('#oldGrowthRate').val(Math.round(data.oldContractInfo.growthRate * 100) || '0');
                             $('#oldBrandName').val(data.oldContractInfo.brandName);
@@ -927,6 +929,10 @@ function findRequestbyBizId() {
                             $('#oldDepositFee').val(accounting.formatNumber(oldDepositFee));
                             $('#oldTotalAmount').val(accounting.formatNumber(oldTotalAmount));
                             $('#oldTotalTaxAmount').val(accounting.formatNumber(oldTotalTaxAmount));
+                            $('#oldMonthAvgAmount').val(accounting.formatNumber(data.oldContractInfo.monthAvgAmount));
+                            updateOldSelectStoreDropDown(10);
+                            temp = new Option((data.oldContractInfo.unitName +'['+ data.oldContractInfo.unitCode +']'), data.oldContractInfo.unitCode+':::'+data.oldContractInfo.shopCode+':::'+data.oldContractInfo.unitName, true, true);
+                            $('#oldSelectStore').append(temp).trigger('change');
                         }
                         
                         /*** END 审批意见书 **/
@@ -2823,17 +2829,20 @@ function saveContractForm(s) {
         oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
-        oldContractTerm.shopCode = shopCode;
         oldContractTerm.startDate = $('#oldStartDate').val();
         oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
         oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
         oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
         oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
-        oldContractTerm.unitCode = unitCode;
-        oldContractTerm.unitName = $('#oldUnitName').val();
         oldContractTerm.updateOpenId = openId;
         oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
+        oldContractTerm.monthAvgAmount = numberWithoutCommas($('#oldMonthAvgAmount').val());
+        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != ''){
+            oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
+            oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
+            oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
+        }
         
         var map = {
             "id": $.request.content.id, //必填

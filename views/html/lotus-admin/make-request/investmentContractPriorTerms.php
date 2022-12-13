@@ -11,7 +11,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">位置编号</label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="oldUnitName" type="text" />
+                    <select class="select2" id="oldSelectStore" style="width: 100%"></select>
                 </div>
             </div>
             <div class="form-group">
@@ -117,8 +117,6 @@
                     </div>
                 </div>
             </div>
-            
-            
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -146,7 +144,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">月物业管理费含税</label>
+                <label class="col-md-4 control-label">月物管费含税</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control money" id="oldPropertyMgmtAmount" type="text" style="border-right: none;" />
@@ -160,6 +158,15 @@
                     <div class="input-group">
                         <input class="form-control" id="oldGrowthRate" type="text" style="border-right: none;" />                                                
                         <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">月均销售额</label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="oldMonthAvgAmount" type="text" style="border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
                     </div>
                 </div>
             </div>

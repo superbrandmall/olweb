@@ -2224,6 +2224,82 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     });
 }
 
+function updateOldSelectStoreDropDown(data_count) {
+    $('#oldSelectStore').select2({
+        minimumResultsForSearch: -1,
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        allowClear: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodes",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) { 
+                var mallCodes;
+                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
+                    mallCodes = $('#department').val();
+                } else {
+                    mallCodes = $.cookie('mallSelected').split(':::')[1];
+                }
+                
+                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+                        mallCodes = 'ALL';
+                        return false;
+                    }
+                })
+                
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    search: params.term,
+                    userCode: $.cookie('uid'),
+                    mallCodes: mallCodes
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.unitCode+':::'+item.code+':::'+item.unitName,
+                                text: item.unitName +'['+ item.unitCode +']'                          
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
 function findFloorDropDownByMallCode(mall_code) {
     $.ajax({
         url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+mall_code,

@@ -82,6 +82,7 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('CONTRACT_TEMPLATE','contractTemplate',$.api.contractTemplate[0],$.api.contractTemplate[1]); // 合同模版
     updateSelectTenantDropDown(50);
     updateSelectStoreDropDown(10);
+    updateOldSelectStoreDropDown(10);
     updateBrandNameDropDown(10);
     findCommissionByDictTypeCode('PRODUCT_CATEGORY'); // 商品分类
     findCommissionByDictTypeCode('DEDUCT_TYPE'); // 全额/差额
@@ -824,9 +825,9 @@ function submitCheck() {
         }
     }
     
-    if($('#oldUnitName').val() == '') {
+    if($('#oldSelectStore').val() == null) {
         flag = 0;
-        $('#oldUnitName').parent().append(error);
+        $('#oldSelectStore').parent().append(error);
     }
     
     if($('#oldBizTypeName').val() == '') {
@@ -902,6 +903,11 @@ function submitCheck() {
     if($('#oldGrowthRate').val() == '') {
         flag = 0;
         $('#oldGrowthRate').parent().append(error);
+    }
+    
+    if($('#oldMonthAvgAmount').val() == '') {
+        flag = 0;
+        $('#oldMonthAvgAmount').parent().append(error);
     }
     
     if(flag == 1){
@@ -1401,19 +1407,22 @@ function saveContractForm(s) {
         oldContractTerm.growthRate = parseFloat($('#oldGrowthRate').val() / 100);
         oldContractTerm.propertyFee = numberWithoutCommas($('#oldPropertyMgmtAmount').val());
         oldContractTerm.rentAmount = numberWithoutCommas($('#oldRentalFloorEffect').val());
-        oldContractTerm.shopCode = shopCode;
         oldContractTerm.startDate = $('#oldStartDate').val() || '';
         oldContractTerm.taxAmount = numberWithoutCommas($('#oldFixedRentTaxAmount').val());
         oldContractTerm.taxPropertyFee = numberWithoutCommas($('#oldPropertyMgmtTaxAmount').val());
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
         oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
         oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
-        oldContractTerm.unitCode = unitCode;
-        oldContractTerm.unitName = $('#oldUnitName').val();
         oldContractTerm.updateOpenId = openId;
         if(oldContractTerm.startDate != '' && oldContractTerm.endDate != ''){
             oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         }
+        oldContractTerm.monthAvgAmount = numberWithoutCommas($('#oldMonthAvgAmount').val());
+        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != ''){
+            oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
+            oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
+            oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
+        } 
         
         var map = {
             "id": $.request.id, //必填
