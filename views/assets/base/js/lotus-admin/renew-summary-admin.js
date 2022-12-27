@@ -84,7 +84,7 @@ function findRequestByBizId() {
                         } else {
                             $('#essayGrowthRate').html('增长<span class="txt">'+Math.round(data.growthRate * 100)+'</span>%，');
                         }
-                        saleRentalRatio = (data.renewAvgSales > 0 ? Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100 : '/');
+                        saleRentalRatio = (data.renewAvgSales > 0 ? Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) * 100 / 100 : '/');
                     }
                     if(data.deductList.length > 0){
                         $('#essayCommission').html('扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');

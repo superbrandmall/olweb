@@ -81,8 +81,8 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('PAYMENT_MODE','paymentMode',$.api.paymentMode[0],$.api.paymentMode[1]); // 支付方式
     updateDictDropDownByDictTypeCode('CONTRACT_TEMPLATE','contractTemplate',$.api.contractTemplate[0],$.api.contractTemplate[1]); // 合同模版
     updateSelectTenantDropDown(50);
-    updateSelectStoreDropDown(10);
-    updateOldSelectStoreDropDown(10);
+    updateSelectStoreDropDownByMallCode(10,$.cookie('mallSelected').split(':::')[1]);
+    updateOldSelectStoreDropDownByMallCode(10,$.cookie('mallSelected').split(':::')[1]);
     updateBrandNameDropDown(10);
     findCommissionByDictTypeCode('PRODUCT_CATEGORY'); // 商品分类
     findCommissionByDictTypeCode('DEDUCT_TYPE'); // 全额/差额
@@ -1422,7 +1422,8 @@ function saveContractForm(s) {
             oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
             oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
             oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
-        } 
+            oldContractTerm.planModalitySecond = $('#oldSelectStore').val().split(':::')[3];
+        }
         
         var map = {
             "id": $.request.id, //必填

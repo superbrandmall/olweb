@@ -64,7 +64,7 @@ function findRequestByBizId() {
                     var saleRentalRatio = '';
                     if(data.fixedRentList.length > 0){
                         $('#essayFixedRent').html('新签首年固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
-                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                     }
                     if(data.deductList.length > 0){
                         $('#essayCommission').html('首年扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');

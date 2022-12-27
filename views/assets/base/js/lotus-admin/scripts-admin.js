@@ -2078,81 +2078,6 @@ function updateBrandNameDropDown(data_count) {
     });
 }
 
-function updateSelectStoreDropDown(data_count) {
-    $('#selectStore').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodes",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) { 
-                var mallCodes;
-                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
-                    mallCodes = $('#department').val();
-                } else {
-                    mallCodes = $.cookie('mallSelected').split(':::')[1];
-                }
-                
-                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-                        mallCodes = 'ALL';
-                        return false;
-                    }
-                })
-                
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.floorName+':::'+item.floorCode,
-                                text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
 function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     $('#selectStore').select2({
         minimumResultsForSearch: -1,
@@ -2206,6 +2131,78 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                             data = {
                                 id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.floorName+':::'+item.floorCode,
                                 text: item.unitName +'['+ item.unitCode +'] | '+ item.unitArea + '㎡'                            
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
+    $('#oldSelectStore').select2({
+        minimumResultsForSearch: -1,
+        placeholder: '未选择',
+        dropdownAutoWidth: true,
+        allowClear: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodesAndMallCode",
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) { 
+                var mallCodes = mall_code;
+                var mallCode = mallCodes;
+                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+                        mallCodes = 'ALL';
+                        return false;
+                    }
+                })
+                
+                return {
+                    page: params.page || 0,
+                    size: data_count,
+                    search: params.term,
+                    userCode: $.cookie('uid'),
+                    mallCodes: mallCodes,
+                    mallCode: mallCode
+                }
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.modality,
+                                text: item.unitName +'['+ item.unitCode +']'                          
                             }
                             var returnData = [];
                             returnData.push(data);
@@ -2473,14 +2470,16 @@ function updateUserRoleYZJDropDownByRoleId(id) {
                     var data;
                     return {
                         results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.openId,
-                                text: item.name
+                            if(item.state == 1){
+                                data = {
+                                    id: item.openId,
+                                    text: item.name
+                                }
+
+                                var returnData = [];
+                                returnData.push(data);
+                                return returnData;
                             }
-                            
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
                         })
                     }
                 } else {
@@ -3025,6 +3024,73 @@ function updateRequestContractDropDown(id, data_count) {
                     operator: "OR",
                     params: [
                       "mallCode","tenantName","contractNo"
+                    ],
+                    sorts: []
+                }
+                return JSON.stringify(map);
+            },
+            processResults: function (data,params) {
+                if(data['code'] === 'C0') {
+                    var jsonData = data['data'].content;
+                    params.page = params.page || 0;
+                    var data;
+                    return {
+                        results: $.map(jsonData, function(item) {
+                            data = {
+                                id: item.contractNo,
+                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate            
+                            }
+                            var returnData = [];
+                            returnData.push(data);
+                            return returnData;
+                        }),
+                        pagination: {
+                            "more": data_count <= jsonData.length
+                        }
+                    }
+                } else {
+                    alertMsg(data['code'],data['customerMessage']);
+                }
+            },
+            cache: true
+        }
+    });
+}
+
+function updateSelectContractDropDown(data_count) {
+    $('#selectContract').select2({
+        placeholder: '输入合同编号',
+        dropdownAutoWidth: true,
+        allowClear: true,
+        language: {
+            searching: function() {
+                return '加载中...';
+            },
+            loadingMore: function() {
+                return '加载中...';
+            }
+        },
+        ajax: {
+            url: function (params) {
+                return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            delay: 250,
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            data: function (params) {
+                var map = {
+                    key: params.term || $('#department').val(),
+                    operator: "OR",
+                    params: [
+                      "mallCode","contractNo"
                     ],
                     sorts: []
                 }

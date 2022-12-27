@@ -1,26 +1,36 @@
 $(document).ready(function(){
-    if($.cookie('searchCode') != ''){
-        $('#code').val($.cookie('searchCode'));
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
+    if($.cookie('searchMallCode') != null){
+        $('#department').val($.cookie('searchMallCode')).trigger('change');
+    }
+    
+    if($.cookie('searchYearMonth') != ''){
+        var ym = $.cookie('searchYearMonth').split('');
+        ym[6] = ym[5];
+        ym[5] = ym[4];
+        ym[4] = '-';
+        var yearM = ym.join('');
+        $('#yearMonth').val(yearM);
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        findSaleRecordByDate(getURLParameter('page'),items);
+        findAllSalesByKVCondition(getURLParameter('page'),items);
     } else {
-        findSaleRecordByDate(1,items);
+        findAllSalesByKVCondition(1,items);
     }
-    
-    $('.date-picker, .input-daterange').datepicker({
-        'language': 'zh-CN',
-        'format': 'yyyy-mm-dd',
-        'todayBtn': "linked",
-        'todayHighlight': true,
-        'startDate': '',
-        'endDate': '',
-        'autoclose': true
-    });
-    
-    updateSalesContractDropDown(10);
 
     switch (getURLParameter('items')) {
         case '10':
@@ -39,88 +49,91 @@ $(document).ready(function(){
             $('.page-size').text('20');
             break;
     }
+  
+    $('#department option').each(function(j, elem){
+        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
+            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                if($(elem).val() == v.moduleCode){
+                    $('#department option:eq('+j+')').addClass('no-remove');
+                }
+            } else if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL') {
+                $('#department option:eq('+j+')').addClass('no-remove');
+            }
+        })
+    })
+    
+    updateSelectContractDropDown(50);
+    
+    $('#yearMonth').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm',
+        'todayHighlight': true,
+        'startView': 'months',
+        'maxViewMode': 'years',
+        'minViewMode': 'months',
+        'autoclose': true
+    })
     
     $('#clear').click(function(){
-        $('#code').val('');
-        $.cookie('searchCode', '');
+        $('#yearMonth').val('');
+        $('#department, #selectContract').val('').trigger('change');
+        
+        $.cookie('searchYearMonth', '');
+        $.cookie('searchMallCode', null);
+        $.cookie('searchContract', null);
     })
     
     $('#search').click(function(){
-        $.cookie('searchCode', $('#code').val());
-        findSaleRecordByDate(1,items);
+        $.cookie('searchMallCode', $('#department').val());
+        $.cookie('searchContract', $('#selectContract').val());
+        $.cookie('searchYearMonth', $('#yearMonth').val().replace('-',''));
+        findAllSalesByKVCondition(1,items);
     })
 });
 
-function updateSalesContractDropDown(data_count) {    
-    $('#contract').select2({
-        placeholder: '输入合同编号',
-        dropdownAutoWidth: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: function (params) {
-                return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
-            },
-            type: "POST",
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {
-                var map = {
-                    key: params.term,
-                    operator: "OR",
-                    params: [
-                      "mallCode","tenantName","contractNo"
-                    ],
-                    sorts: []
-                }
-                return JSON.stringify(map);
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.contractNo,
-                                text: (item.contractName || '') + '[' + item.contractNo + '] | '+ item.startDate + '～' + item.endDate + ' | ' + item.contractType + ' | ' + item.unitName           
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
+function findAllSalesByKVCondition(p,c) {
+    $('#sales').html('');
+    
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    params = [{
+        "columnName": "state",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": "1"
+    }]
 
-function findSaleRecordByDate(p,c) {
+    if($.cookie('searchContract') != null && $.cookie('searchContract') != 'null' && $.cookie('searchContract') != ''){
+        param = {
+            "columnName": "contractNo",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchContract')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchYearMonth') != null && $.cookie('searchYearMonth') != ''){
+        param = {
+            "columnName": "yyyymm",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchYearMonth')
+        }
+        params.push(param);
+    }
+
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
     $.ajax({
-        url: $.api.baseLotus+"/api/sales/lotus/findSaleRecodeByDate?contractNo=800427&startDate=2022-10-01&endDate=2022-10-31&page="+(p-1)+"&size="+c+"&sort=id,desc",
-        type: "GET",
+        url: $.api.baseLotus+"/api/sales/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -142,36 +155,47 @@ function findSaleRecordByDate(p,c) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
 
-                $('#entries').html('');
+                $('#sales').html('');
                 if(response.data.content.length > 0){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v) {
-                        var state;
-                        switch (v.state) {
-                            case '1':
-                                state = "使用中";
+                        var approveFlag;
+                        switch (v.approveFlag) {
+                            case 1:
+                                approveFlag = "已审核";
                                 break;
-                            case '0':
-                                state = "已删除";
+                            case 0:
+                                approveFlag = "未审核";
                                 break;
                             default:
-                                state = "使用中";
+                                approveFlag = "未审核";
                                 break;
                         }
-                        
-                        $('#entries').append('<tr>\n\
-                            <td>'+v.code+'</td>\n\
-                            <td>'+state+'</td>\n\
-                            <td></td>\n\
+
+                        var category;
+                        switch (v.category) {
+                            case 'A01':
+                                category = "默认商品";
+                                break;
+                            case 'A02':
+                                category = "促销商品";
+                                break;
+                            default:
+                                category = "其它商品";
+                                break;
+                        }
+
+                        $('#sales').append('<tr>\n\
+                            <td><a href="/lotus-admin/edit-sales-data?id='+v.yyyymm+v.contractNo+'">'+v.yyyymm+v.contractNo+'</a></td>\n\
+                            <td>'+approveFlag+'</td>\n\
                             <td>'+v.contractNo+'</td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
+                            <td>'+v.salesDate+'</td>\n\
                             <td>'+v.salesDate+'</td>\n\
                             <td>'+numberWithCommas(v.saleNum)+'</td>\n\
                             <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-                            <td></td>\n\
+                            <td>'+category+'['+v.category+']</td>\n\
                             <td>'+(v.remark || '')+'</td>\n\
                         </tr>');
                     })
@@ -182,7 +206,7 @@ function findSaleRecordByDate(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#entries').append('<tr><td colspan="11" style="text-align: center;">没有查到相关记录！</td></tr>');
+                    $('#sales').append('<tr><td colspan="9" style="text-align: center;">没有查到相关记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

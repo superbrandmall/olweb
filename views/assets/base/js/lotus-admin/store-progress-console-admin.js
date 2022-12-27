@@ -202,7 +202,7 @@ function updateSelectUserDropDown(data_count) {
             }
         },
         ajax: {
-            url: $.api.baseLotus+"/api/user/lotus/findAllByUserType?userType=11",
+            url: $.api.baseAuth+"/api/user/findAllByUserType",
             type: 'GET',
             dataType: 'json',
             delay: 250,
@@ -212,18 +212,22 @@ function updateSelectUserDropDown(data_count) {
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
-            data: function (params) {         
+            data: function (params) {
                 return {
-                    search: params.term
+                    page: params.page || 0,
+                    size: data_count,
+                    sort: 'id,desc',
+                    search: params.term,
+                    userType: 11
                 }
             },
             processResults: function (data,params) {
                 if(data['code'] === 'C0') {
-                    var jsonData = data['data'];
+                    var jsonData = data['data'].content;
                     params.page = params.page || 0;
                     var data;
                     return {
-                        results: $.map(jsonData, function(item) {
+                        results: $.map(jsonData.reverse(), function(item) {
                             data = {
                                 id: item.code,
                                 text: item.settings.name +'['+ item.mobile + ']'

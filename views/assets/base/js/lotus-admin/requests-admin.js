@@ -78,7 +78,12 @@ $(document).ready(function(){
     $("#department, #renewDepartment").find("option:not(.no-remove)").remove();
     
     updateSelectTenantDropDown(50);
-    updateSelectStoreDropDown(10);
+    if($("#department").val() != ''){
+        updateSelectStoreDropDownByMallCode(10,$("#department").val());
+    }
+    $("#department").on('change',function(){
+        updateSelectStoreDropDownByMallCode(10,$(this).val());
+    })
     
     $('#clear').click(function(){
         $('#contractNo').val('');

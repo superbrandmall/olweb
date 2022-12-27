@@ -841,7 +841,7 @@ function findRequestbyBizId() {
                         $('#oldTotalAmount').val(accounting.formatNumber(data.oldContractTerm.totalRent));
                         $('#oldTotalTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
                         $('#oldMonthAvgAmount').val(accounting.formatNumber(data.oldContractTerm.monthAvgAmount));
-                        updateOldSelectStoreDropDown(10);
+                        updateOldSelectStoreDropDownByMallCode(10,$.request.content.mallCode);
                         temp = new Option((data.oldContractTerm.unitName +'['+ data.oldContractTerm.unitCode +']'), data.oldContractTerm.unitCode+':::'+data.oldContractTerm.shopCode+':::'+data.oldContractTerm.unitName, true, true);
                         $('#oldSelectStore').append(temp).trigger('change');
                     }
@@ -2792,6 +2792,7 @@ function saveContractForm(s) {
             oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
             oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
             oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
+            oldContractTerm.planModalitySecond = $('#oldSelectStore').val().split(':::')[3];
         }
 
         var map = {

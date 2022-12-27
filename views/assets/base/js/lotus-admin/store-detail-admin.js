@@ -147,7 +147,7 @@ function saveStore() {
                 "approveFirst": $.store.approveFirst,
                 "approveSecond": $.store.approveSecond,
                 "approveThird": $.store.approveThird,
-                "area": $('#unitArea').val(),
+                "area": numberWithoutCommas($('#unitArea').val()),
                 "code": $.store.code,
                 "creatorOpenId": $.store.creatorOpenId,
                 "endDate": $('#endDate').val(),

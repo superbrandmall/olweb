@@ -8,7 +8,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper create-tenant">
+<div class="content-wrapper create-sales-data">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
             <h4>
@@ -16,12 +16,12 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','tenants');">取消</a>
-                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
+                <button type="submit" class="btn btn-success btn-sm" id="submitForm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
             </div>
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
-                    <li>交易总笔数: </li>
-                    <li>销售总金额: </li>
+                    <li>交易总笔数: <h3 id="totalSaleNum" style="display: inline;">0</h3></li>
+                    <li>销售总金额: <h3 id="totalAmount"  style="display: inline;">0.00</h3></li>
                 </ul>
             </div>
         </section>
@@ -41,52 +41,73 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="department" class="col-md-4 control-label">项目 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="name" name="name">
-                                            <div id="errorcontainer-name" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="type" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2" id="type" name="type" style="width: 100%">
+                                            <select class="select2" id="department" name="department" style="width: 100%">
                                                 <option value="">未选择</option>
-                                                <option value="2">公司</option>
-                                                <option value="1">个人</option>
+                                                <option value="SC033">川沙店[SC033]</option>
+                                                <option value="SC001">杨高南路店[SC001]</option>
+                                                <option value="SC005">上南店[SC005]</option>
+                                                <option value="SC011">杨高北路店[SC011]</option>
+                                                <option value="SC043">杨高中路店[SC043]</option>
+                                                <option value="SC078">浦江店[SC078]</option>
+                                                <option value="SC145">临港店[SC0145]</option>
+                                                <option value="SC055">松江文诚店[SC055]</option>
+                                                <option value="SC027">松江岳阳店[SC027]</option>
+                                                <option value="SC126">牡丹江店[SC0126]</option>
+                                                <option value="SC060">蕴川店[SC060]</option>
+                                                <option value="SC082">新港店[SC082]</option>
+                                                <option value="SC010">汶水店[SC010]</option>
+                                                <option value="SC040">保德店[SC040]</option>
+                                                <option value="SC041">南奉店[SC041]</option>
+                                                <option value="SC127">南桥店[SC127]</option>
+                                                <option value="SC050">金山店[SC050]</option>
+                                                <option value="SC026">解放南路店[SC026]</option>
+                                                <option value="SC130">大学路店[SC130]</option>
+                                                <option value="SC138">中山北路店[SC138]</option>
+                                                <option value="SC034">长江路店[SC034]</option>
+                                                <option value="SC124">花桥店[SC124]</option>
+                                                <option value="SC140">锡山东亭店[SC140]</option>
                                             </select>
-                                            <div id="errorcontainer-type" class="errorDiv"></div>
+                                            <div id="errorcontainer-department" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="capital" class="col-md-4 control-label">注册资金</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <input class="form-control money" type="text" id="capital" name="capital" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" />
+                                        <label for="selectContract" class="col-md-4 control-label">合同 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="selectContract" name="selectContract" style="width: 100%"></select>
+                                            <div id="errorcontainer-selectContract" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="businessScope" class="col-md-4 control-label">经营范围</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <input class="form-control" type="text" id="businessScope" name="businessScope" />
-                                            <div id="errorcontainer-businessScope" class="errorDiv"></div>
+                                        <label for="yearMonth" class="col-md-4 control-label">销售年月 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <div class="input-group">
+                                                <input class="form-control date-picker" id="yearMonth" name="yearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                                <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                            </div>
+                                            <div id="errorcontainer-yearMonth" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+<!--                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="uscc"  class="col-md-4 control-label">统一社会信用代码 / 身份证号码</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <input class="form-control" type="text" id="uscc" name="uscc" />
-                                            <div id="errorcontainer-uscc" class="errorDiv"></div>
+                                        <label for="category" class="col-md-4 control-label">商品类别 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="category" name="category" style="width: 100%">
+                                                <option value="">未选择</option>
+                                                <option value="A01" selected>默认商品[A01]</option>
+                                                <option value="A02">促销商品[A02]</option>
+                                                <option value="A03">其它商品[A03]</option>
+                                            </select>
+                                            <div id="errorcontainer-category" class="errorDiv"></div>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         
@@ -136,13 +157,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                         <?php 
                                                             for($i=0;$i<31;$i++){
                                                         ?>
-                                                        <tr>
+                                                        <tr id="entry_<?= ($i * 1 + 1) ?>">
                                                             <td><?= ($i * 1 + 1) ?></td>
-                                                            <td><input class="form-control" id="" type="text"></td>
-                                                            <td><input class="form-control" id="" type="text"></td>
-                                                            <td><input class="form-control" id="" type="text"></td>
-                                                            <td><input class="form-control" id="" type="text"></td>
-                                                            <td><input class="form-control" id="" type="text"></td>
+                                                            <td><input class="form-control" type="text" readonly></td>
+                                                            <td><input class="form-control" type="text" value="默认商品[A01]" readonly></td>
+                                                            <td><input class="form-control" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" value="0"></td>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <input class="form-control money" value="0.00" type="text">
+                                                                    <span class="input-group-addon">元</span>
+                                                                </div>
+                                                            </td>
+                                                            <td><input class="form-control" type="text" maxlength="200"></td>
                                                         </tr>
                                                         <?php
                                                             }

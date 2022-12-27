@@ -82,7 +82,7 @@ function findRequestByBizId() {
                     $('#essayModifyType').html('<span class="txt">'+modifyType+'</span>【变更类型】。');
                     var saleRentalRatio = '';
                     if(data.fixedRentList.length > 0){
-                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                     }
                     $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
                     if(data.awardDate != null && data.awardDate != ''){
