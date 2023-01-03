@@ -84,7 +84,7 @@ function findRequestByBizId() {
                     if(data.fixedRentList.length > 0){
                         saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                     }
-                    $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
+                    $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%，');
                     if(data.awardDate != null && data.awardDate != ''){
                         $('#essayAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约。');
                     }

@@ -2201,7 +2201,7 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                     return {
                         results: $.map(jsonData, function(item) {
                             data = {
-                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.modality,
+                                id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.modality+':::'+ item.unitArea,
                                 text: item.unitName +'['+ item.unitCode +']'                          
                             }
                             var returnData = [];

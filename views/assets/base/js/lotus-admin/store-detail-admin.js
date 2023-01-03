@@ -98,9 +98,13 @@ function findStoreByCode() {
                 
                 if(response.data != null && response.data != ''){
                     $.store = response.data;
-                    $('#state').text(response.data.state == 1 ? '使用中' : '已删除');
+                    $('#state').text(response.data.remarkFirst == 1 ? '使用中' : '已删除');
                     $('#shopStatus').text(response.data.shopStatus == 1 ? '空闲' : '租用');
                     $('#name2').text(response.data.unitName+'['+response.data.unitCode+']');
+                    
+                    if(response.data.remarkFirst == 0){
+                        $('#saveDraft').hide();
+                    }
                     
                     $('#unitCode').val(response.data.unitCode);
                     $('#unitName').val(response.data.unitName);
@@ -141,7 +145,7 @@ function saveStore() {
         
         var height = $('#height').val();
 
-        if($.store.unitCode != '' && $.store.unitName!= '' && $.store.mallCode != '' && $.store.startDate != '' && $.store.endDate != ''){
+        if($.store.remarkFirst == 1 && $.store.unitCode != '' && $.store.unitName!= '' && $.store.mallCode != '' && $.store.startDate != '' && $.store.endDate != ''){
             var map = {
                 "abcRent": $.store.abcRent,
                 "approveFirst": $.store.approveFirst,

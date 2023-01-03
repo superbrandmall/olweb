@@ -524,6 +524,13 @@ function findRequestbyBizId() {
                             calBackPushFixedRentTaxRentAmount();
                             calBackPushPropertyMgmtTaxRentAmount();
                         })
+                        
+                        $("#oldSelectStore").change(function(){
+                            if( $(this).val() && $(this).val() != '' && $(this).val() != null && $(this).val() != 'null' && $('#oldArea').val() == '' ){
+                                var oldArea = $(this).val().split(':::')[4];
+                                $('#oldArea').val(oldArea);
+                            }
+                        })
 
                         $("#selectTenant").change(function(){
                             if(data.formStatus == 1 || data.formStatus == 3){
@@ -879,8 +886,12 @@ function findRequestbyBizId() {
                             $('#oldTotalTaxAmount').val(accounting.formatNumber(data.oldContractTerm.taxTotalRent));
                             $('#oldMonthAvgAmount').val(accounting.formatNumber(data.oldContractTerm.monthAvgAmount));
                             updateOldSelectStoreDropDownByMallCode(10,$.request.mallCode);
-                            temp = new Option((data.oldContractTerm.unitName +'['+ data.oldContractTerm.unitCode +']'), data.oldContractTerm.unitCode+':::'+data.oldContractTerm.shopCode+':::'+data.oldContractTerm.unitName, true, true);
-                            $('#oldSelectStore').append(temp).trigger('change');
+                            if(data.oldContractTerm.unitName != null && data.oldContractTerm.unitName != 'null' && data.oldContractTerm.unitCode != null && data.oldContractTerm.unitCode != 'null' ){
+                                temp = new Option((data.oldContractTerm.unitName +'['+ data.oldContractTerm.unitCode +']'), data.oldContractTerm.unitCode+':::'+data.oldContractTerm.shopCode+':::'+data.oldContractTerm.unitName, true, true);
+                                $('#oldSelectStore').append(temp).trigger('change');
+                            }
+                            $('#oldTaxPromotionFee').val(accounting.formatNumber(data.oldContractTerm.taxPromotionFee));
+                            $('#oldPromotionFee').val(accounting.formatNumber(data.oldContractTerm.promotionFee));
                         } else {
                             $('#oldFreeDays').val(data.oldContractInfo.freeDays || 0);
                             $('#oldGrowthRate').val(Math.round(data.oldContractInfo.growthRate * 100) || '0');
@@ -931,8 +942,12 @@ function findRequestbyBizId() {
                             $('#oldTotalTaxAmount').val(accounting.formatNumber(oldTotalTaxAmount));
                             $('#oldMonthAvgAmount').val(accounting.formatNumber(data.oldContractInfo.monthAvgAmount));
                             updateOldSelectStoreDropDownByMallCode(10,$.request.mallCode);
-                            temp = new Option((data.oldContractInfo.unitName +'['+ data.oldContractInfo.unitCode +']'), data.oldContractInfo.unitCode+':::'+data.oldContractInfo.shopCode+':::'+data.oldContractInfo.unitName, true, true);
-                            $('#oldSelectStore').append(temp).trigger('change');
+                            if(data.oldContractInfo.unitName != null && data.oldContractInfo.unitName != 'null' && data.oldContractInfo.unitCode != null && data.oldContractInfo.unitCode != 'null' ){
+                                temp = new Option((data.oldContractInfo.unitName +'['+ data.oldContractInfo.unitCode +']'), data.oldContractInfo.unitCode+':::'+data.oldContractInfo.shopCode+':::'+data.oldContractInfo.unitName, true, true);
+                                $('#oldSelectStore').append(temp).trigger('change');
+                            }
+                            $('#oldTaxPromotionFee').val(accounting.formatNumber(data.oldContractInfo.taxPromotionFee));
+                            $('#oldPromotionFee').val(accounting.formatNumber(data.oldContractInfo.promotionFee));
                         }
                         
                         /*** END 审批意见书 **/
@@ -2838,12 +2853,14 @@ function saveContractForm(s) {
         oldContractTerm.updateOpenId = openId;
         oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         oldContractTerm.monthAvgAmount = numberWithoutCommas($('#oldMonthAvgAmount').val());
-        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != ''){
+        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != '' && $('#oldSelectStore').val() != null && $('#oldSelectStore').val() != 'null'){
             oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
             oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
             oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
             oldContractTerm.planModalitySecond = $('#oldSelectStore').val().split(':::')[3];
         }
+        oldContractTerm.taxPromotionFee = numberWithoutCommas($('#oldTaxPromotionFee').val());
+        oldContractTerm.promotionFee = numberWithoutCommas($('#oldPromotionFee').val());
         
         var map = {
             "id": $.request.content.id, //必填

@@ -29,9 +29,12 @@ function findRequestByBizId() {
                 
                 if(response.data != '' && response.data != null){
                     var data = response.data;
-                    $('#requestName').text(data.bizId).attr('title',data.bizId);
+                    $('#mallName').text(data.mallName).attr('title',data.mallName);
+                    $('#brandName').text(data.brandName).attr('title',data.brandName);
+                    var created = data.created.split(' ')[0];
+                    created = created.split('-')[0]+created.split('-')[1]+created.split('-')[2];
+                    $('#created').text(created).attr('title',created);
                     updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
-                    updateDictByDictTypeCode('FORM_TYPE', 'formType', data.formType);
                     
                     var path = data.formType;
                     if(path == 'new'){

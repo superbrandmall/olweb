@@ -192,7 +192,7 @@ function findAllStoresByKVCondition(p,c){
                     
                     $.each(response.data.content, function(i,v){
                         var state;
-                        switch (v.state) {
+                        switch (v.remarkFirst) {
                             case '1':
                                 state = "使用中";
                                 break;

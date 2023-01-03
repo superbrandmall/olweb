@@ -463,6 +463,13 @@ function findRequestbyBizId() {
                             calBackPushFixedRentTaxRentAmount();
                             calBackPushPropertyMgmtTaxRentAmount();
                         })
+                        
+                        $("#oldSelectStore").change(function(){
+                            if( $(this).val() && $(this).val() != '' && $(this).val() != null && $(this).val() != 'null' && $('#oldArea').val() == '' ){
+                                var oldArea = $(this).val().split(':::')[4];
+                                $('#oldArea').val(oldArea);
+                            }
+                        })
 
                         temp = new Option(data.floorName, data.floorCode, true, true);
                         $('#floor').append(temp).trigger('change');
@@ -789,9 +796,12 @@ function findRequestbyBizId() {
                         $('#oldTotalTaxAmount').val(accounting.formatNumber(oldTotalTaxAmount));
                         $('#oldMonthAvgAmount').val(accounting.formatNumber(data.monthAvgAmount));
                         updateOldSelectStoreDropDownByMallCode(10,$.request.mallCode);
-                        temp = new Option((data.unitName +'['+ data.unitCode +']'), data.unitCode+':::'+data.shopCode+':::'+data.unitName, true, true);
-                        $('#oldSelectStore').append(temp).trigger('change');
-                        
+                        if(data.unitName != null && data.unitName != 'null' && data.unitCode != null && data.unitCode != 'null' ){
+                            temp = new Option((data.unitName +'['+ data.unitCode +']'), data.unitCode+':::'+data.shopCode+':::'+data.unitName, true, true);
+                            $('#oldSelectStore').append(temp).trigger('change');
+                        }
+                        $('#oldTaxPromotionFee').val(accounting.formatNumber(data.taxPromotionFee));
+                        $('#oldPromotionFee').val(accounting.formatNumber(data.promotionFee));
                         /*** END 审批意见书 **/
                         
                         appendLotusLeasingHead();
@@ -2591,12 +2601,14 @@ function saveContractForm(s) {
         oldContractTerm.updateOpenId = openId;
         oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         oldContractTerm.monthAvgAmount = numberWithoutCommas($('#oldMonthAvgAmount').val());
-        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != ''){
+        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != '' && $('#oldSelectStore').val() != null && $('#oldSelectStore').val() != 'null'){
             oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
             oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
             oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
             oldContractTerm.planModalitySecond = $('#oldSelectStore').val().split(':::')[3];
         }
+        oldContractTerm.taxPromotionFee = numberWithoutCommas($('#oldTaxPromotionFee').val());
+        oldContractTerm.promotionFee = numberWithoutCommas($('#oldPromotionFee').val());
 
         var map = {
             "id": $.request.content.id, //必填

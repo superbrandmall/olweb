@@ -16,7 +16,7 @@ $(document).ready(function(){
         $('#department').val($.cookie('searchMallCode')).trigger('change');
     }
     
-    if($.cookie('searchYearMonth') != ''){
+    if($.cookie('searchYearMonth') != null && $.cookie('searchYearMonth') != ''){
         var ym = $.cookie('searchYearMonth').split('');
         ym[6] = ym[5];
         ym[5] = ym[4];

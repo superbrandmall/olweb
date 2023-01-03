@@ -95,7 +95,7 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
-                    $('#essayRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+saleRentalRatio+'</span>%。');
+                    $('#essayRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%。');
                     $('#essayBudgetRentAmount').text('预算租金元/月/平米，');
                     $('#essayBudgetRentAmountRateOfReach').text('单价达成率%。');
                     $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');

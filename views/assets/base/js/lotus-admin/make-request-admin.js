@@ -139,6 +139,13 @@ $(document).ready(function(){
         calBackPushPropertyMgmtTaxRentAmount();
     })
     
+    $("#oldSelectStore").change(function(){
+        if( $(this).val() && $(this).val() != '' && $(this).val() != null && $(this).val() != 'null' && $('#oldArea').val() == '' ){
+            var oldArea = $(this).val().split(':::')[4];
+            $('#oldArea').val(oldArea);
+        }
+    })
+    
     $("#selectTenant").change(function(){
         findFilesByBizId($(this).val());
     })
@@ -910,6 +917,16 @@ function submitCheck() {
         $('#oldMonthAvgAmount').parent().append(error);
     }
     
+    if($('#oldTaxPromotionFee').val() == '') {
+        flag = 0;
+        $('#oldTaxPromotionFee').parent().append(error);
+    }
+    
+    if($('#oldPromotionFee').val() == '') {
+        flag = 0;
+        $('#oldPromotionFee').parent().append(error);
+    }
+    
     if(flag == 1){
         saveContractForm('submit');
     } else {
@@ -1418,12 +1435,14 @@ function saveContractForm(s) {
             oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         }
         oldContractTerm.monthAvgAmount = numberWithoutCommas($('#oldMonthAvgAmount').val());
-        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != ''){
+        if( $('#oldSelectStore').val() && $('#oldSelectStore').val() != '' && $('#oldSelectStore').val() != null && $('#oldSelectStore').val() != 'null'){
             oldContractTerm.unitCode = $('#oldSelectStore').val().split(':::')[0];
             oldContractTerm.shopCode = $('#oldSelectStore').val().split(':::')[1];
             oldContractTerm.unitName = $('#oldSelectStore').val().split(':::')[2];
             oldContractTerm.planModalitySecond = $('#oldSelectStore').val().split(':::')[3];
         }
+        oldContractTerm.taxPromotionFee = numberWithoutCommas($('#oldTaxPromotionFee').val());
+        oldContractTerm.promotionFee = numberWithoutCommas($('#oldPromotionFee').val());
         
         var map = {
             "id": $.request.id, //必填

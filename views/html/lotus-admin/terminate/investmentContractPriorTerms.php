@@ -48,11 +48,20 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">押金</label>
+                <label class="col-md-4 control-label">月推广费</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control money" id="oldDepositFee" type="text" style="border-right: none;" />
+                        <input class="form-control money" id="oldTaxPromotionFee" type="text" style="border-right: none;" />
                         <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">免租期</label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control" id="oldFreeDays" type="text" style="border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">天</span>
                     </div>
                 </div>
             </div>
@@ -109,11 +118,20 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">免租期</label>
+                <label class="col-md-4 control-label">月推广费含税</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control" id="oldFreeDays" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;">天</span>
+                        <input class="form-control money" id="oldPromotionFee" type="text" style="border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">月均销售额</label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="oldMonthAvgAmount" type="text" style="border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
                     </div>
                 </div>
             </div>
@@ -162,11 +180,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">月均销售额</label>
+                <label class="col-md-4 control-label">押金</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control money" id="oldMonthAvgAmount" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
+                        <input class="form-control money" id="oldDepositFee" type="text" style="border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>

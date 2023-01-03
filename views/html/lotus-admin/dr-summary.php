@@ -11,7 +11,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header" style="height: 45px;">
         <h4>
-            <span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> <span id="formType"></span>租赁合同申请单: <span id="requestName"></span>
+            <!--<span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> <span id="formType"></span>租赁合同申请单: <span id="requestName"></span>-->
+            <span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> <span id="mallName"></span>项目<span id="brandName"></span>品牌商务审批表<span id="created"></span>
         </h4>
         <div class="pull-right">
             <div class="btn-group">
