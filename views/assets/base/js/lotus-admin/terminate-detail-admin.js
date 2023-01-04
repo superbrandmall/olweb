@@ -913,7 +913,7 @@ function findRequestbyBizId() {
                         /*** START 审批意见书 **/
                         if(data.oldContractTerm != null){
                             $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
-                            $('#oldGrowthRate').val(data.oldContractTerm.growthRate * 100 || '0');
+                            $('#oldGrowthRate').val(parseFloat(data.oldContractTerm.growthRate * 100) || '0');
                             $('#oldBrandName').val(data.oldContractTerm.brandName);
                             $('#oldArea').val(data.oldContractTerm.area);
                             $('#oldBizTypeName').val(data.oldContractTerm.bizScope);

@@ -748,7 +748,7 @@ function findRequestbyBizId() {
                         
                         /*** START 审批意见书 **/
                         $('#oldFreeDays').val(data.freeDays || 0);
-                        $('#oldGrowthRate').val(data.growthRate * 100 || '0');
+                        $('#oldGrowthRate').val(parseFloat(data.growthRate * 100) || '0');
                         $('#oldBrandName').val(data.brandName);
                         $('#oldArea').val(data.area);
                         $('#oldBizTypeName').val(data.bizTypeName);
