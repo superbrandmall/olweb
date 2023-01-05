@@ -205,24 +205,10 @@ $(document).ready(function(){
     $("div[id*='uploadFile_']").on('click',function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
-    
-    $('#8d2794df-c15f-4d68-9f8e-8b847f6191db').on('change',function(){
-        if($(this).find('option:selected').val() != null) {
-            $('.step li:nth-child(5)').addClass('active');
-            if($('#hq_leasing_head').find('option:selected').val() != null) {
-                $('.step li:nth-child(6)').addClass('active');
-            }
-        } else {
-            $('.step li:nth-child(5)').removeClass('active');
-            $('.step li:nth-child(6)').removeClass('active');
-        }
-    })
 
     $('#hq_leasing_head').on('change',function(){
         if($(this).find('option:selected').val() != null) {
-            if($('.step li:nth-child(5)').hasClass('active') == true){
-                $('.step li:nth-child(6)').addClass('active');
-            }
+            $('.step li:nth-child(6)').addClass('active');
         } else {
             $('.step li:nth-child(6)').removeClass('active');
         }
@@ -2054,6 +2040,11 @@ function submitCheck() {
         $('#4381cd4e-b984-4641-8a99-15242faae0eb select').parent().append(error);
     }
     
+    if($('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+        flag = 0;
+        $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+    }
+    
     if($('#finance_pre_check select').val() == null) {
         flag = 0;
         $('#finance_pre_check select').parent().append(error);
@@ -2070,23 +2061,10 @@ function submitCheck() {
     }
     
     var area = $.request.content.area;
-    var yearLength = calDatesDiff($('#startDate').val(),$('#endDate').val()) / 365;
     if(area >= 500){
-        if($('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
-            flag = 0;
-            $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
-        }
-        
         if($('#hq_leasing_head select').val() == null) {
             flag = 0;
             $('#hq_leasing_head select').parent().append(error);
-        }
-    } else if(area > 40 && area < 500) {
-        if((area >= 100 && yearLength > 3) || (area < 100 && yearLength > 2)){
-            if($('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
-                flag = 0;
-                $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
-            }
         }
     }
     
@@ -2196,7 +2174,7 @@ function saveContractForm(s) {
                         processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
                         break;
-                    case "总部招商负责人":
+                    case "商业首席执行官":
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
                         break;

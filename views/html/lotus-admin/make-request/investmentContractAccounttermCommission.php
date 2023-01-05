@@ -15,72 +15,72 @@
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
-                        <div class="bootstrap-table">
-                            <div class="fixed-table-container">
-                                <div class="fixed-table-body">
-                                    <table class="table table-striped snipe-table table-responsive">
-                                        <thead id="assetsListingTable-sticky-header">
-                                            <tr>
-                                                <th>
-                                                    <div class="th-inner">行</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">全额/差额 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">商品类别 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">提成率(去税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">营业额上限 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">预估营业额 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">开发票</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">操作</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="commission"></tbody>
-                                    </table>
-                                </div>
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-body">
+                                <table class="table table-striped snipe-table table-responsive">
+                                    <thead id="assetsListingTable-sticky-header">
+                                        <tr>
+                                            <th>
+                                                <div class="th-inner">行</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">全额/差额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">商品类别 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">提成率(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">提成率(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">营业额上限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">预估营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">开发票</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="commission"></tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -96,6 +96,13 @@
                     </select>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
+            <h5 style="display: inline-block; margin-bottom: 0; margin-right: 10px; vertical-align: super;">账款总金额(含税|去税)</h5>
+            <h3 id="commissionTotalRentAmount" style="display: inline-block;">0.00</h3>
+            <h3 style="display: inline-block;">|</h3>
+            <h3 id="commissionTaxTotalRentAmount" style="display: inline-block;">0.00</h3>
+            <a href="javascript: void(0);" onclick="termsModalToggle('commission');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
         </div>
     </div>
     <div class="box-body">

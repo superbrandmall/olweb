@@ -50,8 +50,8 @@
         </div>
         <div class="col-md-3">
             <div class="form-group" id="8d2794df-c15f-4d68-9f8e-8b847f6191db">
-                <label class="col-md-5 control-label"></label>
-                <div class="col-md-7 col-sm-12">
+                <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-7 col-sm-12 required">
                     <!--<select class="select2" multiple="multiple" style="width: 100%"></select>-->
                     <select class="select2" style="width: 100%"></select>
                 </div>
@@ -85,11 +85,11 @@
                 <li class="active">
                     <a href="javascript: void(0);">审批人: 财法负责人<span class="caret"></span></a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="javascript: void(0);">审批人: 业态负责人<span class="caret"></span></a>
                 </li>
                 <li>
-                    <a href="javascript: void(0);">审批人: 总部招商负责人<span class="caret"></span></a>
+                    <a href="javascript: void(0);">审批人: 商业首席执行官<span class="caret"></span></a>
                 </li>
             </ul>
         </div>
