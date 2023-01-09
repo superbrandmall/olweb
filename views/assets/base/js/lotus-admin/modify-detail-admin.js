@@ -91,6 +91,7 @@ $(document).ready(function(){
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
+        calBackPush('commission');
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
@@ -100,6 +101,7 @@ $(document).ready(function(){
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
     })
     
     $("#contractType").change(function(){
@@ -509,6 +511,8 @@ function findRequestbyBizId() {
                             $('#floor').append(floor).trigger('change');
                             calBackPushFixedRentTaxRentAmount();
                             calBackPushPropertyMgmtTaxRentAmount();
+                            calBackPush('commission');
+                            calBackPush('promotion');
                         })
                         
                         $("#oldSelectStore").change(function(){
@@ -1242,6 +1246,7 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
     input.setAttribute("class","form-control money"+p);
     input.setAttribute("id","fixedRentMinSalesAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
+    input.setAttribute("value","0");
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "元/月";
@@ -1566,8 +1571,11 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
         $(this).parent().parent().removeClass('success');
     });
     
+    calBackPush('commission');
+    
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('commission');
+        calBackPush('commission');
     });
     
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
@@ -1580,6 +1588,10 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
         if(p != ''){
             calBackPushCommissionTaxDeduct();
         }
+    })
+    
+    $("#commissionAmount_"+count.toLocaleString()+", #commissionMinSalesAmount_"+count.toLocaleString()).on('change',function(){
+        calBackPush('commission');
     })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1976,6 +1988,7 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
     
     $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
     })
 
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){

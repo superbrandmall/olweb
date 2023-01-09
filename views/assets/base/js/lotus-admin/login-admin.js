@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if($.cookie('userModules') && $.cookie('userModules') != null && $.cookie('userModules') != ''){
+    if($.cookie('userModules') && $.cookie('userModules') != null && $.cookie('userModules') != '' && $.cookie('userModules') != '[]'){
         var no = JSON.parse($.cookie('userModules'))[0].mobile;
         $('#login_username').val(no);
     }

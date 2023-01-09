@@ -114,6 +114,7 @@ $(document).ready(function(){
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
+        calBackPush('commission');
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
@@ -123,6 +124,7 @@ $(document).ready(function(){
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
     })
     
     $("#contractType").change(function(){
@@ -137,6 +139,8 @@ $(document).ready(function(){
         $('#floor').append(floor).trigger('change');
         calBackPushFixedRentTaxRentAmount();
         calBackPushPropertyMgmtTaxRentAmount();
+        calBackPush('commission');
+        calBackPush('promotion');
     })
     
     $("#oldSelectStore").change(function(){

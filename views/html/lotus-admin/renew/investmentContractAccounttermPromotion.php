@@ -91,6 +91,15 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
+            <h5 style="display: inline-block; margin-bottom: 0; margin-right: 10px; vertical-align: super;">账款总金额(含税|去税)</h5>
+            <h3 id="promotionTotalPromotionAmount" style="display: inline-block;">0.00</h3>
+            <h3 style="display: inline-block;">|</h3>
+            <h3 id="promotionTaxTotalPromotionAmount" style="display: inline-block;">0.00</h3>
+            <a href="javascript: void(0);" onclick="termsModalToggle('promotion');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="col-md-12">
             <h5 style="margin-bottom: 0;">结算周期</h5>
             <hr>
         </div>

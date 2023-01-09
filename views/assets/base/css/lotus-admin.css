@@ -28,22 +28,21 @@
 }
 
 .yellow-light {
+    display: inline-block;
+    margin-left: 10px;
     width: 10px;
     height: 10px;
-    background: #f00;
-    display: block;
     border-radius: 50%;
-    background-color: #FF9302;
+    background-color: #f00;
 }
 
 .green-light {
+    display: inline-block;
+    margin-left: 10px;
     width: 10px;
     height: 10px;
-    background: #f00;
-    display: block;
     border-radius: 50%;
     background-color: #4ED964;
-    border: solid 1px #5CC8F9;
 }
 
 label.error {
