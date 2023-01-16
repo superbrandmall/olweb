@@ -20,21 +20,7 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('FORM_TYPE');
     }
     
-    var items = getURLParameter('items') || $('.page-size').first().text();
-    if(getURLParameter('page') && getURLParameter('page') >= 1){
-        findAllRequestsByKVCondition(getURLParameter('page'),items);
-    } else {
-        findAllRequestsByKVCondition(1,items);
-    }
-
-    switch (getURLParameter('items')) {
-        case '5':
-            $('.page-size').text('5');
-            break;
-        default:
-            $('.page-size').text('5');
-            break;
-    }
+    findAllRequestsByKVCondition();
 });
 
 window.onload = function () {
@@ -99,29 +85,25 @@ window.onload = function () {
                     break;
                 default:
             }
-			//写入文字
-			china[state]['text'] = R.text(xx, yy, china[state]['name']).attr(textAttr);
-			//china[state]['path'].setAttribute("fill","#113333"); //rgba(0,0,china[state]['nvalue'],0);
-			//x = china[state]['nvalue'] *255 * 16 + 10 * 255;
-			//china[state]['nvalue']=255-china[state]['nvalue'];
-			//x = "rgb(255, 255, " + china[state]['nvalue'] + ")";
-                        if($.inArray(china[state]['name'], ['江苏','上海']) != -1){
-                            x = "rgb(254, 0, 0)";
-                        } else {
-                            x = "rgb(246, 247, 246)";
-                        }
-			//x = "rgb(255," + china[state]['nvalue'] + ",255)";
-			//x = "rgb("+china[state]['nvalue'] +",255,255)";
-			china[state]['path'].attr("fill", x);	
+            //写入文字
+            china[state]['text'] = R.text(xx, yy, china[state]['name']).attr(textAttr);
+            //china[state]['path'].setAttribute("fill","#113333"); //rgba(0,0,china[state]['nvalue'],0);
+            //x = china[state]['nvalue'] *255 * 16 + 10 * 255;
+            //china[state]['nvalue']=255-china[state]['nvalue'];
+            //x = "rgb(255, 255, " + china[state]['nvalue'] + ")";
+            if($.inArray(china[state]['name'], ['江苏','上海']) != -1){
+                x = "rgb(254, 0, 0)";
+            } else {
+                x = "rgb(246, 247, 246)";
+            }
+            //x = "rgb(255," + china[state]['nvalue'] + ",255)";
+            //x = "rgb("+china[state]['nvalue'] +",255,255)";
+            china[state]['path'].attr("fill", x);	
          })(china[state]['path'], state);
     }
 }
 
-function findAllRequestsByKVCondition(p,c){
-    $('#todo').html('');
-    var params = [];
-    var param = {};
-    
+function findAllRequestsByKVCondition(){
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.roleCode == 'CROLE220301000001'){
@@ -129,7 +111,12 @@ function findAllRequestsByKVCondition(p,c){
             return false;
         }
     })
+        
+    $('#draftListBody, #draftCount, #doneListBody, #doneCount, #toDoListBody, #toDoCount').html('');
     
+    var params = [];
+    var param = {};
+
     param = {
         "columnName": "creatorOpenId",
         "columnPatten": "",
@@ -138,7 +125,7 @@ function findAllRequestsByKVCondition(p,c){
         "value": openId
     }
     params.push(param);
-    
+
     param = {
         "columnName": "contractName",
         "columnPatten": "",
@@ -147,7 +134,7 @@ function findAllRequestsByKVCondition(p,c){
         "value": 'KOW'
     }
     params.push(param);
-    
+
     param = {
         "columnName": "bizId",
         "columnPatten": "",
@@ -156,22 +143,22 @@ function findAllRequestsByKVCondition(p,c){
         "value": '%_OLD'
     }
     params.push(param);
-    
+
     param = {
         "columnName": "formStatus",
         "columnPatten": "",
         "conditionOperator": "AND",
-        "operator": "in",
-        "value": '1;3;4;5;6;7'
+        "operator": "=",
+        "value": '1'
     }
     params.push(param);
-    
+
     var map = {
         "params": params
     }
-    
+
     $.ajax({
-        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page=0&size=100&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -190,11 +177,9 @@ function findAllRequestsByKVCondition(p,c){
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
-                
-                if(response.data.content.length > 0) { 
-                    var pages =  response.data.totalPages;
-                    generatePages(p, pages, c);
-                    
+
+                if(response.data.content.length > 0) {
+                    $("#draftCount").text("("+response.data.content.length+")");
                     $.each(response.data.content, function(i,v){
                         var page;
                         switch (v.formType) {
@@ -213,38 +198,154 @@ function findAllRequestsByKVCondition(p,c){
                             default:
                                 break;
                         }
-                        var link = '<a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a>';
-                        if($.inArray(v.formStatus, ['4','5','7']) != -1){
-                            link = '<a href="javascript: void(0)" onclick=\'javascript: popUpToDo("'+v.bizId+'","'+(v.contractNo || '')+'","'+(renderFormStatus(v.formStatus) || '')+'","'+v.formType+'","'+v.tenantName+'")\'>'+v.bizId+'</a>';
-                        }
-                        $('#todo').append('\
-                            <tr data-index="'+i+'">\n\
-                            <td>'+link+'</td>\n\
-                            <td>'+(v.contractNo || '')+'</td>\n\
-                            <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
-                            <td>'+(renderFormType(v.formType) || '')+'</td>\n\
-                            <td>'+(v.tenantName || '')+'</td>\n\
-                            <td>'+(v.mallName || '')+'</td>\n\
-                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
-                            <td>'+(v.bizTypeName || '')+'</td>\n\
-                            <td>'+(v.contractName || '')+'</td>\n\
-                        </tr>');
                         
+                        $('#draftListBody').append('\
+                            <tr>\n\
+                            <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+(v.mallName || '')+('['+v.brandName+']' || '')+'</a></td>\n\
+                            <td>'+(renderFormType(v.formType) || '')+'</td>\n\
+                            <td>'+v.updated+'</td>\n\
+                        </tr>');
+
                     });
-                    
-                    if(p == pages){
-                        $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
-                    } else {
-                        $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
-                    }
                 } else {
-                    $('#todo').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#draftListBody').html('<tr><td colspan="3" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             } 
         }
     });
+
+    var map = {
+        "conditionGroups": [],
+        "params": [
+            {
+                "columnName": "handler",
+                "columnPatten": "",
+                "conditionOperator": "",
+                "operator": "=",
+                "value": openId
+            }
+        ]
+    }
+        
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/v/process/inst/record/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                if(response.data.content.length > 0) {
+                    var dAmount = 0; 
+                    var tAmount = 0;
+                    var dRequests = [];
+                    var tRequests = [];
+                        
+                    $.each(response.data.content, function(i,v){
+                        var page, processInstStatus;
+                        switch (v.bizType) {
+                            case "new":
+                                page = 'request';
+                                break;
+                            case "renew":
+                                page = 'renew';
+                                break;
+                            case "termination":
+                                page = 'terminate';
+                                break;
+                            case "modify":
+                                page = 'modify';
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        switch (v.processInstStatus) {
+                            case "RUNNING":
+                                processInstStatus = '审批中';
+                                break;
+                            case "RETURNED":
+                                processInstStatus = '退回';
+                                break;
+                            case "FINISH":
+                                processInstStatus = '完成';
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        if(v.stepStatus == 'DONE'){
+                            var link = '';
+                            if($.inArray(v.bizId, dRequests) == -1){
+                                dAmount++;
+                                dRequests.push(v.bizId);
+                                if(v.activityName != '开始审批' && v.activityName != '提交人'){
+                                    link = '<a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+(v.mallName || '')+('['+v.brandName+']' || '')+'</a>';
+                                    
+                                    $("#doneCount").text("("+dAmount+")");
+                                    $('#doneListBody').append('\
+                                     <tr>\n\
+                                     <td>'+link+'</td>\n\
+                                     <td>'+(v.creatorName || 'admin')+'</td>\n\
+                                     <td>'+v.handleTime+'</td>\n\
+                                    </tr>');
+                                }
+                            }
+                        } else if(v.stepStatus == 'DOING'){
+                            var link = '';
+                            if($.inArray(v.bizId, tRequests) == -1){
+                                tAmount++;
+                                tRequests.push(v.bizId);
+                                if(v.activityName == '开始审批'){
+                                    link = '<a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+(v.mallName || '')+('['+v.brandName+']' || '')+'</a>';
+                                } else if(v.activityName == '合同上传' || v.activityName == '合同收回' || v.activityName == '盖章合同上传') {
+                                    link = '<a href="javascript: void(0)" onclick=\'javascript: popUpToDo("'+v.bizId+'","'+(v.contractNo || '')+'","'+v.activityName+'","'+v.bizType+'","'+v.tenantName+'")\'>'+(v.mallName || '')+('['+v.brandName+']' || '')+'</a>';
+                                } else {
+                                    link = '<a href="/id/'+(v.bizId.toLowerCase())+'/lotus-approval-opinion" target="_blank">'+(v.mallName || '')+('['+v.brandName+']' || '')+'</a>'; 
+                                }
+
+                                $("#toDoCount").text("("+tAmount+")");
+                                $('#toDoListBody').append('\
+                                <tr>\n\
+                                <td>'+link+'</td>\n\
+                                <td>'+(v.creatorName || 'admin')+'</td>\n\
+                                <td>'+processInstStatus+'['+v.activityName+']</td>\n\
+                                </tr>');
+                            }
+                        }
+                    });
+                    
+                    if(dRequests > 0){
+                        $('#doneListBody').html('<tr><td colspan="3" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    }
+                    
+                    if(tRequests > 0){
+                        $('#toDoListBody').html('<tr><td colspan="3" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    }
+                } else {
+                    $('#doneListBody, #toDoListBody').html('<tr><td colspan="3" style="text-align: center;">没有找到任何记录！</td></tr>');
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
+    
 }
 
 function renderFormType(t) {
@@ -260,37 +361,39 @@ function renderFormType(t) {
     return type;
 }
 
-function popUpToDo(bizId,contractNo,formStatus,formType,tenantName) {
-    $('#reqBizId').text(bizId);
-    $('#reqContractNo').text(contractNo);
-    $('#reqFormStatus').text(formStatus);
-    $('#reqFormType').text(renderFormType(formType) || '');
-    $('#reqTenantName').text(tenantName);
-    
-   
-    var headTxt, type;
-    switch (formStatus) {
-        case "未用印合同上传":
+function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
+    var headTxt, type, formStatus;
+    switch (activityName) {
+        case "合同上传":
             headTxt = '上传待租户用印合同';
+            formStatus = '未用印合同上传';
             type = 'INIT';
             break;
-        case "租户用印合同上传":
+        case "合同收回":
             headTxt = '上传待我司用印合同';
+            formStatus = '租户用印合同上传';
             type = 'TENANT';
             break;
-        case "双方用印合同上传":
+        case "盖章合同上传":
             headTxt = '上传双方已用印合同';
+            formStatus = '双方用印合同上传';
             type = 'SIGN';
             break;
         default:
             break;
     }
+    
+    $('#reqBizId').text(bizId);
+    $('#reqContractNo').text(contractNo);
+    $('#reqFormStatus').text(formStatus);
+    $('#reqFormType').text(renderFormType(bizType) || '');
+    $('#reqTenantName').text(tenantName);
 
     $('#investment-todo-request-modify-create .modal-header').find('h4').text(headTxt);
     $('#investment-todo-request-modify-create').modal('toggle');
     
     $("#reqUploadFile").on('click',function(){
-        fileUpload(bizId, contractNo, formType, type);
+        fileUpload(bizId, contractNo, bizType, type);
     })
     
     $('#createToDoModify').on('click',function(){

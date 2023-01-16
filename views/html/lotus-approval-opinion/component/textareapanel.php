@@ -64,6 +64,6 @@
         </div>
         <h5 style="margin-bottom: 0;">合同中的非标准条款说明</h5> 
         <br>
-        <textarea class="form-control" id="remark" rows="3"></textarea>
+        <textarea class="form-control" id="remark" rows="6"></textarea>
     </div>
 </div>

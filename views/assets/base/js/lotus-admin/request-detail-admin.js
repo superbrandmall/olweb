@@ -14,7 +14,8 @@ $(document).ready(function(){
         'todayHighlight': true,
         'startDate': ($('#startDate').val() != '' ? $('#startDate').val() : ''),
         'endDate': $('#endDate').val(),
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     $("#openStartTime").timepicker({
@@ -818,6 +819,26 @@ function findRequestbyBizId() {
                         })
                     }
                     
+                    if(data.totalRentAmount != null && data.taxTotalRentAmount != null){
+                        $('#fixedRentTotalRentAmount').text(accounting.formatNumber(data.totalRentAmount));
+                        $('#fixedRentTaxTotalRentAmount').text(accounting.formatNumber(data.taxTotalRentAmount));
+                    } 
+                    
+                    if(data.totalPropertyAmount != null && data.taxTotalPropertyAmount != null){
+                        $('#propertyMgmtTotalPropertyAmount').text(accounting.formatNumber(data.totalPropertyAmount));
+                        $('#propertyMgmtTaxTotalPropertyAmount').text(accounting.formatNumber(data.taxTotalPropertyAmount));
+                    } 
+                    
+                    if(data.totalDeductAmount != null && data.taxTotalDeductAmount != null){
+                        $('#commissionTotalDeductAmount').text(accounting.formatNumber(data.totalDeductAmount));
+                        $('#commissionTaxTotalDeductAmount').text(accounting.formatNumber(data.taxTotalDeductAmount));
+                    } 
+                    
+                    if(data.totalPromotionAmount != null && data.taxTotalPromotionAmount != null){
+                        $('#promotionTotalPromotionAmount').text(accounting.formatNumber(data.totalPromotionAmount));
+                        $('#promotionTaxTotalPromotionAmount').text(accounting.formatNumber(data.taxTotalPromotionAmount));
+                    }
+                    
                     /*** START 审批意见书 **/
                     if(data.oldContractTerm != null){
                         $('#oldFreeDays').val(data.oldContractTerm.freeDays || 0);
@@ -1173,8 +1194,6 @@ function updateRowInvestmentContractAccounttermFixed(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    calBackPush('fixedRent');
-    
     $("#fixedRentEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('fixedRent');
         calBackPush('fixedRent');
@@ -1407,8 +1426,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    calBackPush('commission');
-    
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('commission');
         calBackPush('commission');
@@ -1606,8 +1623,6 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
         });
         $(this).parent().parent().removeClass('success');
     });
-    
-    calBackPush('propertyMgmt');
     
     $("#propertyMgmtEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('propertyMgmt');

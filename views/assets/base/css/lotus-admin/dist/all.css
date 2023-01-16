@@ -2786,6 +2786,12 @@ table .form-control.date-picker {
     .table-responsive>.table-bordered>tbody>tr:last-child>td,.table-responsive>.table-bordered>tbody>tr:last-child>th,.table-responsive>.table-bordered>tfoot>tr:last-child>td,.table-responsive>.table-bordered>tfoot>tr:last-child>th {
         border-bottom: 0
     }
+    
+    .nav-pills.step-progress li {
+        float: left;
+        width: 120px;
+        height: 100px;
+    }
 }
 
 fieldset {
@@ -4063,7 +4069,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 .nav>li,.nav>li>a {
     position: relative;
     display: block;
-    color: #444;
+    color: #333;
 }
 
 .nav>li>a {
@@ -4100,10 +4106,6 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
     max-width: none
 }
 
-.nav-tabs {
-    border-bottom: 1px solid #ddd
-}
-
 .nav-tabs>li {
     float: left;
     margin-bottom: -1px
@@ -4116,15 +4118,10 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
     border-radius: 4px 4px 0 0
 }
 
-.nav-tabs>li>a:hover {
-    border-color: #eee #eee #ddd
-}
-
 .nav-tabs>li.active>a,.nav-tabs>li.active>a:focus,.nav-tabs>li.active>a:hover {
-    color: #555;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-bottom-color: transparent;
+    border-bottom-color: #E43C24;
+    color: #E43C24;
     cursor: default
 }
 
@@ -9695,10 +9692,6 @@ a:active,a:focus,a:hover {
     border-color: #00acd6
 }
 
-.nav>li>a:active,.nav>li>a:focus,.nav>li>a:hover {
-    color: #444;
-}
-
 .nav-pills>li>a {
     border-radius: 0;
     border-top: 3px solid transparent;
@@ -9862,6 +9855,10 @@ a:active,a:focus,a:hover {
 }
 
 @media print {
+    body {
+        background-color: #fff !important;
+    }
+    
     .fixed-table-container thead th,
     .fixed-table-container tbody td {
         border-left: 1px solid #000 !important;
@@ -9886,6 +9883,7 @@ a:active,a:focus,a:hover {
 
     section.sub-header {
         margin-top: -50px !important;
+        box-shadow: none;
     }
 
     section.content {
@@ -9907,6 +9905,10 @@ a:active,a:focus,a:hover {
 
     td .label-info {
         display: none;
+    }
+    
+    .content-wrapper, .right-side {
+        background-color: #fff !important;
     }
 }
 

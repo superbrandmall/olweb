@@ -50,16 +50,8 @@
                         樾鲜食馆
                     </div>
                     <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP211111000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_2397-240x180.jpg" width="187" alt=""/></a>
-                        璞徽
-                    </div>
-                    <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP180917000718"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2021/11/ZHX_9996-240x180.jpg" width="187" alt=""/></a>
                         锅物新语
-                    </div>
-                    <div class="item" style="text-align: center;">
-                        <a href="shop?id=OLSHOP180917000415"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/03/ZHX_1354-240x180.jpg" width="187" alt=""/></a>
-                        Salomon
                     </div>
                     <div class="item" style="text-align: center;">
                         <a href="shop?id=OLSHOP210326000003"><img src="https://photobank.superbrandmall.com/wp-content/uploads/2022/01/ZHX_8287-240x180.jpg" width="187" alt=""/></a>

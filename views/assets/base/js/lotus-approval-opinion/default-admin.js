@@ -812,6 +812,37 @@ function findRequestByBizId() {
                             }
                         })
                     }
+                    
+                    if(data.processApproveList.length > 0) {
+                        $('#submitter').addClass('active').find('.approveName').text(data.approvalName);
+                        $.each(data.processApproveList, function(i,v) {
+                            switch (v.activityName) {
+                                case "财务负责人":
+                                    $('#finance_check').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "业态负责人":
+                                    $('#biz_head').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "法务负责人":
+                                    $('#legal_check').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "财务预审":
+                                    $('#finance_pre_check').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "法务预审":
+                                    $('#legal_pre_check').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "Lotus招商负责人":
+                                    $('#Lotus_leasing_head').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                case "商业首席执行官":
+                                    $('#hq_leasing_head').addClass('active').find('.approveName').text(v.approveName);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        })
+                    }
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
                 }
@@ -920,7 +951,7 @@ function findRentCalculationMode(dictTypeCode, val) {
 
 function findProcessInstByBizId(){
     $.ajax({
-        url: $.api.baseLotus+"/api/process/inst/form/findAllByBizId?bizId="+getURLBizId(),
+        url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLBizId(),
         type: "GET",
         async: false,
         dataType: "json",

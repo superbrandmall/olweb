@@ -14,7 +14,8 @@ $(document).ready(function(){
         'todayHighlight': true,
         'startDate': ($('#startDate').val() != '' ? $('#startDate').val() : ''),
         'endDate': $('#endDate').val(),
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     $('#freePeriods').datepicker().on('changeDate', function(e) {

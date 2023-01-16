@@ -29,6 +29,62 @@
                 }
             };
         </script>
+        <style type="text/css">
+            .step-progress > li > a::before {
+                box-shadow: none;
+                width: auto;
+            }
+            
+            .step-progress > li.active > a::before {
+                background: transparent;
+                color: #5cb85c;
+                width: auto;
+                box-shadow: none;
+            }
+            
+            #submitter a::before {
+                content: "Lotus招商负责人";
+            }
+            
+            #Lotus_leasing_head a::before {
+                content: "提交人";
+            }
+            
+            #finance_pre_check a::before {
+                content: "财务预审";
+            }
+            
+            #legal_pre_check a::before {
+                content: "法务预审";
+            }
+            
+            #finance_check a::before {
+                content: "财务负责人";
+            }
+            
+            #legal_check a::before {
+                content: "法务负责人";
+            }
+            
+            #biz_head a::before {
+                content: "业态负责人";
+            }
+            
+            #hq_leasing_head a::before {
+                content: "商业首席执行官";
+            }
+            
+            .step-progress > li > a:hover::before {
+                background: transparent;
+                color: #a9a9ab;
+            }
+            
+            .step-progress > li.active > a:hover::before,
+            .step-progress > li.active > a:focus::before {
+                background: transparent;
+                color: #5cb85c;
+            }
+        </style>
     </head>
     <body class="sidebar-mini skin-blue " data-spy="scroll" data-target="#navbarTop" data-offset="190">
         <div id="loader"></div>

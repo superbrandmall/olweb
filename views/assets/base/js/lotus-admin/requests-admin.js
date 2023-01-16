@@ -111,6 +111,12 @@ $(document).ready(function(){
         $.cookie('searchRequestsSelectStoreTxt', $('#selectStore').find('option:selected').text());
         findAllRequestsByKVCondition(1,items);
     })
+    
+    findAllToDoRequestsByKVCondition();
+    
+    $('#openDraft').click(function(){
+        $('#investment-contract-request-todo').modal('toggle');
+    })
 });
 
 function findAllRequestsByKVCondition(p,c){
@@ -323,4 +329,128 @@ function renderFormType(t,m) {
     }
     
     return type;
+}
+
+function findAllToDoRequestsByKVCondition(){
+    $('#todo').html('');
+    var params = [];
+    var param = {};
+    
+    var openId = 'admin';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            return false;
+        }
+    })
+    
+    param = {
+        "columnName": "creatorOpenId",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": openId
+    }
+    params.push(param);
+    
+    param = {
+        "columnName": "contractName",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "!=",
+        "value": 'KOW'
+    }
+    params.push(param);
+    
+    param = {
+        "columnName": "bizId",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "not like",
+        "value": '%_OLD'
+    }
+    params.push(param);
+    
+//    param = {
+//        "columnName": "formStatus",
+//        "columnPatten": "",
+//        "conditionOperator": "AND",
+//        "operator": "in",
+//        "value": '1;3;4;5;6;7'
+//    }
+    param = {
+        "columnName": "formStatus",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": '1'
+    }
+    params.push(param);
+    
+    var map = {
+        "params": params
+    }
+    
+    $.ajax({
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $("#draftCount").text("("+response.data.content.length+")");
+                    $.each(response.data.content, function(i,v){
+                        var page;
+                        switch (v.formType) {
+                            case "new":
+                                page = 'request';
+                                break;
+                            case "renew":
+                                page = 'renew';
+                                break;
+                            case "termination":
+                                page = 'terminate';
+                                break;
+                            case "modify":
+                                page = 'modify';
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                        $('#todo').append('\
+                            <tr data-index="'+i+'">\n\
+                            <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                            <td>'+(renderFormType(v.formType) || '')+'</td>\n\
+                            <td>'+(v.tenantName || '')+'</td>\n\
+                            <td>'+(v.mallName || '')+'</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+(v.bizTypeName || '')+'</td>\n\
+                            <td>'+(v.contractName || '')+'</td>\n\
+                        </tr>');
+                        
+                    });
+                } else {
+                    $('#todo').html('<tr><td colspan="7" style="text-align: center;">没有找到任何记录！</td></tr>');
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            } 
+        }
+    });
 }

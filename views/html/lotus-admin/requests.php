@@ -10,6 +10,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper">
     <section class="sub-header" style="height: 200px;">
+        <div class="left-link">
+            <a class="btn btn-link text-left" id="openDraft" href="javascript:void(0);">
+                <i class="fa fa-inbox"></i><span>草稿箱<span id="draftCount"></span></span>
+            </a>
+        </div>
         <h4>
             租赁合同申请单
         </h4>
@@ -284,6 +289,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     </section>
 </div>
 
+<?php include 'component/investment-contract-request-todo.php'; ?>
 <?php include 'component/investment-contract-request-modify-create.php'; ?>
 <?php include 'component/investment-contract-request-renew-termination-create.php'; ?>
 

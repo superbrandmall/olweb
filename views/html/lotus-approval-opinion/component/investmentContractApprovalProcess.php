@@ -3,6 +3,34 @@
         <h3 class="box-title">审批流程</h3>
     </div>
     <div class="box-body" style="padding: 0;">
+        <div class="col-md-12 hidden-print">
+            <ul class="nav nav-pills nav-justified step step-progress">
+                <li id="submitter">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="Lotus_leasing_head">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="finance_pre_check">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="legal_pre_check">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="finance_check">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="legal_check">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="biz_head">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="hq_leasing_head">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+            </ul>
+        </div>
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">

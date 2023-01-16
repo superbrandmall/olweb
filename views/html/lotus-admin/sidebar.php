@@ -10,7 +10,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
     <section class="sidebar">
         <ul class="sidebar-menu">
             <li class="<?php if ($_GET['p'] == 'lotus-admin/todo' || $_GET['p'] == 'lotus-admin' || $_GET['p'] == 'lotus-admin/' || $_GET['p'] == 'lotus-admin/home') { echo 'active'; }?>">
-                <a href="/lotus-admin/todo?items=5"><i class="fa fa-home"></i>
+                <a href="/lotus-admin/todo"><i class="fa fa-home"></i>
                     <span>首页</span>
                 </a>
             </li>

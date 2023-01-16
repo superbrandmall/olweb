@@ -18,75 +18,96 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div class="row">
                 <div class="col-md-12">
                     <div class="box">
-                        <div class="box-body" style="padding: 10px 20px 0;">
+                        <div class="box-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h4>待办事项</h4>
-                                    <div class="bootstrap-table">
-                                        <div class="fixed-table-container">
-                                            <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
-                                                    <thead id="assetsListingTable-sticky-header">
-                                                        <tr>
-                                                            <th>
-                                                                <div class="th-inner">单号</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">签约编号</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">状态</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">表单类型</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">商户</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">项目</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">铺位</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">业态</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">店招</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="todo"></tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="fixed-table-pagination">
-                                                <div class="pull-left pagination-detail">
-                                                    <span class="pagination-info"></span>
-                                                    <span class="page-list">
-                                                        <span class="btn-group dropdown">
-                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                                <span class="page-size">5</span>
-                                                                <span class="caret"></span>
-                                                            </button>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/todo?items=5">5</a></li>
-                                                            </ul>
-                                                        </span> 行每页
-                                                    </span>
+                                    <h4 style="display: inline-block;">我的事项</h4>
+                                    <div class="pull-right">
+                                        <ul class="nav nav-tabs" style="margin-bottom: 1px;">
+                                            <li class="active"><a href="#toDoList" data-toggle="tab">待办流程<span id="toDoCount"></span></a></li>
+                                            <li><a href="#doneList" data-toggle="tab">已办流程<span id="doneCount"></span></a></li>
+                                            <li><a href="#draftList" data-toggle="tab">草稿箱<span id="draftCount"></span></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade in active" id="toDoList">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body" style="max-height: 300px;">
+                                                        <table class="table table-striped snipe-table table-responsive" style="text-align: left;">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">标题</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">发起人</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">当前环节</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="toDoListBody"></tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
-                                                <div class="pull-right pagination">
-                                                    <ul class="pagination"></ul>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="doneList">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body" style="max-height: 300px;">
+                                                        <table class="table table-striped snipe-table table-responsive" style="text-align: left;">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">标题</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">发起人</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">处理时间</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="doneListBody"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="draftList">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body" style="max-height: 300px;">
+                                                        <table class="table table-striped snipe-table table-responsive" style="text-align: left;">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">标题</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">表单类型</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">修改时间</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="draftListBody"></tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
