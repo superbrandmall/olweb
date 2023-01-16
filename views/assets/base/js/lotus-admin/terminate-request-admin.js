@@ -1967,26 +1967,6 @@ function submitCheck() {
         }
     }
     
-    if($('#newBizDate').val() == '') {
-        flag = 0;
-        $('#newBizDate').parent().append(error);
-    }
-    
-    if($('#newBrandName').val() == '') {
-        flag = 0;
-        $('#newBrandName').parent().append(error);
-    }
-    
-    if($('#newDeliveryDate').val() == '') {
-        flag = 0;
-        $('#newDeliveryDate').parent().append(error);
-    }
-    
-    if($('#newDrDate').val() == '') {
-        flag = 0;
-        $('#newDrDate').parent().append(error);
-    }
-    
     if($('#selectRentCalculationMode').find('option:selected').val() == 'fixRent' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
         if($('#fixedRent tr').length > 0) {
             if($('#fixedRentStartDate_1').val() == ''){

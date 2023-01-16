@@ -69,7 +69,9 @@ function findRequestByBizId() {
                     } else if(data.cancelType == 'B' || data.cancelType == 'C'){
                         $('#essayCancelType').html('<span class="txt">提前终止。</span>');
                     }
-                    $('#essayNewBrandName').html('<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                    if(data.newBrandName != null && data.newBrandName != ''){
+                        $('#essayNewBrandName').html('后续洽谈品牌<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                    }
                     if(data.newDrDate != null && data.newDrDate != ''){
                         $('#essayNewDrDate').html('<span class="txt">预计'+data.newDrDate.split('-')[0]+'年'+data.newDrDate.split('-')[1]+'月'+data.newDrDate.split('-')[2]+'日</span>上会，');
                     }

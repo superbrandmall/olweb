@@ -21,7 +21,7 @@
                     <span id="essayCancelType"></span>
                 </p>
                 <p>
-                    后续洽谈品牌<span id="essayNewBrandName"></span>
+                    <span id="essayNewBrandName"></span>
                     <span id="essayNewDrDate"></span>
                     <span id="essayNewDeliveryDate"></span>
                     <span id="essayNewBizDate"></span>
