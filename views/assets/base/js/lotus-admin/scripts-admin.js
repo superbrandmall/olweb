@@ -25,57 +25,41 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 
 $(document).ready(function(){
+    if($.cookie('locationSelected') && $.cookie('locationSelected') != ''){
+        $('#locationSelected').text($.cookie('locationSelected'));
+    } else {
+        $('.location-select ul li').each(function(i,elem){
+            if($(elem).hasClass('to-select')){
+                $('#locationSelected').text($(elem).find('span').text());
+                $.cookie('locationSelected',$(elem).find('span').text());
+                return false;
+            }
+        })
+    }
+        
+    if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == "null" || sessionStorage.getItem("malls") == '') {
+        findAllMalls();
+    } else {
+        updateTopNavMallSelection();
+    }
+    
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
                 $('.location-select ul li').show();
-                if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
-                    $('.mall-select ul li.'+$.cookie('locationSelected').split(':::')[1]).show();
-                }
                 if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
                     $('.sidebar-menu > li').last().hide();
                 }
                 return false;
             } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
                 $('.sidebar-menu > li').last().hide();
-                if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
-                    $(".mall-select ul li."+$.cookie('locationSelected').split(':::')[1]+"").each(function(i,elem){
-                        if($(elem).find('a').attr('data-code') == v.moduleCode){
-                            $(this).show();
-                        }
-                    })
-                }
             }
         })
-        
-        if($.cookie('locationSelected') && $.cookie('locationSelected') != ''){
-            $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);
-        } else {
-            $('.location-select ul li').each(function(i,elem){
-                if($(elem).hasClass('to-select') && $(elem).css('display') != 'none'){
-                    $('#locationSelected').text($(elem).find('span').text());
-                    $.cookie('locationSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
-                    return false;
-                }
-            })
-        }
-        
-        if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
-            $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
-        } else {
-            $('.mall-select ul li').each(function(i,elem){
-                if($(elem).hasClass('to-select') && $(elem).hasClass($.cookie('locationSelected').split(':::')[1])){
-                    $('#mallSelected').text($(elem).find('span').text());
-                    $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
-                    return false;
-                }
-            })
-        }
     }
     
     $('.location-select .text-blue').click(function(){
-        $.cookie('locationSelected',$(this).find('span').text()+':::'+$(this).attr('data-code'));
-        $('#locationSelected').text($.cookie('locationSelected').split(':::')[0]);
+        $.cookie('locationSelected',$(this).find('span').text());
+        $('#locationSelected').text($.cookie('locationSelected'));
         $.cookie('mallSelected','');
         window.location.href = location.protocol + location.pathname;
     })
@@ -513,6 +497,101 @@ function scrollJump() {
         }, 0);
         e.preventDefault();
     });
+}
+
+function findAllMalls() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/mall/lotus/findAll?page=0&size=100&sort=id,asc",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0){
+                    var returnData = [];
+                    $.map(response.data.content, function(item) {
+                        if(item.mallType != 'kow'){
+                            returnData.push(item);
+                        }
+                        return returnData;
+                    });
+                    
+                    sessionStorage.setItem("malls", JSON.stringify(returnData));
+                    updateTopNavMallSelection();
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
+}
+
+function updateTopNavMallSelection() {
+    if(sessionStorage.getItem("malls") && sessionStorage.getItem("malls") != null && sessionStorage.getItem("malls") != '') {
+        $('.navbar-nav .mall-select > ul').html('<li><a href="javascript: void(0);"><span>选择项目</span></a></li>');
+        var malls = $.parseJSON(sessionStorage.getItem("malls"));
+        if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+            $.each(JSON.parse($.cookie('userModules')), function(j,w) {
+                if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
+                    if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
+                        $.each(malls, function(i,v){
+                            if(v.mallLotusBase.province == $.cookie('locationSelected')){
+                                $('.navbar-nav .mall-select > ul').append('<li class="to-select" style="display: block;">\n\
+                                    <a href="javascript: void(0);" class="text-blue" data-code="'+v.code+'">\n\
+                                        <i class="fa fa-location-arrow"></i>\n\
+                                        <span>'+v.mallName+'</span>\n\
+                                    </a>\n\
+                                </li>');
+                            }
+                        })
+                    }
+                    return false;
+                } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
+                    if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
+                        $.each(malls, function(i,v){
+                            if(v.mallLotusBase.province == $.cookie('locationSelected') && v.code == w.moduleCode){
+                                $('.navbar-nav .mall-select > ul').append('<li class="to-select" style="display: block;">\n\
+                                    <a href="javascript: void(0);" class="text-blue" data-code="'+v.code+'">\n\
+                                        <i class="fa fa-location-arrow"></i>\n\
+                                        <span>'+v.mallName+'</span>\n\
+                                    </a>\n\
+                                </li>');
+                            }
+                        })
+                    }
+                }
+            })
+            
+            if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
+                $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
+            } else {
+                $('.mall-select ul li').each(function(i,elem){
+                    if($(elem).hasClass('to-select')){
+                        $('#mallSelected').text($(elem).find('span').text());
+                        $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
+                        return false;
+                    }
+                })
+            }
+        }
+    } else {
+        findAllMalls();
+    }
 }
 
 function updateStartDatepicker() {
@@ -2302,6 +2381,54 @@ function updateOldSelectStoreDropDown(data_count) {
             cache: true
         }
     });
+}
+
+function updateSelectMallDropDown() {
+    if(sessionStorage.getItem("malls") && sessionStorage.getItem("malls") != null && sessionStorage.getItem("malls") != '') {
+        var malls = $.parseJSON(sessionStorage.getItem("malls"));
+        var returnData = [];
+        var data = $.map(malls, function(item) {
+            if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+                $.each(JSON.parse($.cookie('userModules')), function(j,w) {
+                    if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
+                        data = {
+                            id: item.code,
+                            text: item.mallName +'['+ item.code +']'                            
+                        }
+                        returnData.push(data);
+                    } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
+                        if(item.code == w.moduleCode){
+                            data = {
+                                id: item.code,
+                                text: item.mallName +'['+ item.code +']'                            
+                            }
+                            returnData.push(data);
+                        }
+                    }
+                })
+            }
+                
+            return returnData;
+        });
+        
+        $('#mallCode').select2({
+            minimumResultsForSearch: -1,
+            placeholder: '未选择',
+            dropdownAutoWidth: true,
+            language: {
+                searching: function() {
+                    return '加载中...';
+                },
+                loadingMore: function() {
+                    return '加载中...';
+                }
+            },
+            data: returnData,
+            pagination: {
+                "more": 10 <= returnData.length
+            }
+        });
+    }
 }
 
 function findFloorDropDownByMallCode(mall_code) {

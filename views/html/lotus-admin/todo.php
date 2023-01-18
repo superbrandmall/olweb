@@ -128,9 +128,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div style="margin: 30px 15px;">
                                         <h4>莲花项目概览</h4>
                                         <hr>
-                                        项目数(已开业)<br><h4 class="text-red">23</h4><hr>
-                                        总面积(m²)<br><h4 class="text-red">368,506.82</h4><hr>
-                                        总铺位数<br><h4 class="text-red">2,319</h4><hr>
+                                        项目数(已开业)<br><h4 class="text-red">53</h4><hr>
+                                        总面积(m²)<br><h4 class="text-red">338,409.92</h4><hr>
+                                        总铺位数<br><h4 class="text-red">2,185</h4><hr>
                                         出租率<br><h4 class="text-red">80.55%</h4><hr>
                                     </div>
                                 </div>

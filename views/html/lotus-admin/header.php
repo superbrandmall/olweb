@@ -73,27 +73,51 @@
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="shanghai">
+                                        <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>上海</span>
+                                            <span>上海市</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="xuzhou">
+                                        <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>徐州</span>
+                                            <span>北京市</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="kunshan">
+                                        <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>昆山</span>
+                                            <span>重庆市</span>
                                         </a>
                                     </li>
                                     <li class="to-select" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="wuxi">
+                                        <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
-                                            <span>无锡</span>
+                                            <span>江苏省</span>
+                                        </a>
+                                    </li>
+                                    <li class="to-select" style="display: none;">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>河南省</span>
+                                        </a>
+                                    </li>
+                                    <li class="to-select" style="display: none;">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>山东省</span>
+                                        </a>
+                                    </li>
+                                    <li class="to-select" style="display: none;">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>湖南省</span>
+                                        </a>
+                                    </li>
+                                    <li class="to-select" style="display: none;">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>陕西省</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -109,7 +133,7 @@
                                             <span>选择项目</span>
                                         </a>
                                     </li>
-                                    <li class="to-select shanghai" style="display: none;">
+                                    <!--<li class="to-select shanghai" style="display: none;">
                                         <a href="javascript: void(0);" class="text-blue" data-code="SC033">
                                             <i class="fa fa-location-arrow"></i>
                                             <span>川沙店</span>
@@ -246,7 +270,7 @@
                                             <i class="fa fa-location-arrow"></i>
                                             <span>锡山东亭店</span>
                                         </a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                             </li>
 

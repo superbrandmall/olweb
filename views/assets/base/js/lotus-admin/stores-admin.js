@@ -14,7 +14,7 @@ $(document).ready(function(){
     
 //    if(!sessionStorage.getItem('lotusUser') || sessionStorage.getItem('lotusUser') == null || sessionStorage.getItem('lotusUser') == ''){
 //        findAllLotusUsers();
-//    } 
+//    }
     
     if($.cookie('searchUnit') != ''){
         $('#unit').val($.cookie('searchUnit'));
@@ -26,10 +26,6 @@ $(document).ready(function(){
     
     if($.cookie('searchUnitType') != null){
         $('#unitType').val($.cookie('searchUnitType')).trigger('change');
-    }
-    
-    if($.cookie('searchMallCode') != null){
-        $('#mallCode').val($.cookie('searchMallCode')).trigger('change');
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -57,6 +53,15 @@ $(document).ready(function(){
             break;
     }
     
+    updateSelectMallDropDown();
+    
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
+        var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
+        $('#mallCode').append(newOption).trigger('change');
+    } else {
+        $('#select2-mallCode-container').text("未选择").attr('title',"未选择");
+    }
+    
     $('#clear').click(function(){
         $('#unit').val('');
         $('#shopStatus, #unitType, #mallCode').val('').trigger('change');
@@ -71,7 +76,12 @@ $(document).ready(function(){
         $.cookie('searchShopStatus',$('#shopStatus').val());
         $.cookie('searchUnit', $('#unit').val());
         $.cookie('searchUnitType', $('#unitType').val());
-        $.cookie('searchMallCode', $('#mallCode').val());
+        if($('#mallCode').val() != null){
+            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+        } else {
+            $.cookie('searchMallCode', null);
+        }
+        
         findAllStoresByKVCondition(1,items);
     })
 });
@@ -130,12 +140,12 @@ function findAllStoresByKVCondition(p,c){
         params.push(param);
     }
     
-    if($.cookie('searchMallCode') != null && $.cookie('searchMallCode') != ''){
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null && $.cookie('searchMallCode') != ''){
         param = {
             "columnName": "mallCode",
             "columnPatten": "",
             "operator": "AND",
-            "value": $.cookie('searchMallCode')
+            "value": $.cookie('searchMallCode').split(':::')[1]
         }
         params.push(param);
     }
