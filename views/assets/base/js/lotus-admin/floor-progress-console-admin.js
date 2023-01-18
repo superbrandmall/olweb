@@ -1,9 +1,4 @@
 $(document).ready(function(){
-    $('#mallCode').val(($.cookie('searchMallCode') || 'SC033')).trigger('change');
-    
-    var items = getURLParameter('items') || $('.page-size').first().text();
-    getFloors(1,items);
-
     switch (getURLParameter('items')) {
         case '10':
             $('.page-size').text('10');
@@ -22,13 +17,29 @@ $(document).ready(function(){
             break;
     }
     
+    updateSelectMallDropDown();
+    
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
+        var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
+        $('#mallCode').append(newOption).trigger('change');
+    } else {
+        $("#mallCode").val($.cookie('mallSelected').split(':::')[1]).trigger('change');
+    }
+    
+    var items = getURLParameter('items') || $('.page-size').first().text();
+    getFloors(1,items);
+    
     $('#clear').click(function(){
         $('#mallCode').val('').trigger('change');
         $.cookie('searchMallCode', null);
     })
     
     $('#search').click(function(){
-        $.cookie('searchMallCode', $('#mallCode').val());
+        if($('#mallCode').val() != null){
+            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+        } else {
+            $.cookie('searchMallCode', null);
+        }
         getFloors(1,items);
     })
 });

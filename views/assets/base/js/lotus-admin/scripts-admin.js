@@ -45,14 +45,9 @@ $(document).ready(function(){
     
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-            if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-                $('.location-select ul li').show();
-                if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
-                    $('.sidebar-menu > li').last().hide();
-                }
-                return false;
-            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+            if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000002','CUSER220615000003']) == -1){
                 $('.sidebar-menu > li').last().hide();
+                return false;
             }
         })
     }
@@ -2412,7 +2407,6 @@ function updateSelectMallDropDown() {
         });
         
         $('#mallCode').select2({
-            minimumResultsForSearch: -1,
             placeholder: '未选择',
             dropdownAutoWidth: true,
             language: {

@@ -49,6 +49,8 @@ $(document).ready(function(){
     
     updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '未选择', '');
     updateUserDropDown(20);
+    updateSelectMallDropDown();
+    $("#mallCode").val(null).trigger('change');
     
     $("#mallCode").on('change',function(){
         findFloorDropDownByMallCode($('#mallCode').val());

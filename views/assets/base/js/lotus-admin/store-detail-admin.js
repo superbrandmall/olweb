@@ -59,7 +59,7 @@ $(document).ready(function(){
         'endDate': '',
         'autoclose': true
     });
-    
+    updateSelectMallDropDown();
     findStoreByCode();
     
     $('input.money').on('blur',function(){

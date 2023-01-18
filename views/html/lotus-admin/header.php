@@ -72,49 +72,49 @@
                                             <span>选择区域</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>上海市</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>北京市</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>重庆市</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>江苏省</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>河南省</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>山东省</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>湖南省</span>
                                         </a>
                                     </li>
-                                    <li class="to-select" style="display: none;">
+                                    <li class="to-select">
                                         <a href="javascript: void(0);" class="text-blue">
                                             <i class="fa fa-map-marker"></i>
                                             <span>陕西省</span>
@@ -133,144 +133,6 @@
                                             <span>选择项目</span>
                                         </a>
                                     </li>
-                                    <!--<li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC033">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>川沙店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC001">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>杨高南路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC005">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>上南店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC011">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>杨高北路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC043">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>杨高中路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC078">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>浦江店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC145">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>临港店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC055">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>松江文诚店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC027">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>松江岳阳店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC126">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>牡丹江店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC060">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>蕴川店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC082">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>新港店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC010">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>汶水店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC040">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>保德店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC041">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>南奉店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC127">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>南桥店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select shanghai" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC050">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>金山店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select xuzhou" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC026">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>解放南路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select xuzhou" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC130">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>大学路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select xuzhou" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC138">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>中山北路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select kunshan" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC034">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>长江路店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select kunshan" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC124">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>花桥店</span>
-                                        </a>
-                                    </li>
-                                    <li class="to-select wuxi" style="display: none;">
-                                        <a href="javascript: void(0);" class="text-blue" data-code="SC140">
-                                            <i class="fa fa-location-arrow"></i>
-                                            <span>锡山东亭店</span>
-                                        </a>
-                                    </li>-->
                                 </ul>
                             </li>
 

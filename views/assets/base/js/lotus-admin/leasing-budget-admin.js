@@ -1,10 +1,15 @@
 $(document).ready(function(){
+    updateSelectMallDropDown();
+    
     if($.cookie('searchUnit') != ''){
         $('#unit').val($.cookie('searchUnit'));
     }
     
-    if($.cookie('searchMallCode') != null){
-        $('#mallCode').val($.cookie('searchMallCode')).trigger('change');
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
+        var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
+        $('#mallCode').append(newOption).trigger('change');
+    } else {
+        $("#mallCode").val($.cookie('mallSelected').split(':::')[1]).trigger('change');
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -59,7 +64,11 @@ $(document).ready(function(){
     
     $('#search').click(function(){
         $.cookie('searchUnit', $('#unit').val());
-        $.cookie('searchMallCode', $('#mallCode').val());
+        if($('#mallCode').val() != null){
+            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+        } else {
+            $.cookie('searchMallCode', null);
+        }
         findShopBudget(1,items);
     })
 });
@@ -97,12 +106,12 @@ function findShopBudget(p,c){
         "value": '测试店'
     }]
     
-    if($.cookie('searchMallCode') != null && $.cookie('searchMallCode') != '' && $.cookie('searchMallCode') != 'null'){
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null && $.cookie('searchMallCode') != ''){
         param = {
             "columnName": "mallCode",
             "columnPatten": "",
             "operator": "AND",
-            "value": $.cookie('searchMallCode')
+            "value": $.cookie('searchMallCode').split(':::')[1]
         }
         params.push(param);
     }

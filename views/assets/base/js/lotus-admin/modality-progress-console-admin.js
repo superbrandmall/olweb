@@ -1,6 +1,11 @@
 $(document).ready(function(){
-    if($.cookie('searchMallCode') != null){
-        $('#mallCode').val($.cookie('searchMallCode')).trigger('change');
+    updateSelectMallDropDown();
+    
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
+        var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
+        $('#mallCode').append(newOption).trigger('change');
+    } else {
+        $("#mallCode").val($.cookie('mallSelected').split(':::')[1]).trigger('change');
     }
     
     if($.cookie('searchBiz') != null){
@@ -36,7 +41,11 @@ $(document).ready(function(){
     })
     
     $('#search').click(function(){
-        $.cookie('searchMallCode', $('#mallCode').val());
+        if($('#mallCode').val() != null){
+            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+        } else {
+            $.cookie('searchMallCode', null);
+        }
         $.cookie('searchBiz', $('#biz').val());
         renderModality0(1,items,($('#biz').val() || ''));
     })

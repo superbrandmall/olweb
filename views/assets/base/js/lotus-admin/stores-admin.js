@@ -59,7 +59,7 @@ $(document).ready(function(){
         var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
         $('#mallCode').append(newOption).trigger('change');
     } else {
-        $('#select2-mallCode-container').text("未选择").attr('title',"未选择");
+        $("#mallCode").val(null).trigger('change');
     }
     
     $('#clear').click(function(){
