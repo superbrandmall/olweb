@@ -1,3 +1,5 @@
+$.curProcess = 0;
+
 $(document).ready(function(){
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
@@ -34,9 +36,13 @@ $(document).ready(function(){
             default:
                 break;
         }
-        
-        $('#txt').text(txt);
-        $('#approval_form').modal('toggle');
+            
+        if($.curProcess == 1) {
+            $('#txt').text(txt);
+            $('#approval_form').modal('toggle');
+        } else {
+            alertMsg('999','非当前审批人，无法'+txt);
+        }
     })
     
     $('#submitApproval').click(function(){
@@ -47,6 +53,10 @@ $(document).ready(function(){
         }
     })
 })
+
+function login() {
+    window.location.href = '/lotus-admin/login?approval='+getURLBizId();
+}
 
 function findRequestByBizId() {
     $.ajax({
@@ -974,6 +984,14 @@ function findProcessInstByBizId(){
                 if(response.data != '' && response.data != null){
                     if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
                         var index = 0;
+                        
+                        var openId = 'admin';
+                        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                            if(v.roleCode == 'CROLE220301000001'){
+                                openId = v.moduleName;
+                                return false;
+                            }
+                        })
                         $.each(response.data.processStepRecordList, function(i,v) {
                             if(i != 0 && v.activityType != 'END'){
                                 index++;
@@ -983,6 +1001,10 @@ function findProcessInstByBizId(){
                                 <td>'+renderFlowStatus(v.status)+'</td>\n\
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');
+                                
+                                if(v.handler == openId && v.status == 'DOING'){
+                                    $.curProcess = 1;
+                                }
                             }
                         })
                         $('#investmentContractApprovalProcess').show();

@@ -44,6 +44,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="">未选择</option>
                                     <option value="lotus">上海区</option>
                                     <option value="lotus-east">小东区</option>
+                                    <option value="lotus-north">北区</option>
                                 </select>
                             </div>
                         </div>

@@ -6,8 +6,7 @@
         session_destroy();
     }
     
-    session_start();
-    include ('system/Router.php');
+    session_start();include ('system/Router.php');
     $scripts = null;
 ?>
 <!DOCTYPE html>
@@ -114,10 +113,23 @@
                                 </a>
                                 <ul class="dropdown-menu" style="border: 1px solid rgba(0,0,0,.15); background-color: #fff;">
                                     <li>
-                                        <a href="javascript: logout();" title="登出">
-                                            <i class="fa fa-sign-out fa-fw"></i>
-                                            登出
-                                        </a>
+                                        <?php
+                                            if(isset($_SESSION['lotus_admin_login'])) {
+                                        ?>
+                                            <a href="javascript: logout();" title="登出">
+                                                <i class="fa fa-sign-out fa-fw"></i>
+                                                登出
+                                            </a>
+                                        <?php
+                                            } else {
+                                        ?>
+                                            <a href="javascript: login();" title="登出">
+                                                <i class="fa fa-sign-out fa-fw"></i>
+                                                登录
+                                            </a>
+                                        <?php
+                                            }
+                                        ?>
                                     </li>
                                 </ul>
                             </li>

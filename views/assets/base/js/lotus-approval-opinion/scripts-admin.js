@@ -75,7 +75,7 @@ function alertMsg(code,m) {
         if($('#msgDiv').length > 0){
             $('#msgDiv').remove();
         }
-    }, 60000);
+    }, 3000);
 }
 
 function successMsg(code,m) {
