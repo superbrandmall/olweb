@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    updateSelectMallDropDown();
-    
     if($.cookie('searchUnit') != ''){
         $('#unit').val($.cookie('searchUnit'));
     }

@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    updateSelectMallDropDown();
-    
     if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
         var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
         $('#mallCode').append(newOption).trigger('change');

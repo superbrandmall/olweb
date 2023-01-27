@@ -25,23 +25,27 @@ $(document).ready(function(){
     findRequestByBizId();
     
     $('#opinion_agree, #opinion_return').click(function(){
-        var txt;
-        switch ($(this).attr('id').split('_')[1]) {
-            case "agree":
-                txt = '同意';
-                break;
-            case "return":
-                txt = '撤回';
-                break;
-            default:
-                break;
-        }
-            
-        if($.curProcess == 1) {
-            $('#txt').text(txt);
-            $('#approval_form').modal('toggle');
+        if($.cookie('userModules') == '' || $.cookie('userModules') == null){
+            window.location.href = '/lotus-admin/login?approval='+getURLBizId();
         } else {
-            alertMsg('999','非当前审批人，无法'+txt);
+            var txt;
+            switch ($(this).attr('id').split('_')[1]) {
+                case "agree":
+                    txt = '同意';
+                    break;
+                case "return":
+                    txt = '撤回';
+                    break;
+                default:
+                    break;
+            }
+
+            if($.curProcess == 1) {
+                $('#txt').text(txt);
+                $('#approval_form').modal('toggle');
+            } else {
+                alertMsg('999','非当前审批人，无法'+txt);
+            }
         }
     })
     
@@ -99,7 +103,7 @@ function findRequestByBizId() {
                     $('#contractTemplate').text(contractTemplate + '租赁合同');
                     
                     findMainSigningBody(data.mallCode);
-                    if(data.formStatus != 1){
+                    if(data.formStatus != 1 && $.cookie('userModules') != '' && $.cookie('userModules') != null){
                         findProcessInstByBizId();
                     }
                     
@@ -257,7 +261,7 @@ function findRequestByBizId() {
                         var saleRentalRatio = '';
                         if(data.fixedRentList.length > 0){
                             $('#newFixedRent').html('新签首年固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
-                            saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                            saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                         }
                         if(data.deductList.length > 0){
                             $('#newCommission').html('首年扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
@@ -268,7 +272,7 @@ function findRequestByBizId() {
                         if(data.promotionFeeList.length > 0){
                             $('#newPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                         }
-                        $('#newTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
+                        $('#newTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%，');
                         if(data.awardDate != null && data.awardDate != ''){
                             $('#newAwardDate').html('<span class="txt">预计'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
                         }
@@ -411,7 +415,7 @@ function findRequestByBizId() {
                                 } else {
                                     $('#renewGrowthRate').html('增长<span class="txt">'+Math.round(data.growthRate * 100)+'</span>%，');
                                 }
-                                saleRentalRatio = (data.renewAvgSales > 0 ? Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) / 100 : '/');
+                                saleRentalRatio = (data.renewAvgSales > 0 ? Math.round(data.fixedRentList[0].taxAmount / data.renewAvgSales * 100) * 100 / 100 : '/');
                             }
                             if(data.deductList.length > 0){
                                 $('#renewCommission').html('扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
@@ -422,7 +426,7 @@ function findRequestByBizId() {
                             if(data.promotionFeeList.length > 0){
                                 $('#renewPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                             }
-                            $('#renewRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+saleRentalRatio+'</span>%。');
+                            $('#renewRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%。');
                         } else if(data.formType == 'modify') {
                             $('#modifyRemark').show();
                             
@@ -552,9 +556,9 @@ function findRequestByBizId() {
                             $('#modifyModifyType').html('<span class="txt">'+modifyType+'</span>【变更类型】。');
                             var saleRentalRatio = '';
                             if(data.fixedRentList.length > 0){
-                                saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) / 100;
+                                saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                             }
-                            $('#modifyTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio || '/')+'</span>%，');
+                            $('#modifyTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%，');
                             if(data.awardDate != null && data.awardDate != ''){
                                 $('#modifyAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约。');
                             }
@@ -674,7 +678,9 @@ function findRequestByBizId() {
                             } else if(data.cancelType == 'B' || data.cancelType == 'C'){
                                 $('#terminateCancelType').html('<span class="txt">提前终止。</span>');
                             }
-                            $('#terminateNewBrandName').html('<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                            if(data.newBrandName != null && data.newBrandName != ''){
+                                $('#terminateNewBrandName').html('后续洽谈品牌<span class="txt">'+data.newBrandName+'</span>【品牌名】，');
+                            }
                             if(data.newDrDate != null && data.newDrDate != ''){
                                 $('#terminateNewDrDate').html('<span class="txt">预计'+data.newDrDate.split('-')[0]+'年'+data.newDrDate.split('-')[1]+'月'+data.newDrDate.split('-')[2]+'日</span>上会，');
                             }
@@ -694,7 +700,9 @@ function findRequestByBizId() {
                         $('#oldBrandName').text(data.oldContractTerm.brandName);
                         $('#oldArea').html(data.oldContractTerm.area+'m<sup>2</sup>');
                         $('#oldBizTypeName').text(data.oldContractTerm.bizScope);
-                        $('#oldDuration').text(data.oldContractTerm.startDate + '-' + data.oldContractTerm.endDate);
+                        if(data.oldContractTerm.startDate != null && data.oldContractTerm.endDate != null){
+                            $('#oldDuration').text(data.oldContractTerm.startDate + '-' + data.oldContractTerm.endDate);
+                        }
                         $('#oldFixedRentTaxAmount').text(accounting.formatNumber(data.oldContractTerm.taxAmount));
                         $('#oldFixedRentAmount').text(accounting.formatNumber(data.oldContractTerm.amount));
                         $('#oldRentalFloorEffect').text(accounting.formatNumber(data.oldContractTerm.rentAmount));

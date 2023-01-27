@@ -18,20 +18,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <h4>
             租赁合同申请单
         </h4>
-        <div class="pull-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-plus icon-white"></i> 创建
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
-                    <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                    
-                    <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
-                    <li><a href="javascript: void(0);" id="createModify">变更租赁合同申请单</a></li>
-                </ul>
-            </div>
-        </div>
+        <?php include 'component/investment-contract-request-create-dropdown.php'; ?>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">
@@ -292,5 +279,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'component/investment-contract-request-todo.php'; ?>
 <?php include 'component/investment-contract-request-modify-create.php'; ?>
 <?php include 'component/investment-contract-request-renew-termination-create.php'; ?>
+<?php include 'component/investment-contract-request-create.php'; ?>
 
 <?php include 'footer.php'; ?>

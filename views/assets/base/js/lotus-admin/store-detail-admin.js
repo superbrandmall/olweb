@@ -11,13 +11,22 @@ $(document).ready(function(){
                 required: true,
                 minlength: 2
             },
+            unitType: {
+                required: true
+            },
             mallCode: {
+                required: true
+            },
+            selectFloor: {
                 required: true
             },
             startDate: {
                 required: true
             },
             endDate: {
+                required: true
+            },
+            selectUser1: {
                 required: true
             }
         },
@@ -27,17 +36,26 @@ $(document).ready(function(){
                 minlength: "请输入完整铺位代码"
             },
             unitName: {
-                required: "请输入铺位名称",
-                minlength: "请输入完整铺位名称"
+                required: "请输入门牌号",
+                minlength: "请输入完整门牌号"
+            },
+            unitType: {
+                required: "请选择铺位类型"
             },
             mallCode: {
-                required: "请选择所属门店"
+                required: "请选择所属项目"
+            },
+            selectFloor: {
+                required: "请选择所属楼层"
             },
             startDate: {
                 required: "请选择生效开始日期"
             },
             endDate: {
                 required: "请选择生效结束日期"
+            },
+            selectUser1: {
+                required: "请选择铺位负责人1"
             }
         },
         errorPlacement: function(error, element) {
@@ -59,7 +77,7 @@ $(document).ready(function(){
         'endDate': '',
         'autoclose': true
     });
-    updateSelectMallDropDown();
+    
     findStoreByCode();
     
     $('input.money').on('blur',function(){

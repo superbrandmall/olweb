@@ -134,12 +134,22 @@ $(document).ready(function(){
         });
     })
     
-    $('#renewDepartment').select2({
-        dropdownParent: $('#investment-contract-request-renew-termination-create')
+    if($('.mallCode').length > 0){
+        updateSelectMallDropDown();
+    }
+    
+    if($("#createContractDepartment").val() != '' && $("#createContractDepartment").val() != null){
+        updateSelectStoreDropDownByMallCode(20,$("#createContractDepartment").val());
+    }
+    
+    $("#createContractDepartment").on("select2:select",function(){
+        if($("#createContractDepartment").val() != '' && $("#createContractDepartment").val() != null){
+            updateSelectStoreDropDownByMallCode(20,$("#createContractDepartment").val());
+        }
     })
     
-    $('#modifyDepartment').select2({
-        dropdownParent: $('#investment-contract-request-modify-create')
+    $('#createContract').click(function(){
+        $('#investment-contract-request-create').modal('toggle');
     })
     
     $("#renewContract, #modifyContract").on("select2:select",function(){
@@ -153,6 +163,10 @@ $(document).ready(function(){
     $('#renewCreateRequest, #modifyCreateRequest').click(function(){
         var id = $(this).attr('id').split('CreateRequest')[0];
         redirectCheck(id);
+    })
+    
+    $('#createContractRequest').click(function(){
+        createContractCheck();
     })
     
     scrollJump();
@@ -2160,7 +2174,12 @@ function updateBrandNameDropDown(data_count) {
 }
 
 function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
-    $('#selectStore').select2({
+    var selectStore = $('#selectStore');
+    if(data_count == 20){
+        selectStore = $('#createContractStore');
+    }
+    
+    selectStore.select2({
         minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
@@ -2406,7 +2425,7 @@ function updateSelectMallDropDown() {
             return returnData;
         });
         
-        $('#mallCode').select2({
+        $('.mallCode').select2({
             placeholder: '未选择',
             dropdownAutoWidth: true,
             language: {
@@ -3479,6 +3498,103 @@ function saveContractInfoForRequest(id) {
             }
         }
     })
+}
+
+function createContractCheck() {
+    $('.mandatory-error').remove();
+    var flag = 1;
+    var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
+    
+    if($('#createContractDepartment').val() == null) {
+        flag = 0;
+        $('#createContractDepartment').parent().append(error);
+    }
+    
+    if($('#createContractStore').val() == null) {
+        flag = 0;
+        $('#createContractStore').parent().append(error);
+    }
+    
+    if(flag == 1){
+        createContract();
+    }
+}
+
+function createContract() {
+    var openId = 'admin';
+    var userCode = '';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            userCode = v.userCode;
+            return false;
+        }
+    })
+
+    var unitCode = '';
+    var unitName = '';
+    var shopCode = '';
+    if( $('#createContractStore').val() && $('#createContractStore').val() != ''){
+        unitCode = $('#createContractStore').val().split(':::')[0];
+        shopCode = $('#createContractStore').val().split(':::')[1];
+        unitName = $('#createContractStore').val().split(':::')[2];
+    }
+
+    var map = {
+        "creatorCode": userCode,
+        "creatorName": $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,""),
+        "creatorOpenId": openId,
+        "creatorOrgId": "",
+        "creatorOrgName": "",
+        "shopCode": shopCode,
+        "unitCode": unitCode,
+        "unitName": unitName,
+        "area": $('#select2-createContractStore-container').text().split(' | ')[1].split('㎡')[0],
+        "formType": "",
+        "rentCalculationMode": "",
+        "endDate": "",
+        "contractType": "",
+        "mallCode": "",
+        "startDate": ""
+    };
+        
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/lotus/saveOrUpdate",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                if(response.data.resultCode == 'SUCCESS') {
+                    //window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                } else {
+                    alertMsg(response.data.resultCode,response.data.resultMsg);
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
 }
 
 function activateAddDeleteRow(){

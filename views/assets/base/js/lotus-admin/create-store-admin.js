@@ -1,15 +1,17 @@
 $(document).ready(function(){    
     $("#create-form").validate({
         rules: {
-            unitCode: {
-                required: true,
-                minlength: 2
-            },
             unitName: {
                 required: true,
                 minlength: 2
             },
+            unitType: {
+                required: true
+            },
             mallCode: {
+                required: true
+            },
+            selectFloor: {
                 required: true
             },
             startDate: {
@@ -17,25 +19,33 @@ $(document).ready(function(){
             },
             endDate: {
                 required: true
+            },
+            selectUser1: {
+                required: true
             }
         },
         messages: {
-            unitCode: {
-                required: "请输入铺位代码",
-                minlength: "请输入完整铺位代码"
-            },
             unitName: {
-                required: "请输入铺位名称",
-                minlength: "请输入完整铺位名称"
+                required: "请输入门牌号",
+                minlength: "请输入完整门牌号"
+            },
+            unitType: {
+                required: "请选择铺位类型"
             },
             mallCode: {
-                required: "请选择所属门店"
+                required: "请选择所属项目"
+            },
+            selectFloor: {
+                required: "请选择所属楼层"
             },
             startDate: {
                 required: "请选择生效开始日期"
             },
             endDate: {
                 required: "请选择生效结束日期"
+            },
+            selectUser1: {
+                required: "请选择铺位负责人1"
             }
         },
         errorPlacement: function(error, element) {
@@ -49,7 +59,6 @@ $(document).ready(function(){
     
     updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '未选择', '');
     updateUserDropDown(20);
-    updateSelectMallDropDown();
     $("#mallCode").val(null).trigger('change');
     
     $("#mallCode").on('change',function(){
@@ -91,67 +100,64 @@ function saveStore() {
         
         var height = $('#height').val();
 
-        if($.store.unitCode != '' && $.store.unitName!= '' && $.store.mallCode != '' && $.store.startDate != '' && $.store.endDate != ''){
-            var map = {
-                "abcRent": $.store.abcRent,
-                "approveFirst": $.store.approveFirst,
-                "approveSecond": $.store.approveSecond,
-                "approveThird": $.store.approveThird,
-                "area": $('#unitArea').val(),
-                "code": $.store.code,
-                "creatorOpenId": $.store.creatorOpenId,
-                "endDate": $('#endDate').val(),
-                "enterFlag": $.store.enterFlag,
-                "floorName": $.store.floorName,
-                "id": $.store.id,
-                "liftFlag": $.store.liftFlag,
-                "mallCode": $('#mallCode').val(),
-                "modality": $.store.modality,
-                "mulitPathFlag": 0,
-                "shopStatus": 1,
-                "startDate": $('#startDate').val(),
-                "unitCode": $('#unitCode').val(),
-                "unitDesc": $.store.unitDesc,
-                "unitName": $('#unitName').val(),
-                "unitSize": '0x0x'+height,
-                "unitType": $('#unitType').val(),
-                "creatorOpenId": openId
-            };
-            
-            $.ajax({
-                url: $.api.baseLotus+"/api/shop/lotus/saveOrUpdate",
-                type: "POST",
-                data: JSON.stringify(map),
-                async: false,
-                dataType: "json",
-                contentType: "application/json",
-                beforeSend: function(request) {
-                    $('#loader').show();
-                    request.setRequestHeader("Login", $.cookie('login'));
-                    request.setRequestHeader("Authorization", $.cookie('authorization'));
-                    request.setRequestHeader("Lang", $.cookie('lang'));
-                    request.setRequestHeader("Source", "onlineleasing");
-                },
-                complete: function(){},
-                success: function (response, status, xhr) {
-                    $('#loader').hide();
-                    if(response.code === 'C0') {
-                        if(xhr.getResponseHeader("Login") !== null){
-                            $.cookie('login', xhr.getResponseHeader("Login"));
-                        }
-                        if(xhr.getResponseHeader("Authorization") !== null){
-                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                        }
+        var map = {
+            "abcRent": null,
+            "approveFirst": $('#approveFirst').val(),
+            "approveSecond":('#approveSecond').val(),
+            "approveThird": ('#approveThird').val(),
+            "area": $('#unitArea').val(),
+            "creatorOpenId": openId,
+            "endDate": $('#endDate').val(),
+            "enterFlag": ('#approveFirst').val(),
+            "floorName":('#approveFirst').val(),
+            "id": ('#approveFirst').val(),
+            "liftFlag": ('#approveFirst').val(),
+            "mallCode": $('#mallCode').val(),
+            "modality": ('#approveFirst').val(),
+            "mulitPathFlag": 0,
+            "shopStatus": 1,
+            "startDate": $('#startDate').val(),
+            "unitCode": $('#unitCode').val(),
+            "unitDesc":('#approveFirst').val(),
+            "unitName": $('#unitName').val(),
+            "unitSize": '0x0x'+height,
+            "unitType": $('#unitType').val(),
+            "creatorOpenId": openId
+        };
 
-                        window.location.href = '/lotus-admin/stores?s=succeed';
-                    } else {
-                        alertMsg(response.code,response.customerMessage);
+        $.ajax({
+            url: $.api.baseLotus+"/api/shop/lotus/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
                     }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    window.location.href = '/lotus-admin/stores?s=succeed';
+                } else {
+                    alertMsg(response.code,response.customerMessage);
                 }
-            });
-        }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
     })
 }

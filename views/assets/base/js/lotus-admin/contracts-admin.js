@@ -65,11 +65,10 @@ $(document).ready(function(){
             }
         })
     })
-    $("#department").find("option:not(.no-remove)").remove();
     
     updateSelectTenantDropDown(50);
     
-    if($("#department").val() != ''){
+    if($("#department").val() != '' && $("#department").val() != null){
         updateSelectStoreDropDownByMallCode(10,$("#department").val());
     }
     $("#department").on('change',function(){

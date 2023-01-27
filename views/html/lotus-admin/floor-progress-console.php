@@ -20,7 +20,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="mallCode" name="mallCode" style="width: 100%"></select>
+                                <select class="select2 mallCode" id="mallCode" name="mallCode" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>

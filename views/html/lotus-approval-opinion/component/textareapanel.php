@@ -45,7 +45,7 @@
                 <span id="terminateArea"></span>
                 <span id="terminateCancelDate"></span>
                 <span id="terminateCancelType"></span>
-                后续洽谈品牌<span id="terminateNewBrandName"></span>
+                <span id="terminateNewBrandName"></span>
                 <span id="terminateNewDrDate"></span>
                 <span id="terminateNewDeliveryDate"></span>
                 <span id="terminateNewBizDate"></span>

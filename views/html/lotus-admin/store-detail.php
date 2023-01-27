@@ -66,7 +66,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitName" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="unitName" class="col-md-4 control-label">门牌号 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="unitName" name="unitName">
                                             <div id="errorcontainer-unitName" class="errorDiv"></div>
@@ -77,7 +77,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="unitType" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2" id="unitType" style="width: 100%"></select>
+                                            <select class="select2" id="unitType" name="unitType" style="width: 100%"></select>
                                             <div id="errorcontainer-unitType" class="errorDiv"></div>
                                         </div>
                                     </div>
@@ -85,9 +85,20 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="mallCode" class="col-md-4 control-label">所属项目 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="mallCode" name="mallCode" style="width: 100%"> </select>
+                                        <div class="col-md-8 col-sm-1 required">
+                                            <select class="select2 mallCode" id="mallCode" name="mallCode" style="width: 100%"> </select>
                                             <div id="errorcontainer-mallCode" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectFloor" class="col-md-4 control-label">所属楼层 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="selectFloor" name="selectFloor" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-selectFloor" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -96,16 +107,47 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <label class="col-md-4 control-label">生效日期 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <div class="input-daterange input-group">
-                                                <input type="text" class="form-control" id="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                                <input type="text" class="form-control" id="startDate" name="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                                 <span class="input-group-addon" style="border: none; background: transparent;">-</span>
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" id="endDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                                    <input type="text" class="form-control" id="endDate" name="endDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                                 </div>
-                                                <div id="errorcontainer-startDate" class="errorDiv"></div>
-                                                <div id="errorcontainer-endDate" class="errorDiv"></div>
                                             </div>
+                                            <div id="errorcontainer-startDate" class="errorDiv" style="float: left;"></div>
+                                            <div id="errorcontainer-endDate" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectUser1" class="col-md-4 control-label">铺位负责人1 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2 selectUser" id="selectUser1" name="selectUser1" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-selectUser1" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectUser2" class="col-md-4 control-label">铺位负责人2</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2 selectUser" id="selectUser2" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectUser3" class="col-md-4 control-label">铺位负责人3</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2 selectUser" id="selectUser3" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
