@@ -43,6 +43,10 @@
                                                 <div class="th-inner">店招</div>
                                                 <div class="fht-cell"></div>
                                             </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody id="todo"></tbody>

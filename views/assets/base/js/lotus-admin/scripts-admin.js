@@ -121,6 +121,7 @@ $(document).ready(function(){
         
         updateDictDropDownByDictTypeCode('FORM_TYPE',ftid,ftTxt,ftVal);
         $('#investment-contract-request-'+fheader+'-create .modal-header').find('h4').text(headTxt);
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
         $('#investment-contract-request-'+fheader+'-create').modal('toggle');
         updateRequestContractDropDown(rcdd,10);
         $('.date-picker').datepicker({
@@ -139,17 +140,31 @@ $(document).ready(function(){
     }
     
     if($("#createContractDepartment").val() != '' && $("#createContractDepartment").val() != null){
-        updateSelectStoreDropDownByMallCode(20,$("#createContractDepartment").val());
+        updateSelectStoreDropDownByMallCode(21,$("#createContractDepartment").val());
     }
     
     $("#createContractDepartment").on("select2:select",function(){
         if($("#createContractDepartment").val() != '' && $("#createContractDepartment").val() != null){
-            updateSelectStoreDropDownByMallCode(20,$("#createContractDepartment").val());
+            updateSelectStoreDropDownByMallCode(21,$("#createContractDepartment").val());
         }
     })
     
     $('#createContract').click(function(){
+        $.fn.modal.Constructor.prototype.enforceFocus = function() {};
         $('#investment-contract-request-create').modal('toggle');
+        updateSelectTenantDropDown(51);
+        updateBrandNameDropDown(21);
+        updateDictDropDownByDictTypeCode('RENT_CALCULATION_MODE','createContractSelectRentCalculationMode',$.api.rentCalculationMode[0],$.api.rentCalculationMode[1]);
+        $('.input-daterange').datepicker({
+            'language': 'zh-CN',
+            'format': 'yyyy-mm-dd',
+            'todayBtn': "linked",
+            'todayHighlight': true,
+            'startDate': ($('#createContractStartDate').val() != '' ? $('#createContractStartDate').val() : ''),
+            'endDate': $('#createContractEndDate').val(),
+            'autoclose': true,
+            'clearBtn': true
+        });
     })
     
     $("#renewContract, #modifyContract").on("select2:select",function(){
@@ -351,7 +366,8 @@ function refineUrl() {
 function refineCreateUrl() {
     var url = window.location.href;
     var value = url.substring(url.lastIndexOf('/') + 1);
-    value  = value.split("?s")[0];   
+    value = value.split("?s")[0]+window.location.hash;
+    value = value.split("&s")[0]+window.location.hash;
     return value;     
 }
 
@@ -2042,7 +2058,12 @@ function updateDictDropDownByDictTypeCode(dictTypeCode, id, dataTxt, dataVal) {
 }
 
 function updateSelectTenantDropDown(data_count) {
-    $('#selectTenant').select2({
+    var selectTenant = $('#selectTenant');
+    if(data_count == 51){
+        selectTenant = $('#createContractSelectTenant');
+    }
+    
+    selectTenant.select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -2108,7 +2129,12 @@ function updateSelectTenantDropDown(data_count) {
 }
 
 function updateBrandNameDropDown(data_count) {
-    $('#brandName').select2({
+    var brandName = $('#brandName');
+    if(data_count == 21){
+        brandName = $('#createContractBrandName');
+    }
+    
+    brandName.select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -2175,7 +2201,7 @@ function updateBrandNameDropDown(data_count) {
 
 function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     var selectStore = $('#selectStore');
-    if(data_count == 20){
+    if(data_count == 21){
         selectStore = $('#createContractStore');
     }
     
@@ -3515,6 +3541,21 @@ function createContractCheck() {
         $('#createContractStore').parent().append(error);
     }
     
+    if($('#createContractBrandName').val() == null) {
+        flag = 0;
+        $('#createContractBrandName').parent().append(error);
+    }
+    
+    if($('#createContractSelectTenant').val() == null) {
+        flag = 0;
+        $('#createContractSelectTenant').parent().append(error);
+    }
+    
+    if($('#createContractStartDate').val() == '' || $('#createContractEndDate').val() == '') {
+        flag = 0;
+        $('#createContractStartDate').parent().parent().append(error);
+    }
+    
     if(flag == 1){
         createContract();
     }
@@ -3531,42 +3572,81 @@ function createContract() {
         }
     })
 
-    var unitCode = '';
-    var unitName = '';
-    var shopCode = '';
-    if( $('#createContractStore').val() && $('#createContractStore').val() != ''){
+    var mallName = '', mallCode = '', unitCode = '', unitName = '', shopCode = '', floorCode = '', floorName = '', 
+    area = '', brandName = '', bizTypeName = '', brandCode = '', tenantName = '', tenantCode = '', tenantNo = '', 
+    startDate = $('#createContractStartDate').val(), endDate = $('#createContractEndDate').val(), rentCalculationMode = $('#createContractSelectRentCalculationMode').val();
+
+    if( $('#createContractDepartment').val() && $('#createContractDepartment').val() != '' && $('#createContractDepartment').val() != null){
+        mallName = $('#select2-createContractDepartment-container').text().split('[')[0];
+        mallCode = $('#createContractDepartment').val();
+    }
+
+    if( $('#createContractStore').val() && $('#createContractStore').val() != '' && $('#createContractStore').val() != null){
         unitCode = $('#createContractStore').val().split(':::')[0];
         shopCode = $('#createContractStore').val().split(':::')[1];
         unitName = $('#createContractStore').val().split(':::')[2];
+        floorName = $('#createContractStore').val().split(':::')[3];
+        floorCode = $('#createContractStore').val().split(':::')[4];
+        area = $('#select2-createContractStore-container').text().split(' | ')[1].split('㎡')[0];
+    }
+
+    if( $('#createContractBrandName').val() && $('#createContractBrandName').val() != '' && $('#createContractBrandName').val() != null){
+        brandName = $('#select2-createContractBrandName-container').text().split('[')[0];
+        bizTypeName = $('#select2-createContractBrandName-container').text().split('[')[1].split(']')[0];
+        brandCode = $('#createContractBrandName').val();
+    }
+
+    if( $('#createContractSelectTenant').val() && $('#createContractSelectTenant').val() != '' && $('#createContractSelectTenant').val() != null){
+        tenantNo = $('#select2-createContractSelectTenant-container').text().split(' | ')[0];
+        tenantName = $('#select2-createContractSelectTenant-container').text().split(' | ')[1];
+        tenantCode = $('#createContractSelectTenant').val();
     }
 
     var map = {
         "creatorCode": userCode,
         "creatorName": $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,""),
         "creatorOpenId": openId,
-        "creatorOrgId": "",
-        "creatorOrgName": "",
         "shopCode": shopCode,
         "unitCode": unitCode,
         "unitName": unitName,
-        "area": $('#select2-createContractStore-container').text().split(' | ')[1].split('㎡')[0],
-        "formType": "",
-        "rentCalculationMode": "",
-        "endDate": "",
-        "contractType": "",
-        "mallCode": "",
-        "startDate": ""
+        "area": area,
+        "formType": "NEW",
+        "rentCalculationMode": rentCalculationMode,
+        "endDate": endDate,
+        "contractType": "leasing",
+        "mallCode": mallCode,
+        "startDate": startDate,
+        "contractVersion": 1,
+        "contractStatus": "init",
+        "profitCenter": "leasing",
+        "posMode": "unUse",
+        "cooperationMode": "RENT",
+        "mallName": mallName,
+        "floorCode": floorCode,
+        "floorName": floorName,
+        "duration": 0,
+        "termCalcMode": "NEW",
+        "brandName": brandName,
+        "brandCode": brandCode,
+        "contractName": brandName,
+        "tenantName": tenantName,
+        "tenantCode": tenantCode,
+        "tenantNo": tenantNo,
+        "bizTypeName": bizTypeName,
+        "bizDate": startDate,
+        "enterDate": startDate,
+        "deliveryDate": startDate,
+        "awardDate": startDate,
+        "intentDate": startDate
     };
-        
+    
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/saveOrUpdate",
-        type: "POST",
-        data: JSON.stringify(map),
+        url: $.api.baseLotus+"/api/contract/lotus/checkDuplicateData?shopCode="+shopCode+"&startDate="+$('#createContractStartDate').val()+"&endDate="+$('#createContractEndDate').val(),
+        type: "GET",
         async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
-            $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -3574,7 +3654,6 @@ function createContract() {
         },
         complete: function(){},
         success: function (response, status, xhr) {
-            $('#loader').hide();
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Login") !== null){
                     $.cookie('login', xhr.getResponseHeader("Login"));
@@ -3582,19 +3661,53 @@ function createContract() {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
                 if(response.data.resultCode == 'SUCCESS') {
-                    //window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                    $.ajax({
+                        url: $.api.baseLotus+"/api/contract/lotus/saveOrUpdate",
+                        type: "POST",
+                        data: JSON.stringify(map),
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        beforeSend: function(request) {
+                            $('#loader').show();
+                            request.setRequestHeader("Login", $.cookie('login'));
+                            request.setRequestHeader("Authorization", $.cookie('authorization'));
+                            request.setRequestHeader("Lang", $.cookie('lang'));
+                            request.setRequestHeader("Source", "onlineleasing");
+                        },
+                        complete: function(){},
+                        success: function (response, status, xhr) {
+                            $('#loader').hide();
+                            if(response.code === 'C0') {
+                                if(xhr.getResponseHeader("Login") !== null){
+                                    $.cookie('login', xhr.getResponseHeader("Login"));
+                                }
+                                if(xhr.getResponseHeader("Authorization") !== null){
+                                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                                }
+                                if(response.data.resultCode == 'SUCCESS') {
+                                    window.location.href = '/lotus-admin/contract-init?id='+response.data.contractNo+'&contractVersion='+response.data.contractVersion+'&s=succeed';         
+                                } else {
+                                    alertMsg(response.data.resultCode,response.data.resultMsg);
+                                }
+                            } else {
+                                alertMsg(response.code,response.customerMessage);
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log(textStatus, errorThrown);
+                        }
+                    });
                 } else {
                     alertMsg(response.data.resultCode,response.data.resultMsg);
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
         }
-    });
+    })
 }
 
 function activateAddDeleteRow(){

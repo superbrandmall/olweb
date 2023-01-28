@@ -103,6 +103,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                         <div class="th-inner">修改时间</div>
                                                                         <div class="fht-cell"></div>
                                                                     </th>
+                                                                    <th>
+                                                                        <div class="th-inner">操作</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="draftListBody"></tbody>

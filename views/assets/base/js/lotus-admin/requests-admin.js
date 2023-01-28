@@ -1,4 +1,17 @@
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     if(!sessionStorage.getItem("FORM_STATUS") || sessionStorage.getItem("FORM_STATUS") == null || sessionStorage.getItem("FORM_STATUS") == '') {
         findDictCodeByDictTypeCode('FORM_STATUS');
     }
@@ -441,15 +454,73 @@ function findAllToDoRequestsByKVCondition(){
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
+                            <td><a href="javascript:void(0);" onclick=\'javascript: deleteFormByBizId("'+v.bizId+'")\'>\n\
+                                <i class="fa fa-minus-circle"></i>\n\
+                            </a></td>\n\
                         </tr>');
                         
                     });
                 } else {
-                    $('#todo').html('<tr><td colspan="7" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#todo').html('<tr><td colspan="8" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             } 
         }
     });
+}
+
+function deleteFormByBizId(bizId) {
+    var msg = '确定要删除这份草稿吗？';
+    Ewin.confirm({ message: msg }).on(function (e) {
+        if (!e) {
+            return;
+        } else {
+            $('.modal.in').hide().remove();
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        $.ajax({
+            url: $.api.baseLotus+"/api/rent/contract/form/deleteByBizId?delKey=lotus&bizId="+bizId+"&updateOpenId="+openId,
+            type: "DELETE",
+            async: false,
+            beforeSend: function (request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    if(window.location.search == ''){
+                        window.location.href = '/lotus-admin/requests?s=delete';
+                    } else {
+                        window.location.href = window.location+'&s=delete';
+                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    })
 }
