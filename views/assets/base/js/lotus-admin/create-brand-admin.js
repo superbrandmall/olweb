@@ -7,9 +7,6 @@ $(document).ready(function(){
                 required: true,
                 minlength: 2
             },
-            brandAttribute: {
-                required: true
-            },
             modality_1: {
                 required: true
             },
@@ -21,27 +18,12 @@ $(document).ready(function(){
             },
             modality_4: {
                 required: true
-            },
-            contact_name_1: {
-                required: true,
-                minlength: 2
-            },
-            title: {
-                required: true,
-                minlength: 2
-            },
-            contact_phone_1: {
-                required: true,
-                minlength: 6
             }
         },
         messages: {
             brand_name: {
                 required: "请输入品牌名称",
                 minlength: "请输入完整品牌名称"
-            },
-            brandAttribute: {
-                required: "请选择品牌档次"
             },
             modality_1: {
                 required: "请选择一级业态"
@@ -54,18 +36,6 @@ $(document).ready(function(){
             },
             modality_4: {
                 required: "请输入四级业态"
-            },
-            contact_name_1: {
-                required: "请输入联系人",
-                minlength: "请输入完整联系人"
-            },
-            title: {
-                required: "请输入岗位",
-                minlength: "请输入完整岗位"
-            },
-            contact_phone_1: {
-                required: "请输入联系电话",
-                minlength: "请输入完整联系电话"
             }
         },
         errorPlacement: function(error, element) {
@@ -298,7 +268,7 @@ function addBrand() {
         var contact_name_1 = $('#contact_name_1').val();
         var contact_phone_1 = $('#contact_phone_1').val();
 
-        if(brand_name != '' && modality_1!= '' && modality_2 != '' && modality_3 != '' && contact_name_1 != '' && contact_phone_1 != ''){
+        if(brand_name != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
             var map = {
                 "creatorOpenId": openId,
                 "updateOpenId": openId,

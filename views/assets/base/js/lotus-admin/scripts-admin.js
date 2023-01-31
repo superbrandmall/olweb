@@ -732,6 +732,32 @@ function renderFormStatus(s) {
     return status;
 }
 
+function renderFlowStatus(s) {
+    var status = '';
+    if(sessionStorage.getItem("FLOW_STATUS") && sessionStorage.getItem("FLOW_STATUS") != null && sessionStorage.getItem("FLOW_STATUS") != '') {
+        var status = $.parseJSON(sessionStorage.getItem("FLOW_STATUS"));
+        $.each(status, function(i,v){
+            if(v.dictCode == s){
+                status = v.dictName;
+            }
+        })
+    }
+    return status;
+}
+
+function renderFlowSteps(s) {
+    var step = '';
+    if(sessionStorage.getItem("FLOW_STEPS") && sessionStorage.getItem("FLOW_STEPS") != null && sessionStorage.getItem("FLOW_STEPS") != '') {
+        var step = $.parseJSON(sessionStorage.getItem("FLOW_STEPS"));
+        $.each(step, function(i,v){
+            if(v.dictCode == s){
+                step = v.dictName;
+            }
+        })
+    }
+    return step;
+}
+
 function findMainSigningBody(code){
     $.ajax({
         url: $.api.baseLotus+"/api/mall/lotus/findOneByCode?code="+code,
@@ -2943,13 +2969,8 @@ function calBackPush(prefix){
         var taxRentAmount = tdArr.eq(3).find('input').val();
         if(path == 'fixedRentCalc'){
             var rentAmount = tdArr.eq(6).find('input').val();
-            if(getURLParameter('contractVersion') && getURLParameter('contractVersion') != ''){
-                var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
-                var taxRate = tdArr.eq(7).find('select').val();
-            } else {
-                var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
-                var taxRate = tdArr.eq(8).find('select').val();
-            }
+            var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
+            var taxRate = tdArr.eq(8).find('select').val();
             if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
                 fixedRent = {
                     "amount": numberWithoutCommas(amount),
@@ -2988,13 +3009,9 @@ function calBackPush(prefix){
             var deductType = tdArr.eq(3).find('select').val();
             var amount = tdArr.eq(7).find('input').val();
             var targetSales = tdArr.eq(8).find('input').val();
-            if(getURLParameter('contractVersion') && getURLParameter('contractVersion') != ''){
-                var taxCode = tdArr.eq(9).find('select option:selected').attr('data-code');
-                var taxRate = tdArr.eq(9).find('select').val();
-            } else {
-                var taxCode = tdArr.eq(10).find('select option:selected').attr('data-code');
-                var taxRate = tdArr.eq(10).find('select').val();
-            }
+            var taxCode = tdArr.eq(10).find('select option:selected').attr('data-code');
+            var taxRate = tdArr.eq(10).find('select').val();
+            
             var commissionMinSalesAmount = tdArr.eq(9).find('input').val();
             if(deduct != '' && startDate != '' && endDate != '' && itemCode != '' && category != '' && deductType != '' && taxCode != '' && taxRate != '' && amount != '' && targetSales != ''){
                 deductFee = {

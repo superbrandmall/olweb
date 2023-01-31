@@ -9,9 +9,6 @@ $(document).ready(function(){
                 required: true,
                 minlength: 2
             },
-            brandAttribute: {
-                required: true
-            },
             modality_1: {
                 required: true
             },
@@ -23,33 +20,12 @@ $(document).ready(function(){
             },
             modality_4: {
                 required: true
-            },
-            contact_name_1: {
-                required: true,
-                minlength: 2
-            },
-            title: {
-                required: true,
-                minlength: 2
-            },
-            contact_phone_1: {
-                required: true,
-                minlength: 6
-            },
-            trademark_0: {
-                required: true
-            },
-            brandAuthorization_0: {
-                required: true
             }
         },
         messages: {
             brand_name: {
                 required: "请输入品牌名称",
                 minlength: "请输入完整品牌名称"
-            },
-            brandAttribute: {
-                required: "请选择品牌档次"
             },
             modality_1: {
                 required: "请选择一级业态"
@@ -62,24 +38,6 @@ $(document).ready(function(){
             },
             modality_4: {
                 required: "请输入四级业态"
-            },
-            contact_name_1: {
-                required: "请输入联系人",
-                minlength: "请输入完整联系人"
-            },
-            title: {
-                required: "请输入岗位",
-                minlength: "请输入完整岗位"
-            },
-            contact_phone_1: {
-                required: "请输入联系电话",
-                minlength: "请输入完整联系电话"
-            },
-            trademark_0: {
-                required: "请在附件中上传商标注册证"
-            },
-            brandAuthorization_0: {
-                required: "请在附件中上传品牌授权书"
             }
         },
         errorPlacement: function(error, element) {
@@ -112,6 +70,96 @@ function updateBrandAttribute() {
     }
 }
 
+function findBizByBiz1(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+biz,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
+                        if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
+                            $("#modality_2 option:contains('"+v.modality2+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                $('#modality_2').on('change',function(){
+                    if($(this).val() != '') {
+                        findBizByBiz2($(this).val());
+                    }
+                })
+                
+                if($('#modality_2').val() != '') {
+                    findBizByBiz2($('#modality_2').val());
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
+}
+
+function findBizByBiz2(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+biz,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        $('#modality_3').append('<option value="'+v.modality3+'">'+v.modality3+'</option>');
+                        if ($("#modality_3 option:contains('"+v.modality3+"')").length > 1){
+                            $("#modality_3 option:contains('"+v.modality3+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                 $('#modality_3').on('change',function(){
+                    if($(this).val() != '') {
+                        findBizByBiz3($(this).val());
+                    }
+                })
+                
+                if($('#modality_3').val() != '') {
+                    findBizByBiz3($('#modality_3').val());
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
+}
+
 function findBizByBiz3(biz) {
     $.ajax({
         url: $.api.baseLotus+"/api/biz/lotus/findAllByModality3?modality3="+biz,
@@ -133,7 +181,6 @@ function findBizByBiz3(biz) {
                 }
                 
                 if(response.data.length > 0){
-                    $('#modality_4').html('<option value="">未选择</option>');
                     $.each(response.data, function(i,v) {
                         $('#modality_4').append('<option value="'+v.modality4+'">'+v.modality4+'</option>');
                         if ($("#modality_4 option:contains('"+v.modality4+"')").length > 1){
@@ -183,17 +230,22 @@ function findBrandByCode() {
                     $('#brandAttribute').val(response.data.brandAttribute).trigger('change');
                     $('#modality_1').val(response.data.modality1).trigger('change');
                     
-                    var modality_2 = new Option(response.data.modality2, response.data.modality2, true, true);
-                    $('#modality_2').append(modality_2).trigger('change');
+                    if(response.data.modality2 != null && response.data.modality2 != ''){
+                        var modality_2 = new Option(response.data.modality2, response.data.modality2, true, true);
+                        $('#modality_2').append(modality_2).trigger('change');
+                    }
                     
-                    var modality_3 = new Option(response.data.modality3, response.data.modality3, true, true);
-                    $('#modality_3').append(modality_3).trigger('change');
+                    if(response.data.modality3 != null && response.data.modality3 != ''){
+                        var modality_3 = new Option(response.data.modality3, response.data.modality3, true, true);
+                        $('#modality_3').append(modality_3).trigger('change');
+                    }
                     
                     if(response.data.modality4 != null && response.data.modality4 != ''){
                         var modality_4 = new Option(response.data.modality4, response.data.modality4, true, true);
                         $('#modality_4').append(modality_4).trigger('change');
                     }
                     
+                    findBizByBiz1($('#modality_1').val());
                     $('#contact_name_1').val(response.data.contactName);
                     $('#title').val(response.data.title);
                     $('#contact_phone_1').val(response.data.contactPhone);
@@ -232,7 +284,7 @@ function saveBrand() {
         $.brand.contactName = $('#contact_name_1').val() || null;
         $.brand.contactPhone = $('#contact_phone_1').val() || null;
 
-        if($.brand.brandName != '' && $.brand.modality1!= '' && $.brand.modality2 != '' && $.brand.modality3 != '' && $.brand.contactName != '' && $.brand.contactPhone != ''){
+        if($('#brand_name').val() != '' && $('#modality_1').val() != '' && $('#modality_2').val() != '' && $('#modality_3').val() != '' && $('#modality_4').val() != ''){
             $.ajax({
                 url: $.api.baseLotus+"/api/brand/lotus/saveOrUpdate",
                 type: "POST",

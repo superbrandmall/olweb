@@ -53,11 +53,15 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">起始金额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="th-inner">营业额上限 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
                                                 <div class="th-inner">保底营业额 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">预估营业额</div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
@@ -152,6 +156,13 @@
                     </select>
                 </div>
             </div>
+        </div>
+        <div class="col-md-12">
+            <h5 style="display: inline-block; margin-bottom: 0; margin-right: 10px; vertical-align: super;">账款总金额(含税|去税)</h5>
+            <h3 id="commissionTotalDeductAmount" style="display: inline-block;">0.00</h3>
+            <h3 style="display: inline-block;">|</h3>
+            <h3 id="commissionTaxTotalDeductAmount" style="display: inline-block;">0.00</h3>
+            <a href="javascript: void(0);" onclick="termsModalToggle('commission');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
         </div>
     </div>
     <div class="box-body">

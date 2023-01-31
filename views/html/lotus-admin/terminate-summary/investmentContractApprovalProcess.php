@@ -8,7 +8,7 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
-            <h5 style="margin-bottom: 0;">租赁-终止合同云之家审批流程</h5>
+            <h5 style="margin-bottom: 0;">租赁-终止合同云之家审批流程 <span id="flowStatus"></span></h5>
             <div class="box-body">
                 <div class="row">
                     <div class="bootstrap-table">

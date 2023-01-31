@@ -4,8 +4,7 @@ $.contract = {
     commission: [],
     propertyMgmt: [],
     promotion: [],
-    deposit: [],
-    mallCode: ''
+    deposit: []
 };
 
 $(document).ready(function(){
@@ -96,6 +95,7 @@ $(document).ready(function(){
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
+        calBackPush('commission');
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
@@ -105,6 +105,7 @@ $(document).ready(function(){
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
     })
     
     $("#contractType").change(function(){
@@ -204,7 +205,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.inArray($.contract.mallCode, $.api.fivePercentFixedRent) != -1){
+                if($.inArray($.contract.content.mallCode, $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -265,7 +266,6 @@ function findContractByContractNo() {
                     })
                     
                     $('#contractName').text(data.contractName).attr('title',data.contractName);
-                    $('#contractVersion').text(data.contractVersion).attr('title',data.contractVersion);
                     findMainSigningBody(data.mallCode);
                     findContractStatus('CONTRACT_STATUS',data.contractStatus);
                     
@@ -275,7 +275,6 @@ function findContractByContractNo() {
                     $('#bizId').val(data.bizId);
                     $('#approvalName').val((data.approvalName != null ? data.approvalName : 'admin'));
                     $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
-                    $.contract.mallCode = data.mallCode;
                     
                     updateSelectStoreDropDownByMallCode(10,data.mallCode);
                     temp = new Option((data.unitName +'['+ data.unitCode +'] | '+ data.area + '㎡'), data.unitCode+':::'+data.shopCode+':::'+data.unitName+':::'+data.floorName+':::'+data.floorCode, true, true);
@@ -289,6 +288,8 @@ function findContractByContractNo() {
                         $('#floor').append(floor).trigger('change');
                         calBackPushFixedRentTaxRentAmount();
                         calBackPushPropertyMgmtTaxRentAmount();
+                        calBackPush('commission');
+                        calBackPush('promotion');
                     })
                     
                     temp = new Option(data.floorName, data.floorCode, true, true);
@@ -426,6 +427,7 @@ function findContractByContractNo() {
                     $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
                     
                     if(data.fixedRentList != null && data.fixedRentList.length > 0) {
+                        $.contract.fixedRent = data.fixedRentList;
                         $.each(data.fixedRentList, function(i,v) {
                             updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
                         })
@@ -461,6 +463,7 @@ function findContractByContractNo() {
                     }
                     
                     if(data.deductList != null && data.deductList.length > 0) {
+                        $.contract.commission = data.deductList;
                         $.each(data.deductList, function(i,v) {
                             updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
                         })
@@ -496,6 +499,7 @@ function findContractByContractNo() {
                     }
                     
                     if(data.propertyFeeList != null && data.propertyFeeList.length > 0) {
+                        $.contract.propertyMgmt = data.propertyFeeList;
                         $.each(data.propertyFeeList, function(i,v) {
                             updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
                         })
@@ -525,6 +529,7 @@ function findContractByContractNo() {
                     }
                     
                     if(data.promotionFeeList != null && data.promotionFeeList.length > 0) {
+                        $.contract.promotion = data.promotionFeeList;
                         $.each(data.promotionFeeList, function(i,v) {
                             updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
                         })
@@ -554,6 +559,7 @@ function findContractByContractNo() {
                     }
                     
                     if(data.depositList != null && data.depositList.length > 0) {
+                        $.contract.deposit = data.depositList;
                         $.each(data.depositList, function(i,v) {
                             updateRowInvestmentContractDepositterm(JSON.stringify(v));
                         })
@@ -567,6 +573,16 @@ function findContractByContractNo() {
                     if(data.totalPropertyAmount != null && data.taxTotalPropertyAmount != null){
                         $('#propertyMgmtTotalPropertyAmount').text(accounting.formatNumber(data.totalPropertyAmount));
                         $('#propertyMgmtTaxTotalPropertyAmount').text(accounting.formatNumber(data.taxTotalPropertyAmount));
+                    }
+                    
+                    if(data.totalDeductAmount != null && data.taxTotalDeductAmount != null){
+                        $('#commissionTotalDeductAmount').text(accounting.formatNumber(data.totalDeductAmount));
+                        $('#commissionTaxTotalDeductAmount').text(accounting.formatNumber(data.taxTotalDeductAmount));
+                    } 
+                    
+                    if(data.totalPromotionAmount != null && data.taxTotalPromotionAmount != null){
+                        $('#promotionTotalPromotionAmount').text(accounting.formatNumber(data.totalPromotionAmount));
+                        $('#promotionTaxTotalPromotionAmount').text(accounting.formatNumber(data.taxTotalPromotionAmount));
                     }
                     
                     $('input.money').each(function(){
@@ -1392,14 +1408,11 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee');
-    var tmp = $('#promotionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1545,12 +1558,14 @@ function saveContractFixedRent() {
             }
 
             var ind;
-            $.each($.contract.fixedRent, function(i,v) {
-                ind = i * 1 + 1;
-                if(ind > $("#fixedRent").find("tr").length){
-                    v.state = 0;
-                }
-            })
+            if($.contract.fixedRent.length > 0){
+                $.each($.contract.fixedRent, function(i,v) {
+                    ind = i * 1 + 1;
+                    if(ind > $("#fixedRent").find("tr").length){
+                        v.state = 0;
+                    }
+                })
+            }
 
             var index;
             var len = $("#fixedRent").find("tr").length;
@@ -1675,7 +1690,7 @@ function saveContractFixedRent() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": getURLParameter('contractVersion'),
+                    "contractVersion": 1,
                     "fixedRentList": $.contract.fixedRent,
                     "updateOpenId": openId
                 };
@@ -1705,7 +1720,7 @@ function saveContractFixedRent() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1730,12 +1745,14 @@ function saveContractPropertyMgmt() {
             }
 
             var ind;
-            $.each($.contract.propertyMgmt, function(i,v) {
-                ind = i * 1 + 1;
-                if(ind > $("#propertyMgmt").find("tr").length){
-                    v.state = 0;
-                }
-            })
+            if($.contract.propertyMgmt.length > 0){
+                $.each($.contract.propertyMgmt, function(i,v) {
+                    ind = i * 1 + 1;
+                    if(ind > $("#propertyMgmt").find("tr").length){
+                        v.state = 0;
+                    }
+                })
+            }
 
             var index;
             var len = $("#propertyMgmt").find("tr").length;
@@ -1860,7 +1877,7 @@ function saveContractPropertyMgmt() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": getURLParameter('contractVersion'),
+                    "contractVersion": 1,
                     "propertyFeeList": $.contract.propertyMgmt,
                     "updateOpenId": openId
                 };
@@ -1890,7 +1907,7 @@ function saveContractPropertyMgmt() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1915,12 +1932,14 @@ function saveContractCommission() {
             }
 
             var ind;
-            $.each($.contract.commission, function(i,v) {
-                ind = i * 1 + 1;
-                if(ind > $("#commission").find("tr").length){
-                    v.state = 0;
-                }
-            })
+            if($.contract.commission.length > 0){
+                $.each($.contract.commission, function(i,v) {
+                    ind = i * 1 + 1;
+                    if(ind > $("#commission").find("tr").length){
+                        v.state = 0;
+                    }
+                })
+            }
 
             var index;
             var len = $("#commission").find("tr").length;
@@ -2055,7 +2074,7 @@ function saveContractCommission() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": getURLParameter('contractVersion'),
+                    "contractVersion": 1,
                     "deductList": $.contract.commission,
                     "updateOpenId": openId
                 };
@@ -2085,7 +2104,7 @@ function saveContractCommission() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2110,12 +2129,14 @@ function saveContractPromotion() {
             }
 
             var ind;
-            $.each($.contract.promotion, function(i,v) {
-                ind = i * 1 + 1;
-                if(ind > $("#promotion").find("tr").length){
-                    v.state = 0;
-                }
-            })
+            if($.contract.promotion.length > 0){
+                $.each($.contract.promotion, function(i,v) {
+                    ind = i * 1 + 1;
+                    if(ind > $("#promotion").find("tr").length){
+                        v.state = 0;
+                    }
+                })
+            }
 
             var index;
             var len = $("#promotion").find("tr").length;
@@ -2240,7 +2261,7 @@ function saveContractPromotion() {
                 var map = {
                     "bizId": $('#bizId').val(),
                     "contractNo": getURLParameter('id'),
-                    "contractVersion": getURLParameter('contractVersion'),
+                    "contractVersion": 1,
                     "promotionFeeList": $.contract.promotion,
                     "updateOpenId": openId
                 };
@@ -2270,7 +2291,7 @@ function saveContractPromotion() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2295,12 +2316,14 @@ function saveContractDeposit() {
             }
 
             var ind;
-            $.each($.contract.deposit, function(i,v) {
-                ind = i * 1 + 1;
-                if(ind > $("#deposit").find("tr").length){
-                    v.state = 0;
-                }
-            })
+            if($.contract.deposit.length > 0){
+                $.each($.contract.deposit, function(i,v) {
+                    ind = i * 1 + 1;
+                    if(ind > $("#deposit").find("tr").length){
+                        v.state = 0;
+                    }
+                })
+            }
 
             var index;
             $("#deposit").find("tr").each(function(i,e){
@@ -2344,7 +2367,7 @@ function saveContractDeposit() {
             var map = {
                 "bizId": $('#bizId').val(),
                 "contractNo": getURLParameter('id'),
-                "contractVersion": getURLParameter('contractVersion'),
+                "contractVersion": 1,
                 "depositList": $.contract.deposit,
                 "updateOpenId": openId
             };
@@ -2374,7 +2397,7 @@ function saveContractDeposit() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -2492,7 +2515,7 @@ function saveContract() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

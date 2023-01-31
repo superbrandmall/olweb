@@ -27,7 +27,7 @@
         </div>
         <div class="col-md-4">    
             <div class="form-group">
-                <label class="col-md-4 control-label">商户编号:</label>
+                <label class="col-md-4 control-label">铺位编号:</label>
                 <div class="col-md-8 col-sm-12" id="unitCode"></div>
             </div>
             <div class="form-group">

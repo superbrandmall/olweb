@@ -215,7 +215,7 @@ function findAllContractsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        var modality = '';
+                        var modality = '', link = '';
                         if(v.brandLotus != null){
                             modality = v.brandLotus.modality3;
                             
@@ -224,9 +224,15 @@ function findAllContractsByKVCondition(p,c){
                             }
                         }
                         
+                        if(v.contractStatus == 'init'){
+                            link = '<a href="/lotus-admin/contract-init?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a>';
+                        } else {
+                            link = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
+                        }
+                        
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/contract-'+(v.contractStatus == 'init' ? 'init' : 'summary')+'?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a></td>\n\
+                            <td>'+link+'</td>\n\
                             <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\

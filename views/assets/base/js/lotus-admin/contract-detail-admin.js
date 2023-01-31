@@ -94,6 +94,7 @@ $(document).ready(function(){
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
+        calBackPush('commission');
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
@@ -103,6 +104,7 @@ $(document).ready(function(){
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
     })
     
     $("#contractType").change(function(){
@@ -292,6 +294,8 @@ function findContractByContractNo() {
                         $('#floor').append(floor).trigger('change');
                         calBackPushFixedRentTaxRentAmount();
                         calBackPushPropertyMgmtTaxRentAmount();
+                        calBackPush('commission');
+                        calBackPush('promotion');
                     })
                     
                     temp = new Option(data.floorName, data.floorCode, true, true);
@@ -412,7 +416,7 @@ function findContractByContractNo() {
                     $('#compareSecondFrequency').val(data.secondCompareCycle).trigger('change');
                     $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
                     
-                    if(data.fixedRentList.length > 0) {
+                    if(data.fixedRentList != null && data.fixedRentList.length > 0) {
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
                                 updateRowMinSales('fixedRent', i, JSON.stringify(v));
@@ -420,13 +424,37 @@ function findContractByContractNo() {
                         }
                     }
                     
-                    if(data.deductList.length > 0) {
+                    if(data.deductList != null && data.deductList.length > 0) {
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
                                 updateRowMinSales('commission', i, JSON.stringify(v));
                             })
                         }
                     }
+                    
+                    if(data.totalRentAmount != null && data.taxTotalRentAmount != null){
+                        $('#fixedRentTotalRentAmount').text(accounting.formatNumber(data.totalRentAmount));
+                        $('#fixedRentTaxTotalRentAmount').text(accounting.formatNumber(data.taxTotalRentAmount));
+                    } 
+                    
+                    if(data.totalPropertyAmount != null && data.taxTotalPropertyAmount != null){
+                        $('#propertyMgmtTotalPropertyAmount').text(accounting.formatNumber(data.totalPropertyAmount));
+                        $('#propertyMgmtTaxTotalPropertyAmount').text(accounting.formatNumber(data.taxTotalPropertyAmount));
+                    }
+                    
+                    if(data.totalDeductAmount != null && data.taxTotalDeductAmount != null){
+                        $('#commissionTotalDeductAmount').text(accounting.formatNumber(data.totalDeductAmount));
+                        $('#commissionTaxTotalDeductAmount').text(accounting.formatNumber(data.taxTotalDeductAmount));
+                    } 
+                    
+                    if(data.totalPromotionAmount != null && data.taxTotalPromotionAmount != null){
+                        $('#promotionTotalPromotionAmount').text(accounting.formatNumber(data.totalPromotionAmount));
+                        $('#promotionTaxTotalPromotionAmount').text(accounting.formatNumber(data.taxTotalPromotionAmount));
+                    }
+                    
+                    $('input.money').each(function(){
+                        $(this).val(accounting.formatNumber($(this).val()));
+                    })
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【签约编号或版本号错误】导致！');
                 }
@@ -894,9 +922,8 @@ function updateRowInvestmentContractAccounttermFixed(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    calBackPush('fixedRent');
-    
     $("#fixedRentEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('fixedRent');
         calBackPush('fixedRent');
     })
     
@@ -1487,15 +1514,11 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     tbody.appendChild(newrow);
     updateTaxVAT();
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee');
-    var tmp = $('#promotionEndDate_'+(parseInt(count)-1).toLocaleString()).val();
-    var sd;
-    count == 1 ?  sd = $('#startDate').val() : sd = IncrDate(tmp);
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
-        'todayBtn': "linked",
         'todayHighlight': true,
-        'startDate': sd,
+        'startDate': $('#startDate').val(),
         'endDate': $('#endDate').val(),
         'autoclose': true
     });
@@ -1516,6 +1539,11 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
+    
+    $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
+    })
     
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
         calBackPushPromotionAmount();

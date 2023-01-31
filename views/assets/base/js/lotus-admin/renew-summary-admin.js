@@ -16,6 +16,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('FLOW_STEPS');
     }
     
+    if(!sessionStorage.getItem("FLOW_STATUS") || sessionStorage.getItem("FLOW_STATUS") == null || sessionStorage.getItem("FLOW_STATUS") == '') {
+        findDictCodeByDictTypeCode('FLOW_STATUS');
+    }
+    
     findRequestByBizId();
     findRentCalculationMode('RENT_CALCULATION_MODE');
 })
@@ -239,7 +243,7 @@ function findRequestByBizId() {
                         if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                             var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                             $.each(mode, function(i,v){
-                                $("#commissionBefore tr td:nth-child(5), #commissionAfter tr td:nth-child(5)").each(function() {
+                                $("#commissionBefore tr td:nth-child(4), #commissionAfter tr td:nth-child(5)").each(function() {
                                     if(v.dictCode == $(this).text()){
                                         $(this).text(v.dictName);
                                         return;
@@ -260,7 +264,7 @@ function findRequestByBizId() {
                             if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') {
                                 var mode = $.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE"));
                                 $.each(mode, function(i,v){
-                                    $("#commissionAfter tr td:nth-child(5)").each(function() {
+                                    $("#commissionAfter tr td:nth-child(4)").each(function() {
                                         if(v.dictCode == $(this).text()){
                                             $(this).text(v.dictName);
                                             return;
@@ -425,6 +429,9 @@ function findProcessInstByBizId(){
                 }
                 
                 if(response.data != '' && response.data != null){
+                    if(response.data.processInstStatus != null){
+                        $('#flowStatus').html('(<span class="txt">流程'+renderFlowStatus(response.data.processInstStatus)+'</span>)');
+                    }
                     if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
                         var index = 0;
                         $.each(response.data.processStepRecordList, function(i,v) {
@@ -433,7 +440,7 @@ function findProcessInstByBizId(){
                                 $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
                                 <td>'+v.activityName+'</td>\n\
                                 <td>'+v.approveName+'</td>\n\
-                                <td>'+renderFlowStatus(v.status)+'</td>\n\
+                                <td>'+renderFlowSteps(v.status)+'</td>\n\
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.createTime || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');
@@ -447,17 +454,4 @@ function findProcessInstByBizId(){
             }                            
         }
     }); 
-}
-
-function renderFlowStatus(s) {
-    var step = '';
-    if(sessionStorage.getItem("FLOW_STEPS") && sessionStorage.getItem("FLOW_STEPS") != null && sessionStorage.getItem("FLOW_STEPS") != '') {
-        var step = $.parseJSON(sessionStorage.getItem("FLOW_STEPS"));
-        $.each(step, function(i,v){
-            if(v.dictCode == s){
-                step = v.dictName;
-            }
-        })
-    }
-    return step;
 }

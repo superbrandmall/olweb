@@ -52,9 +52,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="brandAttribute" class="col-md-4 control-label">品牌档次</label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <div class="col-md-8 col-sm-12">
                                             <select class="select2" id="brandAttribute" name="brandAttribute" style="width: 100%"></select>
-                                            <div id="errorcontainer-brandAttribute" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -121,28 +120,25 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="contact_name_1" class="col-md-4 control-label">联系人 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="contact_name_1" class="col-md-4 control-label">联系人</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="contact_name_1" name="contact_name_1" />
-                                            <div id="errorcontainer-contact_name_1" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="title" class="col-md-4 control-label">岗位 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="title" class="col-md-4 control-label">岗位</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="title" name="title" />
-                                            <div id="errorcontainer-title" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="contact_phone_1" class="col-md-4 control-label">联系电话 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="contact_phone_1" class="col-md-4 control-label">联系电话</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="contact_phone_1" name="contact_phone_1" />
-                                            <div id="errorcontainer-contact_phone_1" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
