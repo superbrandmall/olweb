@@ -69,19 +69,15 @@ $(document).ready(function(){
     findFeeItemByContractType($('#contractType').val()); 
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
+        $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
+        $(this).parent().parent().removeClass('success');
     });
     
     // change事件
@@ -133,15 +129,18 @@ $(document).ready(function(){
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#commission').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(3)').hide();
         } else if($(this).val() == 'deduct'){
             $('#investmentContractAccounttermFixed').fadeOut();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#fixedRent').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(3)').show();
         } else {
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#investmentContractAccounttermCompare').fadeIn();
+            $('#navbarTop ul li:eq(3)').show();
         }
     })
     
@@ -664,10 +663,6 @@ function findRequestbyBizId() {
                             $('#compareSecondFrequency').append(temp).trigger('change');
                         }
                         $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
-
-                        $('input.money').each(function(){
-                            $(this).val(accounting.formatNumber($(this).val()));
-                        })
                         
                         if(data.oldContractInfo.fixedRentList.length > 0) {
                             if(data.modifyType != 'TIME_CHANGE'){
@@ -1315,20 +1310,14 @@ function updateRowInvestmentContractAccounttermFixed(v,p) {
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1573,20 +1562,14 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1788,20 +1771,14 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v,p) {
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1988,20 +1965,14 @@ function updateRowInvestmentContractAccounttermPromotion(v,p) {
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -2111,20 +2082,14 @@ function updateRowInvestmentContractDepositterm(v) {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
 }

@@ -1,18 +1,6 @@
 $.dates = 0;
 
 $(document).ready(function(){
-    $('#department option').each(function(j, elem){
-        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-                if($(elem).val() == v.moduleCode){
-                    $('#department option:eq('+j+')').addClass('no-remove');
-                }
-            } else if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL') {
-                $('#department option:eq('+j+')').addClass('no-remove');
-            }
-        })
-    })
-    
     updateSelectContractDropDown(50);
     
     $('input.money').on('focus',function(){

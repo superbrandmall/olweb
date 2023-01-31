@@ -1,4 +1,17 @@
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     if(!sessionStorage.getItem("CONTRACT_STATUS") || sessionStorage.getItem("CONTRACT_STATUS") == null || sessionStorage.getItem("CONTRACT_STATUS") == '') {
         findDictCodeByDictTypeCode('CONTRACT_STATUS');
     }
@@ -53,18 +66,6 @@ $(document).ready(function(){
             $('.page-size').text('20');
             break;
     }
-    
-    $('#department option').each(function(j, elem){
-        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-                if($(elem).val() == v.moduleCode){
-                    $('#department option:eq('+j+')').addClass('no-remove');
-                }
-            } else if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL') {
-                $('#department option:eq('+j+')').addClass('no-remove');
-            }
-        })
-    })
     
     updateSelectTenantDropDown(50);
     
@@ -222,10 +223,10 @@ function findAllContractsByKVCondition(p,c){
                                 modality += modality + '（' + v.brandLotus.modality4 + '）';
                             }
                         }
-                    
+                        
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a></td>\n\
+                            <td><a href="/lotus-admin/contract-'+(v.contractStatus == 'init' ? 'init' : 'summary')+'?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a></td>\n\
                             <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\

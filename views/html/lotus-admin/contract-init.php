@@ -7,10 +7,10 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
 }
 
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-detail-admin.js"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-init-admin.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-detail.js"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-init.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 }
 
@@ -19,13 +19,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper contract-detail">
+<div class="content-wrapper contract-init">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="javascript: void(0);" class="btn btn-danger btn-sm" id="deleteContract"><i class="fa fa-times"></i> 删除</a>
+            </div>
             <h4>
                 <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <b id="contractName"></b> - V<b id="contractVersion"></b>
             </h4>
-            <?php include 'component/investment-contract-request-create-dropdown.php'; ?>
+            <div class="pull-right">
+                <button type="button" class="btn btn-success btn-sm" id="activateContract"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交生效</span></button>
+            </div>
             <div class="box-header" id="navbarTop" style="height: 53px;">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#investmentContractModel">合同内容</a></li>
@@ -36,28 +41,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#investmentContractDepositterm">预存款条款</a></li>
                 </ul>
             </div>
-            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px; height: 50px;">
-                <div class="pull-left">
-                    <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                        <li><a href="/lotus-admin/contract-summary?id=<?= $id; ?>">合同概要</a></li>
-                        <li class="active"><a href="javascript: void(0);">合同内容</a></li>
-                        <li><a href="/lotus-admin/contract-history?id=<?= $id; ?>">合同历史</a></li>
-                    </ol>
-                </div>
-            </div>
         </section>
 
-        <section class="content" style="margin-top: 179px;">
+        <section class="content" style="margin-top: 140px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        include 'contract-detail/investmentContractModel.php'; //合同内容
-                        include 'contract-detail/investmentContractAccounttermFixed.php'; //固定租金
-                        include 'contract-detail/investmentContractAccounttermCommission.php'; //提成租金
-                        include 'contract-detail/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
-                        include 'contract-detail/investmentContractAccounttermPromotion.php'; //推广费
-                        include 'contract-detail/investmentContractDepositterm.php'; //保证金
+                        include 'contract-init/investmentContractModel.php'; //合同内容
+                        include 'contract-init/investmentContractAccounttermFixed.php'; //固定租金
+                        include 'contract-init/investmentContractAccounttermCommission.php'; //提成租金
+                        include 'contract-init/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
+                        include 'contract-init/investmentContractAccounttermPromotion.php'; //推广费
+                        include 'contract-init/investmentContractDepositterm.php'; //保证金
                         ?>
                     </div>
 

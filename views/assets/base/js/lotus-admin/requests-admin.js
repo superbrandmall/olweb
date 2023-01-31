@@ -77,18 +77,6 @@ $(document).ready(function(){
             break;
     }
     
-    $('#department option').each(function(j, elem){
-        $.each(JSON.parse($.cookie('userModules')), function(i, v) {
-            if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-                if($(elem).val() == v.moduleCode){
-                    $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
-                }
-            } else if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL') {
-                $('#department option:eq('+j+'), #renewDepartment option:eq('+j+')').addClass('no-remove');
-            }
-        })
-    })
-    
     updateSelectTenantDropDown(50);
     if($("#department").val() != '' && $("#department").val() != null){
         updateSelectStoreDropDownByMallCode(10,$("#department").val());

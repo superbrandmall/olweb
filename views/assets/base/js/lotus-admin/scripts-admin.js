@@ -1108,20 +1108,14 @@ function addRowInvestmentContractAccounttermFixed() {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1334,20 +1328,14 @@ function addRowInvestmentContractAccounttermCommission() {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1522,20 +1510,14 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1721,20 +1703,14 @@ function addRowInvestmentContractAccounttermPromotion() {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
     
@@ -1831,20 +1807,14 @@ function addRowInvestmentContractDepositterm() {
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
-        $(this).css({
-            'backgroundColor': '#fff',
-            'boxShadow': 'inset 6px 6px 2px -6px #000'
-        });
+        $(this).css('backgroundColor','#fff');
         $(this).select();
         $(this).parent().parent().addClass('success');
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
-        $(this).css({
-            'backgroundColor': 'transparent',
-            'boxShadow': 'none'
-        });
+        $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
 }
@@ -3574,8 +3544,9 @@ function createContract() {
 
     var mallName = '', mallCode = '', unitCode = '', unitName = '', shopCode = '', floorCode = '', floorName = '', 
     area = '', brandName = '', bizTypeName = '', brandCode = '', tenantName = '', tenantCode = '', tenantNo = '', 
-    startDate = $('#createContractStartDate').val(), endDate = $('#createContractEndDate').val(), rentCalculationMode = $('#createContractSelectRentCalculationMode').val();
-
+    startDate = $('#createContractStartDate').val(), endDate = $('#createContractEndDate').val(), rentCalculationMode = $('#createContractSelectRentCalculationMode').val(), 
+    userName = $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,"");
+    
     if( $('#createContractDepartment').val() && $('#createContractDepartment').val() != '' && $('#createContractDepartment').val() != null){
         mallName = $('#select2-createContractDepartment-container').text().split('[')[0];
         mallCode = $('#createContractDepartment').val();
@@ -3604,7 +3575,7 @@ function createContract() {
 
     var map = {
         "creatorCode": userCode,
-        "creatorName": $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,""),
+        "creatorName": userName,
         "creatorOpenId": openId,
         "shopCode": shopCode,
         "unitCode": unitCode,
@@ -3637,7 +3608,11 @@ function createContract() {
         "enterDate": startDate,
         "deliveryDate": startDate,
         "awardDate": startDate,
-        "intentDate": startDate
+        "intentDate": startDate,
+        "approvalOpenId": openId,
+        "approvalName": userName,
+        "openStartTime": "10:00",
+        "openEndTime": "22:00"
     };
     
     $.ajax({
@@ -3688,7 +3663,7 @@ function createContract() {
                                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                 }
                                 if(response.data.resultCode == 'SUCCESS') {
-                                    window.location.href = '/lotus-admin/contract-init?id='+response.data.contractNo+'&contractVersion='+response.data.contractVersion+'&s=succeed';         
+                                    window.location.href = '/lotus-admin/contract-init?id='+response.data.contractNo+'&s=succeed';         
                                 } else {
                                     alertMsg(response.data.resultCode,response.data.resultMsg);
                                 }

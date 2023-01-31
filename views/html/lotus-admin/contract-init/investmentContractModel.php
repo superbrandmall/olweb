@@ -16,21 +16,21 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">项目（甲方）</label>
+                <label class="col-md-4 control-label">项目（甲方）<span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <input id="investmentContractModelMallSelect" class="form-control" type="text" readonly />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">我方签约主体</label>
+                <label class="col-md-4 control-label">我方签约主体 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <input id="mainSigningBody" class="form-control" type="text" readonly />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">商户（乙方）</label>
+                <label class="col-md-4 control-label">商户（乙方）<span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select id="selectTenant" class="select2" style="width: 100%;" disabled="readonly"></select>
+                    <select id="selectTenant" class="select2" style="width: 100%;"></select>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">招商人员</label>
+                <label class="col-md-4 control-label">招商人员 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <input class="form-control" id="approvalName" type="text" readonly />
                 </div>
@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">签约日期</label>
+                <label class="col-md-4 control-label">签约日期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control date-picker" id="awardDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
@@ -69,46 +69,40 @@
     
     <div class="box-body">
         <div class="col-md-12">
-            <h5 style="margin-bottom: 0;"> 品牌信息以及商务合作条件</h5>
+            <h5 style="margin-bottom: 0;">品牌信息以及商务合作条件</h5>
             <hr>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">租赁期限</label>
+                <label class="col-md-4 control-label">租赁期限 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-daterange input-group">
-                        <input type="text" class="form-control" id="startDate" disabled />
-                        <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
+                        <input type="text" class="form-control" id="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                         <span class="input-group-addon" style="border: none; background: transparent;">-</span>
                         <div class="input-group">
-                            <input type="text" class="form-control" id="endDate" disabled />
-                            <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
+                            <input type="text" class="form-control" id="endDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                         </div>    
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">业态</label>
+                <label class="col-md-4 control-label">业态 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <input class="form-control" id="bizTypeName" type="text" readonly />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">计租方式</label>
+                <label class="col-md-4 control-label">计租方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="selectRentCalculationMode" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="selectRentCalculationMode" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">利润中心</label>
+                <label class="col-md-4 control-label">利润中心 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="profitCenter" style="width: 100%;" disabled="readonly"></select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label">合同类型</label>
-                <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="contractType" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="profitCenter" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
@@ -117,16 +111,25 @@
                     <select class="select2" id="termCalcMode" style="width: 100%"></select>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">目标营业额 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="targetSales" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">铺位</label>
+                <label class="col-md-4 control-label">铺位 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="selectStore" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="selectStore" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">租赁面积</label>
+                <label class="col-md-4 control-label">租赁面积 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="area" type="text" style="border: 0 none;" readonly />                                                
@@ -135,29 +138,29 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">核算楼层</label>
+                <label class="col-md-4 control-label">核算楼层 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="floor" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="floor" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">经营内容</label>
+                <label class="col-md-4 control-label">经营内容 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="bizScope" type="text" readonly />
+                    <input class="form-control" id="bizScope" type="text" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">支付方式</label>
+                <label class="col-md-4 control-label">合同模版 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="paymentMode" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="contractTemplate" style="width: 100%"></select>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">品牌</label>
+                <label class="col-md-4 control-label">品牌 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="brandName" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="brandName" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
@@ -167,27 +170,21 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">目标营业额</label>
+                <label class="col-md-4 control-label">支付方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control money" id="targetSales" type="text" style="border: none;" readonly />                                                
-                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
-                    </div>
+                    <select class="select2" id="paymentMode" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">预估销售额</label>
+                <label class="col-md-4 control-label">合同类型 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control money" id="minSales" type="text" style="border-right: none;" readonly />                                                
-                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
-                    </div>
+                    <select class="select2" id="contractType" style="width: 100%;"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">收银方式</label>
+                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="posMode" style="width: 100%;" disabled="readonly"></select>
+                    <select class="select2" id="posMode" style="width: 100%;"></select>
                 </div>
             </div>
         </div>
@@ -200,27 +197,27 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">交付日期</label>
+                <label class="col-md-4 control-label">交付日期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control date-picker" id="deliveryDate" type="text" data-plugin="datepicker" disabled />
-                        <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
+                        <input class="form-control date-picker" id="deliveryDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">进场日期</label>
+                <label class="col-md-4 control-label">进场日期 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control date-picker" id="enterDate" type="text" data-plugin="datepicker" disabled />
-                        <span class="input-group-addon" style="border: none; background: #eee;"><i class="fa fa-calendar"></i></span>
+                        <input class="form-control date-picker" id="enterDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">装修期限</label>
+                <label class="col-md-4 control-label">装修期限 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-daterange input-group" id="freePeriods">
                         <input type="text" class="form-control" id="freeStartDate_1" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
@@ -234,7 +231,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">装修天数</label>
+                <label class="col-md-4 control-label">装修天数 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="freeDays" placeholder="请选择装修期限" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="border: 1px solid #ccc; background: #fff; border-right: none; ime-mode:disabled;" />                                      
@@ -289,7 +286,7 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
-                                                <div class="th-inner">适用</div>
+                                                <div class="th-inner">适用 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>

@@ -15,7 +15,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <span class="badge badge-success" id="formStatus" style="vertical-align: top;"></span> <span id="mallName"></span>项目<span id="brandName"></span>品牌商务审批表<span id="created"></span>
         </h4>
         <?php include 'component/investment-contract-request-create-dropdown.php'; ?>
-        <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px;">
+        <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="javascript: void(0);">单据概要</a></li>

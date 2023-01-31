@@ -57,7 +57,7 @@ function findContractByContractNo(v) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data != '' && response.data != null){
+                if(response.data != '' && response.data != null && response.data.contractStatus != 'init'){
                     var data = response.data;
                     if(data.bizId != null){
                         findContractCoFilesByBizId(data.bizId);
@@ -109,6 +109,8 @@ function findContractByContractNo(v) {
                         })
                         findContractCommissionByContractNo(data.rentCalculationMode, getURLParameter('versionB'));
                     }
+                } else {
+                    alertMsg('9999','模块加载错误，该错误由【签约编号或版本号错误】导致！');
                 }
             }
         }

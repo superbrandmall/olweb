@@ -135,6 +135,12 @@ label.error {
     top: 8px;
 }
 
+.sub-header .pull-left {
+    position: absolute;
+    left: 10px;
+    top: 8px;
+}
+
 .sub-header .left-link {
     position: absolute;
     left: 40px;

@@ -9,7 +9,7 @@ $.contract = {
 };
 
 $(document).ready(function(){
-    $('#create-form')[0].reset();    
+    $('#create-form')[0].reset();
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "succeed":
@@ -68,7 +68,9 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('POS_MODE','posMode',$.api.posMode[0],$.api.posMode[1]); // 收银方式
     updateDictDropDownByDictTypeCode('CONTRACT_TYPE','contractType',$.api.contractType[0],$.api.contractType[1]); // 合同类型
     updateDictDropDownByDictTypeCode('PAYMENT_MODE','paymentMode',$.api.paymentMode[0],$.api.paymentMode[1]); // 支付方式
+    updateDictDropDownByDictTypeCode('CONTRACT_TEMPLATE','contractTemplate',$.api.contractTemplate[0],$.api.contractTemplate[1]); // 合同模版
     updateSelectTenantDropDown(50);
+    updateBrandNameDropDown(10);
     findCommissionByDictTypeCode('PRODUCT_CATEGORY'); // 商品分类
     findCommissionByDictTypeCode('DEDUCT_TYPE'); // 全额/差额
     
@@ -108,15 +110,6 @@ $(document).ready(function(){
     $("#contractType").change(function(){
         findFeeItemByContractType($('#contractType').val());
     })
-    
-    /*$(".promotionFeeItemDropDown").on('change',function(){
-        $(".promotionFeeItemDropDown").not('#promotionItem_'+$(this).attr('id').split('_')[1]).val($(this).val()).trigger("change"); ;
-        if($(this).val() == 'G011'){
-            $('#promotionCommissionBase').hide();
-        } else if($(this).val() == 'G021'){
-            $('#promotionCommissionBase').show();
-        }
-    })*/
     
     updateTaxVAT();
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
@@ -191,6 +184,7 @@ $(document).ready(function(){
         updateEndDatepicker('promotion');
         $('#freeStartDate_1').datepicker('setEndDate',$(this).val());
         $('#freeEndDate_1').datepicker('setEndDate',$(this).val());
+        updateContractTemplate();
     })
     
     $("#freeEndDate_1").on('changeDate',function(){
@@ -202,11 +196,6 @@ $(document).ready(function(){
     findDictCodeByDictTypeCode('PAYMENT_MODE'); // 支付方式
     findDictCodeByDictTypeCode('TERM_CALC_MODE'); // 条款计算方式
     findContractByContractNo();
-    findContractFixedRentByContractNo();
-    findContractCommissionByContractNo();
-    findContractPropertyMgmtByContractNo();
-    findContractPromotionByContractNo();
-    findContractDepositByContractNo();
 })
 
 function updateFeeItems(FeeItem,VAT,type) {
@@ -228,9 +217,22 @@ function updateFeeItems(FeeItem,VAT,type) {
     }
 }
 
+function updateContractTemplate() {
+    var start = $('#startDate').val(); 
+    var end = $('#endDate').val(); 
+    if(start != end){
+        var diff = calDatesDiff(start, end);
+        if(diff > 183){
+            updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', '1');
+        } else {
+            updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', '2');
+        }
+    }
+}
+
 function findContractByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNo?contractNo="+getURLParameter('id'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -254,18 +256,13 @@ function findContractByContractNo() {
                 }
                 
                 var temp;
-                if(response.data != '' && response.data != null && response.data.contractStatus != 'init'){
-                    var data = response.data;
+                if(response.data.length > 0 && response.data[0].contractStatus == 'init'){
+                    var data = response.data[0];
                     $.contract.content = data;
                     
-                    if($.contract.content.contractStatus != 'uneffect'){
-                        $('#investmentContractModel .box-header .pull-right button').attr('disabled',true);
-                        $('#investmentContractAccounttermFixed .box-header .pull-right button').attr('disabled',true);
-                        $('#investmentContractAccounttermCommission .box-header .pull-right button').attr('disabled',true);
-                        $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right button').attr('disabled',true);
-                        $('#investmentContractAccounttermPromotion .box-header .pull-right button').attr('disabled',true);
-                        $('#investmentContractDepositterm .box-header .pull-right button').attr('disabled',true);
-                    }
+                    $('#deleteContract').click(function(){
+                        deleteContractById(data.id);
+                    })
                     
                     $('#contractName').text(data.contractName).attr('title',data.contractName);
                     $('#contractVersion').text(data.contractVersion).attr('title',data.contractVersion);
@@ -366,9 +363,14 @@ function findContractByContractNo() {
                         $('#freeEndDate_1').datepicker('update',$(this).val());
                         $("#deliveryDate").datepicker('update', $(this).val());
                         $("#enterDate").datepicker('update', $(this).val());
+                        updateContractTemplate();
                     })
                     
-                     $('#freePeriods').datepicker().on('changeDate', function(e) {
+                    $("#freeEndDate_1").on('changeDate',function(){
+                        $('#bizDate').datepicker('update', IncrDate($(this).val()));
+                    })
+                    
+                    $('#freePeriods').datepicker().on('changeDate', function(e) {
                         var start = $('#freeStartDate_1').val(); 
                         var end = $('#freeEndDate_1').val(); 
                         var diff = calDatesDiff(start, end);
@@ -394,6 +396,14 @@ function findContractByContractNo() {
                     $('#bizTypeName').val(data.bizTypeName);
                     $('#bizDate').datepicker('update', data.bizDate);
                     
+                    $("#brandName").change(function(){
+                        var contractName = $('#select2-brandName-container').text().split('[')[0];
+                        $('#contractName2').val(contractName);
+                        var bizTypeName = $('#select2-brandName-container').text().split('[')[1];
+                        bizTypeName = bizTypeName.split(']')[0];
+                        $('#bizTypeName').val(bizTypeName);
+                    })
+                    
                     $('#awardDate').datepicker('update', data.awardDate);
                     $('#bizScope').val(data.bizScope);
                     $('#targetSales').val(data.targetSales);
@@ -404,6 +414,9 @@ function findContractByContractNo() {
                     $('#openEndTime').val(data.openEndTime);
                     $('#freeDays').val(data.freeDays);
                     $('#remark').val(data.remark);
+                    if(data.contractTemplate != null) {
+                        updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', data.contractTemplate);
+                    }
                     
                     $('#compareFirstFrequency').val(data.firstCompareCycle).trigger('change');
                     if(data.secondCompareFlag == '1'){
@@ -412,7 +425,34 @@ function findContractByContractNo() {
                     $('#compareSecondFrequency').val(data.secondCompareCycle).trigger('change');
                     $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
                     
-                    if(data.fixedRentList.length > 0) {
+                    if(data.fixedRentList != null && data.fixedRentList.length > 0) {
+                        $.each(data.fixedRentList, function(i,v) {
+                            updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
+                        })
+                        
+                        $('#fixedRentPeriodType_1').val(data.fixedRentList[0].periodTypeCode).trigger('change');
+                        
+                        $('#fixedRentSettleDay_1').val(data.fixedRentList[0].settleDay).trigger('change');
+                                                
+                        $('#fixedRentSettlePeriod_1').val(data.fixedRentList[0].settlePeriodCode).trigger('change');
+                        
+                        if(data.fixedRentList[0].isOverdueFlag == 1) {
+                            $('#fixedRentIsOverdueFlag_1').prop('checked', true);
+                        } else {
+                            $('#fixedRentIsOverdueFlag_1').prop('checked', false);
+                        }
+                        
+                        $('#fixedRentOverdueTaxRate_1').val(data.fixedRentList[0].overdueTaxRate).trigger('change');
+                        
+                        
+                        $('#fixedRentOverdueRate_1').val(parseFloat(data.fixedRentList[0].overdueRate * 1000));
+                        
+                        if(data.fixedRentList[0].overdueInvoiceFlag == 1) {
+                            $('#fixedRentOverdueInvoiceFlag_1').prop('checked', true);
+                        } else {
+                            $('#fixedRentOverdueInvoiceFlag_1').prop('checked', false);
+                        }
+                        
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
                                 updateRowMinSales('fixedRent', i, JSON.stringify(v));
@@ -420,257 +460,123 @@ function findContractByContractNo() {
                         }
                     }
                     
-                    if(data.deductList.length > 0) {
+                    if(data.deductList != null && data.deductList.length > 0) {
+                        $.each(data.deductList, function(i,v) {
+                            updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
+                        })
+                        
+                        $('#commissionPeriodType_1').val(data.deductList[0].periodTypeCode).trigger('change');
+                        
+                        $('#commissionSettleDay_1').val(data.deductList[0].settleDay).trigger('change');
+                                                
+                        $('#commissionSettlePeriod_1').val(data.deductList[0].settlePeriodCode).trigger('change');
+                        
+                        if(data.deductList[0].isOverdueFlag == 1) {
+                            $('#commissionIsOverdueFlag_1').prop('checked', true);
+                        } else {
+                            $('#commissionIsOverdueFlag_1').prop('checked', false);
+                        }
+                        
+                        $('#commissionOverdueTaxRate_1').val(data.deductList[0].overdueTaxRate).trigger('change');
+                        
+                        
+                        $('#commissionOverdueRate_1').val(parseFloat(data.deductList[0].overdueRate * 1000));
+                        
+                        if(data.deductList[0].overdueInvoiceFlag == 1) {
+                            $('#commissionOverdueInvoiceFlag_1').prop('checked', true);
+                        } else {
+                            $('#commissionOverdueInvoiceFlag_1').prop('checked', false);
+                        }
+                        
                         if(data.salesList != null && data.salesList.length > 0) {                        
                             $.each(data.salesList, function(i,v) {
                                 updateRowMinSales('commission', i, JSON.stringify(v));
                             })
                         }
                     }
+                    
+                    if(data.propertyFeeList != null && data.propertyFeeList.length > 0) {
+                        $.each(data.propertyFeeList, function(i,v) {
+                            updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
+                        })
+                        
+                        $('#propertyMgmtPeriodType_1').val(data.propertyFeeList[0].periodTypeCode).trigger('change');
+                        
+                        $('#propertyMgmtSettleDay_1').val(data.propertyFeeList[0].settleDay).trigger('change');
+                                                
+                        $('#propertyMgmtSettlePeriod_1').val(data.propertyFeeList[0].settlePeriodCode).trigger('change');
+                        
+                        if(data.propertyFeeList[0].isOverdueFlag == 1) {
+                            $('#propertyMgmtIsOverdueFlag_1').prop('checked', true);
+                        } else {
+                            $('#propertyMgmtIsOverdueFlag_1').prop('checked', false);
+                        }
+                        
+                        $('#propertyMgmtOverdueTaxRate_1').val(data.propertyFeeList[0].overdueTaxRate).trigger('change');
+                        
+                        
+                        $('#propertyMgmtOverdueRate_1').val(parseFloat(data.propertyFeeList[0].overdueRate * 1000));
+                        
+                        if(data.propertyFeeList[0].overdueInvoiceFlag == 1) {
+                            $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', true);
+                        } else {
+                            $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', false);
+                        }
+                    }
+                    
+                    if(data.promotionFeeList != null && data.promotionFeeList.length > 0) {
+                        $.each(data.promotionFeeList, function(i,v) {
+                            updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
+                        })
+                        
+                        $('#promotionPeriodType_1').val(data.promotionFeeList[0].periodTypeCode).trigger('change');
+                        
+                        $('#promotionSettleDay_1').val(data.promotionFeeList[0].settleDay).trigger('change');
+                                                
+                        $('#promotionSettlePeriod_1').val(data.promotionFeeList[0].settlePeriodCode).trigger('change');
+                        
+                        if(data.promotionFeeList[0].isOverdueFlag == 1) {
+                            $('#promotionIsOverdueFlag_1').prop('checked', true);
+                        } else {
+                            $('#promotionIsOverdueFlag_1').prop('checked', false);
+                        }
+                        
+                        $('#promotionOverdueTaxRate_1').val(data.promotionFeeList[0].overdueTaxRate).trigger('change');
+                        
+                        
+                        $('#promotionOverdueRate_1').val(parseFloat(data.promotionFeeList[0].overdueRate * 1000));
+                        
+                        if(data.promotionFeeList[0].overdueInvoiceFlag == 1) {
+                            $('#promotionOverdueInvoiceFlag_1').prop('checked', true);
+                        } else {
+                            $('#promotionOverdueInvoiceFlag_1').prop('checked', false);
+                        }
+                    }
+                    
+                    if(data.depositList != null && data.depositList.length > 0) {
+                        $.each(data.depositList, function(i,v) {
+                            updateRowInvestmentContractDepositterm(JSON.stringify(v));
+                        })
+                    }
+                    
+                    if(data.totalRentAmount != null && data.taxTotalRentAmount != null){
+                        $('#fixedRentTotalRentAmount').text(accounting.formatNumber(data.totalRentAmount));
+                        $('#fixedRentTaxTotalRentAmount').text(accounting.formatNumber(data.taxTotalRentAmount));
+                    } 
+                    
+                    if(data.totalPropertyAmount != null && data.taxTotalPropertyAmount != null){
+                        $('#propertyMgmtTotalPropertyAmount').text(accounting.formatNumber(data.totalPropertyAmount));
+                        $('#propertyMgmtTaxTotalPropertyAmount').text(accounting.formatNumber(data.taxTotalPropertyAmount));
+                    }
+                    
+                    $('input.money').each(function(){
+                        $(this).val(accounting.formatNumber($(this).val()));
+                    })
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【签约编号或版本号错误】导致！');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
-            }
-        }
-    })
-}
-
-function findContractFixedRentByContractNo() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/fixed/rent/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $('#fixedRent tr').remove();
-                if(response.data != null && response.data.length > 0){
-                    $.contract.fixedRent = response.data;
-                    $.each(response.data, function(i,v) {
-                        updateRowInvestmentContractAccounttermFixed(JSON.stringify(v));
-                    })
-                    $('input.money').each(function(){
-                        $(this).val(accounting.formatNumber($(this).val()));
-                    })
-                    
-                    $('#fixedRentPeriodType_1').val(response.data[0].periodTypeCode).trigger('change');
-                    $('#fixedRentSettleDay_1').val(response.data[0].settleDay).trigger('change');
-                    $('#fixedRentSettlePeriod_1').val(response.data[0].settlePeriodCode).trigger('change');
-                    if(response.data[0].isOverdueFlag == '1'){
-                        $('#fixedRentIsOverdueFlag_1').prop('checked', 'checked');
-                    }
-                    $('#fixedRentOverdueTaxRate_1').val(response.data[0].overdueTaxRate).trigger('change');
-                    $('#fixedRentOverdueRate_1').val((parseFloat(response.data[0].overdueRate) * 1000));
-                    if(response.data[0].overdueInvoiceFlag == '1'){
-                        $('#fixedRentOverdueInvoiceFlag_1').prop('checked', 'checked');
-                    }
-                }
-            }
-        }
-    })
-}
-
-function findContractCommissionByContractNo() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/deduct/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $('#commission tr').remove();
-                if(response.data != null && response.data.length > 0){
-                    $.contract.commission = response.data;
-                    $.each(response.data, function(i,v) {
-                        updateRowInvestmentContractAccounttermCommission(JSON.stringify(v));
-                    })
-                    $('input.money').each(function(){
-                        $(this).val(accounting.formatNumber($(this).val()));
-                    })
-                    
-                    $('#commissionSalesType_1').val(response.data[0].salesType).trigger('change');
-                    $('#commissionPeriodType_1').val(response.data[0].periodTypeCode).trigger('change');
-                    $('#commissionSettleDay_1').val(response.data[0].settleDay).trigger('change');
-                    $('#commissionSettlePeriod_1').val(response.data[0].settlePeriodCode).trigger('change');
-                    if(response.data[0].isOverdueFlag == '1'){
-                        $('#commissionIsOverdueFlag_1').prop('checked', 'checked');
-                    }
-                    $('#commissionOverdueTaxRate_1').val(response.data[0].overdueTaxRate).trigger('change');
-                    $('#commissionOverdueRate_1').val((parseFloat(response.data[0].overdueRate) * 1000));
-                    if(response.data[0].overdueInvoiceFlag == '1'){
-                        $('#commissionOverdueInvoiceFlag_1').prop('checked', 'checked');
-                    }
-                }
-            }
-        }
-    })
-}
-
-function findContractPropertyMgmtByContractNo() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/property/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $('#propertyMgmt tr').remove();
-                if(response.data != null && response.data.length > 0){
-                    $.contract.propertyMgmt = response.data;
-                    $.each(response.data, function(i,v) {
-                        updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v));
-                    })
-                    $('input.money').each(function(){
-                        $(this).val(accounting.formatNumber($(this).val()));
-                    })
-                    
-                    $('#propertyMgmtPeriodType_1').val(response.data[0].periodTypeCode).trigger('change');
-                    $('#propertyMgmtSettleDay_1').val(response.data[0].settleDay).trigger('change');
-                    $('#propertyMgmtSettlePeriod_1').val(response.data[0].settlePeriodCode).trigger('change');
-                    if(response.data[0].isOverdueFlag == '1'){
-                        $('#propertyMgmtIsOverdueFlag_1').prop('checked', 'checked');
-                    }
-                    $('#propertyMgmtOverdueTaxRate_1').val(response.data[0].overdueTaxRate).trigger('change');
-                    $('#propertyMgmtOverdueRate_1').val((parseFloat(response.data[0].overdueRate) * 1000));
-                    if(response.data[0].overdueInvoiceFlag == '1'){
-                        $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', 'checked');
-                    }
-                }
-            }
-        }
-    })
-}
-
-function findContractPromotionByContractNo() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/promotion/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $('#promotion tr').remove();
-                if(response.data != null && response.data.length > 0){
-                    $.contract.promotion = response.data;
-                    $.each(response.data, function(i,v) {
-                        updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v));
-                    })
-                    $('input.money').each(function(){
-                        $(this).val(accounting.formatNumber($(this).val()));
-                    })
-                    
-                    $('#promotionPeriodType_1').val(response.data[0].periodTypeCode).trigger('change');
-                    $('#promotionSettleDay_1').val(response.data[0].settleDay).trigger('change');
-                    $('#promotionSettlePeriod_1').val(response.data[0].settlePeriodCode).trigger('change');
-                    if(response.data[0].isOverdueFlag == '1'){
-                        $('#promotionIsOverdueFlag_1').prop('checked', 'checked');
-                    }
-                    $('#promotionOverdueTaxRate_1').val(response.data[0].overdueTaxRate).trigger('change');
-                    $('#promotionOverdueRate_1').val((parseFloat(response.data[0].overdueRate) * 1000));
-                    if(response.data[0].overdueInvoiceFlag == '1'){
-                        $('#promotionOverdueInvoiceFlag_1').prop('checked', 'checked');
-                    }
-                }
-            }
-        }
-    })
-}
-
-function findContractDepositByContractNo() {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/deposit/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $('#deposit tr').remove();
-                if(response.data != null && response.data.length > 0){
-                    $.contract.deposit = response.data;
-                    $.each(response.data, function(i,v) {
-                        updateRowInvestmentContractDepositterm(JSON.stringify(v));
-                    })
-                    $('input.money').each(function(){
-                        $(this).val(accounting.formatNumber($(this).val()));
-                    })
-                }
             }
         }
     })
@@ -894,9 +800,8 @@ function updateRowInvestmentContractAccounttermFixed(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    calBackPush('fixedRent');
-    
     $("#fixedRentEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('fixedRent');
         calBackPush('fixedRent');
     })
     
@@ -1300,7 +1205,7 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     $('#investmentContractAccounttermPropertyMgmt .select2').select2();
     $("#propertyMgmtTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
  
-     $('input.money').on('focus',function(){
+    $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
         $(this).css('backgroundColor','#fff');
         $(this).select();
@@ -1493,7 +1398,6 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     $('#investmentContractAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
-        'todayBtn': "linked",
         'todayHighlight': true,
         'startDate': sd,
         'endDate': $('#endDate').val(),
@@ -1516,6 +1420,11 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
+    
+    $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('promotion');
+        calBackPush('promotion');
+    })
     
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
         calBackPushPromotionAmount();
@@ -1629,7 +1538,7 @@ function updateRowMinSales(id,index,v) {
 }
 
 function saveContractFixedRent() {
-    if($("#fixedRent").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
+    if($("#fixedRent").find("tr").length > 0 && $.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存固定租金吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -1796,7 +1705,7 @@ function saveContractFixedRent() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1814,7 +1723,7 @@ function saveContractFixedRent() {
 }
 
 function saveContractPropertyMgmt() {
-    if($("#propertyMgmt").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
+    if($("#propertyMgmt").find("tr").length > 0 && $.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存物业管理费吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -1981,7 +1890,7 @@ function saveContractPropertyMgmt() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1999,7 +1908,7 @@ function saveContractPropertyMgmt() {
 }
 
 function saveContractCommission() {
-    if($("#commission").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
+    if($("#commission").find("tr").length > 0 && $.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存提成租金吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2176,7 +2085,7 @@ function saveContractCommission() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2194,7 +2103,7 @@ function saveContractCommission() {
 }
 
 function saveContractPromotion() {
-    if($("#promotion").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
+    if($("#promotion").find("tr").length > 0 && $.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存推广费吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2361,7 +2270,7 @@ function saveContractPromotion() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2379,7 +2288,7 @@ function saveContractPromotion() {
 }
 
 function saveContractDeposit() {
-    if($("#deposit").find("tr").length > 0 && $.contract.content.contractStatus == 'uneffect'){
+    if($("#deposit").find("tr").length > 0 && $.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存预存款条款吗？" }).on(function (e) {
             if (!e) {
                 return;
@@ -2465,7 +2374,7 @@ function saveContractDeposit() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -2482,33 +2391,80 @@ function saveContractDeposit() {
 }
 
 function saveContract() {
-    if($.contract.content.contractStatus == 'uneffect'){
+    if($.contract.content.contractStatus == 'init'){
         Ewin.confirm({ message: "确定要保存本版块合同内容吗？" }).on(function (e) {
             if (!e) {
                 return;
             }
 
             var openId = 'admin';
+            var userCode = '';
             $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                 if(v.roleCode == 'CROLE220301000001'){
                     openId = v.moduleName;
+                    userCode = v.userCode;
                     return false;
                 }
             })
-
+            
+            var area = $('#area').val();
+            var unitCode = '';
+            var unitName = '';
+            var shopCode = '';
+            if( $('#selectStore').val() && $('#selectStore').val() != ''){
+                unitCode = $('#selectStore').val().split(':::')[0];
+                shopCode = $('#selectStore').val().split(':::')[1];
+                unitName = $('#selectStore').val().split(':::')[2];
+            }
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var contractType = $('#contractType').val();
+            var selectRentCalculationMode = $('#selectRentCalculationMode').val();
+            
+            var brandName = '';
+            var brandCode = '';
+            if( $('#brandName').val() && $('#brandName').val() != ''){
+                brandName = $('#select2-brandName-container').text().split('[')[0];
+                brandCode = $('#brandName').val();
+            }
+        
             $.contract.content.updateOpenId = openId;
-            $.contract.content.created = null;
-            $.contract.content.updated = null;
-            $.contract.content.contractName = $('#contractName2').val();
+            $.contract.content.updateCode = userCode;
+            $.contract.content.updateName = $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,"");
             $.contract.content.awardDate = $('#awardDate').val();
-            $.contract.content.openStartTime = $('#openStartTime').val();
-            $.contract.content.openEndTime = $('#openEndTime').val();
+            $.contract.content.tenantCode = $('#selectTenant').val();
+            $.contract.content.tenantName = $('#select2-selectTenant-container').text().split(' | ')[1];
+            $.contract.content.tenantNo = $('#select2-selectTenant-container').text().split(' | ')[0];
+            $.contract.content.startDate = startDate;
+            $.contract.content.endDate = endDate;
+            $.contract.content.bizTypeName = $('#bizTypeName').val();
+            $.contract.content.rentCalculationMode = selectRentCalculationMode;
+            $.contract.content.profitCenter = $('#profitCenter').val();
+            $.contract.content.termCalcMode = $('#termCalcMode').val();
+            $.contract.content.unitCode = unitCode;
+            $.contract.content.unitName = unitName;
+            $.contract.content.shopCode = shopCode;
+            $.contract.content.area = area;
+            $.contract.content.floorCode = $('#floor').find('option:selected').val();
+            $.contract.content.floorName = $('#floor').find('option:selected').text();
+            $.contract.content.bizScope = $('#bizScope').val();
+            $.contract.content.targetSales = numberWithoutCommas($('#targetSales').val());
+            $.contract.content.brandName = brandName;
+            $.contract.content.brandCode = brandCode;
+            $.contract.content.contractName = $('#contractName2').val();
+            $.contract.content.paymentMode = $('#paymentMode').find('option:selected').val();
+            $.contract.content.contractType = contractType;
+            $.contract.content.posMode = $('#posMode').find('option:selected').val();
+            $.contract.content.deliveryDate = $('#deliveryDate').val();
+            $.contract.content.enterDate = $('#enterDate').val();
             $.contract.content.freeStartDate = $('#freeStartDate_1').val();
             $.contract.content.freeEndDate = $('#freeEndDate_1').val();
             $.contract.content.freeDays = $('#freeDays').val();
             $.contract.content.bizDate = $('#bizDate').val();
+            $.contract.content.openStartTime = $('#openStartTime').val();
+            $.contract.content.openEndTime = $('#openEndTime').val();
+            $.contract.content.contractTemplate = $('#contractTemplate').find('option:selected').val();
             $.contract.content.remark = $('#remark').val();
-            $.contract.content.termCalcMode = $('#termCalcMode').val();
 
             var map = $.contract.content;
             $.ajax({
@@ -2536,7 +2492,7 @@ function saveContract() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-detail?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -2550,4 +2506,55 @@ function saveContract() {
             });
         })
     }
+}
+
+function deleteContractById(id) {
+    var msg = '确定要删除这份合同吗？';
+    Ewin.confirm({ message: msg }).on(function (e) {
+        if (!e) {
+            return;
+        } else {
+            $('.modal.in').hide().remove();
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        $.ajax({
+            url: $.api.baseLotus+"/api/contract/lotus/deleteById?id="+id+"&updateOpenId="+openId,
+            type: "DELETE",
+            async: false,
+            beforeSend: function (request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    window.location.href = '/lotus-admin/contracts?s=delete';
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    })
 }

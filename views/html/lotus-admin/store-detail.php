@@ -31,7 +31,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#storePropertyInfo">物业信息</a></li>
                 </ul>
             </div>
-            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px;">
+            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px; height: 50px;">
                 <div class="pull-left">
                     <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                         <li class="active"><a href="javascript: void(0);">详细资料</a></li>
