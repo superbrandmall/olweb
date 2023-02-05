@@ -106,8 +106,14 @@ $(document).ready(function(){
                                                 $.each(userInfo.userModules, function(i,v) {
                                                     if(v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001' || v.roleCode == 'CROLE210706000001' || v.roleCode == 'CROLE211008000001' || v.roleCode == 'CROLE220301000001'){
                                                         // 云之家openId v.roleCode == 'CROLE220301000001'
-                                                        v.mobile = userName;
-                                                        userModules.push(v);
+                                                        var userModule = {
+                                                            "roleCode": v.roleCode,
+                                                            "userCode": v.userCode,
+                                                            "mobile": userName,
+                                                            "moduleCode": v.moduleCode,
+                                                            "moduleName": v.moduleName
+                                                        };
+                                                        userModules.push(userModule);
                                                     }
                                                     
 //                                                    if (v.userCode == 'CUSER200524000004') {

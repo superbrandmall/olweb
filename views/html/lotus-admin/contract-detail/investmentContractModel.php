@@ -42,6 +42,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-4 control-label">SAP编号</label>
+                <div class="col-md-8 col-sm-12">
+                    <input class="form-control" id="sapContractNo" type="text" readonly />
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-4 control-label">招商人员</label>
                 <div class="col-md-8 col-sm-12">
                     <input class="form-control" id="approvalName" type="text" readonly />

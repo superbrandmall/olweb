@@ -95,7 +95,7 @@ function findAllStoresByKVCondition(p,c){
         "columnName": "userCode",
         "columnPatten": "",
         "conditionOperator": "AND",
-        "operator": "=",
+        "operator": "LIKE",
         "value": $.cookie('uid')
     },{
         "columnName": "unitType",
@@ -198,7 +198,10 @@ function findAllStoresByKVCondition(p,c){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
+                    var storeCodes = '';
                     $.each(response.data.content, function(i,v){
+                        storeCodes += v.code + ';';
+                        
                         var state;
                         switch (v.remarkFirst) {
                             case '1':
@@ -248,7 +251,7 @@ function findAllStoresByKVCondition(p,c){
                         }
                         
                         
-                        $('#stores').append('<tr data-index="'+i+'">\n\
+                        $('#stores').append('<tr data-index="'+i+'" id="store_'+v.code+'">\n\
                         <td><a href="/lotus-admin/store-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
                         <td>'+state+'</td>\n\
                         <td>'+shopStatus+'</td>\n\
@@ -257,8 +260,13 @@ function findAllStoresByKVCondition(p,c){
                         <td>'+v.startDate+'~'+v.endDate+'</td>\n\
                         <td>'+v.unitArea+'</td>\n\
                         <td>'+unitType+'</td>\n\
-                        <td>'+(v.remarkFirst || '')+'</td></tr>');
+                        <td></td>\n\
+                        <td><span class="ifSigned">未签约</span><span class="signedContract"></span></td></tr>');
                     });
+                    
+                    if(storeCodes != ''){
+                        findContractsByStoreCode(storeCodes);
+                    }
                     
                     if(p == pages){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
@@ -266,7 +274,7 @@ function findAllStoresByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#stores').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#stores').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -275,53 +283,59 @@ function findAllStoresByKVCondition(p,c){
     });
 }
 
-//function findAllLotusUsers() {
-//    $.ajax({
-//        url: $.api.baseLotus+"/api/user/lotus/findAllByUserType?userType=11",
-//        type: "GET",
-//        async: false,
-//        dataType: "json",
-//        contentType: "application/json",
-//        beforeSend: function(request) {
-//            $('#loader').show();
-//            request.setRequestHeader("Login", $.cookie('login'));
-//            request.setRequestHeader("Authorization", $.cookie('authorization'));
-//            request.setRequestHeader("Lang", $.cookie('lang'));
-//            request.setRequestHeader("Source", "onlineleasing");
-//        },
-//        complete: function(){},
-//        success: function (response, status, xhr) {
-//            $('#loader').hide();
-//            if(response.code === 'C0') {
-//                if(xhr.getResponseHeader("Login") !== null){
-//                    $.cookie('login', xhr.getResponseHeader("Login"));
-//                }
-//                if(xhr.getResponseHeader("Authorization") !== null){
-//                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-//                }
-//                
-//                sessionStorage.setItem("lotusUser", JSON.stringify(response.data));
-//            } else {
-//                alertMsg(response.code,response.customerMessage);
-//            }
-//        },
-//        error: function(jqXHR, textStatus, errorThrown) {
-//            console.log(textStatus, errorThrown);
-//        }
-//    });
-//}
-
-//function renderUserNames(uc) {
-//    var step = '';
-//    if(sessionStorage.getItem("lotusUser") && sessionStorage.getItem("lotusUser") != null && sessionStorage.getItem("lotusUser") != '') {
-//        var user = $.parseJSON(sessionStorage.getItem("lotusUser"));
-//        $.each(user, function(i,v){
-//            if(v.code == uc){
-//                user = v.settings.name;
-//            } else {
-//                user = '';
-//            }
-//        })
-//    }
-//    return user;
-//}
+function findContractsByStoreCode(sc) {
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    param = {
+        "columnName": "shopCode",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "in",
+        "value": sc
+    }
+    
+    params.push(param);
+    
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+    
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $.each(response.data.content, function(i,v){
+                        $('#store_'+v.shopCode+' td:eq(8)').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>');
+                        $('#store_'+v.shopCode+' td:eq(9) .ifSigned').text('已签约 ');
+                        $('#store_'+v.shopCode+' td:eq(9) .signedContract').append('<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a> ');
+                    })
+                }
+            }
+        }
+    })
+}

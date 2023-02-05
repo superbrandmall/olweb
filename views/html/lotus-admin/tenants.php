@@ -105,23 +105,35 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left;">
+                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
-                                                            <th>
+                                                            <th style="width: 300px;">
                                                                 <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
+                                                            <th style="width: 55px;">
                                                                 <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                            <th>
+                                                            <th style="width: 45px;">
                                                                 <div class="th-inner">类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
-                                                             <th>
+                                                            <th style="width: 350px;">
+                                                                <div class="th-inner">签约信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">地址</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">创建信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">最后修改信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

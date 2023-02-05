@@ -12,40 +12,14 @@ $(document).ready(function(){
             type: {
                 required: true
             },
-            businessScope: {
-                minlength: 4
-            },
             uscc: {
+                required: true,
                 rangelength: [18,18],
                 numChar: true
-            },
-            remarkFirst: {
-                required: true,
-                minlength: 4
-            },
-            bankAccount: {
-                required: true,
-                minlength: 4
-            },
-            bankName: {
-                required: true,
-                minlength: 4
-            },
-            deliveryAddress: {
-                required: true,
-                minlength: 4
-            },
-            phoneNum: {
-                required: true,
-                minlength: 4
             },
             regAddress: {
                 required: true,
                 minlength: 4
-            },
-            mail: {
-                required: true,
-                email: true
             }
         },
         messages: {
@@ -56,40 +30,14 @@ $(document).ready(function(){
             type: {
                 required: "请选择类型"
             },
-            businessScope: {
-                minlength: "请输入经营范围"
-            },
             uscc: {
-                rangelength: "请输入正确统一社会信用代码 / 身份证号码",
-                numChar: "请输入正确统一社会信用代码 / 身份证号码"
-            },
-            remarkFirst: {
-                required: "请输入办公地址",
-                minlength: "请输入正确办公地址"
-            },
-            bankAccount: {
-                required: "请输入银行账号",
-                minlength: "请输入正确银行账号"
-            },
-            bankName: {
-                required: "请输入银行名称",
-                minlength: "请输入正确银行名称"
-            },
-            deliveryAddress: {
-                required: "请输入账单地址",
-                minlength: "请输入正确账单地址"
-            },
-            phoneNum: {
-                required: "请输入联系电话",
-                minlength: "请输入正确联系电话"
+                required: "请输入统一社会信用代码/身份证号码",
+                rangelength: "请输入正确统一社会信用代码/身份证号码",
+                numChar: "请输入正确统一社会信用代码/身份证号码"
             },
             regAddress: {
                 required: "请输入注册地址",
                 minlength: "请输入正确注册地址"
-            },
-            mail: {
-                required: "请输入送达邮箱",
-                email: "请输入正确送达邮箱"
             }
         },
         errorPlacement: function(error, element) {
@@ -208,7 +156,7 @@ function addTenant() {
             contactList.push(contact);
         })
 
-        if(name!= '' && type != '' && regAddress != '' && deliveryAddress != '' && bankName != '' && bankAccount != '' && remarkFirst != '' && phoneNum != '' && mail != ''){
+        if(name!= '' && type != '' && uscc != '' && regAddress != ''){
             var map = {
                 "creatorOpenId": openId,
                 "updateOpenId": openId,

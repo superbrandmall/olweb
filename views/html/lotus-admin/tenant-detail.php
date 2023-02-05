@@ -52,30 +52,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <div id="errorcontainer-tenantCode" class="errorDiv"></div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="name" name="name" readonly>
-                                            <div id="errorcontainer-name" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="type" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2" id="type" name="type" style="width: 100%" disabled>
-                                                <option value="">未选择</option>
-                                                <option value="2">公司</option>
-                                                <option value="1">个人</option>
-                                            </select>
-                                            <div id="errorcontainer-type" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="capital" class="col-md-4 control-label">注册资金</label>
                                         <div class="col-md-8 col-sm-12">
@@ -85,18 +61,35 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="name" name="name" readonly>
+                                            <div id="errorcontainer-name" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="businessScope" class="col-md-4 control-label">经营范围</label>
                                         <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="businessScope" name="businessScope" />
-                                            <div id="errorcontainer-businessScope" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="uscc"  class="col-md-4 control-label">统一社会信用代码 / 身份证号码</label>
+                                        <label for="type" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12">
-                                            <input class="form-control" type="text" id="uscc" name="uscc" />
+                                            <select class="select2" id="type" name="type" style="width: 100%">
+                                                <option value="">未选择</option>
+                                                <option value="2">公司</option>
+                                                <option value="1">个人</option>
+                                            </select>
+                                            <div id="errorcontainer-type" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="uscc"  class="col-md-4 control-label">统一社会信用代码/身份证号码 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="uscc" name="uscc" required />
                                             <div id="errorcontainer-uscc" class="errorDiv"></div>
                                         </div>
                                     </div>
@@ -124,10 +117,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="deliveryAddress" class="col-md-4 control-label">账单地址 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="deliveryAddress" class="col-md-4 control-label">账单地址</label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="deliveryAddress" name="deliveryAddress" />
-                                            <div id="errorcontainer-deliveryAddress" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -145,19 +137,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankName" class="col-md-4 control-label">银行名称 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="bankName" class="col-md-4 control-label">银行名称</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="bankName" name="bankName" />
-                                            <div id="errorcontainer-bankName" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankAccount" class="col-md-4 control-label">银行账号 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="bankAccount" class="col-md-4 control-label">银行账号</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="bankAccount" name="bankAccount" />
-                                            <div id="errorcontainer-bankAccount" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,31 +170,26 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <input class="form-control" type="text" id="shareHolder" name="shareHolder" />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="remarkFirst" class="col-md-4 control-label">办公地址 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="remarkFirst" name="remarkFirst" />
-                                            <div id="errorcontainer-remarkFirst" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="phoneNum" class="col-md-4 control-label">联系电话 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="phoneNum" name="phoneNum" />
-                                            <div id="errorcontainer-phoneNum" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="mail" class="col-md-4 control-label">送达邮箱 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="mail" class="col-md-4 control-label">送达邮箱</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <input class="form-control" type="text" id="mail" name="mail" />
-                                            <div id="errorcontainer-mail" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="remarkFirst" class="col-md-4 control-label">办公地址</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="remarkFirst" name="remarkFirst" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="phoneNum" class="col-md-4 control-label">联系电话</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input class="form-control" type="text" id="phoneNum" name="phoneNum" />
                                         </div>
                                     </div>
                                 </div>

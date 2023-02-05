@@ -202,41 +202,7 @@ $(document).ready(function(){
     })
     
     
-    var iNum1, selected;
-    var compareFirstFrequency = ['月','季','年'];
-    var compareSecondFrequency = [['季','年'],['年'],['年']];
-    $(function () {
-        for(var i=0;i<compareFirstFrequency.length;i++){
-            compareFirstFrequency[i] == '月'? selected = ' selected' : selected = ''
-            $('#compareFirstFrequency').append('<option value="'+compareFirstFrequency[i]+'"'+selected+'>'+compareFirstFrequency[i]+'</option>');
-        }
-        
-        $('#compareFirstFrequency').change(function () {
-            $('#compareSecondFrequency').children().not(':eq(0)').remove();
-            iNum1 = $(this).children('option:selected').index();
-            if(iNum1 != 0) {
-                if(iNum1 != 3) {
-                    $("#compareSecond").prop('disabled',false);
-                    var CompareSecondFrequency = compareSecondFrequency[iNum1-1];
-                    for(var j=0;j<CompareSecondFrequency.length;j++){
-                        $('#compareSecondFrequency').append('<option value="'+CompareSecondFrequency[j]+'">'+CompareSecondFrequency[j]+'</option>');
-                    }
-                } else {
-                    $("#compareSecond").prop("checked",false);
-                    $("#compareSecond").prop('disabled',true);
-                    $(".shell").show();
-                }
-            }
-        })
-    })          
-    
-    $("#compareSecond").change(function(){
-        if($(this).prop('checked') == true){
-            $(".shell").hide();
-        } else {
-            $(".shell").show();
-        }
-    })
+    updateCompareFrequencyDropDown();
     
     $("#saveDraft").click(function(){
         mandatoryCheck('save');

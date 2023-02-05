@@ -379,13 +379,28 @@ function refineUpdateUrl() {
 }
 
 function logout() {
-    var keys = document.cookie.match(/[^ =;]+(?=\=)/g); 
-    if (keys) { 
-    for (var i = keys.length; i--;) 
-        document.cookie = keys[i]+'=0;expires=' + new Date(0).toUTCString();
-    }
+    deleteCookie();
     
     window.location.href = 'logout';
+}
+
+function deleteCookie() {
+    var cookies = document.cookie.split(";");
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
+    }
+    if(cookies.length > 0) {
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            var domain = location.host.substr(location.host.indexOf('.'));
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=" + domain;
+        }
+    }
 }
 
 $.validator.addMethod('numChar',function(text){
@@ -683,6 +698,60 @@ function findFeeItemByContractType(type) {
     })
 }
 
+function findAllUsers() {
+    $.ajax({
+        url: $.api.baseAuth+"/api/user/findAll?page=0&size=500&sort=id,asc",
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0){
+                    sessionStorage.setItem("users", JSON.stringify(response.data.content));
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function renderUserName(oi) {
+    var user = '';
+    if(sessionStorage.getItem("users") && sessionStorage.getItem("users") != null && sessionStorage.getItem("users") != '') {
+        $.each($.parseJSON(sessionStorage.getItem("users")), function(i,v){
+            if(v.userModules.length > 0){
+                $.each(v.userModules, function(j,w){
+                    if(w.moduleCode == 'YZJ_OPEN_ID' && w.moduleName == oi){
+                        user = v.settings.name;
+                    }
+                })
+            }
+        })
+    }
+    return user;
+}
+
 function renderRentCalculationMode(r) {
     var rentCalculationMode = '';
     if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
@@ -756,6 +825,19 @@ function renderFlowSteps(s) {
         })
     }
     return step;
+}
+
+function renderBrandAttribute(a) {
+    var attribute = '';
+    if(sessionStorage.getItem("BRAND_ATTRIBUTE") && sessionStorage.getItem("BRAND_ATTRIBUTE") != null && sessionStorage.getItem("BRAND_ATTRIBUTE") != '') {
+        var attribute = $.parseJSON(sessionStorage.getItem("BRAND_ATTRIBUTE"));
+        $.each(attribute, function(i,v){
+            if(v.dictCode == a){
+                attribute = v.dictName;
+            }
+        })
+    }
+    return attribute;
 }
 
 function findMainSigningBody(code){
@@ -950,6 +1032,51 @@ function updateDictByDictTypeCodeAndVal(dictTypeCode, id, val) {
             }                             
         }
     })
+}
+
+function updateCompareFrequencyDropDown(){
+    var selected;
+    var compareFirstFrequency = ['月','季','年'];
+    $(function () {
+        for(var i=0;i<compareFirstFrequency.length;i++){
+            compareFirstFrequency[i] == '月'? selected = ' selected' : selected = ''
+            $('#compareFirstFrequency').append('<option value="'+compareFirstFrequency[i]+'"'+selected+'>'+compareFirstFrequency[i]+'</option>');
+        }
+        
+        updateCompareSecondFrequencyDropDown();
+        
+        $('#compareFirstFrequency').change(function () {
+            updateCompareSecondFrequencyDropDown();
+        })
+    })
+    
+    $("#compareSecond").change(function(){
+        if($(this).prop('checked') == true){
+            $(".shell").hide();
+        } else {
+            $(".shell").show();
+        }
+    })
+}
+
+function updateCompareSecondFrequencyDropDown(){
+    var iNum1;
+    var compareSecondFrequency = [['季','年'],['年'],['年']];
+    $('#compareSecondFrequency').children().not(':eq(0)').remove();
+    iNum1 = $('#compareFirstFrequency').children('option:selected').index();
+    if(iNum1 != 0) {
+        if(iNum1 != 3) {
+            $("#compareSecond").prop('disabled',false);
+            var CompareSecondFrequency = compareSecondFrequency[iNum1-1];
+            for(var j=0;j<CompareSecondFrequency.length;j++){
+                $('#compareSecondFrequency').append('<option value='+CompareSecondFrequency[j]+'>'+CompareSecondFrequency[j]+'</option>');
+            }
+        } else {
+            $("#compareSecond").prop("checked",false);
+            $("#compareSecond").prop('disabled',true);
+            $(".shell").show();
+        }
+    }
 }
 
 function calDatesDiff(s,e) {
@@ -2927,276 +3054,282 @@ function calBackPushPromotionDeduct(){
 }
 
 function calBackPush(prefix){
-    var path;
+    var path, cal;
     switch (prefix) {
         case "fixedRent":
             path = 'fixedRentCalc';
+            cal = $('#'+prefix+'TotalRentAmount');
             break;
         case "propertyMgmt":
             path = 'propertyFeeCalc';
+            cal = $('#'+prefix+'TotalPropertyAmount');
             break;
         case "commission":
             path = 'deductCalc';
+            cal = $('#'+prefix+'TotalDeductAmount');
             break;
         case "promotion":
             path = 'promotionCalc';
+            cal = $('#'+prefix+'TotalPromotionAmount');
             break;
         default:
             break;
     }
-    var fixedRent = {};
-    var fixedRentList = [];
-    var propertyFee = {};
-    var propertyFeeList = [];
-    var deductFee = {};
-    var deductList = [];
-    var sales = {};
-    var salesList = [];
-    var promotionFee = {};
-    var promotionFeeList = [];
-    sessionStorage.setItem("rentCalcList",null);
-    sessionStorage.setItem("propertyCalcList",null);
-    sessionStorage.setItem("deductCalcList",null);
-    sessionStorage.setItem("deductCalcList",null);
-    sessionStorage.setItem("promotionCalcList",null);
-    $("#"+prefix).find("tr").each(function(){
-        var tdArr = $(this).children();
-        var amount = tdArr.eq(5).find('input').val();
-        var startDate = tdArr.eq(2).find("input[id*='"+prefix+"StartDate_']").val();
-        var endDate = tdArr.eq(2).find("input[id*='"+prefix+"EndDate_']").val();
-        var itemCode = tdArr.eq(1).find('select').val();
-        var taxAmount = tdArr.eq(4).find('input').val();
-        var taxRentAmount = tdArr.eq(3).find('input').val();
-        if(path == 'fixedRentCalc'){
-            var rentAmount = tdArr.eq(6).find('input').val();
-            var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
-            var taxRate = tdArr.eq(8).find('select').val();
-            if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
-                fixedRent = {
-                    "amount": numberWithoutCommas(amount),
-                    "startDate": startDate,
-                    "endDate":  endDate,
-                    "itemCode": itemCode,
-                    "rentAmount": numberWithoutCommas(rentAmount),
-                    "taxAmount": numberWithoutCommas(taxAmount),
-                    "taxCode": taxCode,
-                    "taxRate": taxRate,
-                    "taxRentAmount": numberWithoutCommas(taxRentAmount)
-                }
-                fixedRentList.push(fixedRent);
-            }
-        } else if(path == 'propertyFeeCalc'){
-            var rentAmount = tdArr.eq(6).find('input').val();
-            var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
-            var taxRate = tdArr.eq(7).find('select').val();
-            if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
-                propertyFee = {
-                    "amount": numberWithoutCommas(amount),
-                    "startDate": startDate,
-                    "endDate":  endDate,
-                    "itemCode": itemCode,
-                    "rentAmount": numberWithoutCommas(rentAmount),
-                    "taxAmount": numberWithoutCommas(taxAmount),
-                    "taxCode": taxCode,
-                    "taxRate": taxRate,
-                    "taxRentAmount": numberWithoutCommas(taxRentAmount)
-                }
-                propertyFeeList.push(propertyFee);
-            }
-        } else if(path == 'deductCalc'){
-            var deduct = tdArr.eq(6).find('input').val();
-            var category = tdArr.eq(4).find('select').val();
-            var deductType = tdArr.eq(3).find('select').val();
-            var amount = tdArr.eq(7).find('input').val();
-            var targetSales = tdArr.eq(8).find('input').val();
-            var taxCode = tdArr.eq(10).find('select option:selected').attr('data-code');
-            var taxRate = tdArr.eq(10).find('select').val();
-            
-            var commissionMinSalesAmount = tdArr.eq(9).find('input').val();
-            if(deduct != '' && startDate != '' && endDate != '' && itemCode != '' && category != '' && deductType != '' && taxCode != '' && taxRate != '' && amount != '' && targetSales != ''){
-                deductFee = {
-                    "taxDeduct": parseFloat(numberWithoutCommas(tdArr.eq(5).find('input').val())) / 100,
-                    "startDate": startDate,
-                    "endDate":  endDate,
-                    "itemCode": itemCode,
-                    "deduct": parseFloat(numberWithoutCommas(deduct)) / 100,
-                    "category": category,
-                    "taxCode": taxCode,
-                    "taxRate": taxRate,
-                    "deductType": deductType,
-                    "amount": numberWithoutCommas(amount),
-                    "targetSales": numberWithoutCommas(targetSales)
-                }
-                deductList.push(deductFee);
-                
-                sales = {
-                    "startDate": startDate,
-                    "endDate":  endDate,
-                    "amount": numberWithoutCommas(commissionMinSalesAmount)
-                }
-                salesList.push(sales);
-            }
-        } else if(path == 'promotionCalc'){
-            var amount = tdArr.eq(3).find('input').val();
-            var taxAmount = tdArr.eq(4).find('input').val();
-            var taxCode = tdArr.eq(5).find('select option:selected').attr('data-code');
-            var taxRate = tdArr.eq(5).find('select').val();
-            if(startDate != '' && endDate != '' && itemCode != '' && taxCode != '' && taxRate != '' && amount != '' && taxAmount != ''){
-                promotionFee = {
-                    "taxAmount": numberWithoutCommas(taxAmount),
-                    "startDate": startDate,
-                    "endDate":  endDate,
-                    "itemCode": itemCode,
-                    "taxCode": taxCode,
-                    "taxRate": taxRate,
-                    "amount": numberWithoutCommas(amount)
-                }
-                promotionFeeList.push(promotionFee);
-            }
-        }
-    });
         
-    if(fixedRentList.length > 0 || propertyFeeList.length > 0 || deductList.length > 0 || promotionFeeList.length > 0){
-        var bizId = $('#bizId').val();
-        var area = $('#area').val();
-        var unitCode = '';
-        var shopCode = '';
-        if( $('#selectStore').val() && $('#selectStore').val() != ''){
-            unitCode = $('#selectStore').val().split(':::')[0];
-            shopCode = $('#selectStore').val().split(':::')[1];
-        }
-        var startDate = $('#startDate').val();
-        var endDate = $('#endDate').val();
-        var contractType = $('#contractType').val();
-        var selectRentCalculationMode = $('#selectRentCalculationMode').val();
-        var map = {};
-        if(fixedRentList.length > 0){
-            map = {
-                "bizId": bizId,
-                "startDate": startDate,
-                "endDate": endDate,
-                "area": area,
-                "shopCode": shopCode,
-                "formType": "new",
-                "rentCalculationMode": selectRentCalculationMode,
-                "contractType": contractType,
-                "unitCode": unitCode,
-                "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
-                "fixedRentList": fixedRentList
-            };
-        } else if(propertyFeeList.length > 0) {
-            map = {
-                "bizId": bizId,
-                "startDate": startDate,
-                "endDate": endDate,
-                "area": area,
-                "shopCode": shopCode,
-                "formType": "new",
-                "rentCalculationMode": selectRentCalculationMode,
-                "contractType": contractType,
-                "unitCode": unitCode,
-                "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
-                "propertyFeeList": propertyFeeList
-            };
-        } else if(deductList.length > 0) {
-            map = {
-                "bizId": bizId,
-                "startDate": startDate,
-                "endDate": endDate,
-                "area": area,
-                "shopCode": shopCode,
-                "formType": "new",
-                "rentCalculationMode": selectRentCalculationMode,
-                "contractType": contractType,
-                "unitCode": unitCode,
-                "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
-                "deductList": deductList,
-                "salesList": salesList
-            };
-        } else if(promotionFeeList.length > 0) {
-            map = {
-                "bizId": bizId,
-                "startDate": startDate,
-                "endDate": endDate,
-                "area": area,
-                "shopCode": shopCode,
-                "formType": "new",
-                "rentCalculationMode": selectRentCalculationMode,
-                "contractType": contractType,
-                "unitCode": unitCode,
-                "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
-                "promotionFeeList": promotionFeeList
-            };
-        }
-
-        $.ajax({
-            url: $.api.baseLotus+"/api/rent/calc/"+path,
-            type: "POST",
-            data: JSON.stringify(map),
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            complete: function(){},
-            success: function (response, status, xhr) {
-                if(response.code === 'C0') {
-                    if(xhr.getResponseHeader("Login") !== null){
-                        $.cookie('login', xhr.getResponseHeader("Login"));
+    if(cal.length > 0){
+        var fixedRent = {};
+        var fixedRentList = [];
+        var propertyFee = {};
+        var propertyFeeList = [];
+        var deductFee = {};
+        var deductList = [];
+        var sales = {};
+        var salesList = [];
+        var promotionFee = {};
+        var promotionFeeList = [];
+        sessionStorage.setItem("rentCalcList",null);
+        sessionStorage.setItem("propertyCalcList",null);
+        sessionStorage.setItem("deductCalcList",null);
+        sessionStorage.setItem("promotionCalcList",null);
+        $("#"+prefix).find("tr").each(function(){
+            var tdArr = $(this).children();
+            var amount = tdArr.eq(5).find('input').val();
+            var startDate = tdArr.eq(2).find("input[id*='"+prefix+"StartDate_']").val();
+            var endDate = tdArr.eq(2).find("input[id*='"+prefix+"EndDate_']").val();
+            var itemCode = tdArr.eq(1).find('select').val();
+            var taxAmount = tdArr.eq(4).find('input').val();
+            var taxRentAmount = tdArr.eq(3).find('input').val();
+            if(path == 'fixedRentCalc'){
+                var rentAmount = tdArr.eq(6).find('input').val();
+                var taxCode = tdArr.eq(8).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(8).find('select').val();
+                if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
+                    fixedRent = {
+                        "amount": numberWithoutCommas(amount),
+                        "startDate": startDate,
+                        "endDate":  endDate,
+                        "itemCode": itemCode,
+                        "rentAmount": numberWithoutCommas(rentAmount),
+                        "taxAmount": numberWithoutCommas(taxAmount),
+                        "taxCode": taxCode,
+                        "taxRate": taxRate,
+                        "taxRentAmount": numberWithoutCommas(taxRentAmount)
                     }
-                    if(xhr.getResponseHeader("Authorization") !== null){
-                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                    }
-                    
-                    if(response.data != null){
-                        if(path == 'fixedRentCalc' && response.data.rentCalcList.length > 0){
-                            $('#'+prefix+'TotalRentAmount').text(accounting.formatNumber(response.data.totalRentAmount));
-                            $('#'+prefix+'TaxTotalRentAmount').text(accounting.formatNumber(response.data.taxTotalRentAmount));
-                            sessionStorage.setItem("rentCalcList", JSON.stringify(response.data.rentCalcList));
-                        } else if (path == 'propertyFeeCalc' && response.data.propertyCalcList.length > 0){
-                            $('#'+prefix+'TotalPropertyAmount').text(accounting.formatNumber(response.data.totalPropertyAmount));
-                            $('#'+prefix+'TaxTotalPropertyAmount').text(accounting.formatNumber(response.data.taxTotalPropertyAmount));
-                            sessionStorage.setItem("propertyCalcList", JSON.stringify(response.data.propertyCalcList));
-                        } else if(path == 'deductCalc' && response.data.deductCalcList.length > 0){
-                            $('#'+prefix+'TotalDeductAmount').text(accounting.formatNumber(response.data.totalDeductAmount));
-                            $('#'+prefix+'TaxTotalDeductAmount').text(accounting.formatNumber(response.data.taxTotalDeductAmount));
-                            sessionStorage.setItem("deductCalcList", JSON.stringify(response.data.deductCalcList));
-                        } else if(path == 'promotionCalc' && response.data.promotionCalcList.length > 0){
-                            $('#'+prefix+'TotalPromotionAmount').text(accounting.formatNumber(response.data.totalPromotionAmount));
-                            $('#'+prefix+'TaxTotalPromotionAmount').text(accounting.formatNumber(response.data.taxTotalPromotionAmount));
-                            sessionStorage.setItem("promotionCalcList", JSON.stringify(response.data.promotionCalcList));
-                        } 
-                    }
-
-                } else {
-                    alertMsg(response.code,response.customerMessage);
+                    fixedRentList.push(fixedRent);
                 }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
+            } else if(path == 'propertyFeeCalc'){
+                var rentAmount = tdArr.eq(6).find('input').val();
+                var taxCode = tdArr.eq(7).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(7).find('select').val();
+                if(amount != '' && startDate != '' && endDate != '' && itemCode != '' && rentAmount != '' && taxAmount != '' && taxCode != '' && taxRate != '' && taxRentAmount != ''){
+                    propertyFee = {
+                        "amount": numberWithoutCommas(amount),
+                        "startDate": startDate,
+                        "endDate":  endDate,
+                        "itemCode": itemCode,
+                        "rentAmount": numberWithoutCommas(rentAmount),
+                        "taxAmount": numberWithoutCommas(taxAmount),
+                        "taxCode": taxCode,
+                        "taxRate": taxRate,
+                        "taxRentAmount": numberWithoutCommas(taxRentAmount)
+                    }
+                    propertyFeeList.push(propertyFee);
+                }
+            } else if(path == 'deductCalc'){
+                var deduct = tdArr.eq(6).find('input').val();
+                var category = tdArr.eq(4).find('select').val();
+                var deductType = tdArr.eq(3).find('select').val();
+                var amount = tdArr.eq(7).find('input').val();
+                var targetSales = tdArr.eq(8).find('input').val();
+                var taxCode = tdArr.eq(10).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(10).find('select').val();
+
+                var commissionMinSalesAmount = tdArr.eq(9).find('input').val();
+                if(deduct != '' && startDate != '' && endDate != '' && itemCode != '' && category != '' && deductType != '' && taxCode != '' && taxRate != '' && amount != '' && targetSales != ''){
+                    deductFee = {
+                        "taxDeduct": parseFloat(numberWithoutCommas(tdArr.eq(5).find('input').val())) / 100,
+                        "startDate": startDate,
+                        "endDate":  endDate,
+                        "itemCode": itemCode,
+                        "deduct": parseFloat(numberWithoutCommas(deduct)) / 100,
+                        "category": category,
+                        "taxCode": taxCode,
+                        "taxRate": taxRate,
+                        "deductType": deductType,
+                        "amount": numberWithoutCommas(amount),
+                        "targetSales": numberWithoutCommas(targetSales)
+                    }
+                    deductList.push(deductFee);
+
+                    sales = {
+                        "startDate": startDate,
+                        "endDate":  endDate,
+                        "amount": numberWithoutCommas(commissionMinSalesAmount)
+                    }
+                    salesList.push(sales);
+                }
+            } else if(path == 'promotionCalc'){
+                var amount = tdArr.eq(3).find('input').val();
+                var taxAmount = tdArr.eq(4).find('input').val();
+                var taxCode = tdArr.eq(5).find('select option:selected').attr('data-code');
+                var taxRate = tdArr.eq(5).find('select').val();
+                if(startDate != '' && endDate != '' && itemCode != '' && taxCode != '' && taxRate != '' && amount != '' && taxAmount != ''){
+                    promotionFee = {
+                        "taxAmount": numberWithoutCommas(taxAmount),
+                        "startDate": startDate,
+                        "endDate":  endDate,
+                        "itemCode": itemCode,
+                        "taxCode": taxCode,
+                        "taxRate": taxRate,
+                        "amount": numberWithoutCommas(amount)
+                    }
+                    promotionFeeList.push(promotionFee);
+                }
             }
         });
-    } else {
-        if(path == 'fixedRentCalc'){
-            $('#'+prefix+'TotalRentAmount').text(accounting.formatNumber(0));
-            $('#'+prefix+'TaxTotalRentAmount').text(accounting.formatNumber(0));
-            sessionStorage.setItem("rentCalcList", null);
-        } else if (path == 'propertyFeeCalc'){
-            $('#'+prefix+'TotalPropertyAmount').text(accounting.formatNumber(0));
-            $('#'+prefix+'TaxTotalPropertyAmount').text(accounting.formatNumber(0));
-            sessionStorage.setItem("propertyCalcList", null);
-        } else if (path == 'deductCalc'){
-            $('#'+prefix+'TotalDeductAmount').text(accounting.formatNumber(0));
-            $('#'+prefix+'TaxTotalDeductAmount').text(accounting.formatNumber(0));
-            sessionStorage.setItem("deductCalcList", null);
-        } else if (path == 'promotionCalc'){
-            $('#'+prefix+'TotalPromotionAmount').text(accounting.formatNumber(0));
-            $('#'+prefix+'TaxTotalPromotionAmount').text(accounting.formatNumber(0));
-            sessionStorage.setItem("deductCalcList", null);
+
+        if(fixedRentList.length > 0 || propertyFeeList.length > 0 || deductList.length > 0 || promotionFeeList.length > 0){
+            var bizId = $('#bizId').val();
+            var area = $('#area').val();
+            var unitCode = '';
+            var shopCode = '';
+            if( $('#selectStore').val() && $('#selectStore').val() != ''){
+                unitCode = $('#selectStore').val().split(':::')[0];
+                shopCode = $('#selectStore').val().split(':::')[1];
+            }
+            var startDate = $('#startDate').val();
+            var endDate = $('#endDate').val();
+            var contractType = $('#contractType').val();
+            var selectRentCalculationMode = $('#selectRentCalculationMode').val();
+            var map = {};
+            if(fixedRentList.length > 0){
+                map = {
+                    "bizId": bizId,
+                    "startDate": startDate,
+                    "endDate": endDate,
+                    "area": area,
+                    "shopCode": shopCode,
+                    "formType": "new",
+                    "rentCalculationMode": selectRentCalculationMode,
+                    "contractType": contractType,
+                    "unitCode": unitCode,
+                    "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
+                    "fixedRentList": fixedRentList
+                };
+            } else if(propertyFeeList.length > 0) {
+                map = {
+                    "bizId": bizId,
+                    "startDate": startDate,
+                    "endDate": endDate,
+                    "area": area,
+                    "shopCode": shopCode,
+                    "formType": "new",
+                    "rentCalculationMode": selectRentCalculationMode,
+                    "contractType": contractType,
+                    "unitCode": unitCode,
+                    "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
+                    "propertyFeeList": propertyFeeList
+                };
+            } else if(deductList.length > 0) {
+                map = {
+                    "bizId": bizId,
+                    "startDate": startDate,
+                    "endDate": endDate,
+                    "area": area,
+                    "shopCode": shopCode,
+                    "formType": "new",
+                    "rentCalculationMode": selectRentCalculationMode,
+                    "contractType": contractType,
+                    "unitCode": unitCode,
+                    "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
+                    "deductList": deductList,
+                    "salesList": salesList
+                };
+            } else if(promotionFeeList.length > 0) {
+                map = {
+                    "bizId": bizId,
+                    "startDate": startDate,
+                    "endDate": endDate,
+                    "area": area,
+                    "shopCode": shopCode,
+                    "formType": "new",
+                    "rentCalculationMode": selectRentCalculationMode,
+                    "contractType": contractType,
+                    "unitCode": unitCode,
+                    "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
+                    "promotionFeeList": promotionFeeList
+                };
+            }
+
+            $.ajax({
+                url: $.api.baseLotus+"/api/rent/calc/"+path,
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+
+                        if(response.data != null){
+                            if(path == 'fixedRentCalc' && response.data.rentCalcList.length > 0){
+                                $('#'+prefix+'TotalRentAmount').text(accounting.formatNumber(response.data.totalRentAmount));
+                                $('#'+prefix+'TaxTotalRentAmount').text(accounting.formatNumber(response.data.taxTotalRentAmount));
+                                sessionStorage.setItem("rentCalcList", JSON.stringify(response.data.rentCalcList));
+                            } else if (path == 'propertyFeeCalc' && response.data.propertyCalcList.length > 0){
+                                $('#'+prefix+'TotalPropertyAmount').text(accounting.formatNumber(response.data.totalPropertyAmount));
+                                $('#'+prefix+'TaxTotalPropertyAmount').text(accounting.formatNumber(response.data.taxTotalPropertyAmount));
+                                sessionStorage.setItem("propertyCalcList", JSON.stringify(response.data.propertyCalcList));
+                            } else if(path == 'deductCalc' && response.data.deductCalcList.length > 0){
+                                $('#'+prefix+'TotalDeductAmount').text(accounting.formatNumber(response.data.totalDeductAmount));
+                                $('#'+prefix+'TaxTotalDeductAmount').text(accounting.formatNumber(response.data.taxTotalDeductAmount));
+                                sessionStorage.setItem("deductCalcList", JSON.stringify(response.data.deductCalcList));
+                            } else if(path == 'promotionCalc' && response.data.promotionCalcList.length > 0){
+                                $('#'+prefix+'TotalPromotionAmount').text(accounting.formatNumber(response.data.totalPromotionAmount));
+                                $('#'+prefix+'TaxTotalPromotionAmount').text(accounting.formatNumber(response.data.taxTotalPromotionAmount));
+                                sessionStorage.setItem("promotionCalcList", JSON.stringify(response.data.promotionCalcList));
+                            } 
+                        }
+
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        } else {
+            if(path == 'fixedRentCalc'){
+                $('#'+prefix+'TotalRentAmount').text(accounting.formatNumber(0));
+                $('#'+prefix+'TaxTotalRentAmount').text(accounting.formatNumber(0));
+                sessionStorage.setItem("rentCalcList", null);
+            } else if (path == 'propertyFeeCalc'){
+                $('#'+prefix+'TotalPropertyAmount').text(accounting.formatNumber(0));
+                $('#'+prefix+'TaxTotalPropertyAmount').text(accounting.formatNumber(0));
+                sessionStorage.setItem("propertyCalcList", null);
+            } else if (path == 'deductCalc'){
+                $('#'+prefix+'TotalDeductAmount').text(accounting.formatNumber(0));
+                $('#'+prefix+'TaxTotalDeductAmount').text(accounting.formatNumber(0));
+                sessionStorage.setItem("deductCalcList", null);
+            } else if (path == 'promotionCalc'){
+                $('#'+prefix+'TotalPromotionAmount').text(accounting.formatNumber(0));
+                $('#'+prefix+'TaxTotalPromotionAmount').text(accounting.formatNumber(0));
+                sessionStorage.setItem("deductCalcList", null);
+            }
         }
     }
 }

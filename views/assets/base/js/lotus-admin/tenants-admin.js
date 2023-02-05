@@ -1,4 +1,12 @@
 $(document).ready(function(){
+    if(!sessionStorage.getItem("BRAND_ATTRIBUTE") || sessionStorage.getItem("BRAND_ATTRIBUTE") == null || sessionStorage.getItem("BRAND_ATTRIBUTE") == '') {
+        findDictCodeByDictTypeCode('BRAND_ATTRIBUTE');
+    }
+    
+    if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
+        findAllUsers();
+    }
+    
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "succeed":
@@ -100,7 +108,7 @@ function findAllTenantsByKVCondition(p,c){
         param = {
             "columnName": "tenantCode",
             "columnPatten": "",
-            "operator": "AND",
+            "operator": "LIKE",
             "value": $.cookie('searchTenantCode')
         }
         params.push(param);
@@ -110,7 +118,7 @@ function findAllTenantsByKVCondition(p,c){
         param = {
             "columnName": "name",
             "columnPatten": "",
-            "operator": "AND",
+            "operator": "LIKE",
             "value": $.cookie('searchTenantName')
         }
         params.push(param);
@@ -154,16 +162,25 @@ function findAllTenantsByKVCondition(p,c){
                 if(response.data.content.length > 0) { 
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
-
+                    
+                    var tenantNos = '';
                     $.each(response.data.content, function(i,v){
+                        tenantNos += v.tenantCode + ';';
                         $('#tenants').append('\
-                        <tr data-index="'+i+'">\n\
+                        <tr data-index="'+i+'" id="tenant_'+v.tenantCode+'">\n\
                         <td><a href="/lotus-admin/tenant-detail?id='+v.code+'">'+v.name+'['+v.tenantCode+']</a></td>\n\
                         <td>'+(v.state == 1? '使用中' : '已删除')+'</td>\n\
                         <td>'+(v.type == 1? '个人' : '公司')+'</td>\n\
-                        <td>'+(v.remarkFirst || '')+'</td>\n\
+                        <td><span class="ifSigned">未签约</span><span class="signedContract"></span></td>\n\
+                        <td>'+(v.regAddress || '')+'</td>\n\
+                        <td>'+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+'</td>\n\
+                        <td>'+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+'</td>\n\
                         </tr>');
                     });
+                    
+                    if(tenantNos != ''){
+                        findContractsByTenantNo(tenantNos);
+                    }
                     
                     if(p == pages){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
@@ -171,11 +188,67 @@ function findAllTenantsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#tenants').html('<tr><td colspan="4" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#tenants').html('<tr><td colspan="7" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
         }
     });
+}
+
+function findContractsByTenantNo(tn) {
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    param = {
+        "columnName": "tenantNo",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "in",
+        "value": tn
+    }
+    
+    params.push(param);
+    
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+    
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $.each(response.data.content, function(i,v){
+                        $('#tenant_'+v.tenantNo+' td:eq(3) .ifSigned').text('已签约 ');
+                        $('#tenant_'+v.tenantNo+' td:eq(3) .signedContract').append('<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a> ');
+                    })
+                }
+            }
+        }
+    })
 }

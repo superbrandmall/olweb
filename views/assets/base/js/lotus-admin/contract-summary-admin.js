@@ -253,7 +253,7 @@ function findContractFixedRentByContractNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
+                if(response.data != null && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         $('#fixedRent').append('<tr>\n\
 <td>'+v.itemName+'['+v.itemCode+']</td>\n\
@@ -294,7 +294,7 @@ function findContractCommissionByContractNo(rentCalcMode) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
+                if(response.data != null && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         $('#commission').append('<tr>\n\
 <td>'+v.itemName+'['+v.itemCode+']</td>\n\
@@ -347,7 +347,7 @@ function findContractPropertyMgmtByContractNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
+                if(response.data != null && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         $('#propertyMgmt').append('<tr>\n\
 <td>'+v.itemName+'['+v.itemCode+']</td>\n\
@@ -388,7 +388,7 @@ function findContractPromotionByContractNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
+                if(response.data != null && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         $('#promotion').append('<tr>\n\
 <td>'+v.itemName+'['+v.itemCode+']</td>\n\
@@ -427,7 +427,7 @@ function findContractDepositByContractNo() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
+                if(response.data != null && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         $('#deposit').append('<tr>\n\
 <td>'+v.itemName+'['+v.itemCode+']</td>\n\

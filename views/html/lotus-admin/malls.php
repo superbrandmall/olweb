@@ -9,10 +9,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 160px;">
+    <section class="sub-header" style="height: 210px;">
         <h4>
-            项目
+            物业资源 - 项目
         </h4>
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
+            <div class="pull-left">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                    <li class="active"><a href="javascript: void(0);">项目</a></li>
+                    <li><a href="/lotus-admin/stores?items=20">铺位</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">
@@ -41,10 +49,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <label class="col-md-4 control-label" style="text-align: right;">所属区域</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2" id="mallType" name="mallType" style="width: 100%">
-                                    <option value="">未选择</option>
-                                    <option value="lotus">上海区</option>
-                                    <option value="lotus-east">小东区</option>
-                                    <option value="lotus-north">北区</option>
+                                    <option value="" selected>全部</option>
+                                    <option value="上海市">上海市</option>
+                                    <option value="北京市">北京市</option>
+                                    <option value="重庆市">重庆市</option>
+                                    <option value="江苏省">江苏省</option>
+                                    <option value="河南省">河南省</option>
+                                    <option value="山东省">山东省</option>
+                                    <option value="湖南省">湖南省</option>
+                                    <option value="陕西省">陕西省</option>
                                 </select>
                             </div>
                         </div>
@@ -63,7 +76,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 210px;">
+    <section class="content" style="margin-top: 260px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -99,7 +112,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner" style="width: 120px;">项目</div>
+                                                                <div class="th-inner" style="width: 150px;">项目</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 50px;">状态</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 85px;">开业日期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 100px;">电话</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -115,23 +140,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 330px;">注册地址</div>
+                                                                <div class="th-inner" style="width: 300px;">注册地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">开户银行</div>
+                                                                <div class="th-inner" style="width: 270px;">开户银行</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 160px;">账号</div>
+                                                                <div class="th-inner" style="width: 170px;">账号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">联系电话</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner" style="width: 100px;">项目所属地</div>
+                                                                <div class="th-inner" style="width: 120px;">项目所属地</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

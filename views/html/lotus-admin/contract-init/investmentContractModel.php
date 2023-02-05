@@ -36,9 +36,9 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">单号</label>
+                <label class="col-md-4 control-label">SAP编号 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="bizId" type="text" readonly />
+                    <input class="form-control" id="sapContractNo" type="text" />
                 </div>
             </div>
             <div class="form-group">
@@ -316,11 +316,11 @@
                                             <td>一次比高</td>
                                             <td>
                                                 <div class="input-daterange input-group">
-                                                    <input type="text" class="form-control" id="compareStartDate_1" style="min-width: 80px;" disabled />
+                                                    <input type="text" class="form-control" id="compareStartDate_1" style="min-width: 80px;" readonly />
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <span class="input-group-addon">-</span>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="compareEndDate_1"  style="min-width: 80px;" disabled />
+                                                        <input type="text" class="form-control" id="compareEndDate_1"  style="min-width: 80px;" readonly />
                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     </div>    
                                                 </div>
@@ -344,11 +344,11 @@
                                             <td>
                                                 <div class="shell"></div>
                                                 <div class="input-daterange input-group">
-                                                    <input type="text" class="form-control" id="compareStartDate_2" style="min-width: 80px;" disabled />
+                                                    <input type="text" class="form-control" id="compareStartDate_2" style="min-width: 80px;" readonly />
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <span class="input-group-addon">-</span>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" id="compareEndDate_2"  style="min-width: 80px;" disabled />
+                                                        <input type="text" class="form-control" id="compareEndDate_2"  style="min-width: 80px;" readonly />
                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     </div>    
                                                 </div>

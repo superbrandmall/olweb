@@ -22,9 +22,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <span id="contractName"></span> - V<span id="contractVersion"></span>
         </h4>
         <?php include 'component/investment-contract-request-create-dropdown.php'; ?>
-        <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px;">
+        <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px; height: 50px;">
             <div class="pull-left">
-                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0; height: 50px;">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/contract-summary?id=<?= $id; ?>">合同概要</a></li>
                     <li><a href="/lotus-admin/contract-detail?id=<?= $id; ?>">合同内容</a></li>
                     <li class="active"><a href="javascript: void(0);">合同历史</a></li>

@@ -61,6 +61,12 @@ function findAllMallsByKVCondition(p,c){
             "conditionOperator": "",
             "operator": "!=",
             "value": 'SC999'
+        },{
+            "columnName": "mallType",
+            "columnPatten": "",
+            "conditionOperator": "",
+            "operator": "!=",
+            "value": 'kow'
         }
     ];
     var param = {};
@@ -87,7 +93,7 @@ function findAllMallsByKVCondition(p,c){
         param = {
             "columnName": "mallName",
             "columnPatten": "",
-            "operator": "AND",
+            "operator": "LIKE",
             "value": $.cookie('searchMallName')
         }
         params.push(param);
@@ -95,19 +101,11 @@ function findAllMallsByKVCondition(p,c){
 
     if($.cookie('searchMallType') != null && $.cookie('searchMallType') != '' && $.cookie('searchMallType') != 'null'){
         param = {
-            "columnName": "mallType",
+            "columnName": "location",
             "columnPatten": "",
-            "operator": "AND",
+            "operator": "LIKE",
             "value": $.cookie('searchMallType')
-        }
-        
-    } else {
-        param = {
-            "columnName": "mallType",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": "lotus"
-        }
+        } 
     }
     
     params.push(param);
@@ -142,15 +140,31 @@ function findAllMallsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
+                        var mallStatus;
+                        var dc = dateCompare(v.endDate,date);
+                        switch (dc) {
+                            case 'larger':
+                                mallStatus = "使用中";
+                                break;
+                            case 'smaller':
+                                mallStatus = "已闭店";
+                                break;
+                            default:
+                                mallStatus = "使用中";
+                                break;
+                        }
+                        
                         $('#malls').append('<tr data-index="'+i+'">\n\
                         <td><a href="/lotus-admin/default?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
+                        <td>'+mallStatus+'</td>\n\
+                        <td>'+v.startDate+'</td>\n\
+                        <td>'+(v.mallLotusBase.phoneNum || '')+'</td>\n\
                         <td>'+v.mallLotusBase.address+'</td>\n\
                         <td>'+v.mallLotusBase.name+'</td>\n\
                         <td>'+v.mallLotusBase.uscc+'</td>\n\
                         <td>'+v.mallLotusBase.regAddress+'</td>\n\
                         <td>'+v.mallLotusBase.bankName+'</td>\n\
                         <td>'+v.mallLotusBase.bankAccount+'</td>\n\
-                        <td>'+(v.mallLotusBase.phoneNum || '')+'</td>\n\
                         <td>'+v.mallLotusBase.cityDistrict+'</td></tr>');
                     });
                     

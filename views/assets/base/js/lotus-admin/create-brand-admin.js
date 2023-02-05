@@ -1,5 +1,7 @@
 $(document).ready(function(){
-    findDictCodeByDictTypeCode('BRAND_ATTRIBUTE');
+    if(!sessionStorage.getItem("BRAND_ATTRIBUTE") || sessionStorage.getItem("BRAND_ATTRIBUTE") == null || sessionStorage.getItem("BRAND_ATTRIBUTE") == '') {
+        findDictCodeByDictTypeCode('BRAND_ATTRIBUTE');
+    }
 
     $("#create-form").validate({
         rules: {

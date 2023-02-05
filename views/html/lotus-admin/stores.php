@@ -9,10 +9,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 160px;">
+    <section class="sub-header" style="height: 210px;">
         <h4>
-            铺位
+            物业资源 - 铺位
         </h4>
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
+            <div class="pull-left">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="/lotus-admin/malls">项目</a></li>
+                    <li class="active"><a href="javascript: void(0);">铺位</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="pull-right">
             <a href="/lotus-admin/create-store" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus icon-white"></i> 创建
@@ -78,7 +86,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 210px;">
+    <section class="content" style="margin-top: 260px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -147,6 +155,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">落位品牌</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">签约合同</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

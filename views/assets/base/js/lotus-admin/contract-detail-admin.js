@@ -89,22 +89,18 @@ $(document).ready(function(){
     // change事件
     $("input[id*='fixedRentEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('fixedRent');
-        calBackPush('fixedRent');
     })
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('commission');
-        calBackPush('commission');
     })
     
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('propertyMgmt');
-        calBackPush('propertyMgmt');
     })
     
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
-        calBackPush('promotion');
     })
     
     $("#contractType").change(function(){
@@ -150,41 +146,7 @@ $(document).ready(function(){
         }
     })
     
-    var iNum1, selected;
-    var compareFirstFrequency = ['月','季','年'];
-    var compareSecondFrequency = [['季','年'],['年'],['年']];
-    $(function () {
-        for(var i=0;i<compareFirstFrequency.length;i++){
-            compareFirstFrequency[i] == '月'? selected = ' selected' : selected = ''
-            $('#compareFirstFrequency').append('<option value="'+compareFirstFrequency[i]+'"'+selected+'>'+compareFirstFrequency[i]+'</option>');
-        }
-        
-        $('#compareFirstFrequency').change(function () {
-            $('#compareSecondFrequency').children().not(':eq(0)').remove();
-            iNum1 = $(this).children('option:selected').index();
-            if(iNum1 != 0) {
-                if(iNum1 != 3) {
-                    $("#compareSecond").prop('disabled',false);
-                    var CompareSecondFrequency = compareSecondFrequency[iNum1-1];
-                    for(var j=0;j<CompareSecondFrequency.length;j++){
-                        $('#compareSecondFrequency').append('<option value='+CompareSecondFrequency[j]+'>'+CompareSecondFrequency[j]+'</option>');
-                    }
-                } else {
-                    $("#compareSecond").prop("checked",false);
-                    $("#compareSecond").prop('disabled',true);
-                    $(".shell").show();
-                }
-            }
-        })
-    })          
-    
-    $("#compareSecond").change(function(){
-        if($(this).prop('checked') == true){
-            $(".shell").hide();
-        } else {
-            $(".shell").show();
-        }
-    })
+    updateCompareFrequencyDropDown();
     
     $("#endDate").on('changeDate',function(){
         updateEndDatepicker('fixedRent');
@@ -277,6 +239,7 @@ function findContractByContractNo() {
                     temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantNo, true, true);
                     $('#selectTenant').append(temp).trigger('change');
                     $('#contractNo').val(data.contractNo);
+                    $('#sapContractNo').val(data.sapContractNo);
                     $('#bizId').val(data.bizId);
                     $('#approvalName').val((data.approvalName != null ? data.approvalName : 'admin'));
                     $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
@@ -294,8 +257,6 @@ function findContractByContractNo() {
                         $('#floor').append(floor).trigger('change');
                         calBackPushFixedRentTaxRentAmount();
                         calBackPushPropertyMgmtTaxRentAmount();
-                        calBackPush('commission');
-                        calBackPush('promotion');
                     })
                     
                     temp = new Option(data.floorName, data.floorCode, true, true);
@@ -924,7 +885,6 @@ function updateRowInvestmentContractAccounttermFixed(v) {
     
     $("#fixedRentEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('fixedRent');
-        calBackPush('fixedRent');
     })
     
     $("#fixedRentTaxRentAmount_"+count.toLocaleString()).on('change',function(){
@@ -1150,7 +1110,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('commission');
-        calBackPush('commission');
     });
     
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
@@ -1159,10 +1118,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
     
     $("#commissionDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionTaxDeduct();
-    })
-    
-    $("#commissionAmount_"+count.toLocaleString()+", #commissionMinSalesAmount_"+count.toLocaleString()).on('change',function(){
-        calBackPush('commission');
     })
     
     $("#commissionTaxRate_"+count.toLocaleString()).on('change',function(){
@@ -1342,7 +1297,6 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     
     $("#propertyMgmtEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('propertyMgmt');
-        calBackPush('propertyMgmt');
     })
     
     $("#propertyMgmtTaxRentAmount_"+count.toLocaleString()).on('change',function(){
@@ -1542,7 +1496,6 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     
     $("#promotionEndDate_"+count.toLocaleString()).on('changeDate',function(){
         calBackPushNextCalendar('promotion');
-        calBackPush('promotion');
     })
     
     $("#promotionAmount_"+count.toLocaleString()).on('change',function(){
@@ -1673,95 +1626,6 @@ function saveContractFixedRent() {
 
             var index;
             var len = $("#fixedRent").find("tr").length;
-            $("#fixedRent").find("tr").each(function(i,e){
-                var fixedRent = {};
-                index = i * 1 + 1;
-                if(index <= $.contract.fixedRent.length){
-                    $.contract.fixedRent[i].created = null;
-                    $.contract.fixedRent[i].updated = null;
-                    $.contract.fixedRent[i].itemCode = $('#fixedRentItem_'+index).val();
-                    $.contract.fixedRent[i].itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
-
-                    $.contract.fixedRent[i].settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
-                    $.contract.fixedRent[i].settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
-                    $.contract.fixedRent[i].periodTypeCode = $('#fixedRentPeriodType_1').val();
-                    $.contract.fixedRent[i].periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
-                    $.contract.fixedRent[i].settleDay = $('#fixedRentSettleDay_1').val();
-                    if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
-                        $.contract.fixedRent[i].isOverdueFlag = 1;
-                    } else {
-                        $.contract.fixedRent[i].isOverdueFlag = 0;
-                    }
-                    $.contract.fixedRent[i].overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
-                    $.contract.fixedRent[i].overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
-                    if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
-                        $.contract.fixedRent[i].overdueInvoiceFlag = 1;
-                    } else {
-                        $.contract.fixedRent[i].overdueInvoiceFlag = 0;
-                    }
-
-                    $.contract.fixedRent[i].startDate = $('#fixedRentStartDate_'+index).val();
-                    $.contract.fixedRent[i].endDate = $('#fixedRentEndDate_'+index).val();
-
-                    $.contract.fixedRent[i].amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
-                    $.contract.fixedRent[i].taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
-
-                    $.contract.fixedRent[i].rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
-                    $.contract.fixedRent[i].taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
-
-                    $.contract.fixedRent[i].taxRate = $('#fixedRentTaxRate_'+index).val();
-                    $.contract.fixedRent[i].taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
-                        $.contract.fixedRent[i].invoiceFlag = 1;
-                    } else {
-                        $.contract.fixedRent[i].invoiceFlag = 0;
-                    }
-                } else {
-                    fixedRent.itemCode = $('#fixedRentItem_'+index).val();
-                    fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
-
-                    fixedRent.shopCode = $.contract.content.shopCode;
-                    fixedRent.area = $.contract.content.area;
-
-                    fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
-                    fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
-                    fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val();
-                    fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
-                    fixedRent.settleDay = $('#fixedRentSettleDay_1').val();
-                    if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
-                        fixedRent.isOverdueFlag = 1;
-                    } else {
-                        fixedRent.isOverdueFlag = 0;
-                    }
-                    fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
-                    fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
-                    if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
-                        fixedRent.overdueInvoiceFlag = 1;
-                    } else {
-                        fixedRent.overdueInvoiceFlag = 0;
-                    }
-
-                    fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
-                    fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
-
-                    fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
-                    fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
-
-                    fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
-                    fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
-
-                    fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
-                    fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
-                        fixedRent.invoiceFlag = 1;
-                    } else {
-                        fixedRent.invoiceFlag = 0;
-                    }
-                    $.contract.fixedRent.push(fixedRent);
-                }
-            })
 
             var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
             var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
@@ -1783,6 +1647,96 @@ function saveContractFixedRent() {
             if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
                 alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
             } else {
+                $("#fixedRent").find("tr").each(function(i,e){
+                    var fixedRent = {};
+                    index = i * 1 + 1;
+                    if(index <= $.contract.fixedRent.length){
+                        $.contract.fixedRent[i].created = null;
+                        $.contract.fixedRent[i].updated = null;
+                        $.contract.fixedRent[i].itemCode = $('#fixedRentItem_'+index).val();
+                        $.contract.fixedRent[i].itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+
+                        $.contract.fixedRent[i].settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
+                        $.contract.fixedRent[i].settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
+                        $.contract.fixedRent[i].periodTypeCode = $('#fixedRentPeriodType_1').val();
+                        $.contract.fixedRent[i].periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
+                        $.contract.fixedRent[i].settleDay = $('#fixedRentSettleDay_1').val();
+                        if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
+                            $.contract.fixedRent[i].isOverdueFlag = 1;
+                        } else {
+                            $.contract.fixedRent[i].isOverdueFlag = 0;
+                        }
+                        $.contract.fixedRent[i].overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
+                        $.contract.fixedRent[i].overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
+                        if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
+                            $.contract.fixedRent[i].overdueInvoiceFlag = 1;
+                        } else {
+                            $.contract.fixedRent[i].overdueInvoiceFlag = 0;
+                        }
+
+                        $.contract.fixedRent[i].startDate = $('#fixedRentStartDate_'+index).val();
+                        $.contract.fixedRent[i].endDate = $('#fixedRentEndDate_'+index).val();
+
+                        $.contract.fixedRent[i].amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
+                        $.contract.fixedRent[i].taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
+
+                        $.contract.fixedRent[i].rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
+                        $.contract.fixedRent[i].taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
+
+                        $.contract.fixedRent[i].taxRate = $('#fixedRentTaxRate_'+index).val();
+                        $.contract.fixedRent[i].taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
+                            $.contract.fixedRent[i].invoiceFlag = 1;
+                        } else {
+                            $.contract.fixedRent[i].invoiceFlag = 0;
+                        }
+                    } else {
+                        fixedRent.itemCode = $('#fixedRentItem_'+index).val();
+                        fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+
+                        fixedRent.shopCode = $.contract.content.shopCode;
+                        fixedRent.area = $.contract.content.area;
+
+                        fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
+                        fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
+                        fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val();
+                        fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
+                        fixedRent.settleDay = $('#fixedRentSettleDay_1').val();
+                        if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
+                            fixedRent.isOverdueFlag = 1;
+                        } else {
+                            fixedRent.isOverdueFlag = 0;
+                        }
+                        fixedRent.overdueTaxRate = $('#fixedRentOverdueTaxRate_1').val();
+                        fixedRent.overdueRate = parseFloat($('#fixedRentOverdueRate_1').val()) / 1000;
+                        if($('#fixedRentOverdueInvoiceFlag_1').prop('checked') == true){
+                            fixedRent.overdueInvoiceFlag = 1;
+                        } else {
+                            fixedRent.overdueInvoiceFlag = 0;
+                        }
+
+                        fixedRent.startDate = $('#fixedRentStartDate_'+index).val();
+                        fixedRent.endDate = $('#fixedRentEndDate_'+index).val();
+
+                        fixedRent.amount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
+                        fixedRent.taxAmount =  numberWithoutCommas($('#fixedRentTaxAmount_'+index).val());
+
+                        fixedRent.rentAmount =  numberWithoutCommas($('#fixedRentRentAmount_'+index).val());
+                        fixedRent.taxRentAmount =  numberWithoutCommas($('#fixedRentTaxRentAmount_'+index).val());
+
+                        fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
+                        fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
+                            fixedRent.invoiceFlag = 1;
+                        } else {
+                            fixedRent.invoiceFlag = 0;
+                        }
+                        $.contract.fixedRent.push(fixedRent);
+                    }
+                })
+            
                 var openId = 'admin';
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.roleCode == 'CROLE220301000001'){
@@ -1857,96 +1811,7 @@ function saveContractPropertyMgmt() {
             })
 
             var index;
-            var len = $("#propertyMgmt").find("tr").length;
-            $("#propertyMgmt").find("tr").each(function(i,e){
-                var propertyMgmt = {};
-                index = i * 1 + 1;
-                if(index <= $.contract.propertyMgmt.length){
-                    $.contract.propertyMgmt[i].created = null;
-                    $.contract.propertyMgmt[i].updated = null;
-                    $.contract.propertyMgmt[i].itemCode = $('#propertyMgmtItem_'+index).val();
-                    $.contract.propertyMgmt[i].itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
-
-                    $.contract.propertyMgmt[i].settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
-                    $.contract.propertyMgmt[i].settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
-                    $.contract.propertyMgmt[i].periodTypeCode = $('#propertyMgmtPeriodType_1').val();
-                    $.contract.propertyMgmt[i].periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
-                    $.contract.propertyMgmt[i].settleDay = $('#propertyMgmtSettleDay_1').val();
-                    if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
-                        $.contract.propertyMgmt[i].isOverdueFlag = 1;
-                    } else {
-                        $.contract.propertyMgmt[i].isOverdueFlag = 0;
-                    }
-                    $.contract.propertyMgmt[i].overdueTaxRate = $('#propertyMgmtOverdueTaxRate_1').val();
-                    $.contract.propertyMgmt[i].overdueRate = parseFloat($('#propertyMgmtOverdueRate_1').val()) / 1000;
-                    if($('#propertyMgmtOverdueInvoiceFlag_1').prop('checked') == true){
-                        $.contract.propertyMgmt[i].overdueInvoiceFlag = 1;
-                    } else {
-                        $.contract.propertyMgmt[i].overdueInvoiceFlag = 0;
-                    }
-
-                    $.contract.propertyMgmt[i].startDate = $('#propertyMgmtStartDate_'+index).val();
-                    $.contract.propertyMgmt[i].endDate = $('#propertyMgmtEndDate_'+index).val();
-
-                    $.contract.propertyMgmt[i].amount =  numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
-                    $.contract.propertyMgmt[i].taxAmount =  numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
-
-                    $.contract.propertyMgmt[i].rentAmount =  numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
-                    $.contract.propertyMgmt[i].taxRentAmount =  numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
-
-                    $.contract.propertyMgmt[i].taxRate = $('#propertyMgmtTaxRate_'+index).val();
-                    $.contract.propertyMgmt[i].taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#propertyMgmtInvoiceFlag_'+index).prop('checked') == true){
-                        $.contract.propertyMgmt[i].invoiceFlag = 1;
-                    } else {
-                        $.contract.propertyMgmt[i].invoiceFlag = 0;
-                    }
-                } else {
-                    propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
-                    propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
-
-                    propertyMgmt.shopCode = $.contract.content.shopCode;
-                    propertyMgmt.area = $.contract.content.area;
-
-                    propertyMgmt.settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
-                    propertyMgmt.settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
-                    propertyMgmt.periodTypeCode = $('#propertyMgmtPeriodType_1').val();
-                    propertyMgmt.periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
-                    propertyMgmt.settleDay = $('#propertyMgmtSettleDay_1').val();
-                    if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
-                        propertyMgmt.isOverdueFlag = 1;
-                    } else {
-                        propertyMgmt.isOverdueFlag = 0;
-                    }
-                    propertyMgmt.overdueTaxRate = $('#propertyMgmtOverdueTaxRate_1').val();
-                    propertyMgmt.overdueRate = parseFloat($('#propertyMgmtOverdueRate_1').val()) / 1000;
-                    if($('#propertyMgmtOverdueInvoiceFlag_1').prop('checked') == true){
-                        propertyMgmt.overdueInvoiceFlag = 1;
-                    } else {
-                        propertyMgmt.overdueInvoiceFlag = 0;
-                    }
-
-                    propertyMgmt.startDate = $('#propertyMgmtStartDate_'+index).val();
-                    propertyMgmt.endDate = $('#propertyMgmtEndDate_'+index).val();
-
-                    propertyMgmt.amount =  numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
-                    propertyMgmt.taxAmount =  numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
-
-                    propertyMgmt.rentAmount =  numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
-                    propertyMgmt.taxRentAmount =  numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
-
-                    propertyMgmt.taxRate = $('#propertyMgmtTaxRate_'+index).val();
-                    propertyMgmt.taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#propertyMgmtInvoiceFlag_'+index).prop('checked') == true){
-                        propertyMgmt.invoiceFlag = 1;
-                    } else {
-                        propertyMgmt.invoiceFlag = 0;
-                    }
-                    $.contract.propertyMgmt.push(propertyMgmt);
-                }
-            })
+            var len = $("#propertyMgmt").find("tr").length;      
 
             var check1 = dateCompare($('#propertyMgmtStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
             var check2 = dateCompare($('#propertyMgmtEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
@@ -1968,6 +1833,96 @@ function saveContractPropertyMgmt() {
             if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
                 alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
             } else {
+                $("#propertyMgmt").find("tr").each(function(i,e){
+                    var propertyMgmt = {};
+                    index = i * 1 + 1;
+                    if(index <= $.contract.propertyMgmt.length){
+                        $.contract.propertyMgmt[i].created = null;
+                        $.contract.propertyMgmt[i].updated = null;
+                        $.contract.propertyMgmt[i].itemCode = $('#propertyMgmtItem_'+index).val();
+                        $.contract.propertyMgmt[i].itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
+
+                        $.contract.propertyMgmt[i].settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
+                        $.contract.propertyMgmt[i].settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
+                        $.contract.propertyMgmt[i].periodTypeCode = $('#propertyMgmtPeriodType_1').val();
+                        $.contract.propertyMgmt[i].periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
+                        $.contract.propertyMgmt[i].settleDay = $('#propertyMgmtSettleDay_1').val();
+                        if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
+                            $.contract.propertyMgmt[i].isOverdueFlag = 1;
+                        } else {
+                            $.contract.propertyMgmt[i].isOverdueFlag = 0;
+                        }
+                        $.contract.propertyMgmt[i].overdueTaxRate = $('#propertyMgmtOverdueTaxRate_1').val();
+                        $.contract.propertyMgmt[i].overdueRate = parseFloat($('#propertyMgmtOverdueRate_1').val()) / 1000;
+                        if($('#propertyMgmtOverdueInvoiceFlag_1').prop('checked') == true){
+                            $.contract.propertyMgmt[i].overdueInvoiceFlag = 1;
+                        } else {
+                            $.contract.propertyMgmt[i].overdueInvoiceFlag = 0;
+                        }
+
+                        $.contract.propertyMgmt[i].startDate = $('#propertyMgmtStartDate_'+index).val();
+                        $.contract.propertyMgmt[i].endDate = $('#propertyMgmtEndDate_'+index).val();
+
+                        $.contract.propertyMgmt[i].amount =  numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
+                        $.contract.propertyMgmt[i].taxAmount =  numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
+
+                        $.contract.propertyMgmt[i].rentAmount =  numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
+                        $.contract.propertyMgmt[i].taxRentAmount =  numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
+
+                        $.contract.propertyMgmt[i].taxRate = $('#propertyMgmtTaxRate_'+index).val();
+                        $.contract.propertyMgmt[i].taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#propertyMgmtInvoiceFlag_'+index).prop('checked') == true){
+                            $.contract.propertyMgmt[i].invoiceFlag = 1;
+                        } else {
+                            $.contract.propertyMgmt[i].invoiceFlag = 0;
+                        }
+                    } else {
+                        propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
+                        propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
+
+                        propertyMgmt.shopCode = $.contract.content.shopCode;
+                        propertyMgmt.area = $.contract.content.area;
+
+                        propertyMgmt.settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
+                        propertyMgmt.settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
+                        propertyMgmt.periodTypeCode = $('#propertyMgmtPeriodType_1').val();
+                        propertyMgmt.periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
+                        propertyMgmt.settleDay = $('#propertyMgmtSettleDay_1').val();
+                        if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
+                            propertyMgmt.isOverdueFlag = 1;
+                        } else {
+                            propertyMgmt.isOverdueFlag = 0;
+                        }
+                        propertyMgmt.overdueTaxRate = $('#propertyMgmtOverdueTaxRate_1').val();
+                        propertyMgmt.overdueRate = parseFloat($('#propertyMgmtOverdueRate_1').val()) / 1000;
+                        if($('#propertyMgmtOverdueInvoiceFlag_1').prop('checked') == true){
+                            propertyMgmt.overdueInvoiceFlag = 1;
+                        } else {
+                            propertyMgmt.overdueInvoiceFlag = 0;
+                        }
+
+                        propertyMgmt.startDate = $('#propertyMgmtStartDate_'+index).val();
+                        propertyMgmt.endDate = $('#propertyMgmtEndDate_'+index).val();
+
+                        propertyMgmt.amount =  numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
+                        propertyMgmt.taxAmount =  numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
+
+                        propertyMgmt.rentAmount =  numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
+                        propertyMgmt.taxRentAmount =  numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
+
+                        propertyMgmt.taxRate = $('#propertyMgmtTaxRate_'+index).val();
+                        propertyMgmt.taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#propertyMgmtInvoiceFlag_'+index).prop('checked') == true){
+                            propertyMgmt.invoiceFlag = 1;
+                        } else {
+                            propertyMgmt.invoiceFlag = 0;
+                        }
+                        $.contract.propertyMgmt.push(propertyMgmt);
+                    }
+                })
+            
                 var openId = 'admin';
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.roleCode == 'CROLE220301000001'){
@@ -2043,105 +1998,6 @@ function saveContractCommission() {
 
             var index;
             var len = $("#commission").find("tr").length;
-            $("#commission").find("tr").each(function(i,e){
-                var commission = {};
-                index = i * 1 + 1;
-                if(index <= $.contract.commission.length){
-                    $.contract.commission[i].created = null;
-                    $.contract.commission[i].updated = null;
-                    $.contract.commission[i].itemCode = $('#commissionItem_'+index).val();
-                    $.contract.commission[i].itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
-
-                    $.contract.commission[i].salesType = $('#commissionSalesType_1').val();
-                    $.contract.commission[i].settlePeriodCode = $('#commissionSettlePeriod_1').val();
-                    $.contract.commission[i].settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
-                    $.contract.commission[i].periodTypeCode = $('#commissionPeriodType_1').val();
-                    $.contract.commission[i].periodTypeName = $('#select2-commissionPeriodType_1-container').text();
-                    $.contract.commission[i].settleDay = $('#commissionSettleDay_1').val();
-                    if($('#commissionIsOverdueFlag_1').prop('checked') == true){
-                        $.contract.commission[i].isOverdueFlag = 1;
-                    } else {
-                        $.contract.commission[i].isOverdueFlag = 0;
-                    }
-                    $.contract.commission[i].overdueTaxRate = $('#commissionOverdueTaxRate_1').val();
-                    $.contract.commission[i].overdueRate = parseFloat($('#commissionOverdueRate_1').val()) / 1000;
-                    if($('#commissionOverdueInvoiceFlag_1').prop('checked') == true){
-                        $.contract.commission[i].overdueInvoiceFlag = 1;
-                    } else {
-                        $.contract.commission[i].overdueInvoiceFlag = 0;
-                    }
-
-                    $.contract.commission[i].startDate = $('#commissionStartDate_'+index).val();
-                    $.contract.commission[i].endDate = $('#commissionEndDate_'+index).val();
-
-                    $.contract.commission[i].deductType = $('#commissionDeductType_'+index).val();
-                    $.contract.commission[i].category = $('#commissionCategory_'+index).val();
-
-                    $.contract.commission[i].deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
-                    $.contract.commission[i].taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
-
-                    $.contract.commission[i].amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
-                    $.contract.commission[i].amount =  0;
-                    $.contract.commission[i].targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
-
-                    $.contract.commission[i].taxRate = $('#commissionTaxRate_'+index).val();
-                    $.contract.commission[i].taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
-                        $.contract.commission[i].invoiceFlag = 1;
-                    } else {
-                        $.contract.commission[i].invoiceFlag = 0;
-                    }
-                } else {
-                    commission.itemCode = $('#commissionItem_'+index).val();
-                    commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
-
-                    commission.shopCode = $.contract.content.shopCode;
-                    commission.area = $.contract.content.area;
-
-                    commission.salesType = $('#commissionSalesType_1').val();
-                    commission.settlePeriodCode = $('#commissionSettlePeriod_1').val();
-                    commission.settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
-                    commission.periodTypeCode = $('#commissionPeriodType_1').val();
-                    commission.periodTypeName = $('#select2-commissionPeriodType_1-container').text();
-                    commission.settleDay = $('#commissionSettleDay_1').val();
-                    if($('#commissionIsOverdueFlag_1').prop('checked') == true){
-                        commission.isOverdueFlag = 1;
-                    } else {
-                        commission.isOverdueFlag = 0;
-                    }
-                    commission.overdueTaxRate = $('#commissionOverdueTaxRate_1').val();
-                    commission.overdueRate = parseFloat($('#commissionOverdueRate_1').val()) / 1000;
-                    if($('#commissionOverdueInvoiceFlag_1').prop('checked') == true){
-                        commission.overdueInvoiceFlag = 1;
-                    } else {
-                        commission.overdueInvoiceFlag = 0;
-                    }
-
-                    commission.startDate = $('#commissionStartDate_'+index).val();
-                    commission.endDate = $('#commissionEndDate_'+index).val();
-
-                    commission.deductType = $('#commissionDeductType_'+index).val();
-                    commission.category = $('#commissionCategory_'+index).val();
-
-                    commission.deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
-                    commission.taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
-
-                    commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
-                    commission.amount =  0;
-                    commission.targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
-
-                    commission.taxRate = $('#commissionTaxRate_'+index).val();
-                    commission.taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
-                        commission.invoiceFlag = 1;
-                    } else {
-                        commission.invoiceFlag = 0;
-                    }
-                    $.contract.commission.push(commission);
-                }
-            })
 
             var check1 = dateCompare($('#commissionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
             var check2 = dateCompare($('#commissionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
@@ -2163,6 +2019,106 @@ function saveContractCommission() {
             if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
                 alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
             } else {
+                $("#commission").find("tr").each(function(i,e){
+                    var commission = {};
+                    index = i * 1 + 1;
+                    if(index <= $.contract.commission.length){
+                        $.contract.commission[i].created = null;
+                        $.contract.commission[i].updated = null;
+                        $.contract.commission[i].itemCode = $('#commissionItem_'+index).val();
+                        $.contract.commission[i].itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
+
+                        $.contract.commission[i].salesType = $('#commissionSalesType_1').val();
+                        $.contract.commission[i].settlePeriodCode = $('#commissionSettlePeriod_1').val();
+                        $.contract.commission[i].settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
+                        $.contract.commission[i].periodTypeCode = $('#commissionPeriodType_1').val();
+                        $.contract.commission[i].periodTypeName = $('#select2-commissionPeriodType_1-container').text();
+                        $.contract.commission[i].settleDay = $('#commissionSettleDay_1').val();
+                        if($('#commissionIsOverdueFlag_1').prop('checked') == true){
+                            $.contract.commission[i].isOverdueFlag = 1;
+                        } else {
+                            $.contract.commission[i].isOverdueFlag = 0;
+                        }
+                        $.contract.commission[i].overdueTaxRate = $('#commissionOverdueTaxRate_1').val();
+                        $.contract.commission[i].overdueRate = parseFloat($('#commissionOverdueRate_1').val()) / 1000;
+                        if($('#commissionOverdueInvoiceFlag_1').prop('checked') == true){
+                            $.contract.commission[i].overdueInvoiceFlag = 1;
+                        } else {
+                            $.contract.commission[i].overdueInvoiceFlag = 0;
+                        }
+
+                        $.contract.commission[i].startDate = $('#commissionStartDate_'+index).val();
+                        $.contract.commission[i].endDate = $('#commissionEndDate_'+index).val();
+
+                        $.contract.commission[i].deductType = $('#commissionDeductType_'+index).val();
+                        $.contract.commission[i].category = $('#commissionCategory_'+index).val();
+
+                        $.contract.commission[i].deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
+                        $.contract.commission[i].taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
+
+                        $.contract.commission[i].amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
+                        $.contract.commission[i].amount =  0;
+                        $.contract.commission[i].targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
+
+                        $.contract.commission[i].taxRate = $('#commissionTaxRate_'+index).val();
+                        $.contract.commission[i].taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
+                            $.contract.commission[i].invoiceFlag = 1;
+                        } else {
+                            $.contract.commission[i].invoiceFlag = 0;
+                        }
+                    } else {
+                        commission.itemCode = $('#commissionItem_'+index).val();
+                        commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
+
+                        commission.shopCode = $.contract.content.shopCode;
+                        commission.area = $.contract.content.area;
+
+                        commission.salesType = $('#commissionSalesType_1').val();
+                        commission.settlePeriodCode = $('#commissionSettlePeriod_1').val();
+                        commission.settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
+                        commission.periodTypeCode = $('#commissionPeriodType_1').val();
+                        commission.periodTypeName = $('#select2-commissionPeriodType_1-container').text();
+                        commission.settleDay = $('#commissionSettleDay_1').val();
+                        if($('#commissionIsOverdueFlag_1').prop('checked') == true){
+                            commission.isOverdueFlag = 1;
+                        } else {
+                            commission.isOverdueFlag = 0;
+                        }
+                        commission.overdueTaxRate = $('#commissionOverdueTaxRate_1').val();
+                        commission.overdueRate = parseFloat($('#commissionOverdueRate_1').val()) / 1000;
+                        if($('#commissionOverdueInvoiceFlag_1').prop('checked') == true){
+                            commission.overdueInvoiceFlag = 1;
+                        } else {
+                            commission.overdueInvoiceFlag = 0;
+                        }
+
+                        commission.startDate = $('#commissionStartDate_'+index).val();
+                        commission.endDate = $('#commissionEndDate_'+index).val();
+
+                        commission.deductType = $('#commissionDeductType_'+index).val();
+                        commission.category = $('#commissionCategory_'+index).val();
+
+                        commission.deduct =  parseFloat(numberWithoutCommas($('#commissionDeduct_'+index).val())) / 100;
+                        commission.taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
+
+                        commission.amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
+                        commission.amount =  0;
+                        commission.targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
+
+                        commission.taxRate = $('#commissionTaxRate_'+index).val();
+                        commission.taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
+                            commission.invoiceFlag = 1;
+                        } else {
+                            commission.invoiceFlag = 0;
+                        }
+                        $.contract.commission.push(commission);
+                    }
+                })
+            
                 var openId = 'admin';
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.roleCode == 'CROLE220301000001'){
@@ -2238,95 +2194,6 @@ function saveContractPromotion() {
 
             var index;
             var len = $("#promotion").find("tr").length;
-            $("#promotion").find("tr").each(function(i,e){
-                var promotion = {};
-                index = i * 1 + 1;
-                if(index <= $.contract.promotion.length){
-                    $.contract.promotion[i].created = null;
-                    $.contract.promotion[i].updated = null;
-                    $.contract.promotion[i].itemCode = $('#promotionItem_'+index).val();
-                    $.contract.promotion[i].itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
-
-                    $.contract.promotion[i].settlePeriodCode = $('#promotionSettlePeriod_1').val();
-                    $.contract.promotion[i].settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
-                    $.contract.promotion[i].periodTypeCode = $('#promotionPeriodType_1').val();
-                    $.contract.promotion[i].periodTypeName = $('#select2-promotionPeriodType_1-container').text();
-                    $.contract.promotion[i].settleDay = $('#promotionSettleDay_1').val();
-                    if($('#promotionIsOverdueFlag_1').prop('checked') == true){
-                        $.contract.promotion[i].isOverdueFlag = 1;
-                    } else {
-                        $.contract.promotion[i].isOverdueFlag = 0;
-                    }
-                    $.contract.promotion[i].overdueTaxRate = $('#promotionOverdueTaxRate_1').val();
-                    $.contract.promotion[i].overdueRate = parseFloat($('#promotionOverdueRate_1').val()) / 1000;
-                    if($('#promotionOverdueInvoiceFlag_1').prop('checked') == true){
-                        $.contract.promotion[i].overdueInvoiceFlag = 1;
-                    } else {
-                        $.contract.promotion[i].overdueInvoiceFlag = 0;
-                    }
-
-                    $.contract.promotion[i].startDate = $('#promotionStartDate_'+index).val();
-                    $.contract.promotion[i].endDate = $('#promotionEndDate_'+index).val();
-
-                    $.contract.promotion[i].amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
-                    $.contract.promotion[i].taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
-
-                    //$.contract.promotion[i].deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
-                    //$.contract.promotion[i].taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
-
-                    $.contract.promotion[i].taxRate = $('#promotionTaxRate_'+index).val();
-                    $.contract.promotion[i].taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#promotionInvoiceFlag_'+index).prop('checked') == true){
-                        $.contract.promotion[i].invoiceFlag = 1;
-                    } else {
-                        $.contract.promotion[i].invoiceFlag = 0;
-                    }
-                } else {
-                    promotion.itemCode = $('#promotionItem_'+index).val();
-                    promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
-
-                    promotion.shopCode = $.contract.content.shopCode;
-                    promotion.area = $.contract.content.area;
-
-                    promotion.settlePeriodCode = $('#promotionSettlePeriod_1').val();
-                    promotion.settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
-                    promotion.periodTypeCode = $('#promotionPeriodType_1').val();
-                    promotion.periodTypeName = $('#select2-promotionPeriodType_1-container').text();
-                    promotion.settleDay = $('#promotionSettleDay_1').val();
-                    if($('#promotionIsOverdueFlag_1').prop('checked') == true){
-                        promotion.isOverdueFlag = 1;
-                    } else {
-                        promotion.isOverdueFlag = 0;
-                    }
-                    promotion.overdueTaxRate = $('#promotionOverdueTaxRate_1').val();
-                    promotion.overdueRate = parseFloat($('#promotionOverdueRate_1').val()) / 1000;
-                    if($('#promotionOverdueInvoiceFlag_1').prop('checked') == true){
-                        promotion.overdueInvoiceFlag = 1;
-                    } else {
-                        promotion.overdueInvoiceFlag = 0;
-                    }
-
-                    promotion.startDate = $('#promotionStartDate_'+index).val();
-                    promotion.endDate = $('#promotionEndDate_'+index).val();
-
-                    promotion.amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
-                    promotion.taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
-
-                    //promotion.deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
-                    //promotion.taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
-
-                    promotion.taxRate = $('#promotionTaxRate_'+index).val();
-                    promotion.taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');
-
-                    if($('#promotionInvoiceFlag_'+index).prop('checked') == true){
-                        promotion.invoiceFlag = 1;
-                    } else {
-                        promotion.invoiceFlag = 0;
-                    }
-                    $.contract.promotion.push(promotion);
-                }
-            })
 
             var check1 = dateCompare($('#promotionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
             var check2 = dateCompare($('#promotionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
@@ -2348,6 +2215,96 @@ function saveContractPromotion() {
             if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
                 alertMsg('9999','条款开始日与结束日错误，请修改重新提交！');
             } else {
+                $("#promotion").find("tr").each(function(i,e){
+                    var promotion = {};
+                    index = i * 1 + 1;
+                    if(index <= $.contract.promotion.length){
+                        $.contract.promotion[i].created = null;
+                        $.contract.promotion[i].updated = null;
+                        $.contract.promotion[i].itemCode = $('#promotionItem_'+index).val();
+                        $.contract.promotion[i].itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
+
+                        $.contract.promotion[i].settlePeriodCode = $('#promotionSettlePeriod_1').val();
+                        $.contract.promotion[i].settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
+                        $.contract.promotion[i].periodTypeCode = $('#promotionPeriodType_1').val();
+                        $.contract.promotion[i].periodTypeName = $('#select2-promotionPeriodType_1-container').text();
+                        $.contract.promotion[i].settleDay = $('#promotionSettleDay_1').val();
+                        if($('#promotionIsOverdueFlag_1').prop('checked') == true){
+                            $.contract.promotion[i].isOverdueFlag = 1;
+                        } else {
+                            $.contract.promotion[i].isOverdueFlag = 0;
+                        }
+                        $.contract.promotion[i].overdueTaxRate = $('#promotionOverdueTaxRate_1').val();
+                        $.contract.promotion[i].overdueRate = parseFloat($('#promotionOverdueRate_1').val()) / 1000;
+                        if($('#promotionOverdueInvoiceFlag_1').prop('checked') == true){
+                            $.contract.promotion[i].overdueInvoiceFlag = 1;
+                        } else {
+                            $.contract.promotion[i].overdueInvoiceFlag = 0;
+                        }
+
+                        $.contract.promotion[i].startDate = $('#promotionStartDate_'+index).val();
+                        $.contract.promotion[i].endDate = $('#promotionEndDate_'+index).val();
+
+                        $.contract.promotion[i].amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
+                        $.contract.promotion[i].taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
+
+                        //$.contract.promotion[i].deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
+                        //$.contract.promotion[i].taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+
+                        $.contract.promotion[i].taxRate = $('#promotionTaxRate_'+index).val();
+                        $.contract.promotion[i].taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#promotionInvoiceFlag_'+index).prop('checked') == true){
+                            $.contract.promotion[i].invoiceFlag = 1;
+                        } else {
+                            $.contract.promotion[i].invoiceFlag = 0;
+                        }
+                    } else {
+                        promotion.itemCode = $('#promotionItem_'+index).val();
+                        promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
+
+                        promotion.shopCode = $.contract.content.shopCode;
+                        promotion.area = $.contract.content.area;
+
+                        promotion.settlePeriodCode = $('#promotionSettlePeriod_1').val();
+                        promotion.settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
+                        promotion.periodTypeCode = $('#promotionPeriodType_1').val();
+                        promotion.periodTypeName = $('#select2-promotionPeriodType_1-container').text();
+                        promotion.settleDay = $('#promotionSettleDay_1').val();
+                        if($('#promotionIsOverdueFlag_1').prop('checked') == true){
+                            promotion.isOverdueFlag = 1;
+                        } else {
+                            promotion.isOverdueFlag = 0;
+                        }
+                        promotion.overdueTaxRate = $('#promotionOverdueTaxRate_1').val();
+                        promotion.overdueRate = parseFloat($('#promotionOverdueRate_1').val()) / 1000;
+                        if($('#promotionOverdueInvoiceFlag_1').prop('checked') == true){
+                            promotion.overdueInvoiceFlag = 1;
+                        } else {
+                            promotion.overdueInvoiceFlag = 0;
+                        }
+
+                        promotion.startDate = $('#promotionStartDate_'+index).val();
+                        promotion.endDate = $('#promotionEndDate_'+index).val();
+
+                        promotion.amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
+                        promotion.taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
+
+                        //promotion.deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
+                        //promotion.taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+
+                        promotion.taxRate = $('#promotionTaxRate_'+index).val();
+                        promotion.taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');
+
+                        if($('#promotionInvoiceFlag_'+index).prop('checked') == true){
+                            promotion.invoiceFlag = 1;
+                        } else {
+                            promotion.invoiceFlag = 0;
+                        }
+                        $.contract.promotion.push(promotion);
+                    }
+                })
+            
                 var openId = 'admin';
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
                     if(v.roleCode == 'CROLE220301000001'){
@@ -2528,6 +2485,7 @@ function saveContract() {
             $.contract.content.created = null;
             $.contract.content.updated = null;
             $.contract.content.contractName = $('#contractName2').val();
+            $.contract.content.sapContractNo = $('#sapContractNo').val();
             $.contract.content.awardDate = $('#awardDate').val();
             $.contract.content.openStartTime = $('#openStartTime').val();
             $.contract.content.openEndTime = $('#openEndTime').val();

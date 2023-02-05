@@ -18,111 +18,111 @@
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
-                        <div class="bootstrap-table">
-                            <div class="fixed-table-container">
-                                <div class="fixed-table-body">
-                                    <table class="table table-striped snipe-table table-responsive">
-                                        <thead id="assetsListingTable-sticky-header">
-                                            <tr>
-                                                <th>
-                                                    <div class="th-inner">行</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(含税)</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(去税)</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <!--<th>
-                                                    <div class="th-inner">提成率(含税)</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">提成率(去税)</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>-->
-                                                <th>
-                                                    <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">开发票</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">操作</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="promotion">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    <select class="select2 promotionFeeItemDropDown new" id="promotionItem_1"></select>
-                                                </td>
-                                                <td>
-                                                    <div class="input-daterange input-group">
-                                                        <input type="text" class="form-control" id="promotionStartDate_1" style="min-width: 80px;" readonly />
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-body">
+                                <table class="table table-striped snipe-table table-responsive">
+                                    <thead id="assetsListingTable-sticky-header">
+                                        <tr>
+                                            <th>
+                                                <div class="th-inner">行</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(含税)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(去税)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <!--<th>
+                                                <div class="th-inner">提成率(含税)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">提成率(去税)</div>
+                                                <div class="fht-cell"></div>
+                                            </th>-->
+                                            <th>
+                                                <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">开发票</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="promotion">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                <select class="select2 promotionFeeItemDropDown new" id="promotionItem_1"></select>
+                                            </td>
+                                            <td>
+                                                <div class="input-daterange input-group">
+                                                    <input type="text" class="form-control" id="promotionStartDate_1" style="min-width: 80px;" readonly />
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <span class="input-group-addon">-</span>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="promotionEndDate_1" style="min-width: 80px;" readonly />
                                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        <span class="input-group-addon">-</span>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" id="promotionEndDate_1" style="min-width: 80px;" readonly />
-                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                        </div>    
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionAmount_1" type="text" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionTaxAmount_1" type="text" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">元</span>
-                                                    </div>
-                                                </td>
-                                                <!--<td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionDeduct_1" type="text" value="0"  />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input class="form-control money" id="promotionTaxDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
-                                                        <span class="input-group-addon">%</span>
-                                                    </div>
-                                                </td>-->
-                                                <td>
-                                                    <select class="select2 taxVat newVAT promotionVATDropDown newFee" id="promotionTaxRate_1"></select>
-                                                </td>
-                                                <td><input type="checkbox" id="promotionInvoiceFlag_1" value="" checked></td>
-                                                <td>
-                                                    <a href="javascript:void(0);" onClick="deleteRow(this)" >
-                                                        <i class="fa fa-minus-circle" style="color: #ED4A52; font-size: 16px;"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                                    </div>    
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input class="form-control money" id="promotionAmount_1" type="text" />                                                
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input class="form-control money" id="promotionTaxAmount_1" type="text" readonly style="border: none;" />                                                
+                                                    <span class="input-group-addon">元</span>
+                                                </div>
+                                            </td>
+                                            <!--<td>
+                                                <div class="input-group">
+                                                    <input class="form-control money" id="promotionDeduct_1" type="text" value="0"  />                                                
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="input-group">
+                                                    <input class="form-control money" id="promotionTaxDeduct_1" type="text" value="0" readonly style="border: none;" />                                                
+                                                    <span class="input-group-addon">%</span>
+                                                </div>
+                                            </td>-->
+                                            <td>
+                                                <select class="select2 taxVat newVAT promotionVATDropDown newFee" id="promotionTaxRate_1"></select>
+                                            </td>
+                                            <td><input type="checkbox" id="promotionInvoiceFlag_1" value="" checked></td>
+                                            <td>
+                                                <a href="javascript:void(0);" onClick="deleteRow(this)" >
+                                                    <i class="fa fa-minus-circle" style="color: #ED4A52; font-size: 16px;"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -149,15 +149,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="box-body">
-        <div class="col-md-12">
-            <h5 style="display: inline-block; margin-bottom: 0; margin-right: 10px; vertical-align: super;">账款总金额(含税|去税)</h5>
-            <h3 id="promotionTotalPromotionAmount" style="display: inline-block;">0.00</h3>
-            <h3 style="display: inline-block;">|</h3>
-            <h3 id="promotionTaxTotalPromotionAmount" style="display: inline-block;">0.00</h3>
-            <a href="javascript: void(0);" onclick="termsModalToggle('promotion');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
         </div>
     </div>
     <div class="box-body">
