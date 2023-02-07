@@ -112,15 +112,18 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">合同类型</label>
-                <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="contractType" style="width: 100%;" disabled="readonly"></select>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-4 control-label">条款计算方式 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <select class="select2" id="termCalcMode" style="width: 100%"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">目标营业额</label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="targetSales" type="text" style="border: none;" readonly />                                                
+                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,9 +156,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">支付方式</label>
+                <label class="col-md-4 control-label">延迟开业违约金</label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="paymentMode" style="width: 100%;" disabled="readonly"></select>
+                    <div class="input-group">
+                        <input class="form-control money" id="overdueBizAmount" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/天</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -173,21 +179,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">目标营业额</label>
+                <label class="col-md-4 control-label">支付方式</label>
                 <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control money" id="targetSales" type="text" style="border: none;" readonly />                                                
-                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
-                    </div>
+                    <select class="select2" id="paymentMode" style="width: 100%;" disabled="readonly"></select>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">预估销售额</label>
+                <label class="col-md-4 control-label">合同类型</label>
                 <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control money" id="minSales" type="text" style="border-right: none;" readonly />                                                
-                        <span class="input-group-addon" style="border: 0 none; background: #eee;">元/月</span>
-                    </div>
+                    <select class="select2" id="contractType" style="width: 100%;" disabled="readonly"></select>
                 </div>
             </div>
             <div class="form-group">

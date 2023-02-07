@@ -27,6 +27,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="termination">已终止</option>
                                     <option value="uneffect">未生效</option>
                                     <option value="cancel">已作废</option>
+                                    <option value="init">初始化</option>
                                 </select>
                             </div>
                         </div>

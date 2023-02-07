@@ -362,6 +362,7 @@ function findContractByContractNo() {
                     $('#awardDate').datepicker('update', data.awardDate);
                     $('#bizScope').val(data.bizScope);
                     $('#targetSales').val(data.targetSales);
+                    $('#overdueBizAmount').val(data.overdueBizAmount);
                     $('#enterDate').datepicker('update', data.enterDate);
                     $('#freeStartDate_1').datepicker('update', data.freeStartDate);
                     $('#freeEndDate_1').datepicker('update', data.freeEndDate);
@@ -2482,8 +2483,6 @@ function saveContract() {
             })
 
             $.contract.content.updateOpenId = openId;
-            $.contract.content.created = null;
-            $.contract.content.updated = null;
             $.contract.content.contractName = $('#contractName2').val();
             $.contract.content.sapContractNo = $('#sapContractNo').val();
             $.contract.content.awardDate = $('#awardDate').val();
@@ -2495,6 +2494,13 @@ function saveContract() {
             $.contract.content.bizDate = $('#bizDate').val();
             $.contract.content.remark = $('#remark').val();
             $.contract.content.termCalcMode = $('#termCalcMode').val();
+            $.contract.content.overdueBizAmount = numberWithoutCommas($('#overdueBizAmount').val());
+            $.contract.content.deductList = null;
+            $.contract.content.propertyFeeList = null;
+            $.contract.content.depositList = null;
+            $.contract.content.salesList = null;
+            $.contract.content.promotionFeeList = null;
+            $.contract.content.fixedRentList = null;
 
             var map = $.contract.content;
             $.ajax({

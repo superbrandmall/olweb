@@ -599,6 +599,7 @@ function updateTopNavMallSelection() {
                                 </li>');
                             }
                         })
+                        renderLocationMalls();
                     }
                     return false;
                 } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
@@ -638,17 +639,19 @@ function updateTopNavMallSelection() {
                         }
                     }
                 }
-                
-                if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
-                    $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
-                } else {
-                    $('.mall-select ul li').each(function(i,elem){
-                        if($(elem).hasClass('to-select')){
-                            $('#mallSelected').text($(elem).find('span').text());
-                            $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
-                            return false;
-                        }
-                    })
+                renderLocationMalls();
+                function renderLocationMalls(){
+                    if($.cookie('mallSelected') && $.cookie('mallSelected') != '' && $.cookie('mallSelected') != null){
+                        $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
+                    } else {
+                        $('.mall-select ul li').each(function(i,elem){
+                            if($(elem).hasClass('to-select')){
+                                $('#mallSelected').text($(elem).find('span').text());
+                                $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
+                                return false;
+                            }
+                        })
+                    }
                 }
             })
         }

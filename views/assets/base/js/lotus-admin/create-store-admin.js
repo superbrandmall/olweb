@@ -91,32 +91,28 @@ function saveStore() {
                 return false;
             }
         })
-        
-        var height = $('#height').val();
 
         var map = {
             "abcRent": null,
-            "approveFirst": $('#approveFirst').val(),
-            "approveSecond":('#approveSecond').val(),
-            "approveThird": ('#approveThird').val(),
+            "approveFirst": $('#selectUser1').val(),
+            "approveSecond":$('#selectUser2').val(),
+            "approveThird": $('#selectUser3').val(),
             "area": $('#unitArea').val(),
             "creatorOpenId": openId,
             "endDate": $('#endDate').val(),
-            "enterFlag": ('#approveFirst').val(),
-            "floorName":('#approveFirst').val(),
-            "id": ('#approveFirst').val(),
-            "liftFlag": ('#approveFirst').val(),
+            "floorCode": $('#selectFloor').val(),
+            "floorName": $('#select2-selectFloor-container').text(),
             "mallCode": $('#mallCode').val(),
-            "modality": ('#approveFirst').val(),
-            "mulitPathFlag": 0,
+            "modality": $('#modality_1').val(),
             "shopStatus": 1,
+            "shopState": 1,
+            "state": 1,
             "startDate": $('#startDate').val(),
+            "remarks": $('#remark').val(),
             "unitCode": $('#unitCode').val(),
-            "unitDesc":('#approveFirst').val(),
             "unitName": $('#unitName').val(),
-            "unitSize": '0x0x'+height,
             "unitType": $('#unitType').val(),
-            "creatorOpenId": openId
+            "updateOpenId": openId
         };
 
         $.ajax({
