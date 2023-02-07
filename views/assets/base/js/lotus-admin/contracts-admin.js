@@ -4,6 +4,9 @@ $(document).ready(function(){
             case "delete":
                 successMsg('00','删除成功！');
                 break;
+            case "succeed":
+                successMsg('00','提交成功！');
+                break;
             default:
                 break;
         }

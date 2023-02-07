@@ -36,7 +36,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">SAP编号 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">SAP编号</label>
                 <div class="col-md-8 col-sm-12">
                     <input class="form-control" id="sapContractNo" type="text" />
                 </div>
@@ -155,6 +155,15 @@
                     <select class="select2" id="contractTemplate" style="width: 100%"></select>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">延迟开业违约金 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="overdueBizAmount" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/天</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -217,7 +226,7 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="col-md-4 control-label">装修期限 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">装修期限</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-daterange input-group" id="freePeriods">
                         <input type="text" class="form-control" id="freeStartDate_1" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
@@ -231,7 +240,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">装修天数 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">装修天数</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input class="form-control" id="freeDays" placeholder="请选择装修期限" type="number" min="0" onKeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))" style="border: 1px solid #ccc; background: #fff; border-right: none; ime-mode:disabled;" />                                      
@@ -251,7 +260,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">营业时间 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">营业时间</label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
                         <input type="text" class="form-control timepicker" id="openStartTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />

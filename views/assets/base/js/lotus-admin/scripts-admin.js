@@ -603,6 +603,11 @@ function updateTopNavMallSelection() {
                     return false;
                 } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
                     if($.cookie('locationSelected') && $.cookie('locationSelected') != '' && $.cookie('locationSelected') != null){
+                        renderLocations();
+                    }
+
+                    function renderLocations(){
+                        var malls = $.parseJSON(sessionStorage.getItem("malls"));
                         $.each(malls, function(i,v){
                             if(v.mallLotusBase.province == $.cookie('locationSelected') && v.code == w.moduleCode){
                                 $('.navbar-nav .mall-select > ul').append('<li class="to-select" style="display: block;">\n\
@@ -613,21 +618,39 @@ function updateTopNavMallSelection() {
                                 </li>');
                             }
                         })
+                        
+                        if($('.navbar-nav .mall-select > ul').find('.to-select').length <= 0){
+                            var temp = $('#locationSelected').text();
+                            var index;
+                            $('.location-select ul li').each(function(i,elem){
+                                if($(elem).find('span').text() == temp){
+                                    index = i*1+1;
+                                    if(i == $('.location-select ul li').length - 1){
+                                        index = 0;
+                                    }
+                                    $('#locationSelected').text($('.location-select ul').find('li:eq('+index+')').find('span').text());
+                                    $.cookie('locationSelected',$('.location-select ul').find('li:eq('+index+')').find('span').text());
+                                    $.cookie('mallSelected','');
+                                    return false;
+                                }
+                            })
+                            renderLocations();
+                        }
                     }
                 }
+                
+                if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
+                    $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
+                } else {
+                    $('.mall-select ul li').each(function(i,elem){
+                        if($(elem).hasClass('to-select')){
+                            $('#mallSelected').text($(elem).find('span').text());
+                            $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
+                            return false;
+                        }
+                    })
+                }
             })
-            
-            if($.cookie('mallSelected') && $.cookie('mallSelected') != ''){
-                $('#mallSelected').text($.cookie('mallSelected').split(':::')[0]);
-            } else {
-                $('.mall-select ul li').each(function(i,elem){
-                    if($(elem).hasClass('to-select')){
-                        $('#mallSelected').text($(elem).find('span').text());
-                        $.cookie('mallSelected',$(elem).find('span').text()+':::'+$(elem).find('a').attr('data-code'));
-                        return false;
-                    }
-                })
-            }
         }
     } else {
         findAllMalls();

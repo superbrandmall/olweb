@@ -14,13 +14,14 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <span>首页</span>
                 </a>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>">
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi' || $_GET['p'] == 'lotus-admin/lotus-north') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-pie-chart"></i>
                     <span>报表</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">报表分析</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/lotus-north') { echo 'active'; }?>"><a href="/lotus-admin/lotus-north">北区铺位分析</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi') { echo 'active'; }?>"><a href="/lotus-admin/bi">合同信息分析</a></li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/malls' || $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/create-store' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || $_GET['p'] == 'lotus-admin/store-budget' ||  

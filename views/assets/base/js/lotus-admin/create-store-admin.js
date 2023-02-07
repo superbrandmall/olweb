@@ -19,9 +19,6 @@ $(document).ready(function(){
             },
             endDate: {
                 required: true
-            },
-            selectUser1: {
-                required: true
             }
         },
         messages: {
@@ -43,9 +40,6 @@ $(document).ready(function(){
             },
             endDate: {
                 required: "请选择生效结束日期"
-            },
-            selectUser1: {
-                required: "请选择铺位负责人1"
             }
         },
         errorPlacement: function(error, element) {

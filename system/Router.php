@@ -392,6 +392,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/bi' => array(
             'url' => 'bi.php'
         ),
+        'lotus-admin/lotus-north' => array(
+            'url' => 'lotus-north.php'
+        ),
         'lotus-admin/modality' => array(
             'url' => 'modality.php'
         ),
@@ -430,7 +433,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'todo.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-init.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'requests.php', 'request-summary.php', 'bi.php', 'modality.php', 'modality-progress-console.php',     
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-init.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'requests.php', 'request-summary.php', 'bi.php', 'lotus-north.php', 'modality.php', 'modality-progress-console.php',     
         'dr-summary.php', 'floor-progress-console.php', 'product-category.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php', 'leasing-budget.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php');
     
     if (in_array($page, $session_required)) {

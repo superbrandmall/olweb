@@ -12,10 +12,6 @@ $(document).ready(function(){
         },1000);
     }
     
-//    if(!sessionStorage.getItem('lotusUser') || sessionStorage.getItem('lotusUser') == null || sessionStorage.getItem('lotusUser') == ''){
-//        findAllLotusUsers();
-//    }
-    
     if($.cookie('searchUnit') != ''){
         $('#unit').val($.cookie('searchUnit'));
     }
@@ -95,7 +91,7 @@ function findAllStoresByKVCondition(p,c){
         "columnName": "userCode",
         "columnPatten": "",
         "conditionOperator": "AND",
-        "operator": "LIKE",
+        "operator": "=",
         "value": $.cookie('uid')
     },{
         "columnName": "unitType",
@@ -103,18 +99,6 @@ function findAllStoresByKVCondition(p,c){
         "conditionOperator": "AND",
         "operator": "!=",
         "value": 'kow'
-    },{
-        "columnName": "mallCodes",
-        "columnPatten": "",
-        "conditionOperator": "AND",
-        "operator": "=",
-        "value": 'ALL'
-    },{
-        "columnName": "mallName",
-        "columnPatten": "",
-        "conditionOperator": "AND",
-        "operator": "!=",
-        "value": '测试店'
     }]
     
     if($.cookie('searchShopStatus') != null && $.cookie('searchShopStatus') != '' && $.cookie('searchShopStatus') != 'null'){
@@ -146,6 +130,44 @@ function findAllStoresByKVCondition(p,c){
             "value": $.cookie('searchMallCode').split(':::')[1]
         }
         params.push(param);
+    } else {
+        if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+            var tmc = 0, mc = '';
+            $.each(JSON.parse($.cookie('userModules')), function(j,w) {
+                if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
+                    tmc = 1;
+                    mc += w.moduleCode+';';
+                }
+            })
+            
+            if(tmc == 1){
+                param = {
+                    "columnName": "mallCode",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "IN",
+                    "value": mc
+                }
+            } else {
+                param = {
+                    "columnName": "mallCodes",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": 'ALL'
+                }
+            }
+            params.push(param); 
+        } else {
+            param = {
+                "columnName": "mallCodes",
+                "columnPatten": "",
+                "conditionOperator": "AND",
+                "operator": "=",
+                "value": ''
+            }
+            params.push(param);
+        }
     }
     
     if($.cookie('searchUnit') != null && $.cookie('searchUnit') != '' && $.cookie('searchUnit') != 'null'){
@@ -153,7 +175,7 @@ function findAllStoresByKVCondition(p,c){
             "columnName": "unitCode",
             "columnPatten": "",
             "conditionOperator": "OR",
-            "operator": "=",
+            "operator": "LIKE",
             "value": $.cookie('searchUnit')
         }
         params.push(param);
@@ -162,7 +184,7 @@ function findAllStoresByKVCondition(p,c){
             "columnName": "unitName",
             "columnPatten": "",
             "conditionOperator": "OR",
-            "operator": "=",
+            "operator": "LIKE",
             "value": $.cookie('searchUnit')
         }
         params.push(param);

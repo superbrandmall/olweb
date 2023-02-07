@@ -11,7 +11,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header">
         <h4>
-            报表分析
+            合同信息分析
         </h4>
     </section>
     

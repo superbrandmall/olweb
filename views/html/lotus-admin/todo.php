@@ -25,8 +25,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="pull-right">
                                         <ul class="nav nav-tabs" style="margin-bottom: 1px;">
                                             <li class="active"><a href="#toDoList" data-toggle="tab">待办流程<span id="toDoCount"></span></a></li>
-                                            <li><a href="#doneList" data-toggle="tab">已办流程<span id="doneCount"></span></a></li>
-                                            <li><a href="#draftList" data-toggle="tab">草稿箱<span id="draftCount"></span></a></li>
+                                            <li class="hidden-xs"><a href="#doneList" data-toggle="tab">已办流程<span id="doneCount"></span></a></li>
+                                            <li class="hidden-xs"><a href="#draftList" data-toggle="tab">草稿箱<span id="draftCount"></span></a></li>
                                         </ul>
                                     </div>
                                     <div class="tab-content">
@@ -139,9 +139,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     </div>
                                 </div>
                                 <div class="col-md-8">
-                                    <div class="box" style="padding: 30px 30px 0 30px; margin-bottom: 0; box-shadow: -1px 0px 0px rgba(0,0,0,.1);">
+                                    <div class="box" style="padding: 30px 30px 0 30px; margin-bottom: 0; box-shadow: -1px 0px 0px rgba(0,0,0,.1); overflow: auto;">
                                         <div id="map"></div>
-                                        <a href="/lotus-admin/malls" class="btn btn-primary btn-sm" style="position: absolute; right: 0; top: 0;">进入项目列表 <i class="fa fa-angle-right icon-white"></i></a>
+                                        <a href="/lotus-admin/malls" class="btn btn-primary btn-sm hidden-xs" style="position: absolute; right: 0; top: 0;">进入项目列表 <i class="fa fa-angle-right icon-white"></i></a>
                                     </div>
                                 </div>
                             </div>
