@@ -115,6 +115,7 @@
                         <option value="M" selected>月</option>
                         <option value="Q">季</option>
                         <option value="Y">年</option>
+                        <option value="T">次</option>
                     </select>
                 </div>
             </div>

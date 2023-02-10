@@ -32,8 +32,8 @@ $(document).ready(function(){
         },
         messages: {
             tenantCode: {
-                required: "商户代码缺失",
-                minlength: "商户代码缺失"
+                required: "商户编码缺失",
+                minlength: "商户编码长度不够"
             },
             name: {
                 required: "请输入商户名称",
@@ -152,6 +152,8 @@ function saveTenant() {
         } else {
             $.tenant.capital = null;
         }
+        $.tenant.tenantCode = $('#tenantCode').val();
+        $.tenant.name = $('#name').val() || null;
         $.tenant.type = $('#type').val() || null;
         $.tenant.businessScope = $('#businessScope').val() || null;
         $.tenant.uscc = $('#uscc').val() || null;

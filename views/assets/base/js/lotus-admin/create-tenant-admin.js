@@ -5,6 +5,9 @@ $(document).ready(function(){
     
     $("#create-form").validate({
         rules: {
+            tenantCode: {
+                minlength: 4
+            },
             name: {
                 required: true,
                 minlength: 2
@@ -23,6 +26,9 @@ $(document).ready(function(){
             }
         },
         messages: {
+            tenantCode: {
+                minlength: "商户编码长度不够"
+            },
             name: {
                 required: "请输入商户名称",
                 minlength: "请输入完整商户名称"
@@ -106,6 +112,7 @@ function addTenant() {
             }
         })
         
+        var tenantCode = $('#tenantCode').val();
         var name = $('#name').val();
         var type = $('#type').val();
         var capital;
@@ -158,6 +165,7 @@ function addTenant() {
 
         if(name!= '' && type != '' && uscc != '' && regAddress != ''){
             var map = {
+                "tenantCode": tenantCode,
                 "creatorOpenId": openId,
                 "updateOpenId": openId,
                 "businessScope": businessScope,

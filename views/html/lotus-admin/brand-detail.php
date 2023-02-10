@@ -45,7 +45,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="brand_name" class="col-md-4 control-label">名称 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="brand_name" name="brand_name" readonly>
+                                            <input class="form-control" type="text" id="brand_name" name="brand_name">
                                             <div id="errorcontainer-brand_name" class="errorDiv"></div>
                                         </div>
                                     </div>

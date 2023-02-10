@@ -787,7 +787,7 @@ function findRequestByBizId() {
                                     bizType = v.bizType.split('_')[1];
                                 }
                                 
-                                if($.inArray(bizType, ['BL','IC','TM','BA','OF']) != -1){
+                                if($.inArray(bizType, ['BL','IC','TM','BA','OF','INIT','TENANT','SIGN']) != -1){
                                     var type;
                                     switch (bizType) {
                                         case "BL":
@@ -804,6 +804,15 @@ function findRequestByBizId() {
                                             break;
                                         case "OF":
                                             type = '其它文件';
+                                            break;
+                                        case "INIT":
+                                            type = '未盖章合同';
+                                            break;
+                                        case "TENANT":
+                                            type = '商户盖章合同';
+                                            break;
+                                        case "SIGN":
+                                            type = '双方盖章合同';
                                             break;
                                         default:
                                             break;
