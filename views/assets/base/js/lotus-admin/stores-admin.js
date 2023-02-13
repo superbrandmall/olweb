@@ -78,6 +78,8 @@ $(document).ready(function(){
         
         findAllStoresByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllStoresByKVCondition(p,c){
@@ -272,9 +274,13 @@ function findAllStoresByKVCondition(p,c){
                                 break;
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
                         
                         $('#stores').append('<tr data-index="'+i+'" id="store_'+v.code+'">\n\
-                        <td><a href="/lotus-admin/store-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
+                        <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/store-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
                         <td>'+state+'</td>\n\
                         <td>'+shopStatus+'</td>\n\
                         <td>'+v.mallName+'['+v.mallCode+']</td>\n\
@@ -282,8 +288,9 @@ function findAllStoresByKVCondition(p,c){
                         <td>'+v.startDate+'~'+v.endDate+'</td>\n\
                         <td>'+v.unitArea+'</td>\n\
                         <td>'+unitType+'</td>\n\
-                        <td></td>\n\
-                        <td><span class="ifSigned">未签约</span><span class="signedContract"></span></td></tr>');
+                        <td>'+(v.approveFirst || '')+'</td>\n\
+                        <td>/</td>\n\
+                        <td><span class="ifSigned">未签约</span></td></tr>');
                     });
                     
                     if(storeCodes != ''){
@@ -296,7 +303,7 @@ function findAllStoresByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#stores').html('<tr><td colspan="10" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#stores').html('<tr><td colspan="11" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -352,9 +359,8 @@ function findContractsByStoreCode(sc) {
                 
                 if(response.data.content.length > 0) {
                     $.each(response.data.content, function(i,v){
-                        $('#store_'+v.shopCode+' td:eq(8)').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>');
-                        $('#store_'+v.shopCode+' td:eq(9) .ifSigned').text('已签约 ');
-                        $('#store_'+v.shopCode+' td:eq(9) .signedContract').append('<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a> ');
+                        $('#store_'+v.shopCode+' td:eq(9)').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>');
+                        $('#store_'+v.shopCode+' td:eq(10) .ifSigned').html('已签约 <a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a>').removeClass('ifSigned');
                     })
                 }
             }

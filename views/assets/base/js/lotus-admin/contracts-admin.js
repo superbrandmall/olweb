@@ -104,6 +104,8 @@ $(document).ready(function(){
         $.cookie('searchContractsSelectStoreTxt', $('#selectStore').text());
         findAllContractsByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllContractsByKVCondition(p,c){
@@ -233,9 +235,14 @@ function findAllContractsByKVCondition(p,c){
                             link = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
-                            <td>'+link+'</td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+link+'</td>\n\
                             <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\

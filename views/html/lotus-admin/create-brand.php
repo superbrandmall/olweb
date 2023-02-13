@@ -2,7 +2,7 @@
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/create-brand-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/create-brand.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/create-brand.js?t='.date("Y-m-d").'1"></script>'.PHP_EOL;
 }
 ?>
 

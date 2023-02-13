@@ -121,9 +121,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
-                                                            <th>
-                                                                <div class="th-inner" style="width: 200px;">铺位</div>
-                                                                <div class="fht-cell"></div>
+                                                            <th style="z-index: 1;">
+                                                                <div class="th-inner" style="width: 200px; background: #fff;">铺位</div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner" style="width: 55px;">状态</div>
@@ -151,6 +151,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner" style="width: 60px;">类型</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">铺位负责人</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

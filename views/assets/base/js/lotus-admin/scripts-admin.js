@@ -3944,6 +3944,56 @@ function modifyTypeCheck() {
     }
 }
 
+function scrollHandle() {
+    var scrollTop = $('.fixed-table-body').scrollTop();
+    // 当滚动距离大于0时设置top及相应的样式
+    if (scrollTop > 0) {
+        $('.fixed-table-body tr th').css({
+            "top": scrollTop + 'px',
+            "marginTop": "-1px",
+            "padding": 0
+        });
+    } else {
+    // 当滚动距离小于0时设置top及相应的样式
+         $('.fixed-table-body tr th').css({
+            "top": scrollTop + 'px',
+            "marginTop": 0
+        });
+    }
+    
+    var scrollLeft = $('.fixed-table-body').scrollLeft();
+    // 当滚动距离大于0时设置left及相应的样式
+    if (scrollLeft > 275) {
+        $('.fixed-table-body tr th:eq(0)').css({
+            "left": scrollLeft + 'px',
+            "marginLeft": "-1px",
+            "padding": 0
+        });
+        
+        $('.fixed-table-body tr').each(function() {
+            $(this).find("td:eq(0)").css({
+                "position": "relative",
+                "left": scrollLeft + 'px',
+                "marginLeft": "-1px",
+                "padding": 0
+            });
+        })
+    } else {
+    // 当滚动距离小于0时设置left及相应的样式
+         $('.fixed-table-body tr th:eq(0)').css({
+            "left": scrollLeft + 'px',
+            "marginLeft": 0
+        });
+        
+        $('.fixed-table-body tr').each(function() {
+            $(this).find("td:eq(0)").css({
+                "left": scrollLeft + 'px',
+                "marginLeft": 0
+            });
+        })
+    }
+}
+
 (function ($) {
     window.Ewin = function () {
         var html = '<div id="[Id]" class="modal fade" role="dialog" aria-labelledby="modalLabel">' +

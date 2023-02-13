@@ -25,7 +25,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <i class="fa fa-plus icon-white"></i> 创建
             </a>
         </div>
-        <div class="box-header" style="background-color: #ecf0f5;">
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/store-detail?id=<?= $id; ?>">详细资料</a></li>

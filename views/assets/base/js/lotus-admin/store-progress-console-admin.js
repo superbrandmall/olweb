@@ -8,6 +8,7 @@ $(document).ready(function(){
         $('#mallCode').append(newOption).trigger('change');
     } else {
         $("#mallCode").val($.cookie('mallSelected').split(':::')[1]).trigger('change');
+        $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -54,6 +55,8 @@ $(document).ready(function(){
         }
         findAllStoresByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllStoresByKVCondition(p,c){
@@ -149,19 +152,25 @@ function findAllStoresByKVCondition(p,c){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
+                    var storeCodes = '';
                     $.each(response.data.content, function(i,v){
-                        var isEmpty, isContract;
+                        storeCodes += v.code + ';';
+                        
+                        var isEmpty, isBrand, isContract;
                         switch (v.shopStatus) {
                             case '1':
                                 isEmpty = "是";
+                                isBrand = "/";
                                 isContract = '<i class="fa fa-circle-o text-red"></i> 未签订';
                                 break;
                             case '0':
                                 isEmpty = "否";
-                                isContract = '<i class="fa fa-circle text-green"></i> 已签订';
+                                isBrand = '<span class="signedBrand"></span>';
+                                isContract = '<i class="fa fa-circle text-green"></i> 已签订 <span class="signedContract"></span>';
                                 break;
                             default:
                                 isEmpty = "是";
+                                isBrand = "/";
                                 isContract = '<i class="fa fa-circle-o text-red"></i> 未签订';
                                 break;
                         }
@@ -169,16 +178,20 @@ function findAllStoresByKVCondition(p,c){
                         var isDR = '<i class="fa fa-circle-o text-red"></i> 未通过';
                         var isRequest = '<i class="fa fa-circle-o text-red"></i> 未通过';
                         
-                        $('#console').append('<tr data-index="'+i+'">\n\
+                        $('#console').append('<tr data-index="'+i+'" id="store_'+v.code+'">\n\
                         <td><a href="/lotus-admin/store-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
                         <td>'+v.unitArea+'</td>\n\
-                        <td></td>\n\
+                        <td>'+(v.approveFirst || '')+'</td>\n\
                         <td>'+isEmpty+'</td>\n\
-                        <td>'+(v.remarkFirst || '/')+'</td>\n\
+                        <td>'+isBrand+'</td>\n\
                         <td>'+isDR+'</td>\n\
-                        <td>'+isRequest+'</td>\n\
+                        <td><span class="signedRequest">'+isRequest+'</span></td>\n\
                         <td>'+isContract+'</td></tr>');
                     });
+                    
+                    if(storeCodes != ''){
+                        findContractsByStoreCode(storeCodes);
+                    }
                     
                     if(p == pages){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
@@ -252,6 +265,82 @@ function updateSelectUserDropDown(data_count) {
                 }
             },
             cache: true
+        }
+    })
+}
+
+function findContractsByStoreCode(sc) {
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    param = {
+        "columnName": "shopCode",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "in",
+        "value": sc
+    }
+    
+    params.push(param);
+    
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+    
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $.each(response.data.content, function(i,v){
+                        $('#store_'+v.shopCode+' td:eq(4) .signedBrand').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>').removeClass('signedBrand');
+                        if(v.bizId != null && v.endDate != null && dateCompare(v.endDate,date) != 'smaller'){
+                            var page;
+                            switch (v.formType) {
+                                case "new":
+                                    page = 'request';
+                                    break;
+                                case "renew":
+                                    page = 'renew';
+                                    break;
+                                case "termination":
+                                    page = 'terminate';
+                                    break;
+                                case "modify":
+                                    page = 'modify';
+                                    break;
+                                default:
+                                    break;
+                            }
+                            $('#store_'+v.shopCode+' td:eq(6) .signedRequest').html('<i class="fa fa-circle text-green"></i> 已通过 <a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'" target="_blank">'+v.bizId+'</a> ').removeClass('signedRequest');
+                        }
+                        $('#store_'+v.shopCode+' td:eq(7) .signedContract').append('<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a> ').removeClass('signedContract');
+                    })
+                }
+            }
         }
     })
 }

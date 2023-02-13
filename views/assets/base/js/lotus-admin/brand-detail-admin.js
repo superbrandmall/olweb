@@ -80,7 +80,7 @@ function updateBrandAttribute() {
 
 function findBizByBiz1(biz) {
     $.ajax({
-        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+biz,
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -125,7 +125,7 @@ function findBizByBiz1(biz) {
 
 function findBizByBiz2(biz) {
     $.ajax({
-        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+biz,
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+encodeURIComponent(biz),
         type: "GET",
         async: false,
         beforeSend: function(request) {
@@ -171,7 +171,7 @@ function findBizByBiz2(biz) {
 
 function findBizByBiz3(biz) {
     $.ajax({
-        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality3?modality3="+biz,
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality3?modality3="+encodeURIComponent(biz),
         type: "GET",
         async: false,
         beforeSend: function(request) {

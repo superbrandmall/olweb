@@ -53,7 +53,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
         </div>
 
-        <div class="box-header" style="background-color: #ecf0f5; margin-top: -14px;">
+        <div class="box-header" style="background-color: #ecf0f5; margin-top: -14px; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li class="active"><a href="javascript: void(0);">铺位</a></li>

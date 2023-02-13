@@ -42,7 +42,7 @@ function renderModality(modalityLevel,index,modality,id,ids) {
     
     node.html('<i class="fa fa-minus"></i> '+modality+' ('+degree+')').attr('onclick','closeModality("'+modalityLevel+'","'+index+'","'+modality+'","'+id+'","'+ids+'")');
     $.ajax({
-        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality"+modalityLevel+"?modality"+modalityLevel+"="+modality,
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality"+modalityLevel+"?modality"+modalityLevel+"="+encodeURIComponent(modality),
         type: "GET",
         async: false,
         beforeSend: function(request) {
