@@ -1503,7 +1503,7 @@ function addRowInvestmentContractAccounttermCommission() {
     });
     
     $('#investmentContractAccounttermCommission .select2').select2();
-    calBackPushNextCalendar('commission');
+    //calBackPushNextCalendar('commission');
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -1519,7 +1519,7 @@ function addRowInvestmentContractAccounttermCommission() {
     });
     
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('commission');
+        //calBackPushNextCalendar('commission');
         calBackPush('commission');
     });
     

@@ -1008,10 +1008,10 @@ function updateRowInvestmentContractAccounttermCommission(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('commission');
-    });
-    
+//    $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
+//        calBackPushNextCalendar('commission');
+//    });
+//    
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
     })
@@ -1912,9 +1912,11 @@ function saveContractCommission() {
             }
             var check4 = 'equal';
             for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
-                var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
-                if(check44 != 'equal'){
-                    check4 = check44;
+                if($('#commissionDeductType_'+ln).val() != "1"){
+                    var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
                 }
             }
 
