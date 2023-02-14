@@ -1503,7 +1503,6 @@ function addRowInvestmentContractAccounttermCommission() {
     });
     
     $('#investmentContractAccounttermCommission .select2').select2();
-    //calBackPushNextCalendar('commission');
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -1519,7 +1518,6 @@ function addRowInvestmentContractAccounttermCommission() {
     });
     
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        //calBackPushNextCalendar('commission');
         calBackPush('commission');
     });
     
@@ -1931,6 +1929,7 @@ function addRowInvestmentContractDepositterm() {
     select.setAttribute("id","deposittermItem_"+count.toLocaleString());
     select.options[0] = new Option('租赁保证金[E02]','E02');
     select.options[1] = new Option('装修保证金[E03]','E03');
+    select.options[2] = new Option('公共事业费押金[E22]','E22');
     column2.appendChild(select);
     
     column3.innerText = '收';

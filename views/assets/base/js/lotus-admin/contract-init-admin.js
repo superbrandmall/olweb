@@ -92,14 +92,6 @@ $(document).ready(function(){
         calBackPushNextCalendar('fixedRent');
     })
     
-    $("input[id*='commissionEndDate_']").on('changeDate',function(){
-        calBackPushNextCalendar('commission');
-    })
-    
-    $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
-        calBackPushNextCalendar('propertyMgmt');
-    })
-    
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
     })
@@ -1007,11 +999,7 @@ function updateRowInvestmentContractAccounttermCommission(v) {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
-    
-//    $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-//        calBackPushNextCalendar('commission');
-//    });
-//    
+
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
     })
@@ -1194,10 +1182,6 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
-    
-    $("#propertyMgmtEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('propertyMgmt');
-    })
     
     $("#propertyMgmtTaxRentAmount_"+count.toLocaleString()).on('change',function(){
         calBackPushPropertyMgmtTaxRentAmount();
@@ -1431,6 +1415,7 @@ function updateRowInvestmentContractDepositterm(v) {
     select.setAttribute("id","deposittermItem_"+count.toLocaleString());
     select.options[0] = new Option('租赁保证金[E02]','E02');
     select.options[1] = new Option('装修保证金[E03]','E03');
+    select.options[2] = new Option('公共事业费押金[E22]','E22');
     column2.appendChild(select);
     
     column3.innerText = '收';

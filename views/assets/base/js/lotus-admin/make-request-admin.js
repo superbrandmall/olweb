@@ -110,7 +110,6 @@ $(document).ready(function(){
     })
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
-        calBackPushNextCalendar('commission');
         calBackPush('commission');
     })
     

@@ -86,7 +86,6 @@ $(document).ready(function(){
     })
     
     $("input[id*='commissionEndDate_']").on('changeDate',function(){
-        calBackPushNextCalendar('commission');
         calBackPush('commission');
     })
     
@@ -1470,7 +1469,6 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     });
     
     $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('commission');
         calBackPush('commission');
     });
     
