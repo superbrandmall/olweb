@@ -91,10 +91,6 @@ $(document).ready(function(){
         calBackPushNextCalendar('fixedRent');
     })
     
-    $("input[id*='commissionEndDate_']").on('changeDate',function(){
-        calBackPushNextCalendar('commission');
-    })
-    
     $("input[id*='propertyMgmtEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('propertyMgmt');
     })
@@ -1109,10 +1105,6 @@ function updateRowInvestmentContractAccounttermCommission(v) {
         $(this).parent().parent().removeClass('success');
     });
     
-    $("#commissionEndDate_"+count.toLocaleString()).on('changeDate',function(){
-        calBackPushNextCalendar('commission');
-    });
-    
     $("#commissionTaxDeduct_"+count.toLocaleString()).on('change',function(){
         calBackPushCommissionDeduct();
     })
@@ -1532,6 +1524,7 @@ function updateRowInvestmentContractDepositterm(v) {
     select.setAttribute("id","deposittermItem_"+count.toLocaleString());
     select.options[0] = new Option('租赁保证金[E02]','E02');
     select.options[1] = new Option('装修保证金[E03]','E03');
+    select.options[2] = new Option('公共事业费押金[E22]','E22');
     column2.appendChild(select);
     
     column3.innerText = '收';
@@ -2011,9 +2004,11 @@ function saveContractCommission() {
             }
             var check4 = 'equal';
             for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
-                var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
-                if(check44 != 'equal'){
-                    check4 = check44;
+                if($('#commissionDeductType_'+ln).val() == "1"){
+                    var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
                 }
             }
 

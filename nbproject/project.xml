@@ -19,6 +19,7 @@
             <word>开户银行</word>
             <word>服务台</word>
             <word>浦东新区</word>
+            <word>表示有变更的内容</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

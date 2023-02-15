@@ -2373,7 +2373,7 @@ function saveContractForm(s) {
                 }
                 var check4 = 'equal';
                 for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
-                    if($('#commissionDeductType_'+ln).val() != "1"){
+                    if($('#commissionDeductType_'+ln).val() == "1"){
                         var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
                         if(check44 != 'equal'){
                             check4 = check44;
