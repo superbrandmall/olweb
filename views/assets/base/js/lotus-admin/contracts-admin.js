@@ -225,7 +225,7 @@ function findAllContractsByKVCondition(p,c){
                             modality = v.brandLotus.modality3;
                             
                             if(v.brandLotus.modality4 != null){
-                                modality += modality + '（' + v.brandLotus.modality4 + '）';
+                                modality = modality + '（' + v.brandLotus.modality4 + '）';
                             }
                         }
                         

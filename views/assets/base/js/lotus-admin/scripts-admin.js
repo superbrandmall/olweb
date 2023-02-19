@@ -3328,7 +3328,6 @@ function calBackPush(prefix){
                                 sessionStorage.setItem("promotionCalcList", JSON.stringify(response.data.promotionCalcList));
                             } 
                         }
-
                     } else {
                         alertMsg(response.code,response.customerMessage);
                     }
@@ -3860,24 +3859,6 @@ function createContract() {
     })
 }
 
-function activateAddDeleteRow(){
-    if($('#investmentContractAccounttermFixed tbody tr').length > 0){
-        $('#investmentContractAccounttermFixed .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermFixed()').css('opacity',1);
-    }
-    if($('#investmentContractAccounttermCommission tbody tr').length > 0){
-        $('#investmentContractAccounttermCommission .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermCommission()').css('opacity',1);
-    }
-    if($('#investmentContractAccounttermPropertyMgmt tbody tr').length > 0){
-        $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermPropertyMgmt()').css('opacity',1);
-    }
-    if($('#investmentContractAccounttermPromotion tbody tr').length > 0){
-        $('#investmentContractAccounttermPromotion .box-header .pull-right a').attr('onClick','addRowInvestmentContractAccounttermPromotion()').css('opacity',1);
-    }
-    
-    $('tbody tr').not('.past').find('.fa-minus-circle').parent().attr('onClick','deleteRow(this)');
-    $('tbody tr').not('.past').find('.fa-minus-circle').parent().css('opacity',1);
-}
-
 function modifyTypeCheck() {
     if($('#contractModifyType').val() != ''){
         $("#selectTenant, #brandName, #contractName, #startDate, #endDate, tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_'], \n\
@@ -3886,13 +3867,6 @@ function modifyTypeCheck() {
             'border': 'none',
             'background': '#eee'
         });
-        $('#investmentContractAccounttermFixed .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('#investmentContractAccounttermCommission .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('#investmentContractAccounttermPropertyMgmt .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('#investmentContractAccounttermPromotion .box-header .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('#investmentContractProperteisterm .box-body .pull-right a').removeAttr('onClick').css('opacity',0.5);
-        $('tbody .fa-minus-circle').parent().removeAttr('onClick');
-        $('tbody .fa-minus-circle').parent().css('opacity',0.5);
         
         $("input[id*='StartDate_']").datepicker('setStartDate',$('#startDate').val());
         $("input[id*='StartDate_']").datepicker('setEndDate',$('#endDate').val());
@@ -3903,14 +3877,10 @@ function modifyTypeCheck() {
             case "TENANT_CHANGE":
                 $("#selectTenant, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
                 $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
-                
-                activateAddDeleteRow();
                 break;
             case "BRAND_CHANGE":
                 $("#brandName, #contractName, tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").not('.past').removeAttr('disabled');
                 $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
-                
-                activateAddDeleteRow();
                 break;
             case "TIME_CHANGE":
                 $('#startDate, #endDate, #investmentContractEnteryterm input').removeAttr('disabled').css({
@@ -3923,8 +3893,6 @@ function modifyTypeCheck() {
                 });
                 $("tbody input[id*='StartDate_'], tbody input[id*='EndDate_']").removeAttr('disabled');
                 $("tbody input.money, tbody input[id*='TaxRate_'], tbody input[id*='InvoiceFlag_']").removeAttr('disabled');
-                
-                activateAddDeleteRow();
                 break;
             case "CLAUSE_CHANGE":
                 $("#selectRentCalculationMode, tbody input[id*='StartDate_'], tbody input[id*='EndDate_'], #targetSales").not('.past').removeAttr('disabled');
@@ -3934,8 +3902,6 @@ function modifyTypeCheck() {
                     'borderLeft': 'none',
                     'background': 'transparent'
                 });
-                
-                activateAddDeleteRow();
                 break;
             default:
                 break;

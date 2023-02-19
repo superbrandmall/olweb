@@ -455,6 +455,8 @@ function findRequestbyBizId() {
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
                         } else if(data.formStatus == '9'){
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                        } else if(data.formStatus == '10'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_closed.png) 0 100%/112px auto no-repeat');
                         }
 
                         $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
@@ -621,7 +623,7 @@ function findRequestbyBizId() {
                         $('#freeDays').val(data.freeDays);
                         $('#remark').val(data.remark);
                         $('#rewardDate').datepicker('update', data.awardDate);
-                        $('#modifyEffectTime').datepicker('update', data.modifyEffectTime);
+                        $('#modifyEffectTime').datepicker('update', data.modifyEffectTime != null ? data.modifyEffectTime : data.startDate);
                         $('#targetSales').val(data.targetSales);
         
                         if(data.firstCompareCycle != null && data.firstCompareCycle != null){
@@ -638,7 +640,11 @@ function findRequestbyBizId() {
                         $('#compareSecondValue').val(data.secondCompareValueType).trigger('change');
                         
                         if(data.oldContractInfo.fixedRentList.length > 0) {
-                            if(data.modifyType != 'TIME_CHANGE'){
+                            if(data.fixedRentList.length > 0) {
+                                $.each(data.fixedRentList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),'');
+                                })
+                            } else {
                                 $.each(data.oldContractInfo.fixedRentList, function(i,v) {
                                     var newDate = ''; 
                                     if(data.fixedRentList.length > 0) {
@@ -651,14 +657,7 @@ function findRequestbyBizId() {
                                     if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
                                         updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),' past');
                                         $('#fixedRent tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                        $('#fixedRent tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                     }
-                                })
-                            }
-                            
-                            if(data.fixedRentList.length > 0) {
-                                $.each(data.fixedRentList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermFixed(JSON.stringify(v),'');
                                 })
                             }
 
@@ -686,23 +685,25 @@ function findRequestbyBizId() {
                             }
                             
                             var minI = 0;
-                            if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
-                                $.each(data.oldContractInfo.salesList, function(i,v) {
-                                    updateRowOldMinSales('fixedRent', i, JSON.stringify(v));
-                                    minI++;
-                                })
-                            }
-                            
                             if(data.salesList != null && data.salesList.length > 0) {                        
                                 $.each(data.salesList, function(i,v) {
                                     updateRowMinSales('fixedRent', minI, JSON.stringify(v));
+                                    minI++;
+                                })
+                            } else if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
+                                $.each(data.oldContractInfo.salesList, function(i,v) {
+                                    updateRowOldMinSales('fixedRent', i, JSON.stringify(v));
                                     minI++;
                                 })
                             }
                         }
 
                         if(data.oldContractInfo.deductList.length > 0) {
-                            if(data.modifyType != 'TIME_CHANGE'){
+                            if(data.deductList.length > 0) {
+                                $.each(data.deductList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),'');
+                                })
+                            } else {
                                 $.each(data.oldContractInfo.deductList, function(i,v) {
                                     var newDate = ''; 
                                     if(data.deductList.length > 0) {
@@ -715,14 +716,7 @@ function findRequestbyBizId() {
                                     if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
                                         updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),' past');
                                         $('#commission tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                        $('#commission tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                     }
-                                })
-                            }
-                            
-                            if(data.deductList.length > 0) {
-                                $.each(data.deductList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermCommission(JSON.stringify(v),'');
                                 })
                             }
 
@@ -750,23 +744,25 @@ function findRequestbyBizId() {
                             }
                             
                             var minI = 0;
-                            if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
-                                $.each(data.oldContractInfo.salesList, function(i,v) {
-                                    updateRowOldMinSales('commission', i, JSON.stringify(v));
-                                    minI++;
-                                })
-                            }
-                            
                             if(data.salesList != null && data.salesList.length > 0) {                        
                                 $.each(data.salesList, function(i,v) {
                                     updateRowMinSales('commission', minI, JSON.stringify(v));
+                                    minI++;
+                                })
+                            } else if(data.oldContractInfo.salesList != null && data.oldContractInfo.salesList.length > 0) {                        
+                                $.each(data.oldContractInfo.salesList, function(i,v) {
+                                    updateRowOldMinSales('commission', i, JSON.stringify(v));
                                     minI++;
                                 })
                             }
                         }
 
                         if(data.oldContractInfo.propertyFeeList.length > 0) {
-                            if(data.modifyType != 'TIME_CHANGE'){
+                            if(data.propertyFeeList.length > 0) {
+                                $.each(data.propertyFeeList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),'');
+                                })
+                            } else {
                                 $.each(data.oldContractInfo.propertyFeeList, function(i,v) {
                                     var newDate = ''; 
                                     if(data.propertyFeeList.length > 0) {
@@ -779,14 +775,7 @@ function findRequestbyBizId() {
                                     if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
                                         updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),' past');
                                         $('#propertyMgmt tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                        $('#propertyMgmt tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                     }
-                                })
-                            }
-                            
-                            if(data.propertyFeeList.length > 0) {
-                                $.each(data.propertyFeeList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermPropertyMgmt(JSON.stringify(v),'');
                                 })
                             }
 
@@ -815,7 +804,11 @@ function findRequestbyBizId() {
                         }
 
                         if(data.oldContractInfo.promotionFeeList.length > 0) {
-                            if(data.modifyType != 'TIME_CHANGE'){
+                            if(data.promotionFeeList.length > 0) {
+                                $.each(data.promotionFeeList, function(i,v) {
+                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),'');
+                                })
+                            } else {
                                 $.each(data.oldContractInfo.promotionFeeList, function(i,v) {
                                     var newDate = ''; 
                                     if(data.promotionFeeList.length > 0) {
@@ -828,14 +821,7 @@ function findRequestbyBizId() {
                                     if(newDate == '' || dateCompare(v.startDate, newDate) == 'smaller'){
                                         updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),' past');
                                         $('#promotion tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
-                                        $('#promotion tr:eq("'+i+'")').find('a').css('opacity','0.5').attr('onclick','');
                                     }
-                                })
-                            }
-                            
-                            if(data.promotionFeeList.length > 0) {
-                                $.each(data.promotionFeeList, function(i,v) {
-                                    updateRowInvestmentContractAccounttermPromotion(JSON.stringify(v),'');
                                 })
                             }
 
@@ -2504,21 +2490,11 @@ function saveContractForm(s) {
         var fixedRentList = [];
         var salesList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'deduct') {
-            var terms, len, lenOld, lenTotle;
-            if(modifyType == 'TIME_CHANGE'){
-                terms = $("#fixedRent").find("tr");
-                len = $("#fixedRent").find("tr").length;
-                lenOld = 0;
-                lenTotle = len * 1 + lenOld * 1;
-            } else {
-                terms = $("#fixedRent").find("tr").not('.past');
-                len = $("#fixedRent").find("tr").not('.past').length;
-                lenOld = $("#fixedRent").find("tr.past").length;
-                lenTotle = len * 1 + lenOld * 1;
-            }
-            terms.each(function(i,e){
+            var len = $("#fixedRent").find("tr").length;
+            $("#fixedRent").find("tr").each(function(i,e){
                 var fixedRent = {};
-                index = i * 1 + lenOld * 1 + 1;
+                var minSales = {}; 
+                index = i * 1 + 1;
                 fixedRent.itemCode = $('#fixedRentItem_'+index).val();
                 fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
 
@@ -2559,6 +2535,12 @@ function saveContractForm(s) {
 
                 fixedRent.taxRate = $('#fixedRentTaxRate_'+index).val();
                 fixedRent.taxCode = $('#fixedRentTaxRate_'+index).find('option:selected').attr('data-code');
+                
+                minSales.startDate = fixedRent.startDate;
+                minSales.endDate = fixedRent.endDate;
+                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+index).val());
+                minSales.contractNo = $.request.content.contractNo;
+                minSales.contractVersion = $.request.content.contractVersion;
 
                 if($('#fixedRentInvoiceFlag_'+index).prop('checked') == true){
                     fixedRent.invoiceFlag = 1;
@@ -2570,17 +2552,6 @@ function saveContractForm(s) {
                 fixedRent.contractVersion = $.request.content.contractVersion;
 
                 fixedRentList.push(fixedRent);
-            })
-            
-            $("#fixedRent").find("tr").each(function(i,e){
-                var minSales = {};
-                minSales.startDate = $('#fixedRentStartDate_'+(i * 1 + 1)).val();
-                minSales.endDate = $('#fixedRentEndDate_'+(i * 1 + 1)).val();
-                minSales.amount =  numberWithoutCommas($('#fixedRentMinSalesAmount_'+(i * 1 + 1)).val());
-                
-                minSales.contractNo = $.request.content.contractNo;
-                minSales.contractVersion = $.request.content.contractVersion;
-                
                 salesList.push(minSales);
             })
         }
@@ -2588,16 +2559,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(fixedRentList.length > 0) {
                 var check1 = dateCompare($('#fixedRentStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#fixedRentEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#fixedRentEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#fixedRentStartDate_'+(ln+1)).val(),$('#fixedRentEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#fixedRentEndDate_'+ln).val()), $('#fixedRentStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2614,21 +2585,11 @@ function saveContractForm(s) {
         var deductList = [];
         if($('#selectRentCalculationMode').find('option:selected').val() != 'fixRent') {
             salesList = [];
-            var terms, len, lenOld, lenTotle;
-            if(modifyType == 'TIME_CHANGE'){
-                terms = $("#commission").find("tr");
-                len = $("#commission").find("tr").length;
-                lenOld = 0;
-                lenTotle = len * 1 + lenOld * 1;
-            } else {
-                terms = $("#commission").find("tr").not('.past');
-                len = $("#commission").find("tr").not('.past').length;
-                lenOld = $("#commission").find("tr.past").length;
-                lenTotle = len * 1 + lenOld * 1;
-            }
-            terms.each(function(i,e){
+            var len = $("#commission").find("tr").length;
+            $("#commission").find("tr").each(function(i,e){
                 var commission = {};
-                index = i * 1 + lenOld * 1 + 1;
+                var minSales = {};
+                index = i * 1 + 1;
                 commission.itemCode = $('#commissionItem_'+index).val();
                 commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
 
@@ -2674,6 +2635,12 @@ function saveContractForm(s) {
 
                 commission.taxRate = $('#commissionTaxRate_'+index).val();
                 commission.taxCode = $('#commissionTaxRate_'+index).find('option:selected').attr('data-code');
+                
+                minSales.startDate = commission.startDate;
+                minSales.endDate = commission.endDate;
+                minSales.amount =  numberWithoutCommas($('#commissionMinSalesAmount_'+index).val());
+                minSales.contractNo = $.request.content.contractNo;
+                minSales.contractVersion = $.request.content.contractVersion;
 
                 if($('#commissionInvoiceFlag_'+index).prop('checked') == true){
                     commission.invoiceFlag = 1;
@@ -2685,18 +2652,6 @@ function saveContractForm(s) {
                 commission.contractVersion = $.request.content.contractVersion;
 
                 deductList.push(commission);  
-
-            })
-            
-            $("#commission").find("tr").each(function(i,e){
-                var minSales = {};
-                minSales.startDate = $('#commissionStartDate_'+(i * 1 + 1)).val();
-                minSales.endDate = $('#commissionEndDate_'+(i * 1 + 1)).val();
-                minSales.amount =  numberWithoutCommas($('#commissionMinSalesAmount_'+(i * 1 + 1)).val());
-
-                minSales.contractNo = $.request.content.contractNo;
-                minSales.contractVersion = $.request.content.contractVersion;
-
                 salesList.push(minSales);
             })
         }
@@ -2704,16 +2659,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(deductList.length > 0) {
                 var check1 = dateCompare($('#commissionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#commissionEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#commissionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#commissionStartDate_'+(ln+1)).val(),$('#commissionEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     if($('#commissionDeductType_'+ln).val() == "1"){
                         var check44 = dateCompare(IncrDate($('#commissionEndDate_'+ln).val()), $('#commissionStartDate_'+(ln+1)).val());
                         if(check44 != 'equal'){
@@ -2750,21 +2705,10 @@ function saveContractForm(s) {
         })
         
         var promotionFeeList = [];
-        var terms, len, lenOld, lenTotle;
-        if(modifyType == 'TIME_CHANGE'){
-            terms = $("#promotion").find("tr");
-            len = $("#promotion").find("tr").length;
-            lenOld = 0;
-            lenTotle = len * 1 + lenOld * 1;
-        } else {
-            terms = $("#promotion").find("tr").not('.past');
-            len = $("#promotion").find("tr").not('.past').length;
-            lenOld = $("#promotion").find("tr.past").length;
-            lenTotle = len * 1 + lenOld * 1;
-        }
-        terms.each(function(i,e){
+        var len = $("#promotion").find("tr").length;
+        $("#promotion").find("tr").each(function(i,e){
             var promotion = {};
-            index = i * 1 + lenOld * 1 + 1;
+            index = i * 1 + 1;
             promotion.itemCode = $('#promotionItem_'+index).val();
             promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
 
@@ -2818,16 +2762,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(promotionFeeList.length > 0) {
                 var check1 = dateCompare($('#promotionStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#promotionEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#promotionEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#promotionStartDate_'+(ln+1)).val(),$('#promotionEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#promotionEndDate_'+ln).val()), $('#promotionStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;
@@ -2842,21 +2786,10 @@ function saveContractForm(s) {
         }
         
         var propertyFeeList = [];
-        var terms, len, lenOld, lenTotle;
-        if(modifyType == 'TIME_CHANGE'){
-            terms = $("#propertyMgmt").find("tr");
-            len = $("#propertyMgmt").find("tr").length;
-            lenOld = 0;
-            lenTotle = len * 1 + lenOld * 1;
-        } else {
-            terms = $("#propertyMgmt").find("tr").not('.past');
-            len = $("#propertyMgmt").find("tr").not('.past').length;
-            lenOld = $("#propertyMgmt").find("tr.past").length;
-            lenTotle = len * 1 + lenOld * 1;
-        }
-        terms.each(function(i,e){
+        var len = $("#propertyMgmt").find("tr").length;
+        $("#propertyMgmt").find("tr").each(function(i,e){
             var propertyMgmt = {};
-            index = i * 1 + lenOld * 1 + 1;
+            index = i * 1 + 1;
             propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
             propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
 
@@ -2913,16 +2846,16 @@ function saveContractForm(s) {
         if(s == 'submit'){
             if(propertyFeeList.length > 0) {
                 var check1 = dateCompare($('#propertyMgmtStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
-                var check2 = dateCompare($('#propertyMgmtEndDate_'+lenTotle).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check2 = dateCompare($('#propertyMgmtEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
                 var check3 = 'smaller';
-                for(var ln = 0; ln < lenTotle; ln++){ //条款每一期开始日与结束日比较
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
                     var check33 = dateCompare($('#propertyMgmtStartDate_'+(ln+1)).val(),$('#propertyMgmtEndDate_'+(ln+1)).val());
                     if(check33 != 'smaller'){
                         check3 = check33;
                     }
                 }
                 var check4 = 'equal';
-                for(var ln = 1; ln < lenTotle; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
                     var check44 = dateCompare(IncrDate($('#propertyMgmtEndDate_'+ln).val()), $('#propertyMgmtStartDate_'+(ln+1)).val());
                     if(check44 != 'equal'){
                         check4 = check44;

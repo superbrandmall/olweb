@@ -401,6 +401,8 @@ function findRequestbyBizId() {
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
                         } else if(data.formStatus == '9'){
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                        } else if(data.formStatus == '10'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_closed.png) 0 100%/112px auto no-repeat');
                         }
 
                         $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));

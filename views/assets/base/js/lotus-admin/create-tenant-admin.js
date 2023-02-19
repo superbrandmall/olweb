@@ -56,16 +56,34 @@ $(document).ready(function(){
 })
 
 function checkTenantName(name) {
+    var params = [{
+        "columnName": "name",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": name
+    },{
+        "columnName": "tenantCode",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": $('#tenantCode').val()
+    },{
+        "columnName": "uscc",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": $('#uscc').val()
+    }]
+
+    var map = {
+        "params": params
+    }
+        
     $.ajax({
-        url: $.api.baseLotus+"/api/tenant/lotus/findAllByName?name="+name,
-        type: "GET",
+        url: $.api.baseLotus+"/api/tenant/lotus/findAllByKVCondition?page=1&size=100&sort=id,asc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
+        dataType: "json",
+        contentType: "application/json",
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Login") !== null){
@@ -75,19 +93,8 @@ function checkTenantName(name) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                if(response.data.length > 0){
-                    var duplicate = false;
-                    $.each(response.data, function(i,x) {
-                        if(x.name == name){
-                            duplicate = true;
-                        }
-                    })
-                    
-                    if(duplicate == true) {
-                        alertMsg('9999','该商户已经存在！');
-                    } else {
-                        addTenant();
-                    }
+                if(response.data.content.length > 0) {
+                    alertMsg('9999','该商户已经存在！');
                 } else {
                     addTenant();
                 }
