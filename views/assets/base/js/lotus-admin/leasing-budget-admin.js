@@ -69,6 +69,8 @@ $(document).ready(function(){
         }
         findShopBudget(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findShopBudget(p,c){
@@ -166,8 +168,13 @@ function findShopBudget(p,c){
                     
                     $.each(response.data.content, function(i,v){
                         if($('#budget_'+v.code).length <= 0){
+                            var tbg = '#fff';
+                            if(i%2==0){
+                                tbg = '#f9f9f9';
+                            }
+                        
                             $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.code+'">\n\
-                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>铺位-'+(v.unitDesc || v.unitType)+'</td>\n\
                             <td>2022-01-01</td>\n\
                             <td>2022-12-31</td>\n\

@@ -51,6 +51,8 @@ $(document).ready(function(){
         $.cookie('searchMallType', $('#mallType').val());
         findAllMallsByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllMallsByKVCondition(p,c){
@@ -154,8 +156,13 @@ function findAllMallsByKVCondition(p,c){
                                 break;
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#malls').append('<tr data-index="'+i+'">\n\
-                        <td><a href="/lotus-admin/default?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
+                        <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/default?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
                         <td>'+mallStatus+'</td>\n\
                         <td>'+v.startDate+'</td>\n\
                         <td>'+(v.mallLotusBase.phoneNum || '')+'</td>\n\

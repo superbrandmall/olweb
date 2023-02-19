@@ -117,6 +117,8 @@ $(document).ready(function(){
     $('#openDraft').click(function(){
         $('#investment-contract-request-todo').modal('toggle');
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllRequestsByKVCondition(p,c){
@@ -266,10 +268,15 @@ function findAllRequestsByKVCondition(p,c){
                         var creatorName, updateName;
                         v.creatorName != null ? creatorName = '['+v.creatorName+']' : creatorName = '';
                         v.updateName != null ? updateName = '['+v.updateName+']' : updateName = '';
-
+                        
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                            
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
-                            <td><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
                             <td>'+contractLink+'</td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
