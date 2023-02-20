@@ -2354,7 +2354,6 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     }
     
     selectStore.select2({
-        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         language: {
@@ -2366,9 +2365,13 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
             }
         },
         ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodesAndMallCode",
-            type: 'GET',
-            dataType: 'json',
+            url: function (params) {
+                return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
             delay: 250,
             beforeSend: function(request) {
                 request.setRequestHeader("Login", $.cookie('login'));
@@ -2376,7 +2379,8 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
-            data: function (params) { 
+            data: function (params) {
+                var term = params.term;
                 var mallCodes = mall_code;
                 var mallCode = mallCodes;
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -2386,14 +2390,69 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                     }
                 })
                 
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes,
-                    mallCode: mallCode
+                var params = [];
+                var conditionGroups = [];
+                var conditionGroup = {};
+
+                conditionGroup = {
+                    "conditionOperator": "AND",
+                    "params": [
+                      {
+                        "columnName": "mallCodes",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": mallCodes
+                      },
+                      {
+                        "columnName": "mallCode",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": mallCode
+                      },
+                      {
+                        "columnName": "userCode",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": $.cookie('uid')
+                      }
+                    ]
                 }
+
+                conditionGroups.push(conditionGroup);
+                
+                if(term != undefined && term != '') {
+                    conditionGroups.push({
+                        "conditionOperator": "OR",
+                        "params": [{
+                                "columnName": "unitName",
+                                "columnPatten": "",
+                                "conditionOperator": "AND",
+                                "operator": "LIKE",
+                                "value": term
+                            }
+                        ]
+                    },{
+                        "conditionOperator": "OR",
+                        "params": [{
+                                "columnName": "unitCode",
+                                "columnPatten": "",
+                                "conditionOperator": "AND",
+                                "operator": "LIKE",
+                                "value": term
+                            }
+                        ]
+                    });
+                }
+                
+                var map = {
+                    "conditionGroups": conditionGroups,
+                    "params": params
+                }
+    
+                return JSON.stringify(map);
             },
             processResults: function (data,params) {
                 if(data['code'] === 'C0') {
@@ -2425,7 +2484,6 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
 
 function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
     $('#oldSelectStore').select2({
-        minimumResultsForSearch: -1,
         placeholder: '未选择',
         dropdownAutoWidth: true,
         allowClear: true,
@@ -2438,9 +2496,13 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
             }
         },
         ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodesAndMallCode",
-            type: 'GET',
-            dataType: 'json',
+            url: function (params) {
+                return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
+            },
+            type: "POST",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
             delay: 250,
             beforeSend: function(request) {
                 request.setRequestHeader("Login", $.cookie('login'));
@@ -2448,7 +2510,8 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                 request.setRequestHeader("Lang", $.cookie('lang'));
                 request.setRequestHeader("Source", "onlineleasing");
             },
-            data: function (params) { 
+            data: function (params) {
+                var term = params.term;
                 var mallCodes = mall_code;
                 var mallCode = mallCodes;
                 $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -2458,14 +2521,69 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                     }
                 })
                 
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes,
-                    mallCode: mallCode
+                var params = [];
+                var conditionGroups = [];
+                var conditionGroup = {};
+
+                conditionGroup = {
+                    "conditionOperator": "AND",
+                    "params": [
+                      {
+                        "columnName": "mallCodes",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": mallCodes
+                      },
+                      {
+                        "columnName": "mallCode",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": mallCode
+                      },
+                      {
+                        "columnName": "userCode",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": $.cookie('uid')
+                      }
+                    ]
                 }
+
+                conditionGroups.push(conditionGroup);
+                
+                if(term != undefined && term != '') {
+                    conditionGroups.push({
+                        "conditionOperator": "OR",
+                        "params": [{
+                                "columnName": "unitName",
+                                "columnPatten": "",
+                                "conditionOperator": "AND",
+                                "operator": "LIKE",
+                                "value": term
+                            }
+                        ]
+                    },{
+                        "conditionOperator": "OR",
+                        "params": [{
+                                "columnName": "unitCode",
+                                "columnPatten": "",
+                                "conditionOperator": "AND",
+                                "operator": "LIKE",
+                                "value": term
+                            }
+                        ]
+                    });
+                }
+                
+                var map = {
+                    "conditionGroups": conditionGroups,
+                    "params": params
+                }
+    
+                return JSON.stringify(map);
             },
             processResults: function (data,params) {
                 if(data['code'] === 'C0') {
@@ -2476,82 +2594,6 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.unitCode+':::'+item.code+':::'+item.unitName+':::'+item.modality+':::'+ item.unitArea,
-                                text: item.unitName +'['+ item.unitCode +']'                          
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
-function updateOldSelectStoreDropDown(data_count) {
-    $('#oldSelectStore').select2({
-        minimumResultsForSearch: -1,
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        allowClear: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseLotus+"/api/vshop/lotus/findAllByUserCodeAndMallCodes",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) { 
-                var mallCodes;
-                if($('#department').val() != null && $('#department').val() != '' && $('#department').val() != 'null'){
-                    mallCodes = $('#department').val();
-                } else {
-                    mallCodes = $.cookie('mallSelected').split(':::')[1];
-                }
-                
-                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-                        mallCodes = 'ALL';
-                        return false;
-                    }
-                })
-                
-                return {
-                    page: params.page || 0,
-                    size: data_count,
-                    search: params.term,
-                    userCode: $.cookie('uid'),
-                    mallCodes: mallCodes
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.unitCode+':::'+item.code+':::'+item.unitName,
                                 text: item.unitName +'['+ item.unitCode +']'                          
                             }
                             var returnData = [];
