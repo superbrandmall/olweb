@@ -847,7 +847,7 @@ function findRequestByBizId() {
                                 case "财务负责人":
                                     $('#finance_check').addClass('active').find('.approveName').text(v.approveName);
                                     break;
-                                case "业态负责人":
+                                case "业态负责人审批":
                                     $('#biz_head').addClass('active').find('.approveName').text(v.approveName);
                                     break;
                                 case "法务负责人":
