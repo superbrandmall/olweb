@@ -68,6 +68,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <option value="娱乐服务">娱乐服务</option>
                                                 <option value="儿童">儿童</option>
                                                 <option value="主力店">主力店</option>
+                                                <option value="基站">基站</option>
+                                                <option value="停车场">停车场</option>
+                                                <option value="酒店公寓">酒店公寓</option>
                                             </select>
                                             <div id="errorcontainer-modality_1" class="errorDiv"></div>
                                         </div>

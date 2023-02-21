@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 function renderModality0() {
     $('#modalities').html('');
-    var modality0 = ['零售','娱乐服务','儿童','餐饮','主力店'];
+    var modality0 = ['零售','娱乐服务','儿童','餐饮','主力店','基站','停车场','酒店公寓'];
     $.each(modality0, function(i,v){
         $('#modalities').append('<tr>\n\
         <td><a id="modality0_'+i+'" href="javascript: void(0);" onclick=\'javascript: renderModality("1","'+i+'","'+v+'","","")\'><i class="fa fa-plus"></i> '+v+' (I)</a></td>\n\

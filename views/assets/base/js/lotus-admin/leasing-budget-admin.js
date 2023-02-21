@@ -172,26 +172,90 @@ function findShopBudget(p,c){
                             if(i%2==0){
                                 tbg = '#f9f9f9';
                             }
-                        
+                            
                             $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.code+'">\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+v.unitName+'['+v.unitCode+']</td>\n\
-                            <td>铺位-'+(v.unitDesc || v.unitType)+'</td>\n\
-                            <td>2022-01-01</td>\n\
-                            <td>2022-12-31</td>\n\
+                            <td>铺位-'+renderUnitType(v.unitType)+'</td>\n\
                             <td><b>'+(accounting.formatNumber(v.unitArea) || '')+'</b></td>\n\
-                            <td id="D011_'+v.code+'"></td>\n\
-                            <td>'+v.modality+'</td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td id="B021_'+v.code+'"></td>\n\
-                            <td id="G021_'+v.code+'"></td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td></td>\n\
-                            <td id="B011_'+v.code+'"></td></tr>');
+                            <td>'+(v.modality || '')+'</td>\n\
+                            <td class="B011_january"></td>\n\
+                            <td class="B011_february"></td>\n\
+                            <td class="B011_march"></td>\n\
+                            <td class="B011_april"></td>\n\
+                            <td class="B011_may"></td>\n\
+                            <td class="B011_june"></td>\n\
+                            <td class="B011_july"></td>\n\
+                            <td class="B011_august"></td>\n\
+                            <td class="B011_september"></td>\n\
+                            <td class="B011_october"></td>\n\
+                            <td class="B011_november"></td>\n\
+                            <td class="B011_december"></td>\n\
+                            <td class="B021_january"></td>\n\
+                            <td class="B021_february"></td>\n\
+                            <td class="B021_march"></td>\n\
+                            <td class="B021_april"></td>\n\
+                            <td class="B021_may"></td>\n\
+                            <td class="B021_june"></td>\n\
+                            <td class="B021_july"></td>\n\
+                            <td class="B021_august"></td>\n\
+                            <td class="B021_september"></td>\n\
+                            <td class="B021_october"></td>\n\
+                            <td class="B021_november"></td>\n\
+                            <td class="B021_december"></td>\n\
+                            <td class="D011_january"></td>\n\
+                            <td class="D011_february"></td>\n\
+                            <td class="D011_march"></td>\n\
+                            <td class="D011_april"></td>\n\
+                            <td class="D011_may"></td>\n\
+                            <td class="D011_june"></td>\n\
+                            <td class="D011_july"></td>\n\
+                            <td class="D011_august"></td>\n\
+                            <td class="D011_september"></td>\n\
+                            <td class="D011_october"></td>\n\
+                            <td class="D011_november"></td>\n\
+                            <td class="D011_december"></td>\n\
+                            <td class="G011_january"></td>\n\
+                            <td class="G011_february"></td>\n\
+                            <td class="G011_march"></td>\n\
+                            <td class="G011_april"></td>\n\
+                            <td class="G011_may"></td>\n\
+                            <td class="G011_june"></td>\n\
+                            <td class="G011_july"></td>\n\
+                            <td class="G011_august"></td>\n\
+                            <td class="G011_september"></td>\n\
+                            <td class="G011_october"></td>\n\
+                            <td class="G011_november"></td>\n\
+                            <td class="G011_december"></td>\n\
+                            <td class="SALE_january"></td>\n\
+                            <td class="SALE_february"></td>\n\
+                            <td class="SALE_march"></td>\n\
+                            <td class="SALE_april"></td>\n\
+                            <td class="SALE_may"></td>\n\
+                            <td class="SALE_june"></td>\n\
+                            <td class="SALE_july"></td>\n\
+                            <td class="SALE_august"></td>\n\
+                            <td class="SALE_september"></td>\n\
+                            <td class="SALE_october"></td>\n\
+                            <td class="SALE_november"></td>\n\
+                            <td class="SALE_december"></td>\n\
+                            </tr>');
+                            
+                            if(v.shopBudgetList.length > 0){
+                                $.each(v.shopBudgetList, function(j,w){
+                                    $('#budget_'+v.code).find('.'+w.termType+'_january').text(accounting.formatNumber(w.january));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_february').text(accounting.formatNumber(w.february));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_march').text(accounting.formatNumber(w.march));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_april').text(accounting.formatNumber(w.april));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_may').text(accounting.formatNumber(w.may));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_june').text(accounting.formatNumber(w.june));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_july').text(accounting.formatNumber(w.july));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_august').text(accounting.formatNumber(w.august));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_september').text(accounting.formatNumber(w.september));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_october').text(accounting.formatNumber(w.october));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_november').text(accounting.formatNumber(w.november));
+                                    $('#budget_'+v.code).find('.'+w.termType+'_december').text(accounting.formatNumber(w.december));
+                                });
+                            }
                         }
                     });
 
@@ -202,33 +266,10 @@ function findShopBudget(p,c){
                     }
 
                     $.each(response.data, function(i,v){
-//                            switch (v.termType) {
-//                                case "B011":
-//                                    termType = '固定租金';
-//                                    break;
-//                                case "B021":
-//                                    termType = '物业管理费';
-//                                    break;
-//                                case "G021":
-//                                    termType = '推广费';
-//                                    break;
-//                                case "D011":
-//                                    termType = '提成扣率';
-//                                    break;
-//                                case "E02":
-//                                    termType = '保证金';
-//                                    break;
-//                                case "E22":
-//                                    termType = '履约保证金';
-//                                    break;
-//                                default:
-//                                    break;
-//                            }
-
                         $('#'+v.termType+'_'+v.shopCode).text(accounting.formatNumber(v.january));
                     });
                 } else {
-                    $('#budget').html('<tr><td colspan="18" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#budget').html('<tr><td colspan="64" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
