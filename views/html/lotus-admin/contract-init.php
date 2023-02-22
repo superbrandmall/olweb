@@ -26,7 +26,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <a href="javascript: void(0);" class="btn btn-danger btn-sm" id="deleteContract"><i class="fa fa-times"></i> 删除</a>
             </div>
             <h4>
-                <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <b id="contractName"></b> - V0
+                <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <b id="contractName"></b> - V<b id="contractVersion"></b>
             </h4>
             <!--<div class="pull-right">
                 <button type="button" class="btn btn-success btn-sm" id="activateContract"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交生效</span></button>

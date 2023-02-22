@@ -392,7 +392,7 @@
             <hr>
         </div>
         <div class="col-md-12">
-            <textarea class="form-control" id="remark" rows="3" placeholder="请用序号1、2、3、……逐一列明本合同的最主要事项及内容"></textarea>
+            <textarea class="form-control" id="remark" rows="7" placeholder="请用序号1、2、3、……逐一列明本合同的最主要事项及内容"></textarea>
         </div>
     </div>
 </div>

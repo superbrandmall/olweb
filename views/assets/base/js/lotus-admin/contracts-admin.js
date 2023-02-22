@@ -230,7 +230,7 @@ function findAllContractsByKVCondition(p,c){
                         }
                         
                         if(v.contractStatus == 'init'){
-                            link = '<a href="/lotus-admin/contract-init?id='+v.contractNo+'">'+(v.bizId || v.code)+'</a>';
+                            link = '<a href="/lotus-admin/contract-init?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
                         } else {
                             link = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
                         }

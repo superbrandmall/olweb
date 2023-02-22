@@ -193,7 +193,7 @@ function updateContractTemplate() {
 
 function findContractByContractNo() {
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNo?contractNo="+getURLParameter('id'),
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+getURLParameter('id')+"&contractVersion="+getURLParameter('contractVersion'),
         type: "GET",
         async: false,
         dataType: "json",
@@ -217,8 +217,8 @@ function findContractByContractNo() {
                 }
                 
                 var temp;
-                if(response.data.length > 0 && response.data[0].contractStatus == 'init'){
-                    var data = response.data[0];
+                if(response.data != null && response.data.contractStatus == 'init'){
+                    var data = response.data;
                     $.contract.content = data;
                     
                     $('#deleteContract').click(function(){
@@ -226,6 +226,7 @@ function findContractByContractNo() {
                     })
                     
                     $('#contractName').text(data.contractName).attr('title',data.contractName);
+                    $('#contractVersion').text(data.contractVersion).attr('title',data.contractVersion);
                     findMainSigningBody(data.mallCode);
                     findContractStatus('CONTRACT_STATUS',data.contractStatus);
                     
@@ -1632,8 +1633,8 @@ function saveContractFixedRent() {
 
                 var map = {
                     "bizId": "",
-                    "contractNo": getURLParameter('id'),
-                    "contractVersion": 1,
+                    "contractNo": $.contract.content.contractNo,
+                    "contractVersion": $.contract.content.contractVersion,
                     "fixedRentList": $.contract.fixedRent,
                     "updateOpenId": openId
                 };
@@ -1663,7 +1664,7 @@ function saveContractFixedRent() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';          
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1818,8 +1819,8 @@ function saveContractPropertyMgmt() {
 
                 var map = {
                     "bizId": "",
-                    "contractNo": getURLParameter('id'),
-                    "contractVersion": 1,
+                    "contractNo": $.contract.content.contractNo,
+                    "contractVersion": $.contract.content.contractVersion,
                     "propertyFeeList": $.contract.propertyMgmt,
                     "updateOpenId": openId
                 };
@@ -1849,7 +1850,7 @@ function saveContractPropertyMgmt() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -1944,7 +1945,6 @@ function saveContractCommission() {
                         $.contract.commission[i].taxDeduct =  parseFloat(numberWithoutCommas($('#commissionTaxDeduct_'+index).val())) / 100;
 
                         $.contract.commission[i].amount =  numberWithoutCommas($('#commissionAmount_'+index).val());
-                        $.contract.commission[i].amount =  0;
                         $.contract.commission[i].targetSales =  numberWithoutCommas($('#commissionMinSales_'+index).val());
 
                         $.contract.commission[i].taxRate = $('#commissionTaxRate_'+index).val();
@@ -2016,8 +2016,8 @@ function saveContractCommission() {
 
                 var map = {
                     "bizId": "",
-                    "contractNo": getURLParameter('id'),
-                    "contractVersion": 1,
+                    "contractNo": $.contract.content.contractNo,
+                    "contractVersion": $.contract.content.contractVersion,
                     "deductList": $.contract.commission,
                     "updateOpenId": openId
                 };
@@ -2047,7 +2047,7 @@ function saveContractCommission() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2202,8 +2202,8 @@ function saveContractPromotion() {
 
                 var map = {
                     "bizId": "",
-                    "contractNo": getURLParameter('id'),
-                    "contractVersion": 1,
+                    "contractNo": $.contract.content.contractNo,
+                    "contractVersion": $.contract.content.contractVersion,
                     "promotionFeeList": $.contract.promotion,
                     "updateOpenId": openId
                 };
@@ -2233,7 +2233,7 @@ function saveContractPromotion() {
                                 $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                             }
                             if(response.data.resultCode == 'SUCCESS') {
-                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                                window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                             } else {
                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                             }
@@ -2306,8 +2306,8 @@ function saveContractDeposit() {
 
             var map = {
                 "bizId": "",
-                "contractNo": getURLParameter('id'),
-                "contractVersion": 1,
+                "contractNo": $.contract.content.contractNo,
+                "contractVersion": $.contract.content.contractVersion,
                 "depositList": $.contract.deposit,
                 "updateOpenId": openId
             };
@@ -2337,7 +2337,7 @@ function saveContractDeposit() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -2463,7 +2463,7 @@ function saveContract() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
                         if(response.data.resultCode == 'SUCCESS') {
-                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&s=succeed';         
+                            window.location.href = '/lotus-admin/contract-init?id='+getURLParameter('id')+'&contractVersion='+getURLParameter('contractVersion')+'&s=succeed';         
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
