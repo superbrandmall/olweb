@@ -89,6 +89,7 @@ $(document).ready(function(){
         $.cookie('searchContractsContractNo', '');
         $.cookie('searchContractsContractVersion','');
         $.cookie('searchContractsSelectTenantVal', null);
+        $.cookie('searchContractsSelectTenantTxt', null);
         $.cookie('searchContractsSelectStoreVal', null);
         $.cookie('searchContractsSelectDepartmentVal', null);
     })
@@ -170,12 +171,12 @@ function findAllContractsByKVCondition(p,c){
         params.push(param);
     }
 
-    if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != '' && $.cookie('searchContractsSelectTenantVal') != 'null'){
+    if($.cookie('searchContractsSelectTenantTxt') != null && $.cookie('searchContractsSelectTenantTxt') != '' && $.cookie('searchContractsSelectTenantTxt') != 'null'){
         param = {
             "columnName": "tenantCode",
             "columnPatten": "",
             "operator": "AND",
-            "value": $.cookie('searchContractsSelectTenantVal')
+            "value": $.cookie('searchContractsSelectTenantTxt').split(' | ')[0]
         }
         params.push(param);
     }

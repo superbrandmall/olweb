@@ -33,17 +33,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">代码</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="tenantCode" type="text"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">商户</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="name" type="text"  />
+                                <select id="selectTenant" class="select2" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>

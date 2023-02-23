@@ -24,12 +24,9 @@ $(document).ready(function(){
         $('#state').val($.cookie('searchTenantState')).trigger('change');
     }
     
-    if($.cookie('searchTenantCode') != ''){
-        $('#tenantCode').val($.cookie('searchTenantCode'));
-    }
-    
-    if($.cookie('searchTenantName') != ''){
-        $('#name').val($.cookie('searchTenantName'));
+    if($.cookie('searchContractsSelectTenantVal') != null){
+        var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
+        $('#selectTenant').append(newOption).trigger('change');
     }
     
     if($.cookie('searchTenantType') != null){
@@ -61,21 +58,23 @@ $(document).ready(function(){
             break;
     }
     
+    updateSelectTenantDropDown(50);
+    
     $('#clear').click(function(){
-        $('#tenantCode').val('');
-        $('#name').val('');
         $('#state, #type').val('').trigger('change');
+        $('#selectTenant').empty(); 
+        $('#selectTenant').select2("val", "");
         
         $.cookie('searchTenantState',null);
-        $.cookie('searchTenantCode', '');
-        $.cookie('searchTenantName', '');
+        $.cookie('searchContractsSelectTenantVal', null);
+        $.cookie('searchContractsSelectTenantTxt', null);
         $.cookie('searchTenantType', null);
     })
     
     $('#search').click(function(){
         $.cookie('searchTenantState',$('#state').val());
-        $.cookie('searchTenantCode', $('#tenantCode').val());
-        $.cookie('searchTenantName', $('#name').val());
+        $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
+        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').text());
         $.cookie('searchTenantType', $('#type').val());
         findAllTenantsByKVCondition(1,items);
     })
@@ -104,22 +103,12 @@ function findAllTenantsByKVCondition(p,c){
     
     params.push(param);
     
-    if($.cookie('searchTenantCode') != null && $.cookie('searchTenantCode') != ''){
+    if($.cookie('searchContractsSelectTenantTxt') != null && $.cookie('searchContractsSelectTenantTxt') != '' && $.cookie('searchContractsSelectTenantTxt') != 'null'){
         param = {
             "columnName": "tenantCode",
             "columnPatten": "",
-            "operator": "LIKE",
-            "value": $.cookie('searchTenantCode')
-        }
-        params.push(param);
-    }
-        
-    if($.cookie('searchTenantName') != null && $.cookie('searchTenantName') != ''){
-        param = {
-            "columnName": "name",
-            "columnPatten": "",
-            "operator": "LIKE",
-            "value": $.cookie('searchTenantName')
+            "operator": "AND",
+            "value": $.cookie('searchContractsSelectTenantTxt').split(' | ')[0]
         }
         params.push(param);
     }

@@ -23,6 +23,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
             <div class="pull-left">
+                <a href="contract-duplicate?id=<?= $id; ?>" class="btn btn-primary btn-sm"><i class="fa fa-copy"></i> 复制</a>
                 <a href="javascript: void(0);" class="btn btn-danger btn-sm" id="deleteContract"><i class="fa fa-times"></i> 删除</a>
             </div>
             <h4>
@@ -71,10 +72,5 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </section>
     </form>
 </div>
-
-<?php include 'component/investment-contract-accountterm-account.php'; ?>
-<?php include 'component/investment-contract-request-modify-create.php'; ?>
-<?php include 'component/investment-contract-request-renew-termination-create.php'; ?>
-<?php include 'component/investment-contract-request-create.php'; ?>
 
 <?php include 'footer.php'; ?>

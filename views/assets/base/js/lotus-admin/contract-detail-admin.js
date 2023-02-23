@@ -232,7 +232,7 @@ function findContractByContractNo() {
                     findMainSigningBody(data.mallCode);
                     findContractStatus('CONTRACT_STATUS',data.contractStatus);
                     
-                    temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantNo, true, true);
+                    temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantCode, true, true);
                     $('#selectTenant').append(temp).trigger('change');
                     $('#contractNo').val(data.contractNo);
                     $('#sapContractNo').val(data.sapContractNo);

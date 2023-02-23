@@ -122,10 +122,15 @@ $(document).ready(function(){
             $('#fixedRent').find('tr').remove();
             $('#investmentContractAccounttermCompare').hide();
             $('#navbarTop ul li:eq(2)').show();
-        } else {
+        } else if($(this).val() == 'fixedRentAndHigherDeduct'){
             $('#investmentContractAccounttermFixed').show();
             $('#investmentContractAccounttermCommission').show();
             $('#investmentContractAccounttermCompare').show();
+            $('#navbarTop ul li:eq(2)').show();
+        } else {
+            $('#investmentContractAccounttermFixed').show();
+            $('#investmentContractAccounttermCommission').show();
+            $('#investmentContractAccounttermCompare').hide();
             $('#navbarTop ul li:eq(2)').show();
         }
     })
@@ -230,7 +235,7 @@ function findContractByContractNo() {
                     findMainSigningBody(data.mallCode);
                     findContractStatus('CONTRACT_STATUS',data.contractStatus);
                     
-                    temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantNo, true, true);
+                    temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantCode, true, true);
                     $('#selectTenant').append(temp).trigger('change');
                     $('#contractNo').val(data.contractNo);
                     $('#sapContractNo').val(data.sapContractNo);

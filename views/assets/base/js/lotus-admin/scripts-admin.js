@@ -3268,6 +3268,7 @@ function calBackPush(prefix){
             var endDate = $('#endDate').val();
             var contractType = $('#contractType').val();
             var selectRentCalculationMode = $('#selectRentCalculationMode').val();
+            var termCalcMode = $('#termCalcMode').length > 0 ? $('#termCalcMode').val() : $.request.content.termCalcMode;
             var map = {};
             if(fixedRentList.length > 0){
                 map = {
@@ -3278,6 +3279,7 @@ function calBackPush(prefix){
                     "shopCode": shopCode,
                     "formType": "new",
                     "rentCalculationMode": selectRentCalculationMode,
+                    "termCalcMode": termCalcMode,
                     "contractType": contractType,
                     "unitCode": unitCode,
                     "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
@@ -3292,6 +3294,7 @@ function calBackPush(prefix){
                     "shopCode": shopCode,
                     "formType": "new",
                     "rentCalculationMode": selectRentCalculationMode,
+                    "termCalcMode": termCalcMode,
                     "contractType": contractType,
                     "unitCode": unitCode,
                     "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
@@ -3306,6 +3309,7 @@ function calBackPush(prefix){
                     "shopCode": shopCode,
                     "formType": "new",
                     "rentCalculationMode": selectRentCalculationMode,
+                    "termCalcMode": termCalcMode,
                     "contractType": contractType,
                     "unitCode": unitCode,
                     "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
@@ -3321,6 +3325,7 @@ function calBackPush(prefix){
                     "shopCode": shopCode,
                     "formType": "new",
                     "rentCalculationMode": selectRentCalculationMode,
+                    "termCalcMode": termCalcMode,
                     "contractType": contractType,
                     "unitCode": unitCode,
                     "mallCode": $('#investmentContractModelMallSelect').val().split('[')[1].split(']')[0],
@@ -3879,7 +3884,7 @@ function createContract() {
                                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                 }
                                 if(response.data.resultCode == 'SUCCESS') {
-                                    window.location.href = '/lotus-admin/contract-init?id='+response.data.contractNo+'&s=succeed';         
+                                    window.location.href = '/lotus-admin/contract-init?id='+response.data.contractNo+'&contractVersion=1&s=succeed';         
                                 } else {
                                     alertMsg(response.data.resultCode,response.data.resultMsg);
                                 }
