@@ -367,7 +367,11 @@ function saveContract() {
                 brandName = $('#select2-brandName-container').text().split('[')[0];
                 brandCode = $('#brandName').val();
             }
-        
+            
+            $.contract.content.id = null;
+            $.contract.content.created = null;
+            $.contract.content.updated = null;
+            $.contract.content.code = null;
             $.contract.content.updateOpenId = openId;
             $.contract.content.updateCode = userCode;
             $.contract.content.updateName = $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,"");

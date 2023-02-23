@@ -99,10 +99,10 @@ $(document).ready(function(){
         $.cookie('searchContractsContractNo', $('#contractNo').val());
         $.cookie('searchContractsContractVersion',$('#contractVersion').val());
         $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
-        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('searchContractsSelectTenantTxt', $('#select2-selectTenant-container').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
         $.cookie('searchContractsSelectStoreVal', $('#selectStore').val());
-        $.cookie('searchContractsSelectStoreTxt', $('#selectStore').text());
+        $.cookie('searchContractsSelectStoreTxt', $('#select2-selectStore-container').text());
         findAllContractsByKVCondition(1,items);
     })
     
@@ -171,9 +171,9 @@ function findAllContractsByKVCondition(p,c){
         params.push(param);
     }
 
-    if($.cookie('searchContractsSelectTenantTxt') != null && $.cookie('searchContractsSelectTenantTxt') != '' && $.cookie('searchContractsSelectTenantTxt') != 'null'){
+    if($.cookie('searchContractsSelectTenantTxt') != null && $.cookie('searchContractsSelectTenantTxt') != '' && $.cookie('searchContractsSelectTenantTxt') != 'null' && $.cookie('searchContractsSelectTenantTxt') != '未选择'){
         param = {
-            "columnName": "tenantCode",
+            "columnName": "tenantNo",
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchContractsSelectTenantTxt').split(' | ')[0]
