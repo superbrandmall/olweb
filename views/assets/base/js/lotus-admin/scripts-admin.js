@@ -14,7 +14,7 @@ $.api = {
     termCalcMode: ['新计算方法','NEW'],
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
     contractTemplate: ['租期 > 6个月','1'],
-    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046']
+    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029']
 };
 
 var d = new Date();

@@ -1517,6 +1517,7 @@ function updateRowInvestmentContractAccounttermCommission(v,p) {
     $("#commissionItem_"+count.toLocaleString()).val(value.itemCode).trigger("change");
     $('#investmentContractAccounttermCommission .select2').select2();
     $("#commissionDeductType_"+count.toLocaleString()).val(value.deductType).trigger("change");
+    $("#commissionCategory_"+count.toLocaleString()).val(value.category).trigger("change");
     $("#commissionTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
  
     $('input.money').on('focus',function(){
