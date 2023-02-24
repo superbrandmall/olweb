@@ -45,7 +45,6 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('POS_MODE','posMode',$.api.posMode[0],$.api.posMode[1]); // 收银方式
     updateDictDropDownByDictTypeCode('CONTRACT_TYPE','contractType',$.api.contractType[0],$.api.contractType[1]); // 合同类型
     updateDictDropDownByDictTypeCode('PAYMENT_MODE','paymentMode',$.api.paymentMode[0],$.api.paymentMode[1]); // 支付方式
-    updateDictDropDownByDictTypeCode('CONTRACT_TEMPLATE','contractTemplate',$.api.contractTemplate[0],$.api.contractTemplate[1]); // 合同模版
     updateSelectTenantDropDown(50);
     updateBrandNameDropDown(10);
     
@@ -76,7 +75,6 @@ $(document).ready(function(){
     $("#endDate").on('changeDate',function(){
         $('#freeStartDate_1').datepicker('setEndDate',$(this).val());
         $('#freeEndDate_1').datepicker('setEndDate',$(this).val());
-        updateContractTemplate();
     })
     
     $("#freeEndDate_1").on('changeDate',function(){
@@ -89,19 +87,6 @@ $(document).ready(function(){
     findDictCodeByDictTypeCode('TERM_CALC_MODE'); // 条款计算方式
     findContractByContractNo();
 })
-
-function updateContractTemplate() {
-    var start = $('#startDate').val(); 
-    var end = $('#endDate').val(); 
-    if(start != end){
-        var diff = calDatesDiff(start, end);
-        if(diff > 183){
-            updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', '1');
-        } else {
-            updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', '2');
-        }
-    }
-}
 
 function findContractByContractNo() {
     $.ajax({
@@ -230,7 +215,6 @@ function findContractByContractNo() {
                         $('#freeEndDate_1').datepicker('update',$(this).val());
                         $("#deliveryDate").datepicker('update', $(this).val());
                         $("#enterDate").datepicker('update', $(this).val());
-                        updateContractTemplate();
                     })
                     
                     $("#freeEndDate_1").on('changeDate',function(){
@@ -282,9 +266,6 @@ function findContractByContractNo() {
                     $('#openEndTime').val(data.openEndTime);
                     $('#freeDays').val(data.freeDays);
                     $('#remark').val(data.remark);
-                    if(data.contractTemplate != null) {
-                        updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', data.contractTemplate);
-                    }
                     
                     $('#compareFirstFrequency').val(data.firstCompareCycle).trigger('change');
                     if(data.secondCompareFlag == '1'){
@@ -404,7 +385,6 @@ function saveContract() {
             $.contract.content.bizDate = $('#bizDate').val();
             $.contract.content.openStartTime = $('#openStartTime').val();
             $.contract.content.openEndTime = $('#openEndTime').val();
-            $.contract.content.contractTemplate = $('#contractTemplate').find('option:selected').val();
             $.contract.content.remark = $('#remark').val();
             $.contract.content.deductList = null;
             $.contract.content.propertyFeeList = null;

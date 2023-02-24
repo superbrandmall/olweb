@@ -150,12 +150,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">合同模版 <span class="btn-box-tool-lg">*</span></label>
-                <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="contractTemplate" style="width: 100%"></select>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="col-md-4 control-label">延迟开业违约金 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
