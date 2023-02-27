@@ -10,7 +10,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-init-admin.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-init.js?t='.date("Y-m-d").'2"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-init.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 }
 
@@ -29,9 +29,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <h4>
                 <span class="badge badge-success" id="contractStatus" style="vertical-align: top;"></span> 合同: <b id="contractName"></b> - V<b id="contractVersion"></b>
             </h4>
-            <!--<div class="pull-right">
+            <div class="pull-right">
                 <button type="button" class="btn btn-success btn-sm" id="activateContract"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交生效</span></button>
-            </div>-->
+            </div>
             <div class="box-header" id="navbarTop" style="height: 53px;">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#investmentContractModel">合同内容</a></li>
