@@ -19,6 +19,13 @@ $(document).ready(function(){
             },
             endDate: {
                 required: true
+            },
+            selectUser1: {
+                required: true
+            },
+            unitArea: {
+                required: true,
+                min: 0.01
             }
         },
         messages: {
@@ -40,6 +47,13 @@ $(document).ready(function(){
             },
             endDate: {
                 required: "请选择生效结束日期"
+            },
+            selectUser1: {
+                required: "请选择铺位负责人1"
+            },
+            unitArea: {
+                required: "请输入租赁面积",
+                min: "租赁面积不能为0"
             }
         },
         errorPlacement: function(error, element) {
@@ -108,8 +122,7 @@ function saveStore() {
             "shopState": 1,
             "state": 1,
             "startDate": $('#startDate').val(),
-            "remarks": $('#remark').val(),
-            "unitCode": $('#unitCode').val(),
+            "unitDesc": $('#remark').val(),
             "unitName": $('#unitName').val(),
             "unitType": $('#unitType').val(),
             "updateOpenId": openId

@@ -138,7 +138,7 @@ $(document).ready(function(){
     
     $("#activateContract").click(function(){
         if($.contract.content.contractStatus  == 'init') {
-            activateCheck($.contract.content.id);
+            activateCheck($.contract.content.contractNo);
         }
     })
     
@@ -2516,7 +2516,7 @@ function deleteContractById(id) {
     })
 }
 
-function activateCheck(id) {
+function activateCheck(cn) {
     $('.mandatory-error').remove();
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
@@ -2716,7 +2716,7 @@ function activateCheck(id) {
     }
     
     if(flag == 1){
-        activateContract(id);
+        activateContract(cn);
     } else {
         $('html, body').animate({
             scrollTop: $('.mandatory-error').offset().top - 195
@@ -2724,7 +2724,7 @@ function activateCheck(id) {
     }
 }
 
-function activateContract(id){
+function activateContract(cn){
     var msg = '确定要将此合同提交生效吗？合同生效后将不可修改';
     Ewin.confirm({ message: msg }).on(function (e) {
         if (!e) {
@@ -2734,16 +2734,86 @@ function activateContract(id){
         }
         
         var openId = 'admin';
+        var userCode = '';
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if(v.roleCode == 'CROLE220301000001'){
                 openId = v.moduleName;
+                userCode = v.userCode;
                 return false;
             }
         })
         
+        var area = $('#area').val();
+        var unitCode = '';
+        var unitName = '';
+        var shopCode = '';
+        if( $('#selectStore').val() && $('#selectStore').val() != ''){
+            unitCode = $('#selectStore').val().split(':::')[0];
+            shopCode = $('#selectStore').val().split(':::')[1];
+            unitName = $('#selectStore').val().split(':::')[2];
+        }
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var contractType = $('#contractType').val();
+        var selectRentCalculationMode = $('#selectRentCalculationMode').val();
+
+        var brandName = '';
+        var brandCode = '';
+        if( $('#brandName').val() && $('#brandName').val() != ''){
+            brandName = $('#select2-brandName-container').text().split('[')[0];
+            brandCode = $('#brandName').val();
+        }
+        
+        $.contract.content.updateOpenId = openId;
+        $.contract.content.updateCode = userCode;
+        $.contract.content.updateName = $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,"");
+        $.contract.content.sapContractNo = $('#sapContractNo').val();
+        $.contract.content.awardDate = $('#awardDate').val();
+        $.contract.content.tenantCode = $('#selectTenant').val();
+        $.contract.content.tenantName = $('#select2-selectTenant-container').text().split(' | ')[1];
+        $.contract.content.tenantNo = $('#select2-selectTenant-container').text().split(' | ')[0];
+        $.contract.content.startDate = startDate;
+        $.contract.content.endDate = endDate;
+        $.contract.content.bizTypeName = $('#bizTypeName').val();
+        $.contract.content.rentCalculationMode = selectRentCalculationMode;
+        $.contract.content.profitCenter = $('#profitCenter').val();
+        $.contract.content.termCalcMode = $('#termCalcMode').val();
+        $.contract.content.unitCode = unitCode;
+        $.contract.content.unitName = unitName;
+        $.contract.content.shopCode = shopCode;
+        $.contract.content.area = area;
+        $.contract.content.floorCode = $('#floor').find('option:selected').val();
+        $.contract.content.floorName = $('#floor').find('option:selected').text();
+        $.contract.content.bizScope = $('#bizScope').val();
+        $.contract.content.targetSales = numberWithoutCommas($('#targetSales').val());
+        $.contract.content.overdueBizAmount = numberWithoutCommas($('#overdueBizAmount').val());
+        $.contract.content.brandName = brandName;
+        $.contract.content.brandCode = brandCode;
+        $.contract.content.contractName = $('#contractName2').val();
+        $.contract.content.paymentMode = $('#paymentMode').find('option:selected').val();
+        $.contract.content.contractType = contractType;
+        $.contract.content.posMode = $('#posMode').find('option:selected').val();
+        $.contract.content.deliveryDate = $('#deliveryDate').val();
+        $.contract.content.enterDate = $('#enterDate').val();
+        $.contract.content.freeStartDate = $('#freeStartDate_1').val();
+        $.contract.content.freeEndDate = $('#freeEndDate_1').val();
+        $.contract.content.freeDays = $('#freeDays').val();
+        $.contract.content.bizDate = $('#bizDate').val();
+        $.contract.content.openStartTime = $('#openStartTime').val();
+        $.contract.content.openEndTime = $('#openEndTime').val();
+        $.contract.content.remark = $('#remark').val();
+        $.contract.content.deductList = null;
+        $.contract.content.propertyFeeList = null;
+        $.contract.content.depositList = null;
+        $.contract.content.salesList = null;
+        $.contract.content.promotionFeeList = null;
+        $.contract.content.fixedRentList = null;
+
+        var map = $.contract.content;
         $.ajax({
-            url: $.api.baseLotus+"/api/contract/lotus/updateContractStatus?id="+id+"&contractStatus=effect&updateOpenid="+openId,
-            type: "GET",
+            url: $.api.baseLotus+"/api/contract/lotus/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
             async: false,
             dataType: "json",
             contentType: "application/json",
@@ -2764,10 +2834,58 @@ function activateContract(id){
                     if(xhr.getResponseHeader("Authorization") !== null){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
-                    
-                    window.location.href = '/lotus-admin/contracts?s=succeed';
+                    if(response.data.resultCode == 'SUCCESS') {
+                        var map = {
+                            "id": $.contract.content.id,
+                            "contractNo": cn,
+                            "contractVersion": $.contract.content.contractVersion,
+                            "updateOpenid": openId
+                        }
+                        $.ajax({
+                            url: $.api.baseLotus+"/api/contract/lotus/confirm",
+                            type: "POST",
+                            data: JSON.stringify($.contract.content),
+                            async: false,
+                            dataType: "json",
+                            contentType: "application/json",
+                            beforeSend: function(request) {
+                                $('#loader').show();
+                                request.setRequestHeader("Login", $.cookie('login'));
+                                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                                request.setRequestHeader("Lang", $.cookie('lang'));
+                                request.setRequestHeader("Source", "onlineleasing");
+                            },
+                            complete: function(){},
+                            success: function (response, status, xhr) {
+                                $('#loader').hide();
+                                if(response.code === 'C0') {
+                                    if(xhr.getResponseHeader("Login") !== null){
+                                        $.cookie('login', xhr.getResponseHeader("Login"));
+                                    }
+                                    if(xhr.getResponseHeader("Authorization") !== null){
+                                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                                    }
+                                    
+                                    if(response.data.resultCode == 'SUCCESS') {
+                                        window.location.href = '/lotus-admin/contracts?s=succeed';
+                                    } else {
+                                        alertMsg(response.data.resultCode,response.data.resultMsg);
+                                    }
+                                } else {
+                                    alertMsg(response.data.resultCode,response.data.resultMsg);
+                                }
+                            }
+                        })
+                    } else {
+                        alertMsg(response.data.resultCode,response.data.resultMsg);
+                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
             }
-        })
+        });
     })
 }

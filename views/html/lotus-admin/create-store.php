@@ -44,31 +44,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitCode" class="col-md-4 control-label">代码 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="unitCode" name="unitCode">
-                                            <div id="errorcontainer-unitCode" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="mallCode" class="col-md-4 control-label">所属项目 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2 mallCode" id="mallCode" name="mallCode" style="width: 100%"> </select>
-                                            <div id="errorcontainer-mallCode" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="selectUser1" class="col-md-4 control-label">铺位负责人1 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2 selectUser" id="selectUser1" name="selectUser1" style="width: 100%">
-                                                <option value="">未选择</option>
-                                            </select>
-                                            <div id="errorcontainer-selectUser1" class="errorDiv"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
                                         <label for="unitName" class="col-md-4 control-label">门牌号 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="unitName" name="unitName">
@@ -126,6 +101,24 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="mallCode" class="col-md-4 control-label">所属项目 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2 mallCode" id="mallCode" name="mallCode" style="width: 100%"> </select>
+                                            <div id="errorcontainer-mallCode" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selectUser1" class="col-md-4 control-label">铺位负责人1 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2 selectUser" id="selectUser1" name="selectUser1" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-selectUser1" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
@@ -143,8 +136,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <label for="buildingArea" class="col-md-4 control-label">建筑面积</label>
                                         <div class="col-md-8 col-sm-12">
                                             <div class="input-group">
-                                                <input class="form-control money" id="buildingArea" name="buildingArea" type="text" style="border: 1px solid #ccc; background: #fff; border-right: none;" />                                                
-                                                <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                                <input class="form-control money" id="buildingArea" name="buildingArea" type="text" disabled />                                                
+                                                <span class="input-group-addon" style="border: none; background: #eee;">m<sup>2</sup></span>
                                             </div>
                                         </div>
                                     </div>
@@ -157,6 +150,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <input class="form-control money" id="unitArea" name="unitArea" type="text" style="border: 1px solid #ccc; background: #fff; border-right: none;" />                                                
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
                                             </div>
+                                            <div id="errorcontainer-unitArea" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -171,6 +165,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <option value="娱乐服务">娱乐服务</option>
                                                 <option value="儿童">儿童</option>
                                                 <option value="主力店">主力店</option>
+                                                <option value="基站">基站</option>
+                                                <option value="停车场">停车场</option>
+                                                <option value="酒店公寓">酒店公寓</option>
                                             </select>
                                         </div>
                                     </div>
@@ -192,15 +189,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <label for="height" class="col-md-4 control-label">层高</label>
                                         <div class="col-md-8 col-sm-12">
                                             <div class="input-group">
-                                                <input class="form-control money" id="height" name="height" type="text" style="border: 1px solid #ccc; background: #fff; border-right: none;" />                                                
-                                                <span class="input-group-addon" style="border-left: none; background: transparent;">米</span>
+                                                <input class="form-control money" id="height" name="height" type="text" disabled />                                                
+                                                <span class="input-group-addon" style="border: none; background: #eee;">米</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="networkFlag" class="col-md-4 control-label">是否通网络</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%">
+                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>
@@ -212,7 +209,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="waterFlag" class="col-md-4 control-label">是否通水</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="waterFlag" name="waterFlag" style="width: 100%">
+                                            <select class="select2" id="waterFlag" name="waterFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>
@@ -222,7 +219,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="networkFlag" class="col-md-4 control-label">是否通煤气</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%">
+                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>
@@ -234,7 +231,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="electricFlag" class="col-md-4 control-label">是否通电</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="electricFlag" name="electricFlag" style="width: 100%">
+                                            <select class="select2" id="electricFlag" name="electricFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>
@@ -244,7 +241,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label for="freeState" class="col-md-4 control-label">装修情况</label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="freeState" name="freeState" maxlength="64">
+                                            <input class="form-control" type="text" id="freeState" name="freeState" maxlength="64" disabled>
                                             <div id="errorcontainer-freeState" class="errorDiv"></div>
                                         </div>
                                     </div>
@@ -297,9 +294,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <div class="col-md-10 col-sm-12">
                                             <div class="form-group input-group">
                                                 <input type="text" id="fileName" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
-                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
+                                                <input type="file" style="display: none;" accept="image/*,application/pdf" multiple />
                                                 <div type="button" class="input-group-addon" id="uploadFile" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
-                                                <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
+                                                <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
                                             </div>
                                         </div>
                                     </div>

@@ -2697,6 +2697,7 @@ function updateUserDropDown(data_count) {
     $('.selectUser').select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
+        allowClear: true,
         language: {
             searching: function() {
                 return '加载中...';

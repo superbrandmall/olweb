@@ -3,10 +3,6 @@ $.store = '';
 $(document).ready(function(){    
     $("#create-form").validate({
         rules: {
-            unitCode: {
-                required: true,
-                minlength: 2
-            },
             unitName: {
                 required: true,
                 minlength: 2
@@ -28,13 +24,13 @@ $(document).ready(function(){
             },
             selectUser1: {
                 required: true
+            },
+            unitArea: {
+                required: true,
+                min: 0.01
             }
         },
         messages: {
-            unitCode: {
-                required: "请输入铺位代码",
-                minlength: "请输入完整铺位代码"
-            },
             unitName: {
                 required: "请输入门牌号",
                 minlength: "请输入完整门牌号"
@@ -56,6 +52,10 @@ $(document).ready(function(){
             },
             selectUser1: {
                 required: "请选择铺位负责人1"
+            },
+            unitArea: {
+                required: true,
+                min: 0.01
             }
         },
         errorPlacement: function(error, element) {
@@ -128,9 +128,11 @@ function findStoreByCode() {
                     
                     $('#unitCode').val(response.data.unitCode);
                     $('#unitName').val(response.data.unitName);
+                    $('#remark').val(response.data.unitDesc);
                     updateDictByDictTypeCodeAndVal('UNIT_TYPE', 'unitType', response.data.unitType);
                     $('#mallCode').val(response.data.mallCode).trigger('change');
-                    $('#modality_1').val(response.data.modality);
+                    var modality_1 = new Option(response.data.modality, response.data.modality, true, true);
+                    $('#modality_1').append(modality_1).trigger('change');
                     $('#startDate').datepicker('update',response.data.startDate);
                     $('#endDate').datepicker('update',response.data.endDate);
                     $('#unitArea').val(response.data.unitArea);
@@ -188,7 +190,7 @@ function saveStore() {
             "shopStatus": $.store.shopStatus,
             "startDate": $('#startDate').val(),
             "unitCode": $.store.unitCode,
-            "unitDesc": $.store.unitDesc,
+            "unitDesc": $('#remark').val(),
             "unitName": $('#unitName').val(),
             "unitSize": $.store.unitSize,
             "unitType": $('#unitType').val(),

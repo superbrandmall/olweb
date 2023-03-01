@@ -21,11 +21,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 </ol>
             </div>
         </div>
-<!--        <div class="pull-right">
+        <div class="pull-right">
             <a href="/lotus-admin/create-store" class="btn btn-primary btn-sm">
                 <i class="fa fa-plus icon-white"></i> 创建
             </a>
-        </div>-->
+        </div>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">
