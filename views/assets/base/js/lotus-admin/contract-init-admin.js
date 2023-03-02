@@ -2866,7 +2866,7 @@ function activateContract(cn){
                                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                                     }
                                     
-                                    if(response.data.resultCode == 'SUCCESS') {
+                                    if(response.data.resultCode == null || response.data.resultCode == 'SUCCESS') {
                                         window.location.href = '/lotus-admin/contracts?s=succeed';
                                     } else {
                                         alertMsg(response.data.resultCode,response.data.resultMsg);
