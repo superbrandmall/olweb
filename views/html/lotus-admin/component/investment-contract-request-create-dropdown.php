@@ -9,7 +9,13 @@
             <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                   
             <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
             <li><a href="javascript: void(0);" id="createModify">变更租赁合同申请单</a></li>
-            <li><a href="javascript: void(0);" id="createContract">北区-初始化租赁合同</a></li>
+            <?php
+            if(isset($_SESSION['lotus_admin_name']) && ($_SESSION['lotus_admin_name'] == '马俊' || $_SESSION['lotus_admin_name'] == '刘方琨')) {
+            ?>
+            <li><a href="javascript: void(0);" id="createContract">青岛区-初始化租赁合同</a></li>
+            <?php
+            }
+            ?>
         </ul>
     </div>
 </div>
