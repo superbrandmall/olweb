@@ -2835,12 +2835,7 @@ function activateContract(cn){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
                     if(response.data.resultCode == 'SUCCESS') {
-                        var map = {
-                            "id": $.contract.content.id,
-                            "contractNo": cn,
-                            "contractVersion": $.contract.content.contractVersion,
-                            "updateOpenid": openId
-                        }
+                        $.contract.content.updateOpenid = openId;
                         $.ajax({
                             url: $.api.baseLotus+"/api/contract/lotus/confirm",
                             type: "POST",

@@ -5,15 +5,15 @@
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu pull-right" role="menu">
-            <li><a href="/lotus-admin/make-request">新签租赁合同申请单</a></li>
-            <li><a href="javascript: void(0);" id="createRenew">续签租赁合同申请单</a></li>                   
-            <li><a href="javascript: void(0);" id="createTerminate">终止租赁合同申请单</a></li>
-            <li><a href="javascript: void(0);" id="createModify">变更租赁合同申请单</a></li>
+            <li><a href="/lotus-admin/make-request">上海-新签租赁合同申请单</a></li>
+            <li><a href="javascript: void(0);" id="createRenew">上海-续签租赁合同申请单</a></li>                   
+            <li><a href="javascript: void(0);" id="createTerminate">上海-终止租赁合同申请单</a></li>
+            <li><a href="javascript: void(0);" id="createModify">上海-变更租赁合同申请单</a></li>
             <?php
-            if(isset($_SESSION['lotus_admin_name']) && ($_SESSION['lotus_admin_name'] == '马俊' || $_SESSION['lotus_admin_name'] == '刘方琨')) {
-            ?>
-            <li><a href="javascript: void(0);" id="createContract">青岛区-初始化租赁合同</a></li>
-            <?php
+            if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '刘方琨') {
+                echo '<li><a href="javascript: void(0);" id="createContract">青岛凤凰城&辽阳西路-初始化租赁合同</a></li>';
+            } else if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '郑瑞丰') {
+                echo '<li><a href="javascript: void(0);" id="createContract">长沙凯德&富兴&宁乡-初始化租赁合同</a></li>';
             }
             ?>
         </ul>
