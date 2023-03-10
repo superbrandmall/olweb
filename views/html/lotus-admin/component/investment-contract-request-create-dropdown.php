@@ -14,6 +14,10 @@
                 echo '<li><a href="javascript: void(0);" id="createContract">青岛凤凰城&辽阳西路-初始化租赁合同</a></li>';
             } else if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '郑瑞丰') {
                 echo '<li><a href="javascript: void(0);" id="createContract">长沙凯德&富兴&宁乡-初始化租赁合同</a></li>';
+            } else if(isset($_SESSION['lotus_admin_name']) && ($_SESSION['lotus_admin_name'] == '丁娜' || $_SESSION['lotus_admin_name'] == '杨诚')) {
+                echo '<li><a href="javascript: void(0);" id="createContract">西安唐延路-初始化租赁合同</a></li>';
+            } else if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '程海涛') {
+                echo '<li><a href="javascript: void(0);" id="createContract">湖南永州愿景-初始化租赁合同</a></li>';
             }
             ?>
         </ul>
