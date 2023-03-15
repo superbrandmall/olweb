@@ -24,8 +24,16 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
         findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
     }
-    if($.cookie('searchContractsContractStatus') != ''){
-        $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
+    if($.cookie('searchContractsContractStatus') && $.cookie('searchContractsContractStatus') != ''){
+        var searchContractsContractStatus = $.cookie('searchContractsContractStatus').split(',');
+        if(searchContractsContractStatus.length > 1){
+            $('#contractStatus').val(searchContractsContractStatus).trigger('change');
+        } else {
+            $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
+        }
+    }
+    if($.cookie('searchContractsCode') != ''){
+        $('#code').val($.cookie('searchContractsCode'));
     }
     if($.cookie('searchContractsContractVersion') != ''){
         $('#contractVersion').val($.cookie('searchContractsContractVersion')).trigger('change');
@@ -33,12 +41,18 @@ $(document).ready(function(){
     if($.cookie('searchContractsContractNo') != ''){
         $('#contractNo').val($.cookie('searchContractsContractNo'));
     }
-    if($.cookie('searchContractsSelectTenantVal') != null){
+    if($.cookie('searchContractsContractName') != ''){
+        $('#contractName').val($.cookie('searchContractsContractName'));
+    }
+    if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != 'null'){
         var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
     }
     if($.cookie('searchContractsSelectDepartmentVal') != null){
         $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
+    }
+    if($.cookie('searchContractsUnitType') != ''){
+        $('#unitType').val($.cookie('searchContractsUnitType')).trigger('change');
     }
     if($.cookie('searchContractsSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchContractsSelectStoreTxt'), $.cookie('searchContractsSelectStoreVal'), true, true);
@@ -72,6 +86,8 @@ $(document).ready(function(){
     
     updateSelectTenantDropDown(50);
     
+    $('#contractStatus').show();
+    
     if($("#department").val() != '' && $("#department").val() != null){
         updateSelectStoreDropDownByMallCode(10,$("#department").val());
     }
@@ -80,27 +96,33 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#contractNo').val('');
+        $('#code,#contractNo,#contractName').val('');
         $('#selectTenant, #selectStore').empty(); 
         $('#department, #contractStatus, #contractVersion').val("").trigger('change');
-        $('#selectTenant, #selectStore').select2("val", "");
+        $('#selectTenant, #unitType, #selectStore').select2("val", "");
         
         $.cookie('searchContractsContractStatus','');
+        $.cookie('searchContractsCode', '');
         $.cookie('searchContractsContractNo', '');
+        $.cookie('searchContractsContractName', '');
         $.cookie('searchContractsContractVersion','');
         $.cookie('searchContractsSelectTenantVal', null);
         $.cookie('searchContractsSelectTenantTxt', null);
+        $.cookie('searchContractsUnitType','');
         $.cookie('searchContractsSelectStoreVal', null);
         $.cookie('searchContractsSelectDepartmentVal', null);
     })
     
     $('#search').click(function(){
         $.cookie('searchContractsContractStatus', $('#contractStatus').val());
+        $.cookie('searchContractsCode', $('#code').val());
         $.cookie('searchContractsContractNo', $('#contractNo').val());
+        $.cookie('searchContractsContractName', $('#contractName').val());
         $.cookie('searchContractsContractVersion',$('#contractVersion').val());
         $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
         $.cookie('searchContractsSelectTenantTxt', $('#select2-selectTenant-container').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
+        $.cookie('searchContractsUnitType', $('#unitType').val());
         $.cookie('searchContractsSelectStoreVal', $('#selectStore').val());
         $.cookie('searchContractsSelectStoreTxt', $('#select2-selectStore-container').text());
         findAllContractsByKVCondition(1,items);
@@ -123,12 +145,14 @@ function findAllContractsByKVCondition(p,c){
     }
     params.push(param);
     
-    if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''){
+    if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''  && $.cookie('searchContractsContractStatus').substring(0,1) != ','){
+        var reg = new RegExp(",","g");
         param = {
             "columnName": "contractStatus",
             "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchContractsContractStatus')
+            "conditionOperator": "AND",
+            "operator": "in",
+            "value": $.cookie('searchContractsContractStatus').replace(reg,";")
         }
     } else {
             param = {
@@ -161,12 +185,35 @@ function findAllContractsByKVCondition(p,c){
         params.push(param);
     }
     
+    if($.cookie('searchContractsCode') != null && $.cookie('searchContractsCode') != ''){
+        param = {
+            "columnName": "code",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "LIKE",
+            "value": $.cookie('searchContractsCode')
+        }
+        params.push(param);
+    }
+    
     if($.cookie('searchContractsContractNo') != null && $.cookie('searchContractsContractNo') != ''){
         param = {
             "columnName": "contractNo",
             "columnPatten": "",
-            "operator": "AND",
+            "conditionOperator": "AND",
+            "operator": "LIKE",
             "value": $.cookie('searchContractsContractNo')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchContractsContractName') != null && $.cookie('searchContractsContractName') != ''){
+        param = {
+            "columnName": "contractName",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "LIKE",
+            "value": $.cookie('searchContractsContractName')
         }
         params.push(param);
     }
@@ -177,6 +224,17 @@ function findAllContractsByKVCondition(p,c){
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchContractsSelectTenantTxt').split(' | ')[0]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchContractsUnitType') != ''){
+        param = {
+            "columnName": "unitCode",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "LIKE",
+            "value": 'F'+$.cookie('searchContractsUnitType')
         }
         params.push(param);
     }
@@ -241,10 +299,32 @@ function findAllContractsByKVCondition(p,c){
                             tbg = '#f9f9f9';
                         }
                         
+                        var unitType;
+                        switch (v.unitCode.substring(3,4)) {
+                            case "C":
+                                unitType = '临时柜';
+                                break;
+                            case "S":
+                                unitType = '仓库';
+                                break;
+                            case "T":
+                                unitType = '基站';
+                                break;
+                            case "R":
+                                unitType = '停车场';
+                                break;
+                            case "A":
+                                unitType = '广告位';
+                                break;
+                            default:
+                                unitType = '正柜';
+                                break;
+                        }
+                        
                         $('#contracts').append('\
                             <tr data-index="'+i+'">\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+link+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? renderUnitType(v.vshopLotus.unitType) : '')+'</td>\n\
+                            <td>'+unitType+'</td>\n\
                             <td>'+modality+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\

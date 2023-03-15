@@ -358,9 +358,15 @@ function findContractsByStoreCode(sc) {
                 }
                 
                 if(response.data.content.length > 0) {
+                    var link;
                     $.each(response.data.content, function(i,v){
                         $('#store_'+v.shopCode+' td:eq(9)').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>');
-                        $('#store_'+v.shopCode+' td:eq(10) .ifSigned').html('已签约 <a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a>').removeClass('ifSigned');
+                        if(v.contractStatus == 'init'){
+                            link = 'init';
+                        } else {
+                            link = 'summary';
+                        }
+                        $('#store_'+v.shopCode+' td:eq(10) .ifSigned').html('已签约 <a href="/lotus-admin/contract-'+link+'?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a>').removeClass('ifSigned');
                     })
                 }
             }

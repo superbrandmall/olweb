@@ -27,6 +27,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <li class="active"><a href="#toDoList" data-toggle="tab">待办流程<span id="toDoCount"></span></a></li>
                                             <li class="hidden-xs"><a href="#doneList" data-toggle="tab">已办流程<span id="doneCount"></span></a></li>
                                             <li class="hidden-xs"><a href="#draftList" data-toggle="tab">草稿箱<span id="draftCount"></span></a></li>
+                                            <li class="hidden-xs"><a href="#files" data-toggle="tab">我的文件<span>(1)</span></a></li>
                                         </ul>
                                     </div>
                                     <div class="tab-content">
@@ -110,6 +111,49 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="draftListBody"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="files">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body">
+                                                        <table class="table table-striped snipe-table table-responsive" style="text-align: left;">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">附件类型</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">上传时间</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">文件名</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">大小</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">操作</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="filesBody">
+                                                                <tr>
+                                                                    <td>操作手册</td>
+                                                                    <td>2023.02.06 11:42:24</td>
+                                                                    <td>Lotus招商管理系统操作手册_v2.3</td>
+                                                                    <td>5.6Mb</td>
+                                                                    <td><a href="/upload/manual/Lotus招商管理系统操作手册_v2.3.pdf" target="_blank">查看文件</a></td>
+                                                                </tr>
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>

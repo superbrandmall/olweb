@@ -14,7 +14,7 @@ $.api = {
     termCalcMode: ['新计算方法','NEW'],
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
     contractTemplate: ['租期 > 6个月','1'],
-    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029']
+    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028']
 };
 
 var d = new Date();
@@ -2796,6 +2796,56 @@ function updateRoleYZJLabel() {
             updateUserRoleYZJDropDownByRoleId(v.roleId);
         }
     })
+}
+
+function findProcessInstByBizId(){
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    if(response.data.processInstStatus != null){
+                        $('#flowStatus').html('(<span class="txt">流程'+renderFlowStatus(response.data.processInstStatus)+'</span>)');
+                    }
+                    if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
+                        var index = 0;
+                        $.each(response.data.processStepRecordList, function(i,v) {
+                            if(i != 0){
+                                index++;
+                                $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
+                                <td>'+v.activityName+'</td>\n\
+                                <td>'+(v.approveName || '')+'</td>\n\
+                                <td>'+(v.status != null ? renderFlowSteps(v.status) : '已完成')+'</td>\n\
+                                <td>'+(v.opinion || '')+'</td>\n\
+                                <td>'+(v.createTime || '')+'</td>\n\
+                                <td>'+(v.handleTime || '')+'</td></tr>');
+                            }
+                        })
+                        $('#investmentContractApprovalProcess').show();
+                    }
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                            
+        }
+    }); 
 }
         
 function updateUserRoleYZJDropDownByRoleId(id) {

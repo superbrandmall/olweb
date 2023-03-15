@@ -147,7 +147,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <label for="unitArea" class="col-md-4 control-label">租赁面积</label>
                                         <div class="col-md-8 col-sm-12">
                                             <div class="input-group">
-                                                <input class="form-control money" id="unitArea" name="unitArea" type="text" style="border: 1px solid #ccc; background: #fff; border-right: none;" />                                                
+                                                <input class="form-control money" id="unitArea" type="text" style="border: 1px solid #ccc; background: #fff; border-right: none;" />                                                
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
                                             </div>
                                             <div id="errorcontainer-unitArea" class="errorDiv"></div>

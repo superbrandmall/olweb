@@ -26,8 +26,7 @@ $(document).ready(function(){
                 required: true
             },
             unitArea: {
-                required: true,
-                min: 0.01
+                required: true
             }
         },
         messages: {
@@ -54,8 +53,7 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: true,
-                min: 0.01
+                required: true
             }
         },
         errorPlacement: function(error, element) {
@@ -81,7 +79,8 @@ $(document).ready(function(){
         'todayHighlight': true,
         'startDate': '',
         'endDate': '',
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     findStoreByCode();
@@ -122,7 +121,7 @@ function findStoreByCode() {
                 
                 if(response.data != null && response.data != ''){
                     $.store = response.data;
-                    $('#state').text(response.data.state == 1 ? '使用中' : '已删除');
+                    $('#state').text(response.data.remarkFirst == 1 ? '使用中' : '已删除');
                     $('#shopStatus').text(response.data.shopStatus == 1 ? '空闲' : '租用');
                     $('#name2').text(response.data.unitName+'['+response.data.unitCode+']');
                     
@@ -138,14 +137,20 @@ function findStoreByCode() {
                     $('#unitArea').val(response.data.unitArea);
                     var floor = new Option(response.data.floorName, response.data.floorCode, true, true);
                     $('#selectFloor').append(floor).trigger('change');
-                    var selectUser1 = new Option(response.data.approveFirst, response.data.approveFirst, true, true);
-                    $('#selectUser1').append(selectUser1).trigger('change');
-                    var selectUser2 = new Option(response.data.approveSecond, response.data.approveSecond, true, true);
-                    $('#selectUser2').append(selectUser2).trigger('change');
-                    var selectUser3 = new Option(response.data.approveThird, response.data.approveThird, true, true);
-                    $('#selectUser3').append(selectUser3).trigger('change');
+                    if(response.data.approveFirst != null){
+                        var selectUser1 = new Option(response.data.approveFirst, response.data.approveFirst, true, true);
+                        $('#selectUser1').append(selectUser1).trigger('change');
+                    }
+                    if(response.data.approveSecond != null){
+                        var selectUser2 = new Option(response.data.approveSecond, response.data.approveSecond, true, true);
+                        $('#selectUser2').append(selectUser2).trigger('change');
+                    }
+                    if(response.data.approveThird != null){
+                        var selectUser3 = new Option(response.data.approveThird, response.data.approveThird, true, true);
+                        $('#selectUser3').append(selectUser3).trigger('change');
+                    }
                     
-                     $('input.money').each(function(){
+                    $('input.money').each(function(){
                         if($(this).val() != ''){
                             $(this).val(accounting.formatNumber($(this).val()));
                         }

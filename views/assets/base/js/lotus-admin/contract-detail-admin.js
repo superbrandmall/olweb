@@ -30,7 +30,8 @@ $(document).ready(function(){
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
         'todayHighlight': true,
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     $("#openStartTime").timepicker({
@@ -318,7 +319,8 @@ function findContractByContractNo() {
                         'todayHighlight': true,
                         'startDate': ($('#startDate').val() != '' ? $('#startDate').val() : ''),
                         'endDate': $('#endDate').val(),
-                        'autoclose': true
+                        'autoclose': true,
+                        'clearBtn': true
                     });
                     
                     $("#startDate").on('changeDate',function(){

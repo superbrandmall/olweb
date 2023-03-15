@@ -24,8 +24,7 @@ $(document).ready(function(){
                 required: true
             },
             unitArea: {
-                required: true,
-                min: 0.01
+                required: true
             }
         },
         messages: {
@@ -52,8 +51,7 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: "请输入租赁面积",
-                min: "租赁面积不能为0"
+                required: "请输入租赁面积"
             }
         },
         errorPlacement: function(error, element) {
@@ -80,7 +78,8 @@ $(document).ready(function(){
         'todayHighlight': true,
         'startDate': '',
         'endDate': '',
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     $('input.money').on('blur',function(){
@@ -111,7 +110,7 @@ function saveStore() {
             "approveFirst": $('#selectUser1').val(),
             "approveSecond":$('#selectUser2').val(),
             "approveThird": $('#selectUser3').val(),
-            "area": $('#unitArea').val(),
+            "area": numberWithoutCommas($('#unitArea').val()),
             "creatorOpenId": openId,
             "endDate": $('#endDate').val(),
             "floorCode": $('#selectFloor').val(),

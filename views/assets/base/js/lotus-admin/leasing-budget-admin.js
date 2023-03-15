@@ -24,7 +24,8 @@ $(document).ready(function(){
         'todayHighlight': true,
         'startDate': '',
         'endDate': '',
-        'autoclose': true
+        'autoclose': true,
+        'clearBtn': true
     });
     
     if($("#mallCode").val() != ''){
