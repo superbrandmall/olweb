@@ -159,15 +159,6 @@ $(document).ready(function(){
         findFilesByBizId($(this).val());
     })
     
-    /*$(".promotionFeeItemDropDown").on('change',function(){
-        $(".promotionFeeItemDropDown").not('#promotionItem_'+$(this).attr('id').split('_')[1]).val($(this).val()).trigger("change"); ;
-        if($(this).val() == 'G011'){
-            $('#promotionCommissionBase').hide();
-        } else if($(this).val() == 'G021'){
-            $('#promotionCommissionBase').show();
-        }
-    })*/
-    
     updateTaxVAT();
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
@@ -1250,8 +1241,9 @@ function saveContractForm(s) {
             promotion.amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
             promotion.taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
 
-            //promotion.deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
-            //promotion.taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+            promotion.deduct = parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
+            promotion.taxDeduct = parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+            promotion.salesType = $('#promotionSalesType_'+index).val();
 
             promotion.taxRate = $('#promotionTaxRate_'+index).val();
             promotion.taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');

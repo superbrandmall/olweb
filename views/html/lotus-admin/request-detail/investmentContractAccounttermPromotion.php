@@ -41,14 +41,18 @@
                                                     <div class="th-inner">月金额(去税)</div>
                                                     <div class="fht-cell"></div>
                                                 </th>
-                                                <!--<th>
+                                                <th>
                                                     <div class="th-inner">提成率(含税)</div>
                                                     <div class="fht-cell"></div>
                                                 </th>
                                                 <th>
                                                     <div class="th-inner">提成率(去税)</div>
                                                     <div class="fht-cell"></div>
-                                                </th>-->
+                                                </th>
+                                                <th>
+                                                    <div class="th-inner">提成基数</div>
+                                                    <div class="fht-cell"></div>
+                                                </th>
                                                 <th>
                                                     <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
                                                     <div class="fht-cell"></div>
@@ -69,30 +73,6 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="box-body" id="promotionCommissionBase" style="display: none;">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-md-4 control-label">提成基数</label>
-                <div class="col-md-8 col-sm-12">
-                    <select class="select2" style="width: 100%;">
-                        <option value="1" selected>包含营业额中的增值税</option>
-                        <option value="2">不包含营业额中的增值税</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="col-md-4 control-label">最低营业额</label>
-                <div class="col-md-8 col-sm-12">
-                    <div class="input-group">
-                        <input class="form-control" id="promotionTargetSales" type="text" style="border-right: none;" />
-                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
-                    </div>
                 </div>
             </div>
         </div>

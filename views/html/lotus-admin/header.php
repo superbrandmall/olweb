@@ -45,12 +45,17 @@
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
                             <a href="/lotus-admin/todo" style="font-size: 15px;font-weight: bold;">
-                                招商区
+                                招商
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm">
+                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;">
+                                物业
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
                             <a href="/kow-admin" style="font-size: 15px;font-weight: bold;">
-                                快闪店
+                                快闪
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">

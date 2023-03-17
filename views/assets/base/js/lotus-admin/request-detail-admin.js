@@ -104,15 +104,6 @@ $(document).ready(function(){
         findFeeItemByContractType($('#contractType').val());
     })
     
-    /*$(".promotionFeeItemDropDown").on('change',function(){
-        $(".promotionFeeItemDropDown").not('#promotionItem_'+$(this).attr('id').split('_')[1]).val($(this).val()).trigger("change"); ;
-        if($(this).val() == 'G011'){
-            $('#promotionCommissionBase').hide();
-        } else if($(this).val() == 'G021'){
-            $('#promotionCommissionBase').show();
-        }
-    })*/
-    
     updateTaxVAT();
     updateCommissionDropDown('commissionCategoryDropDown','PRODUCT_CATEGORY'); // 商品分类
     updateCommissionDropDown('commissionDeductTypeDropDown','DEDUCT_TYPE'); // 全额/差额
@@ -886,11 +877,11 @@ function findRequestbyBizId() {
                         $('.step-progress li:eq(6)').addClass('active');
                     }
                                         
-                    if($("#selectTenant").val() != null && ($.request.content.formStatus == 1 || $.request.content.formStatus == 3)){
+                    if($("#selectTenant").val() != null && $.request.content.formStatus == 1){
                         findFilesByBizId($("#selectTenant").val());
                     }
                     
-                    if($("#brandName").val() != null && ($.request.content.formStatus == 1 || $.request.content.formStatus == 3)){
+                    if($("#brandName").val() != null && $.request.content.formStatus == 1){
                         findFilesByBizId($("#brandName").val());
                     }
                     
@@ -1610,11 +1601,12 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var column3 = createRowColumn(newrow);
     var column4 = createRowColumn(newrow);
     var column5 = createRowColumn(newrow);
-    //var column6 = createRowColumn(newrow);
-    //var column7 = createRowColumn(newrow);
+    var column6 = createRowColumn(newrow);
+    var column7 = createRowColumn(newrow);
     var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
     var column10 = createRowColumn(newrow);
+    var column11 = createRowColumn(newrow);
     
     var table = document.getElementById('investmentContractAccounttermPromotion');
     var tbody = table.querySelector('tbody') || table;
@@ -1624,7 +1616,6 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     var select = document.createElement("select"); //费用项
     select.setAttribute("class","select2 promotionFeeItemDropDown new");
     select.setAttribute("id","promotionItem_"+count.toLocaleString());
-    select.setAttribute("disabled","disabled");
     column2.appendChild(select);
     
     var div = document.createElement("div"); //期限
@@ -1696,7 +1687,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     div.appendChild(percent);
     column5.appendChild(div);
     
-    /*var div = document.createElement("div"); //含税扣率
+    var div = document.createElement("div"); //含税扣率
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money");
@@ -1724,12 +1715,19 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     percent.innerText = "%";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
-    column7.appendChild(div);*/
+    column7.appendChild(div);
+    
+    var select = document.createElement("select"); //提成基数
+    select.setAttribute("class","select2");
+    select.setAttribute("id","promotionSalesType_"+count.toLocaleString());
+    select.options[0] = new Option('包含营业额中的增值税','1');
+    select.options[1] = new Option('不包含营业额中的增值税','2');
+    column8.appendChild(select);
     
     var select = document.createElement("select"); //税率
     select.setAttribute("class","select2 taxVat newVAT promotionVATDropDown newFee");
     select.setAttribute("id","promotionTaxRate_"+count.toLocaleString());
-    column8.appendChild(select);
+    column9.appendChild(select);
     
     var checkbox = document.createElement("input"); //是否开发票
     checkbox.setAttribute("id","promotionInvoiceFlag_"+count.toLocaleString());
@@ -1737,7 +1735,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     if(value.invoiceFlag == 1){
         checkbox.setAttribute("checked", "");
     }
-    column9.appendChild(checkbox);
+    column10.appendChild(checkbox);
     
     var remove = document.createElement("a");
     remove.setAttribute("href", "javascript:void(0);");
@@ -1746,7 +1744,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     icon.setAttribute("class", "fa fa-minus-circle");
     icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
     remove.appendChild(icon);
-    column10.appendChild(remove);
+    column11.appendChild(remove);
 
     tbody.appendChild(newrow);
     updateTaxVAT();
@@ -1762,6 +1760,7 @@ function updateRowInvestmentContractAccounttermPromotion(v) {
     
     $("#promotionItem_"+count.toLocaleString()).val(value.itemCode).trigger("change");
     $('#investmentContractAccounttermPromotion .select2').select2();
+    $("#promotionSalesType_"+count.toLocaleString()).val(value.salesType).trigger("change");
     $("#promotionTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
  
     $('input.money').on('focus',function(){
@@ -2608,8 +2607,9 @@ function saveContractForm(s) {
             promotion.amount =  numberWithoutCommas($('#promotionAmount_'+index).val());
             promotion.taxAmount =  numberWithoutCommas($('#promotionTaxAmount_'+index).val());
 
-            //promotion.deduct =  parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
-            //promotion.taxDeduct =  parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+            promotion.deduct = parseFloat(numberWithoutCommas($('#promotionDeduct_'+index).val())) / 100;
+            promotion.taxDeduct = parseFloat(numberWithoutCommas($('#promotionTaxDeduct_'+index).val())) / 100;
+            promotion.salesType = $('#promotionSalesType_'+index).val();
 
             promotion.taxRate = $('#promotionTaxRate_'+index).val();
             promotion.taxCode = $('#promotionTaxRate_'+index).find('option:selected').attr('data-code');
