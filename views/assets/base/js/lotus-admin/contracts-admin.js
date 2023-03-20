@@ -228,7 +228,7 @@ function findAllContractsByKVCondition(p,c){
         params.push(param);
     }
     
-    if($.cookie('searchContractsUnitType') != ''){
+    if($.cookie('searchContractsUnitType') && $.cookie('searchContractsUnitType') != ''){
         param = {
             "columnName": "unitCode",
             "columnPatten": "",
