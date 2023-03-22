@@ -16,8 +16,8 @@
                     <span id="essayFloor"></span>
                     <span id="essayModality"></span>
                     <span id="essayBrand"></span>，
-                    <span id="essayArea"></span>新签
-                    <span id="essayDuration" class="txt"></span>个月，
+                    <span id="essayArea"></span>
+                    <span id="essayDuration"></span>
                     <span id="essayFixedRent"></span>
                     <span id="essayCommission"></span>
                     <span id="essayPropertyMgmt"></span>
@@ -30,6 +30,7 @@
                 <p>
                     <span id="essayBudgetRentAmount"></span>
                     <span id="essayBudgetRentAmountRateOfReach"></span>
+                    <span id="essayBudgetBizDate"></span>
                     <span id="essayBudgetYearAmountRateOfReach"></span>
                     <span id="essayBudgetDifference"></span>
                 </p>

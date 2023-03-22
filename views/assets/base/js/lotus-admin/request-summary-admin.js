@@ -63,15 +63,20 @@ function findRequestByBizId() {
                     $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
                     $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
-                    
-                    $('#essayDuration').text(data.duration);
-                    var saleRentalRatio = '';
+                    if(data.duration >= 12){
+                        if(data.duration % 12 != 0){
+                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'年'+data.duration % 12+'个月</span>,');
+                        } else {
+                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'年</span>,');
+                        }
+                    } else if(data.duration < 12){
+                        $('#essayDuration').html('新签<span class="txt">'+data.duration+'个月</span>,');
+                    }
                     if(data.fixedRentList.length > 0){
                         $('#essayFixedRent').html('新签首年固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
-                        saleRentalRatio = Math.round(data.fixedRentList[0].taxAmount / (data.salesList.length > 0 ? data.salesList[0].amount : 1) * 100) * 100 / 100;
                     }
                     if(data.deductList.length > 0){
-                        $('#essayCommission').html('首年扣率<span class="txt">'+Math.round(data.deductList[0].taxDeduct * 100)+'</span>%，');
+                        $('#essayCommission').html('首年扣率<span class="txt">'+parseFloat(data.deductList[0].taxDeduct * 100)+'</span>%，');
                     }
                     if(data.propertyFeeList.length > 0){
                         $('#essayPropertyMgmt').html('首年物管费<span class="txt">'+data.propertyFeeList[0].taxRentAmount+'</span>元/月/平米，');
@@ -79,7 +84,7 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
-                    $('#essayTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(saleRentalRatio != 'Infinity' ? saleRentalRatio : '/')+'</span>%，');
+                    $('#essayTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100) * 100 / 100 || '/')+'</span>%，');
                     if(data.awardDate != null && data.awardDate != ''){
                         $('#essayAwardDate').html('<span class="txt">预计'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
                     }
@@ -90,11 +95,11 @@ function findRequestByBizId() {
                         $('#essayBizDate').html('<span class="txt">'+data.bizDate.split('-')[0]+'年'+data.bizDate.split('-')[1]+'月'+data.bizDate.split('-')[2]+'日</span>开业。');
                     }
                     
-                    $('#essayBudgetRentAmount').text('首年预算租金0元/月/平米，');
-                    $('#essayBudgetRentAmountRateOfReach').text('首年单价达成率100%。');
-                    $('#essayBudgetBizDate').text('预算中/年/月/日开业，');
-                    $('#essayBudgetYearAmountRateOfReach').text('全年预算达成率%，');
-                    $('#essayBudgetDifference').text('差异元。');
+                    $('#essayBudgetRentAmount').html('首年预算租金<span class="txt">'+(data.budgetDayRent || '/')+'</span>元/天/平米，');
+                    $('#essayBudgetRentAmountRateOfReach').html('首年单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100) * 100 / 100 || '/')+'</span>%。');
+                    $('#essayBudgetBizDate').html('预算中<span class="txt">'+(data.budgetStartDate != null ? data.budgetStartDate.split('-')[0]+'年'+data.budgetStartDate.split('-')[1]+'月'+data.budgetStartDate.split('-')[2]+'日' : '/')+'</span>开业，');
+                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100) * 100 / 100 || '/')+'</span>%，');
+                    $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '/')+'</span>元。');
                     $('#remark').val(data.remark);
                     
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);

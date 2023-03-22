@@ -16,8 +16,8 @@
                     <span id="essayFloor"></span>
                     <span id="essayModality"></span>
                     <span id="essayBrand"></span>，
-                    <span id="essayArea"></span>续约
-                    <span id="essayDuration" class="txt"></span>个月，
+                    <span id="essayArea"></span>
+                    <span id="essayDuration"></span>
                     <span id="essayRenewBrandHoldFlag"></span>
                     <span id="essayRenewBrandHoldReason"></span>
                     <span id="essayFixedRent"></span>
@@ -30,6 +30,7 @@
                 <p>
                     <span id="essayBudgetRentAmount"></span>
                     <span id="essayBudgetRentAmountRateOfReach"></span>
+                    <span id="essayBudgetBizDate"></span>
                     <span id="renewBudgetDesc"></span>
                     <span id="essayBudgetYearAmountRateOfReach"></span>
                     <span id="essayBudgetDifference"></span>

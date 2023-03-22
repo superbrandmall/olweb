@@ -2836,12 +2836,12 @@ function findProcessInstByBizId(){
                     if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
                         var index = 0;
                         $.each(response.data.processStepRecordList, function(i,v) {
-                            if(i != 0){
+                            if(i != 0 && v.status != null && v.status != 'WITHDRAW'){
                                 index++;
                                 $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
                                 <td>'+v.activityName+'</td>\n\
                                 <td>'+(v.approveName || '')+'</td>\n\
-                                <td>'+(v.status != null ? renderFlowSteps(v.status) : '已完成')+'</td>\n\
+                                <td>'+renderFlowSteps(v.status)+'</td>\n\
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.createTime || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');
