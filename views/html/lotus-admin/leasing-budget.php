@@ -9,7 +9,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 200px;">
+    <section class="sub-header" style="height: 160px;">
         <h4>
             租金计划
         </h4>
@@ -47,28 +47,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">开始日期</label>
-                            <div class="col-md-8 col-sm-12">
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="startDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                                    <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">截止日期</label>
-                            <div class="col-md-8 col-sm-12">
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="endDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                                    <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="clearfix"></div>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -84,7 +62,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 250px;">
+    <section class="content" style="margin-top: 210px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">

@@ -69,25 +69,23 @@ function findRequestByBizId() {
                     if(oldContractInfo.endDate != data.endDate){
                         if(data.duration >= 12){
                             if(data.duration % 12 != 0){
-                                $('#essayDuration').html('续签<span class="txt">'+parseInt(data.duration / 12)+'年'+data.duration % 12+'个月</span>,');
+                                $('#essayDuration').html('续签<span class="txt">'+parseInt(data.duration / 12)+'</span>年<span class="txt">'+data.duration % 12+'</span>个月,');
                             } else {
-                                $('#essayDuration').html('续签<span class="txt">'+parseInt(data.duration / 12)+'年</span>,');
+                                $('#essayDuration').html('续签<span class="txt">'+parseInt(data.duration / 12)+'</span>年,');
                             }
                         } else if(data.duration < 12){
-                            $('#essayDuration').html('续签<span class="txt">'+data.duration+'个月</span>,');
+                            $('#essayDuration').html('续签<span class="txt">'+data.duration+'</span>个月,');
                         }
                     }
                     
-                    $('#essayRenewBrandHoldFlag').text('');
-                    $('#essayRenewBrandHoldReason').text('');
                     if(data.renewBrandHoldFlag == 1){
-                        $('#essayRenewBrandHoldFlag').text('是需要保留的品牌。');
+                        $('#essayRenewBrandHoldFlag').html('<span class="txt">是需要保留的品牌</span>。');
                     } else if(data.renewBrandHoldFlag == 0){
                         $('#essayRenewBrandHoldFlag').html('<span class="txt">不是需要保留的品牌，</span>');
                         $('#essayRenewBrandHoldReason').html('<span class="txt">'+data.renewBrandHoldReason+'</span>【暂时保留的原因】。');
                     }
                     if(data.fixedRentList.length > 0){
-                        $('#essayFixedRent').html('固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
+                        $('#essayFixedRent').html('续签固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');
                         if(data.renewRentSameFlag == 1){
                             $('#essayGrowthRate').text('平续，');
                         } else {
@@ -103,12 +101,18 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
+                    $('#essayRenewTargetSales').html('目标营业额<span class="txt">'+data.targetSales+'</span>元/月，');
+                    var salesListAmount = 0;
+                    if(data.salesList.length > 0){
+                        salesListAmount = data.salesList[0].amount;
+                    }
+                    $('#essayRenewSalesListAmount').html('预估销售额<span class="txt">'+salesListAmount+'</span>元/月，');
                     $('#essayRenewAvgSales').html('近12个月平均销售额<span class="txt">'+(data.renewAvgSales || '/')+'</span>元，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100) * 100 / 100 || '/')+'</span>%。');
-                    $('#essayBudgetRentAmount').html('预算租金<span class="txt">'+(data.budgetDayRent || '/')+'</span>元/天/平米，');
-                    $('#essayBudgetRentAmountRateOfReach').html('单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100) * 100 / 100 || '/')+'</span>%。');
+                    $('#essayBudgetRentAmount').html('预算租金<span class="txt">'+(data.budgetDayRent || '0')+'</span>元/天/平米，');
+                    $('#essayBudgetRentAmountRateOfReach').html('单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100).toFixed(2) * 100 / 100 || '/')+'</span>%。');
                     $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
                     $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100) * 100 / 100 || '/')+'</span>%，');
-                    $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '/')+'</span>元。');
+                    $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '0')+'</span>元。');
                     $('#remark').val(data.remark);
  
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);

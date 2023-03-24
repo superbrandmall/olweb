@@ -23,12 +23,7 @@
                     <span id="essayAwardDate"></span>
                 </p>
                 <p>
-                    <span id="essayBudgetRentAmount"></span>
-                    <span id="essayBudgetRentAmountRateOfReach"></span>
-                    <span id="essayBudgetBizDate"></span>
-                    <span id="renewBudgetDesc"></span>
-                    <span id="essayBudgetYearAmountRateOfReach"></span>
-                    <span id="essayBudgetDifference"></span>
+                    <span id="essayBudgetDesc"></span>
                 </p>
             </div>
         </div>

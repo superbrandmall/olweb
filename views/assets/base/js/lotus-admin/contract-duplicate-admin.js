@@ -123,7 +123,7 @@ function findContractByContractNo() {
                     $.contract.content.contractVersion = $.contract.content.contractVersion * 1 + 1;
                     $('#contractVersion').text($.contract.content.contractVersion).attr('title',$.contract.content.contractVersion);
                     findMainSigningBody(data.mallCode);
-                    findContractStatus('CONTRACT_STATUS',data.contractStatus);
+                    updateDictByDictTypeCode('CONTRACT_STATUS','contractStatus',(data.contractStatus != null ? data.contractStatus : 'init'));
                     
                     temp = new Option((data.tenantNo +' | '+ data.tenantName), data.tenantCode, true, true);
                     $('#selectTenant').append(temp).trigger('change');
@@ -285,39 +285,6 @@ function findContractByContractNo() {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
-        }
-    })
-}
-
-function findContractStatus(dictTypeCode, val) {
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data.dictDataList.length > 0){
-                    $.each(response.data.dictDataList, function(i,v){
-                        if(v.dictCode == val){
-                            $('#contractStatus').text(v.dictName);
-                            return false;
-                        }
-                    })
-                }
-            }                             
         }
     })
 }

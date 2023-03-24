@@ -85,8 +85,8 @@ function findRequestByBizId() {
                     if(data.newBizDate != null && data.newBizDate != ''){
                         $('#essayNewBizDate').html('<span class="txt">'+data.newBizDate.split('-')[0]+'年'+data.newBizDate.split('-')[1]+'月'+data.newBizDate.split('-')[2]+'日</span>开业。');
                     }
-                    $('#essayBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
-                    $('#essayBudgetDifference').html('与预算差异<span class="txt">'+(data.budgetDiffAmount || '/')+'</span>元。');
+                    $('#essayBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '无')+'</span>，');
+                    $('#essayBudgetDifference').html('与预算差异<span class="txt">'+(data.budgetDiffAmount || '0')+'</span>元。');
                     $('#remark').val(data.remark);
  
                     $('#selectTenant').text(data.tenantName).attr('title',data.tenantName);

@@ -248,5 +248,24 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">预算情况说明</label>
+                <div class="col-md-8 col-sm-12">
+                    <input class="form-control" id="renewBudgetDesc" type="text"  />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="col-md-4 control-label">与预算差异</label>
+                <div class="col-md-8 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control money" id="budgetDiffAmount" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

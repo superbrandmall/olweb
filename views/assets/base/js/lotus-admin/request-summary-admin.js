@@ -65,12 +65,12 @@ function findRequestByBizId() {
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
                     if(data.duration >= 12){
                         if(data.duration % 12 != 0){
-                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'年'+data.duration % 12+'个月</span>,');
+                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'</span>年<span class="txt">'+data.duration % 12+'</span>个月,');
                         } else {
-                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'年</span>,');
+                            $('#essayDuration').html('新签<span class="txt">'+parseInt(data.duration / 12)+'</span>年,');
                         }
                     } else if(data.duration < 12){
-                        $('#essayDuration').html('新签<span class="txt">'+data.duration+'个月</span>,');
+                        $('#essayDuration').html('新签<span class="txt">'+data.duration+'</span>个月,');
                     }
                     if(data.fixedRentList.length > 0){
                         $('#essayFixedRent').html('新签首年固定租金<span class="txt">'+data.fixedRentList[0].taxRentAmount+'</span>元/天/平米，');

@@ -961,36 +961,38 @@ function findCommissionByDictTypeCode(dictTypeCode) {
 }
 
 function findDictCodeByDictTypeCode(dictTypeCode) {
-    $.ajax({
-        url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
+    if(!sessionStorage.getItem(dictTypeCode) || sessionStorage.getItem(dictTypeCode) == null || sessionStorage.getItem(dictTypeCode) == "null" || sessionStorage.getItem(dictTypeCode) == '') {
+        $.ajax({
+            url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    if(response.data.dictDataList.length > 0){
+                        sessionStorage.setItem(dictTypeCode, JSON.stringify(response.data.dictDataList));
+                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
                 }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data.dictDataList.length > 0){
-                    sessionStorage.setItem(dictTypeCode, JSON.stringify(response.data.dictDataList));
-                }
-            } else {
-                alertMsg(response.code,response.customerMessage);
             }
-        }
-    })
+        })
+    }
 }
 
 function updateDictByDictTypeCode(dictTypeCode, id, val) {
@@ -1017,6 +1019,13 @@ function updateDictByDictTypeCode(dictTypeCode, id, val) {
                     $.each(response.data.dictDataList, function(i,v) {
                         if(v.dictCode == val){
                             $('#'+id).text(v.dictName).attr('title',v.dictName);
+                            if($('#'+id).hasClass('badge-success')){
+                                if($.inArray(val.toUpperCase(), ['TERMINATION','CANCEL','0','3','RETURNED','ABANDON','SMART_RETURNED','DISAGREE','DISAGREE_CANCLE']) != -1){
+                                    $('#'+id).removeClass('badge-success').addClass('badge-danger');
+                                } else if($.inArray(val.toUpperCase(), ['UNEFFECT','INIT','1','10','AGREE_CANCEL']) != -1){
+                                    $('#'+id).removeClass('badge-success').addClass('badge-warning');
+                                }
+                            }
                             return false;
                         }
                     })

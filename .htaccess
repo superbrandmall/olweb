@@ -1,6 +1,16 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteCond %{REQUEST_URI} !^/(wechat_test|wechat_test/.*)$  
+RewriteCond %{REQUEST_URI} !^/(sbm-h5|sbm-h5/.*)$
+RewriteCond %{REQUEST_URI} !^/(face-verify|face-verify/.*)$ 
+RewriteCond %{REQUEST_URI} !^/(co-work|co-work/.*)$
+RewriteCond %{REQUEST_URI} !^/(popup|popup/.*)$  
+RewriteCond %{REQUEST_URI} !^/(popup-form|popup-form/.*)$
+RewriteCond %{REQUEST_URI} !^/(authorization|authorization/.*)$
+RewriteCond %{REQUEST_URI} !^/(dr-summary|dr-summary/.*)$
+RewriteCond %{REQUEST_URI} !^/(we-meter|we-meter/.*)$
+RewriteCond %{REQUEST_URI} !^/(lhtenant|lhtenant/.*)$
 RewriteRule ^([a-z0-9\/-]+)?$ index.php?p=$1
+RewriteCond %{REQUEST_URI} ^/(lotus-approval-opinion/.*)$
+RewriteRule ^([^/.]+)/?$ ?p=$1
 ErrorDocument 403 /403.htm
 </IfModule>

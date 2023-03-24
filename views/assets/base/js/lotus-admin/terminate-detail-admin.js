@@ -573,7 +573,9 @@ function findRequestbyBizId() {
                         $('#newBrandName').val(data.newBrandName);
                         $('#newDeliveryDate').datepicker('update', data.newDeliveryDate).trigger("change");
                         $('#newDrDate').datepicker('update', data.newDrDate).trigger("change");
-        
+                        $('#renewBudgetDesc').val(data.renewBudgetDesc);
+                        $('#budgetDiffAmount').val(data.budgetDiffAmount);
+                          
                         if(data.firstCompareCycle != null && data.firstCompareCycle != null){
                             temp = new Option(data.firstCompareCycle, data.firstCompareCycle, true, true);
                             $('#compareFirstFrequency').append(temp).trigger('change');
@@ -2414,6 +2416,8 @@ function saveContractForm(s) {
         var newBrandName = $('#newBrandName').val();
         var newDeliveryDate = $('#newDeliveryDate').val();
         var newDrDate = $('#newDrDate').val();
+        var renewBudgetDesc = $('#renewBudgetDesc').val();
+        var budgetDiffAmount = numberWithoutCommas($('#budgetDiffAmount').val());
         
         var processBizApprove = 0;
         if($('.step-progress li:eq(4)').hasClass('active') == true){
@@ -2909,6 +2913,7 @@ function saveContractForm(s) {
             "bizTypeName": $.request.content.bizTypeName,
             "brandCode": $.request.content.brandCode,
             "brandName": $.request.content.brandName,
+            "budgetDiffAmount": budgetDiffAmount,
             "cancelBizDate": cancelBizDate,
             "cancelBizHour": cancelBizHour,
             "cancelBreachAmount": cancelBreachAmount,
@@ -2994,6 +2999,7 @@ function saveContractForm(s) {
             "remark": remark,
             "rentDeductRate": 0,
             "rentSalesRate": 0,
+            "renewBudgetDesc": renewBudgetDesc,
             "salesList": $.request.content.oldContractInfo.salesList,
             "sapContractNo": $.request.content.sapContractNo,
             "secondCompareCycle": $.request.content.compareSecondFrequency,

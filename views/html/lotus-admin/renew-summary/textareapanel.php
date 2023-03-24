@@ -25,6 +25,8 @@
                     <span id="essayCommission"></span>
                     <span id="essayPropertyMgmt"></span>
                     <span id="essayPromotion"></span>
+                    <span id="essayRenewTargetSales"></span>
+                    <span id="essayRenewSalesListAmount"></span>
                     <span id="essayRenewAvgSales"></span>
                 </p>
                 <p>

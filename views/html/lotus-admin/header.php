@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;">
+                            <a href="/we-meter/#/meter" style="font-size: 15px;font-weight: bold;">
                                 物业
                             </a>
                         </li>

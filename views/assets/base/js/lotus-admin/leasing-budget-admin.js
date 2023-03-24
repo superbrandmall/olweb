@@ -1,7 +1,11 @@
 $(document).ready(function(){
-    if($.cookie('searchUnit') != ''){
-        $('#unit').val($.cookie('searchUnit'));
+    findDictCodeByDictTypeCode('UNIT_TYPE');
+    
+    if($.cookie('searchLeasingBudgetSelectStoreVal') != null){
+        var newOption = new Option($.cookie('searchLeasingBudgetSelectStoreTxt'), $.cookie('searchLeasingBudgetSelectStoreVal'), true, true);
+        $('#selectStore').append(newOption).trigger('change');
     }
+    
     
     if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null){
         var newOption = new Option($.cookie('searchMallCode').split(':::')[0], $.cookie('searchMallCode').split(':::')[1], true, true);
@@ -54,15 +58,17 @@ $(document).ready(function(){
     }
     
     $('#clear').click(function(){
-        $('#unit').val('');
         $('#mallCode').val('').trigger('change');
+        $('#selectStore').empty(); 
+        $('#selectStore').select2("val", "");
         
-        $.cookie('searchUnit', '');
+        $.cookie('searchLeasingBudgetSelectStoreVal', null);
         $.cookie('searchMallCode', null);
     })
     
     $('#search').click(function(){
-        $.cookie('searchUnit', $('#unit').val());
+        $.cookie('searchLeasingBudgetSelectStoreVal', $('#selectStore').val());
+        $.cookie('searchLeasingBudgetSelectStoreTxt', $('#select2-selectStore-container').text());
         if($('#mallCode').val() != null){
             $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
@@ -117,13 +123,13 @@ function findShopBudget(p,c){
         params.push(param);
     }
     
-    if($.cookie('searchUnit') != null && $.cookie('searchUnit') != '' && $.cookie('searchUnit') != 'null'){
+    if($.cookie('searchLeasingBudgetSelectStoreVal') != null && $.cookie('searchLeasingBudgetSelectStoreVal') != '' && $.cookie('searchLeasingBudgetSelectStoreVal') != 'null'){
         param = {
             "columnName": "unitCode",
             "columnPatten": "",
             "conditionOperator": "OR",
             "operator": "=",
-            "value": $.cookie('searchUnit')
+            "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[0]
         }
         params.push(param);
         
@@ -132,7 +138,7 @@ function findShopBudget(p,c){
             "columnPatten": "",
             "conditionOperator": "OR",
             "operator": "=",
-            "value": $.cookie('searchUnit')
+            "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[2]
         }
         params.push(param);
     }
