@@ -1,8 +1,8 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contracts-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/standing-book-admin.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contracts.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/standing-book.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
@@ -11,9 +11,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header" style="height: 250px;">
         <h4>
-            租赁合同
+            合同台账
         </h4>
-        <?php include 'component/investment-contract-request-create-dropdown.php'; ?>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">
@@ -132,10 +131,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert alert-warning alert-dismissable">
-                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        <b>租赁合同【申请单】当前仅限【上海区】使用，其他区请勿创建！</b>
-                                    </div>
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
                                             <div class="pull-left pagination-detail">
@@ -147,10 +142,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/contracts?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contracts?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contracts?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contracts?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/standing-book?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/standing-book?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/standing-book?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/standing-book?items=50">50</a></li>
                                                         </ul>
                                                     </span> 
                                                     行每页
@@ -178,19 +173,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">商户</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner" style="width: 140px;">店招</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">签约编号</div>
+                                                                <div class="th-inner" style="width: 60px;">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 60px;">状态</div>
+                                                                <div class="th-inner">楼层</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 200px;">商户</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -206,10 +205,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">核算楼层</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner" style="width: 170px;">合同周期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -219,7 +214,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="contracts"></tbody>
+                                                    <tbody id="standing-book"></tbody>
                                                 </table>
                                             </div>
 
@@ -233,10 +228,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/contracts?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/contracts?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/contracts?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/contracts?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/standing-book?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/standing-book?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/standing-book?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/standing-book?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>

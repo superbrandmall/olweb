@@ -282,15 +282,15 @@ function generatePages(currentPage, LastPage, items) {
         if(currentPage>1){
             if(currentPage>2){
                 currentPage-6 > 0 ? pre = currentPage-6 : pre = 1;
-                pages += '<li class="page-item"><a class="page-link" href="?page=1&items='+items+'">&laquo;</a></li>';
-                pages += '<li class="page-item"><a class="page-link pn" href="?page='+pre+'&items='+items+'">上一页</a></li>';
+                pages += '<li class="page-item"><a class="page-link" href="?page=1&items='+items+'" title="第一页"><i class="fa fa-angle-double-left"></i></a></li>'; //第一页
+                pages += '<li class="page-item"><a class="page-link pn" href="?page='+pre+'&items='+items+'" title="上一页"><i class="fa fa-angle-left"></i></a></li>'; //上一页
             } else {
-                pages += '<li class="page-item"><a class="page-link" href="?page=1&items='+items+'">&laquo;</a></li>';
-                pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);">上一页</a></li>';
+                pages += '<li class="page-item"><a class="page-link" href="?page=1&items='+items+'" title="第一页"><i class="fa fa-angle-double-left"></i></a></li>'; //第一页
+                pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);"><i class="fa fa-angle-left"></i></a></li>'; //上一页
             }
         } else {
-            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);">&laquo;</a></li>';
-            pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);">上一页</a></li>';
+            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);"><i class="fa fa-angle-double-left"></i></a></li>'; //第一页
+            pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);"><i class="fa fa-angle-left"></i></a></li>'; //上一页
         }
         var index = 1;
         if(currentPage<=(LastPage-4)*1) {
@@ -311,15 +311,15 @@ function generatePages(currentPage, LastPage, items) {
         if(currentPage<LastPage){
             if(currentPage<(LastPage-4)){
                 currentPage*1+6 <= LastPage ? nex = currentPage*1+6 : nex = LastPage;
-                pages += '<li class="page-item"><a class="page-link pn" href="?page='+nex+'&items='+items+'">下一页</a></li>';
-                pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'">&raquo;</a></li>';
+                pages += '<li class="page-item"><a class="page-link pn" href="?page='+nex+'&items='+items+'" title="下一页"><i class="fa fa-angle-right"></i></a></li>'; //下一页
+                pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'" title="最后页"><i class="fa fa-angle-double-right"></i></a></li>'; //最后页
             } else {
-                pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);">下一页</a></li>';
-                pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'">&raquo;</a></li>';
+                pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);"><i class="fa fa-angle-right"></i></a></li>'; //下一页
+                pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'" title="最后页"><i class="fa fa-angle-double-right"></i></a></li>'; //最后页
             }
         } else {
-            pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);">下一页</a></li>';
-            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);">&raquo;</a></li>';
+            pages += '<li class="page-item disabled"><a class="page-link pn" href="javascript: void(0);"><i class="fa fa-angle-right"></i></a></li>'; //下一页
+            pages += '<li class="page-item disabled"><a class="page-link" href="javascript: void(0);"><i class="fa fa-angle-double-right"></i></a></li>'; //最后页
         }
     }
     
