@@ -37,7 +37,7 @@ $(document).ready(function(){
         })
     }
         
-    if(!sessionStorage.getItem("malls") || sessionStorage.getItem("malls") == null || sessionStorage.getItem("malls") == "null" || sessionStorage.getItem("malls") == '') {
+    if(!sessionStorage.getItem("lotus_malls") || sessionStorage.getItem("lotus_malls") == null || sessionStorage.getItem("lotus_malls") == "null" || sessionStorage.getItem("lotus_malls") == '') {
         findAllMalls();
     } else {
         updateTopNavMallSelection();
@@ -571,7 +571,7 @@ function findAllMalls() {
                         return returnData;
                     });
                     
-                    sessionStorage.setItem("malls", JSON.stringify(returnData));
+                    sessionStorage.setItem("lotus_malls", JSON.stringify(returnData));
                     updateTopNavMallSelection();
                 }
             } else {
@@ -582,9 +582,9 @@ function findAllMalls() {
 }
 
 function updateTopNavMallSelection() {
-    if(sessionStorage.getItem("malls") && sessionStorage.getItem("malls") != null && sessionStorage.getItem("malls") != '') {
+    if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
         $('.navbar-nav .mall-select > ul').html('<li><a href="javascript: void(0);"><span>选择项目</span></a></li>');
-        var malls = $.parseJSON(sessionStorage.getItem("malls"));
+        var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
         if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
             $.each(JSON.parse($.cookie('userModules')), function(j,w) {
                 if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
@@ -608,7 +608,7 @@ function updateTopNavMallSelection() {
                     }
 
                     function renderLocations(){
-                        var malls = $.parseJSON(sessionStorage.getItem("malls"));
+                        var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
                         $.each(malls, function(i,v){
                             if(v.mallLotusBase.province == $.cookie('locationSelected') && v.code == w.moduleCode){
                                 $('.navbar-nav .mall-select > ul').append('<li class="to-select" style="display: block;">\n\
@@ -2632,8 +2632,8 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
 }
 
 function updateSelectMallDropDown() {
-    if(sessionStorage.getItem("malls") && sessionStorage.getItem("malls") != null && sessionStorage.getItem("malls") != '') {
-        var malls = $.parseJSON(sessionStorage.getItem("malls"));
+    if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
+        var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
         var returnData = [];
         var data = $.map(malls, function(item) {
             if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
@@ -2845,12 +2845,12 @@ function findProcessInstByBizId(){
                     if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
                         var index = 0;
                         $.each(response.data.processStepRecordList, function(i,v) {
-                            if(i != 0 && v.status != null && v.status != 'WITHDRAW'){
+                            if((i != 0 && v.status != null && v.status != 'WITHDRAW') || v.activityType == 'END'){
                                 index++;
                                 $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
                                 <td>'+v.activityName+'</td>\n\
                                 <td>'+(v.approveName || '')+'</td>\n\
-                                <td>'+renderFlowSteps(v.status)+'</td>\n\
+                                <td>'+(v.status != null ? renderFlowSteps(v.status) : '')+'</td>\n\
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.createTime || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');

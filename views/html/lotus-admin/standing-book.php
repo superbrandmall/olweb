@@ -9,7 +9,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 250px;">
+    <section class="sub-header" style="height: 160px;">
         <h4>
             合同台账
         </h4>
@@ -18,92 +18,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="contractStatus" style="width: 100%; display: none;" multiple>
-                                    <option value="" selected>全部</option>
-                                    <option value="effect">已生效</option>
-                                    <option value="termination">已终止</option>
-                                    <option value="uneffect">未生效</option>
-                                    <option value="cancel">已作废</option>
-                                    <option value="init">初始化</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">合同编号</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="code" type="text"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">店招</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="contractName" type="text"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">商户</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select id="selectTenant" class="select2" style="width: 100%"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
-                            <div class="col-md-3 col-sm-12" style="text-align: left; padding-right: 0px;">
-                                <select class="select2" id="unitType" style="width: 100%">
-                                    <option value=""></option>
-                                    <option value="L">正柜</option>
-                                    <option value="C">临时柜</option>
-                                    <option value="S">仓库</option>
-                                    <option value="T">基站</option>
-                                    <option value="R">停车场</option>
-                                    <option value="A">广告位</option>
-                                </select>
-                            </div>
-                            <div class="col-md-5 col-sm-12" style="text-align: left; padding-left: 2px;">
-                                <select class="select2" id="selectStore" style="width: 100%"></select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">签约编号</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="contractNo" type="text"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">版本</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="contractVersion" style="width: 100%">
-                                    <option value="" selected>全部</option>
-                                    <option value="1">V1</option>
-                                    <option value="2">V2</option>
-                                    <option value="3">V3</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -123,7 +40,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 300px;">
+    <section class="content" style="margin-top: 210px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -169,7 +86,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">业态</div>
+                                                                <div class="th-inner" style="width: 100px;">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -181,11 +98,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">楼层</div>
+                                                                <div class="th-inner" style="width: 180px;">楼层</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">商户</div>
+                                                                <div class="th-inner" style="width: 100px;">计租方式</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 100px;">位置</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">租赁面积</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 250px;">签约乙方(公司或个人)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -193,23 +122,47 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">项目</div>
+                                                                <div class="th-inner">签约日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">铺位</div>
+                                                                <div class="th-inner">起始日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">计租面积</div>
+                                                                <div class="th-inner">截止日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 170px;">合同周期</div>
+                                                                <div class="th-inner">交铺日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">计租方式</div>
+                                                                <div class="th-inner">开业日期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">装修期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 250px;">保底租金</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 200px;">提成租金</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 250px;">物业管理费</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 250px;">推广费</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 230px;">备注</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

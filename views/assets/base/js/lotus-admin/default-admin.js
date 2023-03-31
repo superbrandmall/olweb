@@ -96,8 +96,8 @@ function showFloors() {
     } else {
         renderMap(deFC);
     }
-
-    $('#mallName').text($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id')))[0].mallName);
+    
+    $('#name2').text($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id')))[0].mallName+'['+$.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id')))[0].mallCode+']');
     $('#floorNo').text(floor);
 }
 

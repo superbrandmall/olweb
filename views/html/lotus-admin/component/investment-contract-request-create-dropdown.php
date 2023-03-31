@@ -2,7 +2,7 @@
 <?php
 if(isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contracts') {
 ?>
-    <a href="javascript:void(0);" class="btn btn-outline btn-sm">合同台账</a>
+    <a href="/lotus-admin/standing-book" class="btn btn-outline btn-sm">合同台账</a>
 <?php
 }
 ?>

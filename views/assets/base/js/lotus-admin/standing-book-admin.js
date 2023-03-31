@@ -1,20 +1,4 @@
 $(document).ready(function(){
-    if(getURLParameter('s')) {
-        switch (getURLParameter('s')) {
-            case "delete":
-                successMsg('00','删除成功！');
-                break;
-            case "succeed":
-                successMsg('00','提交成功！');
-                break;
-            default:
-                break;
-        }
-        setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-        },1000);
-    }
-    
     if(!sessionStorage.getItem("CONTRACT_STATUS") || sessionStorage.getItem("CONTRACT_STATUS") == null || sessionStorage.getItem("CONTRACT_STATUS") == '') {
         findDictCodeByDictTypeCode('CONTRACT_STATUS');
     }
@@ -24,46 +8,15 @@ $(document).ready(function(){
     if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
         findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
     }
-    if($.cookie('searchContractsContractStatus') && $.cookie('searchContractsContractStatus') != ''){
-        var searchContractsContractStatus = $.cookie('searchContractsContractStatus').split(',');
-        if(searchContractsContractStatus.length > 1){
-            $('#contractStatus').val(searchContractsContractStatus).trigger('change');
-        } else {
-            $('#contractStatus').val($.cookie('searchContractsContractStatus')).trigger('change');
-        }
-    }
-    if($.cookie('searchContractsCode') != ''){
-        $('#code').val($.cookie('searchContractsCode'));
-    }
-    if($.cookie('searchContractsContractVersion') != ''){
-        $('#contractVersion').val($.cookie('searchContractsContractVersion')).trigger('change');
-    }
-    if($.cookie('searchContractsContractNo') != ''){
-        $('#contractNo').val($.cookie('searchContractsContractNo'));
-    }
-    if($.cookie('searchContractsContractName') != ''){
-        $('#contractName').val($.cookie('searchContractsContractName'));
-    }
-    if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != 'null'){
-        var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
-        $('#selectTenant').append(newOption).trigger('change');
-    }
-    if($.cookie('searchContractsSelectDepartmentVal') != null){
-        $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
-    }
-    if($.cookie('searchContractsUnitType') != ''){
-        $('#unitType').val($.cookie('searchContractsUnitType')).trigger('change');
-    }
-    if($.cookie('searchContractsSelectStoreVal') != null){
-        var newOption = new Option($.cookie('searchContractsSelectStoreTxt'), $.cookie('searchContractsSelectStoreVal'), true, true);
-        $('#selectStore').append(newOption).trigger('change');
+    if($.cookie('searchStandingBooksSelectDepartmentVal') != null){
+        $('#department').val($.cookie('searchStandingBooksSelectDepartmentVal')).trigger('change');
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        findAllContractsByKVCondition(getURLParameter('page'),items);
+        findAllContractsByFreeCondition(getURLParameter('page'),items);
     } else {
-        findAllContractsByKVCondition(1,items);
+        findAllContractsByFreeCondition(1,items);
     }
 
     switch (getURLParameter('items')) {
@@ -83,178 +36,55 @@ $(document).ready(function(){
             $('.page-size').text('20');
             break;
     }
-    
-    updateSelectTenantDropDown(50);
-    
+        
     $('#contractStatus').show();
     
-    if($("#department").val() != '' && $("#department").val() != null){
-        updateSelectStoreDropDownByMallCode(10,$("#department").val());
-    }
-    $("#department").on('change',function(){
-        updateSelectStoreDropDownByMallCode(10,$(this).val());
-    })
-    
     $('#clear').click(function(){
-        $('#code,#contractNo,#contractName').val('');
-        $('#selectTenant, #selectStore').empty(); 
-        $('#department, #contractStatus, #contractVersion').val("").trigger('change');
-        $('#selectTenant, #unitType, #selectStore').select2("val", "");
-        
-        $.cookie('searchContractsContractStatus','');
-        $.cookie('searchContractsCode', '');
-        $.cookie('searchContractsContractNo', '');
-        $.cookie('searchContractsContractName', '');
-        $.cookie('searchContractsContractVersion','');
-        $.cookie('searchContractsSelectTenantVal', null);
-        $.cookie('searchContractsSelectTenantTxt', null);
-        $.cookie('searchContractsUnitType','');
-        $.cookie('searchContractsSelectStoreVal', null);
-        $.cookie('searchContractsSelectDepartmentVal', null);
+        $('#department').val("").trigger('change');
+        $.cookie('searchStandingBooksSelectDepartmentVal', null);
     })
     
     $('#search').click(function(){
-        $.cookie('searchContractsContractStatus', $('#contractStatus').val());
-        $.cookie('searchContractsCode', $('#code').val());
-        $.cookie('searchContractsContractNo', $('#contractNo').val());
-        $.cookie('searchContractsContractName', $('#contractName').val());
-        $.cookie('searchContractsContractVersion',$('#contractVersion').val());
-        $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
-        $.cookie('searchContractsSelectTenantTxt', $('#select2-selectTenant-container').text());
-        $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
-        $.cookie('searchContractsUnitType', $('#unitType').val());
-        $.cookie('searchContractsSelectStoreVal', $('#selectStore').val());
-        $.cookie('searchContractsSelectStoreTxt', $('#select2-selectStore-container').text());
-        findAllContractsByKVCondition(1,items);
+        $.cookie('searchStandingBooksSelectDepartmentVal', $('#department').val());
+        findAllContractsByFreeCondition(1,items);
     })
     
     $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
-function findAllContractsByKVCondition(p,c){
-    $('#contracts').html('');
-    var params = [];
-    var param = {};
-    
-    param = {
-        "columnName": "contractName",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": "!=",
-        "value": 'KOW'
-    }
-    params.push(param);
-    
-    if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''  && $.cookie('searchContractsContractStatus').substring(0,1) != ','){
-        var reg = new RegExp(",","g");
-        param = {
-            "columnName": "contractStatus",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "in",
-            "value": $.cookie('searchContractsContractStatus').replace(reg,";")
+function findAllContractsByFreeCondition(p,c){
+    $('#standing-book').html('');
+    var map = {};
+    if($.cookie('searchStandingBooksSelectDepartmentVal') != null && $.cookie('searchStandingBooksSelectDepartmentVal') != '' && $.cookie('searchStandingBooksSelectDepartmentVal') != 'null'){
+        map = {
+            "key": $.cookie('searchStandingBooksSelectDepartmentVal'),
+            "operator": "OR",
+            "params": [
+              "mallCode"
+            ]
         }
     } else {
-            param = {
-            "columnName": "state",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": 1
+        if($('#select2-department-container').text() != '未选择'){
+            map = {
+                "key": $('#select2-department-container').text().split('[')[1].split(']')[0],
+                "operator": "OR",
+                "params": [
+                  "mallCode"
+                ]
+            }
+        } else {
+            map = {
+                "key": 'leasing',
+                "operator": "OR",
+                "params": [
+                  "contractType"
+                ]
+            }
         }
-    }
-    
-    params.push(param);
-    
-    if($.cookie('searchContractsSelectDepartmentVal') != null && $.cookie('searchContractsSelectDepartmentVal') != '' && $.cookie('searchContractsSelectDepartmentVal') != 'null'){
-        param = {
-            "columnName": "mallCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchContractsSelectDepartmentVal')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsContractVersion') != null && $.cookie('searchContractsContractVersion') != ''){
-        param = {
-            "columnName": "contractVersion",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchContractsContractVersion')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsCode') != null && $.cookie('searchContractsCode') != ''){
-        param = {
-            "columnName": "code",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('searchContractsCode')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsContractNo') != null && $.cookie('searchContractsContractNo') != ''){
-        param = {
-            "columnName": "contractNo",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('searchContractsContractNo')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsContractName') != null && $.cookie('searchContractsContractName') != ''){
-        param = {
-            "columnName": "contractName",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('searchContractsContractName')
-        }
-        params.push(param);
-    }
-
-    if($.cookie('searchContractsSelectTenantTxt') != null && $.cookie('searchContractsSelectTenantTxt') != '' && $.cookie('searchContractsSelectTenantTxt') != 'null' && $.cookie('searchContractsSelectTenantTxt') != '未选择'){
-        param = {
-            "columnName": "tenantNo",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchContractsSelectTenantTxt').split(' | ')[0]
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsUnitType') && $.cookie('searchContractsUnitType') != ''){
-        param = {
-            "columnName": "unitCode",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": 'F'+$.cookie('searchContractsUnitType')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchContractsSelectStoreVal') != null && $.cookie('searchContractsSelectStoreVal') != '' && $.cookie('searchContractsSelectStoreVal') != 'null'){
-        param = {
-            "columnName": "shopCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchContractsSelectStoreVal').split(':::')[1]
-        }
-        params.push(param);
-    }
-        
-    var map = {
-        "params": params
     }
     
     $.ajax({
-        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -279,15 +109,7 @@ function findAllContractsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        var modality = '', link = '';
-                        if(v.brandLotus != null){
-                            modality = v.brandLotus.modality3;
-                            
-                            if(v.brandLotus.modality4 != null){
-                                modality = modality + '（' + v.brandLotus.modality4 + '）';
-                            }
-                        }
-                        
+                        var link = '';
                         if(v.contractStatus == 'init'){
                             link = '<a href="/lotus-admin/contract-init?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
                         } else {
@@ -321,21 +143,55 @@ function findAllContractsByKVCondition(p,c){
                                 break;
                         }
                         
-                        $('#contracts').append('\
+                        var fixRentList = '', deductList = '', propertyFeeList = '', promotionFeeList = '';
+                        if(v.fixedRentList != null && v.fixedRentList.length > 0){
+                            $.each(v.fixedRentList, function(j,w){
+                                fixRentList += w.startDate+'~'+w.endDate+', '+w.amount+'元/月'+(j!=v.fixedRentList.length-1 ? ', <br>' : '');
+                            })
+                        }
+                        
+                        if(v.deductList != null && v.deductList.length > 0){
+                            $.each(v.deductList, function(j,w){
+                                deductList += w.startDate+'~'+w.endDate+', '+parseFloat(w.deduct)*100+'%'+(j!=v.deductList.length-1 ? ', <br>' : '');
+                            })
+                        }
+                        
+                        if(v.propertyFeeList != null && v.propertyFeeList.length > 0){
+                            $.each(v.propertyFeeList, function(j,w){
+                                propertyFeeList += w.startDate+'~'+w.endDate+', '+w.amount+'元/月'+(j!=v.propertyFeeList.length-1 ? ', <br>' : '');
+                            })
+                        }
+                        
+                        if(v.promotionFeeList != null && v.promotionFeeList.length > 0){
+                            $.each(v.promotionFeeList, function(j,w){
+                                promotionFeeList += w.startDate+'~'+w.endDate+', '+w.amount+'元/月'+(j!=v.promotionFeeList.length-1 ? ', <br>' : '');
+                            })
+                        }
+                        
+                        $('#standing-book').append('\
                             <tr data-index="'+i+'">\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+link+'</td>\n\
                             <td>'+unitType+'</td>\n\
-                            <td>'+modality+'</td>\n\
+                            <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                             <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.floorName : '')+'</td>\n\
+                            <td>'+(v.mallName || '')+(v.floorName || '')+'</td>\n\
                             <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
+                            <td>'+(v.unitName || '')+'</td>\n\
+                            <td>'+(v.area || '')+'㎡</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
-                            <td>'+v.contractNo+'</td>\n\
-                            <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
-                            <td>'+(v.unitArea || '')+'㎡</td>\n\
-                            <td>'+v.startDate+'～'+v.endDate+'</td>\n\
+                            <td>'+(v.contractNo || '')+'</td>\n\
+                            <td>'+(v.awardDate || '')+'</td>\n\
+                            <td>'+(v.startDate || '')+'</td>\n\
+                            <td>'+(v.endDate || '')+'</td>\n\
+                            <td>'+(v.deliveryDate || '')+'</td>\n\
+                            <td>'+(v.bizDate || '')+'</td>\n\
+                            <td>'+(v.freeDays || '0')+'天</td>\n\
+                            <td>'+fixRentList+'</td>\n\
+                            <td>'+deductList+'</td>\n\
+                            <td>'+propertyFeeList+'</td>\n\
+                            <td>'+promotionFeeList+'</td>\n\
+                            <td><div title="'+v.remark+'" style="width: 200px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">'+(v.remark || '')+'</div></td>\n\
                         </tr>');
                     });
                     
@@ -345,7 +201,7 @@ function findAllContractsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#contracts').html('<tr><td colspan="13" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#standing-book').html('<tr><td colspan="22" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

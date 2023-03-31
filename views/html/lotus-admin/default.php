@@ -1,4 +1,11 @@
 <?php
+if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
+    $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
+    if (strpos($id, '&s=') !== false) {
+        $id = explode('&s=', $id)[0];
+    }
+}
+
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/default-admin.js"></script>'.PHP_EOL;
 } else {
@@ -10,19 +17,30 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper" style="overflow: hidden;">
-    <section class="sub-header">
+    <section class="sub-header" style="height: 90px;">
         <div class="pull-left">
-            <a href="/lotus-admin/malls" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回</a>
+            <a href="/lotus-admin/malls" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
         </div>
-        <h4><span id="mallName"></span> <span id="floorNo"></span></h4>
+        <h4><b id="name2"></b></h4>
+        <div class="box-header" id="navbarTop" style="height: 53px;">
+            <span id="floorNo"></span>
+        </div>
+        <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px; height: 50px;">
+            <div class="pull-left">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                    <li><a href="/lotus-admin/mall-detail?id=<?= $id; ?>">详细资料</a></li>
+                    <li class="active"><a href="javascript: void(0);">平面图</a></li>
+                </ol>
+            </div>
+        </div>
     </section>
     
-    <section class="content" style="margin-top: 90px;">
+    <section class="content" style="margin-top: 179px;">
         <div class="col-lg-12" id="map_canvas">
             <div id="webui">
                 <div class="box box-default" style="overflow: auto;">
                     <div class="box-header with-border">
-                        <h3 class="box-title">楼层图</h3>
+                        <h3 class="box-title">平面图</h3>
                         <div class="c-label" id="fmap" style="display: inline-block;">
                             <span style="margin-left: 5px; background-color: #d3fdd9; width: 13px; height: 13px; display: inline-block;"></span> 在租 <span id="leased"></span>%
                             <span style="margin-left: 5px; background-color: #ff2700; width: 13px; height: 13px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
