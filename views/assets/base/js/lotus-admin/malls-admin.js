@@ -1,4 +1,17 @@
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     if($.cookie('searchMallState') != null){
         $('#state').val($.cookie('searchMallState')).trigger('change');
     }
@@ -162,7 +175,7 @@ function findAllMallsByKVCondition(p,c){
                         }
                         
                         $('#malls').append('<tr data-index="'+i+'">\n\
-                        <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/default?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
+                        <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/mall-detail?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
                         <td>'+mallStatus+'</td>\n\
                         <td>'+v.startDate+'</td>\n\
                         <td>'+(v.mallLotusBase.phoneNum || '')+'</td>\n\
@@ -181,7 +194,7 @@ function findAllMallsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#malls').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#malls').html('<tr><td colspan="11" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

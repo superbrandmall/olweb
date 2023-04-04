@@ -90,23 +90,21 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="modality_3" class="col-md-4 control-label">三级业态 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="modality_3" class="col-md-4 control-label">三级业态</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <select class="select2" id="modality_3" name="modality_3" style="width: 100%">
                                                 <option value="">未选择</option>
                                             </select>
-                                            <div id="errorcontainer-modality_3" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="modality_4" class="col-md-4 control-label">四级业态 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="modality_4" class="col-md-4 control-label">四级业态</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <select class="select2" id="modality_4" name="modality_4" style="width: 100%">
                                                 <option value="">未选择</option>
                                             </select>
-                                            <div id="errorcontainer-modality_4" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>

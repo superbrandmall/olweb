@@ -94,7 +94,7 @@ window.onload = function () {
             //x = china[state]['nvalue'] *255 * 16 + 10 * 255;
             //china[state]['nvalue']=255-china[state]['nvalue'];
             //x = "rgb(255, 255, " + china[state]['nvalue'] + ")";
-            if($.inArray(china[state]['name'], ['北京','上海','重庆','江苏','河南','山东','湖南','陕西']) != -1){
+            if($.inArray(china[state]['name'], ['北京','上海','重庆','江苏','河南','山东','湖南','陕西','广东','广西']) != -1){
                 x = "rgb(254, 0, 0)";
             } else {
                 x = "rgb(246, 247, 246)";

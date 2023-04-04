@@ -125,6 +125,18 @@
                                             <span>陕西省</span>
                                         </a>
                                     </li>
+                                    <li class="to-select">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>广东省</span>
+                                        </a>
+                                    </li>
+                                    <li class="to-select">
+                                        <a href="javascript: void(0);" class="text-blue">
+                                            <i class="fa fa-map-marker"></i>
+                                            <span>广西省</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             

@@ -16,12 +16,6 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: true
-            },
-            modality_3: {
-                required: true
-            },
-            modality_4: {
-                required: true
             }
         },
         messages: {
@@ -34,12 +28,6 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: "请选择二级业态"
-            },
-            modality_3: {
-                required: "请输入三级业态"
-            },
-            modality_4: {
-                required: "请输入四级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -294,7 +282,7 @@ function saveBrand() {
         $.brand.contactName = $('#contact_name_1').val() || null;
         $.brand.contactPhone = $('#contact_phone_1').val() || null;
 
-        if($('#brand_name').val() != '' && $('#modality_1').val() != '' && $('#modality_2').val() != '' && $('#modality_3').val() != '' && $('#modality_4').val() != ''){
+        if($('#brand_name').val() != '' && $('#modality_1').val() != '' && $('#modality_2').val() != ''){
             $.ajax({
                 url: $.api.baseLotus+"/api/brand/lotus/saveOrUpdate",
                 type: "POST",

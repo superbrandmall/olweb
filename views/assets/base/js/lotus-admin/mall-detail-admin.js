@@ -1,68 +1,60 @@
 $.mall = '';
 
 $(document).ready(function(){    
-//    $("#create-form").validate({
-//        rules: {
-//            unitName: {
-//                required: true,
-//                minlength: 2
-//            },
-//            unitType: {
-//                required: true
-//            },
-//            mallCode: {
-//                required: true
-//            },
-//            selectFloor: {
-//                required: true
-//            },
-//            startDate: {
-//                required: true
-//            },
-//            endDate: {
-//                required: true
-//            },
-//            selectUser1: {
-//                required: true
-//            },
-//            unitArea: {
-//                required: true
-//            }
-//        },
-//        messages: {
-//            unitName: {
-//                required: "请输入门牌号",
-//                minlength: "请输入完整门牌号"
-//            },
-//            unitType: {
-//                required: "请选择铺位类型"
-//            },
-//            mallCode: {
-//                required: "请选择所属项目"
-//            },
-//            selectFloor: {
-//                required: "请选择所属楼层"
-//            },
-//            startDate: {
-//                required: "请选择生效开始日期"
-//            },
-//            endDate: {
-//                required: "请选择生效结束日期"
-//            },
-//            selectUser1: {
-//                required: "请选择铺位负责人1"
-//            },
-//            unitArea: {
-//                required: true
-//            }
-//        },
-//        errorPlacement: function(error, element) {
-//            error.appendTo('#errorcontainer-' + element.attr('id'));
-//        },
-//        submitHandler: function() {
-//            saveMall();
-//        }
-//    });
+    $("#create-form").validate({
+        rules: {
+            cityDistrict: {
+                required: true
+            },
+            regAddress: {
+                required: true
+            },
+            mallName: {
+                required: true
+            },
+            startDate: {
+                required: true
+            },
+            endDate: {
+                required: true
+            },
+            province: {
+                required: true
+            },
+            deliveryAddress: {
+                required: true
+            }
+        },
+        messages: {
+            cityDistrict: {
+                required: "请输入项目所属地"
+            },
+            regAddress: {
+                required: "请输入注册地址"
+            },
+            mallName: {
+                required: "请选择项目名称"
+            },
+            startDate: {
+                required: "请选择大业主合同开始日期"
+            },
+            endDate: {
+                required: "请选择大业主合同结束日期"
+            },
+            province: {
+                required: "请输入项目所属省市"
+            },
+            deliveryAddress: {
+                required: "请输入邮寄地址"
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.appendTo('#errorcontainer-' + element.attr('id'));
+        },
+        submitHandler: function() {
+            saveMall();
+        }
+    });
     
     $('.date-picker, .input-daterange').datepicker({
         'language': 'zh-CN',
@@ -86,6 +78,7 @@ $(document).ready(function(){
     });
     
     findMallByCode();
+    getShops();
 })
 
 function findMallByCode() {
@@ -125,7 +118,6 @@ function findMallByCode() {
                     $('#mallName').val(response.data.mallName);
                     $('#province').val(response.data.mallLotusBase.province);
                     $('#cityDistrict').val(response.data.mallLotusBase.cityDistrict);
-                    updateDictByDictTypeCodeAndVal('MALL_TYPE','mallType',response.data.mallType);  
                     $('#deliveryAddress').val(response.data.mallLotusBase.deliveryAddress);
                     $('#regAddress').val(response.data.mallLotusBase.regAddress);
                     $('#startDate').datepicker('update',response.data.startDate);
@@ -133,6 +125,13 @@ function findMallByCode() {
                     $('#openStartTime').val(response.data.mallLotusBase.startTime);
                     $('#openEndTime').val(response.data.mallLotusBase.endTime);
                     
+                    $('#building').text(response.data.mallLotusBase.building || '-');
+                    if(!sessionStorage.getItem("floors-"+getURLParameter('id')) || sessionStorage.getItem("floors-"+getURLParameter('id')) == null || sessionStorage.getItem("floors-"+getURLParameter('id')) == '') {
+                        getFloors();
+                    } else {
+                        $('#floor').text($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id'))).length);
+                    }
+    
                     $('#name').val(response.data.mallLotusBase.name);
                     $('#bankName').val(response.data.mallLotusBase.bankName);
                     $('#bankAccount').val(response.data.mallLotusBase.bankAccount);
@@ -147,8 +146,84 @@ function findMallByCode() {
     })
 }
 
+function getFloors() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", 1);
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0' && response.data.length > 0) {
+                sessionStorage.setItem("floors-"+getURLParameter('id'), JSON.stringify(response.data) );
+                $('#floor').text(response.data.length);
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function getShops() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/shop/lotus/findAllByMallCode?mallCode="+getURLParameter('id')+"&page=0&size=100",
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", 1);
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0' && response.data.content.length > 0) {
+                var leasing_area = 0;
+                var shoppe_units = 0;
+                var kiosk_units = 0;
+                var stora_units = 0;
+                $.each(response.data.content, function(i,v){
+                    leasing_area = leasing_area + v.area;
+                    switch (v.unitType) {
+                        case 'shoppe':
+                            shoppe_units++;
+                            break;
+                        case 'kiosk':
+                            kiosk_units++;
+                            break;
+                        case 'warehouse':
+                            stora_units++;
+                            break;
+                        case 'stora':
+                            stora_units++;
+                            break;
+                        default:
+                            break;
+                    }
+                })
+                
+                $('#leasingArea').text(numberWithCommas(leasing_area.toFixed(2)));
+                $('#shoppeUnits').text(Math.round(shoppe_units));
+                $('#kioskUnits').text(Math.round(kiosk_units));
+                $('#storaUnits').text(Math.round(stora_units));
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });
+}
+
 function saveMall() {
-    Ewin.confirm({ message: "确定要保存修改该铺位信息吗？" }).on(function (e) {
+    Ewin.confirm({ message: "确定要保存修改该项目信息吗？" }).on(function (e) {
         if (!e) {
             return;
         }
@@ -160,36 +235,46 @@ function saveMall() {
                 return false;
             }
         })
-
+        
         var map = {
-            "abcRent": $.store.abcRent,
-            "approveFirst": $('#selectUser1').val(),
-            "approveSecond":$('#selectUser2').val(),
-            "approveThird": $('#selectUser3').val(),
-            "area": numberWithoutCommas($('#unitArea').val()),
-            "code": $.store.code,
-            "creatorOpenId": $.store.creatorOpenId,
+            "code": $.mall.code,
+            "creatorOpenId": $.mall.creatorOpenId,
+            "description": $('#description').val(),
             "endDate": $('#endDate').val(),
-            "enterFlag": $.store.enterFlag,
-            "floorCode": $('#selectFloor').val(),
-            "floorName": $('#select2-selectFloor-container').text(),
-            "id": $.store.id,
-            "liftFlag": $.store.liftFlag,
-            "mallCode": $('#mallCode').val(),
-            "modality": $('#modality_1').val(),
-            "mulitPathFlag": $.store.mulitPathFlag,
-            "shopStatus": $.store.shopStatus,
+            "id": $.mall.id,
+            "img": "",
+            "location": $('#regAddress').val(),
+            "mallLotusBase": {
+              "address": $('#address').val(),
+              "bankAccount": $('#bankAccount').val(),
+              "bankName": $('#bankName').val(),
+              "building": $.mall.mallLotusBase.building,
+              "cityDistrict": $('#cityDistrict').val(),
+              "code": $.mall.mallLotusBase.code,
+              "creatorOpenId": $.mall.creatorOpenId,
+              "deliveryAddress": $('#deliveryAddress').val(),
+              "endTime": $('#openEndTime').val(),
+              "id": $.mall.mallLotusBase.id,
+              "mallCode": getURLParameter('id'),
+              "mallName": $('#mallName').val(),
+              "mallStatus": $.mall.mallLotusBase.mallStatus,
+              "name": $('#name').val(),
+              "phoneNum": $('#phoneNum').val(),
+              "province": $('#province').val(),
+              "regAddress": $('#regAddress').val(),
+              "startTime": $('#startTime').val(),
+              "updateOpenId": openId,
+              "uscc": $('#uscc').val()
+            },
+            "mallName": $('#mallName').val(),
+            "mallType": $.mall.mallType,
+            "phone": $('#phoneNum').val(),
             "startDate": $('#startDate').val(),
-            "unitCode": $.store.unitCode,
-            "unitDesc": $('#remark').val(),
-            "unitName": $('#unitName').val(),
-            "unitSize": $.store.unitSize,
-            "unitType": $('#unitType').val(),
             "updateOpenId": openId
-        };
+        }
 
         $.ajax({
-            url: $.api.baseLotus+"/api/shop/lotus/saveOrUpdate",
+            url: $.api.baseLotus+"/api/mall/lotus/saveOrUpdate",
             type: "POST",
             data: JSON.stringify(map),
             async: false,
@@ -213,7 +298,7 @@ function saveMall() {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
 
-                    window.location.href = '/lotus-admin/stores?s=succeed';
+                    window.location.href = '/lotus-admin/malls?s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }

@@ -14,12 +14,6 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: true
-            },
-            modality_3: {
-                required: true
-            },
-            modality_4: {
-                required: true
             }
         },
         messages: {
@@ -32,12 +26,6 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: "请选择二级业态"
-            },
-            modality_3: {
-                required: "请输入三级业态"
-            },
-            modality_4: {
-                required: "请输入四级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -270,7 +258,7 @@ function addBrand() {
         var contact_name_1 = $('#contact_name_1').val();
         var contact_phone_1 = $('#contact_phone_1').val();
 
-        if(brand_name != '' && modality_1!= '' && modality_2 != '' && modality_3 != ''){
+        if(brand_name != '' && modality_1!= '' && modality_2 != ''){
             var map = {
                 "creatorOpenId": openId,
                 "updateOpenId": openId,

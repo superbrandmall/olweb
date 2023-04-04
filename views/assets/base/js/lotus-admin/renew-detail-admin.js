@@ -2380,9 +2380,6 @@ function saveContractForm(s) {
             renewPaymentContent = null;
         }
         var renewBrandHoldReason = $('#renewBrandHoldReason').val();
-        if($('#renewBrandHoldFlag').val() == '1') {
-            renewBrandHoldReason = null;
-        }
         var renewBrandHoldFlag = $('#renewBrandHoldFlag').find('option:selected').val();
         var renewAdjustFlag = $('#renewAdjustFlag').find('option:selected').val();
         var renewAdjustBeforeDays = $('#renewAdjustBeforeDays').val();

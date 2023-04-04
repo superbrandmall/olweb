@@ -58,6 +58,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="山东省">山东省</option>
                                     <option value="湖南省">湖南省</option>
                                     <option value="陕西省">陕西省</option>
+                                    <option value="广东省">广东省</option>
+                                    <option value="广西壮族自治区">广西省</option>
                                 </select>
                             </div>
                         </div>

@@ -281,7 +281,9 @@ function findAllContractsByKVCondition(p,c){
                     $.each(response.data.content, function(i,v){
                         var modality = '', link = '';
                         if(v.brandLotus != null){
-                            modality = v.brandLotus.modality3;
+                            if(v.brandLotus.modality3 != null){
+                                modality = v.brandLotus.modality3;
+                            }
                             
                             if(v.brandLotus.modality4 != null){
                                 modality = modality + '（' + v.brandLotus.modality4 + '）';

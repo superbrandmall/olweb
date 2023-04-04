@@ -94,12 +94,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="mallType" class="col-md-4 control-label">项目类型 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label for="mallType" class="col-md-4 control-label">项目类型</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <select class="select2" id="mallType" name="mallType" style="width: 100%">
-                                                <option value="">未选择</option>
+                                                <option value="">莲花</option>
                                             </select>
-                                            <div id="errorcontainer-mallType" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -124,7 +123,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <label for="province" class="col-md-4 control-label">项目所属省市 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="province" name="province">
-                                            <div id="errorcontainer-uscc" class="errorDiv"></div>
+                                            <div id="errorcontainer-province" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -135,8 +134,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">营业时间 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
+                                        <label class="col-md-4 control-label">营业时间</label>
+                                        <div class="col-md-8 col-sm-12">
                                             <div class="input-group">
                                                 <input type="text" class="form-control timepicker" id="openStartTime" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-clock-o"></i></span>
@@ -165,7 +164,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                         
-                        <div class="box box-default" id="mallBasicInfo">    
+                        <div class="box box-default" id="mallResources">    
                             <div class="box-header with-border">
                                 <h3 class="box-title">物业信息</h3>
                                 <div class="box-tools">
@@ -174,6 +173,89 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                             </div>
                             <div class="box-body">
+                                <div class="col-md-4">
+                                    <br>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">项目面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">车位数量</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>0</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">车库面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库数量</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>0</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>铺位(单元)信息</h5>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">建筑面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p>-</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">租赁面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p id="leasingArea"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h5>招商资源</h5>
+                                    <hr>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">楼宇</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p><span id="building"></span>栋</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">楼层</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p><span id="floor"></span>层</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">正柜</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p><span id="shoppeUnits"></span>个</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">临时柜</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p><span id="kioskUnits"></span>个</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <p><span id="storaUnits"></span>个</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
