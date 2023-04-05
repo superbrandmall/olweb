@@ -134,7 +134,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="col-md-12">
                                     <div class="alert alert-warning alert-dismissable">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                        <b>租赁合同【申请单】当前仅限【上海区】使用，其他区请勿创建！</b>
+                                        <b>南区店招请点击右上角【创建】【南区-初始化租赁合同】</b>
                                     </div>
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
