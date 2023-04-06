@@ -541,7 +541,7 @@ function scrollJump() {
 
 function findAllMalls() {
     $.ajax({
-        url: $.api.baseLotus+"/api/mall/lotus/findAll?page=0&size=100&sort=id,asc",
+        url: $.api.baseLotus+"/api/mall/lotus/findAll?page=0&size=150&sort=id,asc",
         type: "GET",
         async: false,
         beforeSend: function(request) {

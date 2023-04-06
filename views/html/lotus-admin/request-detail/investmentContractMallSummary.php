@@ -36,14 +36,14 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control date-picker" id="investmentContractMallSummaryOpenDate" type="text" data-plugin="datepicker" readonly style="width: 100%; border: 1px solid #ccc; background: #fff;" />
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                            <input class="form-control date-picker" id="investmentContractMallSummaryOpenDate" type="text" data-plugin="datepicker" readonly style="width: 100%; border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;"><i class="fa fa-calendar"></i></span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryTotalRentArea" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                            <input class="form-control" id="investmentContractMallSummaryTotalRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -87,30 +87,39 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <input id="investmentContractMallSummaryBudgetYear" class="form-control" type="text" value="2023" />
-                                    </td>
-                                    <td>
-                                        <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryBudgetAmount" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                                        <div class="form-group">
+                                            <select class="select2" id="investmentContractMallSummaryBudgetYear" style="width: 100%;">
+                                                <?php
+                                                
+                                                ?>
+                                                <option value="M">月</option>
+                                                <option value="Q" selected><?= date("Y") ?></option>
+                                                <option value="Y">年</option>
+                                            </select>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryActualAmount" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                                            <input class="form-control" id="investmentContractMallSummaryBudgetAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryDiffAmount" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                                            <input class="form-control" id="investmentContractMallSummaryActualAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryBudgetCompletionRate" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                                            <input class="form-control" id="investmentContractMallSummaryDiffAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input class="form-control" id="investmentContractMallSummaryBudgetCompletionRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -124,7 +133,7 @@
     </div>
     
     <div class="box-body">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <h5>开业率及招商率</h5>
             <div class="bootstrap-table">
                 <div class="fixed-table-container">
@@ -157,20 +166,20 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryRentedArea" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                            <input class="form-control" id="investmentContractMallSummaryRentedArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryReportArea" type="text" style="background: #fff;" readonly />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                            <input class="form-control" id="investmentContractMallSummaryReportArea" type="text" style="background: #fff; border-right: none;" readonly />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubRentArea" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                            <input class="form-control" id="investmentContractMallSummarySubRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                 </tr>
@@ -180,15 +189,15 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryRentRate" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                                            <input class="form-control" id="investmentContractMallSummaryRentRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
-                                    <td></td>
+                                    <td>/</td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubRentRate" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                                            <input class="form-control" id="investmentContractMallSummarySubRentRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                 </tr>
@@ -198,12 +207,12 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryOpenRentArea" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
+                                            <input class="form-control" id="investmentContractMallSummaryOpenRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>/</td>
+                                    <td>/</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -211,15 +220,15 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryOpenRate" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                                            <input class="form-control" id="investmentContractMallSummaryOpenRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
-                                    <td></td>
+                                    <td>/</td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubOpenRate" type="text" style="background: #fff;" />                                                
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;">%</span>
+                                            <input class="form-control" id="investmentContractMallSummarySubOpenRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                 </tr>
