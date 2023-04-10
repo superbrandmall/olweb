@@ -39,11 +39,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#investmentContractAccounttermPropertyMgmt">物业管理费</a></li>
                     <li><a href="#investmentContractAccounttermPromotion">推广费</a></li>
                     <li><a href="#investmentContractDepositterm">预存款条款</a></li>
-                    <li><a href="#investmentContractProperteisterm">其它新签条件</a></li>
                     <li><a href="#investmentContractCertificates">合同附件</a></li>
                     <li><a href="#textareapanel">说明</a></li>
                     <li><a href="#investmentContractPriorTerms">原租户合同</a></li>
                     <li><a href="#investmentContractMallSummary">项目情况汇总</a></li>
+                    <li><a href="#investmentContractProperteisterm">商圈租金参考</a></li>
                     <li><a href="#approvalProcess">审批流程</a></li>
                 </ul>
             </div>
@@ -72,11 +72,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         include 'request-detail/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
                         include 'request-detail/investmentContractAccounttermPromotion.php'; //推广费
                         include 'request-detail/investmentContractDepositterm.php';
-                        include 'request-detail/investmentContractProperteisterm.php';
                         include 'request-detail/investmentContractCertificates.php';
                         include 'request-detail/textareapanel.php';
                         include 'request-detail/investmentContractPriorTerms.php';
                         include 'request-detail/investmentContractMallSummary.php';
+                        include 'request-detail/investmentContractProperteisterm.php';
                         include 'request-detail/approvalProcess.php';
                         ?>
                     </div>

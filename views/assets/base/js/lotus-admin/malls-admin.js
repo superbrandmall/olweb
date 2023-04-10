@@ -93,21 +93,14 @@ function findAllMallsByKVCondition(p,c){
             "operator": "AND",
             "value": $.cookie('searchMallState')
         }
-    } else {
-            param = {
-            "columnName": "state",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": 1
-        }
+        params.push(param);
     }
-    
-    params.push(param);
             
     if($.cookie('searchMallName') != null && $.cookie('searchMallName') != ''){
         param = {
             "columnName": "mallName",
             "columnPatten": "",
+            "conditionOperator": "AND",
             "operator": "LIKE",
             "value": $.cookie('searchMallName')
         }
@@ -118,14 +111,14 @@ function findAllMallsByKVCondition(p,c){
         param = {
             "columnName": "location",
             "columnPatten": "",
+            "conditionOperator": "AND",
             "operator": "LIKE",
             "value": $.cookie('searchMallType')
-        } 
+        }
+        params.push(param);
     }
-    
-    params.push(param);
         
-     var map = {
+    var map = {
         "params": params
     }
     

@@ -987,7 +987,7 @@ function findRequestbyBizId() {
                             allowClear: true
                         });
                         
-                        if(data.processApproveList.length > 0) {
+                        if(data.processApproveList != null && data.processApproveList.length > 0) {
                             var temp;
                             $.each(data.processApproveList, function(i,v) {
                                 temp = new Option(v.approveName, v.approveOpenId, true, true);

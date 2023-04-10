@@ -830,6 +830,43 @@ function findRequestbyBizId() {
                     }
                     /*** END 审批意见书 **/
                     
+                    /*** START DR相关资料提交 **/
+                    if(data.mallSummary != null){
+                        var mallSummary = data.mallSummary;
+                        $('#investmentContractMallSummaryMallSelect').val(mallSummary.mallName+'['+mallSummary.mallCode+']');
+                        $('#investmentContractMallSummaryOpenDate').datepicker('update',mallSummary.openDate);
+                        $('#investmentContractMallSummaryTotalRentArea').val(mallSummary.totalRentArea || '');
+                        $('#investmentContractMallSummaryBudgetYear').val(mallSummary.budgetYear).trigger('change');
+                        $('#investmentContractMallSummaryBudgetAmount').val(mallSummary.budgetAmount);
+                        $('#investmentContractMallSummaryActualAmount').val(mallSummary.actualAmount);
+                        $('#investmentContractMallSummaryDiffAmount').val(mallSummary.diffAmount);
+                        $('#investmentContractMallSummaryBudgetCompletionRate').val(parseFloat(mallSummary.budgetCompletionRate * 100).toFixed(2));
+                        $('#investmentContractMallSummaryRentedArea').val(mallSummary.rentedArea);
+                        $('#investmentContractMallSummaryReportArea').val(mallSummary.reportArea);
+                        $('#investmentContractMallSummarySubRentArea').val(mallSummary.subRentArea);
+                        $('#investmentContractMallSummaryRentRate').val(parseFloat(mallSummary.rentRate * 100).toFixed(2));
+                        $('#investmentContractMallSummarySubRentRate').val(parseFloat(mallSummary.subRentRate * 100).toFixed(2));
+                        $('#investmentContractMallSummaryOpenRentArea').val(mallSummary.openRentArea);
+                        $('#investmentContractMallSummaryOpenRate').val(parseFloat(mallSummary.openRate * 100).toFixed(2));
+                        $('#investmentContractMallSummarySubOpenRate').val(parseFloat(mallSummary.subOpenRate * 100).toFixed(2));
+                    }
+                    
+                    if(data.compareList != null){
+                        $.each(data.compareList, function(i,v) {
+                            $('#investmentContractProperteistermArea_'+i).val(v.area);
+                            $('#investmentContractProperteistermDeduct_'+i).val(parseFloat(v.deduct * 100).toFixed(2));
+                            $('#investmentContractProperteistermFloor_'+i).val(v.floor);
+                            $('#investmentContractProperteistermMallName_'+i).val(v.mallName || $.cookie('mallSelected').split(':::')[0]);
+                            $('#investmentContractProperteistermMinRent_'+i).val(v.minRent);
+                            $('#investmentContractProperteistermPromotionFee_'+i).val(parseFloat(v.promotionFee * 100).toFixed(2));
+                            $('#investmentContractProperteistermPropertyDayFee_'+i).val(v.propertyDayFee);
+                            $('#investmentContractProperteistermRentSalesRate_'+i).val(parseFloat(v.rentSalesRate * 100).toFixed(2));
+                            $('#investmentContractProperteistermRentTerm_'+i).val(v.rentTerm);
+                            $('#investmentContractProperteistermSalesAmount_'+i).val(v.salesAmount);
+                        })
+                    }
+                    /*** END DR相关资料提交 **/
+                    
                     appendLotusLeasingHead();
                     
                     $('#Lotus_leasing_head select').val('').select2({
@@ -837,7 +874,7 @@ function findRequestbyBizId() {
                         allowClear: true
                     });
                     
-                    if(data.processApproveList.length > 0) {
+                    if(data.processApproveList != null && data.processApproveList.length > 0) {
                         var temp;
                         $.each(data.processApproveList, function(i,v) {
                             temp = new Option(v.approveName, v.approveOpenId, true, true);
@@ -2243,6 +2280,61 @@ function submitCheck() {
         $('#oldPromotionFee').parent().append(error);
     }
     
+    if($('#investmentContractMallSummaryOpenDate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenDate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryTotalRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryTotalRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryBudgetCompletionRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryBudgetCompletionRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryRentedArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryRentedArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryReportArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryReportArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryRentRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryRentRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubRentRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubRentRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryOpenRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryOpenRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubOpenRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubOpenRate').parent().append(error);
+    }
+    
     if(flag == 1){
         saveContractForm('submit');
     } else {
@@ -2765,6 +2857,68 @@ function saveContractForm(s) {
         }
         oldContractTerm.taxPromotionFee = numberWithoutCommas($('#oldTaxPromotionFee').val());
         oldContractTerm.promotionFee = numberWithoutCommas($('#oldPromotionFee').val());
+        
+        var mallSummary = {};
+        if($.request.content.mallSummary != null) {
+            mallSummary = $.request.content.mallSummary;
+        }
+        mallSummary.updateOpenId = openId;
+        mallSummary.mallName = $.request.content.mallName;
+        mallSummary.mallCode = $.request.content.mallCode;
+        mallSummary.openDate = $('#investmentContractMallSummaryOpenDate').val();
+        mallSummary.totalRentArea = $('#investmentContractMallSummaryTotalRentArea').val();
+        mallSummary.budgetYear = $('#investmentContractMallSummaryBudgetYear').val();
+        mallSummary.budgetAmount = numberWithoutCommas($('#investmentContractMallSummaryBudgetAmount').val());
+        mallSummary.actualAmount = numberWithoutCommas($('#investmentContractMallSummaryActualAmount').val());
+        mallSummary.diffAmount = numberWithoutCommas($('#investmentContractMallSummaryDiffAmount').val());
+        mallSummary.budgetCompletionRate = parseFloat($('#investmentContractMallSummaryBudgetCompletionRate').val() / 100).toFixed(4);
+        mallSummary.rentedArea = $('#investmentContractMallSummaryRentedArea').val();
+        mallSummary.reportArea = $('#investmentContractMallSummaryReportArea').val();
+        mallSummary.subRentArea = $('#investmentContractMallSummarySubRentArea').val();
+        mallSummary.rentRate = parseFloat($('#investmentContractMallSummaryRentRate').val() / 100).toFixed(4);
+        mallSummary.subRentRate = parseFloat($('#investmentContractMallSummarySubRentRate').val() / 100).toFixed(4);
+        mallSummary.openRentArea = $('#investmentContractMallSummaryOpenRentArea').val();
+        mallSummary.openRate = parseFloat($('#investmentContractMallSummaryOpenRate').val() / 100).toFixed(4);
+        mallSummary.subOpenRate = parseFloat($('#investmentContractMallSummarySubOpenRate').val() / 100).toFixed(4);
+        
+        var compareList = [];
+        if($.request.content.compareList != null && $.request.content.compareList.length > 0) {
+            $.each($.request.content.compareList, function(i,v) {
+                v.area = $('#investmentContractProperteistermArea_'+i).val();
+                v.bizId = bizId;
+                v.deduct = parseFloat($('#investmentContractProperteistermDeduct_'+i).val() / 100).toFixed(4);
+                v.floor = $('#investmentContractProperteistermFloor_'+i).val();
+                v.mallName = $('#investmentContractProperteistermMallName_'+i).val();
+                v.minRent = $('#investmentContractProperteistermMinRent_'+i).val();
+                v.promotionFee = $('#investmentContractProperteistermPromotionFee_'+i).val();
+                v.propertyDayFee = $('#investmentContractProperteistermPropertyDayFee_'+i).val();
+                v.rentSalesRate = parseFloat($('#investmentContractProperteistermRentSalesRate_'+i).val() / 100).toFixed(4);
+                v.rentTerm = $('#investmentContractProperteistermRentTerm_'+i).val();
+                v.salesAmount = $('#investmentContractProperteistermSalesAmount_'+i).val();
+                v.updateOpenId = openId;
+                
+                compareList.push(v);
+            })
+        } else {
+            var compares = {};
+            for(var i=0;i<4;i++){
+                compares = {
+                    area : $('#investmentContractProperteistermArea_'+i).val(),
+                    bizId : bizId,
+                    deduct : parseFloat($('#investmentContractProperteistermDeduct_'+i).val() / 100).toFixed(4),
+                    floor : $('#investmentContractProperteistermFloor_'+i).val(),
+                    mallName : $('#investmentContractProperteistermMallName_'+i).val(),
+                    minRent : $('#investmentContractProperteistermMinRent_'+i).val(),
+                    promotionFee : $('#investmentContractProperteistermPromotionFee_'+i).val(),
+                    propertyDayFee : $('#investmentContractProperteistermPropertyDayFee_'+i).val(),
+                    rentSalesRate : parseFloat($('#investmentContractProperteistermRentSalesRate_'+i).val() / 100).toFixed(4),
+                    rentTerm : $('#investmentContractProperteistermRentTerm_'+i).val(),
+                    salesAmount : $('#investmentContractProperteistermSalesAmount_'+i).val(),
+                    createOpenId : openId
+                }
+                compareList.push(compares);
+            }
+        }
 
         var map = {
             "id": $.request.content.id, //必填
@@ -2794,6 +2948,7 @@ function saveContractForm(s) {
             "brandCode": brandCode,
             "brandName": brandName,
             "cardDiscount": 0,
+            "compareList": compareList,
             "contractName": $('#contractName').val(),
             "contractNo": $('#contractNo').val(),
             "contractTemplate": $('#contractTemplate').find('option:selected').val(),
@@ -2833,6 +2988,7 @@ function saveContractForm(s) {
             "lastBrandCode": "",
             "lastBrandName": "",
             "mallName": $.request.content.mallName,
+            "mallSummary": mallSummary,
             "minSales": 0,
             "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),
@@ -3040,7 +3196,7 @@ function saveContractForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                            //window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

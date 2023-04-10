@@ -23,6 +23,9 @@ $(document).ready(function(){
             },
             deliveryAddress: {
                 required: true
+            },
+            location: {
+                required: true
             }
         },
         messages: {
@@ -46,6 +49,9 @@ $(document).ready(function(){
             },
             deliveryAddress: {
                 required: "请输入邮寄地址"
+            },
+            location: {
+                required: "请输入位置"
             }
         },
         errorPlacement: function(error, element) {
@@ -118,6 +124,7 @@ function findMallByCode() {
                     $('#mallName').val(response.data.mallName);
                     $('#province').val(response.data.mallLotusBase.province);
                     $('#cityDistrict').val(response.data.mallLotusBase.cityDistrict);
+                    $('#location').val(response.data.location);
                     $('#deliveryAddress').val(response.data.mallLotusBase.deliveryAddress);
                     $('#regAddress').val(response.data.mallLotusBase.regAddress);
                     $('#startDate').datepicker('update',response.data.startDate);
@@ -243,7 +250,7 @@ function saveMall() {
             "endDate": $('#endDate').val(),
             "id": $.mall.id,
             "img": "",
-            "location": $('#regAddress').val(),
+            "location": $('#location').val(),
             "mallLotusBase": {
               "address": $('#address').val(),
               "bankAccount": $('#bankAccount').val(),
@@ -252,9 +259,10 @@ function saveMall() {
               "cityDistrict": $('#cityDistrict').val(),
               "code": $.mall.mallLotusBase.code,
               "creatorOpenId": $.mall.creatorOpenId,
-              "deliveryAddress": $('#deliveryAddress').val(),
+              "deliveryAddress": ($('#deliveryAddress').val() || ''),
               "endTime": $('#openEndTime').val(),
               "id": $.mall.mallLotusBase.id,
+              "mail": $.mall.mallLotusBase.mail,
               "mallCode": getURLParameter('id'),
               "mallName": $('#mallName').val(),
               "mallStatus": $.mall.mallLotusBase.mallStatus,
@@ -262,13 +270,14 @@ function saveMall() {
               "phoneNum": $('#phoneNum').val(),
               "province": $('#province').val(),
               "regAddress": $('#regAddress').val(),
-              "startTime": $('#startTime').val(),
+              "startTime": $('#openStartTime').val(),
               "updateOpenId": openId,
               "uscc": $('#uscc').val()
             },
             "mallName": $('#mallName').val(),
             "mallType": $.mall.mallType,
             "phone": $('#phoneNum').val(),
+            "remarkSecond": $.mall.remarkSecond,
             "startDate": $('#startDate').val(),
             "updateOpenId": openId
         }

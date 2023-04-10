@@ -42,7 +42,7 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryTotalRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryTotalRentArea" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
@@ -87,38 +87,44 @@
                             <tbody>
                                 <tr>
                                     <td>
-                                        <div class="form-group">
-                                            <select class="select2" id="investmentContractMallSummaryBudgetYear" style="width: 100%;">
+                                        <div class="form-group" style="margin-bottom: 0; width: 80px;">
+                                            <select class="select2" id="investmentContractMallSummaryBudgetYear">
                                                 <?php
-                                                
+                                                    $year = date("Y");
+                                                    $const = 1;
+                                                    echo $year-$const;
+                                                    for($i=($year-$const);$i<($year+$const);$i++){
+                                                        if($i == $year){
+                                                            echo '<option value="'.$i.'" selected>'.$i.'</option>';
+                                                        } else {
+                                                            echo '<option value="'.$i.'">'.$i.'</option>';
+                                                        }
+                                                    }
                                                 ?>
-                                                <option value="M">月</option>
-                                                <option value="Q" selected><?= date("Y") ?></option>
-                                                <option value="Y">年</option>
                                             </select>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryBudgetAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control money" id="investmentContractMallSummaryBudgetAmount" type="text" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryActualAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control money" id="investmentContractMallSummaryActualAmount" type="text" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryDiffAmount" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control money" id="investmentContractMallSummaryDiffAmount" type="text" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">元</span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryBudgetCompletionRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryBudgetCompletionRate" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
@@ -131,10 +137,12 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    
+    <hr>
     <div class="box-body">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h5>开业率及招商率</h5>
+        </div>
+        <div class="col-md-6">
             <div class="bootstrap-table">
                 <div class="fixed-table-container">
                     <div class="fixed-table-body">
@@ -161,24 +169,24 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>
+                                    <td style="width: 80px;">
                                         已出租面积
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryRentedArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryRentedArea" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryReportArea" type="text" style="background: #fff; border-right: none;" readonly />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryReportArea" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummarySubRentArea" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
@@ -189,25 +197,58 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryRentRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryRentRate" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                     <td>/</td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubRentRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummarySubRentRate" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="bootstrap-table">
+                <div class="fixed-table-container">
+                    <div class="fixed-table-body">
+                        <table class="table table-striped snipe-table table-responsive" style="margin-top: 0">
+                            <thead id="assetsListingTable-sticky-header">
                                 <tr>
-                                    <td>
+                                    <th>
+                                        <div class="th-inner"></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">截止目前 <span class="btn-box-tool-lg">*</span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">本次提报</div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                    <th>
+                                        <div class="th-inner">含本次提报后 <span class="btn-box-tool-lg">*</span></div>
+                                        <div class="fht-cell"></div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width: 80px;">
                                         开业面积
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryOpenRentArea" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryOpenRentArea" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">m<sup>2</sup></span>
                                         </div>
                                     </td>
@@ -220,14 +261,14 @@
                                     </td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummaryOpenRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummaryOpenRate" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>
                                     <td>/</td>
                                     <td>
                                         <div class="input-group">
-                                            <input class="form-control" id="investmentContractMallSummarySubOpenRate" type="text" style="background: #fff; border-right: none;" />                                                
+                                            <input class="form-control" id="investmentContractMallSummarySubOpenRate" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="background: #fff; border-right: none;" />                                                
                                             <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; background: #fff; padding: 6px 6px 6px 3px;">%</span>
                                         </div>
                                     </td>

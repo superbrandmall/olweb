@@ -37,6 +37,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#textareapanel">说明</a></li>
                     <li><a href="#investmentContractPriorTerms">原租户合同</a></li>
                     <li><a href="#investmentContractMallSummary">项目情况汇总</a></li>
+                    <li><a href="#investmentContractProperteisterm">商圈租金参考</a></li>
                     <li><a href="#approvalProcess">审批流程</a></li>
                 </ul>
             </div>
@@ -56,11 +57,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         include 'make-request/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
                         include 'make-request/investmentContractAccounttermPromotion.php'; //推广费
                         include 'make-request/investmentContractDepositterm.php';
-                        include 'make-request/investmentContractProperteisterm.php';
                         include 'make-request/investmentContractCertificates.php';
                         include 'make-request/textareapanel.php';
                         include 'make-request/investmentContractPriorTerms.php';
                         include 'make-request/investmentContractMallSummary.php';
+                        include 'make-request/investmentContractProperteisterm.php';
                         include 'make-request/approvalProcess.php';
                         ?>
                     </div>

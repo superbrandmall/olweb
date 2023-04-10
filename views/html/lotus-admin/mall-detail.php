@@ -71,10 +71,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="cityDistrict" class="col-md-4 control-label">项目所属地 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="cityDistrict" name="cityDistrict">
-                                            <div id="errorcontainer-cityDistrict" class="errorDiv"></div>
+                                        <label for="mallType" class="col-md-4 control-label">项目类型</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="mallType" name="mallType" style="width: 100%">
+                                                <option value="">莲花</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -94,11 +95,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="mallType" class="col-md-4 control-label">项目类型</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="mallType" name="mallType" style="width: 100%">
-                                                <option value="">莲花</option>
-                                            </select>
+                                        <label for="location" class="col-md-4 control-label">位置 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <input class="form-control" type="text" id="location" name="location">
+                                            <div id="errorcontainer-location" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -120,10 +120,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="province" class="col-md-4 control-label">项目所属省市 <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-4 control-label">项目所属地 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="province" name="province">
-                                            <div id="errorcontainer-province" class="errorDiv"></div>
+                                            <div class="input-group">
+                                                <input class="form-control" type="text" id="province" name="province">
+                                                <span class="input-group-addon" style="border: none; background: transparent;"></span>
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text" id="cityDistrict" name="cityDistrict">
+                                                </div>
+                                            </div>
+                                            <div id="errorcontainer-province" class="errorDiv" style="float: left;"></div>
+                                            <div id="errorcontainer-cityDistrict" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">

@@ -73,6 +73,10 @@ $(document).ready(function(){
     // 初始化
     $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
     
+    /*** START DR相关资料提交 **/
+    $('#investmentContractMallSummaryMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
+    $('#investmentContractProperteistermMallName_0').val($.cookie('mallSelected').split(':::')[0]);
+    /*** END DR相关资料提交 **/
     updateDictDropDownByDictTypeCode('RENT_CALCULATION_MODE','selectRentCalculationMode',$.api.rentCalculationMode[0],$.api.rentCalculationMode[1]); // 计租方式
     updateDictDropDownByDictTypeCode('PROFIT_CENTER','profitCenter',$.api.profitCenter[0],$.api.profitCenter[1]); // 利润中心
     updateDictDropDownByDictTypeCode('TERM_CALC_MODE','termCalcMode',$.api.termCalcMode[0],$.api.termCalcMode[1]); // 条款计算方式
@@ -872,6 +876,61 @@ function submitCheck() {
     if($('#oldPromotionFee').val() == '') {
         flag = 0;
         $('#oldPromotionFee').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryOpenDate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenDate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryTotalRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryTotalRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryBudgetCompletionRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryBudgetCompletionRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryRentedArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryRentedArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryReportArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryReportArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryRentRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryRentRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubRentRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubRentRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryOpenRentArea').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenRentArea').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryOpenRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryOpenRate').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummarySubOpenRate').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummarySubOpenRate').parent().append(error);
     }
     
     if(flag == 1){

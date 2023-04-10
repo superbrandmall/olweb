@@ -47,6 +47,15 @@
                     <select class="select2" id="termCalcMode" style="width: 100%"></select>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">目标营业额 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <div class="input-group">
+                        <input class="form-control money" id="targetSales" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/月</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
@@ -108,6 +117,12 @@
                 <label class="col-md-4 control-label">合同类型 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12 required">
                     <select class="select2" id="contractType" style="width: 100%"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12 required">
+                    <select class="select2" id="posMode" style="width: 100%"></select>
                 </div>
             </div>
         </div>

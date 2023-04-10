@@ -266,7 +266,7 @@ function alertModalMsg(code,m) {
     $('.modal-body').prepend(msgDiv);
 }
 
-function generatePages(currentPage, LastPage, items) {
+function generatePages(currentPage, LastPage, items) {//5
     $(".pagination .pagination").html('');
     var pages = '';
     if (LastPage <= 4) {
@@ -300,7 +300,7 @@ function generatePages(currentPage, LastPage, items) {
         }
         var pindex, qindex;
         index > 1 ? pindex = index-1 : pindex = 1;
-        index > 1 ? qindex = index*1+5: qindex = index*1+6;
+        index > 1 ? qindex = index*1+5: qindex = index*1+5;
         for(var i=pindex;i<qindex;i++) {
             if(i == currentPage ) {
                 pages += '<li class="page-item active"><a class="page-link" href="?page='+i+'&items='+items+'">'+i+'</a></li>';
@@ -310,7 +310,7 @@ function generatePages(currentPage, LastPage, items) {
         }
         if(currentPage<LastPage){
             if(currentPage<(LastPage-4)){
-                currentPage*1+6 <= LastPage ? nex = currentPage*1+6 : nex = LastPage;
+                currentPage*1+5 <= LastPage ? nex = currentPage*1+5 : nex = LastPage;
                 pages += '<li class="page-item"><a class="page-link pn" href="?page='+nex+'&items='+items+'" title="下一页"><i class="fa fa-angle-right"></i></a></li>'; //下一页
                 pages += '<li class="page-item"><a class="page-link" href="?page='+LastPage+'&items='+items+'" title="最后页"><i class="fa fa-angle-double-right"></i></a></li>'; //最后页
             } else {
@@ -888,6 +888,10 @@ function findMainSigningBody(code){
                 
                 if(response.data != '' && response.data != null){
                     $('#mainSigningBody').val(response.data.mallLotusBase.name);
+                    
+                    if($('#investmentContractMallSummaryOpenDate').length > 0){
+                        $('#investmentContractMallSummaryOpenDate').val(response.data.startDate || '');
+                    }
                 }
             }                             
         }
