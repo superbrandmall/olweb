@@ -59,7 +59,7 @@
                                     <td><input id="investmentContractProperteistermFloor_3" class="form-control" type="text" style="background: #fff;" /></td>
                                 </tr>
                                 <tr style="border-bottom: solid 1px #ddd;">
-                                    <td>租赁面积(㎡)</td>
+                                    <td>租赁面积</td>
                                     <?php
                                     for($i=0;$i<4;$i++)
                                         {
@@ -78,7 +78,7 @@
                                     <td rowspan="7" style="border-right: solid 1px #ddd;">
                                         <strong>商务条款</strong>
                                     </td>
-                                    <td>租赁期限(年)</td>
+                                    <td>租赁期限</td>
                                     <?php
                                     for($i=0;$i<4;$i++)
                                         {

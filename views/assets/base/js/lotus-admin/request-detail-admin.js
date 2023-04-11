@@ -124,18 +124,20 @@ $(document).ready(function(){
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#commission').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(2)').show();
             $('#navbarTop ul li:eq(3)').hide();
         } else if($(this).val() == 'deduct'){
             $('#investmentContractAccounttermFixed').fadeOut();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#fixedRent').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(2)').hide();
             $('#navbarTop ul li:eq(3)').show();
         } else {
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#investmentContractAccounttermCompare').fadeIn();
-            $('#navbarTop ul li:eq(3)').show();
+            $('#navbarTop ul li:eq(2), #navbarTop ul li:eq(3)').show();
         }
     })
     
@@ -477,6 +479,7 @@ function findRequestbyBizId() {
                     updateSelectStoreDropDownByMallCode(10,data.mallCode);
                     temp = new Option((data.unitName +'['+ data.unitCode +'] | '+ data.area + '㎡'), data.unitCode+':::'+data.shopCode+':::'+data.unitName+':::'+data.floorName+':::'+data.floorCode, true, true);
                     $('#selectStore').append(temp).trigger('change');
+                    findShopBudgetByCode(data.shopCode);
 
                     $("#selectStore").change(function(){
                         var selectStoreArea = $('#select2-selectStore-container').text().split(' | ')[1];
@@ -488,6 +491,7 @@ function findRequestbyBizId() {
                         calBackPushPropertyMgmtTaxRentAmount();
                         calBackPush('commission');
                         calBackPush('promotion');
+                        findShopBudgetByCode($('#selectStore').val().split(':::')[1]);
                     })
                     
                     $("#oldSelectStore").change(function(){
@@ -831,9 +835,9 @@ function findRequestbyBizId() {
                     /*** END 审批意见书 **/
                     
                     /*** START DR相关资料提交 **/
+                    $('#investmentContractMallSummaryMallSelect').val(data.mallName+'['+data.mallCode+']');
                     if(data.mallSummary != null){
                         var mallSummary = data.mallSummary;
-                        $('#investmentContractMallSummaryMallSelect').val(mallSummary.mallName+'['+mallSummary.mallCode+']');
                         $('#investmentContractMallSummaryOpenDate').datepicker('update',mallSummary.openDate);
                         $('#investmentContractMallSummaryTotalRentArea').val(mallSummary.totalRentArea || '');
                         $('#investmentContractMallSummaryBudgetYear').val(mallSummary.budgetYear).trigger('change');
@@ -851,12 +855,12 @@ function findRequestbyBizId() {
                         $('#investmentContractMallSummarySubOpenRate').val(parseFloat(mallSummary.subOpenRate * 100).toFixed(2));
                     }
                     
+                    $('#investmentContractProperteistermMallName_0').val(data.mallName);
                     if(data.compareList != null){
                         $.each(data.compareList, function(i,v) {
                             $('#investmentContractProperteistermArea_'+i).val(v.area);
-                            $('#investmentContractProperteistermDeduct_'+i).val(parseFloat(v.deduct * 100).toFixed(2));
                             $('#investmentContractProperteistermFloor_'+i).val(v.floor);
-                            $('#investmentContractProperteistermMallName_'+i).val(v.mallName || $.cookie('mallSelected').split(':::')[0]);
+                            $('#investmentContractProperteistermDeduct_'+i).val(parseFloat(v.deduct * 100).toFixed(2));
                             $('#investmentContractProperteistermMinRent_'+i).val(v.minRent);
                             $('#investmentContractProperteistermPromotionFee_'+i).val(parseFloat(v.promotionFee * 100).toFixed(2));
                             $('#investmentContractProperteistermPropertyDayFee_'+i).val(v.propertyDayFee);
@@ -2290,6 +2294,21 @@ function submitCheck() {
         $('#investmentContractMallSummaryTotalRentArea').parent().append(error);
     }
     
+    if($('#investmentContractMallSummaryBudgetAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryBudgetAmount').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryActualAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryActualAmount').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryDiffAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryDiffAmount').parent().append(error);
+    }
+    
     if($('#investmentContractMallSummaryBudgetCompletionRate').val() == '') {
         flag = 0;
         $('#investmentContractMallSummaryBudgetCompletionRate').parent().append(error);
@@ -2333,6 +2352,35 @@ function submitCheck() {
     if($('#investmentContractMallSummarySubOpenRate').val() == '') {
         flag = 0;
         $('#investmentContractMallSummarySubOpenRate').parent().append(error);
+    }
+    
+    var budgetError = '<h5 style="vertical-align: super; display: inline-block; margin-left: 10px; color: #f00;"><i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true" style="position: relative;"></i> 请保存单据后前往【租金计划】完善当年度预算。</h5>';
+    var shopBudget = sessionStorage.getItem("shopBudget_"+$('#selectStore').val().split(':::')[1]);
+    if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+         if(JSON.parse(shopBudget).length > 0){
+             var sd = $('#startDate').val();
+             flag = 1;
+             if(sd != ''){
+                flag = 0;
+
+                $.each(JSON.parse(shopBudget), function(i,v) {
+                    if(v.year == sd.split('-')[0]){
+                       flag = 1;
+                       return false;
+                    }
+                })
+            }
+
+            if(flag == 0){
+                $('#budgetModalLink').parent().append(budgetError);
+            }
+         } else {
+            flag = 0;
+            $('#budgetModalLink').parent().append(budgetError);
+         }
+    } else {
+        flag = 0;
+        $('#budgetModalLink').parent().append(budgetError);
     }
     
     if(flag == 1){
@@ -2890,11 +2938,11 @@ function saveContractForm(s) {
                 v.floor = $('#investmentContractProperteistermFloor_'+i).val();
                 v.mallName = $('#investmentContractProperteistermMallName_'+i).val();
                 v.minRent = $('#investmentContractProperteistermMinRent_'+i).val();
-                v.promotionFee = $('#investmentContractProperteistermPromotionFee_'+i).val();
+                v.promotionFee = parseFloat($('#investmentContractProperteistermPromotionFee_'+i).val() / 100).toFixed(4);
                 v.propertyDayFee = $('#investmentContractProperteistermPropertyDayFee_'+i).val();
                 v.rentSalesRate = parseFloat($('#investmentContractProperteistermRentSalesRate_'+i).val() / 100).toFixed(4);
                 v.rentTerm = $('#investmentContractProperteistermRentTerm_'+i).val();
-                v.salesAmount = $('#investmentContractProperteistermSalesAmount_'+i).val();
+                v.salesAmount = numberWithoutCommas($('#investmentContractProperteistermSalesAmount_'+i).val());
                 v.updateOpenId = openId;
                 
                 compareList.push(v);
@@ -2909,11 +2957,11 @@ function saveContractForm(s) {
                     floor : $('#investmentContractProperteistermFloor_'+i).val(),
                     mallName : $('#investmentContractProperteistermMallName_'+i).val(),
                     minRent : $('#investmentContractProperteistermMinRent_'+i).val(),
-                    promotionFee : $('#investmentContractProperteistermPromotionFee_'+i).val(),
+                    promotionFee : parseFloat($('#investmentContractProperteistermPromotionFee_'+i).val() / 100).toFixed(4),
                     propertyDayFee : $('#investmentContractProperteistermPropertyDayFee_'+i).val(),
                     rentSalesRate : parseFloat($('#investmentContractProperteistermRentSalesRate_'+i).val() / 100).toFixed(4),
                     rentTerm : $('#investmentContractProperteistermRentTerm_'+i).val(),
-                    salesAmount : $('#investmentContractProperteistermSalesAmount_'+i).val(),
+                    salesAmount : numberWithoutCommas($('#investmentContractProperteistermSalesAmount_'+i).val()),
                     createOpenId : openId
                 }
                 compareList.push(compares);
@@ -3196,7 +3244,7 @@ function saveContractForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            //window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

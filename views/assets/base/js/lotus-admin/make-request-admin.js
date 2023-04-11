@@ -141,6 +141,7 @@ $(document).ready(function(){
         calBackPushPropertyMgmtTaxRentAmount();
         calBackPush('commission');
         calBackPush('promotion');
+        findShopBudgetByCode($('#selectStore').val().split(':::')[1]);
     })
     
     $("#oldSelectStore").change(function(){
@@ -180,21 +181,22 @@ $(document).ready(function(){
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#commission').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(2)').show();
             $('#navbarTop ul li:eq(3)').hide();
         } else if($(this).val() == 'deduct'){
             $('#investmentContractAccounttermFixed').fadeOut();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#fixedRent').find('tr').remove();
             $('#investmentContractAccounttermCompare').fadeOut();
+            $('#navbarTop ul li:eq(2)').hide();
             $('#navbarTop ul li:eq(3)').show();
         } else {
             $('#investmentContractAccounttermFixed').fadeIn();
             $('#investmentContractAccounttermCommission').fadeIn();
             $('#investmentContractAccounttermCompare').fadeIn();
-            $('#navbarTop ul li:eq(3)').show();
+            $('#navbarTop ul li:eq(2), #navbarTop ul li:eq(3)').show();
         }
     })
-    
     
     updateCompareFrequencyDropDown();
     
@@ -888,6 +890,21 @@ function submitCheck() {
         $('#investmentContractMallSummaryTotalRentArea').parent().append(error);
     }
     
+    if($('#investmentContractMallSummaryBudgetAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryBudgetAmount').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryActualAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryActualAmount').parent().append(error);
+    }
+    
+    if($('#investmentContractMallSummaryDiffAmount').val() == '') {
+        flag = 0;
+        $('#investmentContractMallSummaryDiffAmount').parent().append(error);
+    }
+    
     if($('#investmentContractMallSummaryBudgetCompletionRate').val() == '') {
         flag = 0;
         $('#investmentContractMallSummaryBudgetCompletionRate').parent().append(error);
@@ -931,6 +948,35 @@ function submitCheck() {
     if($('#investmentContractMallSummarySubOpenRate').val() == '') {
         flag = 0;
         $('#investmentContractMallSummarySubOpenRate').parent().append(error);
+    }
+    
+    var budgetError = '<h5 style="vertical-align: super; display: inline-block; margin-left: 10px; color: #f00;"><i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true" style="position: relative;"></i> 请保存单据后前往【租金计划】完善当年度预算。</h5>';
+    var shopBudget = sessionStorage.getItem("shopBudget_"+$('#selectStore').val().split(':::')[1]);
+    if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+         if(JSON.parse(shopBudget).length > 0){
+             var sd = $('#startDate').val();
+             flag = 1;
+             if(sd != ''){
+                flag = 0;
+
+                $.each(JSON.parse(shopBudget), function(i,v) {
+                    if(v.year == sd.split('-')[0]){
+                       flag = 1;
+                       return false;
+                    }
+                })
+            }
+
+            if(flag == 0){
+                $('#budgetModalLink').parent().append(budgetError);
+            }
+         } else {
+            flag = 0;
+            $('#budgetModalLink').parent().append(budgetError);
+         }
+    } else {
+        flag = 0;
+        $('#budgetModalLink').parent().append(budgetError);
     }
     
     if(flag == 1){
@@ -1439,7 +1485,7 @@ function saveContractForm(s) {
         oldContractTerm.taxRentAmount = numberWithoutCommas($('#oldRentalFloorTaxEffect').val());
         oldContractTerm.taxTotalRent = numberWithoutCommas($('#oldTotalTaxAmount').val());
         oldContractTerm.totalRent = numberWithoutCommas($('#oldTotalAmount').val());
-        oldContractTerm.updateOpenId = openId;
+        oldContractTerm.creatorOpenId = openId;
         if(oldContractTerm.startDate != '' && oldContractTerm.endDate != ''){
             oldContractTerm.rentDuration = calDatesDiff(oldContractTerm.startDate,oldContractTerm.endDate);
         }
@@ -1452,6 +1498,47 @@ function saveContractForm(s) {
         }
         oldContractTerm.taxPromotionFee = numberWithoutCommas($('#oldTaxPromotionFee').val());
         oldContractTerm.promotionFee = numberWithoutCommas($('#oldPromotionFee').val());
+        
+        var mallSummary = {};
+        mallSummary.createOpenId = openId;
+        mallSummary.mallName = $.cookie('mallSelected').split(':::')[0];
+        mallSummary.mallCode = $.cookie('mallSelected').split(':::')[1];
+        mallSummary.openDate = $('#investmentContractMallSummaryOpenDate').val();
+        mallSummary.totalRentArea = $('#investmentContractMallSummaryTotalRentArea').val();
+        mallSummary.budgetYear = $('#investmentContractMallSummaryBudgetYear').val();
+        mallSummary.budgetAmount = numberWithoutCommas($('#investmentContractMallSummaryBudgetAmount').val());
+        mallSummary.actualAmount = numberWithoutCommas($('#investmentContractMallSummaryActualAmount').val());
+        mallSummary.diffAmount = numberWithoutCommas($('#investmentContractMallSummaryDiffAmount').val());
+        mallSummary.budgetCompletionRate = parseFloat($('#investmentContractMallSummaryBudgetCompletionRate').val() / 100).toFixed(4);
+        mallSummary.rentedArea = $('#investmentContractMallSummaryRentedArea').val();
+        mallSummary.reportArea = $('#investmentContractMallSummaryReportArea').val();
+        mallSummary.subRentArea = $('#investmentContractMallSummarySubRentArea').val();
+        mallSummary.rentRate = parseFloat($('#investmentContractMallSummaryRentRate').val() / 100).toFixed(4);
+        mallSummary.subRentRate = parseFloat($('#investmentContractMallSummarySubRentRate').val() / 100).toFixed(4);
+        mallSummary.openRentArea = $('#investmentContractMallSummaryOpenRentArea').val();
+        mallSummary.openRate = parseFloat($('#investmentContractMallSummaryOpenRate').val() / 100).toFixed(4);
+        mallSummary.subOpenRate = parseFloat($('#investmentContractMallSummarySubOpenRate').val() / 100).toFixed(4);
+        
+        var compareList = [];
+        var compares = {};
+        for(var i=0;i<4;i++){
+            compares = {
+                area : $('#investmentContractProperteistermArea_'+i).val(),
+                bizId : bizId,
+                deduct : parseFloat($('#investmentContractProperteistermDeduct_'+i).val() / 100).toFixed(4),
+                floor : $('#investmentContractProperteistermFloor_'+i).val(),
+                mallName : $('#investmentContractProperteistermMallName_'+i).val(),
+                minRent : $('#investmentContractProperteistermMinRent_'+i).val(),
+                promotionFee : parseFloat($('#investmentContractProperteistermPromotionFee_'+i).val() / 100).toFixed(4),
+                propertyDayFee : $('#investmentContractProperteistermPropertyDayFee_'+i).val(),
+                rentSalesRate : parseFloat($('#investmentContractProperteistermRentSalesRate_'+i).val() / 100).toFixed(4),
+                rentTerm : $('#investmentContractProperteistermRentTerm_'+i).val(),
+                salesAmount : numberWithoutCommas($('#investmentContractProperteistermSalesAmount_'+i).val()),
+                createOpenId : openId
+            }
+            compareList.push(compares);
+        }
+        
         
         var map = {
             "id": $.request.id, //必填
@@ -1481,6 +1568,7 @@ function saveContractForm(s) {
             "brandCode": brandCode,
             "brandName": brandName,
             "cardDiscount": 0,
+            "compareList": compareList,
             "contractName": $('#contractName').val(),
             "contractNo": '',
             "contractTemplate": $('#contractTemplate').find('option:selected').val(),
@@ -1520,6 +1608,7 @@ function saveContractForm(s) {
             "lastBrandCode": "",
             "lastBrandName": "",
             "mallName": $.cookie('mallSelected').split(':::')[0],
+            "mallSummary": mallSummary,
             "minSales": 0,
             "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),

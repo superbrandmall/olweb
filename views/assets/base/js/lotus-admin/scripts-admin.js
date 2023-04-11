@@ -581,6 +581,39 @@ function findAllMalls() {
     })
 }
 
+function findShopBudgetByCode(sc) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/shop/budget/findAllByShopCode?shopCode="+sc,
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){                    
+                    sessionStorage.setItem("shopBudget_"+sc, JSON.stringify(response.data));
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
+}
+
 function updateTopNavMallSelection() {
     if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
         $('.navbar-nav .mall-select > ul').html('<li><a href="javascript: void(0);"><span>选择项目</span></a></li>');
@@ -3536,6 +3569,35 @@ function termsModalToggle(calc){
     }
     
     $('#investment-contract-accountterm-account').modal('toggle');
+}
+
+function budgetModalToggle(term){
+    $('#budgetTerm').html('');
+    var shopBudget = sessionStorage.getItem("shopBudget_"+$('#selectStore').val().split(':::')[1]);
+    if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+        if(JSON.parse(shopBudget).length > 0){
+            $.each(JSON.parse(shopBudget), function(i,v) {
+                if(v.termType == term){
+                    $('#budgetTerm').append('<tr>\n\
+                        <td>'+v.year+'</td>\n\
+                        <td>'+accounting.formatNumber(v.january)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.february)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.march)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.april)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.may)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.june)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.july)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.august)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.septermber)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.october)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.november)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.december)+'</td></tr>'
+                    );
+                }
+            })
+        }
+    }
+    $('#investment-contract-budgetterm-budget').modal('toggle');
 }
 
 function dataURLtoFile(dataurl,filename,filetype) {

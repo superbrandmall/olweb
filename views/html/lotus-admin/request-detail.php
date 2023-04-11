@@ -22,6 +22,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper request-detail">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/requests" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 <span class="badge badge-success" id="formStatus" style="vertical-align: top; font-size: 12px;"></span> 新签租赁合同申请单: <span id="requestName" style="font-size: 18px;"></span>
             </h4>
@@ -97,4 +100,5 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 </div>
 
 <?php include 'component/investment-contract-accountterm-account.php'; ?>
+<?php include 'component/investment-contract-budgetterm-budget.php'; ?>
 <?php include 'footer.php'; ?>

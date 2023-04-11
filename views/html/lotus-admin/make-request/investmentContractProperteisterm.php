@@ -8,6 +8,11 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
+            <h5>预算租金: <span id="shopBudget"></span></h5>
+            <span class="label label-danger">请先保存!</span>
+            <span class="label label-danger">请先保存!!</span>
+            <span class="label label-danger">请先保存!!!</span>
+            <hr>
             <div class="bootstrap-table">
                 <div class="fixed-table-container">
                     <div class="fixed-table-body">
@@ -59,7 +64,7 @@
                                     <td><input id="investmentContractProperteistermFloor_3" class="form-control" type="text" style="background: #fff;" /></td>
                                 </tr>
                                 <tr style="border-bottom: solid 1px #ddd;">
-                                    <td>租赁面积(㎡)</td>
+                                    <td>租赁面积</td>
                                     <?php
                                     for($i=0;$i<4;$i++)
                                         {
@@ -78,7 +83,7 @@
                                     <td rowspan="7" style="border-right: solid 1px #ddd;">
                                         <strong>商务条款</strong>
                                     </td>
-                                    <td>租赁期限(年)</td>
+                                    <td>租赁期限</td>
                                     <?php
                                     for($i=0;$i<4;$i++)
                                         {

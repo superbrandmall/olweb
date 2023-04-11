@@ -15,6 +15,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper make-request">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/requests" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 新签租赁合同申请单
             </h4>
@@ -32,7 +35,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#investmentContractAccounttermPropertyMgmt">物业管理费</a></li>
                     <li><a href="#investmentContractAccounttermPromotion">推广费</a></li>
                     <li><a href="#investmentContractDepositterm">预存款条款</a></li>
-                    <li><a href="#investmentContractProperteisterm">其它新签条件</a></li>
                     <li><a href="#investmentContractCertificates">合同附件</a></li>
                     <li><a href="#textareapanel">说明</a></li>
                     <li><a href="#investmentContractPriorTerms">原租户合同</a></li>
@@ -82,4 +84,5 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 </div>
 
 <?php include 'component/investment-contract-accountterm-account.php'; ?>
+<?php include 'component/investment-contract-budgetterm-budget.php'; ?>
 <?php include 'footer.php'; ?>
