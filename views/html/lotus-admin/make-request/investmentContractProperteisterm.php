@@ -8,11 +8,6 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
-            <h5>预算租金: <span id="shopBudget"></span></h5>
-            <span class="label label-danger">请先保存!</span>
-            <span class="label label-danger">请先保存!!</span>
-            <span class="label label-danger">请先保存!!!</span>
-            <hr>
             <div class="bootstrap-table">
                 <div class="fixed-table-container">
                     <div class="fixed-table-body">
@@ -52,21 +47,27 @@
                                     </td>
                                     <td>门店名称/位置</td>
                                     <td><input id="investmentContractProperteistermMallName_0" class="form-control" type="text" readonly /></td>
-                                    <td><input id="investmentContractProperteistermMallName_1" class="form-control" type="text" style="background: #fff;" /></td>
-                                    <td><input id="investmentContractProperteistermMallName_2" class="form-control" type="text" style="background: #fff;" /></td>
-                                    <td><input id="investmentContractProperteistermMallName_3" class="form-control" type="text" style="background: #fff;" /></td>
+                                    <td><input id="investmentContractProperteistermMallName_1" class="form-control" type="text" /></td>
+                                    <td><input id="investmentContractProperteistermMallName_2" class="form-control" type="text" /></td>
+                                    <td><input id="investmentContractProperteistermMallName_3" class="form-control" type="text" /></td>
                                 </tr>
                                 <tr>
                                     <td>租赁楼层</td>
-                                    <td><input id="investmentContractProperteistermFloor_0" class="form-control" type="text" style="background: #fff;" /></td>
-                                    <td><input id="investmentContractProperteistermFloor_1" class="form-control" type="text" style="background: #fff;" /></td>
-                                    <td><input id="investmentContractProperteistermFloor_2" class="form-control" type="text" style="background: #fff;" /></td>
-                                    <td><input id="investmentContractProperteistermFloor_3" class="form-control" type="text" style="background: #fff;" /></td>
+                                    <td><input id="investmentContractProperteistermFloor_0" class="form-control" type="text" readonly /></td>
+                                    <td><input id="investmentContractProperteistermFloor_1" class="form-control" type="text" /></td>
+                                    <td><input id="investmentContractProperteistermFloor_2" class="form-control" type="text" /></td>
+                                    <td><input id="investmentContractProperteistermFloor_3" class="form-control" type="text" /></td>
                                 </tr>
                                 <tr style="border-bottom: solid 1px #ddd;">
                                     <td>租赁面积</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <input class="form-control" id="investmentContractProperteistermArea_0" type="text" onInput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" style="border-right: none;" />                                                
+                                            <span class="input-group-addon" style="border: solid 1px #d2d6de; border-left: none; padding: 6px 6px 6px 3px;">㎡</span>
+                                        </div>
+                                    </td>
                                     <?php
-                                    for($i=0;$i<4;$i++)
+                                    for($i=1;$i<4;$i++)
                                         {
                                     ?>
                                         <td>

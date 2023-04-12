@@ -181,7 +181,7 @@ function findShopBudget(p,c){
                             }
                             
                             $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.code+'">\n\
-                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="budget-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
                             <td>铺位-'+renderUnitType(v.unitType)+'</td>\n\
                             <td><b>'+(accounting.formatNumber(v.unitArea) || '')+'</b></td>\n\
                             <td>'+(v.modality || '')+'</td>\n\

@@ -142,6 +142,8 @@ $(document).ready(function(){
         calBackPush('commission');
         calBackPush('promotion');
         findShopBudgetByCode($('#selectStore').val().split(':::')[1]);
+        $('#investmentContractProperteistermFloor_0').val(data.floorName);
+        $('#investmentContractProperteistermArea_0').val(data.area);
     })
     
     $("#oldSelectStore").change(function(){

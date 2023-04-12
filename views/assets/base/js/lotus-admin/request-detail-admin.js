@@ -480,6 +480,8 @@ function findRequestbyBizId() {
                     temp = new Option((data.unitName +'['+ data.unitCode +'] | '+ data.area + '㎡'), data.unitCode+':::'+data.shopCode+':::'+data.unitName+':::'+data.floorName+':::'+data.floorCode, true, true);
                     $('#selectStore').append(temp).trigger('change');
                     findShopBudgetByCode(data.shopCode);
+                    $('#investmentContractProperteistermFloor_0').val(data.floorName);
+                    $('#investmentContractProperteistermArea_0').val(data.area);
 
                     $("#selectStore").change(function(){
                         var selectStoreArea = $('#select2-selectStore-container').text().split(' | ')[1];
@@ -492,6 +494,8 @@ function findRequestbyBizId() {
                         calBackPush('commission');
                         calBackPush('promotion');
                         findShopBudgetByCode($('#selectStore').val().split(':::')[1]);
+                        $('#investmentContractProperteistermFloor_0').val(data.floorName);
+                        $('#investmentContractProperteistermArea_0').val(data.area);
                     })
                     
                     $("#oldSelectStore").change(function(){
@@ -856,10 +860,15 @@ function findRequestbyBizId() {
                     }
                     
                     $('#investmentContractProperteistermMallName_0').val(data.mallName);
+                    $('#investmentContractProperteistermArea_0').val(data.area);
+                    $('#investmentContractProperteistermFloor_0').val(data.floorName);
                     if(data.compareList != null){
                         $.each(data.compareList, function(i,v) {
-                            $('#investmentContractProperteistermArea_'+i).val(v.area);
-                            $('#investmentContractProperteistermFloor_'+i).val(v.floor);
+                            if(i != 0){
+                                $('#investmentContractProperteistermMallName_'+i).val(v.mallName);
+                                $('#investmentContractProperteistermArea_'+i).val(v.area);
+                                $('#investmentContractProperteistermFloor_'+i).val(v.floor);
+                            }
                             $('#investmentContractProperteistermDeduct_'+i).val(parseFloat(v.deduct * 100).toFixed(2));
                             $('#investmentContractProperteistermMinRent_'+i).val(v.minRent);
                             $('#investmentContractProperteistermPromotionFee_'+i).val(parseFloat(v.promotionFee * 100).toFixed(2));
