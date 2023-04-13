@@ -78,6 +78,10 @@
                                                 <div class="fht-cell"></div>
                                             </th>
                                             <th>
+                                                <div class="th-inner">共计 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
                                                 <div class="th-inner">操作</div>
                                                 <div class="fht-cell"></div>
                                             </th>
