@@ -2162,6 +2162,121 @@ function addRowContactList() {
     $('#tenantContactList .select2').select2();
 }
 
+function addRowInvestmentBudgetAccountterm(term) {
+    var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
+    var column = [];
+    column[0] = createRowColumn(newrow);
+    column[1] = createRowColumn(newrow);
+    column[2] = createRowColumn(newrow);
+    column[3] = createRowColumn(newrow);
+    column[4] = createRowColumn(newrow);
+    column[5] = createRowColumn(newrow);
+    column[6] = createRowColumn(newrow);
+    column[7] = createRowColumn(newrow);
+    column[8] = createRowColumn(newrow);
+    column[9] = createRowColumn(newrow);
+    column[10] = createRowColumn(newrow);
+    column[11] = createRowColumn(newrow);
+    column[12] = createRowColumn(newrow);
+    column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
+    
+    var table = document.getElementById('investmentBudgetAccountterm'+term);
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column[0].innerText = count.toLocaleString();
+    
+    var div = document.createElement("div"); //期限
+    div.setAttribute("class","input-daterange input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id",term.toLowerCase()+"StartDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","min-width: 80px");
+    input.setAttribute("readonly","");
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    var to = document.createElement("span");
+    to.innerText = "-";
+    to.setAttribute("class", "input-group-addon");
+    div.appendChild(to);
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","input-group");
+    var input2 = document.createElement("input");
+    input2.setAttribute("class","form-control");
+    input2.setAttribute("id",term.toLowerCase()+"EndDate_"+count.toLocaleString());
+    input2.setAttribute("type","text");
+    input2.setAttribute("style","min-width: 80px");
+    input2.setAttribute("readonly","");
+    div2.appendChild(input2);
+    var icon2 = document.createElement("i");
+    icon2.setAttribute("class", "fa fa-calendar");
+    var span2 = document.createElement("span");
+    span2.setAttribute("class", "input-group-addon");
+    span2.appendChild(icon2);
+    div2.appendChild(span2);
+    div.appendChild(div2);
+    column[1].appendChild(div);
+    
+    for(let i = 1; i <= 12; i++){
+        var div = document.createElement("div");
+        div.setAttribute("class","input-group");
+        var input = document.createElement("input");
+        input.setAttribute("class","form-control money");
+        input.setAttribute("id",term.toLowerCase()+"_"+i+"_"+count.toLocaleString());
+        input.setAttribute("type","text");
+        input.setAttribute("value",0);
+        div.appendChild(input);
+        var percent = document.createElement("span");
+        percent.innerText = "元";
+        percent.setAttribute("class", "input-group-addon");
+        div.appendChild(percent);
+        column[i*1+1].appendChild(div);
+    }
+    
+    var div = document.createElement("div");
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id",term.toLowerCase()+"Total_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column[14].appendChild(div);
+
+    tbody.appendChild(newrow);
+    $('#investmentBudgetAccountterm'+term+' .input-daterange').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'autoclose': true
+    });
+    
+    $('#investmentBudgetAccountterm'+term+' .select2').select2();
+ 
+    $('input.money').on('focus',function(){
+        $(this).val(accounting.unformat($(this).val()));
+        $(this).css('backgroundColor','#fff');
+        $(this).select();
+        $(this).parent().parent().addClass('success');
+    });
+    
+    $('input.money').on('blur',function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+        $(this).css('backgroundColor','transparent');
+        $(this).parent().parent().removeClass('success');
+    });
+}
+
 function deleteRow(button) {
     var row = button.parentNode.parentNode;
     var tbody = row.parentNode;
@@ -2179,6 +2294,24 @@ function deleteRow(button) {
         });
     }
     calBackPush(id);
+}
+
+function deleteBudgetRow(button) {
+    var row = button.parentNode.parentNode;
+    var tbody = row.parentNode;
+    tbody.removeChild(row);
+
+    // refactoring numbering
+    var rows = tbody.getElementsByTagName("tr");
+    var id = tbody.getAttribute("id");
+    for (var i = 0; i < rows.length; i++) {
+        var currentRow = rows[i];
+        currentRow.childNodes[0].innerText = (i+1).toLocaleString();
+        var td = $("#"+id+" tr:eq(" + i + ") td");
+        td.find("input, select").each(function(){
+            $(this).attr('id',$(this).attr('id').split('_')[0]+'_'+(i+1).toLocaleString());
+        });
+    }
 }
 
 function updateTaxVAT() {

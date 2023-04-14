@@ -6,7 +6,7 @@
             </button>
         </div>
         <div class="pull-right" style="margin-right: 40px;">
-            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccounttermCommission()" style="margin-right: 10px;">
+            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccountterm('Commission')" style="margin-right: 10px;">
                 <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
             </a>
         </div>

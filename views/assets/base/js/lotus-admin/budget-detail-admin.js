@@ -41,7 +41,7 @@ $(document).ready(function(){
     });
     
     $("#saveDraft").click(function(){
-        mandatoryCheck('save');
+        saveBudget();
     })
     
     findBudgetByShopCode();
@@ -121,6 +121,9 @@ function findBudgetByShopCode() {
 function updateRowInvestmentBudgetAccounttermFixed(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
+    if(value.lockFlag == 1){
+        newrow.setAttribute("class","new");
+    }
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -137,7 +140,6 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
     column[14] = createRowColumn(newrow);
-    column[15] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermFixed');
     var tbody = table.querySelector('tbody') || table;
@@ -148,7 +150,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control");
-    input.setAttribute("id","fixedRentStartDate_"+count.toLocaleString());
+    input.setAttribute("id","fixedStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
     input.setAttribute("readonly","");
@@ -171,7 +173,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
     input2.setAttribute("class","form-control");
-    input2.setAttribute("id","fixedRentEndDate_"+count.toLocaleString());
+    input2.setAttribute("id","fixedEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
     input2.setAttribute("readonly","");
@@ -236,7 +238,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
         div.setAttribute("class","input-group");
         var input = document.createElement("input");
         input.setAttribute("class","form-control money");
-        input.setAttribute("id","fixedRent_"+i+"_"+count.toLocaleString());
+        input.setAttribute("id","fixed_"+i+"_"+count.toLocaleString());
         input.setAttribute("type","text");
         input.setAttribute("value",rent);
         if(value.lockFlag == 1){
@@ -254,7 +256,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     div.setAttribute("class","input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control money");
-    input.setAttribute("id","fixedRentTotal_"+count.toLocaleString());
+    input.setAttribute("id","fixedTotal_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("value",value.total);
     if(value.lockFlag == 1){
@@ -266,19 +268,6 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column[14].appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    if(value.lockFlag == 1){
-        remove.style.opacity = .5;
-        remove.setAttribute('onclick','');
-    }
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column[15].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermFixed .input-daterange').datepicker({
@@ -307,6 +296,9 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
 function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
+    if(value.lockFlag == 1){
+        newrow.setAttribute("class","new");
+    }
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -323,7 +315,6 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
     column[14] = createRowColumn(newrow);
-    column[15] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermPropertyMgmt');
     var tbody = table.querySelector('tbody') || table;
@@ -452,19 +443,6 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column[14].appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    if(value.lockFlag == 1){
-        remove.style.opacity = .5;
-        remove.setAttribute('onclick','');
-    }
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column[15].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermPropertyMgmt .input-daterange').datepicker({
@@ -493,6 +471,9 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
 function updateRowInvestmentBudgetAccounttermCommission(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
+    if(value.lockFlag == 1){
+        newrow.setAttribute("class","new");
+    }
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -509,7 +490,6 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
     column[14] = createRowColumn(newrow);
-    column[15] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermCommission');
     var tbody = table.querySelector('tbody') || table;
@@ -638,19 +618,6 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column[14].appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    if(value.lockFlag == 1){
-        remove.style.opacity = .5;
-        remove.setAttribute('onclick','');
-    }
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column[15].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermCommission .input-daterange').datepicker({
@@ -679,6 +646,9 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
 function updateRowInvestmentBudgetAccounttermPromotion(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
+    if(value.lockFlag == 1){
+        newrow.setAttribute("class","new");
+    }
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -695,7 +665,6 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
     column[14] = createRowColumn(newrow);
-    column[15] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermPromotion');
     var tbody = table.querySelector('tbody') || table;
@@ -824,19 +793,6 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column[14].appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    if(value.lockFlag == 1){
-        remove.style.opacity = .5;
-        remove.setAttribute('onclick','');
-    }
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column[15].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermPromotion .input-daterange').datepicker({
@@ -865,6 +821,9 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
 function updateRowInvestmentBudgetAccounttermSales(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
+    if(value.lockFlag == 1){
+        newrow.setAttribute("class","new");
+    }
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -881,7 +840,6 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
     column[14] = createRowColumn(newrow);
-    column[15] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermSales');
     var tbody = table.querySelector('tbody') || table;
@@ -1010,19 +968,6 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
     column[14].appendChild(div);
-    
-    var remove = document.createElement("a");
-    remove.setAttribute("href", "javascript:void(0);");
-    remove.setAttribute("onClick", "deleteRow(this)");
-    if(value.lockFlag == 1){
-        remove.style.opacity = .5;
-        remove.setAttribute('onclick','');
-    }
-    var icon = document.createElement("i");
-    icon.setAttribute("class", "fa fa-minus-circle");
-    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
-    remove.appendChild(icon);
-    column[15].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermSales .input-daterange').datepicker({
@@ -1046,4 +991,112 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
+}
+
+function saveBudget() {
+    var msg = '确定要将此内容保存提交吗？';
+    
+    Ewin.confirm({ message: msg }).on(function (e) {
+        if (!e) {
+            return;
+        } else {
+            $('.modal.in').hide().remove();
+        }
+        
+        var openId = 'admin';
+        var userCode = '';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                userCode = v.userCode;
+                return false;
+            }
+        })
+        
+        var index;
+        var fixedList = [];
+        $("#fixed").find("tr.new").each(function(i,e){
+            var fixed = {};
+            index = i * 1 + 1;
+            fixed.itemCode = $('#fixedItem_'+index).val();
+            fixed.itemName = $('#select2-fixedItem_'+index+'-container').text().split('[')[0];
+
+
+            fixed.settlePeriodCode = $('#fixedSettlePeriod_1').val(); // 结算周期
+            fixed.settlePeriodName = $('#select2-fixedSettlePeriod_1-container').text(); // 结算周期
+
+            fixed.periodTypeCode = $('#fixedPeriodType_1').val(); // 周期类型
+            fixed.periodTypeName = $('#select2-fixedPeriodType_1-container').text(); // 周期类型
+
+            fixed.settleDay = $('#fixedSettleDay_1').val(); // 结算日期
+
+            if($('#fixedIsOverdueFlag_1').prop('checked') == true){
+                fixed.isOverdueFlag = 1;
+            } else {
+                fixed.isOverdueFlag = 0;
+            }
+
+            fixed.overdueTaxRate = $('#fixedOverdueTaxRate_1').val();
+            fixed.overdueRate = parseFloat($('#fixedOverdueRate_1').val()) / 1000;
+
+            if($('#fixedOverdueInvoiceFlag_1').prop('checked') == true){
+                fixed.overdueInvoiceFlag = 1;
+            } else {
+                fixed.overdueInvoiceFlag = 0;
+            }
+
+            fixed.startDate = $('#fixedStartDate_'+index).val();
+            fixed.endDate = $('#fixedEndDate_'+index).val();
+
+            fixed.amount =  numberWithoutCommas($('#fixedAmount_'+index).val());
+            fixed.taxAmount =  numberWithoutCommas($('#fixedTaxAmount_'+index).val());
+
+            fixed.rentAmount =  numberWithoutCommas($('#fixedRentAmount_'+index).val());
+            fixed.taxRentAmount =  numberWithoutCommas($('#fixedTaxRentAmount_'+index).val());
+
+            fixed.taxRate = $('#fixedTaxRate_'+index).val();
+            fixed.taxCode = $('#fixedTaxRate_'+index).find('option:selected').attr('data-code');
+
+            fixedList.push(fixed);
+        })
+        
+        $.ajax({
+            url: $.api.baseLotus+"/api/shop/budget/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(jqXHR, textStatus, errorThrown) {},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+//                    if(response.data.id != ""){
+//                        window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
+//                    } else {
+//                        alertMsg(response.data.resultCode,response.data.resultMsg);
+//                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    })
 }
