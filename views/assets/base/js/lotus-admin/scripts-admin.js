@@ -2165,6 +2165,7 @@ function addRowContactList() {
 function addRowInvestmentBudgetAccountterm(term) {
     var newrow = document.createElement("tr");
     newrow.setAttribute("class","new");
+    newrow.setAttribute("data-id","");
     var column = [];
     column[0] = createRowColumn(newrow);
     column[1] = createRowColumn(newrow);
@@ -2246,6 +2247,7 @@ function addRowInvestmentBudgetAccountterm(term) {
     input.setAttribute("class","form-control money");
     input.setAttribute("id",term.toLowerCase()+"Total_"+count.toLocaleString());
     input.setAttribute("type","text");
+    input.setAttribute("value",0);
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "元";
@@ -2262,6 +2264,10 @@ function addRowInvestmentBudgetAccountterm(term) {
     });
     
     $('#investmentBudgetAccountterm'+term+' .select2').select2();
+    
+    $('input.money').each(function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+    })
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
