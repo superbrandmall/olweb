@@ -1,4 +1,4 @@
-<div class="box box-default" id="investmentBudgetAccounttermPropertyMgmt">    
+<div class="box box-default" id="investmentBudgetAccounttermPropertymgmt">    
     <div class="box-header with-border">
         <h3 class="box-title">物业管理费</h3>
         <div class="box-tools">
@@ -6,7 +6,7 @@
             </button>
         </div>
         <div class="pull-right" style="margin-right: 40px;">
-            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccountterm('PropertyMgmt')" style="margin-right: 10px;">
+            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccountterm('propertymgmt')" style="margin-right: 10px;">
                 <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
             </a>
         </div>
@@ -77,13 +77,9 @@
                                                 <div class="th-inner">12月 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th>
-                                                <div class="th-inner">共计 <span class="btn-box-tool-lg">*</span></div>
-                                                <div class="fht-cell"></div>
-                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody id="propertyMgmt"></tbody>
+                                    <tbody id="propertymgmt"></tbody>
                                 </table>
                             </div>
                         </div>

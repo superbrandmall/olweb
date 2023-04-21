@@ -1,4 +1,3 @@
-
 <footer class="main-footer hidden-print text-center" style="margin-left: 0; font-size: 9px; position: fixed; bottom: 0; padding: 0 0 10px 0;">
     <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <div class="btn-group" role="group" style="padding: 10px 0;">

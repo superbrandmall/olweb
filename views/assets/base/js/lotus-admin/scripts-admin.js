@@ -380,7 +380,7 @@ function refineUpdateUrl() {
 
 function logout() {
     deleteCookie();
-    
+    sessionStorage.clear();
     window.location.href = 'logout';
 }
 
@@ -2181,9 +2181,8 @@ function addRowInvestmentBudgetAccountterm(term) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
-    var table = document.getElementById('investmentBudgetAccountterm'+term);
+    var table = document.getElementById('investmentBudgetAccountterm'+term.slice(0,1).toUpperCase()+term.slice(1).toLowerCase());
     var tbody = table.querySelector('tbody') || table;
     var count = tbody.getElementsByTagName('tr').length + 1;
     column[0].innerText = count.toLocaleString();
@@ -2192,7 +2191,7 @@ function addRowInvestmentBudgetAccountterm(term) {
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control");
-    input.setAttribute("id",term.toLowerCase()+"StartDate_"+count.toLocaleString());
+    input.setAttribute("id",term+"StartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
     input.setAttribute("readonly","");
@@ -2211,7 +2210,7 @@ function addRowInvestmentBudgetAccountterm(term) {
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
     input2.setAttribute("class","form-control");
-    input2.setAttribute("id",term.toLowerCase()+"EndDate_"+count.toLocaleString());
+    input2.setAttribute("id",term+"EndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
     input2.setAttribute("readonly","");
@@ -2230,7 +2229,7 @@ function addRowInvestmentBudgetAccountterm(term) {
         div.setAttribute("class","input-group");
         var input = document.createElement("input");
         input.setAttribute("class","form-control money");
-        input.setAttribute("id",term.toLowerCase()+"_"+i+"_"+count.toLocaleString());
+        input.setAttribute("id",term+"_"+i+"_"+count.toLocaleString());
         input.setAttribute("type","text");
         input.setAttribute("value",0);
         div.appendChild(input);
@@ -2240,30 +2239,16 @@ function addRowInvestmentBudgetAccountterm(term) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id",term.toLowerCase()+"Total_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",0);
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
-    $('#investmentBudgetAccountterm'+term+' .input-daterange').datepicker({
+    $('#investmentBudgetAccountterm'+term.slice(0,1).toUpperCase()+term.slice(1).toLowerCase()+' .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
         'autoclose': true
     });
     
-    $('#investmentBudgetAccountterm'+term+' .select2').select2();
+    $('#investmentBudgetAccountterm'+term.slice(0,1).toUpperCase()+term.slice(1).toLowerCase()+' .select2').select2();
     
     $('input.money').each(function(){
         $(this).val(accounting.formatNumber($(this).val()));

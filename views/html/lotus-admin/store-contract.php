@@ -28,8 +28,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                    <li><a href="/lotus-admin/store-detail?id=<?= $id; ?>">详细资料</a></li>
-                    <li><a href="/lotus-admin/store-budget?id=<?= $id; ?>">租金计划</a></li>
+                    <li><a href="/lotus-admin/store-detail?id=<?= $id; ?>">铺位资料</a></li>
+                    <li><a href="/lotus-admin/budget-detail?id=<?= $id; ?>">租金计划</a></li>
                     <li class="active"><a href="javascript: void(0);">签约合同</a></li>
                 </ol>
             </div>

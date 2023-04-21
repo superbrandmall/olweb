@@ -19,14 +19,27 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">业态</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="biz" name="biz" style="width: 100%">
-                                    <option value="">未选择</option>
-                                    <option value="0">零售 (I)</option>
-                                    <option value="1">娱乐服务 (I)</option>
-                                    <option value="2">儿童 (I)</option>
-                                    <option value="3">餐饮 (I)</option>
-                                    <option value="4">主力店 (I)</option>
+                            <div class="col-md-8 col-sm-12" style="text-align: left; padding-right: 0px;">
+                                <select class="select2" id="modality_1" name="modality_1" style="width: 100%" data-placeholder="未选择一级业态">
+                                    <option value="">未选择一级业态</option>
+                                    <option value="零售">零售</option>
+                                    <option value="餐饮">餐饮</option>
+                                    <option value="娱乐服务">娱乐服务</option>
+                                    <option value="儿童">儿童</option>
+                                    <option value="主力店">主力店</option>
+                                    <option value="基站">基站</option>
+                                    <option value="停车场">停车场</option>
+                                    <option value="酒店公寓">酒店公寓</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 col-sm-12" style="text-align: left; padding-left: 2px; display: none;">
+                                <select class="select2" id="modality_2" name="modality_2" style="width: 100%" data-placeholder="未选择二级业态" data-allow-clear="true">
+                                    <option value="">未选择二级业态</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 col-sm-12" style="text-align: left; padding-left: 2px; display: none;">
+                                <select class="select2" id="modality_3" name="modality_3" style="width: 100%" data-placeholder="未选择三级业态" data-allow-clear="true">
+                                    <option value="">未选择三级业态</option>
                                 </select>
                             </div>
                         </div>

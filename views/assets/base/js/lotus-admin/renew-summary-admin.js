@@ -111,7 +111,7 @@ function findRequestByBizId() {
                     $('#essayBudgetRentAmount').html('预算租金<span class="txt">'+(data.budgetDayRent || '0')+'</span>元/天/平米，');
                     $('#essayBudgetRentAmountRateOfReach').html('单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100).toFixed(2) * 100 / 100 || '/')+'</span>%。');
                     $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
-                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100) * 100 / 100 || '/')+'</span>%，');
+                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100) * 100 / 100 || '/').toFixed(2)+'</span>%，');
                     $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '0')+'</span>元。');
                     $('#remark').val(data.remark);
  

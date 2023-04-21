@@ -6,7 +6,7 @@
             </button>
         </div>
         <div class="pull-right" style="margin-right: 40px;">
-            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccountterm('Fixed')" style="margin-right: 10px;">
+            <a href="javascript:void(0);" onClick="addRowInvestmentBudgetAccountterm('fixed')" style="margin-right: 10px;">
                 <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
             </a>
         </div>
@@ -75,10 +75,6 @@
                                             </th>
                                             <th>
                                                 <div class="th-inner">12月 <span class="btn-box-tool-lg">*</span></div>
-                                                <div class="fht-cell"></div>
-                                            </th>
-                                            <th>
-                                                <div class="th-inner">共计 <span class="btn-box-tool-lg">*</span></div>
                                                 <div class="fht-cell"></div>
                                             </th>
                                         </tr>

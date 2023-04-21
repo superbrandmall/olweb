@@ -1,9 +1,29 @@
+$.budgetShops = '';
+
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','提交成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     findDictCodeByDictTypeCode('UNIT_TYPE');
     
     if($.cookie('searchLeasingBudgetSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchLeasingBudgetSelectStoreTxt'), $.cookie('searchLeasingBudgetSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('searchLeasingBudgetModality3') != null){
+        var newOption = new Option($.cookie('searchLeasingBudgetModality3'), $.cookie('searchLeasingBudgetModality3'), true, true);
+        $('#modality_3').append(newOption).trigger('change');
     }
     
     
@@ -16,9 +36,9 @@ $(document).ready(function(){
     
     var items = getURLParameter('items') || $('.page-size').first().text();
     if(getURLParameter('page') && getURLParameter('page') >= 1){
-        findShopBudget(getURLParameter('page'),items);
+        findShops(getURLParameter('page'),items);
     } else {
-        findShopBudget(1,items);
+        findShops(1,items);
     }
     
     $('.date-picker, .input-daterange').datepicker({
@@ -58,15 +78,17 @@ $(document).ready(function(){
     }
     
     $('#clear').click(function(){
-        $('#mallCode').val('').trigger('change');
+        $('#mallCode, #modality_1, #modality_2, #modality_3').val('').trigger('change');
         $('#selectStore').empty(); 
         $('#selectStore').select2("val", "");
         
+        $.cookie('searchLeasingBudgetModality3', null);
         $.cookie('searchLeasingBudgetSelectStoreVal', null);
         $.cookie('searchMallCode', null);
     })
     
     $('#search').click(function(){
+        $.cookie('searchLeasingBudgetModality3', $('#modality_3').val());
         $.cookie('searchLeasingBudgetSelectStoreVal', $('#selectStore').val());
         $.cookie('searchLeasingBudgetSelectStoreTxt', $('#select2-selectStore-container').text());
         if($('#mallCode').val() != null){
@@ -74,13 +96,23 @@ $(document).ready(function(){
         } else {
             $.cookie('searchMallCode', null);
         }
-        findShopBudget(1,items);
+        findShops(1,items);
     })
+    
+    $('#modality_1').on('change',function(){
+        if($(this).val() != '') {
+            findBizByBiz1($(this).val());
+        }
+    })
+    
+    if($('#modality_1').val() != '' && $('#modality_2').val() == '') {
+        findBizByBiz1($('#modality_1').val());
+    }
     
     $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
-function findShopBudget(p,c){
+function findShops(p,c){
     $('#budget').html('');
     
     var params = [];
@@ -143,6 +175,17 @@ function findShopBudget(p,c){
         params.push(param);
     }
     
+    if($.cookie('searchLeasingBudgetModality3') != null && $.cookie('searchLeasingBudgetModality3') != '' && $.cookie('searchLeasingBudgetModality3') != 'null'){
+        param = {
+            "columnName": "modality",
+            "columnPatten": "",
+            "conditionOperator": "OR",
+            "operator": "=",
+            "value": $.cookie('searchLeasingBudgetModality3').split(':::')[0]
+        }
+        params.push(param);
+    }
+    
     var map = {
         "conditionGroups": conditionGroups,
         "params": params
@@ -179,6 +222,8 @@ function findShopBudget(p,c){
                             if(i%2==0){
                                 tbg = '#f9f9f9';
                             }
+                            
+                            $.budgetShops += v.code + ';';
                             
                             $('#budget').append('<tr data-index="'+i+'" id="budget_'+v.code+'">\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="budget-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
@@ -246,25 +291,10 @@ function findShopBudget(p,c){
                             <td class="SALE_november"></td>\n\
                             <td class="SALE_december"></td>\n\
                             </tr>');
-                            
-                            if(v.shopBudgetList.length > 0){
-                                $.each(v.shopBudgetList, function(j,w){
-                                    $('#budget_'+v.code).find('.'+w.termType+'_january').text(accounting.formatNumber(w.january));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_february').text(accounting.formatNumber(w.february));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_march').text(accounting.formatNumber(w.march));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_april').text(accounting.formatNumber(w.april));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_may').text(accounting.formatNumber(w.may));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_june').text(accounting.formatNumber(w.june));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_july').text(accounting.formatNumber(w.july));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_august').text(accounting.formatNumber(w.august));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_september').text(accounting.formatNumber(w.september));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_october').text(accounting.formatNumber(w.october));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_november').text(accounting.formatNumber(w.november));
-                                    $('#budget_'+v.code).find('.'+w.termType+'_december').text(accounting.formatNumber(w.december));
-                                });
-                            }
                         }
                     });
+                    
+                    findShopBudget(1,10000);
 
                     if(p == pages){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+response.data.totalElements+' 行，共 '+response.data.totalElements+'行');
@@ -344,4 +374,165 @@ function updateSelectUserDropDown(data_count) {
             cache: true
         }
     })
+}
+
+function findShopBudget(p,c){
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    param = {
+        "columnName": "shopCode",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "in",
+        "value": $.budgetShops
+    }
+    
+    params.push(param);
+    
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+
+    $.ajax({
+        url: $.api.baseLotus+"/api/shop/budget/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                if(response.data.content.length > 0) {
+                    $.each(response.data.content, function(i,v){
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_january').text(accounting.formatNumber(v.january));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_february').text(accounting.formatNumber(v.february));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_march').text(accounting.formatNumber(v.march));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_april').text(accounting.formatNumber(v.april));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_may').text(accounting.formatNumber(v.may));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_june').text(accounting.formatNumber(v.june));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_july').text(accounting.formatNumber(v.july));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_august').text(accounting.formatNumber(v.august));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_september').text(accounting.formatNumber(v.september));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_october').text(accounting.formatNumber(v.october));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_november').text(accounting.formatNumber(v.november));
+                        $('#budget_'+v.shopCode).find('.'+v.termType+'_december').text(accounting.formatNumber(v.december));
+                    })
+                }
+            }
+        }
+    })
+}
+
+function findBizByBiz1(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $('#modality_1,#modality_3').parent().hide();
+                    $('#modality_2').parent().fadeIn();
+                    $('#modality_2').html('<option value="">未选择二级业态</option>').fadeIn();
+                    $.each(response.data, function(i,v) {
+                        $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
+                        if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
+                            $("#modality_2 option:contains('"+v.modality2+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                $('#modality_2').on('change',function(){
+                    if($(this).val() != '') {
+                        findBizByBiz2($(this).val());
+                    } else {
+                        $('#modality_2').select2('close').parent().hide();
+                        $('#modality_3').select2('close').parent().hide();
+                        $('#modality_1').parent().fadeIn();
+                    }
+                })
+                
+                if($('#modality_2').val() != '' && $('#modality_3').val() == '') {
+                    findBizByBiz2($('#modality_2').val());
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
+}
+
+function findBizByBiz2(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+encodeURIComponent(biz),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $('#modality_1,#modality_2').parent().hide();
+                    $('#modality_3').parent().fadeIn();
+                    $('#modality_3').html('<option value="">未选择三级业态</option>').fadeIn();
+                    $.each(response.data, function(i,v) {
+                        $('#modality_3').append('<option value="'+v.modality3+'">'+v.modality3+'</option>');
+                        if ($("#modality_3 option:contains('"+v.modality3+"')").length > 1){
+                            $("#modality_3 option:contains('"+v.modality3+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                $('#modality_3').on('change',function(){
+                    if($(this).val() != '') {
+                    } else {
+                        $('#modality_2').select2('close').parent().hide();
+                        $('#modality_3').select2('close').parent().hide();
+                        $('#modality_1').parent().fadeIn();
+                    }
+                })
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
 }

@@ -79,7 +79,7 @@
             <h3 id="propertyMgmtTaxTotalPropertyAmount" style="display: inline-block;">0.00</h3>
             <a href="javascript: void(0);" onclick="termsModalToggle('propertyMgmt');" style="font-size: 14px; margin: 0 5px 0 10px; vertical-align: super;">查看账款明细</a>
             <h5 style="display: inline-block; vertical-align: super">|</h5>
-            <a href="javascript: void(0);" onclick="budgetModalToggle('B021');" style="font-size: 14px; margin-left: 5px; vertical-align: super;">查看预算明细</a>
+            <a href="javascript: void(0);" id="propertyMgmtBudgetModalLink" onclick="budgetModalToggle('B021');" style="font-size: 14px; margin-left: 5px; vertical-align: super;">查看预算明细</a>
         </div>
     </div>
     <div class="box-body">

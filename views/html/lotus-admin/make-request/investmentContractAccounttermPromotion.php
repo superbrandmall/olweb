@@ -84,6 +84,8 @@
             <h3 style="display: inline-block;">|</h3>
             <h3 id="promotionTaxTotalPromotionAmount" style="display: inline-block;">0.00</h3>
             <a href="javascript: void(0);" onclick="termsModalToggle('promotion');" style="font-size: 14px; margin-left: 10px; vertical-align: super;">查看账款明细</a>
+            <h5 style="display: inline-block; vertical-align: super">|</h5>
+            <a href="javascript: void(0);" id="promotionBudgetModalLink" onclick="budgetModalToggle('G011');" style="font-size: 14px; margin-left: 5px; vertical-align: super;">查看预算明细</a>
         </div>
     </div>
     <div class="box-body">

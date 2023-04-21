@@ -132,7 +132,6 @@ function findBizByBiz2(biz) {
                 }
                 
                 if(response.data.length > 0){
-                    $('#modality_3').val(null).trigger('change');
                     $.each(response.data, function(i,v) {
                         $('#modality_3').append('<option value="'+v.modality3+'">'+v.modality3+'</option>');
                         if ($("#modality_3 option:contains('"+v.modality3+"')").length > 1){
@@ -178,7 +177,6 @@ function findBizByBiz3(biz) {
                 }
                 
                 if(response.data.length > 0){
-                    $('#modality_4').val(null).trigger('change');
                     $.each(response.data, function(i,v) {
                         $('#modality_4').append('<option value="'+v.modality4+'">'+v.modality4+'</option>');
                         if ($("#modality_4 option:contains('"+v.modality4+"')").length > 1){
@@ -520,7 +518,6 @@ function deleteFile(id) {
                     default:
                         break;
                 }
-                
 
                 var row = $('#file_'+id).parent().parent();
                 row.hide();

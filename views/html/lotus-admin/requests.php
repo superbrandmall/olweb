@@ -9,7 +9,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 200px;">
+    <section class="sub-header" style="height: 250px;">
         <div class="left-link">
             <a class="btn btn-link text-left" id="openDraft" href="javascript:void(0);">
                 <i class="fa fa-inbox"></i><span>草稿箱<span id="draftCount"></span></span>
@@ -42,9 +42,33 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">签约编号</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="contractNo" type="text"  />
+                                <input class="form-control" id="contractNo" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">店招</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <input class="form-control" id="contractName" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="selectTenant" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
@@ -58,28 +82,61 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">单号</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
+                                <input class="form-control" id="bizId" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                            <div class="col-md-3 col-sm-12" style="text-align: left; padding-right: 0px;">
+                                <select class="select2" id="unitType" style="width: 100%">
+                                    <option value=""></option>
+                                    <option value="L">正柜</option>
+                                    <option value="C">临时柜</option>
+                                    <option value="S">仓库</option>
+                                    <option value="T">基站</option>
+                                    <option value="R">停车场</option>
+                                    <option value="A">广告位</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-sm-12" style="text-align: left; padding-left: 2px;">
                                 <select class="select2" id="selectStore" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">商户</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">业态</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="selectTenant" style="width: 100%"></select>
+                                <select class="select2" id="modality_1" name="modality_1" style="width: 100%" data-placeholder="未选择一级业态">
+                                    <option value="">未选择一级业态</option>
+                                    <option value="零售">零售</option>
+                                    <option value="餐饮">餐饮</option>
+                                    <option value="娱乐服务">娱乐服务</option>
+                                    <option value="儿童">儿童</option>
+                                    <option value="主力店">主力店</option>
+                                    <option value="基站">基站</option>
+                                    <option value="停车场">停车场</option>
+                                    <option value="酒店公寓">酒店公寓</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 col-sm-12" style="text-align: left; padding-left: 2px; display: none;">
+                                <select class="select2" id="modality_2" name="modality_2" style="width: 100%" data-placeholder="未选择二级业态" data-allow-clear="true">
+                                    <option value="">未选择二级业态</option>
+                                </select>
+                            </div>
+                            <div class="col-md-8 col-sm-12" style="text-align: left; padding-left: 2px; display: none;">
+                                <select class="select2" id="modality_3" name="modality_3" style="width: 100%" data-placeholder="未选择三级业态" data-allow-clear="true">
+                                    <option value="">未选择三级业态</option>
+                                </select>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
@@ -94,7 +151,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 250px;">
+    <section class="content" style="margin-top: 300px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -102,10 +159,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         <div class="box-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert alert-warning alert-dismissable">
+                                    <!--<div class="alert alert-warning alert-dismissable">
                                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                         <b>租赁合同【申请单】当前仅限【上海区】使用，其他区请勿创建！</b>
-                                    </div>
+                                    </div>-->
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
                                             <div class="pull-left pagination-detail">
@@ -192,7 +249,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 170px;">合同周期</div>
+                                                                <div class="th-inner" style="width: 175px;">合同周期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

@@ -15,12 +15,12 @@ $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/view
     <section class="sub-header" style="height: 45px; left: 0;">
         <img class="navbar-brand-img visible-print" src="/views/assets/base/img/content/lotus-admin/lotus-logo.png" style="top: -3px; position: absolute; left: 0;">
         <h4>
-            招商租赁审批意见书 <span id="formType"></span>
+            <span id="opinionType">招商租赁审批意见书</span> <span id="formType"></span>
         </h4>
     </section>
 
     <section class="content" style="margin-top: 96px;">
-        <div id="webui">
+        <div id="webui" style="display: none;">
             <div class="row">
                 <?php
                 include 'component/investmentContractDepartment.php'; // 承办部门
@@ -39,6 +39,14 @@ $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/view
             </div>
         </div>
     </section>
+</div>
+
+<div id="lotus-approval-opinion" style="position: fixed;right: 0;top: 95px;background: #FFFFCC;width: 50px;z-index: 1;bottom: 0; display: none;">
+    <div style="padding: 20px 10px 0;">财务</div>
+    <hr>
+    <div style="padding: 0 18px 20px;">
+        <a href="#" style="color: #1c9e74;"><i class="fa fa-line-chart" style="margin-bottom: 5px;"></i>招商租赁审批意见书</a>
+    </div>
 </div>
 
 <div class="modal fade" id="approval_form" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">

@@ -1,4 +1,4 @@
-$.budget = {};
+$.shop = {};
 
 $(document).ready(function(){
     $('#create-form')[0].reset();
@@ -44,10 +44,11 @@ $(document).ready(function(){
         mandatoryCheck();
     })
     
+    findShopByShopCode();
     findBudgetByShopCode();
 })
 
-function findBudgetByShopCode() {
+function findShopByShopCode() {
     $.ajax({
         url: $.api.baseLotus+"/api/vshop/lotus/findAllByShopCode?shopCode="+getURLParameter('id'),
         type: "GET",
@@ -73,36 +74,72 @@ function findBudgetByShopCode() {
                 }
                 
                 var data = response.data;
-                $.budget = data;
-                var state = "使用中";
-                if(data.shopBudgetList == null || data.shopBudgetList.length == 0){
-                    $('#budgetStatus').removeClass('badge-success').addClass('badge-danger');
-                    state = "未使用";
-                }
-                
-                $('#budgetStatus').text(state);
+                $.shop = data;
                 $('#unitName').text(data.unitName);
                 $('#unitCode').text(data.unitCode);
                 $('#mall').val(data.mallName+'['+data.mallCode+']');
                 $('#unitType').val(renderUnitType(data.unitType));
                 $('#area').val(data.unitArea);
+            }
+        }
+    })
+}
+
+function findBudgetByShopCode() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/shop/budget/findAllByShopCode?shopCode="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
                 
-                if(data.shopBudgetList != null && data.shopBudgetList.length > 0) {
-                    $.each(data.shopBudgetList, function(i,v) {
+                var data = response.data;
+                var state = "使用中";
+                if(data == null || data.length == 0){
+                    $('#budgetStatus').removeClass('badge-success').addClass('badge-danger');
+                    state = "未使用";
+                }
+                
+                $('#budgetStatus').text(state);
+                if(data != null && data.length > 0) {
+                    data.sort(function(a,b){
+                        if(a.year > b.year) return 1 ;
+                        if(a.year < b.year) return -1 ;
+                        return 0 ;
+                    });
+                    
+                    $.each(data, function(i,v) {
                         switch (v.termType) {
                             case "B011":
                                 updateRowInvestmentBudgetAccounttermFixed(JSON.stringify(v));
                                 break;
                             case "B021":
-                                updateRowInvestmentBudgetAccounttermPropertyMgmt(JSON.stringify(v));
-                                break;
-                            case "G011":
-                                updateRowInvestmentBudgetAccounttermCommission(JSON.stringify(v));
+                                updateRowInvestmentBudgetAccounttermPropertymgmt(JSON.stringify(v));
                                 break;
                             case "D011":
+                                updateRowInvestmentBudgetAccounttermCommission(JSON.stringify(v));
+                                break;
+                            case "G011":
                                 updateRowInvestmentBudgetAccounttermPromotion(JSON.stringify(v));
                                 break;
-                            case "SALE":
+                            case "SALES":
                                 updateRowInvestmentBudgetAccounttermSales(JSON.stringify(v));
                                 break;
                             default:
@@ -143,7 +180,6 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermFixed');
     var tbody = table.querySelector('tbody') || table;
@@ -255,23 +291,6 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","fixedTotal_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",value.total);
-    if(value.lockFlag == 1){
-        input.setAttribute('disabled','disabled');
-    }
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermFixed .input-daterange').datepicker({
@@ -297,7 +316,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     });
 }
 
-function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
+function updateRowInvestmentBudgetAccounttermPropertymgmt(v) {
     var value = JSON.parse(v);
     var newrow = document.createElement("tr");
     if(value.lockFlag != 1){
@@ -321,9 +340,8 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
-    var table = document.getElementById('investmentBudgetAccounttermPropertyMgmt');
+    var table = document.getElementById('investmentBudgetAccounttermPropertymgmt');
     var tbody = table.querySelector('tbody') || table;
     var count = tbody.getElementsByTagName('tr').length + 1;
     column[0].innerText = count.toLocaleString();
@@ -332,7 +350,7 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     div.setAttribute("class","input-daterange input-group");
     var input = document.createElement("input");
     input.setAttribute("class","form-control");
-    input.setAttribute("id","propertyMgmtStartDate_"+count.toLocaleString());
+    input.setAttribute("id","propertymgmtStartDate_"+count.toLocaleString());
     input.setAttribute("type","text");
     input.setAttribute("style","min-width: 80px");
     input.setAttribute("readonly","");
@@ -355,7 +373,7 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
     div2.setAttribute("class","input-group");
     var input2 = document.createElement("input");
     input2.setAttribute("class","form-control");
-    input2.setAttribute("id","propertyMgmtEndDate_"+count.toLocaleString());
+    input2.setAttribute("id","propertymgmtEndDate_"+count.toLocaleString());
     input2.setAttribute("type","text");
     input2.setAttribute("style","min-width: 80px");
     input2.setAttribute("readonly","");
@@ -420,7 +438,7 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
         div.setAttribute("class","input-group");
         var input = document.createElement("input");
         input.setAttribute("class","form-control money");
-        input.setAttribute("id","propertyMgmt_"+i+"_"+count.toLocaleString());
+        input.setAttribute("id","propertymgmt_"+i+"_"+count.toLocaleString());
         input.setAttribute("type","text");
         input.setAttribute("value",rent);
         if(value.lockFlag == 1){
@@ -433,33 +451,16 @@ function updateRowInvestmentBudgetAccounttermPropertyMgmt(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","propertyMgmtTotal_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",value.total);
-    if(value.lockFlag == 1){
-        input.setAttribute('disabled','disabled');
-    }
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
-    $('#investmentBudgetAccounttermPropertyMgmt .input-daterange').datepicker({
+    $('#investmentBudgetAccounttermPropertymgmt .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayHighlight': true,
         'autoclose': true
     });
     
-    $('#investmentBudgetAccounttermPropertyMgmt .select2').select2();
+    $('#investmentBudgetAccounttermPropertymgmt .select2').select2();
  
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -499,7 +500,6 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermCommission');
     var tbody = table.querySelector('tbody') || table;
@@ -611,23 +611,6 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","commissionTotal_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",value.total);
-    if(value.lockFlag == 1){
-        input.setAttribute('disabled','disabled');
-    }
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermCommission .input-daterange').datepicker({
@@ -677,7 +660,6 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermPromotion');
     var tbody = table.querySelector('tbody') || table;
@@ -789,23 +771,6 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","promotionTotal_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",value.total);
-    if(value.lockFlag == 1){
-        input.setAttribute('disabled','disabled');
-    }
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermPromotion .input-daterange').datepicker({
@@ -855,7 +820,6 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
-    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermSales');
     var tbody = table.querySelector('tbody') || table;
@@ -967,23 +931,6 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-    
-    var div = document.createElement("div");
-    div.setAttribute("class","input-group");
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control money");
-    input.setAttribute("id","salesTotal_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    input.setAttribute("value",value.total);
-    if(value.lockFlag == 1){
-        input.setAttribute('disabled','disabled');
-    }
-    div.appendChild(input);
-    var percent = document.createElement("span");
-    percent.innerText = "元";
-    percent.setAttribute("class", "input-group-addon");
-    div.appendChild(percent);
-    column[14].appendChild(div);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermSales .input-daterange').datepicker({
@@ -1047,95 +994,104 @@ function saveBudget() {
             $('.modal.in').hide().remove();
         }
         
-        var index;
         var fixedList = [];
         var len = $("#fixed").find("tr").length;
-        var map = [];
+        var budgetList = [];
         $("#fixed").find("tr.new").each(function(i,e){
             var fixed = {};
-            index = i * 1 + 1;
-            fixed.april = numberWithoutCommas($('#fixed_4_'+index).val());
-            fixed.area = $.budget.unitArea;
-            fixed.august = numberWithoutCommas($('#fixed_8_'+index).val());
-            fixed.december = numberWithoutCommas($('#fixed_12_'+index).val());
-            fixed.endDate = $('#fixedEndDate_'+index).val();
-            fixed.february = numberWithoutCommas($('#fixed_2_'+index).val());
-            fixed.january = numberWithoutCommas($('#fixed_1_'+index).val());
-            fixed.july = numberWithoutCommas($('#fixed_7_'+index).val());
-            fixed.june = numberWithoutCommas($('#fixed_6_'+index).val());
+            fixed.april = numberWithoutCommas($(this).find('input:eq(5)').val());
+            fixed.area = $.shop.unitArea;
+            fixed.august = numberWithoutCommas($(this).find('input:eq(9)').val());
+            fixed.december = numberWithoutCommas($(this).find('input:eq(13)').val());
+            fixed.endDate = $(this).find('input:eq(1)').val();
+            fixed.february = numberWithoutCommas($(this).find('input:eq(3)').val());
+            fixed.january = numberWithoutCommas($(this).find('input:eq(2)').val());
+            fixed.july = numberWithoutCommas($(this).find('input:eq(8)').val());
+            fixed.june = numberWithoutCommas($(this).find('input:eq(7)').val());
             fixed.lockFlag = 0;
-            fixed.mallCode = $.budget.mallCode;
-            fixed.march = numberWithoutCommas($('#fixed_3_'+index).val());
-            fixed.may = numberWithoutCommas($('#fixed_5_'+index).val());
-            fixed.november = numberWithoutCommas($('#fixed_11_'+index).val());
-            fixed.october = numberWithoutCommas($('#fixed_10_'+index).val());
-            fixed.september = numberWithoutCommas($('#fixed_9_'+index).val());
-            fixed.shopCode = $.budget.code;
-            fixed.startDate = $('#fixedStartDate_'+index).val();
+            fixed.mallCode = $.shop.mallCode;
+            fixed.march = numberWithoutCommas($(this).find('input:eq(4)').val());
+            fixed.may = numberWithoutCommas($(this).find('input:eq(6)').val());
+            fixed.november = numberWithoutCommas($(this).find('input:eq(12)').val());
+            fixed.october = numberWithoutCommas($(this).find('input:eq(11)').val());
+            fixed.september = numberWithoutCommas($(this).find('input:eq(10)').val());
+            fixed.shopCode = $.shop.code;
+            fixed.startDate = $(this).find('input:eq(0)').val();
             fixed.termType = "B011";
-            fixed.total = numberWithoutCommas($('#fixedTotal_'+index).val());
-            fixed.unitCode = $.budget.unitCode;
-            fixed.year = $('#fixedStartDate_'+index).val().split('-')[0];
+            fixed.total = 0;
+            fixed.unitCode = $.shop.unitCode;
+            fixed.year = $(this).find('input:eq(0)').val().split('-')[0];
             if($(this).attr('data-id') != ''){
                 fixed.id = $(this).attr('data-id');
             }
-
+            fixed.updateOpenId = openId;
+            
             fixedList.push(fixed);
         })
         
         if(fixedList.length > 0) {
-            map = fixedList;
-            for(var ln = 1; ln < len; ln++){
-                var year1 = $('#fixedStartDate_'+ln).val().split('-')[0];
-                var year2 = $('#fixedStartDate_'+(ln+1)).val().split('-')[0];
-                if(year1 == year2){
-                    alertMsg('9999','此次提交的固定租金预算年份已经存在，请修改重新提交！');
+            budgetList = fixedList;
+            for(var ln = 0; ln < len; ln++){
+                var year1 = $('#fixedStartDate_'+(ln+1)).val().split('-')[0];
+                var year2 = $('#fixedStartDate_'+len).val().split('-')[0];
+                var year3 = $('#fixedEndDate_'+(ln+1)).val().split('-')[0];
+                var year4 = $('#fixedEndDate_'+len).val().split('-')[0];
+                if(year1 == year2 && (ln+1) != len){
+                    alertMsg('9999','固定租金预算年份重复，请修改重新提交！');
+                    return false;
+                } else if (year1 != year3 || year2 != year4){
+                    alertMsg('9999','固定租金预算开始与结束年份不同，请修改重新提交！');
                     return false;
                 }
             }
         }
         
-        var perpertyMgmtList = [];
-        var len = $("#perpertyMgmt").find("tr").length;
-        $("#perpertyMgmt").find("tr.new").each(function(i,e){
-            var perpertyMgmt = {};
-            index = i * 1 + 1;
-            perpertyMgmt.april = numberWithoutCommas($('#perpertyMgmt_4_'+index).val());
-            perpertyMgmt.area = $.budget.unitArea;
-            perpertyMgmt.august = numberWithoutCommas($('#perpertyMgmt_8_'+index).val());
-            perpertyMgmt.december = numberWithoutCommas($('#perpertyMgmt_12_'+index).val());
-            perpertyMgmt.endDate = $('#perpertyMgmtEndDate_'+index).val();
-            perpertyMgmt.february = numberWithoutCommas($('#perpertyMgmt_2_'+index).val());
-            perpertyMgmt.january = numberWithoutCommas($('#perpertyMgmt_1_'+index).val());
-            perpertyMgmt.july = numberWithoutCommas($('#perpertyMgmt_7_'+index).val());
-            perpertyMgmt.june = numberWithoutCommas($('#perpertyMgmt_6_'+index).val());
-            perpertyMgmt.lockFlag = 0;
-            perpertyMgmt.mallCode = $.budget.mallCode;
-            perpertyMgmt.march = numberWithoutCommas($('#perpertyMgmt_3_'+index).val());
-            perpertyMgmt.may = numberWithoutCommas($('#perpertyMgmt_5_'+index).val());
-            perpertyMgmt.november = numberWithoutCommas($('#perpertyMgmt_11_'+index).val());
-            perpertyMgmt.october = numberWithoutCommas($('#perpertyMgmt_10_'+index).val());
-            perpertyMgmt.september = numberWithoutCommas($('#perpertyMgmt_9_'+index).val());
-            perpertyMgmt.shopCode = $.budget.code;
-            perpertyMgmt.startDate = $('#perpertyMgmtStartDate_'+index).val();
-            perpertyMgmt.termType = "B021";
-            perpertyMgmt.total = numberWithoutCommas($('#perpertyMgmtTotal_'+index).val());
-            perpertyMgmt.unitCode = $.budget.unitCode;
-            perpertyMgmt.year = $('#perpertyMgmtStartDate_'+index).val().split('-')[0];
+        var propertymgmtList = [];
+        var len = $("#propertymgmt").find("tr").length;
+        $("#propertymgmt").find("tr.new").each(function(i,e){
+            var propertymgmt = {};
+            propertymgmt.april = numberWithoutCommas($(this).find('input:eq(5)').val());
+            propertymgmt.area = $.shop.unitArea;
+            propertymgmt.august = numberWithoutCommas($(this).find('input:eq(9)').val());
+            propertymgmt.december = numberWithoutCommas($(this).find('input:eq(13)').val());
+            propertymgmt.endDate = $(this).find('input:eq(1)').val();
+            propertymgmt.february = numberWithoutCommas($(this).find('input:eq(3)').val());
+            propertymgmt.january = numberWithoutCommas($(this).find('input:eq(2)').val());
+            propertymgmt.july = numberWithoutCommas($(this).find('input:eq(8)').val());
+            propertymgmt.june = numberWithoutCommas($(this).find('input:eq(7)').val());
+            propertymgmt.lockFlag = 0;
+            propertymgmt.mallCode = $.shop.mallCode;
+            propertymgmt.march = numberWithoutCommas($(this).find('input:eq(4)').val());
+            propertymgmt.may = numberWithoutCommas($(this).find('input:eq(6)').val());
+            propertymgmt.november = numberWithoutCommas($(this).find('input:eq(12)').val());
+            propertymgmt.october = numberWithoutCommas($(this).find('input:eq(11)').val());
+            propertymgmt.september = numberWithoutCommas($(this).find('input:eq(10)').val());
+            propertymgmt.shopCode = $.shop.code;
+            propertymgmt.startDate = $(this).find('input:eq(0)').val();
+            propertymgmt.termType = "B021";
+            propertymgmt.total = 0;
+            propertymgmt.unitCode = $.shop.unitCode;
+            propertymgmt.year = $(this).find('input:eq(0)').val().split('-')[0];
             if($(this).attr('data-id') != ''){
-                perpertyMgmt.id = $(this).attr('data-id');
+                propertymgmt.id = $(this).attr('data-id');
             }
+            propertymgmt.updateOpenId = openId;
 
-            perpertyMgmtList.push(perpertyMgmt);
+            propertymgmtList.push(propertymgmt);
         })
         
-        if(perpertyMgmtList.length > 0) {
-            map = fixedList.concat(perpertyMgmtList);
-            for(var ln = 1; ln < len; ln++){
-                var year1 = $('#perpertyMgmtStartDate_'+ln).val().split('-')[0];
-                var year2 = $('#perpertyMgmtStartDate_'+(ln+1)).val().split('-')[0];
-                if(year1 == year2){
-                    alertMsg('9999','此次提交的物业管理费预算年份已经存在，请修改重新提交！');
+        if(propertymgmtList.length > 0) {
+            budgetList = fixedList.concat(propertymgmtList);
+            for(var ln = 0; ln < len; ln++){
+                var year1 = $('#propertymgmtStartDate_'+(ln+1)).val().split('-')[0];
+                var year2 = $('#propertymgmtStartDate_'+len).val().split('-')[0];
+                var year3 = $('#propertymgmtEndDate_'+(ln+1)).val().split('-')[0];
+                var year4 = $('#propertymgmtEndDate_'+len).val().split('-')[0];
+                if(year1 == year2 && (ln+1) != len){
+                    alertMsg('9999','物业管理费预算年份重复，请修改重新提交！');
+                    return false;
+                } else if (year1 != year3 || year2 != year4){
+                    alertMsg('9999','物业管理费预算开始与结束年份不同，请修改重新提交！');
                     return false;
                 }
             }
@@ -1145,43 +1101,48 @@ function saveBudget() {
         var len = $("#commission").find("tr").length;
         $("#commission").find("tr.new").each(function(i,e){
             var commission = {};
-            index = i * 1 + 1;
-            commission.april = numberWithoutCommas($('#commission_4_'+index).val());
-            commission.area = $.budget.unitArea;
-            commission.august = numberWithoutCommas($('#commission_8_'+index).val());
-            commission.december = numberWithoutCommas($('#commission_12_'+index).val());
-            commission.endDate = $('#commissionEndDate_'+index).val();
-            commission.february = numberWithoutCommas($('#commission_2_'+index).val());
-            commission.january = numberWithoutCommas($('#commission_1_'+index).val());
-            commission.july = numberWithoutCommas($('#commission_7_'+index).val());
-            commission.june = numberWithoutCommas($('#commission_6_'+index).val());
+            commission.april = numberWithoutCommas($(this).find('input:eq(5)').val());
+            commission.area = $.shop.unitArea;
+            commission.august = numberWithoutCommas($(this).find('input:eq(9)').val());
+            commission.december = numberWithoutCommas($(this).find('input:eq(13)').val());
+            commission.endDate = $(this).find('input:eq(1)').val();
+            commission.february = numberWithoutCommas($(this).find('input:eq(3)').val());
+            commission.january = numberWithoutCommas($(this).find('input:eq(2)').val());
+            commission.july = numberWithoutCommas($(this).find('input:eq(8)').val());
+            commission.june = numberWithoutCommas($(this).find('input:eq(7)').val());
             commission.lockFlag = 0;
-            commission.mallCode = $.budget.mallCode;
-            commission.march = numberWithoutCommas($('#commission_3_'+index).val());
-            commission.may = numberWithoutCommas($('#commission_5_'+index).val());
-            commission.november = numberWithoutCommas($('#commission_11_'+index).val());
-            commission.october = numberWithoutCommas($('#commission_10_'+index).val());
-            commission.september = numberWithoutCommas($('#commission_9_'+index).val());
-            commission.shopCode = $.budget.code;
-            commission.startDate = $('#commissionStartDate_'+index).val();
-            commission.termType = "G011";
-            commission.total = numberWithoutCommas($('#commissionTotal_'+index).val());
-            commission.unitCode = $.budget.unitCode;
-            commission.year = $('#commissionStartDate_'+index).val().split('-')[0];
+            commission.mallCode = $.shop.mallCode;
+            commission.march = numberWithoutCommas($(this).find('input:eq(4)').val());
+            commission.may = numberWithoutCommas($(this).find('input:eq(6)').val());
+            commission.november = numberWithoutCommas($(this).find('input:eq(12)').val());
+            commission.october = numberWithoutCommas($(this).find('input:eq(11)').val());
+            commission.september = numberWithoutCommas($(this).find('input:eq(10)').val());
+            commission.shopCode = $.shop.code;
+            commission.startDate = $(this).find('input:eq(0)').val();
+            commission.termType = "D011";
+            commission.total = 0;
+            commission.unitCode = $.shop.unitCode;
+            commission.year = $(this).find('input:eq(0)').val().split('-')[0];
             if($(this).attr('data-id') != ''){
                 commission.id = $(this).attr('data-id');
             }
+            commission.updateOpenId = openId;
 
             commissionList.push(commission);
         })
         
         if(commissionList.length > 0) {
-            map = map.concat(commissionList);
-            for(var ln = 1; ln < len; ln++){
-                var year1 = $('#commissionStartDate_'+ln).val().split('-')[0];
-                var year2 = $('#commissionStartDate_'+(ln+1)).val().split('-')[0];
-                if(year1 == year2){
-                    alertMsg('9999','此次提交的提成扣率预算年份已经存在，请修改重新提交！');
+            budgetList = budgetList.concat(commissionList);
+            for(var ln = 0; ln < len; ln++){
+                var year1 = $('#commissionStartDate_'+(ln+1)).val().split('-')[0];
+                var year2 = $('#commissionStartDate_'+len).val().split('-')[0];
+                var year3 = $('#commissionEndDate_'+(ln+1)).val().split('-')[0];
+                var year4 = $('#commissionEndDate_'+len).val().split('-')[0];
+                if(year1 == year2 && (ln+1) != len){
+                    alertMsg('9999','提成扣率预算年份重复，请修改重新提交！');
+                    return false;
+                } else if (year1 != year3 || year2 != year4){
+                    alertMsg('9999','提成扣率预算开始与结束年份不同，请修改重新提交！');
                     return false;
                 }
             }
@@ -1191,43 +1152,48 @@ function saveBudget() {
         var len = $("#promotion").find("tr").length;
         $("#promotion").find("tr.new").each(function(i,e){
             var promotion = {};
-            index = i * 1 + 1;
-            promotion.april = numberWithoutCommas($('#promotion_4_'+index).val());
-            promotion.area = $.budget.unitArea;
-            promotion.august = numberWithoutCommas($('#promotion_8_'+index).val());
-            promotion.december = numberWithoutCommas($('#promotion_12_'+index).val());
-            promotion.endDate = $('#promotionEndDate_'+index).val();
-            promotion.february = numberWithoutCommas($('#promotion_2_'+index).val());
-            promotion.january = numberWithoutCommas($('#promotion_1_'+index).val());
-            promotion.july = numberWithoutCommas($('#promotion_7_'+index).val());
-            promotion.june = numberWithoutCommas($('#promotion_6_'+index).val());
+            promotion.april = numberWithoutCommas($(this).find('input:eq(5)').val());
+            promotion.area = $.shop.unitArea;
+            promotion.august = numberWithoutCommas($(this).find('input:eq(9)').val());
+            promotion.december = numberWithoutCommas($(this).find('input:eq(13)').val());
+            promotion.endDate = $(this).find('input:eq(1)').val();
+            promotion.february = numberWithoutCommas($(this).find('input:eq(3)').val());
+            promotion.january = numberWithoutCommas($(this).find('input:eq(2)').val());
+            promotion.july = numberWithoutCommas($(this).find('input:eq(8)').val());
+            promotion.june = numberWithoutCommas($(this).find('input:eq(7)').val());
             promotion.lockFlag = 0;
-            promotion.mallCode = $.budget.mallCode;
-            promotion.march = numberWithoutCommas($('#promotion_3_'+index).val());
-            promotion.may = numberWithoutCommas($('#promotion_5_'+index).val());
-            promotion.november = numberWithoutCommas($('#promotion_11_'+index).val());
-            promotion.october = numberWithoutCommas($('#promotion_10_'+index).val());
-            promotion.september = numberWithoutCommas($('#promotion_9_'+index).val());
-            promotion.shopCode = $.budget.code;
-            promotion.startDate = $('#promotionStartDate_'+index).val();
-            promotion.termType = "D011";
-            promotion.total = numberWithoutCommas($('#promotionTotal_'+index).val());
-            promotion.unitCode = $.budget.unitCode;
-            promotion.year = $('#promotionStartDate_'+index).val().split('-')[0];
+            promotion.mallCode = $.shop.mallCode;
+            promotion.march = numberWithoutCommas($(this).find('input:eq(4)').val());
+            promotion.may = numberWithoutCommas($(this).find('input:eq(6)').val());
+            promotion.november = numberWithoutCommas($(this).find('input:eq(12)').val());
+            promotion.october = numberWithoutCommas($(this).find('input:eq(11)').val());
+            promotion.september = numberWithoutCommas($(this).find('input:eq(10)').val());
+            promotion.shopCode = $.shop.code;
+            promotion.startDate = $(this).find('input:eq(0)').val();
+            promotion.termType = "G011";
+            promotion.total = 0;
+            promotion.unitCode = $.shop.unitCode;
+            promotion.year = $(this).find('input:eq(0)').val().split('-')[0];
             if($(this).attr('data-id') != ''){
                 promotion.id = $(this).attr('data-id');
             }
+            promotion.updateOpenId = openId;
 
             promotionList.push(promotion);
         })
         
         if(promotionList.length > 0) {
-            map = map.concat(promotionList);
-            for(var ln = 1; ln < len; ln++){
-                var year1 = $('#promotionStartDate_'+ln).val().split('-')[0];
-                var year2 = $('#promotionStartDate_'+(ln+1)).val().split('-')[0];
-                if(year1 == year2){
-                    alertMsg('9999','此次提交的固定推广费预算年份已经存在，请修改重新提交！');
+            budgetList = budgetList.concat(promotionList);
+            for(var ln = 0; ln < len; ln++){
+                var year1 = $('#promotionStartDate_'+(ln+1)).val().split('-')[0];
+                var year2 = $('#promotionStartDate_'+len).val().split('-')[0];
+                var year3 = $('#promotionEndDate_'+(ln+1)).val().split('-')[0];
+                var year4 = $('#promotionEndDate_'+len).val().split('-')[0];
+                if(year1 == year2 && (ln+1) != len){
+                    alertMsg('9999','固定推广费预算年份重复，请修改重新提交！');
+                    return false;
+                } else if (year1 != year3 || year2 != year4){
+                    alertMsg('9999','固定推广费预算开始与结束年份不同，请修改重新提交！');
                     return false;
                 }
             }
@@ -1237,49 +1203,67 @@ function saveBudget() {
         var len = $("#sales").find("tr").length;
         $("#sales").find("tr.new").each(function(i,e){
             var sales = {};
-            index = i * 1 + 1;
-            sales.april = numberWithoutCommas($('#sales_4_'+index).val());
-            sales.area = $.budget.unitArea;
-            sales.august = numberWithoutCommas($('#sales_8_'+index).val());
-            sales.december = numberWithoutCommas($('#sales_12_'+index).val());
-            sales.endDate = $('#salesEndDate_'+index).val();
-            sales.february = numberWithoutCommas($('#sales_2_'+index).val());
-            sales.january = numberWithoutCommas($('#sales_1_'+index).val());
-            sales.july = numberWithoutCommas($('#sales_7_'+index).val());
-            sales.june = numberWithoutCommas($('#sales_6_'+index).val());
+            sales.april = numberWithoutCommas($(this).find('input:eq(5)').val());
+            sales.area = $.shop.unitArea;
+            sales.august = numberWithoutCommas($(this).find('input:eq(9)').val());
+            sales.december = numberWithoutCommas($(this).find('input:eq(13)').val());
+            sales.endDate = $(this).find('input:eq(1)').val();
+            sales.february = numberWithoutCommas($(this).find('input:eq(3)').val());
+            sales.january = numberWithoutCommas($(this).find('input:eq(2)').val());
+            sales.july = numberWithoutCommas($(this).find('input:eq(8)').val());
+            sales.june = numberWithoutCommas($(this).find('input:eq(7)').val());
             sales.lockFlag = 0;
-            sales.mallCode = $.budget.mallCode;
-            sales.march = numberWithoutCommas($('#sales_3_'+index).val());
-            sales.may = numberWithoutCommas($('#sales_5_'+index).val());
-            sales.november = numberWithoutCommas($('#sales_11_'+index).val());
-            sales.october = numberWithoutCommas($('#sales_10_'+index).val());
-            sales.september = numberWithoutCommas($('#sales_9_'+index).val());
-            sales.shopCode = $.budget.code;
-            sales.startDate = $('#salesStartDate_'+index).val();
+            sales.mallCode = $.shop.mallCode;
+            sales.march = numberWithoutCommas($(this).find('input:eq(4)').val());
+            sales.may = numberWithoutCommas($(this).find('input:eq(6)').val());
+            sales.november = numberWithoutCommas($(this).find('input:eq(12)').val());
+            sales.october = numberWithoutCommas($(this).find('input:eq(11)').val());
+            sales.september = numberWithoutCommas($(this).find('input:eq(10)').val());
+            sales.shopCode = $.shop.code;
+            sales.startDate = $(this).find('input:eq(0)').val();
             sales.termType = "SALES";
-            sales.total = numberWithoutCommas($('#salesTotal_'+index).val());
-            sales.unitCode = $.budget.unitCode;
-            sales.year = $('#salesStartDate_'+index).val().split('-')[0];
+            sales.total = 0;
+            sales.unitCode = $.shop.unitCode;
+            sales.year = $(this).find('input:eq(0)').val().split('-')[0];
             if($(this).attr('data-id') != ''){
                 sales.id = $(this).attr('data-id');
             }
+            sales.updateOpenId = openId;
 
             salesList.push(sales);
         })
         
         if(salesList.length > 0) {
-            map = map.concat(salesList);
-            for(var ln = 1; ln < len; ln++){
-                var year1 = $('#salesStartDate_'+ln).val().split('-')[0];
-                var year2 = $('#salesStartDate_'+(ln+1)).val().split('-')[0];
-                if(year1 == year2){
-                    alertMsg('9999','此次提交的预估销售额预算年份已经存在，请修改重新提交！');
+            budgetList = budgetList.concat(salesList);
+            for(var ln = 0; ln < len; ln++){
+                var year1 = $('#salesStartDate_'+(ln+1)).val().split('-')[0];
+                var year2 = $('#salesStartDate_'+len).val().split('-')[0];
+                var year3 = $('#salesEndDate_'+(ln+1)).val().split('-')[0];
+                var year4 = $('#salesEndDate_'+len).val().split('-')[0];
+                if(year1 == year2 && (ln+1) != len){
+                    alertMsg('9999','预估销售额预算年份重复，请修改重新提交！');
+                    return false;
+                } else if (year1 != year3 || year2 != year4){
+                    alertMsg('9999','预估销售额预算开始与结束年份不同，请修改重新提交！');
                     return false;
                 }
             }
         }
         
-        if(map.length > 0){
+        if(budgetList.length > 0){
+            var openId = 'admin';
+            $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                if(v.roleCode == 'CROLE220301000001'){
+                    openId = v.moduleName;
+                    return false;
+                }
+            })
+        
+            var map = {
+                "shopCode": $.shop.code,
+                "updateOpenId": openId,
+                "budgetList": budgetList
+            }
             $.ajax({
                 url: $.api.baseLotus+"/api/shop/budget/saveOrUpdate",
                 type: "POST",
@@ -1305,11 +1289,7 @@ function saveBudget() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
 
-    //                    if(response.data.id != ""){
-    //                        window.location.href = '/lotus-admin/renew-summary?id='+response.data.bizId+'&s=succeed';
-    //                    } else {
-    //                        alertMsg(response.data.resultCode,response.data.resultMsg);
-    //                    }
+                        //window.location.href = '/lotus-admin/leasing-budget?s=succeed';
                     } else {
                         alertMsg(response.code,response.customerMessage);
                     }

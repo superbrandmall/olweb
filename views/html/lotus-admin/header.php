@@ -168,6 +168,13 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
+                                        <a href="javascript: sessionStorage.clear();" title="清除缓存">
+                                            <i class="fa fa-trash-o fa-fw"></i>
+                                            清除缓存
+                                        </a>
+                                    </li>
+                                    <li class="divider" style="margin: 0;"></li>
+                                    <li>
                                         <a href="javascript: logout();" title="登出">
                                             <i class="fa fa-sign-out fa-fw"></i>
                                             登出
