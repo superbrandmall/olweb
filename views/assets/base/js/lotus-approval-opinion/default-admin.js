@@ -94,9 +94,21 @@ function findRequestByBizId() {
                         formType = renderFormType(data.formType);
                     }
                     $('#formType').html('【<strong>' + formType + '</strong>】');
-                    if(data.formType == 'new' && getURLParameter('id') == null){
+                    /*if(data.formType == 'new' && getURLParameter('id') == null){
+                        $('#opinion_print').click(function(){
+                            var comment = document.getElementById("printButton");
+                            var ev = document.createEvent('MouseEvents');
+                            ev.initEvent('click', false, true);
+                            comment.dispatchEvent(ev);
+                        })
                         $('#webui').parent().remove();
+                        document.title = 'leasing DR商务审批';
                         $('#opinionType').text('leasing DR商务审批');
+                        
+                        if(data.formStatus != 1 && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+                            findDrProcessInstByBizId();
+                        }
+                        
                         $('#lotus-approval-opinion').show();
                         $('#lotus-approval-opinion').find('a').attr('href','?id='+getURLBizId());
                         $('.content-wrapper').append('<section class="content">\n\
@@ -107,7 +119,7 @@ function findRequestByBizId() {
                                             <div class="box-body" style="padding-top: 0; padding-bottom: 0; margin: 0 2px;">\n\
                                                 <div class="row">\n\
                                                     <div class="col-md-12" style="padding: 0;">\n\
-                                                        <iframe src ="/dr-summary/#/summary" width="100%" height="800" scrolling="auto" frameBorder="0" style="margin-top: 76px; overflow: hidden;">\n\
+                                                        <iframe id="leasingDrFrame" src ="/dr-summary/#/summary" width="100%" height="800" scrolling="auto" frameBorder="0" style="margin-top: 76px; overflow: hidden;">\n\
                                                             <p>你的浏览器不支持iframes。</p>\n\
                                                         </iframe>\n\
                                                     </div>\n\
@@ -118,7 +130,10 @@ function findRequestByBizId() {
                                 </div>\n\
                             </div>\n\
                         </section>');
-                    } else {
+                    } else {*/
+                        $('#opinion_print').click(function(){
+                            window.print();
+                        })
                         $('#webui').show();
                         var contractTemplate = '长期';
                         if(data.contractTemplate == 2){
@@ -894,7 +909,7 @@ function findRequestByBizId() {
                                 }
                             })
                         }
-                    }
+                    //}
                 } else {
                     alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
                 }
@@ -1039,7 +1054,7 @@ function findProcessInstByBizId(){
                                 index++;
                                 $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
                                 <td>'+v.activityName+'</td>\n\
-                                <td>'+v.approveName+'</td>\n\
+                                <td>'+(v.approveName || '')+'</td>\n\
                                 <td>'+(v.status != null ? renderFlowSteps(v.status) : '')+'</td>\n\
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');
@@ -1050,6 +1065,53 @@ function findProcessInstByBizId(){
                             }
                         })
                         $('#investmentContractApprovalProcess').show();
+                    }
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                            
+        }
+    }); 
+}
+
+function findDrProcessInstByBizId(){
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLBizId(),
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
+                        var openId = 'admin';
+                        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                            if(v.roleCode == 'CROLE220301000001'){
+                                openId = v.moduleName;
+                                return false;
+                            }
+                        })
+                        $.each(response.data.processStepRecordList, function(i,v) {
+                            if((i != 0 && v.status != null && v.status != 'WITHDRAW') || v.activityType == 'END'){
+                                if(v.handler == openId && v.status == 'DOING'){
+                                    $.curProcess = 1;
+                                }
+                            }
+                        })
                     }
                 }
             } else {

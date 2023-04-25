@@ -111,7 +111,7 @@ function findRequestByBizId() {
                     $('#essayBudgetRentAmount').html('预算租金<span class="txt">'+(data.budgetDayRent || '0')+'</span>元/天/平米，');
                     $('#essayBudgetRentAmountRateOfReach').html('单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100).toFixed(2) * 100 / 100 || '/')+'</span>%。');
                     $('#renewBudgetDesc').html('该铺位预算中的情况说明<span class="txt">'+(data.renewBudgetDesc || '/')+'</span>，');
-                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100) * 100 / 100 || '/').toFixed(2)+'</span>%，');
+                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat((data.budgetYearCompleteRate * 100) * 100 / 100).toFixed(2) || '/')+'</span>%，');
                     $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '0')+'</span>元。');
                     $('#remark').val(data.remark);
  
@@ -412,4 +412,51 @@ function findRentCalculationMode(dictTypeCode) {
             }                             
         }
     })
+}
+
+function flowInstUpdate() {
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/process/inst/form/flowInstUpdate?bizId="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $('#myModalLabel').text('正在连接云之家, 请稍后...');
+                $('#submitStateModal').modal('show');
+                var obj = $('#submitState');
+                setTimeFlowInst(obj);
+            }                             
+        }
+    })
+}
+
+var countdownFlowInst=10;
+
+function setTimeFlowInst(obj) {
+    if (countdownFlowInst == 0) { 
+        $('#myModalLabel,#submitState').text('');
+        $('#submitStateModal').modal('hide');
+        findProcessInstByBizId(); 
+        countdownFlowInst = 10; 
+        return;
+    } else { 
+        obj.html(countdownFlowInst + "秒");
+        countdownFlowInst--; 
+    } 
+setTimeout(function() { 
+    setTimeFlowInst(obj); }
+    ,1000); 
 }

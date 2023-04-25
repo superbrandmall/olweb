@@ -246,6 +246,12 @@ tbody .money {
     box-shadow: none;
 }
 
+.callout.callout-default {
+    color: #333;
+    background: rgba(238,242,250,0.9);
+    border: 1px solid #9cb1cd;
+}
+
 @media (max-width:767px) {
     .sub-header {
         left: 0;

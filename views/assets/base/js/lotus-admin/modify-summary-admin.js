@@ -445,3 +445,50 @@ function findRentCalculationMode(dictTypeCode) {
         }
     })
 }
+
+function flowInstUpdate() {
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/process/inst/form/flowInstUpdate?bizId="+getURLParameter('id'),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                $('#myModalLabel').text('正在连接云之家, 请稍后...');
+                $('#submitStateModal').modal('show');
+                var obj = $('#submitState');
+                setTimeFlowInst(obj);
+            }                             
+        }
+    })
+}
+
+var countdownFlowInst=10;
+
+function setTimeFlowInst(obj) {
+    if (countdownFlowInst == 0) { 
+        $('#myModalLabel,#submitState').text('');
+        $('#submitStateModal').modal('hide');
+        findProcessInstByBizId(); 
+        countdownFlowInst = 10; 
+        return;
+    } else { 
+        obj.html(countdownFlowInst + "秒");
+        countdownFlowInst--; 
+    } 
+setTimeout(function() { 
+    setTimeFlowInst(obj); }
+    ,1000); 
+}

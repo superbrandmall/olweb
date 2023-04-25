@@ -30,8 +30,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2" id="state" style="width: 100%">
                                     <option value="" selected>全部</option>
-                                    <option value="1">使用中</option>
-                                    <option value="0">已删除</option>
+                                    <option value="经营中">经营中</option>
+                                    <option value="待续签">待续签</option>
+                                    <option value="改造中">改造中</option>
+                                    <option value="已闭店">已闭店</option>
                                 </select>
                             </div>
                         </div>
@@ -118,11 +120,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 50px;">状态</div>
+                                                                <div class="th-inner" style="width: 85px;">起始日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 85px;">开业日期</div>
+                                                                <div class="th-inner" style="width: 85px;">到期日期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 50px;">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

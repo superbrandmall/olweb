@@ -2066,249 +2066,6 @@ function submitCheck() {
         }
     }
     
-    var budgetError = '<h5 style="vertical-align: super; display: inline-block; margin-left: 10px; color: #f00;"><i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true" style="position: relative;"></i> 请保存单据后前往【招商规划 - 租金计划】完善当年度预算。</h5>';
-    var shopBudget = sessionStorage.getItem("shopBudget_"+$('#selectStore').val().split(':::')[1]);
-    
-    if($('#selectRentCalculationMode').find('option:selected').val() == 'fixRent' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
-        if($('#fixedRent tr').length > 0) {
-            if($('#fixedRentStartDate_1').val() == ''){
-                flag = 0;
-                $('#fixedRentStartDate_1').parent().prepend(error);
-            }
-            
-            if($('#fixedRentEndDate_1').val() == ''){
-                flag = 0;
-                $('#fixedRentEndDate_1').parent().prepend(error);
-            }
-            
-            if($('#fixedRentAmount_1').val() == ''){
-                flag = 0;
-                $('#fixedRentAmount_1').parent().append(error);
-            }
-            
-            if($('#fixedRentTaxAmount_1').val() == ''){
-                flag = 0;
-                $('#fixedRentTaxAmount_1').parent().append(error);
-            }
-            
-            if($('#fixedRentMinSalesAmount_1').val() == ''){
-                flag = 0;
-                $('#fixedRentMinSalesAmount_1').parent().append(error);
-            }
-            
-            var index = 0;
-            $("#fixedRent").find("tr").each(function(i,e){
-                index = i * 1 + 1;
-                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-                    if(JSON.parse(shopBudget).length > 0){
-                        var sd = $('#fixedRentStartDate_'+index).val();
-                        flag = 1;
-                        if(sd != ''){
-                            flag = 0;
-                            $.each(JSON.parse(shopBudget), function(j,w) {
-                                if(w.year == sd.split('-')[0] && w.termType == 'B011'){
-                                   flag = 1;
-                                   return false;
-                                }
-                            })
-                        }
-                    } else {
-                        flag = 0;
-                        $('#fixedRentBudgetModalLink').parent().append(budgetError);
-                    }
-                } else {
-                    flag = 0;
-                    $('#fixedRentBudgetModalLink').parent().append(budgetError);
-                }
-            })
-            if(flag == 0){
-                $('#fixedRentBudgetModalLink').parent().append(budgetError);
-            }
-            
-            var index = 0;
-            $("#fixedRent").find("tr").each(function(i,e){
-                index = i * 1 + 1;
-                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-                    if(JSON.parse(shopBudget).length > 0){
-                        var sd = $('#fixedRentStartDate_'+index).val();
-                        flag = 1;
-                        if(sd != ''){
-                            flag = 0;
-                            $.each(JSON.parse(shopBudget), function(j,w) {
-                                if(w.year == sd.split('-')[0] && w.termType == 'SALES'){
-                                   flag = 1;
-                                   return false;
-                                }
-                            })
-                        }
-                    } else {
-                        flag = 0;
-                    }
-                } else {
-                    flag = 0;
-                }
-            })
-            if(flag == 0){
-                $('#fixedRentBudgetModalLink').parent().append(budgetError);
-            }
-        } else {
-            flag = 0;
-            $('#investmentContractAccounttermFixed').append(error);
-        }
-    }
-    
-    if($('#selectRentCalculationMode').find('option:selected').val() == 'deduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
-        if($('#commission tr').length > 0) {
-            if($('#commissionStartDate_1').val() == ''){
-                flag = 0;
-                $('#commissionStartDate_1').parent().prepend(error);
-            }
-            
-            if($('#commissionEndDate_1').val() == ''){
-                flag = 0;
-                $('#commissionEndDate_1').parent().prepend(error);
-            }
-            
-            if($('#commissionTaxDeduct_1').val() == ''){
-                flag = 0;
-                $('#commissionTaxDeduct_1').parent().append(error);
-            }
-            
-            if($('#commissionDeduct_1').val() == ''){
-                flag = 0;
-                $('#commissionDeduct_1').parent().append(error);
-            }
-            
-            if($('#commissionAmount_1').val() == ''){
-                flag = 0;
-                $('#commissionAmount_1').parent().append(error);
-            }
-            
-            if($('#commissionMinSales_1').val() == ''){
-                flag = 0;
-                $('#commissionMinSales_1').parent().append(error);
-            }
-            
-            if($('#commissionMinSalesAmount_1').val() == ''){
-                flag = 0;
-                $('#commissionMinSalesAmount_1').parent().append(error);
-            }
-            
-            var index = 0;
-            $("#commission").find("tr").each(function(i,e){
-                index = i * 1 + 1;
-                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-                    if(JSON.parse(shopBudget).length > 0){
-                        var sd = $('#commissionStartDate_'+index).val();
-                        flag = 1;
-                        if(sd != ''){
-                            flag = 0;
-                            $.each(JSON.parse(shopBudget), function(j,w) {
-                                if(w.year == sd.split('-')[0] && w.termType == 'D011'){
-                                   flag = 1;
-                                   return false;
-                                }
-                            })
-                        }
-                    } else {
-                        flag = 0;
-                    }
-                } else {
-                    flag = 0;
-                }
-            })
-            if(flag == 0){
-                $('#commissionBudgetModalLink').parent().append(budgetError);
-            }
-            
-            var index = 0;
-            $("#commission").find("tr").each(function(i,e){
-                index = i * 1 + 1;
-                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-                    if(JSON.parse(shopBudget).length > 0){
-                        var sd = $('#commissionStartDate_'+index).val();
-                        flag = 1;
-                        if(sd != ''){
-                            flag = 0;
-                            $.each(JSON.parse(shopBudget), function(j,w) {
-                                if(w.year == sd.split('-')[0] && w.termType == 'SALES'){
-                                   flag = 1;
-                                   return false;
-                                }
-                            })
-                        }
-                    } else {
-                        flag = 0;
-                    }
-                } else {
-                    flag = 0;
-                }
-            })
-            if(flag == 0){
-                $('#commissionBudgetModalLink').parent().append(budgetError);
-            }
-        } else {
-            flag = 0;
-            $('#investmentContractAccounttermCommission').append(error);
-        }
-    }
-    
-    var index = 0;
-    $("#propertyMgmt").find("tr").each(function(i,e){
-        index = i * 1 + 1;
-        if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-            if(JSON.parse(shopBudget).length > 0){
-                var sd = $('#propertyMgmtStartDate_'+index).val();
-                flag = 1;
-                if(sd != ''){
-                    flag = 0;
-                    $.each(JSON.parse(shopBudget), function(j,w) {
-                        if(w.year == sd.split('-')[0] && w.termType == 'B021'){
-                           flag = 1;
-                           return false;
-                        }
-                    })
-                }
-            } else {
-                flag = 0;
-            }
-        } else {
-            flag = 0;
-        }
-    })
-    
-    if(flag == 0){
-        $('#propertyMgmtBudgetModalLink').parent().append(budgetError);
-    }
-    
-    var index = 0;
-    $("#promotion").find("tr").each(function(i,e){
-        index = i * 1 + 1;
-        if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
-            if(JSON.parse(shopBudget).length > 0){
-                var sd = $('#promotionStartDate_'+index).val();
-                flag = 1;
-                if(sd != ''){
-                    flag = 0;
-                    $.each(JSON.parse(shopBudget), function(j,w) {
-                        if(w.year == sd.split('-')[0] && w.termType == 'G011'){
-                           flag = 1;
-                           return false;
-                        }
-                    })
-                }
-            } else {
-                flag = 0;
-            }
-        } else {
-            flag = 0;
-        }
-    })
-    
-    if(flag == 0){
-        $('#promotionBudgetModalLink').parent().append(budgetError);
-    }
-    
     if($('#businessLicense_0').val() == '') {
         flag = 0;
         $('#businessLicense_0').parent().append(error);
@@ -2532,7 +2289,247 @@ function submitCheck() {
         $('#investmentContractMallSummarySubOpenRate').parent().append(error);
     }
     
-    if(flag == 1){
+    var budgetError = '<h5 style="vertical-align: super; display: inline-block; margin-left: 10px; color: #f00;"><i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true" style="position: relative;"></i> 请保存单据后前往【招商规划 - 租金计划】完善当年度预算。</h5>';
+    var shopBudget = sessionStorage.getItem("shopBudget_"+$('#selectStore').val().split(':::')[1]);
+    
+    if($('#selectRentCalculationMode').find('option:selected').val() == 'fixRent' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
+        if($('#fixedRent tr').length > 0) {
+            if($('#fixedRentStartDate_1').val() == ''){
+                flag = 0;
+                $('#fixedRentStartDate_1').parent().prepend(error);
+            }
+            
+            if($('#fixedRentEndDate_1').val() == ''){
+                flag = 0;
+                $('#fixedRentEndDate_1').parent().prepend(error);
+            }
+            
+            if($('#fixedRentAmount_1').val() == ''){
+                flag = 0;
+                $('#fixedRentAmount_1').parent().append(error);
+            }
+            
+            if($('#fixedRentTaxAmount_1').val() == ''){
+                flag = 0;
+                $('#fixedRentTaxAmount_1').parent().append(error);
+            }
+            
+            if($('#fixedRentMinSalesAmount_1').val() == ''){
+                flag = 0;
+                $('#fixedRentMinSalesAmount_1').parent().append(error);
+            }
+            
+            var index = 0;
+            $("#fixedRent").find("tr").each(function(i,e){
+                index = i * 1 + 1;
+                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+                    if(JSON.parse(shopBudget).length > 0){
+                        var sd = $('#fixedRentStartDate_'+index).val();
+                        var ed = $('#fixedRentEndDate_'+index).val();
+                        flag = 1;
+                        if(sd != ''){
+                            flag = 0;
+                            $.each(JSON.parse(shopBudget), function(j,w) {
+                                if(w.year == sd.split('-')[0] && w.termType == 'B011'){
+                                   flag = 1;
+                                   return false;
+                                }
+                            })
+                        }
+                        
+                        if(ed != ''){
+                            flag = 0;
+                            $.each(JSON.parse(shopBudget), function(j,w) {
+                                if(w.year == ed.split('-')[0] && w.termType == 'B011'){
+                                   flag = 1;
+                                   return false;
+                                }
+                            })
+                        }
+                    } else {
+                        flag = 0;
+                        $('#fixedRentBudgetModalLink').parent().append(budgetError);
+                    }
+                } else {
+                    flag = 0;
+                    $('#fixedRentBudgetModalLink').parent().append(budgetError);
+                }
+            })
+            
+            if(flag == 0){
+                $('#fixedRentBudgetModalLink').parent().append(budgetError);
+            }
+        } else {
+            flag = 0;
+            $('#investmentContractAccounttermFixed').append(error);
+        }
+    }
+    
+    if($('#selectRentCalculationMode').find('option:selected').val() == 'deduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndHigherDeduct' || $('#selectRentCalculationMode').find('option:selected').val() == 'fixedRentAndAddDeduct') {
+        if($('#commission tr').length > 0) {
+            if($('#commissionStartDate_1').val() == ''){
+                flag = 0;
+                $('#commissionStartDate_1').parent().prepend(error);
+            }
+            
+            if($('#commissionEndDate_1').val() == ''){
+                flag = 0;
+                $('#commissionEndDate_1').parent().prepend(error);
+            }
+            
+            if($('#commissionTaxDeduct_1').val() == ''){
+                flag = 0;
+                $('#commissionTaxDeduct_1').parent().append(error);
+            }
+            
+            if($('#commissionDeduct_1').val() == ''){
+                flag = 0;
+                $('#commissionDeduct_1').parent().append(error);
+            }
+            
+            if($('#commissionAmount_1').val() == ''){
+                flag = 0;
+                $('#commissionAmount_1').parent().append(error);
+            }
+            
+            if($('#commissionMinSales_1').val() == ''){
+                flag = 0;
+                $('#commissionMinSales_1').parent().append(error);
+            }
+            
+            if($('#commissionMinSalesAmount_1').val() == ''){
+                flag = 0;
+                $('#commissionMinSalesAmount_1').parent().append(error);
+            }
+            
+            var index = 0;
+            $("#commission").find("tr").each(function(i,e){
+                index = i * 1 + 1;
+                if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+                    if(JSON.parse(shopBudget).length > 0){
+                        var sd = $('#commissionStartDate_'+index).val();
+                        var ed = $('#commissionEndDate_'+index).val();
+                        flag = 1;
+                        if(sd != ''){
+                            flag = 0;
+                            $.each(JSON.parse(shopBudget), function(j,w) {
+                                if(w.year == sd.split('-')[0] && w.termType == 'D011'){
+                                   flag = 1;
+                                   return false;
+                                }
+                            })
+                        }
+                        
+                        if(ed != ''){
+                            flag = 0;
+                            $.each(JSON.parse(shopBudget), function(j,w) {
+                                if(w.year == ed.split('-')[0] && w.termType == 'D011'){
+                                   flag = 1;
+                                   return false;
+                                }
+                            })
+                        }
+                    } else {
+                        flag = 0;
+                    }
+                } else {
+                    flag = 0;
+                }
+            })
+            
+            if(flag == 0){
+                $('#commissionBudgetModalLink').parent().append(budgetError);
+            }
+        } else {
+            flag = 0;
+            $('#investmentContractAccounttermCommission').append(error);
+        }
+    }
+    
+    if($("#propertyMgmt").find("tr").length > 0){
+        var index = 0;
+        $("#propertyMgmt").find("tr").each(function(i,e){
+            index = i * 1 + 1;
+            if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+                if(JSON.parse(shopBudget).length > 0){
+                    var sd = $('#propertyMgmtStartDate_'+index).val();
+                    var ed = $('#propertyMgmtEndDate_'+index).val();
+                    flag = 1;
+                    if(sd != ''){
+                        flag = 0;
+                        $.each(JSON.parse(shopBudget), function(j,w) {
+                            if(w.year == sd.split('-')[0] && w.termType == 'B021'){
+                               flag = 1;
+                               return false;
+                            }
+                        })
+                    }
+                    
+                    if(ed != ''){
+                        flag = 0;
+                        $.each(JSON.parse(shopBudget), function(j,w) {
+                            if(w.year == ed.split('-')[0] && w.termType == 'B021'){
+                               flag = 1;
+                               return false;
+                            }
+                        })
+                    }
+                } else {
+                    flag = 0;
+                }
+            } else {
+                flag = 0;
+            }
+        })
+        
+        if(flag == 0){
+            $('#propertyMgmtBudgetModalLink').parent().append(budgetError);
+        }
+    }
+    
+    
+    if($("#promotion").find("tr").length > 0){
+        var index = 0;
+        $("#promotion").find("tr").each(function(i,e){
+            index = i * 1 + 1;
+            if(shopBudget != null && shopBudget != '' && shopBudget != 'null' ){
+                if(JSON.parse(shopBudget).length > 0){
+                    var sd = $('#promotionStartDate_'+index).val();
+                    var ed = $('#promotionEndDate_'+index).val();
+                    flag = 1;
+                    if(sd != ''){
+                        flag = 0;
+                        $.each(JSON.parse(shopBudget), function(j,w) {
+                            if(w.year == sd.split('-')[0] && w.termType == 'G011'){
+                               flag = 1;
+                               return false;
+                            }
+                        })
+                    }
+                    
+                    if(ed != ''){
+                        flag = 0;
+                        $.each(JSON.parse(shopBudget), function(j,w) {
+                            if(w.year == ed.split('-')[0] && w.termType == 'G011'){
+                               flag = 1;
+                               return false;
+                            }
+                        })
+                    }
+                } else {
+                    flag = 0;
+                }
+            } else {
+                flag = 0;
+            }
+        })
+        
+        if(flag == 0){
+            $('#promotionBudgetModalLink').parent().append(budgetError);
+        }
+    }
+    
+    if(flag == 1 && $('.mandatory-error').length == 0){
         saveContractForm('submit');
     } else {
         $('html, body').animate({

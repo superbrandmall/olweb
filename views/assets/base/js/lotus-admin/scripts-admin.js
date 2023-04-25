@@ -192,19 +192,19 @@ function alertMsg(code,m) {
     switch (code) {
         case "JWT0002":
             msg = m+"，请重新 <strong><a href='javascript: logout();'>登录</a></strong>！";
-            color = "danger";
-            style = ' style="z-index: 1041;position: fixed; left:165px; right: 15px; top: 152px;"';
+            color = "default";
+            style = ' style="z-index: 1041;position: fixed; left:0; right: 0; top: 0; bottom: 0; background: rgba(193,194,193,0.5);"';
             break;
         default:
             msg = m;
-            color = "danger";
-            style = ' style="z-index: 1041;position: fixed; left:165px; right: 15px; top: 152px;"';
+            color = "default";
+            style = ' style="z-index: 1041;position: fixed; left:0; right: 0; top: 0; bottom: 0; background: rgba(193,194,193,0.5);"';
             break;
     }
     
     var msgDiv = '<div id="msgDiv" class="row"'+style+' role="alert">\n\
-            <div class="col-md-12">\n\
-                    <h5 class="callout callout-'+color+'"><a href="javascript: void(0);" onclick=\'javascript: $("#msgDiv").remove()\' style="float: right;"><i class="fa fa-times"></i></a>'+msg+'</h5>\n\
+            <div class="col-md-6 col-md-offset-3" style="top: 40%;">\n\
+                    <h5 class="callout callout-'+color+'"><a href="javascript: void(0);" onclick=\'javascript: $("#msgDiv").remove()\' style="float: right; background-color: #d1eaf9; border: 1px solid #66a; color: #333; text-decoration: none; padding: 2px 10px;">关闭窗口</a><i class="fa fa-times-circle" style="color: #d20100; font-size: 30px; vertical-align: middle; margin-right: 20px;"></i> '+msg+'</h5>\n\
                 </div>\n\
             </div>';
 
@@ -224,14 +224,14 @@ function successMsg(code,m) {
     switch (code) {
         default:
             msg = m;
-            color = "success";
-            style = ' style="z-index: 1029;position: fixed; left:165px; right: 15px; top: 152px;"';
+            color = "default";
+            style = ' style="z-index: 1029;position: fixed; left:0; right: 0; top: 0; bottom: 0; background: rgba(193,194,193,0.5);"';
             break;
     }
     
-    var msgDiv = '<div id="msgDiv" class="row"'+style+'>\n\
-            <div class="col-md-12">\n\
-                    <h5 class="callout callout-'+color+'"><a href="javascript: void(0);" onclick=\'javascript: $("#msgDiv").remove()\' style="float: right;"><i class="fa fa-times"></i></a>'+msg+'</h5>\n\
+    var msgDiv = '<div id="msgDiv" class="row"'+style+' role="alert">\n\
+            <div class="col-md-6 col-md-offset-3" style="top: 40%;">\n\
+                    <h5 class="callout callout-'+color+'"><a href="javascript: void(0);" onclick=\'javascript: $("#msgDiv").remove()\' style="float: right; background-color: #d1eaf9; border: 1px solid #66a; color: #333; text-decoration: none; padding: 2px 10px;">关闭窗口</a><i class="fa fa-check-circle" style="color: #008f50; font-size: 30px; vertical-align: middle; margin-right: 20px;"></i> '+msg+'</h5>\n\
                 </div>\n\
             </div>';
 
@@ -2181,6 +2181,7 @@ function addRowInvestmentBudgetAccountterm(term) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccountterm'+term.slice(0,1).toUpperCase()+term.slice(1).toLowerCase());
     var tbody = table.querySelector('tbody') || table;
@@ -2239,6 +2240,15 @@ function addRowInvestmentBudgetAccountterm(term) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteBudgetRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);               
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccountterm'+term.slice(0,1).toUpperCase()+term.slice(1).toLowerCase()+' .input-daterange').datepicker({
@@ -3003,6 +3013,7 @@ function findProcessInstByBizId(){
                     if(response.data.processInstStatus != null){
                         $('#flowStatus').html('(<span class="txt">流程'+renderFlowStatus(response.data.processInstStatus)+'</span>)');
                     }
+                    $('#approvalProcess').html('');
                     if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
                         var index = 0;
                         $.each(response.data.processStepRecordList, function(i,v) {

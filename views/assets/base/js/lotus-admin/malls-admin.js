@@ -88,9 +88,10 @@ function findAllMallsByKVCondition(p,c){
     
     if($.cookie('searchMallState') != null && $.cookie('searchMallState') != '' && $.cookie('searchMallState') != 'null'){
         param = {
-            "columnName": "state",
+            "columnName": "remarkFirst",
             "columnPatten": "",
-            "operator": "AND",
+            "conditionOperator": "AND",
+            "operator": "=",
             "value": $.cookie('searchMallState')
         }
         params.push(param);
@@ -147,21 +148,7 @@ function findAllMallsByKVCondition(p,c){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
-                    $.each(response.data.content, function(i,v){
-                        var mallStatus;
-                        var dc = dateCompare(v.endDate,date);
-                        switch (dc) {
-                            case 'larger':
-                                mallStatus = "使用中";
-                                break;
-                            case 'smaller':
-                                mallStatus = "已闭店";
-                                break;
-                            default:
-                                mallStatus = "使用中";
-                                break;
-                        }
-                        
+                    $.each(response.data.content, function(i,v){       
                         var tbg = '#fff';
                         if(i%2==0){
                             tbg = '#f9f9f9';
@@ -169,8 +156,9 @@ function findAllMallsByKVCondition(p,c){
                         
                         $('#malls').append('<tr data-index="'+i+'">\n\
                         <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/mall-detail?id='+v.code+'">'+v.mallName+'['+v.code+']</a></td>\n\
-                        <td>'+mallStatus+'</td>\n\
                         <td>'+v.startDate+'</td>\n\
+                        <td>'+v.endDate+'</td>\n\
+                        <td>'+(v.remarkFirst || '')+'</td>\n\
                         <td>'+(v.mallLotusBase.phoneNum || '')+'</td>\n\
                         <td>'+v.mallLotusBase.address+'</td>\n\
                         <td>'+v.mallLotusBase.name+'</td>\n\
@@ -187,7 +175,7 @@ function findAllMallsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#malls').html('<tr><td colspan="11" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#malls').html('<tr><td colspan="12" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

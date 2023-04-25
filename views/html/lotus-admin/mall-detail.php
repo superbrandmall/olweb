@@ -85,6 +85,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <div id="errorcontainer-regAddress" class="errorDiv"></div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="remarkFirst" class="col-md-4 control-label">状态</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="remarkFirst" style="width: 100%">
+                                                <option value="" selected>全部</option>
+                                                <option value="经营中">经营中</option>
+                                                <option value="待续签">待续签</option>
+                                                <option value="改造中">改造中</option>
+                                                <option value="已闭店">已闭店</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -102,7 +114,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">大业主合同 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="startDate" class="col-md-4 control-label">大业主合同 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <div class="input-daterange input-group">
                                                 <input type="text" class="form-control" id="startDate" name="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
@@ -115,6 +127,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             </div>
                                             <div id="errorcontainer-startDate" class="errorDiv" style="float: left;"></div>
                                             <div id="errorcontainer-endDate" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="remarkSecond" class="col-md-4 control-label">项目招商</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2 selectUser" id="remarkSecond" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -346,7 +366,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                             <div class="box-body">
                                 <div class="col-md-12">
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                    <textarea class="form-control" id="remarkThird" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>

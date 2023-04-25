@@ -62,6 +62,8 @@ $(document).ready(function(){
         }
     });
     
+    updateUserDropDown(20);
+    
     $('.date-picker, .input-daterange').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
@@ -114,11 +116,13 @@ function findMallByCode() {
                 
                 if(response.data != null && response.data != ''){
                     $.mall = response.data;
-                    if(response.data.mallLotusBase.mallStatus == 1){
-                        $('#state').text('使用中');
-                    } else {
-                        $('#state').text('已删除').removeClass('badge-success').addClass('badge-danger');
+                    $('#state').text(response.data.remarkFirst || '');
+                    if(response.data.remarkFirst == null){
+                        $('#state').remove();
+                    } else if(response.data.remarkFirst == '已闭店'){
+                        $('#state').removeClass('badge-success').addClass('badge-danger');
                     }
+                    
                     $('#name2').text(response.data.mallName+'['+response.data.code+']');
                     $('#code').val(response.data.code);
                     $('#mallName').val(response.data.mallName);
@@ -131,6 +135,14 @@ function findMallByCode() {
                     $('#endDate').datepicker('update',response.data.endDate);
                     $('#openStartTime').val(response.data.mallLotusBase.startTime);
                     $('#openEndTime').val(response.data.mallLotusBase.endTime);
+                    if(response.data.remarkFirst != '' && response.data.remarkFirst != null){
+                        var remarkFirst = new Option(response.data.remarkFirst, response.data.remarkFirst, true, true);
+                        $('#remarkFirst').append(remarkFirst).trigger('change');
+                    }
+                    if(response.data.remarkSecond != '' && response.data.remarkSecond != null){
+                        var remarkSecond = new Option(response.data.remarkSecond, response.data.remarkSecond, true, true);
+                        $('#remarkSecond').append(remarkSecond).trigger('change');
+                    }
                     
                     $('#building').text(response.data.mallLotusBase.building || '-');
                     if(!sessionStorage.getItem("floors-"+getURLParameter('id')) || sessionStorage.getItem("floors-"+getURLParameter('id')) == null || sessionStorage.getItem("floors-"+getURLParameter('id')) == '') {
@@ -146,7 +158,7 @@ function findMallByCode() {
                     $('#phoneNum').val(response.data.mallLotusBase.phoneNum);
                     $('#address').val(response.data.mallLotusBase.address);
                     
-                    $('#description').val(response.data.description);
+                    $('#remarkThird').val(response.data.remarkThird);
                 }
             }
         }
@@ -277,7 +289,9 @@ function saveMall() {
             "mallName": $('#mallName').val(),
             "mallType": $.mall.mallType,
             "phone": $('#phoneNum').val(),
-            "remarkSecond": $.mall.remarkSecond,
+            "remarkFirst": ($('#remarkFirst').val() || ''),
+            "remarkSecond": ($('#remarkSecond').val() || ''),
+            "remarkThird": ($('#remarkThird').val() || ''),
             "startDate": $('#startDate').val(),
             "updateOpenId": openId
         }

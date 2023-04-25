@@ -180,6 +180,7 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermFixed');
     var tbody = table.querySelector('tbody') || table;
@@ -291,6 +292,14 @@ function updateRowInvestmentBudgetAccounttermFixed(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px; opacity: 0.5");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermFixed .input-daterange').datepicker({
@@ -340,6 +349,7 @@ function updateRowInvestmentBudgetAccounttermPropertymgmt(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermPropertymgmt');
     var tbody = table.querySelector('tbody') || table;
@@ -451,6 +461,14 @@ function updateRowInvestmentBudgetAccounttermPropertymgmt(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px; opacity: 0.5");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermPropertymgmt .input-daterange').datepicker({
@@ -500,6 +518,7 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermCommission');
     var tbody = table.querySelector('tbody') || table;
@@ -611,7 +630,15 @@ function updateRowInvestmentBudgetAccounttermCommission(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px; opacity: 0.5");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);
+    
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermCommission .input-daterange').datepicker({
         'language': 'zh-CN',
@@ -660,6 +687,7 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermPromotion');
     var tbody = table.querySelector('tbody') || table;
@@ -771,7 +799,15 @@ function updateRowInvestmentBudgetAccounttermPromotion(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
-
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px; opacity: 0.5");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);
+    
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermPromotion .input-daterange').datepicker({
         'language': 'zh-CN',
@@ -820,6 +856,7 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
     column[11] = createRowColumn(newrow);
     column[12] = createRowColumn(newrow);
     column[13] = createRowColumn(newrow);
+    column[14] = createRowColumn(newrow);
     
     var table = document.getElementById('investmentBudgetAccounttermSales');
     var tbody = table.querySelector('tbody') || table;
@@ -931,6 +968,14 @@ function updateRowInvestmentBudgetAccounttermSales(v) {
         div.appendChild(percent);
         column[i*1+1].appendChild(div);
     }
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px; opacity: 0.5");
+    remove.appendChild(icon);
+    column[14].appendChild(remove);
 
     tbody.appendChild(newrow);
     $('#investmentBudgetAccounttermSales .input-daterange').datepicker({
@@ -1289,7 +1334,7 @@ function saveBudget() {
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
 
-                        //window.location.href = '/lotus-admin/leasing-budget?s=succeed';
+                        window.location.href = '/lotus-admin/leasing-budget?s=succeed';
                     } else {
                         alertMsg(response.code,response.customerMessage);
                     }
