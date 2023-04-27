@@ -56,20 +56,26 @@ $(document).ready(function(){
         $("#mallCode").val(null).trigger('change');
     }
     
+    updateUserDropDown(20);
+    
     $('#clear').click(function(){
         $('#unit').val('');
-        $('#shopStatus, #unitType, #mallCode').val('').trigger('change');
+        $('#state, #shopStatus, #unitType, #mallCode, #approveFirst').val('').trigger('change');
         
+        $.cookie('searchUnitState',null);
         $.cookie('searchUnit', '');
         $.cookie('searchShopStatus',null);
         $.cookie('searchUnitType', null);
+        $.cookie('searchUser', null);
         $.cookie('searchMallCode', null);
     })
     
     $('#search').click(function(){
+        $.cookie('searchUnitState',$('#state').val());
         $.cookie('searchShopStatus',$('#shopStatus').val());
         $.cookie('searchUnit', $('#unit').val());
         $.cookie('searchUnitType', $('#unitType').val());
+        $.cookie('searchUser', $('#approveFirst').val());
         if($('#mallCode').val() != null){
             $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
@@ -102,6 +108,16 @@ function findAllStoresByKVCondition(p,c){
         "operator": "!=",
         "value": 'kow'
     }]
+
+    if($.cookie('searchUnitState') != null && $.cookie('searchUnitState') != '' && $.cookie('searchUnitState') != 'null'){
+        param = {
+            "columnName": "remarkFirst",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchUnitState')
+        }
+        params.push(param);
+    }
     
     if($.cookie('searchShopStatus') != null && $.cookie('searchShopStatus') != '' && $.cookie('searchShopStatus') != 'null'){
         param = {
@@ -188,6 +204,16 @@ function findAllStoresByKVCondition(p,c){
             "conditionOperator": "OR",
             "operator": "LIKE",
             "value": $.cookie('searchUnit')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchUser') != null && $.cookie('searchUser') != '' && $.cookie('searchUser') != 'null'){
+        param = {
+            "columnName": "approveFirst",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchUser')
         }
         params.push(param);
     }

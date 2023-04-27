@@ -9,7 +9,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 210px;">
+    <section class="sub-header" style="height: 250px;">
         <h4>
             物业资源 - 铺位
         </h4>
@@ -31,6 +31,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="state" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="1">使用中</option>
+                                    <option value="0">已删除</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">铺位</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <input class="form-control" id="unit" placeholder="代码/名称" type="text"  />
@@ -49,6 +61,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="col-md-4 control-label" style="text-align: right;">类型</label>
@@ -74,6 +88,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label class="col-md-4 control-label" style="text-align: right;">铺位负责人</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2 selectUser" id="approveFirst" style="width: 100%">
+                                    <option value="">未选择</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label class="col-md-4 control-label"></label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
@@ -86,7 +112,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 260px;">
+    <section class="content" style="margin-top: 300px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
