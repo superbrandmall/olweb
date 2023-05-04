@@ -114,76 +114,104 @@ $(document).ready(function(){
 
 function findShops(p,c){
     $('#budget').html('');
-    
+                
     var params = [];
-    var param = {};
     var conditionGroups = [];
+    var conditionGroup = {};
     
-    params = [{
-        "columnName": "userCode",
-        "columnPatten": "",
+    var mallCodes = 'ALL';
+    if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null && $.cookie('searchMallCode') != ''){
+        mallCodes = $.cookie('searchMallCode').split(':::')[1];
+    }
+    
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+            mallCodes = 'ALL';
+            return false;
+        }
+    })
+    
+    conditionGroup = {
         "conditionOperator": "AND",
-        "operator": "=",
-        "value": $.cookie('uid')
-    },{
-        "columnName": "unitType",
-        "columnPatten": "",
-        "conditionOperator": "AND",
-        "operator": "!=",
-        "value": 'kow'
-    },{
-        "columnName": "mallCodes",
-        "columnPatten": "",
-        "conditionOperator": "AND",
-        "operator": "=",
-        "value": 'ALL'
-    },{
-        "columnName": "mallName",
-        "columnPatten": "",
-        "conditionOperator": "AND",
-        "operator": "!=",
-        "value": '测试店'
-    }]
+        "params": [{
+            "columnName": "userCode",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('uid')
+        },{
+            "columnName": "unitType",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "!=",
+            "value": 'kow'
+        },{
+            "columnName": "mallCodes",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": mallCodes
+        },{
+            "columnName": "mallName",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "!=",
+            "value": '测试店'
+        }]
+    }
+
+    conditionGroups.push(conditionGroup);
     
     if($.cookie('searchMallCode') != 'null' && $.cookie('searchMallCode') != null && $.cookie('searchMallCode') != ''){
-        param = {
-            "columnName": "mallCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchMallCode').split(':::')[1]
-        }
-        params.push(param);
+        conditionGroups.push({
+            "conditionOperator": "AND",
+            "params": [{
+                    "columnName": "mallCode",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": $.cookie('searchMallCode').split(':::')[1]
+                }
+            ]
+        })
     }
     
     if($.cookie('searchLeasingBudgetSelectStoreVal') != null && $.cookie('searchLeasingBudgetSelectStoreVal') != '' && $.cookie('searchLeasingBudgetSelectStoreVal') != 'null'){
-        param = {
-            "columnName": "unitCode",
-            "columnPatten": "",
-            "conditionOperator": "OR",
-            "operator": "=",
-            "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[0]
-        }
-        params.push(param);
-        
-        param = {
-            "columnName": "unitName",
-            "columnPatten": "",
-            "conditionOperator": "OR",
-            "operator": "=",
-            "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[2]
-        }
-        params.push(param);
+        conditionGroups.push({
+            "conditionOperator": "AND",
+            "params": [{
+                    "columnName": "unitName",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[2]
+                }
+            ]
+        },{
+            "conditionOperator": "AND",
+            "params": [{
+                    "columnName": "unitCode",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": $.cookie('searchLeasingBudgetSelectStoreVal').split(':::')[0]
+                }
+            ]
+        })
     }
     
     if($.cookie('searchLeasingBudgetModality3') != null && $.cookie('searchLeasingBudgetModality3') != '' && $.cookie('searchLeasingBudgetModality3') != 'null'){
-        param = {
-            "columnName": "modality",
-            "columnPatten": "",
-            "conditionOperator": "OR",
-            "operator": "=",
-            "value": $.cookie('searchLeasingBudgetModality3').split(':::')[0]
-        }
-        params.push(param);
+        conditionGroups.push({
+            "conditionOperator": "AND",
+            "params": [{
+                    "columnName": "modality",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": $.cookie('searchLeasingBudgetModality3').split(':::')[0]
+                }
+            ]
+        })
     }
     
     var map = {

@@ -23,6 +23,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('FORM_TYPE');
     }
     
+    if(!sessionStorage.getItem("FLOW_STATUS") || sessionStorage.getItem("FLOW_STATUS") == null || sessionStorage.getItem("FLOW_STATUS") == '') {
+        findDictCodeByDictTypeCode('FLOW_STATUS');
+    }
+    
     findAllRequestsByKVCondition();
 });
 
@@ -263,7 +267,7 @@ function findAllRequestsByKVCondition(){
                     var tRequests = [];
                         
                     $.each(response.data.content, function(i,v){
-                        var page, processInstStatus;
+                        var page;
                         switch (v.bizType) {
                             case "new":
                                 page = 'request';
@@ -276,20 +280,6 @@ function findAllRequestsByKVCondition(){
                                 break;
                             case "modify":
                                 page = 'modify';
-                                break;
-                            default:
-                                break;
-                        }
-                        
-                        switch (v.processInstStatus) {
-                            case "RUNNING":
-                                processInstStatus = '审批中';
-                                break;
-                            case "RETURNED":
-                                processInstStatus = '退回';
-                                break;
-                            case "FINISH":
-                                processInstStatus = '完成';
                                 break;
                             default:
                                 break;
@@ -330,7 +320,7 @@ function findAllRequestsByKVCondition(){
                                 <tr>\n\
                                 <td>'+link+'</td>\n\
                                 <td>'+(v.creatorName || 'admin')+'</td>\n\
-                                <td>'+processInstStatus+'['+v.activityName+']</td>\n\
+                                <td>'+renderFlowStatus(v.processInstStatus)+'['+v.activityName+']</td>\n\
                                 </tr>');
                             }
                         }
@@ -371,17 +361,17 @@ function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
     var headTxt, type, formStatus;
     switch (activityName) {
         case "合同上传":
-            headTxt = '上传待租户用印合同';
+            headTxt = '待租户用印合同';
             formStatus = '未用印合同上传';
             type = 'INIT';
             break;
         case "合同收回":
-            headTxt = '上传待我司用印合同';
+            headTxt = '待我司用印合同';
             formStatus = '租户用印合同上传';
             type = 'TENANT';
             break;
         case "盖章合同上传":
-            headTxt = '上传双方已用印合同';
+            headTxt = '双方已用印合同';
             formStatus = '双方用印合同上传';
             type = 'SIGN';
             break;
@@ -394,12 +384,15 @@ function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
     $('#reqFormStatus').text(formStatus);
     $('#reqFormType').text(renderFormType(bizType) || '');
     $('#reqTenantName').text(tenantName);
-
-    $('#investment-todo-request-modify-create .modal-header').find('h4').text(headTxt);
+    $('.headTxt').text(headTxt);
     $('#investment-todo-request-modify-create').modal('toggle');
     
     $("#reqUploadFile").on('click',function(){
-        fileUpload(bizId, contractNo, bizType, type);
+        fileUpload(bizId, contractNo, bizType, type, 'reqFile');
+    })
+    
+    $("#uploadFile_otherFiles").on('click',function(){
+        fileUpload(bizId, contractNo, bizType, type, 'otherFiles');
     })
     
     $('#createToDoModify').on('click',function(){
@@ -407,13 +400,32 @@ function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
     })
 }
 
-function fileUpload(bizId, contractNo, formType, type) {
-    if($('#reqUploadFile').parent().find("input[type=file]").val() != ''){
-        var fileName = bizId+'_'+contractNo+'_'+date+'_'+formType+'_'+type;
-        
+function fileUpload(bizId, contractNo, formType, type, id) {
+    var container;
+    switch (id) {
+        case "reqFile":
+            container = $('#reqUploadFile');
+            break;
+        default:
+            container = $('#uploadFile_otherFiles');
+            break;
+    }
+    if(container.parent().find("input[type=file]").val() != ''){
+        var t;
         var formData = new FormData();
-        var file = $('#reqUploadFile').parent().find("input[type=file]")[0].files[0];
-        formData.append('file', file,fileName+'.'+file.name.split('.')[file.name.split('.').length - 1]);
+        var fileName = bizId+'_'+contractNo+'_'+date+'_'+formType+'_'+type;
+        switch (id) {
+            case "reqFile":
+                t = type;
+                var file = $('#reqUploadFile').parent().find("input[type=file]")[0].files[0];
+                formData.append('file', file,fileName+'.'+file.name.split('.')[file.name.split('.').length - 1]);
+                break;
+            default:
+                t = 'OF';
+                var file = $('#uploadFile_'+id).parent().find("input[type=file]")[0].files[0];
+                formData.append('file', file);
+                break;
+        }
 
         var openId = 'admin';
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -425,7 +437,7 @@ function fileUpload(bizId, contractNo, formType, type) {
 
         var upload = $.ajax({
             type: "POST",
-            url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+bizId+"&creatorOpenId="+openId+"&activityName=CONTRACT_"+type+"&bizType=CONTRACT_"+type,
+            url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+bizId+"&creatorOpenId="+openId+"&activityName=CONTRACT_"+type+"&bizType=CONTRACT_"+t,
             data: formData,
             async: false,
             cache: false,
@@ -457,13 +469,37 @@ function fileUpload(bizId, contractNo, formType, type) {
                     
                     sessionStorage.setItem("uploadFile_"+response.data.id,JSON.stringify(response.data));
 
-                    $('#reqUploadFileName').val('');
-                    $('#reqUploadFile').parent().find("input[type=file]").val('');
-                    $('#reqFileName').html(response.data.fileName+'\
-<br><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+response.data.bizId+'&fileId='+response.data.fileId+'" target="_blank">查看文件</a> | \n\
+//                    $('#reqUploadFileName').val('');
+//                    $('#reqUploadFile').parent().find("input[type=file]").val('');
+//                    $('#reqFileName').html(response.data.fileName+'\
+//<br><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+response.data.bizId+'&fileId='+response.data.fileId+'" target="_blank">查看文件</a> | \n\
+//<a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+response.data.id+'")\'>删除文件</a>\n\
+//<input type="hidden" id="file_'+response.data.id+'" />');
+//                    $('#reqUploadTime').text(response.data.created);
+                    $('#fileName_'+id).val('');
+                    $('#uploadFile_'+id).parent().find("input[type=file]").val('');
+                    
+                    $("input[id*='"+id+"_']").each(function(i,e){
+                        if($('#'+id+'_'+i).val() == ''){
+                            $('#'+id+'_'+i).val(response.data.fileName);
+                            var fileSize;
+                            if(response.data.fileSize >= 1024 && response.data.fileSize < 1048576){
+                                fileSize = Math.round(response.data.fileSize / 1024 * 100) / 100 + 'Kb';
+                            } else if(response.data.fileSize >= 1048576){
+                                fileSize = Math.round(response.data.fileSize / 1048576 * 100) / 100 + 'Mb';
+                            } else {
+                                fileSize = response.data.fileSize + 'b';
+                            }
+                            $('#'+id+'FileSize'+'_'+i).text(fileSize);
+                            $('#'+id+'Created'+'_'+i).text(response.data.created);
+                            $('#'+id+'Action'+'_'+i).html('\
+<a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+response.data.bizId+'&fileId='+response.data.fileId+'" target="_blank">查看文件</a> | \n\
 <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+response.data.id+'")\'>删除文件</a>\n\
 <input type="hidden" id="file_'+response.data.id+'" />');
-                    $('#reqUploadTime').text(response.data.created);
+                            $('#'+id+'_'+i).parent().parent().show();
+                            return false;
+                        }
+                    })
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }
@@ -479,6 +515,8 @@ function deleteFile(id) {
     var file = $.parseJSON(sessionStorage.getItem("uploadFile_"+id));
     file.update = '';
     file.state = 0;
+    
+    var bizType = file.bizType.split('_')[1];
     
     $.ajax({
         url: $.api.baseLotus+"/api/co/file/saveOrUpdate",
@@ -505,8 +543,22 @@ function deleteFile(id) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                $('#reqFileName').html('-');
-                $('#reqUploadTime').html('-');
+                var type;
+                switch (bizType) {
+                    case "OF":
+                        type = 'otherFiles';
+                        break;
+                    default:
+                        type = 'reqFile';
+                        break;
+                }
+
+                var row = $('#file_'+id).parent().parent();
+                row.hide();
+                row.find("input[id*='"+type+"_']").val('');
+                row.find("td[id*='"+type+'FileSize'+"_']").text('');
+                row.find("td[id*='"+type+'Created'+"_']").text('');
+                row.find("td[id*='"+type+'Action'+"_']").html('');
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
