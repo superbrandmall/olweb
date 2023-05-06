@@ -30,6 +30,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/mall-detail?id=<?= $id; ?>">详细资料</a></li>
                     <li class="active"><a href="javascript: void(0);">平面图</a></li>
+                    <li><a href="/lotus-admin/mall-summary?id=<?= $id; ?>">概要</a></li>
                 </ol>
             </div>
         </div>

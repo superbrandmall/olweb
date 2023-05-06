@@ -152,10 +152,24 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <tbody id="filesBody">
                                                                 <tr>
                                                                     <td>操作手册</td>
-                                                                    <td>2023.02.06 11:42:24</td>
-                                                                    <td>Lotus招商管理系统操作手册_v2.3</td>
-                                                                    <td>5.6Mb</td>
-                                                                    <td><a href="/upload/manual/Lotus招商管理系统操作手册_v2.3.pdf" target="_blank">查看文件</a></td>
+                                                                    <td>2023.05.05 17:41:24</td>
+                                                                    <td>Lotus招商管理系统操作手册_v2.4.pdf</td>
+                                                                    <td>6.6Mb</td>
+                                                                    <td><a href="/upload/manual/Lotus招商管理系统操作手册_v2.4.pdf" target="_blank">查看文件</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>操作指南</td>
+                                                                    <td>2023.05.06 10:29:33</td>
+                                                                    <td>Lotus招商系统快速操作指南v0.1.pptx</td>
+                                                                    <td>4.3Mb</td>
+                                                                    <td><a href="/upload/manual/Lotus招商系统快速操作指南v0.1.pptx" target="_blank">查看文件</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>审批节点模版</td>
+                                                                    <td>2023.05.06 10:29:37</td>
+                                                                    <td>莲花租赁流程审批人员表.xlsx</td>
+                                                                    <td>58Kb</td>
+                                                                    <td><a href="/upload/manual/莲花租赁流程审批人员表.xlsx" target="_blank">查看文件</a></td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>

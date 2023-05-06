@@ -358,6 +358,8 @@ function renderFormType(t) {
 }
 
 function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
+    findFilesByBizId(bizId,activityName);
+    
     var headTxt, type, formStatus;
     switch (activityName) {
         case "合同上传":
@@ -660,5 +662,69 @@ function deleteFormByBizId(bizId) {
                 console.log(textStatus, errorThrown);
             }
         });
+    })
+}
+
+function findFilesByBizId(id,an) {
+    $("input[id*='fileName_']").val('');
+    $("td[id*='uploadFile_']").parent().find("input[type=file]").val('');
+    
+    $("td[id*='Action_'],td[id*='FileSize_'],td[id*='Created_']").text('');
+    $("input[id*='reqFile_'],input[id*='otherFiles_']").val('');
+                    
+    $.ajax({
+        url: $.api.baseLotus+"/api/co/file/findAllByBizId?bizId="+id,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang')); 
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(response.data != null && response.data != '' && response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        if(v.activityName == an){
+                            sessionStorage.setItem("uploadFile_"+v.id,JSON.stringify(v));
+                            var bizType = v.bizType.split('_')[1];
+                            var type;
+                            switch (bizType) {
+                                case "OF":
+                                    type = 'otherFiles';
+                                    break;
+                                default:
+                                    type = 'reqFile';
+                                    break;
+                            }
+
+                            $("input[id*='"+type+"_']").each(function(j,e){
+                                $('#'+type+'_'+j).val(v.fileName);
+                                var fileSize;
+                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                                } else if(v.fileSize >= 1048576){
+                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                                } else {
+                                    fileSize = v.fileSize + 'b';
+                                }
+                                $('#'+type+'FileSize'+'_'+j).text(fileSize);
+                                $('#'+type+'Created'+'_'+j).text(v.created);
+                                $('#'+type+'Action'+'_'+j).html('\
+<a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
+<a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
+<input type="hidden" id="file_'+v.id+'" />');
+                                $('#'+type+'_'+j).parent().parent().show();
+                                return false;
+                            })
+                        }
+                    })
+                }
+            }
+        }
     })
 }

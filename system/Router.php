@@ -293,6 +293,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/mall-detail' => array(
             'url' => 'mall-detail.php'
         ),
+        'lotus-admin/mall-summary' => array(
+            'url' => 'mall-summary.php'
+        ),
         'lotus-admin/tenants' => array(
             'url' => 'tenants.php'
         ),
@@ -439,7 +442,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'lotus-admin/floor-progress-console' => array(
             'url' => 'floor-progress-console.php'
-        ),
+        )
     );
 
     if (array_key_exists($getTarget, $target)) {
@@ -448,8 +451,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'todo.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'requests.php', 'request-summary.php', 'bi.php', 'lotus-north.php', 'lotus-south.php', 'modality.php', 'standing-book.php',      
-        'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 'product-category.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php', 'leasing-budget.php', 'budget-detail.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php');
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'mall-summary.php', 'requests.php', 'request-summary.php', 'bi.php', 'lotus-north.php', 'lotus-south.php', 'modality.php',      
+        'standing-book.php', 'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 'product-category.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php', 'leasing-budget.php', 'budget-detail.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';
