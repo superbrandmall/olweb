@@ -31,8 +31,17 @@ $(document).ready(function(){
     if($.cookie('searchRequestsFormStatus') != ''){
         $('#formStatus').val($.cookie('searchRequestsFormStatus')).trigger('change');
     }
+    
     if($.cookie('searchRequestsContractNo') != ''){
         $('#contractNo').val($.cookie('searchRequestsContractNo'));
+    }
+    
+    if($.cookie('searchRequestsBizId') != ''){
+        $('#bizId').val($.cookie('searchRequestsBizId'));
+    }
+    
+    if($.cookie('searchRequestsContractName') != ''){
+        $('#contractName').val($.cookie('searchRequestsContractName'));
     }
     
     if($.cookie('searchRequestsSelectFormTypeVal') != null){
@@ -40,16 +49,24 @@ $(document).ready(function(){
     } else {
         updateDictDropDownByDictTypeCode('FORM_TYPE','formType','未选择',null); // 表单类型
     }
+    
     if($.cookie('searchRequestsSelectTenantVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectTenantTxt'), $.cookie('searchRequestsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
     }
+    
     if($.cookie('searchContractsSelectDepartmentVal') != null){
         $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
     }
+    
     if($.cookie('searchRequestsSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectStoreTxt'), $.cookie('searchRequestsSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
+    }
+    
+     if($.cookie('searchRequestsModality3') != null){
+        var newOption = new Option($.cookie('searchRequestsModality3'), $.cookie('searchRequestsModality3'), true, true);
+        $('#modality_3').append(newOption).trigger('change');
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -78,21 +95,36 @@ $(document).ready(function(){
     }
     
     updateSelectTenantDropDown(50);
+    
     if($("#department").val() != '' && $("#department").val() != null){
         updateSelectStoreDropDownByMallCode(10,$("#department").val());
     }
+    
     $("#department").on('change',function(){
         updateSelectStoreDropDownByMallCode(10,$(this).val());
     })
     
+    $('#modality_1').on('change',function(){
+        if($(this).val() != '') {
+            findBizByBiz1($(this).val());
+        }
+    })
+    
+    if($('#modality_1').val() != '' && $('#modality_2').val() == '') {
+        findBizByBiz1($('#modality_1').val());
+    }
+    
     $('#clear').click(function(){
-        $('#contractNo').val('');
+        $('#contractNo,#bizId,#contractName').val('');
         $('#selectTenant, #selectStore, #formType').empty(); 
-        $('#selectTenant, #department, #formStatus').val("").trigger('change');
+        $('#selectTenant, #department, #formStatus, #modality_1, #modality_2, #modality_3').val("").trigger('change');
         $('#selectStore, #formType').select2("val", "");
         
         $.cookie('searchRequestsFormStatus','');
         $.cookie('searchRequestsContractNo', '');
+        $.cookie('searchRequestsBizId', '');
+        $.cookie('searchRequestsContractName', '');
+        $.cookie('searchRequestsModality3', null);
         $.cookie('searchRequestsSelectFormTypeVal', null);
         $.cookie('searchRequestsSelectTenantVal', null);
         $.cookie('searchRequestsSelectStoreVal', null);
@@ -100,8 +132,11 @@ $(document).ready(function(){
     })
     
     $('#search').click(function(){
+        $.cookie('searchRequestsModality3', $('#modality_3').val());
         $.cookie('searchRequestsFormStatus', $('#formStatus').val());
         $.cookie('searchRequestsContractNo', $('#contractNo').val());
+        $.cookie('searchRequestsBizId', $('#bizId').val());
+        $.cookie('searchRequestsContractName', $('#contractName').val());
         $.cookie('searchRequestsSelectFormTypeVal', $('#formType').find('option:selected').val());
         $.cookie('searchRequestsSelectFormTypeTxt', $('#formType').find('option:selected').text());
         $.cookie('searchRequestsSelectTenantVal', $('#selectTenant').find('option:selected').val());
@@ -126,24 +161,6 @@ function findAllRequestsByKVCondition(p,c){
     var params = [];
     var param = {};
     
-    param = {
-        "columnName": "contractName",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": "!=",
-        "value": 'KOW'
-    }
-    params.push(param);
-    
-    param = {
-        "columnName": "bizId",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": "not like",
-        "value": '%_OLD'
-    }
-    params.push(param);
-    
     if($.cookie('searchRequestsFormStatus') != null && $.cookie('searchRequestsFormStatus') != ''){
         param = {
             "columnName": "formStatus",
@@ -159,7 +176,6 @@ function findAllRequestsByKVCondition(p,c){
             "value": 1
         }
     }
-    
     params.push(param);
     
     if($.cookie('searchContractsSelectDepartmentVal') != null && $.cookie('searchContractsSelectDepartmentVal') != '' && $.cookie('searchContractsSelectDepartmentVal') != 'null'){
@@ -182,15 +198,24 @@ function findAllRequestsByKVCondition(p,c){
         params.push(param);
     }
     
-    if($.cookie('searchRequestsSelectFormTypeVal') != null && $.cookie('searchRequestsSelectFormTypeVal') != '' && $.cookie('searchRequestsSelectFormTypeVal') != 'null'){
+    if($.cookie('searchRequestsContractName') != null && $.cookie('searchRequestsContractName') != ''){
         param = {
-            "columnName": "formType",
+            "columnName": "contractName",
             "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchRequestsSelectFormTypeVal')
+            "conditionOperator": "",
+            "operator": "like",
+            "value": $.cookie('searchRequestsContractName')
         }
-        params.push(param);
+    } else {
+        param = {
+            "columnName": "contractName",
+            "columnPatten": "",
+            "conditionOperator": "",
+            "operator": "!=",
+            "value": 'KOW'
+        }
     }
+    params.push(param);
 
     if($.cookie('searchRequestsSelectTenantVal') != null && $.cookie('searchRequestsSelectTenantVal') != '' && $.cookie('searchRequestsSelectTenantVal') != 'null'){
         param = {
@@ -202,6 +227,34 @@ function findAllRequestsByKVCondition(p,c){
         params.push(param);
     }
     
+    if($.cookie('searchRequestsSelectFormTypeVal') != null && $.cookie('searchRequestsSelectFormTypeVal') != '' && $.cookie('searchRequestsSelectFormTypeVal') != 'null'){
+        param = {
+            "columnName": "formType",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchRequestsSelectFormTypeVal')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('searchRequestsBizId') != null && $.cookie('searchRequestsBizId') != ''){
+        param = {
+            "columnName": "bizId",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchRequestsBizId')
+        }
+    } else {
+        param = {
+            "columnName": "bizId",
+            "columnPatten": "",
+            "conditionOperator": "",
+            "operator": "not like",
+            "value": '%_OLD'
+        }
+    }
+    params.push(param);
+    
     if($.cookie('searchRequestsSelectStoreVal') != null && $.cookie('searchRequestsSelectStoreVal') != '' && $.cookie('searchRequestsSelectStoreVal') != 'null'){
         param = {
             "columnName": "shopCode",
@@ -212,7 +265,17 @@ function findAllRequestsByKVCondition(p,c){
         params.push(param);
     }
         
-     var map = {
+    if($.cookie('searchRequestsModality3') != null && $.cookie('searchRequestsModality3') != '' && $.cookie('searchRequestsModality3') != 'null'){
+        param = {
+            "columnName": "bizTypeName",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('searchRequestsModality3')
+        }
+        params.push(param);
+    }
+     
+    var map = {
         "params": params
     }
     
@@ -260,9 +323,10 @@ function findAllRequestsByKVCondition(p,c){
                                 break;
                         }
 
-                        var contractLink = '';
-                        if(v.formStatus == 9){
-                            contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'">合同['+v.bizId+']</a>';
+                        var contractLink = '', ver;
+                        if(v.contractVersion > 1){
+                            ver = v.contractVersion * 1 - 1;
+                            contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+ver+'" target="_blank">合同['+v.contractNo+']</a>';
                         }
                         
                         var creatorName, updateName;
@@ -518,4 +582,103 @@ function deleteFormByBizId(bizId) {
             }
         });
     })
+}
+
+function findBizByBiz1(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $('#modality_1,#modality_3').parent().hide();
+                    $('#modality_2').parent().fadeIn();
+                    $('#modality_2').html('<option value="">未选择二级业态</option>').fadeIn();
+                    $.each(response.data, function(i,v) {
+                        $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
+                        if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
+                            $("#modality_2 option:contains('"+v.modality2+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                $('#modality_2').on('change',function(){
+                    if($(this).val() != '') {
+                        findBizByBiz2($(this).val());
+                    } else {
+                        $('#modality_2').select2('close').parent().hide();
+                        $('#modality_3').select2('close').parent().hide();
+                        $('#modality_1').parent().fadeIn();
+                    }
+                })
+                
+                if($('#modality_2').val() != '' && $('#modality_3').val() == '') {
+                    findBizByBiz2($('#modality_2').val());
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
+}
+
+function findBizByBiz2(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+encodeURIComponent(biz),
+        type: "GET",
+        async: false,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $('#modality_1,#modality_2').parent().hide();
+                    $('#modality_3').parent().fadeIn();
+                    $('#modality_3').html('<option value="">未选择三级业态</option>').fadeIn();
+                    $.each(response.data, function(i,v) {
+                        $('#modality_3').append('<option value="'+v.modality3+'">'+v.modality3+'</option>');
+                        if ($("#modality_3 option:contains('"+v.modality3+"')").length > 1){
+                            $("#modality_3 option:contains('"+v.modality3+"'):gt(0)").remove();
+                        }
+                    })
+                }
+                
+                $('#modality_3').on('change',function(){
+                    if($(this).val() != '') {
+                    } else {
+                        $('#modality_2').select2('close').parent().hide();
+                        $('#modality_3').select2('close').parent().hide();
+                        $('#modality_1').parent().fadeIn();
+                    }
+                })
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
 }

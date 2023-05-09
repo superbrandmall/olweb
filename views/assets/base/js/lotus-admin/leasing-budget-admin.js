@@ -208,7 +208,7 @@ function findShops(p,c){
                     "columnPatten": "",
                     "conditionOperator": "AND",
                     "operator": "=",
-                    "value": $.cookie('searchLeasingBudgetModality3').split(':::')[0]
+                    "value": $.cookie('searchLeasingBudgetModality3')
                 }
             ]
         })
