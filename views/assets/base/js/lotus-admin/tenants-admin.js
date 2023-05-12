@@ -24,7 +24,7 @@ $(document).ready(function(){
         $('#state').val($.cookie('searchTenantState')).trigger('change');
     }
     
-    if($.cookie('searchContractsSelectTenantVal') != null){
+    if($.cookie('searchContractsSelectTenantVal') != null && $.cookie('searchContractsSelectTenantVal') != 'null'){
         var newOption = new Option($.cookie('searchContractsSelectTenantTxt'), $.cookie('searchContractsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
     }

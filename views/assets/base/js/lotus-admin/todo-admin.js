@@ -390,10 +390,12 @@ function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {
     $('#investment-todo-request-modify-create').modal('toggle');
     
     $("#reqUploadFile").on('click',function(){
+        $(this).attr('pointer-events','none');
         fileUpload(bizId, contractNo, bizType, type, 'reqFile');
     })
     
     $("#uploadFile_otherFiles").on('click',function(){
+        $(this).attr('pointer-events','none');
         fileUpload(bizId, contractNo, bizType, type, 'otherFiles');
     })
     
@@ -454,6 +456,7 @@ function fileUpload(bizId, contractNo, formType, type, id) {
                 request.setRequestHeader("Source", "onlineleasing");
             },
             complete: function(jqXHR, textStatus, errorThrown) {
+                $('#reqUploadFile','#uploadFile_otherFiles').attr('pointer-events','');
                 if(textStatus == 'timeout'){
                      upload.abort();
                      upload();
@@ -470,14 +473,6 @@ function fileUpload(bizId, contractNo, formType, type, id) {
                     }
                     
                     sessionStorage.setItem("uploadFile_"+response.data.id,JSON.stringify(response.data));
-
-//                    $('#reqUploadFileName').val('');
-//                    $('#reqUploadFile').parent().find("input[type=file]").val('');
-//                    $('#reqFileName').html(response.data.fileName+'\
-//<br><a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+response.data.bizId+'&fileId='+response.data.fileId+'" target="_blank">查看文件</a> | \n\
-//<a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+response.data.id+'")\'>删除文件</a>\n\
-//<input type="hidden" id="file_'+response.data.id+'" />');
-//                    $('#reqUploadTime').text(response.data.created);
                     $('#fileName_'+id).val('');
                     $('#uploadFile_'+id).parent().find("input[type=file]").val('');
                     

@@ -3506,7 +3506,8 @@ select[multiple].form-group-lg .form-control,textarea.form-group-lg .form-contro
 }
 
 .btn-link,.btn-link:active,.btn-link:focus,.btn-link:hover {
-    border-color: transparent
+    border-color: transparent;
+    box-shadow: none;
 }
 
 .btn-link:focus,.btn-link:hover {
