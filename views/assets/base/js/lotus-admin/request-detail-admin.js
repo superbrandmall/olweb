@@ -920,11 +920,11 @@ function findRequestbyBizId() {
                     }
                     
                     if(data.processBizApprove == 1) {
-                        $('.step-progress li:eq(5)').addClass('active');
+                        $('.step-progress li:eq(4)').addClass('active');
                     }
                     
                     if(data.processHqRentApprove == 1) {
-                        $('.step-progress li:eq(6)').addClass('active');
+                        $('.step-progress li:eq(5)').addClass('active');
                     }
                                         
                     if($("#selectTenant").val() != null && $.request.content.formStatus == 1){

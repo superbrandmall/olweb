@@ -511,6 +511,54 @@ function DecrDate(date_str){
     }
 }
 
+function DecrMonth(date_str){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10) - 2,  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + 1);
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
+function IncrMonths(date_str, months){
+    if(date_str){
+        var parts = date_str.split("-");
+        var dt = new Date(
+          parseInt(parts[0], 10),      // year
+          parseInt(parts[1], 10),  // month (starts with 0)
+          parseInt(parts[2], 10)       // date
+        );
+        dt.setDate(dt.getDate());
+        parts[0] = "" + dt.getFullYear();
+        parts[1] = "" + (Number(dt.getMonth()) + Number(months));
+        if (parts[1].length < 2) {
+          parts[1] = "0" + parts[1];
+        }
+        parts[2] = "" + dt.getDate();
+        if (parts[2].length < 2) {
+          parts[2] = "0" + parts[2];
+        }
+        return parts.join("-");
+    } else {
+        return '';
+    }
+}
+
 function dateCompare(date1,date2){
     date1 = date1.replace(/\-/gi,"/");
     date2 = date2.replace(/\-/gi,"/");
@@ -3874,7 +3922,7 @@ function updateSelectContractDropDown(data_count) {
                     key: params.term || $('#department').val(),
                     operator: "OR",
                     params: [
-                      "mallCode","contractNo"
+                      "mallCode","tenantName","contractNo","unitName","contractName"
                     ],
                     sorts: []
                 }
@@ -3889,7 +3937,7 @@ function updateSelectContractDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.contractNo,
-                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate            
+                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
                             }
                             var returnData = [];
                             returnData.push(data);

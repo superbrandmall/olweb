@@ -1,9 +1,9 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-balance-preview-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/request-balance-preview-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL; 
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-balance-preview.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/request-balance-preview.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL; 
 }
 ?>
@@ -18,8 +18,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div class="box-header" style="background-color: #ecf0f5; margin-top: 13px; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
-                    <li class="active"><a href="javascript: void(0);">合同</a></li>
-                    <li><a href="/lotus-admin/request-balance-preview">合同申请</a></li>
+                    <li><a href="/lotus-admin/contract-balance-preview">合同</a></li>
+                    <li class="active"><a href="javascript: void(0);">合同申请</a></li>
                 </ol>
             </div>
         </div>

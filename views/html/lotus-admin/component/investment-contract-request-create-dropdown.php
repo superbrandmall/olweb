@@ -6,7 +6,7 @@ if(isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contracts') {
 <?php
 }
 ?>
-    <a href="javascript:void(0);" class="btn btn-outline btn-sm">结算预览</a>
+    <a href="/lotus-admin/contract-balance-preview" class="btn btn-outline btn-sm">结算预览</a>
     <div class="btn-group">
         <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
             <i class="fa fa-plus icon-white"></i> 创建
