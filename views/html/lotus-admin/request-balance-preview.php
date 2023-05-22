@@ -37,9 +37,20 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="selectContract" class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg" style="vertical-align: top;">*</span> 合同</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="selectContract" name="selectContract" style="width: 100%"></select>
+                            <label for="selectStore" class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg" style="vertical-align: top;">*</span> 铺位</label>
+                            <div class="col-md-3 col-sm-12" style="text-align: left; padding-right: 2px;">
+                                <select class="select2" id="unitType" style="width: 100%">
+                                    <option value=""></option>
+                                    <option value="L">正柜</option>
+                                    <option value="C">临时柜</option>
+                                    <option value="S">仓库</option>
+                                    <option value="T">基站</option>
+                                    <option value="R">停车场</option>
+                                    <option value="A">广告位</option>
+                                </select>
+                            </div>
+                            <div class="col-md-5 col-sm-12" style="text-align: left; padding-left: 0;">
+                                <select class="select2" id="selectStore" name="selectStore" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>

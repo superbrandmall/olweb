@@ -14,10 +14,6 @@ $(document).ready(function(){
         init++;
     }
     
-    if($.cookie('balanceMinSales') != null && $.cookie('balanceMinSales') != 'null'){
-        $('#minSales').val($.cookie('balanceMinSales'));
-    }
-    
     if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null'){
         $('#termType').val($.cookie('balanceTermType')).trigger('change');
     }
@@ -50,14 +46,13 @@ $(document).ready(function(){
         $('#termType').val('').trigger('change');
         $('#department, #selectContract').empty(); 
         $('#department, #selectContract').select2("val", "");
-        $('#minSales, #yearMonth').val('');
+        $('#yearMonth').val('');
         
         $.cookie('balanceTermType', null);
         $.cookie('balanceContractTxt', null);
         $.cookie('balanceContractVal', null);
         $.cookie('balanceMallTxt', null);
         $.cookie('balanceMallVal', null);
-        $.cookie('balanceMinSales', null);
         $.cookie('balanceYearMonth', null);
     })
     
@@ -68,7 +63,6 @@ $(document).ready(function(){
         $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
-        $.cookie('balanceMinSales', $('#minSales').val());
         $.cookie('balanceYearMonth', $('#yearMonth').val());
         mandatoryCheck();
     })

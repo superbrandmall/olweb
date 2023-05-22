@@ -8,14 +8,14 @@ $(document).ready(function(){
         init++;
     }
     
-    if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null'){
-        var newOption = new Option($.cookie('balanceContractTxt'), $.cookie('balanceContractVal'), true, true);
-        $('#selectContract').append(newOption).trigger('change');
+    if($.cookie('balanceSelectStoreVal') != null && $.cookie('balanceSelectStoreVal') != 'null'){
+        var newOption = new Option($.cookie('balanceSelectStoreTxt'), $.cookie('balanceSelectStoreVal'), true, true);
+        $('#selectStore').append(newOption).trigger('change');
         init++;
     }
     
-    if($.cookie('balanceMinSales') != null && $.cookie('balanceMinSales') != 'null'){
-        $('#minSales').val($.cookie('balanceMinSales'));
+    if($.cookie('balanceUnitType') != null && $.cookie('balanceUnitType') != 'null'){
+        $('#unitType').val($.cookie('balanceUnitType')).trigger('change');
     }
     
     if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null'){
@@ -47,28 +47,28 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#termType').val('').trigger('change');
-        $('#department, #selectContract').empty(); 
-        $('#department, #selectContract').select2("val", "");
-        $('#minSales, #yearMonth').val('');
+        $('#termType,#unitType').val('').trigger('change');
+        $('#department, #selectStore').empty(); 
+        $('#department, #selectStore').select2("val", "");
+        $('#yearMonth').val('');
         
         $.cookie('balanceTermType', null);
-        $.cookie('balanceContractTxt', null);
-        $.cookie('balanceContractVal', null);
+        $.cookie('balanceUnitType', null);
+        $.cookie('balanceSelectStoreTxt', null);
+        $.cookie('balanceSelectStoreVal', null);
         $.cookie('balanceMallTxt', null);
         $.cookie('balanceMallVal', null);
-        $.cookie('balanceMinSales', null);
         $.cookie('balanceYearMonth', null);
     })
     
     $('#search').click(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
         $.cookie('balanceTermType', $('#termType').val());
+        $.cookie('balanceUnitType', $('#unitType').val());
         $.cookie('balanceContractVal', $('#selectContract').val());
         $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
-        $.cookie('balanceMinSales', $('#minSales').val());
         $.cookie('balanceYearMonth', $('#yearMonth').val());
         mandatoryCheck();
     })
@@ -103,13 +103,29 @@ function mandatoryCheck() {
 }
 
 function findBalance(){
-    var ver = '';
-    if($('#select2-selectContract-container').attr('title') != ''){
-        ver = $('#select2-selectContract-container').attr('title').split('|')[4];
+    var params = [];
+    var param = {};
+    
+    params = [{
+        "columnName": "mallCode",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": $.cookie('balanceMallVal')
+    },{
+        "columnName": "shopCode",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": $.cookie('balanceSelectStoreVal').split(':::')[1]
+    }]
+
+    var map = {
+        "params": params
     }
+    
     $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+$('#selectContract').val()+"&contractVersion="+ver.substring(2),
-        type: "GET",
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page=0&size=10000&sort=id,asc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
