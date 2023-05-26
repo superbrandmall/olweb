@@ -61,26 +61,11 @@
                                     <td class="headTxt"></td>
                                     <td id="reqFileCreated_0"></td>
                                     <td>
-                                        <input type="text" id="reqFile_0" name="reqFileName_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
+                                        <input type="text" id="reqFile_0" name="reqFile_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
                                     </td>
                                     <td id="reqFileFileSize_0"></td>
                                     <td id="reqFileAction_0"></td>
                                 </tr>
-                                <?php
-                                    for($i=1;$i<10;$i++){
-                                ?>
-                                <tr style="display: none;">
-                                    <td class="headTxt"></td>
-                                    <td id="reqFileCreated_<?= $i; ?>"></td>
-                                    <td>
-                                        <input type="text" id="reqFile_<?= $i; ?>" name="reqFileName_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                                    </td>
-                                    <td id="reqFileFileSize_<?= $i; ?>"></td>
-                                    <td id="reqFileAction_<?= $i; ?>"></td>
-                                </tr>
-                                <?php
-                                    }
-                                ?>
                                 <tr>
                                     <td>其它文件</td>
                                     <td id="otherFilesCreated_0"></td>

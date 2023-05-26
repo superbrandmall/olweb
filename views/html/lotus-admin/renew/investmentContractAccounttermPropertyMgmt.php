@@ -15,61 +15,61 @@
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
-                        <div class="bootstrap-table">
-                            <div class="fixed-table-container">
-                                <div class="fixed-table-body">
-                                    <table class="table table-striped snipe-table table-responsive">
-                                        <thead id="assetsListingTable-sticky-header">
-                                            <tr>
-                                                <th>
-                                                    <div class="th-inner">行</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月面积单价(去税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(去税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">月面积单价(含税) <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                
-                                                <th>
-                                                    <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">开发票</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                                <th>
-                                                    <div class="th-inner">操作</div>
-                                                    <div class="fht-cell"></div>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="propertyMgmt"></tbody>
-                                    </table>
-                                </div>
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-body">
+                                <table class="table table-striped snipe-table table-responsive">
+                                    <thead id="assetsListingTable-sticky-header">
+                                        <tr>
+                                            <th>
+                                                <div class="th-inner">行</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月面积单价(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月金额(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">月面积单价(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+
+                                            <th>
+                                                <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">开发票</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="propertyMgmt"></tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -170,6 +170,73 @@
                 <label class="col-md-4 control-label">开发票</label>
                 <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
                     <input type="checkbox" id="propertyMgmtOverdueInvoiceFlag_1" checked disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box box-default" id="investmentContractAccounttermPropertyFeeYear">  
+    <div class="box-body">
+        <div class="col-md-12">
+            <h5 style="display: inline-block;">
+                年度商场服务费
+                <img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;">
+            </h5>
+            <div class="pull-right" style="margin-top: 15px;">
+                <a href="javascript:void(0);" onclick="addRowInvestmentContractAccounttermPropertyFeeYear()" style="margin-top: 11px;">
+                    <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box-body">
+                <div class="row">
+                    <div class="bootstrap-table">
+                        <div class="fixed-table-container">
+                            <div class="fixed-table-body">
+                                <table class="table table-striped snipe-table table-responsive">
+                                    <thead id="assetsListingTable-sticky-header">
+                                        <tr>
+                                            <th>
+                                                <div class="th-inner">行</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">期限 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">此段期间总金额(去税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">此段期间总金额(含税) <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">税率 <span class="btn-box-tool-lg">*</span></div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">开发票</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                            <th>
+                                                <div class="th-inner">操作</div>
+                                                <div class="fht-cell"></div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="propertyFeeYear"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>

@@ -14,7 +14,7 @@ $.api = {
     termCalcMode: ['新计算方法','NEW'],
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
     contractTemplate: ['租期 > 6个月','1'],
-    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028']
+    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028','SC102','SC109']
 };
 
 var d = new Date();
@@ -26,11 +26,11 @@ var date = d.getFullYear() + '-' +
 
 $(document).ready(function(){
     if($.cookie('locationSelected') && $.cookie('locationSelected') != ''){
-        $('#locationSelected').text($.cookie('locationSelected'));
+        $('.locationSelected').text($.cookie('locationSelected'));
     } else {
         $('.location-select ul li').each(function(i,elem){
             if($(elem).hasClass('to-select')){
-                $('#locationSelected').text($(elem).find('span').text());
+                $('.locationSelected').text($(elem).find('span').text());
                 $.cookie('locationSelected',$(elem).find('span').text());
                 return false;
             }
@@ -54,7 +54,7 @@ $(document).ready(function(){
     
     $('.location-select .text-blue').click(function(){
         $.cookie('locationSelected',$(this).find('span').text());
-        $('#locationSelected').text($.cookie('locationSelected'));
+        $('.locationSelected').text($.cookie('locationSelected'));
         $.cookie('mallSelected','');
         window.location.href = location.protocol + location.pathname;
     })
@@ -702,7 +702,7 @@ function updateTopNavMallSelection() {
                         })
                         
                         if($('.navbar-nav .mall-select > ul').find('.to-select').length <= 0){
-                            var temp = $('#locationSelected').text();
+                            var temp = $('.locationSelected').text();
                             var index;
                             $('.location-select ul li').each(function(i,elem){
                                 if($(elem).find('span').text() == temp){
@@ -710,7 +710,7 @@ function updateTopNavMallSelection() {
                                     if(i == $('.location-select ul li').length - 1){
                                         index = 0;
                                     }
-                                    $('#locationSelected').text($('.location-select ul').find('li:eq('+index+')').find('span').text());
+                                    $('.locationSelected').text($('.location-select ul').find('li:eq('+index+')').find('span').text());
                                     $.cookie('locationSelected',$('.location-select ul').find('li:eq('+index+')').find('span').text());
                                     $.cookie('mallSelected','');
                                     return false;
@@ -1818,6 +1818,155 @@ function addRowInvestmentContractAccounttermPropertyMgmt() {
     })
 }
 
+function addRowInvestmentContractAccounttermPropertyFeeYear() {
+    var newrow = document.createElement("tr");
+    newrow.setAttribute("class","new");
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    var column5 = createRowColumn(newrow);
+    var column6 = createRowColumn(newrow);
+    var column7 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
+    
+    var table = document.getElementById('investmentContractAccounttermPropertyFeeYear');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var select = document.createElement("select"); //费用项
+    select.setAttribute("class","select2 propertyFeeYearItemDropDown new");
+    select.setAttribute("id","propertyFeeYearItem_"+count.toLocaleString());
+    column2.appendChild(select);
+    
+    var div = document.createElement("div"); //期限
+    div.setAttribute("class","input-daterange input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id","propertyFeeYearStartDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","min-width: 80px");
+    input.setAttribute("readonly","");
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    var to = document.createElement("span");
+    to.innerText = "-";
+    to.setAttribute("class", "input-group-addon");
+    div.appendChild(to);
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","input-group");
+    var input2 = document.createElement("input");
+    input2.setAttribute("class","form-control");
+    input2.setAttribute("id","propertyFeeYearEndDate_"+count.toLocaleString());
+    input2.setAttribute("type","text");
+    input2.setAttribute("style","min-width: 80px");
+    input2.setAttribute("readonly","");
+    div2.appendChild(input2);
+    var icon2 = document.createElement("i");
+    icon2.setAttribute("class", "fa fa-calendar");
+    var span2 = document.createElement("span");
+    span2.setAttribute("class", "input-group-addon");
+    span2.appendChild(icon2);
+    div2.appendChild(span2);
+    div.appendChild(div2);
+    column3.appendChild(div);
+    
+    var div = document.createElement("div"); //去税金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id","propertyFeeYearTaxAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column4.appendChild(div);
+    
+    var div = document.createElement("div"); //含税金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id","propertyFeeYearAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column5.appendChild(div);
+    
+    var select = document.createElement("select"); //税率
+    select.setAttribute("class","select2 taxVat newVAT propertyFeeYearVATDropDown newFee");
+    select.setAttribute("id","propertyFeeYearTaxRate_"+count.toLocaleString());
+    column6.appendChild(select);
+    
+    var checkbox = document.createElement("input"); //是否开发票
+    checkbox.setAttribute("id","propertyFeeYearInvoiceFlag_"+count.toLocaleString());
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.setAttribute("checked", "");
+    column7.appendChild(checkbox);
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column8.appendChild(remove);
+
+    tbody.appendChild(newrow);
+    updateTaxVAT();
+    updateFeeItems('propertyFeeYearItemDropDown','propertyFeeYearVATDropDown','propertyYear');
+    $('#investmentContractAccounttermPropertyFeeYear .input-daterange').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'startDate': $('#startDate').val(),
+        'endDate': $('#endDate').val(),
+        'autoclose': true
+    });
+    $('#investmentContractAccounttermPropertyFeeYear .select2').select2();
+    calBackPushNextCalendar('propertyFeeYear');
+    
+    $('input.money').on('focus',function(){
+        $(this).val(accounting.unformat($(this).val()));
+        $(this).css('backgroundColor','#fff');
+        $(this).select();
+        $(this).parent().parent().addClass('success');
+    });
+    
+    $('input.money').on('blur',function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+        $(this).css('backgroundColor','transparent');
+        $(this).parent().parent().removeClass('success');
+    });
+    
+    $("#propertyFeeYearEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('propertyFeeYear');
+    })
+    
+    $("#propertyFeeYearTaxAmount_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearTaxAmount();
+    })
+    
+    $("#propertyFeeYearAmount_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearAmount();
+    })
+    
+    $("#propertyFeeYearTaxRate_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearSingleRow($(this).attr('id').split('_')[1]);
+    })
+}
+
 function addRowInvestmentContractAccounttermPromotion() {
     var newrow = document.createElement("tr");
     newrow.setAttribute("class","new");
@@ -2630,35 +2779,49 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                 var params = [];
                 var conditionGroups = [];
                 var conditionGroup = {};
+                
+                params = [
+                    {
+                      "columnName": "mallCodes",
+                      "columnPatten": "",
+                      "conditionOperator": "AND",
+                      "operator": "=",
+                      "value": mallCodes
+                    },
+                    {
+                      "columnName": "mallCode",
+                      "columnPatten": "",
+                      "conditionOperator": "AND",
+                      "operator": "=",
+                      "value": mallCode
+                    },
+                    {
+                      "columnName": "userCode",
+                      "columnPatten": "",
+                      "conditionOperator": "AND",
+                      "operator": "=",
+                      "value": $.cookie('uid')
+                    }
+                ]
+                
+                if($('#unitType').length > 0 && $('#unitType').val() != '') {
+                    params.push({
+                        "columnName": "unitType",
+                        "columnPatten": "",
+                        "conditionOperator": "AND",
+                        "operator": "=",
+                        "value": $('#unitType').val()
+                    });
+                }
 
                 conditionGroup = {
                     "conditionOperator": "AND",
-                    "params": [
-                      {
-                        "columnName": "mallCodes",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": mallCodes
-                      },
-                      {
-                        "columnName": "mallCode",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": mallCode
-                      },
-                      {
-                        "columnName": "userCode",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": $.cookie('uid')
-                      }
-                    ]
+                    "params": params
                 }
 
                 conditionGroups.push(conditionGroup);
+                
+                
                 
                 if(term != undefined && term != '') {
                     conditionGroups.push({
@@ -2686,7 +2849,7 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                 
                 var map = {
                     "conditionGroups": conditionGroups,
-                    "params": params
+                    "params": []
                 }
     
                 return JSON.stringify(map);
@@ -3377,6 +3540,35 @@ function calBackPushPropertyMgmtRentAmount() { //月面积单价(含税)
         }
     });
     calBackPush('propertyMgmt');
+}
+
+function calBackPushPropertyFeeYearSingleRow(num) {
+    if(numberWithoutCommas($('#propertyFeeYearAmount_'+num).val()) >= 0){
+        var taxAmount = Math.round(numberWithoutCommas($('#propertyFeeYearAmount_'+num).val()) / (1 + parseFloat($('#propertyFeeYearTaxRate_'+num).val())) * 100) / 100;
+        $('#propertyFeeYearTaxAmount_'+num).val(accounting.formatNumber(taxAmount)).fadeOut().fadeIn();
+    }
+}
+
+function calBackPushPropertyFeeYearTaxAmount() { //总金额(去税)
+    $("input[id*='propertyFeeYearTaxAmount_']").not('.past').each(function(i){  
+        if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
+            var num = $(this).attr('id').split('_')[1];
+            //月金额(含税)
+            var amount = Math.round(numberWithoutCommas($(this).val()) * (1 + parseFloat($('#propertyFeeYearTaxRate_'+num).val())) * 100) / 100;
+            $('#propertyFeeYearAmount_'+num).val(accounting.formatNumber(amount)).fadeOut().fadeIn();
+        }
+    });
+}
+
+function calBackPushPropertyFeeYearAmount() { //总金额(含税)
+    $("input[id*='propertyFeeYearAmount_']").not('.past').each(function(i){  
+        if(numberWithoutCommas($(this).val()) >= 0 && numberWithoutCommas($('#area').val()) > 0){
+            var num = $(this).attr('id').split('_')[1];
+            //月金额(去税)
+            var taxAmount = Math.round(numberWithoutCommas($(this).val()) / (1 + parseFloat($('#propertyFeeYearTaxRate_'+num).val())) * 100) / 100;
+            $('#propertyFeeYearTaxAmount_'+num).val(accounting.formatNumber(taxAmount)).fadeOut().fadeIn();
+        }
+    });
 }
 
 function calBackPushPromotionSingleRow(num) {

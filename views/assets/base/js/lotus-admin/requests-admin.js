@@ -59,6 +59,10 @@ $(document).ready(function(){
         $('#department').val($.cookie('searchContractsSelectDepartmentVal')).trigger('change');
     }
     
+    if($.cookie('searchRequestsUnitType') != null && $.cookie('searchRequestsUnitType') != 'null' && $.cookie('searchRequestsUnitType') != ''){
+        $('#unitType').val($.cookie('searchRequestsUnitType')).trigger('change');
+    }
+    
     if($.cookie('searchRequestsSelectStoreVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectStoreTxt'), $.cookie('searchRequestsSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
@@ -99,9 +103,9 @@ $(document).ready(function(){
     if($("#department").val() != '' && $("#department").val() != null){
         updateSelectStoreDropDownByMallCode(10,$("#department").val());
     }
-    
-    $("#department").on('change',function(){
-        updateSelectStoreDropDownByMallCode(10,$(this).val());
+
+    $("#department, #unitType").on('change',function(){
+        updateSelectStoreDropDownByMallCode(10,$('#department').val());
     })
     
     $('#modality_1').on('change',function(){
@@ -115,7 +119,7 @@ $(document).ready(function(){
     }
     
     $('#clear').click(function(){
-        $('#contractNo,#bizId,#contractName').val('');
+        $('#contractNo,#bizId,#contractName,#unitType').val('');
         $('#selectTenant, #selectStore, #formType').empty(); 
         $('#selectTenant, #department, #formStatus, #modality_1, #modality_2, #modality_3').val("").trigger('change');
         $('#selectStore, #formType').select2("val", "");
@@ -127,6 +131,7 @@ $(document).ready(function(){
         $.cookie('searchRequestsModality3', null);
         $.cookie('searchRequestsSelectFormTypeVal', null);
         $.cookie('searchRequestsSelectTenantVal', null);
+        $.cookie('searchRequestsUnitType', null);
         $.cookie('searchRequestsSelectStoreVal', null);
         $.cookie('searchContractsSelectDepartmentVal', null);
     })
@@ -142,6 +147,7 @@ $(document).ready(function(){
         $.cookie('searchRequestsSelectTenantVal', $('#selectTenant').find('option:selected').val());
         $.cookie('searchRequestsSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
+        $.cookie('searchRequestsUnitType', $('#unitType').val());
         $.cookie('searchRequestsSelectStoreVal', $('#selectStore').find('option:selected').val());
         $.cookie('searchRequestsSelectStoreTxt', $('#selectStore').find('option:selected').text());
         findAllRequestsByKVCondition(1,items);
@@ -348,7 +354,7 @@ function findAllRequestsByKVCondition(p,c){
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
                             <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
-                            <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
+                            <td>'+(v.tenantName != null ? v.tenantName+'['+v.tenantNo+']' : '')+'</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+(v.area || '')+'㎡</td>\n\
                             <td>'+(v.floorName || '')+'</td>\n\

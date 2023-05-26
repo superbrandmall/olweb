@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    updateSelectContractDropDown(50);
-    
     var init = 0;
     if($.cookie('balanceMallVal') != null && $.cookie('balanceMallVal') != 'null'){
         var newOption = new Option($.cookie('balanceMallTxt'), $.cookie('balanceMallVal'), true, true);
@@ -14,7 +12,7 @@ $(document).ready(function(){
         init++;
     }
     
-    if($.cookie('balanceUnitType') != null && $.cookie('balanceUnitType') != 'null'){
+    if($.cookie('balanceUnitType') != null && $.cookie('balanceUnitType') != 'null' && $.cookie('balanceUnitType') != ''){
         $('#unitType').val($.cookie('balanceUnitType')).trigger('change');
     }
     
@@ -27,6 +25,14 @@ $(document).ready(function(){
     }
     
     $('#termType').show();
+    
+    if($("#department").val() != '' && $("#department").val() != null){
+        updateSelectStoreDropDownByMallCode(10,$("#department").val());
+    }
+    
+    $("#department, #unitType").on('change',function(){
+        updateSelectStoreDropDownByMallCode(10,$('#department').val());
+    })
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -65,8 +71,8 @@ $(document).ready(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
         $.cookie('balanceTermType', $('#termType').val());
         $.cookie('balanceUnitType', $('#unitType').val());
-        $.cookie('balanceContractVal', $('#selectContract').val());
-        $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
+        $.cookie('balanceSelectStoreVal', $('#selectStore').val());
+        $.cookie('balanceSelectStoreTxt', $('#select2-selectStore-container').attr('title'));
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
         $.cookie('balanceYearMonth', $('#yearMonth').val());
@@ -88,13 +94,13 @@ function mandatoryCheck() {
         $('#department').parent().prepend(error);
     }
     
-    if($('#selectContract').val() == null){
+    if($('#selectStore').val() == null){
         flag = 0;
-        $('#selectContract').parent().prepend(error);
+        $('#selectStore').parent().prepend(error);
     }
     
     if(flag == 1){
-        findBalance();
+        findBalanceByKVCondition();
     } else {
         $('html, body').animate({
             scrollTop: $('.mandatory-error').offset().top - 195
@@ -102,14 +108,16 @@ function mandatoryCheck() {
     }
 }
 
-function findBalance(){
+function findBalanceByKVCondition() {
     var params = [];
     var param = {};
-    
+    var conditionGroups = [];
+
     params = [{
         "columnName": "mallCode",
         "columnPatten": "",
-        "operator": "AND",
+        "conditionOperator": "AND",
+        "operator": "=",
         "value": $.cookie('balanceMallVal')
     },{
         "columnName": "shopCode",
@@ -118,84 +126,37 @@ function findBalance(){
         "value": $.cookie('balanceSelectStoreVal').split(':::')[1]
     }]
 
+//    if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
+//        param = {
+//            "columnName": "itemCode",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('balanceTermType')
+//        }
+//        params.push(param);
+//    }
+//
+//    if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
+//        param = {
+//            "columnName": "yyyymm",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
+//        }
+//        params.push(param);
+//    }
+
     var map = {
+        "conditionGroups": conditionGroups,
         "params": params
     }
-    
+                
     $.ajax({
-        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page=0&size=10000&sort=id,asc",
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByKVCondition?page=0&size=1000&sort=id,asc",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                var params = [];
-                var param = {};
-                var conditionGroups = [];
-
-                params = [{
-                    "columnName": "contractNo",
-                    "columnPatten": "",
-                    "conditionOperator": "AND",
-                    "operator": "=",
-                    "value": $.cookie('balanceContractVal')
-                }]
-            
-                if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
-                    param = {
-                        "columnName": "itemCode",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": $.cookie('balanceTermType')
-                    }
-                    params.push(param);
-                }
-
-                if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
-                    param = {
-                        "columnName": "yyyymm",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
-                    }
-                    params.push(param);
-                }
-
-                var map = {
-                    "conditionGroups": conditionGroups,
-                    "params": params
-                }
-                
-                findContractTermByKVCondition(JSON.stringify(map));
-                
-            } else {
-                alertMsg(response.code,response.customerMessage);
-            }
-        }
-    });
-}
-
-function findContractTermByKVCondition(map) {
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/rent/calc/findAllByKVCondition?page=0&size=1000&sort=id,asc",
-        type: "POST",
-        data: map,
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -215,32 +176,78 @@ function findContractTermByKVCondition(map) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
+                $.totalAmount = 0
+                $.totalTaxAmount = 0;
+                $.row = 0;
                 $('#balance').html('');
                 if(response.data.content.length > 0){
-                    var totalAmount = 0, totalTaxAmount = 0;
                     $.each(response.data.content, function(i,v){
-                        totalTaxAmount += v.taxAmount;
-                        totalAmount += v.amount;
-                        $('#balance').append('<tr>\n\
-                        <td>'+(i*1+1)+'</td>\n\
-                        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-                        <td>收</td>\n\
-                        <td>'+v.yyyymm+'</td>\n\
-                        <td>'+v.startDate+'～'+v.endDate+'</td>\n\
-                        <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
-                        <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
-                        <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-\                       <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-                    </tr>');
+                        if(v.rentCalcList != null && v.rentCalcList.length > 0){
+                            renderBalance(JSON.stringify(v.rentCalcList));
+                        }
+                        
+                        if(v.propertyCalcList != null && v.propertyCalcList.length > 0){
+                            renderBalance(JSON.stringify(v.propertyCalcList));
+                        }
+                        
+                        if(v.promotionCalcList != null && v.promotionCalcList.length > 0){
+                            renderBalance(JSON.stringify(v.promotionCalcList));
+                        }
+                        
+                        if(v.deductCalcList != null && v.deductCalcList.length > 0){
+                            renderBalance(JSON.stringify(v.deductCalcList));
+                        }
                     })
-                    $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
-                    $('#totalAmount').text(accounting.formatNumber(totalAmount));
+                    $('#totalTaxAmount').text(accounting.formatNumber($.totalTaxAmount));
+                    $('#totalAmount').text(accounting.formatNumber($.totalAmount));
                 } else {
                     $('#balance').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        }
+    })
+}
+
+function renderBalance(calcList){
+    var obj = JSON.parse(calcList);
+    $.each(obj, function(j,w){
+        if(($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != '') 
+                || ($.cookie('balanceYearMonth') != null && $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != '')){
+            if($.cookie('balanceYearMonth') == null || $.cookie('balanceYearMonth') == 'null' || $.cookie('balanceYearMonth') == ''){
+                if($.cookie('balanceTermType') == w.itemCode){
+                    render();
+                }
+            } else if($.cookie('balanceTermType') == null || $.cookie('balanceTermType') == 'null' || $.cookie('balanceTermType') == ''){
+                if($.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1] == w.yyyymm){
+                    render();
+                }
+            } else {
+                if($.cookie('balanceTermType') == w.itemCode && $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1] == w.yyyymm){
+                    render();
+                }
+            }
+        } else {
+            render();
+        }
+        
+        function render(){
+            $.totalTaxAmount += w.taxAmount;
+            $.totalAmount += w.amount;
+            $.row++;
+            
+            $('#balance').append('<tr>\n\
+            <td>'+$.row+'</td>\n\
+            <td>'+w.itemName+'['+w.itemCode+']</td>\n\
+            <td>收</td>\n\
+            <td>'+w.yyyymm+'</td>\n\
+            <td>'+w.startDate+'～'+w.endDate+'</td>\n\
+            <td>'+DecrMonth(w.startDate.split('-')[0]+'-'+w.startDate.split('-')[1]+'-01')+'</td>\n\
+            <td>'+w.startDate.split('-')[0]+'-'+w.startDate.split('-')[1]+'-'+w.settleDay+'</td>\n\
+            <td>'+accounting.formatNumber(w.taxAmount)+'</td>\n\
+            <td>'+accounting.formatNumber(w.amount)+'</td>\n\
+            </tr>');
         }
     })
 }

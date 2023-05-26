@@ -88,7 +88,7 @@ function mandatoryCheck() {
     }
     
     if(flag == 1){
-        findBalance();
+        findBalanceByKVCondition();
     } else {
         $('html, body').animate({
             scrollTop: $('.mandatory-error').offset().top - 195
@@ -96,84 +96,50 @@ function mandatoryCheck() {
     }
 }
 
-function findBalance(){
-    var ver = '';
-    if($('#select2-selectContract-container').attr('title') != ''){
-        ver = $('#select2-selectContract-container').attr('title').split('|')[4];
-    }
-    $.ajax({
-        url: $.api.baseLotus+"/api/contract/lotus/findAllByContractNoAndContractVersion?contractNo="+$('#selectContract').val()+"&contractVersion="+ver.substring(2),
-        type: "GET",
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            $('#loader').show();
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            $('#loader').hide();
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                var params = [];
-                var param = {};
-                var conditionGroups = [];
+function findBalanceByKVCondition() {
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
 
-                params = [{
-                    "columnName": "contractNo",
-                    "columnPatten": "",
-                    "conditionOperator": "AND",
-                    "operator": "=",
-                    "value": $.cookie('balanceContractVal')
-                }]
-            
-                if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
-                    param = {
-                        "columnName": "itemCode",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": $.cookie('balanceTermType')
-                    }
-                    params.push(param);
-                }
+    params = [{
+        "columnName": "contractNo",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": $.cookie('balanceContractVal')
+    }]
 
-                if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
-                    param = {
-                        "columnName": "yyyymm",
-                        "columnPatten": "",
-                        "conditionOperator": "AND",
-                        "operator": "=",
-                        "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
-                    }
-                    params.push(param);
-                }
-
-                var map = {
-                    "conditionGroups": conditionGroups,
-                    "params": params
-                }
-                
-                findContractTermByKVCondition(JSON.stringify(map));
-                
-            } else {
-                alertMsg(response.code,response.customerMessage);
-            }
+    if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
+        param = {
+            "columnName": "itemCode",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('balanceTermType')
         }
-    });
-}
+        params.push(param);
+    }
 
-function findContractTermByKVCondition(map) {
+    if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
+        param = {
+            "columnName": "yyyymm",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
+        }
+        params.push(param);
+    }
+
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+                
     $.ajax({
         url: $.api.baseLotus+"/api/contract/rent/calc/findAllByKVCondition?page=0&size=1000&sort=id,asc",
         type: "POST",
-        data: map,
+        data: JSON.stringify(map),
         async: false,
         dataType: "json",
         contentType: "application/json",
@@ -208,7 +174,7 @@ function findContractTermByKVCondition(map) {
                         <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
                         <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
                         <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-\                       <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
                     </tr>');
                     })
                     $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));

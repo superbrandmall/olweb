@@ -60,8 +60,8 @@ function findRequestByBizId() {
                     
                     $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
                     $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
-                    $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
-                    $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
+                    $('#essayModality').html('<span class="txt">'+(data.bizTypeName || '/')+'</span>【业态】');
+                    $('#essayBrand').html('<span class="txt">'+(data.brandName || '/')+'</span>【品牌】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
                     if(data.duration >= 12){
                         if(data.duration % 12 != 0){

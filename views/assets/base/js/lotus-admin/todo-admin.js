@@ -477,7 +477,7 @@ function fileUpload(bizId, contractNo, formType, type, id) {
                     $('#uploadFile_'+id).parent().find("input[type=file]").val('');
                     
                     $("input[id*='"+id+"_']").each(function(i,e){
-                        if($('#'+id+'_'+i).val() == ''){
+                        if(id == 'reqFile' || $('#'+id+'_'+i).val() == ''){
                             $('#'+id+'_'+i).val(response.data.fileName);
                             var fileSize;
                             if(response.data.fileSize >= 1024 && response.data.fileSize < 1048576){
@@ -698,23 +698,25 @@ function findFilesByBizId(id,an) {
                             }
 
                             $("input[id*='"+type+"_']").each(function(j,e){
-                                $('#'+type+'_'+j).val(v.fileName);
-                                var fileSize;
-                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
-                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
-                                } else if(v.fileSize >= 1048576){
-                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
-                                } else {
-                                    fileSize = v.fileSize + 'b';
+                                if(type == 'reqFile' || $('#'+type+'_'+j).val() == ''){
+                                    $('#'+type+'_'+j).val(v.fileName);
+                                    var fileSize;
+                                    if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                        fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                                    } else if(v.fileSize >= 1048576){
+                                        fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                                    } else {
+                                        fileSize = v.fileSize + 'b';
+                                    }
+                                    $('#'+type+'FileSize'+'_'+j).text(fileSize);
+                                    $('#'+type+'Created'+'_'+j).text(v.created);
+                                    $('#'+type+'Action'+'_'+j).html('\
+    <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
+    <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
+    <input type="hidden" id="file_'+v.id+'" />');
+                                    $('#'+type+'_'+j).parent().parent().show();
+                                    return false;
                                 }
-                                $('#'+type+'FileSize'+'_'+j).text(fileSize);
-                                $('#'+type+'Created'+'_'+j).text(v.created);
-                                $('#'+type+'Action'+'_'+j).html('\
-<a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
-<a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
-<input type="hidden" id="file_'+v.id+'" />');
-                                $('#'+type+'_'+j).parent().parent().show();
-                                return false;
                             })
                         }
                     })

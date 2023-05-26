@@ -95,6 +95,10 @@ $(document).ready(function(){
         calBackPush('propertyMgmt');
     })
     
+    $("input[id*='propertyFeeYearEndDate_']").on('changeDate',function(){
+        calBackPushNextCalendar('propertyFeeYear');
+    })
+    
     $("input[id*='promotionEndDate_']").on('changeDate',function(){
         calBackPushNextCalendar('promotion');
         calBackPush('promotion');
@@ -114,6 +118,7 @@ $(document).ready(function(){
     updateFeeItems('fixedFeeItemDropDown','fixedVATDropDown','fixedRent'); // 固定租金科目
     updateFeeItems('commissionFeeItemDropDown','commissionVATDropDown','deductRent'); // 提成租金科目
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property'); // 物业管理费科目
+    updateFeeItems('propertyFeeYearItemDropDown','propertyFeeYearVATDropDown','propertyYear'); // 年度商场服务费科目
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee'); // 推广费科目
     findDictCodeByDictTypeCode('LOTUS_RENT_FLOW_STEP'); // 云之家流程
     findDictCodeByDictTypeCode('RENT_CALCULATION_MODE'); // 计租方式
@@ -722,6 +727,13 @@ function findRequestbyBizId() {
                             } else {
                                 $('#propertyMgmtOverdueInvoiceFlag_1').prop('checked', false);
                             }
+                        }
+                        
+                        if(data.propertyFeeYearList.length > 0) {
+                            $.each(data.propertyFeeYearList, function(i,v) {
+                                updateRowInvestmentContractAccounttermPropertyFeeYear(JSON.stringify(v));
+                                $('#propertyFeeyear tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
+                            })
                         }
 
                         if(data.promotionFeeList.length > 0) {
@@ -1523,6 +1535,172 @@ function updateRowInvestmentContractAccounttermPropertyMgmt(v) {
     
     $("#propertyMgmtTaxRate_"+count.toLocaleString()).on('change',function(){
         calBackPushPropertyMgmtSingleRow($(this).attr('id').split('_')[1]);
+    })
+}
+
+function updateRowInvestmentContractAccounttermPropertyFeeYear(v) {
+    var value = JSON.parse(v);
+    var newrow = document.createElement("tr");
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    var column5 = createRowColumn(newrow);
+    var column6 = createRowColumn(newrow);
+    var column7 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
+    
+    var table = document.getElementById('investmentContractAccounttermPropertyFeeYear');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var select = document.createElement("select"); //费用项
+    select.setAttribute("class","select2 propertyFeeYearItemDropDown new");
+    select.setAttribute("id","propertyFeeYearItem_"+count.toLocaleString());
+    column2.appendChild(select);
+    
+    var div = document.createElement("div"); //期限
+    div.setAttribute("class","input-daterange input-group");
+    var input = document.createElement("input");
+    var past = "";
+    if(dateCompare(value.startDate, date) == 'smaller'){
+        past = ' past';
+    }
+    newrow.setAttribute("class",past);
+    input.setAttribute("class","form-control"+past);
+    input.setAttribute("id","propertyFeeYearStartDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","min-width: 80px");
+    input.setAttribute("readonly","");
+    input.setAttribute("value",value.startDate);
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    var to = document.createElement("span");
+    to.innerText = "-";
+    to.setAttribute("class", "input-group-addon");
+    div.appendChild(to);
+    var div2 = document.createElement("div");
+    div2.setAttribute("class","input-group");
+    var input2 = document.createElement("input");
+    past = "";
+    if(dateCompare(value.endDate, date) == 'smaller'){
+        past = ' past';
+    }
+    input2.setAttribute("class","form-control"+past);
+    input2.setAttribute("id","propertyFeeYearEndDate_"+count.toLocaleString());
+    input2.setAttribute("type","text");
+    input2.setAttribute("style","min-width: 80px");
+    input2.setAttribute("readonly","");
+    input2.setAttribute("value",value.endDate);
+    div2.appendChild(input2);
+    var icon2 = document.createElement("i");
+    icon2.setAttribute("class", "fa fa-calendar");
+    var span2 = document.createElement("span");
+    span2.setAttribute("class", "input-group-addon");
+    span2.appendChild(icon2);
+    div2.appendChild(span2);
+    div.appendChild(div2);
+    column3.appendChild(div);
+    
+    var div = document.createElement("div"); //去税金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("id","propertyFeeYearTaxAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value",value.taxAmount);
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column4.appendChild(div);
+    
+    var div = document.createElement("div"); //含税金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money"+past);
+    input.setAttribute("id","propertyFeeYearAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value",value.amount);
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column5.appendChild(div);
+    
+    var select = document.createElement("select"); //税率
+    select.setAttribute("class","select2 taxVat newVAT propertyFeeYearVATDropDown newFee"+past);
+    select.setAttribute("id","propertyFeeYearTaxRate_"+count.toLocaleString());
+    column6.appendChild(select);
+    
+    var checkbox = document.createElement("input"); //是否开发票
+    checkbox.setAttribute("id","propertyFeeYearInvoiceFlag_"+count.toLocaleString());
+    checkbox.setAttribute("type", "checkbox");
+    if(value.invoiceFlag == 1){
+        checkbox.setAttribute("checked", "");
+    }
+    column7.appendChild(checkbox);
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column8.appendChild(remove);
+
+    tbody.appendChild(newrow);
+    updateTaxVAT();
+    updateFeeItems('propertyFeeYearItemDropDown','propertyFeeYearVATDropDown','propertyYear');
+    $('#investmentContractAccounttermPropertyFeeYear .input-daterange').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'startDate': $('#startDate').val(),
+        'endDate': $('#endDate').val(),
+        'autoclose': true
+    });
+    
+    $("#propertyFeeYearItem_"+count.toLocaleString()).val(value.itemCode).trigger("change");
+    $('#investmentContractAccounttermPropertyFeeYear .select2').select2();
+    $("#propertyFeeYearTaxRate_"+count.toLocaleString()).val(value.taxRate).trigger("change");
+ 
+    $('input.money').on('focus',function(){
+        $(this).val(accounting.unformat($(this).val()));
+        $(this).css('backgroundColor','#fff');
+        $(this).select();
+        $(this).parent().parent().addClass('success');
+    });
+    
+    $('input.money').on('blur',function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+        $(this).css('backgroundColor','transparent');
+        $(this).parent().parent().removeClass('success');
+    });
+    
+    $("#propertyFeeYearEndDate_"+count.toLocaleString()).on('changeDate',function(){
+        calBackPushNextCalendar('propertyFeeYear');
+    })
+    
+    $("#propertyFeeYearTaxAmount_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearTaxAmount();
+    })
+    
+    $("#propertyFeeYearAmount_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearAmount();
+    })
+    
+    $("#propertyFeeYearTaxRate_"+count.toLocaleString()).on('change',function(){
+        calBackPushPropertyFeeYearSingleRow($(this).attr('id').split('_')[1]);
     })
 }
 
@@ -2570,11 +2748,11 @@ function saveContractForm(s) {
             propertyMgmt.startDate = $('#propertyMgmtStartDate_'+index).val();
             propertyMgmt.endDate = $('#propertyMgmtEndDate_'+index).val();
 
-            propertyMgmt.amount =  numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
-            propertyMgmt.taxAmount =  numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
+            propertyMgmt.amount = numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
+            propertyMgmt.taxAmount = numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
 
-            propertyMgmt.rentAmount =  numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
-            propertyMgmt.taxRentAmount =  numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
+            propertyMgmt.rentAmount = numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
+            propertyMgmt.taxRentAmount = numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
 
             propertyMgmt.taxRate = $('#propertyMgmtTaxRate_'+index).val();
             propertyMgmt.taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
@@ -2737,6 +2915,7 @@ function saveContractForm(s) {
             "promotionFeeList": promotionFeeList,
             "promotionFeeUnit": "",
             "propertyFeeList": propertyFeeList,
+            "propertyFeeYearList": propertyFeeYearList,
             "propertyManageFee": 0,
             "publicUtilitiesFee": 0,
             "remark": remark,

@@ -1770,7 +1770,7 @@ function saveContractForm(s) {
             "brandName": brandName,
             "cardDiscount": 0,
             "compareList": compareList,
-            "contractName": ($('#contractName').val() || ''),
+            "contractName": $('#contractName').val(),
             "contractNo": '',
             "contractTemplate": $('#contractTemplate').find('option:selected').val(),
             "contractVersion": 1,

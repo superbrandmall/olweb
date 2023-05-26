@@ -49,17 +49,17 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/we-meter/#/meter" style="font-size: 15px;font-weight: bold;">
+                            <a href="javascript: void(0);" style="font-size: 15px;font-weight: bold;"><!--/we-meter/#/meter-->
                                 物业
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/kow-admin" style="font-size: 15px;font-weight: bold;">
+                            <a href="/kow-admin" target="_blank" style="font-size: 15px;font-weight: bold;">
                                 快闪
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/authorization/#/user" style="font-size: 15px;font-weight: bold;">
+                            <a href="/authorization/#/user" target="_blank" style="font-size: 15px;font-weight: bold;">
                                 系统
                             </a>
                         </li>
@@ -69,7 +69,7 @@
                         <ul class="nav navbar-nav">
                             <li class="dropdown location-select">
                                 <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    <span id="locationSelected">选择区域</span><b class="caret"></b>
+                                    <span class="locationSelected">选择区域</span><b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
