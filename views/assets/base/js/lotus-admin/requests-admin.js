@@ -352,7 +352,7 @@ function findAllRequestsByKVCondition(p,c){
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType,v.modifyType) || '')+'</td>\n\
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
-                            <td>'+(v.bizTypeName || '')+'</td>\n\
+                            <td>'+((v.bizTypeName != 'null' && v.bizTypeName != null) ? v.bizTypeName : '/')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                             <td>'+(v.tenantName != null ? v.tenantName+'['+v.tenantNo+']' : '')+'</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\

@@ -1,9 +1,9 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/make-request-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/make-request-main-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;            
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/make-request.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/make-request-main.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;            
 }
 
@@ -64,7 +64,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         include 'request/investmentContractPriorTerms.php'; //原租户合同
                         include 'request/investmentContractMallSummary.php'; //项目情况汇总
                         include 'request/investmentContractProperteisterm.php'; //商圈租金参考
-                        include 'request/approvalProcess.php'; //审批流程
+                        include 'request/approvalProcessMain.php'; //全国审批流程
                         ?>
                     </div>
 

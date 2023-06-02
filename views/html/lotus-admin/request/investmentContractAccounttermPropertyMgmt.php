@@ -175,7 +175,6 @@
             </div>
         </div>
     </div>
-    <hr>
 </div>
 <div class="box box-default" id="investmentContractAccounttermPropertyFeeYear">  
     <div class="box-body">

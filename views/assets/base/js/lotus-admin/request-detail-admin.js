@@ -412,7 +412,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.request.mallCode == 'SC126' || $.request.mallCode == 'SC127'){
+                if($.inArray($.request.mallCode, $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -606,7 +606,7 @@ function findRequestbyBizId() {
                     })
                     
                     if(data.brandName != null && data.brandCode != null){
-                        temp = new Option(data.brandName, data.brandCode, true, true);
+                        temp = new Option(data.brandName+'['+((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/')+']', data.brandCode, true, true);
                         $('#brandName').append(temp).trigger('change');
                     }
                     
@@ -624,7 +624,7 @@ function findRequestbyBizId() {
                     
                     $('#deliveryDate').datepicker('update', data.deliveryDate);
                     $('#area').val(data.area);
-                    $('#bizTypeName').val(data.bizTypeName);
+                    $('#bizTypeName').val((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                     $('#bizDate').datepicker('update', data.bizDate);
                     
                     $('#awardDate').datepicker('update', data.awardDate);
@@ -759,7 +759,7 @@ function findRequestbyBizId() {
                         }
                     }
                     
-                    if(data.propertyFeeYearList.length > 0) {
+                    if(data.propertyFeeYearList != null && data.propertyFeeYearList.length > 0) {
                         $.each(data.propertyFeeYearList, function(i,v) {
                             updateRowInvestmentContractAccounttermPropertyFeeYear(JSON.stringify(v));
                         })
@@ -2223,6 +2223,11 @@ function submitCheck() {
         $('#targetSales').parent().append(error);
     }
     
+    if($('#overdueBizAmount').val() == '' || parseFloat(numberWithoutCommas($('#overdueBizAmount').val())) < 0) {
+        flag = 0;
+        $('#overdueBizAmount').parent().append(error);
+    }
+    
     if($('#paymentMode').val() == '') {
         flag = 0;
         $('#paymentMode').parent().append(error);
@@ -3414,7 +3419,7 @@ function saveContractForm(s) {
             "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),
             "openStartTime": $('#openStartTime').val(),
-            "overdueBizAmount": 0,
+            "overdueBizAmount": numberWithoutCommas($('#overdueBizAmount').val()),
             "overdueFee": 0,
             "paymentMode": $('#paymentMode').find('option:selected').val(),
             "posMode": $('#posMode').find('option:selected').val(),

@@ -90,7 +90,7 @@ function findContractByContractNo(v) {
                         $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
                         updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
                         $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
-                        $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
+                        $('#bizTypeName').text((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/').attr('title',(data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                         $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
                         $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
                         findContractCommissionByContractNo(data.rentCalculationMode, getURLParameter('versionA'));

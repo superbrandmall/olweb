@@ -66,21 +66,21 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
-                        include 'request-detail/investmentContractModel.php'; //合同内容
-                        include 'request-detail/investmentContractModelBasicinfo.php'; //基本信息
-                        include 'request-detail/investmentContractEnteryterm.php';
-                        include 'request-detail/investmentContractAccounttermFixed.php'; //固定租金
-                        include 'request-detail/investmentContractAccounttermCommission.php'; //提成租金
-                        include 'request-detail/investmentContractAccounttermCompare.php'; //取高明细
-                        include 'request-detail/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
-                        include 'request-detail/investmentContractAccounttermPromotion.php'; //推广费
-                        include 'request-detail/investmentContractDepositterm.php';
-                        include 'request-detail/investmentContractCertificates.php';
-                        include 'request-detail/textareapanel.php';
-                        include 'request-detail/investmentContractPriorTerms.php';
-                        include 'request-detail/investmentContractMallSummary.php';
-                        include 'request-detail/investmentContractProperteisterm.php';
-                        include 'request-detail/approvalProcess.php';
+                        include 'request/investmentContractModel.php'; //合同内容
+                        include 'request/investmentContractModelBasicinfo.php'; //基本信息
+                        include 'request/investmentContractEnteryterm.php'; //进场条款
+                        include 'request/investmentContractAccounttermFixed.php'; //固定租金
+                        include 'request/investmentContractAccounttermCommission.php'; //提成租金
+                        include 'request/investmentContractAccounttermCompare.php'; //取高明细
+                        include 'request/investmentContractAccounttermPropertyMgmt.php'; //物业管理费
+                        include 'request/investmentContractAccounttermPromotion.php'; //推广费
+                        include 'request/investmentContractDepositterm.php'; //预存款条款
+                        include 'request/investmentContractCertificates.php'; //合同附件
+                        include 'request/textareapanel.php'; //说明
+                        include 'request/investmentContractPriorTerms.php'; //原租户合同
+                        include 'request/investmentContractMallSummary.php'; //项目情况汇总
+                        include 'request/investmentContractProperteisterm.php'; //商圈租金参考
+                        include 'request/approvalProcess.php'; //审批流程
                         ?>
                     </div>
 

@@ -162,7 +162,6 @@
                 </tbody>
             </table>
         </div>
-        
         <div class="col-md-12">
             <div class="col-md-12">
                 <label class="col-md-2 control-label">其它文件上传</label>

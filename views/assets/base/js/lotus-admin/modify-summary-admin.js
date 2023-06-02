@@ -92,7 +92,7 @@ function findRequestByBizId() {
                             break;
                     }
                     $('#essayModifyType').html('<span class="txt">'+modifyType+'</span>【变更类型】。');
-                    $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '0')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '0')+'</span>元/月，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100).toFixed(2) * 100 / 100 || '/')+'</span>%，');
+                    $('#essayTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '0')+'</span>元/月，预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '0')+'</span>元/月，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100).toFixed(2) || '/')+'</span>%，');
                     if(data.awardDate != null && data.awardDate != ''){
                         $('#essayAwardDate').html('<span class="txt">'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约。');
                     }
@@ -109,7 +109,7 @@ function findRequestByBizId() {
                     $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
                     updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
                     $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
-                    $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
+                    $('#bizTypeName').text((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/').attr('title',(data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                     
                     var duration = parseInt(oldContractInfo.duration) + parseInt(data.duration);
                     $('#duration').text(duration +'个月').attr('title',duration +'个月');

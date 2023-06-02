@@ -64,11 +64,7 @@ $(document).ready(function(){
         $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
     })
     
-    if(!sessionStorage.getItem('roleYZJ') || sessionStorage.getItem('roleYZJ') == null || sessionStorage.getItem('roleYZJ') == ''){
-        findRoleYZJByParentId();
-    } else {
-        updateRoleYZJLabel();
-    }
+    findUserRoleYZJByKVCondition($.cookie('mallSelected').split(':::')[1]);
     
     // 初始化
     $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
@@ -178,7 +174,7 @@ $(document).ready(function(){
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property'); // 物业管理费科目
     updateFeeItems('propertyFeeYearItemDropDown','propertyFeeYearVATDropDown','propertyYear'); // 年度商场服务费科目
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee'); // 推广费科目
-    findDictCodeByDictTypeCode('LOTUS_RENT_FLOW_STEP'); // 云之家流程
+    findDictCodeByDictTypeCode('LOTUS_OUTER_CONTRACT_FLOW_STEP'); // 全国云之家流程
     findDictCodeByDictTypeCode('FORM_STATUS'); // 表单状态
     
     // 选择计租方式隐藏相关板块
@@ -243,28 +239,37 @@ $(document).ready(function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
     
-    $('#8d2794df-c15f-4d68-9f8e-8b847f6191db').on('change',function(){
-        if($(this).find('option:selected').val() != null) {
-            $('.step li:nth-child(5)').addClass('active');
-        } else {
-            $('.step li:nth-child(5)').removeClass('active');
-        }
-    })
-
-    $('#hq_leasing_head').on('change',function(){
+    $('#bizApprove').on('change',function(){
         if($(this).find('option:selected').val() != null) {
             $('.step li:nth-child(6)').addClass('active');
         } else {
             $('.step li:nth-child(6)').removeClass('active');
         }
     })
+
+    $('#hqFinanceApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(7)').addClass('active');
+        } else {
+            $('.step li:nth-child(7)').removeClass('active');
+        }
+    })
     
-    appendLotusLeasingHead();
-    
-    $('#Lotus_leasing_head select').val('').select2({
-        placeholder: "未选择",
-        allowClear: true
-    });
+    $('#hqLegalApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(8)').addClass('active');
+        } else {
+            $('.step li:nth-child(8)').removeClass('active');
+        }
+    })
+
+    $('#hqCeoApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(9)').addClass('active');
+        } else {
+            $('.step li:nth-child(9)').removeClass('active');
+        }
+    })
 })
 
 function findFilesByBizId(id) {
@@ -481,7 +486,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.cookie('mallSelected').split(':::')[1] == 'SC126' || $.cookie('mallSelected').split(':::')[1] == 'SC127'){
+                if($.inArray($.cookie('mallSelected').split(':::')[1], $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -648,6 +653,11 @@ function submitCheck() {
         $('#targetSales').parent().append(error);
     }
     
+    if($('#overdueBizAmount').val() == '' || parseFloat(numberWithoutCommas($('#overdueBizAmount').val())) < 0) {
+        flag = 0;
+        $('#overdueBizAmount').parent().append(error);
+    }
+    
     if($('#paymentMode').val() == '') {
         flag = 0;
         $('#paymentMode').parent().append(error);
@@ -680,42 +690,37 @@ function submitCheck() {
         $('#brandAuthorization_0').parent().append(error);
     }
     
-    if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
+    if($('#gmApprove select').val() == null) {
         flag = 0;
-        $('#66bfb352-903b-490a-a25b-4c554bc16756 select').parent().append(error);
+        $('#gmApprove select').parent().append(error);
     }
     
-    if($('#4381cd4e-b984-4641-8a99-15242faae0eb select').val() == null) {
+    if($('#areaGmApprove select').val() == null) {
         flag = 0;
-        $('#4381cd4e-b984-4641-8a99-15242faae0eb select').parent().append(error);
-    }
-    
-    if($('#finance_pre_check select').val() == null) {
-        flag = 0;
-        $('#finance_pre_check select').parent().append(error);
-    }
-    
-    if($('#legal_pre_check select').val() == null) {
-        flag = 0;
-        $('#legal_pre_check select').parent().append(error);
-    }
-    
-    if($('#Lotus_leasing_head select').val() == null) {
-        flag = 0;
-        $('#Lotus_leasing_head select').parent().append(error);
+        $('#areaGmApprove select').parent().append(error);
     }
     
     var area = $('#area').val();
-    //var yearLength = calDatesDiff($('#startDate').val(),$('#endDate').val()) / 365;
-    if(area >= 500){
-        if($('#hq_leasing_head select').val() == null) {
+    var yearLength = calDatesDiff($('#startDate').val(),$('#endDate').val()) / 365;
+    if(area >= 500 || yearLength >= 5){
+        if($('#bizApprove select').val() == null) {
             flag = 0;
-            $('#hq_leasing_head select').parent().append(error);
+            $('#bizApprove select').parent().append(error);
         }
-    } else {
-        if($('#hq_leasing_head select').val() == null && $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+        
+        if($('#hqFinanceApprove select').val() == null) {
             flag = 0;
-            $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+            $('#hqFinanceApprove select').parent().append(error);
+        }
+        
+        if($('#hqLegalApprove select').val() == null) {
+            flag = 0;
+            $('#hqLegalApprove select').parent().append(error);
+        }
+        
+        if($('#hqCeoApprove select').val() == null) {
+            flag = 0;
+            $('#hqCeoApprove select').parent().append(error);
         }
     }
     
@@ -1178,12 +1183,12 @@ function saveContractForm(s) {
         }
         
         var processBizApprove = 0;
-        if($('.step-progress li:eq(4)').hasClass('active') == true){
+        if($('.step-progress li:eq(6)').hasClass('active') == true){
             processBizApprove = 1;
         }
         
         var processHqRentApprove = 0;
-        if($('.step-progress li:eq(5)').hasClass('active') == true){
+        if($('.step-progress li:eq(9)').hasClass('active') == true){
             processHqRentApprove = 1;
         }
         
@@ -1193,50 +1198,21 @@ function saveContractForm(s) {
         }
         
         var processApproveList = [];
-        var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_RENT_FLOW_STEP'));
+        var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_OUTER_CONTRACT_FLOW_STEP'));
         if(lotusRentFlowStep.length > 0){
             $.each(lotusRentFlowStep, function(i,v) {
-                var processApprove = {};
-                processApprove.activityCode = v.dictCode;
-                processApprove.activityName = v.dictName;
-                switch (v.dictName) {
-                    case "财务负责人":
-                        processApprove.approveName = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').val();
-                        break;
-                    case "业态负责人审批":
-                        processApprove.approveName = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').val();
-                        break;
-                    case "法务负责人":
-                        processApprove.approveName = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').val();
-                        break;
-                    case "财务预审":
-                        processApprove.approveName = $('#finance_pre_check select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#finance_pre_check select').find('option:selected').val();
-                        break;
-                    case "法务预审":
-                        processApprove.approveName = $('#legal_pre_check select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#legal_pre_check select').find('option:selected').val();
-                        break;
-                    case "Lotus招商负责人":
-                        processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
-                        break;
-                    case "商业首席执行官":
-                        processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
-                        break;
-                    default:
-                        break;
-                }
-                processApprove.bizId = bizId;
-                processApprove.state = 1;
-                
-                if(processApprove.approveOpenId != null){
-                    processApproveList.push(processApprove);
-                }
+                $.each($('#'+v.dictCode+' select').val(), function(j,w) {
+                    var processApprove = {};
+                    processApprove.activityCode = v.dictCode;
+                    processApprove.activityName = v.dictName;
+                    processApprove.bizId = bizId;
+                    processApprove.state = 1;
+                    processApprove.approveName = $('#'+v.dictCode+' select').find("option[value='"+w+"']").text();
+                    processApprove.approveOpenId = w;
+                    if(processApprove.approveOpenId != null){
+                        processApproveList.push(processApprove);
+                    }
+                })
             })
         }
         
@@ -1770,7 +1746,7 @@ function saveContractForm(s) {
             "brandName": brandName,
             "cardDiscount": 0,
             "compareList": compareList,
-            "contractName": $('#contractName').val(),
+            "contractName": ($('#contractName').val() || ''),
             "contractNo": '',
             "contractTemplate": $('#contractTemplate').find('option:selected').val(),
             "contractVersion": 1,
@@ -1786,7 +1762,6 @@ function saveContractForm(s) {
             "depositList": depositList,
             "duration": 0,
             "enterDate": $('#enterDate').val(),
-            //"esignFlag": esignFlag,
             "esignFlag": 0,
             "exclusiveCondition": "",
             "firstCompareCycle": ($('#compareFirstFrequency').val() != "" ? $('#compareFirstFrequency').val() : ""),
@@ -1814,7 +1789,7 @@ function saveContractForm(s) {
             "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),
             "openStartTime": $('#openStartTime').val(),
-            "overdueBizAmount": 0,
+            "overdueBizAmount": numberWithoutCommas($('#overdueBizAmount').val()),
             "overdueFee": 0,
             "paymentMode": $('#paymentMode').find('option:selected').val(),
             "posMode": $('#posMode').find('option:selected').val(),

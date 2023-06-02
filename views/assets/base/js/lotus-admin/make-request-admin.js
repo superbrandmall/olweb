@@ -481,7 +481,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.cookie('mallSelected').split(':::')[1] == 'SC126' || $.cookie('mallSelected').split(':::')[1] == 'SC127'){
+                if($.inArray($.cookie('mallSelected').split(':::')[1], $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -646,6 +646,11 @@ function submitCheck() {
     if($('#targetSales').val() == '' || parseFloat(numberWithoutCommas($('#targetSales').val())) <= 0) {
         flag = 0;
         $('#targetSales').parent().append(error);
+    }
+    
+    if($('#overdueBizAmount').val() == '' || parseFloat(numberWithoutCommas($('#overdueBizAmount').val())) < 0) {
+        flag = 0;
+        $('#overdueBizAmount').parent().append(error);
     }
     
     if($('#paymentMode').val() == '') {
@@ -1814,7 +1819,7 @@ function saveContractForm(s) {
             "oldContractTerm": oldContractTerm,
             "openEndTime": $('#openEndTime').val(),
             "openStartTime": $('#openStartTime').val(),
-            "overdueBizAmount": 0,
+            "overdueBizAmount": numberWithoutCommas($('#overdueBizAmount').val()),
             "overdueFee": 0,
             "paymentMode": $('#paymentMode').find('option:selected').val(),
             "posMode": $('#posMode').find('option:selected').val(),

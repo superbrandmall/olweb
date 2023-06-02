@@ -88,8 +88,8 @@ $(document).ready(function(){
         return false;
     });
     
-    $('#createRenew, #createTerminate, #createModify').click(function(){
-        var ftTxt, ftVal,headTxt,rcdd,ftid,fheader;
+    $('#createRenew, #createTerminate, #createModify, #createRenewMain, #createTerminateMain, #createModifyMain').click(function(){
+        var ftTxt, ftVal,headTxt,rcdd,ftid,fheader,confirm;
         switch ($(this).attr('id')) {
             case "createRenew":
                 ftTxt = $.api.formType[2];
@@ -98,6 +98,7 @@ $(document).ready(function(){
                 rcdd = 'renewContract';
                 ftid = 'renewUpdateFormType';
                 fheader = 'renew-termination';
+                confirm = 'renewCreateRequest';
                 break;
             case "createTerminate":
                 ftTxt = $.api.formType[4];
@@ -106,6 +107,7 @@ $(document).ready(function(){
                 rcdd = 'renewContract';
                 ftid = 'renewUpdateFormType';
                 fheader = 'renew-termination';
+                confirm = 'renewCreateRequest';
                 break;
             case "createModify":
                 ftTxt = $.api.formType[6];
@@ -114,14 +116,44 @@ $(document).ready(function(){
                 rcdd = 'modifyContract';
                 ftid = 'modifyUpdateFormType';
                 fheader = 'modify';
+                confirm = 'modifyCreateRequest';
+                break;
+            case "createRenewMain":
+                ftTxt = $.api.formType[2];
+                ftVal = $.api.formType[3];
+                headTxt = '续签合同申请';
+                rcdd = 'renewContract';
+                ftid = 'renewUpdateFormType';
+                fheader = 'renew-termination';
+                confirm = 'renewCreateRequestMain';
+                break;
+            case "createTerminateMain":
+                ftTxt = $.api.formType[4];
+                ftVal = $.api.formType[5];
+                headTxt = '终止合同申请';
+                rcdd = 'renewContract';
+                ftid = 'renewUpdateFormType';
+                fheader = 'renew-termination';
+                confirm = 'renewCreateRequestMain';
+                break;
+            case "createModifyMain":
+                ftTxt = $.api.formType[6];
+                ftVal = $.api.formType[7];
+                headTxt = '变更合同申请';
+                rcdd = 'modifyContract';
+                ftid = 'modifyUpdateFormType';
+                fheader = 'modify';
+                confirm = 'modifyCreateRequestMain';
                 break;
             default:
                 break;
         }
         
+        
         updateDictDropDownByDictTypeCode('FORM_TYPE',ftid,ftTxt,ftVal);
         $('#investment-contract-request-'+fheader+'-create .modal-header').find('h4').text(headTxt);
         $.fn.modal.Constructor.prototype.enforceFocus = function() {};
+        $('#investment-contract-request-'+fheader+'-create').find('.btn-info').attr('id', confirm);
         $('#investment-contract-request-'+fheader+'-create').modal('toggle');
         updateRequestContractDropDown(rcdd,10);
         $('.date-picker').datepicker({
@@ -133,6 +165,16 @@ $(document).ready(function(){
             'endDate': '',
             'autoclose': true
         });
+        
+        $('#renewCreateRequest, #modifyCreateRequest').click(function(){
+            var id = $(this).attr('id').split('CreateRequest')[0];
+            redirectCheck(id,'');
+        })
+
+        $('#renewCreateRequestMain, #modifyCreateRequestMain').click(function(){
+            var id = $(this).attr('id').split('CreateRequest')[0];
+            redirectCheck(id,'-main');
+        })
     })
     
     if($('.mallCode').length > 0){
@@ -173,11 +215,6 @@ $(document).ready(function(){
         $("#"+id+"ContractName").text($('#select2-'+id+'Contract-container').text().split(' | ')[1]);
         $("#"+id+"UnitName").text($('#select2-'+id+'Contract-container').text().split(' | ')[2]);
         $("#"+id+"StartEndDate").text($('#select2-'+id+'Contract-container').text().split(' | ')[3]);
-    })
-    
-    $('#renewCreateRequest, #modifyCreateRequest').click(function(){
-        var id = $(this).attr('id').split('CreateRequest')[0];
-        redirectCheck(id);
     })
     
     $('#createContractRequest').click(function(){
@@ -3198,6 +3235,74 @@ function updateRoleYZJLabel() {
     })
 }
 
+function findUserRoleYZJByKVCondition(mc){
+    var conditionGroups = [];
+    conditionGroups.push({
+        "conditionOperator": "OR",
+        "params": [{
+                "columnName": "mallCode",
+                "columnPatten": "",
+                "conditionOperator": "AND",
+                "operator": "=",
+                "value": mc
+            }
+        ]
+    },{
+        "conditionOperator": "OR",
+        "params": [{
+                "columnName": "roleId",
+                "columnPatten": "",
+                "conditionOperator": "AND",
+                "operator": "in",
+                "value": "bizApprove;hqFinanceApprove;hqLegalApprove;hqCeoApprove"
+            }
+        ]
+    });
+
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": []
+    }
+    
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/vUserRole/yzj/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0){
+                    $.each(response.data.content, function(i,v){
+                        $('#'+v.roleId).find('label').find('b').text(v.roleName);
+                        if(v.mallCode == null || v.mallCode == ''){
+                            updateUserRoleYZJDropDownByRoleId(v.roleId);
+                        } else {
+                            var newOption = new Option(v.name, v.openId, true, true);
+                            $('#'+v.roleId+' select').append(newOption).trigger('change');
+                        }
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            } 
+        }
+    });
+}
+
 function findProcessInstByBizId(){
     $.ajax({
         url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
@@ -3963,7 +4068,7 @@ function budgetModalToggle(term){
                         <td>'+accounting.formatNumber(v.june)+'</td>\n\
                         <td>'+accounting.formatNumber(v.july)+'</td>\n\
                         <td>'+accounting.formatNumber(v.august)+'</td>\n\
-                        <td>'+accounting.formatNumber(v.septermber)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.september)+'</td>\n\
                         <td>'+accounting.formatNumber(v.october)+'</td>\n\
                         <td>'+accounting.formatNumber(v.november)+'</td>\n\
                         <td>'+accounting.formatNumber(v.december)+'</td></tr>'
@@ -4148,7 +4253,7 @@ function updateSelectContractDropDown(data_count) {
     });
 }
 
-function redirectCheck(id) {
+function redirectCheck(id,suffix) {
     $('.mandatory-error').remove();
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
@@ -4164,11 +4269,11 @@ function redirectCheck(id) {
     }
     
     if(flag == 1){
-        saveContractInfoForRequest(id);
+        saveContractInfoForRequest(id,suffix);
     }
 }
 
-function saveContractInfoForRequest(id) {
+function saveContractInfoForRequest(id,suffix) {
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.roleCode == 'CROLE220301000001'){
@@ -4218,7 +4323,7 @@ function saveContractInfoForRequest(id) {
                             break;
                     }
                     
-                    window.location.href = '/lotus-admin/'+path+'-request?id='+response.data.bizId;
+                    window.location.href = '/lotus-admin/'+path+'-request'+suffix+'?id='+response.data.bizId;
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

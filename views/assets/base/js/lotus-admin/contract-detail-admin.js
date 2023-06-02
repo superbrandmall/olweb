@@ -354,7 +354,7 @@ function findContractByContractNo() {
                     
                     $('#deliveryDate').datepicker('update', data.deliveryDate);
                     $('#area').val(data.area);
-                    $('#bizTypeName').val(data.bizTypeName);
+                    $('#bizTypeName').val((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                     $('#bizDate').datepicker('update', data.bizDate);
                     
                     $('#awardDate').datepicker('update', data.awardDate);

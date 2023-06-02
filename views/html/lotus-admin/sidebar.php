@@ -54,7 +54,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console' || $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail') { echo 'active'; }?>">
-                <a href="#"><i class="fa fa-bullseye"></i>
+                <a href="#"><i class="fa fa-calendar-check-o"></i>
                     <span>招商规划<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>

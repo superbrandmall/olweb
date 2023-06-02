@@ -52,12 +52,6 @@ $(document).ready(function(){
         $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
     })
     
-    if(!sessionStorage.getItem('roleYZJ') || sessionStorage.getItem('roleYZJ') == null || sessionStorage.getItem('roleYZJ') == ''){
-        findRoleYZJByParentId();
-    } else {
-        updateRoleYZJLabel();
-    }
-    
     // 初始化    
     updateDictDropDownByDictTypeCode('RENT_CALCULATION_MODE','selectRentCalculationMode',$.api.rentCalculationMode[0],$.api.rentCalculationMode[1]); // 计租方式
     updateDictDropDownByDictTypeCode('PROFIT_CENTER','profitCenter',$.api.profitCenter[0],$.api.profitCenter[1]); // 利润中心
@@ -121,7 +115,7 @@ $(document).ready(function(){
     updateFeeItems('propertyMgmtFeeItemDropDown','propertyMgmtVATDropDown','property'); // 物业管理费科目
     updateFeeItems('propertyFeeYearItemDropDown','propertyFeeYearVATDropDown','propertyYear'); // 年度商场服务费科目
     updateFeeItems('promotionFeeItemDropDown','promotionVATDropDown','promitionFee'); // 推广费科目
-    findDictCodeByDictTypeCode('LOTUS_RENT_FLOW_STEP'); // 云之家流程
+    findDictCodeByDictTypeCode('LOTUS_OUTER_CONTRACT_FLOW_STEP'); // 全国云之家流程
     findDictCodeByDictTypeCode('RENT_CALCULATION_MODE'); // 计租方式
     findDictCodeByDictTypeCode('CONTRACT_TYPE'); // 合同类型
     findDictCodeByDictTypeCode('PAYMENT_MODE'); // 支付方式
@@ -179,19 +173,35 @@ $(document).ready(function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
     
-    $('#8d2794df-c15f-4d68-9f8e-8b847f6191db').on('change',function(){
-        if($(this).find('option:selected').val() != null) {
-            $('.step li:nth-child(5)').addClass('active');
-        } else {
-            $('.step li:nth-child(5)').removeClass('active');
-        }
-    })
-
-    $('#hq_leasing_head').on('change',function(){
+    $('#bizApprove').on('change',function(){
         if($(this).find('option:selected').val() != null) {
             $('.step li:nth-child(6)').addClass('active');
         } else {
             $('.step li:nth-child(6)').removeClass('active');
+        }
+    })
+
+    $('#hqFinanceApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(7)').addClass('active');
+        } else {
+            $('.step li:nth-child(7)').removeClass('active');
+        }
+    })
+    
+    $('#hqLegalApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(8)').addClass('active');
+        } else {
+            $('.step li:nth-child(8)').removeClass('active');
+        }
+    })
+
+    $('#hqCeoApprove').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(9)').addClass('active');
+        } else {
+            $('.step li:nth-child(9)').removeClass('active');
         }
     })
     
@@ -426,6 +436,8 @@ function findRequestbyBizId() {
                         $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
                         $.request.mallCode = data.mallCode;
 
+                        findUserRoleYZJByKVCondition(data.mallCode);
+                        
                         updateSelectStoreDropDownByMallCode(10,data.mallCode);
                         temp = new Option((data.unitName +'['+ data.unitCode +'] | '+ data.area + '㎡'), data.unitCode+':::'+data.shopCode+':::'+data.unitName+':::'+data.floorName+':::'+data.floorCode, true, true);
                         $('#selectStore').append(temp).trigger('change');
@@ -1000,51 +1012,20 @@ function findRequestbyBizId() {
                         
                         /*** END 审批意见书 **/
                         
-                        appendLotusLeasingHead();
-                        
-                        $('#Lotus_leasing_head select').val('').select2({
-                            placeholder: "未选择",
-                            allowClear: true
-                        });
-                        
                         if(data.processApproveList != null && data.processApproveList.length > 0) {
                             var temp;
                             $.each(data.processApproveList, function(i,v) {
                                 temp = new Option(v.approveName, v.approveOpenId, true, true);
-                                switch (v.activityName) {
-                                    case "财务负责人":
-                                        $('#66bfb352-903b-490a-a25b-4c554bc16756 select').append(temp).trigger('change');
-                                        break;
-                                    case "业态负责人审批":
-                                        $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').append(temp).trigger('change');
-                                        break;
-                                    case "法务负责人":
-                                        $('#4381cd4e-b984-4641-8a99-15242faae0eb select').append(temp).trigger('change');
-                                        break;
-                                    case "财务预审":
-                                        $('#finance_pre_check select').append(temp).trigger('change');
-                                        break;
-                                    case "法务预审":
-                                        $('#legal_pre_check select').append(temp).trigger('change');
-                                        break;
-                                    case "Lotus招商负责人":
-                                        $('#Lotus_leasing_head select').append(temp).trigger('change');
-                                        break;
-                                    case "商业首席执行官":
-                                        $('#hq_leasing_head select').append(temp).trigger('change');
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                $('#'+v.activityCode+' select').append(temp).trigger('change');
                             })
                         }
 
                         if(data.processBizApprove == 1) {
-                            $('.step-progress li:eq(4)').addClass('active');
+                            $('.step-progress li:eq(6)').addClass('active');
                         }
 
                         if(data.processHqRentApprove == 1) {
-                            $('.step-progress li:eq(5)').addClass('active');
+                            $('.step-progress li:eq(7), .step-progress li:eq(8), .step-progress li:eq(9)').addClass('active');
                         }
 
                         if(data.coFileList.length > 0) {
@@ -2499,41 +2480,37 @@ function submitCheck() {
         }
     }
     
-    if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
+    if($('#gmApprove select').val() == null) {
         flag = 0;
-        $('#66bfb352-903b-490a-a25b-4c554bc16756 select').parent().append(error);
+        $('#gmApprove select').parent().append(error);
     }
     
-    if($('#4381cd4e-b984-4641-8a99-15242faae0eb select').val() == null) {
+    if($('#areaGmApprove select').val() == null) {
         flag = 0;
-        $('#4381cd4e-b984-4641-8a99-15242faae0eb select').parent().append(error);
-    }
-    
-    if($('#finance_pre_check select').val() == null) {
-        flag = 0;
-        $('#finance_pre_check select').parent().append(error);
-    }
-    
-    if($('#legal_pre_check select').val() == null) {
-        flag = 0;
-        $('#legal_pre_check select').parent().append(error);
-    }
-    
-    if($('#Lotus_leasing_head select').val() == null) {
-        flag = 0;
-        $('#Lotus_leasing_head select').parent().append(error);
+        $('#areaGmApprove select').parent().append(error);
     }
     
     var area = $.request.content.area;
-    if(area >= 500){
-        if($('#hq_leasing_head select').val() == null) {
+    var yearLength = calDatesDiff($('#startDate').val(),$('#endDate').val()) / 365;
+    if(area >= 500 || yearLength >= 5){
+        if($('#bizApprove select').val() == null) {
             flag = 0;
-            $('#hq_leasing_head select').parent().append(error);
+            $('#bizApprove select').parent().append(error);
         }
-    } else {
-        if($('#hq_leasing_head select').val() == null && $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+        
+        if($('#hqFinanceApprove select').val() == null) {
             flag = 0;
-            $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+            $('#hqFinanceApprove select').parent().append(error);
+        }
+        
+        if($('#hqLegalApprove select').val() == null) {
+            flag = 0;
+            $('#hqLegalApprove select').parent().append(error);
+        }
+        
+        if($('#hqCeoApprove select').val() == null) {
+            flag = 0;
+            $('#hqCeoApprove select').parent().append(error);
         }
     }
     
@@ -2612,58 +2589,22 @@ function saveContractForm(s) {
             processHqRentApprove = 1;
         }
         
-        /*var esignFlag;
-        if($('#esignFlag').prop('checked') == true){
-            esignFlag = 1;
-        } else {
-            esignFlag = 0;
-        }*/
-        
         var processApproveList = [];
-        var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_RENT_FLOW_STEP'));
+        var lotusRentFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_OUTER_CONTRACT_FLOW_STEP'));
         if(lotusRentFlowStep.length > 0){
             $.each(lotusRentFlowStep, function(i,v) {
-                var processApprove = {};
-                processApprove.activityCode = v.dictCode;
-                processApprove.activityName = v.dictName;
-                switch (v.dictName) {
-                    case "财务负责人":
-                        processApprove.approveName = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').val();
-                        break;
-                    case "业态负责人审批":
-                        processApprove.approveName = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').val();
-                        break;
-                    case "法务负责人":
-                        processApprove.approveName = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').val();
-                        break;
-                    case "财务预审":
-                        processApprove.approveName = $('#finance_pre_check select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#finance_pre_check select').find('option:selected').val();
-                        break;
-                    case "法务预审":
-                        processApprove.approveName = $('#legal_pre_check select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#legal_pre_check select').find('option:selected').val();
-                        break;
-                    case "Lotus招商负责人":
-                        processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
-                        break;
-                    case "商业首席执行官":
-                        processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
-                        break;
-                    default:
-                        break;
-                }
-                processApprove.bizId = bizId;
-                processApprove.state = 1;
-                
-                if(processApprove.approveOpenId != null){
-                    processApproveList.push(processApprove);
-                }
+                $.each($('#'+v.dictCode+' select').val(), function(j,w) {
+                    var processApprove = {};
+                    processApprove.activityCode = v.dictCode;
+                    processApprove.activityName = v.dictName;
+                    processApprove.bizId = bizId;
+                    processApprove.state = 1;
+                    processApprove.approveName = $('#'+v.dictCode+' select').find("option[value='"+w+"']").text();
+                    processApprove.approveOpenId = w;
+                    if(processApprove.approveOpenId != null){
+                        processApproveList.push(processApprove);
+                    }
+                })
             })
         }
         

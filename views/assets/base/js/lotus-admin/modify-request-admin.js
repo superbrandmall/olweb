@@ -407,7 +407,7 @@ function updateFeeItems(FeeItem,VAT,type) {
         $.each(feeItems, function(i,v) {
             if(v.itemType == type){
                 $('.'+FeeItem+'.new').append('<option value="'+v.itemCode+'">'+v.itemName+'['+v.itemCode+']</option>');
-                if($.request.mallCode == 'SC126' || $.request.mallCode == 'SC127'){
+                if($.inArray($.request.mallCode, $.api.fivePercentFixedRent) != -1){
                     $('.'+VAT+'.newFee').val(v.taxRate).trigger('change');
                     $('#fixedRent .'+VAT+'.newFee').val('0.05').trigger('change');
                 } else {
@@ -583,7 +583,7 @@ function findRequestbyBizId() {
                         })
 
                         if(data.brandName != null && data.brandCode != null){
-                            temp = new Option(data.brandName, data.brandCode, true, true);
+                            temp = new Option(data.brandName+'['+((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/')+']', data.brandCode, true, true);
                             $('#brandName').append(temp).trigger('change');
                         }
 
@@ -601,7 +601,7 @@ function findRequestbyBizId() {
 
                         $('#deliveryDate').datepicker('update', data.deliveryDate);
                         $('#area').val(data.area);
-                        $('#bizTypeName').val(data.bizTypeName);
+                        $('#bizTypeName').val((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                         $('#bizDate').datepicker('update', data.bizDate);
 
                         $('#awardDate').datepicker('update', data.awardDate);
@@ -729,7 +729,7 @@ function findRequestbyBizId() {
                             }
                         }
                         
-                        if(data.propertyFeeYearList.length > 0) {
+                        if(data.propertyFeeYearList != null && data.propertyFeeYearList.length > 0) {
                             $.each(data.propertyFeeYearList, function(i,v) {
                                 updateRowInvestmentContractAccounttermPropertyFeeYear(JSON.stringify(v));
                                 $('#propertyFeeyear tr:eq("'+i+'")').find('select, input').attr('disabled','disabled');
@@ -2795,6 +2795,69 @@ function saveContractForm(s) {
             }
         }
         
+        var propertyFeeYearList = [];
+        var len = $("#propertyFeeYear").find("tr").length;
+        $("#propertyFeeYear").find("tr").each(function(i,e){
+            var propertyFeeYear = {};
+            index = i * 1 + 1;
+            propertyFeeYear.itemCode = $('#propertyFeeYearItem_'+index).val();
+            propertyFeeYear.itemName = $('#select2-propertyFeeYearItem_'+index+'-container').text().split('[')[0];
+
+            propertyFeeYear.shopCode = shopCode;
+            propertyFeeYear.area = area;
+
+            propertyFeeYear.settlePeriodCode = 'T';
+            propertyFeeYear.settlePeriodName = '次';
+
+            propertyFeeYear.startDate = $('#propertyFeeYearStartDate_'+index).val();
+            propertyFeeYear.endDate = $('#propertyFeeYearEndDate_'+index).val();
+
+            propertyFeeYear.amount = (numberWithoutCommas($('#propertyFeeYearAmount_'+index).val()) || 0);
+            propertyFeeYear.rentAmount = propertyFeeYear.amount;
+            propertyFeeYear.taxAmount = (numberWithoutCommas($('#propertyFeeYearTaxAmount_'+index).val()) || 0);
+            propertyFeeYear.taxRentAmount = propertyFeeYear.taxAmount;
+
+            propertyFeeYear.taxRate = $('#propertyFeeYearTaxRate_'+index).val();
+            propertyFeeYear.taxCode = $('#propertyFeeYearTaxRate_'+index).find('option:selected').attr('data-code');
+
+            if($('#propertyFeeYearInvoiceFlag_'+index).prop('checked') == true){
+                propertyFeeYear.invoiceFlag = 1;
+            } else {
+                propertyFeeYear.invoiceFlag = 0;
+            }
+            
+            propertyFeeYear.contractNo = $.request.content.contractNo;
+            propertyFeeYear.contractVersion = $.request.content.contractVersion;
+            
+            propertyFeeYearList.push(propertyFeeYear);
+        })
+        
+        if(s == 'submit'){
+            if(propertyFeeYearList.length > 0) {
+                var check1 = dateCompare($('#propertyFeeYearStartDate_1').val(),$('#startDate').val()); //条款开始日与合同开始日比较
+                var check2 = dateCompare($('#propertyFeeYearEndDate_'+len).val(),$('#endDate').val()); //条款结束日与合同结束日比较
+                var check3 = 'smaller';
+                for(var ln = 0; ln < len; ln++){ //条款每一期开始日与结束日比较
+                    var check33 = dateCompare($('#propertyFeeYearStartDate_'+(ln+1)).val(),$('#propertyFeeYearEndDate_'+(ln+1)).val());
+                    if(check33 != 'smaller'){
+                        check3 = check33;
+                    }
+                }
+                var check4 = 'equal';
+                for(var ln = 1; ln < len; ln++){ //条款每一期开始日与上一期结束日比较，条款连续性
+                    var check44 = dateCompare(IncrDate($('#propertyFeeYearEndDate_'+ln).val()), $('#propertyFeeYearStartDate_'+(ln+1)).val());
+                    if(check44 != 'equal'){
+                        check4 = check44;
+                    }
+                }
+
+                if(check1 == 'smaller' || check2 != 'equal' || check3 != 'smaller' || check4 != 'equal') {
+                    alertMsg('9999','年度商场服务费条款开始日与结束日错误，请修改重新提交！');
+                    return false;
+                } 
+            }
+        }
+        
         var oldContractTerm = {};
         if($.request.content.oldContractTerm != null) {
             oldContractTerm = $.request.content.oldContractTerm;
@@ -2902,7 +2965,7 @@ function saveContractForm(s) {
             "oldStartDate": $.request.content.startDate,
             "openEndTime": openEndTime,
             "openStartTime": openStartTime,
-            "overdueBizAmount": 0,
+            "overdueBizAmount": $.request.content.overdueBizAmount,
             "overdueFee": 0,
             "paymentMode": $.request.content.paymentMode,
             "posMode": $.request.content.posMode,

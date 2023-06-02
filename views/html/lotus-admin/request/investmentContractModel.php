@@ -36,7 +36,13 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">招商人员 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="creatorName" type="text" readonly />
+                    <?php
+                    if(isset($_SESSION['lotus_admin_name'])) {
+                        echo '<input class="form-control" id="creatorName" type="text" value="'.$_SESSION['lotus_admin_name'].'" readonly />';
+                    } else {
+                        echo '<input class="form-control" id="creatorName" type="text" value="管理员" readonly />';
+                    }
+                    ?>
                 </div>
             </div>
         </div>
@@ -44,7 +50,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label">签约编号</label>
                 <div class="col-md-8 col-sm-12">
-                    <input class="form-control" id="contractNo" type="text" readonly />
+                    <input class="form-control" id="contractNo" type="text" value="系统生成" readonly />
                 </div>
             </div>
             <div class="form-group">

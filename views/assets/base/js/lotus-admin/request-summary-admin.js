@@ -84,7 +84,7 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
-                    $('#essayTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100) * 100 / 100 || '/')+'</span>%，');
+                    $('#essayTargetSales').html('首年目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，首年预估销售额<span class="txt">'+(data.salesList.length > 0 ? data.salesList[0].amount : '/')+'</span>元/月，租售比<span class="txt">'+(parseFloat(data.rentSalesRate * 100).toFixed(2) || '/')+'</span>%，');
                     if(data.awardDate != null && data.awardDate != ''){
                         $('#essayAwardDate').html('<span class="txt">预计'+data.awardDate.split('-')[0]+'年'+data.awardDate.split('-')[1]+'月'+data.awardDate.split('-')[2]+'日</span>签约，');
                     }
@@ -96,9 +96,9 @@ function findRequestByBizId() {
                     }
                     
                     $('#essayBudgetRentAmount').html('首年预算租金<span class="txt">'+(data.budgetDayRent || '/')+'</span>元/天/平米，');
-                    $('#essayBudgetRentAmountRateOfReach').html('首年单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100) * 100 / 100 || '/')+'</span>%。');
+                    $('#essayBudgetRentAmountRateOfReach').html('首年单价达成率<span class="txt">'+(parseFloat(data.budgetCompleteRate * 100).toFixed(2) || '/')+'</span>%。');
                     $('#essayBudgetBizDate').html('预算中<span class="txt">'+(data.budgetStartDate != null ? data.budgetStartDate.split('-')[0]+'年'+data.budgetStartDate.split('-')[1]+'月'+data.budgetStartDate.split('-')[2]+'日' : '/')+'</span>开业，');
-                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat((data.budgetYearCompleteRate * 100) * 100 / 100).toFixed(2) || '/')+'</span>%，');
+                    $('#essayBudgetYearAmountRateOfReach').html('全年预算达成率<span class="txt">'+(parseFloat(data.budgetYearCompleteRate * 100).toFixed(2) || '/')+'</span>%，');
                     $('#essayBudgetDifference').html('差异<span class="txt">'+(data.budgetDiffAmount || '/')+'</span>元。');
                     $('#remark').val(data.remark);
                     
@@ -113,7 +113,7 @@ function findRequestByBizId() {
                     $('#deliveryDate').text(data.deliveryDate).attr('title',data.deliveryDate);
                     updateDictByDictTypeCode('PAYMENT_MODE','paymentMode',data.paymentMode);
                     $('#area').html(data.area+'m<sup>2</sup>').attr('title',data.area+'m²');
-                    $('#bizTypeName').text(data.bizTypeName).attr('title',data.bizTypeName);
+                    $('#bizTypeName').text((data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/').attr('title',(data.bizTypeName != 'null' && data.bizTypeName != null) ? data.bizTypeName : '/');
                     $('#duration').text(data.duration +'个月').attr('title',data.duration +'个月');
                     $('#bizDate').text(data.bizDate).attr('title',data.bizDate);
                     
