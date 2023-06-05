@@ -343,10 +343,15 @@ function findAllRequestsByKVCondition(p,c){
                         if(i%2==0){
                             tbg = '#f9f9f9';
                         }
+                        
+                        var main = '';
+                        if($.inArray(v.mallCode, $.api.mallCodeSH) == -1){
+                            main = '&t=';
+                        }
                             
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
-                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+main+'">'+v.bizId+'</a></td>\n\
                             <td>'+contractLink+'</td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\

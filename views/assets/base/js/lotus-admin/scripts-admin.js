@@ -14,7 +14,8 @@ $.api = {
     termCalcMode: ['新计算方法','NEW'],
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
     contractTemplate: ['租期 > 6个月','1'],
-    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028','SC102','SC109']
+    fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028','SC102','SC109'],
+    mallCodeSH: ['SC145','SC127','SC082','SC078','SC060','SC050','SC043','SC041','SC040','SC027','SC011','SC010','SC005','SC001','SC055','SC126','SC033']
 };
 
 var d = new Date();
@@ -70,7 +71,6 @@ $(document).ready(function(){
         $(this).ekkoLightbox();
     });
     
-    // An highlighted block
     var fixedNavHeight = $('.main-header').outerHeight();
     if (window.location.hash.indexOf('#') >= 0) {
         $('html,body').animate({
@@ -303,7 +303,7 @@ function alertModalMsg(code,m) {
     $('.modal-body').prepend(msgDiv);
 }
 
-function generatePages(currentPage, LastPage, items) {//5
+function generatePages(currentPage, LastPage, items) {
     $(".pagination .pagination").html('');
     var pages = '';
     if (LastPage <= 4) {
@@ -391,11 +391,8 @@ function getURLParameter(sParam) {
 }
 
 function refineUrl() {
-    //get full url
     var url = window.location.href;
-    //get url after/  
     var value = url.substring(url.lastIndexOf('/') + 1);
-    //get the part after before ?
     value  = value.split("?")[0];   
     return value;     
 }
@@ -446,20 +443,16 @@ $.validator.addMethod('numChar',function(text){
 }, "The value entered is invalid");
 
 (function (){
-    // 这个调用能触发目标事件，从而达到共享数据的目的
     if(!sessionStorage.length){
       localStorage.setItem('getSessionStorage', Date.now());
     };
     
-    // 该事件是核心
     window.addEventListener('storage', function (event){
 
     if(event.key == 'getSessionStorage'){
-        // 已存在的标签页会收到这个事件
         localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage));
         localStorage.removeItem('sessionStorage');
     } else if(event.key == 'sessionStorage' && !sessionStorage.length){
-        // 新开启的标签页会收到这个事件
         var data = JSON.parse(event.newValue),
           value;
           
@@ -3288,9 +3281,9 @@ function findUserRoleYZJByKVCondition(mc){
                 if(response.data.content.length > 0){
                     $.each(response.data.content, function(i,v){
                         $('#'+v.roleId).find('label').find('b').text(v.roleName);
-                        if(v.mallCode == null || v.mallCode == ''){
-                            updateUserRoleYZJDropDownByRoleId(v.roleId);
-                        } else {
+                        updateUserRoleYZJDropDownByRoleId(v.roleId);
+                        var pathname = window.location.pathname;
+                        if(v.mallCode != null && v.mallCode != '' && (pathname.indexOf('make-request') != -1 || pathname.indexOf('renew-request') != -1 || pathname.indexOf('terminate-request') != -1 || pathname.indexOf('modify-request') != -1)){
                             var newOption = new Option(v.name, v.openId, true, true);
                             $('#'+v.roleId+' select').append(newOption).trigger('change');
                         }
@@ -3519,11 +3512,9 @@ function calBackPushNextCalendar(Exid){
         var num = parseInt(num0) + 1;
         var tmp = $(this).val();
         if($('#'+Exid+'StartDate_'+num).length > 0){
-            //$('#'+Exid+'StartDate_'+num).datepicker('setStartDate', IncrDate(tmp));
             $('#'+Exid+'StartDate_'+num).datepicker('update', IncrDate(tmp));
         } else {
             if($('#'+Exid+'EndDate_'+num0).val() == '' && $('#'+Exid+'StartDate_'+num0).val() != ''){
-                //$('#'+Exid+'EndDate_'+num0).datepicker('setStartDate', IncrDate(tmp));
                 $('#'+Exid+'EndDate_'+num0).datepicker('update', $('#endDate').val());
             }
         }
@@ -4084,13 +4075,10 @@ function dataURLtoFile(dataurl,filename,filetype) {
     var arr = dataurl.split(","),
     bstr =atob(arr[1]),
     n = bstr.length,
-
     u8arr =new Uint8Array(n);
-
     while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
     }
-
     return new File([u8arr], filename, {
         type: filetype
     });
@@ -4620,7 +4608,6 @@ function scrollHandle() {
         })
     }
 }
-
 (function ($) {
     window.Ewin = function () {
         var html = '<div id="[Id]" class="modal fade" role="dialog" aria-labelledby="modalLabel">' +
@@ -4777,18 +4764,16 @@ function scrollHandle() {
         }
     }();
 })(jQuery);
-
-// Settings object that controls default parameters for library methods:
 accounting.settings = {
     currency: {
-            symbol : "¥",   // default currency symbol is '$'
-            format: "%s%v", // controls output: %s = symbol, %v = value/number (can be object: see below)
-            decimal : ".",  // decimal point separator
-            thousand: ",",  // thousands separator
-            precision : 2   // decimal places
+            symbol : "¥",
+            format: "%s%v",
+            decimal : ".",
+            thousand: ",",
+            precision : 2 
     },
     number: {
-            precision : 2,  // default precision on numbers is 0
+            precision : 2,
             thousand: ",",
             decimal : "."
     }

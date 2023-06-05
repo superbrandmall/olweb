@@ -1,8 +1,12 @@
 <?php
 if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
     $id = explode('?id=', $_SERVER['REQUEST_URI'])[1];
-    if (strpos($id, '&s=') !== false) {
-        $id = explode('&s=', $id)[0];
+    $main = '';
+    if (strpos($id, '&t=') !== false) {
+        $id = explode('&t=', $id)[0];
+        $main = '-main';
+    } else if(strpos($id, '&s=') !== false) {
+        $id = explode('&s=', $id)[0]; 
     }
 }
 
@@ -26,7 +30,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li class="active"><a href="javascript: void(0);">单据概要</a></li>
-                    <li><a href="/lotus-admin/modify-detail?id=<?= $id; ?>">单据内容</a></li>
+                    <li><a href="/lotus-admin/modify-detail<?= $main; ?>?id=<?= $id; ?>">单据内容</a></li>
                     <li><a href="/lotus-admin/dr-summary?id=<?= $id; ?>">DR概要</a></li>
                 </ol>
             </div>

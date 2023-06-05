@@ -3,6 +3,24 @@ $.request = {
 }
 
 $(document).ready(function(){
+    var auth = 0;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+            auth = 1;
+            return false;
+        } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+            if($.cookie('mallSelected').split(':::')[1] == v.moduleCode){
+                auth = 1;
+                return false;
+            }
+        }
+    })
+    
+    if(auth == 0){
+        alertMsg('9999','没有访问授权，请联系系统管理员。');
+        return false;
+    }
+    
     $('#create-form')[0].reset();
     getBizId();
     
@@ -1925,7 +1943,7 @@ function saveContractForm(s) {
                                                                 $.request.id = response.data.id;
                                                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                                                             } else if(response.data.id != "" && response.data.formStatus == "2"){
-                                                                window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                                                                window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&t=&s=succeed';
                                                             } else {
                                                                 alertMsg(response.data.resultCode,response.data.resultMsg);
                                                             }
@@ -1993,7 +2011,7 @@ function saveContractForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&t=&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
