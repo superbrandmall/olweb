@@ -4,24 +4,6 @@ $.request = {
 }
 
 $(document).ready(function(){
-    var auth = 0;
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-            auth = 1;
-            return false;
-        } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            if(getURLParameter('id') == v.moduleCode){
-                auth = 1;
-                return false;
-            }
-        }
-    })
-    
-    if(auth == 0){
-        alertMsg('9999','没有访问授权，请联系系统管理员。');
-        return false;
-    }
-    
     $('#create-form')[0].reset();
     
     findTaxInfoByTaxCategories('VAT');
@@ -481,7 +463,25 @@ function findRequestbyBizId() {
                         } else if(data.formStatus == '10'){
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_closed.png) 0 100%/112px auto no-repeat');
                         }
+                        
+                        var auth = 0;
+                        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                            if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+                                auth = 1;
+                                return false;
+                            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                                if(data.mallCode == v.moduleCode){
+                                    auth = 1;
+                                    return false;
+                                }
+                            }
+                        })
 
+                        if(auth == 0){
+                            alertMsg('9999','没有访问授权，请联系系统管理员。');
+                            return false;
+                        }
+                        
                         $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
                         $('#requestName').text(data.bizId);
                         $('#bizId').val(data.bizId);

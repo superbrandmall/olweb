@@ -9,7 +9,7 @@ $(document).ready(function(){
             auth = 1;
             return false;
         } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            if($.cookie('mallSelected').split(':::')[1] == v.moduleCode){
+            if($.inArray(v.moduleCode, $.api.mallCodeSH) == -1){
                 auth = 1;
                 return false;
             }
@@ -1764,7 +1764,7 @@ function saveContractForm(s) {
             "brandName": brandName,
             "cardDiscount": 0,
             "compareList": compareList,
-            "contractName": ($('#contractName').val() || ''),
+            "contractName": ($('#contractName').val() || ' '),
             "contractNo": '',
             "contractTemplate": $('#contractTemplate').find('option:selected').val(),
             "contractVersion": 1,

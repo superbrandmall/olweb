@@ -4,24 +4,6 @@ $.request = {
 }
 
 $(document).ready(function(){
-    var auth = 0;
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-            auth = 1;
-            return false;
-        } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            if(getURLParameter('id') == v.moduleCode){
-                auth = 1;
-                return false;
-            }
-        }
-    })
-    
-    if(auth == 0){
-        alertMsg('9999','没有访问授权，请联系系统管理员。');
-        return false;
-    }
-    
     $('#create-form')[0].reset();
     
     findTaxInfoByTaxCategories('VAT');
@@ -483,6 +465,24 @@ function findRequestbyBizId() {
                         if($.request.content.formStatus != '1' && $.request.content.formStatus != '3'){
                             $('#saveDraft').hide();
                             $('#submitForm').hide();
+                        }
+                        
+                        var auth = 0;
+                        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+                            if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
+                                auth = 1;
+                                return false;
+                            } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
+                                if(data.mallCode == v.moduleCode){
+                                    auth = 1;
+                                    return false;
+                                }
+                            }
+                        })
+
+                        if(auth == 0){
+                            alertMsg('9999','没有访问授权，请联系系统管理员。');
+                            return false;
                         }
 
                         $('#requestName').text($.request.content.bizId);
