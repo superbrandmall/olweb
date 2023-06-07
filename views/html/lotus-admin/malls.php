@@ -2,7 +2,7 @@
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/malls-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/malls.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/malls.js?t='.date("Y-m-d").'1"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
@@ -52,16 +52,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2" id="mallType" name="mallType" style="width: 100%">
                                     <option value="" selected>全部</option>
-                                    <option value="上海市">上海市</option>
-                                    <option value="北京市">北京市</option>
-                                    <option value="重庆市">重庆市</option>
-                                    <option value="江苏省">江苏省</option>
-                                    <option value="河南省">河南省</option>
-                                    <option value="山东省">山东省</option>
-                                    <option value="湖南省">湖南省</option>
-                                    <option value="陕西省">陕西省</option>
-                                    <option value="广东省">广东省</option>
-                                    <option value="广西壮族自治区">广西省</option>
+                                    <option value="上海">上海市</option>
+                                    <option value="北京">北京市</option>
+                                    <option value="重庆">重庆市</option>
+                                    <option value="江苏">江苏省</option>
+                                    <option value="河南">河南省</option>
+                                    <option value="山东">山东省</option>
+                                    <option value="湖南">湖南省</option>
+                                    <option value="陕西">陕西省</option>
+                                    <option value="广东">广东省</option>
+                                    <option value="广西">广西省</option>
                                 </select>
                             </div>
                         </div>

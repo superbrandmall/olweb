@@ -36,9 +36,10 @@ window.onload = function () {
     paintMap(R);
 	
 	var textAttr = {
-        "fill": "#000",
+        "fill": "#dd4b39",
         "font-size": "12px",
-        "cursor": "pointer"
+        "cursor": "pointer",
+        "font-weight": "bold"
     };
 			
            
@@ -93,20 +94,80 @@ window.onload = function () {
                 default:
             }
             //写入文字
-            china[state]['text'] = R.text(xx, yy, china[state]['name']).attr(textAttr);
+            //china[state]['text'] = R.text(xx, yy, china[state]['name']+'\n12').attr(textAttr);
             //china[state]['path'].setAttribute("fill","#113333"); //rgba(0,0,china[state]['nvalue'],0);
             //x = china[state]['nvalue'] *255 * 16 + 10 * 255;
             //china[state]['nvalue']=255-china[state]['nvalue'];
             //x = "rgb(255, 255, " + china[state]['nvalue'] + ")";
+//            if($.inArray(china[state]['name'], ['北京','上海','重庆','江苏','河南','山东','湖南','陕西','广东','广西']) != -1){
+//                x = "rgb(131, 204, 60)";
+//            } else {
+//                x = "rgb(246, 247, 246)";
+//            }
+
+            var mallNo = 0;
+            switch (china[state]['name']) {
+                case "北京":
+                    mallNo = '4';
+                    break;
+                case "上海":
+                    mallNo = '17';
+                    break;
+                case "重庆":
+                    mallNo = '2';
+                    break;
+                case "江苏":
+                    mallNo = '6';
+                    break;
+                case "河南":
+                    mallNo = '2';
+                    break;
+                case "山东":
+                    mallNo = '2';
+                    break;
+                case "湖南":
+                    mallNo = '9';
+                    break;
+                case "陕西":
+                    mallNo = '7';
+                    break;
+                case "广东":
+                    mallNo = '46';
+                    break;
+                case "广西":
+                    mallNo = '1';
+                    break;
+                default:
+            }
+            
             if($.inArray(china[state]['name'], ['北京','上海','重庆','江苏','河南','山东','湖南','陕西','广东','广西']) != -1){
-                x = "rgb(131, 204, 60)";
+                china[state]['text'] = R.text(xx, yy, china[state]['name']+'\n'+mallNo).attr(textAttr);
+                china[state]['image'] = R.image("/views/assets/base/img/content/lotus-admin/circle.gif", xx+=2, yy-=2, 20, 20);
+                china[state]['text'][0].onclick = function () {
+                    $.cookie('searchMallType',china[state]['name']);
+                    location.href = "/lotus-admin/malls";
+                }
+                china[state]['image'][0].onclick = function () {
+                    $.cookie('searchMallType',china[state]['name']);
+                    location.href = "/lotus-admin/malls";
+                }
+            }
+            
+            if($.inArray(china[state]['name'], ['北京','山东','广东']) != -1){
+                x = "rgb(254,252,200)";
+            } else if($.inArray(china[state]['name'], ['上海','河南','湖南']) != -1){
+                x = "rgb(244,218,190)";
+            } else if($.inArray(china[state]['name'], ['重庆']) != -1){
+                x = "rgb(203,205,230)";
+            } else if($.inArray(china[state]['name'], ['江苏','陕西','广西']) != -1){
+                x = "rgb(248,202,223)";
             } else {
                 x = "rgb(246, 247, 246)";
             }
             //x = "rgb(255," + china[state]['nvalue'] + ",255)";
             //x = "rgb("+china[state]['nvalue'] +",255,255)";
             china[state]['path'].attr("fill", x);	
-         })(china[state]['path'], state);
+        })(china[state]['path'], state);
     }
 }
 

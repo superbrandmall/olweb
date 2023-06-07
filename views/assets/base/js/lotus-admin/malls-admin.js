@@ -91,7 +91,7 @@ function findAllMallsByKVCondition(p,c){
             "columnName": "remarkFirst",
             "columnPatten": "",
             "conditionOperator": "AND",
-            "operator": "=",
+            "operator": "LIKE",
             "value": $.cookie('searchMallState')
         }
         params.push(param);

@@ -195,10 +195,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <h4>莲花项目概览</h4>
                                         <hr>
                                         项目数(已开业)<br><h4 class="text-red">96</h4><hr>
-                                        总面积(m²)<br><h4 class="text-red">501,906</h4><hr>
-                                        总铺位数<br><h4 class="text-red">3,864</h4><hr>
-                                        出租率(按面积)<br><h4 class="text-red">61.28%</h4><hr>
-                                        合同数(生效中)<br><h4 class="text-red">1,817</h4>
+                                        总面积(m²)<br><h4 class="text-red">492,072</h4><hr>
+                                        总铺位数<br><h4 class="text-red">3,875</h4><hr>
+                                        出租率(按面积)<br><h4 class="text-red">61.21%</h4><hr>
+                                        合同数(生效中)<br><h4 class="text-red">1,670</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
