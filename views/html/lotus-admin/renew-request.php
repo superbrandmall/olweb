@@ -22,6 +22,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper renew-request">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/requests" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 续签租赁合同申请单: <span id="requestName" style="font-size: 18px;"></span>
             </h4>
