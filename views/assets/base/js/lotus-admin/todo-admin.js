@@ -301,7 +301,7 @@ function findAllRequestsByKVCondition(){
     }
         
     $.ajax({
-        url: $.api.baseCommYZJ+"/api/v/process/inst/record/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        url: $.api.baseCommYZJ+"/api/v/process/inst/record/findAllByKVCondition?page=0&size=1000&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,

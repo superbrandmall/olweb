@@ -62,7 +62,7 @@ function findRequestByBizId() {
                     
                     $('#essayMall').html('<span class="txt">'+data.mallName+'</span>【项目名称】');
                     $('#essayFloor').html('<span class="txt">'+data.floorName+'</span>【楼层】');
-                    $('#essayModality').html('<span class="txt">'+data.bizTypeName+'</span>【业态】');
+                    $('#essayModality').html('<span class="txt">'+(data.bizTypeName != 'null'? data.bizTypeName : '/')+'</span>【业态】');
                     $('#essayBrand').html('<span class="txt">'+data.brandName+'</span>【品牌】');
                     $('#essayArea').html('<span class="txt">'+data.area+'</span>【铺位面积】平米，');
                     
@@ -101,7 +101,7 @@ function findRequestByBizId() {
                     if(data.promotionFeeList.length > 0){
                         $('#essayPromotion').html('推广费<span class="txt">'+data.promotionFeeList[0].taxAmount+'</span>元/月，');
                     }
-                    $('#essayRenewTargetSales').html('目标营业额<span class="txt">'+data.targetSales+'</span>元/月，');
+                    $('#essayRenewTargetSales').html('目标营业额<span class="txt">'+(data.targetSales || '/')+'</span>元/月，');
                     var salesListAmount = 0;
                     if(data.salesList.length > 0){
                         salesListAmount = data.salesList[0].amount;
