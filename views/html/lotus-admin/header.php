@@ -17,7 +17,7 @@
         <link rel="shortcut icon" href="/views/assets/base/img/content/lotus-admin/favicon.ico" type="image/x-icon"/>
         <link rel="stylesheet" href="/views/assets/base/css/lotus-admin.css">
         <link rel="stylesheet" href="/views/assets/plugins/datepicker/bootstrap-datepicker.css" type="text/css" media="all" />
-        <link rel="stylesheet" href="/views/assets/base/css/grayscale.css" type="text/css" media="all" />
+        <!--<link rel="stylesheet" href="/views/assets/base/css/grayscale.css" type="text/css" media="all" />-->
         <script>
             window.snipeit = {
                 settings: {
