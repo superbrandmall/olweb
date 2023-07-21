@@ -1,49 +1,73 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/brands-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/my-process-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/brands.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/my-process.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
 }
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 160px;">
+    <section class="sub-header" style="height: 210px;">
         <h4>
-            品牌
+            流程
         </h4>
-        <div class="pull-right">
-            <a href="/lotus-admin/create-brand" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建品牌</span></a>
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
+            <div class="pull-left">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                    <li class="active"><a href="javascript: void(0);">我的流程</a></li>
+                    <li><a href="/lotus-admin/in-process?items=20">执行中流程</a></li>
+                    <li><a href="/lotus-admin/processes?items=20">全部流程</a></li>
+                </ol>
+            </div>
         </div>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">流程范围</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="status" style="width: 100%">
+                                <select class="select2" id="scope" style="width: 100%">
                                     <option value="" selected>全部</option>
-                                    <option value="1">使用中</option>
-                                    <option value="0">已删除</option>
+                                    <option value="DOING">我的待办</option>
+                                    <option value="DONE">我的已办</option>
+                                    <option value="creatorOpenId">我发起的</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">品牌</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">流程</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="name" type="text"  />
+                                <select class="select2" id="bizType" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="new">租赁新签合同审批流程</option>
+                                    <option value="renew">租赁续签合同审批流程</option>
+                                    <option value="termination">租赁终止合同审批流程</option>
+                                    <option value="modify">租赁变更合同审批流程</option>
+                                </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="col-md-4 control-label" style="text-align: right;">品牌档次</label>
+                            <label class="col-md-4 control-label" style="text-align: right;">状态</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="brandAttribute" style="width: 100%"></select>
+                                <select class="select2" id="processInstStatus" style="width: 100%">
+                                    <option value="" selected>全部</option>
+                                    <option value="RUNNING">待审批</option>
+                                    <option value="FINISH">同意已完成</option>
+                                    <option value="DISAGREE">不同意已完成</option>
+                                    <option value="SUSPEND">挂起</option>
+                                    <option value="RETURNED">已驳回</option>
+                                    <option value="TOSUBMIT">待提交</option>
+                                    <option value="ABANDON">废弃</option>
+                                    <option value="DELETE">已删除</option>
+                                    <option value="CLOSED">已关闭</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -61,7 +85,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 210px;">
+    <section class="content" style="margin-top: 260px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -80,10 +104,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/brands?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/brands?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/brands?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/brands?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/my-process?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/my-process?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/my-process?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/my-process?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页</span>
                                             </div>
@@ -96,41 +120,45 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
-                                                            <th style="width: 120px;">
-                                                                <div class="th-inner">品牌</div>
-                                                                <div class="fht-cell"></div>
+                                                            <th style="z-index: 1;">
+                                                                <div class="th-inner" style="width: 200px; background: #fff;">流程名称</div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
-                                                            <th style="width: 100px;">
-                                                                <div class="th-inner">状态</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th style="width: 90px;">
-                                                                <div class="th-inner">品牌档次</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th style="width: 250px;">
-                                                                <div class="th-inner">业态</div>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 85px;">流程状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">一级业态</div>
+                                                                <div class="th-inner" style="width: 100px;">流程分类</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">二级业态</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th style="width: 110px;">
-                                                                <div class="th-inner">三级业态</div>
+                                                                <div class="th-inner" style="width: 50px;">发起人</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">签约信息</div>
+                                                                <div class="th-inner" style="width: 180px;">当前任务</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 80px;">当前执行人</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 150px;">开始时间</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 150px;">最后操作时间</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 150px;">结束时间</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="brands"></tbody>
+                                                    <tbody id="process"></tbody>
                                                 </table>
                                             </div>
 
@@ -144,10 +172,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <span class="caret"></span>
                                                             </button>
                                                             <ul class="dropdown-menu" role="menu">
-                                                                <li role="menuitem"><a href="/lotus-admin/brands?items=10">10</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/brands?items=20">20</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/brands?items=30">30</a></li>
-                                                                <li role="menuitem"><a href="/lotus-admin/brands?items=50">50</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/my-process?items=10">10</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/my-process?items=20">20</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/my-process?items=30">30</a></li>
+                                                                <li role="menuitem"><a href="/lotus-admin/my-process?items=50">50</a></li>
                                                             </ul>
                                                         </span> 行每页
                                                     </span>

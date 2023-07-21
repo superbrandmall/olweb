@@ -180,24 +180,46 @@ function findRequestByBizId() {
                         var totalAmount = 0;
                         var totalTaxAmount = 0;
                         if(data.fixedRentList.length > 0){
-                            $('#fixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].taxAmount));
-                            $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
-                            rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
-                            rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
-                            $('#rentalFloorEffect').text(accounting.formatNumber(rentalFloorEffect));
-                            $('#rentalFloorTaxEffect').text(accounting.formatNumber(rentalFloorTaxEffect));
-                            totalAmount += data.fixedRentList[fixedRentListIndex].amount;
-                            totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
+                            if(data.formType == 'modify'){
+                                rentalFloorTaxEffect = data.dayRent || '/';
+                                $('#rentalFloorTaxEffect').text(accounting.formatNumber(rentalFloorTaxEffect));
+                                rentalFloorEffect = Math.round(numberWithoutCommas(rentalFloorTaxEffect) * (1 + data.fixedRentList[fixedRentListIndex].taxRate) * 100) / 100;
+                                $('#rentalFloorEffect').text(accounting.formatNumber(rentalFloorEffect));
+                                var fixedRentTaxAmount = data.firstYearRentFee || '/';
+                                $('#fixedRentTaxAmount').html(accounting.formatNumber(fixedRentTaxAmount));
+                                var fixedRentAmount = Math.round(numberWithoutCommas(fixedRentTaxAmount) * (1 + data.fixedRentList[fixedRentListIndex].taxRate) * 100) / 100;
+                                $('#fixedRentAmount').html(accounting.formatNumber(fixedRentAmount));
+                                totalAmount += fixedRentAmount;
+                                totalTaxAmount += fixedRentTaxAmount;
+                            } else {
+                                $('#fixedRentTaxAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].taxAmount));
+                                $('#fixedRentAmount').html(accounting.formatNumber(data.fixedRentList[fixedRentListIndex].amount));
+                                rentalFloorEffect = data.fixedRentList[fixedRentListIndex].rentAmount;
+                                rentalFloorTaxEffect = data.fixedRentList[fixedRentListIndex].taxRentAmount;
+                                $('#rentalFloorEffect').text(accounting.formatNumber(rentalFloorEffect));
+                                $('#rentalFloorTaxEffect').text(accounting.formatNumber(rentalFloorTaxEffect));
+                                totalAmount += data.fixedRentList[fixedRentListIndex].amount;
+                                totalTaxAmount += data.fixedRentList[fixedRentListIndex].taxAmount;
+                            }
                         }
 
                         //日租金坪效含税（元/m²/天）= 月租金含税 * 12 / 365 / 面积;
                         //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
 
                         if(data.propertyFeeList.length > 0){
-                            $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
-                            $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
-                            totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
-                            totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
+//                            if(data.formType == 'modify'){
+//                                var propertyMgmtTaxAmount = (data.propertyManageFee * data.area).toFixed(2);
+//                                $('#propertyMgmtTaxAmount').html(accounting.formatNumber(propertyMgmtTaxAmount));
+//                                var propertyMgmtAmount = Math.round(numberWithoutCommas(propertyMgmtTaxAmount) * (1 + data.propertyFeeList[propertyFeeListIndex].taxRate) * 100) / 100;
+//                                $('#propertyMgmtAmount').html(accounting.formatNumber(propertyMgmtAmount));
+//                                totalAmount += propertyMgmtAmount;
+//                                totalTaxAmount += propertyMgmtTaxAmount;
+//                            } else {
+                                $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
+                                $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
+                                totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
+                                totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
+                            //}
                         }
 
                         if(data.promotionFeeList.length > 0){
@@ -211,6 +233,7 @@ function findRequestByBizId() {
                                 depositFee += data.depositList[i].amount;
                             }
                         }
+                        
                         $('#depositFee').text(accounting.formatNumber(depositFee));
                         $('#totalTaxAmount').html(accounting.formatNumber(totalTaxAmount));
                         $('#totalAmount').html(accounting.formatNumber(totalAmount));
@@ -901,7 +924,7 @@ function findRequestByBizId() {
                                     case "Lotus招商负责人":
                                         $('#Lotus_leasing_head').addClass('active').find('.approveName').text(v.approveName);
                                         break;
-                                    case "商业首席执行官":
+                                    case "总部招商负责人":
                                         $('#hq_leasing_head').addClass('active').find('.approveName').text(v.approveName);
                                         break;
                                     default:

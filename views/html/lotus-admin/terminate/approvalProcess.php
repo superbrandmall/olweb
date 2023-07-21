@@ -89,7 +89,7 @@
                     <a href="javascript: void(0);">审批人: 业态负责人<span class="caret"></span></a>
                 </li>
                 <li>
-                    <a href="javascript: void(0);">审批人: 商业首席执行官<span class="caret"></span></a>
+                    <a href="javascript: void(0);">审批人: 总部招商负责人<span class="caret"></span></a>
                 </li>
             </ul>
         </div>

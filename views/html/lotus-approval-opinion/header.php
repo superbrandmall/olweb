@@ -70,7 +70,7 @@
             }
             
             #hq_leasing_head a::before {
-                content: "商业首席执行官";
+                content: "总部招商负责人";
             }
             
             .step-progress > li > a:hover::before {

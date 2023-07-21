@@ -1,10 +1,69 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/todo-admin.js"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/plugins/tour/tour.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/todo-admin.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/raphael.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/flot/jquery.flot.js"></script>'.PHP_EOL 
     . '        <script type="text/javascript" src="/views/assets/plugins/flot/flot-demo.js"></script>'.PHP_EOL         
     . '        <script type="text/javascript" src="/views/assets/plugins/chinamapPath.js"></script>'.PHP_EOL;
+?>
+<link rel="stylesheet" type="text/css" href="/views/assets/plugins/tour/tour.css"/>
+<style type="text/css">
+    #box{
+        position: absolute;
+        top: 40px;
+        left: 140px;
+        width: 80%;
+        margin: 0 auto;
+        padding-top: 40px;
+        overflow: hidden;
+        z-index: 10001;
+        color: #fff;
+        font-size: 16px;
+    }
+    
+    #box h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    #box i {
+        color: #4de6cf;
+        margin-right: 10px;
+    }
+    
+    #box li {
+        line-height: 24px;
+    }
+    
+    #box1{
+        display: none;
+        height: 250px;
+        width: 1000px;
+        margin: 0 auto;
+        background: rgba(0,0,0,0.5);
+        padding: 1px;
+    }
+    
+    #box2{
+        display: none;
+        height: 250px;
+        width: 1000px;
+        margin: 0 auto;
+        background: rgba(0,0,0,0.5);
+        padding: 1px;
+    }
+    
+    #box3{
+        display: none;
+        height: 250px;
+        width: 1000px;
+        margin: 0 auto;
+        background: rgba(0,0,0,0.5);
+        padding: 1px;
+    }
+</style>
+<?php
 } else {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/todo.js"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/raphael.js"></script>'.PHP_EOL
@@ -15,6 +74,44 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 ?>
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
+
+<?php
+if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+?>
+<div id="box">
+    <div id="box1">
+        <h2>背景回顾</h2>
+        <ul>
+            <li><i class="fa fa-check"></i> 2021年底接手，面对不同城市、门店，没有顺手好用的招商管理工具</li>
+            <li><i class="fa fa-check"></i> 特别项目组就是船上的马达，服务于莲花招商，服务于未来</li>
+            <li><i class="fa fa-check"></i> 快速实现系统功能，做到先进、有弹性、可扩展</li>
+            <li><i class="fa fa-check"></i> 用系统来解决问题，找到解决方案</li>
+        </ul>
+    </div>
+    <div id="box2">
+        <h2>当前状况</h2>
+        <ul>
+            <li><i class="fa fa-check"></i> 花钱不多、自主研发、组织精简、覆盖华东 (快速响应)</li>
+            <li><i class="fa fa-check"></i> 已对全国各区域的招商作了系统操作培训</li>
+            <li><i class="fa fa-check"></i> 已与上海财务确定结算规则</li>
+            <li><i class="fa fa-check"></i> 已在测试SAP接口</li>
+        </ul>
+    </div>
+    <div id="box3">
+        <h2>下步计划</h2>
+        <ul>
+            <li><i class="fa fa-check"></i> 打通SAP，实现业务闭环。招商在系统中申请合同，财务在系统中做应收账款</li>
+            <li><i class="fa fa-check"></i> 紧密配合各业务部门/人员</li>
+            <li><i class="fa fa-check"></i> 积极参与莲花招商业务的相关会议，了解难点并提供帮助</li>
+            <li><i class="fa fa-check"></i> 24年预算by门店by月</li>
+            <li><i class="fa fa-check"></i> 品牌落位</li>
+        </ul>
+    </div>
+</div>
+
+<?php
+}
+?>
 
 <div class="content-wrapper">
     <section class="content" style="margin-top: 50px;">
@@ -192,13 +289,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="row">
                                 <div class="col-md-4">
                                     <div style="margin: 30px 15px;">
-                                        <h4>莲花项目概览</h4>
+                                        <h4>莲花项目概览<small>（2023年7月19日更新）</small></h4>
                                         <hr>
                                         项目数(已开业)<br><h4 class="text-red">96</h4><hr>
-                                        总面积(m²)<br><h4 class="text-red">492,072</h4><hr>
-                                        总铺位数<br><h4 class="text-red">3,875</h4><hr>
-                                        出租率(按面积)<br><h4 class="text-red">61.21%</h4><hr>
-                                        合同数(生效中)<br><h4 class="text-red">1,670</h4>
+                                        总面积(m²)<br><h4 class="text-red">496,023</h4><hr>
+                                        总铺位数<br><h4 class="text-red">3,874</h4><hr>
+                                        出租率(按面积)<br><h4 class="text-red">60.05%</h4><hr>
+                                        合同数(生效中)<br><h4 class="text-red">1,575</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

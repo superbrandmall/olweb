@@ -1247,7 +1247,7 @@ function saveContractForm(s) {
                         processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
                         break;
-                    case "商业首席执行官":
+                    case "总部招商负责人":
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
                         break;

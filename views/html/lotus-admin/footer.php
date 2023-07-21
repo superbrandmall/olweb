@@ -35,9 +35,11 @@ if(!isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/plugins/accounting.min.js"></script>
         <?php
         if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>';
+            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/scripts-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+            echo '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/function-admin.js?t='.date("Y-m-d").'"></script>';
         } else {
-            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/script.js?t='.date("Y-m-d").'"></script>';
+            echo '<script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/script.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+            echo '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/function.js?t='.date("Y-m-d").'"></script>';
         }
         ?>
         <?php

@@ -28,6 +28,17 @@ $(document).ready(function(){
     }
     
     findAllRequestsByKVCondition();
+    
+    if(localStorage.getItem("account") == 'CUSER200524000004' ){
+        $(function  () {
+            var arrObj = [$('#box1'),$('#box2'),$('#box3')];
+            var arrTitle = ['莲花招商系统事宜汇报','',''];
+            $.guidance({
+                    obj:arrObj,
+                    title:arrTitle
+            });
+	});
+    }
 });
 
 window.onload = function () {
@@ -403,19 +414,6 @@ function findAllRequestsByKVCondition(){
         }
     })
     
-}
-
-function renderFormType(t) {
-    var type = '';
-    if(sessionStorage.getItem("FORM_TYPE") && sessionStorage.getItem("FORM_TYPE") != null && sessionStorage.getItem("FORM_TYPE") != '') {
-        var type = $.parseJSON(sessionStorage.getItem("FORM_TYPE"));
-        $.each(type, function(i,v){
-            if(v.dictCode == t){
-                type = v.dictName;
-            }
-        })
-    }
-    return type;
 }
 
 function popUpToDo(bizId,contractNo,activityName,bizType,tenantName) {

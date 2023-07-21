@@ -14,6 +14,17 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <span>首页</span>
                 </a>
             </li>
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail') { echo 'active'; }?>">
+                <a href="#"><i class="fa fa-send"></i>
+                    <span>流程</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail') { echo 'active'; }?>">
+                        <a href="/lotus-admin/my-process?items=20">流程汇总</a>
+                    </li>
+                </ul>
+            </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi' || $_GET['p'] == 'lotus-admin/lotus-south') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-pie-chart"></i>
                     <span>报表</span>
@@ -30,7 +41,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/malls' || $_GET['p'] == 'lotus-admin/mall-detail' || $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/create-store' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || 
                     $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || 
-                    $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail') { echo 'active'; }?>">
+                    $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-address-card"></i>
                     <span>基础资料</span>
                     <i class="fa fa-angle-left pull-right"></i>
@@ -50,6 +61,9 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail') { echo 'active'; }?>">
                         <a href="/lotus-admin/tenants?items=20">商户</a>
+                    </li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
+                        <a href="/lotus-admin/store-change">铺位变更单</a>
                     </li>
                 </ul>
             </li>

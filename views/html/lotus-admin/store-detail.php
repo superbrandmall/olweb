@@ -178,8 +178,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="modality_1" class="col-md-4 control-label">业态</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label for="modality_1" class="col-md-4 control-label">一级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
                                                 <option value="">未选择</option>
                                                 <option value="零售">零售</option>
@@ -191,6 +191,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <option value="停车场">停车场</option>
                                                 <option value="酒店公寓">酒店公寓</option>
                                             </select>
+                                            <div id="errorcontainer-modality_1" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="modality_2" class="col-md-4 control-label">二级业态 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
+                                            <select class="select2" id="modality_2" name="modality_2" style="width: 100%">
+                                                <option value="">未选择</option>
+                                            </select>
+                                            <div id="errorcontainer-modality_2" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>

@@ -27,6 +27,12 @@ $(document).ready(function(){
             },
             unitArea: {
                 required: true
+            },
+            modality_1: {
+                required: true
+            },
+            modality_2: {
+                required: true
             }
         },
         messages: {
@@ -53,7 +59,13 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: true
+                required: "请输入租赁面积"
+            },
+            modality_1: {
+                required: "请选择一级业态"
+            },
+            modality_2: {
+                required: "请选择二级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -85,6 +97,12 @@ $(document).ready(function(){
     
     findStoreByCode();
     
+    $("#modality_1").on('change',function(){
+        if($(this).val() != '') {
+            findBizByBiz1($(this).val());
+        }
+    })
+    
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
     });
@@ -98,7 +116,7 @@ function findStoreByCode() {
     $.ajax({
         url: $.api.baseLotus+"/api/vshop/lotus/findAllByShopCode?shopCode="+getURLParameter('id'),
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -130,8 +148,11 @@ function findStoreByCode() {
                     $('#remark').val(response.data.unitDesc);
                     updateDictByDictTypeCodeAndVal('UNIT_TYPE', 'unitType', response.data.unitType);
                     $('#mallCode').val(response.data.mallCode).trigger('change');
-                    var modality_1 = new Option(response.data.modality, response.data.modality, true, true);
-                    $('#modality_1').append(modality_1).trigger('change');
+                    $('#modality_1').val(response.data.modality1).trigger('change');
+                    if(response.data.modality2 != null && response.data.modality2 != ''){
+                        var modality_2 = new Option(response.data.modality2, response.data.modality2, true, true);
+                        $('#modality_2').append(modality_2).trigger('change');
+                    }
                     $('#startDate').datepicker('update',response.data.startDate);
                     $('#endDate').datepicker('update',response.data.endDate);
                     $('#unitArea').val(response.data.unitArea);
@@ -150,6 +171,10 @@ function findStoreByCode() {
                         $('#selectUser3').append(selectUser3).trigger('change');
                     }
                     
+                    if($('#modality_1').val() != '') {
+                        findBizByBiz1($('#modality_1').val());
+                    }
+                    
                     $('input.money').each(function(){
                         if($(this).val() != ''){
                             $(this).val(accounting.formatNumber($(this).val()));
@@ -159,6 +184,41 @@ function findStoreByCode() {
             }
         }
     })
+}
+
+function findBizByBiz1(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
+        type: "GET",
+        async: true,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
+                        if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
+                            $("#modality_2 option:contains('"+v.modality2+"'):gt(0)").remove();
+                        }
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
 }
 
 function saveStore() {
@@ -190,7 +250,9 @@ function saveStore() {
             "id": $.store.id,
             "liftFlag": $.store.liftFlag,
             "mallCode": $('#mallCode').val(),
-            "modality": $('#modality_1').val(),
+            "modality": "",
+            "modality1": $('#modality_1').val(),
+            "modality2": $('#modality_2').val(),
             "mulitPathFlag": $.store.mulitPathFlag,
             "shopStatus": $.store.shopStatus,
             "startDate": $('#startDate').val(),

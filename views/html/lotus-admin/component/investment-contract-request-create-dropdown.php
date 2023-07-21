@@ -18,11 +18,11 @@ if(isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contracts') {
             <li><a href="javascript: void(0);" id="createTerminate">上海-终止租赁合同申请单</a></li>
             <li><a href="javascript: void(0);" id="createModify">上海-变更租赁合同申请单</a></li>
             <li class="divider"></li>
-            <li><a href="/lotus-admin/make-request-main">全国-新签租赁合同申请单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></a></li>
+            <!--<li><a href="/lotus-admin/make-request-main">全国-新签租赁合同申请单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></a></li>
             <li><a href="javascript: void(0);" id="createRenewMain">全国-续签租赁合同申请单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></a></li>                   
             <li><a href="javascript: void(0);" id="createTerminateMain">全国-终止租赁合同申请单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></a></li>
             <li><a href="javascript: void(0);" id="createModifyMain">全国-变更租赁合同申请单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></a></li>
-            <li class="divider"></li>
+            <li class="divider"></li>-->
             <li><a href="javascript: void(0);" id="createContract">限时-初始化租赁合同</a></li>
         </ul>
     </div>
