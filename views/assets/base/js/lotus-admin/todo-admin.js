@@ -30,14 +30,14 @@ $(document).ready(function(){
     findAllRequestsByKVCondition();
     
     if(localStorage.getItem("account") == 'CUSER200524000004' ){
-        $(function  () {
-            var arrObj = [$('#box1'),$('#box2'),$('#box3')];
-            var arrTitle = ['莲花招商系统事宜汇报','',''];
-            $.guidance({
-                    obj:arrObj,
-                    title:arrTitle
-            });
-	});
+//        $(function  () {
+//            var arrObj = [$('#box1'),$('#box2'),$('#box3')];
+//            var arrTitle = ['莲花招商系统事宜汇报','',''];
+//            $.guidance({
+//                    obj:arrObj,
+//                    title:arrTitle
+//            });
+//	});
     }
 });
 

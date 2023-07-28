@@ -13,6 +13,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <h4>
             流程
         </h4>
+        <?php include 'component/investment-process-request-create-dropdown.php'; ?>
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">

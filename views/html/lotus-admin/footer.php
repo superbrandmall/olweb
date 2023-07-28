@@ -49,12 +49,14 @@ if(!isset($_SESSION['lotus_admin_login'])) {
         <script type="text/javascript" src="/views/assets/plugins/datepicker/bootstrap-datepicker.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                var title = $('.sub-header h4').ignore('.badge').text().replace(/<.>/g,"").replace(/\r|\n/ig,"").replace(/\s*/g,"");
-                if(title != '' && title != null){
-                    document.title = title;
-                } else {
-                    document.title = '首页';
-                }
+                setTimeout(function(){
+                    var title = $('.sub-header h4').ignore('.badge').text().replace(/<.>/g,"").replace(/\r|\n/ig,"").replace(/\s*/g,"");
+                    if(title != '' && title != null){
+                        document.title = title;
+                    } else {
+                        document.title = '首页';
+                    }
+                }, 500)
             })
             
             $.fn.ignore = function(sel){

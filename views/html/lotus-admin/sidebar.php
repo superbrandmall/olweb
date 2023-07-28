@@ -14,14 +14,16 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <span>首页</span>
                 </a>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail') { echo 'active'; }?>">
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail' 
+                    || $_GET['p'] == 'lotus-admin/process-request' || $_GET['p'] == 'lotus-admin/sign-request' || $_GET['p'] == 'lotus-admin/matter-process-detail' || $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-send"></i>
-                    <span>流程</span>
+                    <span>流程<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail') { echo 'active'; }?>">
-                        <a href="/lotus-admin/my-process?items=20">流程汇总</a>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail'
+                            || $_GET['p'] == 'lotus-admin/process-request' || $_GET['p'] == 'lotus-admin/sign-request' || $_GET['p'] == 'lotus-admin/matter-process-detail' || $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>">
+                        <a href="/lotus-admin/my-process?items=20">流程汇总<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
                     </li>
                 </ul>
             </li>
@@ -43,7 +45,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || 
                     $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-address-card"></i>
-                    <span>基础资料</span>
+                    <span>基础资料<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -63,18 +65,18 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                         <a href="/lotus-admin/tenants?items=20">商户</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
-                        <a href="/lotus-admin/store-change">铺位变更单</a>
+                        <a href="/lotus-admin/store-change">铺位变更单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
                     </li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console' || $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-calendar-check-o"></i>
-                    <span>招商规划<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
+                    <span>招商规划</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console') { echo 'active'; }?>"><a href="/lotus-admin/store-progress-console?items=20">招商进度控制台</a></li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail') { echo 'active'; }?>"><a href="/lotus-admin/leasing-budget?items=20">租金计划<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail') { echo 'active'; }?>"><a href="/lotus-admin/leasing-budget?items=20">租金计划</a></li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contracts' || $_GET['p'] == 'lotus-admin/contract-summary' || $_GET['p'] == 'lotus-admin/contract-detail' || $_GET['p'] == 'lotus-admin/contract-init' || $_GET['p'] == 'lotus-admin/contract-compare' || $_GET['p'] == 'lotus-admin/contract-history' || $_GET['p'] == 'lotus-admin/requests'
@@ -82,7 +84,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     || $_GET['p'] == 'lotus-admin/terminate-summary' || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request' || $_GET['p'] == 'lotus-admin/modify-summary' || $_GET['p'] == 'lotus-admin/standing-book' || $_GET['p'] == 'lotus-admin/contract-balance-preview' 
                     || $_GET['p'] == 'lotus-admin/modify-detail' || $_GET['p'] == 'lotus-admin/modify-request') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-paperclip"></i>
-                    <span>租赁合同<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
+                    <span>租赁合同</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -90,10 +92,10 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                         <a href="/lotus-admin/contracts?items=20">租赁合同</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/standing-book') { echo 'active'; }?>">
-                        <a href="/lotus-admin/standing-book">合同台账<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
+                        <a href="/lotus-admin/standing-book">合同台账</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance-preview') { echo 'active'; }?>">
-                        <a href="/lotus-admin/contract-balance-preview">合同结算预览<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
+                        <a href="/lotus-admin/contract-balance-preview">合同结算预览</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/requests' || $_GET['p'] == 'lotus-admin/request-summary' || $_GET['p'] == 'lotus-admin/request-detail' || $_GET['p'] == 'lotus-admin/make-request' || $_GET['p'] == 'lotus-admin/dr-summary'
                             || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' 

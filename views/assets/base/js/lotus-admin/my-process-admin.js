@@ -79,8 +79,7 @@ function findAllProcessByKVCondition(p,c){
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.roleCode == 'CROLE220301000001'){
-            //openId = v.moduleName;
-            openId = '640e968be4b0a53fa3e68068';
+            openId = v.moduleName;
             return false;
         }
     })

@@ -484,6 +484,12 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         ),
         'lotus-admin/process-detail' => array(
             'url' => 'process-detail.php'
+        ),
+        'lotus-admin/process-request' => array(
+            'url' => 'process-request.php'
+        ),
+        'lotus-admin/sign-request' => array(
+            'url' => 'sign-request.php'
         )
     );
 
@@ -501,7 +507,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'renew-summary.php', 'renew-request.php', 'renew-request-main.php', 'renew-detail.php', 'renew-detail-main.php', 'terminate-summary.php', 'terminate-request.php', 
         'terminate-request-main.php', 'terminate-detail.php', 'terminate-detail-main.php', 'modify-summary.php', 'modify-request.php', 'modify-request-main.php', 'modify-detail.php', 
         'modify-detail-main.php', 'todo.php', 'leasing-budget.php', 'budget-detail.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 
-        'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php', 'lotus-south.php', 'my-process.php', 'in-process.php', 'processes.php', 'process-detail.php');
+        'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php', 'lotus-south.php', 'my-process.php', 'in-process.php', 'processes.php', 'process-detail.php','sign-request.php','process-request.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';
