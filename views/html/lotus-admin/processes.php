@@ -10,6 +10,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper">
     <section class="sub-header" style="height: 210px;">
+        <div class="left-link">
+            <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: $('#investment-sign-request-todo').modal('toggle');">
+                <i class="fa fa-inbox"></i><span>草稿箱<span id="draftCount"></span></span>
+            </a>
+        </div>
         <h4>
             流程
         </h4>
@@ -127,7 +132,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">流程分类</div>
+                                                                <div class="th-inner" style="width: 120px;">流程分类</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -194,5 +199,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 </div>
+
+<?php include 'component/investment-sign-request-todo.php'; ?>
 
 <?php include 'footer.php'; ?>

@@ -20,6 +20,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('FORM_TYPE');
     }
     
+    if(!sessionStorage.getItem("SIGN_APPROVE_TYPE") || sessionStorage.getItem("SIGN_APPROVE_TYPE") == null || sessionStorage.getItem("SIGN_APPROVE_TYPE") == '') {
+        findDictCodeByDictTypeCode('SIGN_APPROVE_TYPE');
+    }
+    
     if($.cookie('searchProcessScope') != null && $.cookie('searchProcessScope') != ''){
         $('#scope').val($.cookie('searchProcessScope')).trigger('change');
     }
@@ -71,6 +75,8 @@ $(document).ready(function(){
         $.cookie('searchProcessState', $('#processInstStatus').val());
         findAllProcessByKVCondition(1,items);
     })
+    
+    findAllToDoSignRequestsByKVCondition();
     
     $('.fixed-table-body').on('scroll', scrollHandle);
 });
@@ -297,4 +303,103 @@ function findAllProcessByKVCondition(p,c){
             }
         }
     });
+}
+
+function findAllToDoSignRequestsByKVCondition(){
+    $('#todo').html('');
+    var params = [];
+    var param = {};
+    
+    var openId = 'admin';
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.roleCode == 'CROLE220301000001'){
+            openId = v.moduleName;
+            return false;
+        }
+    })
+    
+    param = {
+        "columnName": "creatorOpenId",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": openId
+    }
+    params.push(param);
+    
+//    param = {
+//        "columnName": "formStatus",
+//        "columnPatten": "",
+//        "conditionOperator": "AND",
+//        "operator": "in",
+//        "value": '1;3;4;5;6;7'
+//    }
+    param = {
+        "columnName": "formStatus",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": '1'
+    }
+    params.push(param);
+    
+    var map = {
+        "params": params
+    }
+    
+    $.ajax({
+        url: $.api.baseLotus+"/api/sign/approve/form/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0) {
+                    $("#draftCount").text("("+response.data.content.length+")");
+                    $.each(response.data.content, function(i,v){
+                        $('#todo').append('\
+                            <tr data-index="'+i+'">\n\
+                            <td><a href="/lotus-admin/process-request?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
+                            <td>'+(renderApproveType(v.applyType) || '')+'</td>\n\
+                            <td>'+v.applyReason+'</td>\n\
+                            <td>'+v.mallName+'['+v.mallCode+']</td>\n\
+                            <td>'+v.urgencyDegree+'</td>\n\
+                        </tr>');
+                        
+                    });
+                } else {
+                    $('#todo').html('<tr><td colspan="5" style="text-align: center;">没有找到任何记录！</td></tr>');
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            } 
+        }
+    });
+}
+
+function renderApproveType(t) {
+    var type = '';
+    if(sessionStorage.getItem("SIGN_APPROVE_TYPE") && sessionStorage.getItem("SIGN_APPROVE_TYPE") != null && sessionStorage.getItem("SIGN_APPROVE_TYPE") != '') {
+        var type = $.parseJSON(sessionStorage.getItem("SIGN_APPROVE_TYPE"));
+        $.each(type, function(i,v){
+            if(v.dictCode == t){
+                type = v.dictName;
+            }
+        })
+    }
+    return type;
 }
