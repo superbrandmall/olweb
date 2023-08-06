@@ -15,7 +15,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <a href="/lotus-admin/my-process" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
             </div>
             <h4>
+                <span class="badge badge-success" id="formStatus" style="vertical-align: top; font-size: 12px;"></span>
                 卜蜂莲花签呈
+                <span id="requestName" style="font-size: 18px;"></span>
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','processes');">取消</a>

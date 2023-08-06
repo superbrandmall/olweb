@@ -1,5 +1,6 @@
 $.request = {
-    id: ''
+    id: '',
+    content: ''
 }
 
 $(document).ready(function(){
@@ -22,14 +23,6 @@ $(document).ready(function(){
     }
     
     $('#create-form')[0].reset();
-    getBizId();
-    
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE220301000001'){
-            $('#mobileNo').val(v.mobile);
-            return false;
-        }
-    })
         
     $('input.form-control, .select2-selection').click(function(){
         $(this).css('borderColor','#3c8dbc');
@@ -52,9 +45,6 @@ $(document).ready(function(){
     } else {
         updateRoleYZJLabel();
     }
-
-    // 初始化
-    $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -87,6 +77,17 @@ $(document).ready(function(){
     
     if(getURLParameter('id') && getURLParameter('id') != ''){
         findSignRequestbyBizId();
+        findFilesByBizId();
+    } else {
+        // 初始化
+        $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
+        getBizId();
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                $('#mobileNo').val(v.mobile);
+                return false;
+            }
+        })
     }
 })
 
@@ -114,6 +115,55 @@ function findSignRequestbyBizId() {
                 if(xhr.getResponseHeader("Authorization") !== null){
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
+                
+                if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    $.request.content = data;
+                    $.request.id = data.id;
+                    
+                    if($.request.content.formStatus != '1' && $.request.content.formStatus != '3'){
+                        $('#saveDraft').hide();
+                        $('#submitForm').hide();
+                        
+                        if($.request.content.formStatus == '4' || $.request.content.formStatus == '5' || $.request.content.formStatus == '6'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
+                        } else if($.request.content.formStatus == '9'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                        } else if($.request.content.formStatus == '10'){
+                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_closed.png) 0 100%/112px auto no-repeat');
+                        }
+                    }
+                    
+                    $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
+                    $('#requestName').text(' :'+data.bizId);
+                    $('#bizId').val(data.bizId);
+                    updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
+                    $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
+                    $('#approveInfo').val(data.approveInfo);
+                    $('#amount').val(data.amount);
+                    $('#mobileNo').val(data.mobileNo);
+                    $('#applyReason').val(data.applyReason);
+                    $('#remarks').val(data.remarks);
+                    updateDictByDictTypeCodeAndVal('SIGN_APPROVE_TYPE', 'applyType', data.applyType);
+                    
+                    $('input[type=radio][name=urgencyDegree][value='+data.urgencyDegree+']').attr("checked",true);
+                    
+                    if(data.processApproveList != null && data.processApproveList.length > 0) {
+                        var temp;
+                        $.each(data.processApproveList, function(i,v) {
+                            temp = new Option(v.approveName, v.approveOpenId, true, true);
+                            $('#'+v.activityCode+' select').append(temp).trigger('change');
+                        })
+                    }
+                    
+                    $('input.money').each(function(){
+                        $(this).val(accounting.formatNumber($(this).val()));
+                    })
+                } else {
+                    alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
             }
         }
     })
@@ -172,6 +222,53 @@ function updateUserRoleYZJDropDownByRoleId(id) {
                 }
             },
             cache: true
+        }
+    })
+}
+
+function findFilesByBizId() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/co/file/findAllByBizId?bizId="+getURLParameter('id'),
+        type: "GET",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(response.data != null && response.data != '' && response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        sessionStorage.setItem("uploadFile_"+v.id,JSON.stringify(v));
+                        var type = "otherFiles";
+                        $("input[id*='"+type+"_']").each(function(j,e){
+                            $('#'+type+'_'+j).val(v.fileName);
+                            var fileSize;
+                            if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                            } else if(v.fileSize >= 1048576){
+                                fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                            } else {
+                                fileSize = v.fileSize + 'b';
+                            }
+                            $('#'+type+'FileSize'+'_'+j).text(fileSize);
+                            $('#'+type+'Created'+'_'+j).text(v.created);
+                            $('#'+type+'Action'+'_'+j).html('\
+                            <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
+                            <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
+                            <input type="hidden" id="file_'+v.id+'" />');
+                            
+                            $('#'+type+'_'+j).parent().parent().show();
+                            return false;
+                        })
+                    })
+                }
+            }
         }
     })
 }
@@ -485,22 +582,22 @@ function saveSignForm(s) {
         }
         
         var map = {
-            "amount": numberWithoutCommas($('#overdueBizAmount').val()) || 0,
+            "amount": numberWithoutCommas($('#amount').val()) || 0,
             "applyReason": $('#applyReason').val(),
             "applyType": $('#applyType').find('option:selected').val(),
             "approveInfo": $('#approveInfo').val(),
-            "bizId": bizId,
-            "code": "",
+            "bizId": ($.request.content != '' ? $.request.content.bizId : bizId),
+            "code": ($.request.content != '' ? $.request.content.code : ""),
             "companyName": "",
             "corporationName": "",
-            "creatorName": $('#creatorName').val(),
-            "creatorOpenId": openId,
+            "creatorName": ($.request.content != '' ? $.request.content.creatorName : $('#creatorName').val()),
+            "creatorOpenId": ($.request.content != '' ? $.request.content.creatorOpenId : openId),
             "creatorOrgId": "",
             "creatorOrgName": "",
-            "formStatus": formStatus,
+            "formStatus": ($.request.content != '' ? $.request.content.formStatus : formStatus),
             "id": $.request.id,
-            "mallCode": $.cookie('mallSelected').split(':::')[1],
-            "mallName": $.cookie('mallSelected').split(':::')[0],
+            "mallCode": ($.request.content != '' ? $.request.content.mallCode : $.cookie('mallSelected').split(':::')[1]),
+            "mallName": ($.request.content != '' ? $.request.content.mallName : $.cookie('mallSelected').split(':::')[0]),
             "mobileNo": $('#mobileNo').val(),
             "processApproveList": processApproveList,
             "remarks": $('#remarks').val(),
