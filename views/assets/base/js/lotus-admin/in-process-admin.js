@@ -1,4 +1,17 @@
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     if(!sessionStorage.getItem("FLOW_STATUS") || sessionStorage.getItem("FLOW_STATUS") == null || sessionStorage.getItem("FLOW_STATUS") == '') {
         findDictCodeByDictTypeCode('FLOW_STATUS');
     }
@@ -163,6 +176,13 @@ function findAllProcessByKVCondition(p,c){
                             tbg = '#f9f9f9';
                         }
                         
+                        var bizType = '';
+                        if($.isNumeric(v.bizType) == false){    
+                            bizType = '合同'+renderFormType(v.bizType);
+                        } else {
+                            bizType = renderApproveType(v.bizType);
+                        }
+                        
                         var url,activityName,approveName,created='',updated='';
                         
                         activityName = v.creatorOrgName+'-'+(v.processStepRecordList.length > 0 ? v.processStepRecordList[v.processStepRecordList.length-1].activityName : "/");
@@ -174,7 +194,7 @@ function findAllProcessByKVCondition(p,c){
                         $('#process').append('<tr data-index="'+i+'">\n\
                         <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+url+'</td>\n\
                         <td>'+renderFlowStatus(v.processInstStatus)+'</td>\n\
-                        <td>/招商/合同'+renderFormType(v.bizType)+'/</td>\n\
+                        <td>/招商/'+bizType+'/</td>\n\
                         <td>'+(v.creatorName || 'admin')+'</td>\n\
                         <td>'+activityName+'</td>\n\
                         <td>'+approveName+'</td>\n\
@@ -267,7 +287,7 @@ function findAllToDoSignRequestsByKVCondition(){
                         $('#todo').append('\
                             <tr data-index="'+i+'">\n\
                             <td><a href="/lotus-admin/process-request?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
-                            <td>'+(renderApproveType(v.applyType) || '')+'</td>\n\
+                            <td>'+(renderApproveType(v.applyTypeCode) || '')+'</td>\n\
                             <td>'+v.applyReason+'</td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
                             <td>'+v.urgencyDegree+'</td>\n\

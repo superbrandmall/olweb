@@ -105,13 +105,23 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>">
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/create-contract-balance' || $_GET['p'] == 'lotus-admin/edit-contract-balance' 
+                    || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/create-accounting-voucher' || $_GET['p'] == 'lotus-admin/edit-accounting-voucher' 
+                    || $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-calculator"></i>
                     <span>账务</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>"><a href="/lotus-admin/sales-data-entries?items=20">销售数据录入单</a></li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/create-contract-balance' || $_GET['p'] == 'lotus-admin/edit-contract-balance') { echo 'active'; }?>">
+                        <a href="/lotus-admin/contract-balance?items=20">合同结算数据</a>
+                    </li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/create-accounting-voucher' || $_GET['p'] == 'lotus-admin/edit-accounting-voucher') { echo 'active'; }?>">
+                        <a href="/lotus-admin/accounting-voucher?items=20">会计凭证</a>
+                    </li>
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>">
+                        <a href="/lotus-admin/sales-data-entries?items=20">销售数据录入</a>
+                    </li>
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/dict' || $_GET['p'] == 'lotus-admin/create-dict-type' || $_GET['p'] == 'lotus-admin/create-dict-data' || $_GET['p'] == 'lotus-admin/edit-dict-data') { echo 'active'; }?>">

@@ -345,7 +345,7 @@ function findAllRequestsByKVCondition(p,c){
                         }
                         
                         var main = '';
-                        if($.inArray(v.mallCode, $.api.mallCodeSH) == -1){
+                        if($.inArray(v.mallCode, $.api.mallCodeEast) == -1){
                             main = '&t=';
                         }
                             

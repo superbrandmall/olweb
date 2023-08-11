@@ -9,7 +9,7 @@ $(document).ready(function(){
             auth = 1;
             return false;
         } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            if($.inArray(v.moduleCode, $.api.mallCodeSH) != -1){
+            if($.inArray(v.moduleCode, $.api.mallCodeEast) != -1){
                 auth = 1;
                 return false;
             }
@@ -289,7 +289,7 @@ function findFilesByBizId(id) {
     $.ajax({
         url: $.api.baseLotus+"/api/co/file/findAllByBizId?bizId="+id,
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -373,7 +373,7 @@ function fileUpload(id) {
             type: "POST",
             url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+$('#bizId').val()+"&creatorOpenId="+openId+"&activityName=&bizType=CONTRACT_"+type,
             data: formData,
-            async: false,
+            async: true,
             cache: false,
             timeout: 15000,
             processData: false,
@@ -449,7 +449,7 @@ function deleteFile(id) {
         url: $.api.baseLotus+"/api/co/file/saveOrUpdate",
         type: "POST",
         data: JSON.stringify(file),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -529,7 +529,7 @@ function getBizId() {
     $.ajax({
         url: $.api.baseLotus+"/api/rent/contract/form/getBizId/",
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -1824,7 +1824,7 @@ function saveContractForm(s) {
             "freeEndDate": $('#freeEndDate_1').val(),
             "freeOverdueDays": 0,
             "freeStartDate": $('#freeStartDate_1').val(),
-            "graphFee": 0,
+            "graphFee": numberWithoutCommas($('#graphFee').val()),
             "growthRate": 0,
             "intentDate": "",
             "intentionMoney": 0,

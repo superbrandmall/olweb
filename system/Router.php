@@ -461,6 +461,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/contract-balance-preview' => array(
             'url' => 'contract-balance-preview.php'
         ),
+        'lotus-admin/contract-balance' => array(
+            'url' => 'contract-balance.php'
+        ),
         'lotus-admin/request-balance-preview' => array(
             'url' => 'request-balance-preview.php'
         ),
@@ -499,7 +502,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         $page = 'todo.php';
     }
 
-    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 
+    $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'contract-balance.php',
         'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-change.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 
         'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'mall-summary.php', 'requests.php', 
         'request-summary.php', 'bi.php', 'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 

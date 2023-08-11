@@ -2,6 +2,7 @@ $.api = {
     base: $.base,
     baseLotus: $.base+"/onlineleasing-lotus",
     baseAdmin: $.base+"/onlineleasing-admin",
+    baseSap: $.base+"/onlineleasing-sap",
     baseCommYZJ: $.base+"/comm-yunzhijia",
     baseAuth: $.base+"/common-authorization",
     dictModule: [],
@@ -15,7 +16,8 @@ $.api = {
     rentCalculationMode: ['固租与提成取高','fixedRentAndHigherDeduct'],
     contractTemplate: ['租期 > 6个月','1'],
     fivePercentFixedRent: ['SC126','SC127','SC140','SC124','SC046','SC029','SC028','SC102','SC109'],
-    mallCodeSH: ['SC145','SC127','SC082','SC078','SC060','SC050','SC043','SC041','SC040','SC027','SC011','SC010','SC005','SC001','SC055','SC126','SC033']
+    mallCodeEast: ['SC145','SC127','SC082','SC078','SC060','SC050','SC043','SC041','SC040','SC027','SC011',
+        'SC010','SC005','SC001','SC055','SC126','SC033','SC140','SC138','SC130','SC026','SC034','SC124']
 };
 
 var d = new Date();

@@ -18,7 +18,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <h4>
             流程
         </h4>
-        <?php include 'component/investment-process-request-create-dropdown.php'; ?>
+        <div class="pull-right">
+            <a href="/lotus-admin/process-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">上海-流程申请</span></a>
+        </div>
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">

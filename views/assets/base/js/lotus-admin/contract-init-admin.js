@@ -358,6 +358,7 @@ function findContractByContractNo() {
                     $('#awardDate').datepicker('update', data.awardDate);
                     $('#bizScope').val(data.bizScope);
                     $('#targetSales').val(data.targetSales);
+                    $('#graphFee').val(data.graphFee);
                     $('#overdueBizAmount').val(data.overdueBizAmount);
                     $('#enterDate').datepicker('update', data.enterDate);
                     $('#freeStartDate_1').datepicker('update', data.freeStartDate);
@@ -2369,6 +2370,7 @@ function saveContract() {
             $.contract.content.floorName = $('#floor').find('option:selected').text();
             $.contract.content.bizScope = $('#bizScope').val();
             $.contract.content.targetSales = numberWithoutCommas($('#targetSales').val());
+            $.contract.content.graphFee = numberWithoutCommas($('#graphFee').val());
             $.contract.content.overdueBizAmount = numberWithoutCommas($('#overdueBizAmount').val());
             $.contract.content.brandName = brandName;
             $.contract.content.brandCode = brandCode;
@@ -2590,6 +2592,11 @@ function activateCheck(cn) {
         $('#targetSales').parent().append(error);
     }
     
+    if($('#graphFee').val() == '' || parseFloat(numberWithoutCommas($('#graphFee').val())) < 0) {
+        flag = 0;
+        $('#graphFee').parent().append(error);
+    }
+    
     if($('#overdueBizAmount').val() == '' || parseFloat(numberWithoutCommas($('#overdueBizAmount').val())) < 0) {
         flag = 0;
         $('#overdueBizAmount').parent().append(error);
@@ -2755,6 +2762,7 @@ function activateContract(cn){
         $.contract.content.floorName = $('#floor').find('option:selected').text();
         $.contract.content.bizScope = $('#bizScope').val();
         $.contract.content.targetSales = numberWithoutCommas($('#targetSales').val());
+        $.contract.content.graphFee = numberWithoutCommas($('#graphFee').val());
         $.contract.content.overdueBizAmount = numberWithoutCommas($('#overdueBizAmount').val());
         $.contract.content.brandName = brandName;
         $.contract.content.brandCode = brandCode;

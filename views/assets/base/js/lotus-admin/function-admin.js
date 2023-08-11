@@ -580,7 +580,7 @@ function findFeeItemByContractType(type) {
     $.ajax({
         url: $.api.baseAdmin+"/api/finance/feeItem/findAllByContractType/"+type,
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -613,7 +613,7 @@ function findAllUsers() {
     $.ajax({
         url: $.api.baseAuth+"/api/user/findAll?page=0&size=500&sort=id,asc",
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -768,7 +768,7 @@ function findMainSigningBody(code){
     $.ajax({
         url: $.api.baseLotus+"/api/mall/lotus/findOneByCode?code="+code,
         type: "GET",
-        async: false,
+        async: true,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -800,7 +800,7 @@ function findTaxInfoByTaxCategories(cate) {
     $.ajax({
         url: $.api.baseAdmin+"/api/finance/taxInfo/findAllByTaxCategories/"+cate,
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -833,7 +833,7 @@ function findCommissionByDictTypeCode(dictTypeCode) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -867,7 +867,7 @@ function findDictCodeByDictTypeCode(dictTypeCode) {
         $.ajax({
             url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
             type: "GET",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             beforeSend: function(request) {
@@ -901,7 +901,7 @@ function updateDictByDictTypeCode(dictTypeCode, id, val) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: false,
+        async: true,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -941,7 +941,7 @@ function updateDictByDictTypeCodeAndVal(dictTypeCode, id, val) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: false,
+        async: true,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -2353,6 +2353,7 @@ function updateDictDropDownByDictTypeCode(dictTypeCode, id, dataTxt, dataVal) {
     $('#'+id).select2({
         minimumResultsForSearch: -1,
         placeholder: '未选择',
+        allowClear: true,
         dropdownAutoWidth: true,
         language: {
             searching: function() {
@@ -2417,6 +2418,7 @@ function updateSelectTenantDropDown(data_count) {
     selectTenant.select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
+        allowClear: true,
         language: {
             searching: function() {
                 return '加载中...';
@@ -2430,7 +2432,7 @@ function updateSelectTenantDropDown(data_count) {
                 return $.api.baseLotus+"/api/tenant/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2501,7 +2503,7 @@ function updateBrandNameDropDown(data_count) {
                 return $.api.baseLotus+"/api/brand/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2559,6 +2561,7 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
     selectStore.select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
+        allowClear: true,
         language: {
             searching: function() {
                 return '加载中...';
@@ -2572,7 +2575,7 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                 return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2717,7 +2720,7 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                 return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2881,7 +2884,7 @@ function findFloorDropDownByMallCode(mall_code) {
     $.ajax({
         url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+mall_code,
         type: "GET",
-        async: false,
+        async: true,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -2974,7 +2977,7 @@ function findRoleYZJByParentId() {
     $.ajax({
         url: $.api.baseCommYZJ+"/api/role/yzj/findAllByParentId/?parentId=69bcb693-92c4-11ec-8a77-ecf4bbea1498",
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3048,7 +3051,7 @@ function findUserRoleYZJByKVCondition(mc){
         url: $.api.baseCommYZJ+"/api/vUserRole/yzj/findAllByKVCondition?page=0&size=100&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3087,7 +3090,7 @@ function findProcessInstByBizId(){
     $.ajax({
         url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3701,7 +3704,7 @@ function calBackPush(prefix){
                 url: $.api.baseLotus+"/api/rent/calc/"+path,
                 type: "POST",
                 data: JSON.stringify(map),
-                async: false,
+                async: true,
                 dataType: "json",
                 contentType: "application/json",
                 beforeSend: function(request) {
@@ -3901,7 +3904,7 @@ function updateRequestContractDropDown(id, data_count) {
                 return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -3979,7 +3982,7 @@ function updateSelectContractDropDown(data_count) {
                 return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
             },
             type: "POST",
-            async: false,
+            async: true,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -4066,7 +4069,7 @@ function saveContractInfoForRequest(id,suffix) {
         url: $.api.baseLotus+"/api/rent/contract/form/saveContractInfoForRenew",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {

@@ -1,10 +1,13 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/process-request-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/process-request-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/process-request.js?t='.date("Y-m-d").'"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/process-request.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL;
 }
 ?>
+<link href="/views/assets/plugins/timepicker/bootstrap-timepicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <?php include 'sidebar.php'; ?>
 
@@ -16,7 +19,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
             <h4>
                 <span class="badge badge-success" id="formStatus" style="vertical-align: top; font-size: 12px;"></span>
-                卜蜂莲花签呈
+                卜蜂莲花流程
                 <span id="requestName" style="font-size: 18px;"></span>
             </h4>
             <div class="pull-right">
@@ -27,7 +30,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#processBasicInfo">概要</a></li>
-                    <li><a href="#processComplementaryFile">补充文件</a></li>
+                    <li><a href="#processSignInfo">用印信息</a></li>
+                    <li><a href="#processSignRelation">关联事项</a></li>
+                    <li><a href="#processComplementaryFile">附件</a></li>
                     <li><a href="#processApprove">审批流程</a></li>
                 </ul>
             </div>
@@ -60,8 +65,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="applyType">签呈类型</label>
+                                        <label class="col-md-4 control-label" for="mainSigningBody">我方公司</label>
                                         <div class="col-md-8 col-sm-12">
+                                            <input id="mainSigningBody" class="form-control" type="text" readonly />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="applyType">申请类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <select class="select2" id="applyType" style="width: 100%"></select>
                                         </div>
                                     </div>
@@ -86,12 +97,21 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="amount">签呈总金额</label>
+                                        <label class="col-md-4 control-label" for="amount">申请总金额</label>
                                         <div class="col-md-8 col-sm-12">
                                             <div class="input-group">
                                                 <input class="form-control money" id="amount" type="text" style="border-right: none;" />                                                
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="signFlag">是否用印</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="signFlag" style="width: 100%">
+                                                <option value="1" selected="">是</option>
+                                                <option value="0">否</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -116,20 +136,133 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <input id="mobileNo" class="form-control" type="text" />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-1 control-label" for="approveInfo">主旨 <span class="btn-box-tool-lg">*</span></label>
-                                        <div class="col-md-10 col-sm-12 required" style="margin-left: 2.7%;">
-                                            <input class="form-control" type="text" id="approveInfo" name="applyReason">
+                                        <label class="col-md-4 control-label" for="applyDate">申请日期 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="input-group">
+                                                <input class="form-control date-picker" id="applyDate" type="text" data-plugin="datepicker" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" required />
+                                                <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-1 control-label" for="remarks">说明 <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-1 control-label" for="approveInfo">说明 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-10 col-sm-12 required" style="margin-left:2.7%;">
-                                            <textarea class="form-control" id="remarks" name="remarks" rows="7" placeholder="理由,数据,附件,建议......"></textarea>
+                                            <textarea class="form-control" id="approveInfo" name="approveInfo" rows="7" placeholder="理由,数据,附件,建议......"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="processSignInfo">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">用印信息</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="signName">印鉴名称</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="signName" style="width: 100%"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="corporationName">法人章名称</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <input id="corporationName" class="form-control" type="text" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="signNum">用印份数</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="input-group">
+                                                <input class="form-control" id="signNum" type="number" style="border-right: none;" min="0" />                                                
+                                                <span class="input-group-addon" style="border-left: none; background: transparent;">份</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="selectTenant">对方公司</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select id="selectTenant" class="select2" style="width: 100%"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="signFileName">用印文件名</label>
+                                        <div class="col-md-9 col-sm-12">
+                                            <input id="signFileName" class="form-control" type="text" placeholder="多份用印文件的名称请用逗号(,)隔开" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="box box-default" id="processSignRelation">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">关联事项</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <div class="pull-right" style="margin-right: 40px;">
+                                    <a href="javascript:void(0);" onClick="addRowInvestmentSignRelation()" style="margin-right: 10px;">
+                                        <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body">
+                                                        <table class="table table-striped snipe-table table-responsive">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">行</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">分类 <span class="btn-box-tool-lg">*</span></div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">合同/签呈 <span class="btn-box-tool-lg">*</span></div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">关联信息</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">操作</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="signRelation"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +271,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         
                         <div class="box box-default" id="processComplementaryFile">    
                             <div class="box-header with-border">
-                                <h3 class="box-title">补充文件</h3>
+                                <h3 class="box-title">附件</h3>
                                 <div class="box-tools">
                                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                     </button>
@@ -173,7 +306,31 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </thead>
                                         <tbody id="fileList">
                                             <tr>
-                                                <td>附件</td>
+                                                <td>用印文件</td>
+                                                <td id="signFilesCreated_0"></td>
+                                                <td>
+                                                    <input type="text" id="signFiles_0" name="signFiles_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
+                                                </td>
+                                                <td id="signFilesFileSize_0"></td>
+                                                <td id="signFilesAction_0"></td>
+                                            </tr>
+                                            <?php
+                                                for($i=1;$i<10;$i++){
+                                            ?>
+                                            <tr style="display: none;">
+                                                <td>用印文件</td>
+                                                <td id="signFilesCreated_<?= $i; ?>"></td>
+                                                <td>
+                                                    <input type="text" id="signFiles_<?= $i; ?>" name="signFiles_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
+                                                </td>
+                                                <td id="signFilesFileSize_<?= $i; ?>"></td>
+                                                <td id="signFilesAction_<?= $i; ?>"></td>
+                                            </tr>
+                                            <?php
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td>其他文件</td>
                                                 <td id="otherFilesCreated_0"></td>
                                                 <td>
                                                     <input type="text" id="otherFiles_0" name="otherFiles_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
@@ -185,7 +342,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 for($i=1;$i<10;$i++){
                                             ?>
                                             <tr style="display: none;">
-                                                <td>附件</td>
+                                                <td>其他文件</td>
                                                 <td id="otherFilesCreated_<?= $i; ?>"></td>
                                                 <td>
                                                     <input type="text" id="otherFiles_<?= $i; ?>" name="otherFiles_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
@@ -200,18 +357,27 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     </table>
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="col-md-12">
-                                        <label class="col-md-2 control-label">上传附件</label>
-                                        <div class="col-md-10 col-sm-12">
+                                        <label class="col-md-1 control-label">用印文件</label>
+                                        <div class="col-md-10 col-sm-12" style="margin-left:2.7%;">
                                             <div class="form-group input-group">
-                                                <input type="text" id="fileName_otherFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
-                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_otherFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
-                                                <div type="button" class="input-group-addon" id="uploadFile_otherFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 选取文件</div>
+                                                <input type="text" id="fileName_signFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
+                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_signFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
+                                                <div type="button" class="input-group-addon" id="uploadFile_signFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
                                                 <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-12">
+                                        <label class="col-md-1 control-label">其他文件</label>
+                                        <div class="col-md-10 col-sm-12" style="margin-left:2.7%;">
+                                            <div class="form-group input-group">
+                                                <input type="text" id="fileName_otherFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
+                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_otherFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
+                                                <div type="button" class="input-group-addon" id="uploadFile_otherFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
+                                                <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         

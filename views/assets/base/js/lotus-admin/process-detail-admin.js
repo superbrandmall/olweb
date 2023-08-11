@@ -68,7 +68,7 @@ function findProcessByBizId() {
                         }
                         
                         var main = '';
-                        if($.inArray(data.mallCode, $.api.mallCodeSH) == -1){
+                        if($.inArray(data.mallCode, $.api.mallCodeEast) == -1){
                             main = '&t=';
                         }
                         window.open('/lotus-admin/'+page+'-summary?id='+data.bizId+main, "_newtab");

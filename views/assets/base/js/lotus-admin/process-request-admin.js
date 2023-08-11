@@ -1,6 +1,8 @@
 $.request = {
     id: '',
-    content: ''
+    content: '',
+    signName: ['合同章','1'],
+    applyType: ['立项/定标','1']
 }
 
 $(document).ready(function(){
@@ -10,12 +12,18 @@ $(document).ready(function(){
             auth = 1;
             return false;
         } else if(v.roleCode == 'CROLE211008000001' && v.moduleName == '门店对接人') {
-            if($.inArray(v.moduleCode, $.api.mallCodeSH) != -1){
+            if($.inArray(v.moduleCode, $.api.mallCodeEast) != -1){
                 auth = 1;
                 return false;
             }
         }
     })
+    
+    updateDictDropDownByDictTypeCode('SIGN_NAME','signName',null,''); // 印鉴名称
+    updateDictDropDownByDictTypeCode('SIGN_APPROVE_TYPE','applyType',$.request.applyType[0],$.request.applyType[1]); // 申请类型
+    findDictCodeByDictTypeCode('LOTUS_SIGN_APPROVE_FLOW_STEP'); // 云之家流程
+    findDictCodeByDictTypeCode('FORM_STATUS'); // 表单状态
+    updateSelectTenantDropDown(50);
     
     if(auth == 0){
         alertMsg('9999','没有访问授权，请联系系统管理员。');
@@ -23,7 +31,15 @@ $(document).ready(function(){
     }
     
     $('#create-form')[0].reset();
-        
+    
+    $('.date-picker').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'autoclose': true,
+        'clearBtn': true
+    });
+    
     $('input.form-control, .select2-selection').click(function(){
         $(this).css('borderColor','#3c8dbc');
     })
@@ -58,10 +74,6 @@ $(document).ready(function(){
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
-    
-    updateDictDropDownByDictTypeCode('SIGN_APPROVE_TYPE','applyType','立项/定标','1'); // 签呈类型
-    findDictCodeByDictTypeCode('LOTUS_SIGN_APPROVE_FLOW_STEP'); // 云之家流程
-    findDictCodeByDictTypeCode('FORM_STATUS'); // 表单状态
         
     $("#saveDraft").click(function(){
         mandatoryCheck('save');
@@ -76,22 +88,24 @@ $(document).ready(function(){
     })
     
     if(getURLParameter('id') && getURLParameter('id') != ''){
-        findSignRequestbyBizId();
+        findSignRequestByBizId();
         findFilesByBizId();
     } else {
         // 初始化
         $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
         getBizId();
+        findMainSigningBody($.cookie('mallSelected').split(':::')[1]);
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if(v.roleCode == 'CROLE220301000001'){
                 $('#mobileNo').val(v.mobile);
                 return false;
             }
         })
+        $('#applyDate').datepicker('update', date);
     }
 })
 
-function findSignRequestbyBizId() {
+function findSignRequestByBizId() {
     $.ajax({
         url: $.api.baseLotus+"/api/sign/approve/form/findAllByBizId?bizId="+getURLParameter('id'),
         type: "GET",
@@ -143,8 +157,27 @@ function findSignRequestbyBizId() {
                     $('#amount').val(data.amount);
                     $('#mobileNo').val(data.mobileNo);
                     $('#applyReason').val(data.applyReason);
-                    $('#remarks').val(data.remarks);
-                    updateDictByDictTypeCodeAndVal('SIGN_APPROVE_TYPE', 'applyType', data.applyType);
+                    $('#corporationName').val(data.corporationName);
+                    $('#signFlag').val(data.signFlag).trigger('change');
+                    $('#signFileName').val(data.signFileName);
+                    $('#applyDate').datepicker('update', (data.applyDate != null ? data.applyDate : date));
+                    if(data.companyName != null){
+                        $('#mainSigningBody').val(data.companyName);
+                    } else {
+                        findMainSigningBody($.cookie('mallSelected').split(':::')[1]);
+                    }
+                    
+                    $('#signNum').val(data.signNum);
+                    if(data.signName != null && data.remarkSecond != null){
+                        temp = new Option(data.remarkSecond, data.signName, true, true);
+                        $('#signName').append(temp).trigger('change');
+                    }
+                    
+                    if(data.tenantCode != null && data.tenantName != null && data.remarkFirst != null){
+                        temp = new Option((data.tenantCode +' | '+ data.tenantName), data.remarkFirst, true, true);
+                        $('#selectTenant').append(temp).trigger('change');
+                    }
+                    updateDictByDictTypeCodeAndVal('SIGN_APPROVE_TYPE', 'applyType', data.applyTypeCode);
                     
                     $('input[type=radio][name=urgencyDegree][value='+data.urgencyDegree+']').attr("checked",true);
                     
@@ -153,6 +186,12 @@ function findSignRequestbyBizId() {
                         $.each(data.processApproveList, function(i,v) {
                             temp = new Option(v.approveName, v.approveOpenId, true, true);
                             $('#'+v.activityCode+' select').append(temp).trigger('change');
+                        })
+                    }
+                    
+                    if(data.signRelationList.length > 0) {
+                        $.each(data.signRelationList, function(i,v) {
+                            updateRowInvestmentSignRelation(JSON.stringify(v));
                         })
                     }
                     
@@ -245,26 +284,39 @@ function findFilesByBizId() {
                 if(response.data != null && response.data != '' && response.data.length > 0){
                     $.each(response.data, function(i,v) {
                         sessionStorage.setItem("uploadFile_"+v.id,JSON.stringify(v));
-                        var type = "otherFiles";
+                        var bizType = v.bizType.split('_')[1];
+                        var type;
+                        switch (bizType) {
+                            case "SF":
+                                type = 'signFiles';
+                                break;
+                            case "OF":
+                                type = 'otherFiles';
+                                break;
+                            default:
+                                break;
+                        }
                         $("input[id*='"+type+"_']").each(function(j,e){
-                            $('#'+type+'_'+j).val(v.fileName);
-                            var fileSize;
-                            if(v.fileSize >= 1024 && v.fileSize < 1048576){
-                                fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
-                            } else if(v.fileSize >= 1048576){
-                                fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
-                            } else {
-                                fileSize = v.fileSize + 'b';
+                            if($('#'+type+'_'+j).val() == ''){
+                                $('#'+type+'_'+j).val(v.fileName);
+                                var fileSize;
+                                if(v.fileSize >= 1024 && v.fileSize < 1048576){
+                                    fileSize = Math.round(v.fileSize / 1024 * 100) / 100 + 'Kb';
+                                } else if(v.fileSize >= 1048576){
+                                    fileSize = Math.round(v.fileSize / 1048576 * 100) / 100 + 'Mb';
+                                } else {
+                                    fileSize = v.fileSize + 'b';
+                                }
+                                $('#'+type+'FileSize'+'_'+j).text(fileSize);
+                                $('#'+type+'Created'+'_'+j).text(v.created);
+                                $('#'+type+'Action'+'_'+j).html('\
+                                <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
+                                <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
+                                <input type="hidden" id="file_'+v.id+'" />');
+
+                                $('#'+type+'_'+j).parent().parent().show();
+                                return false;
                             }
-                            $('#'+type+'FileSize'+'_'+j).text(fileSize);
-                            $('#'+type+'Created'+'_'+j).text(v.created);
-                            $('#'+type+'Action'+'_'+j).html('\
-                            <a href="'+$.api.baseLotus+'/api/co/file/showFile?bizId='+v.bizId+'&fileId='+v.fileId+'" target="_blank">查看文件</a> | \n\
-                            <a href="javascript:void(0)" onclick=\'javascript: deleteFile("'+v.id+'")\'>删除文件</a>\n\
-                            <input type="hidden" id="file_'+v.id+'" />');
-                            
-                            $('#'+type+'_'+j).parent().parent().show();
-                            return false;
                         })
                     })
                 }
@@ -277,8 +329,13 @@ function fileUpload(id) {
     if($('#uploadFile_'+id).parent().find("input[type=file]").val() != ''){
         var type;
         switch (id) {
-            default:
+            case "signFiles":
+                type = 'SF';
+                break;
+            case "otherFiles":
                 type = 'OF';
+                break;
+            default:
                 break;
         }
     
@@ -374,7 +431,7 @@ function deleteFile(id) {
         url: $.api.baseLotus+"/api/co/file/saveOrUpdate",
         type: "POST",
         data: JSON.stringify(file),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -397,8 +454,13 @@ function deleteFile(id) {
                 
                 var type;
                 switch (bizType) {
-                    default:
+                    case "SF":
+                        type = 'signFiles';
+                        break;
+                    case "OF":
                         type = 'otherFiles';
+                        break;
+                    default:
                         break;
                 }
 
@@ -456,14 +518,14 @@ function mandatoryCheck(s) {
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
     
-    if($('#approveInfo').val() == ''){
-        flag = 0;
-        $('#approveInfo').parent().prepend(error);
-    }
-    
     if($('#applyReason').val() == ''){
         flag = 0;
         $('#applyReason').parent().prepend(error);
+    }
+    
+    if($('#applyType').val() == null){
+        flag = 0;
+        $('#applyType').parent().prepend(error);
     }
     
     if(flag == 1){
@@ -484,9 +546,41 @@ function submitCheck() {
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
     
-    if($('#remarks').val() == ''){
+    if($('#applyDate').val() == ''){
         flag = 0;
-        $('#remarks').parent().prepend(error);
+        $('#applyDate').parent().prepend(error);
+    }
+    
+    if($('#approveInfo').val() == ''){
+        flag = 0;
+        $('#approveInfo').parent().prepend(error);
+    }
+    
+    if($('#applyType').val() == 5 || $('#signFlag').val() == 1){
+        if($('#signName').val() == null){
+            flag = 0;
+            $('#signName').parent().prepend(error);
+        }
+        
+        if($('#corporationName').val() == ''){
+            flag = 0;
+            $('#corporationName').parent().prepend(error);
+        }
+        
+        if($.isNumeric($('#signNum').val()) == false){
+            flag = 0;
+            $('#signNum').parent().prepend(error);
+        }
+        
+        if($('#selectTenant').val() == null){
+            flag = 0;
+            $('#selectTenant').parent().prepend(error);
+        }
+        
+        if($('#signFileName').val() == ''){
+            flag = 0;
+            $('#signFileName').parent().prepend(error);
+        }
     }
     
     if($('#signLeasingApprove select').val() == null) {
@@ -551,7 +645,23 @@ function saveSignForm(s) {
             }
         })
         
-        var bizId = $('#bizId').val();
+        var bizId = ($.request.content != '' ? $.request.content.bizId : $('#bizId').val());
+        var creatorName = $('#creatorName').val();
+        
+        var index;
+        var signRelationList = [];
+        $("#signRelation").find("tr").each(function(i,e){
+            var signRelation = {};
+            index = i * 1 + 1;
+            signRelation.bizId = bizId;
+            signRelation.creatorName = creatorName;
+            signRelation.creatorOpenId = openId;
+            signRelation.relationBizId = $('#requestItem_'+index).val();
+            signRelation.relationInfo = $('#relationInfo_'+index).val();
+            signRelation.relationType = $('#requestType_'+index).val(); 
+            signRelation.updateOpenId = openId;
+            signRelationList.push(signRelation);
+        })
         
         var processApproveList = [];
         var lotusSignFlowStep = JSON.parse(sessionStorage.getItem('LOTUS_SIGN_APPROVE_FLOW_STEP'));
@@ -584,13 +694,15 @@ function saveSignForm(s) {
         var map = {
             "amount": numberWithoutCommas($('#amount').val()) || 0,
             "applyReason": $('#applyReason').val(),
-            "applyType": $('#applyType').find('option:selected').val(),
+            "applyDate": $('#applyDate').val(),
+            "applyTypeCode": $('#applyType').find('option:selected').val(),
+            "applyTypeName": $('#applyType').find('option:selected').text(),
             "approveInfo": $('#approveInfo').val(),
-            "bizId": ($.request.content != '' ? $.request.content.bizId : bizId),
+            "bizId": bizId,
             "code": ($.request.content != '' ? $.request.content.code : ""),
-            "companyName": "",
-            "corporationName": "",
-            "creatorName": ($.request.content != '' ? $.request.content.creatorName : $('#creatorName').val()),
+            "companyName": $('#mainSigningBody').val(),
+            "corporationName": $('#corporationName').val(),
+            "creatorName": ($.request.content != '' ? $.request.content.creatorName : creatorName),
             "creatorOpenId": ($.request.content != '' ? $.request.content.creatorOpenId : openId),
             "creatorOrgId": "",
             "creatorOrgName": "",
@@ -600,20 +712,22 @@ function saveSignForm(s) {
             "mallName": ($.request.content != '' ? $.request.content.mallName : $.cookie('mallSelected').split(':::')[0]),
             "mobileNo": $('#mobileNo').val(),
             "processApproveList": processApproveList,
-            "remarks": $('#remarks').val(),
-            "signFileName": "",
-            "signName": "",
-            "signNum": 0,
-            "signRelationList": [],
-            "tenantCode": "",
-            "tenantName": "",
+            "signFileName": $('#signFileName').val(),
+            "signFlag": $('#signFlag').find('option:selected').val(),
+            "signName": $('#signName').val(),
+            "signNum": $('#signNum').val(),
+            "signRelationList": signRelationList,
+            "tenantCode": $('#select2-selectTenant-container').text().split(' | ')[0],
+            "tenantName": $('#select2-selectTenant-container').text().split(' | ')[1],
             "updateOpenId": openId,
-            "urgencyDegree": $('input[name=urgencyDegree]:checked').val()
+            "urgencyDegree": $('input[name=urgencyDegree]:checked').val(),
+            "remarkFirst": $('#selectTenant').val(),
+            "remarkSecond": $('#signName').find('option:selected').text()
         };
         
         if(s == 'submit') {
             var submitSignForm = $.ajax({
-                url: $.baseLotus+"/api/sign/approve/form/submit",
+                url: $.api.baseLotus+"/api/sign/approve/form/submit",
                 type: "POST",
                 data: JSON.stringify(map),
                 async: true,
@@ -640,7 +754,7 @@ function saveSignForm(s) {
                             $.request.id = response.data.id;
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         } else if(response.data.id != "" && response.data.formStatus == "2"){
-                            //window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/in-process?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -684,7 +798,7 @@ function saveSignForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            //window.location.href = '/lotus-admin/request-summary?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/in-process?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -696,6 +810,318 @@ function saveSignForm(s) {
                     console.log(textStatus, errorThrown);
                 }
             });
+        }
+    })
+}
+
+function addRowInvestmentSignRelation() {
+    var newrow = document.createElement("tr");
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    var column5 = createRowColumn(newrow);
+    
+    var table = document.getElementById('processSignRelation');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var select = document.createElement("select");
+    select.setAttribute("class","select2 requestTypeDropDown");
+    select.setAttribute("id","requestType_"+count.toLocaleString());
+    select.options[0] = new Option('合同申请单','1');
+    select.options[1] = new Option('签呈','2');
+    column2.appendChild(select);
+    
+    var select = document.createElement("select");
+    select.setAttribute("class","select2 requestItemDropDown");
+    select.setAttribute("id","requestItem_"+count.toLocaleString());
+    column3.appendChild(select);
+    
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id","relationInfo_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    column4.appendChild(input);
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteBudgetRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column5.appendChild(remove);
+
+    tbody.appendChild(newrow);
+    $('#requestType_'+count.toLocaleString()+', #requestItem_'+count.toLocaleString()).select2();
+    updateRequestItems(count.toLocaleString());
+    
+     $(".requestTypeDropDown").on('change',function(){
+        updateRequestItems($(this).attr('id').split('_')[1]);
+    })
+}
+
+function updateRequestItems(count) {
+    if($('#requestType_'+count).length > 0 && $('#requestType_'+count).val() == 1){
+        $('#requestItem_'+count).select2({
+            placeholder: '输入申请单号',
+            dropdownAutoWidth: true,
+            allowClear: true,
+            language: {
+                searching: function() {
+                    return '加载中...';
+                },
+                loadingMore: function() {
+                    return '加载中...';
+                }
+            },
+            ajax: {
+                url: function (params) {
+                    return $.api.baseLotus+"/api/rent/contract/form/findAllByFreeCondition?page="+(params.page || 0)+"&size=20&sort=id,asc";
+                },
+                type: "POST",
+                async: true,
+                dataType: "json",
+                contentType: "application/json",
+                delay: 250,
+                beforeSend: function(request) {
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                data: function (params) {
+                    var map = {
+                        key: params.term || $.request.content.mallCode || $.cookie('mallSelected').split(':::')[1],
+                        operator: "OR",
+                        params: [
+                          "mallCode","tenantName","contractNo","unitName","contractName","bizId"
+                        ],
+                        sorts: []
+                    }
+                    return JSON.stringify(map);
+                },
+                processResults: function (data,params) {
+                    if(data['code'] === 'C0') {
+                        var jsonData = data['data'].content;
+                        params.page = params.page || 0;
+                        var data;
+                        return {
+                            results: $.map(jsonData, function(item) {
+                                var arr = ['2','4','5','6','7','9'];
+                                var index = $.inArray(item.formStatus,arr);
+                                if(index >= 0){
+                                    data = {
+                                        id: item.bizId,
+                                        text: item.tenantName + '[' + item.bizId + '] | ' + (item.contractName || '') + ' | ' + item.mallName + '[' + item.mallCode+'] ' +item.unitName + ' | ' + item.startDate + '～' + item.endDate         
+                                    }
+                                    var returnData = [];
+                                    returnData.push(data);
+                                    return returnData;
+                                }
+                            }),
+                            pagination: {
+                                "more": 20 <= jsonData.length
+                            }
+                        }
+                    } else {
+                        alertMsg(data['code'],data['customerMessage']);
+                    }
+                },
+                cache: true
+            }
+        });
+    } else if($('#requestType_'+count).length > 0 && $('#requestType_'+count).val() == 2){
+        $('#requestItem_'+count).select2({
+            placeholder: '输入签呈单号',
+            dropdownAutoWidth: true,
+            allowClear: true,
+            language: {
+                searching: function() {
+                    return '加载中...';
+                },
+                loadingMore: function() {
+                    return '加载中...';
+                }
+            },
+            ajax: {
+                url: function (params) {
+                    return $.api.baseLotus+"/api/sign/approve/form/findAllByFreeCondition?page="+(params.page || 0)+"&size=20&sort=id,asc";
+                },
+                type: "POST",
+                async: true,
+                dataType: "json",
+                contentType: "application/json",
+                delay: 250,
+                beforeSend: function(request) {
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                data: function (params) {
+                    var map = {
+                        key: params.term || $.request.content.mallCode || $.cookie('mallSelected').split(':::')[1],
+                        operator: "OR",
+                        params: [
+                          "mallCode","bizId","applyReason"
+                        ],
+                        sorts: []
+                    }
+                    return JSON.stringify(map);
+                },
+                processResults: function (data,params) {
+                    if(data['code'] === 'C0') {
+                        var jsonData = data['data'].content;
+                        params.page = params.page || 0;
+                        var data;
+                        return {
+                            results: $.map(jsonData, function(item) {
+                                var arr = ['2','9'];
+                                var index = $.inArray(item.formStatus,arr);
+                                if(index >= 0){
+                                    data = {
+                                        id: item.bizId,
+                                        text: item.applyReason + '[' + item.bizId + '] | ' + (item.applyDate || '')       
+                                    }
+                                    var returnData = [];
+                                    returnData.push(data);
+                                    return returnData;
+                                }
+                            }),
+                            pagination: {
+                                "more": 20 <= jsonData.length
+                            }
+                        }
+                    } else {
+                        alertMsg(data['code'],data['customerMessage']);
+                    }
+                },
+                cache: true
+            }
+        });
+    } else {
+        return false;
+    }
+}
+
+function updateRowInvestmentSignRelation(v) {
+    var value = JSON.parse(v);
+    var newrow = document.createElement("tr");
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    var column5 = createRowColumn(newrow);
+    
+    var table = document.getElementById('processSignRelation');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var select = document.createElement("select");
+    select.setAttribute("class","select2 requestTypeDropDown");
+    select.setAttribute("id","requestType_"+count.toLocaleString());
+    select.options[0] = new Option('合同申请单','1');
+    select.options[1] = new Option('签呈','2');
+    column2.appendChild(select);
+    
+    var select = document.createElement("select");
+    select.setAttribute("class","select2 requestItemDropDown");
+    select.setAttribute("id","requestItem_"+count.toLocaleString());
+    column3.appendChild(select);
+    
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id","relationInfo_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("value",value.relationInfo);
+    column4.appendChild(input);
+    
+    var remove = document.createElement("a");
+    remove.setAttribute("href", "javascript:void(0);");
+    remove.setAttribute("onClick", "deleteBudgetRow(this)");
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-minus-circle");
+    icon.setAttribute("style", "color: #ED4A52; font-size: 16px;");
+    remove.appendChild(icon);
+    column5.appendChild(remove);
+
+    tbody.appendChild(newrow);
+    $('#requestType_'+count.toLocaleString()+', #requestItem_'+count.toLocaleString()).select2();
+    $("#requestType_"+count.toLocaleString()).val(value.relationType).trigger("change");
+    updateRequestItems(count.toLocaleString());
+    if(value.relationBizId.slice(0,4) == 'SIGN'){
+        findSignRelationSignFormByRelationBizId(value.relationBizId,count.toLocaleString());
+    } else {
+        findSignRelationRequestFormByRelationBizId(value.relationBizId,count.toLocaleString());
+    }
+}
+
+function findSignRelationSignFormByRelationBizId(rbid,index) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/sign/approve/form/findAllByBizId?bizId="+rbid,
+        type: "GET",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    var temp = new Option((data.applyReason + '[' + data.bizId + '] | ' + (data.applyDate || '') ), data.bizId, true, true);
+                    $('#requestItem_'+index).append(temp).trigger('change');
+                }
+            }
+        }
+    })
+}
+
+function findSignRelationRequestFormByRelationBizId(rbid,index) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/rent/contract/form/findAllByBizId?bizId="+rbid,
+        type: "GET",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    var temp = new Option((data.tenantName + '[' + data.bizId + '] | ' + (data.contractName || '') + ' | ' + data.mallName + '[' + data.mallCode+'] ' +data.unitName + ' | ' + data.startDate + '～' + data.endDate), data.bizId, true, true);
+                    $('#requestItem_'+index).append(temp).trigger('change');
+                }
+            }
         }
     })
 }

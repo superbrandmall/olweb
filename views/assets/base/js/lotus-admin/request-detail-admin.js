@@ -202,7 +202,7 @@ function findFilesByBizId(id) {
     $.ajax({
         url: $.api.baseLotus+"/api/co/file/findAllByBizId?bizId="+id,
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -286,7 +286,7 @@ function fileUpload(id) {
             type: "POST",
             url: $.base+"/zuul/onlineleasing-lotus/api/co/file/uploadYzj?bizId="+$('#bizId').val()+"&creatorOpenId="+openId+"&activityName=&bizType=CONTRACT_"+type,
             data: formData,
-            async: false,
+            async: true,
             cache: false,
             timeout: 15000,
             processData: false,
@@ -362,7 +362,7 @@ function deleteFile(id) {
         url: $.api.baseLotus+"/api/co/file/saveOrUpdate",
         type: "POST",
         data: JSON.stringify(file),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -429,7 +429,7 @@ function findRequestbyBizId() {
     $.ajax({
         url: $.api.baseLotus+"/api/rent/contract/form/findAllByBizId?bizId="+getURLParameter('id'),
         type: "GET",
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -655,6 +655,7 @@ function findRequestbyBizId() {
                     $('#openEndTime').val(data.openEndTime);
                     $('#freeDays').val(data.freeDays);
                     $('#remark').val(data.remark);
+                    $('#graphFee').val(data.graphFee);
                     if(data.contractTemplate != null) {
                         updateDictByDictTypeCodeAndVal('CONTRACT_TEMPLATE', 'contractTemplate', data.contractTemplate);
                     }
@@ -3409,7 +3410,6 @@ function saveContractForm(s) {
             "depositList": depositList,
             "duration": 0,
             "enterDate": $('#enterDate').val(),
-            //"esignFlag": esignFlag,
             "esignFlag": 0,
             "exclusiveCondition": "",
             "firstCompareCycle": ($('#compareFirstFrequency').val() != "" ? $('#compareFirstFrequency').val() : ""),
@@ -3424,7 +3424,7 @@ function saveContractForm(s) {
             "freeEndDate": $('#freeEndDate_1').val(),
             "freeOverdueDays": 0,
             "freeStartDate": $('#freeStartDate_1').val(),
-            "graphFee": 0,
+            "graphFee": numberWithoutCommas($('#graphFee').val()),
             "growthRate": 0,
             "intentDate": "",
             "intentionMoney": 0,

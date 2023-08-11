@@ -150,11 +150,17 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">延迟开业违约金 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
+                <div class="col-md-8 col-sm-12">
+                    <select class="select2" id="posMode" style="width: 100%;"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">审图费 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
                     <div class="input-group">
-                        <input class="form-control money" id="overdueBizAmount" type="text" style="border-right: none;" />                                                
-                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/天</span>
+                        <input class="form-control money" id="graphFee" type="text" style="border-right: none;" />                                             
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                     </div>
                 </div>
             </div>
@@ -185,9 +191,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-4 control-label">收银方式 <span class="btn-box-tool-lg">*</span></label>
+                <label class="col-md-4 control-label">延迟开业违约金 <span class="btn-box-tool-lg">*</span></label>
                 <div class="col-md-8 col-sm-12">
-                    <select class="select2" id="posMode" style="width: 100%;"></select>
+                    <div class="input-group">
+                        <input class="form-control money" id="overdueBizAmount" type="text" style="border-right: none;" />                                                
+                        <span class="input-group-addon" style="border-left: none; background: transparent;">元/天</span>
+                    </div>
                 </div>
             </div>
         </div>

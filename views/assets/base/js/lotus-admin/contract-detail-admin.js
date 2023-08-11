@@ -360,6 +360,7 @@ function findContractByContractNo() {
                     $('#awardDate').datepicker('update', data.awardDate);
                     $('#bizScope').val(data.bizScope);
                     $('#targetSales').val(data.targetSales);
+                    $('#graphFee').val(data.graphFee);
                     $('#overdueBizAmount').val(data.overdueBizAmount);
                     $('#enterDate').datepicker('update', data.enterDate);
                     $('#freeStartDate_1').datepicker('update', data.freeStartDate);

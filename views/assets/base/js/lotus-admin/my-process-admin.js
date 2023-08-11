@@ -374,7 +374,7 @@ function findAllToDoSignRequestsByKVCondition(){
                         $('#todo').append('\
                             <tr data-index="'+i+'">\n\
                             <td><a href="/lotus-admin/process-request?id='+v.bizId+'">'+v.bizId+'</a></td>\n\
-                            <td>'+(renderApproveType(v.applyType) || '')+'</td>\n\
+                            <td>'+(renderApproveType(v.applyTypeCode) || '')+'</td>\n\
                             <td>'+v.applyReason+'</td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
                             <td>'+v.urgencyDegree+'</td>\n\
