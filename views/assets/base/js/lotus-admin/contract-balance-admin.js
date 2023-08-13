@@ -24,6 +24,8 @@ $(document).ready(function(){
     
     $('#termType').show();
     
+    mandatoryCheck();
+    
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
     });
@@ -101,8 +103,8 @@ function findBalanceByKVCondition() {
         "columnPatten": "",
         "conditionOperator": "AND",
         "operator": "=",
-        "value": $.cookie('balanceMallVal')
-    }]
+        "value": ($.cookie('balanceMallVal') != 'null' ? $.cookie('balanceMallVal') : $('#department').val())
+    }];
     
     if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null' && $.cookie('balanceContractVal') != ''){
         params = [{
@@ -142,11 +144,11 @@ function findBalanceByKVCondition() {
     }
                 
     $.ajax({
-        //url: $.api.baseLotus+"/api/contract/rent/calc/findAllByKVCondition?page=0&size=1000&sort=id,asc",
         url: $.api.baseSap+"/api/sap/contractItem/findAllByKVCondition?page=0&size=1000&sort=id,asc",
+        //url: $.api.baseLotus+"/api/contract/rent/calc/findAllByKVCondition?page=0&size=1000&sort=id,asc",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -166,28 +168,28 @@ function findBalanceByKVCondition() {
                 }
                 
                 $('#balance').html('');
-//                if(response.data.content.length > 0){
-//                    var totalAmount = 0, totalTaxAmount = 0;
-//                    $.each(response.data.content, function(i,v){
-//                        totalTaxAmount += v.taxAmount;
-//                        totalAmount += v.amount;
-//                        $('#balance').append('<tr>\n\
-//                        <td>'+(i*1+1)+'</td>\n\
-//                        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-//                        <td>收</td>\n\
-//                        <td>'+v.yyyymm+'</td>\n\
-//                        <td>'+v.startDate+'～'+v.endDate+'</td>\n\
-//                        <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
-//                        <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
-//                        <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-//                        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-//                    </tr>');
-//                    })
-//                    $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
-//                    $('#totalAmount').text(accounting.formatNumber(totalAmount));
-//                } else {
-//                    $('#balance').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
-//                }
+                if(response.data.content.length > 0){
+                    var totalAmount = 0, totalTaxAmount = 0;
+                    $.each(response.data.content, function(i,v){
+                        totalTaxAmount += v.taxAmount;
+                        totalAmount += v.amount;
+                        $('#balance').append('<tr>\n\
+                        <td>'+(i*1+1)+'</td>\n\
+                        <td>'+v.itemName+'['+v.itemCode+']</td>\n\
+                        <td>收</td>\n\
+                        <td>'+v.yyyymm+'</td>\n\
+                        <td>'+v.startDate+'～'+v.endDate+'</td>\n\
+                        <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
+                        <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
+                        <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
+                        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+                    </tr>');
+                    })
+                    $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
+                    $('#totalAmount').text(accounting.formatNumber(totalAmount));
+                } else {
+                    $('#balance').html('<tr><td colspan="9" style="text-align: center;">没有找到任何记录！</td></tr>');
+                }
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
