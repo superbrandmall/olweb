@@ -725,6 +725,19 @@ function renderFormType(t) {
     return type;
 }
 
+function renderApproveType(t) {
+    var type = '';
+    if(sessionStorage.getItem("SIGN_APPROVE_TYPE") && sessionStorage.getItem("SIGN_APPROVE_TYPE") != null && sessionStorage.getItem("SIGN_APPROVE_TYPE") != '') {
+        var type = $.parseJSON(sessionStorage.getItem("SIGN_APPROVE_TYPE"));
+        $.each(type, function(i,v){
+            if(v.dictCode == t){
+                type = v.dictName;
+            }
+        })
+    }
+    return type;
+}
+
 function renderFlowStatus(s) {
     var status = '';
     if(sessionStorage.getItem("FLOW_STATUS") && sessionStorage.getItem("FLOW_STATUS") != null && sessionStorage.getItem("FLOW_STATUS") != '') {

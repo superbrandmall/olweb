@@ -279,6 +279,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                             <div class="box-body">
                                 <div class="col-md-12">
+                                    <h5>注意: 用印文件请上传节点在签呈负责人审批完后</h5>
                                     <table class="table table-responsive" style="margin-top: 0; text-align: left;">
                                         <thead id="assetsListingTable-sticky-header">
                                             <tr>
@@ -306,29 +307,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </thead>
                                         <tbody id="fileList">
                                             <tr>
-                                                <td>用印文件</td>
-                                                <td id="signFilesCreated_0"></td>
-                                                <td>
-                                                    <input type="text" id="signFiles_0" name="signFiles_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                                                </td>
-                                                <td id="signFilesFileSize_0"></td>
-                                                <td id="signFilesAction_0"></td>
+                                                <td colspan="5"><span class="label label-danger">其他文件非用印文件</span></td>
                                             </tr>
-                                            <?php
-                                                for($i=1;$i<10;$i++){
-                                            ?>
-                                            <tr style="display: none;">
-                                                <td>用印文件</td>
-                                                <td id="signFilesCreated_<?= $i; ?>"></td>
-                                                <td>
-                                                    <input type="text" id="signFiles_<?= $i; ?>" name="signFiles_<?= $i; ?>" style="border: 0 none; text-align: left; width: 100%;" readonly/>
-                                                </td>
-                                                <td id="signFilesFileSize_<?= $i; ?>"></td>
-                                                <td id="signFilesAction_<?= $i; ?>"></td>
-                                            </tr>
-                                            <?php
-                                                }
-                                            ?>
                                             <tr>
                                                 <td>其他文件</td>
                                                 <td id="otherFilesCreated_0"></td>
@@ -357,27 +337,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     </table>
                                 </div>
                                 <div class="col-md-12">
-                                        <label class="col-md-1 control-label">用印文件</label>
-                                        <div class="col-md-10 col-sm-12" style="margin-left:2.7%;">
-                                            <div class="form-group input-group">
-                                                <input type="text" id="fileName_signFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
-                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_signFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
-                                                <div type="button" class="input-group-addon" id="uploadFile_signFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
-                                                <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
-                                            </div>
+                                    <label class="col-md-1 control-label">其他文件</label>
+                                    <div class="col-md-10 col-sm-12" style="margin-left:2.7%;">
+                                        <div class="form-group input-group">
+                                            <input type="text" id="fileName_otherFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
+                                            <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_otherFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
+                                            <div type="button" class="input-group-addon" id="uploadFile_otherFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
+                                            <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <label class="col-md-1 control-label">其他文件</label>
-                                        <div class="col-md-10 col-sm-12" style="margin-left:2.7%;">
-                                            <div class="form-group input-group">
-                                                <input type="text" id="fileName_otherFiles" class="form-control" disabled style="background-color: #fff; border: solid 1px rgb(210, 214, 222);">
-                                                <input type="file" style="display: none;" onchange="javascript:$('input[id=\'fileName_otherFiles\']').val(this.files[0].name);" accept="image/*,application/pdf" multiple />
-                                                <div type="button" class="input-group-addon" id="uploadFile_otherFiles" style="padding: 6px 12px; font-size: 11px; cursor: pointer; border-left: 0 none; border-right: 0 none;"><i class="fa fa-upload"></i> 上传文件</div>
-                                                <div type="button" class="input-group-addon" style="background-color: #3c8dbc; border-color: #367fa9; padding: 6px 12px; font-size: 11px; cursor: pointer; color: #fff;" onclick="javascript:$(this).parent().find('input[type=\'file\']').click();"><i class="fa fa-folder-open-o"></i> 选择文件 &hellip;</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         

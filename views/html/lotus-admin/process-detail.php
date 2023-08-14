@@ -17,7 +17,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <a href="javascript: flowInstUpdate();" class="btn btn-warning btn-sm">更新审批状态</a>
             </div>
             <h4>
-                <b id="status"></b>流程: 租赁合同【<b id="formType"></b>】申请
+                <b id="status"></b>流程:<b id="formType"></b>申请
             </h4>
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
@@ -91,7 +91,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                             <div class="box-body">
                                 <div class="col-md-12">
-                                    <ul class="nav nav-pills nav-justified step step-progress">
+                                    <ul class="nav nav-pills nav-justified step step-progress" id="leasingContract" style="display: none;">
                                         <li>
                                             <a href="javascript: void(0);">提交人<span class="caret"></span></a>
                                         </li>
@@ -127,6 +127,55 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </li>
                                         <li>
                                             <a href="javascript: void(0);">盖章合同上传<span class="caret"></span></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-pills nav-justified step step-progress" id="lotusApprove" style="display: none;">
+                                        <li>
+                                            <a href="javascript: void(0);">开始审批<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">招商负责人审批<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">财法预审负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">财法负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">总部招商负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">签呈负责人审批<span class="caret"></span></a>
+                                        </li>
+                                    </ul>
+                                    <ul class="nav nav-pills nav-justified step step-progress" id="lotusSign" style="display: none;">
+                                        <li>
+                                            <a href="javascript: void(0);">开始审批<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">招商负责人审批<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">财法预审负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">财法负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">总部招商负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">签呈负责人审批<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">用印文件上传<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">用印财法预审<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">用印财法负责人审批<span class="caret"></span></a>
                                         </li>
                                     </ul>
                                 </div>

@@ -103,6 +103,14 @@ $(document).ready(function(){
         })
         $('#applyDate').datepicker('update', date);
     }
+    
+    $('#applyType').change(function(){
+        if($(this).val() == 5){
+            $('#signFlag').val(1).trigger('change');
+        } else {
+            $('#signFlag').val(0).trigger('change');
+        }
+    })
 })
 
 function findSignRequestByBizId() {
@@ -287,9 +295,6 @@ function findFilesByBizId() {
                         var bizType = v.bizType.split('_')[1];
                         var type;
                         switch (bizType) {
-                            case "SF":
-                                type = 'signFiles';
-                                break;
                             case "OF":
                                 type = 'otherFiles';
                                 break;
@@ -329,9 +334,6 @@ function fileUpload(id) {
     if($('#uploadFile_'+id).parent().find("input[type=file]").val() != ''){
         var type;
         switch (id) {
-            case "signFiles":
-                type = 'SF';
-                break;
             case "otherFiles":
                 type = 'OF';
                 break;
@@ -454,9 +456,6 @@ function deleteFile(id) {
                 
                 var type;
                 switch (bizType) {
-                    case "SF":
-                        type = 'signFiles';
-                        break;
                     case "OF":
                         type = 'otherFiles';
                         break;
@@ -754,7 +753,7 @@ function saveSignForm(s) {
                             $.request.id = response.data.id;
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         } else if(response.data.id != "" && response.data.formStatus == "2"){
-                            window.location.href = '/lotus-admin/in-process?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/my-process?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }
@@ -798,7 +797,7 @@ function saveSignForm(s) {
                         }
 
                         if(response.data.id != ""){
-                            window.location.href = '/lotus-admin/in-process?id='+response.data.bizId+'&s=succeed';
+                            window.location.href = '/lotus-admin/my-process?id='+response.data.bizId+'&s=succeed';
                         } else {
                             alertMsg(response.data.resultCode,response.data.resultMsg);
                         }

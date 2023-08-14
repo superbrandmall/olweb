@@ -1,17 +1,4 @@
 $(document).ready(function(){
-    if(getURLParameter('s')) {
-        switch (getURLParameter('s')) {
-            case "succeed":
-                successMsg('00','保存成功！');
-                break;
-            default:
-                break;
-        }
-        setTimeout(function () {
-            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-        },1000);
-    }
-    
     if(!sessionStorage.getItem("FLOW_STATUS") || sessionStorage.getItem("FLOW_STATUS") == null || sessionStorage.getItem("FLOW_STATUS") == '') {
         findDictCodeByDictTypeCode('FLOW_STATUS');
     }
@@ -176,18 +163,23 @@ function findAllProcessByKVCondition(p,c){
                             tbg = '#f9f9f9';
                         }
                         
-                        var bizType = '';
-                        if($.isNumeric(v.bizType) == false){    
-                            bizType = '合同'+renderFormType(v.bizType);
-                        } else {
-                            bizType = renderApproveType(v.bizType);
-                        }
-                        
                         var url,activityName,approveName,created='',updated='';
-                        
+                        var bizType = '', urlTitle = '';
+                        if($.isNumeric(v.bizType) == false){    
+                            bizType = '租赁合同'+renderFormType(v.bizType);
+                            urlTitle = '租赁合同申请';
+                        } else {
+                            if(v.bizType == 5){
+                                bizType = '卜蜂莲花'+renderApproveType(v.bizType);
+                                urlTitle = '卜蜂莲花用印申请';
+                            } else {
+                                bizType = '卜蜂莲花'+renderApproveType(v.bizType);
+                                urlTitle = '卜蜂莲花签呈';
+                            }
+                        }
                         activityName = v.creatorOrgName+'-'+(v.processStepRecordList.length > 0 ? v.processStepRecordList[v.processStepRecordList.length-1].activityName : "/");
-                        approveName = (v.processStepRecordList.length > 0 ? v.processStepRecordList[v.processStepRecordList.length-1].approveName : "/");
-                        url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">租赁合同申请('+v.creatorOrgName+')['+v.mallCode+']</a>';
+                        approveName = (v.processStepRecordList.length > 0 ? (v.processStepRecordList[v.processStepRecordList.length-1].approveName || '/') : "/");
+                        url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                         created = v.created;
                         updated = v.updated;
                         
@@ -240,13 +232,6 @@ function findAllToDoSignRequestsByKVCondition(){
     }
     params.push(param);
     
-//    param = {
-//        "columnName": "formStatus",
-//        "columnPatten": "",
-//        "conditionOperator": "AND",
-//        "operator": "in",
-//        "value": '1;3;4;5;6;7'
-//    }
     param = {
         "columnName": "formStatus",
         "columnPatten": "",
@@ -302,17 +287,4 @@ function findAllToDoSignRequestsByKVCondition(){
             } 
         }
     });
-}
-
-function renderApproveType(t) {
-    var type = '';
-    if(sessionStorage.getItem("SIGN_APPROVE_TYPE") && sessionStorage.getItem("SIGN_APPROVE_TYPE") != null && sessionStorage.getItem("SIGN_APPROVE_TYPE") != '') {
-        var type = $.parseJSON(sessionStorage.getItem("SIGN_APPROVE_TYPE"));
-        $.each(type, function(i,v){
-            if(v.dictCode == t){
-                type = v.dictName;
-            }
-        })
-    }
-    return type;
 }

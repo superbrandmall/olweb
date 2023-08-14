@@ -154,8 +154,8 @@ function findAllProcessByKVCondition(p,c){
                 "columnName": "appId",
                 "columnPatten": "",
                 "conditionOperator": "",
-                "operator": "=",
-                "value": "500740097"
+                "operator": "in",
+                "value": "500740097;500881373"
             }];
         }
         
@@ -207,8 +207,8 @@ function findAllProcessByKVCondition(p,c){
                     "columnName": "appId",
                     "columnPatten": "",
                     "conditionOperator": "",
-                    "operator": "=",
-                    "value": "500740097"
+                    "operator": "in",
+                    "value": "500740097;500881373"
                 }
             ]
         }
@@ -246,16 +246,29 @@ function findAllProcessByKVCondition(p,c){
                         }
                         
                         var url,activityName,approveName,created='',updated='',endTime='';
+                        var bizType = '', urlTitle = '';
+                        if($.isNumeric(v.bizType) == false){    
+                            bizType = '租赁合同'+renderFormType(v.bizType);
+                            urlTitle = '租赁合同申请';
+                        } else {
+                            if(v.bizType == 5){
+                                bizType = '卜蜂莲花'+renderApproveType(v.bizType);
+                                urlTitle = '卜蜂莲花用印申请';
+                            } else {
+                                bizType = '卜蜂莲花'+renderApproveType(v.bizType);
+                                urlTitle = '卜蜂莲花签呈';
+                            }
+                        }
                         if(($.cookie('searchProcessScope') != null && $.cookie('searchProcessScope') != '') || ($.cookie('searchProcessBizType') != null && $.cookie('searchProcessBizType') != '') || ($.cookie('searchProcessState') != null && $.cookie('searchProcessState') != '')){
                             activityName = v.mallName+'-'+v.activityName;
                             approveName = v.approveName || '';
-                            url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">租赁合同申请('+v.mallName+')['+v.mallCode+']</a>';
+                            url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.mallName+')['+v.mallCode+']</a>';
                             created = v.stepCreateTime;
                             
                             if($.cookie('searchProcessScope') == null || $.cookie('searchProcessScope') == '' || $.cookie('searchProcessScope') == 'creatorOpenId'){
-                                activityName = v.creatorOrgName+'-'+v.processStepRecordList[v.processStepRecordList.length-1].activityName;
-                                approveName = v.processStepRecordList[v.processStepRecordList.length-1].approveName || '';
-                                url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">租赁合同申请('+v.creatorOrgName+')['+v.mallCode+']</a>';
+                                activityName = v.creatorOrgName+'-'+(v.processStepRecordList.length > 0 ? v.processStepRecordList[v.processStepRecordList.length-1].activityName : "/");
+                                approveName = (v.processStepRecordList.length > 0 ? (v.processStepRecordList[v.processStepRecordList.length-1].approveName || '/') : "/");
+                                url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                                 created = v.created;
                                 updated = v.updated;
                                 if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
@@ -268,9 +281,9 @@ function findAllProcessByKVCondition(p,c){
                                 }
                             }
                         } else {
-                            activityName = v.creatorOrgName+'-'+v.processStepRecordList[v.processStepRecordList.length-1].activityName;
-                            approveName = v.processStepRecordList[v.processStepRecordList.length-1].approveName || '';
-                            url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">租赁合同申请('+v.creatorOrgName+')['+v.mallCode+']</a>';
+                            activityName = v.creatorOrgName+'-'+(v.processStepRecordList.length > 0 ? v.processStepRecordList[v.processStepRecordList.length-1].activityName : "/");
+                            approveName = (v.processStepRecordList.length > 0 ? (v.processStepRecordList[v.processStepRecordList.length-1].approveName || '/') : "/");
+                            url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                             created = v.created;
                             updated = v.updated;
                             if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
@@ -281,7 +294,7 @@ function findAllProcessByKVCondition(p,c){
                         $('#process').append('<tr data-index="'+i+'">\n\
                         <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+url+'</td>\n\
                         <td>'+renderFlowStatus(v.processInstStatus)+'</td>\n\
-                        <td>/招商/合同'+renderFormType(v.bizType)+'/</td>\n\
+                        <td>/招商/'+bizType+'/</td>\n\
                         <td>'+(v.creatorName || 'admin')+'</td>\n\
                         <td>'+activityName+'</td>\n\
                         <td>'+approveName+'</td>\n\
@@ -327,13 +340,6 @@ function findAllToDoSignRequestsByKVCondition(){
     }
     params.push(param);
     
-//    param = {
-//        "columnName": "formStatus",
-//        "columnPatten": "",
-//        "conditionOperator": "AND",
-//        "operator": "in",
-//        "value": '1;3;4;5;6;7'
-//    }
     param = {
         "columnName": "formStatus",
         "columnPatten": "",
@@ -389,17 +395,4 @@ function findAllToDoSignRequestsByKVCondition(){
             } 
         }
     });
-}
-
-function renderApproveType(t) {
-    var type = '';
-    if(sessionStorage.getItem("SIGN_APPROVE_TYPE") && sessionStorage.getItem("SIGN_APPROVE_TYPE") != null && sessionStorage.getItem("SIGN_APPROVE_TYPE") != '') {
-        var type = $.parseJSON(sessionStorage.getItem("SIGN_APPROVE_TYPE"));
-        $.each(type, function(i,v){
-            if(v.dictCode == t){
-                type = v.dictName;
-            }
-        })
-    }
-    return type;
 }
