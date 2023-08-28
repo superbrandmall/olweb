@@ -94,10 +94,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/store-progress-console?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/leasing-budget?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页</span>
                                             </div>

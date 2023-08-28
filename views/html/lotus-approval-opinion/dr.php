@@ -1,5 +1,5 @@
 <?php
-$scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-approval-opinion/default-admin.js"></script>'.PHP_EOL;
+$scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-approval-opinion/dr-admin.js"></script>'.PHP_EOL;
 
 
 ?>
@@ -8,35 +8,33 @@ $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/view
     <section class="sub-header" style="height: 45px; left: 0;">
         <img class="navbar-brand-img visible-print" src="/views/assets/base/img/content/lotus-admin/lotus-logo.png" style="top: -3px; position: absolute; left: 0;">
         <h4>
-            <span id="opinionType">招商租赁审批意见书</span> <span id="formType"></span>
+            <span id="opinionType">leasing DR商务审批</span> <span id="formType"></span>
         </h4>
     </section>
-
-    <section class="content" style="margin-top: 96px;">
-        <div id="webui" style="display: none;">
+    <section class="content">
+        <div id="webui">
             <div class="row">
-                <?php
-                include 'component/investmentContractDepartment.php'; // 承办部门
-                include 'component/investmentContractTopic.php'; // 主题
-                include 'component/investmentContractBasicInfo.php'; //基本信息
-                include 'component/investmentContractDetails.php'; //商务明细
-                include 'component/investmentContractAccounttermFixed.php'; //固定租金
-                include 'component/investmentContractAccounttermCommission.php'; //提成租金
-                include 'component/investmentContractAccounttermPropertyMgmt.php'; //其它固定费用
-                include 'component/investmentContractAccounttermPromotion.php'; //推广费
-                include 'component/investmentContractDepositterm.php'; //首期费用以及保证金
-                include 'component/textareapanel.php'; //小作文
-                include 'component/investmentContractCertificates.php'; //附件信息
-                include 'component/investmentContractApprovalProcess.php'; //操作历史
-                ?>
+                <div class="col-md-12">
+                    <div class="box" style="height: 0;">
+                        <div class="box-body" style="padding-top: 0; padding-bottom: 0; margin: 0 2px;">
+                            <div class="row">
+                                <div class="col-md-12" style="padding: 0;">
+                                    <iframe id="leasingDrFrame" src ="/dr-summary/#/summary" width="100%" height="800" scrolling="auto" frameBorder="0" style="margin-top: 76px; overflow: hidden;">
+                                        <p>你的浏览器不支持iframes。</p>
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 </div>
 
-<div id="lotus-approval-opinion" class="hidden-print" style="position: fixed;right: 0;top: 95px;background: #FFFFCC;width: 50px;z-index: 1;bottom: 0; display: none;">
+<div id="lotus-approval-opinion" style="position: fixed;right: 0;top: 95px;background: #FFFFCC;width: 50px;z-index: 1;bottom: 0;">
     <div style="padding: 50px 18px;">
-        <a href="lotus-approval-opinion/dr" style="color: #1c9e74;"><i class="fa fa-folder-open-o" style="margin-bottom: 5px;"></i>租赁DR商务审批</a>
+        <a href="javascript: void(0);" style="color: #1c9e74;"><i class="fa fa-folder-open-o" style="margin-bottom: 5px;"></i>招商租赁审批意见书</a>
     </div>
 </div>
 

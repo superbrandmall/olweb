@@ -11,22 +11,25 @@
                 <li id="Lotus_leasing_head">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
-                <li id="finance_pre_check">
-                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
-                </li>
                 <li id="legal_pre_check">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
-                <li id="finance_check">
+                <li id="finance_pre_check">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
-                <li id="legal_check">
+                <li id="legalApprove">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
-                <li id="biz_head">
+                <li id="financeApprove">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="bizApprove">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
                 <li id="hq_leasing_head">
+                    <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
+                </li>
+                <li id="leasingPresident">
                     <a href="javascript: void(0);"><span class="approveName">&nbsp;</span><span class="caret"></span></a>
                 </li>
             </ul>

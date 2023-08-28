@@ -1,9 +1,9 @@
 <?php
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-balance-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/accounting-voucher-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL; 
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/contract-balance.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/accounting-voucher.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL; 
 }
 ?>
@@ -17,15 +17,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 </style>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 240px;">
+    <section class="sub-header" style="height: 260px;">
         <h4>
-            合同结算情况
+            会计凭证
         </h4>
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
+            <div class="pull-left">
+                <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                    <li class="active"><a href="javascript: void(0);">会计凭证</a></li>
+                    <li><a href="/lotus-admin/accounting-tenant?items=20">租户</a></li>
+                    <li><a href="/lotus-admin/accounting-contract?items=20">合同</a></li>
+                </ol>
+            </div>
+        </div>
         <div class="pull-right">
-            <a href="javascript: void(0);" class="btn btn-primary btn-sm" onclick="javascript: createBalanceDetail();"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建结算调整单</span></a>
+            <a href="javascript: void(0);" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建</span></a>
         </div>
         <div class="box-header">
-            <h5>不含税金额合计: <strong id="totalTaxAmount" class="text-red" style="margin-right: 10px;">0.00</strong> 含税金额合计: <strong id="totalAmount" class="text-red">0.00</strong></h5>
             <div class="box-body">
                 <div class="col-md-12">
                     <div class="col-md-4">
@@ -38,17 +46,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="selectContract" class="col-md-4 control-label" style="text-align: right;">合同</label>
+                            <label for="accountVoucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="selectContract" name="selectContract" style="width: 100%"></select>
+                                <input class="form-control" id="accountVoucherCode" name="accountVoucherCode" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="selectTenant" class="col-md-4 control-label" style="text-align: right;">对方单位</label>
+                            <label for="messIdOs" class="col-md-4 control-label" style="text-align: right;">参考</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select id="selectTenant" class="select2" style="width: 100%"></select>
+                                <input class="form-control" id="messIdOs" name="messIdOs" type="text" />
                             </div>
                         </div>
                     </div>
@@ -56,7 +64,18 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="yearMonth" class="col-md-4 control-label" style="text-align: right;">账单结转期</label>
+                            <label for="voucherDate" class="col-md-4 control-label" style="text-align: right;">凭证日期</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <div class="input-group">
+                                    <input class="form-control date-picker" id="voucherDate" name="voucherDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                    <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="yearMonth" class="col-md-4 control-label" style="text-align: right;">会计期间</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <div class="input-group">
                                     <input class="form-control date-picker" id="yearMonth" name="yearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
@@ -67,27 +86,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="termType" class="col-md-4 control-label" style="text-align: right;">科目</label>
+                            <label for="voucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="termType" name="termType" style="width: 100%; display: none;">
-                                    <option value="">未选择</option>
-                                    <option value="B011">固定租金</option>
-                                    <option value="B021">物业管理费</option>
-                                    <option value="G011">固定推广费</option>
-                                    <option value="D011">提成扣率</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="itemType" class="col-md-4 control-label" style="text-align: right;">明细类型</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="itemType" name="itemType" style="width: 100%; display: none;">
-                                    <option value="">未选择</option>
-                                    <option value="normal">常规</option>
-                                    <option value="adjust">调整</option>
-                                </select>
+                                <input class="form-control" id="voucherInfo" name="voucherInfo" type="text" />
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 290px;">
+    <section class="content" style="margin-top: 310px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">
@@ -127,10 +128,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <span class="caret"></span>
                                                         </button>
                                                         <ul class="dropdown-menu" role="menu">
-                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=10">10</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=20">20</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=30">30</a></li>
-                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=50">50</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-voucher?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-voucher?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-voucher?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-voucher?items=50">50</a></li>
                                                         </ul>
                                                     </span> 行每页
                                                 </span>
@@ -165,52 +166,48 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">合同</div>
+                                                                <div class="th-inner">凭证编码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">对方单位</div>
+                                                                <div class="th-inner">公司代码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">位置</div>
+                                                                <div class="th-inner">凭证类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 120px;">科目</div>
+                                                                <div class="th-inner">凭证日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">收付方向</div>
+                                                                <div class="th-inner">过帐日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">费用周期</div>
+                                                                <div class="th-inner">会计期间</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">账单结转期</div>
+                                                                <div class="th-inner">参考</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">不含税金额</div>
+                                                                <div class="th-inner">备选参考</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">含税金额</div>
+                                                                <div class="th-inner" style="width: 300px;">抬头文本</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">计划出账日期</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">最后缴款日期</div>
+                                                                <div class="th-inner">货币码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="balance"></tbody>
+                                                    <tbody id="voucher"></tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -226,6 +223,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     </section>
 </div>
 
-<?php include 'component/investment-contract-balance-create.php'; ?>
+<?php include 'component/investment-contract-voucher-create.php'; ?>
 
 <?php include 'footer.php'; ?>

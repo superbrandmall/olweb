@@ -580,7 +580,7 @@ function findFeeItemByContractType(type) {
     $.ajax({
         url: $.api.baseAdmin+"/api/finance/feeItem/findAllByContractType/"+type,
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -613,7 +613,7 @@ function findAllUsers() {
     $.ajax({
         url: $.api.baseAuth+"/api/user/findAll?page=0&size=500&sort=id,asc",
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -781,7 +781,7 @@ function findMainSigningBody(code){
     $.ajax({
         url: $.api.baseLotus+"/api/mall/lotus/findOneByCode?code="+code,
         type: "GET",
-        async: true,
+        async: false,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -813,7 +813,7 @@ function findTaxInfoByTaxCategories(cate) {
     $.ajax({
         url: $.api.baseAdmin+"/api/finance/taxInfo/findAllByTaxCategories/"+cate,
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -846,7 +846,7 @@ function findCommissionByDictTypeCode(dictTypeCode) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -880,7 +880,7 @@ function findDictCodeByDictTypeCode(dictTypeCode) {
         $.ajax({
             url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
             type: "GET",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             beforeSend: function(request) {
@@ -914,7 +914,7 @@ function updateDictByDictTypeCode(dictTypeCode, id, val) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: true,
+        async: false,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -954,7 +954,7 @@ function updateDictByDictTypeCodeAndVal(dictTypeCode, id, val) {
     $.ajax({
         url: $.api.baseAdmin+"/api/dict/findAllByDictTypeCode/"+dictTypeCode,
         type: "GET",
-        async: true,
+        async: false,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -1011,13 +1011,18 @@ function updateCompareFrequencyDropDown(){
 
 function updateCompareSecondFrequencyDropDown(){
     var iNum1;
-    var compareSecondFrequency = [['季','年'],['年'],['年']];
     $('#compareSecondFrequency').children().not(':eq(0)').remove();
-    iNum1 = $('#compareFirstFrequency').children('option:selected').index();
-    if(iNum1 != 0) {
-        if(iNum1 != 3) {
+    iNum1 = $('#compareFirstFrequency').children('option:selected').text();
+    if(iNum1 != '未选择') {
+        if(iNum1 == '月'){
             $("#compareSecond").prop('disabled',false);
-            var CompareSecondFrequency = compareSecondFrequency[iNum1-1];
+            var CompareSecondFrequency = ['季','年'];
+            for(var j=0;j<CompareSecondFrequency.length;j++){
+                $('#compareSecondFrequency').append('<option value='+CompareSecondFrequency[j]+'>'+CompareSecondFrequency[j]+'</option>');
+            }
+        } else if(iNum1 == '季'){
+            $("#compareSecond").prop('disabled',false);
+            var CompareSecondFrequency = ['年'];
             for(var j=0;j<CompareSecondFrequency.length;j++){
                 $('#compareSecondFrequency').append('<option value='+CompareSecondFrequency[j]+'>'+CompareSecondFrequency[j]+'</option>');
             }
@@ -2445,7 +2450,7 @@ function updateSelectTenantDropDown(data_count) {
                 return $.api.baseLotus+"/api/tenant/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2516,7 +2521,7 @@ function updateBrandNameDropDown(data_count) {
                 return $.api.baseLotus+"/api/brand/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2588,7 +2593,7 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                 return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2733,7 +2738,7 @@ function updateOldSelectStoreDropDownByMallCode(data_count,mall_code) {
                 return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -2897,7 +2902,7 @@ function findFloorDropDownByMallCode(mall_code) {
     $.ajax({
         url: $.api.baseLotus+"/api/floor/lotus/findAllByMallCode?mallCode="+mall_code,
         type: "GET",
-        async: true,
+        async: false,
         beforeSend: function(request) {
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
@@ -2990,7 +2995,7 @@ function findRoleYZJByParentId() {
     $.ajax({
         url: $.api.baseCommYZJ+"/api/role/yzj/findAllByParentId/?parentId=69bcb693-92c4-11ec-8a77-ecf4bbea1498",
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3050,7 +3055,7 @@ function findUserRoleYZJByKVCondition(mc){
                 "columnPatten": "",
                 "conditionOperator": "AND",
                 "operator": "in",
-                "value": "bizApprove;hqFinanceApprove;hqLegalApprove;hqCeoApprove"
+                "value": "bizApprove;financeApprove;legalApprove;hq_leasing_head;leasingPresident"
             }
         ]
     });
@@ -3064,7 +3069,7 @@ function findUserRoleYZJByKVCondition(mc){
         url: $.api.baseCommYZJ+"/api/vUserRole/yzj/findAllByKVCondition?page=0&size=100&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3084,7 +3089,7 @@ function findUserRoleYZJByKVCondition(mc){
                 if(response.data.content.length > 0){
                     $.each(response.data.content, function(i,v){
                         $('#'+v.roleId).find('label').find('b').text(v.roleName);
-                        updateUserRoleYZJDropDownByRoleId(v.roleId);
+                        updateUserRoleYZJDropDownByRoleId(v.roleId,mc);
                         var pathname = window.location.pathname;
                         if(v.mallCode != null && v.mallCode != '' && (pathname.indexOf('make-request') != -1 || pathname.indexOf('renew-request') != -1 || pathname.indexOf('terminate-request') != -1 || pathname.indexOf('modify-request') != -1)){
                             var newOption = new Option(v.name, v.openId, true, true);
@@ -3103,7 +3108,7 @@ function findProcessInstByBizId(){
     $.ajax({
         url: $.api.baseCommYZJ+"/api/process/inst/form/findAllByBizId?bizId="+getURLParameter('id'),
         type: "GET",
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
@@ -3150,7 +3155,7 @@ function findProcessInstByBizId(){
     }); 
 }
         
-function updateUserRoleYZJDropDownByRoleId(id) {
+function updateUserRoleYZJDropDownByRoleId(id,mc) {
     $('#'+id).find('select').select2({
         placeholder: '未选择',
         dropdownAutoWidth: true,
@@ -3186,7 +3191,7 @@ function updateUserRoleYZJDropDownByRoleId(id) {
                     var data;
                     return {
                         results: $.map(jsonData, function(item) {
-                            if(item.state == 1){
+                            if(item.state == 1 && (item.mallCode == mc || item.mallCode == null)){
                                 data = {
                                     id: item.openId,
                                     text: item.name
@@ -3538,7 +3543,7 @@ function calBackPush(prefix){
         sessionStorage.setItem("propertyCalcList",null);
         sessionStorage.setItem("deductCalcList",null);
         sessionStorage.setItem("promotionCalcList",null);
-        $("#"+prefix).find("tr").each(function(){
+        $("#"+prefix).find("tr").not('.old').each(function(){
             var tdArr = $(this).children();
             var amount = tdArr.eq(5).find('input').val();
             var startDate = tdArr.eq(2).find("input[id*='"+prefix+"StartDate_']").val();
@@ -3717,7 +3722,7 @@ function calBackPush(prefix){
                 url: $.api.baseLotus+"/api/rent/calc/"+path,
                 type: "POST",
                 data: JSON.stringify(map),
-                async: true,
+                async: false,
                 dataType: "json",
                 contentType: "application/json",
                 beforeSend: function(request) {
@@ -3917,7 +3922,7 @@ function updateRequestContractDropDown(id, data_count) {
                 return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -3995,7 +4000,7 @@ function updateSelectContractDropDown(data_count) {
                 return $.api.baseLotus+"/api/contract/lotus/findAllByFreeCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=contractNo,asc";
             },
             type: "POST",
-            async: true,
+            async: false,
             dataType: "json",
             contentType: "application/json",
             delay: 250,
@@ -4082,7 +4087,7 @@ function saveContractInfoForRequest(id,suffix) {
         url: $.api.baseLotus+"/api/rent/contract/form/saveContractInfoForRenew",
         type: "POST",
         data: JSON.stringify(map),
-        async: true,
+        async: false,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {

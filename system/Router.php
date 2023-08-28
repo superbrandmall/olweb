@@ -2,7 +2,6 @@
 
 $controller = null;
 $getTarget = isset($_GET['p']) ? $_GET['p'] : null;
-
 if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆家嘴内部汇报
     $target = array(
         'ljz-admin/home' => array(
@@ -464,6 +463,15 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
         'lotus-admin/contract-balance' => array(
             'url' => 'contract-balance.php'
         ),
+        'lotus-admin/accounting-voucher' => array(
+            'url' => 'accounting-voucher.php'
+        ),
+        'lotus-admin/accounting-tenant' => array(
+            'url' => 'accounting-tenant.php'
+        ),
+        'lotus-admin/accounting-contract' => array(
+            'url' => 'accounting-contract.php'
+        ),
         'lotus-admin/request-balance-preview' => array(
             'url' => 'request-balance-preview.php'
         ),
@@ -504,13 +512,13 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
 
     $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'contract-balance.php',
         'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-change.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 
-        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'mall-summary.php', 'requests.php', 
-        'request-summary.php', 'bi.php', 'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 
-        'dr-summary.php', 'floor-progress-console.php', 'product-category.php', 'make-request.php', 'make-request-main.php', 'request-detail.php', 'request-detail-main.php', 
-        'renew-summary.php', 'renew-request.php', 'renew-request-main.php', 'renew-detail.php', 'renew-detail-main.php', 'terminate-summary.php', 'terminate-request.php', 
-        'terminate-request-main.php', 'terminate-detail.php', 'terminate-detail-main.php', 'modify-summary.php', 'modify-request.php', 'modify-request-main.php', 'modify-detail.php', 
-        'modify-detail-main.php', 'todo.php', 'leasing-budget.php', 'budget-detail.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 
-        'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php', 'lotus-south.php', 'my-process.php', 'in-process.php', 'processes.php', 'process-detail.php','sign-request.php','process-request.php');
+        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'mall-summary.php', 'requests.php', 'request-summary.php', 
+        'bi.php', 'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 
+        'product-category.php', 'make-request.php', 'make-request-main.php', 'request-detail.php', 'request-detail-main.php', 'renew-summary.php', 'renew-request.php', 'renew-request-main.php', 
+        'renew-detail.php', 'renew-detail-main.php', 'terminate-summary.php', 'terminate-request.php', 'accounting-voucher.php', 'accounting-tenant.php', 'accounting-contract.php', 'terminate-request-main.php', 
+        'terminate-detail.php', 'terminate-detail-main.php', 'modify-summary.php', 'modify-request.php', 'modify-request-main.php', 'modify-detail.php', 'modify-detail-main.php', 'todo.php', 
+        'leasing-budget.php', 'budget-detail.php', 'dict.php', 'create-dict-type.php', 'create-dict-data.php', 'edit-dict-data.php', 'create-sales-data.php', 'edit-sales-data.php', 'sales-data-entries.php', 
+        'lotus-south.php', 'my-process.php', 'in-process.php', 'processes.php', 'process-detail.php','sign-request.php','process-request.php');
     
     if (in_array($page, $session_required)) {
         include_once 'models/lotus-admin/Session.class.php';
@@ -521,6 +529,9 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
     $target = array(
         'lotus-approval-opinion/home' => array(
             'url' => 'default.php'
+        ),
+        'lotus-approval-opinion/dr' => array(
+            'url' => 'dr.php'
         ),
         'lotus-approval-opinion/login' => array(
             'url' => 'login.php'
@@ -533,7 +544,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // 陆�
     if (array_key_exists($getTarget, $target)) {
         $page = $target[$getTarget]['url'];
     } else {
-        $page = 'default.php';
+        if(strpos($getTarget,'dr') == true){
+            $page = 'dr.php';
+        } else {
+            $page = 'default.php';
+        }
     }
 
     $session_required = array('login.php');

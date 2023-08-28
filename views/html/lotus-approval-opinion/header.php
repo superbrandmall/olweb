@@ -6,7 +6,9 @@
         session_destroy();
     }
     
-    session_start();include ('system/Router.php');
+    session_start();
+
+    include ('system/Router.php');
     $scripts = null;
 ?>
 <!DOCTYPE html>
@@ -42,11 +44,11 @@
             }
             
             #submitter a::before {
-                content: "Lotus招商负责人";
+                content: "提交人";
             }
             
             #Lotus_leasing_head a::before {
-                content: "提交人";
+                content: "Lotus招商负责人";
             }
             
             #finance_pre_check a::before {
@@ -57,20 +59,24 @@
                 content: "法务预审";
             }
             
-            #finance_check a::before {
+            #financeApprove a::before {
                 content: "财务负责人";
             }
             
-            #legal_check a::before {
+            #legalApprove a::before {
                 content: "法务负责人";
             }
             
-            #biz_head a::before {
+            #bizApprove a::before {
                 content: "业态负责人";
             }
             
             #hq_leasing_head a::before {
                 content: "总部招商负责人";
+            }
+            
+            #leasingPresident a::before {
+                content: "总裁及地区相关领导";
             }
             
             .step-progress > li > a:hover::before {

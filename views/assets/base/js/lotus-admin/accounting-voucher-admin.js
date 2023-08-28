@@ -1,19 +1,13 @@
-if($.cookie('checkBalance') &&  JSON.parse($.cookie('checkBalance')).length > 0){
-    $.checkBalance = JSON.parse($.cookie('checkBalance'));
+if($.cookie('checkVoucher') &&  JSON.parse($.cookie('checkVoucher')).length > 0){
+    $.checkVoucher = JSON.parse($.cookie('checkVoucher'));
 } else {
-    $.checkBalance = [];
+    $.checkVoucher = [];
 }
 
 if(getURLParameter('s')) {
     switch (getURLParameter('s')) {
         case "succeed":
             successMsg('00','保存成功！');
-            break;
-        case "voucher":
-            successMsg('00','凭证生成成功！');
-            break;
-        case "delete":
-            successMsg('00','删除成功！');
             break;
         default:
             break;
@@ -24,33 +18,31 @@ if(getURLParameter('s')) {
 }
 
 $(document).ready(function(){
-    updateSelectContractDropDown(50);
-    
-    if($.cookie('balanceMallVal') != null && $.cookie('balanceMallVal') != 'null'){
-        var newOption = new Option($.cookie('balanceMallTxt'), $.cookie('balanceMallVal'), true, true);
+    if($.cookie('voucherMallVal') != null && $.cookie('voucherMallVal') != 'null'){
+        var newOption = new Option($.cookie('voucherMallTxt'), $.cookie('voucherMallVal'), true, true);
         $('#department').append(newOption).trigger('change');
     }
     
-    if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null'){
-        var newOption = new Option($.cookie('balanceContractTxt'), $.cookie('balanceContractVal'), true, true);
-        $('#selectContract').append(newOption).trigger('change');
-    }
+//    if($.cookie('voucherContractVal') != null && $.cookie('voucherContractVal') != 'null'){
+//        var newOption = new Option($.cookie('voucherContractTxt'), $.cookie('voucherContractVal'), true, true);
+//        $('#selectContract').append(newOption).trigger('change');
+//    }
+//    
+//    if($.cookie('voucherSelectTenantVal') != null && $.cookie('voucherSelectTenantVal') != 'null'){
+//        var newOption = new Option($.cookie('voucherSelectTenantTxt'), $.cookie('voucherSelectTenantVal'), true, true);
+//        $('#selectTenant').append(newOption).trigger('change');
+//    }
+//    
+//    if($.cookie('voucherTermType') != null && $.cookie('voucherTermType') != 'null'){
+//        $('#termType').val($.cookie('voucherTermType')).trigger('change');
+//    }
+//    
+//    if($.cookie('voucherItemType') != null && $.cookie('voucherItemType') != 'null'){
+//        $('#itemType').val($.cookie('voucherItemType')).trigger('change');
+//    }
     
-    if($.cookie('balanceSelectTenantVal') != null && $.cookie('balanceSelectTenantVal') != 'null'){
-        var newOption = new Option($.cookie('balanceSelectTenantTxt'), $.cookie('balanceSelectTenantVal'), true, true);
-        $('#selectTenant').append(newOption).trigger('change');
-    }
-    
-    if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null'){
-        $('#termType').val($.cookie('balanceTermType')).trigger('change');
-    }
-    
-    if($.cookie('balanceItemType') != null && $.cookie('balanceItemType') != 'null'){
-        $('#itemType').val($.cookie('balanceItemType')).trigger('change');
-    }
-    
-    if($.cookie('balanceYearMonth') != null && $.cookie('balanceYearMonth') != 'null'){
-        $('#yearMonth').val($.cookie('balanceYearMonth'));
+    if($.cookie('voucherYearMonth') != null && $.cookie('voucherYearMonth') != 'null'){
+        $('#yearMonth').val($.cookie('voucherYearMonth'));
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -78,15 +70,20 @@ $(document).ready(function(){
             break;
     }
     
-    updateSelectTenantDropDown(50);
-    $('#termType, #itemType').show();
-    
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
     });
     
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
+    });
+    
+    $('#voucherDate').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayBtn': "linked",
+        'todayHighlight': true,
+        'autoclose': true
     });
     
     $('#yearMonth').datepicker({
@@ -100,35 +97,35 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#termType, #itemType').val('').trigger('change');
-        $('#selectContract, #selectTenant').empty(); 
-        $('#selectContract, #selectTenant').select2("val", "");
+//        $('#termType, #itemType').val('').trigger('change');
+//        $('#selectContract, #selectTenant').empty(); 
+//        $('#selectContract, #selectTenant').select2("val", "");
         $('#yearMonth').val('');
         
-        $.cookie('balanceTermType', null);
-        $.cookie('balanceItemType', null);
-        $.cookie('balanceContractTxt', null);
-        $.cookie('balanceContractVal', null);
-        $.cookie('balanceMallTxt', null);
-        $.cookie('balanceMallVal', null);
-        $.cookie('balanceYearMonth', null);
-        $.cookie('balanceSelectTenantVal', null);
-        $.cookie('balanceSelectTenantTxt', null);
+        $.cookie('voucherTermType', null);
+        $.cookie('voucherItemType', null);
+        $.cookie('voucherContractTxt', null);
+        $.cookie('voucherContractVal', null);
+        $.cookie('voucherMallTxt', null);
+        $.cookie('voucherMallVal', null);
+        $.cookie('voucherYearMonth', null);
+//        $.cookie('voucherSelectTenantVal', null);
+//        $.cookie('voucherSelectTenantTxt', null);
     })
     
     $('#search').click(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
-        $.cookie('balanceTermType', $('#termType').val());
-        $.cookie('balanceContractVal', $('#selectContract').val());
-        $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
-        $.cookie('balanceMallVal', $('#department').val());
-        $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
-        $.cookie('balanceYearMonth', $('#yearMonth').val());
-        $.cookie('balanceSelectTenantVal', $('#selectTenant').val());
-        $.cookie('balanceSelectTenantTxt', $('#selectTenant').text());
-        $.cookie('balanceItemType', $('#itemType').val());
-        $.checkBalance = [];
-        $.cookie('checkBalance','');
+        $.cookie('voucherTermType', $('#termType').val());
+        $.cookie('voucherContractVal', $('#selectContract').val());
+        $.cookie('voucherContractTxt', $('#select2-selectContract-container').attr('title'));
+        $.cookie('voucherMallVal', $('#department').val());
+        $.cookie('voucherMallTxt', $('#select2-department-container').attr('title'));
+        $.cookie('voucherYearMonth', $('#yearMonth').val());
+        $.cookie('voucherSelectTenantVal', $('#selectTenant').val());
+        $.cookie('voucherSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('voucherItemType', $('#itemType').val());
+        $.checkVoucher = [];
+        $.cookie('checkVoucher','');
         mandatoryCheck(1,items);
     })
 });
@@ -144,7 +141,7 @@ function mandatoryCheck(p,c){
     }
     
     if(flag == 1){
-        findBalanceByKVCondition(p,c);
+        findVoucherByKVCondition(p,c);
     } else {
         $('html, body').animate({
             scrollTop: $('.mandatory-error').offset().top - 195
@@ -152,7 +149,7 @@ function mandatoryCheck(p,c){
     }
 }
 
-function findBalanceByKVCondition(p,c) {
+function findVoucherByKVCondition(p,c) {
     var params = [];
     var param = {};
     var conditionGroups = [];
@@ -162,61 +159,61 @@ function findBalanceByKVCondition(p,c) {
         "columnPatten": "",
         "conditionOperator": "AND",
         "operator": "=",
-        "value": ($.cookie('balanceMallVal') != null ? $.cookie('balanceMallVal') : $('#department').val())
+        "value": ($.cookie('voucherMallVal') != null ? $.cookie('voucherMallVal') : $('#department').val())
     }];
     
-    if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null' && $.cookie('balanceContractVal') != ''){
-        params = [{
-            "columnName": "contractNo",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('balanceContractVal')
-        }]
-    }
-
-    if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
-        param = {
-            "columnName": "itemCode",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('balanceTermType')
-        }
-        params.push(param);
-    }
-
-    if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
-        param = {
-            "columnName": "yyyymm",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('balanceSelectTenantTxt') != null && $.cookie('balanceSelectTenantTxt') != '' && $.cookie('balanceSelectTenantTxt') != 'null'){
-        param = {
-            "columnName": "tenantCode",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('balanceSelectTenantTxt').split(' | ')[0]
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('balanceItemType') != null && $.cookie('balanceItemType') != 'null' && $.cookie('balanceItemType') != ''){
-        param = {
-            "columnName": "itemType",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('balanceItemType')
-        }
-        params.push(param);
-    }
+//    if($.cookie('voucherContractVal') != null && $.cookie('voucherContractVal') != 'null' && $.cookie('voucherContractVal') != ''){
+//        params = [{
+//            "columnName": "contractNo",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('voucherContractVal')
+//        }]
+//    }
+//
+//    if($.cookie('voucherTermType') != null && $.cookie('voucherTermType') != 'null' && $.cookie('voucherTermType') != ''){
+//        param = {
+//            "columnName": "itemCode",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('voucherTermType')
+//        }
+//        params.push(param);
+//    }
+//
+//    if($.cookie('voucherYearMonth') != null & $.cookie('voucherYearMonth') != 'null' && $.cookie('voucherYearMonth') != ''){
+//        param = {
+//            "columnName": "yyyymm",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('voucherYearMonth').split('-')[0]+$.cookie('voucherYearMonth').split('-')[1]
+//        }
+//        params.push(param);
+//    }
+//    
+//    if($.cookie('voucherSelectTenantTxt') != null && $.cookie('voucherSelectTenantTxt') != '' && $.cookie('voucherSelectTenantTxt') != 'null'){
+//        param = {
+//            "columnName": "tenantCode",
+//            "columnPatten": "",
+//            "operator": "AND",
+//            "value": $.cookie('voucherSelectTenantTxt').split(' | ')[0]
+//        }
+//        params.push(param);
+//    }
+//    
+//    if($.cookie('voucherItemType') != null && $.cookie('voucherItemType') != 'null' && $.cookie('voucherItemType') != ''){
+//        param = {
+//            "columnName": "itemType",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "=",
+//            "value": $.cookie('voucherItemType')
+//        }
+//        params.push(param);
+//    }
 
     var map = {
         "conditionGroups": conditionGroups,
@@ -224,7 +221,7 @@ function findBalanceByKVCondition(p,c) {
     }
                 
     $.ajax({
-        url: $.api.baseLotus+"/api/v/contract/settle/data/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseSap+"/api/sap/voucher/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: true,
@@ -246,75 +243,72 @@ function findBalanceByKVCondition(p,c) {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                $('#balance').html('');
+                $('#voucher').html('');
                 if(response.data.content.length > 0){
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
-                    sessionStorage.setItem("balance", JSON.stringify(response.data.content) );
+                    sessionStorage.setItem("voucher", JSON.stringify(response.data.content) );
                     
-                    var totalAmount = 0, totalTaxAmount = 0, checked = '';
+                    var checked = '';
                     $("#all").prop('checked',false);
-                    if($.checkBalance.length > 0){
-                        $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0); onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
+                    if($.checkVoucher.length > 0){
+                        $("#selected").html("已选<b class='text-red'>"+$.checkVoucher.length+"</b>条 <a href='javascript:void(0); onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-paper-plane icon-white'></i> <span class='hidden-xs'>传凭到SAP</span></a>");
                     } else {
                         $("#selected").text("");
                     }
-                    $.each(response.data.content, function(i,v){
-                        totalTaxAmount += v.taxAmount;
-                        totalAmount += v.amount;
-                        
-                        var tableSuffix = '';
-                        switch (v.tableName) {
-                            case "t_ol_contract_rent_calc_lotus_adjust":
-                                tableSuffix = 2;
-                                break;
-                            default:
-                                tableSuffix = 1;
-                                break;
-                        }
-                        
-                        
-                        if($.checkBalance && $.checkBalance.length > 0 && isInArray($.checkBalance,v.id+':'+tableSuffix) == 1) {
+                    $.each(response.data.content, function(i,v){  
+                        if($.checkVoucher && $.checkVoucher.length > 0 && isInArray($.checkVoucher,v.id) == 1) {
                             checked = ' checked';
                         } else {
                             checked = '';
                         }
+                        var voucherStatus;
+                        switch (v.voucherStatus) {
+                            case "1":
+                                voucherStatus = '<span class="badge badge-warning">未传凭</span>';
+                                break;
+                            case "2":
+                                voucherStatus = '<span class="badge badge-danger">传凭失败</span>';
+                                break;
+                            case "9":
+                                voucherStatus = '<span class="badge badge-success">传凭成功</span>';
+                                break;
+                            default:
+                                break;
+                        }
                         
-                        $('#balance').append('<tr>\n\
-                            <td><input type="checkbox" class="me-1" value="'+v.id+':'+tableSuffix+'"'+checked+'></td>\n\
-                            <td><a href=\'javascript:void(0);\' onclick=\'javascript: getBalanceDetail("'+v.id+'")\'>查看详情</a></td>\n\
-                            <td>'+v.mallName+'['+v.mallCode+']</td>\n\
-                            <td>'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
-                            <td>'+(v.itemType=='normal'?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
-                            <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
-                            <td>'+v.tenantName+'</td>\n\
-                            <td>'+(v.unitName || '')+'</td>\n\
-                            <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-                            <td>收</td>\n\
-                            <td>'+v.startDate+'～'+v.endDate+'</td>\n\
+                        $('#voucher').append('<tr>\n\
+                            <td><input type="checkbox" class="me-1" value="'+v.id+'"'+checked+'></td>\n\
+                            <td><a href=\'javascript:void(0);\' onclick=\'javascript: getVoucherDetail("'+v.id+'")\'>查看详情</a></td>\n\
+                            <td>'+$('#department').find('option:selected').text()+'</td>\n\
+                            <td>'+voucherStatus+'</td>\n\
+                            <td>'+(v.tableId!=null?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
+                            <td>'+v.voucherCode+'</td>\n\
+                            <td>'+v.companyCode+'</td>\n\
+                            <td>'+v.voucherType+'</td>\n\
+                            <td>'+v.voucherDate+'</td>\n\
+                            <td>'+v.voucherPostDate+'</td>\n\
                             <td>'+v.yyyymm+'</td>\n\
-                            <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-                            <td>'+accounting.formatNumber(v.amount)+'</td>\n\
-                            <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
-                            <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
+                            <td>'+v.messIdOs+'</td>\n\
+                            <td>'+v.optionMessIdOs+'</td>\n\
+                            <td>'+v.voucherInfo+'</td>\n\
+                            <td>'+v.currencyCode+'</td>\n\
                         </tr>');
                     })
-                    $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
-                    $('#totalAmount').text(accounting.formatNumber(totalAmount));
                     
                     $(".me-1").each(function(){
                         $(this).change(function(){
                             if($(this).is(':checked') == true) {
-                                $.checkBalance.push($(this).val());
-                                $.cookie('checkBalance',JSON.stringify($.checkBalance));
+                                $.checkVoucher.push($(this).val());
+                                $.cookie('checkVoucher',JSON.stringify($.checkVoucher));
                             } else {
-                                var pos = $.inArray($(this).val(),$.checkBalance);
-                                $.checkBalance.splice(pos,1);
-                                $.cookie('checkBalance',JSON.stringify($.checkBalance));
+                                var pos = $.inArray($(this).val(),$.checkVoucher);
+                                $.checkVoucher.splice(pos,1);
+                                $.cookie('checkVoucher',JSON.stringify($.checkVoucher));
                             }
-                            if($.checkBalance.length > 0){
-                                $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
+                            if($.checkVoucher.length > 0){
+                                $("#selected").html("已选<b class='text-red'>"+$.checkVoucher.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-paper-plane icon-white'></i> <span class='hidden-xs'>传凭到SAP</span></a>");
                             } else {
                                 $("#selected").text("");
                             }
@@ -327,8 +321,8 @@ function findBalanceByKVCondition(p,c) {
                                 if($(e).is(':checked') == false) {
                                     $(e).prop('checked',true);
                                     
-                                    $.checkBalance.push($(e).val());
-                                    $.cookie('checkBalance',JSON.stringify($.checkBalance));
+                                    $.checkVoucher.push($(e).val());
+                                    $.cookie('checkVoucher',JSON.stringify($.checkVoucher));
                                 }
                             })
                         } else {
@@ -336,14 +330,14 @@ function findBalanceByKVCondition(p,c) {
                                 if($(e).is(':checked') == true) {
                                     $(e).prop("checked",false);
 
-                                    var pos = $.inArray($(e).val(),$.checkBalance);
-                                    $.checkBalance.splice(pos,1);
-                                    $.cookie('checkBalance',JSON.stringify($.checkBalance));
+                                    var pos = $.inArray($(e).val(),$.checkVoucher);
+                                    $.checkVoucher.splice(pos,1);
+                                    $.cookie('checkVoucher',JSON.stringify($.checkVoucher));
                                 }
                             })
                         }
-                        if($.checkBalance.length > 0){
-                            $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条");
+                        if($.checkVoucher.length > 0){
+                            $("#selected").html("已选<b class='text-red'>"+$.checkVoucher.length+"</b>条");
                         } else {
                             $("#selected").text("");
                         }
@@ -355,7 +349,7 @@ function findBalanceByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#balance').html('<tr><td colspan="16" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#voucher').html('<tr><td colspan="15" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -364,20 +358,20 @@ function findBalanceByKVCondition(p,c) {
     })
 }
 
-function getBalanceDetail(id){
+function getVoucherDetail(id){
     $('.mandatory-error').remove();
-    $('#investment-contract-balance-create').modal('toggle');
+    $('#investment-contract-voucher-create').modal('toggle');
     
-    updateBalanceContractDropDown(50);
+    updateVoucherContractDropDown(50);
     
-    if($("#balanceDepartment").val() != '' && $("#balanceDepartment").val() != null){
-        updateBalanceStoreDropDownByMallCode(10,$("#balanceDepartment").val());
+    if($("#voucherDepartment").val() != '' && $("#voucherDepartment").val() != null){
+        updateVoucherStoreDropDownByMallCode(10,$("#voucherDepartment").val());
     }
-    $("#balanceDepartment").on('change',function(){
-        updateBalanceStoreDropDownByMallCode(10,$(this).val());
+    $("#voucherDepartment").on('change',function(){
+        updateVoucherStoreDropDownByMallCode(10,$(this).val());
     })
     
-    $('.input-daterange, #billingDate, #paymentDate').datepicker({
+    $('.input-daterange, #voucherDate, #voucherPostDate').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
@@ -385,7 +379,7 @@ function getBalanceDetail(id){
         'autoclose': true
     });
     
-    $('#balanceYearMonth').datepicker({
+    $('#voucherYearMonth').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm',
         'todayHighlight': true,
@@ -396,12 +390,12 @@ function getBalanceDetail(id){
     })
     
     $('#deleteCalc, #adjustRow').hide();
-    var balance = $.parseJSON(sessionStorage.getItem("balance"));
-    $('#balanceTermType, #taxRate').val('').trigger('change');
+    var voucher = $.parseJSON(sessionStorage.getItem("voucher"));
+    $('#voucherTermType, #taxRate').val('').trigger('change');
     $('#settleDay').val('25').trigger('change');
-    $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
-    $('#balanceStore, #balanceContract').empty(); 
-    $('#balanceDepartment, #balanceStore, #balanceContract').select2("val", "");
+    $('#startDate, #endDate, #voucherYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
+    $('#voucherStore, #voucherContract').empty(); 
+    $('#voucherDepartment, #voucherStore, #voucherContract').select2("val", "");
     $('#yearMonth, #remarks').val('');
     $('.modal-header h4').find('.badge').remove();
     $('.shield').remove();
@@ -414,7 +408,7 @@ function getBalanceDetail(id){
         }
     })
         
-    $.each(balance, function(i,v){
+    $.each(voucher, function(i,v){
         if(v.id == id){
             var temp;
                         
@@ -433,19 +427,19 @@ function getBalanceDetail(id){
             $('.modal-header h4').prepend(temp);
             
             temp = new Option(v.mallName+'['+v.mallCode+']',v.mallCode,true,true);
-            $('#balanceDepartment').append(temp).trigger('change');
+            $('#voucherDepartment').append(temp).trigger('change');
             
             temp = new Option((v.unitName +' | '+ v.area + '㎡'),v.shopCode+':::'+v.area, true, true);
-            $('#balanceStore').append(temp).trigger('change');
+            $('#voucherStore').append(temp).trigger('change');
             
             temp = new Option(v.tenantName+'['+v.contractNo+'] | '+v.brandName+' | '+v.unitName+' | '+v.startDate+'～'+v.endDate+' | V'+v.contractVersion, v.contractNo, true, true);
-            $('#balanceContract').append(temp).trigger('change');
+            $('#voucherContract').append(temp).trigger('change');
             
-            $('#balanceTermType').val(v.itemCode).trigger('change');
+            $('#voucherTermType').val(v.itemCode).trigger('change');
             $('#startDate').datepicker('update', v.startDate);
             $('#endDate').datepicker('update', v.endDate);
-            var balanceYearMonth = v.yyyymm.toString();
-            $('#balanceYearMonth').datepicker('update', balanceYearMonth.substr(0,4)+'-'+balanceYearMonth.substr(4,2));
+            var voucherYearMonth = v.yyyymm.toString();
+            $('#voucherYearMonth').datepicker('update', voucherYearMonth.substr(0,4)+'-'+voucherYearMonth.substr(4,2));
             $('#billingDate').datepicker('update',DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01'));
             $('#taxAmount').val(accounting.formatNumber(v.taxAmount));
             $('#amount').val(accounting.formatNumber(v.amount));
@@ -486,8 +480,8 @@ function isInArray(arr,val){
   return res;
 }
 
-function updateBalanceContractDropDown(data_count) {
-    $('#balanceContract').select2({
+function updateVoucherContractDropDown(data_count) {
+    $('#voucherContract').select2({
         placeholder: '输入合同编号',
         dropdownAutoWidth: true,
         allowClear: true,
@@ -553,8 +547,8 @@ function updateBalanceContractDropDown(data_count) {
     });
 }
 
-function updateBalanceStoreDropDownByMallCode(data_count,mall_code) {
-    var selectStore = $('#balanceStore');
+function updateVoucherStoreDropDownByMallCode(data_count,mall_code) {
+    var selectStore = $('#voucherStore');
     
     selectStore.select2({
         placeholder: '未选择',
@@ -695,24 +689,24 @@ function saveCheck(v) {
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
     
-    if($('#balanceDepartment').val() == null) {
+    if($('#voucherDepartment').val() == null) {
         flag = 0;
-        $('#balanceDepartment').parent().append(error);
+        $('#voucherDepartment').parent().append(error);
     }
     
-    if($('#balanceContract').val() == null) {
+    if($('#voucherContract').val() == null) {
         flag = 0;
-        $('#balanceContract').parent().append(error);
+        $('#voucherContract').parent().append(error);
     }
     
-    if($('#balanceStore').val() == null) {
+    if($('#voucherStore').val() == null) {
         flag = 0;
-        $('#balanceStore').parent().append(error);
+        $('#voucherStore').parent().append(error);
     }
     
-    if($('#balanceTermType').val() == '') {
+    if($('#voucherTermType').val() == '') {
         flag = 0;
-        $('#balanceTermType').parent().append(error);
+        $('#voucherTermType').parent().append(error);
     }
     
     if($('#startDate').val() == '') {
@@ -725,9 +719,9 @@ function saveCheck(v) {
         $('#endDate').parent().append(error);
     }
     
-    if($('#balanceYearMonth').val() == '') {
+    if($('#voucherYearMonth').val() == '') {
         flag = 0;
-        $('#balanceYearMonth').parent().append(error);
+        $('#voucherYearMonth').parent().append(error);
     }
     
     if($('#billingDate').val() == '') {
@@ -799,23 +793,23 @@ function editCalc(calc) {
         
         var map = JSON.parse(calc);
         map.amount = numberWithoutCommas($('#amount').val());
-        map.area = $('#balanceStore').val().split(':::')[1];       
-        map.contractNo = $('#balanceContract').find('option:selected').val(); 
-        map.contractVersion = $('#balanceContract').find('option:selected').text().split(' | ')[4].substr(1,1);
+        map.area = $('#voucherStore').val().split(':::')[1];       
+        map.contractNo = $('#voucherContract').find('option:selected').val(); 
+        map.contractVersion = $('#voucherContract').find('option:selected').text().split(' | ')[4].substr(1,1);
         map.endDate = $('#endDate').val();  
-        map.itemCode = $('#balanceTermType').find('option:selected').val();       
-        map.itemName = $('#balanceTermType').find('option:selected').text();
+        map.itemCode = $('#voucherTermType').find('option:selected').val();       
+        map.itemName = $('#voucherTermType').find('option:selected').text();
         map.remarks = $('#remarks').val();
         map.rentAmount = numberWithoutCommas($('#rentAmount').val());
         map.settleDay = $('#settleDay').val();      
-        map.shopCode = $('#balanceStore').val().split(':::')[0];
+        map.shopCode = $('#voucherStore').val().split(':::')[0];
         map.startDate = $('#startDate').val();    
         map.taxAmount = numberWithoutCommas($('#taxAmount').val());
         map.taxCode = $('#taxRate').find('option:selected').text();
         map.taxRate = parseFloat($('#taxRate').find('option:selected').val() / 100).toFixed(5),
         map.taxRentAmount = numberWithoutCommas($('#taxRentAmount').val());
         map.updateOpenId = openId;      
-        map.yyyymm =  $('#balanceYearMonth').val().split('-')[0]+$('#balanceYearMonth').val().split('-')[1] ;
+        map.yyyymm =  $('#voucherYearMonth').val().split('-')[0]+$('#voucherYearMonth').val().split('-')[1] ;
         
         if(map.creatorOpenId != openId || map.itemType == 'normal' || map.voucherFlag == 1){
             alertMsg('9999','常规结算数据无法修改。');
@@ -845,7 +839,7 @@ function editCalc(calc) {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
                     
-                    window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
+                    window.location.href = '/lotus-admin/contract-voucher?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }
@@ -854,17 +848,17 @@ function editCalc(calc) {
     })
 }
 
-function createBalanceDetail(){
+function createVoucherDetail(){
     $('.mandatory-error,.shield').remove();
-    $('#investment-contract-balance-create').modal('toggle');
+    $('#investment-contract-voucher-create').modal('toggle');
 
-    updateBalanceContractDropDown(50);
+    updateVoucherContractDropDown(50);
     
-    if($("#balanceDepartment").val() != '' && $("#balanceDepartment").val() != null){
-        updateBalanceStoreDropDownByMallCode(10,$("#balanceDepartment").val());
+    if($("#voucherDepartment").val() != '' && $("#voucherDepartment").val() != null){
+        updateVoucherStoreDropDownByMallCode(10,$("#voucherDepartment").val());
     }
-    $("#balanceDepartment").on('change',function(){
-        updateBalanceStoreDropDownByMallCode(10,$(this).val());
+    $("#voucherDepartment").on('change',function(){
+        updateVoucherStoreDropDownByMallCode(10,$(this).val());
     })
     
     $('.input-daterange, #billingDate, #paymentDate').datepicker({
@@ -875,7 +869,7 @@ function createBalanceDetail(){
         'autoclose': true
     });
     
-    $('#balanceYearMonth').datepicker({
+    $('#voucherYearMonth').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm',
         'todayHighlight': true,
@@ -886,11 +880,11 @@ function createBalanceDetail(){
     })
     
     $('#deleteCalc, #adjustRow').hide();
-    $('#balanceTermType, #taxRate').val('').trigger('change');
+    $('#voucherTermType, #taxRate').val('').trigger('change');
     $('#settleDay').val('25').trigger('change');
-    $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
-    $('#balanceStore, #balanceContract').empty(); 
-    $('#balanceDepartment, #balanceStore, #balanceContract').select2("val", "");
+    $('#startDate, #endDate, #voucherYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
+    $('#voucherStore, #voucherContract').empty(); 
+    $('#voucherDepartment, #voucherStore, #voucherContract').select2("val", "");
     $('#yearMonth, #remarks').val('');
     $('.modal-header h4').find('.badge').remove();
     
@@ -910,7 +904,7 @@ function createBalanceDetail(){
 }
 
 function saveCalc() {
-    Ewin.confirm({ message: "确定要保存该条结算数据吗？" }).on(function (e) {
+    Ewin.confirm({ message: "确定要保存该条凭证吗？" }).on(function (e) {
         if (!e) {
             return;
         }
@@ -925,15 +919,15 @@ function saveCalc() {
         
         var map = {
             "amount": numberWithoutCommas($('#amount').val()),
-            "area": $('#balanceStore').val().split(':::')[1],
-            "contractNo": $('#balanceContract').find('option:selected').val(),
-            "contractVersion": $('#balanceContract').find('option:selected').text().split(' | ')[4].substr(1,1),
+            "area": $('#voucherStore').val().split(':::')[1],
+            "contractNo": $('#voucherContract').find('option:selected').val(),
+            "contractVersion": $('#voucherContract').find('option:selected').text().split(' | ')[4].substr(1,1),
             "creatorOpenId": openId,
             "endDate": $('#endDate').val(),
             "invoiceFlag": 1,
             "isOverdueFlag": 1,
-            "itemCode": $('#balanceTermType').find('option:selected').val(),       
-            "itemName": $('#balanceTermType').find('option:selected').text(),
+            "itemCode": $('#voucherTermType').find('option:selected').val(),       
+            "itemName": $('#voucherTermType').find('option:selected').text(),
             "itemType": "adjust",
             "overdueInvoiceFlag": 1,
             "overdueRate": 0.00100,
@@ -945,14 +939,13 @@ function saveCalc() {
             "settleDay": $('#settleDay').val(),
             "settlePeriodCode": "M",
             "settlePeriodName": "月",
-            "shopCode": $('#balanceStore').val().split(':::')[0],
+            "shopCode": $('#voucherStore').val().split(':::')[0],
             "startDate": $('#startDate').val(),
             "taxAmount": numberWithoutCommas($('#taxAmount').val()),
             "taxCode": $('#taxRate').find('option:selected').text(),
             "taxRate": parseFloat($('#taxRate').find('option:selected').val() / 100).toFixed(5),
             "taxRentAmount": numberWithoutCommas($('#taxRentAmount').val()),
-            "updateOpenId": openId,
-            "yyyymm":  $('#balanceYearMonth').val().split('-')[0]+$('#balanceYearMonth').val().split('-')[1]
+            "yyyymm":  $('#voucherYearMonth').val().split('-')[0]+$('#voucherYearMonth').val().split('-')[1]
         }
         
         $.ajax({
@@ -978,7 +971,7 @@ function saveCalc() {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
                     
-                    window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
+                    window.location.href = '/lotus-admin/contract-voucher?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }
@@ -988,77 +981,12 @@ function saveCalc() {
 }
 
 function disp_confirm() {
-    if($.checkBalance.length > 0) {
-        var r = confirm("确定要将选中的"+$.checkBalance.length+"条结算数据生成凭证吗");
+    if($.checkVoucher.length > 0) {
+        var r = confirm("确定要将选中的"+$.checkVoucher.length+"条凭证传到SAP吗");
         if (r == true) {
-            generateVoucherEntryBySelect();
+            //传凭
         }
     } else {
-         alertMsg('9999','没有选中任何结算数据！');
+         alertMsg('9999','没有选中任何凭证！');
     }
-}
-
-function generateVoucherEntryBySelect() {
-    var detailList = [];
-    var detail = {};
-    var tableName = '';
-    $.each($.checkBalance, function(i,v){
-        switch (v.split(':')[1]) {
-            case "2":
-                tableName = 't_ol_contract_rent_calc_lotus_adjust';
-                break;
-            default:
-                tableName = 't_ol_contract_rent_calc_lotus';
-                break;
-        }
-        detail = {
-            "id": v.split(':')[0],
-            "tableName": tableName
-        }
-        detailList.push(detail);
-    })
-    
-    var openId = 'admin';
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE220301000001'){
-            openId = v.moduleName;
-            return false;
-        }
-    })
-    
-    var map = {
-        "detailList": detailList,
-        "updateOpenId": openId
-    }
-
-    $.ajax({
-        url: $.api.baseLotus+"/api/v/contract/settle/data/generateVoucherEntryBySelect",
-        type: "POST",
-        data: JSON.stringify(map),
-        async: false,
-        dataType: "json",
-        contentType: "application/json",
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        complete: function(){},
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                $.cookie('checkBalance','');
-                $.checkBalance = [];
-                
-                //window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=voucher';
-            }
-        }
-    });
 }

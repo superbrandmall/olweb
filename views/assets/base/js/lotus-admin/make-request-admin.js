@@ -82,12 +82,6 @@ $(document).ready(function(){
         $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
     })
     
-    if(!sessionStorage.getItem('roleYZJ') || sessionStorage.getItem('roleYZJ') == null || sessionStorage.getItem('roleYZJ') == ''){
-        findRoleYZJByParentId();
-    } else {
-        updateRoleYZJLabel();
-    }
-    
     // 初始化
     $('#investmentContractModelMallSelect').val($.cookie('mallSelected').split(':::')[0]+'['+$.cookie('mallSelected').split(':::')[1]+']');
     
@@ -104,6 +98,7 @@ $(document).ready(function(){
     updateDictDropDownByDictTypeCode('PAYMENT_MODE','paymentMode',$.api.paymentMode[0],$.api.paymentMode[1]); // 支付方式
     updateDictDropDownByDictTypeCode('CONTRACT_TEMPLATE','contractTemplate',$.api.contractTemplate[0],$.api.contractTemplate[1]); // 合同模版
     updateSelectTenantDropDown(50);
+    findUserRoleYZJByKVCondition($.cookie('mallSelected').split(':::')[1]);
     updateSelectStoreDropDownByMallCode(10,$.cookie('mallSelected').split(':::')[1]);
     updateOldSelectStoreDropDownByMallCode(10,$.cookie('mallSelected').split(':::')[1]);
     updateBrandNameDropDown(10);
@@ -261,7 +256,7 @@ $(document).ready(function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
     
-    $('#8d2794df-c15f-4d68-9f8e-8b847f6191db').on('change',function(){
+    $('#bizApprove').on('change',function(){
         if($(this).find('option:selected').val() != null) {
             $('.step li:nth-child(5)').addClass('active');
         } else {
@@ -277,12 +272,13 @@ $(document).ready(function(){
         }
     })
     
-    appendLotusLeasingHead();
-    
-    $('#Lotus_leasing_head select').val('').select2({
-        placeholder: "未选择",
-        allowClear: true
-    });
+    $('#leasingPresident').on('change',function(){
+        if($(this).find('option:selected').val() != null) {
+            $('.step li:nth-child(7)').addClass('active');
+        } else {
+            $('.step li:nth-child(7)').removeClass('active');
+        }
+    })
 })
 
 function findFilesByBizId(id) {
@@ -703,14 +699,14 @@ function submitCheck() {
         $('#brandAuthorization_0').parent().append(error);
     }
     
-    if($('#66bfb352-903b-490a-a25b-4c554bc16756 select').val() == null) {
+    if($('#legalApprove select').val() == null) {
         flag = 0;
-        $('#66bfb352-903b-490a-a25b-4c554bc16756 select').parent().append(error);
+        $('#legalApprove select').parent().append(error);
     }
     
-    if($('#4381cd4e-b984-4641-8a99-15242faae0eb select').val() == null) {
+    if($('#financeApprove select').val() == null) {
         flag = 0;
-        $('#4381cd4e-b984-4641-8a99-15242faae0eb select').parent().append(error);
+        $('#financeApprove select').parent().append(error);
     }
     
     if($('#finance_pre_check select').val() == null) {
@@ -735,10 +731,15 @@ function submitCheck() {
             flag = 0;
             $('#hq_leasing_head select').parent().append(error);
         }
-    } else {
-        if($('#hq_leasing_head select').val() == null && $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').val() == null) {
+        
+        if($('#leasingPresident select').val() == null) {
             flag = 0;
-            $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').parent().append(error);
+            $('#leasingPresident select').parent().append(error);
+        }
+    } else {
+        if($('#hq_leasing_head select').val() == null && $('#bizApprove select').val() == null) {
+            flag = 0;
+            $('#bizApprove select').parent().append(error);
         }
     }
     
@@ -1222,34 +1223,38 @@ function saveContractForm(s) {
                 var processApprove = {};
                 processApprove.activityCode = v.dictCode;
                 processApprove.activityName = v.dictName;
-                switch (v.dictName) {
-                    case "财务负责人":
-                        processApprove.approveName = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#66bfb352-903b-490a-a25b-4c554bc16756 select').find('option:selected').val();
+                switch (v.dictCode) {
+                    case "2":
+                        processApprove.approveName = $('#financeApprove select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#financeApprove select').find('option:selected').val();
                         break;
-                    case "业态负责人审批":
-                        processApprove.approveName = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#8d2794df-c15f-4d68-9f8e-8b847f6191db select').find('option:selected').val();
+                    case "3":
+                        processApprove.approveName = $('#bizApprove select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#bizApprove select').find('option:selected').val();
                         break;
-                    case "法务负责人":
-                        processApprove.approveName = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').text();
-                        processApprove.approveOpenId = $('#4381cd4e-b984-4641-8a99-15242faae0eb select').find('option:selected').val();
+                    case "4":
+                        processApprove.approveName = $('#legalApprove select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#legalApprove select').find('option:selected').val();
                         break;
-                    case "财务预审":
+                    case "5":
                         processApprove.approveName = $('#finance_pre_check select').find('option:selected').text();
                         processApprove.approveOpenId = $('#finance_pre_check select').find('option:selected').val();
                         break;
-                    case "法务预审":
+                    case "6":
                         processApprove.approveName = $('#legal_pre_check select').find('option:selected').text();
                         processApprove.approveOpenId = $('#legal_pre_check select').find('option:selected').val();
                         break;
-                    case "Lotus招商负责人":
+                    case "8":
                         processApprove.approveName = $('#Lotus_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#Lotus_leasing_head select').find('option:selected').val();
                         break;
-                    case "总部招商负责人":
+                    case "7":
                         processApprove.approveName = $('#hq_leasing_head select').find('option:selected').text();
                         processApprove.approveOpenId = $('#hq_leasing_head select').find('option:selected').val();
+                        break;
+                    case "10":
+                        processApprove.approveName = $('#leasingPresident select').find('option:selected').text();
+                        processApprove.approveOpenId = $('#leasingPresident select').find('option:selected').val();
                         break;
                     default:
                         break;
