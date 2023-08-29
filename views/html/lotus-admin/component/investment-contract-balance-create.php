@@ -40,7 +40,7 @@
                                 <label for="balanceTermType" class="col-md-4 control-label" style="text-align: right;">科目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="balanceTermType" name="balanceTermType" style="width: 100%;">
-                                        <option value=""></option>
+                                        <option value="">未选择</option>
                                         <option value="B011">固定租金</option>
                                         <option value="B021">物业管理费</option>
                                         <option value="G011">固定推广费</option>
@@ -153,7 +153,7 @@
                                 <label for="taxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
                                     <select class="select2" id="taxRate" style="width: 100%">
-                                        <option value=""></option>
+                                        <option value="">未选择</option>
                                         <option value="0">V00</option>
                                         <option value="5">V05</option>
                                         <option value="6">V06</option>

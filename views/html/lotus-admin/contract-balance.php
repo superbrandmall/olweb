@@ -30,7 +30,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="department" class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg" style="vertical-align: top;">*</span> 项目</label>
+                            <label for="department" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
                             </div>

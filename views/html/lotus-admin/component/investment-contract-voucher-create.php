@@ -11,9 +11,38 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="voucherDepartment" class="col-md-4 control-label" style="text-align: right;">项目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <select class="select2 mallCode" id="voucherDepartment" style="width: 100%"></select>
+                                    <input class="form-control" id="voucherCode" type="text" />                                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherCompanyCode" class="col-md-4 control-label" style="text-align: right;">公司代码 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12">
+                                    <input class="form-control" id="voucherCompanyCode" type="text" />                                                
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherType" class="col-md-4 control-label" style="text-align: right;">凭证类型 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="voucherType" name="voucherType" style="width: 100%;">
+                                        <option value="">未选择</option>
+                                        <option value="Z3">Z3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherDepartment" class="col-md-4 control-label" style="text-align: right;">项目编码 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12">
+                                    <select class="select2" id="voucherDepartment" style="width: 100%"></select>
                                 </div>
                             </div>
                         </div>
@@ -27,41 +56,17 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="voucherStore" class="col-md-4 control-label" style="text-align: right;">位置 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherStartDate" class="col-md-4 control-label" style="text-align: right;">费用周期 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="voucherStore" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="taxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="taxRate" style="width: 100%">
-                                        <option value=""></option>
-                                        <option value="0">V00</option>
-                                        <option value="5">V05</option>
-                                        <option value="6">V06</option>
-                                        <option value="9">V09</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="selectTenant" class="col-md-4 control-label" style="text-align: right;">商户 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select id="selectTenant" class="select2" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="voucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本</label>
-                                <div class="col-md-8 col-sm-12">
-                                    <input class="form-control" id="voucherInfo" type="text" />                                                
+                                    <div class="input-daterange input-group">
+                                        <input type="text" class="form-control" id="voucherStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                        <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="voucherEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +77,7 @@
                                 <label for="voucherTermType" class="col-md-4 control-label" style="text-align: right;">科目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="voucherTermType" name="voucherTermType" style="width: 100%;">
-                                        <option value=""></option>
+                                        <option value="">未选择</option>
                                         <option value="B011">固定租金</option>
                                         <option value="B021">物业管理费</option>
                                         <option value="G011">固定推广费</option>
@@ -83,27 +88,61 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="startDate" class="col-md-4 control-label" style="text-align: right;">费用周期 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherTransactionType" class="col-md-4 control-label" style="text-align: right;">TTy <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                    <select class="select2" id="voucherTransactionType" name="voucherTransactionType" style="width: 100%;">
+                                        <option value="">未选择</option>
+                                        <option value="Z09">Z09</option>
+                                        <option value="Z10">Z10</option>
+                                        <option value="Z11">Z11</option>
+                                        <option value="F02">F02</option>
+                                        <option value="Y77">Y77</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <div class="input-daterange input-group">
-                                        <input type="text" class="form-control" id="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                        <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" id="endDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
-                                            <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                        </div>
+                                    <input class="form-control" id="voucherInfo" type="text" />                                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherTaxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12">
+                                    <select class="select2" id="voucherTaxRate" style="width: 100%">
+                                        <option value="">未选择</option>
+                                        <option value="0">V00</option>
+                                        <option value="5">V05</option>
+                                        <option value="6">V06</option>
+                                        <option value="9">V09</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="voucherAmount" class="col-md-4 control-label" style="text-align: right;">含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="input-group">
+                                        <input class="form-control money" id="voucherAmount" type="text" style="border-right: none;" />                                                
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="voucherYearMonth" class="col-md-4 control-label" style="text-align: right;">账单结转期 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherTaxAmount" class="col-md-4 control-label" style="text-align: right;">不含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
                                     <div class="input-group">
-                                        <input class="form-control date-picker" id="voucherYearMonth" name="voucherYearMonth" type="text" data-plugin="voucherYearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                        <input class="form-control money" id="voucherTaxAmount" type="text" style="border-right: none;" />                                                
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
                                     </div>
                                 </div>
                             </div>
@@ -134,46 +173,11 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="amount" class="col-md-4 control-label" style="text-align: right;">含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherYearMonth" class="col-md-4 control-label" style="text-align: right;">账单结转期 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
                                     <div class="input-group">
-                                        <input class="form-control money" id="amount" type="text" style="border-right: none;" />                                                
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="taxAmount" class="col-md-4 control-label" style="text-align: right;">不含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control money" id="taxAmount" type="text" style="border-right: none;" />                                                
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="rentAmount" class="col-md-4 control-label" style="text-align: right;">含税单价 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control money" id="rentAmount" type="text" style="border-right: none;" />                                                
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="taxRentAmount" class="col-md-4 control-label" style="text-align: right;">不含税单价 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control money" id="taxRentAmount" type="text" style="border-right: none;" />                                                
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;">元</span>
+                                        <input class="form-control date-picker" id="voucherYearMonth" name="voucherYearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                     </div>
                                 </div>
                             </div>
@@ -187,6 +191,71 @@
                                     <button type="button" class="btn btn-info btn-sm" id="saveCalc"><i class="fa fa-save icon-white"></i> <b class="hidden-xs">保存</span></b>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" style="margin-left: 10px;"><i class="fa fa-times icon-white"></i> <b class="hidden-xs">取消</b></button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="bootstrap-table">
+                                    <div class="fixed-table-container">
+                                        <div class="fixed-table-body">
+                                            <table class="table table-striped snipe-table table-responsive" style="font-size: 10px;">
+                                                <thead id="assetsListingTable-sticky-header">
+                                                    <tr>
+                                                        <th>
+                                                            <div class="th-inner">行</div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">D <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- debitCreditFlag -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div>
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">总账科目 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- subjectCode -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">本币 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- localCurrencyCode -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">本币金额 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- localAmount -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">文本 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- termInfo -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">利润中心 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- profitCenter -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">税码 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- taxCode -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">计息逾期日期 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- interestOverDate -->
+                                                        </th>
+                                                        <th>
+                                                            <div class="th-inner">支付逾期日期 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="fht-cell"></div><!-- paymentOverDate -->
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="fixedRent"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
                     </div>

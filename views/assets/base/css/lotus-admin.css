@@ -263,6 +263,12 @@ tbody .money {
       }
 }
 
+@media (max-width:991px) {
+    .sub-header {
+        overflow: auto;
+    }
+}
+
 /***** Approval Process *****/
 .step {
   counter-reset: flag;

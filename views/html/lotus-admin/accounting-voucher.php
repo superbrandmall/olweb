@@ -38,25 +38,25 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="department" class="col-md-4 control-label" style="text-align: right;"><span class="btn-box-tool-lg" style="vertical-align: top;">*</span> 项目</label>
+                            <label for="accountingDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
+                                <select class="select2 mallCode" id="accountingDepartment" name="accountingDepartment" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountVoucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码</label>
+                            <label for="accountingVoucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="accountVoucherCode" name="accountVoucherCode" type="text" />
+                                <input class="form-control" id="accountingVoucherCode" name="accountingVoucherCode" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="messIdOs" class="col-md-4 control-label" style="text-align: right;">参考</label>
+                            <label for="accountingMessIdOs" class="col-md-4 control-label" style="text-align: right;">参考</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="messIdOs" name="messIdOs" type="text" />
+                                <input class="form-control" id="accountingMessIdOs" name="accountingMessIdOs" type="text" />
                             </div>
                         </div>
                     </div>
@@ -64,10 +64,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="voucherDate" class="col-md-4 control-label" style="text-align: right;">凭证日期</label>
+                            <label for="accountingVoucherDate" class="col-md-4 control-label" style="text-align: right;">凭证日期</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <div class="input-group">
-                                    <input class="form-control date-picker" id="voucherDate" name="voucherDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                    <input class="form-control date-picker" id="accountingVoucherDate" name="accountingVoucherDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
@@ -75,10 +75,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="yearMonth" class="col-md-4 control-label" style="text-align: right;">会计期间</label>
+                            <label for="accountingYearMonth" class="col-md-4 control-label" style="text-align: right;">会计期间</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <div class="input-group">
-                                    <input class="form-control date-picker" id="yearMonth" name="yearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                    <input class="form-control date-picker" id="accountingYearMonth" name="accountingYearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                 </div>
                             </div>
@@ -86,9 +86,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="voucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本</label>
+                            <label for="accountingVoucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="voucherInfo" name="voucherInfo" type="text" />
+                                <input class="form-control" id="accountingVoucherInfo" name="accountingVoucherInfo" type="text" />
                             </div>
                         </div>
                     </div>
