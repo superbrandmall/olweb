@@ -36,6 +36,8 @@ $(document).ready(function(){
         'autoclose': true
     })
     
+    findGlConfig();
+    
     if($.cookie('accountingVoucherMallVal') != null && $.cookie('accountingVoucherMallVal') != 'null'){
         var newOption = new Option($.cookie('accountingVoucherMallTxt'), $.cookie('accountingVoucherMallVal'), true, true);
         $('#accountingDepartment').append(newOption).trigger('change');
@@ -96,13 +98,13 @@ $(document).ready(function(){
     
     
     $('#clear').click(function(){
-        $.cookie('balanceMallTxt', null);
-        $.cookie('balanceMallVal', null);
-        $.cookie('voucherCode', '');
-        $.cookie('messIdOs', '');
-        $.cookie('voucherDate', null);
-        $.cookie('voucherYearMonth', null);
-        $.cookie('voucherInfo', '');
+        $.cookie('accountingVoucherMallTxt', null);
+        $.cookie('accountingVoucherMallVal', null);
+        $.cookie('accountingVoucherCode', '');
+        $.cookie('accountingVoucherMessIdOs', '');
+        $.cookie('accountingVoucherVoucherDate', null);
+        $.cookie('accountingYearMonth', null);
+        $.cookie('accountingVoucherInfo', '');
         
         $('#accountingDepartment').val('').trigger('change');
         $('#accountingVoucherCode').val('');
@@ -379,8 +381,8 @@ function getVoucherDetail(id){
     
     $('#deleteVoucher, #adjustRow').hide();
     var voucher = $.parseJSON(sessionStorage.getItem("voucher"));
-    $('#voucherType, #voucherTransactionType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
-    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherCompanyCode, #voucherDate','#voucherYearMonth, #voucherInfo').val('');
+    $('#voucherType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
+    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
     $('.modal-header h4').find('.badge').remove();
@@ -401,24 +403,24 @@ function getVoucherDetail(id){
             var temp;
             
             if(v.tableId != null){
-                temp = '<span class="badge badge-info">常规</span>';
+                temp = '<span class="badge badge-info" style="vertical-align: top; margin-right: 10px;">常规</span>';
             } else {
-                temp = '<span class="badge badge-danger">调整</span>'
+                temp = '<span class="badge badge-danger" style="vertical-align: top; margin-right: 10px;">调整</span>'
             }
             $('.modal-header h4').prepend(temp);
             
             switch (v.voucherStatus) {
                 case "1":
-                    temp = '<span class="badge badge-warning">未传凭</span>';
+                    temp = '<span class="badge badge-warning" style="vertical-align: top; margin-right: 10px;">未传凭</span>';
                     break;
                 case "2":
-                    temp = '<span class="badge badge-danger">传凭失败</span>';
+                    temp = '<span class="badge badge-danger" style="vertical-align: top; margin-right: 10px;">传凭失败</span>';
                     break;
                 case "8":
-                    temp = '<span class="badge badge-danger">传凭作废</span>';
+                    temp = '<span class="badge badge-danger" style="vertical-align: top; margin-right: 10px;">传凭作废</span>';
                     break;
                 case "9":
-                    temp = '<span class="badge badge-success">传凭成功</span>';
+                    temp = '<span class="badge badge-success" style="vertical-align: top; margin-right: 10px;">传凭成功</span>';
                     break;
                 default:
                     break;
@@ -426,20 +428,29 @@ function getVoucherDetail(id){
             $('.modal-header h4').prepend(temp);
             
             $('#voucherCode').val(v.voucherCode);
-            $('#voucherCompanyCode').val(v.companyCode);
             $('#voucherType').val(v.voucherType).trigger('change');
             
-            temp = new Option(v.mallCode,v.mallCode,true,true);
+            if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
+                var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
+                var mallName = '';
+                $.each(malls, function(j,w) {
+                    if(v.mallCode == w.code){
+                        mallName = w.mallName;
+                        return false;
+                    }
+                })
+            }
+            
+            temp = new Option(mallName+'['+v.mallCode+']',v.mallCode+':::'+v.companyCode,true,true);
             $('#voucherDepartment').append(temp).trigger('change');
             
-            temp = new Option(v.contractNo+' | '+(v.contractName || '')+' | '+v.unitName+' | V'+v.contractVersion, v.contractNo, true, true);
+            temp = new Option(v.tenantName + '[' + v.contractNo + '] | '+(v.brandName || '')+' | '+v.unitName+' | V'+v.contractVersion, v.contractNo, true, true);
             $('#voucherContract').append(temp).trigger('change');
             
             $('#voucherStartDate').datepicker('update', v.startDate);
             $('#voucherEndDate').datepicker('update', v.endDate);
             
             $('#voucherTermType').val(v.itemCode).trigger('change');
-            $('#voucherTransactionType').val(v.transactionType).trigger('change');
             $('#voucherInfo').val(v.voucherInfo);
             
             $('#voucherTaxRate').val(v.taxRate).trigger('change');
@@ -451,6 +462,17 @@ function getVoucherDetail(id){
             
             var voucherYearMonth = v.yyyymm.toString();
             $('#voucherYearMonth').datepicker('update', voucherYearMonth.substr(0,4)+'-'+voucherYearMonth.substr(4,2));
+            
+            if(v.voucherItemList.length > 0){
+                var rowNumberOrder = v.voucherItemList.sort(
+                    function(a, b) {
+                        return (a.rowNumber - b.rowNumber);
+                    }
+                );
+                $.each(rowNumberOrder, function(i, v) {
+                    createRowSapGLVoucherItem();
+                });
+            }
 
             if(v.creatorOpenId == openId && v.tableId == null && (v.voucherStatus == 1 || v.voucherStatus == 2)){
                 $('#deleteVoucher, #adjustRow').show();
@@ -491,15 +513,15 @@ function updateVoucherMallDropDown() {
                 $.each(JSON.parse($.cookie('userModules')), function(j,w) {
                     if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
                         data = {
-                            id: item.code,
-                            text: item.code                   
+                            id: item.code + ':::' + item.mallLotusBase.companyCode,
+                            text: item.mallName + '[' + item.code + ']'                   
                         }
                         returnData.push(data);
                     } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
                         if(item.code == w.moduleCode){
                             data = {
-                                id: item.code,
-                                text: item.code                           
+                                id: item.code + ':::' + item.mallLotusBase.companyCode,
+                                text: item.mallName + '[' + item.code + ']'                 
                             }
                             returnData.push(data);
                         }
@@ -561,7 +583,7 @@ function updateVoucherContractDropDown(data_count) {
             },
             data: function (params) {
                 var map = {
-                    key: params.term || $('#voucherDepartment').val(),
+                    key: params.term || $('#voucherDepartment').val().split(':::')[0],
                     operator: "OR",
                     params: [
                       "mallCode","tenantName","contractNo","unitName","contractName"
@@ -579,7 +601,7 @@ function updateVoucherContractDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.contractNo + ':::' + item.sapContractNo + ':::' + item.tenantNo,
-                                text: item.contractNo + ' | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + 'V'+item.contractVersion           
+                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.brandName || '') + ' | ' + item.unitName + ' | ' + 'V'+item.contractVersion           
                             }
                             var returnData = [];
                             returnData.push(data);
@@ -903,4 +925,168 @@ function disp_confirm() {
     } else {
          alertMsg('9999','没有选中任何凭证！');
     }
+}
+
+function findGlConfig() {
+    if(!sessionStorage.getItem('glConfig') || sessionStorage.getItem('glConfig') == null || sessionStorage.getItem('glConfig') == "null" || sessionStorage.getItem('glConfig') == '') {
+        $.ajax({
+            url: $.api.baseSap+"/api/gl/config/findAll",
+            type: "GET",
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+
+                    if(response.data.length > 0){
+                        sessionStorage.setItem('glConfig', JSON.stringify(response.data));
+                    }
+                }                             
+            }
+        })
+    }
+}
+
+function createRowSapGLVoucherItem() {
+    var newrow = document.createElement("tr");
+    var column1 = createRowColumn(newrow);
+    var column2 = createRowColumn(newrow);
+    var column3 = createRowColumn(newrow);
+    var column4 = createRowColumn(newrow);
+    var column5 = createRowColumn(newrow);
+    var column6 = createRowColumn(newrow);
+    var column7 = createRowColumn(newrow);
+    var column8 = createRowColumn(newrow);
+    var column9 = createRowColumn(newrow);
+    var column10 = createRowColumn(newrow);
+    var column11 = createRowColumn(newrow);
+    
+    var table = document.getElementById('voucherItem');
+    var tbody = table.querySelector('tbody') || table;
+    var count = tbody.getElementsByTagName('tr').length + 1;
+    column1.innerText = count.toLocaleString();
+    
+    var select = document.createElement("select"); //Debit
+    select.setAttribute("class","select2");
+    select.setAttribute("id","voucherItemDebitCreditFlag_"+count.toLocaleString());
+    select.options[0] = new Option('借[S]','S');
+    select.options[1] = new Option('贷[H]','H');
+    column2.appendChild(select);
+    
+    var select = document.createElement("select"); //科目
+    select.setAttribute("class","select2 voucherItemTypeDropDown");
+    select.setAttribute("id","voucherItemType_"+count.toLocaleString());
+    column3.appendChild(select);
+    
+    var select = document.createElement("select"); //总账科目
+    select.setAttribute("class","select2 voucherItemSubjectDropDown");
+    select.setAttribute("id","voucherItemSubject_"+count.toLocaleString());
+    column4.appendChild(select);
+    
+    column5.innerText = 'CNY'; //本币
+    
+    var div = document.createElement("div"); //本币金额
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control money");
+    input.setAttribute("id","voucherItemLocalAmount_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    div.appendChild(input);
+    var percent = document.createElement("span");
+    percent.innerText = "元";
+    percent.setAttribute("class", "input-group-addon");
+    div.appendChild(percent);
+    column6.appendChild(div);
+    
+    var div = document.createElement("div"); //文本
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id","voucherItemTermInfo_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    column7.appendChild(input);
+
+    var div = document.createElement("div"); //利润中心
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control");
+    input.setAttribute("id","voucherItemProfitCenter_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    column8.appendChild(input);
+    
+    var select = document.createElement("select"); //税码
+    select.setAttribute("class","select2");
+    select.setAttribute("id","voucherItemTaxCode_"+count.toLocaleString());
+    select.options[0] = new Option('X4','X4'); //5%
+    select.options[1] = new Option('X3','X3'); //6%
+    select.options[2] = new Option('X8','X8'); //9%
+    column9.appendChild(select);
+    
+    var div = document.createElement("div"); //计息逾期日期
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control date-picker");
+    input.setAttribute("id","voucherItemInterestOverDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","width: 100%");
+    input.setAttribute("readonly","");
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    column10.appendChild(div);
+    
+    var div = document.createElement("div"); //支付逾期日期
+    div.setAttribute("class","input-group");
+    var input = document.createElement("input");
+    input.setAttribute("class","form-control date-picker");
+    input.setAttribute("id","voucherItemPaymentOverDate_"+count.toLocaleString());
+    input.setAttribute("type","text");
+    input.setAttribute("style","width: 100%");
+    input.setAttribute("readonly","");
+    div.appendChild(input);
+    var icon = document.createElement("i");
+    icon.setAttribute("class", "fa fa-calendar");
+    var span = document.createElement("span");
+    span.setAttribute("class", "input-group-addon");
+    span.appendChild(icon);
+    div.appendChild(span);
+    column11.appendChild(div);
+    
+    tbody.appendChild(newrow);
+    
+    $('#voucherItem .select2').select2();
+    
+    $('#voucherItem .date-picker').datepicker({
+        'language': 'zh-CN',
+        'format': 'yyyy-mm-dd',
+        'todayHighlight': true,
+        'autoclose': true
+    });
+    
+    $('input.money').on('focus',function(){
+        $(this).val(accounting.unformat($(this).val()));
+        $(this).css('backgroundColor','#fff');
+        $(this).select();
+        $(this).parent().parent().addClass('success');
+    });
+    
+    $('input.money').on('blur',function(){
+        $(this).val(accounting.formatNumber($(this).val()));
+        $(this).css('backgroundColor','transparent');
+        $(this).parent().parent().removeClass('success');
+    });
 }
