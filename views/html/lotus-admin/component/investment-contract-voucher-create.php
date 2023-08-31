@@ -52,10 +52,18 @@
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="voucherTermType" name="voucherTermType" style="width: 100%;">
                                         <option value="">未选择</option>
-                                        <option value="B011">固定租金</option>
-                                        <option value="B021">物业管理费</option>
-                                        <option value="G011">固定推广费</option>
-                                        <option value="D011">提成扣率</option>
+                                        <option value="B011">固定租金[B011]</option>
+                                        <option value="B021">物业管理费[B021]</option>
+                                        <option value="D011">提成扣率[D011]</option>
+                                        <option value="G011">固定推广费[G011]</option>
+                                        <option value="E02">租赁保证金[E02]</option>
+                                        <option value="E03">装修保证金[E03]</option>
+                                        <option value="E22">公共事业费押金[E22]</option>
+                                        <option value="H01">水费[H01]</option>
+                                        <option value="H02">电费[H02]</option>
+                                        <option value="H03">煤气费[H03]</option>
+                                        <option value="Y021">物业管理费-年度[Y021]</option>
+                                        <option value="Y77">服务费-线损费[Y77]</option>
                                     </select>
                                 </div>
                             </div>
@@ -153,7 +161,7 @@
                     <div class="col-md-12">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="voucherInfo" class="col-md-2 control-label" style="text-align: right;">抬头文本 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherInfo" class="col-md-2 control-label" style="text-align: right;">抬头文本</label>
                                 <div class="col-md-10 col-sm-12">
                                     <input class="form-control" id="voucherInfo" type="text" />                                                
                                 </div>
@@ -187,10 +195,6 @@
                                                             <div class="fht-cell"></div><!-- debitCreditFlag -->
                                                         </th>
                                                         <th>
-                                                            <div class="th-inner">科目 <span class="btn-box-tool-lg">*</span></div>
-                                                            <div class="fht-cell"></div>
-                                                        </th>
-                                                        <th>
                                                             <div class="th-inner">总账科目 <span class="btn-box-tool-lg">*</span></div>
                                                             <div class="fht-cell"></div><!-- subjectCode -->
                                                         </th>
@@ -203,12 +207,8 @@
                                                             <div class="fht-cell"></div><!-- localAmount -->
                                                         </th>
                                                         <th>
-                                                            <div class="th-inner">文本 <span class="btn-box-tool-lg">*</span></div>
-                                                            <div class="fht-cell"></div><!-- termInfo -->
-                                                        </th>
-                                                        <th>
                                                             <div class="th-inner">利润中心 <span class="btn-box-tool-lg">*</span></div>
-                                                            <div class="fht-cell"></div><!-- profitCenter -->
+                                                            <div class="fht-cell" style="width: 75px;"></div><!-- profitCenter -->
                                                         </th>
                                                         <th>
                                                             <div class="th-inner">税码 <span class="btn-box-tool-lg">*</span></div>
@@ -239,7 +239,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <button type="button" class="btn btn-info btn-sm" id="saveCalc"><i class="fa fa-save icon-white"></i> <b class="hidden-xs">保存</span></b>
+                                    <button type="button" class="btn btn-info btn-sm" id="saveVoucher"><i class="fa fa-save icon-white"></i> <b class="hidden-xs">保存</span></b>
                                     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" aria-label="Close" style="margin-left: 10px;"><i class="fa fa-times icon-white"></i> <b class="hidden-xs">取消</b></button>
                                 </div>
                             </div>

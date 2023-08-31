@@ -31,7 +31,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
         </div>
         <div class="pull-right">
-            <a href="javascript: void(0);" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建</span></a>
+            <a href="javascript: void(0);" class="btn btn-primary btn-sm" onclick="javascript: createVoucherDetail();"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建</span></a>
         </div>
         <div class="box-header">
             <div class="box-body">

@@ -888,14 +888,6 @@ function createBalanceDetail(){
     $('#balanceDepartment, #balanceStore, #balanceContract').select2("val", "");
     $('#yearMonth, #remarks').val('');
     $('.modal-header h4').find('.badge').remove();
-    
-    var openId = 'admin';
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE220301000001'){
-            openId = v.moduleName;
-            return false;
-        }
-    })
         
     $('#adjustRow').show();
                 

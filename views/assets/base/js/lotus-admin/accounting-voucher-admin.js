@@ -385,18 +385,11 @@ function getVoucherDetail(id){
     $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
+    $('#voucherItem tbody').html('');
     $('.modal-header h4').find('.badge').remove();
     $('.shield').remove();
     
     updateVoucherMallDropDown();
-    
-    var openId = 'admin';
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE220301000001'){
-            openId = v.moduleName;
-            return false;
-        }
-    })
         
     $.each(voucher, function(i,v){
         if(v.id == id){
@@ -469,24 +462,24 @@ function getVoucherDetail(id){
                         return (a.rowNumber - b.rowNumber);
                     }
                 );
-                $.each(rowNumberOrder, function(i, v) {
-                    createRowSapGLVoucherItem();
+                $.each(rowNumberOrder, function(j, w) {
+                    updateRowSapGLVoucherItem(v.itemCode, JSON.stringify(w));
                 });
             }
 
-            if(v.creatorOpenId == openId && v.tableId == null && (v.voucherStatus == 1 || v.voucherStatus == 2)){
-                $('#deleteVoucher, #adjustRow').show();
-                
-                $('#saveVoucher').click(function(){
-                    saveCheck(JSON.stringify(v));
-                })
-                
-                $('#deleteVoucher').click(function(){
-                    deleteCalc(JSON.stringify(v));
-                })
-            } else {
-                 $('.modal-content').prepend('<div class="shield" style="position: absolute;background:rgba(0,0,0,0.1);width: 100%;height: 100%;z-index: 3;"></div>');
-            }
+//            if(v.creatorOpenId == openId && v.tableId == null && (v.voucherStatus == 1 || v.voucherStatus == 2)){
+//                $('#deleteVoucher, #adjustRow').show();
+//                
+//                $('#saveVoucher').click(function(){
+//                    saveCheck(JSON.stringify(v));
+//                })
+//                
+//                $('#deleteVoucher').click(function(){
+//                    deleteCalc(JSON.stringify(v));
+//                })
+//            } else {
+//                 $('.modal-content').prepend('<div class="shield" style="position: absolute;background:rgba(0,0,0,0.1);width: 100%;height: 100%;z-index: 3;"></div>');
+//            }
             
             return false;
         }
@@ -625,6 +618,16 @@ function saveCheck(v) {
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
     
+    if($('#voucherCode').val() == '') {
+        flag = 0;
+        $('#voucherCode').parent().append(error);
+    }
+    
+    if($('#voucherType').val() == '') {
+        flag = 0;
+        $('#voucherType').parent().append(error);
+    }
+    
     if($('#voucherDepartment').val() == null) {
         flag = 0;
         $('#voucherDepartment').parent().append(error);
@@ -635,24 +638,44 @@ function saveCheck(v) {
         $('#voucherContract').parent().append(error);
     }
     
-    if($('#voucherStore').val() == null) {
-        flag = 0;
-        $('#voucherStore').parent().append(error);
-    }
-    
     if($('#voucherTermType').val() == '') {
         flag = 0;
         $('#voucherTermType').parent().append(error);
     }
     
-    if($('#startDate').val() == '') {
+    if($('#voucherStartDate').val() == '') {
         flag = 0;
-        $('#endDate').parent().append(error);
+        $('#voucherEndDate').parent().append(error);
     }
     
-    if($('#endDate').val() == '') {
+    if($('#voucherEndDate').val() == '') {
         flag = 0;
-        $('#endDate').parent().append(error);
+        $('#voucherEndDate').parent().append(error);
+    }
+    
+    if($('#voucherTaxRate').val() == '') {
+        flag = 0;
+        $('#voucherTaxRate').parent().append(error);
+    }
+    
+    if($('#voucherAmount').val() == '') {
+        flag = 0;
+        $('#voucherAmount').parent().append(error);
+    }
+    
+    if($('#voucherTaxAmount').val() == '') {
+        flag = 0;
+        $('#voucherTaxAmount').parent().append(error);
+    }
+    
+    if($('#voucherDate').val() == '') {
+        flag = 0;
+        $('#voucherDate').parent().append(error);
+    }
+    
+    if($('#voucherPostDate').val() == '') {
+        flag = 0;
+        $('#voucherPostDate').parent().append(error);
     }
     
     if($('#voucherYearMonth').val() == '') {
@@ -660,51 +683,63 @@ function saveCheck(v) {
         $('#voucherYearMonth').parent().append(error);
     }
     
-    if($('#billingDate').val() == '') {
-        flag = 0;
-        $('#billingDate').parent().append(error);
+    if($("#writeOffVoucherFlag").is(':checked')) {
+        if(parseFloat($('#voucherAmount').val()) >= 0 ) {
+            flag = 0;
+            $('#voucherAmount').parent().append(error);
+        }
+        
+        if(parseFloat($('#voucherTaxAmount').val()) >= 0 ) {
+            flag = 0;
+            $('#voucherTaxAmount').parent().append(error);
+        }
     }
     
-    if($('#paymentDate').val() == '') {
+    if($('#voucherItem tbody tr').length == 0) {
         flag = 0;
-        $('#paymentDate').parent().append(error);
+        $('#voucherItem').parent().append(error);
     }
     
-    if($('#amount').val() == '') {
-        flag = 0;
-        $('#amount').parent().append(error);
-    }
-    
-    if($('#taxAmount').val() == '') {
-        flag = 0;
-        $('#taxAmount').parent().append(error);
-    }
-    
-    if($('#rentAmount').val() == '') {
-        flag = 0;
-        $('#rentAmount').parent().append(error);
-    }
-    
-    if($('#taxRentAmount').val() == '') {
-        flag = 0;
-        $('#taxRentAmount').parent().append(error);
-    }
-    
-    if($('#taxRate').val() == '') {
-        flag = 0;
-        $('#taxRate').parent().append(error);
-    }
-    
-    if($('#settleDay').val() == null) {
-        flag = 0;
-        $('#settleDay').parent().append(error);
-    }
+    var index = 0;
+    $("#voucherItem tbody").find("tr").each(function(i,e){
+        index = i * 1 + 1;
+        
+        if($('#voucherItemDebitCreditFlag_'+index).val() == null) {
+            flag = 0;
+            $('#voucherItemDebitCreditFlag_'+index).parent().append(error);
+        }
+        
+        if($('#voucherItemSubject_'+index).val() == null) {
+            flag = 0;
+            $('#voucherItemSubject_'+index).parent().append(error);
+        } else {
+            if($('#voucherItemSubject_'+index).val().substr(0,2) == '60' && $('#voucherItemProfitCenter_'+index).val() == '') {
+                flag = 0;
+                $('#voucherItemProfitCenter_'+index).parent().append(error);
+            }
+        }
+        
+        if($('#voucherItemLocalAmount_'+index).val() == '') {
+            flag = 0;
+            $('#voucherItemLocalAmount_'+index).parent().append(error);
+        }
+        
+        if($('#voucherItemInterestOverDate_'+index).val() == '') {
+            flag = 0;
+            $('#voucherItemInterestOverDate_'+index).parent().append(error);
+        }
+        
+        if($('#voucherItemPaymentOverDate_'+index).val() == '') {
+            flag = 0;
+            $('#voucherItemPaymentOverDate_'+index).parent().append(error);
+        }
+    })
     
     if(flag == 1 && $('.mandatory-error').length == 0){
         if(v == ''){
-            saveCalc();
+            saveVoucher();
         } else {
-            editCalc(v);
+            editVoucher(v);
         }
     } else {
         $('html, body').animate({
@@ -713,7 +748,7 @@ function saveCheck(v) {
     }
 }
 
-function editCalc(calc) {
+function editVoucher(voucher) {
     Ewin.confirm({ message: "确定要保存修改该条结算数据吗？" }).on(function (e) {
         if (!e) {
             return;
@@ -785,19 +820,12 @@ function editCalc(calc) {
 }
 
 function createVoucherDetail(){
-    $('.mandatory-error,.shield').remove();
+    $('.mandatory-error').remove();
     $('#investment-contract-voucher-create').modal('toggle');
 
     updateVoucherContractDropDown(50);
     
-    if($("#voucherDepartment").val() != '' && $("#voucherDepartment").val() != null){
-        updateVoucherStoreDropDownByMallCode(10,$("#voucherDepartment").val());
-    }
-    $("#voucherDepartment").on('change',function(){
-        updateVoucherStoreDropDownByMallCode(10,$(this).val());
-    })
-    
-    $('.input-daterange, #billingDate, #paymentDate').datepicker({
+    $('.input-daterange, #voucherDate, #voucherPostDate').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
@@ -815,31 +843,224 @@ function createVoucherDetail(){
         'autoclose': true
     })
     
-    $('#deleteCalc, #adjustRow').hide();
-    $('#voucherTermType, #taxRate').val('').trigger('change');
-    $('#settleDay').val('25').trigger('change');
-    $('#startDate, #endDate, #voucherYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
-    $('#voucherStore, #voucherContract').empty(); 
-    $('#voucherDepartment, #voucherStore, #voucherContract').select2("val", "");
-    $('#yearMonth, #remarks').val('');
+    $('#deleteVoucher, #adjustRow').hide();
+    $('#voucherType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
+    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
+    $('#voucherDepartment, #voucherContract').empty(); 
+    $('#voucherDepartment, #voucherContract').select2("val", "");
+    $('#voucherItem tbody').html('');
     $('.modal-header h4').find('.badge').remove();
+    $('.shield').remove();
     
-    var openId = 'admin';
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.roleCode == 'CROLE220301000001'){
-            openId = v.moduleName;
-            return false;
+    updateVoucherMallDropDown();
+    
+    $("#voucherTermType, #voucherTaxRate, #writeOffVoucherFlag").on('change',function(){
+        if($("#voucherTermType").val() != '' && $("#voucherTaxRate").val() != ''){
+            var taxCode;
+            switch ($("#voucherTaxRate").val()) {
+                case "9":
+                    taxCode = "X8";
+                    break;
+                case "6":
+                    taxCode = "X3";
+                    break;
+                case "5":
+                    taxCode = "X4";
+                    break;
+                default:
+                    taxCode = "";
+                    break;
+            }
+            
+            var itemList = [];
+            switch ($("#voucherTermType").val()) {
+                case "B011": //"B011": 固定租金 租金
+                case "D011": //"D011": 浮动租金 租金
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6001000000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "3",
+                           "subjectCode": "2221001005",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case "B021":    //"B021": 物业管理费 服务费A
+                case "Y021":    //"Y021": 物业管理费-年度 服务费A
+                case "G011":    //"G011": 推广费 服务费A
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6001000000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "3",
+                           "subjectCode": "2221001005",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case ("E02" || "E03" || "E22"):   //"E02": 租赁保证金 押金 "E03": 装修保证金 押金 "E22": //公共事业费押金 押金
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1221999001",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "2241003001",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case "H01": //水费 水费
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6000009001",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case "H02": //电费 电费
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6000009002",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "originalAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case "H03": //煤气费 煤费
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6000006007",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                case "Y77": //服务费-线损费 服务费B
+                    itemList = [{
+                           "rowNumber": "1",
+                           "subjectCode": "1122001000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "2",
+                           "subjectCode": "6051888000",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        },{
+                           "rowNumber": "3",
+                           "subjectCode": "2221001005",
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "localAmount": "",
+                           "taxCode": taxCode,
+                           "interestOverDate": "",
+                           "paymentOverDate": ""
+                        }
+                    ];
+                    break;
+                default:
+                    break;
+            }
+            $('#voucherItem tbody').html('');
+            for(var i=0;i<itemList.length;i++){
+                updateRowSapGLVoucherItem($("#voucherTermType").val(), JSON.stringify(itemList[i]));
+            }
+            
         }
     })
-        
+    
     $('#adjustRow').show();
                 
-    $('#saveCalc').click(function(){
+    $('#saveVoucher').click(function(){
         saveCheck('');
     })
 }
 
-function saveCalc() {
+function saveVoucher() {
     Ewin.confirm({ message: "确定要保存该条凭证吗？" }).on(function (e) {
         if (!e) {
             return;
@@ -853,35 +1074,185 @@ function saveCalc() {
             }
         })
         
+        var writeOffVoucherFlag = 0;
+        if($('#writeOffVoucherFlag').prop('checked') == true){
+            writeOffVoucherFlag = 1;
+        }
+        
+        var transactionType = null;
+        var configs  = JSON.parse(sessionStorage.getItem("glConfig"));
+        if(configs.length > 0){
+            $.each(configs, function(i,v) {
+                if(v.itemCode == $('#voucherTermType').val()){
+                    transactionType = v.transactionType
+                    return false;
+                }            
+            })
+        }
+        
+        var index;
+        var voucherItemList = [];
+        $("#voucherItem tbody").find("tr").each(function(i,e){
+            var voucherItem = {};
+            index = i * 1 + 1;
+            
+            voucherItem.accountPeriod = 0;
+            voucherItem.assetChangeType = null;
+            voucherItem.assetCode = null;
+            voucherItem.assetSubCode = null;
+            voucherItem.bankAccount = null;
+            voucherItem.bankAddress = null;
+            voucherItem.bankCode = null;
+            voucherItem.cashDiscountDays = null;
+            voucherItem.companyCode = string;
+            voucherItem.companyFlag = null;
+            voucherItem.costCenter = null;
+            voucherItem.creatorOpenId = openId;
+            voucherItem.debitCreditFlag = string;
+            voucherItem.glFlag = null;
+            voucherItem.interestDate = null;
+            voucherItem.interestOverDate = string;
+            voucherItem.issueDate = null;
+            voucherItem.localAmount = 0;
+            voucherItem.localCurrencyCode = string;
+            voucherItem.materialCode = null;
+            voucherItem.materialGroup = string;
+            voucherItem.negativePost = null;
+            voucherItem.num = null;
+            voucherItem.orderCode = null;
+            voucherItem.originalAmount = 0;
+            voucherItem.originalCurrencyCode = string;
+            voucherItem.paymentCode = null;
+            voucherItem.paymentConditionCode = null;
+            voucherItem.paymentFreezeCode = null;
+            voucherItem.paymentMode = null;
+            voucherItem.paymentOverDate = string;
+            voucherItem.paymentReference = null;
+            voucherItem.postCode = null;
+            voucherItem.profitCenter = string;
+            voucherItem.reportSection = null;
+            voucherItem.rowNumber = 0;
+            voucherItem.rowReferenceCodeFirst = null;
+            voucherItem.rowReferenceCodeSecond = null;
+            voucherItem.rowType = null;
+            voucherItem.sapContractNo = string;
+            voucherItem.sapMallCode = string;
+            voucherItem.subjectCode = string;
+            voucherItem.subjectType = null;
+            voucherItem.supplierCode = null;
+            voucherItem.targetGlFlag = null;
+            voucherItem.taxCode = string;
+            voucherItem.tenantNo = string;
+            voucherItem.termInfo = string;
+            voucherItem.transactionType = string;
+            voucherItem.unit = null;
+            voucherItem.updateOpenId = openId;
+            voucherItem.voucherCode = string;
+            voucherItem.voucherRowNumber = null;
+            voucherItem.writeOffCompanyCode = null;
+            voucherItem.writeOffOrgCode = null;
+            voucherItem.writeOffVoucherCode = null;
+            
+//            propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
+//            propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
+//
+//            propertyMgmt.shopCode = shopCode;
+//            propertyMgmt.area = area;
+//
+//            propertyMgmt.settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
+//            propertyMgmt.settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
+//            
+//            propertyMgmt.periodTypeCode = $('#propertyMgmtPeriodType_1').val();
+//            propertyMgmt.periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
+//            
+//            propertyMgmt.settleDay = $('#propertyMgmtSettleDay_1').val();
+//            
+//            if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
+//                propertyMgmt.isOverdueFlag = 1;
+//            } else {
+//                propertyMgmt.isOverdueFlag = 0;
+//            }
+//            propertyMgmt.overdueTaxRate = $('#propertyMgmtOverdueTaxRate_1').val();
+//            propertyMgmt.overdueRate = parseFloat($('#propertyMgmtOverdueRate_1').val()) / 1000;
+//            if($('#propertyMgmtOverdueInvoiceFlag_1').prop('checked') == true){
+//                propertyMgmt.overdueInvoiceFlag = 1;
+//            } else {
+//                propertyMgmt.overdueInvoiceFlag = 0;
+//            }
+//
+//            propertyMgmt.startDate = $('#propertyMgmtStartDate_'+index).val();
+//            propertyMgmt.endDate = $('#propertyMgmtEndDate_'+index).val();
+//
+//            propertyMgmt.amount = numberWithoutCommas($('#propertyMgmtAmount_'+index).val());
+//            propertyMgmt.taxAmount = numberWithoutCommas($('#propertyMgmtTaxAmount_'+index).val());
+//
+//            propertyMgmt.rentAmount = numberWithoutCommas($('#propertyMgmtRentAmount_'+index).val());
+//            propertyMgmt.taxRentAmount = numberWithoutCommas($('#propertyMgmtTaxRentAmount_'+index).val());
+//
+//            propertyMgmt.taxRate = $('#propertyMgmtTaxRate_'+index).val();
+//            propertyMgmt.taxCode = $('#propertyMgmtTaxRate_'+index).find('option:selected').attr('data-code');
+//
+//            if($('#propertyMgmtInvoiceFlag_'+index).prop('checked') == true){
+//                propertyMgmt.invoiceFlag = 1;
+//            } else {
+//                propertyMgmt.invoiceFlag = 0;
+//            }
+            voucherItemList.push(voucherItem);
+        })
+        
         var map = {
-            "amount": numberWithoutCommas($('#amount').val()),
-            "area": $('#voucherStore').val().split(':::')[1],
-            "contractNo": $('#voucherContract').find('option:selected').val(),
-            "contractVersion": $('#voucherContract').find('option:selected').text().split(' | ')[4].substr(1,1),
+            "accountMonth": $('#voucherYearMonth').val().split('-')[1].substr(0,1) == '0' ? $('#voucherYearMonth').val().split('-')[1].substr(1,1) : $('#voucherYearMonth').val().split('-')[1],
+            "accountVoucherCode": null,
+            "accountYear": $('#voucherYearMonth').val().split('-')[0],
+            "amortizeDate": null,
+            "amortizePeriod": null,
+            "amortizeType": null,
+            "amount": numberWithoutCommas($('#voucherAmount').val()),
+            "brandName": $('#voucherContract').find('option:selected').text().split(' | ')[1],
+            "companyCode": $('#voucherDepartment').find('option:selected').val().split(':::')[1],
+            "companyVoucherCode": null,
+            "contractNo": $('#voucherContract').val().split(':::')[0],
+            "contractVersion": $('#voucherContract').find('option:selected').text().split(' | ')[3].substr(1,1),
+            "conversionDate": null,
             "creatorOpenId": openId,
-            "endDate": $('#endDate').val(),
-            "invoiceFlag": 1,
-            "isOverdueFlag": 1,
-            "itemCode": $('#voucherTermType').find('option:selected').val(),       
-            "itemName": $('#voucherTermType').find('option:selected').text(),
-            "itemType": "adjust",
-            "overdueInvoiceFlag": 1,
-            "overdueRate": 0.00100,
-            "overdueTaxRate": 0.06000,
-            "periodTypeCode": 1,
-            "periodTypeName": "自然月",
-            "remarks": $('#remarks').val(),
-            "rentAmount": numberWithoutCommas($('#rentAmount').val()),
-            "settleDay": $('#settleDay').val(),
-            "settlePeriodCode": "M",
-            "settlePeriodName": "月",
-            "shopCode": $('#voucherStore').val().split(':::')[0],
-            "startDate": $('#startDate').val(),
-            "taxAmount": numberWithoutCommas($('#taxAmount').val()),
-            "taxCode": $('#taxRate').find('option:selected').text(),
-            "taxRate": parseFloat($('#taxRate').find('option:selected').val() / 100).toFixed(5),
-            "taxRentAmount": numberWithoutCommas($('#taxRentAmount').val()),
-            "yyyymm":  $('#voucherYearMonth').val().split('-')[0]+$('#voucherYearMonth').val().split('-')[1]
+            "currencyCode": "CNY",
+            "endDate": $('#voucherEndDate').val(),
+            "exchangeRate": null,
+            "exchangeRateType": null,
+            "itemCode": $('#voucherTermType').val(),
+            "itemName": $('#voucherTermType').find('option:selected').text().split('[')[0],
+            "localCurrencyCode": "CNY",
+            "mallCode": $('#voucherDepartment').find('option:selected').val().split(':::')[0],
+            "processDate": null,
+            "reportBillCode": null,
+            "sapContractNo": $('#voucherContract').val().split(':::')[1],
+            "startDate": $('#voucherStartDate').val(),
+            "tableId": null,
+            "tableName": null,
+            "taxAmount": numberWithoutCommas($('#voucherTaxAmount').val()),
+            "taxRate": parseFloat($('#voucherTaxRate').find('option:selected').val() / 100).toFixed(2),
+            "tenantName": $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[0],
+            "tenantNo": $('#voucherContract').val().split(':::')[2],
+            "transactionType": transactionType,
+            "unitName": $('#voucherContract').find('option:selected').text().split(' | ')[2],
+            "updateOpenId": openId,
+            "userName": null,
+            "voucherCode": $('#voucherCode').val(),
+            "voucherDate": $('#voucherDate').val(),
+            "voucherInfo": $('#voucherInfo').val(),
+            "voucherInfoFirst": null,
+            "voucherInfoSecond": null,
+            "voucherInputDate": null,
+            "voucherInputTime": null,
+            "voucherItemList": voucherItemList,
+            "voucherPostDate": $('#voucherPostDate').val(),
+            "voucherStatus": 1,
+            "voucherType": $('#voucherType').val(),
+            "writeOffAccountYear": null,
+            "writeOffVoucher": null,
+            "writeOffVoucherCode": null,
+            "writeOffVoucherFlag": writeOffVoucherFlag,
+            "yyyymm": $('#voucherYearMonth').val().split('-')[0]+$('#voucherYearMonth').val().split('-')[1]
         }
         
         $.ajax({
@@ -959,7 +1330,9 @@ function findGlConfig() {
     }
 }
 
-function createRowSapGLVoucherItem() {
+function updateRowSapGLVoucherItem(ic, v) {
+    var value = JSON.parse(v);
+    console.log(value);
     var newrow = document.createElement("tr");
     var column1 = createRowColumn(newrow);
     var column2 = createRowColumn(newrow);
@@ -970,8 +1343,6 @@ function createRowSapGLVoucherItem() {
     var column7 = createRowColumn(newrow);
     var column8 = createRowColumn(newrow);
     var column9 = createRowColumn(newrow);
-    var column10 = createRowColumn(newrow);
-    var column11 = createRowColumn(newrow);
     
     var table = document.getElementById('voucherItem');
     var tbody = table.querySelector('tbody') || table;
@@ -983,19 +1354,18 @@ function createRowSapGLVoucherItem() {
     select.setAttribute("id","voucherItemDebitCreditFlag_"+count.toLocaleString());
     select.options[0] = new Option('借[S]','S');
     select.options[1] = new Option('贷[H]','H');
+    for (var i = 0;i < select.options.length; i++){  
+    if (select.options[i].value == value.debitCreditFlag) {                
+        select.options[i].selected = true;            
+    }}
     column2.appendChild(select);
     
-    var select = document.createElement("select"); //科目
-    select.setAttribute("class","select2 voucherItemTypeDropDown");
-    select.setAttribute("id","voucherItemType_"+count.toLocaleString());
+    var select = document.createElement("select"); //总账科目
+    select.setAttribute("class","select2 voucherItemSubjectDropDown new");
+    select.setAttribute("id","voucherItemSubject_"+count.toLocaleString());
     column3.appendChild(select);
     
-    var select = document.createElement("select"); //总账科目
-    select.setAttribute("class","select2 voucherItemSubjectDropDown");
-    select.setAttribute("id","voucherItemSubject_"+count.toLocaleString());
-    column4.appendChild(select);
-    
-    column5.innerText = 'CNY'; //本币
+    column4.innerText = 'CNY'; //本币
     
     var div = document.createElement("div"); //本币金额
     div.setAttribute("class","input-group");
@@ -1003,34 +1373,34 @@ function createRowSapGLVoucherItem() {
     input.setAttribute("class","form-control money");
     input.setAttribute("id","voucherItemLocalAmount_"+count.toLocaleString());
     input.setAttribute("type","text");
+    input.setAttribute("value",value.localAmount);
     div.appendChild(input);
     var percent = document.createElement("span");
     percent.innerText = "元";
     percent.setAttribute("class", "input-group-addon");
     div.appendChild(percent);
-    column6.appendChild(div);
-    
-    var div = document.createElement("div"); //文本
-    var input = document.createElement("input");
-    input.setAttribute("class","form-control");
-    input.setAttribute("id","voucherItemTermInfo_"+count.toLocaleString());
-    input.setAttribute("type","text");
-    column7.appendChild(input);
+    column5.appendChild(div);
 
     var div = document.createElement("div"); //利润中心
     var input = document.createElement("input");
     input.setAttribute("class","form-control");
     input.setAttribute("id","voucherItemProfitCenter_"+count.toLocaleString());
     input.setAttribute("type","text");
-    column8.appendChild(input);
+    input.setAttribute("value",(value.profitCenter || '') );
+    column6.appendChild(input);
     
     var select = document.createElement("select"); //税码
     select.setAttribute("class","select2");
     select.setAttribute("id","voucherItemTaxCode_"+count.toLocaleString());
-    select.options[0] = new Option('X4','X4'); //5%
-    select.options[1] = new Option('X3','X3'); //6%
-    select.options[2] = new Option('X8','X8'); //9%
-    column9.appendChild(select);
+    select.options[0] = new Option('未选择','');
+    select.options[1] = new Option('X4','X4'); //5%
+    select.options[2] = new Option('X3','X3'); //6%
+    select.options[3] = new Option('X8','X8'); //9%
+    for (var i = 0;i < select.options.length; i++){  
+    if (select.options[i].value == value.taxCode) {                
+        select.options[i].selected = true;            
+    }}
+    column7.appendChild(select);
     
     var div = document.createElement("div"); //计息逾期日期
     div.setAttribute("class","input-group");
@@ -1040,6 +1410,7 @@ function createRowSapGLVoucherItem() {
     input.setAttribute("type","text");
     input.setAttribute("style","width: 100%");
     input.setAttribute("readonly","");
+    input.setAttribute("value",value.interestOverDate);
     div.appendChild(input);
     var icon = document.createElement("i");
     icon.setAttribute("class", "fa fa-calendar");
@@ -1047,7 +1418,7 @@ function createRowSapGLVoucherItem() {
     span.setAttribute("class", "input-group-addon");
     span.appendChild(icon);
     div.appendChild(span);
-    column10.appendChild(div);
+    column8.appendChild(div);
     
     var div = document.createElement("div"); //支付逾期日期
     div.setAttribute("class","input-group");
@@ -1057,6 +1428,7 @@ function createRowSapGLVoucherItem() {
     input.setAttribute("type","text");
     input.setAttribute("style","width: 100%");
     input.setAttribute("readonly","");
+    input.setAttribute("value",value.paymentOverDate);
     div.appendChild(input);
     var icon = document.createElement("i");
     icon.setAttribute("class", "fa fa-calendar");
@@ -1064,10 +1436,10 @@ function createRowSapGLVoucherItem() {
     span.setAttribute("class", "input-group-addon");
     span.appendChild(icon);
     div.appendChild(span);
-    column11.appendChild(div);
+    column9.appendChild(div);
     
     tbody.appendChild(newrow);
-    
+    updateVoucherItemSubjectItems('voucherItemSubjectDropDown',ic,value.subjectCode);
     $('#voucherItem .select2').select2();
     
     $('#voucherItem .date-picker').datepicker({
@@ -1089,4 +1461,22 @@ function createRowSapGLVoucherItem() {
         $(this).css('backgroundColor','transparent');
         $(this).parent().parent().removeClass('success');
     });
+}
+
+function updateVoucherItemSubjectItems(dropDown,itemCode,value) {
+    var configs  = JSON.parse(sessionStorage.getItem("glConfig"));
+    if(configs.length > 0){
+        $.each(configs, function(i,v) {
+            if(v.itemCode == itemCode){
+                $('.'+dropDown+'.new').append('\
+                    <option value="'+v.creditItemCode+'">'+v.creditItemName+'['+v.creditItemCode+']</option>\n\
+                    <option value="'+v.creditTaxItemCode+'">'+v.creditTaxItemName+'['+v.creditTaxItemCode+']</option>\n\
+                    <option value="'+v.debitItemCode+'">'+v.debitItemName+'['+v.debitItemCode+']</option>\n\
+                ');
+                return false;
+            }            
+        })
+        $('.'+dropDown+'.new').val(value).trigger('change');
+        $('.'+dropDown+'.new').removeClass('new');
+    }
 }
