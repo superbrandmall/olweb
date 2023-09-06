@@ -118,7 +118,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="bootstrap-table">
                                         <div class="fixed-table-pagination" style="clear: both;">
                                             <div class="pull-left pagination-detail">
-                                                <span id="selected"></span>
+                                                <span class="selected"></span>
                                                 <span class="pagination-info"></span>
                                                 <span class="page-list">
                                                     <span class="btn-group dropdown">
@@ -169,7 +169,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">对方单位</div>
+                                                                <div class="th-inner" style="width: 300px;">对方单位</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -193,11 +193,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">不含税金额</div>
+                                                                <div class="th-inner">含税金额</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">含税金额</div>
+                                                                <div class="th-inner">不含税金额</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -212,6 +212,29 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     </thead>
                                                     <tbody id="balance"></tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+                                        <div class="fixed-table-pagination" style="clear: both;">
+                                            <div class="pull-left pagination-detail">
+                                                <span class="selected"></span>
+                                                <span class="pagination-info"></span>
+                                                <span class="page-list">
+                                                    <span class="btn-group dropdown">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="page-size">20</span>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/contract-balance?items=50">50</a></li>
+                                                        </ul>
+                                                    </span> 行每页
+                                                </span>
+                                            </div>
+                                            <div class="pull-right pagination">
+                                                <ul class="pagination"></ul>
                                             </div>
                                         </div>
                                     </div>

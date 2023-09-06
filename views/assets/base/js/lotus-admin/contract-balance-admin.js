@@ -24,6 +24,19 @@ if(getURLParameter('s')) {
 }
 
 $(document).ready(function(){
+    var auth = 0;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
+            auth = 1;
+            return false;
+        }
+    })
+
+    if(auth == 0){
+        alertMsg('9999','没有访问授权，请联系系统管理员。');
+        return false;
+    }
+                    
     updateSelectContractDropDown(50);
     
     if($.cookie('balanceMallVal') != null && $.cookie('balanceMallVal') != 'null'){
@@ -250,9 +263,9 @@ function findBalanceByKVCondition(p,c) {
                     var totalAmount = 0, totalTaxAmount = 0, checked = '';
                     $("#all").prop('checked',false);
                     if($.checkBalance.length > 0){
-                        $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0); onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
+                        $(".selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0); onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
                     } else {
-                        $("#selected").text("");
+                        $(".selected").text("");
                     }
                     $.each(response.data.content, function(i,v){
                         totalTaxAmount += v.taxAmount;
@@ -282,14 +295,14 @@ function findBalanceByKVCondition(p,c) {
                             <td>'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
                             <td>'+(v.itemType=='normal'?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
                             <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
-                            <td>'+v.tenantName+'</td>\n\
+                            <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
                             <td>'+(v.unitName || '')+'</td>\n\
                             <td>'+v.itemName+'['+v.itemCode+']</td>\n\
                             <td>收</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+v.yyyymm+'</td>\n\
+                            <td><strong>'+accounting.formatNumber(v.amount)+'</strong></td>\n\
                             <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
-                            <td>'+accounting.formatNumber(v.amount)+'</td>\n\
                             <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
                             <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
                         </tr>');
@@ -308,9 +321,9 @@ function findBalanceByKVCondition(p,c) {
                                 $.cookie('checkBalance',JSON.stringify($.checkBalance));
                             }
                             if($.checkBalance.length > 0){
-                                $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
+                                $(".selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
                             } else {
-                                $("#selected").text("");
+                                $(".selected").text("");
                             }
                         })
                     });
@@ -337,9 +350,9 @@ function findBalanceByKVCondition(p,c) {
                             })
                         }
                         if($.checkBalance.length > 0){
-                            $("#selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条");
+                            $(".selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
                         } else {
-                            $("#selected").text("");
+                            $(".selected").text("");
                         }
                     })
                     
@@ -779,7 +792,7 @@ function saveCheck(v) {
 }
 
 function editCalc(calc) {
-    Ewin.confirm({ message: "确定要保存修改该条结算数据吗？" }).on(function (e) {
+    Ewin.confirm({ message: "确定要修改该条结算数据吗？" }).on(function (e) {
         if (!e) {
             return;
         }
@@ -812,8 +825,14 @@ function editCalc(calc) {
         map.updateOpenId = openId;      
         map.yyyymm =  $('#balanceYearMonth').val().split('-')[0]+$('#balanceYearMonth').val().split('-')[1] ;
         
-        if(map.creatorOpenId != openId || map.itemType == 'normal' || map.voucherFlag == 1){
-            alertMsg('9999','常规结算数据无法修改。');
+        if(map.creatorOpenId != openId){
+            alertMsg('9999','非本人不能操作。');
+            return false;
+        } else if(map.itemType == 'normal'){
+            alertMsg('9999','常规结算数据不能修改。');
+            return false;
+        } else if(map.voucherFlag == 1){
+            alertMsg('9999','该条数据已生成凭证，不能修改。');
             return false;
         }
         
@@ -1044,8 +1063,69 @@ function generateVoucherEntryBySelect() {
                 $.cookie('checkBalance','');
                 $.checkBalance = [];
                 
-                //window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=voucher';
+                window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=voucher';
             }
         }
     });
+}
+
+function deleteCalc(calc) {
+    Ewin.confirm({ message: "确定要删除该条结算数据吗？" }).on(function (e) {
+        if (!e) {
+            return;
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        var map = JSON.parse(calc);
+        map.state = 0;
+        map.updateOpenId = openId;
+        
+        if(map.creatorOpenId != openId){
+            alertMsg('9999','非本人不能操作。');
+            return false;
+        } else if(map.itemType == 'normal'){
+            alertMsg('9999','常规结算数据不能修改。');
+            return false;
+        } else if(map.voucherFlag == 1){
+            alertMsg('9999','该条数据已生成凭证，不能修改。');
+            return false;
+        }
+        
+        $.ajax({
+            url: $.api.baseLotus+"/api/contract/rent/calc/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    
+                    window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=delete';
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            }
+        })
+    })
 }

@@ -4200,8 +4200,8 @@ function createContract() {
     }
 
     if( $('#createContractSelectTenant').val() && $('#createContractSelectTenant').val() != '' && $('#createContractSelectTenant').val() != null){
-        tenantNo = $('#select2-createContractSelectTenant-container').text().split(' | ')[0];
-        tenantName = $('#select2-createContractSelectTenant-container').text().split(' | ')[1];
+        tenantNo = $('#createContractSelectTenant').find('option:selected').text().split(' | ')[0];
+        tenantName = $('#createContractSelectTenant').find('option:selected').text().split(' | ')[1];
         tenantCode = $('#createContractSelectTenant').val();
     }
 

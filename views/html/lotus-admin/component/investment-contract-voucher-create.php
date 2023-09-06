@@ -11,9 +11,9 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="voucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="voucherCode" class="col-md-4 control-label" style="text-align: right;">凭证编码</label>
                                 <div class="col-md-8 col-sm-12">
-                                    <input class="form-control" id="voucherCode" type="text" />                                                
+                                    <input class="form-control" id="voucherCode" type="text" disabled />                                                
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label for="voucherDepartment" class="col-md-4 control-label" style="text-align: right;">项目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="voucherDepartment" style="width: 100%"></select>
+                                    <select class="select2" id="voucherDepartment" style="width: 100%" disabled></select>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="voucherContract" class="col-md-4 control-label" style="text-align: right;">合同 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="voucherContract" name="voucherContract" style="width: 100%"></select>
+                                    <select class="select2" id="voucherContract" name="voucherContract" style="width: 100%" disabled></select>
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" style="text-align: right;">是否冲销</label>
                                 <div class="col-md-1 col-sm-6" style="padding-top: 6px;">
-                                    <input type="checkbox" id="writeOffVoucherFlag">
+                                    <input type="checkbox" id="writeOffVoucherFlag" disabled>
                                 </div>
                             </div>
                         </div>
@@ -203,11 +203,11 @@
                                                             <div class="fht-cell"></div><!-- localCurrencyCode -->
                                                         </th>
                                                         <th>
-                                                            <div class="th-inner">本币金额 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="th-inner">本币金额</div>
                                                             <div class="fht-cell"></div><!-- localAmount -->
                                                         </th>
                                                         <th>
-                                                            <div class="th-inner">利润中心 <span class="btn-box-tool-lg">*</span></div>
+                                                            <div class="th-inner">利润中心</div>
                                                             <div class="fht-cell" style="width: 75px;"></div><!-- profitCenter -->
                                                         </th>
                                                         <th>
