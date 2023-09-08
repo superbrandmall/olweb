@@ -263,7 +263,7 @@ function findBalanceByKVCondition(p,c) {
                     var totalAmount = 0, totalTaxAmount = 0, checked = '';
                     $("#all").prop('checked',false);
                     if($.checkBalance.length > 0){
-                        $(".selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0); onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
+                        $(".selected").html("已选<b class='text-red'>"+$.checkBalance.length+"</b>条 <a href='javascript:void(0);' onclick='javascript: disp_confirm()' class='btn btn-primary btn-sm'><i class='fa fa-plus icon-white'></i> <span class='hidden-xs'>生成凭证</span></a>");
                     } else {
                         $(".selected").text("");
                     }
@@ -292,7 +292,7 @@ function findBalanceByKVCondition(p,c) {
                             <td><input type="checkbox" class="me-1" value="'+v.id+':'+tableSuffix+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getBalanceDetail("'+v.id+'")\'>查看详情</a></td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
-                            <td>'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
+                            <td id="voucherFlag_'+v.id+'">'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
                             <td>'+(v.itemType=='normal'?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
                             <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
@@ -309,6 +309,20 @@ function findBalanceByKVCondition(p,c) {
                     })
                     $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
                     $('#totalAmount').text(accounting.formatNumber(totalAmount));
+                    
+                    if($.cookie('generateVoucherEntryResult') != '' && JSON.parse($.cookie('generateVoucherEntryResult')).length > 0){
+                        $.each(JSON.parse($.cookie('generateVoucherEntryResult')), function(j,w) {
+                            if(w.resultCode == 'ERROR'){
+                                $('#voucherFlag_'+w.id).append('<strong class="text-red">'+w.resultMsg+'</strong>');
+                            }
+                        })
+                        
+                        $.checkBalance = [];
+                        $.cookie('checkBalance','');
+                        $.cookie('generateVoucherEntryResult','');
+                    }
+                    
+                    
                     
                     $(".me-1").each(function(){
                         $(this).change(function(){
@@ -405,6 +419,7 @@ function getBalanceDetail(id){
     $('#deleteCalc, #adjustRow').hide();
     var balance = $.parseJSON(sessionStorage.getItem("balance"));
     $('#balanceTermType, #taxRate').val('').trigger('change');
+    $('#balanceUpdated').text('');
     $('#settleDay').val('25').trigger('change');
     $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate, #yearMonth, #remarks').val('');
     $('#balanceDepartment, #balanceStore, #balanceContract').empty(); 
@@ -437,6 +452,8 @@ function getBalanceDetail(id){
                 temp = '<span class="badge badge-danger" style="vertical-align: top; margin-right: 10px;">调整</span>'
             }
             $('.modal-header h4').prepend(temp);
+            
+            $('#balanceUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
             
             temp = new Option(v.mallName+'['+v.mallCode+']',v.mallCode,true,true);
             $('#balanceDepartment').append(temp).trigger('change');
@@ -1045,6 +1062,7 @@ function generateVoucherEntryBySelect() {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", $.cookie('lang'));
@@ -1052,6 +1070,7 @@ function generateVoucherEntryBySelect() {
         },
         complete: function(){},
         success: function (response, status, xhr) {
+            $('#loader').hide();
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Login") !== null){
                     $.cookie('login', xhr.getResponseHeader("Login"));
@@ -1060,10 +1079,39 @@ function generateVoucherEntryBySelect() {
                     $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                 }
                 
-                $.cookie('checkBalance','');
-                $.checkBalance = [];
-                
-                window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=voucher';
+                $('#myModalLabel').text('正在生成凭证, 请稍后...');
+                $('#submitStateModal').modal('show');
+                var obj = $('#submitState');
+                var countdownWriteBalance = $.checkBalance.length;
+                setTimeWriteBalance(obj);
+                function setTimeWriteBalance(obj) {
+                    if (countdownWriteBalance == 0) { 
+                        $('#myModalLabel,#submitState').text('');
+                        $('#submitStateModal').modal('hide');
+                        countdownWriteBalance = $.checkBalance.length;
+                        
+                        var resultList = [];
+                        var result = {};
+                        $.each($.checkBalance, function(i,v){
+                            result = {
+                                "id": v.split(':')[0],
+                                "resultCode": response.data[i].resultCode, 
+                                "resultMsg": response.data[i].resultMsg
+                            }
+                            resultList.push(result);
+                        })
+                        
+                        $.cookie('generateVoucherEntryResult',JSON.stringify(resultList));
+                        location.reload();
+                        return;
+                    } else { 
+                        obj.html(countdownWriteBalance + "秒");
+                        countdownWriteBalance--; 
+                    } 
+                setTimeout(function() { 
+                    setTimeWriteBalance(obj); }
+                    ,1000); 
+                }
             }
         }
     });

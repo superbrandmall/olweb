@@ -33,25 +33,25 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountVoucherCode" class="col-md-4 control-label" style="text-align: right;">客户编码</label>
+                            <label for="accountingTenantNo" class="col-md-4 control-label" style="text-align: right;">企业编码</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="accountVoucherCode" name="accountVoucherCode" type="text" />
+                                <input class="form-control" id="accountingTenantNo" name="accountingTenantNo" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">中文名称</label>
+                            <label for="accountingTenantName" class="col-md-4 control-label" style="text-align: right;">企业名称</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <input class="form-control" id="accountingTenantName" name="accountingTenantName" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">简称</label>
+                            <label for="accountingTenantShortName" class="col-md-4 control-label" style="text-align: right;">简称</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <input class="form-control" id="accountingTenantShortName" name="accountingTenantShortName" type="text" />
                             </div>
                         </div>
                     </div>
@@ -59,17 +59,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">公司代码</label>
+                            <label for="accountingTenantDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <select class="select2" id="accountingTenantDepartment" name="accountingTenantDepartment" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">税务登记号</label>
+                            <label for="accountingTenantUSCC" class="col-md-4 control-label" style="text-align: right;">纳税识别号</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <input class="form-control" id="accountingTenantUSCC" name="accountingTenantUSCC" type="text" />
                             </div>
                         </div>
                     </div>
@@ -131,15 +131,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">查看详情</div>
+                                                                <div class="th-inner" style="width: 280px;">名称</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">邮政编码</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">客户编码</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -155,7 +151,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">纳税人登记号</div>
+                                                                <div class="th-inner">纳税识别号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -163,7 +159,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">城市</div>
+                                                                <div class="th-inner">城市代码</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 305px;">登记地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -175,13 +175,40 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">银行虚拟账户</div>
+                                                                <div class="th-inner" style="width: 190px;">创建信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 190px;">最后修改信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tenant"></tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+                                        <div class="fixed-table-pagination" style="clear: both;">
+                                            <div class="pull-left pagination-detail">
+                                                <span id="selected"></span>
+                                                <span class="pagination-info"></span>
+                                                <span class="page-list">
+                                                    <span class="btn-group dropdown">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="page-size">20</span>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-tenant?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-tenant?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-tenant?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-tenant?items=50">50</a></li>
+                                                        </ul>
+                                                    </span> 行每页
+                                                </span>
+                                            </div>
+                                            <div class="pull-right pagination">
+                                                <ul class="pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -196,6 +223,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
     </section>
 </div>
 
-<?php include 'component/investment-contract-balance-create.php'; ?>
+<?php include 'component/investment-contract-tenant-create.php'; ?>
 
 <?php include 'footer.php'; ?>

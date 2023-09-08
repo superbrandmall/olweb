@@ -289,13 +289,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="row">
                                 <div class="col-md-4">
                                     <div style="margin: 30px 15px;">
-                                        <h4>莲花项目概览<small>（2023年8月31日更新）</small></h4>
+                                        <h4>莲花项目概览<small>（2023年9月7日更新）</small></h4>
                                         <hr>
                                         项目数(已开业)<br><h4 class="text-red">96</h4><hr>
-                                        总面积(m²)<br><h4 class="text-red">496,911.56</h4><hr>
-                                        总铺位数<br><h4 class="text-red">3,879</h4><hr>
-                                        出租率(按面积)<br><h4 class="text-red">58.13%</h4><hr>
-                                        合同数(生效中)<br><h4 class="text-red">1,479</h4>
+                                        总面积(m²)<br><h4 class="text-red">497,716.56</h4><hr>
+                                        总铺位数<br><h4 class="text-red">3,881</h4><hr>
+                                        出租率(按面积)<br><h4 class="text-red">57.53%</h4><hr>
+                                        合同数(生效中)<br><h4 class="text-red">1,392</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

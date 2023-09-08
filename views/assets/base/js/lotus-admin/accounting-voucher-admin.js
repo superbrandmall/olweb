@@ -126,7 +126,6 @@ $(document).ready(function(){
         $(this).val(accounting.formatNumber($(this).val()));
     });
     
-    
     $('#clear').click(function(){
         $.cookie('accountingVoucherStatus','');
         $.cookie('accountingVoucherMallTxt', null);
@@ -146,7 +145,7 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('accountingVoucherStatus', $('#accountingVoucherStatus').val());
         $.cookie('accountingVoucherMallVal', $('#accountingDepartment').val());
-        $.cookie('accountingVoucherMallTxt', $('#select2-department-container').attr('title'));
+        $.cookie('accountingVoucherMallTxt', $('#accountingDepartment').find('option:selected').text());
         $.cookie('accountingVoucherCode', $('#accountingVoucherCode').val()); 
         $.cookie('accountingVoucherDate', $('#accountingVoucherDate').val());
         $.cookie('accountingYearMonth', $('#accountingYearMonth').val());
@@ -458,6 +457,7 @@ function getVoucherDetail(messIdOs){
     $('#deleteVoucher, #adjustRow').hide();
     var voucher = $.parseJSON(sessionStorage.getItem("voucher"));
     $('#voucherType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
+    $('#voucherUpdated').text('');
     $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
@@ -495,6 +495,8 @@ function getVoucherDetail(messIdOs){
                     break;
             }            
             $('.modal-header h4').prepend(temp);
+            
+            $('#voucherUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
             
             $('#voucherCode').val(v.voucherCode);
             $('#voucherType').val(v.voucherType).trigger('change');
@@ -1416,8 +1418,7 @@ function updateRowSapGLVoucherItem(ic, v) {
     div.appendChild(percent);
     column5.appendChild(div);
 
-    var div = document.createElement("div"); //利润中心
-    var input = document.createElement("input");
+    var input = document.createElement("input"); //利润中心
     input.setAttribute("class","form-control");
     input.setAttribute("id","voucherItemProfitCenter_"+count.toLocaleString());
     input.setAttribute("type","text");
