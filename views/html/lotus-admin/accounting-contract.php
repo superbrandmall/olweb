@@ -132,11 +132,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">查看详情</div>
+                                                                <div class="th-inner">SAP合同编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">租户名称</div>
+                                                                <div class="th-inner" style="width: 250px;">租户名称</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -144,11 +144,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">租金类型</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">租户编码</div>
+                                                                <div class="th-inner" style="width: 100px;">租金类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -160,7 +156,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">租赁起租日期</div>
+                                                                <div class="th-inner" style="width: 160px;">租赁期限</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -168,7 +164,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">商场服务费</div>
+                                                                <div class="th-inner">物业管理费</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -188,11 +184,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">合同类型</div>
+                                                                <div class="th-inner" style="width: 150px;">合同类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">合同编码</div>
+                                                                <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -216,15 +212,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">租赁结束日期</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
                                                                 <div class="th-inner">合同状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">专柜面积</div>
+                                                                <div class="th-inner">计租面积</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -235,10 +227,41 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="th-inner">合同租金税率</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 190px;">创建信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 190px;">最后修改信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="contract"></tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+                                        <div class="fixed-table-pagination" style="clear: both;">
+                                            <div class="pull-left pagination-detail">
+                                                <span id="selected"></span>
+                                                <span class="pagination-info"></span>
+                                                <span class="page-list">
+                                                    <span class="btn-group dropdown">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="page-size">20</span>
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu">
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-contract?items=10">10</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-contract?items=20">20</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-contract?items=30">30</a></li>
+                                                            <li role="menuitem"><a href="/lotus-admin/accounting-contract?items=50">50</a></li>
+                                                        </ul>
+                                                    </span> 行每页
+                                                </span>
+                                            </div>
+                                            <div class="pull-right pagination">
+                                                <ul class="pagination"></ul>
                                             </div>
                                         </div>
                                     </div>
@@ -252,7 +275,5 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 </div>
-
-<?php include 'component/investment-contract-balance-create.php'; ?>
 
 <?php include 'footer.php'; ?>
