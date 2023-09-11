@@ -17,13 +17,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header" style="height: 260px;">
         <h4>
-            租户(客户/供应商)
+            账务 - 商户
         </h4>
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/accounting-voucher?items=20">会计凭证</a></li>
-                    <li class="active"><a href="javascript: void(0);">租户</a></li>
+                    <li class="active"><a href="javascript: void(0);">商户</a></li>
                     <li><a href="/lotus-admin/accounting-contract?items=20">合同</a></li>
                 </ol>
             </div>
@@ -33,7 +33,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingTenantNo" class="col-md-4 control-label" style="text-align: right;">企业编码</label>
+                            <label for="accountingTenantNo" class="col-md-4 control-label" style="text-align: right;">商户编码</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <input class="form-control" id="accountingTenantNo" name="accountingTenantNo" type="text" />
                             </div>
@@ -41,7 +41,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingTenantName" class="col-md-4 control-label" style="text-align: right;">企业名称</label>
+                            <label for="accountingTenantName" class="col-md-4 control-label" style="text-align: right;">商户名称</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <input class="form-control" id="accountingTenantName" name="accountingTenantName" type="text" />
                             </div>
@@ -126,12 +126,12 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
-                                                            <th>
-                                                                <div class="th-inner"><input type="checkbox" id="all" value=""></div>
-                                                                <div class="fht-cell"></div>
+                                                            <th style="z-index: 1;">
+                                                                <div class="th-inner" style="background: #fff;"><input type="checkbox" id="all" value=""></div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 280px;">名称</div>
+                                                                <div class="th-inner" style="width: 280px;">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

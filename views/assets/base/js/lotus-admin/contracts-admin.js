@@ -334,7 +334,7 @@ function findAllContractsByKVCondition(p,c){
                             <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
                             <td>'+(v.vshopLotus != null ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
-                            <td>'+(v.unitArea || '')+'㎡</td>\n\
+                            <td>'+accounting.formatNumber(v.unitArea)+'㎡</td>\n\
                             <td>'+(v.vshopLotus != null ? v.vshopLotus.floorName : '')+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\

@@ -293,6 +293,7 @@ function findBalanceByKVCondition(p,c) {
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getBalanceDetail("'+v.id+'")\'>查看详情</a></td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
                             <td id="voucherFlag_'+v.id+'">'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
+                            <td>'+(v.voucherCode || '')+'</td>\n\
                             <td>'+(v.itemType=='normal'?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
                             <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
@@ -310,7 +311,7 @@ function findBalanceByKVCondition(p,c) {
                     $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
                     $('#totalAmount').text(accounting.formatNumber(totalAmount));
                     
-                    if($.cookie('generateVoucherEntryResult') != '' && JSON.parse($.cookie('generateVoucherEntryResult')).length > 0){
+                    if($.cookie('generateVoucherEntryResult') && $.cookie('generateVoucherEntryResult') != '' && JSON.parse($.cookie('generateVoucherEntryResult')).length > 0){
                         $.each(JSON.parse($.cookie('generateVoucherEntryResult')), function(j,w) {
                             if(w.resultCode == 'ERROR'){
                                 $('#voucherFlag_'+w.id).append('<strong class="text-red">'+w.resultMsg+'</strong>');
@@ -376,7 +377,7 @@ function findBalanceByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#balance').html('<tr><td colspan="16" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#balance').html('<tr><td colspan="17" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -829,7 +830,7 @@ function editCalc(calc) {
         map.contractVersion = $('#balanceContract').find('option:selected').text().split(' | ')[4].substr(1,1);
         map.endDate = $('#endDate').val();  
         map.itemCode = $('#balanceTermType').find('option:selected').val();       
-        map.itemName = $('#balanceTermType').find('option:selected').text();
+        map.itemName = $('#balanceTermType').find('option:selected').text().split('[')[0],
         map.remarks = $('#remarks').val();
         map.rentAmount = numberWithoutCommas($('#rentAmount').val());
         map.settleDay = $('#settleDay').val();      
@@ -956,7 +957,7 @@ function saveCalc() {
             "invoiceFlag": 1,
             "isOverdueFlag": 1,
             "itemCode": $('#balanceTermType').find('option:selected').val(),       
-            "itemName": $('#balanceTermType').find('option:selected').text(),
+            "itemName": $('#balanceTermType').find('option:selected').text().split('[')[0],
             "itemType": "adjust",
             "overdueInvoiceFlag": 1,
             "overdueRate": 0.00100,

@@ -19,13 +19,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper">
     <section class="sub-header" style="height: 260px;">
         <h4>
-            会计凭证
+            账务 - 会计凭证
         </h4>
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li class="active"><a href="javascript: void(0);">会计凭证</a></li>
-                    <li><a href="/lotus-admin/accounting-tenant?items=20">租户</a></li>
+                    <li><a href="/lotus-admin/accounting-tenant?items=20">商户</a></li>
                     <li><a href="/lotus-admin/accounting-contract?items=20">合同</a></li>
                 </ol>
             </div>
@@ -151,9 +151,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
-                                                            <th>
-                                                                <div class="th-inner"><input type="checkbox" id="all" value=""></div>
-                                                                <div class="fht-cell"></div>
+                                                            <th style="z-index: 1;">
+                                                                <div class="th-inner" style="background: #fff;"><input type="checkbox" id="all" value=""></div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">凭证编码</div>
@@ -176,19 +176,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">合同签约编号</div>
+                                                                <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">位置</div>
+                                                                <div class="th-inner" style="width: 100px;">铺位</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 300px;">对方单位</div>
+                                                                <div class="th-inner" style="width: 300px;">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">凭证日期</div>
+                                                                <div class="th-inner" style="width: 90px;">凭证日期</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 120px;">科目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

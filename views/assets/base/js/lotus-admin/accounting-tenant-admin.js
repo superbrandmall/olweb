@@ -4,26 +4,26 @@ if($.cookie('checkTenant') &&  JSON.parse($.cookie('checkTenant')).length > 0){
     $.checkTenant = [];
 }
 
-if(getURLParameter('s')) {
-    switch (getURLParameter('s')) {
-        case "succeed":
-            successMsg('00','保存成功！');
-            break;
-        case "voucher":
-            successMsg('00','传凭成功！');
-            break;
-        case "delete":
-            successMsg('00','删除成功！');
-            break;
-        default:
-            break;
-    }
-    setTimeout(function () {
-        window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-    },1000);
-}
-
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            case "voucher":
+                successMsg('00','传凭成功！');
+                break;
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+
     var auth = 0;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
@@ -118,6 +118,8 @@ $(document).ready(function(){
         $.cookie('checkTenant','');
         findTenantByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findTenantByKVCondition(p,c) {
@@ -239,8 +241,13 @@ function findTenantByKVCondition(p,c) {
                             checked = '';
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#tenant').append('<tr>\n\
-                            <td><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getTenantDetail("'+v.messIdOs+'")\'>'+v.tenantName+'['+v.tenantNo+']</a></td>\n\
                             <td>'+v.postCode+'</td>\n\
                             <td>'+(v.paymentMethod || '')+'</td>\n\

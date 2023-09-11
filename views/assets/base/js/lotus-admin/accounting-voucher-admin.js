@@ -174,6 +174,8 @@ $(document).ready(function(){
             ($('#voucherItemLocalAmount_3').val(accounting.formatNumber(Math.abs(parseFloat(numberWithoutCommas($('#voucherAmount').val()))) - Math.abs($(this).val()))));
         }
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findVoucherByKVCondition(p,c) {
@@ -313,7 +315,7 @@ function findVoucherByKVCondition(p,c) {
                                 disabled = '';
                                 break;
                             case "2":
-                                voucherStatus = '<span class="badge badge-danger">传凭失败</span>';
+                                voucherStatus = '<span class="badge badge-danger">传凭失败</span><strong class="text-red">'+v.resultMsg+'</strong>';
                                 disabled = '';
                                 break;
                             case "8":
@@ -350,8 +352,13 @@ function findVoucherByKVCondition(p,c) {
                             })
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#voucher').append('<tr>\n\
-                            <td><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+disabled+'></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+disabled+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getVoucherDetail("'+v.messIdOs+'")\'>'+v.voucherCode+'</a></td>\n\
                             <td>'+voucherStatus+'</td>\n\
                             <td>'+(v.tableId!=null?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
@@ -361,6 +368,7 @@ function findVoucherByKVCondition(p,c) {
                             <td>'+v.unitName+'</td>\n\
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
                             <td>'+v.voucherDate+'</td>\n\
+                            <td>'+v.itemName+'['+v.itemCode+']</td>\n\
                             <td><strong>'+accounting.formatNumber(v.amount)+'</strong></td>\n\
                             <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
                             <td>'+v.yyyymm+'</td>\n\
@@ -421,7 +429,7 @@ function findVoucherByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#voucher').html('<tr><td colspan="15" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#voucher').html('<tr><td colspan="16" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

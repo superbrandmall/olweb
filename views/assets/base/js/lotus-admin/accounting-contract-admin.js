@@ -4,26 +4,26 @@ if($.cookie('checkContract') &&  JSON.parse($.cookie('checkContract')).length > 
     $.checkContract = [];
 }
 
-if(getURLParameter('s')) {
-    switch (getURLParameter('s')) {
-        case "succeed":
-            successMsg('00','保存成功！');
-            break;
-        case "voucher":
-            successMsg('00','传凭成功！');
-            break;
-        case "delete":
-            successMsg('00','删除成功！');
-            break;
-        default:
-            break;
-    }
-    setTimeout(function () {
-        window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-    },1000);
-}
-
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            case "voucher":
+                successMsg('00','传凭成功！');
+                break;
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+
     var auth = 0;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
@@ -53,6 +53,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('LOTUS_SAP_CONTRACT_STATE');
     }
     
+    if(!sessionStorage.getItem("UNIT_TYPE") || sessionStorage.getItem("UNIT_TYPE") == null || sessionStorage.getItem("UNIT_TYPE") == '') {
+        findDictCodeByDictTypeCode('UNIT_TYPE');
+    }
+    
     if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
         findAllUsers();
     }
@@ -62,6 +66,22 @@ $(document).ready(function(){
         findContractByKVCondition(getURLParameter('page'),items);
     } else {
         findContractByKVCondition(1,items);
+    }
+    
+    if($.cookie('accountingContractMallVal') != null && $.cookie('accountingContractMallVal') != 'null'){
+        var newOption = new Option($.cookie('accountingContractMallTxt'), $.cookie('accountingContractMallVal'), true, true);
+        $('#accountingContractDepartment').append(newOption).trigger('change');
+    } else {
+        $('#accountingContractDepartment').val('').trigger('change');
+    }
+    
+    if($.cookie('accountingContractUnitType') != ''){
+        $('#unitType').val($.cookie('accountingContractUnitType')).trigger('change');
+    }
+    
+    if($.cookie('accountingContractSelectStoreVal') != null){
+        var newOption = new Option($.cookie('accountingContractSelectStoreTxt'), $.cookie('accountingContractSelectStoreVal'), true, true);
+        $('#selectStore').append(newOption).trigger('change');
     }
     
 //    if($.cookie('accountingContractNo') != null && $.cookie('accountingContractNo') != ''){
@@ -105,33 +125,57 @@ $(document).ready(function(){
             break;
     }
     
+    if($("#accountingContractDepartment").val() != '' && $("#accountingContractDepartment").val() != null){
+        updateSelectStoreDropDownByMallCode(10,$("#accountingContractDepartment").val());
+    }
+    $("#accountingContractDepartment").on('change',function(){
+        updateSelectStoreDropDownByMallCode(10,$(this).val());
+    })
+    
     $('#clear').click(function(){
+        $.cookie('accountingContractMallTxt', null);
+        $.cookie('accountingContractMallVal', null);
+        $.cookie('accountingContractUnitType','');
+        $.cookie('accountingContractSelectStoreVal', null);
+        
+        
+        
         $.cookie('accountingContractNo','');
         $.cookie('accountingContractName', '');
         $.cookie('accountingContractShortName', '');
-        $.cookie('accountingContractMallTxt', null);
-        $.cookie('accountingContractMallVal', null);
         $.cookie('accountingContractUSCC', '');
 
+
+
+        $('#accountingContractDepartment').val('').trigger('change');
+        $('#selectStore').empty();
+        $('#unitType, #selectStore').select2("val", "");
+        
         $('#accountingContractNo').val('');
         $('#accountingContractName').val('');
         $('#accountingContractShortName').val('');
-        $('#accountingContractDepartment').val('').trigger('change');
         $('#accountingContractUSCC').val('');
     })
     
     $('#search').click(function(){
+        $.cookie('accountingContractMallVal', $('#accountingContractDepartment').val());
+        $.cookie('accountingContractMallTxt', $('#accountingContractDepartment').find('option:selected').text());
+        $.cookie('accountingContractUnitType', $('#unitType').val());
+        $.cookie('accountingContractSelectStoreVal', $('#selectStore').val());
+        $.cookie('accountingContractSelectStoreTxt', $('#select2-selectStore-container').text());
+        
+        
         $.cookie('accountingContractNo', $('#accountingContractNo').val());
         $.cookie('accountingContractName', $('#accountingContractName').val());
         $.cookie('accountingContractShortName', $('#accountingContractShortName').val());
-        $.cookie('accountingContractMallVal', $('#accountingContractDepartment').val());
-        $.cookie('accountingContractMallTxt', $('#accountingContractDepartment').find('option:selected').text());
         $.cookie('accountingContractUSCC', $('#accountingContractUSCC').val());
         
         $.checkContract = [];
         $.cookie('checkContract','');
         findContractByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findContractByKVCondition(p,c) {
@@ -139,42 +183,9 @@ function findContractByKVCondition(p,c) {
     var param = {};
     var conditionGroups = [];
     
-    if($.cookie('accountingContractNo') != null && $.cookie('accountingContractNo') != ''){
-        param = {
-            "columnName": "contractNo",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('accountingContractNo')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('accountingContractName') != null && $.cookie('accountingContractName') != ''){
-        param = {
-            "columnName": "contractName",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('accountingContractName')
-        }
-        params.push(param);
-    }
-   
-    if($.cookie('accountingContractShortName') != null && $.cookie('accountingContractShortName') != ''){
-        param = {
-            "columnName": "shortName",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('accountingContractShortName')
-        }
-        params.push(param);
-    }
-    
     if($.cookie('accountingContractMallVal') != null && $.cookie('accountingContractMallVal') != 'null'){
         param = {
-            "columnName": "companyCode",
+            "columnName": "mallCode",
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "=",
@@ -183,16 +194,61 @@ function findContractByKVCondition(p,c) {
         params.push(param);
     }
     
-    if($.cookie('accountingContractUSCC') != null && $.cookie('accountingContractUSCC') != ''){
+    if($.cookie('accountingContractUnitType') && $.cookie('accountingContractUnitType') != ''){
         param = {
-            "columnName": "uscc",
+            "columnName": "unitCode",
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "LIKE",
-            "value": $.cookie('accountingContractUSCC')
+            "value": 'F'+$.cookie('accountingContractUnitType')
         }
         params.push(param);
     }
+    
+    if($.cookie('accountingContractSelectStoreVal') != null && $.cookie('accountingContractSelectStoreVal') != '' && $.cookie('accountingContractSelectStoreVal') != 'null'){
+        param = {
+            "columnName": "unitName",
+            "columnPatten": "",
+            "operator": "AND",
+            "value": $.cookie('accountingContractSelectStoreVal').split(':::')[2]
+        }
+        params.push(param);
+    }
+    
+    
+    
+//    if($.cookie('accountingContractName') != null && $.cookie('accountingContractName') != ''){
+//        param = {
+//            "columnName": "contractName",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "LIKE",
+//            "value": $.cookie('accountingContractName')
+//        }
+//        params.push(param);
+//    }
+//   
+//    if($.cookie('accountingContractShortName') != null && $.cookie('accountingContractShortName') != ''){
+//        param = {
+//            "columnName": "shortName",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "LIKE",
+//            "value": $.cookie('accountingContractShortName')
+//        }
+//        params.push(param);
+//    }
+//    
+//    if($.cookie('accountingContractUSCC') != null && $.cookie('accountingContractUSCC') != ''){
+//        param = {
+//            "columnName": "uscc",
+//            "columnPatten": "",
+//            "conditionOperator": "AND",
+//            "operator": "LIKE",
+//            "value": $.cookie('accountingContractUSCC')
+//        }
+//        params.push(param);
+//    }
     
     if(params.length == 0){
         params = [{
@@ -246,6 +302,7 @@ function findContractByKVCondition(p,c) {
                     } else {
                         $(".selected").text("");
                     }
+                    
                     $.each(response.data.content, function(i,v){  
                         if($.checkContract && $.checkContract.length > 0 && isInArray($.checkContract,v.messIdOs) == 1) {
                             checked = ' checked';
@@ -253,31 +310,35 @@ function findContractByKVCondition(p,c) {
                             checked = '';
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#contract').append('<tr>\n\
-                            <td><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
-                            <td>'+v.sapContractNo+'</td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
+                            <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
-                            <td>'+accounting.formatNumber(v.rentDeposit)+'</td>\n\
-                            <td>'+renderSapRentType(v.rentType)+'</td>\n\
+                            <td>'+v.mallName+'['+v.mallCode+']</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+v.contractNo+'</td>\n\
+                            <td>'+renderSapContractState(v.contractStatus)+'</td>\n\
+                            <td>'+accounting.formatNumber(v.rentArea)+'㎡</td>\n\
                             <td>'+v.companyCode+'</td>\n\
                             <td>'+renderSapCommercialType(v.bizType)+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
-                            <td>'+accounting.formatNumber(v.dayRentAmount)+'</td>\n\
-                            <td>'+accounting.formatNumber(v.propertyFee)+'</td>\n\
-                            <td>'+accounting.formatNumber(v.graphFee)+'</td>\n\
-                            <td>'+v.mallName+'['+v.mallCode+']</td>\n\
-                            <td>'+accounting.formatNumber(v.minDayRentAmount)+'</td>\n\
                             <td>'+(v.sapMallCode || '')+'</td>\n\
                             <td>'+renderSapContractType(v.contractType)+'</td>\n\
-                            <td>'+v.contractNo+'</td>\n\
-                            <td>'+accounting.formatNumber(v.waterDeposit)+'</td>\n\
-                            <td>'+v.brandName+'</td>\n\
-                            <td>'+accounting.formatNumber(v.yearPropertyFee)+'</td>\n\
-                            <td>'+(accounting.formatNumber(v.buildDeposit) || '')+'</td>\n\
-                            <td>'+accounting.formatNumber(v.rentAmount)+'</td>\n\
-                            <td>'+renderSapContractState(v.contractStatus)+'</td>\n\
-                            <td>'+accounting.formatNumber(v.rentArea)+'</td>\n\
-                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+renderSapRentType(v.rentType)+'</td>\n\
+                            <td>'+accounting.formatNumber(v.rentAmount)+'元/月</td>\n\
+                            <td>'+accounting.formatNumber(v.dayRentAmount)+'元/㎡/天</td>\n\
+                            <td>'+accounting.formatNumber(v.propertyFee)+'元/月</td>\n\
+                            <td>'+accounting.formatNumber(v.graphFee)+'元</td>\n\
+                            <td>'+accounting.formatNumber(v.minDayRentAmount)+'元/㎡/天</td>\n\
+                            <td>'+accounting.formatNumber(v.rentDeposit)+'元</td>\n\
+                            <td>'+accounting.formatNumber(v.waterDeposit)+'元</td>\n\
+                            <td>'+accounting.formatNumber(v.yearPropertyFee)+'元/年</td>\n\
+                            <td>'+accounting.formatNumber(v.buildDeposit)+'元</td>\n\
                             <td>'+v.taxRate * 100+'%</td>\n\
                             <td>'+v.created+'['+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
                             <td>'+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
@@ -336,7 +397,7 @@ function findContractByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#voucher').html('<tr><td colspan="14" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#voucher').html('<tr><td colspan="26" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
