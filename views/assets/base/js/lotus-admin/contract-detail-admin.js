@@ -247,7 +247,7 @@ function findContractByContractNo() {
                     $('#selectStore').append(temp).trigger('change');
                     
                     $("#selectStore").change(function(){
-                        var selectStoreArea = $('#select2-selectStore-container').text().split(' | ')[1];
+                        var selectStoreArea = $('#select2-selectStore-container').find('option:selected').text().split(' | ')[1];
                         selectStoreArea = selectStoreArea.split('㎡')[0];
                         $('#area').val(selectStoreArea);
                         var floor = new Option($('#selectStore').val().split(':::')[3], $('#selectStore').val().split(':::')[4], true, true);
@@ -1619,12 +1619,12 @@ function saveContractFixedRent() {
                         $.contract.fixedRent[i].created = null;
                         $.contract.fixedRent[i].updated = null;
                         $.contract.fixedRent[i].itemCode = $('#fixedRentItem_'+index).val();
-                        $.contract.fixedRent[i].itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+                        $.contract.fixedRent[i].itemName = $('#fixedRentItem_'+index).find('option:selected').text().split('[')[0];
 
                         $.contract.fixedRent[i].settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
-                        $.contract.fixedRent[i].settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
+                        $.contract.fixedRent[i].settlePeriodName = $('#fixedRentSettlePeriod_1').find('option:selected').text();
                         $.contract.fixedRent[i].periodTypeCode = $('#fixedRentPeriodType_1').val();
-                        $.contract.fixedRent[i].periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
+                        $.contract.fixedRent[i].periodTypeName = $('#fixedRentPeriodType_1').find('option:selected').text();
                         $.contract.fixedRent[i].settleDay = $('#fixedRentSettleDay_1').val();
                         if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
                             $.contract.fixedRent[i].isOverdueFlag = 1;
@@ -1658,15 +1658,15 @@ function saveContractFixedRent() {
                         }
                     } else {
                         fixedRent.itemCode = $('#fixedRentItem_'+index).val();
-                        fixedRent.itemName = $('#select2-fixedRentItem_'+index+'-container').text().split('[')[0];
+                        fixedRent.itemName = $('#fixedRentItem_'+index).find('option:selected').text().split('[')[0];
 
                         fixedRent.shopCode = $.contract.content.shopCode;
                         fixedRent.area = $.contract.content.area;
 
                         fixedRent.settlePeriodCode = $('#fixedRentSettlePeriod_1').val();
-                        fixedRent.settlePeriodName = $('#select2-fixedRentSettlePeriod_1-container').text();
+                        fixedRent.settlePeriodName = $('#fixedRentSettlePeriod_1').find('option:selected').text();
                         fixedRent.periodTypeCode = $('#fixedRentPeriodType_1').val();
-                        fixedRent.periodTypeName = $('#select2-fixedRentPeriodType_1-container').text();
+                        fixedRent.periodTypeName = $('#fixedRentPeriodType_1').find('option:selected').text();
                         fixedRent.settleDay = $('#fixedRentSettleDay_1').val();
                         if($('#fixedRentIsOverdueFlag_1').prop('checked') == true){
                             fixedRent.isOverdueFlag = 1;
@@ -1805,12 +1805,12 @@ function saveContractPropertyMgmt() {
                         $.contract.propertyMgmt[i].created = null;
                         $.contract.propertyMgmt[i].updated = null;
                         $.contract.propertyMgmt[i].itemCode = $('#propertyMgmtItem_'+index).val();
-                        $.contract.propertyMgmt[i].itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
+                        $.contract.propertyMgmt[i].itemName = $('#propertyMgmtItem_'+index).find('option:selected').text().split('[')[0];
 
                         $.contract.propertyMgmt[i].settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
-                        $.contract.propertyMgmt[i].settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
+                        $.contract.propertyMgmt[i].settlePeriodName = $('#propertyMgmtSettlePeriod_1').find('option:selected').text();
                         $.contract.propertyMgmt[i].periodTypeCode = $('#propertyMgmtPeriodType_1').val();
-                        $.contract.propertyMgmt[i].periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
+                        $.contract.propertyMgmt[i].periodTypeName = $('#propertyMgmtPeriodType_1').find('option:selected').text();
                         $.contract.propertyMgmt[i].settleDay = $('#propertyMgmtSettleDay_1').val();
                         if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
                             $.contract.propertyMgmt[i].isOverdueFlag = 1;
@@ -1844,15 +1844,15 @@ function saveContractPropertyMgmt() {
                         }
                     } else {
                         propertyMgmt.itemCode = $('#propertyMgmtItem_'+index).val();
-                        propertyMgmt.itemName = $('#select2-propertyMgmtItem_'+index+'-container').text().split('[')[0];
+                        propertyMgmt.itemName = $('#propertyMgmtItem_'+index).find('option:selected').text().split('[')[0];
 
                         propertyMgmt.shopCode = $.contract.content.shopCode;
                         propertyMgmt.area = $.contract.content.area;
 
                         propertyMgmt.settlePeriodCode = $('#propertyMgmtSettlePeriod_1').val();
-                        propertyMgmt.settlePeriodName = $('#select2-propertyMgmtSettlePeriod_1-container').text();
+                        propertyMgmt.settlePeriodName = $('#propertyMgmtSettlePeriod_1').find('option:selected').text();
                         propertyMgmt.periodTypeCode = $('#propertyMgmtPeriodType_1').val();
-                        propertyMgmt.periodTypeName = $('#select2-propertyMgmtPeriodType_1-container').text();
+                        propertyMgmt.periodTypeName = $('#propertyMgmtPeriodType_1').find('option:selected').text();
                         propertyMgmt.settleDay = $('#propertyMgmtSettleDay_1').val();
                         if($('#propertyMgmtIsOverdueFlag_1').prop('checked') == true){
                             propertyMgmt.isOverdueFlag = 1;
@@ -1993,13 +1993,13 @@ function saveContractCommission() {
                         $.contract.commission[i].created = null;
                         $.contract.commission[i].updated = null;
                         $.contract.commission[i].itemCode = $('#commissionItem_'+index).val();
-                        $.contract.commission[i].itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
+                        $.contract.commission[i].itemName = $('#commissionItem_'+index).find('option:selected').text().split('[')[0];
 
                         $.contract.commission[i].salesType = $('#commissionSalesType_1').val();
                         $.contract.commission[i].settlePeriodCode = $('#commissionSettlePeriod_1').val();
-                        $.contract.commission[i].settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
+                        $.contract.commission[i].settlePeriodName = $('#commissionSettlePeriod_1').find('option:selected').text();
                         $.contract.commission[i].periodTypeCode = $('#commissionPeriodType_1').val();
-                        $.contract.commission[i].periodTypeName = $('#select2-commissionPeriodType_1-container').text();
+                        $.contract.commission[i].periodTypeName = $('#commissionPeriodType_1').find('option:selected').text();
                         $.contract.commission[i].settleDay = $('#commissionSettleDay_1').val();
                         if($('#commissionIsOverdueFlag_1').prop('checked') == true){
                             $.contract.commission[i].isOverdueFlag = 1;
@@ -2037,16 +2037,16 @@ function saveContractCommission() {
                         }
                     } else {
                         commission.itemCode = $('#commissionItem_'+index).val();
-                        commission.itemName = $('#select2-commissionItem_'+index+'-container').text().split('[')[0];
+                        commission.itemName = $('#commissionItem_'+index).find('option:selected').text().split('[')[0];
 
                         commission.shopCode = $.contract.content.shopCode;
                         commission.area = $.contract.content.area;
 
                         commission.salesType = $('#commissionSalesType_1').val();
                         commission.settlePeriodCode = $('#commissionSettlePeriod_1').val();
-                        commission.settlePeriodName = $('#select2-commissionSettlePeriod_1-container').text();
+                        commission.settlePeriodName = $('#commissionSettlePeriod_1').find('option:selected').text();
                         commission.periodTypeCode = $('#commissionPeriodType_1').val();
-                        commission.periodTypeName = $('#select2-commissionPeriodType_1-container').text();
+                        commission.periodTypeName = $('#commissionPeriodType_1').find('option:selected').text();
                         commission.settleDay = $('#commissionSettleDay_1').val();
                         if($('#commissionIsOverdueFlag_1').prop('checked') == true){
                             commission.isOverdueFlag = 1;
@@ -2189,12 +2189,12 @@ function saveContractPromotion() {
                         $.contract.promotion[i].created = null;
                         $.contract.promotion[i].updated = null;
                         $.contract.promotion[i].itemCode = $('#promotionItem_'+index).val();
-                        $.contract.promotion[i].itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
+                        $.contract.promotion[i].itemName = $('#promotionItem_'+index).find('option:selected').text().split('[')[0];
 
                         $.contract.promotion[i].settlePeriodCode = $('#promotionSettlePeriod_1').val();
-                        $.contract.promotion[i].settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
+                        $.contract.promotion[i].settlePeriodName = $('#promotionSettlePeriod_1').find('option:selected').text();
                         $.contract.promotion[i].periodTypeCode = $('#promotionPeriodType_1').val();
-                        $.contract.promotion[i].periodTypeName = $('#select2-promotionPeriodType_1-container').text();
+                        $.contract.promotion[i].periodTypeName = $('#promotionPeriodType_1').find('option:selected').text();
                         $.contract.promotion[i].settleDay = $('#promotionSettleDay_1').val();
                         if($('#promotionIsOverdueFlag_1').prop('checked') == true){
                             $.contract.promotion[i].isOverdueFlag = 1;
@@ -2228,15 +2228,15 @@ function saveContractPromotion() {
                         }
                     } else {
                         promotion.itemCode = $('#promotionItem_'+index).val();
-                        promotion.itemName = $('#select2-promotionItem_'+index+'-container').text().split('[')[0];
+                        promotion.itemName = $('#promotionItem_'+index).find('option:selected').text().split('[')[0];
 
                         promotion.shopCode = $.contract.content.shopCode;
                         promotion.area = $.contract.content.area;
 
                         promotion.settlePeriodCode = $('#promotionSettlePeriod_1').val();
-                        promotion.settlePeriodName = $('#select2-promotionSettlePeriod_1-container').text();
+                        promotion.settlePeriodName = $('#promotionSettlePeriod_1').find('option:selected').text();
                         promotion.periodTypeCode = $('#promotionPeriodType_1').val();
-                        promotion.periodTypeName = $('#select2-promotionPeriodType_1-container').text();
+                        promotion.periodTypeName = $('#promotionPeriodType_1').find('option:selected').text();
                         promotion.settleDay = $('#promotionSettleDay_1').val();
                         if($('#promotionIsOverdueFlag_1').prop('checked') == true){
                             promotion.isOverdueFlag = 1;
@@ -2353,7 +2353,7 @@ function saveContractDeposit() {
                     $.contract.deposit[i].created = null;
                     $.contract.deposit[i].updated = null;
                     $.contract.deposit[i].itemCode = $('#deposittermItem_'+index).val();
-                    $.contract.deposit[i].itemName = $('#select2-deposittermItem_'+index+'-container').text().split('[')[0];
+                    $.contract.deposit[i].itemName = $('#deposittermItem_'+index).find('option:selected').text().split('[')[0];
 
                     $.contract.deposit[i].amount =  numberWithoutCommas($('#deposittermAmount_'+index).val());
                     $.contract.deposit[i].paymentDate = $('#deposittermPaymentDate_'+index).val();
@@ -2363,7 +2363,7 @@ function saveContractDeposit() {
                 } else {
                     if(numberWithoutCommas($('#deposittermAmount_'+index).val()) > 0) {
                         deposit.itemCode = $('#deposittermItem_'+index).val();
-                        deposit.itemName = $('#select2-deposittermItem_'+index+'-container').text().split('[')[0];
+                        deposit.itemName = $('#deposittermItem_'+index).find('option:selected').text().split('[')[0];
 
                         deposit.amount =  numberWithoutCommas($('#deposittermAmount_'+index).val());
                         deposit.paymentDate = $('#deposittermPaymentDate_'+index).val();

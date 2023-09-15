@@ -137,7 +137,7 @@ function findContractByContractNo() {
                     $('#selectStore').append(temp).trigger('change');
                     
                     $("#selectStore").change(function(){
-                        var selectStoreArea = $('#select2-selectStore-container').text().split(' | ')[1];
+                        var selectStoreArea = $('#selectStore').find('option:selected').text().split(' | ')[1];
                         selectStoreArea = selectStoreArea.split('㎡')[0];
                         $('#area').val(selectStoreArea);
                         var floor = new Option($('#selectStore').val().split(':::')[3], $('#selectStore').val().split(':::')[4], true, true);
@@ -250,9 +250,9 @@ function findContractByContractNo() {
                     $('#bizDate').datepicker('update', data.bizDate);
                     
                     $("#brandName").change(function(){
-                        var contractName = $('#select2-brandName-container').text().split('[')[0];
+                        var contractName = $('#brandName').find('option:selected').text().split('[')[0];
                         $('#contractName2').val(contractName);
-                        var bizTypeName = $('#select2-brandName-container').text().split('[')[1];
+                        var bizTypeName = $('#brandName').find('option:selected').text().split('[')[1];
                         bizTypeName = bizTypeName.split(']')[0];
                         $('#bizTypeName').val(bizTypeName);
                     })
@@ -313,7 +313,7 @@ function saveContract() {
         var brandName = '';
         var brandCode = '';
         if( $('#brandName').val() && $('#brandName').val() != ''){
-            brandName = $('#select2-brandName-container').text().split('[')[0];
+            brandName = $('#brandName').find('option:selected').text().split('[')[0];
             brandCode = $('#brandName').val();
         }
 
@@ -328,8 +328,8 @@ function saveContract() {
         $.contract.content.sapContractNo = $.contract.content.contractVersion;
         $.contract.content.awardDate = $('#awardDate').val();
         $.contract.content.tenantCode = $('#selectTenant').val();
-        $.contract.content.tenantName = $('#select2-selectTenant-container').text().split(' | ')[1];
-        $.contract.content.tenantNo = $('#select2-selectTenant-container').text().split(' | ')[0];
+        $.contract.content.tenantName = $('#selectTenant').find('option:selected').text().split(' | ')[1];
+        $.contract.content.tenantNo = $('#selectTenant').find('option:selected').text().split(' | ')[0];
         $.contract.content.startDate = startDate;
         $.contract.content.endDate = endDate;
         $.contract.content.bizTypeName = $('#bizTypeName').val();

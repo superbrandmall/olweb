@@ -137,7 +137,7 @@ $(document).ready(function(){
         $.cookie('accountingContractMallVal', null);
         $.cookie('accountingContractUnitType','');
         $.cookie('accountingContractSelectStoreVal', null);
-        
+        $.cookie('accountingContractSelectStoreTxt', null);
         
         
         $.cookie('accountingContractNo','');
@@ -162,7 +162,7 @@ $(document).ready(function(){
         $.cookie('accountingContractMallTxt', $('#accountingContractDepartment').find('option:selected').text());
         $.cookie('accountingContractUnitType', $('#unitType').val());
         $.cookie('accountingContractSelectStoreVal', $('#selectStore').val());
-        $.cookie('accountingContractSelectStoreTxt', $('#select2-selectStore-container').text());
+        $.cookie('accountingContractSelectStoreTxt', $('#selectStore').find('option:selected').text());
         
         
         $.cookie('accountingContractNo', $('#accountingContractNo').val());
@@ -200,7 +200,7 @@ function findContractByKVCondition(p,c) {
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "LIKE",
-            "value": 'F'+$.cookie('accountingContractUnitType')
+            "value": 'F'+$.cookie('accountingContractUnitType').split(':::')[0]
         }
         params.push(param);
     }

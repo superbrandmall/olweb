@@ -8,7 +8,7 @@ $(document).ready(function(){
         $('#mallCode').append(newOption).trigger('change');
     } else {
         $("#mallCode").val($.cookie('mallSelected').split(':::')[1]).trigger('change');
-        $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+        $.cookie('searchMallCode', $('#mallCode').find('option:selected').text().split(' [ ')[0]+':::'+$('#mallCode').val());
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -49,7 +49,7 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('searchUnit', $('#unit').val());
         if($('#mallCode').val() != null){
-            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+            $.cookie('searchMallCode', $('#mallCode').find('option:selected').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
             $.cookie('searchMallCode', null);
         }

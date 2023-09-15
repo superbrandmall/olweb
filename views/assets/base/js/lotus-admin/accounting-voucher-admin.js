@@ -4,26 +4,26 @@ if($.cookie('checkVoucher') &&  JSON.parse($.cookie('checkVoucher')).length > 0)
     $.checkVoucher = [];
 }
 
-if(getURLParameter('s')) {
-    switch (getURLParameter('s')) {
-        case "succeed":
-            successMsg('00','保存成功！');
-            break;
-        case "voucher":
-            successMsg('00','传凭成功！');
-            break;
-        case "delete":
-            successMsg('00','删除成功！');
-            break;
-        default:
-            break;
-    }
-    setTimeout(function () {
-        window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-    },1000);
-}
-
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            case "voucher":
+                successMsg('00','传凭成功！');
+                break;
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+
     var auth = 0;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
@@ -315,7 +315,7 @@ function findVoucherByKVCondition(p,c) {
                                 disabled = '';
                                 break;
                             case "2":
-                                voucherStatus = '<span class="badge badge-danger">传凭失败</span><strong class="text-red">'+v.resultMsg+'</strong>';
+                                voucherStatus = '<span class="badge badge-danger">传凭失败</span><strong class="text-red-bg-yellow">'+v.resultMsg+'</strong>';
                                 disabled = '';
                                 break;
                             case "8":

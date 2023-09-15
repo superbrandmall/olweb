@@ -4,26 +4,26 @@ if($.cookie('checkBalance') &&  JSON.parse($.cookie('checkBalance')).length > 0)
     $.checkBalance = [];
 }
 
-if(getURLParameter('s')) {
-    switch (getURLParameter('s')) {
-        case "succeed":
-            successMsg('00','保存成功！');
-            break;
-        case "voucher":
-            successMsg('00','凭证生成成功！');
-            break;
-        case "delete":
-            successMsg('00','删除成功！');
-            break;
-        default:
-            break;
-    }
-    setTimeout(function () {
-        window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
-    },1000);
-}
-
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','保存成功！');
+                break;
+            case "voucher":
+                successMsg('00','凭证生成成功！');
+                break;
+            case "delete":
+                successMsg('00','删除成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+
     var auth = 0;
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
         if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
@@ -38,10 +38,34 @@ $(document).ready(function(){
     }
                     
     updateSelectContractDropDown(50);
+    updateSelectTenantDropDown(50);
+    updateBrandNameDropDown(50);
+    
+    if($.cookie('balanceVoucherStatus') && $.cookie('balanceVoucherStatus') != ''){
+        var balanceVoucherStatus = $.cookie('balanceVoucherStatus').split(',');
+        if(balanceVoucherStatus.length > 1){
+            $('#voucherStatus').val(balanceVoucherStatus).trigger('change');
+        } else {
+            $('#voucherStatus').val($.cookie('balanceVoucherStatus')).trigger('change');
+        }
+    }
     
     if($.cookie('balanceMallVal') != null && $.cookie('balanceMallVal') != 'null'){
         var newOption = new Option($.cookie('balanceMallTxt'), $.cookie('balanceMallVal'), true, true);
         $('#department').append(newOption).trigger('change');
+    } else {
+        $('#department').val('').trigger('change');
+    }
+    
+    if($.cookie('balanceUnitType') != ''){
+        $('#unitType').val($.cookie('balanceUnitType')).trigger('change');
+    }
+    
+    if($.cookie('balanceSelectStoreVal') != null && $.cookie('balanceSelectStoreVal') != 'null'){
+        var newOption = new Option($.cookie('balanceSelectStoreTxt'), $.cookie('balanceSelectStoreVal'), true, true);
+        $('#selectStore').append(newOption).trigger('change');
+    } else {
+        $('#selectStore').val('').trigger('change');
     }
     
     if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null'){
@@ -52,6 +76,11 @@ $(document).ready(function(){
     if($.cookie('balanceSelectTenantVal') != null && $.cookie('balanceSelectTenantVal') != 'null'){
         var newOption = new Option($.cookie('balanceSelectTenantTxt'), $.cookie('balanceSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('balanceSelectBrandVal') != null && $.cookie('balanceSelectBrandVal') != 'null'){
+        var newOption = new Option($.cookie('balanceSelectBrandTxt'), $.cookie('balanceSelectBrandVal'), true, true);
+        $('#brandName').append(newOption).trigger('change');
     }
     
     if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null'){
@@ -91,7 +120,13 @@ $(document).ready(function(){
             break;
     }
     
-    updateSelectTenantDropDown(50);
+    if($("#department").val() != '' && $("#department").val() != null){
+        updateSelectStoreDropDownByMallCode(10,$("#department").val());
+    }
+    $("#department").on('change',function(){
+        updateSelectStoreDropDownByMallCode(10,$(this).val());
+    })
+    
     $('#termType, #itemType').show();
     
     $('input.money').on('focus',function(){
@@ -113,43 +148,68 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#department, #termType, #itemType').val('').trigger('change');
-        $('#selectContract, #selectTenant').empty(); 
-        $('#selectContract, #selectTenant').select2("val", "");
-        $('#yearMonth').val('');
-        
+        $.cookie('balanceVoucherStatus','');
         $.cookie('balanceTermType', null);
         $.cookie('balanceItemType', null);
         $.cookie('balanceContractTxt', null);
         $.cookie('balanceContractVal', null);
         $.cookie('balanceMallTxt', null);
         $.cookie('balanceMallVal', null);
+        $.cookie('balanceUnitType','');
+        $.cookie('balanceSelectStoreVal', null);
+        $.cookie('balanceSelectStoreTxt', null);
         $.cookie('balanceYearMonth', null);
         $.cookie('balanceSelectTenantVal', null);
         $.cookie('balanceSelectTenantTxt', null);
+        $.cookie('balanceSelectBrandVal', null);
+        $.cookie('balanceSelectBrandTxt', null);
+        
+        $('#voucherStatus, #department, #unitType, #termType, #itemType, #selectStore, #selectContract, #selectTenant, #brandName').val('').trigger('change');
+        $('#department, #termType, #itemType, #selectStore, #selectContract, #selectTenant, #brandName').empty(); 
+        $('#yearMonth').val('');
     })
     
     $('#search').click(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
+        $.cookie('balanceVoucherStatus', $('#voucherStatus').val());
         $.cookie('balanceTermType', $('#termType').val());
         $.cookie('balanceContractVal', $('#selectContract').val());
         $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
+        $.cookie('balanceUnitType', $('#unitType').val());
+        $.cookie('balanceSelectStoreVal', $('#selectStore').val());
+        $.cookie('balanceSelectStoreTxt', $('#selectStore').find('option:selected').text());
         $.cookie('balanceYearMonth', $('#yearMonth').val());
         $.cookie('balanceSelectTenantVal', $('#selectTenant').val());
-        $.cookie('balanceSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('balanceSelectTenantTxt', $('#selectTenant').find('option:selected').text());
+        $.cookie('balanceSelectBrandVal', $('#brandName').val());
+        $.cookie('balanceSelectBrandTxt', $('#brandName').find('option:selected').text());
         $.cookie('balanceItemType', $('#itemType').val());
         $.checkBalance = [];
         $.cookie('checkBalance','');
         findBalanceByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findBalanceByKVCondition(p,c) {
     var params = [];
     var param = {};
     var conditionGroups = [];
+    
+    if($.cookie('balanceVoucherStatus') != null && $.cookie('balanceVoucherStatus') != ''  && $.cookie('balanceVoucherStatus').substring(0,1) != ','){
+        var reg = new RegExp(",","g");
+        param = {
+            "columnName": "voucherFlag",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "in",
+            "value": $.cookie('balanceVoucherStatus').replace(reg,";")
+        }
+        params.push(param);
+    }
     
     if($.cookie('balanceMallVal') != null && $.cookie('balanceMallVal') != 'null'){
         param = {
@@ -162,16 +222,50 @@ function findBalanceByKVCondition(p,c) {
         params.push(param);
     }
     
+    if($.cookie('balanceUnitType') && $.cookie('balanceUnitType') != ''){
+        param = {
+            "columnName": "unitCode",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "LIKE",
+            "value": 'F'+$.cookie('balanceUnitType').split(':::')[0]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('balanceSelectStoreVal') != null && $.cookie('balanceSelectStoreVal') != '' && $.cookie('balanceSelectStoreVal') != 'null'){
+        param = {
+            "columnName": "unitName",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('balanceSelectStoreVal').split(':::')[2]
+        }
+        params.push(param);
+    }
+    
     if($.cookie('balanceContractVal') != null && $.cookie('balanceContractVal') != 'null' && $.cookie('balanceContractVal') != ''){
-        params = [{
+        param = {
             "columnName": "contractNo",
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "=",
             "value": $.cookie('balanceContractVal')
-        }]
+        }
+        params.push(param);
     }
-
+    
+    if($.cookie('balanceSelectBrandTxt') != null && $.cookie('balanceSelectBrandTxt') != '' && $.cookie('balanceSelectBrandTxt') != 'null'){
+        param = {
+            "columnName": "brandName",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('balanceSelectBrandTxt').split('[')[0]
+        }
+        params.push(param);
+    }
+    
     if($.cookie('balanceTermType') != null && $.cookie('balanceTermType') != 'null' && $.cookie('balanceTermType') != ''){
         param = {
             "columnName": "itemCode",
@@ -198,7 +292,8 @@ function findBalanceByKVCondition(p,c) {
         param = {
             "columnName": "tenantCode",
             "columnPatten": "",
-            "operator": "AND",
+            "conditionOperator": "AND",
+            "operator": "=",
             "value": $.cookie('balanceSelectTenantTxt').split(' | ')[0]
         }
         params.push(param);
@@ -216,13 +311,36 @@ function findBalanceByKVCondition(p,c) {
     }
     
     if(params.length == 0){
-        params = [{
-            "columnName": "mallCode",
-            "columnPatten": "",
-            "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('mallSelected').split(':::')[1]
-        }];
+        if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+            var flag = 1, mc = '';
+            $.each(JSON.parse($.cookie('userModules')), function(j,w) {
+                if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
+                    flag = 2;
+                    return;
+                } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
+                    flag = 1;
+                    mc += w.moduleCode + ';';
+                }
+            })
+            
+            if(flag == 1){
+                params = [{
+                    "columnName": "mallCode",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "in",
+                    "value": mc
+                }];
+            } else if(flag == 2){
+                params = [{
+                    "columnName": "state",
+                    "columnPatten": "",
+                    "conditionOperator": "AND",
+                    "operator": "=",
+                    "value": 1
+                }];
+            }
+        }
     }
 
     var map = {
@@ -297,13 +415,13 @@ function findBalanceByKVCondition(p,c) {
                             <td>'+(v.itemType=='normal'?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
                             <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
-                            <td>'+(v.unitName || '')+'</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+v.itemName+'['+v.itemCode+']</td>\n\
                             <td>收</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+v.yyyymm+'</td>\n\
-                            <td><strong>'+accounting.formatNumber(v.amount)+'</strong></td>\n\
-                            <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
+                            <td><strong>'+accounting.formatNumber(v.amount)+'</strong>元</td>\n\
+                            <td>'+accounting.formatNumber(v.taxAmount)+'元</td>\n\
                             <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
                             <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
                         </tr>');
@@ -314,7 +432,7 @@ function findBalanceByKVCondition(p,c) {
                     if($.cookie('generateVoucherEntryResult') && $.cookie('generateVoucherEntryResult') != '' && JSON.parse($.cookie('generateVoucherEntryResult')).length > 0){
                         $.each(JSON.parse($.cookie('generateVoucherEntryResult')), function(j,w) {
                             if(w.resultCode == 'ERROR'){
-                                $('#voucherFlag_'+w.id).append('<strong class="text-red">'+w.resultMsg+'</strong>');
+                                $('#voucherFlag_'+w.id).append('<strong class="text-red-bg-yellow">'+w.resultMsg+'</strong>');
                             }
                         })
                         
@@ -392,13 +510,6 @@ function getBalanceDetail(id){
     
     updateBalanceContractDropDown(50);
     
-    if($("#balanceDepartment").val() != '' && $("#balanceDepartment").val() != null){
-        updateBalanceStoreDropDownByMallCode(10,$("#balanceDepartment").val());
-    }
-    $("#balanceDepartment").on('change',function(){
-        updateBalanceStoreDropDownByMallCode(10,$(this).val());
-    })
-    
     $('.input-daterange, #billingDate, #paymentDate').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
@@ -423,8 +534,8 @@ function getBalanceDetail(id){
     $('#balanceUpdated').text('');
     $('#settleDay').val('25').trigger('change');
     $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate, #yearMonth, #remarks').val('');
-    $('#balanceDepartment, #balanceStore, #balanceContract').empty(); 
-    $('#balanceDepartment, #balanceStore, #balanceContract').select2("val", "");
+    $('#balanceDepartment, #balanceContract').empty(); 
+    $('#balanceDepartment, #balanceContract').select2("val", "");
     $('.modal-header h4').find('.badge').remove();
     $('.shield').remove();
     
@@ -458,9 +569,6 @@ function getBalanceDetail(id){
             
             temp = new Option(v.mallName+'['+v.mallCode+']',v.mallCode,true,true);
             $('#balanceDepartment').append(temp).trigger('change');
-            
-            temp = new Option((v.unitName +' | '+ v.area + '㎡'),v.shopCode+':::'+v.area, true, true);
-            $('#balanceStore').append(temp).trigger('change');
             
             temp = new Option(v.tenantName+'['+v.contractNo+'] | '+v.brandName+' | '+v.unitName+' | '+v.startDate+'～'+v.endDate+' | V'+v.contractVersion, v.contractNo, true, true);
             $('#balanceContract').append(temp).trigger('change');
@@ -541,7 +649,7 @@ function updateBalanceContractDropDown(data_count) {
             },
             data: function (params) {
                 var map = {
-                    key: params.term || $('#department').val(),
+                    key: params.term || $('#balanceDepartment').val(),
                     operator: "OR",
                     params: [
                       "mallCode","tenantName","contractNo","unitName","contractName"
@@ -558,146 +666,8 @@ function updateBalanceContractDropDown(data_count) {
                     return {
                         results: $.map(jsonData, function(item) {
                             data = {
-                                id: item.contractNo,
+                                id: item.contractNo + ':::' + item.shopCode + ':::' + item.area,
                                 text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
-                            }
-                            var returnData = [];
-                            returnData.push(data);
-                            return returnData;
-                        }),
-                        pagination: {
-                            "more": data_count <= jsonData.length
-                        }
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
-        }
-    });
-}
-
-function updateBalanceStoreDropDownByMallCode(data_count,mall_code) {
-    var selectStore = $('#balanceStore');
-    
-    selectStore.select2({
-        dropdownParent: $('#investment-contract-balance-create'),
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        allowClear: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: function (params) {
-                return $.api.baseLotus+"/api/vshop/lotus/findAllByKVCondition?page="+(params.page || 0)+"&size="+data_count+"&sort=id,asc";
-            },
-            type: "POST",
-            async: false,
-            dataType: "json",
-            contentType: "application/json",
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {
-                var term = params.term;
-                var mallCodes = mall_code;
-                var mallCode = mallCodes;
-                $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-                    if((v.roleCode == 'CROLE211008000002' || v.roleCode == 'CROLE220922000001') && v.moduleCode == 'ALL'){
-                        mallCodes = 'ALL';
-                        return false;
-                    }
-                })
-                
-                var params = [];
-                var conditionGroups = [];
-                var conditionGroup = {};
-                
-                params = [
-                    {
-                      "columnName": "mallCodes",
-                      "columnPatten": "",
-                      "conditionOperator": "AND",
-                      "operator": "=",
-                      "value": mallCodes
-                    },
-                    {
-                      "columnName": "mallCode",
-                      "columnPatten": "",
-                      "conditionOperator": "AND",
-                      "operator": "=",
-                      "value": mallCode
-                    },
-                    {
-                      "columnName": "userCode",
-                      "columnPatten": "",
-                      "conditionOperator": "AND",
-                      "operator": "=",
-                      "value": $.cookie('uid')
-                    }
-                ]
-
-                conditionGroup = {
-                    "conditionOperator": "AND",
-                    "params": params
-                }
-
-                conditionGroups.push(conditionGroup);
-                
-                
-                
-                if(term != undefined && term != '') {
-                    conditionGroups.push({
-                        "conditionOperator": "OR",
-                        "params": [{
-                                "columnName": "unitName",
-                                "columnPatten": "",
-                                "conditionOperator": "AND",
-                                "operator": "LIKE",
-                                "value": term
-                            }
-                        ]
-                    },{
-                        "conditionOperator": "OR",
-                        "params": [{
-                                "columnName": "unitCode",
-                                "columnPatten": "",
-                                "conditionOperator": "AND",
-                                "operator": "LIKE",
-                                "value": term
-                            }
-                        ]
-                    });
-                }
-                
-                var map = {
-                    "conditionGroups": conditionGroups,
-                    "params": []
-                }
-    
-                return JSON.stringify(map);
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'].content;
-                    params.page = params.page || 0;
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            data = {
-                                id: item.code+':::'+item.unitArea,
-                                text: item.unitName +' | '+ item.unitArea + '㎡'                            
                             }
                             var returnData = [];
                             returnData.push(data);
@@ -729,11 +699,6 @@ function saveCheck(v) {
     if($('#balanceContract').val() == null) {
         flag = 0;
         $('#balanceContract').parent().append(error);
-    }
-    
-    if($('#balanceStore').val() == null) {
-        flag = 0;
-        $('#balanceStore').parent().append(error);
     }
     
     if($('#balanceTermType').val() == '') {
@@ -825,8 +790,8 @@ function editCalc(calc) {
         
         var map = JSON.parse(calc);
         map.amount = numberWithoutCommas($('#amount').val());
-        map.area = $('#balanceStore').val().split(':::')[1];       
-        map.contractNo = $('#balanceContract').find('option:selected').val(); 
+        map.area = $('#balanceContract').val().split(':::')[2];       
+        map.contractNo = $('#balanceContract').val().split(':::')[0]; 
         map.contractVersion = $('#balanceContract').find('option:selected').text().split(' | ')[4].substr(1,1);
         map.endDate = $('#endDate').val();  
         map.itemCode = $('#balanceTermType').find('option:selected').val();       
@@ -834,7 +799,7 @@ function editCalc(calc) {
         map.remarks = $('#remarks').val();
         map.rentAmount = numberWithoutCommas($('#rentAmount').val());
         map.settleDay = $('#settleDay').val();      
-        map.shopCode = $('#balanceStore').val().split(':::')[0];
+        map.shopCode = $('#balanceContract').val().split(':::')[1];
         map.startDate = $('#startDate').val();    
         map.taxAmount = numberWithoutCommas($('#taxAmount').val());
         map.taxCode = $('#taxRate').find('option:selected').text();
@@ -877,6 +842,9 @@ function editCalc(calc) {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
                     
+                    $.cookie('balanceItemType','adjust');
+                    $.cookie('balanceYearMonth',$('#balanceYearMonth').val());
+                    
                     window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
@@ -891,13 +859,6 @@ function createBalanceDetail(){
     $('#investment-contract-balance-create').modal('toggle');
 
     updateBalanceContractDropDown(50);
-    
-    if($("#balanceDepartment").val() != '' && $("#balanceDepartment").val() != null){
-        updateBalanceStoreDropDownByMallCode(10,$("#balanceDepartment").val());
-    }
-    $("#balanceDepartment").on('change',function(){
-        updateBalanceStoreDropDownByMallCode(10,$(this).val());
-    })
     
     $('.input-daterange, #billingDate, #paymentDate').datepicker({
         'language': 'zh-CN',
@@ -921,8 +882,8 @@ function createBalanceDetail(){
     $('#balanceTermType, #taxRate').val('').trigger('change');
     $('#settleDay').val('25').trigger('change');
     $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
-    $('#balanceStore, #balanceContract').empty(); 
-    $('#balanceDepartment, #balanceStore, #balanceContract').select2("val", "");
+    $('#balanceContract').empty(); 
+    $('#balanceDepartment, #balanceContract').select2("val", "");
     $('#yearMonth, #remarks').val('');
     $('.modal-header h4').find('.badge').remove();
         
@@ -949,8 +910,8 @@ function saveCalc() {
         
         var map = {
             "amount": numberWithoutCommas($('#amount').val()),
-            "area": $('#balanceStore').val().split(':::')[1],
-            "contractNo": $('#balanceContract').find('option:selected').val(),
+            "area": $('#balanceContract').val().split(':::')[2],
+            "contractNo": $('#balanceContract').val().split(':::')[0],
             "contractVersion": $('#balanceContract').find('option:selected').text().split(' | ')[4].substr(1,1),
             "creatorOpenId": openId,
             "endDate": $('#endDate').val(),
@@ -969,7 +930,7 @@ function saveCalc() {
             "settleDay": $('#settleDay').val(),
             "settlePeriodCode": "M",
             "settlePeriodName": "月",
-            "shopCode": $('#balanceStore').val().split(':::')[0],
+            "shopCode": $('#balanceContract').val().split(':::')[1],
             "startDate": $('#startDate').val(),
             "taxAmount": numberWithoutCommas($('#taxAmount').val()),
             "taxCode": $('#taxRate').find('option:selected').text(),
@@ -1001,6 +962,9 @@ function saveCalc() {
                     if(xhr.getResponseHeader("Authorization") !== null){
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
+                    
+                    $.cookie('balanceItemType','adjust');
+                    $.cookie('balanceYearMonth',$('#balanceYearMonth').val());
                     
                     window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {

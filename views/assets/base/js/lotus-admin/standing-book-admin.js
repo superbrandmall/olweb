@@ -64,9 +64,9 @@ function findAllContractsByFreeCondition(p,c){
             ]
         }
     } else {
-        if($('#select2-department-container').text() != '未选择'){
+        if($('#department').find('option:selected').text() != '未选择'){
             map = {
-                "key": $('#select2-department-container').text().split('[')[1].split(']')[0],
+                "key": $('#department').find('option:selected').text().split('[')[1].split(']')[0],
                 "operator": "OR",
                 "params": [
                   "mallCode"

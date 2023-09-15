@@ -2648,7 +2648,7 @@ function updateSelectStoreDropDownByMallCode(data_count,mall_code) {
                         "columnPatten": "",
                         "conditionOperator": "AND",
                         "operator": "=",
-                        "value": $('#unitType').val()
+                        "value": $('#unitType').val().split(':::')[1]
                     });
                 }
 
@@ -4180,7 +4180,7 @@ function createContract() {
     userName = $('.navbar-nav .fa-user').siblings().text().trim().replace(/\s/g,"");
     
     if( $('#createContractDepartment').val() && $('#createContractDepartment').val() != '' && $('#createContractDepartment').val() != null){
-        mallName = $('#select2-createContractDepartment-container').text().split('[')[0];
+        mallName = $('#createContractDepartment').find('option:selected').text().split('[')[0];
         mallCode = $('#createContractDepartment').val();
     }
 
@@ -4190,12 +4190,12 @@ function createContract() {
         unitName = $('#createContractStore').val().split(':::')[2];
         floorName = $('#createContractStore').val().split(':::')[3];
         floorCode = $('#createContractStore').val().split(':::')[4];
-        area = $('#select2-createContractStore-container').text().split(' | ')[1].split('㎡')[0];
+        area = $('#createContractStore').find('option:selected').text().split(' | ')[1].split('㎡')[0];
     }
 
     if( $('#createContractBrandName').val() && $('#createContractBrandName').val() != '' && $('#createContractBrandName').val() != null){
-        brandName = $('#select2-createContractBrandName-container').text().split('[')[0];
-        bizTypeName = $('#select2-createContractBrandName-container').text().split('[')[1].split(']')[0];
+        brandName = $('#createContractBrandName').find('option:selected').text().split('[')[0];
+        bizTypeName = $('#createContractBrandName').find('option:selected').text().split('[')[1].split(']')[0];
         brandCode = $('#createContractBrandName').val();
     }
 

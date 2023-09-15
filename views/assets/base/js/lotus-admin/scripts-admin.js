@@ -213,10 +213,10 @@ $(document).ready(function(){
     
     $("#renewContract, #modifyContract").on("select2:select",function(){
         var id = $(this).attr('id').split('Contract')[0];
-        $("#"+id+"Tenant").text($('#select2-'+id+'Contract-container').text().split(' | ')[0].split('[')[0]);
-        $("#"+id+"ContractName").text($('#select2-'+id+'Contract-container').text().split(' | ')[1]);
-        $("#"+id+"UnitName").text($('#select2-'+id+'Contract-container').text().split(' | ')[2]);
-        $("#"+id+"StartEndDate").text($('#select2-'+id+'Contract-container').text().split(' | ')[3]);
+        $("#"+id+"Tenant").text($('#'+id+'Contract').find('option:selected').text().split(' | ')[0].split('[')[0]);
+        $("#"+id+"ContractName").text($('#'+id+'Contract').find('option:selected').text().split(' | ')[1]);
+        $("#"+id+"UnitName").text($('#'+id+'Contract').find('option:selected').text().split(' | ')[2]);
+        $("#"+id+"StartEndDate").text($('#'+id+'Contract').find('option:selected').text().split(' | ')[3]);
     })
     
     $('#createContractRequest').click(function(){

@@ -77,7 +77,7 @@ $(document).ready(function(){
         $.cookie('searchUnitType', $('#unitType').val());
         $.cookie('searchUser', $('#approveFirst').val());
         if($('#mallCode').val() != null){
-            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+            $.cookie('searchMallCode', $('#mallCode').find('option:selected').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
             $.cookie('searchMallCode', null);
         }
@@ -135,7 +135,7 @@ function findAllStoresByKVCondition(p,c){
             "columnName": "unitType",
             "columnPatten": "",
             "operator": "AND",
-            "value": $.cookie('searchUnitType')
+            "value": $.cookie('searchUnitType').split(':::')[1]
         }
         params.push(param);
     }

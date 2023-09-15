@@ -120,11 +120,11 @@ $(document).ready(function(){
         $.cookie('searchContractsContractName', $('#contractName').val());
         $.cookie('searchContractsContractVersion',$('#contractVersion').val());
         $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
-        $.cookie('searchContractsSelectTenantTxt', $('#select2-selectTenant-container').text());
+        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
         $.cookie('searchContractsUnitType', $('#unitType').val());
         $.cookie('searchContractsSelectStoreVal', $('#selectStore').val());
-        $.cookie('searchContractsSelectStoreTxt', $('#select2-selectStore-container').text());
+        $.cookie('searchContractsSelectStoreTxt', $('#selectStore').find('option:selected').text());
         findAllContractsByKVCondition(1,items);
     })
     
@@ -234,7 +234,7 @@ function findAllContractsByKVCondition(p,c){
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "LIKE",
-            "value": 'F'+$.cookie('searchContractsUnitType')
+            "value": 'F'+$.cookie('searchContractsUnitType').split(':::')[0]
         }
         params.push(param);
     }

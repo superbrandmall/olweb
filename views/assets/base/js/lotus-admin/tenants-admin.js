@@ -74,7 +74,7 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('searchTenantState',$('#state').val());
         $.cookie('searchContractsSelectTenantVal', $('#selectTenant').val());
-        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').text());
+        $.cookie('searchContractsSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('searchTenantType', $('#type').val());
         findAllTenantsByKVCondition(1,items);
     })

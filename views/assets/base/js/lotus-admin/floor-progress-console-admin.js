@@ -34,7 +34,7 @@ $(document).ready(function(){
     
     $('#search').click(function(){
         if($('#mallCode').val() != null){
-            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+            $.cookie('searchMallCode', $('#mallCode').find('option:selected').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
             $.cookie('searchMallCode', null);
         }

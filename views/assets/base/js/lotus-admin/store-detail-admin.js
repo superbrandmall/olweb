@@ -26,7 +26,8 @@ $(document).ready(function(){
                 required: true
             },
             unitArea: {
-                required: true
+                required: true,
+                min: 1
             },
             modality_1: {
                 required: true
@@ -59,7 +60,8 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: "请输入租赁面积"
+                required: "请输入租赁面积",
+                min: "租赁面积最小为1平方米"
             },
             modality_1: {
                 required: "请选择一级业态"
@@ -246,7 +248,7 @@ function saveStore() {
             "endDate": $('#endDate').val(),
             "enterFlag": $.store.enterFlag,
             "floorCode": $('#selectFloor').val(),
-            "floorName": $('#select2-selectFloor-container').text(),
+            "floorName": $('#selectFloor').find('option:selected').text(),
             "id": $.store.id,
             "liftFlag": $.store.liftFlag,
             "mallCode": $('#mallCode').val(),

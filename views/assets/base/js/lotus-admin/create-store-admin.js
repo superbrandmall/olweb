@@ -24,6 +24,13 @@ $(document).ready(function(){
                 required: true
             },
             unitArea: {
+                required: true,
+                min: 1
+            },
+            modality_1: {
+                required: true
+            },
+            modality_2: {
                 required: true
             }
         },
@@ -51,7 +58,14 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: "请输入租赁面积"
+                required: "请输入租赁面积",
+                min: "租赁面积最小为1平方米"
+            },
+            modality_1: {
+                required: "请选择一级业态"
+            },
+            modality_2: {
+                required: "请选择二级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -82,6 +96,12 @@ $(document).ready(function(){
         'clearBtn': true
     });
     
+    $("#modality_1").on('change',function(){
+        if($(this).val() != '') {
+            findBizByBiz1($(this).val());
+        }
+    })
+    
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
     });
@@ -90,6 +110,41 @@ $(document).ready(function(){
         fileUpload($(this).attr('id').split('_')[1]);
     })
 })
+
+function findBizByBiz1(biz) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
+        type: "GET",
+        async: true,
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.length > 0){
+                    $.each(response.data, function(i,v) {
+                        $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
+                        if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
+                            $("#modality_2 option:contains('"+v.modality2+"'):gt(0)").remove();
+                        }
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    }); 
+}
 
 function saveStore() {
     Ewin.confirm({ message: "确定要提交保存该铺位信息吗？" }).on(function (e) {
@@ -114,9 +169,11 @@ function saveStore() {
             "creatorOpenId": openId,
             "endDate": $('#endDate').val(),
             "floorCode": $('#selectFloor').val(),
-            "floorName": $('#select2-selectFloor-container').text(),
+            "floorName": $('#selectFloor').find('option:selected').text(),
             "mallCode": $('#mallCode').val(),
-            "modality": $('#modality_1').val(),
+            "modality": "",
+            "modality1": $('#modality_1').val(),
+            "modality2": $('#modality_2').val(),
             "shopStatus": 1,
             "shopState": 1,
             "state": 1,

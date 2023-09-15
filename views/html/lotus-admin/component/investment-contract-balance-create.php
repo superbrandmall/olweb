@@ -32,16 +32,6 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="balanceStore" class="col-md-4 control-label" style="text-align: right;">位置 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="balanceStore" style="width: 100%"></select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="col-md-4">
-                            <div class="form-group">
                                 <label for="balanceTermType" class="col-md-4 control-label" style="text-align: right;">科目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="balanceTermType" name="balanceTermType" style="width: 100%;">
@@ -59,6 +49,19 @@
                                         <option value="Y021">物业管理费-年度[Y021]</option>
                                         <option value="Y77">服务费-线损费[Y77]</option>
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="billingDate" class="col-md-4 control-label" style="text-align: right;">计划出账日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <div class="col-md-8 col-sm-12">
+                                    <div class="input-group">
+                                        <input class="form-control date-picker" id="billingDate" name="billingDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -93,17 +96,6 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="billingDate" class="col-md-4 control-label" style="text-align: right;">计划出账日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control date-picker" id="billingDate" name="billingDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
                                 <label for="paymentDate" class="col-md-4 control-label" style="text-align: right;">最后缴款日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
                                     <div class="input-group">
@@ -124,8 +116,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="taxAmount" class="col-md-4 control-label" style="text-align: right;">不含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -137,6 +127,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="rentAmount" class="col-md-4 control-label" style="text-align: right;">含税单价 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -159,8 +151,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="taxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -175,6 +165,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="settleDay" class="col-md-4 control-label" style="text-align: right;">结算日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -191,10 +183,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="form-group">
-                                <label for="remarks" class="col-md-4 control-label" style="text-align: right;">备注</label>
-                                <div class="col-md-8 col-sm-12">
+                                <label for="remarks" class="col-md-2 control-label" style="text-align: right;">备注</label>
+                                <div class="col-md-10 col-sm-12">
                                     <input class="form-control" id="remarks" type="text" />                                                
                                 </div>
                             </div>

@@ -72,12 +72,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="col-md-3 col-sm-12" style="text-align: left; padding-right: 0px;">
                                 <select class="select2" id="unitType" style="width: 100%">
                                     <option value=""></option>
-                                    <option value="L">正柜</option>
-                                    <option value="C">临时柜</option>
-                                    <option value="S">仓库</option>
-                                    <option value="T">基站</option>
-                                    <option value="R">停车场</option>
-                                    <option value="A">广告位</option>
+                                    <option value="L:::shoppe">正柜</option>
+                                    <option value="C:::kiosk">临时柜</option>
+                                    <option value="S:::stora">仓库</option>
+                                    <option value="T:::station">基站</option>
+                                    <option value="R:::park">停车场</option>
+                                    <option value="A:::ad">广告位</option>
+                                    <option value="B:::booth">虚拟点位</option>
+                                    <option value="E:::event">场地</option>
+                                    <option value="M:::union">联销区</option>
                                 </select>
                             </div>
                             <div class="col-md-5 col-sm-12" style="text-align: left; padding-left: 2px;">

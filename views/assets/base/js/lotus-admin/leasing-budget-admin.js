@@ -90,9 +90,9 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('searchLeasingBudgetModality3', $('#modality_3').val());
         $.cookie('searchLeasingBudgetSelectStoreVal', $('#selectStore').val());
-        $.cookie('searchLeasingBudgetSelectStoreTxt', $('#select2-selectStore-container').text());
+        $.cookie('searchLeasingBudgetSelectStoreTxt', $('#selectStore').find('option:selected').text());
         if($('#mallCode').val() != null){
-            $.cookie('searchMallCode', $('#select2-mallCode-container').text().split(' [ ')[0]+':::'+$('#mallCode').val());
+            $.cookie('searchMallCode', $('#mallCode').find('option:selected').text().split(' [ ')[0]+':::'+$('#mallCode').val());
         } else {
             $.cookie('searchMallCode', null);
         }
