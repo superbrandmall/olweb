@@ -81,7 +81,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingYearMonth" class="col-md-4 control-label" style="text-align: right;">会计期间</label>
+                            <label for="accountingYearMonth" class="col-md-4 control-label" style="text-align: right;">结转期</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <div class="input-group">
                                     <input class="form-control date-picker" id="accountingYearMonth" name="accountingYearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
@@ -92,9 +92,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingVoucherInfo" class="col-md-4 control-label" style="text-align: right;">抬头文本</label>
+                            <label for="accountingVoucherMessIdOs" class="col-md-4 control-label" style="text-align: right;">Mess Id Os</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="accountingVoucherInfo" name="accountingVoucherInfo" type="text" />
+                                <input class="form-control" id="accountingVoucherMessIdOs" name="accountingVoucherMessIdOs" type="text" />
                             </div>
                         </div>
                     </div>
@@ -168,6 +168,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">Mess Id Os</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner" style="width: 150px;">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -192,7 +196,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 120px;">科目</div>
+                                                                <div class="th-inner" style="width: 130px;">科目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

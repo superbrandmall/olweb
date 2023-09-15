@@ -33,9 +33,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingContractDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <label for="department" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2 mallCode" id="accountingContractDepartment" name="accountingContractDepartment" style="width: 100%"></select>
+                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
@@ -63,9 +63,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">签约编号</label>
+                            <label for="selectContract" class="col-md-4 control-label" style="text-align: right;">合同</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <select class="select2" id="selectContract" name="selectContract" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
@@ -73,21 +73,28 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">商户</label>
+                            <label for="selectTenant" class="col-md-4 control-label" style="text-align: right;">商户</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <select id="selectTenant" class="select2" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="companyCode" class="col-md-4 control-label" style="text-align: right;">品牌</label>
+                            <label for="brandName" class="col-md-4 control-label" style="text-align: right;">品牌</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="companyCode" name="companyCode" type="text" />
+                                <select id="brandName" class="select2" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
-                    
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="accountingContractMessIdOs" class="col-md-4 control-label" style="text-align: right;">Mess Id Os</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <input class="form-control" id="accountingContractMessIdOs" name="accountingContractMessIdOs" type="text" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-12">
                     <div class="col-md-4">
@@ -162,6 +169,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">Mess Id Os</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">签约编号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
@@ -206,7 +217,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">物业管理费</div>
+                                                                <div class="th-inner" style="width: 100px;">商场服务费-月</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -226,7 +237,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">年商场服务费</div>
+                                                                <div class="th-inner" style="width: 100px;">商场服务费-年</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

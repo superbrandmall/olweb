@@ -58,8 +58,8 @@ $(document).ready(function(){
         $('#accountingTenantName').val($.cookie('accountingTenantName'));
     }
     
-    if($.cookie('accountingTenantShortName') != null && $.cookie('accountingTenantShortName') != ''){
-        $('#accountingTenantShortName').val($.cookie('accountingTenantShortName'));
+    if($.cookie('accountingTenantMessIdOs') != null && $.cookie('accountingTenantMessIdOs') != ''){
+        $('#accountingTenantMessIdOs').val($.cookie('accountingTenantMessIdOs'));
     }
     
     if($.cookie('accountingTenantMallVal') != null && $.cookie('accountingTenantMallVal') != 'null'){
@@ -94,14 +94,14 @@ $(document).ready(function(){
     $('#clear').click(function(){
         $.cookie('accountingTenantNo','');
         $.cookie('accountingTenantName', '');
-        $.cookie('accountingTenantShortName', '');
+        $.cookie('accountingTenantMessIdOs', '');
         $.cookie('accountingTenantMallTxt', null);
         $.cookie('accountingTenantMallVal', null);
         $.cookie('accountingTenantUSCC', '');
 
         $('#accountingTenantNo').val('');
         $('#accountingTenantName').val('');
-        $('#accountingTenantShortName').val('');
+        $('#accountingTenantMessIdOs').val('');
         $('#accountingTenantDepartment').val('').trigger('change');
         $('#accountingTenantUSCC').val('');
     })
@@ -109,7 +109,7 @@ $(document).ready(function(){
     $('#search').click(function(){
         $.cookie('accountingTenantNo', $('#accountingTenantNo').val());
         $.cookie('accountingTenantName', $('#accountingTenantName').val());
-        $.cookie('accountingTenantShortName', $('#accountingTenantShortName').val());
+        $.cookie('accountingTenantMessIdOs', $('#accountingTenantMessIdOs').val());
         $.cookie('accountingTenantMallVal', $('#accountingTenantDepartment').val());
         $.cookie('accountingTenantMallTxt', $('#accountingTenantDepartment').find('option:selected').text());
         $.cookie('accountingTenantUSCC', $('#accountingTenantUSCC').val());
@@ -149,13 +149,13 @@ function findTenantByKVCondition(p,c) {
         params.push(param);
     }
    
-    if($.cookie('accountingTenantShortName') != null && $.cookie('accountingTenantShortName') != ''){
+    if($.cookie('accountingTenantMessIdOs') != null && $.cookie('accountingTenantMessIdOs') != ''){
         param = {
-            "columnName": "shortName",
+            "columnName": "messIdOs",
             "columnPatten": "",
             "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('accountingTenantShortName')
+            "operator": "=",
+            "value": $.cookie('accountingTenantMessIdOs')
         }
         params.push(param);
     }
@@ -249,6 +249,7 @@ function findTenantByKVCondition(p,c) {
                         $('#tenant').append('<tr>\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getTenantDetail("'+v.messIdOs+'")\'>'+v.tenantName+'['+v.tenantNo+']</a></td>\n\
+                            <td>'+v.messIdOs+'</td>\n\
                             <td>'+v.postCode+'</td>\n\
                             <td>'+(v.paymentMethod || '')+'</td>\n\
                             <td>'+v.countryCode+'</td>\n\
@@ -316,7 +317,7 @@ function findTenantByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#voucher').html('<tr><td colspan="14" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#voucher').html('<tr><td colspan="15" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -329,17 +330,17 @@ function getTenantDetail(messIdOs){
     $('#investment-contract-tenant-create').modal('toggle');
     
     var tenant = $.parseJSON(sessionStorage.getItem("tenant"));
-    $('.modal-header h4, #tenantUpdated, #tenantNo, #tenantName, #tenantShortName, #tenantUSCC, #tenantRegAddress,  #tenantPhone, #tenantPostCode, #tenantCityCode, #tenantAccountGroup').text('');
+    $('.modal-header h4, #tenantUpdated, #tenantMessIdOs, #tenantName, #tenantShortName, #tenantUSCC, #tenantRegAddress,  #tenantPhone, #tenantPostCode, #tenantCityCode, #tenantAccountGroup').text('');
             
     $.each(tenant, function(i,v){
         if(v.messIdOs == messIdOs){
             $('.modal-header h4').text(v.tenantName+'['+v.tenantNo+']');
             $('#tenantUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
-            $('#tenantNo').text(v.tenantNo);
-            $('#tenantName').text(v.tenantName);
-            $('#tenantShortName').text(v.shortName);
+            $('#tenantMessIdOs').text(v.messIdOs);
+            $('#tenantName').text(v.tenantName+'['+v.tenantNo+']').attr('title',v.tenantName+'['+v.tenantNo+']');
+            $('#tenantShortName').text(v.shortName).attr('title',v.shortName);
             $('#tenantUSCC').text(v.uscc);
-            $('#tenantRegAddress').text(v.regAddress);
+            $('#tenantRegAddress').text(v.regAddress).attr('title',v.regAddress);
             $('#tenantPhone').text(v.phone);
             $('#tenantPostCode').text(v.postCode);
             $('#tenantCityCode').text(v.cityCode);

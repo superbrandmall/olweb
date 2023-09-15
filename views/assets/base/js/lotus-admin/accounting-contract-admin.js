@@ -37,6 +37,10 @@ $(document).ready(function(){
         return false;
     }
     
+    updateSelectContractDropDown(50);
+    updateSelectTenantDropDown(50);
+    updateBrandNameDropDown(50);
+    
     if(!sessionStorage.getItem("LOTUS_SAP_RENT_TYPE") || sessionStorage.getItem("LOTUS_SAP_RENT_TYPE") == null || sessionStorage.getItem("LOTUS_SAP_RENT_TYPE") == '') {
         findDictCodeByDictTypeCode('LOTUS_SAP_RENT_TYPE');
     }
@@ -70,9 +74,9 @@ $(document).ready(function(){
     
     if($.cookie('accountingContractMallVal') != null && $.cookie('accountingContractMallVal') != 'null'){
         var newOption = new Option($.cookie('accountingContractMallTxt'), $.cookie('accountingContractMallVal'), true, true);
-        $('#accountingContractDepartment').append(newOption).trigger('change');
+        $('#department').append(newOption).trigger('change');
     } else {
-        $('#accountingContractDepartment').val('').trigger('change');
+        $('#department').val('').trigger('change');
     }
     
     if($.cookie('accountingContractUnitType') != ''){
@@ -84,28 +88,24 @@ $(document).ready(function(){
         $('#selectStore').append(newOption).trigger('change');
     }
     
-//    if($.cookie('accountingContractNo') != null && $.cookie('accountingContractNo') != ''){
-//        $('#accountingContractNo').val($.cookie('accountingContractNo'));
-//    }
-//    
-//    if($.cookie('accountingContractName') != null && $.cookie('accountingContractName') != ''){
-//        $('#accountingContractName').val($.cookie('accountingContractName'));
-//    }
-//    
-//    if($.cookie('accountingContractShortName') != null && $.cookie('accountingContractShortName') != ''){
-//        $('#accountingContractShortName').val($.cookie('accountingContractShortName'));
-//    }
-//    
-//    if($.cookie('accountingContractMallVal') != null && $.cookie('accountingContractMallVal') != 'null'){
-//        var newOption = new Option($.cookie('accountingContractMallTxt'), $.cookie('accountingContractMallVal'), true, true);
-//        $('#accountingContractDepartment').append(newOption).trigger('change');
-//    } else {
-//        $('#accountingContractDepartment').val('').trigger('change');
-//    }
-//    
-//    if($.cookie('accountingContractUSCC') != null && $.cookie('accountingContractUSCC') != ''){
-//        $('#accountingContractUSCC').val($.cookie('accountingContractUSCC'));
-//    }
+    if($.cookie('accountingContractVal') != null && $.cookie('accountingContractVal') != 'null'){
+        var newOption = new Option($.cookie('accountingContractTxt'), $.cookie('accountingContractVal'), true, true);
+        $('#selectContract').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('accountingContractTenantVal') != null && $.cookie('accountingContractTenantVal') != 'null'){
+        var newOption = new Option($.cookie('accountingContractTenantTxt'), $.cookie('accountingContractTenantVal'), true, true);
+        $('#selectTenant').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('accountingContractBrandVal') != null && $.cookie('accountingContractBrandVal') != 'null'){
+        var newOption = new Option($.cookie('accountingContractBrandTxt'), $.cookie('accountingContractBrandVal'), true, true);
+        $('#brandName').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('accountingContractMessIdOs') != null && $.cookie('accountingContractMessIdOs') != ''){
+        $('#accountingContractMessIdOs').val($.cookie('accountingContractMessIdOs'));
+    }
 
     switch (getURLParameter('items')) {
         case '10':
@@ -125,10 +125,10 @@ $(document).ready(function(){
             break;
     }
     
-    if($("#accountingContractDepartment").val() != '' && $("#accountingContractDepartment").val() != null){
-        updateSelectStoreDropDownByMallCode(10,$("#accountingContractDepartment").val());
+    if($("#department").val() != '' && $("#department").val() != null){
+        updateSelectStoreDropDownByMallCode(10,$("#department").val());
     }
-    $("#accountingContractDepartment").on('change',function(){
+    $("#department").on('change',function(){
         updateSelectStoreDropDownByMallCode(10,$(this).val());
     })
     
@@ -138,37 +138,32 @@ $(document).ready(function(){
         $.cookie('accountingContractUnitType','');
         $.cookie('accountingContractSelectStoreVal', null);
         $.cookie('accountingContractSelectStoreTxt', null);
-        
-        
-        $.cookie('accountingContractNo','');
-        $.cookie('accountingContractName', '');
-        $.cookie('accountingContractShortName', '');
-        $.cookie('accountingContractUSCC', '');
+        $.cookie('accountingContractTxt', null);
+        $.cookie('accountingContractVal', null);
+        $.cookie('accountingContractTenantVal', null);
+        $.cookie('accountingContractTenantTxt', null);
+        $.cookie('accountingContractBrandVal', null);
+        $.cookie('accountingContractBrandTxt', null);
+        $.cookie('accountingContractMessIdOs', '');
 
 
-
-        $('#accountingContractDepartment').val('').trigger('change');
-        $('#selectStore').empty();
-        $('#unitType, #selectStore').select2("val", "");
-        
-        $('#accountingContractNo').val('');
-        $('#accountingContractName').val('');
-        $('#accountingContractShortName').val('');
-        $('#accountingContractUSCC').val('');
+        $('#department, #selectStore, #unitType, #selectTenant, #brandName').val('').trigger('change');
+        $('#accountingContractMessIdOs').val('');
     })
     
     $('#search').click(function(){
-        $.cookie('accountingContractMallVal', $('#accountingContractDepartment').val());
-        $.cookie('accountingContractMallTxt', $('#accountingContractDepartment').find('option:selected').text());
+        $.cookie('accountingContractMallVal', $('#department').val());
+        $.cookie('accountingContractMallTxt', $('#department').find('option:selected').text());
         $.cookie('accountingContractUnitType', $('#unitType').val());
         $.cookie('accountingContractSelectStoreVal', $('#selectStore').val());
         $.cookie('accountingContractSelectStoreTxt', $('#selectStore').find('option:selected').text());
-        
-        
-        $.cookie('accountingContractNo', $('#accountingContractNo').val());
-        $.cookie('accountingContractName', $('#accountingContractName').val());
-        $.cookie('accountingContractShortName', $('#accountingContractShortName').val());
-        $.cookie('accountingContractUSCC', $('#accountingContractUSCC').val());
+        $.cookie('accountingContractVal', $('#selectContract').val());
+        $.cookie('accountingContractTxt', $('#selectContract').find('select option:selected').attr('title'));
+        $.cookie('accountingContractTenantVal', $('#selectTenant'));
+        $.cookie('accountingContractTenantTxt', $('#selectTenant').find('option:selected').text());
+        $.cookie('accountingContractBrandVal', $('#brandName').val());
+        $.cookie('accountingContractBrandTxt', $('#brandName').find('option:selected').text());
+        $.cookie('accountingContractMessIdOs', $('#accountingContractMessIdOs').val());
         
         $.checkContract = [];
         $.cookie('checkContract','');
@@ -189,7 +184,7 @@ function findContractByKVCondition(p,c) {
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "=",
-            "value": ($.cookie('accountingContractMallVal') != null ? $.cookie('accountingContractMallVal') : $('#accountingContractDepartment').val())
+            "value": ($.cookie('accountingContractMallVal') != null ? $.cookie('accountingContractMallVal') : $('#department').val())
         }
         params.push(param);
     }
@@ -215,40 +210,49 @@ function findContractByKVCondition(p,c) {
         params.push(param);
     }
     
+    if($.cookie('accountingContractVal') != null && $.cookie('accountingContractVal') != 'null' && $.cookie('accountingContractVal') != ''){
+        param = {
+            "columnName": "contractNo",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingContractVal')
+        }
+        params.push(param);
+    }
     
+    if($.cookie('accountingContractTenantTxt') != null && $.cookie('accountingContractTenantTxt') != '' && $.cookie('accountingContractTenantTxt') != 'null'){
+        param = {
+            "columnName": "tenantNo",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingContractTenantTxt').split(' | ')[0]
+        }
+        params.push(param);
+    }
     
-//    if($.cookie('accountingContractName') != null && $.cookie('accountingContractName') != ''){
-//        param = {
-//            "columnName": "contractName",
-//            "columnPatten": "",
-//            "conditionOperator": "AND",
-//            "operator": "LIKE",
-//            "value": $.cookie('accountingContractName')
-//        }
-//        params.push(param);
-//    }
-//   
-//    if($.cookie('accountingContractShortName') != null && $.cookie('accountingContractShortName') != ''){
-//        param = {
-//            "columnName": "shortName",
-//            "columnPatten": "",
-//            "conditionOperator": "AND",
-//            "operator": "LIKE",
-//            "value": $.cookie('accountingContractShortName')
-//        }
-//        params.push(param);
-//    }
-//    
-//    if($.cookie('accountingContractUSCC') != null && $.cookie('accountingContractUSCC') != ''){
-//        param = {
-//            "columnName": "uscc",
-//            "columnPatten": "",
-//            "conditionOperator": "AND",
-//            "operator": "LIKE",
-//            "value": $.cookie('accountingContractUSCC')
-//        }
-//        params.push(param);
-//    }
+    if($.cookie('accountingContractBrandTxt') != null && $.cookie('accountingContractBrandTxt') != '' && $.cookie('accountingContractBrandTxt') != 'null'){
+        param = {
+            "columnName": "brandName",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingContractBrandTxt').split('[')[0]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('accountingContractMessIdOs') != null && $.cookie('accountingContractMessIdOs') != ''){
+        param = {
+            "columnName": "messIdOs",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingContractMessIdOs')
+        }
+        params.push(param);
+    }
     
     if(params.length == 0){
         params = [{
@@ -293,8 +297,6 @@ function findContractByKVCondition(p,c) {
                     var pages =  response.data.totalPages;
                     generatePages(p, pages, c);
                     
-                    sessionStorage.setItem("contract", JSON.stringify(response.data.content) );
-                    
                     var checked = '';
                     $("#all").prop('checked',false);
                     if($.checkContract.length > 0){
@@ -321,6 +323,7 @@ function findContractByKVCondition(p,c) {
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+v.messIdOs+'</td>\n\
                             <td>'+v.contractNo+'</td>\n\
                             <td>'+renderSapContractState(v.contractStatus)+'</td>\n\
                             <td>'+accounting.formatNumber(v.rentArea)+'㎡</td>\n\
@@ -397,7 +400,7 @@ function findContractByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#voucher').html('<tr><td colspan="26" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#contract').html('<tr><td colspan="27" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);

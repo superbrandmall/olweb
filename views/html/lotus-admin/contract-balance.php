@@ -116,16 +116,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <select class="select2" id="termType" name="termType" style="width: 100%; display: none;">
                                     <option value="">未选择</option>
                                     <option value="B011">固定租金[B011]</option>
-                                    <option value="B021">物业管理费[B021]</option>
-                                    <option value="D011">提成扣率[D011]</option>
+                                    <option value="B021">商场服务费-月[B021]</option>
+                                    <option value="D011">提成租金[D011]</option>
                                     <option value="G011">固定推广费[G011]</option>
-                                    <option value="E02">租赁保证金[E02]</option>
-                                    <option value="E03">装修保证金[E03]</option>
+                                    <option value="E02">租赁押金[E02]</option>
+                                    <option value="E03">装修押金[E03]</option>
                                     <option value="E22">公共事业费押金[E22]</option>
                                     <option value="H01">水费[H01]</option>
                                     <option value="H02">电费[H02]</option>
                                     <option value="H03">煤气费[H03]</option>
-                                    <option value="Y021">物业管理费-年度[Y021]</option>
+                                    <option value="Y021">商场服务费-年[Y021]</option>
                                     <option value="Y77">服务费-线损费[Y77]</option>
                                 </select>
                             </div>
@@ -233,7 +233,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 120px;">科目</div>
+                                                                <div class="th-inner" style="width: 130px;">科目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

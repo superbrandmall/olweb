@@ -15,14 +15,14 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tenantNo" class="col-md-4 control-label">代码</label>
-                                <div class="col-md-8 col-sm-12" id="tenantNo" style="padding-top: 7px;"></div>
+                                <label for="tenantName" class="col-md-4 control-label">商户</label>
+                                <div class="col-md-8 col-sm-12" id="tenantName" style="padding-top: 7px;"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="tenantName" class="col-md-4 control-label">名称</label>
-                                <div class="col-md-8 col-sm-12" id="tenantName" style="padding-top: 7px;"></div>
+                                <label for="tenantMessIdOs" class="col-md-4 control-label">Mess Id Os</label>
+                                <div class="col-md-8 col-sm-12" id="tenantMessIdOs" style="padding-top: 7px;"></div>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -71,6 +71,9 @@
                                 <div class="col-md-8 col-sm-12" id="tenantAccountGroup" style="padding-top: 7px;"></div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
+                        
                     </div>
                     <div class="col-md-12">
                         <div class="box-body">

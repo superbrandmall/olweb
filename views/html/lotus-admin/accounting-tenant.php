@@ -49,9 +49,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingTenantShortName" class="col-md-4 control-label" style="text-align: right;">简称</label>
+                            <label for="accountingTenantDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="accountingTenantShortName" name="accountingTenantShortName" type="text" />
+                                <select class="select2" id="accountingTenantDepartment" name="accountingTenantDepartment" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
@@ -59,17 +59,17 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingTenantDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <label for="accountingTenantUSCC" class="col-md-4 control-label" style="text-align: right;">纳税识别号</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2" id="accountingTenantDepartment" name="accountingTenantDepartment" style="width: 100%"></select>
+                                <input class="form-control" id="accountingTenantUSCC" name="accountingTenantUSCC" type="text" />
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingTenantUSCC" class="col-md-4 control-label" style="text-align: right;">纳税识别号</label>
+                            <label for="accountingTenantMessIdOs" class="col-md-4 control-label" style="text-align: right;">Mess Id Os</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <input class="form-control" id="accountingTenantUSCC" name="accountingTenantUSCC" type="text" />
+                                <input class="form-control" id="accountingTenantMessIdOs" name="accountingTenantMessIdOs" type="text" />
                             </div>
                         </div>
                     </div>
@@ -132,6 +132,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner" style="width: 280px;">商户</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">Mess Id Os</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

@@ -172,16 +172,16 @@ $(document).ready(function(){
     $('#search').click(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
         $.cookie('balanceVoucherStatus', $('#voucherStatus').val());
+        $.cookie('balanceYearMonth', $('#yearMonth').val());
         $.cookie('balanceTermType', $('#termType').val());
         $.cookie('balanceContractVal', $('#selectContract').val());
-        $.cookie('balanceContractTxt', $('#select2-selectContract-container').attr('title'));
+        $.cookie('balanceContractTxt', $('#selectContract').find('select option:selected').attr('title'));
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
         $.cookie('balanceUnitType', $('#unitType').val());
         $.cookie('balanceSelectStoreVal', $('#selectStore').val());
-        $.cookie('balanceSelectStoreTxt', $('#selectStore').find('option:selected').text());
-        $.cookie('balanceYearMonth', $('#yearMonth').val());
-        $.cookie('balanceSelectTenantVal', $('#selectTenant').val());
+        $.cookie('balanceSelectStoreTxt', $('#selectStore').find('select option:selected').text());
+        $.cookie('balanceSelectTenantVal', $('#selectTenant'));
         $.cookie('balanceSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('balanceSelectBrandVal', $('#brandName').val());
         $.cookie('balanceSelectBrandTxt', $('#brandName').find('option:selected').text());
@@ -1023,7 +1023,7 @@ function generateVoucherEntryBySelect() {
         url: $.api.baseLotus+"/api/v/contract/settle/data/generateVoucherEntryBySelect",
         type: "POST",
         data: JSON.stringify(map),
-        async: false,
+        async: true,
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {

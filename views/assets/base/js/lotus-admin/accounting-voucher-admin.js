@@ -89,8 +89,8 @@ $(document).ready(function(){
         $('#accountingYearMonth').val($.cookie('accountingYearMonth'));
     }
     
-    if($.cookie('accountingVoucherInfo') != null && $.cookie('accountingVoucherInfo') != ''){
-        $('#accountingVoucherInfo').val($.cookie('accountingVoucherInfo'));
+    if($.cookie('accountingVoucherMessIdOs') != null && $.cookie('accountingVoucherMessIdOs') != ''){
+        $('#accountingVoucherMessIdOs').val($.cookie('accountingVoucherMessIdOs'));
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -133,13 +133,13 @@ $(document).ready(function(){
         $.cookie('accountingVoucherCode', '');
         $.cookie('accountingVoucherVoucherDate', null);
         $.cookie('accountingYearMonth', null);
-        $.cookie('accountingVoucherInfo', '');
+        $.cookie('accountingVoucherMessIdOs', '');
         
         $('#accountingVoucherStatus, #accountingDepartment').val('').trigger('change');
         $('#accountingVoucherCode').val('');
         $('#accountingVoucherDate').val('');
         $('#accountingYearMonth').val('');
-        $('#accountingVoucherInfo').val('');
+        $('#accountingVoucherMessIdOs').val('');
     })
     
     $('#search').click(function(){
@@ -149,7 +149,7 @@ $(document).ready(function(){
         $.cookie('accountingVoucherCode', $('#accountingVoucherCode').val()); 
         $.cookie('accountingVoucherDate', $('#accountingVoucherDate').val());
         $.cookie('accountingYearMonth', $('#accountingYearMonth').val());
-        $.cookie('accountingVoucherInfo', $('#accountingVoucherInfo').val());
+        $.cookie('accountingVoucherMessIdOs', $('#accountingVoucherMessIdOs').val());
         $.checkVoucher = [];
         $.cookie('checkVoucher','');
         findVoucherByKVCondition(1,items);
@@ -239,13 +239,13 @@ function findVoucherByKVCondition(p,c) {
         params.push(param);
     }
     
-    if($.cookie('accountingVoucherInfo') != null && $.cookie('accountingVoucherInfo') != ''){
+    if($.cookie('accountingVoucherMessIdOs') != null && $.cookie('accountingVoucherMessIdOs') != ''){
         param = {
-            "columnName": "voucherInfo",
+            "columnName": "messIdOs",
             "columnPatten": "",
             "conditionOperator": "AND",
-            "operator": "LIKE",
-            "value": $.cookie('accountingVoucherInfo')
+            "operator": "=",
+            "value": $.cookie('accountingVoucherMessIdOs')
         }
         params.push(param);
     }
@@ -362,6 +362,7 @@ function findVoucherByKVCondition(p,c) {
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getVoucherDetail("'+v.messIdOs+'")\'>'+v.voucherCode+'</a></td>\n\
                             <td>'+voucherStatus+'</td>\n\
                             <td>'+(v.tableId!=null?'<span class="badge badge-info">常规</span>':'<span class="badge badge-danger">调整</span>')+'</td>\n\
+                            <td>'+v.messIdOs+'</td>\n\
                             <td>'+mallName+'['+v.mallCode+']</td>\n\
                             <td>'+v.brandName+'['+v.sapContractNo+']</td>\n\
                             <td>'+v.contractNo+'</td>\n\
@@ -369,8 +370,8 @@ function findVoucherByKVCondition(p,c) {
                             <td>'+v.tenantName+'['+v.tenantNo+']</td>\n\
                             <td>'+v.voucherDate+'</td>\n\
                             <td>'+v.itemName+'['+v.itemCode+']</td>\n\
-                            <td><strong>'+accounting.formatNumber(v.amount)+'</strong></td>\n\
-                            <td>'+accounting.formatNumber(v.taxAmount)+'</td>\n\
+                            <td><strong>'+accounting.formatNumber(v.amount)+'</strong>元</td>\n\
+                            <td>'+accounting.formatNumber(v.taxAmount)+'元</td>\n\
                             <td>'+v.yyyymm+'</td>\n\
                             <td>'+v.created+'['+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
                             <td>'+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
@@ -429,7 +430,7 @@ function findVoucherByKVCondition(p,c) {
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#voucher').html('<tr><td colspan="16" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#voucher').html('<tr><td colspan="17" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -466,7 +467,7 @@ function getVoucherDetail(messIdOs){
     var voucher = $.parseJSON(sessionStorage.getItem("voucher"));
     $('#voucherType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
     $('#voucherUpdated').text('');
-    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
+    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherMessIdOs, #voucherDate, #voucherInfo').val('');
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
     $('#voucherDepartment, #voucherContract, #writeOffVoucherFlag').attr("disabled", 'disabled');
@@ -507,6 +508,7 @@ function getVoucherDetail(messIdOs){
             $('#voucherUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
             
             $('#voucherCode').val(v.voucherCode);
+            $('#voucherMessIdOs').val(v.messIdOs);
             $('#voucherType').val(v.voucherType).trigger('change');
             
             if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
@@ -992,7 +994,7 @@ function createVoucherDetail(){
     
     $('#deleteVoucher, #adjustRow').hide();
     $('#voucherType, #voucherTermType, #voucherTaxRate').val('').trigger('change');
-    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherDate, #voucherInfo').val('');
+    $('#voucherStartDate, #voucherEndDate, #voucherYearMonth, #voucherPostDate, #voucherTaxAmount, #voucherAmount, #voucherCode, #voucherMessIdOs, #voucherDate, #voucherInfo').val('');
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
     $('#voucherDepartment, #voucherContract, #writeOffVoucherFlag').attr("disabled", false);
