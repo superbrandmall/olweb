@@ -1,5 +1,5 @@
 <?php
-if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
+if(isset($_SESSION['lotus_admin_name']) && ($_SESSION['lotus_admin_name'] == '马俊' || $_SESSION['lotus_admin_name'] == 'admin')) {
     $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/contract-balance-admin.js?t='.date("Y-m-d").'"></script>'.PHP_EOL
     . '        <script type="text/javascript" src="/views/assets/plugins/timepicker/bootstrap-timepicker.js"></script>'.PHP_EOL; 
 } else {

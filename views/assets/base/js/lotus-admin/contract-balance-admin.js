@@ -528,6 +528,7 @@ function getBalanceDetail(id){
     $('.mandatory-error').remove();
     $('#investment-contract-balance-create').modal('toggle');
     
+    updateBalanceMallDropDown();
     updateBalanceContractDropDown(50);
     
     $('#balanceStartEndDate').datepicker({
@@ -636,12 +637,59 @@ function isInArray(arr,val){
   return res;
 }
 
+function updateBalanceMallDropDown() {
+    if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
+        var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
+        var returnData = [];
+        var data = $.map(malls, function(item) {
+            if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
+                $.each(JSON.parse($.cookie('userModules')), function(j,w) {
+                    if((w.roleCode == 'CROLE211008000002' || w.roleCode == 'CROLE220922000001') && w.moduleCode == 'ALL'){
+                        data = {
+                            id: item.code,
+                            text: item.mallName +'['+ item.code +']'                            
+                        }
+                        returnData.push(data);
+                    } else if(w.roleCode == 'CROLE211008000001' && w.moduleName == '门店对接人') {
+                        if(item.code == w.moduleCode){
+                            data = {
+                                id: item.code,
+                                text: item.mallName +'['+ item.code +']'                            
+                            }
+                            returnData.push(data);
+                        }
+                    }
+                })
+            }
+                
+            return returnData;
+        });
+        
+        $('#balanceDepartment').select2({
+            dropdownParent: $('#investment-contract-balance-create'),
+            placeholder: '未选择',
+            dropdownAutoWidth: true,
+            language: {
+                searching: function() {
+                    return '加载中...';
+                },
+                loadingMore: function() {
+                    return '加载中...';
+                }
+            },
+            data: returnData,
+            pagination: {
+                "more": 10 <= returnData.length
+            }
+        });
+    }
+}
+
 function updateBalanceContractDropDown(data_count) {
     $('#balanceContract').select2({
         dropdownParent: $('#investment-contract-balance-create'),
         placeholder: '输入合同编号',
         dropdownAutoWidth: true,
-        allowClear: true,
         language: {
             searching: function() {
                 return '加载中...';
@@ -670,7 +718,7 @@ function updateBalanceContractDropDown(data_count) {
                     key: params.term || $('#balanceDepartment').val(),
                     operator: "OR",
                     params: [
-                      "mallCode","tenantName","contractNo","unitName","contractName"
+                      "tenantNo","tenantName","sapContractNo","contractNo","contractName"
                     ],
                     sorts: []
                 }
@@ -685,7 +733,7 @@ function updateBalanceContractDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.contractNo + ':::' + item.shopCode + ':::' + item.area,
-                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
+                                text: item.tenantName + '[' + item.tenantNo + '] | ' + (item.contractName || '') + ' | ' + (item.sapContractNo || '') + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
                             }
                             var returnData = [];
                             returnData.push(data);
@@ -866,6 +914,7 @@ function createBalanceDetail(){
     $('.mandatory-error,.shield').remove();
     $('#investment-contract-balance-create').modal('toggle');
 
+    updateBalanceMallDropDown();
     updateBalanceContractDropDown(50);
     
     $('#balanceStartEndDate').datepicker({

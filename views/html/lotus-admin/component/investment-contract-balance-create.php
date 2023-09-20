@@ -18,7 +18,7 @@
                             <div class="form-group">
                                 <label for="balanceDepartment" class="col-md-4 control-label" style="text-align: right;">项目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <select class="select2 mallCode" id="balanceDepartment" style="width: 100%"></select>
+                                    <select class="select2" id="balanceDepartment" style="width: 100%"></select>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label for="balanceTermType" class="col-md-4 control-label" style="text-align: right;">科目 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                    <select class="select2" id="balanceTermType" name="balanceTermType" style="width: 100%;">
+                                    <select class="select2" id="balanceTermType" name="balanceTermType" style="width: 100%;" data-dropdownParent="$('#investment-contract-balance-create')">
                                         <option value="">未选择</option>
                                         <option value="B011">固定租金[B011]</option>
                                         <option value="B021">商场服务费-月[B021]</option>
