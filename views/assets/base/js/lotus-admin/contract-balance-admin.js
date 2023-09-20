@@ -91,8 +91,12 @@ $(document).ready(function(){
         $('#itemType').val($.cookie('balanceItemType')).trigger('change');
     }
     
-    if($.cookie('balanceYearMonth') != null && $.cookie('balanceYearMonth') != 'null'){
-        $('#yearMonth').val($.cookie('balanceYearMonth'));
+    if($.cookie('balanceYearMonthStartDate') != null && $.cookie('balanceYearMonthStartDate') != 'null'){
+        $('#yearMonthStartDate').val($.cookie('balanceYearMonthStartDate'));
+    }
+    
+    if($.cookie('balanceYearMonthEndDate') != null && $.cookie('balanceYearMonthEndDate') != 'null'){
+        $('#yearMonthEndDate').val($.cookie('balanceYearMonthEndDate'));
     }
     
     var items = getURLParameter('items') || $('.page-size').first().text();
@@ -158,21 +162,22 @@ $(document).ready(function(){
         $.cookie('balanceUnitType','');
         $.cookie('balanceSelectStoreVal', null);
         $.cookie('balanceSelectStoreTxt', null);
-        $.cookie('balanceYearMonth', null);
+        $.cookie('balanceYearMonthStartDate', null);
+        $.cookie('balanceYearMonthEndDate', null);
         $.cookie('balanceSelectTenantVal', null);
         $.cookie('balanceSelectTenantTxt', null);
         $.cookie('balanceSelectBrandVal', null);
         $.cookie('balanceSelectBrandTxt', null);
         
         $('#voucherStatus, #department, #unitType, #termType, #itemType, #selectStore, #selectContract, #selectTenant, #brandName').val('').trigger('change');
-        $('#department, #termType, #itemType, #selectStore, #selectContract, #selectTenant, #brandName').empty(); 
-        $('#yearMonth').val('');
+        $('#yearMonthStartDate, #yearMonthEndDate').val('');
     })
     
     $('#search').click(function(){
         $('#totalAmount, #totalTaxAmount').text(accounting.formatNumber(0));
         $.cookie('balanceVoucherStatus', $('#voucherStatus').val());
-        $.cookie('balanceYearMonth', $('#yearMonth').val());
+        $.cookie('balanceYearMonthStartDate', $('#yearMonthStartDate').val());
+        $.cookie('balanceYearMonthEndDate', $('#yearMonthEndDate').val());
         $.cookie('balanceTermType', $('#termType').val());
         $.cookie('balanceContractVal', $('#selectContract').val());
         $.cookie('balanceContractTxt', $('#selectContract').find('select option:selected').attr('title'));
@@ -277,20 +282,31 @@ function findBalanceByKVCondition(p,c) {
         params.push(param);
     }
 
-    if($.cookie('balanceYearMonth') != null & $.cookie('balanceYearMonth') != 'null' && $.cookie('balanceYearMonth') != ''){
+    if($.cookie('balanceYearMonthStartDate') != null & $.cookie('balanceYearMonthStartDate') != 'null' && $.cookie('balanceYearMonthStartDate') != ''){
         param = {
             "columnName": "yyyymm",
             "columnPatten": "",
             "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('balanceYearMonth').split('-')[0]+$.cookie('balanceYearMonth').split('-')[1]
+            "operator": ">=",
+            "value": $.cookie('balanceYearMonthStartDate').split('-')[0]+$.cookie('balanceYearMonthStartDate').split('-')[1]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('balanceYearMonthEndDate') != null & $.cookie('balanceYearMonthEndDate') != 'null' && $.cookie('balanceYearMonthEndDate') != ''){
+        param = {
+            "columnName": "yyyymm",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "<=",
+            "value": $.cookie('balanceYearMonthEndDate').split('-')[0]+$.cookie('balanceYearMonthEndDate').split('-')[1]
         }
         params.push(param);
     }
     
     if($.cookie('balanceSelectTenantTxt') != null && $.cookie('balanceSelectTenantTxt') != '' && $.cookie('balanceSelectTenantTxt') != 'null'){
         param = {
-            "columnName": "tenantCode",
+            "columnName": "tenantNo",
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "=",
@@ -399,15 +415,19 @@ function findBalanceByKVCondition(p,c) {
                                 break;
                         }
                         
-                        
                         if($.checkBalance && $.checkBalance.length > 0 && isInArray($.checkBalance,v.id+':'+tableSuffix) == 1) {
                             checked = ' checked';
                         } else {
                             checked = '';
                         }
                         
+                        var tbg = '#fff';
+                        if(i%2==0){
+                            tbg = '#f9f9f9';
+                        }
+                        
                         $('#balance').append('<tr>\n\
-                            <td><input type="checkbox" class="me-1" value="'+v.id+':'+tableSuffix+'"'+checked+'></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.id+':'+tableSuffix+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getBalanceDetail("'+v.id+'")\'>查看详情</a></td>\n\
                             <td>'+v.mallName+'['+v.mallCode+']</td>\n\
                             <td id="voucherFlag_'+v.id+'">'+(v.voucherFlag==1?'<span class="badge badge-success">已生成凭证</span>':'<span class="badge badge-warning">未生成凭证</span>')+'</td>\n\
@@ -422,8 +442,8 @@ function findBalanceByKVCondition(p,c) {
                             <td>'+v.yyyymm+'</td>\n\
                             <td><strong>'+accounting.formatNumber(v.amount)+'</strong>元</td>\n\
                             <td>'+accounting.formatNumber(v.taxAmount)+'元</td>\n\
-                            <td>'+DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01')+'</td>\n\
-                            <td>'+v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay+'</td>\n\
+                            <td>'+v.created+'['+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
+                            <td>'+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
                         </tr>');
                     })
                     $('#totalTaxAmount').text(accounting.formatNumber(totalTaxAmount));
@@ -510,7 +530,7 @@ function getBalanceDetail(id){
     
     updateBalanceContractDropDown(50);
     
-    $('.input-daterange, #billingDate, #paymentDate').datepicker({
+    $('#balanceStartEndDate').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
@@ -533,7 +553,7 @@ function getBalanceDetail(id){
     $('#balanceTermType, #taxRate').val('').trigger('change');
     $('#balanceUpdated').text('');
     $('#settleDay').val('25').trigger('change');
-    $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate, #yearMonth, #remarks').val('');
+    $('#startDate, #endDate, #balanceYearMonth, #taxAmount, #amount, #taxRentAmount, #rentAmount, #yearMonth, #remarks').val('');
     $('#balanceDepartment, #balanceContract').empty(); 
     $('#balanceDepartment, #balanceContract').select2("val", "");
     $('.modal-header h4').find('.badge').remove();
@@ -578,12 +598,10 @@ function getBalanceDetail(id){
             $('#endDate').datepicker('update', v.endDate);
             var balanceYearMonth = v.yyyymm.toString();
             $('#balanceYearMonth').datepicker('update', balanceYearMonth.substr(0,4)+'-'+balanceYearMonth.substr(4,2));
-            $('#billingDate').datepicker('update',DecrMonth(v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-01'));
             $('#taxAmount').val(accounting.formatNumber(v.taxAmount));
             $('#amount').val(accounting.formatNumber(v.amount));
             $('#taxRentAmount').val(accounting.formatNumber(v.taxRentAmount));
             $('#rentAmount').val(accounting.formatNumber(v.rentAmount));
-            $('#paymentDate').datepicker('update',v.startDate.split('-')[0]+'-'+v.startDate.split('-')[1]+'-'+v.settleDay); 
             $('#taxRate').val(v.taxRate).trigger('change');
             $('#settleDay').val(v.settleDay).trigger('change');
             $('#remarks').val(v.remarks);
@@ -721,16 +739,6 @@ function saveCheck(v) {
         $('#balanceYearMonth').parent().append(error);
     }
     
-    if($('#billingDate').val() == '') {
-        flag = 0;
-        $('#billingDate').parent().append(error);
-    }
-    
-    if($('#paymentDate').val() == '') {
-        flag = 0;
-        $('#paymentDate').parent().append(error);
-    }
-    
     if($('#amount').val() == '') {
         flag = 0;
         $('#amount').parent().append(error);
@@ -860,7 +868,7 @@ function createBalanceDetail(){
 
     updateBalanceContractDropDown(50);
     
-    $('.input-daterange, #billingDate, #paymentDate').datepicker({
+    $('#balanceStartEndDate').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm-dd',
         'todayBtn': "linked",
@@ -881,7 +889,7 @@ function createBalanceDetail(){
     $('#deleteCalc, #adjustRow').hide();
     $('#balanceTermType, #taxRate').val('').trigger('change');
     $('#settleDay').val('25').trigger('change');
-    $('#startDate, #endDate, #balanceYearMonth, #billingDate, #taxAmount, #amount, #taxRentAmount, #rentAmount, #paymentDate').val('');
+    $('#startDate, #endDate, #balanceYearMonth, #taxAmount, #amount, #taxRentAmount, #rentAmount').val('');
     $('#balanceContract').empty(); 
     $('#balanceDepartment, #balanceContract').select2("val", "");
     $('#yearMonth, #remarks').val('');
@@ -966,7 +974,7 @@ function saveCalc() {
                     $.cookie('balanceItemType','adjust');
                     $.cookie('balanceYearMonth',$('#balanceYearMonth').val());
                     
-                    window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
+                    //window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }

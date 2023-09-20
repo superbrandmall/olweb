@@ -37,13 +37,19 @@ $(document).ready(function(){
     });
 });
 
+//$(function() {
+//    window.addEventListener("resize",function(){
+//        $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
+//        $('img.mapster_el').css('marginLeft','3%');
+//        addTextLayer();
+//    });
+//});
 $(function() {
     window.addEventListener("resize",function(){
         $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
-        $('img.mapster_el').css('marginLeft','3%');
         addTextLayer();
     });
-});
+})
 
 function getFloors() {
     $.ajax({
@@ -51,12 +57,14 @@ function getFloors() {
         type: "GET",
         async: false,
         beforeSend: function(request) {
+            $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", 1);
             request.setRequestHeader("Source", "onlineleasing");
         },
         success: function (response, status, xhr) {
+            $('#loader').hide();
             if(response.code === 'C0' && response.data.length > 0) {
                 sessionStorage.setItem("floors-"+getURLParameter('id'), JSON.stringify(response.data) );
 
@@ -145,7 +153,7 @@ function getShopFloorInfo(fc) {
         "mallCodes": mallCodes,
         "userCode": $.cookie('uid')
     };
-        
+    
     $.ajax({
         url: $.api.baseLotus+"/api/vshop/lotus/findAllByCondition?page=0&size=100",
         type: "POST",
@@ -154,6 +162,7 @@ function getShopFloorInfo(fc) {
         dataType: "json",
         contentType: "application/json",
         beforeSend: function(request) {
+            $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
             request.setRequestHeader("Authorization", $.cookie('authorization'));
             request.setRequestHeader("Lang", 1);
@@ -161,6 +170,7 @@ function getShopFloorInfo(fc) {
         },
         complete: function(){},
         success: function (response, status, xhr) {
+            $('#loader').hide();
             if(response.code === 'C0') {
                 sessionStorage.setItem("coords_"+fc, JSON.stringify(response.data.content) );
                 renderMap(fc);
@@ -213,34 +223,64 @@ function renderMap(fc) {
     
 function drawShops(){
     var areas = $.map($('area'),function(el) {
-        if($(el).attr('data-full') == 0){
+        if(getURLParameter('id') === $(el).attr('alt')){
             return { 
                 key: $(el).attr('data-key'),
-                toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')<br>'+$(el).attr('name'),
-                fillColor: 'd3fdd9',
-                selected: true,
-                stroke: true,
-                strokeColor: 'd3fdd9'
+                toolTip: '本铺位',
+                fillColor: '3c763d',
+                fillOpacity: 1,
+                stroke: false,
+                selected: true 
             };
-        } else if($(el).attr('data-full') == 1){
-            return { 
-                key: $(el).attr('data-key'),
-                toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
-                fillColor: 'ff2700',
-                selected: true,
-                stroke: true,
-                strokeColor: 'ff2700'
-            };
+        } else {
+            if($(el).attr('data-full') == 0){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')<br>'+$(el).attr('name'),
+                    fillColor: '7d9fe9',
+                    selected: true,
+                    stroke: true,
+                    strokeColor: '6a90e1'
+                };
+            } else if($(el).attr('data-full') == 1){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
+                    fillColor: 'FE9E9E',
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'FE9E9E'
+                };
+            } else if($(el).attr('data-full') == 2){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')<br>'+$(el).attr('name'),
+                    fillColor: 'FEED99',
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'FEED99'
+                };
+            } else if($(el).attr('data-full') == 3){
+                return { 
+                    key: $(el).attr('data-key'),
+                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
+                    fillColor: 'D5C8AA',
+                    selected: true,
+                    stroke: true,
+                    strokeColor: 'D5C8AA'
+                };
+            }
+            
         }
     });
     
     var xOffset;
     var yOffset;
-
+    
     $('#map').mapster({
-        fillColor: 'becff4',
+        fillColor: 'c9ae89',
         fillOpacity: 0.8,
-        strokeColor: 'becff4',
+        strokeColor: 'ffd62c',
         strokeWidth: 0,
         clickNavigate: true,
         mapKey: 'data-key',
@@ -248,10 +288,10 @@ function drawShops(){
         areas:  areas,
         onShowToolTip: function () {
             $(".mapster_tooltip").css({
-                "font-weight": "normal",
-                "color": "#a3aec2",
-                "background": "rgba(28,34,56,1)",
-                "font-size": "14px",
+                "font-weight": "bold",
+                "color": "#fff",
+                "background": "rgba(0,0,0,0.8)",
+                "font-size": "26px",
                 "width": "auto"
             });
 
@@ -267,15 +307,12 @@ function drawShops(){
     if(document.body.clientWidth >= 1280){
         $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
     }
-    $('img.mapster_el').css('marginLeft','3%');
+    
     addTextLayer();
 }
 
 function addTextLayer(){
-    $('map span').each(function(i,elem){
-        $(this).remove();
-    })
-    
+    $('map span').remove();
     if(document.body.clientWidth > 1000){
         setTimeout(function () {
             var pos, shopName, area, brand;
@@ -293,7 +330,7 @@ function addTextLayer(){
                     }
                     x = x + 2;
                 }
-                width = parseInt(posLeftMax - posLeftMin - 10); 
+                width = parseInt(posLeftMax - posLeftMin - 10);             
 
                 var y = 1;
                 var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
@@ -308,8 +345,8 @@ function addTextLayer(){
                 }
 
                 height = parseInt(posTopMax - posTopMin - 10);
-                    
-                if($(this).attr('data-full') == 0){
+                
+                if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
                     shopName = $(this).attr('data-shop-name');
                     area = $(this).attr('data-area');
                     brand = $(this).attr('name');
@@ -319,6 +356,11 @@ function addTextLayer(){
                     
                     $(this).after(
                         '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                    );
+                } else if($(this).attr('data-full') == 'ad') {
+                    shopName = $(this).attr('data-shop-name');
+                    $(this).after(
+                        '<span style="position:absolute;line-height:1;text-align:center;font-size:20px;color:FF0000;">'+shopName+'</span>'
                     );
                 } else {
                     shopName = $(this).attr('data-shop-name');
@@ -338,11 +380,11 @@ function addTextLayer(){
 function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMin, posTopMin) {
     divWord.css('font-size', minSize + "px");
     for (var i = minSize; i < maxSize; i++) {
-        if ($(divWord).width() > maxWidth  || $(divWord).height() > maxHeight) {
+        if ($(divWord).width() > maxWidth || $(divWord).height() > maxHeight) {
             $(divWord).css({
                 'font-size': i + 'px',
-                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 5) + 'px',
-                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 5) + 'px'    
+                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
+                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 6) + 'px'    
             }); 
                 break;
         } else {

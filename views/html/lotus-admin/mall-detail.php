@@ -145,9 +145,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         <div class="col-md-8 col-sm-12 required">
                                             <div class="input-group">
                                                 <input class="form-control" type="text" id="province" name="province">
-                                                <span class="input-group-addon" style="border: none; background: transparent;"></span>
+                                                <span class="input-group-addon" style="border: none; background: transparent;">-</span>
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text" id="cityDistrict" name="cityDistrict">
+                                                    <input class="form-control" type="text" id="cityDistrict" name="cityDistrict" style="border-right: none;">
+                                                    <span class="input-group-addon" style="border-left: none; background: transparent;"></span>
                                                 </div>
                                             </div>
                                             <div id="errorcontainer-province" class="errorDiv" style="float: left;"></div>

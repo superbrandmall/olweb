@@ -136,15 +136,6 @@ function findAllContractsByKVCondition(p,c){
     var params = [];
     var param = {};
     
-    param = {
-        "columnName": "contractName",
-        "columnPatten": "",
-        "conditionOperator": "",
-        "operator": "!=",
-        "value": 'KOW'
-    }
-    params.push(param);
-    
     if($.cookie('searchContractsContractStatus') != null && $.cookie('searchContractsContractStatus') != ''  && $.cookie('searchContractsContractStatus').substring(0,1) != ','){
         var reg = new RegExp(",","g");
         param = {
@@ -252,9 +243,9 @@ function findAllContractsByKVCondition(p,c){
     var map = {
         "params": params
     }
-    
+
     $.ajax({
-        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByKVCondition?page="+(p-1)+"&size="+c+"&sort=id,desc",
         type: "POST",
         data: JSON.stringify(map),
         async: false,
@@ -279,16 +270,7 @@ function findAllContractsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        var modality = '', link = '';
-                        if(v.brandLotus != null){
-                            if(v.brandLotus.modality3 != null){
-                                modality = v.brandLotus.modality3;
-                            }
-                            
-                            if(v.brandLotus.modality4 != null){
-                                modality = modality + '（' + v.brandLotus.modality4 + '）';
-                            }
-                        }
+                        var link = '', unitType;
                         
                         if(v.contractStatus == 'init'){
                             link = '<a href="/lotus-admin/contract-init?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
@@ -301,7 +283,6 @@ function findAllContractsByKVCondition(p,c){
                             tbg = '#f9f9f9';
                         }
                         
-                        var unitType;
                         switch (v.unitCode.substring(3,4)) {
                             case "C":
                                 unitType = '临时柜';
@@ -327,15 +308,15 @@ function findAllContractsByKVCondition(p,c){
                             <tr data-index="'+i+'">\n\
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;">'+link+'</td>\n\
                             <td>'+unitType+'</td>\n\
-                            <td>'+modality+'</td>\n\
+                            <td>'+(v.bizTypeName || '')+'</td>\n\
                             <td>'+(v.tenantName+'['+v.tenantNo+']' || '')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                             <td>'+v.contractNo+'</td>\n\
                             <td>'+(renderContractStatus(v.contractStatus) || '')+'</td>\n\
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.unitName+'['+v.vshopLotus.unitCode+']' : '')+'</td>\n\
-                            <td>'+accounting.formatNumber(v.unitArea)+'㎡</td>\n\
-                            <td>'+(v.vshopLotus != null ? v.vshopLotus.floorName : '')+'</td>\n\
+                            <td>'+v.unitName+'['+v.unitCode+']</td>\n\
+                            <td>'+accounting.formatNumber(v.area)+'㎡</td>\n\
+                            <td>'+v.floorName+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
                         </tr>');

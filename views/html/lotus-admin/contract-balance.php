@@ -100,11 +100,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="yearMonth" class="col-md-4 control-label" style="text-align: right;">账单结转期</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="yearMonth" name="yearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                            <label for="yearMonthStartDate" class="col-md-4 control-label" style="text-align: right;">账单结转期</label>
+                            <div class="col-md-8 col-sm-12">
+                                <div id="yearMonth" class="input-daterange input-group">
+                                    <input type="text" class="form-control" id="yearMonthStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="yearMonthEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +206,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">查看详情</div>
+                                                                <div class="th-inner" style="width: 65px;">查看详情</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -257,11 +262,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">计划出账日期</div>
+                                                                <div class="th-inner" style="width: 190px;">创建信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">最后缴款日期</div>
+                                                                <div class="th-inner" style="width: 190px;">最后修改信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

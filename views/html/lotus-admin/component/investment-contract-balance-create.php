@@ -56,20 +56,9 @@
                     <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="billingDate" class="col-md-4 control-label" style="text-align: right;">计划出账日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control date-picker" id="billingDate" name="billingDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
                                 <label for="startDate" class="col-md-4 control-label" style="text-align: right;">费用周期 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <div class="input-daterange input-group">
+                                    <div id="balanceStartEndDate" class="input-daterange input-group">
                                         <input type="text" class="form-control" id="startDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                         <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
                                         <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
@@ -92,19 +81,22 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="paymentDate" class="col-md-4 control-label" style="text-align: right;">最后缴款日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
+                                <label for="taxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
                                 <div class="col-md-8 col-sm-12">
-                                    <div class="input-group">
-                                        <input class="form-control date-picker" id="paymentDate" name="paymentDate" type="text" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
-                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
-                                    </div>
+                                    <select class="select2" id="taxRate" style="width: 100%">
+                                        <option value="">未选择</option>
+                                        <option value="0">V00</option>
+                                        <option value="5">V05</option>
+                                        <option value="6">V06</option>
+                                        <option value="9">V09</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="amount" class="col-md-4 control-label" style="text-align: right;">含税金额 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -127,8 +119,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="rentAmount" class="col-md-4 control-label" style="text-align: right;">含税单价 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -140,6 +130,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="taxRentAmount" class="col-md-4 control-label" style="text-align: right;">不含税单价 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -151,22 +143,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="taxRate" class="col-md-4 control-label" style="text-align: right;">增值税率 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
-                                <div class="col-md-8 col-sm-12">
-                                    <select class="select2" id="taxRate" style="width: 100%">
-                                        <option value="">未选择</option>
-                                        <option value="0">V00</option>
-                                        <option value="5">V05</option>
-                                        <option value="6">V06</option>
-                                        <option value="9">V09</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="settleDay" class="col-md-4 control-label" style="text-align: right;">结算日 <span class="btn-box-tool-lg" style="vertical-align: top;">*</span></label>
@@ -183,9 +159,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="remarks" class="col-md-2 control-label" style="text-align: right;">备注</label>
+                                <label for="remarks" class="col-md-1 control-label" style="text-align: right; margin-left: 24px;">备注</label>
                                 <div class="col-md-10 col-sm-12">
                                     <input class="form-control" id="remarks" type="text" />                                                
                                 </div>
