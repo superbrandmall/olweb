@@ -647,7 +647,6 @@ function updateVoucherContractDropDown(data_count) {
         dropdownParent: $('#investment-contract-voucher-create'),
         placeholder: '输入合同编号',
         dropdownAutoWidth: true,
-        allowClear: true,
         language: {
             searching: function() {
                 return '加载中...';
@@ -676,7 +675,7 @@ function updateVoucherContractDropDown(data_count) {
                     key: params.term || $('#voucherDepartment').val().split(':::')[0],
                     operator: "OR",
                     params: [
-                      "mallCode","tenantName","contractNo","unitName","contractName"
+                        "mallCode", "tenantNo","tenantName","sapContractNo","contractNo","contractName"
                     ],
                     sorts: []
                 }
@@ -691,7 +690,7 @@ function updateVoucherContractDropDown(data_count) {
                         results: $.map(jsonData, function(item) {
                             data = {
                                 id: item.contractNo + ':::' + item.sapContractNo + ':::' + item.tenantNo,
-                                text: item.tenantName + '[' + item.contractNo + '] | ' + (item.brandName || '') + ' | ' + item.unitName + ' | ' + 'V'+item.contractVersion           
+                                text: item.tenantName + '[' + item.tenantNo + '] | ' + (item.contractName || '') + ' | ' + item.sapContractNo + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
                             }
                             var returnData = [];
                             returnData.push(data);

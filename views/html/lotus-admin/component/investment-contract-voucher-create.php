@@ -36,6 +36,8 @@
                                 <div class="col-md-8 col-sm-12" style="text-align: left;">
                                     <select class="select2" id="voucherType" name="voucherType" style="width: 100%;">
                                         <option value="">未选择</option>
+                                        <option value="SA">SA</option>
+                                        <option value="Z1">Z1</option>
                                         <option value="Z3">Z3</option>
                                     </select>
                                 </div>

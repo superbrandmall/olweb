@@ -718,7 +718,7 @@ function updateBalanceContractDropDown(data_count) {
                     key: params.term || $('#balanceDepartment').val(),
                     operator: "OR",
                     params: [
-                      "tenantNo","tenantName","sapContractNo","contractNo","contractName"
+                      "mallCode", "tenantNo","tenantName","sapContractNo","contractNo","contractName"
                     ],
                     sorts: []
                 }
