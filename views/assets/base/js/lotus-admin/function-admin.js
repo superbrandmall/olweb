@@ -52,7 +52,7 @@ function successMsg(code,m) {
     }, 0);
     setTimeout(function () {
         $('#msgDiv').remove();
-    }, 60000); 
+    }, 10000); 
 }
 
 function alertModalMsg(code,m) {

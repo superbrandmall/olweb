@@ -106,13 +106,16 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     </li>
                 </ul>
             </li>
-            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' 
+            <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' 
                     || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-calculator"></i>
                     <span>账务</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
+                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config') { echo 'active'; }?>">
+                        <a href="/lotus-admin/gl-config">总账配置</a>
+                    </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance') { echo 'active'; }?>">
                         <a href="/lotus-admin/contract-balance?items=20">合同结算情况</a>
                     </li>

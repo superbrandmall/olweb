@@ -1023,6 +1023,7 @@ function saveCalc() {
                     $.cookie('balanceItemType','adjust');
                     $.cookie('balanceYearMonth',$('#balanceYearMonth').val());
                     
+                    successMsg('00','保存成功！');
                     //window.location.href = '/lotus-admin/contract-balance?'+(getURLParameter('page') ? 'page='+getURLParameter('page') : '')+(getURLParameter('items') ? '&items='+getURLParameter('items') : '')+'&s=succeed';
                 } else {
                     alertMsg(response.code,response.customerMessage);
