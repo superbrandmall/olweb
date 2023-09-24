@@ -114,7 +114,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                 </a>
                 <ul class="treeview-menu">
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config') { echo 'active'; }?>">
-                        <a href="/lotus-admin/gl-config">总账配置</a>
+                        <a href="/lotus-admin/gl-config">结算配置</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/contract-balance') { echo 'active'; }?>">
                         <a href="/lotus-admin/contract-balance?items=20">合同结算情况</a>

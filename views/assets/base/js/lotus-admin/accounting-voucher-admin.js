@@ -471,6 +471,7 @@ function getVoucherDetail(messIdOs){
     $('#voucherDepartment, #voucherContract').empty(); 
     $('#voucherDepartment, #voucherContract').select2("val", "");
     $('#voucherDepartment, #voucherContract, #writeOffVoucherFlag').attr("disabled", 'disabled');
+    $("#writeOffVoucherFlag").prop('checked',false);
     $('.modal-header h4').find('.badge').remove();
     $('.shield').remove();
     
@@ -522,10 +523,10 @@ function getVoucherDetail(messIdOs){
                 })
             }
             
-            temp = new Option(mallName+'['+v.mallCode+']',v.mallCode+':::'+v.companyCode,true,true);
+            temp = new Option(mallName + '[' + v.mallCode + ']', v.mallCode + ':::' + v.companyCode, true, true);
             $('#voucherDepartment').append(temp).trigger('change');
             
-            temp = new Option(v.tenantName + '[' + v.contractNo + '] | '+(v.brandName || '')+' | '+v.unitName+' | V'+v.contractVersion, v.contractNo + ':::' + v.sapContractNo + ':::' + v.tenantNo, true, true);
+            temp = new Option(v.tenantName + '[' + v.tenantNo + '] | ' + (v.contractName || '') + ' | ' + (v.sapContractNo || '') + ' | ' + v.startDate + '～' + v.endDate + ' | ' + 'V'+v.contractVersion, v.contractNo + ':::' + v.unitName + ':::' + v.brandName, true, true);
             $('#voucherContract').append(temp).trigger('change');
             
             $('#voucherStartDate').datepicker('update', v.startDate);
@@ -544,6 +545,10 @@ function getVoucherDetail(messIdOs){
             var voucherYearMonth = v.yyyymm.toString();
             $('#voucherYearMonth').datepicker('update', voucherYearMonth.substr(0,4)+'-'+voucherYearMonth.substr(4,2));
             
+            if(v.writeOffVoucherFlag == '1'){
+                $('#writeOffVoucherFlag').prop('checked', 'checked');
+            }
+                    
             $('#voucherItem tbody').html('');
             if(v.voucherItemList.length > 0){
                 var rowNumberOrder = v.voucherItemList.sort(
@@ -689,8 +694,8 @@ function updateVoucherContractDropDown(data_count) {
                     return {
                         results: $.map(jsonData, function(item) {
                             data = {
-                                id: item.contractNo + ':::' + item.sapContractNo + ':::' + item.tenantNo,
-                                text: item.tenantName + '[' + item.tenantNo + '] | ' + (item.contractName || '') + ' | ' + item.sapContractNo + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
+                                id: item.contractNo + ':::' + item.unitName + ':::' + item.brandName,
+                                text: item.tenantName + '[' + item.tenantNo + '] | ' + (item.contractName || '') + ' | ' + (item.sapContractNo || '') + ' | ' + item.startDate + '～' + item.endDate + ' | ' + 'V'+item.contractVersion           
                             }
                             var returnData = [];
                             returnData.push(data);
@@ -894,11 +899,11 @@ function editVoucher(voucher) {
             voucherItemList[i].originalCurrencyCode = 'CNY';
             voucherItemList[i].paymentOverDate = $('#voucherItemPaymentOverDate_'+index).val();
             voucherItemList[i].rowNumber = index;
-            voucherItemList[i].sapContractNo = $('#voucherContract').val().split(':::')[1];
+            voucherItemList[i].sapContractNo = $('#voucherContract').find('option:selected').text().split(' | ')[2];
             voucherItemList[i].sapMallCode = $('#voucherDepartment').find('option:selected').val().split(':::')[0].replace("SC","0");
             voucherItemList[i].subjectCode = $('#voucherItemSubject_'+index).val() ;
             voucherItemList[i].taxCode = $('#voucherItemTaxCode_'+index).val();
-            voucherItemList[i].tenantNo = $('#voucherContract').val().split(':::')[2];
+            voucherItemList[i].tenantNo = $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[1].split(']')[0];
             voucherItemList[i].termInfo = $('#voucherInfo').val();
             voucherItemList[i].transactionType = ($('#voucherItemSubject_'+index).val().substr(0,2) == '60' ? transactionType : null);
             voucherItemList[i].updateOpenId = openId;
@@ -907,24 +912,24 @@ function editVoucher(voucher) {
         map.accountMonth = $('#voucherYearMonth').val().split('-')[1].substr(0,1) == '0' ? $('#voucherYearMonth').val().split('-')[1].substr(1,1) : $('#voucherYearMonth').val().split('-')[1];
         map.accountYear = $('#voucherYearMonth').val().split('-')[0];
         map.amount = numberWithoutCommas($('#voucherAmount').val());
-        map.brandName = $('#voucherContract').find('option:selected').text().split(' | ')[1];
+        map.brandName = $('#voucherContract').val().split(':::')[2];
         map.companyCode = $('#voucherDepartment').find('option:selected').val().split(':::')[1];
         map.contractNo = $('#voucherContract').val().split(':::')[0];
-        map.contractVersion = $('#voucherContract').find('option:selected').text().split(' | ')[3].substr(1,1);
+        map.contractVersion = $('#voucherContract').find('option:selected').text().split(' | ')[4].substr(1,1);
         map.currencyCode = "CNY";
         map.endDate = $('#voucherEndDate').val();
         map.itemCode = $('#voucherTermType').val();
         map.itemName = $('#voucherTermType').find('option:selected').text().split('[')[0];
         map.localCurrencyCode = "CNY";
         map.mallCode = $('#voucherDepartment').find('option:selected').val().split(':::')[0];
-        map.sapContractNo = $('#voucherContract').val().split(':::')[1];
+        map.sapContractNo = $('#voucherContract').find('option:selected').text().split(' | ')[2];
         map.startDate = $('#voucherStartDate').val();
         map.taxAmount = numberWithoutCommas($('#voucherTaxAmount').val());
         map.taxRate = $('#voucherTaxRate').find('option:selected').val();
         map.tenantName = $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[0];
-        map.tenantNo = $('#voucherContract').val().split(':::')[2];
+        map.tenantNo = $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[1].split(']')[0];
         map.transactionType = transactionType;
-        map.unitName = $('#voucherContract').find('option:selected').text().split(' | ')[2];
+        map.unitName = $('#voucherContract').val().split(':::')[1];
         map.updateOpenId = openId;
         map.voucherDate = $('#voucherDate').val();
         map.voucherInfo = $('#voucherInfo').val();
@@ -998,6 +1003,7 @@ function createVoucherDetail(){
     $('#voucherDepartment, #voucherContract').select2("val", "");
     $('#voucherDepartment, #voucherContract, #writeOffVoucherFlag').attr("disabled", false);
     $('#voucherItem tbody').html('');
+    $("#writeOffVoucherFlag").prop('checked',false);
     $('.modal-header h4').find('.badge').remove();
     $('.shield').remove();
     
@@ -1255,11 +1261,11 @@ function saveVoucher() {
             voucherItem.originalCurrencyCode = 'CNY';
             voucherItem.paymentOverDate = $('#voucherItemPaymentOverDate_'+index).val();
             voucherItem.rowNumber = index;
-            voucherItem.sapContractNo = $('#voucherContract').val().split(':::')[1];
+            voucherItem.sapContractNo = $('#voucherContract').find('option:selected').text().split(' | ')[2];
             voucherItem.sapMallCode = $('#voucherDepartment').find('option:selected').val().split(':::')[0].replace("SC","0");
             voucherItem.subjectCode = $('#voucherItemSubject_'+index).val() ;
             voucherItem.taxCode = $('#voucherItemTaxCode_'+index).val();
-            voucherItem.tenantNo = $('#voucherContract').val().split(':::')[2];
+            voucherItem.tenantNo = $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[1].split(']')[0];
             voucherItem.termInfo = $('#voucherInfo').val();
             voucherItem.transactionType = ($('#voucherItemSubject_'+index).val().substr(0,2) == '60' ? transactionType : null);
             voucherItem.updateOpenId = openId;
@@ -1270,10 +1276,10 @@ function saveVoucher() {
             "accountMonth": $('#voucherYearMonth').val().split('-')[1].substr(0,1) == '0' ? $('#voucherYearMonth').val().split('-')[1].substr(1,1) : $('#voucherYearMonth').val().split('-')[1],
             "accountYear": $('#voucherYearMonth').val().split('-')[0],
             "amount": numberWithoutCommas($('#voucherAmount').val()),
-            "brandName": $('#voucherContract').find('option:selected').text().split(' | ')[1],
+            "brandName": $('#voucherContract').val().split(':::')[2],
             "companyCode": $('#voucherDepartment').find('option:selected').val().split(':::')[1],
             "contractNo": $('#voucherContract').val().split(':::')[0],
-            "contractVersion": $('#voucherContract').find('option:selected').text().split(' | ')[3].substr(1,1),
+            "contractVersion": $('#voucherContract').find('option:selected').text().split(' | ')[4].substr(1,1),
             "creatorOpenId": openId,
             "currencyCode": "CNY",
             "endDate": $('#voucherEndDate').val(),
@@ -1281,14 +1287,14 @@ function saveVoucher() {
             "itemName": $('#voucherTermType').find('option:selected').text().split('[')[0],
             "localCurrencyCode": "CNY",
             "mallCode": $('#voucherDepartment').find('option:selected').val().split(':::')[0],
-            "sapContractNo": $('#voucherContract').val().split(':::')[1],
+            "sapContractNo": $('#voucherContract').find('option:selected').text().split(' | ')[2],
             "startDate": $('#voucherStartDate').val(),
             "taxAmount": numberWithoutCommas($('#voucherTaxAmount').val()),
             "taxRate": $('#voucherTaxRate').find('option:selected').val(),
             "tenantName": $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[0],
-            "tenantNo": $('#voucherContract').val().split(':::')[2],
+            "tenantNo": $('#voucherContract').find('option:selected').text().split(' | ')[0].split('[')[1].split(']')[0],
             "transactionType": transactionType,
-            "unitName": $('#voucherContract').find('option:selected').text().split(' | ')[2],
+            "unitName": $('#voucherContract').val().split(':::')[1],
             "updateOpenId": openId,
             "voucherDate": $('#voucherDate').val(),
             "voucherInfo": $('#voucherInfo').val(),
