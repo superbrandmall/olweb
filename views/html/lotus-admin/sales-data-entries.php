@@ -99,11 +99,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>
-                                                                <div class="th-inner">单号</div>
-                                                                <div class="fht-cell"></div>
+                                                                <div class="th-inner" style="background: #fff;">单号</div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 60px;">状态</div>
+                                                                <div class="th-inner" style="width: 80px;">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -111,11 +111,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">合同</div>
+                                                                <div class="th-inner" style="width: 200px;">合同</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 290px;">商户</div>
+                                                                <div class="th-inner" style="width: 350px;">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -139,11 +139,31 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
+                                                                <div class="th-inner">录入方式</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">收款方</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner" style="width: 100px;">计租方式</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">楼层</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
                                                                 <div class="th-inner">位置</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
                                                                 <div class="th-inner">说明</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">创建人</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

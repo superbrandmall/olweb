@@ -594,7 +594,7 @@ function savePeriod(button) {
         periodToUpdate.id = rowId;
         periodToUpdate.period = $('#period_'+rowId).find('.date-picker').val().split('-')[0]+$('#period_'+rowId).find('.date-picker').val().split('-')[1];
         periodToUpdate.periodYear = $('#period_'+rowId).find('.date-picker').val().split('-')[0];
-        periodToUpdate.periodMonth = $('#period_'+rowId).find('.date-picker').val().split('-')[1].substring(0,1) == '0' ? $('#period_'+rowId).find('.date-picker').val().split('-')[1].substring(1,1) : $('#period_'+rowId).find('.date-picker').val().split('-')[1];
+        periodToUpdate.periodMonth = $('#period_'+rowId).find('.date-picker').val().split('-')[1].substring(0,1) == '0' ? $('#period_'+rowId).find('.date-picker').val().split('-')[1].substring(1,2) : $('#period_'+rowId).find('.date-picker').val().split('-')[1];
         periodToUpdate.updateOpenId = openId;
         
         if(periodToUpdate.period != '' && periodToUpdate.periodMonth != '' && periodToUpdate.periodYear != ''){

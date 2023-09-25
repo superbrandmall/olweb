@@ -12,6 +12,14 @@ $(document).ready(function(){
         },1000);
     }
     
+    if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
+        findAllUsers();
+    }
+    
+    if(!sessionStorage.getItem("RENT_CALCULATION_MODE") || sessionStorage.getItem("RENT_CALCULATION_MODE") == null || sessionStorage.getItem("RENT_CALCULATION_MODE") == '') {
+        findDictCodeByDictTypeCode('RENT_CALCULATION_MODE');
+    }
+    
     if($.cookie('searchMallCode') != null){
         $('#department').val($.cookie('searchMallCode')).trigger('change');
     }
@@ -77,6 +85,8 @@ $(document).ready(function(){
         $.cookie('searchYearMonth', $('#yearMonth').val().replace('-',''));
         findAllSalesByKVCondition(1,items);
     })
+    
+    $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
 function findAllSalesByKVCondition(p,c) {
@@ -152,11 +162,7 @@ function findAllSalesByKVCondition(p,c) {
                         if(!sessionStorage.getItem("CONTRACT_"+v.contractNo) || sessionStorage.getItem("CONTRACT_"+v.contractNo) == null || sessionStorage.getItem("CONTRACT_"+v.contractNo) == '') {
                             findContractByContractNo(v.contractNo, JSON.stringify(v));
                         } else {
-                            if(!sessionStorage.getItem("USER_"+v.userCode) || sessionStorage.getItem("USER_"+v.userCode) == null || sessionStorage.getItem("USER_"+v.userCode) == '') {
-                                findUserByUserCode(v.userCode, JSON.stringify(v));
-                            } else {
-                                renderSalesList(JSON.stringify(v));
-                            }
+                            renderSalesList(JSON.stringify(v));
                         }
                     })
                     
@@ -188,6 +194,9 @@ function renderSalesList(sl) {
         case 0:
             approveFlag = "未审核";
             break;
+        case 9:
+            approveFlag = "已计算提成";
+            break;
         default:
             approveFlag = "未审核";
             break;
@@ -205,9 +214,15 @@ function renderSalesList(sl) {
             category = "其它商品";
             break;
     }
+    
+    var trCount = $("#sales").find("tr").length;
+    var tbg = '#fff';
+    if(trCount%2==0){
+        tbg = '#f9f9f9';
+    }
 
     $('#sales').append('<tr>\n\
-        <td><a href="/lotus-admin/edit-sales-data?id='+v.yyyymm+v.contractNo+'">'+v.yyyymm+v.contractNo+'</a></td>\n\
+        <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/edit-sales-data?id='+v.yyyymm+v.contractNo+'">'+v.yyyymm+v.contractNo+'</a></td>\n\
         <td>'+approveFlag+'</td>\n\
         <td>'+renderMallInfo(v.contractNo)+'</td>\n\
         <td>'+renderContractInfo(v.contractNo)+'</td>\n\
@@ -216,10 +231,15 @@ function renderSalesList(sl) {
         <td>'+v.salesDate+'</td>\n\
         <td>'+v.salesDate+'</td>\n\
         <td>'+numberWithCommas(v.saleNum)+'</td>\n\
-        <td>'+accounting.formatNumber(v.amount)+'</td>\n\
+        <td><strong>'+accounting.formatNumber(v.amount)+'</strong></td>\n\
+        <td>按天</td>\n\
+        <td>商户</td>\n\
+        <td>'+renderRentCalculationModeInfo(v.contractNo)+'</td>\n\
+        <td>'+renderFloorInfo(v.contractNo)+'</td>\n\
         <td>'+renderStoreInfo(v.contractNo)+'</td>\n\
         <td>'+(v.remark || '')+'</td>\n\
-        <td>'+renderUserInfo(v.userCode)+'</td>\n\
+        <td>'+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+'</td>\n\
+        <td>'+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+'</td>\n\
     </tr>');
 }
 
@@ -265,7 +285,7 @@ function renderContractInfo(cn) {
     var contractInfo = '';
     if(sessionStorage.getItem("CONTRACT_"+cn) && sessionStorage.getItem("CONTRACT_"+cn) != null && sessionStorage.getItem("CONTRACT_"+cn) != '') {
         var contract = $.parseJSON(sessionStorage.getItem("CONTRACT_"+cn));
-        contractInfo = contract.brandName + '[' + contract.contractNo + ']';
+        contractInfo = contract.contractName + '[' + (contract.sapContractNo || contract.contractNo) + ']';
     }
     return contractInfo;
 }
@@ -289,49 +309,37 @@ function renderBizInfo(cn) {
     return bizInfo;
 }
 
+function renderRentCalculationModeInfo(cn) {
+    var calculationModeInfo = '';
+    if(sessionStorage.getItem("CONTRACT_"+cn) && sessionStorage.getItem("CONTRACT_"+cn) != null && sessionStorage.getItem("CONTRACT_"+cn) != '') {
+        var contract = $.parseJSON(sessionStorage.getItem("CONTRACT_"+cn));
+        calculationModeInfo = contract.rentCalculationMode;
+        if(sessionStorage.getItem("RENT_CALCULATION_MODE") && sessionStorage.getItem("RENT_CALCULATION_MODE") != null && sessionStorage.getItem("RENT_CALCULATION_MODE") != '') { 
+            $.each($.parseJSON(sessionStorage.getItem("RENT_CALCULATION_MODE")), function(i,v){
+                if(v.dictCode == calculationModeInfo){
+                    calculationModeInfo = v.dictName;
+                    return false;
+                }
+            })
+        }
+    }
+    return calculationModeInfo;
+}
+
+function renderFloorInfo(cn) {
+    var floorInfo = '';
+    if(sessionStorage.getItem("CONTRACT_"+cn) && sessionStorage.getItem("CONTRACT_"+cn) != null && sessionStorage.getItem("CONTRACT_"+cn) != '') {
+        var contract = $.parseJSON(sessionStorage.getItem("CONTRACT_"+cn));
+        floorInfo = contract.floorName;
+    }
+    return floorInfo;
+}
+
 function renderStoreInfo(cn) {
     var storeInfo = '';
     if(sessionStorage.getItem("CONTRACT_"+cn) && sessionStorage.getItem("CONTRACT_"+cn) != null && sessionStorage.getItem("CONTRACT_"+cn) != '') {
         var contract = $.parseJSON(sessionStorage.getItem("CONTRACT_"+cn));
-        storeInfo = contract.unitCode + '[' + contract.unitName + ']';
+        storeInfo = contract.unitName + '[' + contract.unitCode + ']';
     }
     return storeInfo;
-}
-
-function findUserByUserCode(uc, sl) {
-    $.ajax({
-        url: $.api.baseAuth+"/api/passport/user/"+uc,
-        type: "GET",
-        async: false,
-        beforeSend: function(request) {
-            request.setRequestHeader("Login", $.cookie('login'));
-            request.setRequestHeader("Authorization", $.cookie('authorization'));
-            request.setRequestHeader("Lang", $.cookie('lang'));
-            request.setRequestHeader("Source", "onlineleasing");
-        },
-        success: function (response, status, xhr) {
-            if(response.code === 'C0') {
-                if(xhr.getResponseHeader("Login") !== null){
-                    $.cookie('login', xhr.getResponseHeader("Login"));
-                }
-                if(xhr.getResponseHeader("Authorization") !== null){
-                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
-                }
-                
-                if(response.data != null){
-                    sessionStorage.setItem("USER_"+uc,JSON.stringify(response.data));
-                    renderSalesList(sl);
-                }
-            }                             
-        }
-    })
-}
-
-function renderUserInfo(uc) {
-    var userInfo = '';
-    if(sessionStorage.getItem("USER_"+uc) && sessionStorage.getItem("USER_"+uc) != null && sessionStorage.getItem("USER_"+uc) != '') {
-        var user = $.parseJSON(sessionStorage.getItem("USER_"+uc));
-        userInfo = user.settings.name;
-    }
-    return userInfo;
 }

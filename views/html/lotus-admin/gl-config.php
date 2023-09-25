@@ -19,8 +19,8 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </h4>
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
-                    <li><a href="#configInfo">费用项配置</a></li>
                     <li><a href="#accountPeriod">账期配置</a></li>
+                    <li><a href="#configInfo">费用项配置</a></li>
                 </ul>
             </div>
         </section>
@@ -29,6 +29,62 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="box box-default" id="accountPeriod">    
+                            <div class="box-header with-border">
+                                <h3 class="box-title">账期配置</h3>
+                                <div class="box-tools">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="col-md-12">
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="bootstrap-table">
+                                                <div class="fixed-table-container">
+                                                    <div class="fixed-table-body">
+                                                        <table class="table table-striped snipe-table table-responsive">
+                                                            <thead id="assetsListingTable-sticky-header">
+                                                                <tr>
+                                                                    <th>
+                                                                        <div class="th-inner">行</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">项目</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">公司</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">模块</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">会计期间</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                    <th>
+                                                                        <div class="th-inner">操作</div>
+                                                                        <div class="fht-cell"></div>
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="periods"></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="box box-default" id="configInfo">    
                             <div class="box-header with-border">
                                 <h3 class="box-title">费用项配置</h3>
@@ -103,62 +159,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="configs"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="box box-default" id="accountPeriod">    
-                            <div class="box-header with-border">
-                                <h3 class="box-title">账期配置</h3>
-                                <div class="box-tools">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div class="col-md-12">
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="bootstrap-table">
-                                                <div class="fixed-table-container">
-                                                    <div class="fixed-table-body">
-                                                        <table class="table table-striped snipe-table table-responsive">
-                                                            <thead id="assetsListingTable-sticky-header">
-                                                                <tr>
-                                                                    <th>
-                                                                        <div class="th-inner">行</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">项目</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">公司</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">模块</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">会计期间</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">操作</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="periods"></tbody>
                                                         </table>
                                                     </div>
                                                 </div>

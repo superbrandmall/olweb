@@ -10,23 +10,20 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper create-sales-data">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 90px;">
+        <div class="text-right" style="margin: 60px 15px 0 0;">
+            交易总笔数: <h3 id="totalSaleNum" style="display: inline; margin-right: 10px;">0</h3>
+            销售总金额: <h3 id="totalAmount"  style="display: inline; margin-right: 10px;">0.00</h3>
+        </div>
+        <section class="sub-header" style="position: absolute; margin-top: 50px; height: 50px;">
             <h4>
-                创建销售数据录入单
+                销售数据录入单
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','tenants');">取消</a>
                 <button type="submit" class="btn btn-success btn-sm" id="submitForm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
             </div>
-            <div class="box-header" id="navbarTop">
-                <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
-                    <li>交易总笔数: <h3 id="totalSaleNum" style="display: inline;">0</h3></li>
-                    <li>销售总金额: <h3 id="totalAmount"  style="display: inline;">0.00</h3></li>
-                </ul>
-            </div>
         </section>
-
-        <section class="content" style="margin-top: 140px;">
+        <section class="content" style="margin-top: 60px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">

@@ -1,10 +1,26 @@
 $.sales = {
     approveFlag: 0,
     yearMonth: '',
-    contractNo: ''
+    contractNo: '',
+    contractVersion: '',
+    termCalcMode: '',
+    salesList: {}
 }    
 
 $(document).ready(function(){
+    if(getURLParameter('s')) {
+        switch (getURLParameter('s')) {
+            case "succeed":
+                successMsg('00','提成计算成功！');
+                break;
+            default:
+                break;
+        }
+        setTimeout(function () {
+            window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
+        },1000);
+    }
+    
     findInfoByContractNo(getURLParameter('id'));
 });
 
@@ -43,6 +59,8 @@ function findInfoByContractNo(id) {
                     $('#department').text(item.mallName);
                     $('#selectContract').text(item.tenantName + '[' + item.contractNo + '] | ' + (item.contractName || '') + ' | ' + item.unitName + ' | ' + item.startDate + '～' + item.endDate);
                     $('#yearMonth').text($.sales.yearMonth);
+                    $.sales.contractVersion = item.contractVersion;
+                    $.sales.termCalcMode = item.rentCalculationMode;
                     
                     findMonthlySales($.sales.contractNo,'A01',$.sales.yearMonth);
                 }
@@ -80,27 +98,38 @@ function findMonthlySales(cn,cg,ym) {
                 
                 if(response.data.length > 0){
                     $.sales.approveFlag = response.data[0].approveFlag;
-                    if($.sales.approveFlag == 1){
+                    var readonly = '';
+                    if($.sales.approveFlag == 1 || $.sales.approveFlag == 9){
                         $('#submitForm').hide();
                         $('#status').text('已审核');
+                        readonly = ' readonly';
+                        if($.sales.approveFlag == 9){
+                            $('#calcDeductStatus').text('已计算提成');
+                        }
                     } else {
+                        $('#deductCalc').hide();
                         $('#status').removeClass('badge-success').addClass('badge-danger').text('未审核');
                     }
                     
+                    $('#deductCalc').click(function(){
+                        calcContractDeductTerm();
+                    })
+                    
+                    $.sales.salesList = JSON.stringify(response.data);
                     
                     $.each(response.data, function(i,v) {
                         $('#salesEntries').append('<tr id="entry_'+(i+1)+'" data-id="'+v.id+'">\n\
                             <td>'+(i+1)+'</td>\n\
                             <td><input class="form-control" type="text" value="'+v.salesDate+'" readonly></td>\n\
                             <td><input class="form-control" type="text" value="默认商品[A01]" readonly></td>\n\
-                            <td><input class="form-control" type="number" min="0" value="'+v.saleNum+'"></td>\n\
+                            <td><input class="form-control" type="number" min="0" value="'+v.saleNum+'"'+readonly+'></td>\n\
                             <td>\n\
                                 <div class="input-group">\n\
-                                    <input class="form-control money" value="'+accounting.formatNumber(v.amount)+'" type="text">\n\
+                                    <input class="form-control money" value="'+accounting.formatNumber(v.amount)+'" type="text"'+readonly+'>\n\
                                     <span class="input-group-addon">元</span>\n\
                                 </div>\n\
                             </td>\n\
-                            <td><input class="form-control" type="text" value="'+(v.remark || '')+'" maxlength="200"></td>\n\
+                            <td><input class="form-control" type="text" value="'+(v.remark || '')+'" maxlength="200"'+readonly+'></td>\n\
                         </tr>');
                     })
                     
@@ -264,4 +293,172 @@ function saveSales() {
             }
         });
     })
+}
+
+function calcContractDeductTerm() {
+    var msg = '确定要计算提成吗？';
+    Ewin.confirm({ message: msg }).on(function (e) {
+        if (!e) {
+            return;
+        } else {
+            $('.modal.in').hide().remove();
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+
+        var map = [{
+            "contractNo": $.sales.contractNo,
+            "contractVersion":$.sales.contractVersion,
+            "endYyyyMm": $.sales.yearMonth,
+            "startYyyyMm": $.sales.yearMonth,
+            "termCalcMode": $.sales.rentCalculationMode,
+            "updateOpenId": openId
+        }]
+
+        $.ajax({
+            url: $.api.baseLotus+"/api/contract/rent/calc/calcContractDeductTerm",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                $('#loader').show();
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                $('#loader').hide();
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    
+                    if(response.data[0].resultCode == "ERROR"){
+                        alertMsg(response.data[0].resultCode,response.data[0].resultMsg);
+                    } else {
+                        calcContractDeductHigh(openId);
+                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    })
+}
+
+function calcContractDeductHigh(openId) {
+    var map = {
+        "contractNo": $.sales.contractNo,
+        "contractVersion":$.sales.contractVersion,
+        "endYyyyMm": $.sales.yearMonth,
+        "startYyyyMm": $.sales.yearMonth,
+        "termCalcMode": $.sales.termCalcMode,
+        "updateOpenId": openId
+    }
+
+    $.ajax({
+        url: $.api.baseLotus+"/api/contract/settlement/calcContractDeductHigh",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                if(response.data.resultCode == "ERROR"){
+                    alertMsg(response.data.resultCode,response.data.resultMsg);
+                } else {
+                    updateSalesApproveFlag(openId);
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function updateSalesApproveFlag(openId) {
+    var salesList = $.parseJSON($.sales.salesList);
+    $.each(salesList, function(i,v){
+        v.approveFlag = 9;
+    })
+
+    var map = {
+        "approveFlag": 9,
+        "category": "A01",
+        "contractNo": $.sales.contractNo,
+        "salesList": salesList,
+        "updateOpenId": openId,
+        "yyyymm": $.sales.yearMonth
+    }
+
+    $.ajax({
+        url: $.api.baseLotus+"/api/sales/lotus/saveOrUpdates",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                window.location.href = '/lotus-admin/edit-sales-data?id='+$.sales.yearMonth+$.sales.contractNo+'&s=succeed';
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
 }
