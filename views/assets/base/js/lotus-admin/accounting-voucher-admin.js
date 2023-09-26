@@ -37,6 +37,9 @@ $(document).ready(function(){
         return false;
     }
     
+    updateSelectContractDropDown(50);
+    updateSelectTenantDropDown(50);
+    
     if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
         findAllUsers();
     }
@@ -49,7 +52,7 @@ $(document).ready(function(){
         'autoclose': true
     });
     
-    $('#accountingYearMonth').datepicker({
+    $('#yearMonth').datepicker({
         'language': 'zh-CN',
         'format': 'yyyy-mm',
         'todayHighlight': true,
@@ -72,9 +75,9 @@ $(document).ready(function(){
     
     if($.cookie('accountingVoucherMallVal') != null && $.cookie('accountingVoucherMallVal') != 'null'){
         var newOption = new Option($.cookie('accountingVoucherMallTxt'), $.cookie('accountingVoucherMallVal'), true, true);
-        $('#accountingDepartment').append(newOption).trigger('change');
+        $('#department').append(newOption).trigger('change');
     } else {
-        $('#accountingDepartment').val('').trigger('change');
+        $('#department').val('').trigger('change');
     }
     
     if($.cookie('accountingVoucherCode') != null && $.cookie('accountingVoucherCode') != ''){
@@ -85,8 +88,26 @@ $(document).ready(function(){
         $('#accountingVoucherDate').datepicker('update',$.cookie('accountingVoucherDate'));
     }
     
-    if($.cookie('accountingYearMonth') != null && $.cookie('accountingYearMonth') != 'null'){
-        $('#accountingYearMonth').val($.cookie('accountingYearMonth'));
+    if($.cookie('accountingContractVal') != null && $.cookie('accountingContractVal') != 'null'){
+        var newOption = new Option($.cookie('accountingContractTxt'), $.cookie('accountingContractVal'), true, true);
+        $('#selectContract').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('accountingSelectTenantVal') != null && $.cookie('accountingSelectTenantVal') != 'null'){
+        var newOption = new Option($.cookie('accountingSelectTenantTxt'), $.cookie('accountingSelectTenantVal'), true, true);
+        $('#selectTenant').append(newOption).trigger('change');
+    }
+    
+    if($.cookie('accountingTermType') != null && $.cookie('accountingTermType') != 'null'){
+        $('#termType').val($.cookie('accountingTermType')).trigger('change');
+    }
+    
+    if($.cookie('accountingYearMonthStartDate') != null && $.cookie('accountingYearMonthStartDate') != 'null'){
+        $('#yearMonthStartDate').val($.cookie('accountingYearMonthStartDate'));
+    }
+    
+    if($.cookie('accountingYearMonthEndDate') != null && $.cookie('accountingYearMonthEndDate') != 'null'){
+        $('#yearMonthEndDate').val($.cookie('accountingYearMonthEndDate'));
     }
     
     if($.cookie('accountingVoucherMessIdOs') != null && $.cookie('accountingVoucherMessIdOs') != ''){
@@ -130,25 +151,34 @@ $(document).ready(function(){
         $.cookie('accountingVoucherStatus','');
         $.cookie('accountingVoucherMallTxt', null);
         $.cookie('accountingVoucherMallVal', null);
+        $.cookie('accountingContractTxt', null);
+        $.cookie('accountingContractVal', null);
+        $.cookie('accountingSelectTenantVal', null);
+        $.cookie('accountingSelectTenantTxt', null);
+        $.cookie('accountingTermType', null);
+        $.cookie('accountingYearMonthStartDate', null);
+        $.cookie('accountingYearMonthEndDate', null);
         $.cookie('accountingVoucherCode', '');
         $.cookie('accountingVoucherVoucherDate', null);
-        $.cookie('accountingYearMonth', null);
         $.cookie('accountingVoucherMessIdOs', '');
         
-        $('#accountingVoucherStatus, #accountingDepartment').val('').trigger('change');
-        $('#accountingVoucherCode').val('');
-        $('#accountingVoucherDate').val('');
-        $('#accountingYearMonth').val('');
-        $('#accountingVoucherMessIdOs').val('');
+        $('#accountingVoucherStatus, #department, #selectContract, #selectTenant, #termType').val('').trigger('change');
+        $('#accountingVoucherCode, #accountingVoucherDate, #accountingVoucherMessIdOs, #yearMonthStartDate, #yearMonthEndDate').val('');
     })
     
     $('#search').click(function(){
         $.cookie('accountingVoucherStatus', $('#accountingVoucherStatus').val());
-        $.cookie('accountingVoucherMallVal', $('#accountingDepartment').val());
-        $.cookie('accountingVoucherMallTxt', $('#accountingDepartment').find('option:selected').text());
+        $.cookie('accountingVoucherMallVal', $('#department').val());
+        $.cookie('accountingVoucherMallTxt', $('#department').find('option:selected').text());
+        $.cookie('accountingContractVal', $('#selectContract').val());
+        $.cookie('accountingContractTxt', $('#selectContract').find('select option:selected').attr('title'));
+        $.cookie('accountingSelectTenantVal', $('#selectTenant'));
+        $.cookie('accountingSelectTenantTxt', $('#selectTenant').find('option:selected').text());
+        $.cookie('accountingTermType', $('#termType').val());
         $.cookie('accountingVoucherCode', $('#accountingVoucherCode').val()); 
         $.cookie('accountingVoucherDate', $('#accountingVoucherDate').val());
-        $.cookie('accountingYearMonth', $('#accountingYearMonth').val());
+        $.cookie('accountingYearMonthStartDate', $('#yearMonthStartDate').val());
+        $.cookie('accountingYearMonthEndDate', $('#yearMonthEndDate').val());
         $.cookie('accountingVoucherMessIdOs', $('#accountingVoucherMessIdOs').val());
         $.checkVoucher = [];
         $.cookie('checkVoucher','');
@@ -201,7 +231,40 @@ function findVoucherByKVCondition(p,c) {
             "columnPatten": "",
             "conditionOperator": "AND",
             "operator": "=",
-            "value": ($.cookie('accountingVoucherMallVal') != null ? $.cookie('accountingVoucherMallVal') : $('#accountingDepartment').val())
+            "value": ($.cookie('accountingVoucherMallVal') != null ? $.cookie('accountingVoucherMallVal') : $('#department').val())
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('accountingContractVal') != null && $.cookie('accountingContractVal') != 'null' && $.cookie('accountingContractVal') != ''){
+        param = {
+            "columnName": "contractNo",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingContractVal')
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('accountingSelectTenantTxt') != null && $.cookie('accountingSelectTenantTxt') != '' && $.cookie('accountingSelectTenantTxt') != 'null'){
+        param = {
+            "columnName": "tenantNo",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingSelectTenantTxt').split(' | ')[0]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('accountingTermType') != null && $.cookie('accountingTermType') != 'null' && $.cookie('accountingTermType') != ''){
+        param = {
+            "columnName": "itemCode",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": $.cookie('accountingTermType')
         }
         params.push(param);
     }
@@ -228,13 +291,24 @@ function findVoucherByKVCondition(p,c) {
         params.push(param);
     }
     
-    if($.cookie('accountingYearMonth') != null & $.cookie('accountingYearMonth') != 'null' && $.cookie('accountingYearMonth') != ''){
+    if($.cookie('accountingYearMonthStartDate') != null & $.cookie('accountingYearMonthStartDate') != 'null' && $.cookie('accountingYearMonthStartDate') != ''){
         param = {
             "columnName": "yyyymm",
             "columnPatten": "",
             "conditionOperator": "AND",
-            "operator": "=",
-            "value": $.cookie('accountingYearMonth').split('-')[0]+$.cookie('accountingYearMonth').split('-')[1]
+            "operator": ">=",
+            "value": $.cookie('accountingYearMonthStartDate').split('-')[0]+$.cookie('accountingYearMonthStartDate').split('-')[1]
+        }
+        params.push(param);
+    }
+    
+    if($.cookie('accountingYearMonthEndDate') != null & $.cookie('accountingYearMonthEndDate') != 'null' && $.cookie('accountingYearMonthEndDate') != ''){
+        param = {
+            "columnName": "yyyymm",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "<=",
+            "value": $.cookie('accountingYearMonthEndDate').split('-')[0]+$.cookie('accountingYearMonthEndDate').split('-')[1]
         }
         params.push(param);
     }
@@ -1064,7 +1138,7 @@ function createVoucherDetail(){
                     itemList = [{
                            "rowNumber": "1",
                            "subjectCode": "1122001000",
-                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
                            "localAmount": Math.abs(numberWithoutCommas($('#voucherAmount').val())),
                            "taxCode": taxCode,
                            "interestOverDate": "",
@@ -1072,7 +1146,7 @@ function createVoucherDetail(){
                         },{
                            "rowNumber": "2",
                            "subjectCode": "6001000000",
-                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
                            "localAmount": Math.abs(numberWithoutCommas($('#voucherTaxAmount').val())),
                            "taxCode": taxCode,
                            "interestOverDate": "",
@@ -1080,7 +1154,7 @@ function createVoucherDetail(){
                         },{
                            "rowNumber": "3",
                            "subjectCode": "2221001005",
-                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "S" : "H"),
+                           "debitCreditFlag": ($("#writeOffVoucherFlag").is(':not(:checked)') ? "H" : "S"),
                            "localAmount": (parseFloat(Math.abs(numberWithoutCommas($('#voucherAmount').val())) - Math.abs(numberWithoutCommas($('#voucherTaxAmount').val())))).toFixed(2),
                            "taxCode": taxCode,
                            "interestOverDate": "",

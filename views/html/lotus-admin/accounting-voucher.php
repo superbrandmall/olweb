@@ -17,7 +17,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 </style>
 
 <div class="content-wrapper">
-    <section class="sub-header" style="height: 260px;">
+    <section class="sub-header" style="height: 300px;">
         <h4>
             账务 - 会计凭证
         </h4>
@@ -52,9 +52,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingDepartment" class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <label for="department" class="col-md-4 control-label" style="text-align: right;">项目</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <select class="select2 mallCode" id="accountingDepartment" name="accountingDepartment" style="width: 100%"></select>
+                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
@@ -70,6 +70,22 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
+                            <label for="selectContract" class="col-md-4 control-label" style="text-align: right;">合同</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="selectContract" name="selectContract" style="width: 100%"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="selectTenant" class="col-md-4 control-label" style="text-align: right;">商户</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select id="selectTenant" class="select2" style="width: 100%"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
                             <label for="accountingVoucherDate" class="col-md-4 control-label" style="text-align: right;">凭证日期</label>
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <div class="input-group">
@@ -79,14 +95,43 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="col-md-12">
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="accountingYearMonth" class="col-md-4 control-label" style="text-align: right;">结转期</label>
-                            <div class="col-md-8 col-sm-12" style="text-align: left;">
-                                <div class="input-group">
-                                    <input class="form-control date-picker" id="accountingYearMonth" name="accountingYearMonth" type="text" data-plugin="yearMonth" readonly style="border: 1px solid #ccc; background: #fff; border-right: none;" />
+                            <label for="yearMonthStartDate" class="col-md-4 control-label" style="text-align: right;">账单结转期</label>
+                            <div class="col-md-8 col-sm-12">
+                                <div id="yearMonth" class="input-daterange input-group">
+                                    <input type="text" class="form-control" id="yearMonthStartDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
                                     <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    <span class="input-group-addon" style="border: none; background: transparent; padding: 0;">-</span>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="yearMonthEndDate" readonly style="border: 1px solid #ccc; background: #fff; border-radius: 0; border-right: none;" />
+                                        <span class="input-group-addon" style="border-left: none; background: transparent;"><i class="fa fa-calendar"></i></span>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="termType" class="col-md-4 control-label" style="text-align: right;">科目</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="termType" name="termType" style="width: 100%; display: none;">
+                                    <option value="">未选择</option>
+                                    <option value="B011">固定租金[B011]</option>
+                                    <option value="B021">商场服务费-月[B021]</option>
+                                    <option value="D011">提成租金[D011]</option>
+                                    <option value="G011">固定推广费[G011]</option>
+                                    <option value="E02">租赁押金[E02]</option>
+                                    <option value="E03">装修押金[E03]</option>
+                                    <option value="E22">公共事业费押金[E22]</option>
+                                    <option value="H01">水费[H01]</option>
+                                    <option value="H02">电费[H02]</option>
+                                    <option value="H03">煤气费[H03]</option>
+                                    <option value="Y021">商场服务费-年[Y021]</option>
+                                    <option value="Y77">服务费-线损费[Y77]</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -114,7 +159,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
 
-    <section class="content" style="margin-top: 310px;">
+    <section class="content" style="margin-top: 350px;">
         <div id="webui">
             <div class="row">
                 <div class="col-md-12">

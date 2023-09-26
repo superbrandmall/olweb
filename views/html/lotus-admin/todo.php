@@ -249,10 +249,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                             <tbody id="filesBody">
                                                                 <tr>
                                                                     <td>操作手册</td>
-                                                                    <td>2023.05.05 17:41:24</td>
-                                                                    <td>Lotus招商管理系统操作手册_v2.4.pdf</td>
+                                                                    <td>2023.08.28 11:18:30</td>
+                                                                    <td>Lotus招商管理系统操作手册_v2.5.pdf</td>
                                                                     <td>6.6Mb</td>
-                                                                    <td><a href="/upload/manual/Lotus招商管理系统操作手册_v2.4.pdf" target="_blank">查看文件</a></td>
+                                                                    <td><a href="/upload/manual/Lotus招商管理系统操作手册_v2.5.pdf" target="_blank">查看文件</a></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>操作指南</td>
@@ -289,13 +289,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="row">
                                 <div class="col-md-4">
                                     <div style="margin: 30px 15px;">
-                                        <h4>莲花项目概览<small>（2023年9月7日更新）</small></h4>
+                                        <h4>莲花项目概览<small>（2023年9月26日更新）</small></h4>
                                         <hr>
                                         项目数(已开业)<br><h4 class="text-red">96</h4><hr>
-                                        总面积(m²)<br><h4 class="text-red">497,716.56</h4><hr>
-                                        总铺位数<br><h4 class="text-red">3,881</h4><hr>
-                                        出租率(按面积)<br><h4 class="text-red">57.53%</h4><hr>
-                                        合同数(生效中)<br><h4 class="text-red">1,392</h4>
+                                        总面积(m²)<br><h4 class="text-red">499,187.56</h4><hr>
+                                        总铺位数<br><h4 class="text-red">3,886</h4><hr>
+                                        出租率(按面积)<br><h4 class="text-red">57.19%</h4><hr>
+                                        合同数(生效中)<br><h4 class="text-red">1,320</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

@@ -51,7 +51,7 @@
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">
                             <a href="/we-meter/#/meter" target="_blank" style="font-size: 15px;font-weight: bold;">
-                                物业
+                                物业<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;">
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm">

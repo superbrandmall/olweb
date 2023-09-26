@@ -17,13 +17,13 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail' 
                     || $_GET['p'] == 'lotus-admin/process-request' || $_GET['p'] == 'lotus-admin/sign-request' || $_GET['p'] == 'lotus-admin/matter-process-detail' || $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-send"></i>
-                    <span>流程<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
+                    <span>流程</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail'
                             || $_GET['p'] == 'lotus-admin/process-request' || $_GET['p'] == 'lotus-admin/sign-request' || $_GET['p'] == 'lotus-admin/matter-process-detail' || $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>">
-                        <a href="/lotus-admin/my-process?items=20">流程汇总<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
+                        <a href="/lotus-admin/my-process?items=20">流程汇总</a>
                     </li>
                 </ul>
             </li>
@@ -45,7 +45,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/tenants' || 
                     $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/store-change' || $_GET['p'] == 'lotus-admin/default') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-address-card"></i>
-                    <span>基础资料<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></span>
+                    <span>基础资料</span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
@@ -66,7 +66,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                         <a href="/lotus-admin/tenants?items=20">商户</a>
                     </li>
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
-                        <a href="/lotus-admin/store-change">铺位变更单<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;" /></a>
+                        <a href="/lotus-admin/store-change">铺位变更单</a>
                     </li>
                 </ul>
             </li>
@@ -109,7 +109,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' 
                     || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>">
                 <a href="#"><i class="fa fa-calculator"></i>
-                    <span>账务</span>
+                    <span>账务<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;"></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
