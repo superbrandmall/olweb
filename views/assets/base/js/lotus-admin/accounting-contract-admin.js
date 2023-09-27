@@ -158,7 +158,7 @@ $(document).ready(function(){
         $.cookie('accountingContractSelectStoreVal', $('#selectStore').val());
         $.cookie('accountingContractSelectStoreTxt', $('#selectStore').find('option:selected').text());
         $.cookie('accountingContractVal', $('#selectContract').val());
-        $.cookie('accountingContractTxt', $('#selectContract').find('select option:selected').attr('title'));
+        $.cookie('accountingContractTxt', $('#selectContract').find('option:selected').text());
         $.cookie('accountingContractTenantVal', $('#selectTenant'));
         $.cookie('accountingContractTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('accountingContractBrandVal', $('#brandName').val());

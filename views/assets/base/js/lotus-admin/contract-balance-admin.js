@@ -180,7 +180,7 @@ $(document).ready(function(){
         $.cookie('balanceYearMonthEndDate', $('#yearMonthEndDate').val());
         $.cookie('balanceTermType', $('#termType').val());
         $.cookie('balanceContractVal', $('#selectContract').val());
-        $.cookie('balanceContractTxt', $('#selectContract').find('select option:selected').attr('title'));
+        $.cookie('balanceContractTxt', $('#selectContract').find('option:selected').text());
         $.cookie('balanceMallVal', $('#department').val());
         $.cookie('balanceMallTxt', $('#select2-department-container').attr('title'));
         $.cookie('balanceUnitType', $('#unitType').val());
