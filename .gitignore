@@ -5,3 +5,4 @@ Thumbs.db
 controllers/api/
 upload/manual/Lotus招商管理系统操作手册_v2.3.pdf
 /upload/
+/models/lotus-admin/

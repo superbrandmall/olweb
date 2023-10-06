@@ -36,7 +36,7 @@ function successMsg(code,m) {
         default:
             msg = m;
             color = "default";
-            style = ' style="z-index: 1029;position: fixed; left:0; right: 0; top: 0; bottom: 0; background: rgba(193,194,193,0.5);"';
+            style = ' style="z-index: 1041;position: fixed; left:0; right: 0; top: 0; bottom: 0; background: rgba(193,194,193,0.5);"';
             break;
     }
     

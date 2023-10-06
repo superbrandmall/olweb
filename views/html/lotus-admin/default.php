@@ -17,15 +17,12 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php include 'sidebar.php'; ?>
 
 <div class="content-wrapper" style="overflow: hidden;">
-    <section class="sub-header" style="height: 90px;">
+    <section class="sub-header">
         <div class="pull-left">
             <a href="/lotus-admin/malls" class="btn btn-link "><i class="fa fa-angle-left"></i> 返回列表</a>
         </div>
-        <h4><b id="name2"></b></h4>
-        <div class="box-header" id="navbarTop" style="height: 53px;">
-            <span id="floorNo"></span>
-        </div>
-        <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px; height: 50px;">
+        <h4><b id="name2"></b> - <b id="floorNo"></b></h4>
+        <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/mall-detail?id=<?= $id; ?>">详细资料</a></li>
@@ -36,15 +33,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         </div>
     </section>
     
-    <section class="content" style="margin-top: 179px;">
+    <section class="content" style="margin-top: 126px;">
         <div class="col-lg-12" id="map_canvas">
             <div id="webui">
                 <div class="box box-default" style="overflow: auto;">
                     <div class="box-header with-border">
                         <h3 class="box-title">平面图</h3>
                         <div class="c-label" id="fmap" style="display: inline-block;">
-                            <span style="margin-left: 5px; background-color: #d3fdd9; width: 13px; height: 13px; display: inline-block;"></span> 在租 <span id="leased"></span>%
-                            <span style="margin-left: 5px; background-color: #ff2700; width: 13px; height: 13px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
+                            <span style="margin-left: 5px; background-color: #e3efcf; border: solid 2px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 在租 <span id="leased"></span>%
+                            <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 2px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
                         </div>
                     </div>
                     <div class="box-body">
@@ -84,30 +81,26 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
             <div class="modal-body">
                 <div class="col-md-4">
-                    <div class="form-group" id="store_img" style="margin-top: 15px;"></div>
+                    <div class="form-group" id="store_img"></div>
                 </div>
                 
                 <div class="col-md-4 col-xs-6">
                     <div class="form-group" id="contractName"></div>
                     <div class="form-group">
                         <span class="control-label">合同类型:</span>
-                        <strong id="contractType" class="control-label"></strong>
+                        <strong id="formType" class="control-label"></strong>
                     </div>
                     <div class="form-group">
                         <span class="control-label">商户名称:</span>
                         <strong id="tenantName" class="control-label"></strong>
                     </div>
                     <div class="form-group">
-                        <span class="control-label">一级业态:</span>
-                        <strong id="modality1" class="control-label"></strong>
+                        <span class="control-label">业态:</span>
+                        <strong id="bizTypeName" class="control-label"></strong>
                     </div>
                     <div class="form-group">
-                        <span class="control-label">二级业态:</span>
-                        <strong id="modality2" class="control-label"></strong>
-                    </div>
-                    <div class="form-group">
-                        <span class="control-label">三级业态:</span>
-                        <strong id="modality3" class="control-label"></strong>
+                        <span class="control-label">合同起始日:</span>
+                        <strong id="startDate" class="control-label"></strong>
                     </div>
                 </div>
                 
@@ -129,10 +122,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         <strong id="unitArea" class="control-label"></strong>
                     </div>
                     <div class="form-group">
-                        <span class="control-label">合同起始日:</span>
-                        <strong id="startDate" class="control-label"></strong>
-                    </div>
-                    <div class="form-group">
                         <span class="control-label">合同终止日:</span>
                         <strong id="endDate" class="control-label"></strong>
                     </div>
@@ -151,27 +140,26 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                         <tr>
                                                             <th>
                                                             </th>
-                                                            <th style="text-align: left;">
+                                                            <th style="text-align: left; padding: 8px;">
                                                                 预算指标
                                                             </th>
-                                                            <th style="text-align: left;">
+                                                            <th style="text-align: left; padding: 8px;">
                                                                 本合同
                                                             </th>
-                                                            <th style="text-align: left;">
+                                                            <th>
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody id="comparisonL" class="hidden-xs">
-                                                        <tr><td>合同总收入(A+B+C)(元)</td><td class="figure">0</td><td id="totalAmount" class="figure"></td><td id="totalAmountGrade">--</td></tr>
-                                                        <tr><td>(A)固定租金(元)</td><td id="B011" class="figure">0</td><td id="B011_amount" class="figure"></td><td id="B011_grade">--</td></tr>
-                                                        <tr><td>(B)物业管理费(元)</td><td id="B021" class="figure">0</td><td id="B021_amount" class="figure"></td><td id="B021_grade">--</td></tr>
-                                                        <tr><td>(C)比率推广费(%)</td><td id="G021" class="figure">0</td><td id="G021_amount" class="figure"></td><td id="G021_grade">--</td></tr>
-                                                        <tr><td>(C)固定推广费(元)</td><td id="G011" class="figure">0</td><td id="G011_amount" class="figure"></td><td id="G011_grade">--</td></tr>
-                                                        <tr><td>提成扣率(%)</td><td id="D011" class="figure">0</td><td id="D011_amount" class="figure"></td><td id="D011_grade">--</td></tr>
-                                                        <tr><td>保证金(元)</td><td id="E02" class="figure">0</td><td id="E02_amount" class="figure"></td><td id="E02_grade">--</td></tr>
-                                                        <tr><td>日坪效(元/㎡/天)</td><td class="figure">0</td><td id="totalAmountDay" class="figure"></td><td id="totalAmountDayGrade">--</td></tr>
+                                                    <tbody id="comparison">
+                                                        <tr><td>合同总收入(A+B+C)(元)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>(A)固定租金(元)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>(B)物业管理费(元)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>(C)比率推广费(%)</td><td class="figure">0</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>(C)固定推广费(元)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>提成扣率(%)</td><td class="figure">0</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>保证金(元)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
+                                                        <tr><td>日坪效(元/㎡/天)</td><td class="figure">0,00</td><td class="figure"></td><td>--</td></tr>
                                                     </tbody>
-                                                    <tbody id="comparisonS" class="hidden-sm hidden-md hidden-lg"></tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -181,92 +169,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                         </div>
                     </div>
                 </div>
-                
-                
-                <!--<div class="col-md-12" style="clear: both;">
-                    <div class="box">
-                        <div class="box-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="bootstrap-table">
-                                        <div class="fixed-table-container table-no-bordered">
-                                            <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive table-no-bordered" style="margin-top: 0">
-                                                    <thead id="assetsListingTable-sticky-header" class="hidden-xs">
-                                                        <tr>
-                                                            <th>
-                                                                <div class="th-inner" style="width: 100px;"></div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">Budget Start Date<br>预算起始日</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">Budget End Date<br>预算结束日</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">January<br>一月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">February<br>二月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">March<br>三月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">April<br>四月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">May<br>五月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">June<br>六月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">July<br>七月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">August<br>八月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">September<br>九月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">October<br>十月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">November<br>十一月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                            <th>
-                                                                <div class="th-inner">December<br>十二月(元)</div>
-                                                                <div class="fht-cell"></div>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="budgetL" class="hidden-xs"></tbody>
-                                                    <tbody id="budgetS" class="hidden-sm hidden-md hidden-lg"></tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
             </div>
         </div>
     </div>

@@ -28,6 +28,7 @@ $(document).ready(function(){
     }
     
     findAllRequestsByKVCondition();
+    findLotusFiguresBI();
     
     if(localStorage.getItem("account") == 'CUSER200524000004' ){
 //        $(function  () {
@@ -783,4 +784,39 @@ function findFilesByBizId(id,an) {
             }
         }
     })
+}
+
+function findLotusFiguresBI() {
+    if($.cookie('lotusFiguresBI') != null && $.cookie('lotusFiguresBI') != ''){
+        var data = JSON.parse($.cookie('lotusFiguresBI'));
+        if(data.date != date){
+            findLotusBI();
+        } else {
+            renderLotusFigures(data);
+        }
+    } else {
+        findLotusBI();
+    }
+}
+
+function renderLotusFiguresBI(data) {
+    data.date = date;
+    $.cookie('lotusFiguresBI', JSON.stringify(data));
+    renderLotusFigures(data);
+}
+
+function renderLotusFigures(data) {
+    $('#lotusFiguresBI .text-red:eq(1)').text(accounting.formatNumber(data.sum));
+    $('#lotusFiguresBI .text-red:eq(2)').text(accounting.formatNumber(data.count));
+    $('#lotusFiguresBI .text-red:eq(3)').text(parseFloat(data.ratio * 100).toFixed(2)+'%');
+    $('#lotusFiguresBI .text-red:eq(4)').text(accounting.formatNumber(data.contract));
+    $('#lotusFiguresBI h4 small').text('（'+data.date+'更新）');
+}
+
+function findLotusBI(){
+    $.getJSON('/controllers/api/lotus-admin/ApiLotusAdminToDoSession.php?action=lotusFigures',function(data){
+        if(data){
+            renderLotusFiguresBI(data);
+        }
+    });
 }

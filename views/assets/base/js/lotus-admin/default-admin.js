@@ -8,11 +8,28 @@ var date = d.getFullYear() + '-' +
 var deFC = '';
 
 $(document).ready(function(){
-    getFloors();
+    if(!sessionStorage.getItem("floors-"+getURLParameter('id')) || sessionStorage.getItem("floors-"+getURLParameter('id')) == null || sessionStorage.getItem("floors-"+getURLParameter('id')) == '') {
+        getFloors();
+    } else {
+        $.each($.parseJSON(sessionStorage.getItem("floors-"+getURLParameter('id'))), function(i,v) {
+            $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/default?id='+getURLParameter('id')+'&f='+v.code+'">'+v.floorName+'</a>');
+        });
+
+        showFloors();
+    }
+    
+    if(!sessionStorage.getItem("CONTRACT_STATUS") || sessionStorage.getItem("CONTRACT_STATUS") == null || sessionStorage.getItem("CONTRACT_STATUS") == '') {
+        findDictCodeByDictTypeCode('CONTRACT_STATUS');
+    }
+    
+    if(!sessionStorage.getItem("FORM_TYPE") || sessionStorage.getItem("FORM_TYPE") == null || sessionStorage.getItem("FORM_TYPE") == '') {
+        findDictCodeByDictTypeCode('FORM_TYPE');
+    }
+    
     var size = 0.85;
     $('#zoom_in').click(function (){
         size = size + 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 300);
+        $('#map').mapster('resize', size*($(window).width()), 0, 0);
         addTextLayer();
         
         $('#zoom_out').attr('disabled', false);
@@ -25,7 +42,7 @@ $(document).ready(function(){
     
     $('#zoom_out').click(function (){
         size = size - 0.15;
-        $('#map').mapster('resize', size*($(window).width()), 0, 300);
+        $('#map').mapster('resize', size*($(window).width()), 0, 0);
         addTextLayer();
         
         $('#zoom_in').attr('disabled', false);
@@ -37,13 +54,6 @@ $(document).ready(function(){
     });
 });
 
-//$(function() {
-//    window.addEventListener("resize",function(){
-//        $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
-//        $('img.mapster_el').css('marginLeft','3%');
-//        addTextLayer();
-//    });
-//});
 $(function() {
     window.addEventListener("resize",function(){
         $('#map').mapster('resize', 0.85*($(window).width()), 0, 0);
@@ -69,7 +79,7 @@ function getFloors() {
                 sessionStorage.setItem("floors-"+getURLParameter('id'), JSON.stringify(response.data) );
 
                 $.each(response.data, function(i,v){
-                    $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/home?id='+getURLParameter('id')+'&f='+v.code+'">'+v.floorName+'</a>');
+                    $('#floorList').append('<a class="btn btn-default" href="/lotus-admin/default?id='+getURLParameter('id')+'&f='+v.code+'">'+v.floorName+'</a>');
                 });
 
                 showFloors();
@@ -123,7 +133,7 @@ function NetPing(url,deFC) {
             });
             $('map').attr({
                 'name'  : 'Map_'+deFC,
-                'id'    : '"Map_'+deFC
+                'id'    : 'Map_'+deFC
             });
         },
         error: function() {
@@ -144,7 +154,7 @@ function getShopFloorInfo(fc) {
             mallCodes = v.moduleCode;
             return false;
         } else {
-            mallCodes = $.cookie('mallSelected').split(':::')[1];
+            mallCodes = getURLParameter('id');
         }
     })
     
@@ -190,7 +200,6 @@ function renderMap(fc) {
         var stores_0 = 0;
         var stores_1 = 0;
 
-        var itm = 0;
         var coords = $.parseJSON(sessionStorage.getItem("coords_"+fc));
         if(coords.length > 0) {
             $.each(coords, function(i,v){
@@ -198,6 +207,8 @@ function renderMap(fc) {
                     stores = stores + v.unitArea;
                     switch (v.shopStatus) {
                         case '0':
+                        case '2':
+                        case '3':
                             stores_0 = stores_0 + v.unitArea;
                             break;
                         case '1':
@@ -213,6 +224,10 @@ function renderMap(fc) {
                 }
             });
         }
+        
+        if(fc == 'LTFLOOR20211026000004'){ // SC005
+            getVshopLotus('LTSHOP211026000049'); // F101,F201[02FL001]
+        }
 
         $('#leased').text(Math.round(stores_0/stores*100));
         $('#empty').text(Math.round(100-$('#leased').text()-$('#to_be_lease').text()-$('#renovation').text()));
@@ -223,54 +238,26 @@ function renderMap(fc) {
     
 function drawShops(){
     var areas = $.map($('area'),function(el) {
-        if(getURLParameter('id') === $(el).attr('alt')){
-            return { 
+        if($(el).attr('data-full') == 0 || $(el).attr('data-full') == 2 || $(el).attr('data-full') == 3){
+            return {
                 key: $(el).attr('data-key'),
-                toolTip: '本铺位',
-                fillColor: '3c763d',
-                fillOpacity: 1,
-                stroke: false,
-                selected: true 
+                toolTip: $(el).attr('name')+'<br>'+$(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
+                fillColor: 'ddf1ca',
+                stroke: true,
+                strokeColor: '000000',
+                strokeWidth: 1,
+                selected: true
             };
-        } else {
-            if($(el).attr('data-full') == 0){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')<br>'+$(el).attr('name'),
-                    fillColor: '7d9fe9',
-                    selected: true,
-                    stroke: true,
-                    strokeColor: '6a90e1'
-                };
-            } else if($(el).attr('data-full') == 1){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
-                    fillColor: 'FE9E9E',
-                    selected: true,
-                    stroke: true,
-                    strokeColor: 'FE9E9E'
-                };
-            } else if($(el).attr('data-full') == 2){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')<br>'+$(el).attr('name'),
-                    fillColor: 'FEED99',
-                    selected: true,
-                    stroke: true,
-                    strokeColor: 'FEED99'
-                };
-            } else if($(el).attr('data-full') == 3){
-                return { 
-                    key: $(el).attr('data-key'),
-                    toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
-                    fillColor: 'D5C8AA',
-                    selected: true,
-                    stroke: true,
-                    strokeColor: 'D5C8AA'
-                };
-            }
-            
+        } else if($(el).attr('data-full') == 1){
+            return {
+                key: $(el).attr('data-key'),
+                toolTip: $(el).attr('data-shop-name')+'<br>('+$(el).attr('data-area')+')',
+                fillColor: 'ffffff',
+                stroke: true,
+                strokeColor: '000000',
+                strokeWidth: 1,
+                selected: true
+            };
         }
     });
     
@@ -278,10 +265,6 @@ function drawShops(){
     var yOffset;
     
     $('#map').mapster({
-        fillColor: 'c9ae89',
-        fillOpacity: 0.8,
-        strokeColor: 'ffd62c',
-        strokeWidth: 0,
         clickNavigate: true,
         mapKey: 'data-key',
         showToolTip: true,
@@ -291,7 +274,7 @@ function drawShops(){
                 "font-weight": "bold",
                 "color": "#fff",
                 "background": "rgba(0,0,0,0.8)",
-                "font-size": "26px",
+                "font-size": "14px",
                 "width": "auto"
             });
 
@@ -355,7 +338,7 @@ function addTextLayer(){
                     }
                     
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+shopName+'<br>('+area+')<br>'+brand+'</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+brand+'<br>'+shopName+'<br>('+area+')</span>'
                     );
                 } else if($(this).attr('data-full') == 'ad') {
                     shopName = $(this).attr('data-shop-name');
@@ -402,10 +385,32 @@ function JumpToShopList(sc){
 }
 
 function GetShopInfo(sc){
+    var params = [];
+    var param = {};
+    var conditionGroups = [];
+    
+    param = {
+        "columnName": "shopCode",
+        "columnPatten": "",
+        "conditionOperator": "AND",
+        "operator": "=",
+        "value": sc
+    }
+    
+    params.push(param);
+    
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": params
+    }
+    
     $.ajax({
-        url: $.api.baseLotus+"/api/user/contract/lotus/findAllByMallCodeAndShopCode?mallCode="+$.cookie('mallSelected').split(':::')[1]+"&shopCode="+sc,
-        type: "GET",
+        url: $.api.baseLotus+"/api/contract/lotus/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
         async: false,
+        dataType: "json",
+        contentType: "application/json",
         beforeSend: function(request) {
             $('#loader').show();
             request.setRequestHeader("Login", $.cookie('login'));
@@ -422,94 +427,111 @@ function GetShopInfo(sc){
                                 
                 var state = "空铺";
                 var shopStateClass = 'badge-danger';
-                    
-                if(response.data.length > 0){
-                    var shop = response.data[response.data.length - 1];
-                    var shopStateClass = 'badge-default';
-                    switch(shop.vshopLotus.shopStatus){
-                        case '0':
-                            state = shop.contractName;
-                            break;
-                        case '1':
-                            state = "空铺";
-                            shopStateClass = 'badge-danger';
-                            break;
-                        default:
-                            state = "在租";
-                            shopStateClass = 'badge-default';
-                            break;
-                    }
-                } else {
-                    
-                }
-                
+                var content = response.data.content;
                 $('.figure').text(0);
-                
-                $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+': '+(response.data.length > 0 ? shop.contractStatus : '未签约')+'</span>');
-                $('#contractType').text(response.data.length > 0 ? shop.contractType : '-' );
-                $('#startDate').text(response.data.length > 0 ? shop.startDate : '-' );
-                $('#endDate').text(response.data.length > 0 ? shop.endDate : '-' );
-                $('#tenantName').text(response.data.length > 0 ? shop.tenantName : '-' );
-                $('#totalAmount').text(response.data.length > 0 ? numberWithCommas(shop.totalAmount.toFixed(2)) : 0);
-                $('#totalAmountDay').text(response.data.length > 0 ? shop.totalAmountDay.toFixed(2) : 0 );
-                $('#B011_amount').text(response.data.length > 0 ? numberWithCommas(shop.rentAmount.toFixed(2)) : 0);
-                $('#B021_amount').text(response.data.length > 0 ? ((shop.managerAmount == 0 || shop.managerAmount == null) ? 0 : numberWithCommas(shop.managerAmount.toFixed(2))) : 0);
-                $('#G021_amount').text(response.data.length > 0 ? ((shop.promotionAmount == 0 || shop.promotionAmount == null) ? 0 : numberWithCommas(shop.promotionAmount.toFixed(2))) : 0);
-                if(response.data.length > 0) {
-                    if(shop.promotionAmount >= 10){
-                        $('#G011_amount').text(numberWithCommas(shop.promotionAmount.toFixed(2)));
-                        $('#G021_amount').text(0);
-                    } else if (shop.promotionAmount > 0 && shop.promotionAmount < 10){
-                        $('#G011_amount').text(0);
-                        $('#G021_amount').text(parseFloat(shop.promotionAmount * 100).toFixed(2));
-                    } else {
-                        $('#G011_amount').text(0);
-                        $('#G021_amount').text(0);
-                    }
-                } else {
-                    $('#G011_amount').text(0);
-                    $('#G021_amount').text(0);
-                }
-                
-                $('#E02_amount').text(response.data.length > 0 ? ((shop.depositAmount == 0 || shop.depositAmount == null) ? 0 : numberWithCommas(shop.depositAmount.toFixed(2))) : 0);
-                $('#D011_amount').text(response.data.length > 0 ? ((shop.deduct == 0 || shop.deduct == null) ? 0 : parseFloat(shop.deduct * 100).toFixed(2)) : 0);
-                $('#contactName').text(response.data.length > 0 ? shop.contactName : '-' );
-                $('#contactPhone').text(response.data.length > 0 ? shop.contactPhone : '-' );
-                $('#modality1').text(response.data.length > 0 ? shop.brandLotus.modality1 : '-' );
-                $('#modality2').text(response.data.length > 0 ? shop.brandLotus.modality2 : '-' );
-                $('#modality3').text(response.data.length > 0 ? shop.brandLotus.modality3 : '-' );
-
+                $('#shop_detail strong').text('--');
+                $('#contractName').html('<span class="badge badge-danger">空铺: 未签约</span>');
+                $("#comparison").find("tr").each(function(i,e){
+                    $(e).find('td:eq(3)').html('--'); 
+                })
                 $('#shop_detail').css('opacity', 1);
                 $('#shop_detail').modal('toggle');
-
                 $('#store_img').html('');
                 var coords = $.parseJSON(sessionStorage.getItem("coords_"+deFC));
                 if(coords.length > 0) {
                     $.each(coords, function(i,v){
                         if(v.code == sc){
-                            if(v.shopBudgetList.length > 0){
-                                GetShopBudget(JSON.stringify(v.shopBudgetList));
-                            } else {
-                                $('#budgetL').html('');
-                            }
-                    
                             if(v.images != null && v.images.length > 0) {
                                 $('#store_img').html('<img src="'+v.images[0].image+'" style="width: 100%;" />');
                             } else {
                                 $('#store_img').html('<img src="/views/assets/base/img/content/lotus-admin/noImage.jpg" style="width: 100%;" />');
                             }
-                            
-                            $('#unitName').text(v.unitName);
-                            $('#unitCode').text(v.unitCode);
-                            $('#unitArea').text(v.unitArea + 'm²');
-                            $('#floorName').text(v.floorName);
                             return false;
                         }
-
-                        if(v.coords != null && v.coords != '' && v.state != 0){
-                            $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
-                        }
                     });
+                }
+                if(content.length > 0){
+                    var shop, version = 0;
+                    $.each(content, function(i,v){
+                        if(version < v.contractVersion) {
+                            shop = content[i];
+                            version = v.contractVersion;
+                        }
+                    })
+                    var shopStateClass = 'badge-default';
+                    switch(shop.contractStatus){
+                        case 'effect':
+                        case 'uneffect':
+                            state = shop.contractName;
+                            break;
+                        default:
+                            state = "空铺";
+                            shopStateClass = 'badge-danger';
+                            break;
+                    }
+                    $('#contractName').html('<span class="badge '+shopStateClass+'">'+state+': '+(content.length > 0 ? renderContractStatus(shop.contractStatus) : '未签约')+'</span>');
+                    $('#unitName').text(content.length > 0 ? shop.unitName : '--' );
+                    $('#unitCode').text(content.length > 0 ? shop.unitCode : '--' );
+                    $('#unitArea').text(content.length > 0 ? shop.area + 'm²' : '--' );
+                    $('#floorName').text(content.length > 0 ? shop.floorName : '--' );
+                    $('#formType').text(content.length > 0 ? renderFormType(shop.formType.toLowerCase()) : '--' );
+                    $('#startDate').text(content.length > 0 ? shop.startDate : '--' );
+                    $('#endDate').text(content.length > 0 ? shop.endDate : '--' );
+                    $('#tenantName').text(content.length > 0 ? shop.tenantName : '--' );
+                    $('#bizTypeName').text(content.length > 0 ? shop.bizTypeName : '--' );
+                    if(shop.bizId != null && shop.formType == "new"){
+                        findDrFormByBizId(shop.bizId);
+                        return false;
+                    }
+                    $('#comparison tr:eq(0) td:eq(2)').text(content.length > 0 ? numberWithCommas((shop.taxTotalRentAmount+shop.taxTotalPropertyAmount).toFixed(2)) : 0);
+                    $('#comparison tr:eq(1) td:eq(2)').text(content.length > 0 ? ((shop.taxTotalRentAmount == 0 || shop.taxTotalRentAmount == null) ? 0 : numberWithCommas(shop.taxTotalRentAmount.toFixed(2))) : 0);
+                    $('#comparison tr:eq(2) td:eq(2)').text(content.length > 0 ? ((shop.taxTotalPropertyAmount == 0 || shop.taxTotalPropertyAmount == null) ? 0 : numberWithCommas(shop.taxTotalPropertyAmount.toFixed(2))) : 0);
+                    $('#comparison tr:eq(4) td:eq(1)').text(content.length > 0 ? ((shop.budgetPromotionFee == 0 || shop.budgetPromotionFee == null) ? 0 : numberWithCommas(shop.budgetPromotionFee.toFixed(2))) : 0);
+                    $('#comparison tr:eq(4) td:eq(2)').text(content.length > 0 ? ((shop.promotionFee == 0 || shop.promotionFee == null) ? 0 : numberWithCommas(shop.promotionFee.toFixed(2))) : 0);
+                    $('#comparison tr:eq(5) td:eq(1)').text(content.length > 0 ? ((shop.budgetDeductRate == 0 || shop.budgetDeductRate == null) ? 0 : parseFloat(shop.budgetDeductRate * 100).toFixed(2)) : 0);
+                    $('#comparison tr:eq(5) td:eq(2)').text(content.length > 0 ? ((shop.rentDeductRate == 0 || shop.rentDeductRate == null) ? 0 : parseFloat(shop.rentDeductRate * 100).toFixed(2)) : 0);
+                    var deposit = 0;
+                    if(shop.depositList != null && shop.depositList.length > 0){
+                        $.each(shop.depositList, function(i,v){
+                            deposit += v.amount;
+                        })
+                    }
+                    $('#comparison tr:eq(6) td:eq(2)').text(numberWithCommas(deposit.toFixed(2)));
+                    $('#comparison tr:eq(7) td:eq(1)').text(content.length > 0 ? ((shop.budgetDayRent == 0 || shop.budgetDayRent == null) ? 0 : numberWithCommas(shop.budgetDayRent.toFixed(2))) : 0);
+                    $('#comparison tr:eq(7) td:eq(2)').text(content.length > 0 ? ((shop.dayRent == 0 || shop.dayRent == null) ? 0 : numberWithCommas(shop.dayRent.toFixed(2))) : 0);
+                } else {
+                    $.ajax({
+                        url: $.api.baseLotus+"/api/vshop/lotus/findAllByShopCode?shopCode="+sc,
+                        type: "GET",
+                        async: false,
+                        dataType: "json",
+                        contentType: "application/json",
+                        beforeSend: function(request) {
+                            request.setRequestHeader("Login", $.cookie('login'));
+                            request.setRequestHeader("Authorization", $.cookie('authorization'));
+                            request.setRequestHeader("Lang", $.cookie('lang'));
+                            request.setRequestHeader("Source", "onlineleasing");
+                        },
+                        complete: function(){},
+                        success: function (response, status, xhr) {
+                            if(response.code === 'C0') {
+                                if(xhr.getResponseHeader("Login") !== null){
+                                    $.cookie('login', xhr.getResponseHeader("Login"));
+                                }
+                                if(xhr.getResponseHeader("Authorization") !== null){
+                                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                                }
+                                if(response.data != null){
+                                    var data = response.data;
+                                    $('#unitName').text(data.unitName);
+                                    $('#unitCode').text(data.unitCode);
+                                    $('#unitArea').text(data.unitArea);
+                                    $('#floorName').text(data.floorName);
+                                    $('#bizTypeName').text(data.modality != null ? data.modality : '--');
+                                }
+                            }
+                        }
+                    })
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -530,49 +552,121 @@ function GetShopBudget(b){
             }
         }
     })
-    
-    /*$('#budgetL').html('');
-    $.each(budget, function(i,v){
-        var termType;
-        switch (v.termType) {
-            case "B011":
-                termType = '固定租金';
-                break;
-            case "B021":
-                termType = '物业管理费';
-                break;
-            case "G021":
-                termType = '推广费';
-                break;
-            case "D011":
-                termType = '提成扣率';
-                break;
-            case "E02":
-                termType = '保证金';
-                break;
-            case "E22":
-                termType = '履约保证金';
-                break;
-            default:
-                break;
+}
+
+function getVshopLotus(sc) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/vshop/lotus/findAllByShopCode?shopCode="+sc,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                var v = response.data;
+                $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="857,2022,1083,2022,1083,1788,857,1788" />'); 
+            }
         }
-        
-        $('#budgetL').append('<tr>\n\
-            <td>'+termType+'</td>\n\
-            <td>'+v.startDate+'</td>\n\
-            <td>'+v.endDate+'</td>\n\
-            <td>'+numberWithCommas(v.january)+'</td>\n\
-            <td>'+numberWithCommas(v.february)+'</td>\n\
-            <td>'+numberWithCommas(v.march)+'</td>\n\
-            <td>'+numberWithCommas(v.april)+'</td>\n\
-            <td>'+numberWithCommas(v.may)+'</td>\n\
-            <td>'+numberWithCommas(v.june)+'</td>\n\
-            <td>'+numberWithCommas(v.july)+'</td>\n\
-            <td>'+numberWithCommas(v.august)+'</td>\n\
-            <td>'+numberWithCommas(v.september)+'</td>\n\
-            <td>'+numberWithCommas(v.october)+'</td>\n\
-            <td>'+numberWithCommas(v.november)+'</td>\n\
-            <td>'+numberWithCommas(v.december)+'</td></tr>'
-        );
-    })*/
+    })
+}
+
+function calcDrForm(bizId) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/drForm/lotus/calcDrForm?bizId="+bizId,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                findDrFormByBizId(bizId);
+            }
+        }
+    })
+}
+
+function findDrFormByBizId(bizId) {
+    $.ajax({
+        url: $.api.baseLotus+"/api/drForm/lotus/findAllByBizId?bizId="+bizId,
+        type: "GET",
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+
+                if(response.data != null){
+                    if(response.data.brandCondition != null){
+                        var shop = response.data.brandCondition;
+                        $('#comparison tr:eq(0) td:eq(1)').text((shop.budgetTotalAmount == 0 || shop.budgetTotalAmount == null) ? 0 : numberWithCommas(shop.budgetTotalAmount.toFixed(2)));
+                        $('#comparison tr:eq(0) td:eq(2)').text((shop.totalAmount == 0 || shop.totalAmount == null) ? 0 : numberWithCommas(shop.totalAmount.toFixed(2)));
+                        $('#comparison tr:eq(1) td:eq(1)').text((shop.budgetFixedRent == 0 || shop.budgetFixedRent == null) ? 0 : numberWithCommas(shop.budgetFixedRent.toFixed(2)));
+                        $('#comparison tr:eq(1) td:eq(2)').text((shop.reportFixedRent == 0 || shop.reportFixedRent == null) ? 0 : numberWithCommas(shop.reportFixedRent.toFixed(2)));
+                        $('#comparison tr:eq(2) td:eq(1)').text((shop.propertyFee == 0 || shop.propertyFee == null) ? 0 : numberWithCommas(shop.propertyFee.toFixed(2)));
+                        $('#comparison tr:eq(2) td:eq(2)').text((shop.reportPropertyFee == 0 || shop.reportPropertyFee == null) ? 0 : numberWithCommas(shop.reportPropertyFee.toFixed(2)));
+                        $('#comparison tr:eq(4) td:eq(1)').text((shop.totalPromotion == 0 || shop.totalPromotion == null) ? 0 : numberWithCommas(shop.totalPromotion.toFixed(2)));
+                        $('#comparison tr:eq(4) td:eq(2)').text((shop.totalReportPromotion == 0 || shop.totalReportPromotion == null) ? 0 : numberWithCommas(shop.totalReportPromotion.toFixed(2)));
+                        $('#comparison tr:eq(6) td:eq(1)').text((shop.depositAmount == 0 || shop.depositAmount == null) ? 0 : numberWithCommas(parseInt(shop.depositAmount)));
+                        $('#comparison tr:eq(6) td:eq(2)').text((shop.reportDepositAmount == 0 || shop.reportDepositAmount == null) ? 0 : numberWithCommas(parseInt(shop.reportDepositAmount)));
+                        if(response.data.fixedRentReportList != null && response.data.fixedRentReportList.length > 0){
+                            shop = response.data.fixedRentReportList[0];
+                            $('#comparison tr:eq(7) td:eq(1)').text((shop.budgetForHighRent == 0 || shop.budgetForHighRent == null) ? 0 : numberWithCommas(shop.budgetForHighRent.toFixed(2)));
+                            $('#comparison tr:eq(7) td:eq(2)').text((shop.reportHigherRent == 0 || shop.reportHigherRent == null) ? 0 : numberWithCommas(shop.reportHigherRent.toFixed(2)));
+                        }
+                        
+                        $("#comparison").find("tr").each(function(i,e){
+                            if(numberWithoutCommas($(e).find('td:eq(2)').text()) >= numberWithoutCommas($(e).find('td:eq(1)').text())){
+                                $(e).find('td:eq(3)').html('<div class="green-light"></div>');
+                            } else {
+                                $(e).find('td:eq(3)').html('<div class="yellow-light"></div>');
+                            }
+                        })
+                    }
+                } else {
+                    calcDrForm(bizId);
+                }
+            }
+        }
+    })     
 }
