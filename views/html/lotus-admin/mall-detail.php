@@ -202,86 +202,108 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                             </div>
                             <div class="box-body">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <br>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">项目面积(m<sup>2</sup>)</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>-</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">项目面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p>--</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">车位数量</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>0</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">车位数量</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p>--</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">车库面积(m<sup>2</sup>)</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>-</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">车库面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p id="parkingArea">--</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库数量</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>0</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">仓库数量</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p id="storaUnits">--</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库面积(m<sup>2</sup>)</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>-</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">仓库面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p id="storaArea">--</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <h5>铺位(单元)信息</h5>
                                     <hr>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">建筑面积(m<sup>2</sup>)</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p>-</p>
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">建筑面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-6 col-sm-12">
+                                            <p>--</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">租赁面积(m<sup>2</sup>)</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label class="col-md-6 control-label" style="padding-top: 0;">租赁面积(m<sup>2</sup>)</label>
+                                        <div class="col-md-6 col-sm-12">
                                             <p id="leasingArea"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <h5>招商资源</h5>
                                     <hr>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">楼宇</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p><span id="building"></span>栋</p>
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">楼宇</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="building"></span>栋</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">楼层</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="floor"></span>层</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">正柜</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="shoppeUnits"></span>个</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">基站</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="baseUnits"></span>个</p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">楼层</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p><span id="floor"></span>层</p>
+                                    <div class="col-md-6" style="padding: 0;">
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">临时柜</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="kioskUnits"></span>个</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">正柜</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p><span id="shoppeUnits"></span>个</p>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">场地</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="eventUnits"></span>个</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">临时柜</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p><span id="kioskUnits"></span>个</p>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">广告位</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="adUnits"></span>个</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" style="padding-top: 0;">仓库</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <p><span id="storaUnits"></span>个</p>
+                                        <div class="form-group">
+                                            <label class="col-md-4 control-label" style="padding-top: 0;">联销区</label>
+                                            <div class="col-md-8 col-sm-12">
+                                                <p><span id="unionUnits"></span>个</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

@@ -203,27 +203,42 @@ function getShops() {
         },
         success: function (response, status, xhr) {
             if(response.code === 'C0' && response.data.content.length > 0) {
-                var leasing_area = 0;
-                var shoppe_units = 0;
-                var kiosk_units = 0;
-                var stora_units = 0;
+                var leasing_area = 0, shoppe_units = 0, kiosk_units = 0, stora_units = 0, stora_area = 0, parking_area = 0, base_units = 0, ad_units = 0, event_units = 0, union_units = 0;
                 $.each(response.data.content, function(i,v){
-                    leasing_area = leasing_area + v.area;
-                    switch (v.unitType) {
-                        case 'shoppe':
-                            shoppe_units++;
-                            break;
-                        case 'kiosk':
-                            kiosk_units++;
-                            break;
-                        case 'warehouse':
-                            stora_units++;
-                            break;
-                        case 'stora':
-                            stora_units++;
-                            break;
-                        default:
-                            break;
+                    if(dateCompare(date,v.startDate) != "smaller" && dateCompare(date,v.endDate) != "larger"){
+                        leasing_area = leasing_area + v.area;
+                        switch (v.unitType) {
+                            case 'shoppe':
+                                shoppe_units++;
+                                break;
+                            case 'kiosk':
+                                kiosk_units++;
+                                break;
+                            case 'stora':
+                            case 'warehouse':
+                                stora_units++;
+                                stora_area = stora_area + v.area;
+                                break;
+                            case 'parking':
+                            case 'park':
+                                parking_area = parking_area + v.area;
+                                break;
+                            case 'base':
+                            case 'station':
+                                base_units++;
+                                break;
+                            case 'ad':
+                                ad_units++;
+                                break;
+                            case 'event':
+                                event_units++;
+                                break;
+                            case 'union':
+                                union_units++;
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 })
                 
@@ -231,6 +246,12 @@ function getShops() {
                 $('#shoppeUnits').text(Math.round(shoppe_units));
                 $('#kioskUnits').text(Math.round(kiosk_units));
                 $('#storaUnits').text(Math.round(stora_units));
+                $('#storaArea').text(Math.round(stora_area.toFixed(2)));
+                $('#parkingArea').text(Math.round(parking_area.toFixed(2)));
+                $('#baseUnits').text(Math.round(base_units));
+                $('#adUnits').text(Math.round(ad_units));
+                $('#eventUnits').text(Math.round(event_units));
+                $('#unionUnits').text(Math.round(union_units));
             } else {
                 alertMsg(response.code,response.customerMessage);
             }

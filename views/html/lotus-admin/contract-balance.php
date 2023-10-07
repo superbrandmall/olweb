@@ -234,7 +234,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner">铺位</div>
+                                                                <div class="th-inner" style="width: 100px;">铺位</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>

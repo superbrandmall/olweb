@@ -219,8 +219,8 @@ function renderMap(fc) {
                     }
                 }
 
-                if(v.coords != null && v.coords != '' && v.state != 0){
-                    $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                if(v.coords != null && v.coords != '' && v.remarkFirst == 1){
+                    $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkSecond || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
                 }
             });
         }
@@ -578,7 +578,9 @@ function getVshopLotus(sc) {
                 }
                 
                 var v = response.data;
-                $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkFirst || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="857,2022,1083,2022,1083,1788,857,1788" />'); 
+                if(v.remarkFirst == 1){
+                   $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkSecond || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="857,2022,1083,2022,1083,1788,857,1788" />'); 
+                }
             }
         }
     })
