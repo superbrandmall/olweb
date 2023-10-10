@@ -6,7 +6,7 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
 }
 
 ?>
-<aside class="main-sidebar">
+<aside class="main-sidebar hidden-print">
     <section class="sidebar">
         <ul class="sidebar-menu">
             <li class="<?php if ($_GET['p'] == 'lotus-admin/todo' || $_GET['p'] == 'lotus-admin' || $_GET['p'] == 'lotus-admin/' || $_GET['p'] == 'lotus-admin/home') { echo 'active'; }?>">

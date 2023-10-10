@@ -55,6 +55,11 @@ function findProcessByBizId() {
                             bizId = '卜蜂莲花签呈['+data.bizId+']';
                             flowDiagram = 2;
                         }
+                        
+                        $('#opinion_print').show();
+                        $('#opinion_print').click(function(){
+                            
+                        })
                     }
                         
                     $('#status').text(renderFlowStatus(data.processInstStatus));
@@ -122,10 +127,10 @@ function findProcessByBizId() {
                                         $('#leasingContract li:eq(0)').addClass('active');
                                         break;
                                     case "Lotus招商负责人":
-                                        $('.leasingContract li:eq(1)').addClass('active');
+                                        $('#leasingContract li:eq(1)').addClass('active');
                                         break;
                                     case "财法预审负责人":
-                                        $('.leasingContract li:eq(2)').addClass('active');
+                                        $('#leasingContract li:eq(2)').addClass('active');
                                         break;
                                     case "财法负责人":
                                         $('#leasingContract li:eq(3)').addClass('active');
@@ -136,23 +141,29 @@ function findProcessByBizId() {
                                     case "总部招商负责人":
                                         $('#leasingContract li:eq(5)').addClass('active');
                                         break;
-                                    case "合同上传":
+                                    case "总裁及地区相关领导":
                                         $('#leasingContract li:eq(6)').addClass('active');
                                         break;
-                                    case "合同收回":
+                                    case "合同上传":
                                         $('#leasingContract li:eq(7)').addClass('active');
                                         break;
-                                    case "合同用印财法预审":
+                                    case "合同收回":
                                         $('#leasingContract li:eq(8)').addClass('active');
                                         break;
-                                    case "合同用印财法负责人":
+                                    case "合同用印财法预审":
                                         $('#leasingContract li:eq(9)').addClass('active');
                                         break;
-                                    case "合同用印总部招商负责人":
+                                    case "合同用印财法负责人":
                                         $('#leasingContract li:eq(10)').addClass('active');
                                         break;
-                                    case "盖章合同上传":
+                                    case "合同用印总部招商负责人":
                                         $('#leasingContract li:eq(11)').addClass('active');
+                                        break;
+                                    case "合同用印总裁及地区相关领导":
+                                        $('#leasingContract li:eq(12)').addClass('active');
+                                        break;
+                                    case "盖章合同上传":
+                                        $('#leasingContract li:eq(13)').addClass('active');
                                         break;
                                     default:
                                         break;
@@ -726,10 +737,10 @@ function findProcessInstByBizId(){
                                             $('#leasingContract li:eq(0)').addClass('active');
                                             break;
                                         case "Lotus招商负责人":
-                                            $('.leasingContract li:eq(1)').addClass('active');
+                                            $('#leasingContract li:eq(1)').addClass('active');
                                             break;
                                         case "财法预审负责人":
-                                            $('.leasingContract li:eq(2)').addClass('active');
+                                            $('#leasingContract li:eq(2)').addClass('active');
                                             break;
                                         case "财法负责人":
                                             $('#leasingContract li:eq(3)').addClass('active');
@@ -740,23 +751,29 @@ function findProcessInstByBizId(){
                                         case "总部招商负责人":
                                             $('#leasingContract li:eq(5)').addClass('active');
                                             break;
-                                        case "合同上传":
+                                        case "总裁及地区相关领导":
                                             $('#leasingContract li:eq(6)').addClass('active');
                                             break;
-                                        case "合同收回":
+                                        case "合同上传":
                                             $('#leasingContract li:eq(7)').addClass('active');
                                             break;
-                                        case "合同用印财法预审":
+                                        case "合同收回":
                                             $('#leasingContract li:eq(8)').addClass('active');
                                             break;
-                                        case "合同用印财法负责人":
+                                        case "合同用印财法预审":
                                             $('#leasingContract li:eq(9)').addClass('active');
                                             break;
-                                        case "合同用印总部招商负责人":
+                                        case "合同用印财法负责人":
                                             $('#leasingContract li:eq(10)').addClass('active');
                                             break;
-                                        case "盖章合同上传":
+                                        case "合同用印总部招商负责人":
                                             $('#leasingContract li:eq(11)').addClass('active');
+                                            break;
+                                        case "合同用印总裁及地区相关领导":
+                                            $('#leasingContract li:eq(12)').addClass('active');
+                                            break;
+                                        case "盖章合同上传":
+                                            $('#leasingContract li:eq(13)').addClass('active');
                                             break;
                                         default:
                                             break;

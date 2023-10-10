@@ -43,6 +43,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="renew">租赁续签合同审批流程</option>
                                     <option value="termination">租赁终止合同审批流程</option>
                                     <option value="modify">租赁变更合同审批流程</option>
+                                    <option value="1">单元变动审批流程</option>
+                                    <option value="5">用印申请审批流程</option>
+                                    <option value="2">其他审批流程</option>
                                 </select>
                             </div>
                         </div>

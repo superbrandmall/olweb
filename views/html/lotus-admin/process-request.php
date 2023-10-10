@@ -30,7 +30,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#processBasicInfo">概要</a></li>
-                    <li><a href="#processSignInfo">用印信息</a></li>
+                    <li style="display: none;"><a href="#processSignInfo">用印信息</a></li>
                     <li><a href="#processSignRelation">关联事项</a></li>
                     <li><a href="#processComplementaryFile">附件</a></li>
                     <li><a href="#processApprove">审批流程</a></li>
@@ -105,15 +105,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label" for="signFlag">是否用印</label>
-                                        <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="signFlag" style="width: 100%">
-                                                <option value="1" selected="">是</option>
-                                                <option value="0">否</option>
-                                            </select>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group" style="margin-bottom: 22px;">
@@ -150,14 +141,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <div class="form-group">
                                         <label class="col-md-1 control-label" for="approveInfo">说明 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-10 col-sm-12 required" style="margin-left:2.7%;">
-                                            <textarea class="form-control" id="approveInfo" name="approveInfo" rows="7" placeholder="理由,数据,附件,建议......"></textarea>
+                                            <textarea class="form-control" id="approveInfo" name="approveInfo" rows="7" placeholder="理由,数据,建议......"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="box box-default" id="processSignInfo">    
+                        <div class="box box-default" id="processSignInfo" style="display: none;">    
                             <div class="box-header with-border">
                                 <h3 class="box-title">用印信息</h3>
                                 <div class="box-tools">
@@ -279,7 +270,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                             <div class="box-body">
                                 <div class="col-md-12">
-                                    <h5>注意: 用印文件请上传节点在签呈负责人审批完后</h5>
+                                    <h5>注意: 需用印的文件请在签呈负责人节点审批完后再上传</h5>
                                     <table class="table table-responsive" style="margin-top: 0; text-align: left;">
                                         <thead id="assetsListingTable-sticky-header">
                                             <tr>
@@ -361,7 +352,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-3">
                                     <div class="form-group" id="signLeasingApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -369,7 +360,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group" id="signFinPreApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -377,7 +368,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group" id="signLegalPreApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -385,7 +376,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group" id="signFinApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -394,7 +385,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="clearfix"></div>
                                 <div class="col-md-3">
                                     <div class="form-group" id="signLegalApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -402,7 +393,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group" id="signHqLeasingApprove">
-                                        <label class="col-md-5 control-label"> <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-7 col-sm-12 required">
+                                            <select class="select2" style="width: 100%"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group" id="signApprove">
+                                        <label class="col-md-5 control-label"><b></b> <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-7 col-sm-12 required">
                                             <select class="select2" style="width: 100%"></select>
                                         </div>
@@ -417,19 +416,22 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="col-md-12">
                                     <ul class="nav nav-pills nav-justified step step-progress">
                                         <li class="active">
-                                            <a href="javascript: void(0);">审批人: 提交人本人<span class="caret"></span></a>
+                                            <a href="javascript: void(0);">提交人本人<span class="caret"></span></a>
                                         </li>
                                         <li class="active">
-                                            <a href="javascript: void(0);">审批人: 招商负责人<span class="caret"></span></a>
+                                            <a href="javascript: void(0);">Lotus招商负责人<span class="caret"></span></a>
                                         </li>
                                         <li class="active">
-                                            <a href="javascript: void(0);">审批人: 财法预审<span class="caret"></span></a>
+                                            <a href="javascript: void(0);">财法预审<span class="caret"></span></a>
                                         </li>
                                         <li class="active">
-                                            <a href="javascript: void(0);">审批人: 财法负责人<span class="caret"></span></a>
+                                            <a href="javascript: void(0);">财法负责人<span class="caret"></span></a>
                                         </li>
                                         <li class="active">
-                                            <a href="javascript: void(0);">审批人: 总部招商负责人<span class="caret"></span></a>
+                                            <a href="javascript: void(0);">总部招商负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li class="active">
+                                            <a href="javascript: void(0);">签呈负责人<span class="caret"></span></a>
                                         </li>
                                     </ul>
                                 </div>

@@ -492,7 +492,7 @@ function findPeriods() {
     }
     
     $.ajax({
-        url: $.api.baseSap+"/api/gl/account/period/findAllByKVCondition",
+        url: $.api.baseSap+"/api/gl/account/period/findAllByKVCondition?page=0&size=100&sort=mallCode,asc",
         type: "POST",
         data: JSON.stringify(map),
         async: true,

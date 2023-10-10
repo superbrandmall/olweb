@@ -8,7 +8,49 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper create-sales-data">
+<style>
+    @media print {
+        body {
+            background-color: #fff;
+        }
+        
+        .content-wrapper {
+            margin-left: 0;
+            background-color: #fff;
+        }
+        
+        h4 {
+            letter-spacing: 30px;
+        }
+        
+        table {
+            border-collapse: initial;
+        }
+
+        td {
+            border: solid 1px #90badd;
+        }
+        
+        input {
+            border: solid 1px #e9e9e2;
+            box-shadow: none;
+            width: 90%;
+        }
+        
+        textarea {
+            border: solid 1px #e9e9e2;
+            box-shadow: none;
+            width: 80%;
+        }
+        
+        table .form-control {
+            text-align: left;
+            font-weight: normal;
+        }
+    }
+</style>
+
+<div class="content-wrapper hidden-print">
     <form class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
             <div class="pull-left">
@@ -19,6 +61,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             <h4>
                 <b id="status"></b>流程:<b id="formType"></b>申请
             </h4>
+            <div class="pull-right">
+                <button type="button" class="btn" id="opinion_print" style="background: #fff; display: none;"><i class="fa fa-print"></i> 打印</button>
+            </div>
             <div class="box-header" id="navbarTop">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="#processBasic">概要</a></li>
@@ -111,6 +156,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             <a href="javascript: void(0);">总部招商负责人<span class="caret"></span></a>
                                         </li>
                                         <li>
+                                            <a href="javascript: void(0);">总裁及地区相关领导<span class="caret"></span></a>
+                                        </li>
+                                        <li>
                                             <a href="javascript: void(0);">合同上传<span class="caret"></span></a>
                                         </li>
                                         <li>
@@ -124,6 +172,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </li>
                                         <li>
                                             <a href="javascript: void(0);">合同用印总部招商负责人<span class="caret"></span></a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript: void(0);">合同用印总裁及地区相关领导<span class="caret"></span></a>
                                         </li>
                                         <li>
                                             <a href="javascript: void(0);">盖章合同上传<span class="caret"></span></a>
@@ -362,6 +413,131 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             </div>
         </section>
     </form>
+</div>
+
+<div class="content-wrapper visible-print">
+    <div class="text-red" style="position: relative; height: 60px; left: 0; top: 0; font-size: 18px; letter-spacing: 30px; line-height: 30px; font-weight: bold; text-align: center;">
+        卜蜂莲花<br>签呈
+    </div>
+    <div class="box box-default">
+        <div class="col-md-12">
+            <div class="box-body">
+                <div class="row">
+                    <table class="table" style="border: solid 1px #90badd;">
+                        <tbody>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">标题</td>
+                                <td>
+                                    <input id="applyReason" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">单号</td>
+                                <td>
+                                    <input id="bizId" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">申请部门</td>
+                                <td>
+                                    <input id="investmentContractModelMallSelect" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">申请人</td>
+                                <td>
+                                    <input id="creatorName" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">我方公司</td>
+                                <td>
+                                    <input id="mainSigningBody" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">申请总金额</td>
+                                <td>
+                                    <input class="form-control money" id="amount" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">紧急程度</td>
+                                <td>
+                                    <div>
+                                        <input type="radio" name="urgencyDegree" value="正常" style="width: 20px !important; margin-top: 2px;" checked="">正常
+                                        <input type="radio" name="urgencyDegree" value="重要" style="width: 20px !important; margin-top: 2px;">重要
+                                        <input type="radio" name="urgencyDegree" value="紧急" style="width: 20px !important; margin-top: 2px;">紧急
+                                    </div>
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">联系电话</td>
+                                <td>
+                                    <input id="mobileNo" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">申请类型</td>
+                                <td>
+                                    <div>
+                                        <input type="checkbox" name="" value="1" style="width: 20px !important; margin-top: 2px;" checked="">单元变动
+                                        <input type="checkbox" name="" value="5" style="width: 20px !important; margin-top: 2px;">用印申请
+                                        <input type="checkbox" name="" value="2" style="width: 20px !important; margin-top: 2px;">其他
+                                    </div>
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">申请日期</td>
+                                <td>
+                                     <input class="form-control" id="applyDate" type="text" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">说明</td>
+                                <td colspan="3">
+                                    <textarea id="approveInfo" class="form-control" name="approveInfo"></textarea>
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td align="center" style="background-color: #e6f2fb;">标题</td>
+                                <td>
+                                    <input id="applyReason" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">单号</td>
+                                <td>
+                                    <input id="bizId" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td align="center" style="background-color: #e6f2fb;">印鉴名称</td>
+                                <td>
+                                    <div>
+                                        <input type="checkbox" name="signName" value="1" style="width: 20px !important; margin-top: 2px;" checked="">合同章
+                                        <input type="checkbox" name="signName" value="2" style="width: 20px !important; margin-top: 2px;">法人章
+                                        <input type="checkbox" name="signName" value="3" style="width: 20px !important; margin-top: 2px;">公章
+                                        <input type="checkbox" name="signName" value="4" style="width: 20px !important; margin-top: 2px;">财务章
+                                        <input type="checkbox" name="signName" value="5" style="width: 20px !important; margin-top: 2px;">门店章
+                                        <input type="checkbox" name="signName" value="6" style="width: 20px !important; margin-top: 2px;">工会章
+                                    </div>
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">法人章名称</td>
+                                <td>
+                                    <input id="corporationName" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td align="center" style="background-color: #e6f2fb;">用印份数</td>
+                                <td>
+                                    <input id="signNum" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">对方公司</td>
+                                <td>
+                                    <input id="selectTenant" class="form-control" type="text" />
+                                </td>
+                            </tr>
+                            <tr style="display: none;">
+                                <td align="center" style="background-color: #e6f2fb;">用印文件名</td>
+                                <td colspan="3">
+                                    <textarea id="signFileName" class="form-control" name="approveInfo"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include 'footer.php'; ?>

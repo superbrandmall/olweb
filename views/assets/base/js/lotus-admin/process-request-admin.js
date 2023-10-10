@@ -1,8 +1,6 @@
 $.request = {
     id: '',
-    content: '',
-    signName: ['合同章','1'],
-    applyType: ['立项/定标','1']
+    content: ''
 }
 
 $(document).ready(function(){
@@ -20,7 +18,7 @@ $(document).ready(function(){
     })
     
     updateDictDropDownByDictTypeCode('SIGN_NAME','signName',null,''); // 印鉴名称
-    updateDictDropDownByDictTypeCode('SIGN_APPROVE_TYPE','applyType',$.request.applyType[0],$.request.applyType[1]); // 申请类型
+    updateDictDropDownByDictTypeCode('SIGN_APPROVE_TYPE','applyType',null,''); // 申请类型
     findDictCodeByDictTypeCode('LOTUS_SIGN_APPROVE_FLOW_STEP'); // 云之家流程
     findDictCodeByDictTypeCode('FORM_STATUS'); // 表单状态
     updateSelectTenantDropDown(50);
@@ -106,9 +104,9 @@ $(document).ready(function(){
     
     $('#applyType').change(function(){
         if($(this).val() == 5){
-            $('#signFlag').val(1).trigger('change');
+            $('#processSignInfo, #navbarTop ul li:eq(1)').show();
         } else {
-            $('#signFlag').val(0).trigger('change');
+            $('#processSignInfo, #navbarTop ul li:eq(1)').hide();
         }
     })
 })
@@ -166,7 +164,6 @@ function findSignRequestByBizId() {
                     $('#mobileNo').val(data.mobileNo);
                     $('#applyReason').val(data.applyReason);
                     $('#corporationName').val(data.corporationName);
-                    $('#signFlag').val(data.signFlag).trigger('change');
                     $('#signFileName').val(data.signFileName);
                     $('#applyDate').datepicker('update', (data.applyDate != null ? data.applyDate : date));
                     if(data.companyName != null){
@@ -555,7 +552,7 @@ function submitCheck() {
         $('#approveInfo').parent().prepend(error);
     }
     
-    if($('#applyType').val() == 5 || $('#signFlag').val() == 1){
+    if($('#applyType').val() == 5){
         if($('#signName').val() == null){
             flag = 0;
             $('#signName').parent().prepend(error);
@@ -610,6 +607,11 @@ function submitCheck() {
     if($('#signHqLeasingApprove select').val() == null) {
         flag = 0;
         $('#signHqLeasingApprove select').parent().append(error);
+    }
+    
+    if($('#signApprove select').val() == null) {
+        flag = 0;
+        $('#signApprove select').parent().append(error);
     }
     
     if(flag == 1 && $('.mandatory-error').length == 0){

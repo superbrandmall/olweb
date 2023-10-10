@@ -271,12 +271,12 @@ function findAllProcessByKVCondition(p,c){
                                 url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                                 created = v.created;
                                 updated = v.updated;
-                                if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
+                                if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSE']) != -1) {
                                     endTime = updated;
                                 }
                             } else if($.cookie('searchProcessScope') == 'DONE'){
                                 updated = v.handleTime || '';
-                                if($.inArray(v.stepStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
+                                if($.inArray(v.stepStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSE']) != -1) {
                                     endTime = updated;
                                 }
                             }
@@ -286,7 +286,7 @@ function findAllProcessByKVCondition(p,c){
                             url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                             created = v.created;
                             updated = v.updated;
-                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
+                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSE']) != -1) {
                                 endTime = updated;
                             }
                         }

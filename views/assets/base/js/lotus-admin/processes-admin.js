@@ -186,7 +186,7 @@ function findAllProcessByKVCondition(p,c){
                             url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.mallName+')['+v.mallCode+']</a>';
                             created = v.stepCreateTime;
                             updated = v.handleTime || '';
-                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
+                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSE']) != -1) {
                                 endTime = updated;
                             }
                         } else {
@@ -195,7 +195,7 @@ function findAllProcessByKVCondition(p,c){
                             url = '<a href="/lotus-admin/process-detail?id='+v.bizId+'">'+urlTitle+'('+v.creatorOrgName+')['+v.mallCode+']</a>';
                             created = v.created;
                             updated = v.updated;
-                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSED']) != -1) {
+                            if($.inArray(v.processInstStatus, ['FINISH','DISAGREE','ABANDON','DELETE','CLOSE']) != -1) {
                                 endTime = updated;
                             }
                         }

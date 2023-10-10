@@ -33,7 +33,7 @@
     <body class="sidebar-mini skin-blue " data-spy="scroll" data-target="#navbarTop" data-offset="190">
         <div id="loader"></div>
         <div class="wrapper">
-            <header class="main-header">
+            <header class="main-header hidden-print">
                 <nav class="navbar navbar-static-top" role="navigation">
                     <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
                         <span class="sr-only">导航切换</span>
