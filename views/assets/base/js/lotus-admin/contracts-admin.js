@@ -278,6 +278,10 @@ function findAllContractsByKVCondition(p,c){
                             link = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+v.contractVersion+'">'+(v.bizId || v.code)+'</a>';
                         }
                         
+                        var creatorName, updateName;
+                        v.creatorName != null ? creatorName = '['+v.creatorName+']' : creatorName = '';
+                        v.updateName != null ? updateName = '['+v.updateName+']' : updateName = '';
+                        
                         var tbg = '#fff';
                         if(i%2==0){
                             tbg = '#f9f9f9';
@@ -319,6 +323,8 @@ function findAllContractsByKVCondition(p,c){
                             <td>'+v.floorName+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
+                            <td>'+v.created+creatorName+'</td>\n\
+                            <td>'+v.updated+updateName+'</td>\n\
                         </tr>');
                     });
                     
@@ -328,11 +334,18 @@ function findAllContractsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#contracts').html('<tr><td colspan="13" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#contracts').html('<tr><td colspan="15" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
             } 
+        }, 
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     });
 }

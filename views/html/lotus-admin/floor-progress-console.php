@@ -96,7 +96,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th>

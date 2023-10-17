@@ -25,27 +25,68 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         
         table {
             border-collapse: initial;
+            border: solid 1px #90badd !important;
+            font-size: 11px !important;
         }
 
         td {
-            border: solid 1px #90badd;
+            border: solid 1px #90badd !important;
+        }
+        
+        tr td tbody tr td {
+            border: none !important;
         }
         
         input {
-            border: solid 1px #e9e9e2;
-            box-shadow: none;
-            width: 90%;
+            border: solid 1px #e9e9e2 !important;
+            box-shadow: none !important;
+            width: 90% !important;
         }
         
-        textarea {
-            border: solid 1px #e9e9e2;
-            box-shadow: none;
-            width: 80%;
+        p {
+            border: solid 1px #e9e9e2 !important;
+            box-shadow: none !important;
+            width: 100% !important;
+            height: auto !important;
+            text-align: left !important;
         }
         
         table .form-control {
-            text-align: left;
-            font-weight: normal;
+            text-align: left !important;
+            font-weight: normal !important;
+        }
+        
+        .table > thead > tr > th {
+            border-bottom: 1px solid #90badd !important;
+            border-left: 1px solid #90badd !important;
+            border-right: 1px solid #90badd !important;
+        }
+        
+        th {
+            font-weight: normal !important;
+        }
+        
+        .bootstrap-table .table {
+            border-collapse: initial !important;
+            border-left: none !important;
+            border-right: none !important;
+            padding: 0 !important;
+        }
+        
+        .bootstrap-table .table > thead > tr > th {
+            border-bottom: 1px solid #90badd !important;
+        }
+        
+        .fixed-table-container {
+            border-color: #90badd !important;
+        }
+        
+        .fixed-table-container thead th {
+            border-left: 1px solid #90badd !important;
+        }
+
+        .fixed-table-container tbody td {
+            border-left: solid 1px #90badd !important;
         }
     }
 </style>
@@ -233,7 +274,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                         
-                        <div class="box box-default" id="processFiles" style="display: none;">    
+                        <div class="box box-default" id="processFiles">    
                             <div class="box-header with-border">
                                 <h3 class="box-title">上传附件</h3>
                                 <div class="box-tools">
@@ -270,7 +311,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </thead>
                                         <tbody id="fileList">
                                             <tr>
-                                                <td class="headTxt"></td>
+                                                <td class="headTxt">用印文件</td>
                                                 <td id="reqFileCreated_0"></td>
                                                 <td>
                                                     <input type="text" id="reqFile_0" name="reqFile_0" style="border: 0 none; text-align: left; width: 100%;" readonly/>
@@ -423,7 +464,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <div class="col-md-12">
             <div class="box-body">
                 <div class="row">
-                    <table class="table" style="border: solid 1px #90badd;">
+                    <table class="table">
                         <tbody>
                             <tr>
                                 <td align="center" style="background-color: #e6f2fb;">标题</td>
@@ -459,7 +500,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <td align="center" style="background-color: #e6f2fb;">紧急程度</td>
                                 <td>
                                     <div>
-                                        <input type="radio" name="urgencyDegree" value="正常" style="width: 20px !important; margin-top: 2px;" checked="">正常
+                                        <input type="radio" name="urgencyDegree" value="正常" style="width: 20px !important; margin-top: 2px;">正常
                                         <input type="radio" name="urgencyDegree" value="重要" style="width: 20px !important; margin-top: 2px;">重要
                                         <input type="radio" name="urgencyDegree" value="紧急" style="width: 20px !important; margin-top: 2px;">紧急
                                     </div>
@@ -473,9 +514,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <td align="center" style="background-color: #e6f2fb;">申请类型</td>
                                 <td>
                                     <div>
-                                        <input type="checkbox" name="" value="1" style="width: 20px !important; margin-top: 2px;" checked="">单元变动
-                                        <input type="checkbox" name="" value="5" style="width: 20px !important; margin-top: 2px;">用印申请
-                                        <input type="checkbox" name="" value="2" style="width: 20px !important; margin-top: 2px;">其他
+                                        <input type="checkbox" name="applyType" value="1" style="width: 20px !important; margin-top: 2px;">单元变动
+                                        <input type="checkbox" name="applyType" value="5" style="width: 20px !important; margin-top: 2px;">用印申请
+                                        <input type="checkbox" name="applyType" value="2" style="width: 20px !important; margin-top: 2px;">其他
                                     </div>
                                 </td>
                                 <td align="center" style="background-color: #e6f2fb;">申请日期</td>
@@ -486,24 +527,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <tr>
                                 <td align="center" style="background-color: #e6f2fb;">说明</td>
                                 <td colspan="3">
-                                    <textarea id="approveInfo" class="form-control" name="approveInfo"></textarea>
-                                </td>
-                            </tr>
-                            <tr style="display: none;">
-                                <td align="center" style="background-color: #e6f2fb;">标题</td>
-                                <td>
-                                    <input id="applyReason" class="form-control" type="text" />
-                                </td>
-                                <td align="center" style="background-color: #e6f2fb;">单号</td>
-                                <td>
-                                    <input id="bizId" class="form-control" type="text" />
+                                    <p id="approveInfo" class="form-control"></p>
                                 </td>
                             </tr>
                             <tr style="display: none;">
                                 <td align="center" style="background-color: #e6f2fb;">印鉴名称</td>
                                 <td>
                                     <div>
-                                        <input type="checkbox" name="signName" value="1" style="width: 20px !important; margin-top: 2px;" checked="">合同章
+                                        <input type="checkbox" name="signName" value="1" style="width: 20px !important; margin-top: 2px;">合同章
                                         <input type="checkbox" name="signName" value="2" style="width: 20px !important; margin-top: 2px;">法人章
                                         <input type="checkbox" name="signName" value="3" style="width: 20px !important; margin-top: 2px;">公章
                                         <input type="checkbox" name="signName" value="4" style="width: 20px !important; margin-top: 2px;">财务章
@@ -517,13 +548,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </td>
                             </tr>
                             <tr style="display: none;">
-                                <td align="center" style="background-color: #e6f2fb;">用印份数</td>
-                                <td>
-                                    <input id="signNum" class="form-control" type="text" />
-                                </td>
                                 <td align="center" style="background-color: #e6f2fb;">对方公司</td>
                                 <td>
                                     <input id="selectTenant" class="form-control" type="text" />
+                                </td>
+                                <td align="center" style="background-color: #e6f2fb;">用印份数</td>
+                                <td>
+                                    <input id="signNum" class="form-control" type="text" />
                                 </td>
                             </tr>
                             <tr style="display: none;">
@@ -532,9 +563,66 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <textarea id="signFileName" class="form-control" name="approveInfo"></textarea>
                                 </td>
                             </tr>
+                            <tr>
+                                <td align="center" style="background-color: #e6f2fb;">关联事项</td>
+                                <td colspan="3" id="signRelation"></td>
+                            </tr>
+                            <tr align="center">
+                                <td style="background-color: #e6f2fb;">附件</td>
+                                <td colspan="3" id="fileListClone" style="text-align: left;"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="box-body">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="bootstrap-table">
+                    <div class="fixed-table-container">
+                        <div class="fixed-table-body">
+                            <table class="table">
+                                <thead>
+                                    <tr style="background-color: #e6f2fb;">
+                                        <th>
+                                            <div class="th-inner">审批意见</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">操作</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">执行人</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">状态</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">意见</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">开始日期</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                        <th>
+                                            <div class="th-inner">结束日期</div>
+                                            <div class="fht-cell"></div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="approvalProcessClone"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
             </div>
         </div>
     </div>

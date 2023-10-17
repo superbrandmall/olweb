@@ -160,7 +160,7 @@ function findAllStoresByKVCondition(p,c){
                         switch (v.shopStatus) {
                             case '1':
                                 isEmpty = "是";
-                                isBrand = "/";
+                                isBrand = "--";
                                 isContract = '<i class="fa fa-circle-o text-red"></i> 未签订';
                                 break;
                             case '0':
@@ -170,7 +170,7 @@ function findAllStoresByKVCondition(p,c){
                                 break;
                             default:
                                 isEmpty = "是";
-                                isBrand = "/";
+                                isBrand = "--";
                                 isContract = '<i class="fa fa-circle-o text-red"></i> 未签订';
                                 break;
                         }
@@ -181,7 +181,7 @@ function findAllStoresByKVCondition(p,c){
                         $('#console').append('<tr data-index="'+i+'" id="store_'+v.code+'">\n\
                         <td><a href="/lotus-admin/store-detail?id='+v.code+'">'+v.unitName+'['+v.unitCode+']</a></td>\n\
                         <td>'+v.unitArea+'</td>\n\
-                        <td>'+(v.approveFirst || '')+'</td>\n\
+                        <td>'+(v.approveFirst || '--')+'</td>\n\
                         <td>'+isEmpty+'</td>\n\
                         <td>'+isBrand+'</td>\n\
                         <td>'+isDR+'</td>\n\
@@ -204,6 +204,13 @@ function findAllStoresByKVCondition(p,c){
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     });
 }

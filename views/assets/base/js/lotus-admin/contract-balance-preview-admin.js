@@ -43,9 +43,7 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#termType').val('').trigger('change');
-        $('#department, #selectContract').empty(); 
-        $('#department, #selectContract').select2("val", "");
+        $('#termType, #department, #selectContract').val('').trigger('change');
         $('#yearMonth').val('');
         
         $.cookie('balanceTermType', null);
@@ -185,6 +183,13 @@ function findBalanceByKVCondition() {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     })
 }

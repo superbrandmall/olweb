@@ -10,12 +10,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
-<style>
-    #create-form input, #create-form span {
-        font-size: 8px;
-    }
-</style>
-
 <div class="content-wrapper">
     <section class="sub-header" style="height: 280px;">
         <h4>
@@ -198,7 +192,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
@@ -206,11 +200,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 65px;">查看详情</div>
+                                                                <div class="th-inner">查看详情</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">项目</div>
+                                                                <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -226,19 +220,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">合同</div>
+                                                                <div class="th-inner">合同</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 300px;">商户</div>
+                                                                <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">铺位</div>
+                                                                <div class="th-inner">铺位</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 130px;">科目</div>
+                                                                <div class="th-inner">科目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -246,7 +240,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">费用周期</div>
+                                                                <div class="th-inner">费用周期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -254,19 +248,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">含税金额</div>
+                                                                <div class="th-inner">含税金额</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">不含税金额</div>
+                                                                <div class="th-inner">不含税金额</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 190px;">创建信息</div>
+                                                                <div class="th-inner">创建信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 190px;">最后修改信息</div>
+                                                                <div class="th-inner">最后修改信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

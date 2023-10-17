@@ -202,6 +202,11 @@ label.error {
     white-space: nowrap;
 }
 
+#investment-contract-balance-create .form-group div,
+#investment-contract-voucher-create .form-group div {
+    padding: 0;
+}
+
 tbody .money {
     min-width: 70px;
 }

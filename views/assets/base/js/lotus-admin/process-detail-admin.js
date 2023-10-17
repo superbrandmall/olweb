@@ -11,6 +11,10 @@ $(document).ready(function(){
         findDictCodeByDictTypeCode('SIGN_APPROVE_TYPE');
     }
     
+    if(!sessionStorage.getItem("FLOW_STEPS") || sessionStorage.getItem("FLOW_STEPS") == null || sessionStorage.getItem("FLOW_STEPS") == '') {
+        findDictCodeByDictTypeCode('FLOW_STEPS');
+    }
+    
     findProcessByBizId();
 })
 
@@ -58,7 +62,7 @@ function findProcessByBizId() {
                         
                         $('#opinion_print').show();
                         $('#opinion_print').click(function(){
-                            
+                            findSignRequestByBizId();
                         })
                     }
                         
@@ -71,7 +75,7 @@ function findProcessByBizId() {
                     $('#created').text(data.created);
                     $('#updated').text((data.updated || ''));
                     $('#bizType').text('/招商/'+bizType);
-                    
+                    findFilesByBizId(data.bizId, '提交');
                     var main = '';
                     if($.inArray(data.mallCode, $.api.mallCodeEast) == -1){
                         main = '&t=';
@@ -120,6 +124,7 @@ function findProcessByBizId() {
                     
                     if(data.processStepRecordList != '' && data.processStepRecordList != null && data.processStepRecordList.length > 0){
                         var index = 0;
+                        var headTxt, type;
                         $.each(data.processStepRecordList, function(i,v) {
                             if(flowDiagram == 1){
                                 switch (v.activityName) {
@@ -236,60 +241,57 @@ function findProcessByBizId() {
                                 <td>'+(v.handleTime || '')+'</td></tr>');
                             }
                             
+                            
                             if(i == (data.processStepRecordList.length - 1) && v.status == 'DOING' && (v.activityName == '合同上传' || v.activityName == '合同收回' || v.activityName == '盖章合同上传' || v.activityName == '用印文件上传')){
                                 $('#processFiles').show();
                                 $('.breadcrumb li:eq(2)').show();
                                 
-                                var headTxt, type, formStatus;
                                 switch (v.activityName) {
                                     case "合同上传":
                                         headTxt = '待租户用印合同';
-                                        formStatus = '未用印合同上传';
                                         type = 'INIT';
                                         break;
                                     case "合同收回":
                                         headTxt = '待我司用印合同';
-                                        formStatus = '租户用印合同上传';
                                         type = 'TENANT';
                                         break;
                                     case "盖章合同上传":
                                         headTxt = '双方已用印合同';
-                                        formStatus = '双方用印合同上传';
                                         type = 'SIGN';
                                         break;
                                     case "用印文件上传":
                                         headTxt = '合同/用印文件';
-                                        formStatus = '用印文件上传';
                                         type = 'APPROVE';
                                         break;
                                     default:
+                                        headTxt = '用印文件';
+                                        type = '';
                                         break;
                                 }
                                 
-                                $('.headTxt').text(headTxt);
-                                $("#reqUploadFile").on('click',function(){
-                                    $(this).attr('pointer-events','none');
-                                    fileUpload(data.bizId, data.contractNo, bizType, type, 'reqFile');
-                                })
-
-                                $("#uploadFile_otherFiles").on('click',function(){
-                                    $(this).attr('pointer-events','none');
-                                    fileUpload(data.bizId, data.contractNo, bizType, type, 'otherFiles');
-                                })
-                               
-                                $('#createToDoModify').on('click',function(){
-                                    if($("input[id*='reqFile_']").val() != ''){
-                                        if(flowDiagram == 3){
-                                            signUpload(v.bizId);
-                                        } else {
-                                            contractUpload(v.bizId, type);
-                                        }
-                                    }
-                                })
-                                
                                 findFilesByBizId(data.bizId,v.activityName);
-                                
                                 return false;
+                            }
+                        })
+                        
+                        $('.headTxt').text(headTxt);
+                        $("#reqUploadFile").on('click',function(){
+                            $(this).attr('pointer-events','none');
+                            fileUpload(data.bizId, data.contractNo, bizType, type, 'reqFile');
+                        })
+
+                        $("#uploadFile_otherFiles").on('click',function(){
+                            $(this).attr('pointer-events','none');
+                            fileUpload(data.bizId, data.contractNo, bizType, type, 'otherFiles');
+                        })
+
+                        $('#createToDoModify').on('click',function(){
+                            if($("input[id*='reqFile_']").val() != ''){
+                                if(flowDiagram == 3){
+                                    signUpload(data.bizId);
+                                } else {
+                                    contractUpload(data.bizId, type);
+                                }
                             }
                         })
                     }
@@ -609,7 +611,8 @@ function findFilesByBizId(id,an) {
                             }
 
                             $("input[id*='"+type+"_']").each(function(j,e){
-                                if(type == 'reqFile' || $('#'+type+'_'+j).val() == ''){
+                                if($('#'+type+'_'+j).val() == ''){
+                                //if(type == 'reqFile' || $('#'+type+'_'+j).val() == ''){
                                     $('#'+type+'_'+j).val(v.fileName);
                                     var fileSize;
                                     if(v.fileSize >= 1024 && v.fileSize < 1048576){
@@ -707,22 +710,167 @@ function findProcessInstByBizId(){
                 }
                 
                 if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    var bizType = '',bizId = '', flowDiagram = 1;
+                    if($.isNumeric(data.bizType) == false){    
+                        bizType = '租赁合同【'+renderFormType(data.bizType)+'】';
+                        bizId = '租赁合同申请['+data.bizId+']';
+                    } else {
+                        if(data.bizType == 5){
+                            bizType = '卜蜂莲花【'+renderApproveType(data.bizType)+'】';
+                            bizId = '卜蜂莲花用印申请['+data.bizId+']';
+                            flowDiagram = 3;
+                        } else {
+                            bizType = '卜蜂莲花【'+renderApproveType(data.bizType)+'】';
+                            bizId = '卜蜂莲花签呈['+data.bizId+']';
+                            flowDiagram = 2;
+                        }
+                        
+                        $('#opinion_print').show();
+                        $('#opinion_print').click(function(){
+                            findSignRequestByBizId();
+                        })
+                    }
+                    
+                    $('#status').text(renderFlowStatus(data.processInstStatus));
+                    $('#formType').text(bizType);
+                    
+                    $('#processName').text(bizId).attr('title',bizId);
+                    $('#processInstStatus').text(renderFlowStatus(data.processInstStatus));
+                    $('#creatorName').text((data.creatorName || 'admin'));
+                    $('#created').text(data.created);
+                    $('#updated').text((data.updated || ''));
+                    $('#bizType').text('/招商/'+bizType);
+                    
+                    var main = '';
+                    if($.inArray(data.mallCode, $.api.mallCodeEast) == -1){
+                        main = '&t=';
+                    }
+                    
                     $('#approvalProcess').html('');
-                    if(response.data.processStepRecordList != '' && response.data.processStepRecordList != null && response.data.processStepRecordList.length > 0){
+                    if(flowDiagram == 1){
+                        $('#leasingContract').show();
+                        $('#lotusApprove').hide();
+                        $('#lotusSign').hide();
+                    } else if(flowDiagram == 2){
+                        $('#leasingContract').hide();
+                        $('#lotusApprove').show();
+                        $('#lotusSign').hide();
+                    } else {
+                        $('#leasingContract').hide();
+                        $('#lotusApprove').hide();
+                        $('#lotusSign').show();
+                    }
+                    
+                    if(data.processStepRecordList != '' && data.processStepRecordList != null && data.processStepRecordList.length > 0){
                         var index = 0;
-                        var flowDiagram = 1;
-                        $.each(response.data.processStepRecordList, function(i,v) {
+                        $.each(data.processStepRecordList, function(i,v) {
+                            if(flowDiagram == 1){
+                                switch (v.activityName) {
+                                    case "提交人":
+                                        $('#leasingContract li:eq(0)').addClass('active');
+                                        break;
+                                    case "Lotus招商负责人":
+                                        $('#leasingContract li:eq(1)').addClass('active');
+                                        break;
+                                    case "财法预审负责人":
+                                        $('#leasingContract li:eq(2)').addClass('active');
+                                        break;
+                                    case "财法负责人":
+                                        $('#leasingContract li:eq(3)').addClass('active');
+                                        break;
+                                    case "业态负责人":
+                                        $('#leasingContract li:eq(4)').addClass('active');
+                                        break;
+                                    case "总部招商负责人":
+                                        $('#leasingContract li:eq(5)').addClass('active');
+                                        break;
+                                    case "总裁及地区相关领导":
+                                        $('#leasingContract li:eq(6)').addClass('active');
+                                        break;
+                                    case "合同上传":
+                                        $('#leasingContract li:eq(7)').addClass('active');
+                                        break;
+                                    case "合同收回":
+                                        $('#leasingContract li:eq(8)').addClass('active');
+                                        break;
+                                    case "合同用印财法预审":
+                                        $('#leasingContract li:eq(9)').addClass('active');
+                                        break;
+                                    case "合同用印财法负责人":
+                                        $('#leasingContract li:eq(10)').addClass('active');
+                                        break;
+                                    case "合同用印总部招商负责人":
+                                        $('#leasingContract li:eq(11)').addClass('active');
+                                        break;
+                                    case "合同用印总裁及地区相关领导":
+                                        $('#leasingContract li:eq(12)').addClass('active');
+                                        break;
+                                    case "盖章合同上传":
+                                        $('#leasingContract li:eq(13)').addClass('active');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else if(flowDiagram == 2){
+                                switch (v.activityName) {
+                                    case "开始审批":
+                                        $('#lotusApprove li:eq(0)').addClass('active');
+                                        break;
+                                    case "招商负责人审批":
+                                        $('#lotusApprove li:eq(1)').addClass('active');
+                                        break;
+                                    case "财法预审负责人":
+                                        $('#lotusApprove li:eq(2)').addClass('active');
+                                        break;
+                                    case "财法负责人":
+                                        $('#lotusApprove li:eq(3)').addClass('active');
+                                        break;
+                                    case "总部招商负责人":
+                                        $('#lotusApprove li:eq(4)').addClass('active');
+                                        break;
+                                    case "签呈负责人审批":
+                                        $('#lotusApprove li:eq(5)').addClass('active');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                switch (v.activityName) {
+                                    case "开始审批":
+                                        $('#lotusSign li:eq(0)').addClass('active');
+                                        break;
+                                    case "招商负责人审批":
+                                        $('#lotusSign li:eq(1)').addClass('active');
+                                        break;
+                                    case "财法预审负责人":
+                                        $('#lotusSign li:eq(2)').addClass('active');
+                                        break;
+                                    case "财法负责人":
+                                        $('#lotusSign li:eq(3)').addClass('active');
+                                        break;
+                                    case "总部招商负责人":
+                                        $('#lotusSign li:eq(4)').addClass('active');
+                                        break;
+                                    case "签呈负责人审批":
+                                        $('#lotusSign li:eq(5)').addClass('active');
+                                        break;
+                                    case "用印文件上传":
+                                        $('#lotusSign li:eq(6)').addClass('active');
+                                        break;
+                                    case "用印财法预审":
+                                        $('#lotusSign li:eq(7)').addClass('active');
+                                        break;
+                                    case "用印财法负责人审批":
+                                        $('#lotusSign li:eq(8)').addClass('active');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                            
                             if((i != 0 && v.status != null && v.status != 'WITHDRAW') || v.activityType == 'END'){
                                 index++;
-                                
-                                if($.isNumeric(v.bizType) == true){    
-                                    if(v.bizType == 5){
-                                        flowDiagram = 3;
-                                    } else {
-                                        flowDiagram = 2;
-                                    }
-                                }
-                    
                                 $('#approvalProcess').append('<tr><td>'+index+'</td>\n\
                                 <td>'+v.activityName+'</td>\n\
                                 <td>'+(v.approveName || '')+'</td>\n\
@@ -730,110 +878,6 @@ function findProcessInstByBizId(){
                                 <td>'+(v.opinion || '')+'</td>\n\
                                 <td>'+(v.createTime || '')+'</td>\n\
                                 <td>'+(v.handleTime || '')+'</td></tr>');
-                                
-                                if(flowDiagram == 1){
-                                    switch (v.activityName) {
-                                        case "提交人":
-                                            $('#leasingContract li:eq(0)').addClass('active');
-                                            break;
-                                        case "Lotus招商负责人":
-                                            $('#leasingContract li:eq(1)').addClass('active');
-                                            break;
-                                        case "财法预审负责人":
-                                            $('#leasingContract li:eq(2)').addClass('active');
-                                            break;
-                                        case "财法负责人":
-                                            $('#leasingContract li:eq(3)').addClass('active');
-                                            break;
-                                        case "业态负责人":
-                                            $('#leasingContract li:eq(4)').addClass('active');
-                                            break;
-                                        case "总部招商负责人":
-                                            $('#leasingContract li:eq(5)').addClass('active');
-                                            break;
-                                        case "总裁及地区相关领导":
-                                            $('#leasingContract li:eq(6)').addClass('active');
-                                            break;
-                                        case "合同上传":
-                                            $('#leasingContract li:eq(7)').addClass('active');
-                                            break;
-                                        case "合同收回":
-                                            $('#leasingContract li:eq(8)').addClass('active');
-                                            break;
-                                        case "合同用印财法预审":
-                                            $('#leasingContract li:eq(9)').addClass('active');
-                                            break;
-                                        case "合同用印财法负责人":
-                                            $('#leasingContract li:eq(10)').addClass('active');
-                                            break;
-                                        case "合同用印总部招商负责人":
-                                            $('#leasingContract li:eq(11)').addClass('active');
-                                            break;
-                                        case "合同用印总裁及地区相关领导":
-                                            $('#leasingContract li:eq(12)').addClass('active');
-                                            break;
-                                        case "盖章合同上传":
-                                            $('#leasingContract li:eq(13)').addClass('active');
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } else if(flowDiagram == 2){
-                                    switch (v.activityName) {
-                                        case "开始审批":
-                                            $('#lotusApprove li:eq(0)').addClass('active');
-                                            break;
-                                        case "招商负责人审批":
-                                            $('#lotusApprove li:eq(1)').addClass('active');
-                                            break;
-                                        case "财法预审负责人":
-                                            $('#lotusApprove li:eq(2)').addClass('active');
-                                            break;
-                                        case "财法负责人":
-                                            $('#lotusApprove li:eq(3)').addClass('active');
-                                            break;
-                                        case "总部招商负责人":
-                                            $('#lotusApprove li:eq(4)').addClass('active');
-                                            break;
-                                        case "签呈负责人审批":
-                                            $('#lotusApprove li:eq(5)').addClass('active');
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                } else {
-                                    switch (v.activityName) {
-                                        case "开始审批":
-                                            $('#lotusSign li:eq(0)').addClass('active');
-                                            break;
-                                        case "招商负责人审批":
-                                            $('#lotusSign li:eq(1)').addClass('active');
-                                            break;
-                                        case "财法预审负责人":
-                                            $('#lotusSign li:eq(2)').addClass('active');
-                                            break;
-                                        case "财法负责人":
-                                            $('#lotusSign li:eq(3)').addClass('active');
-                                            break;
-                                        case "总部招商负责人":
-                                            $('#lotusSign li:eq(4)').addClass('active');
-                                            break;
-                                        case "签呈负责人审批":
-                                            $('#lotusSign li:eq(5)').addClass('active');
-                                            break;
-                                        case "用印文件上传":
-                                            $('#lotusSign li:eq(6)').addClass('active');
-                                            break;
-                                        case "用印财法预审":
-                                            $('#lotusSign li:eq(7)').addClass('active');
-                                            break;
-                                        case "用印财法负责人审批":
-                                            $('#lotusSign li:eq(8)').addClass('active');
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
                             }
                         })
                     }
@@ -843,4 +887,74 @@ function findProcessInstByBizId(){
             }                            
         }
     }); 
+}
+
+function findSignRequestByBizId() {
+    $.ajax({
+        url: $.api.baseLotus+"/api/sign/approve/form/findAllByBizId?bizId="+getURLParameter('id'),
+        type: "GET",
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        complete: function(){},
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data != '' && response.data != null){
+                    var data = response.data;
+                    $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
+                    $('#bizId').val(data.bizId);
+                    $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
+                    $('#approveInfo').html(data.approveInfo);
+                    $('#amount').val((data.amount != null ? data.amount : '--'));
+                    $('#mobileNo').val(data.mobileNo);
+                    $('#applyReason').val(data.applyReason);
+                    $('#corporationName').val(data.corporationName);
+                    $('#signFileName').val((data.signFileName != null ? data.signFileName : '--'));
+                    $('#applyDate').val(data.applyDate);
+                    $('#mainSigningBody').val((data.companyName != null ? data.companyName : '--'));
+                    $('#signNum').val((data.signNum != null ? data.signNum : '--'));
+                    $('#selectTenant').val(((data.tenantCode != null && data.tenantName != null && data.remarkFirst != null) ? (data.tenantCode +' | '+ data.tenantName) : '--'));
+                    $('input[type=radio][name=urgencyDegree][value='+data.urgencyDegree+']').attr("checked",true);
+                    $('input[type=checkbox][name=applyType][value='+data.applyTypeCode+']').attr("checked",true);
+                    $('input[type=checkbox][name=signName][value='+data.signName+']').attr("checked",true);
+                    
+                    if(data.applyTypeCode == '5'){
+                        $('#corporationName').parent().parent().show();
+                        $('#signNum').parent().parent().show();
+                        $('#signFileName').parent().parent().show();
+                    }
+                    
+                    var fileListClone = $('#fileList').clone();
+                    $('#fileListClone').html(fileListClone);
+                    
+                    var approvalProcessClone = $('#approvalProcess').children().clone();
+                    $('#approvalProcessClone').html(approvalProcessClone);
+                    
+                    $('input.money').each(function(){
+                        $(this).val(accounting.formatNumber($(this).val()));
+                    })
+                    window.print();
+                } else {
+                    alertMsg('9999','模块加载错误，该错误由【单号错误】导致！');
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }
+        }
+    })
 }

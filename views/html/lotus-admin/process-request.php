@@ -139,9 +139,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="col-md-1 control-label" for="approveInfo">说明 <span class="btn-box-tool-lg">*</span></label>
+                                        <label class="col-md-1 control-label" for="remark">说明 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-10 col-sm-12 required" style="margin-left:2.7%;">
-                                            <textarea class="form-control" id="approveInfo" name="approveInfo" rows="7" placeholder="理由,数据,建议......"></textarea>
+                                            <textarea class="form-control" id="remark" rows="7" placeholder="理由,数据,建议......"></textarea>
                                         </div>
                                     </div>
                                 </div>

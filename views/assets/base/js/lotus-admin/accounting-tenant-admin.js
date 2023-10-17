@@ -23,19 +23,6 @@ $(document).ready(function(){
             window.history.pushState("object or string", "Title", "/lotus-admin/"+refineCreateUrl() );
         },1000);
     }
-
-    var auth = 0;
-    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
-        if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_FINANCIAL'){
-            auth = 1;
-            return false;
-        }
-    })
-
-    if(auth == 0){
-        alertMsg('9999','没有访问授权，请联系系统管理员。');
-        return false;
-    }
     
     if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
         findAllUsers();
@@ -250,13 +237,13 @@ function findTenantByKVCondition(p,c) {
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getTenantDetail("'+v.messIdOs+'")\'>'+v.tenantName+'['+v.tenantNo+']</a></td>\n\
                             <td>'+v.messIdOs+'</td>\n\
-                            <td>'+v.postCode+'</td>\n\
+                            <td>'+(v.postCode || '')+'</td>\n\
                             <td>'+(v.paymentMethod || '')+'</td>\n\
                             <td>'+v.countryCode+'</td>\n\
                             <td>'+v.companyCode+'</td>\n\
                             <td>'+v.uscc+'</td>\n\
                             <td>'+v.accountGroup+'</td>\n\
-                            <td>'+v.cityCode+'</td>\n\
+                            <td>'+(v.cityCode || '')+'</td>\n\
                             <td>'+(v.regAddress || '')+'</td>\n\
                             <td>'+(v.language || '')+'</td>\n\
                             <td>'+(v.apSubjectTenant || '')+'</td>\n\
@@ -322,6 +309,13 @@ function findTenantByKVCondition(p,c) {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     })
 }

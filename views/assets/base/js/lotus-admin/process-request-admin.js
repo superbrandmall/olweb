@@ -54,11 +54,7 @@ $(document).ready(function(){
         $(this).siblings('.input-group-addon:first').css('borderColor','#d2d6de');
     })
     
-    if(!sessionStorage.getItem('roleYZJ') || sessionStorage.getItem('roleYZJ') == null || sessionStorage.getItem('roleYZJ') == ''){
-        findRoleYZJByParentId();
-    } else {
-        updateRoleYZJLabel();
-    }
+    findUserRoleYZJByKVCondition($.cookie('mallSelected').split(':::')[1]);
     
     $('input.money').on('focus',function(){
         $(this).val(accounting.unformat($(this).val()));
@@ -159,7 +155,7 @@ function findSignRequestByBizId() {
                     $('#bizId').val(data.bizId);
                     updateDictByDictTypeCode('FORM_STATUS','formStatus',(data.formStatus != null ? data.formStatus : 1));
                     $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
-                    $('#approveInfo').val(data.approveInfo);
+                    $('#remark').val(data.approveInfo);
                     $('#amount').val(data.amount);
                     $('#mobileNo').val(data.mobileNo);
                     $('#applyReason').val(data.applyReason);
@@ -209,63 +205,6 @@ function findSignRequestByBizId() {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
-        }
-    })
-}
-
-function updateUserRoleYZJDropDownByRoleId(id) {
-    $('#'+id).find('select').select2({
-        placeholder: '未选择',
-        dropdownAutoWidth: true,
-        allowClear: true,
-        language: {
-            searching: function() {
-                return '加载中...';
-            },
-            loadingMore: function() {
-                return '加载中...';
-            }
-        },
-        ajax: {
-            url: $.api.baseCommYZJ+"/api/user/role/yzj/findAllByRoleId",
-            type: 'GET',
-            dataType: 'json',
-            delay: 250,
-            beforeSend: function(request) {
-                request.setRequestHeader("Login", $.cookie('login'));
-                request.setRequestHeader("Authorization", $.cookie('authorization'));
-                request.setRequestHeader("Lang", $.cookie('lang'));
-                request.setRequestHeader("Source", "onlineleasing");
-            },
-            data: function (params) {         
-                return {
-                    search: params.term,
-                    roleId: id
-                }
-            },
-            processResults: function (data,params) {
-                if(data['code'] === 'C0') {
-                    var jsonData = data['data'];
-                    var data;
-                    return {
-                        results: $.map(jsonData, function(item) {
-                            if((item.mallCode == $.cookie('mallSelected').split(':::')[1] || item.mallCode == null) && item.state == 1){
-                                data = {
-                                    id: item.openId,
-                                    text: item.name
-                                }
-
-                                var returnData = [];
-                                returnData.push(data);
-                                return returnData;
-                            }
-                        })
-                    }
-                } else {
-                    alertMsg(data['code'],data['customerMessage']);
-                }
-            },
-            cache: true
         }
     })
 }
@@ -547,9 +486,9 @@ function submitCheck() {
         $('#applyDate').parent().prepend(error);
     }
     
-    if($('#approveInfo').val() == ''){
+    if($('#remark').val() == ''){
         flag = 0;
-        $('#approveInfo').parent().prepend(error);
+        $('#remark').parent().prepend(error);
     }
     
     if($('#applyType').val() == 5){
@@ -698,7 +637,7 @@ function saveSignForm(s) {
             "applyDate": $('#applyDate').val(),
             "applyTypeCode": $('#applyType').find('option:selected').val(),
             "applyTypeName": $('#applyType').find('option:selected').text(),
-            "approveInfo": $('#approveInfo').val(),
+            "approveInfo": $('#remark').val(),
             "bizId": bizId,
             "code": ($.request.content != '' ? $.request.content.code : ""),
             "companyName": $('#mainSigningBody').val(),
@@ -1125,4 +1064,72 @@ function findSignRelationRequestFormByRelationBizId(rbid,index) {
             }
         }
     })
+}
+
+function findUserRoleYZJByKVCondition(mc){
+    var conditionGroups = [];
+    conditionGroups.push({
+        "conditionOperator": "OR",
+        "params": [{
+                "columnName": "mallCode",
+                "columnPatten": "",
+                "conditionOperator": "AND",
+                "operator": "=",
+                "value": mc
+            }
+        ]
+    },{
+        "conditionOperator": "OR",
+        "params": [{
+                "columnName": "roleId",
+                "columnPatten": "",
+                "conditionOperator": "AND",
+                "operator": "in",
+                "value": "signLeasingApprove;signFinPreApprove;signLegalPreApprove;signFinApprove;signLegalApprove;signHqLeasingApprove;signApprove"
+            }
+        ]
+    });
+
+    var map = {
+        "conditionGroups": conditionGroups,
+        "params": []
+    }
+    
+    $.ajax({
+        url: $.api.baseCommYZJ+"/api/vUserRole/yzj/findAllByKVCondition?page=0&size=100&sort=id,desc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: false,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            $('#loader').show();
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            $('#loader').hide();
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0){
+                    $.each(response.data.content, function(i,v){
+                        $('#'+v.roleId).find('label').find('b').text(v.roleName);
+                        updateUserRoleYZJDropDownByRoleId(v.roleId,mc);
+                        var pathname = window.location.pathname;
+                        if(v.mallCode != null && v.mallCode != '' && (pathname.indexOf('make-request') != -1 || pathname.indexOf('renew-request') != -1 || pathname.indexOf('terminate-request') != -1 || pathname.indexOf('modify-request') != -1)){
+                            var newOption = new Option(v.name, v.openId, true, true);
+                            $('#'+v.roleId+' select').append(newOption).trigger('change');
+                        }
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            } 
+        }
+    });
 }

@@ -19,7 +19,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             流程
         </h4>
         <div class="pull-right">
-            <a href="/lotus-admin/process-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">上海-流程申请</span></a>
+            <a href="/lotus-admin/process-request" class="btn btn-primary btn-sm"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">华东区-流程申请</span></a>
         </div>
         <div class="box-header" style="background-color: #ecf0f5; height: 50px;">
             <div class="pull-left">
@@ -56,6 +56,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                     <option value="renew">租赁续签合同审批流程</option>
                                     <option value="termination">租赁终止合同审批流程</option>
                                     <option value="modify">租赁变更合同审批流程</option>
+                                    <option value="1">单元变动审批流程</option>
+                                    <option value="5">用印申请审批流程</option>
+                                    <option value="2">其他审批流程</option>
                                 </select>
                             </div>
                         </div>
@@ -125,43 +128,43 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
-                                                                <div class="th-inner" style="width: 200px; background: #fff;">流程名称</div>
+                                                                <div class="th-inner" style="background: #fff;">流程名称</div>
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 85px;">流程状态</div>
+                                                                <div class="th-inner">流程状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">流程分类</div>
+                                                                <div class="th-inner">流程分类</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 50px;">发起人</div>
+                                                                <div class="th-inner">发起人</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 180px;">当前任务</div>
+                                                                <div class="th-inner">当前任务</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 80px;">当前执行人</div>
+                                                                <div class="th-inner">当前执行人</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">开始时间</div>
+                                                                <div class="th-inner">开始时间</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">最后操作时间</div>
+                                                                <div class="th-inner">最后操作时间</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">结束时间</div>
+                                                                <div class="th-inner">结束时间</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

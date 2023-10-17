@@ -112,35 +112,35 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
-                                                                <div class="th-inner" style="width: 150px; background: #fff;">项目</div>
+                                                                <div class="th-inner" style="background: #fff;">项目</div>
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 85px;">起始日期</div>
+                                                                <div class="th-inner">起始日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 85px;">到期日期</div>
+                                                                <div class="th-inner">到期日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 50px;">状态</div>
+                                                                <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">电话</div>
+                                                                <div class="th-inner">电话</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 230px;">地址</div>
+                                                                <div class="th-inner">地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 170px;">公司名称</div>
+                                                                <div class="th-inner">公司名称</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -148,19 +148,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 330px;">注册地址</div>
+                                                                <div class="th-inner">注册地址</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 270px;">开户银行</div>
+                                                                <div class="th-inner">开户银行</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 170px;">账号</div>
+                                                                <div class="th-inner">账号</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 120px;">项目所属地</div>
+                                                                <div class="th-inner">项目所属地</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

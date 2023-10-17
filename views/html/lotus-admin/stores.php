@@ -152,11 +152,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
-                                                                <div class="th-inner" style="width: 240px; background: #fff;">铺位</div>
+                                                                <div class="th-inner" style="background: #fff;">铺位</div>
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 55px;">状态</div>
+                                                                <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -164,7 +164,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">所属项目</div>
+                                                                <div class="th-inner">所属项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -172,7 +172,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 170px;">有效期</div>
+                                                                <div class="th-inner">有效期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -180,7 +180,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 60px;">类型</div>
+                                                                <div class="th-inner">类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -188,11 +188,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 160px;">落位品牌</div>
+                                                                <div class="th-inner">落位品牌</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">签约合同</div>
+                                                                <div class="th-inner">签约合同</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

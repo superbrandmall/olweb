@@ -74,7 +74,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
@@ -86,27 +86,27 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">业态</div>
+                                                                <div class="th-inner">业态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 140px;">店招</div>
+                                                                <div class="th-inner">店招</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 60px;">状态</div>
+                                                                <div class="th-inner">状态</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 180px;">楼层</div>
+                                                                <div class="th-inner">楼层</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">计租方式</div>
+                                                                <div class="th-inner">计租方式</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">位置</div>
+                                                                <div class="th-inner">位置</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -114,7 +114,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 330px;">签约乙方(公司或个人)</div>
+                                                                <div class="th-inner">签约乙方(公司或个人)</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -122,23 +122,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 90px;">签约日期</div>
+                                                                <div class="th-inner">签约日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 90px;">起始日期</div>
+                                                                <div class="th-inner">起始日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 90px;">截止日期</div>
+                                                                <div class="th-inner">截止日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 90px;">交铺日期</div>
+                                                                <div class="th-inner">交铺日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 90px;">开业日期</div>
+                                                                <div class="th-inner">开业日期</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -146,23 +146,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">保底租金</div>
+                                                                <div class="th-inner">保底租金</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">提成租金</div>
+                                                                <div class="th-inner">提成租金</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">物业管理费</div>
+                                                                <div class="th-inner">物业管理费</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">推广费</div>
+                                                                <div class="th-inner">推广费</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 230px;">备注</div>
+                                                                <div class="th-inner">备注</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>

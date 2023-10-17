@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute;right: 15px; z-index: 4; opacity: .5;">×</button>
                 <button id="deleteVoucher" type="button" class="btn btn-danger btn-xs" style="margin-left: 20px; margin-top: -8px; display: none;">删除</button>
             </div>
-            <div class="modal-body" style="padding-top: 0;">
+            <div class="modal-body" style="padding: 0 15px 15px 0;">
                 <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
                     <div class="col-md-12 text-gray text-right">
                         <div class="form-group">

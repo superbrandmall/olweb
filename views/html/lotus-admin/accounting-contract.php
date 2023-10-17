@@ -8,12 +8,6 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
-<style>
-    #create-form input, #create-form span {
-        font-size: 8px;
-    }
-</style>
-
 <div class="content-wrapper">
     <section class="sub-header" style="height: 260px;">
         <h4>
@@ -145,7 +139,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                         <div class="fixed-table-container">
                                             <div class="fixed-table-body">
-                                                <table class="table table-striped snipe-table table-responsive" style="margin-top: 0; text-align: left; font-size: 11px;">
+                                                <table class="table table-striped snipe-table table-responsive">
                                                     <thead id="assetsListingTable-sticky-header">
                                                         <tr>
                                                             <th style="z-index: 1;">
@@ -153,15 +147,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 250px;">合同</div>
+                                                                <div class="th-inner">合同</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 300px;">商户</div>
+                                                                <div class="th-inner">商户</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 200px;">项目</div>
+                                                                <div class="th-inner">项目</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -181,7 +175,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 80px;">计租面积</div>
+                                                                <div class="th-inner">计租面积</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -193,7 +187,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 160px;">租赁期限</div>
+                                                                <div class="th-inner">租赁期限</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -201,15 +195,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 150px;">合同类型</div>
+                                                                <div class="th-inner">合同类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">商业类型</div>
+                                                                <div class="th-inner">商业类型</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width : 100px;">固定租金</div>
+                                                                <div class="th-inner">固定租金</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -217,11 +211,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">商场服务费-月</div>
+                                                                <div class="th-inner">商场服务费-月</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 80px;">审图费</div>
+                                                                <div class="th-inner">审图费</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -229,7 +223,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">租赁押金</div>
+                                                                <div class="th-inner">租赁押金</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -237,7 +231,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 100px;">商场服务费-年</div>
+                                                                <div class="th-inner">商场服务费-年</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
@@ -249,11 +243,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 190px;">创建信息</div>
+                                                                <div class="th-inner">创建信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                             <th>
-                                                                <div class="th-inner" style="width: 190px;">最后修改信息</div>
+                                                                <div class="th-inner">最后修改信息</div>
                                                                 <div class="fht-cell"></div>
                                                             </th>
                                                         </tr>
