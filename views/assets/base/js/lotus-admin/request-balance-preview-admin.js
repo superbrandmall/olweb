@@ -53,9 +53,7 @@ $(document).ready(function(){
     })
     
     $('#clear').click(function(){
-        $('#termType,#unitType').val('').trigger('change');
-        $('#department, #selectStore').empty(); 
-        $('#department, #selectStore').select2("val", "");
+        $('#termType,#unitType,#department, #selectStore').val('').trigger('change');
         $('#yearMonth').val('');
         
         $.cookie('balanceTermType', null);

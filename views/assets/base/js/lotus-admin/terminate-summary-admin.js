@@ -38,7 +38,6 @@ function findRequestByBizId() {
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
-        complete: function(){},
         success: function (response, status, xhr) {
             $('#loader').hide();
             if(response.code === 'C0') {
@@ -326,6 +325,13 @@ function findRequestByBizId() {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     })
 }

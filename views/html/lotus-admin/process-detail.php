@@ -83,10 +83,13 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         
         .fixed-table-container thead th {
             border-left: 1px solid #90badd !important;
+            font-size: 10px !important;
         }
 
         .fixed-table-container tbody td {
             border-left: solid 1px #90badd !important;
+            white-space: normal !important;
+            font-size: 10px !important;
         }
     }
 </style>
@@ -588,7 +591,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <thead>
                                     <tr style="background-color: #e6f2fb;">
                                         <th>
-                                            <div class="th-inner">审批意见</div>
+                                            <div class="th-inner">审批</div>
                                             <div class="fht-cell"></div>
                                         </th>
                                         <th>

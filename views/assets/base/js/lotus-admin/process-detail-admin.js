@@ -301,6 +301,13 @@ function findProcessByBizId() {
             } else {
                 alertMsg(response.code,response.customerMessage);
             }
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     })
 }
@@ -742,11 +749,6 @@ function findProcessInstByBizId(){
                     $('#updated').text((data.updated || ''));
                     $('#bizType').text('/招商/'+bizType);
                     
-                    var main = '';
-                    if($.inArray(data.mallCode, $.api.mallCodeEast) == -1){
-                        main = '&t=';
-                    }
-                    
                     $('#approvalProcess').html('');
                     if(flowDiagram == 1){
                         $('#leasingContract').show();
@@ -885,6 +887,13 @@ function findProcessInstByBizId(){
             } else {
                 alertMsg(response.code,response.customerMessage);
             }                            
+        },
+        complete: function () {
+            setTimeout(function () {
+                $('td').each(function(i,e){
+                    $(this).attr('title',$(this).text());
+                })
+            },800);
         }
     }); 
 }

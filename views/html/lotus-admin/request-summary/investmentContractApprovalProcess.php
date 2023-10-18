@@ -20,12 +20,12 @@
                             <div class="fixed-table-body">
                                 <table class="table table-striped snipe-table table-responsive">
                                     <thead id="assetsListingTable-sticky-header">
-                                        <tr style="text-align: left;">
+                                        <tr>
                                             <th>
                                                 <div class="th-inner">行</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 150px;">
+                                            <th>
                                                 <div class="th-inner">操作</div>
                                                 <div class="fht-cell"></div>
                                             </th>
@@ -33,7 +33,7 @@
                                                 <div class="th-inner">执行人</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 80px;">
+                                            <th>
                                                 <div class="th-inner">状态</div>
                                                 <div class="fht-cell"></div>
                                             </th>
@@ -41,11 +41,11 @@
                                                 <div class="th-inner">意见</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 150px;">
+                                            <th>
                                                 <div class="th-inner">开始日期</div>
                                                 <div class="fht-cell"></div>
                                             </th>
-                                            <th style="width: 150px;">
+                                            <th>
                                                 <div class="th-inner">结束日期</div>
                                                 <div class="fht-cell"></div>
                                             </th>

@@ -27,45 +27,46 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                 <ol class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
                     <li><a href="/lotus-admin/mall-detail?id=<?= $id; ?>">详细资料</a></li>
                     <li class="active"><a href="javascript: void(0);">平面图</a></li>
-                    <li><a href="/lotus-admin/mall-summary?id=<?= $id; ?>">概要</a></li>
                 </ol>
             </div>
         </div>
     </section>
     
     <section class="content" style="margin-top: 126px;">
-        <div class="col-lg-12" id="map_canvas">
-            <div id="webui">
-                <div class="box box-default" style="overflow: auto;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">平面图</h3>
-                        <div class="c-label" id="fmap" style="display: inline-block;">
-                            <span style="margin-left: 5px; background-color: #e3efcf; border: solid 2px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 在租 <span id="leased"></span>%
-                            <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 2px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 空铺 <span id="empty"></span>%
-                        </div>
-                    </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="c-content-panel" style="background-color: transparent;">
-                                    <div class="c-body" style="position: relative; margin-left: -3%;">
-                                        <div style="position: absolute; top: 0;left: 5%; z-index: 1;">
-                                            <button id="zoom_in" class="btn btn-xs btn-zoom">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            <button id="zoom_out" class="btn btn-xs btn-zoom">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
+        <div id="webui">
+            <div class="row">
+                <div class="col-lg-12" id="map_canvas">
+                    <div class="box box-default" style="overflow: auto;">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="c-content-panel">
+                                        <div class="c-body">
+                                            <div id="floorList" class="btn-group-vertical" style="position: absolute; top: 20px;right: 5%; z-index: 1;"></div>
+                                            <div style="position: absolute; top: 0;left: 0; background-color: #fff; z-index: 1;">
+                                                <h4>图例与占比</h4>
+                                                <div id="fmap" style="border: solid 1px #ccc;">
+                                                    <span style="margin-left: 5px; background-color: #e3efcf; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 已租 <span id="leasedArea"></span>m<sup>2</sup><span class="text-gray">(<span id="leased"></span>%)</span><br/>
+                                                    <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 其他 <span id="emptyArea"></span>m<sup>2</sup><span class="text-gray">(<span id="empty"></span>%)</span>
+                                                </div>
+                                            </div>
+                                            <div style="position: absolute; bottom: 40px;right: 5%; z-index: 1;">
+                                                <button id="zoom_in" class="btn btn-xs btn-zoom">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                                <button id="zoom_out" class="btn btn-xs btn-zoom">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <img src="#" class="img-responsive" usemap="" id="map" />
+                                            <map name="" id=""></map>
                                         </div>
-                                        <div id="floorList" class="btn-group-vertical" style="position: absolute; bottom: 0;right: 5%; z-index: 1;"></div>
-                                        <img src="#" class="img-responsive" usemap="" id="map" />
-                                        <map name="" id=""></map>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>        
+                    </div>   
+                </div>
             </div>
         </div>
     </section>

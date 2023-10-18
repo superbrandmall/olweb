@@ -292,9 +292,6 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/mall-detail' => array(
             'url' => 'mall-detail.php'
         ),
-        'lotus-admin/mall-summary' => array(
-            'url' => 'mall-summary.php'
-        ),
         'lotus-admin/tenants' => array(
             'url' => 'tenants.php'
         ),
@@ -515,8 +512,8 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
 
     $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'gl-config.php', 'contract-balance.php',
         'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-change.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 
-        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'mall-summary.php', 'requests.php', 'request-summary.php', 
-        'bi.php', 'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 
+        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'requests.php', 'request-summary.php', 'bi.php', 
+        'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 
         'product-category.php', 'make-request.php', 'make-request-main.php', 'request-detail.php', 'request-detail-main.php', 'renew-summary.php', 'renew-request.php', 'renew-request-main.php', 
         'renew-detail.php', 'renew-detail-main.php', 'terminate-summary.php', 'terminate-request.php', 'accounting-voucher.php', 'accounting-tenant.php', 'accounting-contract.php', 'terminate-request-main.php', 
         'terminate-detail.php', 'terminate-detail-main.php', 'modify-summary.php', 'modify-request.php', 'modify-request-main.php', 'modify-detail.php', 'modify-detail-main.php', 'todo.php', 

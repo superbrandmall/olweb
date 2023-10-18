@@ -228,7 +228,9 @@ function renderMap(fc) {
         if(fc == 'LTFLOOR20211026000004'){ // SC005
             getVshopLotus('LTSHOP211026000049'); // F101,F201[02FL001]
         }
-
+        
+        $('#leasedArea').text(numberWithCommas(stores_0.toFixed(2)));
+        $('#emptyArea').text(numberWithCommas(stores_1.toFixed(2)));
         $('#leased').text(Math.round(stores_0/stores*100));
         $('#empty').text(Math.round(100-$('#leased').text()-$('#to_be_lease').text()-$('#renovation').text()));
 
