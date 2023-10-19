@@ -315,7 +315,7 @@ function addTextLayer(){
                     }
                     x = x + 2;
                 }
-                width = parseInt(posLeftMax - posLeftMin - 10);             
+                width = parseInt(posLeftMax - posLeftMin - 12);             
 
                 var y = 1;
                 var posTopMin = parseInt(pos[1]), posTopMax = parseInt(pos[1]);
@@ -329,7 +329,7 @@ function addTextLayer(){
                     y = y + 2;
                 }
 
-                height = parseInt(posTopMax - posTopMin - 10);
+                height = parseInt(posTopMax - posTopMin + 6);
                 
                 if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
                     shopName = $(this).attr('data-shop-name');
@@ -366,17 +366,27 @@ function resetFontSize(divWord, maxWidth, maxHeight, minSize, maxSize, posLeftMi
     divWord.css('font-size', minSize + "px");
     for (var i = minSize; i < maxSize; i++) {
         if ($(divWord).width() > maxWidth || $(divWord).height() > maxHeight) {
+            var left = parseInt(posLeftMin + (maxWidth - $(divWord).width()) / 2) + 'px';
+            var top = parseInt(posTopMin + (maxHeight - $(divWord).height()) / 2 + 6) + 'px';
+            if($(divWord).width() > maxWidth){
+                left = parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px';
+            }
+            
+            if($(divWord).height() > maxHeight){
+                top = parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 6) + 'px';
+            }
+            
             $(divWord).css({
                 'font-size': i + 'px',
-                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2 + 6) + 'px',
-                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2 + 6) + 'px'    
-            }); 
-                break;
+                'left': left,
+                'top': top    
+            });
+            break;
         } else {
             $(divWord).css({
                 'font-size': i + 'px',
-                'left': parseInt(posLeftMin - ($(divWord).width() - maxWidth) / 2) + 'px',
-                'top': parseInt(posTopMin - ($(divWord).height() - maxHeight) / 2) + 'px'
+                'left': parseInt(posLeftMin + (maxWidth - $(divWord).width()) / 2) + 'px',
+                'top': parseInt(posTopMin + (maxHeight - $(divWord).height()) / 2 + 6) + 'px'
             });
         }
     }

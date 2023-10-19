@@ -83,7 +83,7 @@ $(document).ready(function(){
         $('#unitType').val($.cookie('accountingContractUnitType')).trigger('change');
     }
     
-    if($.cookie('accountingContractSelectStoreVal') != null){
+    if($.cookie('accountingContractSelectStoreVal') != null && $.cookie('accountingContractSelectStoreVal') != 'null'){
         var newOption = new Option($.cookie('accountingContractSelectStoreTxt'), $.cookie('accountingContractSelectStoreVal'), true, true);
         $('#selectStore').append(newOption).trigger('change');
     }
@@ -282,7 +282,6 @@ function findContractByKVCondition(p,c) {
             request.setRequestHeader("Lang", $.cookie('lang'));
             request.setRequestHeader("Source", "onlineleasing");
         },
-        complete: function(){},
         success: function (response, status, xhr) {
             if(response.code === 'C0') {
                 if(xhr.getResponseHeader("Login") !== null){
@@ -328,11 +327,11 @@ function findContractByKVCondition(p,c) {
                             <td>'+renderSapContractState(v.contractStatus)+'</td>\n\
                             <td>'+accounting.formatNumber(v.rentArea)+'㎡</td>\n\
                             <td>'+v.companyCode+'</td>\n\
-                            <td>'+renderSapCommercialType(v.bizType)+'</td>\n\
+                            <td>'+renderSapRentType(v.rentType)+'</td>\n\
                             <td>'+v.startDate+'～'+v.endDate+'</td>\n\
                             <td>'+(v.sapMallCode || '')+'</td>\n\
                             <td>'+renderSapContractType(v.contractType)+'</td>\n\
-                            <td>'+renderSapRentType(v.rentType)+'</td>\n\
+                            <td>'+renderSapCommercialType(v.bizType)+'</td>\n\
                             <td>'+accounting.formatNumber(v.rentAmount)+'元/月</td>\n\
                             <td>'+accounting.formatNumber(v.dayRentAmount)+'元/㎡/天</td>\n\
                             <td>'+accounting.formatNumber(v.propertyFee)+'元/月</td>\n\
