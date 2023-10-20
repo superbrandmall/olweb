@@ -52,6 +52,35 @@ $(document).ready(function(){
             $(this).attr('disabled', false);
         }
     });
+    
+    if($.cookie('mapRentShop') && $.cookie('mapRentShop') != ''){
+        $('#mapRentShop').text($.cookie('mapRentShop'));
+    } else {
+        $('#mapRentShop-select ul li').each(function(i,elem){
+            $('#mapRentShop').text($(elem).find('a').text());
+            $.cookie('mapRentShop',$(elem).find('a').text());
+            return false;
+        })
+    }
+    
+    $('#mapRentShop-select .dropdown-menu a').click(function(){
+        $.cookie('mapRentShop',$(this).text());
+        $('#mapRentShop').text($.cookie('mapRentShop'));
+        if($(this).attr('data-target') != 'all') { 
+            var areas = $.map($('area'),function(el) {
+                if($(this).attr('data-target') == $(el).attr('data-key')){
+                    return {
+                        fillColor: 'ff0000',
+                        stroke: false
+                    }
+                }
+            })
+            
+            $('#map').mapster({
+                areas: areas
+            })
+        }
+    })
 });
 
 $(function() {
@@ -221,6 +250,7 @@ function renderMap(fc) {
 
                 if(v.coords != null && v.coords != '' && v.remarkFirst == 1){
                     $('map').append('<area data-key="'+v.unitCode+'" alt="'+v.code+'" data-full="'+v.shopStatus+'" data-area="'+v.unitArea+'" data-shop-name="'+v.unitName+'" name="'+(v.remarkSecond || '')+'" href=\'javascript: JumpToShopList("'+v.code+'");\' shape="poly" coords="'+v.coords+'" />'); 
+                    $('#mapRentShop-select .dropdown-menu').append('<li><a href="javascript: void(0);" data-target="'+v.unitCode+'">'+v.unitName+'</a></li>');
                 }
             });
         }

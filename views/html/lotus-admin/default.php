@@ -39,28 +39,40 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <div class="box box-default" style="overflow: auto;">
                         <div class="box-body">
                             <div class="row">
-                                <div class="form-group">
-                                    <div class="c-content-panel">
-                                        <div class="c-body">
-                                            <div id="floorList" class="btn-group-vertical" style="position: absolute; top: 20px;right: 5%; z-index: 1;"></div>
-                                            <div style="position: absolute; top: 0;left: 0; background-color: #fff; z-index: 1;">
-                                                <h4>图例与占比</h4>
-                                                <div id="fmap" style="border: solid 1px #ccc;">
-                                                    <span style="margin-left: 5px; background-color: #e3efcf; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 已租 <span id="leasedArea"></span>m<sup>2</sup><span class="text-gray">(<span id="leased"></span>%)</span><br/>
-                                                    <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 其他 <span id="emptyArea"></span>m<sup>2</sup><span class="text-gray">(<span id="empty"></span>%)</span>
-                                                </div>
+                                <div class="c-content-panel">
+                                    <div class="c-body">
+                                        <div id="floorList" class="btn-group-vertical" style="position: absolute; top: 20px;right: 5%; z-index: 1;"></div>
+                                        <div style="position: absolute; top: 0;left: 0; background-color: #fff; z-index: 1;">
+                                            <h4>图例与占比</h4>
+                                            <div id="fmap" style="border: solid 1px #ccc;">
+                                                <span style="margin-left: 5px; background-color: #e3efcf; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 已租 <span id="leasedArea"></span>m<sup>2</sup><span class="text-gray">(<span id="leased"></span>%)</span><br/>
+                                                <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 其他 <span id="emptyArea"></span>m<sup>2</sup><span class="text-gray">(<span id="empty"></span>%)</span>
                                             </div>
-                                            <div style="position: absolute; bottom: 40px;right: 5%; z-index: 1;">
-                                                <button id="zoom_in" class="btn btn-xs btn-zoom">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                                <button id="zoom_out" class="btn btn-xs btn-zoom">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <img src="#" class="img-responsive" usemap="" id="map" />
-                                            <map name="" id=""></map>
                                         </div>
+                                        <div style="position: absolute; top: 100px;left: 0; background-color: #fff; z-index: 1;">
+                                            <ul class="nav navbar-nav">
+                                                <li class="dropdown" id="mapRentShop-select">
+                                                    <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
+                                                        <h4>铺位: <span id="mapRentShop"></span><b class="caret"></b></h4>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="javascript: void(0);" data-target="all">全部</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="position: absolute; bottom: 40px;right: 5%; z-index: 1;">
+                                            <button id="zoom_in" class="btn btn-xs btn-zoom">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                            <button id="zoom_out" class="btn btn-xs btn-zoom">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                        <img src="#" class="img-responsive" usemap="" id="map" />
+                                        <map name="" id=""></map>
                                     </div>
                                 </div>
                             </div>

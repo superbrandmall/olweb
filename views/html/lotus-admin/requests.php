@@ -28,14 +28,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2" id="formStatus" style="width: 100%">
                                     <option value="" selected>全部</option>
+                                    <option value="0">已终止</option>
                                     <option value="1">保存</option>
                                     <option value="2">提交</option>
+                                    <option value="3">驳回</option>
                                     <option value="4">未用印合同上传</option>
                                     <option value="5">租户用印合同上传</option>
-                                    <option value="6">双方用印合同上传</option>
+                                    <option value="6">财法合同审批</option>
+                                    <option value="7">双方用印合同上传</option>
                                     <option value="9">已完成</option>
-                                    <option value="3">驳回</option>
-                                    <option value="0">已终止</option>
+                                    <option value="10">关闭</option>
                                 </select>
                             </div>
                         </div>
