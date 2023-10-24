@@ -10,7 +10,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 
 <div class="content-wrapper">
     <section class="sub-header" style="height: 210px;">
-        <div class="left-link">
+        <div class="pull-left">
             <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: $('#investment-sign-request-todo').modal('toggle');">
                 <i class="fa fa-inbox"></i><span>草稿箱<span id="draftCount"></span></span>
             </a>

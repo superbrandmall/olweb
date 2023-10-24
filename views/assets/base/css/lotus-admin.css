@@ -141,17 +141,11 @@ label.error {
     top: 8px;
 }
 
-.sub-header .left-link {
-    position: absolute;
-    left: 40px;
-    top: 4px;
-}
-
-.sub-header .left-link i {
+.sub-header .pull-left i {
     margin-right: 5px;
 }
 
-.sub-header .left-link .btn:active {
+.sub-header .pull-left .btn:active {
   box-shadow: none;
   outline: none;
 }
@@ -162,7 +156,7 @@ label.error {
   background-color: transparent;
 }*/
 
-.sub-header .left-link a:active {
+.sub-header .pull-left a:active {
     box-shadow: none;
     outline: none;
 }

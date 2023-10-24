@@ -73,7 +73,24 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tenantPaymentTerm" class="col-md-4 control-label">支付条款</label>
+                                <div class="col-md-8 col-sm-12" id="tenantPaymentTerm" style="padding-top: 7px;"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tenantDepartment" class="col-md-4 control-label">项目</label>
+                                <div class="col-md-8 col-sm-12" id="tenantDepartment" style="padding-top: 7px;"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="tenantBankDummyAccount" class="col-md-4 control-label">虚拟账户</label>
+                                <div class="col-md-8 col-sm-12" id="tenantBankDummyAccount" style="padding-top: 7px;"></div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <div class="box-body">

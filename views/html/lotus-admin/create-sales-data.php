@@ -15,11 +15,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
             销售总金额: <h3 id="totalAmount"  style="display: inline; margin-right: 10px;">0.00</h3>
         </div>
         <section class="sub-header" style="position: absolute; margin-top: 50px; height: 50px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/sales-data-entries" class="btn btn-link"><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 销售数据录入单
             </h4>
             <div class="pull-right">
-                <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','tenants');">取消</a>
+                <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','sales-data-entries');">取消</a>
                 <button type="submit" class="btn btn-success btn-sm" id="submitForm"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
             </div>
         </section>

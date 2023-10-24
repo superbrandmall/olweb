@@ -1,4 +1,6 @@
 $(document).ready(function(){
+    findBankProvinceDropDown();
+    
     $('input.money').on('blur',function(){
         $(this).val(accounting.formatNumber($(this).val()));
     });
@@ -23,6 +25,22 @@ $(document).ready(function(){
             regAddress: {
                 required: true,
                 minlength: 4
+            },
+            bankName: {
+                required: true,
+                minlength: 4
+            },
+            bankAccount: {
+                required: true,
+                minlength: 16
+            },
+            bankProvince: {
+                required: true,
+                minlength: 1
+            },
+            bankCity: {
+                required: true,
+                minlength: 1
             }
         },
         messages: {
@@ -44,6 +62,22 @@ $(document).ready(function(){
             regAddress: {
                 required: "请输入注册地址",
                 minlength: "请输入正确注册地址"
+            },
+            bankName: {
+                required: "请输入银行名称",
+                minlength: "请输入正确银行名称"
+            },
+            bankAccount: {
+                required: "请输入银行账号",
+                minlength: "请输入正确银行账号"
+            },
+            bankProvince: {
+                required: "请选择省",
+                minlength: "请选择省"
+            },
+            bankCity: {
+                required: "请选择市",
+                minlength: "请选择市"
             }
         },
         errorPlacement: function(error, element) {
@@ -138,6 +172,10 @@ function addTenant() {
         var mail = $('#mail').val() || null;
         var phoneNum = $('#phoneNum').val() || null;
         var regAddress = $('#regAddress').val() || null;
+        var bankProvinceCode = $('#bankProvince').val() != '' ?  $('#bankProvince').val() : null;
+        var bankProvinceName = $('#bankProvince').val() != '' ?  $('#bankProvince').find('option:selected').text() : null;
+        var bankCityCode = $('#bankCity').val() != '' ?  $('#bankCity').val() : null;
+        var bankCityName = $('#bankCity').val() != '' ?  $('#bankCity').find('option:selected').text() : null;
         
         var contactList = [];
         var index;
@@ -170,7 +208,7 @@ function addTenant() {
             contactList.push(contact);
         })
 
-        if(name!= '' && type != '' && uscc != '' && regAddress != ''){
+        if(name!= '' && type != '' && uscc != '' && regAddress != '' && bankProvinceCode!= '' && bankProvinceName != null && bankCityCode != '' && bankCityName != null){
             var map = {
                 "tenantCode": tenantCode,
                 "creatorOpenId": openId,
@@ -192,7 +230,11 @@ function addTenant() {
                 "mail": mail,
                 "phoneNum": phoneNum,
                 "regAddress": regAddress,
-                "contactList": contactList
+                "contactList": contactList,
+                "bankProvinceCode": bankProvinceCode,
+                "bankProvinceName": bankProvinceName,
+                "bankCityCode": bankCityCode,
+                "bankCityName": bankCityName
             };
 
             $.ajax({
@@ -229,6 +271,74 @@ function addTenant() {
                     console.log(textStatus, errorThrown);
                 }
             });
+        }
+    })
+}
+
+function findBankProvinceDropDown() {
+    var map = {
+        "conditionGroups": [],
+        "params": [
+          {
+            "columnName": "state",
+            "columnPatten": "",
+            "conditionOperator": "AND",
+            "operator": "=",
+            "value": "1"
+          }
+        ]
+    }
+    
+    $.ajax({
+        url: $.api.baseSap+"/api/sap/bank/city/findAllByKVCondition?page=0&size=1000&sort=areaCode,asc",
+        type: "POST",
+        data: JSON.stringify(map),
+        async: true,
+        dataType: "json",
+        contentType: "application/json",
+        beforeSend: function(request) {
+            request.setRequestHeader("Login", $.cookie('login'));
+            request.setRequestHeader("Authorization", $.cookie('authorization'));
+            request.setRequestHeader("Lang", $.cookie('lang'));
+            request.setRequestHeader("Source", "onlineleasing");
+        },
+        success: function (response, status, xhr) {
+            if(response.code === 'C0') {
+                if(xhr.getResponseHeader("Login") !== null){
+                    $.cookie('login', xhr.getResponseHeader("Login"));
+                }
+                if(xhr.getResponseHeader("Authorization") !== null){
+                    $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                }
+                
+                if(response.data.content.length > 0){
+                    $('#bankProvince').html('<option value="">未选择</option>');
+                    var arr = response.data.content;
+                    var area = [];
+                    $.each(arr, function(i,v) {
+                        if($.inArray(v.areaCode,area) == -1){
+                            area.push(v.areaCode);
+                            $('#bankProvince').append('<option value="'+v.areaCode+'">'+v.areaName+'</option>');
+                        }
+                    })
+                    
+                    $("#bankProvince").on('change',function(){
+                        renderBankCityDropDown(JSON.stringify(arr));
+                    })
+                }
+            } else {
+                alertMsg(response.code,response.customerMessage);
+            }                               
+        }
+    });
+}
+
+function renderBankCityDropDown(pc) {
+    var arr = JSON.parse(pc);
+    $('#bankCity').html('<option value="">未选择</option>');
+    $.each(arr, function(i,v) {
+        if($("#bankProvince").val() == v.areaCode){
+            $('#bankCity').append('<option value="'+v.cityCode+'">'+v.cityName+'</option>');
         }
     })
 }

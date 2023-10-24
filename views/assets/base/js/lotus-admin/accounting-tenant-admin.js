@@ -237,16 +237,16 @@ function findTenantByKVCondition(p,c) {
                             <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><input type="checkbox" class="me-1" value="'+v.messIdOs+'"'+checked+'></td>\n\
                             <td><a href=\'javascript:void(0);\' onclick=\'javascript: getTenantDetail("'+v.messIdOs+'")\'>'+v.tenantName+'['+v.tenantNo+']</a></td>\n\
                             <td>'+v.messIdOs+'</td>\n\
-                            <td>'+(v.postCode || '')+'</td>\n\
-                            <td>'+(v.paymentMethod || '')+'</td>\n\
+                            <td>'+(v.postCode || '--')+'</td>\n\
+                            <td>'+(v.paymentMethod || '--')+'</td>\n\
                             <td>'+v.countryCode+'</td>\n\
                             <td>'+v.companyCode+'</td>\n\
                             <td>'+v.uscc+'</td>\n\
-                            <td>'+v.accountGroup+'</td>\n\
-                            <td>'+(v.cityCode || '')+'</td>\n\
-                            <td>'+(v.regAddress || '')+'</td>\n\
-                            <td>'+(v.language || '')+'</td>\n\
-                            <td>'+(v.apSubjectTenant || '')+'</td>\n\
+                            <td>'+(v.accountGroup || '--')+'</td>\n\
+                            <td>'+(v.cityCode || '--')+'</td>\n\
+                            <td>'+(v.regAddress || '--')+'</td>\n\
+                            <td>'+(v.language || '--')+'</td>\n\
+                            <td>'+(v.apSubjectTenant || '--')+'</td>\n\
                             <td>'+v.created+'['+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
                             <td>'+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
                         </tr>');
@@ -332,13 +332,27 @@ function getTenantDetail(messIdOs){
             $('#tenantUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
             $('#tenantMessIdOs').text(v.messIdOs);
             $('#tenantName').text(v.tenantName+'['+v.tenantNo+']').attr('title',v.tenantName+'['+v.tenantNo+']');
-            $('#tenantShortName').text(v.shortName).attr('title',v.shortName);
-            $('#tenantUSCC').text(v.uscc);
-            $('#tenantRegAddress').text(v.regAddress).attr('title',v.regAddress);
-            $('#tenantPhone').text(v.phone);
-            $('#tenantPostCode').text(v.postCode);
-            $('#tenantCityCode').text(v.cityCode);
-            $('#tenantAccountGroup').text(v.accountGroup);
+            $('#tenantShortName').text(v.shortName || '--').attr('title',v.shortName);
+            $('#tenantUSCC').text(v.uscc || '--');
+            $('#tenantRegAddress').text(v.regAddress || '--').attr('title',v.regAddress);
+            $('#tenantPhone').text(v.phone || '--');
+            $('#tenantPostCode').text(v.postCode || '--');
+            $('#tenantCityCode').text(v.cityCode || '--');
+            $('#tenantAccountGroup').text(v.accountGroup || '--');
+            $('#tenantPaymentTerm').text(v.paymentTerm == 'Z001' ? '一天之内' : (v.paymentTerm || '--'));
+            
+            if(sessionStorage.getItem("lotus_malls") && sessionStorage.getItem("lotus_malls") != null && sessionStorage.getItem("lotus_malls") != '') {
+                var malls = $.parseJSON(sessionStorage.getItem("lotus_malls"));
+                var mallName = '';
+                $.each(malls, function(j,w) {
+                    if(v.mallCode == w.code){
+                        mallName = w.mallName;
+                        return false;
+                    }
+                })
+            }
+            $('#tenantDepartment').text(mallName + '[' + (v.mallCode || v.companyCode) + ']');
+            $('#tenantBankDummyAccount').text(v.bankDummyAccount || '--');
             
             $('#bankList tbody').html('');
             if(v.bankList.length > 0){
@@ -446,11 +460,11 @@ function updateRowSapTenantBankItem(v) {
     column5.appendChild(div);
     
     var div = document.createElement("div");
-    div.innerText = value.groupCode;
+    div.innerText = (value.groupCode || '--');
     column6.appendChild(div);
     
     var div = document.createElement("div");
-    div.innerText = value.provinceCity;
+    div.innerText = (value.provinceCity || '--');
     column7.appendChild(div);
     
     var div = document.createElement("div");

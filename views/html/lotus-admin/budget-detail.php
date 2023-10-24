@@ -22,6 +22,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper budget-detail">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/leasing-budget" class="btn btn-link"><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 <span class="badge badge-success" id="budgetStatus" style="vertical-align: top;"></span> 租金计划: <b><b id="unitName"></b>[<b id="unitCode"></b>]</b>
             </h4>

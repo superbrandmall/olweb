@@ -13,6 +13,12 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 }
 ?>
 
+<style>
+    #mapRentShop-select .dropdown-menu > li > a {
+        padding: 2px 12px;
+    }
+</style>
+
 <?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
@@ -49,7 +55,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 其他 <span id="emptyArea"></span>m<sup>2</sup><span class="text-gray">(<span id="empty"></span>%)</span>
                                             </div>
                                         </div>
-                                        <div style="position: absolute; top: 100px;left: 0; background-color: #fff; z-index: 1;">
+                                        <div style="position: absolute; top: 100px;left: 0; background-color: #fff; z-index: 2;">
                                             <ul class="nav navbar-nav">
                                                 <li class="dropdown" id="mapRentShop-select">
                                                     <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
@@ -58,6 +64,23 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                     <ul class="dropdown-menu">
                                                         <li>
                                                             <a href="javascript: void(0);" data-target="all">全部</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div style="position: absolute; top: 150px;left: 0; background-color: #fff; z-index: 1;">
+                                            <ul class="nav navbar-nav">
+                                                <li class="dropdown" id="mapRentBrand-select">
+                                                    <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
+                                                        <h4>品牌: <span id="mapRentBrand"></span><b class="caret"></b></h4>
+                                                    </a>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a href="javascript: void(0);" data-target="showBrands">显示</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript: void(0);" data-target="hideBrands">不显示</a>
                                                         </li>
                                                     </ul>
                                                 </li>

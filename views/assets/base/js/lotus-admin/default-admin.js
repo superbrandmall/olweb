@@ -7,6 +7,11 @@ var date = d.getFullYear() + '-' +
     (day<10 ? '0' : '') + day;
 var deFC = '';
 
+$.mapRent = {
+    shop: 'all',
+    brand: 'showBrands'
+}
+
 $(document).ready(function(){
     if(!sessionStorage.getItem("floors-"+getURLParameter('id')) || sessionStorage.getItem("floors-"+getURLParameter('id')) == null || sessionStorage.getItem("floors-"+getURLParameter('id')) == '') {
         getFloors();
@@ -53,33 +58,10 @@ $(document).ready(function(){
         }
     });
     
-    if($.cookie('mapRentShop') && $.cookie('mapRentShop') != ''){
-        $('#mapRentShop').text($.cookie('mapRentShop'));
-    } else {
-        $('#mapRentShop-select ul li').each(function(i,elem){
-            $('#mapRentShop').text($(elem).find('a').text());
-            $.cookie('mapRentShop',$(elem).find('a').text());
-            return false;
-        })
-    }
-    
-    $('#mapRentShop-select .dropdown-menu a').click(function(){
-        $.cookie('mapRentShop',$(this).text());
-        $('#mapRentShop').text($.cookie('mapRentShop'));
-        if($(this).attr('data-target') != 'all') { 
-            var areas = $.map($('area'),function(el) {
-                if($(this).attr('data-target') == $(el).attr('data-key')){
-                    return {
-                        fillColor: 'ff0000',
-                        stroke: false
-                    }
-                }
-            })
-            
-            $('#map').mapster({
-                areas: areas
-            })
-        }
+    $('#mapRentBrand-select ul li a').click(function(){
+        $.mapRent.brand = $(this).attr('data-target');
+        $('#mapRentBrand').text($(this).text());
+        addTextLayer();
     })
 });
 
@@ -265,6 +247,39 @@ function renderMap(fc) {
         $('#empty').text(Math.round(100-$('#leased').text()-$('#to_be_lease').text()-$('#renovation').text()));
 
         drawShops();
+        
+        $('#mapRentShop-select ul li a').click(function(){
+            $.mapRent.shop = $(this).text();
+            $('#mapRentShop').text($.mapRent.shop);
+            var target = $(this).attr('data-target');
+            if(target != 'all') { 
+                var areas = $.map($('area'),function(el) {
+                    if(target == $(el).attr('data-key')){
+                        return {
+                            key: $(el).attr('data-key'),
+                            fillColor: 'ff0000',
+                            stroke: false,
+                            selected: true
+                        };
+                    } else {
+                        return {
+                            key: $(el).attr('data-key'),
+                            fillColor: 'ffffff',
+                            stroke: false,
+                            selected: true
+                        };
+                    }
+                })
+
+                $('#map').mapster({
+                    clickNavigate: true,
+                    mapKey: 'data-key',
+                    areas:  areas
+                });
+            } else {
+                drawShops();
+            }
+        })
     }, 500);
 }
     
@@ -364,13 +379,18 @@ function addTextLayer(){
                 if($(this).attr('data-full') == 0 || $(this).attr('data-full') == 2){
                     shopName = $(this).attr('data-shop-name');
                     area = $(this).attr('data-area');
-                    brand = $(this).attr('name');
-                    if(brand.length > 10){
-                        brand = brand.substring(0,10) + "...";
-                    }
                     
+                    if($.mapRent.brand == 'showBrands'){
+                        brand = $(this).attr('name')+'<br>';
+                        if(brand.length > 10){
+                            brand = brand.substring(0,10) + "...<br>";
+                        }
+                    } else {
+                        brand = '';
+                    }
+
                     $(this).after(
-                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+brand+'<br>'+shopName+'<br>('+area+')</span>'
+                        '<span style="position:absolute;line-height:1;text-align:center;cursor:pointer;" onclick=\'javascript: GetShopInfo("'+$(this).attr('alt')+'");\'>'+brand+shopName+'<br>('+area+')</span>'
                     );
                 } else if($(this).attr('data-full') == 'ad') {
                     shopName = $(this).attr('data-shop-name');

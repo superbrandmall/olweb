@@ -136,17 +136,32 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankName" class="col-md-4 control-label">银行名称</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label for="bankName" class="col-md-4 control-label">银行名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="bankName" name="bankName" />
+                                            <div id="errorcontainer-bankName" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankAccount" class="col-md-4 control-label">银行账号</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label for="bankAccount" class="col-md-4 control-label">银行账号 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="bankAccount" name="bankAccount" />
+                                            <div id="errorcontainer-bankAccount" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bankProvince" class="col-md-4 control-label">银行省市 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-5 col-sm-12 required" style="text-align: left; padding-right: 0px;">
+                                            <select class="select2" id="bankProvince" name="bankProvince" style="width: 100%"></select>
+                                            <div id="errorcontainer-bankProvince" class="errorDiv"></div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12 required" style="text-align: left; padding-left: 2px;">
+                                            <select class="select2" id="bankCity" name="bankCity" style="width: 100%"></select>
+                                            <div id="errorcontainer-bankCity" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>

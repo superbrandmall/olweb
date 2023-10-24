@@ -11,6 +11,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper tenant-detail">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/tenants" class="btn btn-link"><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 <span class="badge badge-success" id="state" style="vertical-align: top;"></span> <b id="tenantName"></b>[<b id="tenantCode2"></b>]
             </h4>
@@ -29,9 +32,19 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <li><a href="#tenantUpload">附件</a></li>
                 </ul>
             </div>
+            <div class="box-header" style="background-color: #ecf0f5; margin-top: -6px; height: 50px;">
+                <div class="pull-left">
+                    <ol id="tenantNav" class="breadcrumb" style="margin-bottom: 0; padding-left: 0;">
+                        <li class="active"><a href="javascript: void(0);">基本资料</a></li>
+                    </ol>
+                </div>
+                <div class="pull-right">
+                    <p id="tenantUpdated" class="text-gray" style="font-size: 13px; margin: 10px 0;"></p>
+                </div>
+            </div>
         </section>
 
-        <section class="content" style="margin-top: 140px;">
+        <section class="content" style="margin-top: 179px;">
             <div id="webui">
                 <div class="row">
                     <div class="col-md-12">
@@ -137,17 +150,32 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankName" class="col-md-4 control-label">银行名称</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label for="bankName" class="col-md-4 control-label">银行名称 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="bankName" name="bankName" />
+                                            <div id="errorcontainer-bankName" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="bankAccount" class="col-md-4 control-label">银行账号</label>
-                                        <div class="col-md-8 col-sm-12">
+                                        <label for="bankAccount" class="col-md-4 control-label">银行账号 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-8 col-sm-12 required">
                                             <input class="form-control" type="text" id="bankAccount" name="bankAccount" />
+                                            <div id="errorcontainer-bankAccount" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="bankProvince" class="col-md-4 control-label">银行省市 <span class="btn-box-tool-lg">*</span></label>
+                                        <div class="col-md-5 col-sm-12 required" style="text-align: left; padding-right: 0px;">
+                                            <select class="select2" id="bankProvince" name="bankProvince" style="width: 100%"></select>
+                                            <div id="errorcontainer-bankProvince" class="errorDiv"></div>
+                                        </div>
+                                        <div class="col-md-3 col-sm-12 required" style="text-align: left; padding-left: 2px;">
+                                            <select class="select2" id="bankCity" name="bankCity" style="width: 100%"></select>
+                                            <div id="errorcontainer-bankCity" class="errorDiv"></div>
                                         </div>
                                     </div>
                                 </div>
