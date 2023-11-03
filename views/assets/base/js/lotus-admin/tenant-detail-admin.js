@@ -9,10 +9,6 @@ $(document).ready(function(){
     
     $("#create-form").validate({
         rules: {
-            tenantCode: {
-                required: true,
-                minlength: 4
-            },
             name: {
                 required: true,
                 minlength: 2
@@ -47,10 +43,6 @@ $(document).ready(function(){
             }
         },
         messages: {
-            tenantCode: {
-                required: "商户编码缺失",
-                minlength: "商户编码长度不够"
-            },
             name: {
                 required: "请输入商户名称",
                 minlength: "请输入完整商户名称"
@@ -191,7 +183,6 @@ function saveTenant() {
         } else {
             $.tenant.capital = null;
         }
-        $.tenant.tenantCode = $('#tenantCode').val();
         $.tenant.name = $('#name').val() || null;
         $.tenant.type = $('#type').val() || null;
         $.tenant.businessScope = $('#businessScope').val() || null;
@@ -244,7 +235,7 @@ function saveTenant() {
         
         $.tenant.contactList = contactList;
         
-        if($.tenant.tenantCode != '' && $.tenant.name!= '' && $.tenant.type != '' && $.tenant.uscc != '' && $.tenant.regAddress != '' && $.tenant.bankProvinceCode!= '' && $.tenant.bankProvinceName != null && $.tenant.bankCityCode != '' && $.tenant.bankCityName != null){
+        if($.tenant.name!= '' && $.tenant.type != '' && $.tenant.uscc != '' && $.tenant.regAddress != '' && $.tenant.bankProvinceCode!= '' && $.tenant.bankProvinceName != null && $.tenant.bankCityCode != '' && $.tenant.bankCityName != null){
             $.ajax({
                 url: $.api.baseLotus+"/api/tenant/lotus/saveOrUpdate",
                 type: "POST",

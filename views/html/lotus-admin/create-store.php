@@ -70,10 +70,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitType" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="unitType1" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2" id="unitType" name="unitType" style="width: 100%"></select>
-                                            <div id="errorcontainer-unitType" class="errorDiv"></div>
+                                            <select class="select2" id="unitType1" name="unitType1" style="width: 100%"></select>
+                                            <div id="errorcontainer-unitType1" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -156,6 +156,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
+                                        <label for="selectStore" class="col-md-4 control-label">来源铺位</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="selectStore" style="width: 100%"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
                                         <label for="modality_1" class="col-md-4 control-label">一级业态 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
                                             <select class="select2" id="modality_1" name="modality_1" style="width: 100%">
@@ -229,9 +237,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="networkFlag" class="col-md-4 control-label">是否通煤气</label>
+                                        <label for="gasFlag" class="col-md-4 control-label">是否通煤气</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%" disabled>
+                                            <select class="select2" id="gasFlag" name="gasFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>

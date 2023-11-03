@@ -1,11 +1,19 @@
 $(document).ready(function(){    
+    var auth = 0;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_ENGINEERING'){
+            auth = 1;
+            return false;
+        }
+    })
+    
     $("#create-form").validate({
         rules: {
             unitName: {
                 required: true,
                 minlength: 2
             },
-            unitType: {
+            unitType1: {
                 required: true
             },
             mallCode: {
@@ -39,7 +47,7 @@ $(document).ready(function(){
                 required: "请输入门牌号",
                 minlength: "请输入完整门牌号"
             },
-            unitType: {
+            unitType1: {
                 required: "请选择铺位类型"
             },
             mallCode: {
@@ -72,17 +80,20 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            saveStore();
+            if(auth == 1){
+                saveStore();
+            }
         }
     });
     
     
-    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '未选择', '');
+    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType1', '未选择', '');
     updateUserDropDown(20);
     $("#mallCode").val(null).trigger('change');
     
     $("#mallCode").on('change',function(){
         findFloorDropDownByMallCode($('#mallCode').val());
+        updateSelectStoreDropDownByMallCode(10,$('#mallCode').val());
     })
     
     $('.date-picker, .input-daterange').datepicker({
@@ -159,6 +170,16 @@ function saveStore() {
                 return false;
             }
         })
+        
+        var shopState = 1;
+        if(dateCompare($('#endDate').val(),date) == 'smaller'){
+            shopState = 0;
+        }
+        
+        var unitParent = null;
+        if($('#selectStore').val() != null && $('#selectStore').val() != ''){
+            unitParent = $('#selectStore').find('option:selected').val().split(':::')[2]+':::'+$('#selectStore').find('option:selected').val().split(':::')[0]+':::'+$('#selectStore').find('option:selected').text().split(' | ')[1]+':::'+$('#selectStore').find('option:selected').val().split(':::')[1];
+        }
 
         var map = {
             "abcRent": null,
@@ -175,12 +196,13 @@ function saveStore() {
             "modality1": $('#modality_1').val(),
             "modality2": $('#modality_2').val(),
             "shopStatus": 1,
-            "shopState": 1,
+            "shopState": shopState,
             "state": 1,
             "startDate": $('#startDate').val(),
             "unitDesc": $('#remark').val(),
             "unitName": $('#unitName').val(),
-            "unitType": $('#unitType').val(),
+            "unitType": $('#unitType1').val(),
+            "unitParent": unitParent,
             "updateOpenId": openId
         };
 

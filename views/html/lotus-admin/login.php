@@ -82,12 +82,12 @@
                             招商管理系统
                         </div>
                         <div class="col-xs-4 text-center" style="margin-bottom: 10px;">
-                            <img src="/views/assets/base/img/content/kow-admin/kow.png" width="50"><br>
-                             快闪项目管理系统
+                            <img src="/views/assets/base/img/content/lotus-admin/lotus2.png" width="50"><br>
+                            物业水电管理系统
                         </div>
                         <div class="col-xs-4 text-center" style="margin-bottom: 10px;">
                             <img src="/views/assets/base/img/content/backgrounds/oll-app.png" width="50"><br>
-                            OLL线上招商
+                            OLL线上租
                         </div>
                     </div>
                 </div>

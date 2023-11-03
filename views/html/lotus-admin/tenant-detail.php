@@ -59,10 +59,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="tenantCode" class="col-md-4 control-label">商户编码 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="tenantCode" class="col-md-4 control-label">商户编码</label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <input class="form-control" type="text" id="tenantCode" name="tenantCode" placeholder="请填入原招商系统中的商户编码">
-                                            <div id="errorcontainer-tenantCode" class="errorDiv"></div>
+                                            <input class="form-control" type="text" id="tenantCode" name="tenantCode" readonly>
                                         </div>
                                     </div>
                                     <div class="form-group">

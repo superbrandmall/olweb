@@ -1,13 +1,22 @@
 $.store = '';
 
-$(document).ready(function(){    
+$(document).ready(function(){
+    var auth = 0;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_ENGINEERING'){
+            auth = 1;
+            $('#saveDraft').show();
+            return false;
+        }
+    })
+    
     $("#create-form").validate({
         rules: {
             unitName: {
                 required: true,
                 minlength: 2
             },
-            unitType: {
+            unitType1: {
                 required: true
             },
             mallCode: {
@@ -41,7 +50,7 @@ $(document).ready(function(){
                 required: "请输入门牌号",
                 minlength: "请输入完整门牌号"
             },
-            unitType: {
+            unitType1: {
                 required: "请选择铺位类型"
             },
             mallCode: {
@@ -74,16 +83,19 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
-            saveStore();
+            if(auth == 1){
+                saveStore();
+            }
         }
     });
     
-    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType', '', '');
+    updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType1', '', '');
     updateUserDropDown(20);
     $("#mallCode").val(null).trigger('change');
     
     $("#mallCode").on('change',function(){
         findFloorDropDownByMallCode($('#mallCode').val());
+        updateSelectStoreDropDownByMallCode(10,$('#mallCode').val());
     })
     
     $('.date-picker, .input-daterange').datepicker({
@@ -141,15 +153,27 @@ function findStoreByCode() {
                 
                 if(response.data != null && response.data != ''){
                     $.store = response.data;
-                    $('#state').text(response.data.remarkFirst == 1 ? '使用中' : '已删除');
+                    if(response.data.remarkFirst == 1 ){
+                        $('#state').text('使用中');
+                    } else {
+                        $('#state').removeClass('badge-success').addClass('badge-danger').text('已删除');
+                    }
                     $('#shopStatus').text(response.data.shopStatus == 1 ? '空闲' : '租用');
                     $('#name2').text(response.data.unitName+'['+response.data.unitCode+']');
                     
                     $('#unitCode').val(response.data.unitCode);
                     $('#unitName').val(response.data.unitName);
                     $('#remark').val(response.data.unitDesc);
-                    updateDictByDictTypeCodeAndVal('UNIT_TYPE', 'unitType', response.data.unitType);
+                    updateDictByDictTypeCodeAndVal('UNIT_TYPE', 'unitType1', response.data.unitType);
                     $('#mallCode').val(response.data.mallCode).trigger('change');
+
+                    updateSelectStoreDropDownByMallCode(10,response.data.mallCode);
+                    if(response.data.remarkThird != null && response.data.remarkThird != ''){
+                        var temp = response.data.remarkThird;
+                        var unitParent = new Option((temp.split(':::')[0] +'['+ temp.split(':::')[1] +'] | '+ temp.split(':::')[2]), temp.split(':::')[1]+':::'+temp.split(':::')[3]+':::'+temp.split(':::')[0]+':::'+response.data.floorName+':::'+response.data.floorCode, true, true);
+                        $('#selectStore').append(unitParent).trigger('change');
+                    }
+                    
                     $('#modality_1').val(response.data.modality1).trigger('change');
                     if(response.data.modality2 != null && response.data.modality2 != ''){
                         var modality_2 = new Option(response.data.modality2, response.data.modality2, true, true);
@@ -236,6 +260,16 @@ function saveStore() {
                 return false;
             }
         })
+        
+        var shopState = 1;
+        if(dateCompare($('#endDate').val(),date) == 'smaller'){
+            shopState = 0;
+        } 
+                                
+        var unitParent = null;
+        if($('#selectStore').val() != null && $('#selectStore').val() != ''){
+            unitParent = $('#selectStore').find('option:selected').val().split(':::')[2]+':::'+$('#selectStore').find('option:selected').val().split(':::')[0]+':::'+$('#selectStore').find('option:selected').text().split(' | ')[1]+':::'+$('#selectStore').find('option:selected').val().split(':::')[1];
+        }
 
         var map = {
             "abcRent": $.store.abcRent,
@@ -257,12 +291,14 @@ function saveStore() {
             "modality2": $('#modality_2').val(),
             "mulitPathFlag": $.store.mulitPathFlag,
             "shopStatus": $.store.shopStatus,
+            "shopState": shopState,
             "startDate": $('#startDate').val(),
             "unitCode": $.store.unitCode,
             "unitDesc": $('#remark').val(),
             "unitName": $('#unitName').val(),
             "unitSize": $.store.unitSize,
-            "unitType": $('#unitType').val(),
+            "unitType": $('#unitType1').val(),
+            "unitParent": unitParent,
             "updateOpenId": openId
         };
 

@@ -65,9 +65,9 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
                     <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/tenant-history') { echo 'active'; }?>">
                         <a href="/lotus-admin/tenants?items=20">商户</a>
                     </li>
-                    <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
+                    <!--<li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-change') { echo 'active'; }?>">
                         <a href="/lotus-admin/store-change">铺位变更单</a>
-                    </li>
+                    </li>-->
                 </ul>
             </li>
             <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console' || $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail') { echo 'active'; }?>">

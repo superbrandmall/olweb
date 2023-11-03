@@ -18,12 +18,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 <div class="content-wrapper store-detail">
     <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
         <section class="sub-header" style="height: 90px;">
+            <div class="pull-left">
+                <a href="/lotus-admin/stores" class="btn btn-link"><i class="fa fa-angle-left"></i> 返回列表</a>
+            </div>
             <h4>
                 <span class="badge badge-info" id="shopStatus" style="vertical-align: top;"></span> <span class="badge badge-success" id="state" style="vertical-align: top;"></span> <b id="name2"></b>
             </h4>
             <div class="pull-right">
                 <a class="btn btn-link text-left" href="javascript:void(0);" onclick="javascript: confirmCancel('<i class=\'fa fa-question-circle\'></i> 确定要取消吗?','stores');">取消</a>
-                <button type="submit" class="btn btn-success btn-sm" id="saveDraft"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
+                <button type="submit" class="btn btn-success btn-sm" id="saveDraft" style="display: none;"><i class="fa fa-check icon-white"></i> <span class="hidden-xs">提交保存</span></button>
             </div>
             <div class="box-header" id="navbarTop" style="height: 53px;">
                 <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
@@ -110,10 +113,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="unitType" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
+                                        <label for="unitType1" class="col-md-4 control-label">类型 <span class="btn-box-tool-lg">*</span></label>
                                         <div class="col-md-8 col-sm-12 required">
-                                            <select class="select2" id="unitType" name="unitType" style="width: 100%"></select>
-                                            <div id="errorcontainer-unitType" class="errorDiv"></div>
+                                            <select class="select2" id="unitType1" name="unitType1" style="width: 100%"></select>
+                                            <div id="errorcontainer-unitType1" class="errorDiv"></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -173,6 +176,14 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 <span class="input-group-addon" style="border-left: none; background: transparent;">m<sup>2</sup></span>
                                             </div>
                                              <div id="errorcontainer-unitArea" class="errorDiv"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="selectStore" class="col-md-4 control-label">来源铺位</label>
+                                        <div class="col-md-8 col-sm-12">
+                                            <select class="select2" id="selectStore" style="width: 100%"></select>
                                         </div>
                                     </div>
                                 </div>
@@ -251,9 +262,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="networkFlag" class="col-md-4 control-label">是否通煤气</label>
+                                        <label for="gasFlag" class="col-md-4 control-label">是否通煤气</label>
                                         <div class="col-md-8 col-sm-12">
-                                            <select class="select2" id="networkFlag" name="networkFlag" style="width: 100%" disabled>
+                                            <select class="select2" id="gasFlag" name="gasFlag" style="width: 100%" disabled>
                                                 <option value="">未选择</option>
                                                 <option value="1">是</option>
                                                 <option value="0">否</option>

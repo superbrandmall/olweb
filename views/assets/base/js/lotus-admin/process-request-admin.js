@@ -141,10 +141,12 @@ function findSignRequestByBizId() {
                         $('#saveDraft').hide();
                         $('#submitForm').hide();
                         
-                        if($.request.content.formStatus == '4' || $.request.content.formStatus == '5' || $.request.content.formStatus == '6'){
-                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
-                        } else if($.request.content.formStatus == '9'){
-                            $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                        if($.request.content.formStatus == '9'){
+                            if($.request.content.applyTypeCode == 5){
+                                $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/seal_completed.png) 0 100%/112px auto no-repeat');
+                            } else {
+                                $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_completed.png) 0 100%/112px auto no-repeat');
+                            }
                         } else if($.request.content.formStatus == '10'){
                             $('#create-form .sub-header').css('background','#fff url(/views/assets/base/img/content/lotus-admin/approval_closed.png) 0 100%/112px auto no-repeat');
                         }

@@ -12,6 +12,15 @@ $(document).ready(function(){
         },1000);
     }
     
+    var auth = 0;
+    $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+        if(v.moduleCode == 'IT_ADMIN' || v.moduleCode == 'LOTUS_ENGINEERING'){
+            auth = 1;
+            $('#saveDraft').show();
+            return false;
+        }
+    })
+    
     if($.cookie('searchUnit') != ''){
         $('#unit').val($.cookie('searchUnit'));
     }

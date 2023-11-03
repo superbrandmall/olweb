@@ -133,38 +133,38 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="box-body">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">流程名称</label>
-                                        <b class="col-md-6 col-sm-12 control-label" id="processName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></b>
+                                        <label class="col-md-4 control-label">流程名称</label>
+                                        <b class="col-md-8 col-sm-12 control-label" id="processName" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"></b>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">当前状态</label>
-                                        <div class="col-md-6 col-sm-12 control-label" id="processInstStatus"></div>
+                                        <label class="col-md-4 control-label">当前状态</label>
+                                        <div class="col-md-8 col-sm-12 control-label" id="processInstStatus"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">发起人</label>
-                                        <b class="col-md-6 col-sm-12 control-label" id="creatorName"></b>
+                                        <label class="col-md-4 control-label">发起人</label>
+                                        <b class="col-md-8 col-sm-12 control-label" id="creatorName"></b>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">发起时间</label>
-                                        <div class="col-md-6 col-sm-12 control-label" id="created"></div>
+                                        <label class="col-md-4 control-label">发起时间</label>
+                                        <div class="col-md-8 col-sm-12 control-label" id="created"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">最后操作时间</label>
-                                        <div class="col-md-6 col-sm-12 control-label" id="updated"></div>
+                                        <label class="col-md-4 control-label">最后操作时间</label>
+                                        <div class="col-md-8 col-sm-12 control-label" id="updated"></div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="col-md-6 control-label">流程分类</label>
-                                        <div class="col-md-6 col-sm-12 control-label" id="bizType"></div>
+                                        <label class="col-md-4 control-label">流程分类</label>
+                                        <div class="col-md-8 col-sm-12 control-label" id="bizType"></div>
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +277,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             </div>
                         </div>
                         
-                        <div class="box box-default" id="processFiles">    
+                        <div class="box box-default" id="processFiles" style="display: none;">    
                             <div class="box-header with-border">
                                 <h3 class="box-title">上传附件</h3>
                                 <div class="box-tools">

@@ -7,9 +7,6 @@ $(document).ready(function(){
     
     $("#create-form").validate({
         rules: {
-            tenantCode: {
-                minlength: 4
-            },
             name: {
                 required: true,
                 minlength: 2
@@ -44,9 +41,6 @@ $(document).ready(function(){
             }
         },
         messages: {
-            tenantCode: {
-                minlength: "商户编码长度不够"
-            },
             name: {
                 required: "请输入商户名称",
                 minlength: "请输入完整商户名称"
@@ -95,11 +89,6 @@ function checkTenantName(name) {
         "columnPatten": "",
         "operator": "AND",
         "value": name
-    },{
-        "columnName": "tenantCode",
-        "columnPatten": "",
-        "operator": "AND",
-        "value": $('#tenantCode').val()
     },{
         "columnName": "uscc",
         "columnPatten": "",
@@ -153,7 +142,6 @@ function addTenant() {
             }
         })
         
-        var tenantCode = $('#tenantCode').val();
         var name = $('#name').val();
         var type = $('#type').val();
         var capital;
@@ -210,7 +198,7 @@ function addTenant() {
 
         if(name!= '' && type != '' && uscc != '' && regAddress != '' && bankProvinceCode!= '' && bankProvinceName != null && bankCityCode != '' && bankCityName != null){
             var map = {
-                "tenantCode": tenantCode,
+                "tenantCode": null,
                 "creatorOpenId": openId,
                 "updateOpenId": openId,
                 "businessScope": businessScope,
