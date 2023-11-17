@@ -152,13 +152,20 @@ function findRequestByBizId() {
                     var totalTaxAmount = 0;
                     if(data.fixedRentList.length > 0){
                         if(data.formType == 'modify'){
-                            rentalFloorTaxEffect = data.dayRent || '/';
+                            rentalFloorTaxEffect = data.dayRent || '--';
                             $('#rentalFloorTaxEffect').text(accounting.formatNumber(rentalFloorTaxEffect));
                             rentalFloorEffect = Math.round(numberWithoutCommas(rentalFloorTaxEffect) * (1 + data.fixedRentList[fixedRentListIndex].taxRate) * 100) / 100;
                             $('#rentalFloorEffect').text(accounting.formatNumber(rentalFloorEffect));
-                            var fixedRentTaxAmount = data.firstYearRentFee || '/';
+                            var fixedRentTaxAmount = '--', fixedRentAmount = '--';
+                            $.each(data.rentCalcList, function(i,v) {
+                                if(dateCompare(v.startDate,data.awardDate) == 'larger') {
+                                    fixedRentTaxAmount = v.taxAmount;
+                                    fixedRentAmount = v.amount;
+                                    return false;
+                                }
+                            })
+
                             $('#fixedRentTaxAmount').html(accounting.formatNumber(fixedRentTaxAmount));
-                            var fixedRentAmount = Math.round(numberWithoutCommas(fixedRentTaxAmount) * (1 + data.fixedRentList[fixedRentListIndex].taxRate) * 100) / 100;
                             $('#fixedRentAmount').html(accounting.formatNumber(fixedRentAmount));
                             totalAmount += fixedRentAmount;
                             totalTaxAmount += fixedRentTaxAmount;
@@ -178,19 +185,26 @@ function findRequestByBizId() {
                     //日租金坪效（元/m²/天）= 日租金坪效含税 / 1.09
 
                     if(data.propertyFeeList.length > 0){
-//                            if(data.formType == 'modify'){
-//                                var propertyMgmtTaxAmount = (data.propertyManageFee * data.area).toFixed(2);
-//                                $('#propertyMgmtTaxAmount').html(accounting.formatNumber(propertyMgmtTaxAmount));
-//                                var propertyMgmtAmount = Math.round(numberWithoutCommas(propertyMgmtTaxAmount) * (1 + data.propertyFeeList[propertyFeeListIndex].taxRate) * 100) / 100;
-//                                $('#propertyMgmtAmount').html(accounting.formatNumber(propertyMgmtAmount));
-//                                totalAmount += propertyMgmtAmount;
-//                                totalTaxAmount += propertyMgmtTaxAmount;
-//                            } else {
+                        if(data.formType == 'modify'){
+                            var propertyMgmtTaxAmount = '--', propertyMgmtAmount = '--';
+                            $.each(data.propertyCalcList, function(i,v) {
+                                if(dateCompare(v.startDate,data.awardDate) == 'larger') {
+                                    propertyMgmtTaxAmount = v.taxAmount;
+                                    propertyMgmtAmount = v.amount;
+                                    return false;
+                                }
+                            })
+                            
+                            $('#propertyMgmtTaxAmount').html(accounting.formatNumber(propertyMgmtTaxAmount));
+                            $('#propertyMgmtAmount').html(accounting.formatNumber(propertyMgmtAmount));
+                            totalAmount += propertyMgmtAmount;
+                            totalTaxAmount += propertyMgmtTaxAmount;
+                        } else {
                             $('#propertyMgmtTaxAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].taxAmount));
                             $('#propertyMgmtAmount').html(accounting.formatNumber(data.propertyFeeList[propertyFeeListIndex].amount));
                             totalAmount += data.propertyFeeList[propertyFeeListIndex].amount;
                             totalTaxAmount += data.propertyFeeList[propertyFeeListIndex].taxAmount;
-                        //}
+                        }
                     }
 
                     if(data.promotionFeeList.length > 0){

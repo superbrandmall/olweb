@@ -470,11 +470,11 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <table class="table">
                         <tbody>
                             <tr>
-                                <td align="center" style="background-color: #e6f2fb;">标题</td>
+                                <td align="center" style="background-color: #e6f2fb; width: 80px;">标题</td>
                                 <td>
                                     <input id="applyReason" class="form-control" type="text" />
                                 </td>
-                                <td align="center" style="background-color: #e6f2fb;">单号</td>
+                                <td align="center" style="background-color: #e6f2fb; width: 80px;">单号</td>
                                 <td>
                                     <input id="bizId" class="form-control" type="text" />
                                 </td>

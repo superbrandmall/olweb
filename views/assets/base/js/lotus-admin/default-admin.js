@@ -9,7 +9,8 @@ var deFC = '';
 
 $.mapRent = {
     shop: 'all',
-    brand: 'showBrands'
+    brand: 'showBrands',
+    color: 'C2EECE'
 }
 
 $(document).ready(function(){
@@ -58,10 +59,58 @@ $(document).ready(function(){
         }
     });
     
-    $('#mapRentBrand-select ul li a').click(function(){
+    $('#enter_full_screen').click(function (){
+        $('header, .main-sidebar, .sub-header, .box-header, #floorList, #legendProportion, #mapRentShop-select, #mapRentBrand-select, #zoom_in, #zoom_out').hide();
+        $('.content-wrapper').css('marginLeft',0);
+        $('.content-wrapper .content').css({
+            'marginTop' : 0,
+            'padding': 0
+        });
+        $('#map_canvas .box-body').css('height','100vh');
+        $('#map').mapster('resize', 1*($(window).width()), 0, 0);
+        addTextLayer();
+        $(this).hide();
+    });
+    
+    $('#exit_full_screen').click(function (){
+        $('header, .main-sidebar, .sub-header, .box-header, #floorList, #legendProportion, #mapRentShop-select, #mapRentBrand-select, #zoom_in, #zoom_out, #enter_full_screen').show();
+        $('.content-wrapper').css('marginLeft','150px');
+        $('.content-wrapper .content').css({
+            'marginTop' : '126px',
+            'padding': '15px'
+        });
+        $('#map_canvas .box-body').css('height','auto');
+        $('#map').mapster('resize',  0.85*($(window).width()), 0, 0);
+        addTextLayer();
+    });
+    
+    $('#mapRentBrand-select ul ul li a').click(function(){
         $.mapRent.brand = $(this).attr('data-target');
         $('#mapRentBrand').text($(this).text());
         addTextLayer();
+    })
+    
+    $('#cp3').colorpicker({
+        format: 'hex'
+    }).on('changeColor', function(ev){
+        $.mapRent.color = ev.color.toHex().split('#')[1];
+    });
+    
+    $('#updateColor').click(function(){
+        var target = $('#unitCode').text();
+        var singleSelect = $('#map').mapster('get_options');
+        
+        $.each(singleSelect.areas, function(i,v) {
+           if(v.key == target){
+               v.fillColor = $.mapRent.color;
+           }
+        });
+                        
+        $('#map').mapster({
+            clickNavigate: true,
+            mapKey: 'data-key',
+            areas:  singleSelect.areas
+        });
     })
 });
 
@@ -248,7 +297,7 @@ function renderMap(fc) {
 
         drawShops();
         
-        $('#mapRentShop-select ul li a').click(function(){
+        $('#mapRentShop-select ul ul li a').click(function(){
             $.mapRent.shop = $(this).text();
             $('#mapRentShop').text($.mapRent.shop);
             var target = $(this).attr('data-target');

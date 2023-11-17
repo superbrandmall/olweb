@@ -7,11 +7,14 @@ if(explode('?id=', $_SERVER['REQUEST_URI'])[1] != null) {
 }
 
 if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马俊') {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/default-admin.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/default-admin.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/colorpicker/js/bootstrap-colorpicker.js"></script>'.PHP_EOL;
 } else {
-    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/default.js"></script>'.PHP_EOL;
+    $scripts = $scripts .PHP_EOL. '        <script type="text/javascript" src="/views/assets/base/js/lotus-admin/encrypted/default.js"></script>'.PHP_EOL
+    . '        <script type="text/javascript" src="/views/assets/plugins/colorpicker/js/bootstrap-colorpicker.js"></script>'.PHP_EOL;
 }
 ?>
+<link href="/views/assets/plugins/colorpicker/css/colorpicker.css" rel="stylesheet" type="text/css" media="all" />
 
 <style>
     #mapRentShop-select .dropdown-menu > li > a {
@@ -48,16 +51,16 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 <div class="c-content-panel">
                                     <div class="c-body">
                                         <div id="floorList" class="btn-group-vertical" style="position: absolute; top: 20px;right: 5%; z-index: 1;"></div>
-                                        <div style="position: absolute; top: 0;left: 0; background-color: #fff; z-index: 1;">
+                                        <div id="legendProportion" style="position: absolute; top: 0;left: 0; background-color: #fff; z-index: 1;">
                                             <h4>图例与占比</h4>
                                             <div id="fmap" style="border: solid 1px #ccc;">
                                                 <span style="margin-left: 5px; background-color: #e3efcf; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 已租 <span id="leasedArea"></span>m<sup>2</sup><span class="text-gray">(<span id="leased"></span>%)</span><br/>
                                                 <span style="margin-left: 5px; background-color: #fbf9f4; border: solid 1px #5e5e59; width: 13px; height: 10px; display: inline-block;"></span> 其他 <span id="emptyArea"></span>m<sup>2</sup><span class="text-gray">(<span id="empty"></span>%)</span>
                                             </div>
                                         </div>
-                                        <div style="position: absolute; top: 100px;left: 0; background-color: #fff; z-index: 2;">
+                                        <div id="mapRentShop-select" style="position: absolute; top: 100px;left: 0; background-color: #fff; z-index: 2;">
                                             <ul class="nav navbar-nav">
-                                                <li class="dropdown" id="mapRentShop-select">
+                                                <li class="dropdown">
                                                     <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
                                                         <h4>铺位: <span id="mapRentShop"></span><b class="caret"></b></h4>
                                                     </a>
@@ -69,9 +72,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div style="position: absolute; top: 150px;left: 0; background-color: #fff; z-index: 1;">
+                                        <div id="mapRentBrand-select" style="position: absolute; top: 150px;left: 0; background-color: #fff; z-index: 1;">
                                             <ul class="nav navbar-nav">
-                                                <li class="dropdown" id="mapRentBrand-select">
+                                                <li class="dropdown">
                                                     <a href="javascript: void(0);" class="dropdown-toggle" data-toggle="dropdown" style="padding: 0;">
                                                         <h4>品牌: <span id="mapRentBrand"></span><b class="caret"></b></h4>
                                                     </a>
@@ -92,6 +95,12 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                             </button>
                                             <button id="zoom_out" class="btn btn-xs btn-zoom">
                                                 <i class="fa fa-minus"></i>
+                                            </button>
+                                            <button id="enter_full_screen" class="btn btn-xs btn-zoom">
+                                                <i class="fa fa-expand"></i>
+                                            </button>
+                                            <button id="exit_full_screen" class="btn btn-xs btn-zoom">
+                                                <i class="fa fa-compress"></i>
                                             </button>
                                         </div>
                                         <img src="#" class="img-responsive" usemap="" id="map" />
@@ -137,6 +146,15 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                     <div class="form-group">
                         <span class="control-label">合同起始日:</span>
                         <strong id="startDate" class="control-label"></strong>
+                    </div>
+                    <div class="form-group">
+                        <span class="control-label" style="vertical-align: top;">显示颜色:</span>
+                        <div id="cp3"class="input-append color" data-color="rgb(226, 238, 206)" data-color-format="rgb" style="display: inline-block;">
+                            <span class="add-on" style="display: inline-block;"><i style="background-color: rgb(226, 238, 206)"></i></span>
+                            <span class="add-on" style="vertical-align: top;">
+                                <button id="updateColor" type="button" class="btn btn-xs btn-default">修改</button>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 
