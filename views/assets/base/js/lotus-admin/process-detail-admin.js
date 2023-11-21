@@ -925,7 +925,7 @@ function findSignRequestByBizId() {
                 
                 if(response.data != '' && response.data != null){
                     var data = response.data;
-                    $('#creatorName').val((data.creatorName != null ? data.creatorName : 'admin'));
+                    $('#creatorName2').val(data.creatorName != null ? data.creatorName : 'admin');
                     $('#bizId').val(data.bizId);
                     $('#investmentContractModelMallSelect').val(data.mallName+'['+data.mallCode+']');
                     $('#approveInfo').html(data.approveInfo);

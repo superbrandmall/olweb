@@ -486,7 +486,7 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                                 </td>
                                 <td align="center" style="background-color: #e6f2fb;">申请人</td>
                                 <td>
-                                    <input id="creatorName" class="form-control" type="text" />
+                                    <input id="creatorName2" class="form-control" type="text" />
                                 </td>
                             </tr>
                             <tr>
