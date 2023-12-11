@@ -16,6 +16,12 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: true
+            },
+            modality_3: {
+                required: true
+            },
+            modality_4: {
+                required: true
             }
         },
         messages: {
@@ -28,6 +34,12 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: "请选择二级业态"
+            },
+            modality_3: {
+                required: "请选择三级业态"
+            },
+            modality_4: {
+                required: "请选择四级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -51,7 +63,9 @@ $(document).ready(function(){
     
     $("#modality_1").on('change',function(){
         if($(this).val() != '') {
-            findBizByBiz1($(this).val());
+            findBizByBiz1($(this).val(),'change');
+            $('#modality_3').html('<option value="">未选择</option>');
+            $('#modality_4').html('<option value="">未选择</option>');
         }
     })
 })
@@ -66,7 +80,7 @@ function updateBrandAttribute() {
     }
 }
 
-function findBizByBiz1(biz) {
+function findBizByBiz1(biz,command) {
     $.ajax({
         url: $.api.baseLotus+"/api/biz/lotus/findAllByModality1?modality1="+encodeURIComponent(biz),
         type: "GET",
@@ -87,6 +101,10 @@ function findBizByBiz1(biz) {
                 }
                 
                 if(response.data.length > 0){
+                    if(command == 'change'){
+                        $('#modality_2').html('<option value="">未选择</option>');
+                    }
+                    
                     $.each(response.data, function(i,v) {
                         $('#modality_2').append('<option value="'+v.modality2+'">'+v.modality2+'</option>');
                         if ($("#modality_2 option:contains('"+v.modality2+"')").length > 1){
@@ -97,12 +115,13 @@ function findBizByBiz1(biz) {
                 
                 $('#modality_2').on('change',function(){
                     if($(this).val() != '') {
-                        findBizByBiz2($(this).val());
+                        findBizByBiz2($(this).val(),'change');
+                        $('#modality_4').html('<option value="">未选择</option>');
                     }
                 })
                 
                 if($('#modality_2').val() != '') {
-                    findBizByBiz2($('#modality_2').val());
+                    findBizByBiz2($('#modality_2').val(),'');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -111,7 +130,7 @@ function findBizByBiz1(biz) {
     }); 
 }
 
-function findBizByBiz2(biz) {
+function findBizByBiz2(biz,command) {
     $.ajax({
         url: $.api.baseLotus+"/api/biz/lotus/findAllByModality2?modality2="+encodeURIComponent(biz),
         type: "GET",
@@ -132,6 +151,10 @@ function findBizByBiz2(biz) {
                 }
                 
                 if(response.data.length > 0){
+                    if(command == 'change'){
+                        $('#modality_3').html('<option value="">未选择</option>');
+                    }
+                    
                     $.each(response.data, function(i,v) {
                         $('#modality_3').append('<option value="'+v.modality3+'">'+v.modality3+'</option>');
                         if ($("#modality_3 option:contains('"+v.modality3+"')").length > 1){
@@ -142,12 +165,12 @@ function findBizByBiz2(biz) {
                 
                  $('#modality_3').on('change',function(){
                     if($(this).val() != '') {
-                        findBizByBiz3($(this).val());
+                        findBizByBiz3($(this).val(),'change');
                     }
                 })
                 
                 if($('#modality_3').val() != '') {
-                    findBizByBiz3($('#modality_3').val());
+                    findBizByBiz3($('#modality_3').val(),'');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -156,7 +179,7 @@ function findBizByBiz2(biz) {
     }); 
 }
 
-function findBizByBiz3(biz) {
+function findBizByBiz3(biz,command) {
     $.ajax({
         url: $.api.baseLotus+"/api/biz/lotus/findAllByModality3?modality3="+encodeURIComponent(biz),
         type: "GET",
@@ -177,6 +200,10 @@ function findBizByBiz3(biz) {
                 }
                 
                 if(response.data.length > 0){
+                    if(command == 'change'){
+                        $('#modality_4').html('<option value="">未选择</option>');
+                    }
+                    
                     $.each(response.data, function(i,v) {
                         $('#modality_4').append('<option value="'+v.modality4+'">'+v.modality4+'</option>');
                         if ($("#modality_4 option:contains('"+v.modality4+"')").length > 1){
@@ -241,7 +268,7 @@ function findBrandByCode() {
                         $('#modality_4').append(modality_4).trigger('change');
                     }
                     
-                    findBizByBiz1($('#modality_1').val());
+                    findBizByBiz1($('#modality_1').val(),'');
                     $('#contact_name_1').val(response.data.contactName);
                     $('#title').val(response.data.title);
                     $('#contact_phone_1').val(response.data.contactPhone);

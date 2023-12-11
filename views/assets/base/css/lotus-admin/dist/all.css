@@ -4088,7 +4088,7 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 }
 
 .nav>li>a {
-    padding: 10px 15px
+    padding: 10px 15px;
 }
 
 .nav>li>a:focus,.nav>li>a:hover {
@@ -4467,6 +4467,10 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
     line-height: 20px
 }
 
+.navbar-nav>li>a.active {
+    background: #bf311f;
+}
+
 @media (max-width:767px) {
     .navbar-nav .open .dropdown-menu {
         position: static;
@@ -4489,6 +4493,11 @@ select[multiple].input-group-sm>.form-control,select[multiple].input-group-sm>.i
 
     .navbar-nav .open .dropdown-menu>li>a:focus,.navbar-nav .open .dropdown-menu>li>a:hover {
         background-image: none
+    }
+    
+    .nav>li>a {
+        padding: 15px 5px;
+        font-size: 12px;
     }
 }
 
@@ -7353,7 +7362,7 @@ body {
 .main-footer {
     padding: 15px;
     color: #444;
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 .fixed .left-side,.fixed .main-header,.fixed .main-sidebar {
@@ -7430,10 +7439,13 @@ a:active,a:focus,a:hover {
     -webkit-transition: margin-left .3s ease-in-out;
     transition: margin-left .3s ease-in-out;
     margin-bottom: 0;
-    margin-left: 150px;
     border: none;
     min-height: 50px;
     border-radius: 0
+}
+
+.borderless, .borderless td, .borderless th {
+    border: none !important;
 }
 
 .layout-top-nav .main-header>.navbar {
@@ -7495,7 +7507,7 @@ a:active,a:focus,a:hover {
     }
 }
 
-.main-header .sidebar-toggle {
+.sidebar-toggle {
     float: left;
     background-color: transparent;
     background-image: none;
@@ -7503,19 +7515,19 @@ a:active,a:focus,a:hover {
     font-family: fontAwesome
 }
 
-.main-header .sidebar-toggle:before {
+.sidebar-toggle:before {
     content: "\F0C9"
 }
 
-.main-header .sidebar-toggle:hover {
+.sidebar-toggle:hover {
     color: #fff
 }
 
-.main-header .sidebar-toggle:active,.main-header .sidebar-toggle:focus {
+.sidebar-toggle:active, .sidebar-toggle:focus {
     background: 0 0
 }
 
-.main-header .sidebar-toggle .icon-bar {
+.sidebar-toggle .icon-bar {
     display: none
 }
 
@@ -7702,11 +7714,6 @@ a:active,a:focus,a:hover {
     min-height: 100%;
     width: 150px;
     z-index: 810;
-    -webkit-transition: -webkit-transform .3s ease-in-out,width .3s ease-in-out;
-    -webkit-transition: width .3s ease-in-out,-webkit-transform .3s ease-in-out;
-    transition: width .3s ease-in-out,-webkit-transform .3s ease-in-out;
-    transition: transform .3s ease-in-out,width .3s ease-in-out;
-    transition: transform .3s ease-in-out,width .3s ease-in-out,-webkit-transform .3s ease-in-out;
 }
 
 @media (max-width:767px) {
@@ -7849,7 +7856,7 @@ a:active,a:focus,a:hover {
 }
 
 .sidebar-menu .treeview-menu>li>a {
-    padding: 5px 5px 5px 15px;
+    padding: 5px 5px 5px 30px;
     display: block;
     font-size: 14px
 }
@@ -7916,13 +7923,13 @@ a:active,a:focus,a:hover {
         margin-left: 0
     }
 
-    .sidebar-mini.sidebar-collapse .main-sidebar .user-panel>.info,.sidebar-mini.sidebar-collapse .sidebar-form,.sidebar-mini.sidebar-collapse .sidebar-menu li.header,.sidebar-mini.sidebar-collapse .sidebar-menu>li>.treeview-menu,.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>.pull-right,.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>span {
+    .sidebar-mini.sidebar-collapse .sidebar-search, .sidebar-mini.sidebar-collapse .main-sidebar .user-panel>.info,.sidebar-mini.sidebar-collapse .sidebar-form,.sidebar-mini.sidebar-collapse .sidebar-menu li.header,.sidebar-mini.sidebar-collapse .sidebar-menu>li>.treeview-menu,.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>.pull-right,.sidebar-mini.sidebar-collapse .sidebar-menu>li>a>span {
         display: none!important;
-        -webkit-transform: translateZ(0)
+        -webkit-transform: translateZ(0);
     }
-
-    .sidebar-mini.sidebar-collapse .main-header .logo {
-        width: 50px
+    
+    .sidebar-mini.sidebar-collapse .sidebar-toggle {
+        width: 50px;
     }
 
     .sidebar-mini.sidebar-collapse .main-header .logo>.logo-mini {
@@ -7934,10 +7941,6 @@ a:active,a:focus,a:hover {
 
     .sidebar-mini.sidebar-collapse .main-header .logo>.logo-lg {
         display: none
-    }
-
-    .sidebar-mini.sidebar-collapse .main-header .navbar {
-        margin-left: 50px
     }
 }
 
@@ -7962,7 +7965,7 @@ a:active,a:focus,a:hover {
 .sidebar-menu li>a>.pull-right {
     position: absolute;
     top: 50%;
-    right: 10px;
+    right: 0;
     margin-top: -7px
 }
 
@@ -10239,9 +10242,11 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .login-box,.register-box {
-    width: 360px;
+    width: 436px;
     margin: 0 auto;
-    padding: 15px;
+    padding: 30px 20px 50px;
+    border-radius: 30px;
+    box-shadow: 0 0 20px 0 rgba(27,52,112,.06);
 }
 
 @media (max-width:768px) {
@@ -10594,7 +10599,7 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .text-gray {
-    color: #B6B6B6!important
+    color: #a5afcb!important
 }
 
 .text-navy {
@@ -10946,22 +10951,23 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .skin-blue .main-header .navbar {
-    background-color: #3c8dbc
+    background-color: #3c8dbc;
+    line-height: 1;
 }
 
 .skin-blue .main-header .navbar .nav>li>a {
     color: #fff
 }
 
-.skin-blue .main-header .navbar .nav .open>a,.skin-blue .main-header .navbar .nav .open>a:focus,.skin-blue .main-header .navbar .nav .open>a:hover,.skin-blue .main-header .navbar .nav>.active>a,.skin-blue .main-header .navbar .nav>li>a:active,.skin-blue .main-header .navbar .nav>li>a:focus,.skin-blue .main-header .navbar .nav>li>a:hover,.skin-blue .main-header .navbar .sidebar-toggle:hover {
+.skin-blue .main-header .navbar .nav .open>a,.skin-blue .main-header .navbar .nav .open>a:focus,.skin-blue .main-header .navbar .nav .open>a:hover,.skin-blue .main-header .navbar .nav>.active>a,.skin-blue .main-header .navbar .nav>li>a:active,.skin-blue .main-header .navbar .nav>li>a:focus,.skin-blue .main-header .navbar .nav>li>a:hover, .sidebar-toggle:hover {
     color: #f6f6f6;
 }
 
-.skin-blue .main-header .navbar .sidebar-toggle {
+.sidebar-toggle {
     color: #fff
 }
 
-.skin-blue .main-header .navbar .sidebar-toggle:hover {
+.sidebar-toggle:hover {
     background-color: #E43C24;
 }
 
@@ -10990,7 +10996,7 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .skin-blue .left-side,.skin-blue .main-sidebar,.skin-blue .wrapper {
-    background-color: #222d32;
+    background: url(/views/assets/base/img/content/lotus-admin/sci-eng.png) no-repeat bottom 20px left #222d32;
 }
 
 .skin-blue .user-panel>.info,.skin-blue .user-panel>.info>a {
@@ -14423,7 +14429,7 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .fix-sticky thead {
-    background: #fff
+    background: #fff;
 }
 
 .fix-sticky thead th,.fix-sticky thead th:first-child {
@@ -14438,11 +14444,8 @@ table.text-center,table.text-center td,table.text-center th {
 }
 
 .main-header .logo {
-    width: 100%!important;
-    white-space: nowrap;
-    text-align: left;
-    display: block;
-    clear: both
+    width: 150px;
+    text-align: center;
 }
 
 .huge {
@@ -14524,14 +14527,27 @@ a.accordion-header {
     width: inherit
 }
 
-.main-header .logo {
-    padding: 0 5px 0 15px
+.sidebar-search {
+    float: left;
+    width: 105px;
+    height: 27px;
+    margin: 10px 0 0 10px;
+    font-size: 13px;
+    background: #162732;
+    border: 0 none;
+    border-radius: 12px;
 }
 
 .sidebar-toggle {
-    margin-left: -48px;
     z-index: 100;
-    background-color: inherit
+    background-color: inherit;
+    width: 35px;
+    padding: 12px 0 !important;
+}
+
+.skin-blue .sidebar-menu > li:hover > a.sidebar-toggle {
+    border-left-color: transparent;
+    background: transparent;
 }
 
 .sidebar-toggle-mobile,
@@ -14544,7 +14560,7 @@ a.accordion-header {
     color: #E43C24;
 }
 
-.main-header .sidebar-toggle:before {
+.sidebar-toggle:before {
     content: "\F0C9"
 }
 
@@ -14812,9 +14828,10 @@ body {
 }
 
 .navbar-brand>img,img.navbar-brand-img {
-    float: left;
-    padding: 5px 5px 5px 0;
-    max-height: 50px
+    width: 100px;
+    display: inline;
+    vertical-align: middle;
+    margin-top: -5px;
 }
 
 .input-daterange {
@@ -14841,6 +14858,12 @@ body {
 }
 
 #login-logo {
-    padding-bottom: 10px;
+    padding: 10px 0;
     max-width: 200px
+}
+
+@media (min-width:1500px) {
+    .login-box,.register-box {
+        margin: 40% auto;
+    }
 }

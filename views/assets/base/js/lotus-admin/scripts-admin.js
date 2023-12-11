@@ -5,6 +5,7 @@ $.api = {
     baseSap: $.base+"/onlineleasing-sap",
     baseCommYZJ: $.base+"/comm-yunzhijia",
     baseAuth: $.base+"/common-authorization",
+    baseBilling: $.base+"/lotus-billing",
     dictModule: [],
     dictContractType: 1, //租赁
     contractType: ['租赁','leasing'],
@@ -46,10 +47,29 @@ $(document).ready(function(){
         updateTopNavMallSelection();
     }
     
+    if($('.sidebar > div > ul').find('.active').length > 0){
+        $('.sidebar > div > ul > li.active').parent().parent().show();
+    }
+    
+    $('input.sidebar-search').on('input', function(){
+        var keyword = $(this).val();
+        if(keyword != ''){
+            $(".sidebar > div:not(:hidden) > ul li").removeClass('active');
+            $(".sidebar > div:not(:hidden) > ul > li > ul > li a:contains('"+keyword+"')").each(function() {
+                $(this).parent().show().addClass('active');
+                $(this).parent().parent().parent().show().addClass('active');
+            });
+            $(".sidebar > div:not(:hidden) > ul li").not(".active").hide();
+        } else {
+            $(".sidebar > div:not(:hidden) > ul > li > ul > li").removeClass('active');
+            $(".sidebar > div:not(:hidden) > ul li").not('#basicMgmt li:eq(0)').show();
+        }
+    })
+    
     if($.cookie('userModules') && $.cookie('userModules') != '' && $.cookie('userModules') != null){
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
             if($.inArray(v.userCode,['CUSER200524000004','CUSER210628000002','CUSER220615000003','CUSER221227000001']) == -1){
-                $('.sidebar-menu > li').last().hide();
+                $('#basicMgmt > ul > li').last().hide();
                 return false;
             }
         })
@@ -96,7 +116,7 @@ $(document).ready(function(){
             case "createRenew":
                 ftTxt = $.api.formType[2];
                 ftVal = $.api.formType[3];
-                headTxt = '续签合同申请';
+                headTxt = '合同续签申请';
                 rcdd = 'renewContract';
                 ftid = 'renewUpdateFormType';
                 fheader = 'renew-termination';
@@ -105,7 +125,7 @@ $(document).ready(function(){
             case "createTerminate":
                 ftTxt = $.api.formType[4];
                 ftVal = $.api.formType[5];
-                headTxt = '终止合同申请';
+                headTxt = '合同终止申请';
                 rcdd = 'renewContract';
                 ftid = 'renewUpdateFormType';
                 fheader = 'renew-termination';
@@ -114,38 +134,11 @@ $(document).ready(function(){
             case "createModify":
                 ftTxt = $.api.formType[6];
                 ftVal = $.api.formType[7];
-                headTxt = '变更合同申请';
+                headTxt = '合同变更申请';
                 rcdd = 'modifyContract';
                 ftid = 'modifyUpdateFormType';
                 fheader = 'modify';
                 confirm = 'modifyCreateRequest';
-                break;
-            case "createRenewMain":
-                ftTxt = $.api.formType[2];
-                ftVal = $.api.formType[3];
-                headTxt = '续签合同申请';
-                rcdd = 'renewContract';
-                ftid = 'renewUpdateFormType';
-                fheader = 'renew-termination';
-                confirm = 'renewCreateRequestMain';
-                break;
-            case "createTerminateMain":
-                ftTxt = $.api.formType[4];
-                ftVal = $.api.formType[5];
-                headTxt = '终止合同申请';
-                rcdd = 'renewContract';
-                ftid = 'renewUpdateFormType';
-                fheader = 'renew-termination';
-                confirm = 'renewCreateRequestMain';
-                break;
-            case "createModifyMain":
-                ftTxt = $.api.formType[6];
-                ftVal = $.api.formType[7];
-                headTxt = '变更合同申请';
-                rcdd = 'modifyContract';
-                ftid = 'modifyUpdateFormType';
-                fheader = 'modify';
-                confirm = 'modifyCreateRequestMain';
                 break;
             default:
                 break;

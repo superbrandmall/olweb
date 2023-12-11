@@ -44,12 +44,6 @@ $(document).ready(function(){
         $('#contractName').val($.cookie('searchRequestsContractName'));
     }
     
-    if($.cookie('searchRequestsSelectFormTypeVal') != null){
-        updateDictDropDownByDictTypeCode('FORM_TYPE','formType',$.cookie('searchRequestsSelectFormTypeTxt'),$.cookie('searchRequestsSelectFormTypeVal')); // 表单类型
-    } else {
-        updateDictDropDownByDictTypeCode('FORM_TYPE','formType','未选择',null); // 表单类型
-    }
-    
     if($.cookie('searchRequestsSelectTenantVal') != null){
         var newOption = new Option($.cookie('searchRequestsSelectTenantTxt'), $.cookie('searchRequestsSelectTenantVal'), true, true);
         $('#selectTenant').append(newOption).trigger('change');
@@ -120,16 +114,15 @@ $(document).ready(function(){
     
     $('#clear').click(function(){
         $('#contractNo,#bizId,#contractName,#unitType').val('');
-        $('#selectTenant, #selectStore, #formType').empty(); 
+        $('#selectTenant, #selectStore').empty(); 
         $('#selectTenant, #department, #formStatus, #modality_1, #modality_2, #modality_3').val("").trigger('change');
-        $('#selectStore, #formType').select2("val", "");
+        $('#selectStore').select2("val", "");
         
         $.cookie('searchRequestsFormStatus','');
         $.cookie('searchRequestsContractNo', '');
         $.cookie('searchRequestsBizId', '');
         $.cookie('searchRequestsContractName', '');
         $.cookie('searchRequestsModality3', null);
-        $.cookie('searchRequestsSelectFormTypeVal', null);
         $.cookie('searchRequestsSelectTenantVal', null);
         $.cookie('searchRequestsUnitType', null);
         $.cookie('searchRequestsSelectStoreVal', null);
@@ -142,8 +135,6 @@ $(document).ready(function(){
         $.cookie('searchRequestsContractNo', $('#contractNo').val());
         $.cookie('searchRequestsBizId', $('#bizId').val());
         $.cookie('searchRequestsContractName', $('#contractName').val());
-        $.cookie('searchRequestsSelectFormTypeVal', $('#formType').find('option:selected').val());
-        $.cookie('searchRequestsSelectFormTypeTxt', $('#formType').find('option:selected').text());
         $.cookie('searchRequestsSelectTenantVal', $('#selectTenant').find('option:selected').val());
         $.cookie('searchRequestsSelectTenantTxt', $('#selectTenant').find('option:selected').text());
         $.cookie('searchContractsSelectDepartmentVal', $('#department').val());
@@ -167,6 +158,14 @@ function findAllRequestsByKVCondition(p,c){
     var params = [];
     var param = {};
     
+    param = {
+        "columnName": "formType",
+        "columnPatten": "",
+        "operator": "AND",
+        "value": 'new'
+    }
+    params.push(param);
+        
     if($.cookie('searchRequestsFormStatus') != null && $.cookie('searchRequestsFormStatus') != ''){
         param = {
             "columnName": "formStatus",
@@ -229,16 +228,6 @@ function findAllRequestsByKVCondition(p,c){
             "columnPatten": "",
             "operator": "AND",
             "value": $.cookie('searchRequestsSelectTenantVal')
-        }
-        params.push(param);
-    }
-    
-    if($.cookie('searchRequestsSelectFormTypeVal') != null && $.cookie('searchRequestsSelectFormTypeVal') != '' && $.cookie('searchRequestsSelectFormTypeVal') != 'null'){
-        param = {
-            "columnName": "formType",
-            "columnPatten": "",
-            "operator": "AND",
-            "value": $.cookie('searchRequestsSelectFormTypeVal')
         }
         params.push(param);
     }
@@ -311,30 +300,6 @@ function findAllRequestsByKVCondition(p,c){
                     generatePages(p, pages, c);
                     
                     $.each(response.data.content, function(i,v){
-                        var page;
-                        switch (v.formType) {
-                            case "new":
-                                page = 'request';
-                                break;
-                            case "renew":
-                                page = 'renew';
-                                break;
-                            case "termination":
-                                page = 'terminate';
-                                break;
-                            case "modify":
-                                page = 'modify';
-                                break;
-                            default:
-                                break;
-                        }
-
-                        var contractLink = '', ver;
-                        if(v.contractVersion > 1){
-                            ver = v.contractVersion * 1 - 1;
-                            contractLink = '<a href="/lotus-admin/contract-summary?id='+v.contractNo+'&contractVersion='+ver+'" target="_blank">合同['+v.contractNo+']</a>';
-                        }
-                        
                         var creatorName, updateName;
                         v.creatorName != null ? creatorName = '['+v.creatorName+']' : creatorName = '';
                         v.updateName != null ? updateName = '['+v.updateName+']' : updateName = '';
@@ -351,22 +316,20 @@ function findAllRequestsByKVCondition(p,c){
                             
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
-                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/'+page+'-summary?id='+v.bizId+main+'">'+v.bizId+'</a></td>\n\
-                            <td>'+contractLink+'</td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/request-summary?id='+v.bizId+main+'">'+v.bizId+'</a></td>\n\
                             <td>'+(v.contractNo || '')+'</td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
-                            <td>'+(renderFormType(v.formType,v.modifyType) || '')+'</td>\n\
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
+                            <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
                             <td>'+((v.bizTypeName != 'null' && v.bizTypeName != null) ? v.bizTypeName : '/')+'</td>\n\
                             <td>'+(v.contractName || '')+'</td>\n\
                             <td>'+(v.tenantName != null ? v.tenantName+'['+v.tenantNo+']' : '')+'</td>\n\
                             <td>'+v.unitName+'['+v.unitCode+']</td>\n\
                             <td>'+(v.area || '')+'㎡</td>\n\
-                            <td>'+(v.floorName || '')+'</td>\n\
+                            <td>'+v.mallName+'['+(v.floorName || '')+']</td>\n\
                             <td>'+(v.updateName || '')+'</td>\n\
                             <td>'+(v.awardDate || '')+'</td>\n\
-                            <td>'+v.startDate+'～'+v.endDate+'</td>\n\
-                            <td>'+(renderRentCalculationMode(v.rentCalculationMode) || '')+'</td>\n\
+                            <td>'+(v.startDate || '--')+'～'+(v.endDate || '--')+'</td>\n\
                             <td>'+v.created+creatorName+'</td>\n\
                             <td>'+v.updated+updateName+'</td>\n\
                         </tr>');
@@ -379,7 +342,7 @@ function findAllRequestsByKVCondition(p,c){
                         $(".pagination-info").html('显示 '+Math.ceil((p-1)*c+1)+' 到 '+Math.ceil((p-1)*c+Number(c))+' 行，共 '+response.data.totalElements+'行');
                     }
                 } else {
-                    $('#requests').html('<tr><td colspan="18" style="text-align: center;">没有找到任何记录！</td></tr>');
+                    $('#requests').html('<tr><td colspan="16" style="text-align: center;">没有找到任何记录！</td></tr>');
                 }
             } else {
                 alertMsg(response.code,response.customerMessage);
@@ -586,11 +549,8 @@ function deleteFormByBizId(bizId) {
                         $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                     }
 
-                    if(window.location.search == ''){
-                        window.location.href = '/lotus-admin/requests?s=delete';
-                    } else {
-                        window.location.href = window.location+'&s=delete';
-                    }
+                    window.location.href = window.location+'&s=delete';
+                    
                 } else {
                     alertMsg(response.code,response.customerMessage);
                 }

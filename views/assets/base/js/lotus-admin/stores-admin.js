@@ -401,15 +401,13 @@ function findContractsByStoreCode(sc) {
                 
                 if(response.data.content.length > 0) {
                     var link;
-                    $.each(response.data.content, function(i,v){
-                        $('#store_'+v.shopCode+' td:eq(9)').html('<a href="/lotus-admin/brand-detail?id='+v.brandCode+'" target="_blank">'+v.contractName+'</a>');
-                        if(v.contractStatus == 'init'){
-                            link = 'init';
-                        } else {
-                            link = 'summary';
-                        }
-                        $('#store_'+v.shopCode+' td:eq(10) .ifSigned').html('已签约 <a href="/lotus-admin/contract-'+link+'?id='+v.contractNo+'&contractVersion='+v.contractVersion+'" target="_blank">'+v.contractName+'['+v.mallName+']</a>').removeClass('ifSigned');
-                    })
+                    $('#store_'+response.data.content[0].shopCode+' td:eq(9)').html('<a href="/lotus-admin/brand-detail?id='+response.data.content[0].brandCode+'" target="_blank">'+response.data.content[0].contractName+'</a>');
+                    if(response.data.content[0].contractStatus == 'init'){
+                        link = 'init';
+                    } else {
+                        link = 'summary';
+                    }
+                    $('#store_'+response.data.content[0].shopCode+' td:eq(10) .ifSigned').html('已签约 <a href="/lotus-admin/contract-'+link+'?id='+response.data.content[0].contractNo+'&contractVersion='+response.data.content[0].contractVersion+'" target="_blank">'+response.data.content[0].contractName+'['+response.data.content[0].mallName+']</a>').removeClass('ifSigned');
                 }
             }
         }

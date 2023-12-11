@@ -460,7 +460,7 @@ function mandatoryCheck(s) {
         $('#applyReason').parent().prepend(error);
     }
     
-    if($('#applyType').val() == null){
+    if($('#applyType').val() == null || $('#applyType').val() == ''){
         flag = 0;
         $('#applyType').parent().prepend(error);
     }
@@ -482,6 +482,16 @@ function submitCheck() {
     $('.mandatory-error').remove();
     var flag = 1;
     var error = '<i class="fa fa-exclamation-circle mandatory-error" aria-hidden="true"></i>';
+    
+    if($('#applyReason').val() == ''){
+        flag = 0;
+        $('#applyReason').parent().prepend(error);
+    }
+    
+    if($('#applyType').val() == null || $('#applyType').val() == ''){
+        flag = 0;
+        $('#applyType').parent().prepend(error);
+    }
     
     if($('#applyDate').val() == ''){
         flag = 0;

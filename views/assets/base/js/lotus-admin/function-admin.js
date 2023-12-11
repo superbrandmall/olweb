@@ -1,3 +1,10 @@
+function toggleMenu(id) {
+    $('.navbar-nav a').removeClass('active');
+    $('.'+id).addClass('active');
+    $('.sidebar div').hide();
+    $('#'+id).fadeIn();
+}
+
 function alertMsg(code,m) {
     var msg,color,style;
     switch (code) {

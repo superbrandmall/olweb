@@ -32,8 +32,7 @@ $(document).ready(function(){
                 required: true
             },
             unitArea: {
-                required: true,
-                min: 1
+                required: true
             },
             modality_1: {
                 required: true
@@ -66,8 +65,7 @@ $(document).ready(function(){
                 required: "请选择铺位负责人1"
             },
             unitArea: {
-                required: "请输入租赁面积",
-                min: "租赁面积最小为1平方米"
+                required: "请输入租赁面积"
             },
             modality_1: {
                 required: "请选择一级业态"
@@ -80,12 +78,19 @@ $(document).ready(function(){
             error.appendTo('#errorcontainer-' + element.attr('id'));
         },
         submitHandler: function() {
+            if(numberWithoutCommas($('#unitArea').val()) < 1 ) {
+                auth = 0;
+                $('#errorcontainer-unitArea').html('<label id="unitArea-error" class="error" for="unitArea" style="">租赁面积最小为1平方米</label>');
+            } else {
+                auth = 1;
+                $('#errorcontainer-unitArea').html('<label id="unitArea-error" class="error" for="unitArea" style="display: none;"></label>');
+            }
+    
             if(auth == 1){
                 saveStore();
             }
         }
     });
-    
     
     updateDictDropDownByDictTypeCode('UNIT_TYPE', 'unitType1', '未选择', '');
     updateUserDropDown(20);

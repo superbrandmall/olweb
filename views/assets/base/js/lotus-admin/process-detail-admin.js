@@ -66,12 +66,14 @@ function findProcessByBizId() {
                         })
                     }
                         
+                    var creatorName = (data.creatorName || 'admin')+'【'+data.creatorOrgName+'】';
+                    
                     $('#status').text(renderFlowStatus(data.processInstStatus));
                     $('#formType').text(bizType);
                     
                     $('#processName').text(bizId).attr('title',bizId);
                     $('#processInstStatus').text(renderFlowStatus(data.processInstStatus));
-                    $('#creatorName').text((data.creatorName || 'admin'));
+                    $('#creatorName').text(creatorName).attr('title',creatorName);
                     $('#created').text(data.created);
                     $('#updated').text((data.updated || ''));
                     $('#bizType').text('/招商/'+bizType);
@@ -738,13 +740,14 @@ function findProcessInstByBizId(){
                             findSignRequestByBizId();
                         })
                     }
+                    var creatorName = (data.creatorName || 'admin')+'【'+data.creatorOrgName+'】';
                     
                     $('#status').text(renderFlowStatus(data.processInstStatus));
                     $('#formType').text(bizType);
                     
                     $('#processName').text(bizId).attr('title',bizId);
                     $('#processInstStatus').text(renderFlowStatus(data.processInstStatus));
-                    $('#creatorName').text((data.creatorName || 'admin'));
+                    $('#creatorName').text(creatorName).attr('title',creatorName);
                     $('#created').text(data.created);
                     $('#updated').text((data.updated || ''));
                     $('#bizType').text('/招商/'+bizType);

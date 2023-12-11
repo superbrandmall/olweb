@@ -1,6 +1,10 @@
 $.shop = {};
 
 $(document).ready(function(){
+    if(!sessionStorage.getItem("UNIT_TYPE") || sessionStorage.getItem("UNIT_TYPE") == null || sessionStorage.getItem("UNIT_TYPE") == '') {
+        findDictCodeByDictTypeCode('UNIT_TYPE');
+    }
+    
     $('#create-form')[0].reset();
     
     $('.date-picker, .input-daterange').datepicker({

@@ -3,38 +3,31 @@
 ?>
 
 <style>
-    body {
-        background: #ecf0f5;
-    }
-
     .btn-primary {
-        background-color: #222d32;
         color: #b8c7ce;
+        margin: 20px 0 30px;
+        border-radius: 40px;
+        padding: 18px 0;
     }
     
     .btn-primary:hover,
     .btn-primary:active,
     .btn-primary:focus    {
-        color: #425559;
-        font-weight: bold;
-        background: #1a2226;
+        color: #cccccc;
+        background: #000000 !important;
     }
 </style>
 <body class="hold-transition login-page">
-<div class="jumbotron hero-spacer" style="background: url(/views/assets/base/img/content/lotus-admin/center-top-bj.jpg) 0 0 no-repeat; background-color: #cb220a;">
-    <div style="width: 360px; margin: 0 auto;">
-        <img id="login-logo" src="/views/assets/base/img/content/lotus-admin/logo.png">
-        <h3 style="display: inline-block; vertical-align: bottom; color: #fff; margin-left: 8px;">集成安全系统</h3>
-        <img class="img-responsive" src="/views/assets/base/img/content/lotus-admin/slogan.png">
-    </div>
+<div style="height: 70px; margin: 0 30px 30px;">
+    <img id="login-logo" src="/views/assets/base/img/content/lotus-admin/logo.png">
 </div>
 <form id="login_form">
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 col-md-offset-7">
                 <div class="box login-box">
-                    <div class="box-header" style="background: #fff;">
-                        <h3 class="box-title"> 用户登录</h3>
+                    <div class="box-header" style="text-align: center;">
+                        <h3>华东区莲花新招商管理系统</h3>
                     </div>
                     <div class="sub-header" style="display: none;">
                         <h4>登录 - [正大集团卜蜂莲花]</h4>
@@ -51,49 +44,31 @@
 
                             <div class="col-md-12">
                                 <fieldset>
-                                    <div class="form-group">
-                                        <input class="form-control" id="login_username" placeholder="手机" name="login_username" type="text"  autocomplete="off" required autofocus>
-                                        <div id="errorcontainer-login_username" class="errorDiv"></div>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <div style="position: relative;">
-                                            <input class="form-control" id="login_verify" placeholder="验证码" name="login_verify" type="text" required autocomplete="off">
-                                            <a href="javascript: VeryficationCodeLogin()" id="login_verify_link" style="display: block; position: absolute; z-index: 10; right: 9px; font-size: 14px; top: 7px;">发送验证码</a>
+                                    <div class="form-group" style="border-bottom: solid 1px #d2d6de;">
+                                        <label class="col-md-2 control-label"><i class="fa fa-user" style="font-size: 30px;"></i></label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" id="login_username" name="login_username" type="text"  autocomplete="off" required autofocus style="border: none;">
+                                            <div id="errorcontainer-login_username" class="errorDiv"></div>
                                         </div>
-                                        <div id="errorcontainer-login_verify" class="errorDiv"></div>
                                     </div>
                                     
+                                    <div class="form-group" style="border-bottom: solid 1px #d2d6de;">
+                                        <label class="col-md-2 control-label"><i class="fa fa-lock" style="font-size: 30px;"></i></label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" id="login_verify" name="login_verify" type="text" required autocomplete="off" style="border: none;">
+                                            <a href="javascript: VeryficationCodeLogin()" id="login_verify_link" style="display: block; position: absolute; z-index: 10; right: 9px; font-size: 14px; top: 7px;">发送验证码</a>
+                                            <div id="errorcontainer-login_verify" class="errorDiv"></div>
+                                        </div>
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>
                     </div>
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-lg btn-primary btn-block">登录</button>
+                    <div class="box-footer text-gray">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+                        提示：为获得最佳性能，推荐使用火狐或谷歌等浏览器；建议使用1024*768以上分辨率浏览。
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 col-md-offset-1">
-                <div style="margin: 20px 20px 150px;">
-                    <h5>应用系统：</h5>
-                    <div class="col-md-12">
-                        <div class="col-xs-4 text-center" style="margin-bottom: 10px;">
-                            <img src="/views/assets/base/img/content/lotus-admin/lotus.png" width="50"><br>
-                            招商管理系统
-                        </div>
-                        <div class="col-xs-4 text-center" style="margin-bottom: 10px;">
-                            <img src="/views/assets/base/img/content/lotus-admin/lotus2.png" width="50"><br>
-                            物业水电管理系统
-                        </div>
-                        <div class="col-xs-4 text-center" style="margin-bottom: 10px;">
-                            <img src="/views/assets/base/img/content/backgrounds/oll-app.png" width="50"><br>
-                            OLL线上租
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                提示：为获得最佳性能，推荐使用火狐、谷歌等浏览器。<br>
-                建议使用1024*768以上分辨率浏览。
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
     </div>
     <div class="box-body">
         <div class="col-md-12">
-            <h5 style="margin-bottom: 0;">租赁-新签合同云之家审批流程 <span id="flowStatus"></span>
+            <h5 style="margin-bottom: 0;">租赁-新租赁合同云之家审批流程 <span id="flowStatus"></span>
                 <a href="javascript: flowInstUpdate();" style="margin-left: 10px;">
                     <i class="fa fa-refresh"></i> 更新审批状态
                 </a>

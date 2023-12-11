@@ -39,10 +39,10 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
                             <div class="col-md-8 col-sm-12" style="text-align: left;">
                                 <select class="select2" id="bizType" style="width: 100%">
                                     <option value="" selected>全部</option>
-                                    <option value="new">租赁新签合同审批流程</option>
-                                    <option value="renew">租赁续签合同审批流程</option>
-                                    <option value="termination">租赁终止合同审批流程</option>
-                                    <option value="modify">租赁变更合同审批流程</option>
+                                    <option value="new">新租赁合同审批流程</option>
+                                    <option value="renew">租赁合同续签审批流程</option>
+                                    <option value="termination">租赁合同终止审批流程</option>
+                                    <option value="modify">租赁合同变更审批流程</option>
                                     <option value="1">单元变动审批流程</option>
                                     <option value="5">用印申请审批流程</option>
                                     <option value="2">其他审批流程</option>

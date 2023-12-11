@@ -14,9 +14,9 @@ if(!isset($_SESSION['lotus_admin_login'])) {
 ?>
     <footer class="main-footer hidden-print text-center">
         <div class="pull-right hidden-xs"></div>
-        &copy; COPYRIGHT <?= date("Y") ?>. 上海帝泰发展有限公司版权所有
-        . <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
-        . <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
+        华东区莲花新招商管理系统 &copy; 2022-<?= date("Y") ?> <a target="_blank" href="https://www.superbrandmall.com/">上海帝泰发展有限公司</a> 版权所有
+         <a target="_blank" href="https://beian.miit.gov.cn/">沪ICP备14029636号-1</a>
+         <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011502015111"><img src="/views/assets/base/img/content/misc/gongan.png" />沪公网安备 31011502015111号</a>
     </footer>
 <?php
     }

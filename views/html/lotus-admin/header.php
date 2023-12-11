@@ -35,27 +35,103 @@
         <div class="wrapper">
             <header class="main-header hidden-print">
                 <nav class="navbar navbar-static-top" role="navigation">
-                    <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">导航切换</span>
+                    <a class="logo navbar-brand no-hover hidden-sm hidden-xs" href="/lotus-admin/todo">
+                        <img class="navbar-brand-img" src="/views/assets/base/img/content/lotus-admin/logo.png">
                     </a>
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="left-navblock">
-                            <a class="logo navbar-brand no-hover" href="javascript: void(0);">
-                                <img class="navbar-brand-img" src="/views/assets/base/img/content/lotus-admin/logo.png">
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>" href="todo" style="font-size: 15px;">
+                                首页
                             </a>
                         </li>
-                        <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/lotus-admin/todo" style="font-size: 15px;font-weight: bold;">
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="basicMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/malls' || $_GET['p'] == 'lotus-admin/mall-detail' || $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/create-store' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || 
+                        $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/mall-visualization' || 
+                        $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/tenant-history' || $_GET['p'] == 'lotus-admin/store-change' || $_GET['p'] == 'lotus-admin/default' || $_GET['p'] == 'lotus-admin/dict' || $_GET['p'] == 'lotus-admin/create-dict-type' || 
+                        $_GET['p'] == 'lotus-admin/create-dict-data' || $_GET['p'] == 'lotus-admin/edit-dict-data' || $_GET['p'] == 'lotus-admin/map') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('basicMgmt')" style="font-size: 15px;">
+                                基础管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="leasingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console' || $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail' || 
+                        $_GET['p'] == 'lotus-admin/contracts' || $_GET['p'] == 'lotus-admin/contract-summary' || $_GET['p'] == 'lotus-admin/contract-detail' || $_GET['p'] == 'lotus-admin/contract-init' || $_GET['p'] == 'lotus-admin/contract-compare' || $_GET['p'] == 'lotus-admin/contract-history' || $_GET['p'] == 'lotus-admin/requests' || 
+                        $_GET['p'] == 'lotus-admin/request-summary' || $_GET['p'] == 'lotus-admin/request-detail' || $_GET['p'] == 'lotus-admin/dr-summary' || $_GET['p'] == 'lotus-admin/make-request' || $_GET['p'] == 'lotus-admin/renew-requests' || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' || 
+                        $_GET['p'] == 'lotus-admin/terminate-requests' || $_GET['p'] == 'lotus-admin/terminate-summary' || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request' || $_GET['p'] == 'lotus-admin/modify-summary' || $_GET['p'] == 'lotus-admin/standing-book' || $_GET['p'] == 'lotus-admin/contract-balance-preview' || 
+                        $_GET['p'] == 'lotus-admin/modify-requests' || $_GET['p'] == 'lotus-admin/modify-detail' || $_GET['p'] == 'lotus-admin/modify-request' || $_GET['p'] == 'lotus-admin/request-balance-preview') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('leasingMgmt')" style="font-size: 15px;">
+                                招商管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="salesMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('salesMgmt')" style="font-size: 15px;">
+                                销售管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/bills') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')" style="font-size: 15px;">
+                                账务管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a href="/we-meter/#/meter" target="_blank" style="font-size: 15px;">
+                                物业管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a class="processMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi' || $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail' || $_GET['p'] == 'lotus-admin/process-request' || 
+                        $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('processMgmt')" style="font-size: 15px;">
+                                流程与报表
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-xs hidden-sm hidden-md">
+                            <a href="/authorization/#/user" target="_blank" style="font-size: 15px;">
+                                系统管理
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>" href="todo">
+                                首页
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a class="basicMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/malls' || $_GET['p'] == 'lotus-admin/mall-detail' || $_GET['p'] == 'lotus-admin/stores' || $_GET['p'] == 'lotus-admin/create-store' || $_GET['p'] == 'lotus-admin/store-detail' || $_GET['p'] == 'lotus-admin/store-contract' || 
+                        $_GET['p'] == 'lotus-admin/store-budget' || $_GET['p'] == 'lotus-admin/brands' || $_GET['p'] == 'lotus-admin/create-brand' || $_GET['p'] == 'lotus-admin/brand-detail' || $_GET['p'] == 'lotus-admin/modality' || $_GET['p'] == 'lotus-admin/tenants' || $_GET['p'] == 'lotus-admin/mall-visualization' || 
+                        $_GET['p'] == 'lotus-admin/create-tenant' || $_GET['p'] == 'lotus-admin/tenant-detail' || $_GET['p'] == 'lotus-admin/tenant-history' || $_GET['p'] == 'lotus-admin/store-change' || $_GET['p'] == 'lotus-admin/default' || $_GET['p'] == 'lotus-admin/dict' || $_GET['p'] == 'lotus-admin/create-dict-type' || 
+                        $_GET['p'] == 'lotus-admin/create-dict-data' || $_GET['p'] == 'lotus-admin/edit-dict-data' || $_GET['p'] == 'lotus-admin/map') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('basicMgmt')">
+                                基础
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a class="leasingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/store-progress-console' || $_GET['p'] == 'lotus-admin/modality-progress-console' || $_GET['p'] == 'lotus-admin/floor-progress-console' || $_GET['p'] == 'lotus-admin/leasing-budget' || $_GET['p'] == 'lotus-admin/budget-detail' || 
+                        $_GET['p'] == 'lotus-admin/contracts' || $_GET['p'] == 'lotus-admin/contract-summary' || $_GET['p'] == 'lotus-admin/contract-detail' || $_GET['p'] == 'lotus-admin/contract-init' || $_GET['p'] == 'lotus-admin/contract-compare' || $_GET['p'] == 'lotus-admin/contract-history' || $_GET['p'] == 'lotus-admin/requests' || 
+                        $_GET['p'] == 'lotus-admin/request-summary' || $_GET['p'] == 'lotus-admin/request-detail' || $_GET['p'] == 'lotus-admin/dr-summary' || $_GET['p'] == 'lotus-admin/make-request' || $_GET['p'] == 'lotus-admin/renew-requests' || $_GET['p'] == 'lotus-admin/renew-summary' || $_GET['p'] == 'lotus-admin/renew-detail' || $_GET['p'] == 'lotus-admin/renew-request' || 
+                        $_GET['p'] == 'lotus-admin/terminate-requests' || $_GET['p'] == 'lotus-admin/terminate-summary' || $_GET['p'] == 'lotus-admin/terminate-detail' || $_GET['p'] == 'lotus-admin/terminate-request' || $_GET['p'] == 'lotus-admin/modify-summary' || $_GET['p'] == 'lotus-admin/standing-book' || $_GET['p'] == 'lotus-admin/contract-balance-preview' || 
+                        $_GET['p'] == 'lotus-admin/modify-requests' || $_GET['p'] == 'lotus-admin/modify-detail' || $_GET['p'] == 'lotus-admin/modify-request' || $_GET['p'] == 'lotus-admin/request-balance-preview') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('leasingMgmt')">
                                 招商
                             </a>
                         </li>
-                        <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/we-meter/#/meter" target="_blank" style="font-size: 15px;font-weight: bold;">
-                                物业<img src="/views/assets/base/img/content/lotus-admin/new.gif" style="vertical-align: top;">
+                        <li class="left-navblock hidden-lg">
+                            <a class="salesMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/product-category' || $_GET['p'] == 'lotus-admin/sales-data-entries' || $_GET['p'] == 'lotus-admin/create-sales-data' || $_GET['p'] == 'lotus-admin/edit-sales-data') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('salesMgmt')">
+                                销售
                             </a>
                         </li>
-                        <li class="left-navblock hidden-xs hidden-sm">
-                            <a href="/authorization/#/user" target="_blank" style="font-size: 15px;font-weight: bold;">
+                        <li class="left-navblock hidden-lg">
+                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/bills') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')">
+                                账务
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a href="/we-meter/#/meter" target="_blank">
+                                物业
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a class="processMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/bi' || $_GET['p'] == 'lotus-admin/my-process' || $_GET['p'] == 'lotus-admin/in-process' || $_GET['p'] == 'lotus-admin/processes' || $_GET['p'] == 'lotus-admin/process-detail' || $_GET['p'] == 'lotus-admin/process-request' || 
+                        $_GET['p'] == 'lotus-admin/sign-process-detail') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('processMgmt')">
+                                流程
+                            </a>
+                        </li>
+                        <li class="left-navblock hidden-lg">
+                            <a href="/authorization/#/user" target="_blank">
                                 系统
                             </a>
                         </li>

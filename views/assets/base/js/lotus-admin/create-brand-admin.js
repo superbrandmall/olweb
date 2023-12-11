@@ -14,6 +14,12 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: true
+            },
+            modality_3: {
+                required: true
+            },
+            modality_4: {
+                required: true
             }
         },
         messages: {
@@ -26,6 +32,12 @@ $(document).ready(function(){
             },
             modality_2: {
                 required: "请选择二级业态"
+            },
+            modality_3: {
+                required: "请选择三级业态"
+            },
+            modality_4: {
+                required: "请选择四级业态"
             }
         },
         errorPlacement: function(error, element) {
@@ -41,6 +53,8 @@ $(document).ready(function(){
     $('#modality_1').on('change',function(){
         if($(this).val() != '') {
             findBizByBiz1($(this).val());
+            $('#modality_3').html('<option value="">未选择</option>');
+            $('#modality_4').html('<option value="">未选择</option>');
         }
     })
     
@@ -92,6 +106,7 @@ function findBizByBiz1(biz) {
                 $('#modality_2').on('change',function(){
                     if($(this).val() != '') {
                         findBizByBiz2($(this).val());
+                        $('#modality_4').html('<option value="">未选择</option>');
                     }
                 })
                 
