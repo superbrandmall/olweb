@@ -7359,12 +7359,6 @@ body {
     overflow: auto;
 }
 
-.main-footer {
-    padding: 15px;
-    color: #444;
-    margin-top: 70px;
-}
-
 .fixed .left-side,.fixed .main-header,.fixed .main-sidebar {
     position: fixed
 }
@@ -14512,7 +14506,11 @@ a.accordion-header {
 }
 
 .main-footer {
-    font-size: 13px
+    font-size: 13px;
+    position: fixed;
+    bottom: 15px;
+    left: 0;
+    right: 0;
 }
 
 .main-header {

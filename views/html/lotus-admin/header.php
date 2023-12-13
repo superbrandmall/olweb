@@ -40,7 +40,7 @@
                     </a>
                     <ul class="nav navbar-nav navbar-left">
                         <li class="left-navblock hidden-xs hidden-sm hidden-md">
-                            <a class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/todo') { echo 'active'; }?>" href="todo" style="font-size: 15px;">
+                            <a class="<?php if (isset($_GET['p']) && ($_GET['p'] == 'lotus-admin/' || $_GET['p'] == 'lotus-admin/todo')) { echo 'active'; }?>" href="todo" style="font-size: 15px;">
                                 首页
                             </a>
                         </li>
@@ -67,7 +67,7 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-xs hidden-sm hidden-md">
-                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/bills') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')" style="font-size: 15px;">
+                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/accounting-bill' || $_GET['p'] == 'lotus-admin/bill-detail') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')" style="font-size: 15px;">
                                 账务管理
                             </a>
                         </li>
@@ -115,7 +115,7 @@
                             </a>
                         </li>
                         <li class="left-navblock hidden-lg">
-                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/bills') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')">
+                            <a class="accountingMgmt <?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item' || $_GET['p'] == 'lotus-admin/contract-balance' || $_GET['p'] == 'lotus-admin/accounting-voucher' || $_GET['p'] == 'lotus-admin/accounting-tenant' || $_GET['p'] == 'lotus-admin/accounting-contract' || $_GET['p'] == 'lotus-admin/accounting-bill' || $_GET['p'] == 'lotus-admin/bill-detail') { echo 'active'; }?>" href="javascript: void(0);" onclick="toggleMenu('accountingMgmt')">
                                 账务
                             </a>
                         </li>

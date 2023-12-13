@@ -2,7 +2,7 @@ $(document).ready(function(){
     if(getURLParameter('s')) {
         switch (getURLParameter('s')) {
             case "succeed":
-                successMsg('00','保存成功！');
+                successMsg('00','操作成功！');
                 break;
             default:
                 break;
@@ -37,7 +37,11 @@ $(document).ready(function(){
         $('#isTaxFlag').val($.cookie('isTaxFlag')).trigger('change');
     }
     
-    findConfigs();
+    if(!sessionStorage.getItem("users") || sessionStorage.getItem("users") == null || sessionStorage.getItem("users") == '') {
+        findAllUsers();
+    }
+    
+    findFeeItems();
     
     $('#termType, #transactionType, #isTaxFlag').show();
     
@@ -53,13 +57,13 @@ $(document).ready(function(){
         $.cookie('feeItemTermType', $('#termType').val());
         $.cookie('feeItemTransactionType', $('#transactionType').val());
         $.cookie('feeItemIsTaxFlag', $('#isTaxFlag').val());
-        findConfigs();
+        findFeeItems();
     })
     
     $('.fixed-table-body').on('scroll', scrollHandle);
 });
 
-function findConfigs() {       
+function findFeeItems() {       
     $.ajax({
         url: $.api.baseSap+"/api/gl/config/findAll",
         type: "GET",
@@ -103,7 +107,7 @@ function findConfigs() {
                     }
                         
                     $.each(response.data, function(i,v) {
-                        if((feeItems.length <= 0 || isInArray(feeItems, v.itemCode) == 1) && (transactionType == '' || v.transactionType == transactionType) && (isTaxFlag == '' || v.isTaxFlag == isTaxFlag)){
+                        if((feeItems.length <= 0 || isInArray(feeItems, v.itemCode) == 1) && (transactionType == '' || v.transactionType == transactionType) && (isTaxFlag == '' || v.isTaxFlag == isTaxFlag) && v.state == 1){
                             var tbg = '#fff';
                             if(i%2==0){
                                 tbg = '#f9f9f9';
@@ -121,8 +125,8 @@ function findConfigs() {
                                 <td>'+(v.creditTaxItemName != null ? v.creditTaxItemName+'['+v.creditTaxItemCode+']' : '--')+'</td>\n\
                                 <td>'+(v.transactionType || '--')+'</td>\n\
                                 <td><input class="configIsTaxFlag" type="checkbox"'+checked+' disabled></td>\n\
-                                <td>'+v.created+'['+(v.creatorOpenId != null ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
-                                <td>'+v.updated+'['+(v.updateOpenId != null ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
+                                <td>'+v.created+'['+(v.creatorOpenId != 'admin' ? renderUserName(v.creatorOpenId) : 'admin')+']</td>\n\
+                                <td>'+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']</td>\n\
                             </tr>');
                         }
                     })
@@ -146,9 +150,12 @@ function findConfigs() {
 function getFeeItemDetail(id){
     $('.mandatory-error').remove();
     $('#investment-fee-item-create').modal('toggle');
+    $('#deleteFeeItem, #adjustRow').hide();
     var feeItem = $.parseJSON(sessionStorage.getItem("feeItem"));
     $("input[id*='modal']").val('');
     $('#modalIsTaxFlag').prop('checked', false);
+    $('.modal-header h4').find('.badge').remove();
+    $('.shield').remove();
     
     var openId = 'admin';
     $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -160,7 +167,16 @@ function getFeeItemDetail(id){
         
     $.each(feeItem, function(i,v){
         if(v.id == id){
-            $('#itemUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != null ? renderUserName(v.updateOpenId) : 'admin')+']');
+            var temp;
+            
+            if(v.remarkFirst == 1){
+                temp = '<span class="badge badge-info" style="vertical-align: top; margin-right: 10px;">使用中</span>';
+            } else {
+                temp = '<span class="badge badge-danger" style="vertical-align: top; margin-right: 10px;">未使用</span>'
+            }
+            $('.modal-header h4').prepend(temp);
+            
+            $('#itemUpdated').text('最近更新：  '+v.updated+'['+(v.updateOpenId != 'admin' ? renderUserName(v.updateOpenId) : 'admin')+']');
             $('#modalItemCode').val(v.itemCode);
             $('#modalItemName').val(v.itemName);
             $('#modalDebitItemCode').val(v.debitItemCode);
@@ -174,9 +190,19 @@ function getFeeItemDetail(id){
                 $('#modalIsTaxFlag').prop('checked', true);
             }
             
-            $('#saveItem').click(function(){
-                saveCheck(JSON.stringify(v));
-            })
+            if(v.remarkFirst != 1){
+                $('#deleteFeeItem, #adjustRow').show();
+                
+                $('#saveItem').click(function(){
+                    saveCheck(JSON.stringify(v));
+                })
+                
+                $('#deleteFeeItem').click(function(){
+                    deleteFeeItem(JSON.stringify(v));
+                })
+            } else {
+                 $('.modal-content').prepend('<div class="shield" style="position: absolute;background:rgba(0,0,0,0.1);width: 100%;height: 100%;z-index: 3;"></div>');
+            }
             
             return false;
         }
@@ -207,7 +233,11 @@ function saveCheck(v) {
     })
     
     if(flag == 1 && $('.mandatory-error').length == 0){
-       editFeeItem(v);
+        if(v == ''){
+            saveFeeItem();
+        } else {
+            editFeeItem(v);
+        }
     } else {
         $('html, body').animate({
             scrollTop: $('.mandatory-error').offset().top - 195
@@ -221,10 +251,7 @@ function editFeeItem(v) {
     Ewin.confirm({ message: msg }).on(function (e) {
         if (!e) {
             return;
-        } else {
-            $('.modal.in').hide().remove();
         }
-        
         
         var openId = 'admin';
         $.each(JSON.parse($.cookie('userModules')), function(i,v) {
@@ -235,23 +262,28 @@ function editFeeItem(v) {
         })
         
         var map = JSON.parse(v);
-        map.creditItemCode = $('#modalCreditItemCode').val();
-        map.creditItemName = $('#modalCreditItemName').val();
-        map.creditTaxItemCode = $('#modalCreditTaxItemCode').val();
-        map.creditTaxItemName = $('#modalCreditTaxItemName').val();
-        map.debitItemCode = $('#modalDebitItemCode').val();
-        map.debitItemName = $('#modalgDebitItemName').val();
+        map.creditItemCode = $('#modalCreditItemCode').val() || null;
+        map.creditItemName = $('#modalCreditItemName').val() || null;
+        map.creditTaxItemCode = $('#modalCreditTaxItemCode').val() || null;
+        map.creditTaxItemName = $('#modalCreditTaxItemName').val() || null;
+        map.debitItemCode = $('#modalDebitItemCode').val() || null;
+        map.debitItemName = $('#modalDebitItemName').val() || null;
         if($('#modalIsTaxFlag').prop('checked') == true){
             map.isTaxFlag = 1;
         } else {
             map.isTaxFlag = 0;
         }
-        map.itemCode = $('#modalgItemCode').val();
-        map.itemName = $('#modalItemName').val();
-        map.transactionType = $('#modalTransactionType').val();
+        map.itemCode = $('#modalItemCode').val() || null;
+        map.itemName = $('#modalItemName').val() || null;
+        map.transactionType = $('#modalTransactionType').val() || null;
         map.updateOpenId = openId;
         
-        if(map.itemCode != '' && map.itemName != '' && map.debitItemCode != '' && map.debitItemName != '' && map.creditItemCode != '' && map.creditItemName != ''){
+        if(map.remarkFirst == 1){
+            alertMsg('9999','该科目正在使用中，不能修改。');
+            return false;
+        }
+        
+        if(map.itemCode != null  && map.itemName != null && map.debitItemCode != null && map.debitItemName != null && map.creditItemCode != null && map.creditItemName != null){
             $.ajax({
                 url: $.api.baseSap+"/api/gl/config/saveOrUpdate",
                 type: "POST",
@@ -276,8 +308,12 @@ function editFeeItem(v) {
                         if(xhr.getResponseHeader("Authorization") !== null){
                             $.cookie('authorization', xhr.getResponseHeader("Authorization"));
                         }
-
-                        caching();
+                        
+                        if(response.data.resultCode != 'ERROR') {
+                            caching();
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
                     } else {
                         alertMsg(response.code,response.customerMessage);
                     }
@@ -286,6 +322,100 @@ function editFeeItem(v) {
                     console.log(textStatus, errorThrown);
                 }
             });
+        }
+    })
+}
+
+function createFeeItemDetail(){
+    $('.mandatory-error,.shield').remove();
+    $('#investment-fee-item-create').modal('toggle');
+    $('#deleteFeeItem, #adjustRow').hide();
+    $("input[id*='modal']").val('');
+    $('#modalIsTaxFlag').prop('checked', false);
+    $('.modal-header h4').find('.badge').remove();
+        
+    $('#adjustRow').show();
+                
+    $('#saveItem').click(function(){
+        saveCheck('');
+    })
+}
+
+function saveFeeItem() {
+    Ewin.confirm({ message: "确定要保存该科目吗？" }).on(function (e) {
+        if (!e) {
+            return;
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        var creditItemCode = $('#modalCreditItemCode').val() || null;
+        var creditItemName =  $('#modalCreditItemName').val() || null;
+        var creditTaxItemCode = $('#modalCreditTaxItemCode').val() || null;
+        var creditTaxItemName = $('#modalCreditTaxItemName').val() || null;
+        var debitItemCode = $('#modalDebitItemCode').val() || null;
+        var debitItemName = $('#modalDebitItemName').val() || null;
+        var isTaxFlag = $('#modalIsTaxFlag').prop('checked') == true ? 1 : 0;
+        var itemCode = $('#modalItemCode').val() || null;
+        var itemName = $('#modalItemName').val() || null;
+        var transactionType = $('#modalTransactionType').val() || null;
+        
+        var map = {
+            "creatorOpenId": openId,
+            "creditItemCode": creditItemCode,
+            "creditItemName": creditItemName,
+            "creditTaxItemCode": creditTaxItemCode,
+            "creditTaxItemName": creditTaxItemName,
+            "debitItemCode": debitItemCode,
+            "debitItemName": debitItemName,
+            "isTaxFlag": isTaxFlag,
+            "itemCode": itemCode,
+            "itemName": itemName,
+            "remarkFirst": "",
+            "transactionType": transactionType,
+            "updateOpenId": openId
+        }
+        
+        if(itemCode != null && itemName != null && debitItemCode != null && debitItemName != null && creditItemCode != null && creditItemName != null){
+            $.ajax({
+                url: $.api.baseSap+"/api/gl/config/saveOrUpdate",
+                type: "POST",
+                data: JSON.stringify(map),
+                async: false,
+                dataType: "json",
+                contentType: "application/json",
+                beforeSend: function(request) {
+                    request.setRequestHeader("Login", $.cookie('login'));
+                    request.setRequestHeader("Authorization", $.cookie('authorization'));
+                    request.setRequestHeader("Lang", $.cookie('lang'));
+                    request.setRequestHeader("Source", "onlineleasing");
+                },
+                complete: function(){},
+                success: function (response, status, xhr) {
+                    if(response.code === 'C0') {
+                        if(xhr.getResponseHeader("Login") !== null){
+                            $.cookie('login', xhr.getResponseHeader("Login"));
+                        }
+                        if(xhr.getResponseHeader("Authorization") !== null){
+                            $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                        }
+
+                        if(response.data.resultCode != 'ERROR') {
+                            caching();
+                        } else {
+                            alertMsg(response.data.resultCode,response.data.resultMsg);
+                        }
+                    } else {
+                        alertMsg(response.code,response.customerMessage);
+                    }
+                }
+            })
         }
     })
 }
@@ -314,4 +444,63 @@ function caching() {
             }
         }
     });    
+}
+
+function deleteFeeItem(v) {
+    Ewin.confirm({ message: "确定要删除该条科目吗？" }).on(function (e) {
+        if (!e) {
+            return;
+        }
+        
+        var openId = 'admin';
+        $.each(JSON.parse($.cookie('userModules')), function(i,v) {
+            if(v.roleCode == 'CROLE220301000001'){
+                openId = v.moduleName;
+                return false;
+            }
+        })
+        
+        var map = JSON.parse(v);
+        map.state = 0;
+        map.updateOpenId = openId;
+        
+        if(map.remarkFirst == 1){
+            alertMsg('9999','该科目正在使用中，不能修改。');
+            return false;
+        }
+        
+        $.ajax({
+            url: $.api.baseSap+"/api/gl/config/saveOrUpdate",
+            type: "POST",
+            data: JSON.stringify(map),
+            async: false,
+            dataType: "json",
+            contentType: "application/json",
+            beforeSend: function(request) {
+                request.setRequestHeader("Login", $.cookie('login'));
+                request.setRequestHeader("Authorization", $.cookie('authorization'));
+                request.setRequestHeader("Lang", $.cookie('lang'));
+                request.setRequestHeader("Source", "onlineleasing");
+            },
+            complete: function(){},
+            success: function (response, status, xhr) {
+                if(response.code === 'C0') {
+                    if(xhr.getResponseHeader("Login") !== null){
+                        $.cookie('login', xhr.getResponseHeader("Login"));
+                    }
+                    if(xhr.getResponseHeader("Authorization") !== null){
+                        $.cookie('authorization', xhr.getResponseHeader("Authorization"));
+                    }
+                    
+                    if(response.data.resultCode != 'ERROR') {
+                        caching();
+                    } else {
+                        alertMsg(response.data.resultCode,response.data.resultMsg);
+                    }
+                } else {
+                    alertMsg(response.code,response.customerMessage);
+                }
+            }
+        })
+    })
 }

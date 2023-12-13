@@ -166,16 +166,27 @@ if(explode('?f=',$_SERVER['REQUEST_URI'])[1] != null) {
         <div id="accountingMgmt" style="display: none;">
             <ul class="sidebar-menu">
                 <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config' || $_GET['p'] == 'lotus-admin/fee-item') { echo 'active'; }?>">
-                    <a href="#"><i class="fa fa-list"></i>
+                    <a href="#"><i class="fa fa-book"></i>
                         <span>基础资料</span>
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                         <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/fee-item') { echo 'active'; }?>">
-                            <a href="/lotus-admin/fee-item?items=20">科目</a>
+                            <a href="/lotus-admin/fee-item">科目</a>
                         </li>
                         <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/gl-config') { echo 'active'; }?>">
-                            <a href="/lotus-admin/gl-config?items=20">账期设置</a>
+                            <a href="/lotus-admin/gl-config">账期设置</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/accounting-bill' || $_GET['p'] == 'lotus-admin/bill-detail') { echo 'active'; }?>">
+                    <a href="#"><i class="fa fa-rmb"></i>
+                        <span>账单管理</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li class="<?php if (isset($_GET['p']) && $_GET['p'] == 'lotus-admin/accounting-bill' || $_GET['p'] == 'lotus-admin/bill-detail') { echo 'active'; }?>">
+                            <a href="/lotus-admin/accounting-bill?items=20">账单</a>
                         </li>
                     </ul>
                 </li>

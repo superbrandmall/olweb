@@ -4,6 +4,7 @@
             <div class="modal-header" style="text-align: center;">
                 <h4 style="display: inline-block; margin: 0 auto;">科目详情</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute;right: 15px; z-index: 4; opacity: .5;">×</button>
+                <button id="deleteFeeItem" type="button" class="btn btn-danger btn-xs" style="margin-left: 20px; margin-top: -8px; display: none;">删除</button>
             </div>
             <div class="modal-body" style="padding: 0 15px 15px 0;">
                 <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
@@ -100,7 +101,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12" id="adjustRow" style="display: none;">
                         <div class="col-md-4 col-md-offset-4">
                             <div class="form-group">
                                 <label class="col-md-4 control-label"></label>

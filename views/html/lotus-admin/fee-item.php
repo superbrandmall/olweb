@@ -14,6 +14,9 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
         <h4>
             科目
         </h4>
+        <div class="pull-right">
+            <a href="javascript: void(0);" class="btn btn-primary btn-sm" onclick="javascript: createFeeItemDetail();"><i class="fa fa-plus icon-white"></i> <span class="hidden-xs">创建科目</span></a>
+        </div>
         <div class="box-header">
             <div class="box-body">
                 <div class="col-md-12">

@@ -415,11 +415,11 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
         'lotus-admin/bi' => array(
             'url' => 'bi.php'
         ),
-        'lotus-admin/bills' => array(
-            'url' => 'bills.php'
+        'lotus-admin/accounting-bill' => array(
+            'url' => 'accounting-bill.php'
         ),
-        'lotus-admin/bill' => array(
-            'url' => 'bill.php'
+        'lotus-admin/bill-detail' => array(
+            'url' => 'bill-detail.php'
         ),
         'lotus-admin/lotus-south' => array(
             'url' => 'lotus-south.php'
@@ -512,7 +512,7 @@ if (isset($_GET['p']) && (strpos($_GET['p'], 'ljz-admin')) !== false) { // é™†å®
 
     $session_required = array('login.php', 'default.php', 'brands.php', 'create-brand.php', 'brand-detail.php', 'tenants.php', 'create-tenant.php', 'tenant-detail.php', 'tenant-history.php', 'gl-config.php', 'fee-item.php', 
         'stores.php', 'store-progress-console.php', 'create-store.php', 'store-detail.php', 'store-change.php', 'store-contract.php', 'contracts.php', 'contract-summary.php', 'contract-detail.php', 'map.php', 
-        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'requests.php', 'request-summary.php', 'bi.php', 'bills.php', 'bill.php', 
+        'contract-init.php', 'contract-duplicate.php', 'contract-history.php', 'contract-compare.php', 'malls.php', 'mall-detail.php', 'requests.php', 'request-summary.php', 'bi.php', 'accounting-bill.php', 'bill-detail.php', 
         'contract-balance.php', 'modality.php', 'contract-balance-preview.php', 'request-balance-preview.php', 'standing-book.php', 'modality-progress-console.php', 'dr-summary.php', 'floor-progress-console.php', 
         'product-category.php', 'make-request.php', 'request-detail.php', 'renew-summary.php', 'renew-request.php', 'terminate-detail.php', 'modify-summary.php', 'modify-request.php', 'modify-detail.php', 'todo.php',
         'renew-detail.php', 'terminate-summary.php', 'terminate-request.php', 'accounting-voucher.php', 'accounting-tenant.php', 'accounting-contract.php', 'renew-requests.php', 'terminate-requests.php', 'modify-requests.php', 

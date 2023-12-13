@@ -8,181 +8,114 @@ if(isset($_SESSION['lotus_admin_name']) && $_SESSION['lotus_admin_name'] == '马
 }
 
 ?>
-
+<?php $_SESSION['record_url'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
 <?php include 'sidebar.php'; ?>
 
-<div class="content-wrapper gl-config">
-    <form id="create-form" class="form-horizontal" role="form" enctype="multipart/form-data">
-        <section class="sub-header" style="height: 90px;">
-            <h4>
-                结算配置
-            </h4>
-            <div class="box-header" id="navbarTop">
-                <ul class="breadcrumb nav" style="margin-bottom: 0; padding-left: 0;">
-                    <li><a href="#accountPeriod">账期配置</a></li>
-                    <li><a href="#configInfo">费用项配置</a></li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="content" style="margin-top: 140px;">
-            <div id="webui">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="box box-default" id="accountPeriod">    
-                            <div class="box-header with-border">
-                                <h3 class="box-title">账期配置</h3>
-                                <div class="box-tools">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div class="col-md-12">
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="bootstrap-table">
-                                                <div class="fixed-table-container">
-                                                    <div class="fixed-table-body">
-                                                        <table class="table table-striped snipe-table table-responsive">
-                                                            <thead id="assetsListingTable-sticky-header">
-                                                                <tr>
-                                                                    <th>
-                                                                        <div class="th-inner">行</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">项目</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">公司</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">模块</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">会计期间</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">操作</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="periods"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="box box-default" id="configInfo">    
-                            <div class="box-header with-border">
-                                <h3 class="box-title">费用项配置</h3>
-                                <div class="box-tools">
-                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <div class="pull-right" style="margin-right: 40px;">
-                                    <a href="javascript:void(0);" onClick="addRowConfigList()" style="margin-right: 10px;">
-                                        <i class="fa fa-plus-circle" style="color: #84CC3D; font-size: 16px; vertical-align: bottom;"></i> 增加行
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <div class="col-md-12">
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="bootstrap-table">
-                                                <div class="fixed-table-container">
-                                                    <div class="fixed-table-body">
-                                                        <table class="table table-striped snipe-table table-responsive">
-                                                            <thead id="assetsListingTable-sticky-header">
-                                                                <tr>
-                                                                    <th style="z-index: 1;">
-                                                                        <div class="th-inner" style="background: #fff;">行</div>
-                                                                        <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">费用项编号 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner" style="width: 110px;">费用项名称 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">借方费用项编号 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner" style="width: 250px;">借方费用项名称 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">贷方费用项编号 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner" style="width: 210px;">贷方费用项名称 <span class="btn-box-tool-lg">*</span></div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">贷方税费用项编号</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner" style="width: 190px;">贷方税费用项名称</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">事务类型</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">税</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                    <th>
-                                                                        <div class="th-inner">操作</div>
-                                                                        <div class="fht-cell"></div>
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody id="configs"></tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="content-wrapper">
+    <section class="sub-header" style="height: 160px;">
+        <h4>
+            账期设置
+        </h4>
+        <div class="box-header">
+            <div class="box-body">
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="department" class="col-md-4 control-label" style="text-align: right;">项目</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2 mallCode" id="department" name="department" style="width: 100%"></select>
                             </div>
                         </div>
                     </div>
-                    <div class="slideout-menu">
-                        <a href="#" class="slideout-menu-toggle pull-right">×</a>
-                        <h3>
-                            注意事项
-                        </h3>
-                        <p><span class="btn-box-tool-lg">*</span> Silence is gold</p>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="glType" class="col-md-4 control-label" style="text-align: right;">模块</label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <select class="select2" id="glType" name="glType" style="width: 100%; display: none;">
+                                    <option value="">未选择</option>
+                                    <option value="GL">总账</option>
+                                    <option value="AR">应收</option>
+                                    <option value="AP">应付</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label"></label>
+                            <div class="col-md-8 col-sm-12" style="text-align: left;">
+                                <button type="button" class="btn btn-info btn-sm" id="search"><i class="fa fa-search icon-white"></i> <span class="hidden-xs">搜索</span></button>
+                                <button type="button" class="btn btn-default btn-sm" id="clear"><i class="fa fa-times icon-white"></i> <span class="hidden-xs">清除</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </section>
 
-        </section>
-    </form>
+    <section class="content" style="margin-top: 210px;">
+        <div id="webui">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="bootstrap-table">
+                                        <div class="fixed-table-container">
+                                            <div class="fixed-table-body">
+                                                <table class="table table-striped snipe-table table-responsive">
+                                                    <thead id="assetsListingTable-sticky-header">
+                                                        <tr>
+                                                            <th style="z-index: 1;">
+                                                                <div class="th-inner">查看详情</div>
+                                                                <div class="fht-cell" style="background: #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd;"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">项目</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">公司</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">模块</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">会计期间</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">创建信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                            <th>
+                                                                <div class="th-inner">最后修改信息</div>
+                                                                <div class="fht-cell"></div>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="gl"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
+
+<?php include 'component/investment-gl-config-create.php'; ?>
 
 <?php include 'footer.php'; ?>

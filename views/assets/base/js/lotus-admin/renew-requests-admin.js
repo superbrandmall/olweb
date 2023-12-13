@@ -321,7 +321,7 @@ function findAllRequestsByKVCondition(p,c){
                             
                         $('#requests').append('\
                             <tr data-index="'+i+'">\n\
-                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/modify-summary?id='+v.bizId+main+'">'+v.bizId+'</a></td>\n\
+                            <td style="background: '+tbg+'; z-index: 1; border-right: solid 2px #ddd;"><a href="/lotus-admin/renew-summary?id='+v.bizId+main+'">'+v.bizId+'</a></td>\n\
                             <td>'+(renderFormStatus(v.formStatus) || '')+'</td>\n\
                             <td>'+(renderFormType(v.formType) || '')+'</td>\n\
                             <td>'+(v.mallName+'['+v.mallCode+']' || '')+'</td>\n\
